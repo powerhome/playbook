@@ -255,5 +255,8 @@
         "react"
       ]
     }
+  },
+  "codegenDefaultProps": {
+    "size": "sm"
   }
 }

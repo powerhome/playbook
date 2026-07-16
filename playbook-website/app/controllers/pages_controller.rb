@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   def application
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
-    @type = params[:platform] || params[:type] || "react"
+    @type = params[:platform] || params[:type] || "rails"
     @kit = params[:name]
     @params = params
 
@@ -107,7 +107,8 @@ class PagesController < ApplicationController
     on_guides    = request.path.include?("guides")
     on_icons     = request.path.include?("icons")
     on_playground = request.path.include?("playground")
-    on_home = !@kit.present? && !on_changelog && !on_guides && !on_icons && !on_playground
+    on_worldcup = request.path.include?("worldcup")
+    on_home = !@kit.present? && !on_changelog && !on_guides && !on_icons && !on_playground && !on_worldcup
 
     # Changelog — needed on changelog page AND as part of the general /kits.json payload
     # (the Changelog React component loads via ComponentsLoader which fetches /kits.json).
@@ -197,6 +198,11 @@ class PagesController < ApplicationController
         playground_kits: playground_kits,
         global_props_schema: global_props_schema,
       }
+      return
+    end
+
+    if on_worldcup && request.format.json?
+      render json: worldcup_json_payload
       return
     end
 
@@ -680,5 +686,30 @@ private
 
   def page_not_found
     redirect_to root_path, flash: { error: "The kit (#{params[:name]}) was not found." }
+  end
+
+  def worldcup_json_payload
+    Rails.cache.fetch("worldcup_json", expires_in: 60.seconds) do
+      matches = fetch_remote_json("https://wheniskickoff.com/data/v1/matches.json")
+      teams = fetch_remote_json("https://wheniskickoff.com/data/v1/teams.json")
+
+      {
+        matches: matches,
+        teams: teams,
+        updated_at: matches.dig("meta", "generated"),
+      }
+    end
+  rescue
+    { error: "Could not load World Cup data" }
+  end
+
+  def fetch_remote_json(url)
+    uri = URI(url)
+    response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https") do |http|
+      http.request(Net::HTTP::Get.new(uri))
+    end
+    raise "HTTP #{response.code}" unless response.is_a?(Net::HTTPSuccess)
+
+    JSON.parse(response.body)
   end
 end

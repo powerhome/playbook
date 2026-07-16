@@ -78,7 +78,8 @@
       ],
       "values": [
         "normal",
-        "subtle"
+        "subtle",
+        "bold"
       ],
       "default": "normal"
     },

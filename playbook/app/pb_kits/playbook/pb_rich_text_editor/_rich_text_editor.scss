@@ -40,7 +40,7 @@
     trix-toolbar {
       display: none;
     }
-    :not(.focused-editor) {
+    trix-editor:not(.focused-editor) {
       border-top-left-radius: $border_rad_heavier !important;
       border-top-right-radius: $border_rad_heavier !important;
     }

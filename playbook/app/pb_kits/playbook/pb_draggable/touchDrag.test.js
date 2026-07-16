@@ -35,4 +35,50 @@ describe("touchDrag utilities", () => {
     const item = document.querySelector(".pb_draggable_item");
     expect(getContainerFromElement(item)).toBe("To Do");
   });
+
+  test("resolvePointerDragTarget uses sibling slots when pointer stays on dragged pill", () => {
+    document.body.innerHTML = `
+      <div class="pb_draggable_container" data-pb-drag-container="typeahead-pills">
+        <div class="pb_draggable_item" data-pb-drag-id="b"></div>
+        <div class="pb_draggable_item" data-pb-drag-id="c"></div>
+        <div class="pb_draggable_item" data-pb-drag-id="a"></div>
+      </div>
+    `;
+
+    const rects = {
+      b: { left: 0, width: 100 },
+      c: { left: 100, width: 100 },
+      a: { left: 200, width: 100 },
+    };
+
+    document.querySelectorAll(".pb_draggable_item").forEach((item) => {
+      const id = item.getAttribute("data-pb-drag-id");
+      item.getBoundingClientRect = () => ({
+        left: rects[id].left,
+        width: rects[id].width,
+        right: rects[id].left + rects[id].width,
+        top: 0,
+        bottom: 20,
+        height: 20,
+        x: rects[id].left,
+        y: 0,
+        toJSON: () => ({}),
+      });
+    });
+
+    const { resolvePointerDragTarget } = require("./utilities/touchDrag");
+
+    document.elementFromPoint = () => document.querySelector('[data-pb-drag-id="a"]');
+    document.elementsFromPoint = () => [document.querySelector('[data-pb-drag-id="a"]')];
+
+    expect(resolvePointerDragTarget(250, 10, "a")).toEqual({
+      targetDragId: null,
+      targetContainer: "typeahead-pills",
+    });
+
+    expect(resolvePointerDragTarget(120, 10, "a")).toEqual({
+      targetDragId: "c",
+      targetContainer: "typeahead-pills",
+    });
+  });
 });

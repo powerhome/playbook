@@ -66,25 +66,36 @@ Add a Global Props page that demonstrates the prop in a Visual Guide and highlig
 - Add to index page `playbook-website/app/javascript/components/Website/src/components/GlobalPropsAndTokens/Data/GlobalPropsCards.ts`.
 - Add to Sidebar `playbook-website/config/global_props_and_tokens.yml`.
 
+## 7. Add Playground Grouping
 
-## 7. Regenerate Metadata
+Playground tabs group global props in the props panel using a hardcoded list. Without an entry, the new prop appears under **Other**.
 
-Run metadata generation after changing global prop types.
+Update `playbook-website/app/javascript/components/Website/src/pages/KitShow/Tabs/Playground/constants.ts`:
+
+- Add the prop name to an existing group in `GLOBAL_PROP_GROUPS` when it fits (e.g. Padding, Margin, Flexbox).
+- Or add a new `{ name, props }` group when the prop belongs in its own section.
+- Include directional or related variants in the same group when they should appear together.
+
+`groupPropDefinitions()` in `Playground/utils.ts` applies these groups on both the kit Playground tab and the standalone Playground page.
+
+## 8. Regenerate Metadata
+
+After changing global prop types, regenerate all docs metadata from the repo root:
 
 ```bash
-cd playbook
-yarn generate:global-props-metadata
-yarn generate:ai-metadata
+yarn generate:docs-metadata
 ```
 
 This updates:
 
 - `playbook/app/pb_kits/playbook/utilities/global-props.schema.json`
 - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json`
+- `playbook-website/.../AvailableProps/globalPropsValues.ts`
+- `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json`
 
-If website available-props values are generated from the schema, regenerate them from `playbook-website` as well.
+`setup.sh`, `run.sh`, and the pre-commit hook all use this same command, so you usually only need to run it manually if you want to preview changes before committing.
 
-## 8. Final Checklist
+## 9. Final Checklist
 
 - The prop uses approved design-system values.
 - Rails and React generate the same class names.
@@ -95,4 +106,5 @@ If website available-props values are generated from the schema, regenerate them
 - Schema and kit metadata are regenerated.
 - Examples render in Rails and React tested locally doc examples.
 - Global Props page contains information and demos.
+- Playground `GLOBAL_PROP_GROUPS` includes the prop (or a new group) so it is not stuck in Other.
 - Tests cover valid, absent, and invalid values.

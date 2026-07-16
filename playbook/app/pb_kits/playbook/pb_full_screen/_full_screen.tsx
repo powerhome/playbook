@@ -4,6 +4,7 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 import { globalProps } from '../utilities/globalProps'
 
 import useFullscreen from './useFullScreen'
+import { FullScreenContext } from './context/_full_screen_context'
 
 import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
@@ -155,15 +156,29 @@ const FullScreenView = (props: FullScreenViewProps) => {
   const renderContent = () => {
     if (isFullscreen) {
       return (
-        <div className="fullscreen-overlay">
-          {defaultHeader}
-          <div className={contentClasses}>
-            {children}
+        <FullScreenContext.Provider value={{ active: true }}>
+          <div
+              className="fullscreen-overlay"
+              data-pb-fullscreen-overlay="true"
+          >
+            {defaultHeader}
+            <div className={contentClasses}>
+              {children}
+            </div>
+            <div
+                aria-hidden="true"
+                className="pb_fullscreen_floating_root"
+                data-pb-dialog-floating-root="true"
+            />
           </div>
-        </div>
+        </FullScreenContext.Provider>
       )
     }
-    return children
+    return (
+      <FullScreenContext.Provider value={{ active: false }}>
+        {children}
+      </FullScreenContext.Provider>
+    )
   }
 
   return (

@@ -8,7 +8,13 @@ Do not hand-edit `docs/_playground.json` for normal kit work. That file is gener
 playbook/app/pb_kits/playbook/<kit>/docs/_playground.overrides.json
 ```
 
-Then regenerate:
+Then regenerate from the repo root (preferred):
+
+```bash
+yarn generate:docs-metadata
+```
+
+Or for a single kit:
 
 ```bash
 cd playbook
@@ -91,7 +97,7 @@ Replace `KitName` with the React component name, such as `Button`, `Overlay`, or
 ## Normal Workflow
 
 1. Create or edit `docs/_playground.overrides.json`.
-2. Run `yarn generate:playground-configs --kit=<kit_name> --overwrite` from `playbook/`.
+2. From the repo root, run `yarn generate:docs-metadata` (or regenerate one kit with `yarn generate:playground-configs --kit=<kit_name> --overwrite` from `playbook/`).
 3. Check both files:
    - `docs/_playground.overrides.json` is the source you maintain.
    - `docs/_playground.json` is the generated file the website reads.
@@ -99,7 +105,7 @@ Replace `KitName` with the React component name, such as `Button`, `Overlay`, or
    - `playbook-website/app/javascript/components/Website/src/pages/KitShow/index.tsx`
 5. Validate generated examples when you add templates, wrappers, or complex children.
 
-Pre-commit hooks also regenerate configs when schema or override files change, but running the command locally makes failures easier to understand.
+Pre-commit also regenerates docs metadata when schema or override files change, but running the command locally makes failures easier to understand.
 
 ## How Generation Works
 
@@ -115,17 +121,18 @@ The base layer can infer simple things like component name, schema defaults, and
 | Field | Purpose |
 | --- | --- |
 | `template` | JSX template. Use `{{props}}` where enabled props should be inserted and `{{children}}` where editable children should appear. |
-| `children` | Controls the Children editor. Use multiline JSX for kits like `Nav`, `Flex`, or `List`. |
+| `children` | Controls the Children editor. Use multiline JSX for kits like `Nav`, `Flex`, or `List`. Optional `propInjection` can merge targeted props into every matching child tag. |
 | `defaults` | Baseline values for controls. Defaults seed the UI but are not emitted until the prop is enabled, selected by a preset, required, or part of a structure mode. |
+| `codegenDefaultProps` | Runtime defaults used only to decide whether generated JSX can omit an enabled prop. Use this when schema/playground defaults differ from the React kit runtime default. |
 | `groups` | Sections in the props panel. Use camelCase prop names. Props not listed still appear under `Other` unless hidden. |
 | `presets` | Feature pills. Each preset can set `props`, `children`, `structureMode`, or `dataPreset`. |
 | `conditionals` | Disable controls until requirements are met. |
 | `hints` | Info/warning/error banners above the preview. |
 | `hiddenProps` | Props to omit from the props panel. |
 | `requiredProps` | Props that should always be present and non-disableable. Useful for required arrays/data like `treeData`. |
-| `customProps` | Playground-only controls not in the schema, often used for subcomponent props. |
+| `customProps` | Playground-only controls not in the schema, often used for subcomponent props. Prefer the real prop names developers pass (for example `text`, `marginY`) when they do not collide with the parent kit. |
 | `propTargets` | Routes a prop into a template marker other than `{{props}}`. |
-| `propAliases` | Renames a playground prop when emitted, such as `navItemText` -> `text`. |
+| `propAliases` | Renames a playground prop when emitted. Prefer avoiding aliases by using real prop names in `customProps` when possible. |
 | `structureModes` | Alternate templates for the same kit, such as default vs subcomponent usage. |
 | `propSyncOnEnable` | Switches structure/data automatically when a prop is enabled. |
 | `wrapper` | Wraps generated JSX with a function component or setup code. Can be top-level or per structure mode. |
@@ -173,6 +180,40 @@ Any template that includes `{{children}}` will show the Children editor. If a st
 
 This is useful for kits where child rows/items matter, such as `Nav`, `Flex`, `List`, `Overlay`, and subcomponent examples.
 
+### Injecting props into every child (`propInjection`)
+
+Use `children.propInjection` when playground controls should apply to **all** matching child tags inside `{{children}}`, not just a single hard-coded child in the template.
+
+This is opt-in. Kits without `propInjection` are unchanged. Injection only runs when the config sets it, and only for the structure modes listed in `structureModes` (if provided).
+
+```json
+"children": {
+  "editable": true,
+  "default": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem active link=\"#\" text=\"Video\" />",
+  "propInjection": {
+    "component": "NavItem",
+    "propTarget": "NavItem.props",
+    "structureModes": ["standard"]
+  }
+}
+```
+
+| Field | Purpose |
+| --- | --- |
+| `component` | Tag name to update, such as `NavItem` or `FlexItem`. |
+| `propTarget` | Marker key whose enabled props are injected, usually the same string used in `propTargets` (for example `NavItem.props`). |
+| `structureModes` | Optional allowlist of structure mode keys. When set, injection runs only in those modes. |
+
+How it works:
+
+1. Enabled props routed to `propTarget` are formatted as JSX attributes.
+2. Those attributes are merged onto every `<component ...>` tag in the `{{children}}` string.
+3. Existing child attributes are kept; injected props are appended.
+
+Prefer this over a structure mode that wraps a single `<NavItem{{NavItem.props}} />` when the goal is to demo shared child props across a list.
+
+Example (Nav): controls like `marginY`, `fontSize`, and `iconLeft` use the real NavItem prop names, target `NavItem.props`, and inject into every NavItem in standard mode.
+
 ## Defaults
 
 Use `defaults` to make controls start with useful values.
@@ -190,6 +231,19 @@ Use `defaults` to make controls start with useful values.
 Defaults are not the same thing as emitted props. They seed the UI as implicit values. If you need a prop to always appear in generated code, use `requiredProps`, a preset, or structure mode `props`.
 
 Object and array defaults prefill the JSON/JS-literal textareas when the prop is enabled.
+
+Use `codegenDefaultProps` when the kit schema default and React runtime default intentionally differ, and generated code should omit only the actual runtime default. This does not change the props panel value; it only changes the "can this enabled prop be left out of JSX?" decision.
+
+```json
+"defaults": {
+  "size": "md"
+},
+"codegenDefaultProps": {
+  "size": "sm"
+}
+```
+
+In this example, the control can still start from `md`, but selecting `md` emits `size="md"` because codegen knows the React kit would otherwise fall back to `sm`.
 
 ## Required Props
 
@@ -337,72 +391,98 @@ Each mode can define:
 
 ## Subcomponent Props
 
-When the subcomponent has props but no schema, create playground-only controls with a prefix.
+When the subcomponent has props but no schema, create playground-only controls with `customProps` and route them with `propTargets`.
 
-Example: control one `NavItem` from the Nav playground.
+**Prefer the real prop names developers pass** (`text`, `active`, `marginY`, `iconLeft`) so the props panel matches generated code. Avoid inventing prefixed names like `navItemText` unless the real name collides with a parent kit prop (for example Nav’s own `link` vs NavItem `link`).
+
+### Apply props to every child (preferred for lists)
+
+Use `children.propInjection` so enabled child props merge into every matching tag in `{{children}}`. See [Injecting props into every child](#injecting-props-into-every-child-propinjection).
 
 ```json
 {
-  "structureModes": {
-    "default": "nav_item_props",
-    "modes": {
-      "nav_item_props": {
-        "label": "NavItem Props",
-        "template": "<Nav{{props}}>\n  <NavItem{{NavItem.props}} />\n  {{children}}\n</Nav>",
-        "children": "<NavItem link=\"#\" text=\"Music\" />",
-        "props": {
-          "navItemText": "Photos",
-          "navItemLink": "#"
-        }
-      }
+  "children": {
+    "editable": true,
+    "default": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem link=\"#\" text=\"Music\" />",
+    "propInjection": {
+      "component": "NavItem",
+      "propTarget": "NavItem.props",
+      "structureModes": ["standard"]
     }
   },
   "customProps": {
-    "navItemText": {
-      "type": "string",
+    "text": { "type": "string", "platforms": ["react"] },
+    "active": { "type": "boolean", "platforms": ["react"], "default": false },
+    "marginY": {
+      "type": "enum",
       "platforms": ["react"],
-      "default": "Photos"
-    },
-    "navItemLink": {
-      "type": "string",
-      "platforms": ["react"],
-      "default": "#"
-    },
-    "navItemActive": {
-      "type": "boolean",
-      "platforms": ["react"],
-      "default": false
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"]
     }
   },
   "propTargets": {
-    "navItemText": "NavItem.props",
-    "navItemLink": "NavItem.props",
-    "navItemActive": "NavItem.props"
-  },
-  "propAliases": {
-    "navItemText": "text",
-    "navItemLink": "link",
-    "navItemActive": "active"
+    "text": "NavItem.props",
+    "active": "NavItem.props",
+    "marginY": "NavItem.props"
   },
   "groups": [
     {
       "name": "NavItem Props",
-      "props": ["navItemText", "navItemLink", "navItemActive"]
+      "props": ["text", "active", "marginY"]
     }
   ]
 }
 ```
 
-Use `propSyncOnEnable` if turning on one of these props should switch to the matching structure:
+No `propAliases` are needed when the playground control name already matches the emitted prop.
+
+### Single hard-coded child in the template
+
+When you need one controlled child (or a parent/child structure like collapsible Nav), put a marker on that tag instead of injecting into all children:
 
 ```json
-"propSyncOnEnable": {
-  "navItemText": { "structureMode": "nav_item_props" },
-  "navItemActive": { "structureMode": "nav_item_props" }
+{
+  "structureModes": {
+    "default": "collapsible",
+    "modes": {
+      "collapsible": {
+        "label": "Collapsible NavItem",
+        "template": "<Nav{{props}}>\n  <NavItem{{NavItem.props}}>\n    {{children}}\n  </NavItem>\n</Nav>",
+        "children": "<NavItem link=\"#\" text=\"City\" />",
+        "props": {
+          "collapsible": true,
+          "text": "Overview"
+        }
+      }
+    }
+  },
+  "customProps": {
+    "text": { "type": "string", "platforms": ["react"] },
+    "collapsible": { "type": "boolean", "platforms": ["react"], "default": false }
+  },
+  "propTargets": {
+    "text": "NavItem.props",
+    "collapsible": "NavItem.props"
+  }
 }
 ```
 
-This same pattern works for `FlexItem`, `Map.Controls`, `AdvancedTable.Header`, or any child/subcomponent surface.
+Use `propSyncOnEnable` if turning on a prop should switch to that structure:
+
+```json
+"propSyncOnEnable": {
+  "collapsible": { "structureMode": "collapsible" }
+}
+```
+
+### When names collide with the parent kit
+
+If a child prop shares a name with the parent (for example both have `link`), either:
+
+- keep the parent prop on `{{props}}` and set the child value in children JSX / structure mode `props`, or
+- use a mode-specific `propTargets` override so `link` routes to `NavItem.props` only in that mode, or
+- as a last resort, use a prefixed `customProps` key plus `propAliases` (older FlexItem-style pattern).
+
+This same targeting pattern works for `FlexItem`, `Map.Controls`, `AdvancedTable.Header`, or any child/subcomponent surface.
 
 ## Wrappers And State
 
@@ -545,20 +625,27 @@ If the template uses `setInput`, `mapContainerRef`, `mapInstance`, or similar, t
 
 ### If a prop belongs to a child component, use `customProps`
 
-Do not add fake props to `kit.schema.json` just for the playground. Add them under `customProps`, target them with `propTargets`, and rename them with `propAliases`.
+Do not add fake props to `kit.schema.json` just for the playground. Add them under `customProps` and target them with `propTargets`. Prefer real prop names so the panel matches what developers write. Use `propAliases` only when a prefix is required to avoid colliding with the parent kit. To apply the same props to every child in `{{children}}`, use `children.propInjection` (opt-in; other kits are unaffected).
 
 ### If a kit needs required data, use `requiredProps`
 
 Do not put required data only in `defaults`. Defaults seed controls but may not emit required props. Put required render data in `requiredProps` and reference it from the template.
 
+### If the schema default differs from the React kit default, use `codegenDefaultProps`
+
+Do not change a kit default just to make the playground emit a prop. Add the real React runtime default to `codegenDefaultProps` in `docs/_playground.overrides.json`, then regenerate `_playground.json`.
+
 ## Manual Commands
 
 ```bash
-# Generate one kit
+# Preferred: regenerate schemas + global props values + all playgrounds
+yarn generate:docs-metadata
+
+# Generate one kit playground only
 cd playbook
 yarn generate:playground-configs --kit=<kit_name> --overwrite
 
-# Generate all kits
+# Generate all kit playgrounds only
 cd playbook
 yarn generate:playground-configs --overwrite
 
@@ -576,7 +663,8 @@ Before handing off a playground override:
 - `docs/_playground.json` was regenerated.
 - Presets demonstrate real usage patterns.
 - Required data is in `requiredProps`, not just `defaults`.
-- Subcomponent props use `customProps`, `propTargets`, and `propAliases`.
+- Subcomponent props use `customProps` and `propTargets` with real prop names when possible; use `propAliases` only for name collisions.
+- Shared list-item props use `children.propInjection` when they should apply to every matching child tag.
 - Wrappers define every variable used by the template.
 - Complex children/templates parse as JSX.
 - `git diff --check` is clean.

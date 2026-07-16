@@ -9,7 +9,7 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 import { DraggableContext } from "../context";
 import { noop } from '../../utilities/object'
-import { bindTouchDrag, isTouchDragDevice } from "../utilities/touchDrag";
+import { bindMousePointerDrag, bindTouchDrag, isTouchDragDevice } from "../utilities/touchDrag";
 
 type DraggableItemProps = {
   aria?: { [key: string]: string };
@@ -27,6 +27,10 @@ type DraggableItemProps = {
   onDragStart?: () => void,
   onDrop?: () => void,
   dragId?: string;
+  /** Whole-item pointer drag (e.g. Typeahead pills without a grip). Disables HTML5 drag. */
+  pointerDrag?: boolean;
+  /** Handle-only pointer drag (e.g. Typeahead pills with a grip). Disables HTML5 drag. */
+  handlePointerDrag?: boolean;
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col' | 'tbody',
 };
 
@@ -48,6 +52,8 @@ const DraggableItem = (props: DraggableItemProps) => {
     onDragOver = noop,
     onDragStart = noop,
     onDrop = noop,
+    pointerDrag = false,
+    handlePointerDrag = false,
   } = props;
 
   const {
@@ -59,11 +65,11 @@ const DraggableItem = (props: DraggableItemProps) => {
     handleDragOver,
     dropZone = 'ghost',
     dropZoneColor = 'neutral',
-    direction = 'horizontal'
   } = DraggableContext();
 
   const itemRef = React.useRef<HTMLElement>(null);
   const [useTouchDrag, setUseTouchDrag] = React.useState(false);
+  const [usePointerMouseDrag, setUsePointerMouseDrag] = React.useState(false);
   const handlersRef = React.useRef({
     handleDragStart,
     handleDragEnter,
@@ -90,9 +96,36 @@ const DraggableItem = (props: DraggableItemProps) => {
     onDragEnd,
   };
 
-  React.useEffect(() => {
-    setUseTouchDrag(isTouchDragDevice());
-  }, []);
+  const dragHandlers = React.useMemo(() => ({
+    onDragStart: (id: string, itemContainer?: string) => {
+      handlersRef.current.handleDragStart(id, itemContainer);
+      handlersRef.current.onDragStart();
+    },
+    onDragEnter: (targetDragId: string, targetContainer?: string) => {
+      handlersRef.current.handleDragEnter(targetDragId, targetContainer);
+      handlersRef.current.onDragEnter();
+    },
+    onDragOver: (event: Event, targetContainer?: string) => {
+      handlersRef.current.handleDragOver(event, targetContainer);
+      handlersRef.current.onDragOver();
+    },
+    onDrop: (dropContainer?: string) => {
+      handlersRef.current.handleDrop(dropContainer);
+      handlersRef.current.onDrop();
+    },
+    onDragEnd: () => {
+      handlersRef.current.handleDragEnd();
+      handlersRef.current.onDragEnd();
+    },
+  }), []);
+
+  React.useLayoutEffect(() => {
+    const touchMode = isTouchDragDevice();
+
+    setUseTouchDrag(touchMode);
+    // Pointer drag is opt-in only — regular Draggable items keep HTML5 drag on the whole item.
+    setUsePointerMouseDrag(!touchMode && (pointerDrag || handlePointerDrag));
+  }, [dragId, container, children, pointerDrag, handlePointerDrag]);
 
   React.useEffect(() => {
     if (!useTouchDrag || !itemRef.current || !dragId) return;
@@ -101,30 +134,21 @@ const DraggableItem = (props: DraggableItemProps) => {
       dragId,
       container,
       itemElement: itemRef.current,
-      handlers: {
-        onDragStart: (id, itemContainer) => {
-          handlersRef.current.handleDragStart(id, itemContainer);
-          handlersRef.current.onDragStart();
-        },
-        onDragEnter: (targetDragId, targetContainer) => {
-          handlersRef.current.handleDragEnter(targetDragId, targetContainer);
-          handlersRef.current.onDragEnter();
-        },
-        onDragOver: (event, targetContainer) => {
-          handlersRef.current.handleDragOver(event, targetContainer);
-          handlersRef.current.onDragOver();
-        },
-        onDrop: (dropContainer) => {
-          handlersRef.current.handleDrop(dropContainer);
-          handlersRef.current.onDrop();
-        },
-        onDragEnd: () => {
-          handlersRef.current.handleDragEnd();
-          handlersRef.current.onDragEnd();
-        },
-      },
+      handlers: dragHandlers,
     });
-  }, [useTouchDrag, dragId, container]);
+  }, [useTouchDrag, dragId, container, dragHandlers]);
+
+  React.useEffect(() => {
+    if (!usePointerMouseDrag || !itemRef.current || !dragId) return;
+
+    return bindMousePointerDrag({
+      dragId,
+      container,
+      itemElement: itemRef.current,
+      handlers: dragHandlers,
+      allowWholeItem: pointerDrag,
+    });
+  }, [usePointerMouseDrag, dragId, container, dragHandlers, pointerDrag]);
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -188,7 +212,7 @@ const DraggableItem = (props: DraggableItemProps) => {
         {...htmlProps}
         className={classes}
         data-pb-drag-id={dragId}
-        draggable={!useTouchDrag}
+        draggable={!useTouchDrag && !usePointerMouseDrag}
         id={id}
         key={dragId}
         onDrag={onDrag}

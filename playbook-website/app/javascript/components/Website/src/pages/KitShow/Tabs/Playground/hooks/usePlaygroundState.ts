@@ -596,6 +596,7 @@ export const usePlaygroundState = ({
         template: activeTemplate!,
         propValues: propValuesForCodegen,
         propDefinitions: allPropDefinitions,
+        codegenDefaultProps: playgroundConfig.codegenDefaultProps,
         propTargets: activePropTargets,
         propAliases: activePropAliases,
         children,
@@ -606,6 +607,7 @@ export const usePlaygroundState = ({
         wrapper: activeWrapper,
         requiredProps,
         statefulProps: activeStatefulProps,
+        structureMode: activeStructureMode,
       });
     }
     return generateCode({
@@ -623,6 +625,7 @@ export const usePlaygroundState = ({
         template: activeTemplate!,
         propValues: propValuesForCodegen,
         propDefinitions: allPropDefinitions,
+        codegenDefaultProps: playgroundConfig.codegenDefaultProps,
         propTargets: activePropTargets,
         propAliases: activePropAliases,
         children,
@@ -632,6 +635,7 @@ export const usePlaygroundState = ({
         wrapper: activeWrapper,
         requiredProps,
         statefulProps: activeStatefulProps,
+        structureMode: activeStructureMode,
       });
     }
     return generateLiveCode({

@@ -22,7 +22,7 @@ type NavProps = {
   orientation?: "vertical" | "horizontal",
   link?: string,
   title?: string,
-  variant?: "normal" | "subtle",
+  variant?: "normal" | "subtle" | "bold",
   itemSpacing?: SpacingObject
 } & GlobalProps
 

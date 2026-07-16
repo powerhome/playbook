@@ -339,8 +339,8 @@
   .pb_rich_text_editor_advanced_container.toolbar-active {
     .ProseMirror {
       border-top: none;
-      border-top-left-radius: initial;
-      border-top-right-radius: initial;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
   }
 }

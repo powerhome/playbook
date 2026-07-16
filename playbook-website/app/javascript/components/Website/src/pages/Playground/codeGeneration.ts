@@ -6,10 +6,8 @@ import {
 import {
   getAllPropDefinitionsWithGlobals,
   getDataPresetProps,
-  getFirstPreset,
   getInitialDataPresetKey,
   getRequiredCodeProps,
-  getRuntimeProps,
   getStructureModeConfig,
   getStructureModeProps,
   displayPropType,
@@ -136,6 +134,8 @@ const getTemplateChildren = (
 ) => {
   if (instance.children.length > 0) {
     return instance.children
+      // renderInstanceCode is recursive with getTemplateChildren.
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       .map((child) => renderInstanceCode(child, kitsByName, 0, globalProps, context))
       .join("\n");
   }
@@ -206,10 +206,14 @@ export const getRuntimeScope = (
   const propValues = kit ? getInstancePropValues(instance, kit) : {};
   const requiredProps = getRequiredCodeProps(kit, instance);
   const ownScope = kit
+    // getTemplateVariableValues is declared below alongside the template helpers it depends on.
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     ? getTemplateVariableValues(kit, instance, propValues, requiredProps)
     : requiredProps;
+  const statefulPropNames = new Set(getActiveStatefulProps(instance, kit));
   const scope = Object.entries(ownScope).reduce<Record<string, any>>(
     (scopedValues, [name, value]) => {
+      if (statefulPropNames.has(name)) return scopedValues;
       scopedValues[name] = instance.props[name] ?? propValues[name]?.value ?? value;
       return scopedValues;
     },
@@ -250,6 +254,7 @@ export const getLivePreviewCode = (
     wrapper: getActiveWrapper(instance, kit),
     requiredProps: getRequiredCodeProps(kit, instance),
     statefulProps: getActiveStatefulProps(instance, kit),
+    structureMode: instance.structureMode,
   });
   const setupCode = context.setupSnippets.join("\n\n");
 
@@ -530,6 +535,7 @@ const renderInstanceCode = (
       wrapper,
       requiredProps: isLivePreviewRender ? {} : requiredProps,
       statefulProps: getActiveStatefulProps(instance, kit),
+      structureMode: instance.structureMode,
     });
 
     const split = splitSetupFromRenderableCode(rendered);
@@ -693,4 +699,28 @@ ${renderedInstances}
   return `${imports.join("\n")}
 
 ${source}`;
+};
+
+export const generatePreviewCode = (
+  instances: BuilderInstance[],
+  kitsByName: Record<string, PlaygroundKit>,
+  globalProps?: Record<string, PropDefinition>
+) => {
+  const context: CodeRenderContext = {
+    setupSnippets: [],
+    usedSetupNames: new Set(),
+  };
+  const renderedInstances = instances.length === 0
+    ? "  <Card padding=\"md\">\n    <Body color=\"light\" text=\"Add kits to start composing.\" />\n  </Card>"
+    : instances
+        .map((instance) => renderInstanceCode(instance, kitsByName, 1, globalProps, context))
+        .join("\n");
+  const setupCode = context.setupSnippets.join("\n\n");
+  const renderCode = `render(
+  <div className="playground-composition">
+${renderedInstances}
+  </div>
+);`;
+
+  return [setupCode, renderCode].filter(Boolean).join("\n\n");
 };

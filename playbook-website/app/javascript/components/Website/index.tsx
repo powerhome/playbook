@@ -1,10 +1,11 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {
   useEffect,
   useMemo,
   useRef,
   useState,
-  type CSSProperties,
 } from "react";
+import type { CSSProperties } from "react";
 import { Flex, Icon, Layout, SectionSeparator, Body } from "playbook-ui";
 import Sidebar from "./src/layouts/Sidebar";
 import LayoutRight from "./src/layouts/LayoutRight";
@@ -14,6 +15,12 @@ import { PlatformToggle } from "./src/components/PlatformToggle";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { PlatformContext } from "./src/contexts/PlatformContext";
 import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
+import {
+  DEFAULT_PLATFORM,
+  resolvePlatform,
+  syncStoredPlatformFromLocation,
+  writeStoredPlatform,
+} from "./src/helpers/platform";
 
 function WebsiteContent() {
   const {
@@ -77,13 +84,23 @@ function WebsiteContent() {
     "--website-header-height": `${headerHeight}px`,
   } as CSSProperties;
 
-  const platform = useMemo(() => {
-    const pathPlatform = normalizedPath.match(/\/(react|rails|swift)$/)?.[1];
-    const queryPlatform = new URLSearchParams(location.search).get("type");
-    return pathPlatform || queryPlatform || type || "react";
-  }, [normalizedPath, location.search, type]);
+  const platform = useMemo(
+    () => resolvePlatform(normalizedPath, location.search, type),
+    [normalizedPath, location.search, type],
+  );
+
+  useEffect(() => {
+    setDesktopSidebarCollapsed(normalizedPath === "/playground");
+  }, [normalizedPath]);
+
+  // Keep preference in sync when the URL explicitly sets a platform
+  useEffect(() => {
+    syncStoredPlatformFromLocation(normalizedPath, location.search);
+  }, [normalizedPath, location.search]);
 
   const handlePlatformChange = (nextPlatform: string) => {
+    writeStoredPlatform(nextPlatform);
+
     const isKitDetailRoute =
       /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(
         normalizedPath,
@@ -120,67 +137,66 @@ function WebsiteContent() {
 
   return (
     <PlatformContext.Provider
-      value={{ platform, setPlatform: handlePlatformChange }}
+        value={{ platform, setPlatform: handlePlatformChange }}
     >
       <div
-        className={`pb--website-shell ${darkMode ? "dark" : ""} ${desktopSidebarCollapsed ? "sidebar-collapsed" : ""}`.trim()}
-        style={websiteStyle}
+          className={`pb--website-shell ${darkMode ? "dark" : ""} ${desktopSidebarCollapsed ? "sidebar-collapsed" : ""}`.trim()}
+          style={websiteStyle}
       >
         <MobileNav />
         {showPlatformToggle && (
           <Flex
-            align="center"
-            dark={darkMode}
-            display={{
+              align="center"
+              dark={darkMode}
+              display={{
               xs: "flex",
               sm: "flex",
               md: "flex",
               lg: "none",
               xl: "none",
             }}
-            paddingX="sm"
-            paddingY="xs"
+              paddingX="sm"
+              paddingY="xs"
           >
             <PlatformToggle
-              platform={platform}
-              setPlatform={handlePlatformChange}
+                platform={platform}
+                setPlatform={handlePlatformChange}
             />
           </Flex>
         )}
         <SectionSeparator
-          dark={darkMode}
-          display={{
+            dark={darkMode}
+            display={{
             xs: "block",
             sm: "block",
             md: "block",
             lg: "none",
             xl: "none",
           }}
-          width="100%"
+            width="100%"
         />
         <div ref={headerRef}>
           <Header
-            PBversion={PBversion || "Latest"}
-            search_list={search_list || []}
-            global_props_and_tokens={global_props_and_tokens || []}
-            platform={platform}
-            setPlatform={handlePlatformChange}
-            sidebarCollapsed={desktopSidebarCollapsed}
+              PBversion={PBversion || "Latest"}
+              global_props_and_tokens={global_props_and_tokens || []}
+              platform={platform}
+              search_list={search_list || []}
+              setPlatform={handlePlatformChange}
           />
         </div>
         <Layout
-          className="pb--page--content pb--website--new"
-          collapse="lg"
-          dark={darkMode}
+            className="pb--page--content pb--website--new"
+            collapse="lg"
+            dark={darkMode}
         >
           <MobileHamburger
-            isOpen={mobileNavOpen}
-            onToggle={() => setMobileNavOpen(!mobileNavOpen)}
+              isOpen={mobileNavOpen}
+              onToggle={() => setMobileNavOpen(!mobileNavOpen)}
           />
           {mobileNavOpen && (
             <div
-              onClick={() => setMobileNavOpen(false)}
-              style={{
+                onClick={() => setMobileNavOpen(false)}
+                style={{
                 position: "fixed",
                 inset: 0,
                 zIndex: 99,
@@ -188,44 +204,43 @@ function WebsiteContent() {
             />
           )}
           <Layout.Side
-            className={`pb--page--sideNav ${darkMode ? "dark" : ""} ${mobileNavOpen ? "mobile-open" : ""} ${desktopSidebarCollapsed ? "is-collapsed" : ""}`.trim()}
+              className={`pb--page--sideNav ${darkMode ? "dark" : ""} ${mobileNavOpen ? "mobile-open" : ""} ${desktopSidebarCollapsed ? "is-collapsed" : ""}`.trim()}
           >
             <Sidebar
-              dark={darkMode}
-              collapsed={desktopSidebarCollapsed}
-              type={platform || "react"}
-              category={category}
-              kit={kit}
-              kits_with_status={kits_with_status || kits}
-              getting_started={getting_started || { pages: [] }}
-              global_props_and_tokens={global_props_and_tokens || []}
-              design_guidelines={design_guidelines || { pages: [] }}
-              icons={icons || []}
-              whats_new={whats_new || { pages: [] }}
-              beta={true}
+                category={category}
+                collapsed={desktopSidebarCollapsed}
+                dark={darkMode}
+                design_guidelines={design_guidelines || { pages: [] }}
+                getting_started={getting_started || { pages: [] }}
+                global_props_and_tokens={global_props_and_tokens || []}
+                icons={icons || []}
+                kit={kit}
+                kits_with_status={kits_with_status || kits}
+                type={platform || DEFAULT_PLATFORM}
+                whats_new={whats_new || { pages: [] }}
             />
             <button
-              aria-label={
+                aria-label={
                 desktopSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"
               }
-              className="pb--page--sideNav-toggle"
-              onClick={() =>
+                className="pb--page--sideNav-toggle"
+                onClick={() =>
                 setDesktopSidebarCollapsed((collapsed) => !collapsed)
               }
-              type="button"
+                type="button"
             >
               <Icon
-                color="light"
-                icon={
+                  color="light"
+                  icon={
                   desktopSidebarCollapsed
                     ? "angle-double-right"
                     : "angle-double-left"
                 }
               />
               <Body
-                marginLeft="xs"
-                color="lighter"
-                text={desktopSidebarCollapsed ? "" : "Collapse sidebar"}
+                  color="lighter"
+                  marginLeft="xs"
+                  text={desktopSidebarCollapsed ? "" : "Collapse sidebar"}
               />
             </button>
           </Layout.Side>
