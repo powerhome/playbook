@@ -70,7 +70,7 @@
 .pb_dropdown_quickpick,
 .pb_dropdown_default_separators_hidden,
 .pb_dropdown_subtle_separators_hidden {
-  label {
+  label:not([class*="pb_radio_kit"]):not([class*="pb_checkbox_kit"]) {
     display: block !important;
   }
   .dropdown_wrapper {
