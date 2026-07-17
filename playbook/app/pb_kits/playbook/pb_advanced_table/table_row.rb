@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "column_layout_helper"
+require_relative "advanced_table"
 
 module Playbook
   module PbAdvancedTable
@@ -245,7 +245,7 @@ module Playbook
         orig_def = find_column_def_by_accessor(column_definitions, column[:accessor])
         return {} unless orig_def
 
-        ColumnLayoutHelper.build_column_layout_styles(orig_def[:column_styling])
+        AdvancedTable.build_column_layout_styles(orig_def[:column_styling])
       end
 
       def custom_renderer_value(column, index)

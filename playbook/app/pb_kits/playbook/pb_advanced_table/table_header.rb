@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "column_layout_helper"
+require_relative "advanced_table"
 
 module Playbook
   module PbAdvancedTable
@@ -219,7 +219,7 @@ module Playbook
         original_def = find_original_column_def_for_cell(cell)
         return {} unless original_def
 
-        ColumnLayoutHelper.build_column_layout_styles(original_def[:column_styling])
+        AdvancedTable.build_column_layout_styles(original_def[:column_styling])
       end
 
       # Find the original column definition for a cell
