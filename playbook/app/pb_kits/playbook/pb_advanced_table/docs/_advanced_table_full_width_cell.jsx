@@ -11,7 +11,6 @@ const AdvancedTableFullWidthCell = (props) => {
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
-      columnStyling: { width: 424 },
       customRenderer: (row, value) => (
         <Flex justify="between">
           <Title size={4}
