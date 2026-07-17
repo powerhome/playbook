@@ -4,6 +4,7 @@
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
+      column_styling: { width: 424 },
       custom_renderer: ->(row, value) {
         capture do
           pb_rails("flex", props: { justify: "between" }) do
@@ -16,24 +17,14 @@
     {
       accessor: "newEnrollments",
       label: "New Enrollments",
-      custom_renderer: ->(row, value) { pb_rails("pill", props: { text: value, variant: "success" }) }
     },
     {
       accessor: "scheduledMeetings",
       label: "Scheduled Meetings",
-      custom_renderer: ->(row, value) { content_tag(:a, value, href: "#") }
     },
     {
       accessor: "attendanceRate",
       label: "Attendance Rate",
-      custom_renderer: ->(row, value) {
-        capture do
-          pb_rails("flex", props: { align_items: "end", orientation: "column" }) do
-            pb_rails("detail", props: { bold: true, color: "default", text: value }) +
-            pb_rails("caption", props: { size: "xs", text: row[:graduatedStudents] })
-          end
-        end
-      }
     },
     {
       accessor: "completedClasses",
@@ -50,4 +41,10 @@
   ]
 %>
 
-<%= pb_rails("advanced_table", props: { id: "custom_cell", table_data: @table_data, column_definitions: column_definitions, full_width_cell: true }) %>
+<%= pb_rails("advanced_table", props: {
+  id: "full_width_cell",
+  table_data: @table_data,
+  column_definitions: column_definitions,
+  enable_toggle_expansion: "all",
+  full_width_cell: true
+}) %>

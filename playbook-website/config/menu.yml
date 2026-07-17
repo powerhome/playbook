@@ -71,7 +71,7 @@ kits:
   - name: cell_behavior
     description: "What each cell shows and does: custom content, edit, loading."
     parent: advanced_table
-    kit_section: ["Custom Components for Cells", "Custom Header Cell", "Custom Header with Multiple Headers", "Inline Cell Editing"]
+    kit_section: ["Custom Components for Cells", "Full Width Cell", "Custom Header Cell", "Custom Header with Multiple Headers", "Inline Cell Editing"]
     platforms: *1
     status: stable
     icons_used: true
@@ -89,7 +89,7 @@ kits:
   - name: styling
     description: "Styling per row or column: padding, color, and border."
     parent: advanced_table
-    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling with Multiple Headers", "Column Styling Background Color", "Column Styling Background Color (Custom)", "Column Styling Background Color with Multiple Headers","Column Styling Individual Cell Background Color", "Padding Control using Column Styling", "Column Group Border Color"]
+    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling Width", "Column Styling with Multiple Headers", "Column Styling Background Color", "Column Styling Background Color (Custom)", "Column Styling Background Color with Multiple Headers","Column Styling Individual Cell Background Color", "Padding Control using Column Styling", "Column Group Border Color"]
     platforms: *1
     status: stable
     icons_used: true

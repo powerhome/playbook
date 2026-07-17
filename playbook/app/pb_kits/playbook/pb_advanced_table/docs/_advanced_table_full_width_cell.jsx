@@ -1,15 +1,11 @@
 import React from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
-import Pill from "../../pb_pill/_pill"
-import Body from "../../pb_body/_body"
 import Flex from "../../pb_flex/_flex"
-import Detail from "../../pb_detail/_detail"
-import Caption from "../../pb_caption/_caption"
 import Badge from "../../pb_badge/_badge"
 import Title from "../../pb_title/_title"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
-const AdvancedTableCustomCell = (props) => {
+const AdvancedTableFullWidthCell = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -19,7 +15,7 @@ const AdvancedTableCustomCell = (props) => {
       customRenderer: (row, value) => (
         <Flex justify="between">
           <Title size={4}
-              text={value} 
+              text={value}
           />
           <Badge dark
               marginLeft="xxs"
@@ -27,36 +23,19 @@ const AdvancedTableCustomCell = (props) => {
               variant="neutral"
           />
         </Flex>
-      ), 
+      ),
     },
     {
       accessor: "newEnrollments",
       label: "New Enrollments",
-      customRenderer: (row, value) => (
-        <Pill text={value} 
-            variant="success"    
-        />
-      ), 
     },
     {
       accessor: "scheduledMeetings",
       label: "Scheduled Meetings",
-      customRenderer: (row, value) => <Body><a href="#">{value}</a></Body>, 
     },
     {
       accessor: "attendanceRate",
       label: "Attendance Rate",
-      customRenderer: (row, value) => (
-        <Flex alignItems="end" 
-            orientation="column"
-        >
-          <Detail bold 
-              color="default" 
-              text={value} 
-          />
-          <Caption size="xs">{row.original.graduatedStudents}</Caption>
-        </Flex>
-      ),
     },
     {
       accessor: "completedClasses",
@@ -78,7 +57,6 @@ const AdvancedTableCustomCell = (props) => {
           columnDefinitions={columnDefinitions}
           enableToggleExpansion="all"
           fullWidthCell
-          responsive="none"
           tableData={MOCK_DATA}
           {...props}
       >
@@ -89,4 +67,4 @@ const AdvancedTableCustomCell = (props) => {
   )
 }
 
-export default AdvancedTableCustomCell
+export default AdvancedTableFullWidthCell

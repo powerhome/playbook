@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "column_layout_helper"
+
 module Playbook
   module PbAdvancedTable
     class TableRow < Playbook::KitBase
@@ -35,6 +37,8 @@ module Playbook
                                      default: ""
       prop :inline_row_loading, type: Playbook::Props::Boolean,
                                 default: false
+      prop :full_width_cell, type: Playbook::Props::Boolean,
+                             default: false
       prop :is_pinned_row, type: Playbook::Props::Boolean,
                            default: false
       prop :pinned_index, type: Playbook::Props::Numeric,
@@ -111,6 +115,7 @@ module Playbook
         column_font_color = cell_font_color(column)
         effective_font_color = column_font_color || font_color
         effective_font_weight = font_weight_value(font_weight)
+        layout_styles = column_layout_styles_for_column(column)
 
         if has_custom_background_color?(column)
           custom_bg_color = cell_background_color(column)
@@ -123,12 +128,14 @@ module Playbook
           style_hash = {}
           style_hash[:color] = effective_font_color if effective_font_color.present?
           style_hash[:"font-weight"] = effective_font_weight if effective_font_weight.present?
+          style_hash.merge!(layout_styles)
           component_props[:html_options] = { style: style_hash } if style_hash.present?
         else
           component_name = "table/table_cell"
           style_hash = { "background-color": bg_color }
           style_hash[:color] = effective_font_color if effective_font_color.present?
           style_hash[:"font-weight"] = effective_font_weight if effective_font_weight.present?
+          style_hash.merge!(layout_styles)
           component_props = {
             html_options: {
               style: style_hash,
@@ -231,6 +238,15 @@ module Playbook
       end
 
     private
+
+      def column_layout_styles_for_column(column)
+        return {} unless column[:accessor].present?
+
+        orig_def = find_column_def_by_accessor(column_definitions, column[:accessor])
+        return {} unless orig_def
+
+        ColumnLayoutHelper.build_column_layout_styles(orig_def[:column_styling])
+      end
 
       def custom_renderer_value(column, index)
         return nil unless column[:accessor].present?

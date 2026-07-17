@@ -6,4 +6,6 @@ The `column_styling` prop is an optional item that can be used within `column_de
 
 3) `font_color`: This will allow you to control the font color for a given column.
 
+4) `width` / `min_width` / `max_width`: These control column sizing via inline styles. See the [Column Styling Width](#column-styling-width) example for details.
+
 `column_styling` can be used within the column_definition of all the columns or some of them, as shown. Each column has its own individual control in this way. 

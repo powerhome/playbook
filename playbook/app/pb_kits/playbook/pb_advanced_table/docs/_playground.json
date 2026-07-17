@@ -9,6 +9,7 @@
   "defaults": {
     "columnGroupBorderColor": "none",
     "enableToggleExpansion": "header",
+    "fullWidthCell": false,
     "inlineRowLoading": false,
     "loading": false,
     "responsive": "scroll",

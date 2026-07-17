@@ -26,7 +26,7 @@
                     <% end %>
                 <% end %>
 
-                <div style="padding-left: <%= depth * 1.25 %>em">
+                <div style="padding-left: <%= depth * 1.25 %>em;<%= ' width: 100%;' if index.zero? && object.full_width_cell %>">
                     <%= pb_rails("flex", props:{align: "center", column_gap: "xs"}) do %>
                         <% if index.zero? %>
                             <% has_integrated_checkbox = object.selectable_rows && object.enable_toggle_expansion != "none" %>
@@ -47,7 +47,7 @@
                                 </button>
                             <% end %>
                         <% end %>
-                        <%= pb_rails("flex/flex_item") do %>       
+                        <%= pb_rails("flex/flex_item", props: (index.zero? && object.full_width_cell ? { width: "100%" } : {})) do %>
                             <% if column[:custom_renderer].present? %>
                                 <%= raw(column[:custom_renderer].call(object.row, custom_renderer_value(column, index))) %>
                             <% elsif index.zero? %>
