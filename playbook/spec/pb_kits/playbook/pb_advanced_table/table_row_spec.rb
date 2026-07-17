@@ -460,50 +460,6 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
         expect(result[:props][:html_options][:style][:"font-weight"]).to eq "700"
       end
     end
-
-    context "with column layout width styles" do
-      let(:column_definitions) do
-        [
-          { accessor: "fixed", column_styling: { width: 128 } },
-          { accessor: "floor", column_styling: { min_width: 160 } },
-          { accessor: "band", column_styling: { min_width: 108, width: 124, max_width: 168 } },
-          { accessor: "with_bg_and_width", column_styling: { cell_background_color: "success_secondary", width: 200 } },
-        ]
-      end
-
-      it "locks min and max when only width is set" do
-        result = instance.cell_component_info({ accessor: "fixed" }, 0, nil, nil)
-        style = result[:props][:html_options][:style]
-        expect(style[:width]).to eq "128px"
-        expect(style[:min_width]).to eq "128px"
-        expect(style[:max_width]).to eq "128px"
-      end
-
-      it "applies min_width alone as a floor" do
-        result = instance.cell_component_info({ accessor: "floor" }, 0, nil, nil)
-        style = result[:props][:html_options][:style]
-        expect(style[:min_width]).to eq "160px"
-        expect(style).not_to have_key(:width)
-        expect(style).not_to have_key(:max_width)
-      end
-
-      it "applies a min / preferred / max band" do
-        result = instance.cell_component_info({ accessor: "band" }, 0, nil, nil)
-        style = result[:props][:html_options][:style]
-        expect(style[:min_width]).to eq "108px"
-        expect(style[:width]).to eq "124px"
-        expect(style[:max_width]).to eq "168px"
-      end
-
-      it "merges layout styles onto background cells" do
-        result = instance.cell_component_info({ accessor: "with_bg_and_width" }, 0, nil, nil)
-        style = result[:props][:html_options][:style]
-        expect(result[:name]).to eq "background"
-        expect(style[:width]).to eq "200px"
-        expect(style[:min_width]).to eq "200px"
-        expect(style[:max_width]).to eq "200px"
-      end
-    end
   end
 
   describe "#font_weight_value" do

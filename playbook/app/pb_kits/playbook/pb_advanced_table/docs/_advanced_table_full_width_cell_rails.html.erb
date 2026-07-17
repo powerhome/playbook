@@ -4,7 +4,6 @@
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
-      column_styling: { width: 424 },
       custom_renderer: ->(row, value) {
         capture do
           pb_rails("flex", props: { justify: "between" }) do

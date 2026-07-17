@@ -77,7 +77,6 @@ const AdvancedTableCustomCell = (props) => {
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           enableToggleExpansion="all"
-          fullWidthCell
           responsive="none"
           tableData={MOCK_DATA}
           {...props}

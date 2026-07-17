@@ -473,43 +473,6 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
         expect(result[:props][:classname]).not_to include "pinned-left"
       end
     end
-
-    context "with column layout width styles" do
-      let(:column_definitions) do
-        [
-          { accessor: "fixed", label: "Fixed", column_styling: { width: 128 } },
-          { accessor: "floor", label: "Floor", column_styling: { min_width: 160 } },
-          { accessor: "band", label: "Band", column_styling: { min_width: 108, width: 124, max_width: 168 } },
-        ]
-      end
-
-      it "locks min and max when only width is set" do
-        cell = { accessor: "fixed", label: "Fixed", colspan: 1 }
-        result = instance.header_component_info(cell, 0, 0)
-        style = result[:props][:html_options][:style]
-        expect(style[:width]).to eq "128px"
-        expect(style[:min_width]).to eq "128px"
-        expect(style[:max_width]).to eq "128px"
-      end
-
-      it "applies min_width alone as a floor" do
-        cell = { accessor: "floor", label: "Floor", colspan: 1 }
-        result = instance.header_component_info(cell, 0, 0)
-        style = result[:props][:html_options][:style]
-        expect(style[:min_width]).to eq "160px"
-        expect(style).not_to have_key(:width)
-        expect(style).not_to have_key(:max_width)
-      end
-
-      it "applies a min / preferred / max band" do
-        cell = { accessor: "band", label: "Band", colspan: 1 }
-        result = instance.header_component_info(cell, 0, 0)
-        style = result[:props][:html_options][:style]
-        expect(style[:min_width]).to eq "108px"
-        expect(style[:width]).to eq "124px"
-        expect(style[:max_width]).to eq "168px"
-      end
-    end
   end
 
   describe "#has_any_sub_rows?" do

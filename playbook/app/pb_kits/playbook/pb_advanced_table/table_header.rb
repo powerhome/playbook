@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "advanced_table"
-
 module Playbook
   module PbAdvancedTable
     class TableHeader < Playbook::KitBase
@@ -166,7 +164,6 @@ module Playbook
       def header_component_info(cell, cell_index, row_index)
         header_id = cell[:accessor].present? ? cell[:accessor] : "header_#{row_index}_#{cell_index}"
         classname = [th_classname(is_first_column: cell_index.zero?), ("last-header-cell" if cell[:is_last_in_group] && cell_index != 0)].compact.join(" ")
-        layout_styles = column_layout_styles_for_cell(cell)
 
         if has_custom_header_background_color?(cell)
           component_name = "background"
@@ -175,14 +172,12 @@ module Playbook
             tag: "th",
             classname: classname,
           }
-          style = {}
-          style[:color] = cell[:header_font_color] if cell[:header_font_color].present?
-          style.merge!(layout_styles)
           component_props[:html_options] = {
             id: header_id,
             colspan: cell[:colspan],
-            style: style,
+            style: { color: cell[:header_font_color] },
           }
+          component_props[:html_options][:style].delete(:color) unless cell[:header_font_color].present?
         else
           component_name = "table/table_header"
           component_props = {
@@ -191,10 +186,7 @@ module Playbook
             classname: classname,
             sort_menu: cell[:accessor] ? cell[:sort_menu] : nil,
           }
-          style = {}
-          style[:color] = cell[:header_font_color] if cell[:header_font_color].present?
-          style.merge!(layout_styles)
-          component_props[:html_options] = { style: style } if style.present?
+          component_props[:html_options] = { style: { color: cell[:header_font_color] } } if cell[:header_font_color].present?
         end
 
         { name: component_name, props: component_props }
@@ -214,13 +206,6 @@ module Playbook
       end
 
     private
-
-      def column_layout_styles_for_cell(cell)
-        original_def = find_original_column_def_for_cell(cell)
-        return {} unless original_def
-
-        AdvancedTable.build_column_layout_styles(original_def[:column_styling])
-      end
 
       # Find the original column definition for a cell
       def find_original_column_def_for_cell(cell)
