@@ -16,7 +16,7 @@ const AdvancedTableCustomCell = (props) => {
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
       customRenderer: (row, value) => (
-        <Flex justify="between">
+        <Flex>
           <Title size={4}
               text={value} 
           />

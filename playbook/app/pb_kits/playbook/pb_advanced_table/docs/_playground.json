@@ -93,7 +93,8 @@
       "name": "Column Configuration",
       "props": [
         "columnVisibilityControl",
-        "columnGroupBorderColor"
+        "columnGroupBorderColor",
+        "fullWidthCell"
       ]
     },
     {
