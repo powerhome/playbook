@@ -27,6 +27,8 @@ module Playbook
                          default: []
       prop :inline_row_loading, type: Playbook::Props::Boolean,
                                 default: false
+      prop :full_width_cell, type: Playbook::Props::Boolean,
+                             default: false
       prop :pinned_rows, type: Playbook::Props::HashProp,
                          default: {}
 
@@ -89,7 +91,7 @@ module Playbook
                                   end
 
         # Additional class and data attributes needed for toggle logic
-        row_props = { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading }
+        row_props = { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading, full_width_cell: full_width_cell }
         if is_pinned_row && next_pinned_index
           row_props[:is_pinned_row] = true
           row_props[:pinned_index] = next_pinned_index

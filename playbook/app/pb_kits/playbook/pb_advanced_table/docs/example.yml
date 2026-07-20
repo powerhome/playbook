@@ -13,6 +13,7 @@ examples:
   - advanced_table_beta_sort: Enable Sorting
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell_rails: Custom Components for Cells
+  - advanced_table_full_width_cell_rails: Full Width Cell
   - advanced_table_with_custom_header_rails: Custom Header Cell
   - advanced_table_with_custom_header_multi_header_rails: Custom Header with Multiple Headers
   - advanced_table_column_headers: Multi-Header Columns
@@ -58,6 +59,7 @@ examples:
   - advanced_table_sticky_scroll_limitation: Sticky Header and Column Scroll Limitation
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell: Custom Components for Cells
+  - advanced_table_full_width_cell: Full Width Cell
   - advanced_table_with_custom_header: Custom Header Cell
   - advanced_table_with_custom_header_multi_header: Custom Header with Multiple Headers
   - advanced_table_pagination: Pagination

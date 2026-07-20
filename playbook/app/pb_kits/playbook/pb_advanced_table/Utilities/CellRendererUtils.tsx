@@ -12,6 +12,8 @@ import { getRowStyle } from "./RowUtils";
  * @param isFirstColumn Whether this is the first column (special handling)
  * @param onRowToggleClick Optional callback for row toggle
  * @param selectableRows Whether rows are selectable
+ * @param rowStyling Optional row styling configuration
+ * @param fullWidthCell Whether first-column cell content should take full width
  */
 export const createCellFunction = (
   cellAccessors: string[],
@@ -19,7 +21,8 @@ export const createCellFunction = (
   isFirstColumn?: boolean,
   onRowToggleClick?: (row: Row<GenericObject>) => void,
   selectableRows?: boolean,
-  rowStyling?: GenericObject[]
+  rowStyling?: GenericObject[],
+  fullWidthCell?: boolean
 ) => {
   // Add display name to the returned function
   const cellRenderer = ({
@@ -39,6 +42,7 @@ export const createCellFunction = (
             <CustomCell
                 customRenderer={customRenderer}
                 customStyle={customStyle}
+                fullWidthCell={fullWidthCell}
                 getValue={getValue}
                 onRowToggleClick={onRowToggleClick}
                 row={row}
@@ -54,6 +58,7 @@ export const createCellFunction = (
             <CustomCell
                 customRenderer={customRenderer}
                 customStyle={customStyle}
+                fullWidthCell={fullWidthCell}
                 onRowToggleClick={onRowToggleClick}
                 row={row}
                 selectableRows={selectableRows}
