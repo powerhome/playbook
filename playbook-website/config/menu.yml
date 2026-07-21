@@ -210,7 +210,7 @@ kits:
     description: Part-to-whole comparison like a pie chart. Default mode stresses share without raw numbers.
     status: stable
     icons_used: false
-    react_rendered: true
+    react_rendered: false
     enhanced_element_used: false
   - name: legend
     platforms: *1

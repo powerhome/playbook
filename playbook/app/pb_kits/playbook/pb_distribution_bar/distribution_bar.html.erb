@@ -1,1 +1,8 @@
-<%= react_component('DistributionBar', object.chart_options) %>
+<%= pb_content_tag do %>
+  <% widths_to_percentages.each_with_index do |percentage, index| %>
+    <div
+      class="<%= segment_classname(index) %>"
+      style="width: <%= percentage %>%;"
+    ></div>
+  <% end %>
+<% end %>
