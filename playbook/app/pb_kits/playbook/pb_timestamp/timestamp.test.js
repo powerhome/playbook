@@ -98,6 +98,50 @@ describe("Timestamp Kit", () => {
     expect(text.textContent).toEqual("12:00a EST");
   });
 
+  test("renders Timestamp timezone with ActiveSupport name", () => {
+    render(
+      <Timestamp
+          align="left"
+          data={{ testid: testId }}
+          showDate={false}
+          showTimezone
+          timestamp={new Date()}
+          timezone="Eastern Time (US & Canada)"
+      />
+    );
+    const kit = screen.getByTestId(testId);
+    const text = kit.querySelector(".pb_caption_kit_xs");
+    expect(text.textContent).toEqual("12:00a EST");
+  });
+
+  test("ActiveSupport and IANA timezone names produce the same output", () => {
+    const { rerender } = render(
+      <Timestamp
+          align="left"
+          data={{ testid: testId }}
+          showDate={false}
+          showTimezone
+          timestamp={new Date()}
+          timezone="America/Los_Angeles"
+      />
+    );
+    const ianaText = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs").textContent;
+
+    rerender(
+      <Timestamp
+          align="left"
+          data={{ testid: testId }}
+          showDate={false}
+          showTimezone
+          timestamp={new Date()}
+          timezone="Pacific Time (US & Canada)"
+      />
+    );
+    const activeSupportText = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs").textContent;
+
+    expect(activeSupportText).toEqual(ianaText);
+  });
+
   test("renders Timestamp updated variant with user", () => {
     render(
       <Timestamp

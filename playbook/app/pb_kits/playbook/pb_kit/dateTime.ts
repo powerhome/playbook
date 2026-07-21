@@ -1,3 +1,5 @@
+import { ACTIVE_SUPPORT_TIME_ZONE_MAPPING } from './activeSupportTimeZones'
+
 const ABBR_DAYS = ['SU', 'M', 'T', 'W', 'TH', 'F', 'S']
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -15,11 +17,19 @@ const formatDate = (newDate: Date | string) => {
   return new Date(newDate)
 }
 
+// Resolves ActiveSupport timezone names (e.g. "Eastern Time (US & Canada)") to IANA
+// identifiers for Intl. IANA values pass through unchanged.
+export const resolveTimeZone = (timeZone?: string): string | undefined => {
+  if (!timeZone) return undefined
+  return ACTIVE_SUPPORT_TIME_ZONE_MAPPING[timeZone] || timeZone
+}
+
 export const toMinute = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
+  const resolvedTimeZone = resolveTimeZone(timeZone)
 
-  if (timeZone) {
-    return date.toLocaleTimeString("en-US", { timeZone, hour: "2-digit", minute: "2-digit" }).slice(3, 5);
+  if (resolvedTimeZone) {
+    return date.toLocaleTimeString("en-US", { timeZone: resolvedTimeZone, hour: "2-digit", minute: "2-digit" }).slice(3, 5);
   } else {
     return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }).slice(3, 5);
   }
@@ -27,17 +37,20 @@ export const toMinute = (newDate: Date | string, timeZone?: string): string => {
 
 export const toHour = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
+  const resolvedTimeZone = resolveTimeZone(timeZone)
 
-  if (timeZone) {
-    return date.toLocaleTimeString("en-US", { timeZone, hour: "numeric" }).split(' ')[0];
+  if (resolvedTimeZone) {
+    return date.toLocaleTimeString("en-US", { timeZone: resolvedTimeZone, hour: "numeric" }).split(' ')[0];
   } else {
     return date.toLocaleTimeString("en-US", { hour: "numeric" }).split(' ')[0];
   }
 }
 
 export const toDay = (newDate: Date | string, timeZone?: string): number => {
-  if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
+  const resolvedTimeZone = resolveTimeZone(timeZone)
+
+  if (resolvedTimeZone) {
+    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone: resolvedTimeZone }));
     return date.getDate()
   } else {
     const date = formatDate(newDate)
@@ -56,8 +69,10 @@ export const toWeekday = (newDate: Date | string): string => {
 }
 
 export const toMonth = (newDate: Date | string, timeZone?: string): string => {
-  if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
+  const resolvedTimeZone = resolveTimeZone(timeZone)
+
+  if (resolvedTimeZone) {
+    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone: resolvedTimeZone }));
     return months[date.getMonth()]
   } else {
     const date = formatDate(newDate)
@@ -71,8 +86,10 @@ export const toMonthNum = (newDate: Date | string): number => {
 }
 
 export const toYear = (newDate: Date | string, timeZone?: string): number => {
-  if (timeZone) {
-    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone }));
+  const resolvedTimeZone = resolveTimeZone(timeZone)
+
+  if (resolvedTimeZone) {
+    const date = new Date(formatDate(newDate).toLocaleString("en-US", { timeZone: resolvedTimeZone }));
     return date.getFullYear()
   } else {
     const date = formatDate(newDate)
@@ -82,9 +99,10 @@ export const toYear = (newDate: Date | string, timeZone?: string): number => {
 
 export const toTime = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
+  const resolvedTimeZone = resolveTimeZone(timeZone)
 
-  if (timeZone) {
-    return date.toLocaleTimeString("en-US", { timeZone, timeStyle: "short" }).split(' ')[0];
+  if (resolvedTimeZone) {
+    return date.toLocaleTimeString("en-US", { timeZone: resolvedTimeZone, timeStyle: "short" }).split(' ')[0];
   } else {
     return date.toLocaleTimeString("en-US", { timeStyle: "short" }).split(' ')[0];
   }
@@ -92,9 +110,10 @@ export const toTime = (newDate: Date | string, timeZone?: string): string => {
 
 export const toMeridiem = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
+  const resolvedTimeZone = resolveTimeZone(timeZone)
 
-  if (timeZone) {
-    return date.toLocaleString("en-US", { timeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
+  if (resolvedTimeZone) {
+    return date.toLocaleString("en-US", { timeZone: resolvedTimeZone, hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
   } else {
     return date.toLocaleString("en-US", { hour12: true }).slice(-2).charAt(0).toLocaleLowerCase();
   }
@@ -102,9 +121,10 @@ export const toMeridiem = (newDate: Date | string, timeZone?: string): string =>
 
 export const toTimeZone = (newDate: Date | string, timeZone?: string): string => {
   const date = formatDate(newDate)
+  const resolvedTimeZone = resolveTimeZone(timeZone)
 
-  if (timeZone) {
-    return date.toLocaleString("en-US", { timeZone, timeZoneName: "short" }).split(' ')[3];
+  if (resolvedTimeZone) {
+    return date.toLocaleString("en-US", { timeZone: resolvedTimeZone, timeZoneName: "short" }).split(' ')[3];
   } else {
     return date.toLocaleString("en-US", { timeZoneName: "short" }).split(' ')[3];
   }
@@ -361,6 +381,7 @@ export const getPreviousYearEndDate = (newDate: Date | string): Date => {
 }
 
 export default {
+  resolveTimeZone,
   toMinute,
   toHour,
   toDay,

@@ -63,3 +63,18 @@
 }) %>
 
 <br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_date: false,
+  show_timezone: true,
+  timezone: "Eastern Time (US & Canada)",
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_timezone: true,
+  timezone: "Pacific Time (US & Canada)",
+}) %>
