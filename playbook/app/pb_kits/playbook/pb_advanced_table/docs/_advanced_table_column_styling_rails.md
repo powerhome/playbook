@@ -7,6 +7,6 @@ The `column_styling` prop is an optional item that can be used within `column_de
 
 Fixed width: pass `width` only and Playbook sets min and max to the same value automatically — you do not need all three for an exact width.
 
-See [Column Styling: Width](https://playbook.powerapp.cloud/kits/advanced_table/rails#column-styling-width) for the full guide (floor-only vs bands, and when to use one vs three values).
+See [Column Styling: Width](https://playbook.powerapp.cloud/kits/advanced_table/styling/rails#column-styling-width) for the full guide (floor-only vs bands, and when to use one vs three values).
 
 `column_styling` can be used within the column_definition of all the columns or some of them, as shown. Each column has its own individual control in this way.
