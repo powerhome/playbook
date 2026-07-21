@@ -36,6 +36,7 @@ examples:
   - dropdown_quickpick_with_date_pickers_default_rails: Quick Pick with Date Pickers (Default Value)
   - dropdown_required_indicator: Required Indicator
   - dropdown_disabled: Disabled Input
+  - dropdown_grouped_options: Grouped Options
   - dropdown_custom_event_type: Custom Event Type
 
   react:
@@ -77,3 +78,4 @@ examples:
   - dropdown_quickpick_with_date_pickers: Quick Pick Variant with Date Pickers
   - dropdown_required_indicator: Required Indicator
   - dropdown_disabled: Disabled Input
+  - dropdown_grouped_options: Grouped Options
