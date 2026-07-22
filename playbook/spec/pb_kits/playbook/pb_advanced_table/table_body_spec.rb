@@ -459,9 +459,14 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
         ]
       end
 
-      it "counts pinned bottom roots and descendants" do
+      it "counts initially visible bottom roots only (collapsed descendants excluded)" do
         instance = subject.new(table_data: table_data, pinned_rows: { bottom: %w[a b] })
-        expect(instance.pinned_bottom_row_count).to eq 4
+        expect(instance.pinned_bottom_row_count).to eq 2
+      end
+
+      it "still counts a single expandable root as one for first paint" do
+        instance = subject.new(table_data: table_data, pinned_rows: { bottom: ["a"] })
+        expect(instance.pinned_bottom_row_count).to eq 1
       end
     end
 

@@ -212,10 +212,6 @@ module Playbook
         row_children_for(row)&.each { |child| collect_row_and_descendant_ids(child, set) }
       end
 
-      def count_row_and_descendants(row)
-        1 + Array(row_children_for(row)).sum { |child| count_row_and_descendants(child) }
-      end
-
       def find_row_by_id(data, id, depth: 0, ancestor_ids: [], parent_row: nil)
         id_str = id.to_s
         Array(data).each do |row|
@@ -243,7 +239,7 @@ module Playbook
       end
 
       def pinned_bottom_row_count
-        pinned_bottom_root_rows.sum { |root| count_row_and_descendants(root[:row]) }
+        pinned_bottom_root_rows.size
       end
 
       def has_pinned_top_rows?
