@@ -26,6 +26,13 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       .with_values("all", "header", "none")
   }
   it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
+  it { is_expected.to define_boolean_prop(:is_pinned_row).with_default(false) }
+
+  it {
+    is_expected.to define_enum_prop(:pinned_position)
+      .with_default("top")
+      .with_values("top", "bottom")
+  }
   it { is_expected.to define_boolean_prop(:full_width_cell).with_default(false) }
 
   describe "#classname" do
@@ -44,6 +51,20 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       it "does not include depth class for root rows" do
         instance = subject.new(row: {}, depth: 0)
         expect(instance.classname).not_to include "depth-sub-row"
+      end
+    end
+
+    context "pinned rows" do
+      it "adds pinned-row class when is_pinned_row is true" do
+        instance = subject.new(row: {}, depth: 0, is_pinned_row: true)
+        expect(instance.classname).to include "pinned-row"
+        expect(instance.classname).not_to include "pinned-row-bottom"
+      end
+
+      it "adds pinned-row-bottom class for bottom pinned rows" do
+        instance = subject.new(row: {}, depth: 0, is_pinned_row: true, pinned_position: "bottom")
+        expect(instance.classname).to include "pinned-row"
+        expect(instance.classname).to include "pinned-row-bottom"
       end
     end
 

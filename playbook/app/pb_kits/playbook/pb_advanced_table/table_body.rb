@@ -46,7 +46,7 @@ module Playbook
         end.compact
       end
 
-      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil, additional_classes: "", table_data_attributes: {}, immediate_parent_row_id: nil, is_pinned_row: false, pinned_index: nil, skip_pinned_ids: nil, initial_table_data_attributes: nil)
+      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil, additional_classes: "", table_data_attributes: {}, immediate_parent_row_id: nil, is_pinned_row: false, pinned_index: nil, skip_pinned_ids: nil, initial_table_data_attributes: nil, pinned_position: "top", pinned_bottom_total: nil)
         if skip_pinned_ids && row_id_for(row) && skip_pinned_ids.include?(row_id_for(row).to_s)
           return is_pinned_row ? [ActiveSupport::SafeBuffer.new, pinned_index] : ActiveSupport::SafeBuffer.new
         end
@@ -71,10 +71,11 @@ module Playbook
         # Subrow header if applicable
         if is_first_child_of_subrow && enable_toggle_expansion == "all"
           subrow_props = { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers_arr[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", responsive: responsive, subrow_data_attributes: subrow_data_attributes, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id }
-          if is_pinned_row && next_pinned_index
+          if is_pinned_row && !next_pinned_index.nil?
             subrow_props[:is_pinned_row] = true
+            subrow_props[:pinned_position] = pinned_position.to_s
             subrow_props[:pinned_index] = next_pinned_index
-            subrow_props[:html_options] = { style: build_pinned_row_style(next_pinned_index, background: "var(--pb_table_sticky_bg, #f5f5f5)") }
+            subrow_props[:html_options] = { style: build_pinned_row_style(next_pinned_index, background: "var(--pb_table_sticky_bg, #f5f5f5)", position: pinned_position, bottom_total: pinned_bottom_total) }
             next_pinned_index += 1
           end
           output << pb_rails("advanced_table/table_subrow_header", props: subrow_props)
@@ -92,11 +93,12 @@ module Playbook
 
         # Additional class and data attributes needed for toggle logic
         row_props = { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading, full_width_cell: full_width_cell }
-        if is_pinned_row && next_pinned_index
+        if is_pinned_row && !next_pinned_index.nil?
           row_props[:is_pinned_row] = true
+          row_props[:pinned_position] = pinned_position.to_s
           row_props[:pinned_index] = next_pinned_index
           row_bg = (row_styling || []).find { |s| s[:row_id].to_s == row_id_for(row).to_s }&.[](:background_color) || "white"
-          row_props[:html_options] = { style: build_pinned_row_style(next_pinned_index, background: row_bg) }
+          row_props[:html_options] = { style: build_pinned_row_style(next_pinned_index, background: row_bg, position: pinned_position, bottom_total: pinned_bottom_total) }
           next_pinned_index += 1
         end
         output << pb_rails("advanced_table/table_row", props: row_props)
@@ -134,6 +136,8 @@ module Playbook
             child_opts = { additional_classes: "toggle-content", table_data_attributes: child_data_attributes, immediate_parent_row_id: row[:id] }
             child_opts[:is_pinned_row] = is_pinned_row
             child_opts[:pinned_index] = next_pinned_index if is_pinned_row
+            child_opts[:pinned_position] = pinned_position if is_pinned_row
+            child_opts[:pinned_bottom_total] = pinned_bottom_total if is_pinned_row
             child_opts[:skip_pinned_ids] = skip_pinned_ids if skip_pinned_ids
 
             child_output, next_pinned_index = render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id, **child_opts)
@@ -187,17 +191,16 @@ module Playbook
       end
 
       def pinned_top_ids
-        return [] if pinned_rows.nil? || !pinned_rows.respond_to?(:[])
+        pinned_ids_for(:top)
+      end
 
-        top = pinned_rows["top"] || pinned_rows[:top]
-        Array(top).map(&:to_s)
+      def pinned_bottom_ids
+        pinned_ids_for(:bottom)
       end
 
       def pinned_ids_set
-        return Set.new if pinned_top_ids.blank?
-
         set = Set.new
-        pinned_root_rows.each do |root|
+        (pinned_top_root_rows + pinned_bottom_root_rows).each do |root|
           collect_row_and_descendant_ids(root[:row], set)
         end
         set
@@ -207,6 +210,10 @@ module Playbook
         id = row_id_for(row)
         set.add(id.to_s) if id
         row_children_for(row)&.each { |child| collect_row_and_descendant_ids(child, set) }
+      end
+
+      def count_row_and_descendants(row)
+        1 + Array(row_children_for(row)).sum { |child| count_row_and_descendants(child) }
       end
 
       def find_row_by_id(data, id, depth: 0, ancestor_ids: [], parent_row: nil)
@@ -220,21 +227,55 @@ module Playbook
         nil
       end
 
-      def pinned_root_rows
+      def pinned_top_root_rows
         return [] if pinned_top_ids.blank?
 
         pinned_top_ids.filter_map { |id| find_row_by_id(table_data, id) }
       end
 
+      # Alias kept for existing call sites / specs
+      alias pinned_root_rows pinned_top_root_rows
+
+      def pinned_bottom_root_rows
+        return [] if pinned_bottom_ids.blank?
+
+        pinned_bottom_ids.filter_map { |id| find_row_by_id(table_data, id) }
+      end
+
+      def pinned_bottom_row_count
+        pinned_bottom_root_rows.sum { |root| count_row_and_descendants(root[:row]) }
+      end
+
+      def has_pinned_top_rows?
+        pinned_top_root_rows.any?
+      end
+
+      def has_pinned_bottom_rows?
+        pinned_bottom_root_rows.any?
+      end
+
       def has_pinned_rows?
-        pinned_root_rows.any?
+        has_pinned_top_rows? || has_pinned_bottom_rows?
       end
 
       # Build inline style for sticky pinned row (matches React). Pass via html_options so the tr gets the attribute.
-      def build_pinned_row_style(pinned_index, background: "white")
-        header_offset = "calc(var(--advanced-table-header-height, 44px) + var(--advanced-table-action-bar-height, 0px))"
-        row_offset = "calc(2.5em * #{pinned_index})"
-        "position: sticky; top: calc(#{header_offset} + #{row_offset}); z-index: 3; background: #{background};"
+      def build_pinned_row_style(pinned_index, background: "white", position: "top", bottom_total: nil)
+        if position.to_s == "bottom"
+          offset_index = bottom_total ? [bottom_total - 1 - pinned_index, 0].max : pinned_index
+          "position: sticky; bottom: calc(2.5em * #{offset_index}); z-index: 3; background: #{background};"
+        else
+          header_offset = "calc(var(--advanced-table-header-height, 44px) + var(--advanced-table-action-bar-height, 0px))"
+          row_offset = "calc(2.5em * #{pinned_index})"
+          "position: sticky; top: calc(#{header_offset} + #{row_offset}); z-index: 3; background: #{background};"
+        end
+      end
+
+      def pinned_ids_for(position)
+        return [] if pinned_rows.nil? || !pinned_rows.respond_to?(:[])
+
+        key = position.to_s
+        ids = pinned_rows[key] || pinned_rows[key.to_sym]
+        Array(ids).map(&:to_s)
       end
 
       def pinned_root_initial_data_attributes(root_info)
