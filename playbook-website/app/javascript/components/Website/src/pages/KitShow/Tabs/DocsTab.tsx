@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Body,
   Flex,
@@ -34,6 +35,7 @@ interface DocsTabProps {
 
 export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
   const { platform } = usePlatform();
+  const location = useLocation();
   const codeLanguage: "erb" | "swift" | "tsx" =
     platform === "rails" ? "erb" : platform === "swift" ? "swift" : "tsx";
   const { darkMode } = useDarkMode();
@@ -190,7 +192,10 @@ export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
             </Tooltip>
           </Flex>
           {platform === "rails" ? (
-            <LiveExampleRails html={example.rendered ?? ""} />
+            <LiveExampleRails
+              key={`${example.example_key}${location.search}`}
+              html={example.rendered ?? ""}
+            />
           ) : (
             <LiveExample code={example.source} exampleProps={exampleProps} />
           )}

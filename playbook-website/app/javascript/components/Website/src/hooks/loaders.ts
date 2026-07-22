@@ -62,6 +62,13 @@ export const ComponentShowLoader = async ({
     url = `/kits/${params.name}/${platform}.json`;
   }
 
+  // Forward query params (e.g. ?sort=) so Rails ERB examples can re-render
+  // with params["sort"] after the SPA migration. Without this, sort_menu demos
+  // stay static because examples are prerendered into the JSON payload.
+  if (requestUrl.search) {
+    url = `${url}${requestUrl.search}`;
+  }
+
   const response = await fetch(url);
   const data = await response.json();
   return data;
