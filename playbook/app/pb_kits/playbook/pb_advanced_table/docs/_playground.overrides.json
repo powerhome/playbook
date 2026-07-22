@@ -160,7 +160,7 @@
     },
     {
       "name": "Column Configuration",
-      "props": ["columnVisibilityControl", "columnGroupBorderColor"]
+      "props": ["columnVisibilityControl", "columnGroupBorderColor", "fullWidthCell"]
     },
     {
       "name": "Table engine",

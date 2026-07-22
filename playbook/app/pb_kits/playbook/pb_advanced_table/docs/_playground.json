@@ -9,6 +9,7 @@
   "defaults": {
     "columnGroupBorderColor": "none",
     "enableToggleExpansion": "header",
+    "fullWidthCell": false,
     "inlineRowLoading": false,
     "loading": false,
     "responsive": "scroll",
@@ -92,7 +93,8 @@
       "name": "Column Configuration",
       "props": [
         "columnVisibilityControl",
-        "columnGroupBorderColor"
+        "columnGroupBorderColor",
+        "fullWidthCell"
       ]
     },
     {

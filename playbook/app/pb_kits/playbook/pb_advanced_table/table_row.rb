@@ -35,6 +35,8 @@ module Playbook
                                      default: ""
       prop :inline_row_loading, type: Playbook::Props::Boolean,
                                 default: false
+      prop :full_width_cell, type: Playbook::Props::Boolean,
+                             default: false
       prop :is_pinned_row, type: Playbook::Props::Boolean,
                            default: false
       prop :pinned_index, type: Playbook::Props::Numeric,

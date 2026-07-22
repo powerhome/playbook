@@ -26,6 +26,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       .with_values("all", "header", "none")
   }
   it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
+  it { is_expected.to define_boolean_prop(:full_width_cell).with_default(false) }
 
   describe "#classname" do
     context "basic functionality" do
