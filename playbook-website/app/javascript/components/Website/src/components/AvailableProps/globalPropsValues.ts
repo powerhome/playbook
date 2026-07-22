@@ -97,6 +97,51 @@ const globalPropsValues = [
     values: []
   },
   {
+    prop: "gridArea",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "gridAutoColumns",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "gridAutoFlow",
+    type: "union",
+    values: '"row" | "column" | "dense" | "rowDense" | "columnDense"'
+  },
+  {
+    prop: "gridAutoRows",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "gridColumn",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "gridRow",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "gridTemplateAreas",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "gridTemplateColumns",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "gridTemplateRows",
+    type: "string",
+    values: []
+  },
+  {
     prop: "groupHover",
     type: "boolean",
     values: []
@@ -120,6 +165,11 @@ const globalPropsValues = [
     prop: "justifyContent",
     type: "union",
     values: '"start" | "end" | "center" | "spaceBetween" | "spaceAround" | "spaceEvenly"'
+  },
+  {
+    prop: "justifyItems",
+    type: "union",
+    values: '"start" | "end" | "center" | "stretch"'
   },
   {
     prop: "left",

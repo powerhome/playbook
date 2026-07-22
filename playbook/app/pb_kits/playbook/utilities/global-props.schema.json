@@ -245,6 +245,63 @@
       "description": "Justify multi-line content.",
       "example": "justifyContent=\"start\" or justifyContent={{ default: \"start\", md: \"end\" }}"
     },
+    "justifyItems": {
+      "type": "enum | responsive",
+      "values": [
+        "start",
+        "end",
+        "center",
+        "stretch"
+      ],
+      "responsive": true,
+      "description": "Justify items.",
+      "example": "justifyItems=\"start\" or justifyItems={{ default: \"start\", md: \"end\" }}"
+    },
+    "gridTemplateColumns": {
+      "type": "string",
+      "description": "Grid template columns."
+    },
+    "gridTemplateRows": {
+      "type": "string",
+      "description": "Grid template rows."
+    },
+    "gridTemplateAreas": {
+      "type": "string",
+      "description": "Grid template areas."
+    },
+    "gridColumn": {
+      "type": "string",
+      "description": "Grid column."
+    },
+    "gridRow": {
+      "type": "string",
+      "description": "Grid row."
+    },
+    "gridArea": {
+      "type": "string",
+      "description": "Grid area."
+    },
+    "gridAutoColumns": {
+      "type": "string",
+      "description": "Grid auto columns."
+    },
+    "gridAutoRows": {
+      "type": "string",
+      "description": "Grid auto rows."
+    },
+    "gridAutoFlow": {
+      "type": "enum | responsive",
+      "values": [
+        "row",
+        "column",
+        "dense",
+        "rowDense",
+        "columnDense"
+      ],
+      "responsive": true,
+      "description": "Grid auto flow.",
+      "example": "gridAutoFlow=\"row\" or gridAutoFlow={{ default: \"row\", md: \"column\" }}"
+    },
     "lineHeight": {
       "type": "enum",
       "values": [

@@ -29,6 +29,7 @@ import GroupHover from "./Examples/GroupHover";
 import FlexBoxAlignGlobalProps from "./Examples/FlexBoxAlignGlobalProps";
 import FlexBoxJustifyGlobalProps from "./Examples/FlexBoxJustifyGlobalProps";
 import ShadowGlobalProps from "./Examples/ShadowGlobalProps";
+import GridGlobalProps from "./Examples/GridGlobalProps";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
@@ -38,6 +39,7 @@ const COMPONENT_MAP = {
   flex_box_gap: FlexBoxGap,
   flex_box_align: FlexBoxAlignGlobalProps,
   flex_box_justify: FlexBoxJustifyGlobalProps,
+  grid: GridGlobalProps,
   height: Height,
   hover: Hover,
   html_options: HtmlOptions,

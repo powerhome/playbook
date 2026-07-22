@@ -56,6 +56,13 @@ export const GlobalPropsCards = [
     link: "/global_props/flex_box_gap",
   },
   {
+    title: "Grid",
+    description:
+      "Implements two-dimensional CSS Grid layouts with template, placement, and alignment props.",
+    icon: "grid-2",
+    link: "/global_props/grid",
+  },
+  {
     title: "Height",
     description:
       "Sets fixed or responsive height values for consistent vertical sizing.",
