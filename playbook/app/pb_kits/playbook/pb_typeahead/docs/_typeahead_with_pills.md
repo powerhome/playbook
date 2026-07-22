@@ -8,6 +8,8 @@ You can also pass `default_options` which will populate the initial pill selecti
 
 `default_options: [{ label: 'Windows', value: '#FFA500' }]`
 
+When present, the kit root is stamped with `data-default-value` (JSON of those initial options) for restore-after-clear via `:set`.
+
 #### Rails: Subscribing to JS Events
 
 JavaScript events are triggered based on actions you take within the kit such as selection, removal and clearing.
@@ -22,3 +24,11 @@ This kit utilizes a default `id` prop named `react-select-input`. It is **highly
 The same rule regarding the `id` prop applies to publishing JS events. The examples below will use the unique `id` prop named `typeahead-pills-example1`:
 
 `pb-typeahead-kit-typeahead-pills-example1:clear` event to clear all options.
+
+`pb-typeahead-kit-typeahead-pills-example1:set` event to set options. Pass `detail` as `[{ label, value }, ...]` (or a single object for single-select):
+
+```js
+document.dispatchEvent(new CustomEvent('pb-typeahead-kit-typeahead-pills-example1:set', {
+  detail: [{ label: 'Windows', value: '#FFA500' }]
+}))
+```

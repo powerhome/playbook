@@ -216,6 +216,14 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     // Create a ref to access React Select instance
     const selectRef = useRef<any>(null)
 
+    // Mount-time stamp for smart Defaults (:clear → read → :set). Not updated on selection change.
+    const [dataDefaultValue] = useState(() => {
+      const defaultValue = props.defaultValue
+      if (defaultValue == null) return undefined
+      const options = Array.isArray(defaultValue) ? defaultValue : [defaultValue]
+      return options.length ? JSON.stringify(options) : undefined
+    })
+
     const dialogCtx = useContext(DialogContext)
 
     const kitContainerRef = useRef<HTMLDivElement>(null)
@@ -710,6 +718,7 @@ const resolvedLoadOptions =
         {...htmlProps}
         aria-busy={asyncLoading ? "true" : "false"}
         className={classnames(classes, inlineClass)}
+        {...(dataDefaultValue ? { "data-default-value": dataDefaultValue } : {})}
         data-pb-typeahead-loading={asyncLoading ? "true" : "false"}
     >
       <Tag
