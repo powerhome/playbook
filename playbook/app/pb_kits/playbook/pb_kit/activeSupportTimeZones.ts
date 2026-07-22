@@ -1,5 +1,4 @@
 // Mirrors ActiveSupport::TimeZone::MAPPING (Rails friendly names → IANA identifiers).
-// Used so React kits accept the same timezone values as Rails kits.
 export const ACTIVE_SUPPORT_TIME_ZONE_MAPPING: Record<string, string> = {
   "International Date Line West": "Etc/GMT+12",
   "Midway Island": "Pacific/Midway",
