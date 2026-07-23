@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { Caption, Card, Nav } from "playbook-ui";
+import { Card, Nav, Title } from "playbook-ui";
 
 const HORIZONTAL_GAP = 0;
 const HEADER_HEIGHT_FALLBACK = 89;
@@ -182,12 +182,12 @@ export const CollapsedHoverNav = ({
           style={onTitleClick ? { cursor: "pointer" } : undefined}
           tabIndex={onTitleClick ? 0 : undefined}
         >
-          <Caption
-            borderBottom={hasSubnav ? "default" : "none"}
+          <Title
             dark={dark}
-            paddingX="sm"
+            paddingX="md"
             paddingY="xs"
             text={title}
+            size={4}
           />
         </div>
         <div
