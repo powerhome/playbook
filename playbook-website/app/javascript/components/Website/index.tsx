@@ -90,8 +90,12 @@ function WebsiteContent() {
     [normalizedPath, location.search, type],
   );
 
+  // Playground defaults to a collapsed sidebar; don't force-expand on other routes
+  // so hover-nav clicks can navigate while keeping the sidebar collapsed.
   useEffect(() => {
-    setDesktopSidebarCollapsed(normalizedPath === "/playground");
+    if (normalizedPath === "/playground") {
+      setDesktopSidebarCollapsed(true);
+    }
   }, [normalizedPath]);
 
   // Keep preference in sync when the URL explicitly sets a platform
