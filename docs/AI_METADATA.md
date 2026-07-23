@@ -8,7 +8,7 @@ This system generates JSON schema files that describe every Playbook component's
 
 - Generate correct Playbook code
 - Understand component APIs without parsing TypeScript
-- Know which props are available on which platforms (React, Rails, Swift)
+- Know which props are available on which platforms (React, Rails)
 - Access usage examples
 
 ## Quick Start
@@ -279,7 +279,7 @@ const buttonSchema = await fetch('/dist/ai/kits/button.schema.json').then(r => r
 
 - `props[name].type` - The prop type (`string`, `boolean`, `enum`, `function`, `ReactNode`, etc.)
 - `props[name].values` - Allowed values for enum types
-- `props[name].platforms` - Which platforms support this prop (`react`, `rails`, `swift`)
+- `props[name].platforms` - Which platforms support this prop (`react`, `rails`)
 - `props[name].default` - Default value if any
 - `globalProps: true` - Indicates component accepts all global props
 - `usage.react.example` - Example React JSX
