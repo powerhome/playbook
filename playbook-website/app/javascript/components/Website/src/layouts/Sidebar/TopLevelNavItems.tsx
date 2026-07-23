@@ -291,6 +291,10 @@ export const TopLevelNavItem = ({
           dark={dark}
           onMouseEnter={() => openHoverNav(hoveredKey)}
           onMouseLeave={scheduleCloseHoverNav}
+          onTitleClick={() => {
+            handleComponentsClick(hoveredItem.key, hoveredIndex);
+            setHoveredKey(null);
+          }}
           title={hoveredItem.name}
         >
           {hoveredItem.children

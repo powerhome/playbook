@@ -11,6 +11,7 @@ type CollapsedHoverNavProps = {
   dark?: boolean;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  onTitleClick?: () => void;
   title: string;
 };
 
@@ -39,6 +40,7 @@ export const CollapsedHoverNav = ({
   dark = false,
   onMouseEnter,
   onMouseLeave,
+  onTitleClick,
   title,
 }: CollapsedHoverNavProps) => {
   const flyoutRef = useRef<HTMLDivElement>(null);
@@ -163,7 +165,23 @@ export const CollapsedHoverNav = ({
         shadow="deeper"
         width="100%"
       >
-        <div ref={titleRef}>
+        <div
+          ref={titleRef}
+          onClick={onTitleClick}
+          onKeyDown={
+            onTitleClick
+              ? (event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onTitleClick();
+                  }
+                }
+              : undefined
+          }
+          role={onTitleClick ? "button" : undefined}
+          style={onTitleClick ? { cursor: "pointer" } : undefined}
+          tabIndex={onTitleClick ? 0 : undefined}
+        >
           <Caption
             borderBottom={hasSubnav ? "default" : "none"}
             dark={dark}
