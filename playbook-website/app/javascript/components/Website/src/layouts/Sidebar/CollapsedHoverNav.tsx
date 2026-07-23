@@ -1,8 +1,7 @@
 import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { Caption, Card, Flex, Nav } from "playbook-ui";
+import { Caption, Card, Nav } from "playbook-ui";
 
-const VIEWPORT_BOTTOM_PADDING = 8;
 const HORIZONTAL_GAP = 0;
 const HEADER_HEIGHT_FALLBACK = 89;
 
@@ -68,10 +67,7 @@ export const CollapsedHoverNav = ({
       const left = getSidebarRight(anchorEl) + HORIZONTAL_GAP;
       const headerBottom = getHeaderBottom(anchorEl);
       const viewportHeight = window.innerHeight;
-      const availableHeight = Math.max(
-        viewportHeight - headerBottom - VIEWPORT_BOTTOM_PADDING,
-        0
-      );
+      const availableHeight = Math.max(viewportHeight - headerBottom, 0);
 
       // scrollHeight stays accurate even when the body is already constrained/scrollable.
       const contentHeight = titleEl.offsetHeight + bodyEl.scrollHeight;
@@ -82,17 +78,15 @@ export const CollapsedHoverNav = ({
       let bottom: CSSProperties["bottom"] = "auto";
 
       if (contentHeight > availableHeight) {
-        // Taller than space below the header: flush with header + bottom of screen, scroll.
+        // Taller than space below the header: flush with header + viewport bottom, scroll.
         mode = "scroll";
         top = headerBottom;
-        bottom = VIEWPORT_BOTTOM_PADDING;
-      } else if (alignedTop + contentHeight > viewportHeight - VIEWPORT_BOTTOM_PADDING) {
-        // Not enough room below the item: attach to bottom, still stay under the header.
+        bottom = 0;
+      } else if (alignedTop + contentHeight > viewportHeight) {
+        // Not enough room below the item: flush with viewport bottom, still under the header.
         mode = "bottom";
-        top = Math.max(
-          headerBottom,
-          viewportHeight - VIEWPORT_BOTTOM_PADDING - contentHeight
-        );
+        top = Math.max(headerBottom, viewportHeight - contentHeight);
+        bottom = 0;
       } else {
         // Default: align with the nav item (or flush under the header if needed).
         mode = "align";
@@ -140,6 +134,9 @@ export const CollapsedHoverNav = ({
 
   if (!anchorEl || typeof document === "undefined") return null;
 
+  const isScrollable = placementMode === "scroll";
+  const hasSubnav = Boolean(children);
+
   return createPortal(
     <div
       onMouseEnter={onMouseEnter}
@@ -153,44 +150,53 @@ export const CollapsedHoverNav = ({
         display="flex"
         flexDirection="column"
         htmlOptions={{
-          style: {
-            height: "100%",
-            maxHeight: "inherit",
-            minHeight: 0,
-          },
+          style: isScrollable
+            ? {
+                height: "100%",
+                maxHeight: "inherit",
+                minHeight: 0,
+              }
+            : undefined,
         }}
-        overflow="hidden"
+        overflow={isScrollable ? "hidden" : "visible"}
         padding="none"
         shadow="deeper"
         width="100%"
       >
         <div ref={titleRef}>
           <Caption
-            borderBottom="default"
+            borderBottom={hasSubnav ? "default" : "none"}
             dark={dark}
             paddingX="sm"
             paddingY="xs"
             text={title}
           />
         </div>
-        <Flex
-          flexGrow={1}
-          htmlOptions={{
-            ref: bodyRef,
-            style: {
-              minHeight: 0,
-              overscrollBehavior: "contain",
-            },
-          }}
-          orientation="column"
-          overflowX="hidden"
-          overflowY={placementMode === "scroll" ? "auto" : "visible"}
-          paddingBottom="xs"
+        <div
+          ref={bodyRef}
+          style={
+            !hasSubnav
+              ? undefined
+              : isScrollable
+                ? {
+                    flex: "1 1 0",
+                    minHeight: 0,
+                    overflowX: "hidden",
+                    overflowY: "auto",
+                    overscrollBehavior: "contain",
+                    paddingBottom: 8,
+                  }
+                : {
+                    paddingBottom: 8,
+                  }
+          }
         >
-          <Nav dark={dark} highlight={false} variant="bold">
-            {children}
-          </Nav>
-        </Flex>
+          {hasSubnav && (
+            <Nav dark={dark} highlight={false} variant="bold">
+              {children}
+            </Nav>
+          )}
+        </div>
       </Card>
     </div>,
     document.body

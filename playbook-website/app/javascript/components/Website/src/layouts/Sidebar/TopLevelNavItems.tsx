@@ -230,16 +230,15 @@ export const TopLevelNavItem = ({
       });
     };
 
-    const hoverHandlers =
-      sidebarCollapsed && children
-        ? {
-            onMouseEnter: (event: { currentTarget: HTMLElement }) => {
-              itemElsRef.current[key] = event.currentTarget;
-              openHoverNav(key);
-            },
-            onMouseLeave: () => scheduleCloseHoverNav(),
-          }
-        : undefined;
+    const hoverHandlers = sidebarCollapsed
+      ? {
+          onMouseEnter: (event: { currentTarget: HTMLElement }) => {
+            itemElsRef.current[key] = event.currentTarget;
+            openHoverNav(key);
+          },
+          onMouseLeave: () => scheduleCloseHoverNav(),
+        }
+      : undefined;
 
     return (
       <NavItem
@@ -286,7 +285,7 @@ export const TopLevelNavItem = ({
       {SideBarNavItems.map(({ name, key, children, leftIcon, link }, i) => {
         return renderTopItems(name, key, children, leftIcon, link, i);
       })}
-      {sidebarCollapsed && hoveredItem?.children && hoveredKey && (
+      {sidebarCollapsed && hoveredItem && hoveredKey && (
         <CollapsedHoverNav
           anchorEl={itemElsRef.current[hoveredKey]}
           dark={dark}
@@ -294,7 +293,9 @@ export const TopLevelNavItem = ({
           onMouseLeave={scheduleCloseHoverNav}
           title={hoveredItem.name}
         >
-          {renderSubmenu(hoveredItem.name, hoveredIndex, updateTopLevelNavFromHover)}
+          {hoveredItem.children
+            ? renderSubmenu(hoveredItem.name, hoveredIndex, updateTopLevelNavFromHover)
+            : null}
         </CollapsedHoverNav>
       )}
     </>
