@@ -160,7 +160,8 @@ export const CollapsedHoverNav = ({
         display="flex"
         flexDirection="column"
         overflow={isScrollable ? "hidden" : "visible"}
-        padding="none"
+        paddingX="none"
+        paddingY="sm"
         shadow="deeper"
         width="100%"
       >
