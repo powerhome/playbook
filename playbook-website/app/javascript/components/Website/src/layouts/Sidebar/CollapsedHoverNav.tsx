@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { Card, Nav, Title } from "playbook-ui";
+import { Card, Nav, Title, colors } from "playbook-ui";
 
 const HORIZONTAL_GAP = 0;
 const HEADER_HEIGHT_FALLBACK = 89;
@@ -54,6 +54,8 @@ export const CollapsedHoverNav = ({
     zIndex: 1100,
   });
   const [placementMode, setPlacementMode] = useState<PlacementMode>("align");
+  const [attachedTop, setAttachedTop] = useState(false);
+  const [attachedBottom, setAttachedBottom] = useState(false);
 
   useLayoutEffect(() => {
     if (!anchorEl) return;
@@ -96,6 +98,8 @@ export const CollapsedHoverNav = ({
       }
 
       setPlacementMode(mode);
+      setAttachedTop(top === headerBottom);
+      setAttachedBottom(bottom === 0);
       setStyle({
         left,
         maxHeight: mode === "scroll" ? availableHeight : "none",
@@ -138,15 +142,24 @@ export const CollapsedHoverNav = ({
 
   const isScrollable = placementMode === "scroll";
   const hasSubnav = Boolean(children);
+  const borderColor = dark ? colors.border_dark : colors.border_light;
 
   return createPortal(
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       ref={flyoutRef}
-      style={style}
+      style={{
+        ...style,
+        borderBottom: attachedBottom ? "none" : `1px solid ${borderColor}`,
+        borderLeft: "none",
+        borderRight: `1px solid ${borderColor}`,
+        borderTop: attachedTop ? "none" : `1px solid ${borderColor}`,
+        boxSizing: "border-box",
+      }}
     >
       <Card
+        borderNone
         borderRadius="none"
         dark={dark}
         display="flex"
