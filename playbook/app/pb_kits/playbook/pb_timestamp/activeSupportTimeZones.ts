@@ -1,4 +1,9 @@
-// Mirrors ActiveSupport::TimeZone::MAPPING (Rails friendly names → IANA identifiers).
+// Mirrored from ActiveSupport::TimeZone::MAPPING
+// Rails 7.0.8.1
+// Last synced: July 2026
+//
+// Maps Rails ActiveSupport friendly timezone names (e.g. "Eastern Time (US & Canada)")
+// to IANA identifiers for use with Intl. Re-sync when upgrading Rails if TimeZone::MAPPING changes.
 export const ACTIVE_SUPPORT_TIME_ZONE_MAPPING: Record<string, string> = {
   "International Date Line West": "Etc/GMT+12",
   "Midway Island": "Pacific/Midway",
@@ -151,4 +156,10 @@ export const ACTIVE_SUPPORT_TIME_ZONE_MAPPING: Record<string, string> = {
   "Tokelau Is.": "Pacific/Fakaofo",
   "Chatham Is.": "Pacific/Chatham",
   "Samoa": "Pacific/Apia",
+}
+
+// Resolves ActiveSupport timezone names to IANA identifiers. IANA values pass through unchanged.
+export const resolveTimeZone = (timeZone?: string): string | undefined => {
+  if (!timeZone) return undefined
+  return ACTIVE_SUPPORT_TIME_ZONE_MAPPING[timeZone] || timeZone
 }
