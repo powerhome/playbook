@@ -5,19 +5,10 @@ web: &1
 all: &3
 - rails
 - react
-- swift
-rails_swift:
-- rails
-- swift
-react_swift:
-- swift
-- react
 rails_only: &4
 - rails
 react_only: &2
 - react
-swift_only:
-- swift
 kits:
 - category: advanced_table
   description: The Advanced Table can be used to display complex, nested data in

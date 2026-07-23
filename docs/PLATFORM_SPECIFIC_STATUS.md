@@ -44,7 +44,6 @@ When using both fields together, the `platforms_status` takes precedence when de
 In the example above:
 - Rails implementation: `deprecated` (from platforms_status)
 - React implementation: `beta` (from platforms_status)
-- Swift implementation: `stable` (from fallback)
 
 ## How It Works
 

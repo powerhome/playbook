@@ -13,6 +13,7 @@ class PagesController < ApplicationController
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
     @type = params[:platform] || params[:type] || "rails"
+    @type = "rails" if @type == "swift"
     @kit = params[:name]
     @params = params
 
@@ -266,8 +267,6 @@ class PagesController < ApplicationController
     extension = case @type
                 when "rails"
                   "html.erb"
-                when "swift"
-                  "swift"
                 else
                   "jsx"
                 end

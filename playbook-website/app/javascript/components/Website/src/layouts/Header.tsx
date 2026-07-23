@@ -28,8 +28,8 @@ const Header = ({
   const location = useLocation();
   const { darkMode, setDarkMode } = useDarkMode();
 
-  const isKitShowPage = /^\/kits\/[^/]+\/(react|rails|swift)$/.test(location.pathname) ||
-    /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(location.pathname);
+  const isKitShowPage = /^\/kits\/[^/]+\/(react|rails)$/.test(location.pathname) ||
+    /^\/kits\/advanced_table\/[^/]+\/(react|rails)$/.test(location.pathname);
 
   const isKitsPage = location.pathname === "/kits";
   const isKitsCategoryPage = /^\/kit_category\/[^/]+$/.test(location.pathname);
@@ -73,13 +73,13 @@ const Header = ({
         {/* End Logo and Version Badge */}
 
         <Flex justify={!isKitsPage && !isKitsCategoryPage && !isKitShowPage ? "end" : "between"} align="center" width="100%">
-          {/* Start React/Rails/Swift Toggle */}
+          {/* Start React/Rails Toggle */}
           {(isKitsPage || isKitsCategoryPage || isKitShowPage) && (
             <FlexItem paddingLeft="xl">
               <PlatformToggle platform={platform} setPlatform={setPlatform} />
             </FlexItem>
           )}
-          {/* End React/Rails/Swift Toggle */}
+          {/* End React/Rails Toggle */}
           {/* Start Search Bar + dark mode toggle (only on kit show pages) */}
           <FlexItem paddingRight="md">
             <Flex

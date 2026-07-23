@@ -11,7 +11,7 @@ export type PropType =
 
 export interface PropDefinition {
   type: PropType;
-  platforms: ("react" | "rails" | "swift")[];
+  platforms: ("react" | "rails")[];
   values?: string[];
   default?: any;
   responsive?: boolean;
@@ -23,7 +23,7 @@ export interface KitSchema {
   $schema: string;
   name: string;
   description: string;
-  platforms: ("react" | "rails" | "swift")[];
+  platforms: ("react" | "rails")[];
   props: Record<string, PropDefinition>;
   globalProps: boolean;
   usage: {

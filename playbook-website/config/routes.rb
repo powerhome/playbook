@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "beta",       to: redirect("/")
   get "beta/*path", to: redirect("/%<path>s")
 
+  # Legacy Swift kit platform → Rails
+  get "kits/advanced_table/:name/swift",     to: redirect("/kits/advanced_table/%<name>s/rails")
+  get "kits/:name/swift",                    to: redirect("/kits/%<name>s/rails")
+
   # SPA routes: all served by the React app
   get "kits",                                to: "pages#application"
   get "kits/advanced_table/:name/:platform", to: "pages#application"
