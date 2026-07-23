@@ -239,7 +239,7 @@ function WebsiteContent() {
             />
             <button
                 aria-label={
-                desktopSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"
+                desktopSidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"
               }
                 className="pb--page--sideNav-toggle"
                 onClick={() =>
@@ -258,7 +258,7 @@ function WebsiteContent() {
               <Body
                   color="lighter"
                   marginLeft="xs"
-                  text={desktopSidebarCollapsed ? "" : "Collapse sidebar"}
+                  text={desktopSidebarCollapsed ? "" : "Collapse Sidebar"}
               />
             </button>
           </Layout.Side>

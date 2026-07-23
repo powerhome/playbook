@@ -168,9 +168,10 @@ body.pages.application .pb--website-react-host {
     width: 100%;
 
     &:hover {
-      background: mix($primary, $card_light, 10%);
-      border-color: $primary;
-      color: $primary;
+      background: $bg_light;
+      .pb_body_kit_lighter, .pb_custom_icon {
+        color: $primary !important;
+      }
     }
 
     @media screen and (min-width: #{$screen-lg-min + 1}) {
