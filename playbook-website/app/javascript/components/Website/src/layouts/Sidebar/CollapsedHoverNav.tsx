@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { Card, Nav, Title, colors } from "playbook-ui";
+import { Card, Nav, Title } from "playbook-ui";
+import "./CollapsedHoverNav.scss";
 
 const HORIZONTAL_GAP = 0;
 const HEADER_HEIGHT_FALLBACK = 89;
@@ -48,10 +49,8 @@ export const CollapsedHoverNav = ({
   const bodyRef = useRef<HTMLDivElement>(null);
   const [style, setStyle] = useState<CSSProperties>({
     left: -9999,
-    position: "fixed",
     top: 0,
     visibility: "hidden",
-    zIndex: 1100,
   });
   const [placementMode, setPlacementMode] = useState<PlacementMode>("align");
   const [attachedTop, setAttachedTop] = useState(false);
@@ -102,16 +101,9 @@ export const CollapsedHoverNav = ({
       setAttachedBottom(bottom === 0);
       setStyle({
         left,
-        maxHeight: mode === "scroll" ? availableHeight : "none",
-        maxWidth:
-          "min(280px, calc(100vw - var(--website-sidebar-collapsed-width, 64px) - 24px))",
-        minWidth: 220,
-        position: "fixed",
         top,
         bottom,
         visibility: "visible",
-        width: "max-content",
-        zIndex: 1100,
       });
     };
 
@@ -142,44 +134,38 @@ export const CollapsedHoverNav = ({
 
   const isScrollable = placementMode === "scroll";
   const hasSubnav = Boolean(children);
-  const borderColor = dark ? colors.border_dark : colors.border_light;
+  const className = [
+    "pb--page--sideNav-hoverNav",
+    dark ? "dark" : "",
+    isScrollable ? "is-scrollable" : "",
+    attachedTop ? "is-attached-top" : "",
+    attachedBottom ? "is-attached-bottom" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return createPortal(
     <div
+      className={className}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       ref={flyoutRef}
-      style={{
-        ...style,
-        borderBottom: attachedBottom ? "none" : `1px solid ${borderColor}`,
-        borderLeft: "none",
-        borderRight: `1px solid ${borderColor}`,
-        borderTop: attachedTop ? "none" : `1px solid ${borderColor}`,
-        boxSizing: "border-box",
-      }}
+      style={style}
     >
       <Card
         borderNone
         borderRadius="none"
+        className="pb--page--sideNav-hoverNav__card"
         dark={dark}
         display="flex"
         flexDirection="column"
-        htmlOptions={{
-          style: isScrollable
-            ? {
-                height: "100%",
-                maxHeight: "inherit",
-                minHeight: 0,
-              }
-            : undefined,
-        }}
         overflow={isScrollable ? "hidden" : "visible"}
         padding="none"
         shadow="deeper"
         width="100%"
       >
         <div
-          ref={titleRef}
+          className={onTitleClick ? "pb--page--sideNav-hoverNav__title" : undefined}
           onClick={onTitleClick}
           onKeyDown={
             onTitleClick
@@ -191,36 +177,21 @@ export const CollapsedHoverNav = ({
                 }
               : undefined
           }
+          ref={titleRef}
           role={onTitleClick ? "button" : undefined}
-          style={onTitleClick ? { cursor: "pointer" } : undefined}
           tabIndex={onTitleClick ? 0 : undefined}
         >
           <Title
             dark={dark}
             paddingX="md"
             paddingY="xs"
-            text={title}
             size={4}
+            text={title}
           />
         </div>
         <div
+          className={hasSubnav ? "pb--page--sideNav-hoverNav__body" : undefined}
           ref={bodyRef}
-          style={
-            !hasSubnav
-              ? undefined
-              : isScrollable
-                ? {
-                    flex: "1 1 0",
-                    minHeight: 0,
-                    overflowX: "hidden",
-                    overflowY: "auto",
-                    overscrollBehavior: "contain",
-                    paddingBottom: 8,
-                  }
-                : {
-                    paddingBottom: 8,
-                  }
-          }
         >
           {hasSubnav && (
             <Nav dark={dark} highlight={false} variant="bold">
