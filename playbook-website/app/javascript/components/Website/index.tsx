@@ -258,12 +258,15 @@ function WebsiteContent() {
                     ? "angle-double-right"
                     : "angle-double-left"
                 }
+                size="lg"
               />
-              <Body
-                  color="lighter"
-                  marginLeft="xs"
-                  text={desktopSidebarCollapsed ? "" : "Collapse Sidebar"}
-              />
+              {!desktopSidebarCollapsed && (
+                <Body
+                    color="lighter"
+                    marginLeft="xs"
+                    text="Collapse Sidebar"
+                />
+              )}
             </button>
           </Layout.Side>
           {kits.length > 0 && <LayoutRight />}
