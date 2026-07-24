@@ -8,7 +8,7 @@
   ],
   "props": {
     "size": {
-      "type": "\"sm\"",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
