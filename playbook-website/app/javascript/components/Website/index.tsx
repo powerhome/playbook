@@ -90,8 +90,12 @@ function WebsiteContent() {
     [normalizedPath, location.search, type],
   );
 
+  // Playground defaults to a collapsed sidebar; don't force-expand on other routes
+  // so hover-nav clicks can navigate while keeping the sidebar collapsed.
   useEffect(() => {
-    setDesktopSidebarCollapsed(normalizedPath === "/playground");
+    if (normalizedPath === "/playground") {
+      setDesktopSidebarCollapsed(true);
+    }
   }, [normalizedPath]);
 
   // Keep preference in sync when the URL explicitly sets a platform
@@ -239,7 +243,7 @@ function WebsiteContent() {
             />
             <button
                 aria-label={
-                desktopSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"
+                desktopSidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"
               }
                 className="pb--page--sideNav-toggle"
                 onClick={() =>
@@ -254,12 +258,15 @@ function WebsiteContent() {
                     ? "angle-double-right"
                     : "angle-double-left"
                 }
+                size="lg"
               />
-              <Body
-                  color="lighter"
-                  marginLeft="xs"
-                  text={desktopSidebarCollapsed ? "" : "Collapse sidebar"}
-              />
+              {!desktopSidebarCollapsed && (
+                <Body
+                    color="lighter"
+                    marginLeft="xs"
+                    text="Collapse Sidebar"
+                />
+              )}
             </button>
           </Layout.Side>
           {kits.length > 0 && <LayoutRight />}
