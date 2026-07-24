@@ -23,6 +23,21 @@
   }
 }
 
+.full-playground-building-blocks {
+  width: 100%;
+}
+
+.full-playground-building-blocks__card {
+  box-sizing: border-box;
+  transition: border-color 140ms ease;
+
+  &:hover,
+  &:focus-within,
+  &.is-active {
+    border-color: $primary;
+  }
+}
+
 .full-playground-workbench {
   align-items: start;
   display: grid;
@@ -308,12 +323,16 @@
 }
 
 .builder-instance {
+  align-self: flex-start;
   cursor: pointer;
   display: block;
+  max-width: 100%;
   min-width: 0;
   outline: 1px solid transparent;
-  position: relative;
-  width: 100%;
+  // Size to content so patterns (user display, banners, positioning)
+  // don't stretch across the demo. Avoid always setting position:relative
+  // so absolute children can anchor to the kit's own positioned ancestor.
+  width: fit-content;
 
   &[draggable="true"] {
     cursor: grab;
@@ -325,21 +344,25 @@
 
   &.is-dragging {
     opacity: 0.55;
+    position: relative;
   }
 
   &.is-selected {
     outline-color: $primary;
     outline-offset: 2px;
+    position: relative;
   }
 
   &.is-drop-target {
     outline-color: $primary;
     outline-offset: 4px;
+    position: relative;
   }
 
   &.is-empty-container {
     border: 1px dashed $border_light;
-    // min-height: 48px;
+    min-width: 48px;
+    position: relative;
   }
 }
 
