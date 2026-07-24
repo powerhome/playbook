@@ -1,1 +1,1 @@
-Set pill size to small wtih `size: "sm"` / `size="sm"`.
+Set pill size to small with `size: "sm"` / `size="sm"`.
