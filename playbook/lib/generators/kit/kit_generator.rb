@@ -12,7 +12,6 @@ class KitGenerator < Rails::Generators::NamedBase
   class_option :props, type: :array, default: []
   class_option :rails, type: :boolean, default: false, desc: "Creates the boilerplate files for Rails"
   class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
-  class_option :swift, type: :boolean, default: false, desc: "Creates the boilerplate files for Swift"
   class_option :beta, type: :boolean, default: true, desc: "Adds status flag to determine if kit is in beta"
   class_option :icons_used, type: :boolean, default: false, desc: "Adds flag to determine if kit uses the icon kit"
   class_option :react_rendered, type: :boolean, default: false, desc: "Adds flag to determine if kit is rendered in react"
@@ -37,10 +36,9 @@ class KitGenerator < Rails::Generators::NamedBase
 
   def create_templates
     kit_name = name.strip.downcase
-    all_kits = options[:rails] == false && options[:react] == false && options[:swift] == false
+    all_kits = options[:rails] == false && options[:react] == false
     @rails_kit = all_kits ? true : options[:rails]
     @react_kit = all_kits ? true : options[:react]
-    @swift_kit = all_kits ? true : options[:swift]
     @kit_status = options[:beta] ? "beta" : "stable"
     @kit_name_underscore = kit_name.parameterize.underscore
     @kit_name_uppercase = @kit_name_underscore.upcase
@@ -88,14 +86,12 @@ class KitGenerator < Rails::Generators::NamedBase
       end
 
       # Generate SCSS files ==============================
-      unless platforms == "swift_only"
-        template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
-        add_scss_import
+      template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
+      add_scss_import
 
-        say_status  "complete",
-                    "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
-                    :green
-      end
+      say_status  "complete",
+                  "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
+                  :green
 
       # Code for Rails kit
       if @rails_kit
@@ -134,13 +130,10 @@ class KitGenerator < Rails::Generators::NamedBase
                     :green
       end
 
-      # Code for Swift kit
-      template "kit_example_swift.erb", "#{full_kit_directory}/docs/_#{@kit_name_underscore}_default_swift.md" if @swift_kit
-
       # Create kit example.yml
       template "kit_example_yml.erb", "#{full_kit_directory}/docs/example.yml"
       create_file "#{full_kit_directory}/docs/_description.md", "#{@kit_description}\n"
-      create_file "#{full_kit_directory}/kit.schema.json", "#{JSON.pretty_generate(kit_schema)}\n" unless platforms == "swift_only"
+      create_file "#{full_kit_directory}/kit.schema.json", "#{JSON.pretty_generate(kit_schema)}\n"
       create_file "#{full_kit_directory}/docs/_playground.json", "#{JSON.pretty_generate(playground_config)}\n" if @react_kit
 
       run "rubocop -A #{full_kit_directory}", abort_on_failure: false if @rails_kit
@@ -151,29 +144,10 @@ class KitGenerator < Rails::Generators::NamedBase
 
 private
 
-  def platforms
-    if @react_kit && @rails_kit && @swift_kit
-      "all"
-    elsif @react_kit && @rails_kit
-      "web"
-    elsif @react_kit && @swift_kit
-      "react_swift"
-    elsif @rails_kit && @swift_kit
-      "rails_swift"
-    elsif @react_kit
-      "react_only"
-    elsif @rails_kit
-      "rails_only"
-    elsif @swift_kit
-      "swift_only"
-    end
-  end
-
   def platform_list
     list = []
     list << "rails" if @rails_kit
     list << "react" if @react_kit
-    list << "swift" if @swift_kit
     list
   end
 
@@ -283,24 +257,22 @@ private
   end
 
   def kit_schema
-    schema = {
+    {
       "$schema" => "https://playbook.powerapp.cloud/schemas/kit-schema.json",
       "name" => @kit_name_pascal,
       "description" => @kit_description,
-      "platforms" => @platform_list.reject { |platform| platform == "swift" },
+      "platforms" => @platform_list,
       "props" => schema_props,
       "globalProps" => true,
       "usage" => schema_usage,
     }
-    schema["platforms"] = @platform_list if schema["platforms"].empty?
-    schema
   end
 
   def schema_props
     @unique_props.to_h do |prop|
       schema_prop = {
         "type" => schema_type(prop),
-        "platforms" => @platform_list.reject { |platform| platform == "swift" },
+        "platforms" => @platform_list,
       }
       schema_prop["values"] = prop[:values] if prop[:type] == "enum"
       default = default_for(prop)

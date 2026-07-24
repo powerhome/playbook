@@ -18,6 +18,7 @@ import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
 import {
   DEFAULT_PLATFORM,
   resolvePlatform,
+  rewriteLegacySwiftPath,
   syncStoredPlatformFromLocation,
   writeStoredPlatform,
 } from "./src/helpers/platform";
@@ -89,8 +90,12 @@ function WebsiteContent() {
     [normalizedPath, location.search, type],
   );
 
+  // Playground defaults to a collapsed sidebar; don't force-expand on other routes
+  // so hover-nav clicks can navigate while keeping the sidebar collapsed.
   useEffect(() => {
-    setDesktopSidebarCollapsed(normalizedPath === "/playground");
+    if (normalizedPath === "/playground") {
+      setDesktopSidebarCollapsed(true);
+    }
   }, [normalizedPath]);
 
   // Keep preference in sync when the URL explicitly sets a platform
@@ -98,17 +103,34 @@ function WebsiteContent() {
     syncStoredPlatformFromLocation(normalizedPath, location.search);
   }, [normalizedPath, location.search]);
 
+  // Legacy Swift kit platform / ?type=swift → Rails
+  useEffect(() => {
+    const rewrittenPath = rewriteLegacySwiftPath(normalizedPath);
+    const params = new URLSearchParams(location.search);
+    const hasSwiftType = params.get("type") === "swift";
+
+    if (!rewrittenPath && !hasSwiftType) return;
+
+    if (hasSwiftType) params.set("type", DEFAULT_PLATFORM);
+    const nextPath = rewrittenPath || normalizedPath;
+    const search = params.toString();
+    navigate(
+      `${nextPath}${search ? `?${search}` : ""}${location.hash}`,
+      { replace: true },
+    );
+  }, [normalizedPath, location.search, location.hash, navigate]);
+
   const handlePlatformChange = (nextPlatform: string) => {
     writeStoredPlatform(nextPlatform);
 
     const isKitDetailRoute =
-      /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(
+      /^\/kits\/advanced_table\/[^/]+\/(react|rails)$/.test(
         normalizedPath,
-      ) || /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
+      ) || /^\/kits\/[^/]+\/(react|rails)$/.test(normalizedPath);
 
     if (isKitDetailRoute) {
       const nextPath = normalizedPath.replace(
-        /\/(react|rails|swift)$/,
+        /\/(react|rails)$/,
         `/${nextPlatform}`,
       );
       if (nextPath !== normalizedPath) {
@@ -129,8 +151,8 @@ function WebsiteContent() {
   };
 
   const isKitShowPage =
-    /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
-    /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
+    /^\/kits\/[^/]+\/(react|rails)$/.test(normalizedPath) ||
+    /^\/kits\/advanced_table\/[^/]+\/(react|rails)$/.test(normalizedPath);
   const isKitsPage = normalizedPath === "/kits";
   const isKitsCategoryPage = /^\/kit_category\/[^/]+$/.test(normalizedPath);
   const showPlatformToggle = isKitsPage || isKitsCategoryPage || isKitShowPage;
@@ -221,7 +243,7 @@ function WebsiteContent() {
             />
             <button
                 aria-label={
-                desktopSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"
+                desktopSidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"
               }
                 className="pb--page--sideNav-toggle"
                 onClick={() =>
@@ -236,12 +258,15 @@ function WebsiteContent() {
                     ? "angle-double-right"
                     : "angle-double-left"
                 }
+                size="lg"
               />
-              <Body
-                  color="lighter"
-                  marginLeft="xs"
-                  text={desktopSidebarCollapsed ? "" : "Collapse sidebar"}
-              />
+              {!desktopSidebarCollapsed && (
+                <Body
+                    color="lighter"
+                    marginLeft="xs"
+                    text="Collapse Sidebar"
+                />
+              )}
             </button>
           </Layout.Side>
           {kits.length > 0 && <LayoutRight />}

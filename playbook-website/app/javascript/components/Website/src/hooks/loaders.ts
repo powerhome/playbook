@@ -46,11 +46,12 @@ export const ComponentShowLoader = async ({
     "/kits/advanced_table/",
   );
   
-  // Get platform from route params (react, rails, swift)
-  const platform =
+  // Get platform from route params (react, rails); legacy swift → rails
+  const rawPlatform =
     typeof params.platform === "string" && params.platform.length > 0
       ? params.platform
       : "react";
+  const platform = rawPlatform === "swift" ? "rails" : rawPlatform;
 
   let url: string;
   if (isAdvancedTableSection) {

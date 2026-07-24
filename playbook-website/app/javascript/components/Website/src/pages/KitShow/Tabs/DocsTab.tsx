@@ -36,8 +36,7 @@ interface DocsTabProps {
 export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
   const { platform } = usePlatform();
   const location = useLocation();
-  const codeLanguage: "erb" | "swift" | "tsx" =
-    platform === "rails" ? "erb" : platform === "swift" ? "swift" : "tsx";
+  const codeLanguage: "erb" | "tsx" = platform === "rails" ? "erb" : "tsx";
   const { darkMode } = useDarkMode();
   const [visibleCode, setVisibleCode] = useState<{ [key: string]: boolean }>(
     {},

@@ -1,0 +1,68 @@
+@import "playbook-tokens/colors";
+@import "playbook-tokens/spacing";
+
+// Portaled to document.body from the collapsed sidebar hover flyout.
+.pb--page--sideNav-hoverNav {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1100;
+  min-width: 220px;
+  width: max-content;
+  max-width: min(280px, calc(100vw - var(--website-sidebar-collapsed-width, 64px) - 24px));
+  border-top: 1px solid $border_light;
+  border-right: 1px solid $border_light;
+  border-bottom: 1px solid $border_light;
+  border-left: none;
+  // Clip shadow on the left so it doesn't overlay the sidebar.
+  // Still allow shadow to extend on top/right/bottom when not flush.
+  clip-path: inset(-40px -40px -40px 0);
+
+  &.is-attached-top {
+    border-top: none;
+    clip-path: inset(0 -40px -40px 0);
+  }
+
+  &.is-attached-bottom {
+    border-bottom: none;
+    clip-path: inset(-40px -40px 0 0);
+  }
+
+  &.is-attached-top.is-attached-bottom {
+    border-top: none;
+    border-bottom: none;
+    clip-path: inset(0 -40px 0 0);
+  }
+
+  &.dark {
+    border-top-color: $border_dark;
+    border-right-color: $border_dark;
+    border-bottom-color: $border_dark;
+  }
+
+  &__card {
+    width: 100%;
+  }
+
+  &.is-scrollable &__card {
+    height: 100%;
+    max-height: inherit;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &__title {
+    cursor: pointer;
+  }
+
+  &__body {
+    padding-bottom: $space_xs;
+  }
+
+  &.is-scrollable &__body {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
