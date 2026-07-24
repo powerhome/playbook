@@ -356,23 +356,40 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   /**
-   * Recompute sticky top for visible pinned rows so collapsed rows don't leave a gap.
+   * Recompute sticky top/bottom for visible pinned rows so collapsed rows don't leave a gap.
    * Call after expand/collapse and on load.
    */
   static updatePinnedRowsStickyTops(advancedTableWrapper) {
-    const pinnedTbody = advancedTableWrapper?.querySelector("tbody.pinned-rows-tbody");
-    if (!pinnedTbody) return;
-
-    const pinnedRows = Array.from(pinnedTbody.querySelectorAll("tr.pinned-row"));
-    const visibleRows = pinnedRows.filter(
-      (tr) => tr.style.display !== "none" && tr.offsetParent !== null
-    );
-
     const headerOffset =
       "calc(var(--advanced-table-header-height, 44px) + var(--advanced-table-action-bar-height, 0px))";
-    visibleRows.forEach((tr, index) => {
-      tr.style.top = `calc(${headerOffset} + 2.5em * ${index})`;
-    });
+
+    const pinnedTopTbody = advancedTableWrapper?.querySelector("tbody.pinned-rows-tbody");
+    if (pinnedTopTbody) {
+      const pinnedRows = Array.from(pinnedTopTbody.querySelectorAll("tr.pinned-row"));
+      const visibleRows = pinnedRows.filter(
+        (tr) => tr.style.display !== "none" && tr.offsetParent !== null
+      );
+
+      visibleRows.forEach((tr, index) => {
+        tr.style.top = `calc(${headerOffset} + 2.5em * ${index})`;
+        tr.style.bottom = "";
+      });
+    }
+
+    const pinnedBottomTbody = advancedTableWrapper?.querySelector(
+      "tbody.pinned-rows-tbody-bottom"
+    );
+    if (pinnedBottomTbody) {
+      const pinnedRows = Array.from(pinnedBottomTbody.querySelectorAll("tr.pinned-row"));
+      const visibleRows = pinnedRows.filter(
+        (tr) => tr.style.display !== "none" && tr.offsetParent !== null
+      );
+
+      visibleRows.forEach((tr, index) => {
+        tr.style.bottom = `calc(2.5em * ${visibleRows.length - 1 - index})`;
+        tr.style.top = "";
+      });
+    }
   }
 
   hideCloseIcon() {

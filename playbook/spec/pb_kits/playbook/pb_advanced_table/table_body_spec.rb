@@ -316,6 +316,28 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
       end
     end
 
+    describe "#pinned_bottom_ids" do
+      it "returns empty array when pinned_rows is nil or empty" do
+        expect(subject.new({}).pinned_bottom_ids).to eq []
+        expect(subject.new(pinned_rows: {}).pinned_bottom_ids).to eq []
+      end
+
+      it "returns bottom ids from symbol key" do
+        instance = subject.new(pinned_rows: { bottom: %w[row_1 row_2] })
+        expect(instance.pinned_bottom_ids).to eq %w[row_1 row_2]
+      end
+
+      it "returns bottom ids from string key" do
+        instance = subject.new(pinned_rows: { "bottom" => ["totals"] })
+        expect(instance.pinned_bottom_ids).to eq %w[totals]
+      end
+
+      it "stringifies id values" do
+        instance = subject.new(pinned_rows: { bottom: [123, :totals] })
+        expect(instance.pinned_bottom_ids).to eq %w[123 totals]
+      end
+    end
+
     describe "#row_id_for" do
       let(:instance) { subject.new({}) }
 
@@ -389,15 +411,93 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
       end
     end
 
+    describe "#pinned_bottom_root_rows" do
+      let(:table_data) do
+        [
+          { id: "totals", name: "Totals" },
+          { id: "row_1", name: "Row 1" },
+        ]
+      end
+
+      it "returns empty array when no bottom pinned_rows" do
+        instance = subject.new(table_data: table_data, pinned_rows: { top: ["totals"] })
+        expect(instance.pinned_bottom_root_rows).to eq []
+      end
+
+      it "returns root info hashes for each bottom pinned id found in table_data" do
+        instance = subject.new(table_data: table_data, pinned_rows: { bottom: ["totals"] })
+        rows = instance.pinned_bottom_root_rows
+        expect(rows.length).to eq 1
+        expect(rows.first[:row][:id]).to eq "totals"
+        expect(rows.first[:depth]).to eq 0
+      end
+    end
+
+    describe "#pinned_ids_set" do
+      let(:table_data) do
+        [
+          { id: "top_row", name: "Top", children: [{ id: "top_child", name: "Top Child" }] },
+          { id: "middle", name: "Middle" },
+          { id: "bottom_row", name: "Bottom" },
+        ]
+      end
+
+      it "includes top and bottom pinned ids and their descendants" do
+        instance = subject.new(
+          table_data: table_data,
+          pinned_rows: { top: ["top_row"], bottom: ["bottom_row"] }
+        )
+        expect(instance.pinned_ids_set).to eq Set.new(%w[top_row top_child bottom_row])
+      end
+    end
+
+    describe "#pinned_bottom_row_count" do
+      let(:table_data) do
+        [
+          { id: "a", name: "A", children: [{ id: "a1", name: "A1" }, { id: "a2", name: "A2" }] },
+          { id: "b", name: "B" },
+        ]
+      end
+
+      it "counts initially visible bottom roots only (collapsed descendants excluded)" do
+        instance = subject.new(table_data: table_data, pinned_rows: { bottom: %w[a b] })
+        expect(instance.pinned_bottom_row_count).to eq 2
+      end
+
+      it "still counts a single expandable root as one for first paint" do
+        instance = subject.new(table_data: table_data, pinned_rows: { bottom: ["a"] })
+        expect(instance.pinned_bottom_row_count).to eq 1
+      end
+    end
+
     describe "#has_pinned_rows?" do
       it "returns false when no pinned rows" do
         instance = subject.new(table_data: [{ id: "1" }])
         expect(instance.has_pinned_rows?).to be false
       end
 
-      it "returns true when pinned_root_rows is non-empty" do
+      it "returns true when top pinned_root_rows is non-empty" do
         instance = subject.new(table_data: [{ id: "totals" }], pinned_rows: { top: ["totals"] })
         expect(instance.has_pinned_rows?).to be true
+        expect(instance.has_pinned_top_rows?).to be true
+        expect(instance.has_pinned_bottom_rows?).to be false
+      end
+
+      it "returns true when bottom pinned rows are present" do
+        instance = subject.new(table_data: [{ id: "totals" }], pinned_rows: { bottom: ["totals"] })
+        expect(instance.has_pinned_rows?).to be true
+        expect(instance.has_pinned_top_rows?).to be false
+        expect(instance.has_pinned_bottom_rows?).to be true
+      end
+
+      it "returns true when both top and bottom pinned rows are present" do
+        instance = subject.new(
+          table_data: [{ id: "1" }, { id: "2" }],
+          pinned_rows: { top: ["1"], bottom: ["2"] }
+        )
+        expect(instance.has_pinned_rows?).to be true
+        expect(instance.has_pinned_top_rows?).to be true
+        expect(instance.has_pinned_bottom_rows?).to be true
       end
     end
 
@@ -412,12 +512,27 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
         expect(style).to include("2.5em * 0")
         expect(style).to include("z-index: 3")
         expect(style).to include("background: white")
+        expect(style).to include("top:")
+        expect(style).not_to include("bottom:")
       end
 
       it "uses custom background when given" do
         style = instance.build_pinned_row_style(1, background: "#f0f0f0")
         expect(style).to include("background: #f0f0f0")
         expect(style).to include("2.5em * 1")
+      end
+
+      it "returns bottom sticky style for bottom position" do
+        style = instance.build_pinned_row_style(0, position: "bottom", bottom_total: 3)
+        expect(style).to include("position: sticky")
+        expect(style).to include("bottom: calc(2.5em * 2)")
+        expect(style).to include("z-index: 3")
+        expect(style).not_to include("top:")
+      end
+
+      it "places the last bottom pinned row at bottom 0" do
+        style = instance.build_pinned_row_style(2, position: "bottom", bottom_total: 3)
+        expect(style).to include("bottom: calc(2.5em * 0)")
       end
     end
   end

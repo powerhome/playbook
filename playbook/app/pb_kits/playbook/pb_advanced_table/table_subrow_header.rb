@@ -21,6 +21,9 @@ module Playbook
                         default: "scroll"
       prop :is_pinned_row, type: Playbook::Props::Boolean,
                            default: false
+      prop :pinned_position, type: Playbook::Props::Enum,
+                             values: %w[top bottom],
+                             default: "top"
       prop :pinned_index, type: Playbook::Props::Numeric,
                           default: nil
       prop :html_options, type: Playbook::Props::HashProp,
@@ -33,6 +36,7 @@ module Playbook
       def classname
         classes = ["pb_table_tr", "bg-silver", "pb_subrow_header", subrow_depth_classname]
         classes << "pinned-row" if is_pinned_row
+        classes << "pinned-row-bottom" if is_pinned_row && pinned_position.to_s == "bottom"
         generate_classname(*classes, separator: " ")
       end
 
