@@ -64,8 +64,10 @@ export const CollapsedHoverNav = ({
     const updatePosition = () => {
       const titleEl = titleRef.current;
       const bodyEl = bodyRef.current;
+      const flyoutEl = flyoutRef.current;
       if (!titleEl || !bodyEl || !anchorEl.isConnected) return;
 
+      const hasSubnav = Boolean(children);
       const anchorRect = anchorEl.getBoundingClientRect();
       const left = getSidebarRight(anchorEl) + HORIZONTAL_GAP;
       const headerBottom = getHeaderBottom(anchorEl);
@@ -74,13 +76,24 @@ export const CollapsedHoverNav = ({
 
       // scrollHeight stays accurate even when the body is already constrained/scrollable.
       const contentHeight = titleEl.offsetHeight + bodyEl.scrollHeight;
+      // Leaf flyouts are title-only; use measured height so card padding is included when centering.
+      const leafHeight = flyoutEl?.offsetHeight || contentHeight;
       const alignedTop = Math.max(anchorRect.top, headerBottom);
 
       let mode: PlacementMode = "align";
       let top = alignedTop;
       let bottom: CSSProperties["bottom"] = "auto";
 
-      if (contentHeight > availableHeight) {
+      if (!hasSubnav) {
+        // Leaf items: vertically center on the hovered nav item.
+        const centeredTop =
+          anchorRect.top + (anchorRect.height - leafHeight) / 2;
+        top = Math.min(
+          Math.max(centeredTop, headerBottom),
+          Math.max(headerBottom, viewportHeight - leafHeight),
+        );
+        mode = "align";
+      } else if (contentHeight > availableHeight) {
         // Taller than space below the header: flush with header + viewport bottom, scroll.
         mode = "scroll";
         top = headerBottom;
