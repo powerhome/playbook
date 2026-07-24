@@ -11,7 +11,7 @@
     },
     {
       "name": "Appearance",
-      "props": ["variant", "textTransform"]
+      "props": ["variant", "size", "textTransform"]
     }
   ],
   "presets": [
@@ -30,6 +30,16 @@
         "text": "Primary",
         "variant": "primary",
         "textTransform": "none"
+      },
+      "children": ""
+    },
+    {
+      "name": "Small",
+      "props": {
+        "text": "small",
+        "size": "sm",
+        "variant": "neutral",
+        "textTransform": "lowercase"
       },
       "children": ""
     },
