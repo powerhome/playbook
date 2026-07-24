@@ -323,16 +323,15 @@
 }
 
 .builder-instance {
-  align-self: flex-start;
   cursor: pointer;
   display: block;
   max-width: 100%;
   min-width: 0;
   outline: 1px solid transparent;
-  // Size to content so patterns (user display, banners, positioning)
-  // don't stretch across the demo. Avoid always setting position:relative
-  // so absolute children can anchor to the kit's own positioned ancestor.
-  width: fit-content;
+  // Default to content width. Root stage children fill the demo below.
+  // Avoid always setting position:relative so absolute children can anchor
+  // to the kit's own positioned ancestor.
+  width: auto;
 
   &[draggable="true"] {
     cursor: grab;
@@ -361,9 +360,37 @@
 
   &.is-empty-container {
     border: 1px dashed $border_light;
-    min-width: 48px;
     position: relative;
   }
+}
+
+// Root kits fill the demo stage (matches fullscreen composition width).
+.builder-stage > .builder-instance {
+  width: 100%;
+}
+
+// Nested kits inside a Card should fill the card (table filter, etc.).
+.pb_card_kit > .builder-instance,
+[class*="pb_card_kit"] > .builder-instance {
+  width: 100%;
+}
+
+// Each kit is wrapped in .builder-instance. Forcing width:100% on Flex
+// children breaks compact patterns (user display, banner icon + text).
+.pb_flex_kit_orientation_row > .builder-instance,
+.pb_flex_kit_orientation_column > .builder-instance {
+  flex: 0 1 auto;
+  max-width: 100%;
+  width: auto;
+}
+
+// Full-bleed layout kits should still span a column Flex.
+.pb_flex_kit_orientation_column > .builder-instance:has(> .builder-instance-render > .pb_card_kit),
+.pb_flex_kit_orientation_column > .builder-instance:has(> .builder-instance-render > [class*="pb_card_kit"]),
+.pb_flex_kit_orientation_column > .builder-instance:has(> .builder-instance-render .pb_table),
+.pb_flex_kit_orientation_column > .builder-instance:has(> .builder-instance-render [class*="pb_filter"]),
+.pb_flex_kit_orientation_column > .builder-instance:has(> .builder-instance-render > .pb_section_separator_kit) {
+  width: 100%;
 }
 
 .builder-instance-render img {
