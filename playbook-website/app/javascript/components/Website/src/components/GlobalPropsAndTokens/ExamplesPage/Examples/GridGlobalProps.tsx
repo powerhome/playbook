@@ -3,6 +3,7 @@ import { Flex, Card, Body, Caption, Title, Detail, Badge } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
+import ResponsivenessSection from "../../Templates/Subcomponents/ResponsivenessSection";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -14,7 +15,6 @@ const getCurrentMonth = () => {
   const monthIndex = now.getMonth();
   const today = now.getDate();
   const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-  // Sunday = 0 → grid column 1; CSS Grid columns are 1-indexed
   const startColumn = new Date(year, monthIndex, 1).getDay() + 1;
   const name = now.toLocaleString("en-US", { month: "long", year: "numeric" });
 
@@ -37,9 +37,60 @@ const getCurrentMonth = () => {
   return { name, startColumn, daysInMonth, today, events };
 };
 
-const GridCell = ({ children }: { children: ReactNode }) => (
-  <Card borderRadius="sm" padding="sm">
+const MiniCell = ({ children }: { children: ReactNode }) => (
+  <Card borderRadius="xs" padding="xs">
     <Body text={String(children)} />
+  </Card>
+);
+
+const TemplateDemo = ({
+  columns,
+  count = 6,
+}: {
+  columns: string;
+  count?: number;
+}) => (
+  <Card
+    display="grid"
+    gap="xs"
+    gridTemplateColumns={columns}
+    padding="xs"
+    width="200px"
+  >
+    {Array.from({ length: count }, (_, i) => (
+      <MiniCell key={i}>{i + 1}</MiniCell>
+    ))}
+  </Card>
+);
+
+const RowsDemo = ({ rows }: { rows: string }) => (
+  <Card
+    display="grid"
+    gap="xs"
+    gridTemplateColumns="1fr"
+    gridTemplateRows={rows}
+    height="120px"
+    padding="xs"
+    width="200px"
+  >
+    <MiniCell>1</MiniCell>
+    <MiniCell>2</MiniCell>
+  </Card>
+);
+
+const AutoFlowDemo = ({ flow }: { flow: "row" | "column" }) => (
+  <Card
+    display="grid"
+    gap="xs"
+    gridAutoFlow={flow}
+    gridTemplateColumns={flow === "row" ? "repeat(3, 1fr)" : "repeat(2, 1fr)"}
+    gridTemplateRows={flow === "column" ? "repeat(2, 1fr)" : undefined}
+    padding="xs"
+    width="200px"
+  >
+    {[1, 2, 3, 4].map((n) => (
+      <MiniCell key={n}>{n}</MiniCell>
+    ))}
   </Card>
 );
 
@@ -51,14 +102,14 @@ const DayCell = ({
 }: {
   day: number;
   isToday?: boolean;
-  event?: { label: string; variant: "info" | "primary" | "success" | "warning" };
+  event?: { label: string; variant: EventVariant };
   gridColumn?: string;
 }) => (
   <Card
     borderRadius="sm"
     gridColumn={gridColumn}
     highlight={isToday ? { position: "top", color: "primary" } : undefined}
-    minHeight="80px"
+    minHeight="72px"
     padding="xs"
   >
     <Detail bold color={isToday ? "link" : "light"} text={String(day)} />
@@ -120,318 +171,231 @@ const GridGlobalProps = () => {
   const weekdayName = WEEKDAYS[month.startColumn - 1];
 
   return (
-    <>
-      <ShowPage
-        title="Grid"
-        description={
-          <>
-            Grid global props enable two-dimensional layouts with CSS Grid. Pair{" "}
-            <code>display=&quot;grid&quot;</code> with template, placement, and
-            alignment props. Open CSS values (like{" "}
-            <code>repeat(7, 1fr)</code>) are supported as dynamic strings, while
-            common alignment props use Playbook&apos;s class-based responsive
-            pattern. For more information, see the{" "}
-            <a
-              href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout"
-              target="_blank"
-              rel="noreferrer"
-            >
-              MDN CSS Grid documentation
-            </a>
-            .
-          </>
-        }
-      >
-        <Flex gap="md" orientation="column">
-          <Title size={4} text="Common Layouts" />
-          <Card padding="md">
-            <Caption marginBottom="sm" text="Three equal columns" />
-            <Card
-              display="grid"
-              gap="sm"
-              gridTemplateColumns="repeat(3, 1fr)"
-              marginBottom="md"
-              width="100%"
-            >
-              <GridCell>A</GridCell>
-              <GridCell>B</GridCell>
-              <GridCell>C</GridCell>
-            </Card>
-            <Flex align="baseline" gap="xs" marginBottom="xs">
-              <Caption text="Rails" />
+    <ShowPage
+      title="Grid"
+      description={
+        <>
+          Grid global props enable two-dimensional layouts with CSS Grid. Pair{" "}
+          <code>display=&quot;grid&quot;</code> with template, placement, and
+          alignment props. Open CSS values (like{" "}
+          <code>repeat(3, 1fr)</code>) are supported as dynamic strings, while
+          common alignment props use Playbook&apos;s class-based responsive
+          pattern. For more information, see the{" "}
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout"
+            target="_blank"
+            rel="noreferrer"
+          >
+            MDN CSS Grid documentation
+          </a>
+          .
+        </>
+      }
+    >
+      <Flex gap="md" orientation="column">
+        <PropsExamplesTable
+          headers={[
+            "Template Columns",
+            "Example",
+            "Rails Example",
+            "React Example",
+          ]}
+          rows={[
+            [
+              "Two equal columns",
+              <TemplateDemo columns="repeat(2, 1fr)" count={4} />,
               <ExampleCodeCard
-                id="grid-3col-rails"
-                text='display: "grid", grid_template_columns: "repeat(3, 1fr)", gap: "sm"'
-              />
-            </Flex>
-            <Flex align="baseline" gap="xs">
-              <Caption text="React" />
+                id="gtc-2-rails"
+                text='grid_template_columns: "repeat(2, 1fr)"'
+              />,
               <ExampleCodeCard
-                id="grid-3col-react"
-                text='display="grid" gridTemplateColumns="repeat(3, 1fr)" gap="sm"'
-              />
-            </Flex>
-          </Card>
+                id="gtc-2-react"
+                text='gridTemplateColumns="repeat(2, 1fr)"'
+              />,
+            ],
+            [
+              "Three equal columns",
+              <TemplateDemo columns="repeat(3, 1fr)" />,
+              <ExampleCodeCard
+                id="gtc-3-rails"
+                text='grid_template_columns: "repeat(3, 1fr)"'
+              />,
+              <ExampleCodeCard
+                id="gtc-3-react"
+                text='gridTemplateColumns="repeat(3, 1fr)"'
+              />,
+            ],
+            [
+              "Sidebar + main",
+              <TemplateDemo columns="120px 1fr" count={2} />,
+              <ExampleCodeCard
+                id="gtc-sidebar-rails"
+                text='grid_template_columns: "120px 1fr"'
+              />,
+              <ExampleCodeCard
+                id="gtc-sidebar-react"
+                text='gridTemplateColumns="120px 1fr"'
+              />,
+            ],
+            [
+              "Auto-fit cards",
+              <TemplateDemo
+                columns="repeat(auto-fit, minmax(60px, 1fr))"
+                count={4}
+              />,
+              <ExampleCodeCard
+                id="gtc-autofit-rails"
+                text='grid_template_columns: "repeat(auto-fit, minmax(60px, 1fr))"'
+              />,
+              <ExampleCodeCard
+                id="gtc-autofit-react"
+                text='gridTemplateColumns="repeat(auto-fit, minmax(60px, 1fr))"'
+              />,
+            ],
+          ]}
+        />
 
-          <Card padding="md">
-            <Caption marginBottom="sm" text="Fixed header row + flexible content" />
-            <Card
-              display="grid"
-              gap="sm"
-              gridTemplateColumns="1fr"
-              gridTemplateRows="59px 1fr"
-              height="200px"
-              marginBottom="md"
-            >
-              <GridCell>Header</GridCell>
-              <GridCell>Content</GridCell>
-            </Card>
-            <Flex align="baseline" gap="xs" marginBottom="xs">
-              <Caption text="Rails" />
+        <PropsExamplesTable
+          headers={[
+            "Template Rows",
+            "Example",
+            "Rails Example",
+            "React Example",
+          ]}
+          rows={[
+            [
+              "Fixed + flexible",
+              <RowsDemo rows="40px 1fr" />,
               <ExampleCodeCard
-                id="grid-rows-rails"
-                text='display: "grid", grid_template_rows: "59px 1fr"'
-              />
-            </Flex>
-            <Flex align="baseline" gap="xs">
-              <Caption text="React" />
+                id="gtr-fixed-rails"
+                text='grid_template_rows: "40px 1fr"'
+              />,
               <ExampleCodeCard
-                id="grid-rows-react"
-                text='display="grid" gridTemplateRows="59px 1fr"'
-              />
-            </Flex>
-          </Card>
-
-          <Card padding="md">
-            <Caption marginBottom="sm" text="Spanning columns" />
-            <Card
-              display="grid"
-              gap="sm"
-              gridTemplateColumns="repeat(4, 1fr)"
-              marginBottom="md"
-            >
-              <Card borderRadius="sm" gridColumn="1 / 3" padding="sm">
-                <Body text="Spans 2 cols" />
-              </Card>
-              <GridCell>3</GridCell>
-              <GridCell>4</GridCell>
-            </Card>
-            <Flex align="baseline" gap="xs" marginBottom="xs">
-              <Caption text="Rails" />
+                id="gtr-fixed-react"
+                text='gridTemplateRows="40px 1fr"'
+              />,
+            ],
+            [
+              "Equal rows",
+              <RowsDemo rows="1fr 1fr" />,
               <ExampleCodeCard
-                id="grid-span-rails"
-                text='grid_column: "1 / 3"'
-              />
-            </Flex>
-            <Flex align="baseline" gap="xs">
-              <Caption text="React" />
+                id="gtr-equal-rails"
+                text='grid_template_rows: "1fr 1fr"'
+              />,
               <ExampleCodeCard
-                id="grid-span-react"
-                text='gridColumn="1 / 3"'
-              />
-            </Flex>
-          </Card>
+                id="gtr-equal-react"
+                text='gridTemplateRows="1fr 1fr"'
+              />,
+            ],
+          ]}
+        />
 
-          <PropsExamplesTable
-            headers={[
-              "Prop",
-              "Type",
-              "Values",
-              "Rails Example",
-              "React Example",
-            ]}
-            rows={[
-              [
-                "gridTemplateColumns",
-                <ExampleCodeCard copyIcon={false} text="string" />,
-                "Any CSS track list",
-                <ExampleCodeCard
-                  id="gtc-rails"
-                  text='grid_template_columns: "repeat(3, 1fr)"'
-                />,
-                <ExampleCodeCard
-                  id="gtc-react"
-                  text='gridTemplateColumns="repeat(3, 1fr)"'
-                />,
-              ],
-              [
-                "gridTemplateRows",
-                <ExampleCodeCard copyIcon={false} text="string" />,
-                "Any CSS track list",
-                <ExampleCodeCard
-                  id="gtr-rails"
-                  text='grid_template_rows: "59px 341px"'
-                />,
-                <ExampleCodeCard
-                  id="gtr-react"
-                  text='gridTemplateRows="59px 341px"'
-                />,
-              ],
-              [
-                "gridTemplateAreas",
-                <ExampleCodeCard copyIcon={false} text="string" />,
-                "Named area template",
-                <ExampleCodeCard
-                  id="gta-rails"
-                  text={`grid_template_areas: "'header header' 'sidebar main'"`}
-                />,
-                <ExampleCodeCard
-                  id="gta-react"
-                  text={`gridTemplateAreas="'header header' 'sidebar main'"`}
-                />,
-              ],
-              [
-                "gridColumn",
-                <ExampleCodeCard copyIcon={false} text="string" />,
-                "Line / span values",
-                <ExampleCodeCard id="gc-rails" text='grid_column: "1 / 3"' />,
-                <ExampleCodeCard id="gc-react" text='gridColumn="1 / 3"' />,
-              ],
-              [
-                "gridRow",
-                <ExampleCodeCard copyIcon={false} text="string" />,
-                "Line / span values",
-                <ExampleCodeCard id="gr-rails" text='grid_row: "2"' />,
-                <ExampleCodeCard id="gr-react" text='gridRow="2"' />,
-              ],
-              [
-                "gridArea",
-                <ExampleCodeCard copyIcon={false} text="string" />,
-                "Named area or shorthand",
-                <ExampleCodeCard id="ga-rails" text='grid_area: "header"' />,
-                <ExampleCodeCard id="ga-react" text='gridArea="header"' />,
-              ],
-              [
-                "gridAutoColumns",
-                <ExampleCodeCard copyIcon={false} text="string" />,
-                "Any CSS track size",
-                <ExampleCodeCard
-                  id="gac-rails"
-                  text='grid_auto_columns: "minmax(100px, 1fr)"'
-                />,
-                <ExampleCodeCard
-                  id="gac-react"
-                  text='gridAutoColumns="minmax(100px, 1fr)"'
-                />,
-              ],
-              [
-                "gridAutoRows",
-                <ExampleCodeCard copyIcon={false} text="string" />,
-                "Any CSS track size",
-                <ExampleCodeCard id="gar-rails" text='grid_auto_rows: "auto"' />,
-                <ExampleCodeCard id="gar-react" text='gridAutoRows="auto"' />,
-              ],
-              [
-                "gridAutoFlow",
-                <ExampleCodeCard copyIcon={false} text="enum | responsive" />,
-                "row, column, dense, rowDense, columnDense",
-                <ExampleCodeCard id="gaf-rails" text='grid_auto_flow: "column"' />,
-                <ExampleCodeCard id="gaf-react" text='gridAutoFlow="column"' />,
-              ],
-              [
-                "justifyItems",
-                <ExampleCodeCard copyIcon={false} text="enum | responsive" />,
-                "start, end, center, stretch",
-                <ExampleCodeCard id="ji-rails" text='justify_items: "center"' />,
-                <ExampleCodeCard id="ji-react" text='justifyItems="center"' />,
-              ],
-              [
-                "alignItems",
-                <ExampleCodeCard copyIcon={false} text="enum | responsive" />,
-                "Existing Flex/Grid align values",
-                <ExampleCodeCard id="ai-rails" text='align_items: "center"' />,
-                <ExampleCodeCard id="ai-react" text='alignItems="center"' />,
-              ],
-              [
-                "gap / rowGap / columnGap",
-                <ExampleCodeCard copyIcon={false} text="spacing | responsive" />,
-                "none, xxs, xs, sm, md, lg, xl",
-                <ExampleCodeCard id="gap-rails" text='gap: "md"' />,
-                <ExampleCodeCard id="gap-react" text='gap="md"' />,
-              ],
-            ]}
-          />
+        <PropsExamplesTable
+          headers={[
+            "Auto Flow",
+            "Example",
+            "Rails Example",
+            "React Example",
+          ]}
+          rows={[
+            [
+              "Row",
+              <AutoFlowDemo flow="row" />,
+              <ExampleCodeCard id="gaf-row-rails" text='grid_auto_flow: "row"' />,
+              <ExampleCodeCard id="gaf-row-react" text='gridAutoFlow="row"' />,
+            ],
+            [
+              "Column",
+              <AutoFlowDemo flow="column" />,
+              <ExampleCodeCard
+                id="gaf-column-rails"
+                text='grid_auto_flow: "column"'
+              />,
+              <ExampleCodeCard
+                id="gaf-column-react"
+                text='gridAutoFlow="column"'
+              />,
+            ],
+          ]}
+        />
 
-          <Card>
-            <Caption text="Responsiveness" />
-            <Body text="Enum Grid props like gridAutoFlow and justifyItems support responsive values using the existing breakpoint pattern. Dynamic string props (templates and placement) accept any valid CSS Grid value as an inline style." />
-            <Body
-              marginY="md"
-              text="Responsive values are defined using an object with screen size keys and an optional default:"
-            />
-            <Flex align="baseline" gap="xs" marginBottom="sm">
-              <Caption text="Rails" />
-              <Body>
-                <ExampleCodeCard
-                  id="grid-responsive-rails"
-                  text={`justify_items: { xs: "start", md: "center", default: "stretch" }`}
-                />
-              </Body>
-            </Flex>
-            <Flex align="baseline" gap="xs">
-              <Caption text="React" />
-              <Body>
-                <ExampleCodeCard
-                  id="grid-responsive-react"
-                  text={`justifyItems={{ xs: "start", md: "center", default: "stretch" }}`}
-                />
-              </Body>
-            </Flex>
-          </Card>
-
-          <Card padding="md" width="100%">
-            <Title marginBottom="xs" size={4} text="Monthly calendar" />
-            <Body marginBottom="md">
-              A full month layout built only with Grid global props:{" "}
-              <code>display=&quot;grid&quot;</code>,{" "}
-              <code>gridTemplateColumns=&quot;repeat(7, 1fr)&quot;</code>,{" "}
-              <code>gap</code>, a header that spans the full width via{" "}
-              <code>gridColumn=&quot;1 / -1&quot;</code>, and the first day of
-              the month offset with{" "}
-              <code>gridColumn=&quot;{month.startColumn}&quot;</code> (
-              {month.name} starts on {weekdayName}). The calendar always
-              reflects the current month and highlights today.
-            </Body>
-            <MonthlyCalendar />
-            <Flex
-              align="baseline"
-              flexDirection="column"
-              gap="xs"
-              marginTop="md"
-            >
-              <Flex align="baseline" gap="xs" wrap>
+        <ResponsivenessSection
+          exampleSection={
+            <>
+              <Flex alignItems="center" gap="sm">
                 <Caption text="Rails" />
                 <ExampleCodeCard
-                  id="grid-calendar-rails"
-                  text='display: "grid", grid_template_columns: "repeat(7, 1fr)", gap: "xs"'
+                  id="grid-responsive-rails"
+                  text={`grid_auto_flow: { xs: "row", md: "column", default: "row" }`}
                 />
               </Flex>
-              <Flex align="baseline" gap="xs" wrap>
+              <Flex alignItems="center" gap="sm">
                 <Caption text="React" />
                 <ExampleCodeCard
-                  id="grid-calendar-react"
-                  text='display="grid" gridTemplateColumns="repeat(7, 1fr)" gap="xs"'
+                  id="grid-responsive-react"
+                  text={`gridAutoFlow={{ xs: "row", md: "column", default: "row" }}`}
                 />
               </Flex>
-              <Flex align="baseline" gap="xs" wrap>
-                <Caption text="Offset first day" />
-                <ExampleCodeCard
-                  id="grid-calendar-offset-react"
-                  text={`gridColumn="${month.startColumn}"`}
-                />
-              </Flex>
-              <Flex align="baseline" gap="xs" wrap>
-                <Caption text="Full-width header" />
-                <ExampleCodeCard
-                  id="grid-calendar-span-react"
-                  text='gridColumn="1 / -1"'
-                />
-              </Flex>
+            </>
+          }
+        >
+          <Body>
+            Enum props like <code>gridAutoFlow</code> and{" "}
+            <code>justifyItems</code> support responsive breakpoint objects.
+            Dynamic string props (<code>gridTemplateColumns</code>, placement,
+            etc.) accept any valid CSS Grid value as an inline style.
+          </Body>
+        </ResponsivenessSection>
+
+        <Card padding="md" width="100%">
+          <Title marginBottom="xs" size={4} text="Monthly calendar" />
+          <Body marginBottom="md">
+            A fuller layout using{" "}
+            <code>gridTemplateColumns=&quot;repeat(7, 1fr)&quot;</code>,{" "}
+            <code>gap</code>, a full-width header via{" "}
+            <code>gridColumn=&quot;1 / -1&quot;</code>, and day 1 offset with{" "}
+            <code>gridColumn=&quot;{month.startColumn}&quot;</code> (
+            {month.name} starts on {weekdayName}).
+          </Body>
+          <MonthlyCalendar />
+          <Flex
+            align="baseline"
+            flexDirection="column"
+            gap="xs"
+            marginTop="md"
+          >
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Rails" />
+              <ExampleCodeCard
+                id="grid-calendar-rails"
+                text='display: "grid", grid_template_columns: "repeat(7, 1fr)", gap: "xs"'
+              />
             </Flex>
-          </Card>
-        </Flex>
-      </ShowPage>
-    </>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="React" />
+              <ExampleCodeCard
+                id="grid-calendar-react"
+                text='display="grid" gridTemplateColumns="repeat(7, 1fr)" gap="xs"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Offset first day" />
+              <ExampleCodeCard
+                id="grid-calendar-offset-react"
+                text={`gridColumn="${month.startColumn}"`}
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Full-width header" />
+              <ExampleCodeCard
+                id="grid-calendar-span-react"
+                text='gridColumn="1 / -1"'
+              />
+            </Flex>
+          </Flex>
+        </Card>
+      </Flex>
+    </ShowPage>
   );
 };
 

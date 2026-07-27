@@ -63,6 +63,27 @@ export const GlobalPropsCards = [
     link: "/global_props/grid",
   },
   {
+    title: "Placement (Grid)",
+    description:
+      "Positions items within a Grid using column, row, and area placement props.",
+    icon: "table-columns",
+    link: "/global_props/grid_placement",
+  },
+  {
+    title: "Align (Grid)",
+    description:
+      "Controls how grid items align within their cells using justifyItems and alignItems.",
+    icon: "objects-align-left",
+    link: "/global_props/grid_align",
+  },
+  {
+    title: "Gap (Grid)",
+    description:
+      "Sets spacing between grid tracks with gap, rowGap, and columnGap.",
+    icon: "gap",
+    link: "/global_props/grid_gap",
+  },
+  {
     title: "Height",
     description:
       "Sets fixed or responsive height values for consistent vertical sizing.",

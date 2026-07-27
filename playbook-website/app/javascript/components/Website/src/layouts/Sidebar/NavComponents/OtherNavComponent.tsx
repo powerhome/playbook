@@ -2,6 +2,25 @@ import { useState, useEffect } from "react";
 import { NavItem } from "playbook-ui";
 import { useNavigate, useLocation } from "react-router-dom";
 
+type CollapsibleGroupConfig = {
+  parentKey: string;
+  childPrefix: string;
+  stripNamePrefix: RegExp;
+};
+
+const COLLAPSIBLE_GROUPS: CollapsibleGroupConfig[] = [
+  {
+    parentKey: "flex_box",
+    childPrefix: "flex_box_",
+    stripNamePrefix: /^Flex Box\s+/,
+  },
+  {
+    parentKey: "grid",
+    childPrefix: "grid_",
+    stripNamePrefix: /^Grid\s+/,
+  },
+];
+
 export const OtherNavItems = ({
   name,
   dark,
@@ -12,65 +31,79 @@ export const OtherNavItems = ({
   whats_new,
   global_props_and_tokens,
 }: any) => {
-
   const navigate = useNavigate();
   const location = useLocation();
   const currentURL = location.pathname + location.search;
-  
+
   const createLink = (path: string) => path;
 
-  let menuItems: { [key: string]: string }[] | string[] = []
+  let menuItems: { [key: string]: string }[] | string[] = [];
 
-  const guidesNavItems = getting_started["pages"].map(guide => ({
+  const guidesNavItems = getting_started["pages"].map((guide) => ({
     name: guide.title,
-    link: createLink(`/${guide.url}`)
-  }))
+    link: createLink(`/${guide.url}`),
+  }));
 
-  const designGuidesNavItems = design_guidelines["pages"].map(guide => ({
+  const designGuidesNavItems = design_guidelines["pages"].map((guide) => ({
     name: guide.title,
-    link: createLink(`/${guide.url}`)
-  }))
+    link: createLink(`/${guide.url}`),
+  }));
 
-  const whatsNewNavItems = whats_new["pages"].map(guide => ({
+  const whatsNewNavItems = whats_new["pages"].map((guide) => ({
     name: guide.title,
-    link: createLink(`/${guide.url}`)
-  }))
+    link: createLink(`/${guide.url}`),
+  }));
 
-  const globalPropsMenu = global_props_and_tokens?.global_props?.map((item: string) => {
-    let displayName = item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase())
-    
-    const menuItem: any = {
-      name: displayName,
-      link: createLink(`/global_props/${item}`),
-    }
-    
-    if (item === 'flex_box') {
-      menuItem.tag = 'flex_box'
-    } else if (item.startsWith('flex_box_')) {
-      menuItem.tag = 'flex_box_child'
-      // Remove 'Flex Box ' prefix from child items to avoid redundancy
-      menuItem.name = displayName.replace(/^Flex Box\s+/, '')
-    }
-    
-    return menuItem
-  }).sort((a, b) => a.name.localeCompare(b.name)) || []
+  const globalPropsMenu =
+    global_props_and_tokens?.global_props
+      ?.map((item: string) => {
+        let displayName = item
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (char: string) => char.toUpperCase());
 
-  const tokensMenu = global_props_and_tokens?.tokens?.map((item: Record<string, any>) => ({
-    name: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
-    link: createLink(`/tokens/${item}`),
-  })).sort((a, b) => a.name.localeCompare(b.name)) || []
+        const menuItem: any = {
+          name: displayName,
+          link: createLink(`/global_props/${item}`),
+          itemKey: item,
+        };
 
-  //conditionally render navitems depending on name
+        const group = COLLAPSIBLE_GROUPS.find(
+          (g) => item === g.parentKey || item.startsWith(g.childPrefix)
+        );
+
+        if (group) {
+          if (item === group.parentKey) {
+            menuItem.tag = `${group.parentKey}_parent`;
+          } else {
+            menuItem.tag = `${group.parentKey}_child`;
+            menuItem.name = displayName.replace(group.stripNamePrefix, "");
+          }
+        }
+
+        return menuItem;
+      })
+      .sort((a, b) => a.name.localeCompare(b.name)) || [];
+
+  const tokensMenu =
+    global_props_and_tokens?.tokens
+      ?.map((item: Record<string, any>) => ({
+        name: item
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (char: string) => char.toUpperCase()),
+        link: createLink(`/tokens/${item}`),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name)) || [];
+
   if (name === "Global Props") {
-    menuItems = globalPropsMenu
+    menuItems = globalPropsMenu;
   } else if (name === "Tokens") {
-    menuItems = tokensMenu
+    menuItems = tokensMenu;
   } else if (name === "Getting Started") {
-    menuItems = guidesNavItems
+    menuItems = guidesNavItems;
   } else if (name === "Design Guidelines") {
-    menuItems = designGuidesNavItems
+    menuItems = designGuidesNavItems;
   } else if (name === "What's New") {
-    menuItems = whatsNewNavItems
+    menuItems = whatsNewNavItems;
   }
 
   const handleItemClick = (link) => {
@@ -78,99 +111,122 @@ export const OtherNavItems = ({
       navigate(link.link);
     }
     updateTopLevelNav(parentIndex);
-  }
+  };
 
   const activeForItems = (link) => {
-    // Strip /react or /rails from the end of currentURL before comparing
-    const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
+    const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, "");
     return link.link === currentURL || link.link === normalizedCurrentURL;
-  }
+  };
 
-  // flex_box items get special handling
-  const flexBoxParent = menuItems.find((item: any) => item?.tag === 'flex_box')
-  const flexBoxChildren = menuItems.filter((item: any) => item?.tag === 'flex_box_child')
-  const otherItems = menuItems.filter((item: any) => !item?.tag || (item?.tag !== 'flex_box' && item?.tag !== 'flex_box_child'))
+  const collapsibleTags = COLLAPSIBLE_GROUPS.flatMap((g) => [
+    `${g.parentKey}_parent`,
+    `${g.parentKey}_child`,
+  ]);
 
-  // Create combined list with flex_box 
-  const allItemsToRender: any[] = [...otherItems]
-  if (flexBoxParent) {
-    // Find the correct alphabetical position for flex_box
-    const insertIndex = allItemsToRender.findIndex((item: any) => 
-      ((item as any).name as string).localeCompare((flexBoxParent as any).name as string) > 0
-    )
-    const flexBoxWithFlag = { ...(flexBoxParent as any), isFlexBoxParent: true }
+  const otherItems = menuItems.filter(
+    (item: any) => !item?.tag || !collapsibleTags.includes(item.tag)
+  );
+
+  const groups = COLLAPSIBLE_GROUPS.map((config) => {
+    const parent = menuItems.find(
+      (item: any) => item?.tag === `${config.parentKey}_parent`
+    );
+    const children = menuItems.filter(
+      (item: any) => item?.tag === `${config.parentKey}_child`
+    );
+    return { config, parent, children };
+  }).filter((g) => g.parent);
+
+  const allItemsToRender: any[] = [...otherItems];
+
+  groups.forEach(({ config, parent, children }) => {
+    const insertIndex = allItemsToRender.findIndex(
+      (item: any) =>
+        ((item as any).name as string).localeCompare(
+          (parent as any).name as string
+        ) > 0
+    );
+    const parentWithFlag = {
+      ...(parent as any),
+      isCollapsibleParent: true,
+      groupKey: config.parentKey,
+      children,
+    };
     if (insertIndex === -1) {
-      allItemsToRender.push(flexBoxWithFlag)
+      allItemsToRender.push(parentWithFlag);
     } else {
-      allItemsToRender.splice(insertIndex, 0, flexBoxWithFlag)
+      allItemsToRender.splice(insertIndex, 0, parentWithFlag);
     }
-  }
-
-  // Check if any flex_box child is active
-  const hasActiveFlexBoxChild = flexBoxChildren.some((child: any) => {
-    const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
-    return child.link === currentURL || child.link === normalizedCurrentURL;
   });
-  
-  // Expand flex_box if we're on it or any of its children
-  const shouldExpandFlexBox = currentURL.startsWith('/global_props/flex_box');
-  
-  const [flexBoxCollapsed, setFlexBoxCollapsed] = useState(!shouldExpandFlexBox);
-  
-  // Auto-expand when navigating to a flex_box child
+
+  const [collapsedByGroup, setCollapsedByGroup] = useState<
+    Record<string, boolean>
+  >(() =>
+    Object.fromEntries(
+      COLLAPSIBLE_GROUPS.map((g) => [
+        g.parentKey,
+        !currentURL.startsWith(`/global_props/${g.parentKey}`),
+      ])
+    )
+  );
+
   useEffect(() => {
-    if (shouldExpandFlexBox) {
-      setFlexBoxCollapsed(false);
-    }
+    COLLAPSIBLE_GROUPS.forEach((g) => {
+      if (currentURL.startsWith(`/global_props/${g.parentKey}`)) {
+        setCollapsedByGroup((prev) => ({ ...prev, [g.parentKey]: false }));
+      }
+    });
   }, [location.pathname]);
-
-  const handleFlexBoxIconClick = () => {
-    setFlexBoxCollapsed(!flexBoxCollapsed)
-  }
-
-  const handleFlexBoxClick = (link: any, i: any) => {
-    if (navigate) {
-      navigate(link.link);
-    }
-    updateTopLevelNav(parentIndex);
-    return true;
-  }
 
   return (
     <>
       {allItemsToRender.map((link: any, i: number) => {
-        if (link.isFlexBoxParent) {
-          // Check if we're on a flex_box child page
-          const isOnChildPage = flexBoxChildren.some((child: any) => {
-            const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
-            return child.link === currentURL || child.link === normalizedCurrentURL;
+        if (link.isCollapsibleParent) {
+          const children = link.children || [];
+          const isOnChildPage = children.some((child: any) => {
+            const normalizedCurrentURL = currentURL.replace(
+              /\/(react|rails)$/,
+              ""
+            );
+            return (
+              child.link === currentURL || child.link === normalizedCurrentURL
+            );
           });
-          
-          // Parent should only be active if we're on the exact flex_box page, not a child
-          const isParentActive = !isOnChildPage && (
-            currentURL === link.link || 
-            currentURL.replace(/\/(react|rails)$/, '') === link.link
-          );
-          
+
+          const isParentActive =
+            !isOnChildPage &&
+            (currentURL === link.link ||
+              currentURL.replace(/\/(react|rails)$/, "") === link.link);
+
+          const collapsed = collapsedByGroup[link.groupKey] ?? true;
+
           return (
             <NavItem
               active={isParentActive}
-              collapsed={flexBoxCollapsed}
-              collapsible={flexBoxChildren.length > 0}
-              collapsibleTrail={flexBoxChildren.length > 0}
+              collapsed={collapsed}
+              collapsible={children.length > 0}
+              collapsibleTrail={children.length > 0}
               cursor="pointer"
               dark={dark}
               fontSize="small"
-              iconRight={flexBoxChildren.length > 0 ? ["plus", "minus"] : undefined}
-              key={`${link.link}-flex-box-parent`}
+              iconRight={children.length > 0 ? ["plus", "minus"] : undefined}
+              key={`${link.link}-${link.groupKey}-parent`}
               marginBottom="none"
               marginTop="xxs"
-              onClick={() => handleFlexBoxClick(link, i)}
-              onIconRightClick={flexBoxChildren.length > 0 ? handleFlexBoxIconClick : undefined}
+              onClick={() => handleItemClick(link)}
+              onIconRightClick={
+                children.length > 0
+                  ? () =>
+                      setCollapsedByGroup((prev) => ({
+                        ...prev,
+                        [link.groupKey]: !prev[link.groupKey],
+                      }))
+                  : undefined
+              }
               paddingY="xxs"
               text={link.name}
             >
-              {flexBoxChildren.map((child: any, childIndex: number) => (
+              {children.map((child: any, childIndex: number) => (
                 <NavItem
                   active={activeForItems(child)}
                   cursor="pointer"
@@ -185,9 +241,9 @@ export const OtherNavItems = ({
                 />
               ))}
             </NavItem>
-          )
+          );
         }
-        
+
         return (
           <NavItem
             active={activeForItems(link)}
@@ -201,8 +257,8 @@ export const OtherNavItems = ({
             paddingY="xxs"
             text={link.name}
           />
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};
