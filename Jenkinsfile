@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library 'github.com/powerhome/ci-kubed@v10.4.0'
+library 'github.com/powerhome/ci-kubed@v10.5.0'
 
 app.build(
   buildCacheVolumeSize: '20Gi',
