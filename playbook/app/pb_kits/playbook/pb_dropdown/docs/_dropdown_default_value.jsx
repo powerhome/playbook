@@ -23,6 +23,7 @@ const DropdownDefaultValue = (props) => {
   return (
   <>
     <Dropdown
+        autocomplete
         defaultValue={options[2]}
         options={options}
         {...props}

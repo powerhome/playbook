@@ -1096,6 +1096,13 @@ export default class PbDropdown extends PbEnhancedElement {
       const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
       this.setTriggerElementText(optionData.label);
 
+      // Autocomplete trigger has no [data-dropdown-trigger-display]; set the input value instead
+      const autocompleteInput =
+        this.searchInput || this.element.querySelector(SEARCH_INPUT_SELECTOR);
+      if (autocompleteInput) {
+        autocompleteInput.value = optionData.label;
+      }
+
       // Handle quickpick variant: populate start/end date hidden inputs and sync DatePickers
       if (optionData.formatted_start_date && optionData.formatted_end_date) {
         const startDateId = this.element.dataset.startDateId;
