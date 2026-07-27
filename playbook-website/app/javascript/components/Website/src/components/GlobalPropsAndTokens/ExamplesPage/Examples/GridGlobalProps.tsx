@@ -94,6 +94,140 @@ const AutoFlowDemo = ({ flow }: { flow: "row" | "column" }) => (
   </Card>
 );
 
+const PageLayoutDemo = () => (
+  <Card
+    display="grid"
+    gap="xs"
+    gridTemplateColumns="140px 1fr"
+    gridTemplateRows="auto 1fr"
+    minHeight="220px"
+    padding="xs"
+    width="100%"
+  >
+    <Card background="light" borderRadius="sm" gridColumn="1 / -1" padding="sm">
+      <Caption text="Header" />
+    </Card>
+    <Card background="light" borderRadius="sm" padding="sm">
+      <Flex flexDirection="column" gap="xs">
+        <Caption text="Sidebar" />
+        <Detail color="light" text="Nav item" />
+        <Detail color="light" text="Nav item" />
+        <Detail color="light" text="Nav item" />
+      </Flex>
+    </Card>
+    <Card borderRadius="sm" padding="md">
+      <Flex flexDirection="column" gap="xs">
+        <Title size={4} text="Main content" />
+        <Body text="Page content sits here beside the sidebar." />
+      </Flex>
+    </Card>
+  </Card>
+);
+
+const PhotoGalleryDemo = () => (
+  <Card
+    display="grid"
+    gap="sm"
+    gridTemplateColumns="repeat(auto-fit, minmax(140px, 1fr))"
+    padding="md"
+    width="100%"
+  >
+    {Array.from({ length: 8 }, (_, index) => (
+      <Card
+        borderRadius="sm"
+        key={index}
+        minHeight="120px"
+        padding="sm"
+      >
+        <Caption text={`Photo ${index + 1}`} />
+      </Card>
+    ))}
+  </Card>
+);
+
+const BentoDemo = () => (
+  <Card
+    display="grid"
+    gap="sm"
+    gridTemplateColumns="repeat(4, 1fr)"
+    gridTemplateRows="repeat(2, minmax(100px, auto))"
+    padding="md"
+    width="100%"
+  >
+    <Card
+      borderRadius="sm"
+      gridColumn="span 2"
+      gridRow="span 2"
+      padding="md"
+    >
+      <Title size={4} text="Featured" />
+      <Body marginTop="xs" text="Spans two columns and two rows." />
+    </Card>
+    <Card borderRadius="sm" padding="md">
+      <Caption text="Card A" />
+    </Card>
+    <Card borderRadius="sm" padding="md">
+      <Caption text="Card B" />
+    </Card>
+    <Card borderRadius="sm" padding="md">
+      <Caption text="Card C" />
+    </Card>
+    <Card borderRadius="sm" padding="md">
+      <Caption text="Card D" />
+    </Card>
+  </Card>
+);
+
+const PricingCell = ({
+  children,
+  header = false,
+}: {
+  children: ReactNode;
+  header?: boolean;
+}) => (
+  <Card
+    background={header ? "light" : undefined}
+    borderRadius="sm"
+    padding="sm"
+  >
+    {header ? (
+      <Caption text={String(children)} textAlign="center" />
+    ) : (
+      <Body text={String(children)} textAlign="center" />
+    )}
+  </Card>
+);
+
+const PricingTableDemo = () => (
+  <Card
+    display="grid"
+    gap="xs"
+    gridTemplateColumns="minmax(96px, 1.2fr) repeat(3, 1fr)"
+    padding="md"
+    width="100%"
+  >
+    <Card borderNone padding="sm" />
+    <PricingCell header>Basic</PricingCell>
+    <PricingCell header>Pro</PricingCell>
+    <PricingCell header>Enterprise</PricingCell>
+
+    <PricingCell header>Users</PricingCell>
+    <PricingCell>✓</PricingCell>
+    <PricingCell>✓</PricingCell>
+    <PricingCell>✓</PricingCell>
+
+    <PricingCell header>Storage</PricingCell>
+    <PricingCell>5GB</PricingCell>
+    <PricingCell>50GB</PricingCell>
+    <PricingCell>1TB</PricingCell>
+
+    <PricingCell header>Support</PricingCell>
+    <PricingCell>✗</PricingCell>
+    <PricingCell>✓</PricingCell>
+    <PricingCell>✓</PricingCell>
+  </Card>
+);
+
 const DayCell = ({
   day,
   isToday,
@@ -379,17 +513,191 @@ const GridGlobalProps = () => {
               />
             </Flex>
             <Flex align="baseline" gap="xs" wrap>
-              <Caption text="Offset first day" />
+              <Caption text="Offset first day (Rails)" />
+              <ExampleCodeCard
+                id="grid-calendar-offset-rails"
+                text={`grid_column: "${month.startColumn}"`}
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Offset first day (React)" />
               <ExampleCodeCard
                 id="grid-calendar-offset-react"
                 text={`gridColumn="${month.startColumn}"`}
               />
             </Flex>
             <Flex align="baseline" gap="xs" wrap>
-              <Caption text="Full-width header" />
+              <Caption text="Full-width header (Rails)" />
+              <ExampleCodeCard
+                id="grid-calendar-span-rails"
+                text='grid_column: "1 / -1"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Full-width header (React)" />
               <ExampleCodeCard
                 id="grid-calendar-span-react"
                 text='gridColumn="1 / -1"'
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
+        <Card padding="md" width="100%">
+          <Title marginBottom="xs" size={4} text="Page layout" />
+          <Body marginBottom="md">
+            A simple page frame: full-width header via{" "}
+            <code>gridColumn=&quot;1 / -1&quot;</code>, then sidebar + main with{" "}
+            <code>gridTemplateColumns=&quot;140px 1fr&quot;</code> and{" "}
+            <code>gridTemplateRows=&quot;auto 1fr&quot;</code>.
+          </Body>
+          <PageLayoutDemo />
+          <Flex
+            align="baseline"
+            flexDirection="column"
+            gap="xs"
+            marginTop="md"
+          >
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Rails" />
+              <ExampleCodeCard
+                id="grid-page-layout-rails"
+                text='display: "grid", grid_template_columns: "140px 1fr", grid_template_rows: "auto 1fr"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="React" />
+              <ExampleCodeCard
+                id="grid-page-layout-react"
+                text='display="grid" gridTemplateColumns="140px 1fr" gridTemplateRows="auto 1fr"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Full-width header (Rails)" />
+              <ExampleCodeCard
+                id="grid-page-layout-header-rails"
+                text='grid_column: "1 / -1"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Full-width header (React)" />
+              <ExampleCodeCard
+                id="grid-page-layout-header-react"
+                text='gridColumn="1 / -1"'
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
+        <Card padding="md" width="100%">
+          <Title marginBottom="xs" size={4} text="Photo gallery" />
+          <Body marginBottom="md">
+            A responsive gallery with{" "}
+            <code>
+              gridTemplateColumns=&quot;repeat(auto-fit, minmax(140px, 1fr))&quot;
+            </code>
+            . Cards reflow as the container width changes - no media queries
+            required.
+          </Body>
+          <PhotoGalleryDemo />
+          <Flex
+            align="baseline"
+            flexDirection="column"
+            gap="xs"
+            marginTop="md"
+          >
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Rails" />
+              <ExampleCodeCard
+                id="grid-gallery-rails"
+                text='display: "grid", grid_template_columns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "sm"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="React" />
+              <ExampleCodeCard
+                id="grid-gallery-react"
+                text='display="grid" gridTemplateColumns="repeat(auto-fit, minmax(140px, 1fr))" gap="sm"'
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
+        <Card padding="md" width="100%">
+          <Title marginBottom="xs" size={4} text="Bento mosaic" />
+          <Body marginBottom="md">
+            Uneven tiles with placement spans - featured card uses{" "}
+            <code>gridColumn=&quot;span 2&quot;</code> and{" "}
+            <code>gridRow=&quot;span 2&quot;</code> inside a{" "}
+            <code>repeat(4, 1fr)</code> track.
+          </Body>
+          <BentoDemo />
+          <Flex
+            align="baseline"
+            flexDirection="column"
+            gap="xs"
+            marginTop="md"
+          >
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Rails" />
+              <ExampleCodeCard
+                id="grid-bento-rails"
+                text='display: "grid", grid_template_columns: "repeat(4, 1fr)"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="React" />
+              <ExampleCodeCard
+                id="grid-bento-react"
+                text='display="grid" gridTemplateColumns="repeat(4, 1fr)"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Featured span (Rails)" />
+              <ExampleCodeCard
+                id="grid-bento-span-rails"
+                text='grid_column: "span 2", grid_row: "span 2"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Featured span (React)" />
+              <ExampleCodeCard
+                id="grid-bento-span-react"
+                text='gridColumn="span 2" gridRow="span 2"'
+              />
+            </Flex>
+          </Flex>
+        </Card>
+
+        <Card padding="md" width="100%">
+          <Title marginBottom="xs" size={4} text="Pricing table" />
+          <Body marginBottom="md">
+            A comparison matrix as one grid: feature labels in the first column,
+            plans across the rest -{" "}
+            <code>
+              gridTemplateColumns=&quot;minmax(96px, 1.2fr) repeat(3, 1fr)&quot;
+            </code>
+            . Shared columns keep every row aligned.
+          </Body>
+          <PricingTableDemo />
+          <Flex
+            align="baseline"
+            flexDirection="column"
+            gap="xs"
+            marginTop="md"
+          >
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="Rails" />
+              <ExampleCodeCard
+                id="grid-pricing-rails"
+                text='display: "grid", grid_template_columns: "minmax(96px, 1.2fr) repeat(3, 1fr)", gap: "xs"'
+              />
+            </Flex>
+            <Flex align="baseline" gap="xs" wrap>
+              <Caption text="React" />
+              <ExampleCodeCard
+                id="grid-pricing-react"
+                text='display="grid" gridTemplateColumns="minmax(96px, 1.2fr) repeat(3, 1fr)" gap="xs"'
               />
             </Flex>
           </Flex>
