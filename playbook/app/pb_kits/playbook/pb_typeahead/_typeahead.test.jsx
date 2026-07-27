@@ -500,8 +500,54 @@ test('publishes data-default-value from initial defaultValue', () => {
 
   expect(screen.getByTestId('default-stamp-test')).toHaveAttribute(
     'data-default-value',
-    JSON.stringify([options[0], options[1]]),
+    JSON.stringify([
+      { label: 'Orange', value: '#FFA500' },
+      { label: 'Red', value: '#FF0000' },
+    ]),
   )
+})
+
+test('data-default-value only includes label and value', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'slim-default-test' }}
+        defaultValue={[
+          {
+            label: 'Orange',
+            value: '#FFA500',
+            imageUrl: 'https://example.com/orange.png',
+            meta: { nested: true },
+          },
+        ]}
+        id="slim-default-typeahead"
+        isMulti
+        options={options}
+    />
+  )
+
+  expect(screen.getByTestId('slim-default-test')).toHaveAttribute(
+    'data-default-value',
+    JSON.stringify([{ label: 'Orange', value: '#FFA500' }]),
+  )
+})
+
+test('omits data-default-value when serialization fails', () => {
+  const circular = { label: 'Broken' }
+  circular.value = circular
+
+  render(
+    <Typeahead
+        data={{ testid: 'bad-default-test' }}
+        defaultValue={[circular]}
+        id="bad-default-typeahead"
+        isMulti
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('bad-default-test')
+  expect(kit).toBeInTheDocument()
+  expect(kit).not.toHaveAttribute('data-default-value')
 })
 
 test(':set updates values; :set after :clear restores', async () => {

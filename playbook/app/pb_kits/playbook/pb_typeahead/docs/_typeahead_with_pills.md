@@ -8,7 +8,7 @@ You can also pass `default_options` which will populate the initial pill selecti
 
 `default_options: [{ label: 'Windows', value: '#FFA500' }]`
 
-When present, the kit root is stamped with `data-default-value` (JSON of those initial options) for restore-after-clear via `:set`.
+When present, the kit root gets `data-default-value` (JSON of `{ label, value }` only) for restore-after-clear via `:set`. Extra option fields are omitted; if serialization fails, the attribute is left off so the kit still mounts.
 
 #### Rails: Subscribing to JS Events
 

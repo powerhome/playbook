@@ -216,12 +216,24 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     // Create a ref to access React Select instance
     const selectRef = useRef<any>(null)
 
-    // Mount-time stamp for smart Defaults (:clear → read → :set). Not updated on selection change.
+    // Mount-time data-default-value for smart Defaults (:clear → read → :set).
+    // Only label/value, with try/catch so non-serializable extras never block mount.
     const [dataDefaultValue] = useState(() => {
       const defaultValue = props.defaultValue
       if (defaultValue == null) return undefined
       const options = Array.isArray(defaultValue) ? defaultValue : [defaultValue]
-      return options.length ? JSON.stringify(options) : undefined
+      if (!options.length) return undefined
+
+      try {
+        return JSON.stringify(
+          options.map((option: SelectValueType) => ({
+            label: option?.label,
+            value: option?.value,
+          })),
+        )
+      } catch {
+        return undefined
+      }
     })
 
     const dialogCtx = useContext(DialogContext)
