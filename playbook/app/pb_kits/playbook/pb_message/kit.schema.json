@@ -78,7 +78,7 @@
       "default": "America/New_York"
     },
     "alignTimestamp": {
-      "type": "string",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
