@@ -25,7 +25,7 @@ The same rule regarding the `id` prop applies to publishing JS events. The examp
 
 `pb-typeahead-kit-typeahead-pills-example1:clear` event to clear all options.
 
-`pb-typeahead-kit-typeahead-pills-example1:set` event to set options. Pass `detail` as `[{ label, value }, ...]` (or a single object for single-select):
+`pb-typeahead-kit-typeahead-pills-example1:set` event to set options without treating it as a user click (no `result-option-select`). Pass `detail` as `[{ label, value }, ...]` (or a single object for single-select):
 
 ```js
 document.dispatchEvent(new CustomEvent('pb-typeahead-kit-typeahead-pills-example1:set', {

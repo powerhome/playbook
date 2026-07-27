@@ -590,3 +590,43 @@ test(':set updates values; :set after :clear restores', async () => {
   ).map((input) => input.value)
   expect(hiddenValues).toEqual(['#FFA500', '#00FF00'])
 })
+
+test(':set calls onChange but does not dispatch result-option-select', async () => {
+  const handleChange = jest.fn()
+  const selectHandler = jest.fn()
+
+  document.addEventListener(
+    'pb-typeahead-kit-set-side-effects-typeahead-result-option-select',
+    selectHandler,
+  )
+
+  render(
+    <Typeahead
+        data={{ testid: 'set-side-effects-test' }}
+        id="set-side-effects-typeahead"
+        isMulti
+        onChange={handleChange}
+        options={options}
+    />
+  )
+
+  await act(async () => {
+    document.dispatchEvent(
+      new CustomEvent('pb-typeahead-kit-set-side-effects-typeahead:set', {
+        detail: [options[0], options[1]],
+      }),
+    )
+  })
+
+  await waitFor(() => {
+    expect(screen.getByTestId('set-side-effects-test').querySelectorAll('.pb_form_pill_kit')).toHaveLength(2)
+  })
+
+  expect(handleChange).toHaveBeenCalled()
+  expect(selectHandler).not.toHaveBeenCalled()
+
+  document.removeEventListener(
+    'pb-typeahead-kit-set-side-effects-typeahead-result-option-select',
+    selectHandler,
+  )
+})

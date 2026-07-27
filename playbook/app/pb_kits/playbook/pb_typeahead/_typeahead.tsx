@@ -215,6 +215,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
 
     // Create a ref to access React Select instance
     const selectRef = useRef<any>(null)
+    // True while :set is applying so handleOnChange skips click-only side effects.
+    const isProgrammaticSetRef = useRef(false)
 
     // Mount-time data-default-value for smart Defaults (:clear → read → :set).
     // Only label/value, with try/catch so non-serializable extras never block mount.
@@ -534,6 +536,7 @@ const resolvedLoadOptions =
           }
         : {}),
       styles: mergedSelectStyles,
+      isProgrammaticSetRef,
     }
 
     const [contextValue, setContextValue] = useState("")
@@ -645,6 +648,8 @@ const resolvedLoadOptions =
       _data: SelectValueType,
       {action, option, removedValue}: TagOnChangeValues,
     ) => {
+      const isProgrammaticSet = isProgrammaticSetRef.current
+
       if (onChange) {
         const isReactHookForm = onChange.toString().includes("target")
         if (isReactHookForm) {
@@ -654,19 +659,19 @@ const resolvedLoadOptions =
         }
       }
 
-      // Reset form submitted state when a selection is made (this is all for react rendered rails kit)
-      if (action === "select-option" || action === "create-option") {
+      // User-selection side effects — skipped for programmatic :set restores
+      if (!isProgrammaticSet && (action === "select-option" || action === "create-option")) {
         setFormSubmitted(false)
         // Mark that user has made a selection to disable default value focus behavior
         setHasUserSelected(true)
       }
 
       // If a value is selected/created and we're preserving input on blur, clear the input
-      if ((action === "select-option" || action === "create-option") && preserveSearchInput) {
+      if (!isProgrammaticSet && (action === "select-option" || action === "create-option") && preserveSearchInput) {
         setInputValue("")
       }
 
-      if (action === "select-option" || action === "create-option") {
+      if (!isProgrammaticSet && (action === "select-option" || action === "create-option")) {
         if (selectProps.onMultiValueClick && option)
           selectProps.onMultiValueClick(option)
         const multiValueClearEvent = new CustomEvent(
