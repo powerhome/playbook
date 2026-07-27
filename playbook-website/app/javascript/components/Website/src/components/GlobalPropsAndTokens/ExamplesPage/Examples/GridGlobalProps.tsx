@@ -80,6 +80,7 @@ const MonthlyCalendar = () => {
       gap="xs"
       gridTemplateColumns="repeat(7, 1fr)"
       padding="md"
+      width="100%"
     >
       <Card
         borderNone
@@ -140,58 +141,8 @@ const GridGlobalProps = () => {
             .
           </>
         }
-        VisualGuideCard={<MonthlyCalendar />}
       >
         <Flex gap="md" orientation="column">
-          <Card padding="md">
-            <Title marginBottom="xs" size={4} text="Monthly calendar" />
-            <Body marginBottom="md">
-              A full month layout built only with Grid global props:{" "}
-              <code>display=&quot;grid&quot;</code>,{" "}
-              <code>gridTemplateColumns=&quot;repeat(7, 1fr)&quot;</code>,{" "}
-              <code>gap</code>, a header that spans the full width via{" "}
-              <code>gridColumn=&quot;1 / -1&quot;</code>, and the first day of
-              the month offset with{" "}
-              <code>gridColumn=&quot;{month.startColumn}&quot;</code> (
-              {month.name} starts on {weekdayName}). The calendar always
-              reflects the current month and highlights today.
-            </Body>
-            <Flex
-              align="baseline"
-              flexDirection="column"
-              gap="xs"
-            >
-              <Flex align="baseline" gap="xs" wrap>
-                <Caption text="Rails" />
-                <ExampleCodeCard
-                  id="grid-calendar-rails"
-                  text='display: "grid", grid_template_columns: "repeat(7, 1fr)", gap: "xs"'
-                />
-              </Flex>
-              <Flex align="baseline" gap="xs" wrap>
-                <Caption text="React" />
-                <ExampleCodeCard
-                  id="grid-calendar-react"
-                  text='display="grid" gridTemplateColumns="repeat(7, 1fr)" gap="xs"'
-                />
-              </Flex>
-              <Flex align="baseline" gap="xs" wrap>
-                <Caption text="Offset first day" />
-                <ExampleCodeCard
-                  id="grid-calendar-offset-react"
-                  text={`gridColumn="${month.startColumn}"`}
-                />
-              </Flex>
-              <Flex align="baseline" gap="xs" wrap>
-                <Caption text="Full-width header" />
-                <ExampleCodeCard
-                  id="grid-calendar-span-react"
-                  text='gridColumn="1 / -1"'
-                />
-              </Flex>
-            </Flex>
-          </Card>
-
           <Title size={4} text="Common Layouts" />
           <Card padding="md">
             <Caption marginBottom="sm" text="Three equal columns" />
@@ -200,6 +151,7 @@ const GridGlobalProps = () => {
               gap="sm"
               gridTemplateColumns="repeat(3, 1fr)"
               marginBottom="md"
+              width="100%"
             >
               <GridCell>A</GridCell>
               <GridCell>B</GridCell>
@@ -424,6 +376,57 @@ const GridGlobalProps = () => {
                   text={`justifyItems={{ xs: "start", md: "center", default: "stretch" }}`}
                 />
               </Body>
+            </Flex>
+          </Card>
+
+          <Card padding="md" width="100%">
+            <Title marginBottom="xs" size={4} text="Monthly calendar" />
+            <Body marginBottom="md">
+              A full month layout built only with Grid global props:{" "}
+              <code>display=&quot;grid&quot;</code>,{" "}
+              <code>gridTemplateColumns=&quot;repeat(7, 1fr)&quot;</code>,{" "}
+              <code>gap</code>, a header that spans the full width via{" "}
+              <code>gridColumn=&quot;1 / -1&quot;</code>, and the first day of
+              the month offset with{" "}
+              <code>gridColumn=&quot;{month.startColumn}&quot;</code> (
+              {month.name} starts on {weekdayName}). The calendar always
+              reflects the current month and highlights today.
+            </Body>
+            <MonthlyCalendar />
+            <Flex
+              align="baseline"
+              flexDirection="column"
+              gap="xs"
+              marginTop="md"
+            >
+              <Flex align="baseline" gap="xs" wrap>
+                <Caption text="Rails" />
+                <ExampleCodeCard
+                  id="grid-calendar-rails"
+                  text='display: "grid", grid_template_columns: "repeat(7, 1fr)", gap: "xs"'
+                />
+              </Flex>
+              <Flex align="baseline" gap="xs" wrap>
+                <Caption text="React" />
+                <ExampleCodeCard
+                  id="grid-calendar-react"
+                  text='display="grid" gridTemplateColumns="repeat(7, 1fr)" gap="xs"'
+                />
+              </Flex>
+              <Flex align="baseline" gap="xs" wrap>
+                <Caption text="Offset first day" />
+                <ExampleCodeCard
+                  id="grid-calendar-offset-react"
+                  text={`gridColumn="${month.startColumn}"`}
+                />
+              </Flex>
+              <Flex align="baseline" gap="xs" wrap>
+                <Caption text="Full-width header" />
+                <ExampleCodeCard
+                  id="grid-calendar-span-react"
+                  text='gridColumn="1 / -1"'
+                />
+              </Flex>
             </Flex>
           </Card>
         </Flex>
