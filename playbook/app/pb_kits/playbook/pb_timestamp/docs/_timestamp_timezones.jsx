@@ -85,6 +85,25 @@ const TimestampTimezones = (props) => {
           timezone="Asia/Hong_Kong"
           {...props}
       />
+
+      <br />
+
+      <Timestamp
+          showDate={false}
+          showTimezone
+          timestamp={todaysDate}
+          timezone="Eastern Time (US & Canada)"
+          {...props}
+      />
+
+      <br />
+
+      <Timestamp
+          showTimezone
+          timestamp={todaysDate}
+          timezone="Pacific Time (US & Canada)"
+          {...props}
+      />
     </div>
   )
 }
