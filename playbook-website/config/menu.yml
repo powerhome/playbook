@@ -5,19 +5,10 @@ web: &1
 all: &3
 - rails
 - react
-- swift
-rails_swift:
-- rails
-- swift
-react_swift:
-- swift
-- react
 rails_only: &4
 - rails
 react_only: &2
 - react
-swift_only:
-- swift
 kits:
 - category: advanced_table
   description: The Advanced Table can be used to display complex, nested data in
@@ -53,7 +44,7 @@ kits:
   - name: row_interaction
     description: Select, expand, subrows, pinning; row highlights and bulk actions.
     parent: advanced_table
-    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Enable Toggle Expansion", "Cascade Collapse", "Pinned Rows (Top)", "Pinned Rows (Bottom)", "Pinned Rows (Both)", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
+    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Skipping Subrow Headers", "Enable Toggle Expansion", "Cascade Collapse", "Pinned Rows (Top)", "Pinned Rows (Bottom)", "Pinned Rows (Both)", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
     platforms: *1
     status: stable
     icons_used: true
@@ -71,7 +62,7 @@ kits:
   - name: cell_behavior
     description: "What each cell shows and does: custom content, edit, loading."
     parent: advanced_table
-    kit_section: ["Custom Components for Cells", "Custom Header Cell", "Custom Header with Multiple Headers", "Inline Cell Editing"]
+    kit_section: ["Custom Components for Cells", "Custom Header Cell", "Custom Header with Multiple Headers", "Full Width Cell", "Inline Cell Editing"]
     platforms: *1
     status: stable
     icons_used: true
@@ -89,7 +80,7 @@ kits:
   - name: styling
     description: "Styling per row or column: padding, color, and border."
     parent: advanced_table
-    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling with Multiple Headers", "Column Styling Background Color", "Column Styling Background Color (Custom)", "Column Styling Background Color with Multiple Headers","Column Styling Individual Cell Background Color", "Padding Control using Column Styling", "Column Group Border Color"]
+    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling Width", "Column Styling with Multiple Headers", "Column Styling Background Color", "Column Styling Background Color (Custom)", "Column Styling Background Color with Multiple Headers","Column Styling Individual Cell Background Color", "Padding Control using Column Styling", "Column Group Border Color"]
     platforms: *1
     status: stable
     icons_used: true
@@ -210,7 +201,7 @@ kits:
     description: Part-to-whole comparison like a pie chart. Default mode stresses share without raw numbers.
     status: stable
     icons_used: false
-    react_rendered: true
+    react_rendered: false
     enhanced_element_used: false
   - name: legend
     platforms: *1

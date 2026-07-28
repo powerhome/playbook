@@ -21,7 +21,6 @@ jobs:
     env:
       # Set an environment variable for the branch name
       BRANCH_NAME: ${{ github.head_ref }}
-      GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
     steps:
       - uses: actions/checkout@v3
       - name: 'Enable registry auth'
@@ -75,15 +74,16 @@ jobs:
           yarn release
           npm pack
           npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_alpha_version }}.tgz --tag alpha
+      - name: Configure RubyGems Credentials
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: rubygems/configure-rubygems-credentials@v2.1.0
       - name: Version Up, Distribute and Publish (RubyGems)
         if: github.event.pull_request.head.repo.full_name == github.repository
         run: |
           bin/build_gem
-          gem build lib/playbook_ui_docs.gemspec
           rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
           echo "${{ env.new_ruby_alpha_version }}"
-          gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-          gem push playbook_ui_docs-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
+          gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/
       - name: Leave PR comment
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -108,8 +108,6 @@ jobs:
     defaults:
       run:
         working-directory: ./playbook
-    env:
-      GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
     steps:
       - uses: actions/checkout@v3
       - name: 'Enable registry auth'
@@ -267,6 +265,9 @@ jobs:
           yarn release
           npm pack
           npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_version }}.tgz --tag rc
+      - name: Configure RubyGems Credentials
+        if: env.SKIP_REMAINING_STEPS != 'true'
+        uses: rubygems/configure-rubygems-credentials@v2.1.0
       - name: Distribute and Publish (RubyGems)
         run: |
           if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
@@ -274,10 +275,8 @@ jobs:
             exit 0
           fi
           bin/build_gem
-          gem build lib/playbook_ui_docs.gemspec
           rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
-          gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-          gem push playbook_ui_docs-${{ env.new_ruby_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
+          gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

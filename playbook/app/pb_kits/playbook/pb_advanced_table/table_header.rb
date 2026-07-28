@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require_relative "column_layout_helper"
+
 module Playbook
   module PbAdvancedTable
     class TableHeader < Playbook::KitBase
+      include Playbook::PbAdvancedTable::ColumnLayoutHelper
       prop :table_id, type: Playbook::Props::String,
                       default: ""
       prop :column_definitions, type: Playbook::Props::Array,
@@ -164,6 +167,9 @@ module Playbook
       def header_component_info(cell, cell_index, row_index)
         header_id = cell[:accessor].present? ? cell[:accessor] : "header_#{row_index}_#{cell_index}"
         classname = [th_classname(is_first_column: cell_index.zero?), ("last-header-cell" if cell[:is_last_in_group] && cell_index != 0)].compact.join(" ")
+        layout_styles = header_layout_styles(cell)
+        style_hash = layout_styles.dup
+        style_hash[:color] = cell[:header_font_color] if cell[:header_font_color].present?
 
         if has_custom_header_background_color?(cell)
           component_name = "background"
@@ -175,9 +181,8 @@ module Playbook
           component_props[:html_options] = {
             id: header_id,
             colspan: cell[:colspan],
-            style: { color: cell[:header_font_color] },
+            style: style_hash,
           }
-          component_props[:html_options][:style].delete(:color) unless cell[:header_font_color].present?
         else
           component_name = "table/table_header"
           component_props = {
@@ -186,7 +191,7 @@ module Playbook
             classname: classname,
             sort_menu: cell[:accessor] ? cell[:sort_menu] : nil,
           }
-          component_props[:html_options] = { style: { color: cell[:header_font_color] } } if cell[:header_font_color].present?
+          component_props[:html_options] = { style: style_hash } if style_hash.present?
         end
 
         { name: component_name, props: component_props }
@@ -206,6 +211,13 @@ module Playbook
       end
 
     private
+
+      def header_layout_styles(cell)
+        original_def = find_original_column_def_for_cell(cell)
+        return {} unless original_def
+
+        build_column_layout_styles_from_column(original_def)
+      end
 
       # Find the original column definition for a cell
       def find_original_column_def_for_cell(cell)

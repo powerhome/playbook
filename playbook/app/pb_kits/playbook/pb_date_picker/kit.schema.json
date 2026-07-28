@@ -25,8 +25,10 @@
     "dark": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "defaultDate": {
       "type": "string",
@@ -339,6 +341,13 @@
       "type": "boolean",
       "default": false
     },
+    "position": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "auto"
+    },
     "startDateId": {
       "platforms": [
         "rails"
@@ -373,6 +382,13 @@
       ],
       "type": "string",
       "default": ""
+    },
+    "cursor": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "pointer"
     }
   },
   "globalProps": true,

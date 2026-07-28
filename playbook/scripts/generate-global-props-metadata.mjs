@@ -18,7 +18,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { TypeRegistry, parseTypeDefinitions, parsePropsFromBlock, PATHS } from './lib/global-props-parser.mjs';
+import { TypeRegistry, parseTypeDefinitions, parseObjectTypes, parsePropsFromBlock, readTypeFiles, PATHS } from './lib/global-props-parser.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -27,8 +27,36 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // =============================================================================
 
 const TOKENS_DIR = path.resolve(__dirname, '../app/pb_kits/playbook/tokens');
+const RAILS_LIB_DIR = path.resolve(__dirname, '../lib/playbook');
 const OUTPUT_PATH = path.resolve(__dirname, '../app/pb_kits/playbook/utilities/global-props.schema.json');
 const SCHEMA_VERSION = 'https://playbook.powerapp.cloud/schemas/global-props-schema.json';
+
+// =============================================================================
+// PLATFORM DETECTION
+// =============================================================================
+
+const snakeToCamel = (s) => s.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+
+/**
+ * Rails exposes each global prop as `base.prop :name` in the mixins under lib/playbook
+ * that KitBase includes. Props absent here are React-only (e.g. inset, which Rails
+ * expresses as a hash key on top/right/bottom/left rather than its own prop).
+ */
+function parseRailsGlobalProps() {
+  const railsProps = new Set();
+  if (!fs.existsSync(RAILS_LIB_DIR)) return railsProps;
+
+  for (const file of fs.readdirSync(RAILS_LIB_DIR)) {
+    if (!file.endsWith('.rb')) continue;
+
+    const content = fs.readFileSync(path.join(RAILS_LIB_DIR, file), 'utf8');
+    for (const [, name] of content.matchAll(/base\.prop\s+:(\w+)/g)) {
+      railsProps.add(snakeToCamel(name));
+    }
+  }
+
+  return railsProps;
+}
 
 // =============================================================================
 // SCSS PARSING
@@ -146,8 +174,8 @@ function generateDescription(propName) {
   
   // Pattern: alignX, justifyX
   if ((lower[0] === 'align' || lower[0] === 'justify') && parts.length > 1) {
-    const axis = lower[1] === 'content' ? 'multi-line ' : (lower[1] === 'self' ? 'self ' : '');
-    return `${capitalize(lower[0])} ${axis}${lower[1] === 'items' ? 'items' : lower[1]}.`;
+    const target = lower[1] === 'content' ? 'multi-line content' : lower[1];
+    return `${capitalize(lower[0])} ${target}.`;
   }
   
   // Pattern: rowX, columnX (rowGap, columnGap)
@@ -179,9 +207,10 @@ function generateDescription(propName) {
 
 function generateExample(propName, isResponsive, values) {
   if (!isResponsive) return null;
-  
-  const val = values?.[0] || 'md';
-  return `${propName}="${val}" or ${propName}={{ default: "${val}", md: "${values?.[1] || 'lg'}" }}`;
+
+  // Destructured defaults (rather than ||) so falsy enum values like 0 survive
+  const [base = 'md', responsive = 'lg'] = values ?? [];
+  return `${propName}="${base}" or ${propName}={{ default: "${base}", md: "${responsive}" }}`;
 }
 
 // =============================================================================
@@ -190,24 +219,19 @@ function generateExample(propName, isResponsive, values) {
 
 function parseSourceFiles() {
   const registry = new TypeRegistry();
-  const typeFiles = ['sizes.ts', 'display.ts', 'base.ts', 'spacing.ts'];
+  const content = fs.readFileSync(PATHS.globalPropsTs, 'utf8');
+  const sources = [...readTypeFiles(), content];
 
-  // Parse type files
-  for (const file of typeFiles) {
-    const filePath = path.join(PATHS.typesDir, file);
-    if (fs.existsSync(filePath)) {
-      parseTypeDefinitions(fs.readFileSync(filePath, 'utf8'), registry);
-    }
+  // Register aliases from every source before resolving any prop types
+  for (const source of sources) {
+    parseTypeDefinitions(source, registry);
   }
 
-  // Parse globalProps.ts
-  const content = fs.readFileSync(PATHS.globalPropsTs, 'utf8');
-  parseTypeDefinitions(content, registry);
-
-  // Extract object-style types
+  // Extract object-style types from every source, since types used by GlobalProps
+  // (e.g. Display) may be declared in a type file rather than inline
   const typeProps = {};
-  for (const [, name, block] of content.matchAll(/type\s+(\w+)\s*=\s*\{([^}]+)\}/g)) {
-    typeProps[name] = parsePropsFromBlock(block, registry);
+  for (const source of sources) {
+    parseObjectTypes(source, registry, typeProps);
   }
 
   // Handle Hover = Shadow & { ... }
@@ -240,6 +264,9 @@ function buildSchema() {
   const responsiveProps = detectResponsiveProps();
   const spacingTokens = parseSpacingTokens();
   const breakpoints = parseBreakpoints();
+  const railsProps = parseRailsGlobalProps();
+
+  const platformsFor = (name) => railsProps.has(name) ? ['react', 'rails'] : ['react'];
 
   // Build props
   const props = {};
@@ -254,6 +281,7 @@ function buildSchema() {
 
       props[name] = {
         type,
+        platforms: platformsFor(name),
         ...(def.values?.length && { values: def.values }),
         ...(isResponsive && { responsive: true }),
         description: generateDescription(name),
@@ -271,6 +299,7 @@ function buildSchema() {
     }
     props.hover = {
       type: 'object',
+      platforms: platformsFor('hover'),
       properties: hoverProps,
       description: generateDescription('hover'),
       example: 'hover={{ shadow: "deep", scale: "sm" }}',
@@ -280,6 +309,7 @@ function buildSchema() {
   // Add groupHover
   props.groupHover = {
     type: 'boolean',
+    platforms: platformsFor('groupHover'),
     default: false,
     description: generateDescription('groupHover'),
   };

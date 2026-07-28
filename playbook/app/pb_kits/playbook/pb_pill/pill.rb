@@ -4,6 +4,9 @@ module Playbook
   module PbPill
     class Pill < Playbook::KitBase
       prop :text
+      prop :size, type: Playbook::Props::Enum,
+                  values: ["sm", nil],
+                  default: nil
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[success warning error info neutral primary],
                      default: "neutral"
@@ -12,7 +15,7 @@ module Playbook
                             default: "lowercase"
 
       def classname
-        generate_classname("pb_pill_kit", variant, text_transform)
+        generate_classname("pb_pill_kit", variant, text_transform, size)
       end
 
       def display_text

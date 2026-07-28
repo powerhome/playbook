@@ -5,8 +5,8 @@
     "align": "left",
     "muted": false,
     "variant": "default",
-    "percent": "50",
-    "width": "100%"
+    "width": "100%",
+    "percent": "50"
   },
   "groups": [
     {

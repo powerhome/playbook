@@ -46,11 +46,12 @@ export const ComponentShowLoader = async ({
     "/kits/advanced_table/",
   );
   
-  // Get platform from route params (react, rails, swift)
-  const platform =
+  // Get platform from route params (react, rails); legacy swift → rails
+  const rawPlatform =
     typeof params.platform === "string" && params.platform.length > 0
       ? params.platform
       : "react";
+  const platform = rawPlatform === "swift" ? "rails" : rawPlatform;
 
   let url: string;
   if (isAdvancedTableSection) {
@@ -60,6 +61,13 @@ export const ComponentShowLoader = async ({
   } else {
     // Normal kit route
     url = `/kits/${params.name}/${platform}.json`;
+  }
+
+  // Forward query params (e.g. ?sort=) so Rails ERB examples can re-render
+  // with params["sort"] after the SPA migration. Without this, sort_menu demos
+  // stay static because examples are prerendered into the JSON payload.
+  if (requestUrl.search) {
+    url = `${url}${requestUrl.search}`;
   }
 
   const response = await fetch(url);

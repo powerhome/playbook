@@ -92,6 +92,14 @@
         "react"
       ]
     },
+    "fullWidthCell": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "initialLoadingRowsCount": {
       "type": "number",
       "platforms": [
@@ -117,7 +125,8 @@
     "maxHeight": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "auto",
@@ -128,7 +137,8 @@
         "xl",
         "xxl",
         "xxxl"
-      ]
+      ],
+      "default": "auto"
     },
     "onRowToggleClick": {
       "type": "function",

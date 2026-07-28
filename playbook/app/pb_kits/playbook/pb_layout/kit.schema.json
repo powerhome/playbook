@@ -39,12 +39,14 @@
     "position": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "left",
         "right"
-      ]
+      ],
+      "default": "left"
     },
     "responsive": {
       "type": "boolean",

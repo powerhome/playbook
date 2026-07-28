@@ -1,7 +1,9 @@
 {
   "template": "<DateRangeStacked{{props}} />",
   "propTargets": {},
-  "defaults": {},
+  "defaults": {
+    "dark": false
+  },
   "groups": [
     {
       "name": "Content",

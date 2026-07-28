@@ -4,6 +4,7 @@
   "defaults": {
     "align": "left",
     "bold": false,
+    "dark": false,
     "size": "sm",
     "reverse": false,
     "showCurrentYear": false

@@ -37,11 +37,16 @@ export const GLOBAL_PROP_GROUPS: Array<{ name: string; props: string[] }> = [
   {
     name: "Flexbox",
     props: [
+      "display",
       "flex",
       "flexDirection",
       "flexWrap",
+      "flexGrow",
+      "flexShrink",
       "justifyContent",
+      "justifySelf",
       "alignItems",
+      "alignSelf",
       "alignContent",
       "gap",
       "columnGap",
