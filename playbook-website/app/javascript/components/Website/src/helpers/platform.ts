@@ -39,6 +39,21 @@ export const writeStoredPlatform = (platform: string) => {
   }
 };
 
+/**
+ * Prop names are camelCase in React and snake_case in Rails. Only names differ —
+ * Rails keeps camelCase prop *values* (e.g. justify_content: "spaceBetween").
+ */
+export const formatPropNameForPlatform = (
+  propName: string,
+  platform: string,
+): string =>
+  platform === "rails"
+    ? propName
+        .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
+        .replace(/-/g, "_")
+        .toLowerCase()
+    : propName;
+
 export const getPlatformFromPath = (pathname: string): Platform | null => {
   const match = pathname.match(
     /^\/kits\/(?:advanced_table\/)?[^/]+\/(react|rails|swift)$/,

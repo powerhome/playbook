@@ -37,6 +37,10 @@
   "props": {
     "alignContent": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "start",
         "end",
@@ -51,6 +55,10 @@
     },
     "alignItems": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "start",
         "end",
@@ -66,6 +74,10 @@
     },
     "alignSelf": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "start",
         "end",
@@ -80,6 +92,10 @@
     },
     "border": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "default",
@@ -93,6 +109,10 @@
     },
     "borderTop": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "default",
@@ -106,6 +126,10 @@
     },
     "borderBottom": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "default",
@@ -119,6 +143,10 @@
     },
     "borderLeft": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "default",
@@ -132,6 +160,10 @@
     },
     "borderRight": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "default",
@@ -145,6 +177,10 @@
     },
     "borderX": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "default",
@@ -158,6 +194,10 @@
     },
     "borderY": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "default",
@@ -171,6 +211,10 @@
     },
     "borderRadius": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xs",
@@ -184,6 +228,10 @@
     },
     "cursor": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "auto",
         "default",
@@ -199,11 +247,19 @@
     },
     "dark": {
       "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "description": "Dark.",
       "default": false
     },
     "display": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "flex",
@@ -219,6 +275,10 @@
     },
     "flex": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "auto",
         "initial",
@@ -243,6 +303,10 @@
     },
     "flexDirection": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "row",
         "column",
@@ -255,6 +319,10 @@
     },
     "flexGrow": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         0,
         1
@@ -265,6 +333,10 @@
     },
     "flexShrink": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         0,
         1
@@ -275,6 +347,10 @@
     },
     "flexWrap": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "wrap",
         "nowrap",
@@ -286,6 +362,10 @@
     },
     "justifyContent": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "start",
         "end",
@@ -300,6 +380,10 @@
     },
     "justifySelf": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "start",
         "end",
@@ -313,6 +397,10 @@
     },
     "lineHeight": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "loosest",
         "looser",
@@ -326,6 +414,10 @@
     },
     "marginRight": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -345,6 +437,10 @@
     },
     "marginLeft": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -364,6 +460,10 @@
     },
     "marginTop": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -383,6 +483,10 @@
     },
     "marginBottom": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -402,6 +506,10 @@
     },
     "marginX": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -421,6 +529,10 @@
     },
     "marginY": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -440,6 +552,10 @@
     },
     "margin": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -459,36 +575,64 @@
     },
     "width": {
       "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "description": "CSS width."
     },
     "minWidth": {
       "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "description": "Minimum width."
     },
     "maxWidth": {
       "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "description": "Maximum width."
     },
     "gap": {
       "type": "string | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "responsive": true,
       "description": "Gap.",
       "example": "gap=\"md\" or gap={{ default: \"md\", md: \"lg\" }}"
     },
     "columnGap": {
       "type": "string | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "responsive": true,
       "description": "Column gap.",
       "example": "columnGap=\"md\" or columnGap={{ default: \"md\", md: \"lg\" }}"
     },
     "rowGap": {
       "type": "string | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "responsive": true,
       "description": "Row gap.",
       "example": "rowGap=\"md\" or rowGap={{ default: \"md\", md: \"lg\" }}"
     },
     "numberSpacing": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "tabular"
       ],
@@ -496,6 +640,10 @@
     },
     "order": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "first",
@@ -518,6 +666,10 @@
     },
     "overflowX": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "scroll",
         "visible",
@@ -528,6 +680,10 @@
     },
     "overflowY": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "scroll",
         "visible",
@@ -538,6 +694,10 @@
     },
     "overflow": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "scroll",
         "visible",
@@ -548,6 +708,10 @@
     },
     "paddingRight": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -567,6 +731,10 @@
     },
     "paddingLeft": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -586,6 +754,10 @@
     },
     "paddingTop": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -605,6 +777,10 @@
     },
     "paddingBottom": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -624,6 +800,10 @@
     },
     "paddingX": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -643,6 +823,10 @@
     },
     "paddingY": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -662,6 +846,10 @@
     },
     "padding": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "xxs",
@@ -681,6 +869,10 @@
     },
     "position": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "relative",
         "absolute",
@@ -692,6 +884,10 @@
     },
     "shadow": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         "deep",
@@ -702,6 +898,10 @@
     },
     "textAlign": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "start",
         "end",
@@ -718,6 +918,10 @@
     },
     "truncate": {
       "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "none",
         1,
@@ -730,6 +934,10 @@
     },
     "verticalAlign": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "baseline",
         "super",
@@ -746,6 +954,10 @@
     },
     "zIndex": {
       "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         1,
         2,
@@ -765,6 +977,10 @@
     },
     "top": {
       "type": "enum | object",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "xxs",
         "xs",
@@ -778,11 +994,18 @@
     },
     "inset": {
       "type": "boolean",
+      "platforms": [
+        "react"
+      ],
       "description": "Inset.",
       "default": false
     },
     "right": {
       "type": "enum | object",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "xxs",
         "xs",
@@ -796,6 +1019,10 @@
     },
     "bottom": {
       "type": "enum | object",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "xxs",
         "xs",
@@ -809,6 +1036,10 @@
     },
     "left": {
       "type": "enum | object",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "values": [
         "xxs",
         "xs",
@@ -822,18 +1053,34 @@
     },
     "height": {
       "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "description": "CSS height."
     },
     "maxHeight": {
       "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "description": "Maximum height."
     },
     "minHeight": {
       "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "description": "Minimum height."
     },
     "hover": {
       "type": "object",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "properties": {
         "shadow": {
           "type": "enum",
@@ -870,6 +1117,10 @@
     },
     "groupHover": {
       "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "default": false,
       "description": "Group hover."
     }

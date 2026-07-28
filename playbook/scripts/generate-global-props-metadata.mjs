@@ -27,8 +27,36 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // =============================================================================
 
 const TOKENS_DIR = path.resolve(__dirname, '../app/pb_kits/playbook/tokens');
+const RAILS_LIB_DIR = path.resolve(__dirname, '../lib/playbook');
 const OUTPUT_PATH = path.resolve(__dirname, '../app/pb_kits/playbook/utilities/global-props.schema.json');
 const SCHEMA_VERSION = 'https://playbook.powerapp.cloud/schemas/global-props-schema.json';
+
+// =============================================================================
+// PLATFORM DETECTION
+// =============================================================================
+
+const snakeToCamel = (s) => s.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+
+/**
+ * Rails exposes each global prop as `base.prop :name` in the mixins under lib/playbook
+ * that KitBase includes. Props absent here are React-only (e.g. inset, which Rails
+ * expresses as a hash key on top/right/bottom/left rather than its own prop).
+ */
+function parseRailsGlobalProps() {
+  const railsProps = new Set();
+  if (!fs.existsSync(RAILS_LIB_DIR)) return railsProps;
+
+  for (const file of fs.readdirSync(RAILS_LIB_DIR)) {
+    if (!file.endsWith('.rb')) continue;
+
+    const content = fs.readFileSync(path.join(RAILS_LIB_DIR, file), 'utf8');
+    for (const [, name] of content.matchAll(/base\.prop\s+:(\w+)/g)) {
+      railsProps.add(snakeToCamel(name));
+    }
+  }
+
+  return railsProps;
+}
 
 // =============================================================================
 // SCSS PARSING
@@ -236,6 +264,9 @@ function buildSchema() {
   const responsiveProps = detectResponsiveProps();
   const spacingTokens = parseSpacingTokens();
   const breakpoints = parseBreakpoints();
+  const railsProps = parseRailsGlobalProps();
+
+  const platformsFor = (name) => railsProps.has(name) ? ['react', 'rails'] : ['react'];
 
   // Build props
   const props = {};
@@ -250,6 +281,7 @@ function buildSchema() {
 
       props[name] = {
         type,
+        platforms: platformsFor(name),
         ...(def.values?.length && { values: def.values }),
         ...(isResponsive && { responsive: true }),
         description: generateDescription(name),
@@ -267,6 +299,7 @@ function buildSchema() {
     }
     props.hover = {
       type: 'object',
+      platforms: platformsFor('hover'),
       properties: hoverProps,
       description: generateDescription('hover'),
       example: 'hover={{ shadow: "deep", scale: "sm" }}',
@@ -276,6 +309,7 @@ function buildSchema() {
   // Add groupHover
   props.groupHover = {
     type: 'boolean',
+    platforms: platformsFor('groupHover'),
     default: false,
     description: generateDescription('groupHover'),
   };
