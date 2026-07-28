@@ -57,6 +57,7 @@ export const GLOBAL_PROP_GROUPS: Array<{ name: string; props: string[] }> = [
   {
     name: "Grid",
     props: [
+      "display",
       "gridTemplateColumns",
       "gridTemplateRows",
       "gridTemplateAreas",
