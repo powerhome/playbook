@@ -44,17 +44,11 @@ const DropdownOption = (props: DropdownOptionProps) => {
     activeStyle,
     disabled,
     filteredOptions,
-    filterItem,
     focusedOptionIndex,
     handleOptionClick,
     multiSelect,
     selected,
   } = useContext(DropdownContext);
-
-  const isItemMatchingFilter = (option: GenericObject | undefined) => {
-    const label = typeof option?.label === 'string' ? option.label.toLowerCase() : option?.label;
-    return String(label).toLowerCase().includes(filterItem.toLowerCase());
-  }
 
   // When multiSelect, then if an option is selected, remove from dropdown
   const isSelected = Array.isArray(selected)
@@ -65,7 +59,12 @@ const DropdownOption = (props: DropdownOptionProps) => {
   const isOptionDisabled = option?.disabled === true;
   const isDisabled = disabled || isOptionDisabled;
 
-  if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
+  // Use filteredOptions (context) so seeded default labels do not hide other options
+  const isInFilteredList = filteredOptions?.some(
+    (filteredOption: GenericObject) => filteredOption.label === option?.label
+  );
+
+  if (!isInFilteredList || (multiSelect && isSelected)) {
     return null;
   }
   const isFocused =

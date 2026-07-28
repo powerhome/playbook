@@ -367,6 +367,24 @@ test("defaultValue renders in autocomplete input", () => {
   expect(input).toHaveAttribute("placeholder", "")
 })
 
+test("autocomplete defaultValue still shows all options when opened", () => {
+  render(
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        defaultValue={options[2]}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const optionEls = kit.querySelectorAll('.pb_dropdown_option_list, .pb_dropdown_option_selected')
+  expect(optionEls).toHaveLength(options.length)
+  expect(kit).toHaveTextContent(options[0].label)
+  expect(kit).toHaveTextContent(options[1].label)
+  expect(kit).toHaveTextContent(options[2].label)
+})
+
 test("searchbar prop to render TextInput in container", () => {  
   render (
     <Dropdown
