@@ -125,7 +125,8 @@
     "maxHeight": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "auto",
@@ -136,7 +137,8 @@
         "xl",
         "xxl",
         "xxxl"
-      ]
+      ],
+      "default": "auto"
     },
     "onRowToggleClick": {
       "type": "function",

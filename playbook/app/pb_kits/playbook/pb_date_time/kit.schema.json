@@ -80,6 +80,13 @@
       ],
       "type": "string",
       "default": "America/New_York"
+    },
+    "dark": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
     }
   },
   "globalProps": true,

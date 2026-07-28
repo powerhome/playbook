@@ -2,6 +2,7 @@
   "template": "<HomeAddressStreet{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "preserveCase": false,
     "emphasis": "street",
     "newWindow": false,

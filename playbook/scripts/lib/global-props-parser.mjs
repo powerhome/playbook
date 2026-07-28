@@ -36,19 +36,20 @@ const stripQuotes = (s) => s.slice(1, -1);
 const dedupe = (arr) => [...new Set(arr)];
 
 /**
- * Split a union type by | while respecting nested braces/parens.
- * e.g., "A | B | { x: number }" -> ["A", "B", "{ x: number }"]
+ * Split a type expression on a top-level operator, respecting nested braces/parens.
+ * e.g., splitTopLevel("A | B | { x: number }", '|') -> ["A", "B", "{ x: number }"]
+ *       splitTopLevel('A & ("a" | "b")', '&') -> ["A", '("a" | "b")']
  */
-function splitUnionType(str) {
+function splitTopLevel(str, operator) {
   const parts = [];
   let current = '';
   let depth = 0;
-  
+
   for (const char of str) {
     if ('{(<'.includes(char)) depth++;
     if ('})>'.includes(char)) depth--;
-    
-    if (char === '|' && depth === 0) {
+
+    if (char === operator && depth === 0) {
       if (current.trim()) parts.push(current.trim());
       current = '';
     } else {
@@ -58,6 +59,34 @@ function splitUnionType(str) {
   
   if (current.trim()) parts.push(current.trim());
   return parts;
+}
+
+const splitUnionType = (str) => splitTopLevel(str, '|');
+
+/**
+ * Remove parens that wrap an entire expression, e.g. '("a" | "b")' -> '"a" | "b"'.
+ * Parens that only wrap part of the expression are left alone.
+ */
+function stripOuterParens(str) {
+  let expr = str.trim();
+
+  while (expr.startsWith('(') && expr.endsWith(')')) {
+    let depth = 0;
+    let wrapsWholeExpr = true;
+
+    for (let i = 0; i < expr.length; i++) {
+      if (expr[i] === '(') depth++;
+      else if (expr[i] === ')' && --depth === 0 && i < expr.length - 1) {
+        wrapsWholeExpr = false;
+        break;
+      }
+    }
+
+    if (!wrapsWholeExpr) break;
+    expr = expr.slice(1, -1).trim();
+  }
+
+  return expr;
 }
 
 /**
@@ -95,7 +124,8 @@ export class TypeRegistry {
    */
   resolve(typeExpr, visited = new Set()) {
     if (!typeExpr) return null;
-    typeExpr = typeExpr.trim();
+    typeExpr = stripOuterParens(typeExpr);
+    if (!typeExpr) return null;
     
     // Circular reference guard
     if (visited.has(typeExpr)) return null;
@@ -107,14 +137,20 @@ export class TypeRegistry {
       return typeof def === 'string' ? this.resolve(def, visited) : def;
     }
     
-    // Intersection type: A & B (combine values from both)
-    if (typeExpr.includes('&') && !typeExpr.includes('|')) {
-      return this.#resolveIntersection(typeExpr, visited);
+    // Indexed access on a const array: typeof BitValues[number]
+    const indexedAccess = typeExpr.match(/^typeof\s+(\w+)\s*\[\s*number\s*\]$/);
+    if (indexedAccess) {
+      return this.resolve(indexedAccess[1], visited);
     }
     
-    // Union type: A | B | C
-    if (typeExpr.includes('|')) {
+    // Union type: A | B | C (checked first so `A & ("a" | "b")` reads as an intersection)
+    if (splitTopLevel(typeExpr, '|').length > 1) {
       return this.#resolveUnion(typeExpr, visited);
+    }
+    
+    // Intersection type: A & B (combine values from both)
+    if (splitTopLevel(typeExpr, '&').length > 1) {
+      return this.#resolveIntersection(typeExpr, visited);
     }
     
     // Literal types
@@ -134,7 +170,7 @@ export class TypeRegistry {
 
   /** Resolve an intersection type like Alignment & Space (combine values) */
   #resolveIntersection(intersectionExpr, visited) {
-    const parts = intersectionExpr.split('&').map(p => p.trim()).filter(Boolean);
+    const parts = splitTopLevel(intersectionExpr, '&');
     const allValues = [];
     
     for (const part of parts) {
@@ -214,7 +250,14 @@ export class TypeRegistry {
 export function parseTypeDefinitions(content, registry) {
   // Type aliases: type Foo = "a" | "b" | ...
   // Keep this separate from object-style type parsing so multiline unions resolve to every approved value.
-  const typeRegex = /(?:export\s+)?type\s+(\w+)\s*=\s*((?:(?!\n\s*(?:export\s+)?type\s+\w+\s*=).)+?)(?=\n\s*(?:export\s+)?type\s+\w+\s*=|\n\s*(?:export\s+)?const\s+\w+\s*=|$)/gs;
+  // Generic declarations (`type Callback<T, K> = ...`) act as boundaries but are not captured,
+  // otherwise the preceding alias swallows them and resolves to nonsense.
+  const TYPE_DECL = String.raw`(?:export\s+)?type\s+\w+\s*(?:<[^>]*>)?\s*=`;
+  const CONST_DECL = String.raw`(?:export\s+)?const\s+\w+\s*=`;
+  const typeRegex = new RegExp(
+    String.raw`(?:export\s+)?type\s+(\w+)\s*=\s*((?:(?!\n\s*${TYPE_DECL}).)+?)(?=\n\s*${TYPE_DECL}|\n\s*${CONST_DECL}|$)`,
+    'gs'
+  );
   for (const [, name, expr] of content.matchAll(typeRegex)) {
     const normalized = expr.trim().replace(/;\s*$/, '');
     if (!normalized.startsWith('{') && !normalized.includes('{')) {
@@ -228,6 +271,29 @@ export function parseTypeDefinitions(content, registry) {
     const values = valuesStr.split(',').map(v => parseLiteral(v.trim()));
     registry.register(name, { type: 'enum', values });
   }
+}
+
+/**
+ * Extract object-style type definitions (`type Foo = { bar?: Type }`) into `target`,
+ * keyed by type name. Definitions spread across files are merged.
+ *
+ * The registry must already hold every alias these blocks reference, so run
+ * parseTypeDefinitions over all sources first.
+ */
+export function parseObjectTypes(content, registry, target = {}) {
+  for (const [, name, block] of content.matchAll(/type\s+(\w+)\s*=\s*\{([^}]+)\}/g)) {
+    target[name] = { ...target[name], ...parsePropsFromBlock(block, registry) };
+  }
+
+  return target;
+}
+
+/** Read the type files that globalProps.ts imports from. */
+export function readTypeFiles() {
+  return TYPE_FILES
+    .map(file => path.join(PATHS.typesDir, file))
+    .filter(filePath => fs.existsSync(filePath))
+    .map(filePath => fs.readFileSync(filePath, 'utf8'));
 }
 
 /**
@@ -262,27 +328,22 @@ export function parsePropsFromBlock(block, registry) {
  */
 export function parseGlobalProps() {
   const registry = new TypeRegistry();
-  
-  // 1. Parse imported type files (sizes, display, etc.)
-  for (const file of TYPE_FILES) {
-    const filePath = path.join(PATHS.typesDir, file);
-    if (fs.existsSync(filePath)) {
-      parseTypeDefinitions(fs.readFileSync(filePath, 'utf8'), registry);
-    }
-  }
-  
-  // 2. Parse globalProps.ts
   const content = fs.readFileSync(PATHS.globalPropsTs, 'utf8');
-  parseTypeDefinitions(content, registry);
   
-  // 3. Extract object-style type definitions: type Foo = { bar?: Type }
-  const typeProps = {};
-  const objectTypeRegex = /type\s+(\w+)\s*=\s*\{([^}]+)\}/g;
-  for (const [, name, block] of content.matchAll(objectTypeRegex)) {
-    typeProps[name] = parsePropsFromBlock(block, registry);
+  // 1. Register aliases from the imported type files (sizes, display, etc.) and globalProps.ts
+  const sources = [...readTypeFiles(), content];
+  for (const source of sources) {
+    parseTypeDefinitions(source, registry);
   }
   
-  // 4. Handle Hover = Shadow & { ... } inheritance
+  // 2. Extract object-style type definitions from every source, since types used by
+  //    GlobalProps (e.g. Display) may be declared in a type file rather than inline
+  const typeProps = {};
+  for (const source of sources) {
+    parseObjectTypes(source, registry, typeProps);
+  }
+  
+  // 3. Handle Hover = Shadow & { ... } inheritance
   const hoverMatch = content.match(/type\s+Hover\s*=\s*Shadow\s*&\s*\{([^}]+)\}/);
   if (hoverMatch && typeProps['Shadow']) {
     typeProps['Hover'] = {
@@ -291,7 +352,7 @@ export function parseGlobalProps() {
     };
   }
   
-  // 5. Find which types make up GlobalProps
+  // 4. Find which types make up GlobalProps
   const globalPropsMatch = content.match(/export\s+type\s+GlobalProps\s*=\s*([^;]+)/);
   const memberTypes = globalPropsMatch
     ? globalPropsMatch[1]
@@ -300,7 +361,7 @@ export function parseGlobalProps() {
         .filter(t => t && !t.includes(':'))
     : [];
   
-  // 6. Collect all prop names and definitions
+  // 5. Collect all prop names and definitions
   const globalPropNames = new Set();
   const globalPropDefs = {};
   
@@ -314,7 +375,7 @@ export function parseGlobalProps() {
     }
   }
   
-  // 7. Always include hover props
+  // 6. Always include hover props
   globalPropNames.add('hover');
   globalPropNames.add('groupHover');
   

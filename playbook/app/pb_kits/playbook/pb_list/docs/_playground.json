@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "borderless": false,
+    "dark": false,
     "enableDrag": false,
     "layout": "",
     "ordered": false,

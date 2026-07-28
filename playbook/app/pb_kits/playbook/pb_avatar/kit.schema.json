@@ -17,8 +17,10 @@
     "dark": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "grayscale": {
       "type": "boolean",
