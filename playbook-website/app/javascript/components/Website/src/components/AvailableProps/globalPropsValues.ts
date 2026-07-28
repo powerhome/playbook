@@ -14,7 +14,12 @@ const globalPropsValues = [
   {
     prop: "alignItems",
     type: "union",
-    values: '"start" | "end" | "center"'
+    values: '"start" | "end" | "center" | "flexStart" | "flexEnd" | "stretch" | "baseline"'
+  },
+  {
+    prop: "alignSelf",
+    type: "union",
+    values: '"start" | "end" | "center" | "auto" | "stretch" | "baseline"'
   },
   {
     prop: "border",
@@ -77,6 +82,11 @@ const globalPropsValues = [
     values: []
   },
   {
+    prop: "display",
+    type: "union",
+    values: '"none" | "flex" | "inline_flex" | "inline" | "inline_block" | "block" | "grid"'
+  },
+  {
     prop: "flex",
     type: "union",
     values: '"auto" | "initial" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "none"'
@@ -85,6 +95,16 @@ const globalPropsValues = [
     prop: "flexDirection",
     type: "union",
     values: '"row" | "column" | "rowReverse" | "columnReverse"'
+  },
+  {
+    prop: "flexGrow",
+    type: "union",
+    values: '"0" | "1"'
+  },
+  {
+    prop: "flexShrink",
+    type: "union",
+    values: '"0" | "1"'
   },
   {
     prop: "flexWrap",
@@ -120,6 +140,11 @@ const globalPropsValues = [
     prop: "justifyContent",
     type: "union",
     values: '"start" | "end" | "center" | "spaceBetween" | "spaceAround" | "spaceEvenly"'
+  },
+  {
+    prop: "justifySelf",
+    type: "union",
+    values: '"start" | "end" | "center" | "auto" | "stretch"'
   },
   {
     prop: "left",

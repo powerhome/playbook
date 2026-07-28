@@ -108,7 +108,8 @@
     "marginBottom": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "none",
@@ -118,7 +119,8 @@
         "md",
         "lg",
         "xl"
-      ]
+      ],
+      "default": "sm"
     },
     "pillColor": {
       "type": "enum",

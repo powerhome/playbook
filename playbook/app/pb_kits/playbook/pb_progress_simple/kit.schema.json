@@ -72,8 +72,10 @@
     "width": {
       "type": "string",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": "100%"
     }
   },
   "globalProps": true,

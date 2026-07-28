@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "color": "default",
+    "dark": false,
     "lineStyle": "solid",
     "orientation": "horizontal",
     "variant": "card"

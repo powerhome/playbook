@@ -54,11 +54,29 @@
       "values": [
         "start",
         "end",
-        "center"
+        "center",
+        "flexStart",
+        "flexEnd",
+        "stretch",
+        "baseline"
       ],
       "responsive": true,
       "description": "Align items.",
       "example": "alignItems=\"start\" or alignItems={{ default: \"start\", md: \"end\" }}"
+    },
+    "alignSelf": {
+      "type": "enum | responsive",
+      "values": [
+        "start",
+        "end",
+        "center",
+        "auto",
+        "stretch",
+        "baseline"
+      ],
+      "responsive": true,
+      "description": "Align self.",
+      "example": "alignSelf=\"start\" or alignSelf={{ default: \"start\", md: \"end\" }}"
     },
     "border": {
       "type": "enum",
@@ -184,6 +202,21 @@
       "description": "Dark.",
       "default": false
     },
+    "display": {
+      "type": "enum | responsive",
+      "values": [
+        "none",
+        "flex",
+        "inline_flex",
+        "inline",
+        "inline_block",
+        "block",
+        "grid"
+      ],
+      "responsive": true,
+      "description": "CSS display.",
+      "example": "display=\"none\" or display={{ default: \"none\", md: \"flex\" }}"
+    },
     "flex": {
       "type": "enum | responsive",
       "values": [
@@ -220,6 +253,26 @@
       "description": "Flex direction.",
       "example": "flexDirection=\"row\" or flexDirection={{ default: \"row\", md: \"column\" }}"
     },
+    "flexGrow": {
+      "type": "enum | responsive",
+      "values": [
+        0,
+        1
+      ],
+      "responsive": true,
+      "description": "Flex grow.",
+      "example": "flexGrow=\"0\" or flexGrow={{ default: \"0\", md: \"1\" }}"
+    },
+    "flexShrink": {
+      "type": "enum | responsive",
+      "values": [
+        0,
+        1
+      ],
+      "responsive": true,
+      "description": "Flex shrink.",
+      "example": "flexShrink=\"0\" or flexShrink={{ default: \"0\", md: \"1\" }}"
+    },
     "flexWrap": {
       "type": "enum | responsive",
       "values": [
@@ -244,6 +297,19 @@
       "responsive": true,
       "description": "Justify multi-line content.",
       "example": "justifyContent=\"start\" or justifyContent={{ default: \"start\", md: \"end\" }}"
+    },
+    "justifySelf": {
+      "type": "enum | responsive",
+      "values": [
+        "start",
+        "end",
+        "center",
+        "auto",
+        "stretch"
+      ],
+      "responsive": true,
+      "description": "Justify self.",
+      "example": "justifySelf=\"start\" or justifySelf={{ default: \"start\", md: \"end\" }}"
     },
     "lineHeight": {
       "type": "enum",
