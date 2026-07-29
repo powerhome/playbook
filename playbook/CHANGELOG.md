@@ -1,3 +1,52 @@
+# 16.12.0
+
+##### July 29, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+[16.12.0](https://github.com/powerhome/playbook/tree/16.12.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Pill Kit: Smaller Size [\#6438](https://github.com/powerhome/playbook/pull/6438) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: Pin Row to Bottom - Rails [\#6425](https://github.com/powerhome/playbook/pull/6425) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Typeahead Reset to Default Preparation - 'data-default-value' and ':set' [\#6424](https://github.com/powerhome/playbook/pull/6424) ([kangaree](https://github.com/kangaree))
+- Timestamp Kit (react): Support Timezone Formats [\#6423](https://github.com/powerhome/playbook/pull/6423) ([nickamantia](https://github.com/nickamantia))
+- Distribution Bar: Rails Refactor [\#6421](https://github.com/powerhome/playbook/pull/6421) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table Kit: Column Styling Width Props - Rails [\#6420](https://github.com/powerhome/playbook/pull/6420) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Radio Variant Not Rendering Radio [\#6405](https://github.com/powerhome/playbook/pull/6405) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: Allow Skipping Subrow Headers & Full-width Cells In Rails [\#6419](https://github.com/powerhome/playbook/pull/6419) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Playbook Website: React-select Third Party Loader [\#6454](https://github.com/powerhome/playbook/pull/6454) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Metadata: Fix Parser for Global Props [\#6453](https://github.com/powerhome/playbook/pull/6453) ([nidaqg](https://github.com/nidaqg))
+- Rubygems Trusted Publishing [\#6448](https://github.com/powerhome/playbook/pull/6448) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Extend Code Example Background and Update Schema Generator [\#6441](https://github.com/powerhome/playbook/pull/6441) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Update Dependency Powerhome/ci-kubed to V10.5.0 [\#6440](https://github.com/powerhome/playbook/pull/6440) ([renovate[bot]](https://github.com/renovate[bot]))
+- Playbook Website: Hover Nav on Collapse [\#6434](https://github.com/powerhome/playbook/pull/6434) ([nidaqg](https://github.com/nidaqg))
+- Add Ci-kubed-read-token Preset for Renovate Ci-kubed Release Lookups [\#6433](https://github.com/powerhome/playbook/pull/6433) ([c-gerke](https://github.com/c-gerke))
+- Playbook Website: Remove Swift from Website [\#6432](https://github.com/powerhome/playbook/pull/6432) ([nidaqg](https://github.com/nidaqg))
+- Dropdown: Dropdown Options Sectioning Docs [\#6412](https://github.com/powerhome/playbook/pull/6412) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playgrounds Enhancements [\#6398](https://github.com/powerhome/playbook/pull/6398) ([nidaqg](https://github.com/nidaqg))
+- Update PR Checklist [\#6393](https://github.com/powerhome/playbook/pull/6393) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Update Restrictions for Agentic PR Review [\#6392](https://github.com/powerhome/playbook/pull/6392) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Update Changelog Generator [\#6390](https://github.com/powerhome/playbook/pull/6390) ([nidaqg](https://github.com/nidaqg))
+- Updating and Fixing All Metadata and Playground Related Scripts [\#6389](https://github.com/powerhome/playbook/pull/6389) ([nidaqg](https://github.com/nidaqg))
+- Global Props: Update Global Props Docs [\#6388](https://github.com/powerhome/playbook/pull/6388) ([nidaqg](https://github.com/nidaqg))
+- Playbook Icons Page - Click to Copy [\#6383](https://github.com/powerhome/playbook/pull/6383) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Setup Agentic-pr-review for Playbook [\#6382](https://github.com/powerhome/playbook/pull/6382) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Reinvestigate and Safely Resolve Svg Console Errors from Playbook Icon Rendering [\#6334](https://github.com/powerhome/playbook/pull/6334) ([nickamantia](https://github.com/nickamantia))
+- Bump Shell-quote from 1.7.4 to 1.8.4 [\#6293](https://github.com/powerhome/playbook/pull/6293) ([dependabot[bot]](https://github.com/dependabot[bot]))
+
+**Fixed Bugs:**
+
+- Icon Kit: Harden Custom Svg Source Loading - Rails [\#6401](https://github.com/powerhome/playbook/pull/6401) ([terryfinn](https://github.com/terryfinn))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.12.0-rc.5...16.12.0)
+
+
 # 🪄 A Few New Tricks Up Our Sleeve
 ##### July 10, 2026
 
