@@ -2,9 +2,9 @@
 name: playbook-ui-generation
 description: >-
   Generate UI code using Playbook design system components with validated props.
-  Use when creating React/Rails UI, processing Figma handoffs, building forms,
-  cards, dialogs, tables, or any user interface. Reads structured metadata from
-  playbook-ui package to ensure correct component usage.
+  Use when creating React/Rails UI, processing Figma handoffs, screenshots,
+  building forms, cards, dialogs, tables, or any user interface. Reads structured
+  metadata from playbook-ui package to ensure correct component usage.
 ---
 
 # Playbook UI Generation
@@ -20,7 +20,11 @@ Before generating ANY Playbook code, you MUST read:
 3. **Component schemas** — `node_modules/playbook-ui/dist/ai/kits/<component>.schema.json` for each component you'll use
 4. **Playground patterns** — `node_modules/playbook-ui/dist/ai/playgrounds/<component>.json` for each component you'll use (presets, hints, composition)
 
-For bulk schema lookup, read `node_modules/playbook-ui/dist/ai/all-schemas.json` (schemas only; does **not** include playgrounds).
+For **screenshots / visual handoffs**, also read:
+
+5. **Visual index** — `node_modules/playbook-ui/dist/ai/visual-index.json` (looksLike, lookalikes, typography/spacing maps)
+
+For bulk schema lookup, read `node_modules/playbook-ui/dist/ai/all-schemas.json` (schemas only; does **not** include playgrounds or visual-index).
 
 Discover playground coverage via `node_modules/playbook-ui/dist/ai/playgrounds/index.json`.
 
@@ -28,10 +32,11 @@ Discover playground coverage via `node_modules/playbook-ui/dist/ai/playgrounds/i
 
 ```
 node_modules/playbook-ui/dist/ai/
-├── index.json               # Manifest (schemas + playground paths)
+├── index.json               # Manifest (schemas, playgrounds, kitMeta, visualIndex)
+├── visual-index.json        # Screenshot / visual → kit map
 ├── global-props.schema.json # Props available on ALL components
 ├── all-schemas.json         # All component schemas bundled (bulk lookup)
-├── kits/                    # Per-component prop schemas
+├── kits/                    # Per-component prop schemas (+ menu descriptions)
 │   ├── button.schema.json
 │   └── ...
 └── playgrounds/             # Slim patterns for accurate codegen
@@ -51,7 +56,7 @@ node_modules/playbook-ui/dist/ai/
 
 ### Step 2: Discover Components
 
-Read `index.json` → `schemas.kits` for schema paths and `playgrounds.kits` for pattern paths.
+Read `index.json` → `schemas.kits` for schema paths, `playgrounds.kits` for patterns, `kitMeta` for category/description.
 
 ### Step 3: Validate Props + Patterns
 
@@ -60,12 +65,12 @@ For each component:
 1. Read `kits/<name>.schema.json` — prop names, enums, required, platforms
 2. Read `playgrounds/<name>.json` when present:
    - Prefer **presets** over inventing prop combinations
-   - Honor **hints** and **conditionals** (props that require other props/values)
+   - Honor **hints** and **conditionals**
    - For nested kits, follow **structureModes** / **template** / **children**
-   - Use **customProps** / **propTargets** for subcomponent APIs (e.g. NavItem under Nav)
+   - Use **customProps** / **propTargets** for subcomponent APIs
    - Use **wrapper** / **statefulProps** / **requiredCodeProps** for stateful kits
 
-For **AdvancedTable**, read `playgrounds/advanced_table.json` and copy shapes from `samples` / `requiredProps` / preset `props` (`columnDefinitions`, `tableData`, nested `children`, first-column `cellAccessors`). Do not invent column/row structures; do not expect the full website mock datasets.
+For **AdvancedTable**, read `playgrounds/advanced_table.json` and copy shapes from `samples` / `requiredProps` / preset `props` (`columnDefinitions`, `tableData`, nested `children`, first-column `cellAccessors`).
 
 ### Step 4: Generate Code
 
@@ -88,6 +93,22 @@ import { Button, Card, Flex } from "playbook-ui"
   <% end %>
 <% end %>
 ```
+
+## Screenshot / Visual Handoff Workflow
+
+Do **not** guess kit names from the image alone. Use `visual-index.json`.
+
+1. **Decompose top-down** — page regions → sections → rows/clusters → controls → text
+2. **Classify each region**
+   - Layout: `layoutCues` (Flex vs Card vs Background vs Layout)
+   - Type: `typographyByVisual` (Title / Body / Caption / Detail)
+   - Controls: match `kits.<name>.looksLike`
+3. **Disambiguate** with `not[]` and `gotchas` (Pill vs Badge vs FormPill; Table vs AdvancedTable; etc.)
+4. **Map measurements**
+   - Spacing px → `spacingPxToToken` (16→`sm`, 24→`md`, …)
+   - Button color/style → `variantsFromVisual` when present
+5. **Open schema + playground** only for chosen kits; start from nearest preset
+6. **Compose** with Flex/Card/Layout — do not invent custom wrappers when Playbook kits fit
 
 ## Global Props
 
@@ -115,19 +136,12 @@ Check the schema's `platforms` field.
 ### Prop name differences
 Some props differ by platform (e.g. React `htmlType="submit"` → Rails `type: "submit"`). Check schema for `reactEquivalent` / `railsEquivalent` mappings.
 
-## Figma/Screenshot Workflow
-
-1. Identify visual elements — buttons, cards, layout, typography
-2. Map to Playbook kits via `index.json`
-3. Extract props from visuals; map pixels → spacing tokens (`md`, not `16px`)
-4. Read kit schema **and** playground file; start from the closest preset
-5. Generate code in the correct platform syntax
-
 ## Validation Checklist
 
 | Check | How |
 |-------|-----|
-| Component exists | `index.json` |
+| Kit chosen correctly | `visual-index.json` looksLike / not / gotchas |
+| Component exists | `index.json` / `kitMeta` |
 | Prop name / value valid | `kits/<name>.schema.json` |
 | Combo is realistic | `playgrounds/<name>.json` presets |
 | Constraints honored | playground `hints` + `conditionals` |
@@ -142,6 +156,8 @@ Some props differ by platform (e.g. React `htmlType="submit"` → Rails `type: "
 ✗ padding="16px"   → use tokens: "md"
 ✗ onClick in .erb  → Rails uses data attributes, not JS handlers
 ✗ invent nested NavItem props without reading nav playground
+✗ Pill children    → use text prop
+✗ Table for nested expand rows → AdvancedTable
 ```
 
 When a prop value is invalid, suggest the closest valid alternative from the schema's enum values.

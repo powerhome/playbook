@@ -1,5 +1,5 @@
 ---
-description: Use Playbook UI components for all UI work. Validates props against schemas and playground patterns.
+description: Use Playbook UI components for all UI work. Validates props against schemas, playgrounds, and visual-index.
 globs: "**/*.{tsx,ts,jsx,js,erb}"
 alwaysApply: false
 ---
@@ -13,29 +13,24 @@ alwaysApply: false
 
 ### AI Metadata (Structured Component Data)
 
-Playbook ships with AI-friendly metadata for validated code generation:
-
 ```
 node_modules/playbook-ui/dist/ai/
-├── index.json               # Manifest (schemas + playground paths)
-├── global-props.schema.json # Props available on ALL components
-├── all-schemas.json         # All schemas bundled (bulk lookup; no playgrounds)
-├── kits/                    # Per-component prop schemas
-│   ├── button.schema.json
-│   └── ...
-└── playgrounds/             # Slim presets/hints/composition for accurate codegen
-    ├── index.json
-    ├── button.json
-    └── ...
+├── index.json               # Manifest + kitMeta
+├── visual-index.json        # Screenshot / visual → kit map
+├── global-props.schema.json
+├── all-schemas.json         # Schemas only (no playgrounds)
+├── kits/                    # Prop schemas (+ menu descriptions)
+└── playgrounds/             # Slim presets / hints / composition
 ```
 
 **When generating UI:**
-1. Read `index.json` to find components
-2. Read `kits/<name>.schema.json` for valid props/values
-3. Read `global-props.schema.json` for universal props (margin, padding, etc.)
-4. Read `playgrounds/<name>.json` for presets, hints, conditionals, and nested templates
-5. Prefer playground presets over inventing prop combinations
-6. For AdvancedTable, copy `columnDefinitions` / `tableData` from `playgrounds/advanced_table.json` (`samples` or preset props) — nested rows use `children`, first column uses `cellAccessors`
+1. Read `index.json` / `kitMeta` to find components
+2. For screenshots: read `visual-index.json` before guessing kits
+3. Read `kits/<name>.schema.json` for valid props/values
+4. Read `global-props.schema.json` for spacing/layout props
+5. Read `playgrounds/<name>.json` for presets, hints, conditionals, nested templates
+6. Prefer playground presets over inventing prop combinations
+7. For AdvancedTable, copy `columnDefinitions` / `tableData` from `playgrounds/advanced_table.json`
 
 ### Platform Detection
 
@@ -46,7 +41,8 @@ node_modules/playbook-ui/dist/ai/
 
 ### Valid Spacing Values
 
-Use tokens, not raw pixels: `none`, `xxs`, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`
+Use tokens, not raw pixels: `none`, `xxs`, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`  
+(Also see `visual-index.json` → `spacingPxToToken`.)
 
 ```tsx
 // Good
@@ -62,6 +58,6 @@ Use tokens, not raw pixels: `none`, `xxs`, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`
 - Search existing usage in this codebase with patterns like `from "playbook-ui"` or `pb_rails`
 
 ### When unsure
-1. Check AI metadata in `node_modules/playbook-ui/dist/ai/` (schemas + playgrounds)
+1. Check `dist/ai/visual-index.json` then schemas + playgrounds
 2. Search existing usage in this codebase
 3. Refer to documentation at https://playbook.powerapp.cloud/

@@ -32,7 +32,8 @@ After running `yarn build:ai`, you'll find:
 
 ```
 dist/ai/
-├── index.json                  # Manifest with version, schema paths, playground paths
+├── index.json                  # Manifest: schemas, playgrounds, kitMeta, visualIndex
+├── visual-index.json           # Screenshot / visual → kit map (looksLike, lookalikes, tokens)
 ├── global-props.schema.json    # Props available on ALL components
 ├── all-schemas.json            # All kit schemas in one file (schemas only)
 ├── kits/                       # Individual component schemas
@@ -50,10 +51,11 @@ dist/ai/
 
 | File | Size | Use Case |
 |------|------|----------|
-| `index.json` | ~8KB | Discover schemas + playground paths |
+| `index.json` | ~8KB+ | Discover schemas, playgrounds, kitMeta |
+| `visual-index.json` | small | Map screenshots/visuals → kits before guessing |
 | `global-props.schema.json` | ~24KB | Spacing, layout, display props |
 | `all-schemas.json` | ~280KB | Bulk schema lookup (no playgrounds) |
-| `kits/*.schema.json` | ~2–4KB each | Per-component props + usage from first preset |
+| `kits/*.schema.json` | ~2–4KB each | Props + menu descriptions + usage from presets |
 | `playgrounds/*.json` | slim | Presets, hints, conditionals, composition patterns |
 | `playgrounds/index.json` | small | Discover which kits have playground patterns |
 
@@ -188,17 +190,49 @@ When Playbook changes, the schema updates automatically - no manual edits needed
 
 ### Build Distribution (`build-ai-dist.mjs`)
 
-1. Copies all `kit.schema.json` files to `dist/ai/kits/`, enriching `usage` from the first playground preset when available
-2. Copies `global-props.schema.json` to `dist/ai/`
-3. Creates `all-schemas.json` with schemas only (playgrounds stay separate to avoid bloat)
-4. Creates slim `dist/ai/playgrounds/<kit>.json` from each `_playground.json`
-5. Creates `index.json` + `playgrounds/index.json` manifests
+1. Loads kit catalog from `playbook-website/config/menu.yml` (descriptions, categories)
+2. Copies all `kit.schema.json` files to `dist/ai/kits/`, enriching thin descriptions from menu.yml and `usage` from the first playground preset
+3. Copies `global-props.schema.json` to `dist/ai/`
+4. Creates `all-schemas.json` with schemas only (playgrounds stay separate to avoid bloat)
+5. Creates slim `dist/ai/playgrounds/<kit>.json` from each `_playground.json`
+6. Builds `visual-index.json` (menu catalog + curated lookalike/visual cues)
+7. Creates `index.json` (includes `kitMeta` + `visualIndex`) and `playgrounds/index.json`
 
 Slim playground export keeps: `presets`, `hints`, `conditionals`, `structureModes`, `template`, `children`, `customProps`, `wrapper`, `statefulProps`, `requiredCodeProps`, `propTargets`, `propAliases`, `codegenDefaultProps`, imports. It strips website UI chrome (`groups`, `hiddenProps`, …) and large mock table datasets.
 
-### Slim playground helper (`lib/slim-playground.mjs`)
+### Helpers
 
-Shared transform used by `build-ai-dist.mjs`. Source of truth for which playground fields ship to consuming apps.
+| File | Role |
+|------|------|
+| `lib/slim-playground.mjs` | Slim playground transform (+ AdvancedTable samples) |
+| `lib/load-menu-catalog.mjs` | Parse `menu.yml` → kit descriptions/categories |
+| `lib/visual-cues.mjs` | **Manual.** Curated looksLike / not / gotchas for ambiguous kits |
+| `lib/build-visual-index.mjs` | Merge menu + cues → `visual-index.json` (rebuild only; cues are manual) |
+
+### Updating the visual index
+
+`dist/ai/visual-index.json` is rebuilt on every `yarn build:ai`. What goes into it is a mix of automatic and manual sources:
+
+| Source | Automated? | When it updates |
+|--------|------------|-----------------|
+| Kit list from `dist/ai` / kit folders | Yes | Every `build:ai` |
+| Descriptions, categories, status from `menu.yml` | Yes | Every `build:ai` (edit menu.yml, then rebuild) |
+| `looksLike`, `not`, `gotchas`, `variantsFromVisual`, typography/layout/spacing maps | **No — manual** | Edit `playbook/scripts/lib/visual-cues.mjs`, then rebuild |
+
+**When to edit `visual-cues.mjs`:**
+- Agents (or Nitro) confuse two kits from a screenshot (e.g. Pill vs Badge, Table vs AdvancedTable)
+- A new kit is easy to mis-identify visually
+- You need a clearer `variantsFromVisual` map (e.g. button colors → `primary` / `secondary` / `danger`)
+- Spacing or typography heuristics drift from design practice
+
+**How to update:**
+1. Edit `playbook/scripts/lib/visual-cues.mjs` — usually `KIT_VISUAL_CUES.<kit_name>` (`looksLike`, `not`, `gotchas`, `cues`)
+2. From `playbook/`: `yarn build:ai`  
+   Or from repo root: `yarn generate:docs-metadata`
+3. Confirm `playbook/dist/ai/visual-index.json` includes your cues under `kits.<name>`
+4. Commit the `visual-cues.mjs` change (and any docs). `dist/` is built at release / local generate; it is not the hand-authored source
+
+Do **not** hand-edit `dist/ai/visual-index.json` — it is overwritten on the next build.
 
 ## Integration
 
@@ -331,8 +365,11 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `scripts/generate-docs-metadata.sh` (repo root) | Shared generator for schemas, values, playgrounds |
 | `playbook/scripts/generate-ai-metadata.mjs` | Generates kit schemas from TS/Ruby source |
 | `playbook/scripts/generate-global-props-metadata.mjs` | Generates global props schema |
-| `playbook/scripts/build-ai-dist.mjs` | Builds dist/ai folder (schemas + slim playgrounds) |
+| `playbook/scripts/build-ai-dist.mjs` | Builds dist/ai folder (schemas + playgrounds + visual-index) |
 | `playbook/scripts/lib/slim-playground.mjs` | Slim playground transform for AI export |
+| `playbook/scripts/lib/load-menu-catalog.mjs` | menu.yml → kit descriptions/categories |
+| `playbook/scripts/lib/visual-cues.mjs` | Curated visual → kit cues |
+| `playbook/scripts/lib/build-visual-index.mjs` | Builds visual-index.json |
 | `playbook/scripts/lib/global-props-parser.mjs` | Shared module for parsing global props |
 | `playbook/app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (generated) |
 | `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json` | Generated playground configs (website + AI source) |
