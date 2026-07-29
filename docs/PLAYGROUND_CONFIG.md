@@ -10,6 +10,8 @@ Put kit-specific choices in:
 playbook/app/pb_kits/playbook/<kit>/docs/_playground.overrides.json
 ```
 
+For kits that need host-app packages (Highcharts, TipTap, MapLibre, …), add an `externalDependencies` object in that overrides file. It is exported into `dist/ai` for consuming-app agents (they should **warn**, not install packages).
+
 Then regenerate from the repo root (preferred):
 
 ```bash

@@ -34,6 +34,7 @@ After running `yarn build:ai`, you'll find:
 dist/ai/
 ├── index.json                  # Manifest: schemas, playgrounds, kitMeta, visualIndex
 ├── visual-index.json           # Screenshot / visual → kit map (looksLike, lookalikes, tokens)
+├── external-dependencies.json  # Kits that need host-app packages (Highcharts, TipTap, …)
 ├── global-props.schema.json    # Props available on ALL components
 ├── all-schemas.json            # All kit schemas in one file (schemas only)
 ├── kits/                       # Individual component schemas
@@ -53,6 +54,7 @@ dist/ai/
 |------|------|----------|
 | `index.json` | ~8KB+ | Discover schemas, playgrounds, kitMeta |
 | `visual-index.json` | small | Map screenshots/visuals → kits before guessing |
+| `external-dependencies.json` | small | Kits whose engines are peer/optional host deps |
 | `global-props.schema.json` | ~24KB | Spacing, layout, display props |
 | `all-schemas.json` | ~280KB | Bulk schema lookup (no playgrounds) |
 | `kits/*.schema.json` | ~2–4KB each | Props + menu descriptions + usage from presets |
@@ -196,7 +198,8 @@ When Playbook changes, the schema updates automatically - no manual edits needed
 4. Creates `all-schemas.json` with schemas only (playgrounds stay separate to avoid bloat)
 5. Creates slim `dist/ai/playgrounds/<kit>.json` from each `_playground.json`
 6. Builds `visual-index.json` (menu catalog + curated lookalike/visual cues)
-7. Creates `index.json` (includes `kitMeta` + `visualIndex`) and `playgrounds/index.json`
+7. Reads `externalDependencies` from playground configs (authored in `_playground.overrides.json`), stamps them onto dist kit schemas / `kitMeta`, and aggregates `external-dependencies.json`
+8. Creates `index.json` (includes `kitMeta` + `visualIndex` + `externalDependencies`) and `playgrounds/index.json`
 
 Slim playground export keeps: `presets`, `hints`, `conditionals`, `structureModes`, `template`, `children`, `customProps`, `wrapper`, `statefulProps`, `requiredCodeProps`, `propTargets`, `propAliases`, `codegenDefaultProps`, imports. It strips website UI chrome (`groups`, `hiddenProps`, …) and large mock table datasets.
 
@@ -208,6 +211,31 @@ Slim playground export keeps: `presets`, `hints`, `conditionals`, `structureMode
 | `lib/load-menu-catalog.mjs` | Parse `menu.yml` → kit descriptions/categories |
 | `lib/visual-cues.mjs` | **Manual.** Curated looksLike / not / gotchas for ambiguous kits |
 | `lib/build-visual-index.mjs` | Merge menu + cues → `visual-index.json` (rebuild only; cues are manual) |
+### External / third-party dependencies
+
+Some kits wrap libraries that are optional peers / host-app packages (Highcharts, TipTap, MapLibre, …). Declare them on the kit:
+
+```json
+// docs/_playground.overrides.json
+{
+  "externalDependencies": {
+    "packages": ["highcharts", "highcharts-react-official"],
+    "optional": true,
+    "note": "Host app must already have these installed. Agents must not install packages — tell the user if missing."
+  }
+}
+```
+
+After `yarn generate:playground-configs` / `yarn generate:docs-metadata` / `yarn build:ai`, that field ships as:
+
+- `dist/ai/playgrounds/<kit>.json` → `externalDependencies`
+- `dist/ai/kits/<kit>.schema.json` → `externalDependencies`
+- `dist/ai/index.json` → `kitMeta.<kit>.externalDependencies`
+- `dist/ai/external-dependencies.json` (aggregate index)
+
+**Agents must not install packages** — they should inform the user if deps are missing.
+
+**When to update:** peer/install notes change for a wrapper kit → edit that kit’s `_playground.overrides.json` → regenerate docs metadata / build AI dist.
 
 ### Updating the visual index
 

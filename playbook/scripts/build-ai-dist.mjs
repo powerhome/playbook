@@ -10,6 +10,7 @@
  *   - index.json (manifest)
  *   - playgrounds/*.json (slim patterns for agent codegen)
  *   - visual-index.json (screenshot / visual → kit map)
+ *   - external-dependencies.json (aggregated from playground overrides)
  *
  * Usage:
  *   yarn build:ai              # Clean and build (default)
@@ -26,6 +27,27 @@ import {
   slimPlaygroundConfig,
   usageFromPreset,
 } from './lib/slim-playground.mjs';
+
+/** Stamp externalDependencies from playground overrides onto the dist kit schema. */
+function enrichSchemaExternalDeps(schema, slimPlayground) {
+  const deps = slimPlayground?.externalDependencies;
+  if (!schema || !deps) return schema;
+  return { ...schema, externalDependencies: deps };
+}
+
+/** Aggregate index from kits that declared externalDependencies in playground overrides. */
+function buildExternalDependenciesIndex(kitEntries) {
+  const kits = {};
+  for (const { name, deps } of kitEntries) {
+    if (deps) kits[name] = deps;
+  }
+  return {
+    description:
+      'Kits that need host-app packages (from each kit’s docs/_playground.overrides.json → externalDependencies). Agents must NOT install packages — tell the user if they are missing.',
+    bundledWithPlaybookUi: ['flatpickr', 'intl-tel-input', '@floating-ui/dom', '@popperjs/core'],
+    kits,
+  };
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -141,6 +163,7 @@ async function main() {
       kits: {},
     },
     visualIndex: 'visual-index.json',
+    externalDependencies: 'external-dependencies.json',
     kitMeta: {},
   };
   const allSchemas = {
@@ -166,12 +189,14 @@ async function main() {
       'codegenDefaultProps',
       'externalImports',
       'imports',
+      'externalDependencies',
     ],
     kits: {},
   };
 
   let playgroundCount = 0;
   let enrichedDescriptions = 0;
+  const externalDepEntries = [];
 
   for (const { name, schemaPath, playgroundPath } of kits) {
     const rawSchema = readJson(schemaPath);
@@ -184,6 +209,7 @@ async function main() {
       enrichedDescriptions += 1;
     }
     schema = enrichSchemaUsage(schema, name, slimPlayground);
+    schema = enrichSchemaExternalDeps(schema, slimPlayground);
 
     writeJson(path.join(kitsOutputDir, `${name}.schema.json`), schema);
     manifest.schemas.kits[name] = `kits/${name}.schema.json`;
@@ -194,7 +220,14 @@ async function main() {
       status: schema.status || menuKit?.status || null,
       schema: `kits/${name}.schema.json`,
       playground: slimPlayground ? `playgrounds/${name}.json` : null,
+      ...(schema.externalDependencies
+        ? { externalDependencies: schema.externalDependencies }
+        : {}),
     };
+
+    if (schema.externalDependencies) {
+      externalDepEntries.push({ name, deps: schema.externalDependencies });
+    }
 
     if (slimPlayground) {
       const relativePath = `playgrounds/${name}.json`;
@@ -214,9 +247,17 @@ async function main() {
   });
   writeJson(path.join(OUTPUT_DIR, 'visual-index.json'), visualIndex, { pretty: false });
 
+  const externalDependencies = buildExternalDependenciesIndex(externalDepEntries);
+  writeJson(path.join(OUTPUT_DIR, 'external-dependencies.json'), externalDependencies, {
+    pretty: false,
+  });
+
   console.log(`✅ ${kits.length} kit schemas → dist/ai/kits/ (${enrichedDescriptions} descriptions from menu.yml)`);
   console.log(`✅ ${playgroundCount} slim playgrounds → dist/ai/playgrounds/`);
   console.log('✅ visual-index.json');
+  console.log(
+    `✅ external-dependencies.json (${Object.keys(externalDependencies.kits).length} kits with host deps from overrides)`
+  );
 
   writeJson(path.join(OUTPUT_DIR, 'index.json'), manifest);
   console.log('✅ index.json');

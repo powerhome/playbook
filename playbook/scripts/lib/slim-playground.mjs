@@ -24,6 +24,8 @@ export const AI_PLAYGROUND_KEYS = [
   'codegenDefaultProps',
   'externalImports',
   'imports',
+  // Host-app packages required by wrapper kits (authored in _playground.overrides.json)
+  'externalDependencies',
 ];
 
 const HEAVY_PROP_KEYS = new Set(['columnDefinitions', 'tableData', 'table_data']);

@@ -34,6 +34,10 @@ For **screenshots / visual handoffs**, also read:
 
 5. **Visual index** — `node_modules/playbook-ui/dist/ai/visual-index.json` (looksLike, lookalikes, typography/spacing maps)
 
+For kits that wrap third-party libraries, also check:
+
+6. **External dependencies** — `node_modules/playbook-ui/dist/ai/external-dependencies.json` and/or `externalDependencies` on the kit schema / `kitMeta`
+
 For bulk schema lookup, read `node_modules/playbook-ui/dist/ai/all-schemas.json` (schemas only; does **not** include playgrounds or visual-index).
 
 Discover playground coverage via `node_modules/playbook-ui/dist/ai/playgrounds/index.json`.
@@ -42,18 +46,28 @@ Discover playground coverage via `node_modules/playbook-ui/dist/ai/playgrounds/i
 
 ```
 node_modules/playbook-ui/dist/ai/
-├── index.json               # Manifest (schemas, playgrounds, kitMeta, visualIndex)
-├── visual-index.json        # Screenshot / visual → kit map
-├── global-props.schema.json # Props available on ALL components
-├── all-schemas.json         # All component schemas bundled (bulk lookup)
-├── kits/                    # Per-component prop schemas (+ menu descriptions)
-│   ├── button.schema.json
-│   └── ...
-└── playgrounds/             # Slim patterns for accurate codegen
-    ├── index.json
-    ├── button.json
-    └── ...
+├── index.json                    # Manifest (schemas, playgrounds, kitMeta, …)
+├── visual-index.json             # Screenshot / visual → kit map
+├── external-dependencies.json    # Kits needing host-app packages
+├── global-props.schema.json
+├── all-schemas.json
+├── kits/
+└── playgrounds/
 ```
+
+## External / third-party kit dependencies
+
+Some kits are thin wrappers and **do not bundle** their engine. Declarations live on the kit’s playground overrides and ship as `externalDependencies` on the schema / playground / `external-dependencies.json`.
+
+**Agents must NOT install npm packages.**
+
+**Before generating code that uses these kits:**
+1. Read `externalDependencies` (`packages`, `note`)
+2. Check whether the consuming app already has those packages
+3. If missing: **stop and tell the user** which packages the app must already have installed — do not run `yarn`/`npm install`
+4. If present: generate using the kit’s wiring notes (e.g. pass `TrixEditor` into `RichTextEditor`; Highcharts `options`)
+
+Packages listed under `bundledWithPlaybookUi` (e.g. `flatpickr`) ship with `playbook-ui` — do not tell users to add those for basic kit use.
 
 ## Prompt → UI Workflow
 

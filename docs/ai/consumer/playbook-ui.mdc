@@ -42,23 +42,25 @@ If unsure a kit exists: check `dist/ai/index.json` + `kitMeta` (and `visual-inde
 
 ```
 node_modules/playbook-ui/dist/ai/
-├── index.json               # Manifest + kitMeta
-├── visual-index.json        # Screenshot / visual → kit map
+├── index.json                    # Manifest + kitMeta
+├── visual-index.json             # Screenshot / visual → kit map
+├── external-dependencies.json    # Kits that need host-app packages
 ├── global-props.schema.json
-├── all-schemas.json         # Schemas only (no playgrounds)
-├── kits/                    # Prop schemas (+ menu descriptions)
-└── playgrounds/             # Slim presets / hints / composition
+├── all-schemas.json
+├── kits/
+└── playgrounds/
 ```
 
 **When generating UI:**
 1. Assume Playbook-first (this rule).
 2. Read `index.json` / `kitMeta` to find kits.
 3. For screenshots: read `visual-index.json` before guessing kits.
-4. Read `kits/<name>.schema.json` for valid props/values.
-5. Read `global-props.schema.json` for spacing/layout props.
-6. Read `playgrounds/<name>.json` for presets, hints, conditionals, nested templates.
-7. Prefer playground presets over inventing prop combinations.
-8. For AdvancedTable, copy `columnDefinitions` / `tableData` from `playgrounds/advanced_table.json`.
+4. If the kit lists `externalDependencies`, **do not install packages**. Tell the user the host app must already have them (e.g. Highcharts, TipTap/Trix). Skip or stub that kit until deps are present.
+5. Read `kits/<name>.schema.json` for valid props/values.
+6. Read `global-props.schema.json` for spacing/layout props.
+7. Read `playgrounds/<name>.json` for presets, hints, conditionals, nested templates.
+8. Prefer playground presets over inventing prop combinations.
+9. For AdvancedTable, copy `columnDefinitions` / `tableData` from `playgrounds/advanced_table.json`.
 
 ### Platform Detection
 
