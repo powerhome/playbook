@@ -2,13 +2,14 @@
 /**
  * Build AI Metadata Distribution
  * ===============================
- * 
+ *
  * Consolidates AI metadata into dist/ai/:
- *   - kit.schema.json files for each component
+ *   - kit.schema.json files for each component (usage enriched from playground presets)
  *   - global-props.schema.json
- *   - all-schemas.json (combined)
+ *   - all-schemas.json (combined schemas only — no playgrounds)
  *   - index.json (manifest)
- * 
+ *   - playgrounds/*.json (slim patterns for agent codegen)
+ *
  * Usage:
  *   yarn build:ai              # Clean and build (default)
  *   yarn build:ai --no-clean   # Incremental build
@@ -17,6 +18,11 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  playgroundStats,
+  slimPlaygroundConfig,
+  usageFromPreset,
+} from './lib/slim-playground.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -32,15 +38,60 @@ const GLOBAL_PROPS_PATH = path.join(KITS_DIR, 'utilities/global-props.schema.jso
 // HELPERS
 // =============================================================================
 
-const readJson = (p) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; } };
-const writeJson = (p, data) => fs.writeFileSync(p, JSON.stringify(data, null, 2) + '\n');
+const readJson = (p) => {
+  try {
+    return JSON.parse(fs.readFileSync(p, 'utf8'));
+  } catch {
+    return null;
+  }
+};
+const writeJson = (p, data, { pretty = true } = {}) => {
+  const body = pretty ? JSON.stringify(data, null, 2) : JSON.stringify(data);
+  fs.writeFileSync(p, `${body}\n`);
+};
 const getVersion = () => readJson(path.resolve(__dirname, '../package.json'))?.version || 'unknown';
 
+function snakeToPascal(s) {
+  return s.split('_').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+}
+
 function getKitDirs() {
-  return fs.readdirSync(KITS_DIR)
-    .filter(d => d.startsWith('pb_') && fs.statSync(path.join(KITS_DIR, d)).isDirectory())
-    .map(d => ({ dir: d, name: d.replace('pb_', ''), schemaPath: path.join(KITS_DIR, d, 'kit.schema.json') }))
-    .filter(k => fs.existsSync(k.schemaPath));
+  return fs
+    .readdirSync(KITS_DIR)
+    .filter((d) => d.startsWith('pb_') && fs.statSync(path.join(KITS_DIR, d)).isDirectory())
+    .map((d) => {
+      const name = d.replace('pb_', '');
+      return {
+        dir: d,
+        name,
+        schemaPath: path.join(KITS_DIR, d, 'kit.schema.json'),
+        playgroundPath: path.join(KITS_DIR, d, 'docs', '_playground.json'),
+      };
+    })
+    .filter((k) => fs.existsSync(k.schemaPath));
+}
+
+function enrichSchemaUsage(schema, kitName, slimPlayground) {
+  if (!schema || !slimPlayground) return schema;
+
+  const pascal = schema.name || snakeToPascal(kitName);
+  const usage = usageFromPreset(kitName, pascal, slimPlayground);
+  if (!usage) return schema;
+
+  return {
+    ...schema,
+    usage: {
+      ...schema.usage,
+      react: {
+        ...(schema.usage?.react || {}),
+        ...usage.react,
+      },
+      rails: {
+        ...(schema.usage?.rails || {}),
+        ...usage.rails,
+      },
+    },
+  };
 }
 
 // =============================================================================
@@ -51,19 +102,18 @@ async function main() {
   const clean = !process.argv.includes('--no-clean');
 
   console.log('\n📦 Building AI Metadata Distribution');
-  console.log('═'.repeat(45) + '\n');
+  console.log(`${'═'.repeat(45)}\n`);
 
-  // Clean if requested (default)
   if (clean && fs.existsSync(OUTPUT_DIR)) {
     console.log('🧹 Cleaning dist/ai...');
     fs.rmSync(OUTPUT_DIR, { recursive: true });
   }
 
-  // Create directories
   const kitsOutputDir = path.join(OUTPUT_DIR, 'kits');
+  const playgroundsOutputDir = path.join(OUTPUT_DIR, 'playgrounds');
   fs.mkdirSync(kitsOutputDir, { recursive: true });
+  fs.mkdirSync(playgroundsOutputDir, { recursive: true });
 
-  // Copy global props
   if (fs.existsSync(GLOBAL_PROPS_PATH)) {
     fs.copyFileSync(GLOBAL_PROPS_PATH, path.join(OUTPUT_DIR, 'global-props.schema.json'));
     console.log('✅ global-props.schema.json');
@@ -71,30 +121,89 @@ async function main() {
     console.log('⚠️  global-props.schema.json not found');
   }
 
-  // Copy kit schemas
   const kits = getKitDirs();
-  const manifest = { version: getVersion(), generated: new Date().toISOString(), schemas: { globalProps: 'global-props.schema.json', kits: {} } };
-  const allSchemas = { globalProps: readJson(GLOBAL_PROPS_PATH), kits: {} };
+  const manifest = {
+    version: getVersion(),
+    generated: new Date().toISOString(),
+    schemas: {
+      globalProps: 'global-props.schema.json',
+      kits: {},
+    },
+    playgrounds: {
+      index: 'playgrounds/index.json',
+      kits: {},
+    },
+  };
+  const allSchemas = {
+    globalProps: readJson(GLOBAL_PROPS_PATH),
+    kits: {},
+  };
+  const playgroundsIndex = {
+    description:
+      'Slim playground patterns for AI code generation in consuming apps. Full website playground configs are not shipped here.',
+    fields: [
+      'presets',
+      'hints',
+      'conditionals',
+      'structureModes',
+      'template',
+      'children',
+      'customProps',
+      'wrapper',
+      'statefulProps',
+      'requiredCodeProps',
+      'propTargets',
+      'propAliases',
+      'codegenDefaultProps',
+      'externalImports',
+      'imports',
+    ],
+    kits: {},
+  };
 
-  for (const { name, schemaPath } of kits) {
-    fs.copyFileSync(schemaPath, path.join(kitsOutputDir, `${name}.schema.json`));
+  let playgroundCount = 0;
+
+  for (const { name, schemaPath, playgroundPath } of kits) {
+    const rawSchema = readJson(schemaPath);
+    const rawPlayground = readJson(playgroundPath);
+    const slimPlayground = slimPlaygroundConfig(rawPlayground);
+    const schema = enrichSchemaUsage(rawSchema, name, slimPlayground);
+
+    writeJson(path.join(kitsOutputDir, `${name}.schema.json`), schema);
     manifest.schemas.kits[name] = `kits/${name}.schema.json`;
-    allSchemas.kits[name] = readJson(schemaPath);
+    allSchemas.kits[name] = schema;
+
+    if (slimPlayground) {
+      const relativePath = `playgrounds/${name}.json`;
+      // Compact JSON keeps playground payload small for npm / agent context.
+      writeJson(path.join(playgroundsOutputDir, `${name}.json`), slimPlayground, { pretty: false });
+      manifest.playgrounds.kits[name] = relativePath;
+      playgroundsIndex.kits[name] = {
+        path: relativePath,
+        ...playgroundStats(slimPlayground),
+      };
+      playgroundCount += 1;
+    }
   }
 
   console.log(`✅ ${kits.length} kit schemas → dist/ai/kits/`);
+  console.log(`✅ ${playgroundCount} slim playgrounds → dist/ai/playgrounds/`);
 
-  // Write manifest and combined schemas
   writeJson(path.join(OUTPUT_DIR, 'index.json'), manifest);
   console.log('✅ index.json');
 
   writeJson(path.join(OUTPUT_DIR, 'all-schemas.json'), allSchemas);
-  console.log('✅ all-schemas.json');
+  console.log('✅ all-schemas.json (schemas only; playgrounds are separate)');
 
-  // Summary
-  console.log('\n' + '─'.repeat(45));
-  console.log(`📊 Built ${kits.length + 3} files to dist/ai/`);
-  console.log('─'.repeat(45) + '\n✨ Done!\n');
+  writeJson(path.join(playgroundsOutputDir, 'index.json'), playgroundsIndex, { pretty: false });
+  console.log('✅ playgrounds/index.json');
+
+  console.log(`\n${'─'.repeat(45)}`);
+  console.log(`📊 Built ${kits.length + playgroundCount + 4} files to dist/ai/`);
+  console.log(`${'─'.repeat(45)}\n✨ Done!\n`);
 }
 
-main().catch(e => { console.error('Fatal:', e); process.exit(1); });
+main().catch((e) => {
+  console.error('Fatal:', e);
+  process.exit(1);
+});

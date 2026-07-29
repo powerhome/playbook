@@ -1,0 +1,66 @@
+---
+description: Use Playbook UI components for all UI work. Validates props against schemas and playground patterns.
+globs: "**/*.{tsx,ts,jsx,js,erb}"
+alwaysApply: false
+---
+
+## Playbook UI (consuming apps)
+
+- When building UI, **use Playbook first**.
+- For React: import from `playbook-ui` (e.g. `import { Button, Card, Flex } from "playbook-ui"`).
+- For Rails views: use existing `pb_*` helpers/components instead of custom HTML when possible.
+- Prefer matching existing patterns in the codebase over new abstractions.
+
+### AI Metadata (Structured Component Data)
+
+Playbook ships with AI-friendly metadata for validated code generation:
+
+```
+node_modules/playbook-ui/dist/ai/
+├── index.json               # Manifest (schemas + playground paths)
+├── global-props.schema.json # Props available on ALL components
+├── all-schemas.json         # All schemas bundled (bulk lookup; no playgrounds)
+├── kits/                    # Per-component prop schemas
+│   ├── button.schema.json
+│   └── ...
+└── playgrounds/             # Slim presets/hints/composition for accurate codegen
+    ├── index.json
+    ├── button.json
+    └── ...
+```
+
+**When generating UI:**
+1. Read `index.json` to find components
+2. Read `kits/<name>.schema.json` for valid props/values
+3. Read `global-props.schema.json` for universal props (margin, padding, etc.)
+4. Read `playgrounds/<name>.json` for presets, hints, conditionals, and nested templates
+5. Prefer playground presets over inventing prop combinations
+
+### Platform Detection
+
+| File Extension | Platform | Syntax |
+|----------------|----------|--------|
+| `.tsx`, `.jsx` | React | `<Button variant="primary" />` |
+| `.erb` | Rails | `<%= pb_rails("button", props: { variant: "primary" }) %>` |
+
+### Valid Spacing Values
+
+Use tokens, not raw pixels: `none`, `xxs`, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`
+
+```tsx
+// Good
+<Card padding="md" marginTop="lg" />
+
+// Bad - don't use raw pixels
+<Card padding="16px" marginTop="24px" />
+```
+
+### Playbook Documentation & Resources
+- **Documentation site:** https://playbook.powerapp.cloud/
+- **GitHub repo:** https://github.com/powerhome/playbook
+- Search existing usage in this codebase with patterns like `from "playbook-ui"` or `pb_rails`
+
+### When unsure
+1. Check AI metadata in `node_modules/playbook-ui/dist/ai/` (schemas + playgrounds)
+2. Search existing usage in this codebase
+3. Refer to documentation at https://playbook.powerapp.cloud/

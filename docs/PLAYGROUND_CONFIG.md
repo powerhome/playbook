@@ -2,7 +2,9 @@
 
 Playground configs power the kit Playground tab on the docs site.
 
-Do not hand-edit `docs/_playground.json` for normal kit work. That file is generated and will be overwritten. Put kit-specific choices in:
+Do not hand-edit `docs/_playground.json` for normal kit work. That file is generated and will be overwritten. After regeneration, `yarn build:ai` (also run by `yarn generate:docs-metadata`) exports a slim copy into `playbook/dist/ai/playgrounds/` for Nitro and other consuming apps — the website continues to read the full `_playground.json` files.
+
+Put kit-specific choices in:
 
 ```text
 playbook/app/pb_kits/playbook/<kit>/docs/_playground.overrides.json
