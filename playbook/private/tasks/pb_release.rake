@@ -116,8 +116,16 @@ namespace :pb_release do
     # Publish to RubyGems
     unless dryrun
       puts "\nPushing to RubyGems..."
-      `gem push playbook_ui-#{version}.gem`
-      `gem push playbook_ui_docs-#{version}.gem`
+      puts "If MFA is enabled (UI and API), you will be prompted for an OTP code..."
+      [
+        "playbook_ui-#{version}.gem",
+        "playbook_ui_docs-#{version}.gem",
+      ].each do |gem_file|
+        cmd = "gem push #{gem_file}"
+        puts "$ #{cmd}"
+        success = system(cmd)
+        abort "gem push failed for #{gem_file}. If no OTP prompt appeared, try:\n  #{cmd}\nor:\n  #{cmd} --otp YOUR_CODE" unless success
+      end
       puts "\nPushed to RubyGems. Now lets clean up..."
       `rm -rf playbook_ui-*.gem playbook_ui_docs-*.gem`
     end
