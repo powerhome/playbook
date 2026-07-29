@@ -40,7 +40,6 @@ export const PLAYGROUND_ENABLED_KITS = [
   "hashtag",
   "highlight",
   "home_address_street",
-  "icon_button",
   "icon_circle",
   "icon_stat_value",
   "icon_value",
