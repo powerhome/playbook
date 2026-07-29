@@ -1,19 +1,29 @@
 ---
 name: playbook-ui-generation
 description: >-
-  Generate UI code using Playbook design system components with validated props.
-  Use when creating React/Rails UI, processing Figma handoffs, screenshots,
-  building forms, cards, dialogs, tables, or any user interface. Reads structured
-  metadata from playbook-ui package to ensure correct component usage.
+  Generate UI with Playbook design system components and validated props.
+  Use for any UI request — prompts, screens, forms, tables, Figma, screenshots —
+  unless the user explicitly asks for non-Playbook markup. Reads playbook-ui
+  dist/ai metadata for kits, props, playgrounds, and visual mapping.
 ---
 
 # Playbook UI Generation
 
 Generate UI using Playbook components with validated props.
 
+## Playbook-first (prompts included)
+
+For **any** request that produces or changes UI, default to Playbook kits.
+
+- Do not require the user to say “use Playbook.”
+- Prefer `playbook-ui` / `pb_rails` over custom HTML, CSS layout, or other libraries when a kit exists.
+- Prefer **global props** (`global-props.schema.json`) for spacing, layout, display, flex, position, and sizing — **do not add SCSS/CSS files** for those concerns.
+- Compose app-specific components **from** Playbook kits; do not replace kits with one-off markup or stylesheets.
+- Only skip Playbook (or add custom CSS) when the user explicitly requires it, or no kit/global prop can express the need (verify via `dist/ai` first).
+
 ## Required: Read These Files First
 
-Before generating ANY Playbook code, you MUST read:
+Before generating ANY UI code, you MUST read:
 
 1. **Component index** — `node_modules/playbook-ui/dist/ai/index.json`
 2. **Global props** — `node_modules/playbook-ui/dist/ai/global-props.schema.json`
@@ -44,6 +54,18 @@ node_modules/playbook-ui/dist/ai/
     ├── button.json
     └── ...
 ```
+
+## Prompt → UI Workflow
+
+Natural-language UI requests (no screenshot/Figma):
+
+1. **Treat as Playbook work** — map the ask to kits via `kitMeta` / `index.json` (titles, cards, forms, tables, dialogs, etc.).
+2. **Search the repo** for similar Playbook usage (`from "playbook-ui"`, `pb_rails`) and match local patterns.
+3. **For each kit:** read schema + playground; prefer presets; honor hints/conditionals/structureModes.
+4. **Layout with Playbook** — `Flex` / `Card` / `Layout` + **global props** (margin/padding/gap/align/display/…). Do not create or extend `.scss` / `.css` for spacing or flex layout.
+5. **Validate** props/enums/platforms before emitting code.
+
+Do not invent a parallel design system. Do not emit raw HTML buttons/inputs/tables when kits exist. Do not add stylesheets for what global props already solve.
 
 ## Generation Workflow
 
@@ -140,8 +162,9 @@ Some props differ by platform (e.g. React `htmlType="submit"` → Rails `type: "
 
 | Check | How |
 |-------|-----|
-| Kit chosen correctly | `visual-index.json` looksLike / not / gotchas |
-| Component exists | `index.json` / `kitMeta` |
+| Playbook used where a kit exists | `index.json` / `kitMeta` — no parallel HTML/CSS UI |
+| Spacing/layout via global props | `global-props.schema.json` — no new SCSS for margin/padding/flex/display |
+| Kit chosen correctly (visuals) | `visual-index.json` looksLike / not / gotchas |
 | Prop name / value valid | `kits/<name>.schema.json` |
 | Combo is realistic | `playgrounds/<name>.json` presets |
 | Constraints honored | playground `hints` + `conditionals` |
@@ -151,6 +174,8 @@ Some props differ by platform (e.g. React `htmlType="submit"` → Rails `type: "
 **Common mistakes:**
 
 ```
+✗ Custom <button>/<input>/<div> layout when a Playbook kit exists
+✗ New .scss for margin/padding/flex/gap when global props exist
 ✗ variant="blue"   → use semantic names like "primary", "secondary"
 ✗ size="large"     → use abbreviated tokens: "lg"
 ✗ padding="16px"   → use tokens: "md"
