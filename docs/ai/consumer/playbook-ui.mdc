@@ -35,6 +35,7 @@ node_modules/playbook-ui/dist/ai/
 3. Read `global-props.schema.json` for universal props (margin, padding, etc.)
 4. Read `playgrounds/<name>.json` for presets, hints, conditionals, and nested templates
 5. Prefer playground presets over inventing prop combinations
+6. For AdvancedTable, copy `columnDefinitions` / `tableData` from `playgrounds/advanced_table.json` (`samples` or preset props) — nested rows use `children`, first column uses `cellAccessors`
 
 ### Platform Detection
 

@@ -3,6 +3,9 @@
  *
  * Keeps high-signal codegen fields (presets, hints, composition) and strips
  * website UI chrome + large mock datasets that would bloat dist/ai.
+ *
+ * AdvancedTable is special-cased: full playground mocks are huge, so we inject
+ * tiny synthetic columnDefinitions/tableData samples agents can copy.
  */
 
 export const AI_PLAYGROUND_KEYS = [
@@ -25,6 +28,58 @@ export const AI_PLAYGROUND_KEYS = [
 
 const HEAVY_PROP_KEYS = new Set(['columnDefinitions', 'tableData', 'table_data']);
 
+/** Compact AdvancedTable shapes for AI codegen (not the website mock datasets). */
+export const ADVANCED_TABLE_AI_SAMPLES = {
+  columnDefinitions: [
+    { accessor: 'year', label: 'Year', cellAccessors: ['quarter', 'month'] },
+    { accessor: 'newEnrollments', label: 'New Enrollments' },
+    { accessor: 'attendanceRate', label: 'Attendance Rate' },
+  ],
+  columnDefinitionsSortable: [
+    { accessor: 'year', label: 'Year', cellAccessors: ['quarter', 'month'] },
+    { accessor: 'newEnrollments', label: 'New Enrollments', enableSort: true },
+    { accessor: 'attendanceRate', label: 'Attendance Rate', enableSort: true },
+  ],
+  tableDataNested: [
+    {
+      year: '2021',
+      quarter: null,
+      month: null,
+      newEnrollments: '20',
+      attendanceRate: '51%',
+      children: [
+        {
+          year: '2021',
+          quarter: 'Q1',
+          month: null,
+          newEnrollments: '2',
+          attendanceRate: '32%',
+          children: [
+            {
+              year: '2021',
+              quarter: 'Q1',
+              month: 'January',
+              newEnrollments: '16',
+              attendanceRate: '11%',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      year: '2022',
+      quarter: null,
+      month: null,
+      newEnrollments: '35',
+      attendanceRate: '64%',
+    },
+  ],
+  tableDataFlat: [
+    { year: '2021', newEnrollments: '20', attendanceRate: '51%' },
+    { year: '2022', newEnrollments: '35', attendanceRate: '64%' },
+  ],
+};
+
 function cloneJson(value) {
   return value === undefined ? undefined : JSON.parse(JSON.stringify(value));
 }
@@ -45,37 +100,67 @@ function stripHeavyProps(props) {
   return { props: next, removed };
 }
 
-function slimStructureModes(structureModes) {
+function slimStructureModes(structureModes, { keepHeavyProps = false } = {}) {
   if (!structureModes || typeof structureModes !== 'object') return structureModes;
 
   const next = cloneJson(structureModes);
-  let strippedData = false;
 
-  if (next.modes && typeof next.modes === 'object') {
+  if (!keepHeavyProps && next.modes && typeof next.modes === 'object') {
     for (const mode of Object.values(next.modes)) {
       if (!mode || typeof mode !== 'object') continue;
-      const { props, removed } = stripHeavyProps(mode.props);
+      const { props } = stripHeavyProps(mode.props);
       mode.props = props;
-      if (removed) strippedData = true;
     }
-  }
-
-  if (strippedData) {
-    next.dataNote =
-      'Large mock datasets (columnDefinitions/tableData) omitted from AI export. Use kit docs for sample table data.';
   }
 
   return next;
 }
 
-function slimPresets(presets) {
+function advancedTableSampleForPreset(dataPresetKey) {
+  const samples = ADVANCED_TABLE_AI_SAMPLES;
+  const key = dataPresetKey || 'default';
+
+  if (key === 'flat_no_subrows') {
+    return {
+      columnDefinitions: cloneJson(samples.columnDefinitions),
+      tableData: cloneJson(samples.tableDataFlat),
+    };
+  }
+
+  if (key === 'column_sort') {
+    return {
+      columnDefinitions: cloneJson(samples.columnDefinitionsSortable),
+      tableData: cloneJson(samples.tableDataNested),
+    };
+  }
+
+  // default, with_ids, inline_loading, grouped_*, column_styling, etc.
+  return {
+    columnDefinitions: cloneJson(samples.columnDefinitions),
+    tableData: cloneJson(samples.tableDataNested),
+  };
+}
+
+function slimPresets(presets, kitName) {
   if (!Array.isArray(presets)) return presets;
 
   return presets.map((preset) => {
     if (!preset || typeof preset !== 'object') return preset;
     const { dataPreset, ...rest } = cloneJson(preset);
     const { props, removed } = stripHeavyProps(rest.props);
-    rest.props = props;
+    rest.props = props || {};
+
+    if (kitName === 'advanced_table') {
+      const sample = advancedTableSampleForPreset(dataPreset);
+      rest.props = {
+        ...sample,
+        ...rest.props,
+      };
+      if (dataPreset != null) rest.dataPreset = dataPreset;
+      delete rest.dataNote;
+      return rest;
+    }
+
     if (dataPreset != null || removed) {
       rest.dataNote =
         'Mock dataset omitted from AI export; compose with schema props and docs examples.';
@@ -84,28 +169,80 @@ function slimPresets(presets) {
   });
 }
 
+function enrichAdvancedTable(out, config) {
+  const samples = ADVANCED_TABLE_AI_SAMPLES;
+
+  out.samples = {
+    description:
+      'Tiny synthetic AdvancedTable datasets for AI codegen. Prefer these shapes over inventing column/row structures. Nested rows use a children array; cellAccessors list sub-row label fields for the first column.',
+    columnDefinitions: cloneJson(samples.columnDefinitions),
+    columnDefinitionsSortable: cloneJson(samples.columnDefinitionsSortable),
+    tableDataNested: cloneJson(samples.tableDataNested),
+    tableDataFlat: cloneJson(samples.tableDataFlat),
+  };
+
+  out.requiredProps = {
+    columnDefinitions: cloneJson(samples.columnDefinitions),
+    tableData: cloneJson(samples.tableDataNested),
+  };
+
+  if (config.dataPresets?.presets) {
+    const keys = Object.keys(config.dataPresets.presets);
+    out.dataPresets = {
+      note: 'Full website mock datasets are not shipped. Each key maps to the tiny samples below (or samples.*).',
+      keys,
+      presets: Object.fromEntries(
+        keys.map((key) => [
+          key,
+          {
+            label: config.dataPresets.presets[key]?.label || key,
+            ...advancedTableSampleForPreset(key),
+          },
+        ])
+      ),
+    };
+  }
+
+  // Point agents at the real template pattern (variables, not empty self-closing tag).
+  if (!out.template || out.template === '<AdvancedTable{{props}} />') {
+    out.template =
+      '<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n{{props}}\n/>';
+  }
+
+  return out;
+}
+
 /**
  * Convert a full website `_playground.json` into a slim AI export payload.
  * Returns null when there is nothing useful to ship.
+ *
+ * @param {object} config
+ * @param {string} [kitName]
  */
-export function slimPlaygroundConfig(config) {
+export function slimPlaygroundConfig(config, kitName) {
   if (!config || typeof config !== 'object') return null;
 
+  const isAdvancedTable = kitName === 'advanced_table';
   const out = {};
+
   for (const key of AI_PLAYGROUND_KEYS) {
     if (config[key] === undefined) continue;
     if (key === 'presets') {
-      out.presets = slimPresets(config[key]);
+      out.presets = slimPresets(config[key], kitName);
     } else if (key === 'structureModes') {
-      out.structureModes = slimStructureModes(config[key]);
+      out.structureModes = slimStructureModes(config[key], {
+        keepHeavyProps: isAdvancedTable,
+      });
     } else {
       out[key] = cloneJson(config[key]);
     }
   }
 
-  if (config.dataPresets?.presets) {
+  if (isAdvancedTable) {
+    enrichAdvancedTable(out, config);
+  } else if (config.dataPresets?.presets) {
     out.dataPresets = {
-      note: 'Mock table datasets omitted from AI export. See Playbook docs / kit examples for AdvancedTable sample data.',
+      note: 'Mock table datasets omitted from AI export. See Playbook docs / kit examples for sample data.',
       keys: Object.keys(config.dataPresets.presets),
     };
   }
@@ -113,10 +250,37 @@ export function slimPlaygroundConfig(config) {
   return Object.keys(out).length > 0 ? out : null;
 }
 
+function formatConst(name, value) {
+  return `const ${name} = ${JSON.stringify(value, null, 2)}`;
+}
+
 /**
  * Build a short React/Rails usage example from the first playground preset.
  */
 export function usageFromPreset(kitName, pascalName, playground) {
+  if (kitName === 'advanced_table' && playground?.requiredProps) {
+    const { columnDefinitions, tableData } = playground.requiredProps;
+    const reactSetup = [
+      formatConst('columnDefinitions', columnDefinitions),
+      formatConst('tableData', tableData),
+    ].join('\n\n');
+
+    return {
+      react: {
+        import: "import { AdvancedTable } from 'playbook-ui'",
+        example: `${reactSetup}\n\n<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n/>`,
+        preset: playground.presets?.[0]?.name || 'Default',
+      },
+      rails: {
+        import: null,
+        example:
+          '<%= pb_rails("advanced_table", props: {\n  column_definitions: column_definitions,\n  table_data: table_data\n}) %>',
+        preset: playground.presets?.[0]?.name || 'Default',
+        note: 'Define column_definitions / table_data in the view or helper using the same shapes as playgrounds/advanced_table.json samples.',
+      },
+    };
+  }
+
   const preset = playground?.presets?.[0];
   if (!preset) return null;
 
@@ -178,5 +342,6 @@ export function playgroundStats(slim) {
     hasHints: Boolean(slim.hints && Object.keys(slim.hints).length),
     hasConditionals: Boolean(slim.conditionals && Object.keys(slim.conditionals).length),
     hasCustomProps: Boolean(slim.customProps && Object.keys(slim.customProps).length),
+    hasSamples: Boolean(slim.samples),
   };
 }

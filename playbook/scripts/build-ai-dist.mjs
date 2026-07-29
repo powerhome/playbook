@@ -166,7 +166,7 @@ async function main() {
   for (const { name, schemaPath, playgroundPath } of kits) {
     const rawSchema = readJson(schemaPath);
     const rawPlayground = readJson(playgroundPath);
-    const slimPlayground = slimPlaygroundConfig(rawPlayground);
+    const slimPlayground = slimPlaygroundConfig(rawPlayground, name);
     const schema = enrichSchemaUsage(rawSchema, name, slimPlayground);
 
     writeJson(path.join(kitsOutputDir, `${name}.schema.json`), schema);

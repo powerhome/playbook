@@ -57,7 +57,9 @@ dist/ai/
 | `playgrounds/*.json` | slim | Presets, hints, conditionals, composition patterns |
 | `playgrounds/index.json` | small | Discover which kits have playground patterns |
 
-Playgrounds are **opt-in for agents**: keep loading schemas by default, then read `playgrounds/<kit>.json` for kits you are generating. Large mock datasets (`dataPresets`, table JSON) are stripped so `dist/ai` stays lean.
+Playgrounds are **opt-in for agents**: keep loading schemas by default, then read `playgrounds/<kit>.json` for kits you are generating. Large website mock datasets are stripped so `dist/ai` stays lean.
+
+**AdvancedTable exception:** `playgrounds/advanced_table.json` includes tiny synthetic `samples` / `requiredProps` / hydrated presets (`columnDefinitions` + `tableData` with nested `children` and `cellAccessors`) so agents can generate correct table code without the full docs mocks.
 
 ## Schema Format
 

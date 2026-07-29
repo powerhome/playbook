@@ -65,7 +65,7 @@ For each component:
    - Use **customProps** / **propTargets** for subcomponent APIs (e.g. NavItem under Nav)
    - Use **wrapper** / **statefulProps** / **requiredCodeProps** for stateful kits
 
-Do **not** invent mock table datasets for AdvancedTable; playground export omits heavy `dataPresets` on purpose.
+For **AdvancedTable**, read `playgrounds/advanced_table.json` and copy shapes from `samples` / `requiredProps` / preset `props` (`columnDefinitions`, `tableData`, nested `children`, first-column `cellAccessors`). Do not invent column/row structures; do not expect the full website mock datasets.
 
 ### Step 4: Generate Code
 
