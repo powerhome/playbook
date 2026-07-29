@@ -10,6 +10,7 @@ import {
   maplibreLoader,
   playbookChartsLoader,
   reactHookFormLoader,
+  reactSelectLoader,
   tiptapLoader,
   trixLoader,
   ThirdPartyLoader,
@@ -99,6 +100,7 @@ const LIB_LOADERS: ThirdPartyLoader[] = [
   maplibreLoader,
   playbookChartsLoader,
   reactHookFormLoader,
+  reactSelectLoader,
   tiptapLoader,
   trixLoader,
 ];
