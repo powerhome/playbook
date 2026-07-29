@@ -1,7 +1,7 @@
 import React from 'react'
 import Dropdown from '../../pb_dropdown/_dropdown'
 
-const DropdownDefaultValue = (props) => {
+const DropdownDefaultValueWithAutocomplete = (props) => {
   const options = [
     {
       label: "United States",
@@ -23,6 +23,7 @@ const DropdownDefaultValue = (props) => {
   return (
   <>
     <Dropdown
+        autocomplete
         defaultValue={options[2]}
         options={options}
         {...props}
@@ -31,4 +32,4 @@ const DropdownDefaultValue = (props) => {
   )
 }
 
-export default DropdownDefaultValue
+export default DropdownDefaultValueWithAutocomplete
