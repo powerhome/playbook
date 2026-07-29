@@ -1,8 +1,10 @@
-# 16.12.0
+# 🎉 All the Cool Kits Refactor: Distribution Bar Goes Native
 
 ##### July 29, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+😎 Another kit has joined the cool kids club. Distribution Bar is now fully Rails-native, bringing us one step closer to a world where Rails kits are Rails and React kits are React. Toss in new Timestamp timezone support, Pill sizing, Advanced Table enhancements, and a whole lot of Playground polish, and you’ve got yourself a release.
 
 [16.12.0](https://github.com/powerhome/playbook/tree/16.12.0) full list of changes:
 
