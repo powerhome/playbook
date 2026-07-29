@@ -113,6 +113,13 @@ export const OtherNavItems = ({
     updateTopLevelNav(parentIndex);
   };
 
+  // Collapsible.Main toggles on main click unless onClick returns true.
+  // Parent nav should navigate without collapsing an open group (icon toggles).
+  const handleCollapsibleParentClick = (link) => {
+    handleItemClick(link);
+    return true;
+  };
+
   const activeForItems = (link) => {
     const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, "");
     return link.link === currentURL || link.link === normalizedCurrentURL;
@@ -213,7 +220,7 @@ export const OtherNavItems = ({
               key={`${link.link}-${link.groupKey}-parent`}
               marginBottom="none"
               marginTop="xxs"
-              onClick={() => handleItemClick(link)}
+              onClick={() => handleCollapsibleParentClick(link)}
               onIconRightClick={
                 children.length > 0
                   ? () =>
