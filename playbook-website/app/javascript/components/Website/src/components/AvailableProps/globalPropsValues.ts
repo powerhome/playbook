@@ -139,6 +139,60 @@ const globalPropsValues = [
     platforms: ["react","rails"]
   },
   {
+    prop: "gridArea",
+    type: "string",
+    values: [],
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "gridAutoColumns",
+    type: "string",
+    values: [],
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "gridAutoFlow",
+    type: "union",
+    values: '"row" | "column" | "dense" | "rowDense" | "columnDense"',
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "gridAutoRows",
+    type: "string",
+    values: [],
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "gridColumn",
+    type: "string",
+    values: [],
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "gridRow",
+    type: "string",
+    values: [],
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "gridTemplateAreas",
+    type: "string",
+    values: [],
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "gridTemplateColumns",
+    type: "string",
+    values: [],
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "gridTemplateRows",
+    type: "string",
+    values: [],
+    platforms: ["react","rails"]
+  },
+  {
     prop: "groupHover",
     type: "boolean",
     values: [],
@@ -166,6 +220,12 @@ const globalPropsValues = [
     prop: "justifyContent",
     type: "union",
     values: '"start" | "end" | "center" | "spaceBetween" | "spaceAround" | "spaceEvenly"',
+    platforms: ["react","rails"]
+  },
+  {
+    prop: "justifyItems",
+    type: "union",
+    values: '"start" | "end" | "center" | "stretch"',
     platforms: ["react","rails"]
   },
   {

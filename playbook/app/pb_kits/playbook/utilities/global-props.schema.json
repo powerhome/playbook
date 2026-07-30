@@ -395,6 +395,103 @@
       "description": "Justify self.",
       "example": "justifySelf=\"start\" or justifySelf={{ default: \"start\", md: \"end\" }}"
     },
+    "justifyItems": {
+      "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "start",
+        "end",
+        "center",
+        "stretch"
+      ],
+      "responsive": true,
+      "description": "Justify items.",
+      "example": "justifyItems=\"start\" or justifyItems={{ default: \"start\", md: \"end\" }}"
+    },
+    "gridTemplateColumns": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Grid template columns."
+    },
+    "gridTemplateRows": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Grid template rows."
+    },
+    "gridTemplateAreas": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Grid template areas."
+    },
+    "gridColumn": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Grid column."
+    },
+    "gridRow": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Grid row."
+    },
+    "gridArea": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Grid area."
+    },
+    "gridAutoColumns": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Grid auto columns."
+    },
+    "gridAutoRows": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Grid auto rows."
+    },
+    "gridAutoFlow": {
+      "type": "enum | responsive",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "row",
+        "column",
+        "dense",
+        "rowDense",
+        "columnDense"
+      ],
+      "responsive": true,
+      "description": "Grid auto flow.",
+      "example": "gridAutoFlow=\"row\" or gridAutoFlow={{ default: \"row\", md: \"column\" }}"
+    },
     "lineHeight": {
       "type": "enum",
       "platforms": [

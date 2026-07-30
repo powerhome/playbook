@@ -13,6 +13,7 @@ import VisualGuide from "./Partials/VisualGuide";
 
 type ShowPageTypes = {
   isFlex?: boolean;
+  isGrid?: boolean;
   title: string;
   description?: string | ReactNode;
   descriptionSecondary?: string | ReactNode;
@@ -23,6 +24,7 @@ type ShowPageTypes = {
 
 const ShowPage = ({
   isFlex = false,
+  isGrid = false,
   title,
   description,
   descriptionSecondary,
@@ -59,11 +61,22 @@ const ShowPage = ({
                 <Detail color="link">{title}</Detail>
               </BreadCrumbItem>
             </>
-          ) :
+          ) : isGrid ? (
+            <>
+              <BreadCrumbItem>
+                <Link to="/global_props/grid">
+                  <Detail color="link">Grid</Detail>
+                </Link>
+              </BreadCrumbItem>
+              <BreadCrumbItem>
+                <Detail color="link">{title}</Detail>
+              </BreadCrumbItem>
+            </>
+          ) : (
             <BreadCrumbItem>
               <Detail color="default">{title}</Detail>
             </BreadCrumbItem>
-          }
+          )}
         </BreadCrumbs>
         <Title size={1}>{title}</Title>
         {pageType === "global_props" && <CardHeader />}

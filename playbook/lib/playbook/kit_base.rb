@@ -12,6 +12,7 @@ require "playbook/flex_direction"
 require "playbook/flex_wrap"
 require "playbook/justify_content"
 require "playbook/justify_self"
+require "playbook/justify_items"
 require "playbook/align_items"
 require "playbook/align_content"
 require "playbook/align_self"
@@ -19,6 +20,8 @@ require "playbook/flex"
 require "playbook/flex_grow"
 require "playbook/flex_shrink"
 require "playbook/order"
+require "playbook/grid"
+require "playbook/grid_auto_flow"
 require "playbook/position"
 require "playbook/hover"
 require "playbook/border_radius"
@@ -53,6 +56,7 @@ module Playbook
     include Playbook::FlexWrap
     include Playbook::JustifyContent
     include Playbook::JustifySelf
+    include Playbook::JustifyItems
     include Playbook::AlignItems
     include Playbook::AlignContent
     include Playbook::AlignSelf
@@ -60,6 +64,8 @@ module Playbook
     include Playbook::FlexGrow
     include Playbook::FlexShrink
     include Playbook::Order
+    include Playbook::Grid
+    include Playbook::GridAutoFlow
     include Playbook::Position
     include Playbook::Hover
     include Playbook::BorderRadius
@@ -169,12 +175,31 @@ module Playbook
       h = height
       mh = min_height
       xh = max_height
-      return EMPTY_HASH if h.nil? && mh.nil? && xh.nil?
+      gtc = grid_template_columns
+      gtr = grid_template_rows
+      gta = grid_template_areas
+      gc = grid_column
+      gr = grid_row
+      ga = grid_area
+      gac = grid_auto_columns
+      gar = grid_auto_rows
+      return EMPTY_HASH if h.nil? && mh.nil? && xh.nil? &&
+                           gtc.nil? && gtr.nil? && gta.nil? &&
+                           gc.nil? && gr.nil? && ga.nil? &&
+                           gac.nil? && gar.nil?
 
       r = {}
       r[:height] = h if h
       r[:min_height] = mh if mh
       r[:max_height] = xh if xh
+      r[:grid_template_columns] = gtc if gtc
+      r[:grid_template_rows] = gtr if gtr
+      r[:grid_template_areas] = gta if gta
+      r[:grid_column] = gc if gc
+      r[:grid_row] = gr if gr
+      r[:grid_area] = ga if ga
+      r[:grid_auto_columns] = gac if gac
+      r[:grid_auto_rows] = gar if gar
       r
     end
 

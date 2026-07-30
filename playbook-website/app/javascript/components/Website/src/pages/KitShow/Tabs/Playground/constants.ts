@@ -55,6 +55,25 @@ export const GLOBAL_PROP_GROUPS: Array<{ name: string; props: string[] }> = [
     ],
   },
   {
+    name: "Grid",
+    props: [
+      "display",
+      "gridTemplateColumns",
+      "gridTemplateRows",
+      "gridTemplateAreas",
+      "gridColumn",
+      "gridRow",
+      "gridArea",
+      "gridAutoColumns",
+      "gridAutoRows",
+      "gridAutoFlow",
+      "justifyItems",
+      "gap",
+      "columnGap",
+      "rowGap",
+    ],
+  },
+  {
     name: "Height & Width",
     props: [
       "height",
