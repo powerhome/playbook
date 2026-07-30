@@ -32,24 +32,38 @@ After running `yarn build:ai`, you'll find:
 
 ```
 dist/ai/
-├── index.json                  # Manifest with version & paths
+├── index.json                  # Manifest: schemas, playgrounds, kitMeta, visualIndex
+├── visual-index.json           # Screenshot / visual → kit map (looksLike, lookalikes, tokens)
+├── external-dependencies.json  # Kits that need host-app packages (Highcharts, TipTap, …)
 ├── global-props.schema.json    # Props available on ALL components
-├── all-schemas.json            # Everything in one file (254KB)
-└── kits/                       # Individual component schemas
-    ├── button.schema.json
-    ├── card.schema.json
-    ├── dialog.schema.json
-    └── ... (103 components)
+├── all-schemas.json            # All kit schemas in one file (schemas only)
+├── kits/                       # Individual component schemas
+│   ├── button.schema.json
+│   ├── card.schema.json
+│   └── ...
+└── playgrounds/                # Slim patterns for agent codegen (not full website configs)
+    ├── index.json              # Kit → path + preset/hint counts
+    ├── button.json
+    ├── card.json
+    └── ...
 ```
 
 ### File Descriptions
 
 | File | Size | Use Case |
 |------|------|----------|
-| `index.json` | 5KB | Discover available schemas, get version info |
-| `global-props.schema.json` | 14KB | Reference for spacing, layout, display props |
-| `all-schemas.json` | 254KB | Load everything at once for full AI context |
-| `kits/*.schema.json` | ~2KB each | Look up individual component details |
+| `index.json` | ~8KB+ | Discover schemas, playgrounds, kitMeta |
+| `visual-index.json` | small | Map screenshots/visuals → kits before guessing |
+| `external-dependencies.json` | small | Kits whose engines are peer/optional host deps |
+| `global-props.schema.json` | ~24KB | Spacing, layout, display props |
+| `all-schemas.json` | ~280KB | Bulk schema lookup (no playgrounds) |
+| `kits/*.schema.json` | ~2–4KB each | Props + menu descriptions + usage from presets |
+| `playgrounds/*.json` | slim | Presets, hints, conditionals, composition patterns |
+| `playgrounds/index.json` | small | Discover which kits have playground patterns |
+
+Playgrounds are **opt-in for agents**: keep loading schemas by default, then read `playgrounds/<kit>.json` for kits you are generating. Large website mock datasets are stripped so `dist/ai` stays lean.
+
+**AdvancedTable exception:** `playgrounds/advanced_table.json` includes tiny synthetic `samples` / `requiredProps` / hydrated presets (`columnDefinitions` + `tableData` with nested `children` and `cellAccessors`) so agents can generate correct table code without the full docs mocks.
 
 ## Schema Format
 
@@ -125,13 +139,14 @@ dist/ai/
 
 | Script | Description |
 |--------|-------------|
-| `yarn generate:docs-metadata` (repo root) | **Preferred.** Kit schemas + global props schema/values + playgrounds |
+| `yarn generate:docs-metadata` (repo root) | **Preferred.** Kit schemas + global props + playgrounds + `dist/ai` |
 | `yarn generate:ai-metadata` | Generate kit.schema.json for all components |
 | `yarn generate:global-props-metadata` | Generate global-props.schema.json |
 | `yarn generate:all-ai-metadata` | Generate both kit and global props schemas |
-| `yarn build:ai` | Clean and copy schemas to dist/ai/ (default clean) |
+| `yarn generate:playground-configs` | Generate per-kit `_playground.json` from schema + overrides |
+| `yarn build:ai` | Clean and build `dist/ai/` (schemas + slim playgrounds) |
 | `yarn build:ai --no-clean` | Incremental build without cleaning |
-| `yarn build:ai:full` | Generate + build (full rebuild) |
+| `yarn build:ai:full` | Regenerate schemas + playgrounds, then build `dist/ai` |
 | `yarn generate:ai-metadata --verbose` | Verbose flag to show more info for debugging|
 | `yarn release` | Full release build (includes AI metadata) |
 
@@ -177,10 +192,75 @@ When Playbook changes, the schema updates automatically - no manual edits needed
 
 ### Build Distribution (`build-ai-dist.mjs`)
 
-1. Copies all `kit.schema.json` files to `dist/ai/kits/`
-2. Copies `global-props.schema.json` to `dist/ai/`
-3. Creates `all-schemas.json` with everything combined
-4. Creates `index.json` manifest
+1. Loads kit catalog from `playbook-website/config/menu.yml` (descriptions, categories)
+2. Copies all `kit.schema.json` files to `dist/ai/kits/`, enriching thin descriptions from menu.yml and `usage` from the first playground preset
+3. Copies `global-props.schema.json` to `dist/ai/`
+4. Creates `all-schemas.json` with schemas only (playgrounds stay separate to avoid bloat)
+5. Creates slim `dist/ai/playgrounds/<kit>.json` from each `_playground.json`
+6. Builds `visual-index.json` (menu catalog + curated lookalike/visual cues)
+7. Reads `externalDependencies` from playground configs (authored in `_playground.overrides.json`), stamps them onto dist kit schemas / `kitMeta`, and aggregates `external-dependencies.json`
+8. Creates `index.json` (includes `kitMeta` + `visualIndex` + `externalDependencies`) and `playgrounds/index.json`
+
+Slim playground export keeps: `presets`, `hints`, `conditionals`, `structureModes`, `template`, `children`, `customProps`, `wrapper`, `statefulProps`, `requiredCodeProps`, `propTargets`, `propAliases`, `codegenDefaultProps`, imports. It strips website UI chrome (`groups`, `hiddenProps`, …) and large mock table datasets.
+
+### Helpers
+
+| File | Role |
+|------|------|
+| `lib/slim-playground.mjs` | Slim playground transform (+ AdvancedTable samples) |
+| `lib/load-menu-catalog.mjs` | Parse `menu.yml` → kit descriptions/categories |
+| `lib/visual-cues.mjs` | **Manual.** Curated looksLike / not / gotchas for ambiguous kits |
+| `lib/build-visual-index.mjs` | Merge menu + cues → `visual-index.json` (rebuild only; cues are manual) |
+### External / third-party dependencies
+
+Some kits wrap libraries that are optional peers / host-app packages (Highcharts, TipTap, MapLibre, …). Declare them on the kit:
+
+```json
+// docs/_playground.overrides.json
+{
+  "externalDependencies": {
+    "packages": ["highcharts", "highcharts-react-official"],
+    "optional": true,
+    "note": "Host app must already have these installed. Agents must not install packages — tell the user if missing."
+  }
+}
+```
+
+After `yarn generate:playground-configs` / `yarn generate:docs-metadata` / `yarn build:ai`, that field ships as:
+
+- `dist/ai/playgrounds/<kit>.json` → `externalDependencies`
+- `dist/ai/kits/<kit>.schema.json` → `externalDependencies`
+- `dist/ai/index.json` → `kitMeta.<kit>.externalDependencies`
+- `dist/ai/external-dependencies.json` (aggregate index)
+
+**Agents must not install packages** — they should inform the user if deps are missing.
+
+**When to update:** peer/install notes change for a wrapper kit → edit that kit’s `_playground.overrides.json` → regenerate docs metadata / build AI dist.
+
+### Updating the visual index
+
+`dist/ai/visual-index.json` is rebuilt on every `yarn build:ai`. What goes into it is a mix of automatic and manual sources:
+
+| Source | Automated? | When it updates |
+|--------|------------|-----------------|
+| Kit list from `dist/ai` / kit folders | Yes | Every `build:ai` |
+| Descriptions, categories, status from `menu.yml` | Yes | Every `build:ai` (edit menu.yml, then rebuild) |
+| `looksLike`, `not`, `gotchas`, `variantsFromVisual`, typography/layout/spacing maps | **No — manual** | Edit `playbook/scripts/lib/visual-cues.mjs`, then rebuild |
+
+**When to edit `visual-cues.mjs`:**
+- Agents (or Nitro) confuse two kits from a screenshot (e.g. Pill vs Badge, Table vs AdvancedTable)
+- A new kit is easy to mis-identify visually
+- You need a clearer `variantsFromVisual` map (e.g. button colors → `primary` / `secondary` / `danger`)
+- Spacing or typography heuristics drift from design practice
+
+**How to update:**
+1. Edit `playbook/scripts/lib/visual-cues.mjs` — usually `KIT_VISUAL_CUES.<kit_name>` (`looksLike`, `not`, `gotchas`, `cues`)
+2. From `playbook/`: `yarn build:ai`  
+   Or from repo root: `yarn generate:docs-metadata`
+3. Confirm `playbook/dist/ai/visual-index.json` includes your cues under `kits.<name>`
+4. Commit the `visual-cues.mjs` change (and any docs). `dist/` is built at release / local generate; it is not the hand-authored source
+
+Do **not** hand-edit `dist/ai/visual-index.json` — it is overwritten on the next build.
 
 ## Integration
 
@@ -192,7 +272,7 @@ Docs metadata is generated by `./setup.sh` and `./run.sh` via:
 yarn generate:docs-metadata
 ```
 
-That regenerates kit schemas, global props schema/values, and playground configs in one pass.
+That regenerates kit schemas, global props schema/values, playground configs, and rebuilds `playbook/dist/ai` (including slim playgrounds) for Nitro and other consumers.
 
 ### Release
 
@@ -263,17 +343,25 @@ yarn generate:ai-metadata --dry-run --verbose
 
 ## For AI Tool Developers
 
-### Loading Schemas
+### Loading Schemas + Playgrounds
+
+In consuming apps (e.g. Nitro), metadata lives under `node_modules/playbook-ui/dist/ai/`.
 
 ```javascript
-// Load everything at once
-const schemas = await fetch('/dist/ai/all-schemas.json').then(r => r.json());
+// Schemas (always)
+const schemas = await fetch('.../dist/ai/all-schemas.json').then(r => r.json());
 const buttonProps = schemas.kits.button.props;
 const globalProps = schemas.globalProps.props;
 
-// Or load individual schemas
-const buttonSchema = await fetch('/dist/ai/kits/button.schema.json').then(r => r.json());
+// Per-kit schema
+const buttonSchema = await fetch('.../dist/ai/kits/button.schema.json').then(r => r.json());
+
+// Slim playground patterns (opt-in per kit you generate)
+const buttonPlayground = await fetch('.../dist/ai/playgrounds/button.json').then(r => r.json());
+// Prefer presets / honor hints + conditionals / follow structureModes for composition
 ```
+
+Optional consumer rule/skill drafts (not applied anywhere): `docs/ai/consumer/`.
 
 ### Key Fields
 
@@ -282,8 +370,9 @@ const buttonSchema = await fetch('/dist/ai/kits/button.schema.json').then(r => r
 - `props[name].platforms` - Which platforms support this prop (`react`, `rails`)
 - `props[name].default` - Default value if any
 - `globalProps: true` - Indicates component accepts all global props
-- `usage.react.example` - Example React JSX
+- `usage.react.example` - Example React JSX (seeded from first playground preset in dist)
 - `usage.rails.example` - Example Rails ERB
+- `playgrounds/<kit>.json` - Presets, hints, conditionals, templates, structure modes
 
 ### Responsive Props
 
@@ -304,10 +393,16 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `scripts/generate-docs-metadata.sh` (repo root) | Shared generator for schemas, values, playgrounds |
 | `playbook/scripts/generate-ai-metadata.mjs` | Generates kit schemas from TS/Ruby source |
 | `playbook/scripts/generate-global-props-metadata.mjs` | Generates global props schema |
-| `playbook/scripts/build-ai-dist.mjs` | Builds dist/ai folder |
+| `playbook/scripts/build-ai-dist.mjs` | Builds dist/ai folder (schemas + playgrounds + visual-index) |
+| `playbook/scripts/lib/slim-playground.mjs` | Slim playground transform for AI export |
+| `playbook/scripts/lib/load-menu-catalog.mjs` | menu.yml → kit descriptions/categories |
+| `playbook/scripts/lib/visual-cues.mjs` | Curated visual → kit cues |
+| `playbook/scripts/lib/build-visual-index.mjs` | Builds visual-index.json |
 | `playbook/scripts/lib/global-props-parser.mjs` | Shared module for parsing global props |
 | `playbook/app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (generated) |
+| `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json` | Generated playground configs (website + AI source) |
 | `playbook/app/pb_kits/playbook/utilities/global-props.schema.json` | Global props schema (generated) |
-| `playbook/dist/ai/*` | Distribution folder (built) |
+| `playbook/dist/ai/*` | Distribution folder (built; published with playbook-ui) |
+| `docs/ai/consumer/*` | Rule + skill templates for Nitro / consuming apps |
 | `.husky/pre-commit` | Runs lint-staged + docs metadata verification |
 | `.git-hooks/pre_commit/verify_docs_metadata.sh` | Pre-commit verification script |

@@ -1,0 +1,88 @@
+---
+description: >-
+  Playbook-first UI for any prompt that builds or changes UI. Prefer playbook-ui /
+  pb_rails over custom HTML, CSS layout, or other component libraries. Validates
+  against dist/ai schemas, playgrounds, and visual-index.
+globs: "**/*.{tsx,ts,jsx,js,erb,css,scss}"
+alwaysApply: false
+---
+
+## Playbook-first (any UI prompt)
+
+If the user asks to build, change, restyle, or lay out **UI** — screens, forms, tables, modals, nav, empty states, dashboards, buttons, typography, spacing — **use Playbook wherever a kit exists**.
+
+This applies whether the request is a natural-language prompt, a ticket, a screenshot, or a Figma handoff. Do not wait for the user to say “use Playbook.”
+
+### Defaults
+
+- **React:** `import { … } from "playbook-ui"` — never invent parallel button/card/input/table components when a kit exists.
+- **Rails:** `pb_rails("…")` / existing `pb_*` helpers — not raw Bootstrap/HTML for Playbook-covered UI.
+- **Layout:** `Flex`, `Card`, `Layout`, `Background`, global spacing props — not ad-hoc CSS flex/grid wrappers for structure Playbook already expresses.
+- **Type:** `Title`, `Body`, `Caption`, `Detail` — not raw `<h1>`/`<p>` with custom classes for product UI.
+- **Spacing / display / flex / position / etc.:** Playbook **global props** from `global-props.schema.json` — not new `.scss` / `.css` files for margins, padding, gaps, alignment, width, or display.
+- **Color:** semantic kit props and tokens — not raw px/hex in SCSS when tokens/props exist.
+
+### Do not
+
+- Reach for another UI library, unstyled HTML, or one-off CSS for something `dist/ai/index.json` / `kitMeta` already covers.
+- Add or extend SCSS/CSS modules to do what global props already do (`margin*`, `padding*`, `gap`, `flexDirection`, `justifyContent`, `alignItems`, `display`, `position`, `maxWidth`, …).
+- “Simplify” by dropping Playbook for plain HTML unless the user explicitly requires non-Playbook markup.
+- Guess props — read `node_modules/playbook-ui/dist/ai/` first.
+
+### Exceptions (only when needed)
+
+- App-specific domain components that **compose** Playbook kits (fine — still Playbook underneath).
+- True primitives Playbook does not provide (e.g. a third-party map canvas, chart host already wrapped by a kit).
+- Styles that **cannot** be expressed with kit props or global props (rare one-offs) — prefer the smallest scoped override, not a new layout stylesheet.
+- Explicit user instruction to avoid Playbook for a specific piece.
+
+If unsure a kit exists: check `dist/ai/index.json` + `kitMeta` (and `visual-index.json` for screenshots) before writing custom UI.
+
+### AI Metadata
+
+```
+node_modules/playbook-ui/dist/ai/
+├── index.json                    # Manifest + kitMeta
+├── visual-index.json             # Screenshot / visual → kit map
+├── external-dependencies.json    # Kits that need host-app packages
+├── global-props.schema.json
+├── all-schemas.json
+├── kits/
+└── playgrounds/
+```
+
+**When generating UI:**
+1. Assume Playbook-first (this rule).
+2. Read `index.json` / `kitMeta` to find kits.
+3. For screenshots: read `visual-index.json` before guessing kits.
+4. If the kit lists `externalDependencies`, **do not install packages**. Tell the user the host app must already have them (e.g. Highcharts, TipTap/Trix). Skip or stub that kit until deps are present.
+5. Read `kits/<name>.schema.json` for valid props/values.
+6. Read `global-props.schema.json` for spacing/layout props.
+7. Read `playgrounds/<name>.json` for presets, hints, conditionals, nested templates.
+8. Prefer playground presets over inventing prop combinations.
+9. For AdvancedTable, copy `columnDefinitions` / `tableData` from `playgrounds/advanced_table.json`.
+
+### Platform Detection
+
+| File Extension | Platform | Syntax |
+|----------------|----------|--------|
+| `.tsx`, `.jsx` | React | `<Button variant="primary" />` |
+| `.erb` | Rails | `<%= pb_rails("button", props: { variant: "primary" }) %>` |
+
+### Valid Spacing Values
+
+Use tokens, not raw pixels: `none`, `xxs`, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`  
+(Also see `visual-index.json` → `spacingPxToToken`.)
+
+```tsx
+// Good
+<Card padding="md" marginTop="lg" />
+
+// Bad - don't use raw pixels
+<Card padding="16px" marginTop="24px" />
+```
+
+### When unsure
+1. Check `dist/ai/` (`kitMeta`, schemas, playgrounds; `visual-index` for visuals)
+2. Search existing usage: `from "playbook-ui"` or `pb_rails`
+3. Docs: https://playbook.powerapp.cloud/

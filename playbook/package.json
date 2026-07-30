@@ -39,7 +39,7 @@
     "generate:global-props-metadata": "node scripts/generate-global-props-metadata.mjs",
     "generate:all-ai-metadata": "node scripts/generate-ai-metadata.mjs && node scripts/generate-global-props-metadata.mjs",
     "build:ai": "node scripts/build-ai-dist.mjs",
-    "build:ai:full": "yarn generate:all-ai-metadata && yarn build:ai"
+    "build:ai:full": "yarn generate:all-ai-metadata && yarn generate:playground-configs --overwrite && yarn build:ai"
   },
   "repository": {
     "type": "git",
