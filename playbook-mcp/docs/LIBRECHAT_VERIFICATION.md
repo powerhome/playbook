@@ -1,0 +1,51 @@
+# LibreChat / MCP-UI verification checklist
+
+Playbook MCP exposes **streamable-http** (MCP 2025-03-26) at `/mcp` — not the deprecated standalone SSE transport. Assets are self-served at `/assets/*` with permissive CORS (including fonts).
+
+## Connect
+
+| Field | Value |
+|-------|--------|
+| Transport | **Streamable HTTPS** (streamable-http) |
+| MCP Server URL | `http://localhost:3099/mcp` (local) or `https://<host>/mcp` |
+| Auth | None, or custom header `X-Playbook-Mcp-Key` if `PLAYBOOK_MCP_SHARED_SECRET` is set |
+
+## Phase 0 exit criteria (architecture risks)
+
+Kill **both** unknowns before expanding the tool surface:
+
+1. **ActionView-outside-request** — `render_kit` for Button returns on-brand HTML via `pb_rails`.
+2. **Iframe-JS hydration** — one JS-interactive kit works **inside a real LibreChat MCP-UI iframe** (`srcdoc` / `@mcp-ui/client`, sandbox with `allow-popups` as LibreChat configures it):
+   - **Preferred:** Table with `data-pb-table-wrapper` + `playbook-rails.js` (responsive/collapse).
+   - **Or:** Chart (`pb_bar_graph`) with vendored peers + chart bindings mounting Highcharts.
+
+Hand-served assets are fine for this gate; the mount chain (`playbook-rails.js` → React → Highcharts for charts) inside that sandbox is the architecture-threatening unknown.
+
+Local helper: `bundle exec ruby bin/smoke` asserts hydration hooks; LibreChat confirms the iframe.
+
+## Must pass (v1)
+
+1. Host completes MCP `initialize` against `/mcp` (streamable-http).
+2. `tools/list` includes `list_kits`, `get_kit_schema`, `render_kit`, `render_layout`, `render_chart`.
+3. Button renders on-brand in the sandboxed iframe (`playbook.css`).
+4. Table renders; **responsive/collapse JS runs in-iframe** (no UI Actions).
+5. Chart returns mount markup; with `bin/vendor_chart_peers`, Highcharts paints in-iframe.
+6. **Fonts:** Proxima / Power Centra (or configured face) load from `/assets/fonts/...` — not system fallback. Asset responses must include `Access-Control-Allow-Origin: *` (opaque iframe `Origin: null`).
+7. Document height: no clipping from `100vh` / fixed full-viewport wrappers (LibreChat auto-resizes to content).
+8. `render_layout` → **one** HTML document per call (multiple `ui://` resources become a carousel — wrong for dashboards).
+
+## UI Actions (known — skip discovery)
+
+LibreChat already handles **intent**, **tool**, and **prompt** action types (converted to chat messages via `handleUIAction`); other types are ignored (the ⚠️ in the mcp-ui host table).
+
+- **v1 tools must not depend on UI Actions.**
+- Table filter/collapse and chart interactivity are **pure in-iframe JS**.
+- Optional 10-minute check: DW `hello-ui.mjs` prompt-action button — confirm host converts prompt actions; Playbook tools still do not emit them.
+
+## Security checks before shared use
+
+- Production **requires** `PLAYBOOK_MCP_ALLOWLIST` and `SECRET_KEY_BASE`.
+- Set `PLAYBOOK_MCP_TRUSTED_PROXIES` to ingress CIDRs.
+- Optional: `PLAYBOOK_MCP_SHARED_SECRET` + LibreChat custom header `X-Playbook-Mcp-Key`.
+- Rate limit + props size caps.
+- Chart peers vendored (`bin/vendor_chart_peers`) — no runtime esm.sh.

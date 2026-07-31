@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+bundle check || bundle install
+mkdir -p tmp/pids log vendor/chart-peers
+if [[ "${PLAYBOOK_MCP_SKIP_VENDOR_CHARTS:-}" != "1" ]]; then
+  if [[ ! -f vendor/chart-peers/react.esm.js ]]; then
+    echo "Vendoring chart peers (React/Highcharts) for self-hosted iframes..."
+    bin/vendor_chart_peers || echo "WARN: chart peer vendoring failed; charts will be non-interactive until bin/vendor_chart_peers succeeds"
+  fi
+fi
+echo "playbook-mcp ready. Start with: bundle exec puma -C config/puma.rb"

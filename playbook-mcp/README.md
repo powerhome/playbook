@@ -1,0 +1,92 @@
+# playbook-mcp
+
+Hosted MCP-UI render server for Playbook. Renders kits server-side via `pb_rails` and returns `ui://` HTML resources for LibreChat and other MCP-UI hosts.
+
+Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from this service’s `/assets` (gem `dist/` + `fonts/`) with **permissive CORS** (`Access-Control-Allow-Origin: *`) so sandboxed MCP-UI iframes with opaque origin can load web fonts. Chart peers (React/Highcharts) are vendored locally via `bin/vendor_chart_peers`.
+
+Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standalone SSE.
+
+## Tools
+
+| Tool | Purpose |
+|------|---------|
+| `list_kits` | Discover rails-renderable kits from `dist/ai` |
+| `get_kit_schema` | Kit schema + slim playground (conditionals, hints, structureModes) |
+| `render_kit` | Validate + render one kit → MCP-UI HTML |
+| `render_layout` | Compose multiple kits into one HTML document |
+| `render_chart` | Interactive Highcharts kit (`pb_bar_graph`, etc.) |
+
+Kit ids are **snake_case** (`table`, `button`, `pb_bar_graph`). Props use **camelCase** as in `playbook/dist/ai` schemas; the server converts to Ruby snake_case for `pb_rails`.
+
+HTML `children` are only accepted for composition kits (`table`, `card`, …) and are sanitized before render.
+
+## Local setup
+
+```bash
+cd playbook-mcp
+bin/setup          # bundle + vendor chart peers
+bundle exec puma -C config/puma.rb
+```
+
+- Health: `http://localhost:3099/health`
+- MCP (Streamable HTTP): `http://localhost:3099/mcp`
+- Assets: `http://localhost:3099/assets/playbook.css`
+
+Smoke / tests:
+
+```bash
+bundle exec ruby bin/smoke
+bundle exec rspec
+```
+
+## Example: render_kit (table)
+
+```json
+{
+  "kit": "table",
+  "props": { "size": "sm", "striped": true },
+  "children": "<thead><tr><th>Name</th><th>Qty</th></tr></thead><tbody><tr><td>Widgets</td><td>3</td></tr></tbody>"
+}
+```
+
+## LibreChat
+
+See [docs/LIBRECHAT_VERIFICATION.md](docs/LIBRECHAT_VERIFICATION.md) and [docs/SPEC_REVIEW_RESPONSE.md](docs/SPEC_REVIEW_RESPONSE.md).
+
+| Field | Value |
+|-------|--------|
+| Transport | **Streamable HTTPS** (streamable-http) |
+| URL | `http://localhost:3099/mcp` |
+| Auth | None, or `X-Playbook-Mcp-Key` if shared secret set |
+
+**Phase 0 gate:** Button styles **and** table JS (or chart) working inside the real LibreChat sandboxed iframe — not only ActionView HTML in isolation.
+
+v1 does not depend on UI Actions (LibreChat already supports intent/tool/prompt; we simply do not emit them).
+
+## Ops / security
+
+| Env | Default | Meaning |
+|-----|---------|---------|
+| `PLAYBOOK_MCP_ALLOWLIST` | empty (dev allow-all) | **Required in production** — comma-separated client IPs |
+| `PLAYBOOK_MCP_TRUSTED_PROXIES` | unset | Ingress CIDRs for correct `remote_ip` |
+| `PLAYBOOK_MCP_SHARED_SECRET` | unset | If set, require `X-Playbook-Mcp-Key` on `/mcp` |
+| `PLAYBOOK_MCP_RATE_LIMIT_MAX` | `60` | Max MCP requests per window per IP |
+| `PLAYBOOK_MCP_RATE_LIMIT_WINDOW` | `60` | Window seconds |
+| `PLAYBOOK_MCP_MAX_PROPS_BYTES` | `65536` | Max props+children JSON/HTML bytes |
+| `PLAYBOOK_MCP_ASSET_BASE_URL` | relative `/assets` | Absolute origin for iframe asset URLs |
+| `SECRET_KEY_BASE` | dev default only | **Required in production** (boot fails if missing) |
+| `PORT` | `3099` | Puma port |
+
+Puma runs with `workers 0` because streamable-http session state is in-memory. Use ingress session affinity (see `config/deploy`).
+
+Deploy manifests live under `config/deploy/`. Image build:
+
+```bash
+docker build -f playbook-mcp/Dockerfile -t playbook-mcp .
+```
+
+## Decisions
+
+- **Ruby / `pb_rails` base** — server HTML already exists; Ruby `mcp_ui_server` wraps `ui://` resources.
+- **Self-served assets** — CSS/JS from gem `dist/` + vendored chart peers under `/assets/vendor`.
+- **Validation** — hard-enforces `playbook/dist/ai` schemas + slim playground conditionals; sanitizes children and chart options.

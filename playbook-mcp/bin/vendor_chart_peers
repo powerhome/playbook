@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Download pinned React/Highcharts ESM builds into vendor/chart-peers for self-hosted chart iframes.
+# Runtime never loads esm.sh — only /assets/vendor/*.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+DEST="$ROOT/vendor/chart-peers"
+mkdir -p "$DEST"
+
+download() {
+  local url="$1"
+  local out="$2"
+  echo "-> $out"
+  curl -fsSL "$url" -o "$DEST/$out"
+}
+
+# Pinned jsDelivr npm ESM builds (fetched at setup time only).
+REACT_VER=18.3.1
+HC_VER=11.4.8
+HCR_VER=3.2.1
+
+download "https://cdn.jsdelivr.net/npm/react@${REACT_VER}/+esm" "react.esm.js"
+download "https://cdn.jsdelivr.net/npm/react-dom@${REACT_VER}/+esm" "react-dom.esm.js"
+download "https://cdn.jsdelivr.net/npm/react@${REACT_VER}/jsx-runtime/+esm" "react-jsx-runtime.esm.js"
+download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/es-modules/masters/highcharts.src.js/+esm" "highcharts.esm.js" \
+  || download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/+esm" "highcharts.esm.js"
+download "https://cdn.jsdelivr.net/npm/highcharts-react-official@${HCR_VER}/+esm" "highcharts-react-official.esm.js"
+download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/es-modules/masters/highcharts-more.src.js/+esm" "highcharts-more.esm.js" \
+  || download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/highcharts-more/+esm" "highcharts-more.esm.js"
+download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/es-modules/masters/modules/solid-gauge.src.js/+esm" "solid-gauge.esm.js" \
+  || download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/modules/solid-gauge/+esm" "solid-gauge.esm.js"
+
+echo "Vendored chart peers into $DEST"
+ls -la "$DEST"

@@ -1,0 +1,30 @@
+# Milano config for the playbook-mcp render service (sibling to website deploy).
+dependencies:
+  override: []
+
+machine:
+  directory: playbook-mcp/
+
+deploy: &deploy
+  max_commits:
+  pre: []
+  override:
+    - echo "Configure cluster deploy for playbook-mcp image playbook/playbook-mcp"
+
+rollback:
+  <<: *deploy
+
+links:
+  logs: "https://splunk.powerapp.cloud/en-US/app/search/search?q=search%20k8s.namespace.name%3D%22$GITHUB_REPO_NAME-$ENVIRONMENT%22%20index%3D%22$CLUSTER%22&earliest=-15m&latest=now"
+
+ci:
+  require: []
+  allow_failures: []
+
+review:
+  checklist:
+    - Confirm /health returns ok
+    - Confirm /mcp streamable-http initializes (not deprecated SSE)
+    - Phase 0: Button + table JS (or chart) inside real LibreChat sandboxed iframe
+    - Confirm asset CORS allows fonts (ACAO *) from opaque-origin iframe
+    - Confirm v1 tools do not emit UI Actions (host already supports intent/tool/prompt)
