@@ -12,7 +12,7 @@ deploy: &deploy
   max_commits:
   pre: []
   override:
-    - ./bin/deployer bash -lc "cd playbook-mcp && cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
+    - ./bin/deployer bash -lc "cd /app/playbook-mcp && cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
 
 rollback:
   <<: *deploy
