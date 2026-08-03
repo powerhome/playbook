@@ -34,5 +34,6 @@ It is important to regularly update and upgrade the design system to ensure that
 - Static assets are path-allowlisted under gem `dist/` / `fonts/` + vendored chart peers, with permissive CORS (`Access-Control-Allow-Origin: *`) so opaque-origin sandboxed iframes can load web fonts.
 - Optional shared secret: `PLAYBOOK_MCP_SHARED_SECRET` requires LibreChat custom header `X-Playbook-Mcp-Key`.
 - Transport is streamable-http only (deprecated standalone SSE is not used).
+- PR/review stacks may use `PLAYBOOK_MCP_ALLOWLIST=*` because review ingress is VPN-only; do not use `*` on staging/production.
 
 Report MCP service issues the same way as design-system vulnerabilities (GitHub issue), and include the service version from `GET /health` when possible.

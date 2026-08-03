@@ -1,0 +1,14 @@
+# PR / review stacks (Milano DEPLOY_URL → playbook-mcp-* host).
+# SECRET_KEY_BASE is generated at deploy time (bin/deploy) — not stored in this public repo.
+ingress:
+  issueCert: false # Certificate issued once per cluster in the playbook-prs namespace
+
+# Review stacks run RAILS_ENV=production; allowlist must be non-empty (boot fail-closed).
+# "*" is OK here: PR ingress is VPN-only. Staging/production must use real client IPs.
+appConfig:
+  rackEnv: "production"
+  railsEnv: "production"
+  allowlist: "*"
+
+# Smaller footprint on review stacks
+replicas: 1

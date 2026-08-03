@@ -1,3 +1,7 @@
+variable "TAG" {
+  default = "local"
+}
+
 group "default" {
   targets = ["playbook"]
 }
@@ -10,5 +14,7 @@ target "playbook" {
 target "playbook-mcp" {
   context = "."
   dockerfile = "playbook-mcp/Dockerfile"
-  tags = ["playbook-mcp:local"]
+  tags = [
+    "image-registry.powerapp.cloud/playbook/playbook-mcp:${TAG}",
+  ]
 }

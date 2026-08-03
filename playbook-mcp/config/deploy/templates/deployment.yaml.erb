@@ -6,8 +6,17 @@ metadata:
     app: playbook-mcp
   annotations:
     krane.shopify.io/required-rollout: "maxUnavailable"
+<%
+  replica_count = 2
+  replica_count = replicas if defined?(replicas) && !replicas.nil?
+  replica_count = appConfig["replicas"] if defined?(appConfig) && appConfig.is_a?(Hash) && appConfig["replicas"]
+  asset_base = ""
+  if defined?(ingress) && ingress.is_a?(Hash) && ingress["hosts"].is_a?(Array) && ingress["hosts"].first
+    asset_base = ingress["hosts"].first.to_s.sub(%r{/\z}, "")
+  end
+%>
 spec:
-  replicas: 2
+  replicas: <%= replica_count %>
   strategy:
     rollingUpdate:
       maxSurge: 50%
@@ -47,7 +56,7 @@ spec:
             - name: PLAYBOOK_MCP_DISABLE_HOST_CHECK
               value: "1"
             - name: PLAYBOOK_MCP_ASSET_BASE_URL
-              value: ""
+              value: "<%= asset_base %>"
             - name: PLAYBOOK_MCP_RATE_LIMIT_MAX
               value: "60"
             - name: PLAYBOOK_MCP_RATE_LIMIT_WINDOW

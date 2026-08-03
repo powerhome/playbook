@@ -2,7 +2,10 @@ appConfig:
   rackEnv: "production"
   railsEnv: "production"
 
+replicas: 2
+
 ingress:
   hosts:
     - https://playbook-mcp.powerapp.cloud
   issueCert: true
+

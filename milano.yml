@@ -1,15 +1,17 @@
 dependencies:
   override: []
 
+# Monorepo root so both playbook-website and playbook-mcp can deploy on PR stacks.
 machine:
-  directory: playbook-website/
+  directory: .
 
 deploy: &deploy
   max_commits: # Automatically deploy all commits, no matter how many.
   pre:
-    - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/pre_deploy"
+    - ./bin/deployer bash -lc "cd playbook-website && cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/pre_deploy"
   override:
-    - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
+    - ./bin/deployer bash -lc "cd playbook-website && cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
+    - ./bin/deployer bash -lc "cd playbook-mcp && cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
 
 rollback:
   <<: *deploy
@@ -25,7 +27,10 @@ ci:
     - continuous-integration/jenkins/branch
 
 review:
-  checklist: []
+  checklist:
+    - Website review URL loads
+    - playbook-mcp health at https://playbook-mcp-<same-pr-host>/health
+    - MCP streamable-http at https://playbook-mcp-<same-pr-host>/mcp
 
 status:
   context: powerhome/deploy/pr

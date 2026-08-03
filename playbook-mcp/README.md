@@ -56,12 +56,36 @@ See [docs/LIBRECHAT_VERIFICATION.md](docs/LIBRECHAT_VERIFICATION.md) and [docs/S
 | Field | Value |
 |-------|--------|
 | Transport | **Streamable HTTPS** (streamable-http) |
-| URL | `http://localhost:3099/mcp` |
+| URL (local) | `http://localhost:3099/mcp` |
 | Auth | None, or `X-Playbook-Mcp-Key` if shared secret set |
 
 **Phase 0 gate:** Button styles **and** table JS (or chart) working inside the real LibreChat sandboxed iframe — not only ActionView HTML in isolation.
 
 v1 does not depend on UI Actions (LibreChat already supports intent/tool/prompt; we simply do not emit them).
+
+## Review / PR environment URL
+
+On Milano PR deploy, the website review host is typically:
+
+```text
+https://playbook-pr-<N>.powerapp.cloud
+```
+
+`playbook-mcp` is deployed alongside it with a derived host:
+
+```text
+https://playbook-mcp-pr-<N>.powerapp.cloud/mcp
+```
+
+Example: if the PR stack is `https://playbook-pr-42.powerapp.cloud`, point LibreChat at:
+
+```text
+https://playbook-mcp-pr-42.powerapp.cloud/mcp
+```
+
+Health check: `https://playbook-mcp-pr-<N>.powerapp.cloud/health`
+
+Review stacks set `PLAYBOOK_MCP_ALLOWLIST=*` because **PR hosts are VPN-only** at the network edge — the allowlist is defense-in-depth inside that perimeter, not the primary control. Staging/production must use real client allowlists (and are not VPN-gated the same way).
 
 ## Ops / security
 
