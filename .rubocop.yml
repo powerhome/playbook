@@ -1,7 +1,5 @@
 AllCops:
   TargetRubyVersion: 3.3
-  NewCops: enable
-  SuggestExtensions: false
 
 Gemspec/RequiredRubyVersion:
   Enabled: false
