@@ -211,6 +211,10 @@
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
+    }
+
+    // React typeahead control only
+    [class^=pb_text_input_kit] .text_input_wrapper div.text_input {
       min-height: 26px;
     }
   }

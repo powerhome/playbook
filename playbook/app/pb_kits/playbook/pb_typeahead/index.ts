@@ -16,6 +16,8 @@ export default class PbTypeahead extends PbEnhancedElement {
   }
 
   connect() {
+    if (this.searchInput?.disabled) return
+
     this.element.addEventListener('keydown', (event: KeyboardEvent) => this.handleKeydown(event))
     this.searchInput.addEventListener('focus', () => this.debouncedSearch())
     this.searchInput.addEventListener('input', () => this.debouncedSearch())
