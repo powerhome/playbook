@@ -29,9 +29,9 @@ ci:
 
 review:
   checklist:
-    - Website review URL loads
-    - playbook-mcp health at https://playbook-mcp-<same-pr-host>/health
-    - MCP streamable-http at https://playbook-mcp-<same-pr-host>/mcp
+    - Website review URL loads (https://pr<N>.playbook.../)
+    - playbook-mcp health at https://mcp-pr<N>.playbook.../health
+    - MCP streamable-http at https://mcp-pr<N>.playbook.../mcp (not a browser page; use LibreChat)
 
 status:
   context: powerhome/deploy/pr

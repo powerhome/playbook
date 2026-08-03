@@ -7,7 +7,7 @@ Playbook MCP exposes **streamable-http** (MCP 2025-03-26) at `/mcp` — not the 
 | Field | Value |
 |-------|--------|
 | Transport | **Streamable HTTPS** (streamable-http) |
-| MCP Server URL | Local: `http://localhost:3099/mcp`. PR review: `https://playbook-mcp-pr-<N>.powerapp.cloud/mcp` (derived from website `playbook-pr-<N>` host). |
+| MCP Server URL | Local: `http://localhost:3099/mcp`. PR review: `https://mcp-pr<N>.playbook.wc.beta.gm.powerapp.cloud/mcp` (sibling of website `https://pr<N>.playbook...`). |
 | Auth | None, or custom header `X-Playbook-Mcp-Key` if `PLAYBOOK_MCP_SHARED_SECRET` is set |
 
 ## Phase 0 exit criteria (architecture risks)

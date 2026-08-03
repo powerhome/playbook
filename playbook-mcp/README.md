@@ -74,16 +74,17 @@ https://playbook-pr-<N>.powerapp.cloud
 `playbook-mcp` is deployed alongside it with a derived host:
 
 ```text
-https://playbook-mcp-pr-<N>.powerapp.cloud/mcp
+https://mcp-pr<N>.playbook.wc.beta.gm.powerapp.cloud/mcp
 ```
 
 Example: if the PR stack is `https://playbook-pr-42.powerapp.cloud`, point LibreChat at:
 
 ```text
-https://playbook-mcp-pr-42.powerapp.cloud/mcp
+https://mcp-pr42.playbook.wc.beta.gm.powerapp.cloud/mcp
 ```
 
-Health check: `https://playbook-mcp-pr-<N>.powerapp.cloud/health`
+Health check: `https://mcp-pr<N>.playbook.wc.beta.gm.powerapp.cloud/health`  
+(Website Milano URL is `https://pr<N>.playbook...` — that host is the docs site, not MCP.)
 
 Review stacks set `PLAYBOOK_MCP_ALLOWLIST=*` because **PR hosts are VPN-only** at the network edge — the allowlist is defense-in-depth inside that perimeter, not the primary control. Staging/production must use real client allowlists (and are not VPN-gated the same way).
 

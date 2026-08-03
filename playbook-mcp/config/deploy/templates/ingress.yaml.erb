@@ -1,4 +1,9 @@
-<% urls = ingress["hosts"].map { |host| URI.parse(host) } %>
+<%
+  urls = ingress["hosts"].map { |host| URI.parse(host) }
+  # PR stacks (issueCert: false) share the pre-issued wildcard secret used by the website.
+  # Staging/production issue a dedicated cert into playbook-mcp-tls.
+  tls_secret = ingress["issueCert"] ? "playbook-mcp-tls" : "playbook-tls"
+%>
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -20,7 +25,7 @@ spec:
       <% urls.each do |url| %>
       - <%= url.host %>
       <% end %>
-    secretName: playbook-mcp-tls
+    secretName: <%= tls_secret %>
   rules:
     <% urls.each do |url| %>
     - host: <%= url.host %>

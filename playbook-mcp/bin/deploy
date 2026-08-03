@@ -34,13 +34,18 @@ else
   secret_key_base_binding="secretKeyBase=$(openssl rand -hex 64)"
 fi
 
-# Website review URL is typically https://playbook-pr-N.powerapp.cloud
-# MCP review host:     https://playbook-mcp-pr-N.powerapp.cloud
+# Milano PR DEPLOY_URL looks like: https://pr6468.playbook.wc.beta.gm.powerapp.cloud
+# MCP needs its own host (separate /assets from the website):
+#   https://mcp-pr6468.playbook.wc.beta.gm.powerapp.cloud
+# Legacy/alternate: https://playbook-pr-N... → https://playbook-mcp-pr-N...
 mcp_deploy_url="${deploy_url}"
-if [[ "${deploy_url}" == *"://playbook-"* ]]; then
+if [[ "${deploy_url}" == *"://mcp-"* ]] || [[ "${deploy_url}" == *"://playbook-mcp-"* ]]; then
+  mcp_deploy_url="${deploy_url}"
+elif [[ "${deploy_url}" == *"://playbook-"* ]]; then
   mcp_deploy_url="${deploy_url/playbook-/playbook-mcp-}"
-elif [[ -n "${deploy_url}" && "${deploy_url}" != *playbook-mcp* ]]; then
-  mcp_deploy_url="$(echo "${deploy_url}" | sed -E 's#^(https?://)#\1playbook-mcp-#')"
+elif [[ -n "${deploy_url}" ]]; then
+  # Prefix the first DNS label: pr6468.playbook... → mcp-pr6468.playbook...
+  mcp_deploy_url="$(echo "${deploy_url}" | sed -E 's#^(https?://)#\1mcp-#')"
 fi
 
 extraBindings="{\"ingress\":{\"hosts\":[\"${mcp_deploy_url}\"]}}"
