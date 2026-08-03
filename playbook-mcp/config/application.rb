@@ -15,9 +15,8 @@ module PlaybookMcp
     config.load_defaults 7.2
     config.api_only = false
 
-    config.eager_load_paths << Rails.root.join("lib")
-    config.autoload_paths << Rails.root.join("lib")
-    config.autoload_lib(ignore: %w[tasks]) if config.respond_to?(:autoload_lib)
+    # version.rb defines PlaybookMcp::VERSION (not ::Version); require it manually.
+    config.autoload_lib(ignore: %w[tasks playbook_mcp/version.rb])
 
     config.playbook_mcp = ActiveSupport::OrderedOptions.new
     config.playbook_mcp.asset_base_url = ENV.fetch("PLAYBOOK_MCP_ASSET_BASE_URL", "")
