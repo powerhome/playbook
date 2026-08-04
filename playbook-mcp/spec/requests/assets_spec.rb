@@ -31,4 +31,21 @@ RSpec.describe "Assets", type: :request do
     get "/assets/not-a-real-file.js"
     expect(response).to have_http_status(:not_found)
   end
+
+  it "rejects path traversal via dist/fonts prefixes" do
+    [
+      "/assets/fonts/../lib/playbook/version.rb",
+      "/assets/chunks/../ai/index.json",
+      "/assets/playbook.css/../../lib/playbook/version.rb",
+      "/assets/vendor/../config/application.rb",
+    ].each do |path|
+      get path
+      expect(response).to have_http_status(:not_found), "expected 404 for #{path}"
+    end
+  end
+
+  it "rejects null bytes and absolute-looking paths" do
+    get "/assets/playbook.css%00.js"
+    expect(response).to have_http_status(:not_found)
+  end
 end

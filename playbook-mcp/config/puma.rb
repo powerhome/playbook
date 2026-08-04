@@ -11,6 +11,8 @@ environment ENV.fetch("RAILS_ENV", "development")
 pidfile ENV.fetch("PIDFILE", "tmp/pids/server.pid")
 
 # Streamable HTTP transport keeps session state in memory — single process only.
+# Multi-thread is fine: render tools build a fresh Renderer per call (no shared
+# ActionView context). Do not reintroduce a process-wide shared Renderer.
 workers 0
 
 plugin :tmp_restart

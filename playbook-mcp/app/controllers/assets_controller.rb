@@ -18,7 +18,6 @@ class AssetsController < ActionController::Base
     "playbook-charts.js",
     "charts.js",
     "chunks/",
-    "fonts/",
   ].freeze
 
   CONTENT_TYPES = {
@@ -69,38 +68,69 @@ private
   end
 
   def resolve_file(relative)
+    return nil unless safe_relative_path?(relative)
+
+    relative = Pathname.new(relative).cleanpath.to_s
+    return nil unless safe_relative_path?(relative)
+
     if relative.start_with?("vendor/")
-      return nil unless relative.match?(%r{\Avendor/[A-Za-z0-9._-]+\z})
+      filename = relative.delete_prefix("vendor/")
+      return nil unless filename.match?(/\A[A-Za-z0-9._-]+\z/)
 
-      root = PlaybookMcp::ChartPeers.root
-      return nil unless root.directory?
+      resolve_under(PlaybookMcp::ChartPeers.root, filename)
+    elsif relative.start_with?("fonts/")
+      rest = relative.delete_prefix("fonts/")
+      return nil if rest.blank?
 
-      root = root.realpath
-      absolute = root.join(relative.delete_prefix("vendor/"))
-      return nil unless absolute.file? && absolute.realpath.to_s.start_with?(root.to_s)
-
-      absolute
+      # Fonts may live under Engine.root/fonts or dist/fonts — never join
+      # the caller path under Engine.root itself.
+      resolve_under(Playbook::Engine.root.join("fonts"), rest) ||
+        resolve_under(Playbook::Engine.root.join("dist", "fonts"), rest)
     else
-      return nil unless DIST_PREFIXES.any? { |prefix| relative == prefix.delete_suffix("/") || relative.start_with?(prefix) }
+      return nil unless dist_allowlisted?(relative)
 
-      candidates = []
-      candidates << Playbook::Engine.root.join("dist", relative)
-      # Gemspec ships fonts/** — may live beside dist, not under it.
-      candidates << Playbook::Engine.root.join(relative) if relative.start_with?("fonts/")
-      candidates << Playbook::Engine.root.join("dist", relative)
-
-      candidates.uniq.each do |absolute|
-        next unless absolute.file?
-
-        root = absolute.dirname
-        # Containment: must stay under Engine.root
-        engine_root = Playbook::Engine.root.realpath.to_s
-        next unless absolute.realpath.to_s.start_with?(engine_root)
-
-        return absolute
-      end
-      nil
+      resolve_under(Playbook::Engine.root.join("dist"), relative)
     end
+  end
+
+  def safe_relative_path?(relative)
+    return false if relative.blank?
+    return false if relative.include?("\0")
+    return false if relative.include?("..")
+    return false if relative.start_with?("/", "\\")
+    return false unless relative.match?(%r{\A[A-Za-z0-9._/-]+\z})
+
+    true
+  end
+
+  def dist_allowlisted?(relative)
+    DIST_PREFIXES.any? do |prefix|
+      if prefix.end_with?("/")
+        relative.start_with?(prefix)
+      else
+        relative == prefix
+      end
+    end
+  end
+
+  # Resolve +realpath+ under +root+ only. Containment uses a trailing separator
+  # so "/tmp/foo" does not match root "/tmp/foobar".
+  def resolve_under(root, relative)
+    return nil if relative.blank?
+    return nil unless safe_relative_path?(relative)
+    return nil unless root&.directory?
+
+    root = root.realpath
+    absolute = root.join(relative).cleanpath
+    return nil unless absolute.file?
+
+    abs = absolute.realpath.to_s
+    root_s = root.to_s
+    return nil unless abs == root_s || abs.start_with?("#{root_s}/")
+
+    absolute
+  rescue Errno::ENOENT
+    nil
   end
 
   def content_type_for(path)

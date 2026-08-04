@@ -44,7 +44,7 @@ module PlaybookMcp
       annotations(read_only_hint: true, destructive_hint: false, open_world_hint: false)
 
       class << self
-        def call(type: nil, kit: nil, props: nil, options: nil, server_context: nil)
+        def call(type: nil, kit: nil, props: nil, options: nil, server_context: nil) # rubocop:disable Lint/UnusedMethodArgument
           resolved = kit.presence || TYPE_TO_KIT[type.to_s]
           unless resolved
             return MCP::Tool::Response.new(
@@ -60,8 +60,8 @@ module PlaybookMcp
             kit_props["options"] = existing.merge(Props.deep_stringify_keys(options))
           end
 
-          renderer = server_context&.dig(:renderer) || PlaybookMcp::Renderer.new
-          html = renderer.render_kit(kit: resolved, props: kit_props)
+          # Fresh Renderer per call — shared ActionView context is not thread-safe.
+          html = PlaybookMcp::Renderer.new.render_kit(kit: resolved, props: kit_props)
           ui = McpUiServer.create_ui_resource(
             uri: "ui://playbook/chart/#{resolved}/#{SecureRandom.hex(6)}",
             content: { type: :raw_html, htmlString: html }

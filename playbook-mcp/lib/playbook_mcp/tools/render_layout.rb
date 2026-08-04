@@ -30,9 +30,9 @@ module PlaybookMcp
       annotations(read_only_hint: true, destructive_hint: false, open_world_hint: false)
 
       class << self
-        def call(items:, server_context: nil)
-          renderer = server_context&.dig(:renderer) || PlaybookMcp::Renderer.new
-          html = renderer.render_layout(items: items)
+        def call(items:, server_context: nil) # rubocop:disable Lint/UnusedMethodArgument
+          # Fresh Renderer per call — shared ActionView context is not thread-safe.
+          html = PlaybookMcp::Renderer.new.render_layout(items: items)
           ui = McpUiServer.create_ui_resource(
             uri: "ui://playbook/layout/#{SecureRandom.hex(6)}",
             content: { type: :raw_html, htmlString: html }

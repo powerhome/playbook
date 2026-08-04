@@ -7,8 +7,9 @@ module PlaybookMcp
   module_function
 
     def build
-      renderer = PlaybookMcp::Renderer.new
-
+      # Do not stash a shared Renderer here — ActionView view_context is not
+      # thread-safe, and Puma runs multiple threads (RAILS_MAX_THREADS).
+      # Render tools construct a fresh Renderer per call.
       MCP::Server.new(
         name: "playbook-mcp",
         title: "Playbook MCP-UI Render Server",
@@ -21,7 +22,7 @@ module PlaybookMcp
           PlaybookMcp::Tools::RenderLayout,
           PlaybookMcp::Tools::RenderChart,
         ],
-        server_context: { renderer: renderer }
+        server_context: {}
       )
     end
   end
