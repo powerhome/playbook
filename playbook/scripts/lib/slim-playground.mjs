@@ -8,6 +8,12 @@
  * tiny synthetic columnDefinitions/tableData samples agents can copy.
  */
 
+import {
+  formatRubyValue,
+  jsxChildrenToErb,
+  selectableListItemsFromJsx,
+} from './jsx-children-to-erb.mjs';
+
 export const AI_PLAYGROUND_KEYS = [
   'presets',
   'hints',
@@ -257,6 +263,86 @@ function formatConst(name, value) {
 }
 
 /**
+ * Resolve children for a usage example from the active preset / structure mode.
+ * Avoids falling back to playground children.default when the structure mode
+ * explicitly clears children (e.g. radio "standard", selectable_card "normal").
+ */
+function isRenderableChildren(children) {
+  if (typeof children !== 'string') return false;
+  const trimmed = children.trim();
+  if (!trimmed) return false;
+  // Structure modes sometimes store React render-prop factories as "children"
+  if (
+    trimmed.startsWith('(') ||
+    trimmed.startsWith('function') ||
+    /^\(?\{/.test(trimmed) && trimmed.includes('=>')
+  ) {
+    return false;
+  }
+  return true;
+}
+
+export function resolvePresetChildren(preset, playground) {
+  if (!preset || typeof preset !== 'object') return '';
+
+  if (typeof preset.children === 'string') {
+    return isRenderableChildren(preset.children) ? preset.children : '';
+  }
+
+  const modeKey = preset.structureMode || playground?.structureModes?.default;
+  const mode = modeKey && playground?.structureModes?.modes?.[modeKey];
+  if (mode && typeof mode.children === 'string') {
+    return isRenderableChildren(mode.children) ? mode.children : '';
+  }
+
+  const template = mode?.template || playground?.template || '';
+  if (
+    template.includes('{{children}}') &&
+    typeof playground?.children?.default === 'string' &&
+    isRenderableChildren(playground.children.default)
+  ) {
+    return playground.children.default;
+  }
+
+  return '';
+}
+
+/** Props that only make sense in React playground examples. */
+const REACT_ONLY_USAGE_PROPS = new Set([
+  'trigger',
+  'onChange',
+  'onClick',
+  'onClose',
+  'onSelect',
+  'render',
+  'renderTrigger',
+]);
+
+function isReactOnlyPropValue(value) {
+  if (typeof value !== 'string') return false;
+  const trimmed = value.trim();
+  return (
+    trimmed.startsWith('(') ||
+    trimmed.startsWith('function') ||
+    trimmed.includes('=>') ||
+    /<[A-Z]/.test(trimmed)
+  );
+}
+
+function formatRailsPropEntries(props) {
+  return Object.entries(props)
+    .filter(([name, value]) => {
+      if (REACT_ONLY_USAGE_PROPS.has(name)) return false;
+      if (isReactOnlyPropValue(value)) return false;
+      return true;
+    })
+    .map(([name, value]) => {
+      const snake = name.replace(/[A-Z]/g, (c) => `_${c.toLowerCase()}`);
+      return `${snake}: ${formatRubyValue(value)}`;
+    });
+}
+
+/**
  * Build a short React/Rails usage example from the first playground preset.
  */
 export function usageFromPreset(kitName, pascalName, playground) {
@@ -286,13 +372,8 @@ export function usageFromPreset(kitName, pascalName, playground) {
   const preset = playground?.presets?.[0];
   if (!preset) return null;
 
-  const props = preset.props && typeof preset.props === 'object' ? preset.props : {};
-  const children =
-    typeof preset.children === 'string'
-      ? preset.children
-      : typeof playground?.children?.default === 'string'
-        ? playground.children.default
-        : '';
+  const props = preset.props && typeof preset.props === 'object' ? { ...preset.props } : {};
+  const children = resolvePresetChildren(preset, playground);
 
   const reactPropParts = Object.entries(props).map(([name, value]) => {
     if (typeof value === 'boolean') return value ? name : `${name}={false}`;
@@ -302,21 +383,53 @@ export function usageFromPreset(kitName, pascalName, playground) {
   });
   const reactProps = reactPropParts.length ? ` ${reactPropParts.join(' ')}` : '';
 
-  const railsProps = Object.entries(props)
-    .map(([name, value]) => {
-      const snake = name.replace(/[A-Z]/g, (c) => `_${c.toLowerCase()}`);
-      return `${snake}: ${JSON.stringify(value)}`;
-    })
-    .join(', ');
-
   const hasChildren = children.trim().length > 0;
   const reactExample = hasChildren
     ? `<${pascalName}${reactProps}>\n  ${children.trim()}\n</${pascalName}>`
     : `<${pascalName}${reactProps} />`;
 
-  const railsExample = hasChildren
-    ? `<%= pb_rails("${kitName}", props: { ${railsProps} }) do %>\n  ${children.trim()}\n<% end %>`
-    : `<%= pb_rails("${kitName}", props: { ${railsProps || ''} }) %>`;
+  // SelectableList Rails API uses an `items` array, not Item children.
+  let railsExample;
+  let railsNote;
+  if (kitName === 'selectable_list' && hasChildren) {
+    const items = selectableListItemsFromJsx(children);
+    if (items) {
+      const railsPropParts = [
+        ...formatRailsPropEntries(props),
+        `items: ${formatRubyValue(items)}`,
+      ];
+      railsExample = `<%= pb_rails("${kitName}", props: { ${railsPropParts.join(', ')} }) %>`;
+    }
+  }
+
+  if (!railsExample) {
+    const railsPropParts = formatRailsPropEntries(props);
+    const railsProps = railsPropParts.join(', ');
+
+    if (hasChildren) {
+      const erbChildren = jsxChildrenToErb(children);
+      if (erbChildren != null && erbChildren.trim()) {
+        const indented = erbChildren
+          .split('\n')
+          .map((line) => (line.trim() ? `  ${line}` : line))
+          .join('\n');
+        railsExample = railsProps
+          ? `<%= pb_rails("${kitName}", props: { ${railsProps} }) do %>\n${indented}\n<% end %>`
+          : `<%= pb_rails("${kitName}") do %>\n${indented}\n<% end %>`;
+      } else {
+        // Keep a valid Rails wrapper; point agents at React children / docs when JSX can't be mapped.
+        railsExample = railsProps
+          ? `<%= pb_rails("${kitName}", props: { ${railsProps} }) do %>\n  <%# Add kit content here %>\n<% end %>`
+          : `<%= pb_rails("${kitName}") do %>\n  <%# Add kit content here %>\n<% end %>`;
+        railsNote =
+          'Rails children could not be auto-converted from the React playground preset; see kit docs `.html.erb` examples for the correct nested pb_rails content.';
+      }
+    } else {
+      railsExample = railsProps
+        ? `<%= pb_rails("${kitName}", props: { ${railsProps} }) %>`
+        : `<%= pb_rails("${kitName}") %>`;
+    }
+  }
 
   return {
     react: {
@@ -328,6 +441,7 @@ export function usageFromPreset(kitName, pascalName, playground) {
       import: null,
       example: railsExample,
       preset: preset.name || null,
+      ...(railsNote ? { note: railsNote } : {}),
     },
   };
 }
