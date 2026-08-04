@@ -34,10 +34,27 @@ puts "ok (#{table_html.bytesize} bytes) — verify collapse/responsive in LibreC
 puts "== chart mount markup =="
 chart_html = renderer.render_kit(
   kit: "pb_bar_graph",
-  props: { "options" => { "title" => { "text" => "Smoke" }, "series" => [{ "data" => [1, 2, 3] }] } }
+  props: {
+    "options" => {
+      "title" => { "text" => "Smoke" },
+      "series" => [{ "name" => "NA", "data" => [1, 2, 3] }],
+      "xAxis" => { "categories" => %w[Q1 Q2 Q3] },
+      "yAxis" => { "title" => { "text" => "USD" } },
+    },
+  }
 )
 raise "chart missing react mount hook" unless chart_html.include?("data-pb-react-component")
 raise "chart must not load esm.sh at runtime" if chart_html.include?("esm.sh")
+raise "chart options snake_cased (x_axis)" if chart_html.match?(/["']x_axis["']/)
+raise "chart options missing camelCase xAxis" unless chart_html.include?("xAxis")
+
+doc_with_origin = PlaybookMcp::Document.new(
+  body_html: "<div/>",
+  asset_base_url: "https://mcp.example.test",
+  charts: false
+).to_html
+raise "CSP must not use 'self' for srcdoc" if doc_with_origin.include?("script-src 'self'")
+raise "CSP must allow absolute asset origin" unless doc_with_origin.include?("script-src https://mcp.example.test")
 
 puts "ok (#{chart_html.bytesize} bytes) — peers #{PlaybookMcp::ChartPeers.available? ? 'vendored' : 'MISSING (bin/vendor_chart_peers)'}"
 

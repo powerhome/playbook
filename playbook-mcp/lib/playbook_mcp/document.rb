@@ -2,6 +2,7 @@
 
 require "erb"
 require "json"
+require "uri"
 
 module PlaybookMcp
   class Document
@@ -23,7 +24,7 @@ module PlaybookMcp
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta http-equiv="Content-Security-Policy" content="#{csp}" />
+          #{csp_meta}
           <title>#{ERB::Util.html_escape(@title)}</title>
           <link rel="stylesheet" href="#{asset_url('playbook.css')}" />
           #{import_map if @charts && ChartPeers.available?}
@@ -50,17 +51,37 @@ module PlaybookMcp
       base.empty? ? "/assets/#{stamped}" : "#{base}/assets/#{stamped}"
     end
 
-    def csp
-      [
+    # LibreChat mounts ui:// HTML in a srcdoc iframe (opaque origin). CSP 'self'
+    # matches nothing there, so absolute asset URLs must name their origin
+    # explicitly. If we have no absolute asset base, omit CSP — sandbox isolates.
+    def csp_meta
+      origin = asset_origin
+      return "" if origin.blank?
+
+      content = [
         "default-src 'none'",
         "base-uri 'none'",
-        "frame-ancestors 'none'",
-        "img-src 'self' data:",
-        "font-src 'self' data:",
-        "style-src 'self' 'unsafe-inline'",
-        "script-src 'self'",
-        "connect-src 'self'",
+        "img-src #{origin} data:",
+        "font-src #{origin} data:",
+        "style-src #{origin} 'unsafe-inline'",
+        "script-src #{origin}",
+        "connect-src #{origin}",
       ].join("; ")
+
+      %(<meta http-equiv="Content-Security-Policy" content="#{content}" />)
+    end
+
+    def asset_origin
+      return "" if @asset_base_url.blank?
+
+      uri = URI.parse(@asset_base_url)
+      return "" if uri.scheme.blank? || uri.host.blank?
+
+      origin = "#{uri.scheme}://#{uri.host}"
+      origin += ":#{uri.port}" if uri.port && ![80, 443].include?(uri.port)
+      origin
+    rescue URI::InvalidURIError
+      ""
     end
 
     def import_map

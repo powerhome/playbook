@@ -19,7 +19,27 @@ RSpec.describe PlaybookMcp::Renderer do
     html = renderer.render_kit(kit: "table", props: { "size" => "sm" }, children: children)
     expect(html).to include("pb_table")
     expect(html).to include("<th>A</th>")
-    expect(html).to include("Content-Security-Policy")
+  end
+
+  it "uses the absolute asset origin in CSP (srcdoc 'self' is opaque)" do
+    html = PlaybookMcp::Document.new(
+      body_html: "<div>ok</div>",
+      asset_base_url: "https://mcp-pr6468.example.test",
+      charts: false
+    ).to_html
+    expect(html).to include(%(Content-Security-Policy" content="))
+    expect(html).to include("script-src https://mcp-pr6468.example.test")
+    expect(html).to include("style-src https://mcp-pr6468.example.test 'unsafe-inline'")
+    expect(html).not_to include("script-src 'self'")
+  end
+
+  it "omits CSP when assets are relative (srcdoc cannot use 'self')" do
+    html = PlaybookMcp::Document.new(
+      body_html: "<div>ok</div>",
+      asset_base_url: "",
+      charts: false
+    ).to_html
+    expect(html).not_to include("Content-Security-Policy")
   end
 
   it "strips dangerous markup from table children" do
@@ -50,6 +70,8 @@ RSpec.describe PlaybookMcp::Renderer do
         "options" => {
           "title" => { "text" => "Demo", "useHTML" => true },
           "series" => [{ "data" => [1, 2] }],
+          "xAxis" => { "categories" => %w[Q1 Q2] },
+          "yAxis" => { "title" => { "text" => "USD" } },
         },
       }
     )
@@ -59,5 +81,10 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).to include("playbook-rails-charts-bindings.js")
     expect(html).to include("data-pb-react-component")
     expect(html).not_to include("useHTML")
+    # Highcharts options must stay camelCase inside the mount props.
+    expect(html).to include("xAxis")
+    expect(html).to include("yAxis")
+    expect(html).not_to match(/["']x_axis["']/)
+    expect(html).not_to match(/["']y_axis["']/)
   end
 end
