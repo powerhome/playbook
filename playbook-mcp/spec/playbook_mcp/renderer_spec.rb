@@ -89,5 +89,8 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).to include("yAxis")
     expect(html).not_to match(/["']x_axis["']/)
     expect(html).not_to match(/["']y_axis["']/)
+    # Reserve height before Highcharts hydrates so LibreChat iframe auto-resize fits.
+    expect(html).to match(/data-pb-react-component="PbBarGraph"[^>]*style="[^"]*height:400px/)
+    expect(html).to include("&quot;chart&quot;:{&quot;height&quot;:400}")
   end
 end

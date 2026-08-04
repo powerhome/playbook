@@ -49,6 +49,10 @@ raise "chart must not use importmap" if chart_html.include?("importmap")
 raise "chart must load self-contained IIFE" unless chart_html.include?("/assets/vendor/playbook-charts.js")
 raise "chart options snake_cased (x_axis)" if chart_html.match?(/["']x_axis["']/)
 raise "chart options missing camelCase xAxis" unless chart_html.include?("xAxis")
+raise "chart mount missing reserved height" unless chart_html.match?(/data-pb-react-component="PbBarGraph"[^>]*style="[^"]*height:400px/)
+raise "chart options missing chart.height" unless chart_html.include?("&quot;height&quot;:400") || chart_html.include?('"height":400')
+
+
 
 doc_with_origin = PlaybookMcp::Document.new(
   body_html: "<div/>",
