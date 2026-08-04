@@ -21,6 +21,27 @@ const TimestampUpdated = (props) => {
           variant="updated"
           {...props}
       />
+
+      <br />
+
+      <Timestamp
+          showTimezone
+          timestamp={todaysDate}
+          timezone="America/New_York"
+          variant="updated"
+          {...props}
+      />
+
+      <br />
+
+      <Timestamp
+          showDate={false}
+          showTimezone
+          timestamp={todaysDate}
+          timezone="Asia/Hong_Kong"
+          variant="updated"
+          {...props}
+      />
     </div>
   )
 }

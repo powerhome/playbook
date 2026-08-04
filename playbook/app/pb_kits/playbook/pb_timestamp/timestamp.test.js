@@ -271,3 +271,45 @@ describe("Timestamp Kit", () => {
     expect(text?.textContent).toEqual("Last updated at 12:00a")
   })
 
+  test("updated variant: shows timezone when showTimezone is enabled", () => {
+    render(
+      <Timestamp
+          data={{ testid: testId }}
+          showTimezone
+          timestamp={new Date()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+    )
+    const text = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs")
+    expect(text?.textContent).toEqual("Last updated on Jan 1 at 12:00a EST")
+  })
+
+  test("updated variant: shows timezone with time only when showDate=false", () => {
+    render(
+      <Timestamp
+          data={{ testid: testId }}
+          showDate={false}
+          showTimezone
+          timestamp={new Date()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+    )
+    const text = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs")
+    expect(text?.textContent).toEqual("Last updated at 12:00a EST")
+  })
+
+  test("updated variant: hides timezone when showTimezone is not provided", () => {
+    render(
+      <Timestamp
+          data={{ testid: testId }}
+          timestamp={new Date()}
+          timezone="America/New_York"
+          variant="updated"
+      />
+    )
+    const text = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs")
+    expect(text?.textContent).toEqual("Last updated on Jan 1 at 12:00a")
+  })
+
