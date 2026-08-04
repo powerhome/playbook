@@ -10508,10 +10508,10 @@ react-highlight-words@^0.20.0:
     memoize-one "^4.0.0"
     prop-types "^15.5.8"
 
-react-hook-form@^7.28.1:
-  version "7.54.2"
-  resolved "https://npm.powerapp.cloud/react-hook-form/-/react-hook-form-7.54.2.tgz#8c26ed54c71628dff57ccd3c074b1dd377cfb211"
-  integrity sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==
+react-hook-form@^7.84.0:
+  version "7.84.0"
+  resolved "https://npm.powerapp.cloud/react-hook-form/-/react-hook-form-7.84.0.tgz#5ace8ca20d0e35ef09a88f6a5cbfdbfbbe32194c"
+  integrity sha512-+hWvQP6GLco56mDwrbU4XnHix8t1z90ltZsDIrREl+jnQFQxYLX8oAzqe/Xn8nHpmoXTY5M6oEXrAhbP1qevNQ==
 
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
