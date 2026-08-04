@@ -29,7 +29,7 @@ Local helper: `bundle exec ruby bin/smoke` asserts hydration hooks; LibreChat co
 2. `tools/list` includes `list_kits`, `get_kit_schema`, `render_kit`, `render_layout`, `render_chart`.
 3. Button renders on-brand in the sandboxed iframe (`playbook.css`).
 4. Table renders; **responsive/collapse JS runs in-iframe** (no UI Actions).
-5. Chart returns mount markup; with `bin/vendor_chart_peers`, Highcharts paints in-iframe.
+5. Chart returns mount markup; with `bin/vendor_chart_peers` IIFE, Highcharts paints in-iframe.
 6. **Fonts:** Proxima / Power Centra (or configured face) load from `/assets/fonts/...` — not system fallback. Asset responses must include `Access-Control-Allow-Origin: *` (opaque iframe `Origin: null`).
 7. Document height: no clipping from `100vh` / fixed full-viewport wrappers (LibreChat auto-resizes to content).
 8. `render_layout` → **one** HTML document per call (multiple `ui://` resources become a carousel — wrong for dashboards).
@@ -48,4 +48,4 @@ LibreChat already handles **intent**, **tool**, and **prompt** action types (con
 - Set `PLAYBOOK_MCP_TRUSTED_PROXIES` to ingress CIDRs.
 - Optional: `PLAYBOOK_MCP_SHARED_SECRET` + LibreChat custom header `X-Playbook-Mcp-Key`.
 - Rate limit + props size caps.
-- Chart peers vendored (`bin/vendor_chart_peers`) — no runtime esm.sh.
+- Chart IIFE built (`bin/vendor_chart_peers`) — no runtime esm.sh / jsDelivr `/+esm` / importmap.

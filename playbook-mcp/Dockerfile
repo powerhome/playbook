@@ -63,6 +63,13 @@ RUN yarn install --frozen-lockfile
 FROM jsdeps AS assets
 COPY --chown=9999:9999 playbook /home/app/src/playbook
 RUN cd playbook && NODE_ENV=production yarn release
+# Build self-contained chart IIFE while node_modules + sass/esbuild are available.
+COPY --chown=9999:9999 playbook-mcp/chart-bundle /home/app/src/playbook-mcp/chart-bundle
+COPY --chown=9999:9999 playbook-mcp/bin/vendor_chart_peers /home/app/src/playbook-mcp/bin/vendor_chart_peers
+RUN chmod +x /home/app/src/playbook-mcp/bin/vendor_chart_peers \
+    && /home/app/src/playbook-mcp/bin/vendor_chart_peers \
+    && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js \
+    && ! grep -qE '/npm/|esm\.sh' /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js
 
 # --- Ruby gems ---
 FROM base AS gems
@@ -77,14 +84,13 @@ COPY --from=gems $BUNDLE_TO $BUNDLE_TO
 COPY --chown=9999:9999 playbook /home/app/src/playbook
 COPY --from=assets --chown=9999:9999 /home/app/src/playbook/dist /home/app/src/playbook/dist
 COPY --chown=9999:9999 playbook-mcp /home/app/src/playbook-mcp
+COPY --from=assets --chown=9999:9999 /home/app/src/playbook-mcp/vendor/chart-peers /home/app/src/playbook-mcp/vendor/chart-peers
 
 WORKDIR /home/app/src/playbook-mcp
-RUN apt-get update -y && apt-get install -y --no-install-recommends curl \
-    && ./bin/vendor_chart_peers \
-    && mkdir -p tmp/pids log \
+RUN mkdir -p tmp/pids log \
     && chown -R app:app tmp log vendor \
     && test -f /home/app/src/playbook/dist/ai/index.json \
-    && rm -rf /var/lib/apt/lists/*
+    && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js
 
 USER app
 ENV PORT=3099

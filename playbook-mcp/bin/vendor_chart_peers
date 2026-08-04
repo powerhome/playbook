@@ -1,34 +1,38 @@
 #!/usr/bin/env bash
-# Download pinned React/Highcharts ESM builds into vendor/chart-peers for self-hosted chart iframes.
-# Runtime never loads esm.sh — only /assets/vendor/*.
+# Bundle React + Highcharts + chart kit mounts into one classic IIFE script.
+# jsDelivr /+esm peers are NOT self-contained (they import /npm/… URLs) and break
+# inside LibreChat srcdoc iframes — do not reintroduce them.
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-DEST="$ROOT/vendor/chart-peers"
-mkdir -p "$DEST"
+MCP_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$MCP_ROOT/.." && pwd)"
+BUILD_JS="$MCP_ROOT/chart-bundle/build.mjs"
+OUT="$MCP_ROOT/vendor/chart-peers/playbook-charts.js"
 
-download() {
-  local url="$1"
-  local out="$2"
-  echo "-> $out"
-  curl -fsSL "$url" -o "$DEST/$out"
-}
+if [[ ! -f "$BUILD_JS" ]]; then
+  echo "ERROR: missing chart bundle builder: $BUILD_JS" >&2
+  exit 1
+fi
 
-# Pinned jsDelivr npm ESM builds (fetched at setup time only).
-REACT_VER=18.3.1
-HC_VER=11.4.8
-HCR_VER=3.2.1
+if [[ ! -d "$REPO_ROOT/node_modules/esbuild" ]] || [[ ! -d "$REPO_ROOT/node_modules/sass" ]]; then
+  echo "ERROR: esbuild/sass not found under $REPO_ROOT/node_modules. Run yarn install at the monorepo root." >&2
+  exit 1
+fi
 
-download "https://cdn.jsdelivr.net/npm/react@${REACT_VER}/+esm" "react.esm.js"
-download "https://cdn.jsdelivr.net/npm/react-dom@${REACT_VER}/+esm" "react-dom.esm.js"
-download "https://cdn.jsdelivr.net/npm/react@${REACT_VER}/jsx-runtime/+esm" "react-jsx-runtime.esm.js"
-download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/es-modules/masters/highcharts.src.js/+esm" "highcharts.esm.js" \
-  || download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/+esm" "highcharts.esm.js"
-download "https://cdn.jsdelivr.net/npm/highcharts-react-official@${HCR_VER}/+esm" "highcharts-react-official.esm.js"
-download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/es-modules/masters/highcharts-more.src.js/+esm" "highcharts-more.esm.js" \
-  || download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/highcharts-more/+esm" "highcharts-more.esm.js"
-download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/es-modules/masters/modules/solid-gauge.src.js/+esm" "solid-gauge.esm.js" \
-  || download "https://cdn.jsdelivr.net/npm/highcharts@${HC_VER}/modules/solid-gauge/+esm" "solid-gauge.esm.js"
+if ! command -v node >/dev/null 2>&1; then
+  echo "ERROR: node is required to build the chart IIFE" >&2
+  exit 1
+fi
 
-echo "Vendored chart peers into $DEST"
-ls -la "$DEST"
+echo "Bundling MCP chart IIFE → $OUT"
+(
+  cd "$REPO_ROOT"
+  node "$BUILD_JS"
+)
+
+if [[ ! -s "$OUT" ]]; then
+  echo "ERROR: chart bundle was not written: $OUT" >&2
+  exit 1
+fi
+
+ls -la "$OUT"

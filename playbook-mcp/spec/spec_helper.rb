@@ -23,9 +23,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     dir = Rails.root.join("vendor/chart-peers")
     FileUtils.mkdir_p(dir)
-    PlaybookMcp::ChartPeers::FILES.each_value do |name|
-      path = dir.join(name)
-      File.write(path, "export default {};\n") unless path.file?
-    end
+    path = dir.join(PlaybookMcp::ChartPeers::BUNDLE)
+    File.write(path, "(function(){})();\n") unless path.file? && path.size.positive?
   end
 end

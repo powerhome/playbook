@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "erb"
-require "json"
 require "uri"
 
 module PlaybookMcp
@@ -27,12 +26,10 @@ module PlaybookMcp
           #{csp_meta}
           <title>#{ERB::Util.html_escape(@title)}</title>
           <link rel="stylesheet" href="#{asset_url('playbook.css')}" />
-          #{import_map if @charts && ChartPeers.available?}
         </head>
         <body style="margin:0;padding:16px;background:#fff;">
           #{@body_html}
-          <script src="#{asset_url('playbook-rails.js')}"></script>
-          #{chart_scripts if @charts}
+          #{scripts}
         </body>
         </html>
       HTML
@@ -64,8 +61,8 @@ module PlaybookMcp
         "img-src #{origin} data:",
         "font-src #{origin} data:",
         "style-src #{origin} 'unsafe-inline'",
-        # importmap is an inline <script>; srcdoc CSP needs unsafe-inline (or a nonce).
-        "script-src #{origin} 'unsafe-inline'",
+        # Classic external scripts only (no importmap / inline JS).
+        "script-src #{origin}",
         "connect-src #{origin}",
       ].join("; ")
 
@@ -85,30 +82,27 @@ module PlaybookMcp
       ""
     end
 
-    def import_map
-      imports = ChartPeers.import_map_entries(method(:asset_url))
-      <<~HTML
-        <script type="importmap">
-        #{JSON.pretty_generate({ 'imports' => imports })}
-        </script>
-      HTML
+    def scripts
+      if @charts
+        chart_scripts
+      else
+        %(<script src="#{asset_url('playbook-rails.js')}"></script>)
+      end
     end
 
     def chart_scripts
       unless ChartPeers.available?
         missing = ChartPeers.missing.join(", ")
         return <<~HTML
-          <!-- Chart peers missing (#{ERB::Util.html_escape(missing)}). Run bin/vendor_chart_peers. -->
+          <!-- Chart bundle missing (#{ERB::Util.html_escape(missing)}). Run bin/vendor_chart_peers. -->
           <p style="font:14px sans-serif;color:#666;">
-            Chart interactivity unavailable: vendor chart peers are not installed.
+            Chart interactivity unavailable: run bin/vendor_chart_peers to build the self-contained chart bundle.
           </p>
         HTML
       end
 
-      <<~HTML
-        <script type="module" src="#{asset_url('playbook-rails-react-bindings.js')}"></script>
-        <script type="module" src="#{asset_url('playbook-rails-charts-bindings.js')}"></script>
-      HTML
+      # One classic IIFE — no importmap, no type=module, no bare specifiers.
+      %(<script src="#{asset_url(ChartPeers.asset_relative_path)}"></script>)
     end
   end
 end

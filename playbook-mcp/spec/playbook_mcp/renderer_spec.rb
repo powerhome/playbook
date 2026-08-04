@@ -28,9 +28,10 @@ RSpec.describe PlaybookMcp::Renderer do
       charts: false
     ).to_html
     expect(html).to include(%(Content-Security-Policy" content="))
-    expect(html).to include("script-src https://mcp-pr6468.example.test 'unsafe-inline'")
+    expect(html).to include("script-src https://mcp-pr6468.example.test")
     expect(html).to include("style-src https://mcp-pr6468.example.test 'unsafe-inline'")
     expect(html).not_to include("script-src 'self'")
+    expect(html).not_to include("script-src https://mcp-pr6468.example.test 'unsafe-inline'")
   end
 
   it "omits CSP when assets are relative (srcdoc cannot use 'self')" do
@@ -63,7 +64,7 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).to include("pb_card")
   end
 
-  it "uses self-hosted chart peers and strips useHTML from options" do
+  it "loads a self-contained chart IIFE and strips useHTML from options" do
     html = renderer.render_kit(
       kit: "pb_bar_graph",
       props: {
@@ -75,10 +76,12 @@ RSpec.describe PlaybookMcp::Renderer do
         },
       }
     )
-    expect(html).to include("importmap")
-    expect(html).to include("/assets/vendor/react.esm.js?v=")
+    expect(html).not_to include("importmap")
+    expect(html).not_to include("type=\"module\"")
+    expect(html).not_to include("react.esm.js")
     expect(html).not_to include("esm.sh")
-    expect(html).to include("playbook-rails-charts-bindings.js")
+    expect(html).to include("/assets/vendor/playbook-charts.js?v=")
+    expect(html).not_to include("playbook-rails-charts-bindings.js")
     expect(html).to include("data-pb-react-component")
     expect(html).not_to include("useHTML")
     # Highcharts options must stay camelCase inside the mount props.

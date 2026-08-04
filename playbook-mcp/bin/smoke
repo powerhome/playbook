@@ -45,6 +45,8 @@ chart_html = renderer.render_kit(
 )
 raise "chart missing react mount hook" unless chart_html.include?("data-pb-react-component")
 raise "chart must not load esm.sh at runtime" if chart_html.include?("esm.sh")
+raise "chart must not use importmap" if chart_html.include?("importmap")
+raise "chart must load self-contained IIFE" unless chart_html.include?("/assets/vendor/playbook-charts.js")
 raise "chart options snake_cased (x_axis)" if chart_html.match?(/["']x_axis["']/)
 raise "chart options missing camelCase xAxis" unless chart_html.include?("xAxis")
 
@@ -54,11 +56,12 @@ doc_with_origin = PlaybookMcp::Document.new(
   charts: false
 ).to_html
 raise "CSP must not use 'self' for srcdoc" if doc_with_origin.include?("script-src 'self'")
-raise "CSP must allow absolute asset origin + unsafe-inline for importmap" unless doc_with_origin.include?(
+raise "CSP must allow absolute asset origin" unless doc_with_origin.include?("script-src https://mcp.example.test")
+raise "CSP must not require unsafe-inline for scripts" if doc_with_origin.include?(
   "script-src https://mcp.example.test 'unsafe-inline'"
 )
 
-puts "ok (#{chart_html.bytesize} bytes) — peers #{PlaybookMcp::ChartPeers.available? ? 'vendored' : 'MISSING (bin/vendor_chart_peers)'}"
+puts "ok (#{chart_html.bytesize} bytes) — bundle #{PlaybookMcp::ChartPeers.available? ? 'built' : 'MISSING (bin/vendor_chart_peers)'}"
 
 puts "== ui resource =="
 ui = McpUiServer.create_ui_resource(
