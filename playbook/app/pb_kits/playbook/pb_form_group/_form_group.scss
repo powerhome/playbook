@@ -207,11 +207,9 @@
     min-width: 200px;
   }
 
-  // Direct child (pure Rails) or nested under react_component mount wrapper
   & > [class^=pb_typeahead_kit]:not(:last-child),
   & > [data-pb-react-component]:not(:last-child) > [class^=pb_typeahead_kit] {
     [class^=pb_text_input_kit] .text_input_wrapper {
-      // `!important` beats react-select emotion `border-width` on the React control
       input,
       .text_input,
       .typeahead-kit-select__control {
@@ -221,7 +219,6 @@
       }
     }
 
-    // React typeahead control only
     [class^=pb_text_input_kit] .text_input_wrapper div.text_input {
       min-height: 26px;
     }
