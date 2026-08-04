@@ -31,7 +31,7 @@ Local helper: `bundle exec ruby bin/smoke` asserts hydration hooks; LibreChat co
 4. Table renders; **responsive/collapse JS runs in-iframe** (no UI Actions).
 5. Chart returns mount markup; with `bin/vendor_chart_peers` IIFE, Highcharts paints in-iframe.
 6. **Fonts:** Proxima / Power Centra (or configured face) load from `/assets/fonts/...` — not system fallback. Asset responses must include `Access-Control-Allow-Origin: *` (opaque iframe `Origin: null`).
-7. Document height: no clipping from `100vh` / fixed full-viewport wrappers (LibreChat auto-resizes to content). Charts reserve mount + `options.chart.height` (default 400px) so early iframe measure is not 0-height before Highcharts hydrates.
+7. Document height: no clipping. Charts post `ui-size-change` from the bundled IIFE (`@mcp-ui/client` cannot measure opaque-origin srcdoc; LibreChat needs that message to set `iframe.style.height`). Also reserve mount + `options.chart.height` (default 400px) for Highcharts layout.
 
 8. `render_layout` → **one** HTML document per call (multiple `ui://` resources become a carousel — wrong for dashboards).
 

@@ -20,14 +20,34 @@ function mountPlaybookCharts(root = document) {
   ComponentRegistry.mountComponents(root)
 }
 
+// @mcp-ui/client cannot measure opaque-origin srcdoc iframes; it only grows the
+// iframe when content posts ui-size-change. Must live in this bundle (CSP blocks
+// inline scripts — script-src has no 'unsafe-inline').
+function reportSize() {
+  const h =
+    document.documentElement?.scrollHeight || document.body?.scrollHeight || 0
+  if (!h || !window.parent || window.parent === window) return
+  window.parent.postMessage({ type: "ui-size-change", payload: { height: h } }, "*")
+}
+
+function startSizeReporter() {
+  reportSize()
+  window.addEventListener("load", reportSize)
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(reportSize).observe(document.documentElement)
+  }
+}
+
 function boot() {
   mountPlaybookCharts(document)
+  startSizeReporter()
 
   let mountTimeout = null
   const debouncedMount = () => {
     if (mountTimeout) clearTimeout(mountTimeout)
     mountTimeout = setTimeout(() => {
       mountPlaybookCharts(document)
+      reportSize()
       mountTimeout = null
     }, 50)
   }
