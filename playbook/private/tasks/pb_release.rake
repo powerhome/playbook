@@ -111,29 +111,21 @@ namespace :pb_release do
     # RubyGems
     puts "\nCreating Gem..."
     `bin/build_gem`
-    puts "\nCreating Docs Gem..."
-    `gem build lib/playbook_ui_docs.gemspec`
     # Publish to RubyGems
     unless dryrun
       puts "\nPushing to RubyGems..."
       puts "If MFA is enabled (UI and API), you will be prompted for an OTP code..."
-      [
-        "playbook_ui-#{version}.gem",
-        "playbook_ui_docs-#{version}.gem",
-      ].each do |gem_file|
-        cmd = "gem push #{gem_file}"
-        puts "$ #{cmd}"
-        success = system(cmd)
-        abort "gem push failed for #{gem_file}. If no OTP prompt appeared, try:\n  #{cmd}\nor:\n  #{cmd} --otp YOUR_CODE" unless success
-      end
+      gem_file = "playbook_ui-#{version}.gem"
+      cmd = "gem push #{gem_file}"
+      puts "$ #{cmd}"
+      success = system(cmd)
+      abort "gem push failed for #{gem_file}. If no OTP prompt appeared, try:\n  #{cmd}\nor:\n  #{cmd} --otp YOUR_CODE" unless success
       puts "\nPushed to RubyGems. Now lets clean up..."
-      `rm -rf playbook_ui-*.gem playbook_ui_docs-*.gem`
+      `rm -rf playbook_ui-*.gem`
     end
 
     # Publish to NPM
     unless dryrun
-      # `rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml`
-      `rm -rf dist/app  dist/pb_doc_helper.rb`
       puts "\nPublishing to NPM..."
       npm_suffix = looks_like_alpha ? "--tag alpha" : ""
       cmd = "npm publish --registry https://registry.npmjs.org playbook-ui-#{npm_version}.tgz #{npm_suffix}"
