@@ -52,8 +52,15 @@ const DropdownOption = (props: DropdownOptionProps) => {
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject | undefined) => {
+    // When the input is only showing the selected label (e.g. seeded defaultValue), do not filter
+    const selectedLabel =
+      !multiSelect &&
+      !Array.isArray(selected) &&
+      (selected as GenericObject)?.label;
+    const filterText =
+      selectedLabel && filterItem === selectedLabel ? "" : filterItem;
     const label = typeof option?.label === 'string' ? option.label.toLowerCase() : option?.label;
-    return String(label).toLowerCase().includes(filterItem.toLowerCase());
+    return String(label).toLowerCase().includes(filterText.toLowerCase());
   }
 
   // When multiSelect, then if an option is selected, remove from dropdown
