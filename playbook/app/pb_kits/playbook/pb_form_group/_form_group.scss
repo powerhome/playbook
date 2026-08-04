@@ -202,15 +202,23 @@
     }
   }
 
-  & > [class^=pb_typeahead_kit] {
+  & > [class^=pb_typeahead_kit],
+  & > [data-pb-react-component] > [class^=pb_typeahead_kit] {
     min-width: 200px;
   }
 
-  & > [class^=pb_typeahead_kit]:not(:last-child) {
-    [class^=pb_text_input_kit] .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-right-width: 0;
+  // Direct child (pure Rails) or nested under react_component mount wrapper
+  & > [class^=pb_typeahead_kit]:not(:last-child),
+  & > [data-pb-react-component]:not(:last-child) > [class^=pb_typeahead_kit] {
+    [class^=pb_text_input_kit] .text_input_wrapper {
+      // `!important` beats react-select emotion `border-width` on the React control
+      input,
+      .text_input,
+      .typeahead-kit-select__control {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-right-width: 0 !important;
+      }
     }
 
     // React typeahead control only
@@ -219,10 +227,15 @@
     }
   }
 
-  & > [class^=pb_typeahead_kit]:not(:first-child) {
-    [class^=pb_text_input_kit] .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
+  & > [class^=pb_typeahead_kit]:not(:first-child),
+  & > [data-pb-react-component]:not(:first-child) > [class^=pb_typeahead_kit] {
+    [class^=pb_text_input_kit] .text_input_wrapper {
+      input,
+      .text_input,
+      .typeahead-kit-select__control {
+        border-bottom-left-radius: 0 !important;
+        border-top-left-radius: 0 !important;
+      }
     }
   }
 
