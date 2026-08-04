@@ -64,7 +64,8 @@ module PlaybookMcp
         "img-src #{origin} data:",
         "font-src #{origin} data:",
         "style-src #{origin} 'unsafe-inline'",
-        "script-src #{origin}",
+        # importmap is an inline <script>; srcdoc CSP needs unsafe-inline (or a nonce).
+        "script-src #{origin} 'unsafe-inline'",
         "connect-src #{origin}",
       ].join("; ")
 

@@ -28,7 +28,7 @@ RSpec.describe PlaybookMcp::Renderer do
       charts: false
     ).to_html
     expect(html).to include(%(Content-Security-Policy" content="))
-    expect(html).to include("script-src https://mcp-pr6468.example.test")
+    expect(html).to include("script-src https://mcp-pr6468.example.test 'unsafe-inline'")
     expect(html).to include("style-src https://mcp-pr6468.example.test 'unsafe-inline'")
     expect(html).not_to include("script-src 'self'")
   end

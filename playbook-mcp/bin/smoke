@@ -54,7 +54,9 @@ doc_with_origin = PlaybookMcp::Document.new(
   charts: false
 ).to_html
 raise "CSP must not use 'self' for srcdoc" if doc_with_origin.include?("script-src 'self'")
-raise "CSP must allow absolute asset origin" unless doc_with_origin.include?("script-src https://mcp.example.test")
+raise "CSP must allow absolute asset origin + unsafe-inline for importmap" unless doc_with_origin.include?(
+  "script-src https://mcp.example.test 'unsafe-inline'"
+)
 
 puts "ok (#{chart_html.bytesize} bytes) — peers #{PlaybookMcp::ChartPeers.available? ? 'vendored' : 'MISSING (bin/vendor_chart_peers)'}"
 
