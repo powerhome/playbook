@@ -20,13 +20,16 @@ module Playground
       >
     /mx
 
-    def initialize(view_context:)
+    def initialize(view_context:, depth: 0)
       @view_context = view_context
+      @depth = depth
     end
 
     def render(children)
       return nil if children.blank?
       return nil unless erb_children?(children)
+
+      Playground::PreviewLimits.validate_children_depth!(@depth)
 
       segments = parse_segments(children.to_s)
       return nil if segments.empty?
@@ -89,10 +92,13 @@ module Playground
     end
 
     def render_inner_content(content)
-      nested = self.class.new(view_context: @view_context).render(content)
+      nested = self.class.new(view_context: @view_context, depth: @depth + 1).render(content)
       return nested if nested.present?
 
-      jsx = Playground::JsxChildrenRenderer.new(view_context: @view_context).render(content)
+      jsx = Playground::JsxChildrenRenderer.new(
+        view_context: @view_context,
+        depth: @depth + 1
+      ).render(content)
       return jsx if jsx.present?
 
       TrustedHtml.plain_text(content)

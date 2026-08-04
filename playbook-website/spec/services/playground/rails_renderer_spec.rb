@@ -31,10 +31,10 @@ RSpec.describe Playground::RailsRenderer do
       ).render
 
       expect(result[:html]).to be_nil
-      expect(result[:error]).to include("not enabled")
+      expect(result[:error]).to eq(Playground::PreviewLimits::CLIENT_ERROR)
     end
 
-    it "returns validation errors for invalid prop values" do
+    it "returns a generic error for invalid prop values" do
       result = described_class.new(
         view_context: view_context,
         kit_name: "button",
@@ -44,7 +44,36 @@ RSpec.describe Playground::RailsRenderer do
       ).render
 
       expect(result[:html]).to be_nil
-      expect(result[:error]).to be_present
+      expect(result[:error]).to eq(Playground::PreviewLimits::CLIENT_ERROR)
+    end
+
+    it "rejects oversized children" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "card",
+        props: {},
+        children: "x" * (Playground::PreviewLimits::MAX_CHILDREN_BYTES + 1),
+        structure_mode: "simple"
+      ).render
+
+      expect(result[:html]).to be_nil
+      expect(result[:error]).to eq(Playground::PreviewLimits::CLIENT_LIMIT_ERROR)
+    end
+
+    it "rejects props nested beyond the depth limit" do
+      nested = { "a" => "leaf" }
+      (Playground::PreviewLimits::MAX_HASH_DEPTH + 2).times do
+        nested = { "wrap" => nested }
+      end
+
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "button",
+        props: nested
+      ).render
+
+      expect(result[:html]).to be_nil
+      expect(result[:error]).to eq(Playground::PreviewLimits::CLIENT_LIMIT_ERROR)
     end
 
     it "renders flex children with JSX Caption components" do

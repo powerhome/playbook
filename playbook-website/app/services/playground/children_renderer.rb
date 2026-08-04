@@ -4,14 +4,17 @@ module Playground
   class ChildrenRenderer
     BODY_TAG = %r{\A<Body(\s+([^>]*))?\s*/?>\z}i
 
-    def initialize(view_context:)
+    def initialize(view_context:, depth: 0)
       @view_context = view_context
-      @jsx_renderer = JsxChildrenRenderer.new(view_context: view_context)
-      @erb_renderer = ErbChildrenRenderer.new(view_context: view_context)
+      @depth = depth
+      @jsx_renderer = JsxChildrenRenderer.new(view_context: view_context, depth: depth)
+      @erb_renderer = ErbChildrenRenderer.new(view_context: view_context, depth: depth)
     end
 
     def render(children, merged_props: {})
       return nil if children.blank?
+
+      Playground::PreviewLimits.validate_children_depth!(@depth)
 
       body_kit = render_body_kit(children)
       return body_kit if body_kit.present?

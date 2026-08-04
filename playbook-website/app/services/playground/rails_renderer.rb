@@ -22,16 +22,34 @@ module Playground
     end
 
     def render
+      validate_payload_limits!
       validate_kit!
 
       { html: render_kit(build_merged_props), error: nil }
-    rescue Playbook::Props::Error => e
-      { html: nil, error: e.message }
-    rescue => e
-      { html: nil, error: e.message }
+    rescue Playground::PreviewLimits::LimitExceeded => e
+      log_render_error(e)
+      { html: nil, error: Playground::PreviewLimits::CLIENT_LIMIT_ERROR }
+    rescue Playbook::Props::Error, StandardError => e
+      log_render_error(e)
+      { html: nil, error: Playground::PreviewLimits::CLIENT_ERROR }
+    rescue SystemStackError => e
+      log_render_error(e)
+      { html: nil, error: Playground::PreviewLimits::CLIENT_ERROR }
     end
 
   private
+
+    def validate_payload_limits!
+      Playground::PreviewLimits.validate_payload!(
+        props: @props,
+        global_props: @global_props,
+        children: @children
+      )
+    end
+
+    def log_render_error(error)
+      Rails.logger.error("Playground::RailsRenderer error: #{error.class}: #{error.message}")
+    end
 
     def validate_kit!
       raise StandardError, "Kit is not enabled for the Rails Playground POC" unless Playground::RailsPlaygroundKits::POC_KITS.include?(@kit_name)

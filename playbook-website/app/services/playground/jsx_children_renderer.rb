@@ -14,13 +14,16 @@ module Playground
 
     CAPTION_FALLBACK_CLASS = "pb_caption_kit_md"
 
-    def initialize(view_context:)
+    def initialize(view_context:, depth: 0)
       @view_context = view_context
+      @depth = depth
     end
 
     def render(children)
       return nil if children.blank?
       return nil unless jsx_children?(children)
+
+      Playground::PreviewLimits.validate_children_depth!(@depth)
 
       segments = parse_segments(children.to_s.strip)
       return nil if segments.empty?
@@ -99,7 +102,7 @@ module Playground
     end
 
     def render_inner_content(content)
-      nested = self.class.new(view_context: @view_context).render(content)
+      nested = self.class.new(view_context: @view_context, depth: @depth + 1).render(content)
       return nested if nested.present?
 
       TrustedHtml.plain_text(self.class.extract_jsx_text(content))
