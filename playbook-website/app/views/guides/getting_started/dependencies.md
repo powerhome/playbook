@@ -44,13 +44,20 @@ PbBarGraph, PbCircleChart, PbGaugeChart, and PbLineGraph are available through a
 ```javascript
 import { PbBarGraph, PbCircleChart, PbGaugeChart, PbLineGraph } from 'playbook-ui/charts'
 ```
+
+**Advanced Table**:
+
+AdvancedTable is available through a separate entrypoint so TanStack stays out of the main `playbook-ui` bundle until the kit is used. TanStack is still bundled with that entrypoint — no additional installation is required. Import it using:
+```javascript
+import { AdvancedTable } from 'playbook-ui/advanced-table'
+```
 ## Bundled Dependencies
 
 These kits use dependencies that are bundled with them; no additional installation is required.
 
 | Kit                    | Kit Link                                                                    | NPM Link(s)                                                                                       | Dependency(s)                           |
 |------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------|
-| **Advanced Table**     | [Advanced Table](https://playbook.powerapp.cloud/kits/advanced_table/react) | [@tanstack/react-table](https://www.npmjs.com/package/@tanstack/react-table)                      | @tanstack/react-table                   |
+| **Advanced Table**     | [Advanced Table](https://playbook.powerapp.cloud/kits/advanced_table/react) | [@tanstack/react-table](https://www.npmjs.com/package/@tanstack/react-table),<br>[@tanstack/react-virtual](https://www.npmjs.com/package/@tanstack/react-virtual) | @tanstack/react-table,<br>@tanstack/react-virtual |
 | **Date Picker**        | [Date Picker](https://playbook.powerapp.cloud/kits/date_picker/react)       | [flatpickr](https://www.npmjs.com/package/flatpickr)                                              | flatpickr                               |
 | **Dialog**             | [Dialog](https://playbook.powerapp.cloud/kits/dialog/react)                 | [react-modal](https://www.npmjs.com/package/react-modal)                                          | react-modal                             |
 | **File Upload**        | [File Upload](https://playbook.powerapp.cloud/kits/file_upload/react)       | [react-dropzone](https://www.npmjs.com/package/react-dropzone)                                    | react-dropzone                          |

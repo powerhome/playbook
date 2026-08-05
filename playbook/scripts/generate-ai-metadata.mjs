@@ -500,10 +500,11 @@ function generateUsage(kitName, props) {
 
   const reactProps = examples.map(([n, p]) => `${n}="${p.values[0]}"`).join(' ');
   const railsProps = examples.map(([n, p]) => `${camelToSnake(n)}: "${p.values[0]}"`).join(', ');
+  const reactImportPath = kitName === 'advanced_table' ? 'playbook-ui/advanced-table' : 'playbook-ui';
 
   return {
     react: {
-      import: `import { ${pascal} } from 'playbook-ui'`,
+      import: `import { ${pascal} } from '${reactImportPath}'`,
       example: `<${pascal}${reactProps ? ' ' + reactProps : ''}></${pascal}>`,
     },
     rails: {

@@ -1,4 +1,5 @@
 const CHART_COMPONENTS = ["PbBarGraph", "PbCircleChart", "PbGaugeChart", "PbLineGraph"];
+const ADVANCED_TABLE_COMPONENTS = ["AdvancedTable"];
 
 export function formatReactSnippet(source: string, darkMode: boolean): string {
   let formatted = source
@@ -26,7 +27,14 @@ export function formatReactSnippet(source: string, darkMode: boolean): string {
   );
 
   const chartImports = allComponents.filter((component) => CHART_COMPONENTS.includes(component));
-  const regularImports = allComponents.filter((component) => !CHART_COMPONENTS.includes(component));
+  const advancedTableImports = allComponents.filter((component) =>
+    ADVANCED_TABLE_COMPONENTS.includes(component),
+  );
+  const regularImports = allComponents.filter(
+    (component) =>
+      !CHART_COMPONENTS.includes(component) &&
+      !ADVANCED_TABLE_COMPONENTS.includes(component),
+  );
 
   if (allComponents.length > 0) {
     formatted = formatted.replace(/^\s*import\s+{([^}]+)}\s+from\s+['"]playbook-ui['"]\s*$/gm, "");
@@ -34,6 +42,11 @@ export function formatReactSnippet(source: string, darkMode: boolean): string {
     const newImports = [];
     if (regularImports.length > 0) {
       newImports.push(`import { ${regularImports.join(", ")} } from 'playbook-ui'`);
+    }
+    if (advancedTableImports.length > 0) {
+      newImports.push(
+        `import { ${advancedTableImports.join(", ")} } from 'playbook-ui/advanced-table'`,
+      );
     }
     if (chartImports.length > 0) {
       newImports.push(`import { ${chartImports.join(", ")} } from 'playbook-ui/charts'`);
