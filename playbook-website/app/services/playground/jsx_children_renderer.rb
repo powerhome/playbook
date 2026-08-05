@@ -117,10 +117,12 @@ module Playground
     end
 
     def render_kit(kit, props, block_content)
+      safe_props = Playground::PropFilter.filter_child_props(kit_name: kit, props: props)
+
       if block_content.present?
-        @view_context.pb_rails(kit, props: props) { block_content }
+        @view_context.pb_rails(kit, props: safe_props) { block_content }
       else
-        @view_context.pb_rails(kit, props: props.compact)
+        @view_context.pb_rails(kit, props: safe_props.compact)
       end
     end
 

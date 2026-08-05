@@ -220,12 +220,11 @@ module Playground
     end
 
     def build_merged_props
-      schema_props = kit_schema.fetch("props", {})
-      global_schema_props = global_props_schema.fetch("props", {})
-
-      merged = {}
-      merge_prop_source!(merged, @props, schema_props)
-      merge_prop_source!(merged, @global_props, global_schema_props) if kit_uses_global_props?
+      merged = Playground::PropFilter.filter_kit_and_globals(
+        kit_name: @kit_name,
+        props: @props,
+        global_props: @global_props
+      )
 
       ensure_required_kit_props(merged)
     end
@@ -241,50 +240,8 @@ module Playground
       merged
     end
 
-    def merge_prop_source!(merged, source, definitions)
-      source.each do |key, value|
-        camel_key = key.to_s
-        definition = definitions[camel_key]
-        next if definition.present? && !prop_for_rails?(definition)
-        next if unsupported_value?(value)
-
-        converted = deep_convert(value)
-        merged[camel_to_snake(camel_key).to_sym] = converted unless converted.nil?
-      end
-    end
-
-    def prop_for_rails?(definition)
-      platforms = definition["platforms"]
-      platforms.blank? || platforms.include?("rails")
-    end
-
-    def unsupported_value?(value)
-      return true if playground_code_expression?(value)
-
-      if value.is_a?(String)
-        trimmed = value.strip
-        return true if trimmed.include?("=>") || trimmed.start_with?("function")
-      end
-
-      false
-    end
-
-    def playground_code_expression?(value)
-      value.is_a?(Hash) && value.key?("__playgroundCode")
-    end
-
-    def kit_uses_global_props?
-      kit_schema["globalProps"] == true
-    end
-
     def kit_schema
       @kit_schema ||= load_json(::Playbook.kit_path(@kit_name, "", "kit.schema.json"))
-    end
-
-    def global_props_schema
-      @global_props_schema ||= load_json(
-        Playbook::Engine.root.join("app/pb_kits/playbook/utilities/global-props.schema.json")
-      ) || {}
     end
 
     def load_json(path)
@@ -300,22 +257,6 @@ module Playground
         .gsub(/([a-z0-9])([A-Z])/, '\1_\2')
         .tr("-", "_")
         .downcase
-    end
-
-    def deep_convert(value)
-      case value
-      when Hash
-        if playground_code_expression?(value)
-          nil
-        else
-          value.transform_keys { |key| camel_to_snake(key.to_s).to_sym }
-               .transform_values { |nested| deep_convert(nested) }
-        end
-      when Array
-        value.map { |item| deep_convert(item) }
-      else
-        value
-      end
     end
 
     def normalize_hash(value)

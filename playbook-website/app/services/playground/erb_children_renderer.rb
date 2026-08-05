@@ -83,11 +83,13 @@ module Playground
 
       return nil unless Playground::RailsPlaygroundKits.allowed_child_kit?(kit)
 
+      safe_props = Playground::PropFilter.filter_child_props(kit_name: kit, props: props)
+
       if content.present?
         inner = render_inner_content(content.strip)
-        @view_context.pb_rails(kit, props: props) { inner.presence || "" }
+        @view_context.pb_rails(kit, props: safe_props) { inner.presence || "" }
       else
-        @view_context.pb_rails(kit, props: props)
+        @view_context.pb_rails(kit, props: safe_props)
       end
     end
 

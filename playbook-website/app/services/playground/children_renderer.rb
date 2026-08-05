@@ -34,13 +34,14 @@ module Playground
       return nil unless match
 
       attrs = match[2].to_s
-      @view_context.pb_rails(
-        "body",
+      props = Playground::PropFilter.filter_child_props(
+        kit_name: "body",
         props: {
           text: attrs[/text="([^"]*)"/, 1],
           dark: attrs.match?(/\bdark\b/) || nil,
         }.compact
       )
+      @view_context.pb_rails("body", props: props)
     end
   end
 end

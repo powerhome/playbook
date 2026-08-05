@@ -76,6 +76,39 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:error]).to eq(Playground::PreviewLimits::CLIENT_LIMIT_ERROR)
     end
 
+    it "drops unknown props and html_options instead of forwarding them to the kit" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "button",
+        props: {
+          "text" => "Safe",
+          "notARealProp" => "ignore-me",
+          "htmlOptions" => { "onmouseover" => "alert(document.cookie)" },
+        }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("Safe")
+      expect(result[:html]).not_to include("onmouseover")
+      expect(result[:html]).not_to include("alert(document.cookie)")
+      expect(result[:html]).not_to include("ignore-me")
+    end
+
+    it "filters dangerous props on nested JSX children" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "flex",
+        props: { "orientation" => "row" },
+        children: '<Button text="Child" htmlOptions="ignored" />'
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("Child")
+      expect(result[:html]).to include("pb_button")
+      expect(result[:html]).not_to include("htmlOptions")
+      expect(result[:html]).not_to include("ignored")
+    end
+
     it "renders flex children with JSX Caption components" do
       result = described_class.new(
         view_context: view_context,
