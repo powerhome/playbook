@@ -17,7 +17,6 @@ const FormGroupTypeahead = (props) => {
     <div>
       <FormGroup>
         <Typeahead
-            disabled
             id="products"
             label="Products"
             options={options}
