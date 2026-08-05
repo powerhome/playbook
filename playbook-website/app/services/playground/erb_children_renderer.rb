@@ -3,6 +3,7 @@
 module Playground
   class ErbChildrenRenderer
     PB_RAILS_BLOCK = /
+      \A
       <%=\s*pb_rails\(\s*
       "([^"]+)"
       (?:\s*,\s*props:\s*(\{.*?\}))?
@@ -13,6 +14,7 @@ module Playground
     /mx
 
     PB_RAILS_TAG = /
+      \A
       <%=\s*pb_rails\(\s*
       "([^"]+)"
       (?:\s*,\s*props:\s*(\{.*?\}))?

@@ -170,6 +170,37 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:html].to_s).not_to include("<script>")
     end
 
+    it "does not mis-parse ERB when content precedes pb_rails" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "flex",
+        props: {},
+        children: 'NOTE <%= pb_rails("caption", props: { text: "Hi" }) %>',
+        structure_mode: "basic"
+      ).render
+
+      expect(result[:error]).to be_nil
+      # Anchored parse refuses a mid-string match; whole string is escaped instead of
+      # slicing as if the tag started at index 0.
+      expect(result[:html].to_s).to include("NOTE")
+      expect(result[:html].to_s).to include("&lt;%=")
+      expect(result[:html].to_s).not_to include("pb_caption_kit")
+    end
+
+    it "still parses ERB children when pb_rails is at the start" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "flex",
+        props: {},
+        children: '<%= pb_rails("caption", props: { text: "Hi" }) %>',
+        structure_mode: "basic"
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html].to_s).to include("Hi")
+      expect(result[:html].to_s).to include("pb_caption_kit")
+    end
+
     it "escapes raw HTML inside controlled flex item children" do
       result = described_class.new(
         view_context: view_context,
