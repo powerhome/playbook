@@ -170,6 +170,22 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:html].to_s).not_to include("<script>")
     end
 
+    it "rejects compound child kit paths that are not explicitly allowlisted" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "flex",
+        props: {},
+        children: '<%= pb_rails("dialog/not_a_real_part") %>',
+        structure_mode: "basic"
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html].to_s).to include("&lt;%=")
+      expect(Playground::RailsPlaygroundKits.allowed_child_kit?("dialog/dialog_header")).to be(true)
+      expect(Playground::RailsPlaygroundKits.allowed_child_kit?("dialog/not_a_real_part")).to be(false)
+      expect(Playground::RailsPlaygroundKits.allowed_child_kit?("flex/flex_item")).to be(true)
+    end
+
     it "does not mis-parse ERB when content precedes pb_rails" do
       result = described_class.new(
         view_context: view_context,
