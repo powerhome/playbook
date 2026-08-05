@@ -157,5 +157,39 @@ RSpec.describe Playbook::PbIcon::Icon do
         expect(subject.new(custom_icon: source).send(:read_svg_content, source)).to eq("")
       end
     end
+
+    it "does not fetch remote http(s) SVG sources" do
+      source = "https://example.com/icons/widget.svg"
+
+      expect(subject.new(custom_icon: source).send(:read_svg_content, source)).to eq("")
+    end
+
+    it "refuses a .svg symlink that resolves to a non-svg file" do
+      Dir.mktmpdir do |engine_dir|
+        secret = File.join(engine_dir, "master.key")
+        File.write(secret, "fake_secret_key_base")
+        link = File.join(engine_dir, "fake.svg")
+        File.symlink(secret, link)
+        Class.new(Rails::Engine) { define_singleton_method(:root) { Pathname.new(engine_dir) } }
+
+        expect(subject.new(custom_icon: link).send(:read_svg_content, link)).to eq("")
+      end
+    end
+  end
+
+  describe "#valid_emoji?" do
+    it "accepts pictographic emoji and keycap sequences", :aggregate_failures do
+      expect(subject.new(icon: "😀").valid_emoji?).to be(true)
+      expect(subject.new(icon: "👍").valid_emoji?).to be(true)
+      expect(subject.new(icon: "1️⃣").valid_emoji?).to be(true)
+    end
+
+    it "rejects bare emoji keycap bases and HTML-like payloads", :aggregate_failures do
+      expect(subject.new(icon: "1").valid_emoji?).to be(false)
+      expect(subject.new(icon: "#").valid_emoji?).to be(false)
+      expect(subject.new(icon: "*").valid_emoji?).to be(false)
+      expect(subject.new(icon: "1<img src=x onerror=alert(1)>").valid_emoji?).to be(false)
+      expect(subject.new(icon: "user").valid_emoji?).to be(false)
+    end
   end
 end

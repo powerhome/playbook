@@ -46,8 +46,19 @@ module Playbook
       prop :tabindex
 
       def valid_emoji?
-        emoji_regex = /\p{Emoji}/
-        emoji_regex.match?(icon)
+        str = icon.to_s
+        return false if str.blank?
+        # Digits / # / * match \p{Emoji} as keycap bases; require real emoji forms.
+        # Also reject markup so we never treat HTML-like strings as emoji.
+        return false if str.match?(%r{[<>&"'A-Za-z/\\]})
+
+        str.match?(
+          /
+            \p{Emoji_Presentation}
+            | \p{Extended_Pictographic}
+            | [\d#*]\u{FE0F}?\u{20E3}
+          /x
+        )
       end
 
       def classname
@@ -302,8 +313,9 @@ module Playbook
         source = source.to_s
         return "" if source.blank?
 
-        remote = remote_svg_uri(source)
-        return read_remote_svg(remote) if remote
+        # Remote http(s) fetch removed: untrusted custom_icon/icon values must not
+        # trigger server-side requests (SSRF). Use local / engine SVG paths only.
+        return "" if remote_svg_uri(source)
 
         path = allowed_svg_path(source)
         return "" unless path
@@ -318,16 +330,11 @@ module Playbook
         nil
       end
 
-      def read_remote_svg(uri)
-        uri.open("User-Agent" => "Playbook-Icon-Kit/1.0 (https://github.com/powerhome/playbook)", redirect: false, &:read)
-      rescue OpenURI::HTTPError, StandardError
-        ""
-      end
-
       def allowed_svg_path(source)
         candidate = Pathname.new(source)
         candidate = Rails.root.join(candidate) unless candidate.absolute?
-        resolved = candidate.expand_path
+        resolved = real_path(candidate.expand_path)
+        return nil unless resolved
         return nil unless svg_file?(resolved)
         return nil unless path_within_allowed_root?(resolved)
 
@@ -337,7 +344,8 @@ module Playbook
       # Only ever read real .svg files. This keeps non-svg files that happen to
       # live inside an allowed root (config/master.key, credentials, .env, ...)
       # structurally out of the read path rather than relying on the is_svg?
-      # gate to exclude them.
+      # gate to exclude them. Extension is checked on the resolved real path so
+      # a *.svg symlink to a non-svg file cannot bypass the filter.
       def svg_file?(path)
         path.file? && path.extname.casecmp(".svg").zero?
       end
