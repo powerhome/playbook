@@ -220,20 +220,44 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:html]).to include("Action")
     end
 
-    it "renders compound dialog structure for subcomponents mode" do
+    it "drops URL and path-like icon sources to avoid SSRF" do
       result = described_class.new(
         view_context: view_context,
-        kit_name: "dialog",
-        props: { "size" => "sm" },
-        children: "Hello Body Text, Nice to meet ya.",
-        structure_mode: "subcomponents"
+        kit_name: "icon",
+        props: {
+          "icon" => "user",
+          "customIcon" => "http://169.254.169.254/latest/meta-data/x.svg",
+        }
       ).render
 
       expect(result[:error]).to be_nil
-      expect(result[:html]).to include("Open Dialog")
-      expect(result[:html]).to include("Header Title inside Dialog.Header")
-      expect(result[:html]).to include("Hello Body Text, Nice to meet ya.")
-      expect(result[:html]).to include("Cancel Button")
+      expect(result[:html]).to include("pb_icon")
+      expect(result[:html]).not_to include("169.254.169.254")
+      expect(result[:html]).not_to include("meta-data")
+    end
+
+    it "still allows plain icon names" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "icon",
+        props: { "icon" => "user" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("pb_icon")
+    end
+
+    it "drops unsafe customIcon on nested Icon children" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "flex",
+        props: { "orientation" => "row" },
+        children: '<Icon customIcon="http://127.0.0.1/secret.svg" icon="user" />'
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).not_to include("127.0.0.1")
+      expect(result[:html]).not_to include("secret.svg")
     end
   end
 end

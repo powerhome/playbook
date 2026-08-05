@@ -7,6 +7,7 @@ module Playground
   # - Only schema-defined props for the Rails platform are kept
   # - html_options / data / aria / style are never forwarded
   # - Code-like playground values are dropped
+  # - icon / custom_icon values that look like URLs or paths are dropped (SSRF defense)
   class PropFilter
     BLOCKED_PROP_NAMES = %w[
       html_options
@@ -14,6 +15,12 @@ module Playground
       data
       aria
       style
+    ].freeze
+
+    ICON_SOURCE_KEYS = %w[
+      icon
+      custom_icon
+      customIcon
     ].freeze
 
     def self.filter_kit_and_globals(kit_name:, props:, global_props: {})
@@ -63,6 +70,7 @@ module Playground
         next if definition.blank?
         next unless prop_for_rails?(definition)
         next if unsupported_value?(value)
+        next if unsafe_icon_source?(camel_key, value)
 
         converted = deep_convert(value)
         next if converted.nil?
@@ -75,6 +83,37 @@ module Playground
     def blocked_prop_name?(name)
       snaked = camel_to_snake(name)
       BLOCKED_PROP_NAMES.include?(name) || BLOCKED_PROP_NAMES.include?(snaked)
+    end
+
+    def icon_source_key?(name)
+      snaked = camel_to_snake(name)
+      ICON_SOURCE_KEYS.include?(name) || ICON_SOURCE_KEYS.include?(snaked)
+    end
+
+    def unsafe_icon_source?(key, value)
+      return false unless icon_source_key?(key)
+
+      case value
+      when String
+        unsafe_icon_string?(value)
+      when Array
+        value.any? { |item| item.is_a?(String) && unsafe_icon_string?(item) }
+      else
+        false
+      end
+    end
+
+    def unsafe_icon_string?(value)
+      trimmed = value.to_s.strip
+      return true if trimmed.blank?
+      return true if trimmed.include?("://")
+      return true if trimmed.start_with?("|", "/", "~", ".", "\\")
+      return true if trimmed.include?("..")
+      return true if trimmed.include?("/") || trimmed.include?("\\")
+      return true if trimmed.match?(%r{\A[A-Za-z]:[\\/]})
+      return true if trimmed.downcase.include?(".svg")
+
+      false
     end
 
     def definition_for(definitions, key)
