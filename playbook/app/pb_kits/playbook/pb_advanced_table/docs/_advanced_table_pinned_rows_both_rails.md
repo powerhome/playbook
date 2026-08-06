@@ -1,0 +1,1 @@
+This code snippet demonstrates `pinned_rows` taking a hash with an array of row ids to both the `top` and `bottom` keys.

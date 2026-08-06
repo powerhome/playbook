@@ -55,7 +55,7 @@ const KitShow = () => {
     return platforms_status && platforms_status[platform] && platforms_status[platform] !== status;
   }, [kitMeta, platform]);
 
-  const platformLabel = platform === "rails" ? "Rails" : platform === "swift" ? "Swift" : "React";
+  const platformLabel = platform === "rails" ? "Rails" : "React";
 
   const statusWarningMessage = useMemo(() => {
     if (!kitStatus) return "";

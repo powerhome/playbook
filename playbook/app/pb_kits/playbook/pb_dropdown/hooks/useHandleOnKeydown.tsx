@@ -6,11 +6,13 @@ export const useHandleOnKeyDown = () => {
 
 const {
   autocomplete,
+  filterItem,
   filteredOptions,
   focusedOptionIndex,
   handleBackspace,
   handleOptionClick,
   selected,
+  setFilterItem,
   setFocusedOptionIndex,
   setIsDropDownClosed,
 }= useContext(DropdownContext)
@@ -40,7 +42,22 @@ const {
   return (e: React.KeyboardEvent) => {
 
     if (e.key !== "Tab" && autocomplete && selected && selected.label) {
+      // Only when the input is showing the selected label (e.g. seeded defaultValue)
+      const replacingSelectedLabel = filterItem === selected.label;
       handleBackspace();
+
+      if (replacingSelectedLabel && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        setFilterItem?.(e.key);
+        setIsDropDownClosed(false);
+        return;
+      }
+
+      if (replacingSelectedLabel && (e.key === "Backspace" || e.key === "Delete")) {
+        e.preventDefault();
+        setFilterItem?.("");
+        return;
+      }
     }
 
     switch (e.key) {

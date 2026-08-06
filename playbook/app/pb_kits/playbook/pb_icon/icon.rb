@@ -3,6 +3,7 @@
 require "open-uri"
 require "json"
 require "digest"
+require "pathname"
 
 module Playbook
   module PbIcon
@@ -113,12 +114,9 @@ module Playbook
       end
 
       def render_svg
-        source = asset_path || icon || custom_icon
-        content = if source.to_s.include?("://")
-                    URI.open(source, "User-Agent" => "Playbook-Icon-Kit/1.0 (https://github.com/powerhome/playbook)", &:read) # rubocop:disable Security/Open
-                  else
-                    URI.open(source, &:read) # rubocop:disable Security/Open
-                  end
+        content = svg_content
+        return "" if content.blank?
+
         doc = Nokogiri::XML(content)
         svg = doc.at_css("svg")
         return "" unless svg
@@ -293,6 +291,93 @@ module Playbook
       end
 
     private
+
+      def svg_content
+        return File.read(asset_path) if asset_path.present?
+
+        read_svg_content(icon || custom_icon)
+      end
+
+      def read_svg_content(source)
+        source = source.to_s
+        return "" if source.blank?
+
+        remote = remote_svg_uri(source)
+        return read_remote_svg(remote) if remote
+
+        path = allowed_svg_path(source)
+        return "" unless path
+
+        path.read
+      end
+
+      def remote_svg_uri(source)
+        uri = URI.parse(source)
+        uri if uri.is_a?(URI::HTTP)
+      rescue URI::InvalidURIError
+        nil
+      end
+
+      def read_remote_svg(uri)
+        uri.open("User-Agent" => "Playbook-Icon-Kit/1.0 (https://github.com/powerhome/playbook)", redirect: false, &:read)
+      rescue OpenURI::HTTPError, StandardError
+        ""
+      end
+
+      def allowed_svg_path(source)
+        candidate = Pathname.new(source)
+        candidate = Rails.root.join(candidate) unless candidate.absolute?
+        resolved = candidate.expand_path
+        return nil unless svg_file?(resolved)
+        return nil unless path_within_allowed_root?(resolved)
+
+        resolved
+      end
+
+      # Only ever read real .svg files. This keeps non-svg files that happen to
+      # live inside an allowed root (config/master.key, credentials, .env, ...)
+      # structurally out of the read path rather than relying on the is_svg?
+      # gate to exclude them.
+      def svg_file?(path)
+        path.file? && path.extname.casecmp(".svg").zero?
+      end
+
+      def path_within_allowed_root?(path)
+        real = path.realpath
+        allowed_svg_roots.any? do |root|
+          real == root || real.to_s.start_with?("#{root}#{File::SEPARATOR}")
+        end
+      rescue
+        false
+      end
+
+      # An SVG may live in the host application or in any mounted engine
+      # (Playbook itself, or a host app's component engines), so every loaded
+      # engine root is allowed in addition to Rails.root.
+      def allowed_svg_roots
+        @allowed_svg_roots ||= svg_root_candidates.filter_map { |candidate| real_path(candidate) }.uniq
+      end
+
+      def svg_root_candidates
+        Rails::Engine.descendants
+                     .map { |engine| engine_root(engine) }
+                     .push(Playbook::Engine.root, Rails.root)
+                     .compact
+      end
+
+      def engine_root(engine)
+        engine.root
+      rescue
+        nil
+      end
+
+      def real_path(path)
+        return nil unless path
+
+        Pathname.new(path).realpath
+      rescue
+        nil
+      end
 
       def resolve_alias(icon)
         return icon unless icon_alias_map

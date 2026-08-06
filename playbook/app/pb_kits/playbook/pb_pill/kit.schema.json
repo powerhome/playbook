@@ -7,6 +7,17 @@
     "rails"
   ],
   "props": {
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm"
+      ],
+      "default": null
+    },
     "text": {
       "type": "string",
       "platforms": [
@@ -47,11 +58,11 @@
   "usage": {
     "react": {
       "import": "import { Pill } from 'playbook-ui'",
-      "example": "<Pill variant=\"success\" textTransform=\"none\"></Pill>"
+      "example": "<Pill size=\"sm\" variant=\"success\"></Pill>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"pill\", props: { variant: \"success\", text_transform: \"none\" }) %>"
+      "example": "<%= pb_rails(\"pill\", props: { size: \"sm\", variant: \"success\" }) %>"
     }
   }
 }

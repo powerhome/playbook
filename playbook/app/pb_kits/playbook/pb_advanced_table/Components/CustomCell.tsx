@@ -21,6 +21,7 @@ interface CustomCellProps {
   customRenderer?: (row: Row<GenericObject>, value: string | undefined) => React.ReactNode
   selectableRows?: boolean
   customStyle?: GenericObject
+  fullWidthCell?: boolean
 } 
 
 export const CustomCell = ({
@@ -31,6 +32,7 @@ export const CustomCell = ({
   customRenderer,
   selectableRows,
   customStyle = {},
+  fullWidthCell,
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded, expandedControl, inlineRowLoading, hasAnySubRows, cascadeCollapse } = useContext(AdvancedTableContext);
 
@@ -58,7 +60,7 @@ export const CustomCell = ({
   const renderButton = inlineRowLoading ? RowHasChildren : row.getCanExpand()
 
   return (
-    <div style={{ paddingLeft: `${row.depth * 1.25}em`}}>
+    <div style={{ paddingLeft: `${row.depth * 1.25}em`, ...(fullWidthCell ? { width: "100%" } : {}) }}>
       <Flex 
           alignItems="center" 
           columnGap="xs"
@@ -94,7 +96,10 @@ export const CustomCell = ({
             )}
           </button>
         ) : null}
-        <FlexItem paddingLeft={renderButton? "none" : "xs"}>
+        <FlexItem
+            paddingLeft={renderButton? "none" : "xs"}
+            width={fullWidthCell ? "100%" : undefined}
+        >
           {row.depth === 0 ? (
             customRenderer ? customRenderer(row, getValue()) : getValue()
            ) :(

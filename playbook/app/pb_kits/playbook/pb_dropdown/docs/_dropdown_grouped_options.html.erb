@@ -1,0 +1,67 @@
+<%
+  sections = [
+    {
+      title: "Profile",
+      items: [
+        { label: "View Profile", value: "profile", id: "profile" },
+        { label: "Account Settings", value: "settings", id: "settings" },
+      ],
+    },
+    {
+      title: "Workspace",
+      items: [
+        { label: "Projects", value: "projects", id: "projects" },
+        { label: "Billing", value: "billing", id: "billing" },
+      ],
+    },
+    {
+      title: "Support",
+      items: [
+        { label: "Help Center", value: "help", id: "help" },
+        { label: "Contact Support", value: "contact", id: "contact" },
+      ],
+    },
+  ]
+
+  options = sections.flat_map { |section| section[:items] }
+%>
+
+<%= pb_rails("dropdown", props: { label: "Grouped Options", margin_bottom: "md", options: options }) do %>
+  <%= pb_rails("dropdown/dropdown_trigger") %>
+  <%= pb_rails("dropdown/dropdown_container") do %>
+    <% sections.each do |section| %>
+
+      <%= pb_rails("caption", props: {
+        text: section[:title],
+        color: "light",
+        padding_x: "xs",
+        padding_y: "xs"
+      }) %>
+
+      <%= pb_rails("section_separator") %>
+
+      <% section[:items].each do |option| %>
+        <%= pb_rails("dropdown/dropdown_option", props: { option: option }) %>
+      <% end %>
+
+    <% end %>
+  <% end %>
+<% end %>
+
+
+<%= pb_rails("dropdown", props: { label: "Grouped Options Minimalist", options: options, separators: false }) do %>
+  <%= pb_rails("dropdown/dropdown_trigger") %>
+  <%= pb_rails("dropdown/dropdown_container") do %>
+    <% sections.each do |section| %>
+
+      <%= pb_rails("section_separator", props: { padding_y: "xs" }) do %>
+        <%= pb_rails("caption", props: { text: section[:title], padding_x: "xs" }) %>
+      <% end %>
+
+      <% section[:items].each do |option| %>
+        <%= pb_rails("dropdown/dropdown_option", props: { option: option }) %>
+      <% end %>
+
+    <% end %>
+  <% end %>
+<% end %>

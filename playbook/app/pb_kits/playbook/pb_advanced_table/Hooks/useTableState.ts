@@ -42,6 +42,7 @@ interface UseTableStateProps {
   rowStyling?: GenericObject[];
   inlineRowLoading?: boolean;
   sortParentOnly?: boolean;
+  fullWidthCell?: boolean;
 }
 
 export function useTableState({
@@ -62,7 +63,8 @@ export function useTableState({
   pinnedRows,
   rowStyling,
   inlineRowLoading = false,
-  sortParentOnly = false
+  sortParentOnly = false,
+  fullWidthCell = false,
 }: UseTableStateProps) {
 
   // Create a local state for expanded and setExpanded if expandedControl not used
@@ -145,13 +147,14 @@ export function useTableState({
           isFirstColumn,
           onRowToggleClick,
           selectableRows,
-          rowStyling
+          rowStyling,
+          fullWidthCell
         );
       }
 
       return columnStructure;
     }) || [];
-  }, [columnHelper, onRowToggleClick, rowStyling, selectableRows]);
+  }, [columnHelper, onRowToggleClick, rowStyling, selectableRows, fullWidthCell]);
 
   const columns = useMemo(() => buildColumns(columnDefinitions), [buildColumns, columnDefinitions]);
 

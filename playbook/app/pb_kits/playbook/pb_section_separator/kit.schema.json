@@ -22,8 +22,10 @@
     "dark": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "lineStyle": {
       "type": "enum",

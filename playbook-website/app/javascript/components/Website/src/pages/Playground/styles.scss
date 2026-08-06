@@ -13,12 +13,6 @@
 
 .full-playground-shell {
   box-sizing: border-box;
-  min-height: 100%;
-}
-
-.full-playground-heading,
-.full-playground-workbench {
-  width: 100%;
 }
 
 .full-playground-heading {
@@ -42,22 +36,41 @@
   }
 }
 
-.full-playground-sidebar {
+.playground-fullscreen-host {
+  &:not(.is-open) {
+    .playground-fullscreen-layout {
+      display: none;
+    }
+  }
+}
+
+.playground-fullscreen-layout {
+  display: flex;
+  flex-direction: column;
+  gap: $space_md;
+  min-height: calc(100vh - 112px);
+}
+
+.playground-fullscreen-preview,
+.playground-fullscreen-code {
   min-width: 0;
 }
 
-.full-playground-demo {
-  min-width: 0;
-  width: 100%;
+.playground-fullscreen-preview {
+  .playground-preview-container {
+    min-height: min(58vh, 640px);
+  }
+}
+
+.playground-fullscreen-code {
+  .pb_card_kit,
+  [class*="pb_card"] {
+    max-height: 34vh;
+    overflow: auto;
+  }
 }
 
 .full-playground-inspector {
-  align-self: start;
-  justify-self: stretch;
-  max-width: 500px;
-  min-width: 0;
-  width: auto;
-
   .props-panel {
     max-width: 100%;
   }
@@ -68,16 +81,148 @@
   }
 }
 
-.builder-field,
 .builder-prop-toggle,
 .builder-checkbox-row {
   display: flex;
   gap: $space_xs;
 }
 
-.builder-field {
-  flex-direction: column;
-  margin-bottom: $space_sm;
+.builder-prompt-textarea {
+  border: 1px solid $border_light;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: $text_lt_default;
+  font: inherit;
+  line-height: 1.4;
+  min-height: 116px;
+  padding: $space_xs;
+  resize: vertical;
+  width: 100%;
+
+  &:focus {
+    border-color: $primary;
+    outline: none;
+  }
+
+  &:disabled {
+    background: $bg_light;
+    color: $text_lt_light;
+  }
+}
+
+.builder-prompt-floating {
+  bottom: $space_md;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  max-width: calc(100vw - #{$space_md * 2});
+  position: fixed;
+  right: $space_md;
+  transform-origin: bottom right;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 180ms ease;
+  width: 360px;
+  z-index: 9000;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY($space_md) scale(0.96);
+    visibility: hidden;
+  }
+}
+
+.builder-prompt-icon-button,
+.builder-prompt-fab {
+  align-items: center;
+  appearance: none;
+  background: $white;
+  border: 1px solid $border_light;
+  color: $text_lt_default;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+
+  &:focus {
+    border-color: $primary;
+    outline: none;
+  }
+}
+
+.builder-prompt-icon-button {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+}
+
+.builder-prompt-fab {
+  border-radius: 50%;
+  bottom: $space_md;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  height: 56px;
+  position: fixed;
+  right: $space_md;
+  transform-origin: center;
+  transition:
+    opacity 160ms ease 80ms,
+    transform 160ms ease 80ms,
+    visibility 160ms ease 80ms;
+  width: 56px;
+  z-index: 9000;
+
+  &.is-visible {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.72);
+    visibility: hidden;
+  }
+
+  &:hover,
+  &:focus {
+    .builder-prompt-fab-tooltip {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+      visibility: visible;
+    }
+  }
+}
+
+.builder-prompt-fab-tooltip {
+  background: $text_lt_default;
+  border-radius: 6px;
+  color: $white;
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0;
+  padding: $space_xs;
+  pointer-events: none;
+  position: absolute;
+  right: calc(100% + #{$space_xs});
+  top: 50%;
+  transform: translateY(-50%) translateX($space_xs);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease,
+    visibility 140ms ease;
+  visibility: hidden;
+  white-space: nowrap;
 }
 
 .builder-prop-row input[type="text"],
@@ -151,9 +296,6 @@
 .builder-stage {
   border: 1px dashed $border_light;
   box-sizing: border-box;
-  max-width: 100%;
-  min-width: 0;
-  width: 100%;
 
   &.is-drop-target {
     border-color: $primary;
@@ -237,9 +379,6 @@
 }
 
 .full-playground-code-panel {
-  min-width: 0;
-  width: 100%;
-
   .pb_card_kit,
   .pb--card,
   [class*="pb_card"] {

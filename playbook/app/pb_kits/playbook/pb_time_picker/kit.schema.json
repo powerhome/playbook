@@ -10,8 +10,10 @@
     "dark": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "defaultTime": {
       "type": "string",

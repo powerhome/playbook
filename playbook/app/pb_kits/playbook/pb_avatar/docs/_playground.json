@@ -2,6 +2,7 @@
   "template": "<Avatar{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "grayscale": false,
     "imageAlt": "",
     "name": "",

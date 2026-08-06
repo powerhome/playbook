@@ -22,6 +22,7 @@ examples:
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_multi_select_with_default: Multi Select Default Value
+  - dropdown_default_value_with_autocomplete: Default Value with Autocomplete
   - dropdown_blank_selection: Blank Selection
   - dropdown_with_placeholder: Placeholder
   - dropdown_separators_hidden: Separators Hidden
@@ -36,6 +37,7 @@ examples:
   - dropdown_quickpick_with_date_pickers_default_rails: Quick Pick with Date Pickers (Default Value)
   - dropdown_required_indicator: Required Indicator
   - dropdown_disabled: Disabled Input
+  - dropdown_grouped_options: Grouped Options
   - dropdown_custom_event_type: Custom Event Type
 
   react:
@@ -62,6 +64,7 @@ examples:
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_multi_select_with_default: Multi Select Default Value
+  - dropdown_default_value_with_autocomplete: Default Value with Autocomplete
   - dropdown_blank_selection: Blank Selection
   - dropdown_with_placeholder: Placeholder
   - dropdown_clear_selection: Clear Selection
@@ -77,3 +80,4 @@ examples:
   - dropdown_quickpick_with_date_pickers: Quick Pick Variant with Date Pickers
   - dropdown_required_indicator: Required Indicator
   - dropdown_disabled: Disabled Input
+  - dropdown_grouped_options: Grouped Options

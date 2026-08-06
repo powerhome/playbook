@@ -2,6 +2,7 @@
   "template": "<TimePicker{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "disabled": false,
     "label": "Time Picker",
     "required": false,

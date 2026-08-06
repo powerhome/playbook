@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavItem, useCollapsible } from "playbook-ui";
 import { useNavigate, useLocation } from "react-router-dom";
 import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 import { OtherNavItems } from "./NavComponents/OtherNavComponent";
+import { CollapsedHoverNav } from "./CollapsedHoverNav";
 
 export const TopLevelNavItem = ({
   dark,
@@ -23,6 +24,44 @@ export const TopLevelNavItem = ({
   const currentURL = location.pathname + location.search;
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+  const itemElsRef = useRef<Record<string, HTMLElement | null>>({});
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseTimeout = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
+  const openHoverNav = (key: string) => {
+    clearCloseTimeout();
+    setHoveredKey(key);
+  };
+
+  const scheduleCloseHoverNav = () => {
+    clearCloseTimeout();
+    closeTimeoutRef.current = setTimeout(() => {
+      setHoveredKey(null);
+    }, 120);
+  };
+
+  useEffect(() => {
+    if (!sidebarCollapsed) {
+      clearCloseTimeout();
+      setHoveredKey(null);
+    }
+  }, [sidebarCollapsed]);
+
+  useEffect(() => {
+    clearCloseTimeout();
+    setHoveredKey(null);
+  }, [location]);
+
+  useEffect(() => {
+    return () => clearCloseTimeout();
+  }, []);
 
   //logic to make it so no navigation if already on that page(prevent unneeded rerenders)
   const TopLevelLink = (link) => {
@@ -107,6 +146,42 @@ export const TopLevelNavItem = ({
     return currentURL.startsWith(link);
   };
 
+  const renderSubmenu = (name: string, parentIndex: number, updateTopLevelNav: (index: number) => void) => {
+    if (name === "Components") {
+      return (
+        <>
+          {kits.map((link, index) => (
+            <KitsNavItem
+              link={link}
+              key={`kits-nav-item-${index}`}
+              kitIndex={index}
+              collapsibles={collapsibles}
+              category={category}
+              type={type}
+              dark={dark}
+              kit={kit}
+              updateTopLevelNav={updateTopLevelNav}
+              parentIndex={parentIndex}
+            />
+          ))}
+        </>
+      );
+    }
+
+    return (
+      <OtherNavItems
+        name={name}
+        dark={dark}
+        updateTopLevelNav={updateTopLevelNav}
+        parentIndex={parentIndex}
+        getting_started={getting_started}
+        design_guidelines={design_guidelines}
+        whats_new={whats_new}
+        global_props_and_tokens={global_props_and_tokens}
+      />
+    );
+  };
+
   //extract render logic out of return for better performance
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
     const [collapsed] = topLevelCollapsibles[i];
@@ -155,6 +230,16 @@ export const TopLevelNavItem = ({
       });
     };
 
+    const hoverHandlers = sidebarCollapsed
+      ? {
+          onMouseEnter: (event: { currentTarget: HTMLElement }) => {
+            itemElsRef.current[key] = event.currentTarget;
+            openHoverNav(key);
+          },
+          onMouseLeave: () => scheduleCloseHoverNav(),
+        }
+      : undefined;
+
     return (
       <NavItem
         active={sidebarCollapsed ? shouldExpandTopLevel(link) : activeTopLevel(link, children)}
@@ -165,6 +250,7 @@ export const TopLevelNavItem = ({
         dark={dark}
         fontSize="small"
         fontWeight="bolder"
+        htmlOptions={hoverHandlers as any}
         iconLeft={leftIcon}
         iconRight={!sidebarCollapsed && children && ["plus", "minus"]}
         key={key}
@@ -174,41 +260,24 @@ export const TopLevelNavItem = ({
         paddingY="xxs"
         text={name}
       >
-        {children && !sidebarCollapsed && (
-          <>
-            {name === "Components" ? (
-              <>
-                {kits.map((link, index) => (
-                  <KitsNavItem
-                    link={link}
-                    key={`kits-nav-item-${index}`}
-                    kitIndex={index}
-                    collapsibles={collapsibles}
-                    category={category}
-                    type={type}
-                    dark={dark}
-                    kit={kit}
-                    updateTopLevelNav={updateTopLevelNav}
-                    parentIndex={i}
-                  />
-                ))}
-              </>
-            ) : (
-              <OtherNavItems
-                name={name}
-                dark={dark}
-                updateTopLevelNav={updateTopLevelNav}
-                parentIndex={i}
-                getting_started={getting_started}
-                design_guidelines={design_guidelines}
-                whats_new={whats_new}
-                global_props_and_tokens={global_props_and_tokens}
-              />
-            )}
-          </>
-        )}
+        {children && !sidebarCollapsed && renderSubmenu(name, i, updateTopLevelNav)}
       </NavItem>
     );
+  };
+
+  const hoveredItem = SideBarNavItems.find((item) => item.key === hoveredKey);
+  const hoveredIndex = SideBarNavItems.findIndex((item) => item.key === hoveredKey);
+
+  const updateTopLevelNavFromHover = (index: number) => {
+    topLevelCollapsibles.forEach((collapsible, i) => {
+      const [, , setCollapsed] = collapsible;
+      if (i !== index) {
+        setCollapsed(true);
+      } else {
+        setCollapsed(false);
+      }
+    });
+    setHoveredKey(null);
   };
 
   return (
@@ -216,6 +285,23 @@ export const TopLevelNavItem = ({
       {SideBarNavItems.map(({ name, key, children, leftIcon, link }, i) => {
         return renderTopItems(name, key, children, leftIcon, link, i);
       })}
+      {sidebarCollapsed && hoveredItem && hoveredKey && (
+        <CollapsedHoverNav
+          anchorEl={itemElsRef.current[hoveredKey]}
+          dark={dark}
+          onMouseEnter={() => openHoverNav(hoveredKey)}
+          onMouseLeave={scheduleCloseHoverNav}
+          onTitleClick={() => {
+            handleComponentsClick(hoveredItem.key, hoveredIndex);
+            setHoveredKey(null);
+          }}
+          title={hoveredItem.name}
+        >
+          {hoveredItem.children
+            ? renderSubmenu(hoveredItem.name, hoveredIndex, updateTopLevelNavFromHover)
+            : null}
+        </CollapsedHoverNav>
+      )}
     </>
   );
 };

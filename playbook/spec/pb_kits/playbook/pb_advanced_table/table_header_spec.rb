@@ -415,6 +415,9 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
         { accessor: "with_bg", label: "With Background", column_styling: { header_background_color: "success" } },
         { accessor: "with_font", label: "With Font", column_styling: { header_font_color: "white" } },
         { accessor: "with_both", label: "With Both", column_styling: { header_background_color: "error", header_font_color: "white" } },
+        { accessor: "with_width", label: "With Width", column_styling: { width: 128 } },
+        { accessor: "with_width_band", label: "With Width Band", column_styling: { min_width: 108, width: 124, max_width: 168 } },
+        { accessor: "with_bg_and_width", label: "With Bg and Width", column_styling: { header_background_color: "success", width: 200 } },
       ]
     end
     let(:instance) { subject.new(column_definitions: column_definitions) }
@@ -432,6 +435,26 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
         result = instance.header_component_info(cell, 0, 0)
         expect(result[:name]).to eq "table/table_header"
         expect(result[:props][:html_options][:style][:color]).to eq "white"
+      end
+
+      it "applies fixed width styles when only width is set" do
+        cell = { accessor: "with_width", label: "With Width", colspan: 1, sort_menu: nil }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:props][:html_options][:style]).to include(
+          width: "128px",
+          min_width: "128px",
+          max_width: "128px"
+        )
+      end
+
+      it "applies min_width, width, and max_width band styles" do
+        cell = { accessor: "with_width_band", label: "With Width Band", colspan: 1, sort_menu: nil }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:props][:html_options][:style]).to include(
+          width: "124px",
+          min_width: "108px",
+          max_width: "168px"
+        )
       end
     end
 
@@ -456,6 +479,17 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
         cell = { accessor: "with_bg", label: "With Background", colspan: 1, header_background_color: "success" }
         result = instance.header_component_info(cell, 0, 0)
         expect(result[:props][:html_options][:style]).to be_empty
+      end
+
+      it "merges width styles with custom background" do
+        cell = { accessor: "with_bg_and_width", label: "With Bg and Width", colspan: 1, header_background_color: "success" }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:name]).to eq "background"
+        expect(result[:props][:html_options][:style]).to include(
+          width: "200px",
+          min_width: "200px",
+          max_width: "200px"
+        )
       end
     end
 

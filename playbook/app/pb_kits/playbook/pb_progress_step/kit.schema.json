@@ -36,7 +36,7 @@
       "default": false
     },
     "variant": {
-      "type": "string",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -48,7 +48,7 @@
       "default": "default"
     },
     "color": {
-      "type": "string",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"

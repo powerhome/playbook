@@ -541,6 +541,30 @@ export default class PbDropdown extends PbEnhancedElement {
     }
   }
 
+  // Keep the selected label in the autocomplete input, but do not treat it as a search filter
+  resetOptionFilterForSelectedLabel() {
+    if (this.isMultiSelect || !this.searchInput) return;
+
+    const selectedOption = Array.from(this.queryAllOptions()).find((opt) =>
+      opt.classList.contains("pb_dropdown_option_selected"),
+    );
+    if (!selectedOption) return;
+
+    try {
+      const selectedLabel = JSON.parse(
+        selectedOption.dataset.dropdownOptionLabel,
+      ).label;
+      if (this.searchInput.value !== selectedLabel) return;
+
+      this.queryAllOptions().forEach((opt) => {
+        opt.style.display = "";
+      });
+      this.removeNoOptionsMessage();
+    } catch {
+      // ignore invalid option payloads
+    }
+  }
+
   showNoOptionsMessage() {
     if (this.target?.querySelector(".dropdown_no_options")) return;
 
@@ -923,6 +947,9 @@ export default class PbDropdown extends PbEnhancedElement {
 
   showElement(elem) {
     if (this.isDisabled) return;
+
+    // When autocomplete is showing the selected label (not an active search), show all options
+    this.resetOptionFilterForSelectedLabel();
     
     this.ensureFloatingPortalConfig();
     if (this.useMenuPortal) {
@@ -1095,6 +1122,13 @@ export default class PbDropdown extends PbEnhancedElement {
       selectedOption.classList.add("pb_dropdown_option_selected");
       const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
       this.setTriggerElementText(optionData.label);
+
+      // Autocomplete trigger has no [data-dropdown-trigger-display]; set the input value instead
+      const autocompleteInput =
+        this.searchInput || this.element.querySelector(SEARCH_INPUT_SELECTOR);
+      if (autocompleteInput) {
+        autocompleteInput.value = optionData.label;
+      }
 
       // Handle quickpick variant: populate start/end date hidden inputs and sync DatePickers
       if (optionData.formatted_start_date && optionData.formatted_end_date) {

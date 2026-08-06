@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
+    "dark": false,
     "size": "sm",
     "showCurrentYear": false
   },

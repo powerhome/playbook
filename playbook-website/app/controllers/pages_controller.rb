@@ -13,6 +13,7 @@ class PagesController < ApplicationController
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
     @type = params[:platform] || params[:type] || "rails"
+    @type = "rails" if @type == "swift"
     @kit = params[:name]
     @params = params
 
@@ -266,8 +267,6 @@ class PagesController < ApplicationController
     extension = case @type
                 when "rails"
                   "html.erb"
-                when "swift"
-                  "swift"
                 else
                   "jsx"
                 end
@@ -282,10 +281,21 @@ class PagesController < ApplicationController
     return nil unless example_path.exist?
 
     erb_content = example_path.read
-    view_context.render(inline: erb_content)
+    html = view_context.render(inline: erb_content)
+    rewrite_prerendered_example_urls(html)
   rescue => e
     Rails.logger.error("Error rendering Rails example #{example_key}: #{e.message}")
     nil
+  end
+
+  # Examples are prerendered into the SPA JSON payload. Helpers like
+  # will_paginate inherit format=json into hrefs. We must strip it so clicks stay on
+  # the HTML docs page (ComponentShowLoader already forwards query params).
+  # Mostly for pagination docs examples.
+  def rewrite_prerendered_example_urls(html)
+    return html if html.blank?
+
+    html.to_s.gsub(/(href=["'])([^"']+)\.json(\?[^"']*)?(["'])/, '\1\2\3\4')
   end
 
   def get_description(example)

@@ -35,6 +35,8 @@ module Playbook
                          default: []
       prop :inline_row_loading, type: Playbook::Props::Boolean,
                                 default: false
+      prop :full_width_cell, type: Playbook::Props::Boolean,
+                             default: false
       prop :persist_toggle_expansion_button, type: Playbook::Props::Boolean,
                                              default: false
       prop :pinned_rows, type: Playbook::Props::HashProp,

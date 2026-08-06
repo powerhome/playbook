@@ -2,12 +2,13 @@
   "template": "<SkeletonLoading{{props}} />",
   "propTargets": {},
   "defaults": {
-    "stack": 1,
-    "color": "default",
+    "height": "16px",
+    "width": "100%",
     "borderRadius": "sm",
     "gap": "xxs",
-    "height": "16px",
-    "width": "100%"
+    "stack": 1,
+    "color": "default",
+    "dark": false
   },
   "groups": [
     {

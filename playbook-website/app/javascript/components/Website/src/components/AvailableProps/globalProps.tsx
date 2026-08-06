@@ -1,8 +1,18 @@
 import React from 'react'
 import { Body, Card, Table, Title } from 'playbook-ui'
 import globalPropsValues from './globalPropsValues'
+import { formatPropNameForPlatform } from '../../helpers/platform'
 
-const GlobalProps = ({ darkMode }) => {
+type GlobalPropsType = {
+  darkMode: boolean,
+  platform?: string
+}
+
+const GlobalProps = ({ darkMode, platform = 'react' }: GlobalPropsType) => {
+  const platformProps = globalPropsValues.filter(
+    (prop) => !prop.platforms || prop.platforms.includes(platform)
+  )
+
   return (
     <>
       <Card.Body
@@ -23,7 +33,7 @@ const GlobalProps = ({ darkMode }) => {
             </tr>
           </thead>
           <tbody>
-            {globalPropsValues.map((prop) => (
+            {platformProps.map((prop) => (
               <>
                 <tr>
                   <td>
@@ -31,7 +41,7 @@ const GlobalProps = ({ darkMode }) => {
                         dark={darkMode}
                         size={4}
                         tag="h4"
-                        text={prop.prop}
+                        text={formatPropNameForPlatform(prop.prop, platform)}
                     />
                   </td>
                   <td>

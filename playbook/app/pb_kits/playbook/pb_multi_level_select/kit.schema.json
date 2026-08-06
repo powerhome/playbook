@@ -145,10 +145,11 @@
       "default": false
     },
     "pillColor": {
+      "type": "enum",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "enum",
       "values": [
         "primary",
         "neutral",

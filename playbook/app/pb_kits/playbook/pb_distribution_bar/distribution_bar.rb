@@ -21,12 +21,9 @@ module Playbook
         end
       end
 
-      def chart_options
-        {
-          size: size,
-          widths: widths,
-          colors: colors,
-        }
+      def segment_classname(index)
+        color = colors[index]
+        ["pb_distribution_width", ("color_#{color}" if color.present?)].compact.join(" ")
       end
     end
   end

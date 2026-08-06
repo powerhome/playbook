@@ -1,6 +1,7 @@
 {
   "extends": [
-    "github>powerhome/renovate-config"
+    "github>powerhome/renovate-config",
+    "github>powerhome/renovate-config:ci-kubed-read-token"
   ],
   "prCreation": "not-pending",
   "prConcurrentLimit": 2,

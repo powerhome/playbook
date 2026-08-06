@@ -55,6 +55,24 @@ RSpec.describe Playbook::PbTextInput::TextInput do
     end
   end
 
+  describe "#sanitized_input_tag" do
+    it "carries the name that the masked input gives up, so the value is still submitted" do
+      text_input = subject.new(mask: "currency", name: "amount", id: "amount")
+
+      expect(text_input.input_tag).to include('name=""')
+      expect(text_input.sanitized_input_tag).to include('name="amount"')
+      expect(text_input.sanitized_input_tag).to include('data="sanitized-pb-input"')
+      expect(text_input.sanitized_input_tag).to include('id="amount-sanitized"')
+    end
+
+    it "is unaffected by an add_on" do
+      text_input = subject.new(mask: "currency", name: "amount", add_on: { icon: "percent" })
+
+      expect(text_input).to have_add_on
+      expect(text_input.sanitized_input_tag).to include('name="amount"')
+    end
+  end
+
   describe "#emoji_mask" do
     context "when emoji_mask is true" do
       it "sets data-pb-emoji-mask attribute" do
