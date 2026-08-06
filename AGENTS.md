@@ -27,14 +27,16 @@ Consumer-facing rule/skill drafts (for apps that import `playbook-ui`) live in [
 4. **Playground source of truth** is `docs/_playground.overrides.json` per kit — edit that, then regenerate.
 5. **Do not install packages** into consuming apps from this repo’s AI guidance; that rule is for consumers. Here, follow normal workspace yarn flows when adding deps intentionally.
 
-## Code change hygiene
+## Code change hygiene (always-on rules)
+
+Keep rules lean — general quality only. Workflow detail lives in skills + `docs/`.
 
 | Topic | Rule |
 |-------|------|
-| Minimal diffs | [`.cursor/rules/minimal-diffs.mdc`](.cursor/rules/minimal-diffs.mdc) — no drive-by formatting; only touch what needs to change |
+| Repo orientation | [`.cursor/rules/playbook-repo.mdc`](.cursor/rules/playbook-repo.mdc) — packages, generated files, regenerate |
+| Minimal diffs | [`.cursor/rules/minimal-diffs.mdc`](.cursor/rules/minimal-diffs.mdc) — no drive-by formatting |
 | Readable code | [`.cursor/rules/readable-code.mdc`](.cursor/rules/readable-code.mdc) — less code, reuse, clear names, performance, no DS regressions |
-| Kit conventions | [`.cursor/rules/kit-conventions.mdc`](.cursor/rules/kit-conventions.mdc) — prop naming, `className` last in `classnames()`, required Jest/RSpec |
-| PRs / commits | [`.cursor/rules/pr-hygiene.mdc`](.cursor/rules/pr-hygiene.mdc) — tests, playground metadata, labels/semver |
+| PRs / commits | [`.cursor/rules/pr-hygiene.mdc`](.cursor/rules/pr-hygiene.mdc) — tests, labels/semver |
 
 Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md).
 
@@ -42,16 +44,16 @@ Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PUL
 
 | Task | Read first |
 |------|------------|
-| AI schemas / `dist/ai` | [`docs/AI_METADATA.md`](docs/AI_METADATA.md) |
-| Playground overrides | [`docs/PLAYGROUND_CONFIG.md`](docs/PLAYGROUND_CONFIG.md) |
-| New global prop | [`docs/ADDING_GLOBAL_PROPS.md`](docs/ADDING_GLOBAL_PROPS.md) |
+| Regenerate metadata | Skill [`.cursor/skills/docs-metadata/`](.cursor/skills/docs-metadata/) · [`docs/AI_METADATA.md`](docs/AI_METADATA.md) |
+| Playground overrides | Skill [`.cursor/skills/kit-playground/`](.cursor/skills/kit-playground/) · [`docs/PLAYGROUND_CONFIG.md`](docs/PLAYGROUND_CONFIG.md) |
+| New global prop | Skill [`.cursor/skills/add-global-prop/`](.cursor/skills/add-global-prop/) · [`docs/ADDING_GLOBAL_PROPS.md`](docs/ADDING_GLOBAL_PROPS.md) |
 | Advanced Table docs | [`docs/ADVANCED_TABLE_DOCS.md`](docs/ADVANCED_TABLE_DOCS.md) |
 | Deprecation warnings | [`docs/DEPRECATION_WARNINGS.md`](docs/DEPRECATION_WARNINGS.md) |
 | Kit status in menu | [`docs/PLATFORM_SPECIFIC_STATUS.md`](docs/PLATFORM_SPECIFIC_STATUS.md) |
 
 ## Cursor-specific paths
 
-- Rules: [`.cursor/rules/`](.cursor/rules/)
-- Skills: [`.cursor/skills/`](.cursor/skills/)
+- Rules (always-on hygiene): [`.cursor/rules/`](.cursor/rules/)
+- Skills (task workflows): [`.cursor/skills/`](.cursor/skills/)
 
 Other agents: treat this file as the entry point; follow the same docs and the rule/skill content under `.cursor/` even if your tool does not auto-load them.
