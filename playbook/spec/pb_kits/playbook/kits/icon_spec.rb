@@ -190,6 +190,8 @@ RSpec.describe Playbook::PbIcon::Icon do
       expect(subject.new(icon: "*").valid_emoji?).to be(false)
       expect(subject.new(icon: "1<img src=x onerror=alert(1)>").valid_emoji?).to be(false)
       expect(subject.new(icon: "user").valid_emoji?).to be(false)
+      expect(subject.new(icon: "&#128525;").valid_emoji?).to be(false)
+      expect(subject.new(icon: "&lt;script&gt;").valid_emoji?).to be(false)
     end
   end
 end
