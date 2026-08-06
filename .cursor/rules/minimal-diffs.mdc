@@ -1,0 +1,27 @@
+---
+description: Keep diffs small — no drive-by formatting or unrelated edits
+alwaysApply: true
+---
+
+# Minimal diffs
+
+Prefer the smallest change that implements the request. Code review should only show what needed to change.
+
+## Do not
+
+- Reformat, “prettify,” or run broad lint-fix on files you did not need to change
+- Rename symbols, reorder imports, or restyle neighboring code for cleanliness
+- “Fix” inconsistent style in untouched lines
+
+## Formatters in this repo
+
+- **ESLint + RuboCop only** — there is no Prettier
+- Rely on husky / lint-staged for staged files; do not mass-fix the tree
+- Overcommit ignores problems on unmodified lines — keep it that way in spirit
+
+## Exceptions
+
+Reformat only when:
+
+1. The user explicitly asks, or
+2. A hook / CI failure requires a fix on lines you already changed
