@@ -330,7 +330,9 @@ export const generateCode = ({
 
   let importStatement = "";
   if (includeImport) {
-    importStatement = `import { ${formattedName} } from 'playbook-ui'\n\n`;
+    const importPath =
+      formattedName === "AdvancedTable" ? "playbook-ui/advanced-table" : "playbook-ui";
+    importStatement = `import { ${formattedName} } from '${importPath}'\n\n`;
   }
 
   const hasChildren = children && children.trim().length > 0;
