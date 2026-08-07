@@ -147,12 +147,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-  - name: icon_button
-    platforms: *1
-    status: deprecated
-    icons_used: true
-    react_rendered: false
-    enhanced_element_used: false
   - name: copy_button
     platforms: *1
     description: Button that copies text to clipboard with visual feedback.
