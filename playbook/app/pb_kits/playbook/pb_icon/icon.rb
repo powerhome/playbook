@@ -114,7 +114,11 @@ module Playbook
           if Rails.application.config.respond_to?(:icon_path)
             resolved_icon = resolve_alias(icon)
             path = self.class.icon_path_index[resolved_icon]
-            path if path && File.exist?(path)
+            # icon_path_index keys off the *.svg basename, so apply the same
+            # realpath / .svg / allowed-root checks as custom_icon loading —
+            # otherwise a foo.svg symlink to a non-svg file would be File.read
+            # directly in svg_content.
+            path && File.exist?(path) ? allowed_svg_path(path)&.to_s : nil
           end
       end
 

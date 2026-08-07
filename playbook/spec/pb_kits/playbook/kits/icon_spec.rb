@@ -1,10 +1,17 @@
 # frozen_string_literal: true
 
 require "tmpdir"
+require "fileutils"
 require_relative "../../../../app/pb_kits/playbook/pb_icon/icon"
 
 RSpec.describe Playbook::PbIcon::Icon do
   subject { Playbook::PbIcon::Icon }
+
+  def reset_icon_path_index_cache!
+    %i[@icon_path_index @icon_path_index_cache_key @icon_path_index_checked_at].each do |ivar|
+      subject.remove_instance_variable(ivar) if subject.instance_variable_defined?(ivar)
+    end
+  end
 
   xit "border" do
     is_expected.to define_prop(:border)
@@ -174,6 +181,30 @@ RSpec.describe Playbook::PbIcon::Icon do
 
         expect(subject.new(custom_icon: link).send(:read_svg_content, link)).to eq("")
       end
+    end
+
+    it "refuses an indexed icon_path .svg symlink to a non-svg file", :aggregate_failures do
+      tmp_root = Rails.root.join("tmp")
+      FileUtils.mkdir_p(tmp_root)
+
+      Dir.mktmpdir("pb_icon_index", tmp_root) do |icons_dir|
+        secret = File.join(icons_dir, "master.key")
+        File.write(secret, "fake_secret_key_base")
+        File.symlink(secret, File.join(icons_dir, "poison.svg"))
+        File.write(File.join(icons_dir, "ok.svg"), "<svg xmlns=\"http://www.w3.org/2000/svg\"></svg>")
+
+        relative_icon_path = Pathname.new(icons_dir).relative_path_from(Rails.root).to_s
+        allow(Rails.application.config).to receive(:respond_to?).and_wrap_original do |method, name, *args|
+          name == :icon_path || method.call(name, *args)
+        end
+        allow(Rails.application.config).to receive(:icon_path).and_return(relative_icon_path)
+        reset_icon_path_index_cache!
+
+        expect(subject.new(icon: "poison").send(:svg_content)).to eq("")
+        expect(subject.new(icon: "ok").send(:svg_content)).to include("<svg")
+      end
+    ensure
+      reset_icon_path_index_cache!
     end
   end
 
