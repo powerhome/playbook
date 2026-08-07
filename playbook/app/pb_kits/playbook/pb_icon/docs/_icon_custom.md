@@ -12,4 +12,4 @@ You must source _your own SVG into component/view_ you are working on. This can 
 
 ### Rails
 
-Sending the absolute path to the `icon` prop results in an `<SVG>` tag within the working view.
+Pass a local filesystem path to an SVG under your application or a mounted engine (for example `Playbook::Engine.root.join("app/pb_kits/playbook/utilities/icons/clock.svg").to_s`) via the `icon` or `custom_icon` prop. Remote `http(s)` URLs are not fetched — only local / engine paths are supported.
