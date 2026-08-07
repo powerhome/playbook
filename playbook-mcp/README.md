@@ -2,7 +2,7 @@
 
 Hosted MCP-UI render server for Playbook. Renders kits server-side via `pb_rails` and returns `ui://` HTML resources for LibreChat and other MCP-UI hosts.
 
-Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from this service’s `/assets` (gem `dist/` + `fonts/`) with **permissive CORS** (`Access-Control-Allow-Origin: *`) so sandboxed MCP-UI iframes with opaque origin can load web fonts. Charts load one self-contained IIFE (`bin/vendor_chart_peers` → `/assets/vendor/playbook-charts.js`) — no importmap / jsDelivr `/+esm`.
+Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from this service’s `/assets` (gem `dist/` + `fonts/`) with **permissive CORS** (`Access-Control-Allow-Origin: *`) so sandboxed MCP-UI iframes with opaque origin can load web fonts. Icons are inlined as SVG from `@powerhome/playbook-icons` (configured via `icon_path` / `icon_alias_path`; vendored into the image at `vendor/playbook-icons/`) — not Font Awesome webfonts. Charts load one self-contained IIFE (`bin/vendor_chart_peers` → `/assets/vendor/playbook-charts.js`) — no importmap / jsDelivr `/+esm`.
 
 Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standalone SSE.
 

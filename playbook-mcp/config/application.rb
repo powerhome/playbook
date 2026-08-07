@@ -15,6 +15,20 @@ module PlaybookMcp
     config.load_defaults 7.2
     config.api_only = false
 
+    # Playbook Icon kit inlines SVGs when these are set (same pattern as playbook-website).
+    # Without them, icons fall back to Font Awesome <i> classes with no webfont in the
+    # MCP document — which shows up as empty colored circles in icon_stat_value / icon_circle.
+    config.icon_path = if Rails.env.development?
+                         "../node_modules/@powerhome/playbook-icons/icons"
+                       else
+                         "vendor/playbook-icons/icons"
+                       end
+    config.icon_alias_path = if Rails.env.development?
+                               "../node_modules/@powerhome/playbook-icons/aliases.json"
+                             else
+                               "vendor/playbook-icons/aliases.json"
+                             end
+
     # version.rb defines PlaybookMcp::VERSION (not ::Version); require it manually.
     config.autoload_lib(ignore: %w[tasks playbook_mcp/version.rb])
 

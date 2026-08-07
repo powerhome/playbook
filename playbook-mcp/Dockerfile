@@ -85,12 +85,17 @@ COPY --chown=9999:9999 playbook /home/app/src/playbook
 COPY --from=assets --chown=9999:9999 /home/app/src/playbook/dist /home/app/src/playbook/dist
 COPY --chown=9999:9999 playbook-mcp /home/app/src/playbook-mcp
 COPY --from=assets --chown=9999:9999 /home/app/src/playbook-mcp/vendor/chart-peers /home/app/src/playbook-mcp/vendor/chart-peers
+# Inline SVG icons for pb_icon / icon_stat_value (no Font Awesome webfont in MCP docs).
+COPY --from=jsdeps --chown=9999:9999 /home/app/src/node_modules/@powerhome/playbook-icons/icons /home/app/src/playbook-mcp/vendor/playbook-icons/icons
+COPY --from=jsdeps --chown=9999:9999 /home/app/src/node_modules/@powerhome/playbook-icons/aliases.json /home/app/src/playbook-mcp/vendor/playbook-icons/aliases.json
 
 WORKDIR /home/app/src/playbook-mcp
 RUN mkdir -p tmp/pids log \
     && chown -R app:app tmp log vendor \
     && test -f /home/app/src/playbook/dist/ai/index.json \
-    && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js
+    && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js \
+    && test -f vendor/playbook-icons/aliases.json \
+    && test -f vendor/playbook-icons/icons/data-visualization/chart-line.svg
 
 USER app
 ENV PORT=3099
