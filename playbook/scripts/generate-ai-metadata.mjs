@@ -26,7 +26,6 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getGlobalPropNames } from './lib/global-props-parser.mjs';
 
 // =============================================================================
 // CONFIGURATION
@@ -40,13 +39,11 @@ const CONFIG = {
   excludedDirs: ['docs', 'utilities'],
 };
 
-const GLOBAL_PROPS = getGlobalPropNames();
-['aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref'].forEach(p => GLOBAL_PROPS.add(p));
-
 /**
- * When parsing a kit `type XProps = { ... }` block, skip only structural globals that
- * should not be duplicated into kit.schema.json. Do **not** use the full GLOBAL_PROPS set
- * here — kits often redeclare names from `& GlobalProps` with a narrower type (e.g. maxHeight).
+ * When parsing kit prop definitions (React `type XProps` or Rails `prop :name`),
+ * skip only structural globals that should not be duplicated into kit.schema.json.
+ * Do **not** skip the full GlobalProps set — kits often redeclare those names with a
+ * narrower type (e.g. Flex alignSelf, maxHeight).
  */
 const KIT_TYPE_BLOCK_SKIP_PROPS = new Set([
   'aria',
@@ -259,7 +256,7 @@ function parseTypeString(typeStr, imports = new Map()) {
 
   // Union of literals: "a" | "b" | "c"
   if (typeStr.includes('|')) {
-    const parts = typeStr.split('|').map(p => p.trim());
+    const parts = typeStr.split('|').map(p => p.trim()).filter(Boolean);
     const isAllLiterals = parts.every(p => 
       isQuoted(p) || p === 'null' || p === 'undefined' || !isNaN(Number(p)) || p === '""'
     );
@@ -271,6 +268,14 @@ function parseTypeString(typeStr, imports = new Map()) {
       return { type: 'enum', values };
     }
     return { type: typeStr };
+  }
+
+  // Single string/number literal: → enum with one value
+  if (isQuoted(typeStr)) {
+    return { type: 'enum', values: [stripQuotes(typeStr)] };
+  }
+  if (typeStr !== '' && !isNaN(Number(typeStr))) {
+    return { type: 'enum', values: [Number(typeStr)] };
   }
 
   // Primitives
@@ -332,7 +337,8 @@ function parseTypeBlock(block, imports = new Map()) {
     } else {
       // Update depth for continuation lines
       depth += (trimmed.match(/\{/g) || []).length - (trimmed.match(/\}/g) || []).length;
-      if (currentProp && depth > 0) {
+      // Continue object types (depth > 0) and multiline unions (lines starting with |)
+      if (currentProp && (depth > 0 || trimmed.startsWith('|'))) {
         currentType += ' ' + trimmed.replace(/,\s*$/, '');
       }
     }
@@ -413,7 +419,7 @@ function parseRuby(filePath) {
 
   for (const [, name, body] of content.matchAll(propRegex)) {
     const camelName = snakeToCamel(name);
-    if (GLOBAL_PROPS.has(camelName)) continue;
+    if (KIT_TYPE_BLOCK_SKIP_PROPS.has(camelName)) continue;
 
     const prop = { platforms: ['rails'] };
 
@@ -454,8 +460,22 @@ function mergeProps(react, rails) {
       merged[name] = {
         type: r.type || rb.type,
         platforms: ['react', 'rails'],
-        ...(r.values || rb.values) && { values: r.values || rb.values },
       };
+
+      // Prefer React values (current display preference). Fall back to Rails 
+      // when React looks truncated to a single literal that exists in a longer Rails enum 
+      // (e.g. multiline union parse failure: ["default"] vs full Rails enum list).
+      // This logic should probably eventually be updated in a better way than this.
+      const rValues = r.values || [];
+      const rbValues = rb.values || [];
+      if (rValues.length || rbValues.length) {
+        const reactLooksTruncated =
+          rValues.length === 1 &&
+          rbValues.length > 1 &&
+          rbValues.includes(rValues[0]);
+        merged[name].values = reactLooksTruncated || !rValues.length ? rbValues : rValues;
+        if (r.type === 'enum' || rb.type === 'enum') merged[name].type = 'enum';
+      }
       
       const rd = r.default, rbd = rb.default;
       if (rd !== undefined || rbd !== undefined) {

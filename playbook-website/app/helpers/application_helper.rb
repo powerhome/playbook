@@ -84,8 +84,6 @@ module ApplicationHelper
       label: label,
       value: if @type == "react"
                "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' ? '?type=react' : '/react'}"
-             elsif @type == "swift"
-               "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}/swift"
              else
                "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' ? '?type=rails' : ''}"
              end,

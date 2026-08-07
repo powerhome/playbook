@@ -4,6 +4,7 @@
   "defaults": {
     "collapse": "xs",
     "full": false,
+    "position": "left",
     "responsive": false,
     "size": {
       "react": "sm",

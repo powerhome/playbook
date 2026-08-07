@@ -2,7 +2,8 @@
   "template": "<DateYearStacked{{props}} />",
   "propTargets": {},
   "defaults": {
-    "align": "left"
+    "align": "left",
+    "dark": false
   },
   "groups": [
     {

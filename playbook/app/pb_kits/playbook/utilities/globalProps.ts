@@ -139,6 +139,46 @@ type RowGap = {
   rowGap?: string,
 }
 
+type GridTemplateColumns = {
+  gridTemplateColumns?: string,
+}
+
+type GridTemplateRows = {
+  gridTemplateRows?: string,
+}
+
+type GridTemplateAreas = {
+  gridTemplateAreas?: string,
+}
+
+type GridColumn = {
+  gridColumn?: string,
+}
+
+type GridRow = {
+  gridRow?: string,
+}
+
+type GridArea = {
+  gridArea?: string,
+}
+
+type GridAutoColumns = {
+  gridAutoColumns?: string,
+}
+
+type GridAutoRows = {
+  gridAutoRows?: string,
+}
+
+type GridAutoFlow = {
+  gridAutoFlow?: "row" | "column" | "dense" | "rowDense" | "columnDense"
+}
+
+type JustifyItems = {
+  justifyItems?: Alignment | "stretch"
+}
+
 type NumberSpacing = {
   numberSpacing?: "tabular",
 }
@@ -226,7 +266,9 @@ type MinHeight = {
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderProp & BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
-  FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
+  FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf & JustifyItems &
+  GridTemplateColumns & GridTemplateRows & GridTemplateAreas & GridColumn & GridRow & GridArea &
+  GridAutoColumns & GridAutoRows & GridAutoFlow &
   LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & ColumnGap & RowGap & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
@@ -644,6 +686,20 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       return justifySelf ? `justify_self_${justifySelf}` : ''
     }
   },
+  justifyItemsProps: ({ justifyItems }: JustifyItems) => {
+    if (typeof justifyItems === 'object') {
+      return getResponsivePropClasses(justifyItems, 'justify_items')
+    } else {
+      return justifyItems ? `justify_items_${camelToSnakeCase(justifyItems)}` : ''
+    }
+  },
+  gridAutoFlowProps: ({ gridAutoFlow }: GridAutoFlow) => {
+    if (typeof gridAutoFlow === 'object') {
+      return getResponsivePropClasses(gridAutoFlow, 'grid_auto_flow')
+    } else {
+      return gridAutoFlow ? `grid_auto_flow_${camelToSnakeCase(gridAutoFlow)}` : ''
+    }
+  },
   orderProps: ({ order }: Order) => {
     if (typeof order === 'object') {
       return getResponsivePropClasses(order, 'flex_order')
@@ -695,6 +751,38 @@ const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[
 
   minHeightProps: ({ minHeight }: MinHeight) => {
     return minHeight ? { minHeight } : {};
+  },
+
+  gridTemplateColumnsProps: ({ gridTemplateColumns }: GridTemplateColumns) => {
+    return gridTemplateColumns ? { gridTemplateColumns } : {};
+  },
+
+  gridTemplateRowsProps: ({ gridTemplateRows }: GridTemplateRows) => {
+    return gridTemplateRows ? { gridTemplateRows } : {};
+  },
+
+  gridTemplateAreasProps: ({ gridTemplateAreas }: GridTemplateAreas) => {
+    return gridTemplateAreas ? { gridTemplateAreas } : {};
+  },
+
+  gridColumnProps: ({ gridColumn }: GridColumn) => {
+    return gridColumn ? { gridColumn } : {};
+  },
+
+  gridRowProps: ({ gridRow }: GridRow) => {
+    return gridRow ? { gridRow } : {};
+  },
+
+  gridAreaProps: ({ gridArea }: GridArea) => {
+    return gridArea ? { gridArea } : {};
+  },
+
+  gridAutoColumnsProps: ({ gridAutoColumns }: GridAutoColumns) => {
+    return gridAutoColumns ? { gridAutoColumns } : {};
+  },
+
+  gridAutoRowsProps: ({ gridAutoRows }: GridAutoRows) => {
+    return gridAutoRows ? { gridAutoRows } : {};
   },
 }
 

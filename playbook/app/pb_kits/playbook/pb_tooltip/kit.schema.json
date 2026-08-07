@@ -24,7 +24,8 @@
     "height": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "icon": {
@@ -44,25 +45,29 @@
     "maxHeight": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "maxWidth": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "minHeight": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "minWidth": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "placement": {
@@ -74,7 +79,8 @@
     "position": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "absolute",
@@ -90,7 +96,8 @@
     "width": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "showTooltip": {
@@ -104,6 +111,13 @@
       "platforms": [
         "react"
       ]
+    },
+    "dark": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
     },
     "delayOpen": {
       "platforms": [

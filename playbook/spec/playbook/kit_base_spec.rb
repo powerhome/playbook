@@ -31,6 +31,7 @@ RSpec.describe Playbook::KitBase do
   it { is_expected.to define_prop(:flex_wrap) }
   it { is_expected.to define_prop(:justify_content) }
   it { is_expected.to define_prop(:justify_self) }
+  it { is_expected.to define_prop(:justify_items) }
   it { is_expected.to define_prop(:align_items) }
   it { is_expected.to define_prop(:align_content) }
   it { is_expected.to define_prop(:align_self) }
@@ -38,6 +39,15 @@ RSpec.describe Playbook::KitBase do
   it { is_expected.to define_prop(:flex_grow) }
   it { is_expected.to define_prop(:flex_shrink) }
   it { is_expected.to define_prop(:order) }
+  it { is_expected.to define_prop(:grid_template_columns) }
+  it { is_expected.to define_prop(:grid_template_rows) }
+  it { is_expected.to define_prop(:grid_template_areas) }
+  it { is_expected.to define_prop(:grid_column) }
+  it { is_expected.to define_prop(:grid_row) }
+  it { is_expected.to define_prop(:grid_area) }
+  it { is_expected.to define_prop(:grid_auto_columns) }
+  it { is_expected.to define_prop(:grid_auto_rows) }
+  it { is_expected.to define_prop(:grid_auto_flow) }
   it { is_expected.to define_prop(:truncate) }
 
   describe "#children" do
@@ -104,6 +114,18 @@ RSpec.describe Playbook::KitBase do
       expect(result[:style]).to include("background-color: red")
       expect(result[:style]).to include("font-size: 14px")
     end
+
+    it "applies grid template props as inline styles" do
+      instance = subject.new(
+        grid_template_columns: "repeat(3, 1fr)",
+        grid_column: "1 / 3"
+      )
+
+      result = instance.combined_html_options
+
+      expect(result[:style]).to include("grid-template-columns: repeat(3, 1fr)")
+      expect(result[:style]).to include("grid-column: 1 / 3")
+    end
   end
 
   describe "#data_attributes" do
@@ -131,6 +153,18 @@ RSpec.describe Playbook::KitBase do
       result = instance.global_inline_props
 
       expect(result[:height]).to eq("100px")
+    end
+
+    it "returns grid template values when set" do
+      instance = subject.new(
+        grid_template_columns: "repeat(3, 1fr)",
+        grid_template_rows: "59px 341px"
+      )
+
+      result = instance.global_inline_props
+
+      expect(result[:grid_template_columns]).to eq("repeat(3, 1fr)")
+      expect(result[:grid_template_rows]).to eq("59px 341px")
     end
 
     it "returns an empty hash when no height props are set" do

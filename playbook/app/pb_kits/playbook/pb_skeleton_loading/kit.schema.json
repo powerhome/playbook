@@ -10,26 +10,53 @@
     "height": {
       "type": "string",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": "16px"
     },
     "width": {
       "type": "string",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": "100%"
     },
     "borderRadius": {
-      "type": "string",
+      "type": "enum",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "values": [
+        "none",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "rounded"
+      ],
+      "default": "sm"
     },
     "gap": {
-      "type": "Sizes | \"none\"",
+      "type": "enum",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "xxl"
+      ],
+      "default": "xxs"
     },
     "stack": {
       "type": "number",
@@ -54,19 +81,21 @@
     "dark": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     }
   },
   "globalProps": true,
   "usage": {
     "react": {
       "import": "import { SkeletonLoading } from 'playbook-ui'",
-      "example": "<SkeletonLoading color=\"default\"></SkeletonLoading>"
+      "example": "<SkeletonLoading borderRadius=\"none\" gap=\"none\"></SkeletonLoading>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"skeleton_loading\", props: { color: \"default\" }) %>"
+      "example": "<%= pb_rails(\"skeleton_loading\", props: { border_radius: \"none\", gap: \"none\" }) %>"
     }
   }
 }

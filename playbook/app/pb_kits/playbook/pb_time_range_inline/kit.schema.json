@@ -35,8 +35,10 @@
     "dark": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "icon": {
       "type": "boolean",

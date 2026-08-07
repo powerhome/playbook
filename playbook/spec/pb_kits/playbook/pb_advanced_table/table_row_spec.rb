@@ -26,6 +26,14 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       .with_values("all", "header", "none")
   }
   it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
+  it { is_expected.to define_boolean_prop(:is_pinned_row).with_default(false) }
+
+  it {
+    is_expected.to define_enum_prop(:pinned_position)
+      .with_default("top")
+      .with_values("top", "bottom")
+  }
+  it { is_expected.to define_boolean_prop(:full_width_cell).with_default(false) }
 
   describe "#classname" do
     context "basic functionality" do
@@ -43,6 +51,20 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       it "does not include depth class for root rows" do
         instance = subject.new(row: {}, depth: 0)
         expect(instance.classname).not_to include "depth-sub-row"
+      end
+    end
+
+    context "pinned rows" do
+      it "adds pinned-row class when is_pinned_row is true" do
+        instance = subject.new(row: {}, depth: 0, is_pinned_row: true)
+        expect(instance.classname).to include "pinned-row"
+        expect(instance.classname).not_to include "pinned-row-bottom"
+      end
+
+      it "adds pinned-row-bottom class for bottom pinned rows" do
+        instance = subject.new(row: {}, depth: 0, is_pinned_row: true, pinned_position: "bottom")
+        expect(instance.classname).to include "pinned-row"
+        expect(instance.classname).to include "pinned-row-bottom"
       end
     end
 
@@ -386,6 +408,9 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
         { accessor: "with_bg_and_font", column_styling: { cell_background_color: "success_secondary", font_color: "white" } },
         { accessor: "with_bg_only", column_styling: { cell_background_color: "warning_secondary" } },
         { accessor: "none", column_styling: {} },
+        { accessor: "with_width", column_styling: { width: 128 } },
+        { accessor: "with_width_band", column_styling: { min_width: 108, width: 124, max_width: 168 } },
+        { accessor: "with_bg_and_width", column_styling: { cell_background_color: "warning_secondary", width: 200 } },
       ]
     end
     let(:instance) { subject.new(row: row, depth: 0, column_definitions: column_definitions) }
@@ -421,6 +446,36 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
         result = instance.cell_component_info({ accessor: "none" }, 0, nil, nil)
         expect(result[:name]).to eq "table/table_cell"
         expect(result[:props][:html_options][:style]).not_to have_key(:color)
+      end
+    end
+
+    context "with column width styling" do
+      it "applies fixed width styles when only width is set" do
+        result = instance.cell_component_info({ accessor: "with_width" }, 0, nil, nil)
+        expect(result[:props][:html_options][:style]).to include(
+          width: "128px",
+          min_width: "128px",
+          max_width: "128px"
+        )
+      end
+
+      it "applies min_width, width, and max_width band styles" do
+        result = instance.cell_component_info({ accessor: "with_width_band" }, 0, nil, nil)
+        expect(result[:props][:html_options][:style]).to include(
+          width: "124px",
+          min_width: "108px",
+          max_width: "168px"
+        )
+      end
+
+      it "merges width styles with custom background" do
+        result = instance.cell_component_info({ accessor: "with_bg_and_width" }, 0, nil, nil)
+        expect(result[:name]).to eq "background"
+        expect(result[:props][:html_options][:style]).to include(
+          width: "200px",
+          min_width: "200px",
+          max_width: "200px"
+        )
       end
     end
 

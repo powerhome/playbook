@@ -36,6 +36,7 @@ module Playbook
       append_classname(css, flex_wrap_props)
       append_classname(css, justify_content_props)
       append_classname(css, justify_self_props)
+      append_classname(css, justify_items_props)
       append_classname(css, align_items_props)
       append_classname(css, align_content_props)
       append_classname(css, align_self_props)
@@ -43,6 +44,9 @@ module Playbook
       append_classname(css, flex_grow_props)
       append_classname(css, flex_shrink_props)
       append_classname(css, order_props)
+
+      # Grid utilities
+      append_classname(css, grid_auto_flow_props)
 
       # Position and layout
       append_classname(css, position_props)

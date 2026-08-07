@@ -54,8 +54,8 @@ const normalizePathForPlatform = (path: string, platform: string) => {
   }
 
   if (path.startsWith('/kits/')) {
-    if (/\/(react|rails|swift)$/.test(path)) {
-      return path.replace(/\/(react|rails|swift)$/, `/${platform}`)
+    if (/\/(react|rails)$/.test(path)) {
+      return path.replace(/\/(react|rails)$/, `/${platform}`)
     }
 
     return `${path}/${platform}`

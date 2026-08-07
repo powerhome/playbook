@@ -226,6 +226,15 @@
       "type": "info"
     }
   },
+  "externalDependencies": {
+    "packages": [
+      "highcharts",
+      "highcharts-react-official"
+    ],
+    "optional": true,
+    "note": "This kit wraps Highcharts and does not ship it. The host app must already have these packages installed before using the kit. Agents must not install packages — tell the user if they are missing.",
+    "docs": "https://api.highcharts.com/highcharts/"
+  },
   "externalImports": [
     "import { PbCircleChart } from 'playbook-ui/charts'"
   ]

@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require_relative "column_layout_helper"
+
 module Playbook
   module PbAdvancedTable
     class TableRow < Playbook::KitBase
+      include Playbook::PbAdvancedTable::ColumnLayoutHelper
       prop :table_id, type: Playbook::Props::String,
                       default: ""
       prop :column_definitions, type: Playbook::Props::Array,
@@ -35,8 +38,13 @@ module Playbook
                                      default: ""
       prop :inline_row_loading, type: Playbook::Props::Boolean,
                                 default: false
+      prop :full_width_cell, type: Playbook::Props::Boolean,
+                             default: false
       prop :is_pinned_row, type: Playbook::Props::Boolean,
                            default: false
+      prop :pinned_position, type: Playbook::Props::Enum,
+                             values: %w[top bottom],
+                             default: "top"
       prop :pinned_index, type: Playbook::Props::Numeric,
                           default: nil
       prop :html_options, type: Playbook::Props::HashProp,
@@ -51,6 +59,7 @@ module Playbook
       def classname
         classes = ["pb_table_tr", "pb-bg-row-white", subrow_depth_classname]
         classes << "pinned-row" if is_pinned_row
+        classes << "pinned-row-bottom" if is_pinned_row && pinned_position.to_s == "bottom"
         classes.reject!(&:blank?)
         generate_classname(*classes, separator: " ")
       end
@@ -111,6 +120,7 @@ module Playbook
         column_font_color = cell_font_color(column)
         effective_font_color = column_font_color || font_color
         effective_font_weight = font_weight_value(font_weight)
+        layout_styles = cell_layout_styles(column)
 
         if has_custom_background_color?(column)
           custom_bg_color = cell_background_color(column)
@@ -120,13 +130,13 @@ module Playbook
             tag: "td",
             classname: td_classname(column, index),
           }
-          style_hash = {}
+          style_hash = layout_styles.dup
           style_hash[:color] = effective_font_color if effective_font_color.present?
           style_hash[:"font-weight"] = effective_font_weight if effective_font_weight.present?
           component_props[:html_options] = { style: style_hash } if style_hash.present?
         else
           component_name = "table/table_cell"
-          style_hash = { "background-color": bg_color }
+          style_hash = layout_styles.merge("background-color": bg_color)
           style_hash[:color] = effective_font_color if effective_font_color.present?
           style_hash[:"font-weight"] = effective_font_weight if effective_font_weight.present?
           component_props = {
@@ -231,6 +241,15 @@ module Playbook
       end
 
     private
+
+      def cell_layout_styles(column)
+        return {} unless column[:accessor].present?
+
+        orig_def = find_column_def_by_accessor(column_definitions, column[:accessor])
+        return {} unless orig_def
+
+        build_column_layout_styles_from_column(orig_def)
+      end
 
       def custom_renderer_value(column, index)
         return nil unless column[:accessor].present?

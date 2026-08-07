@@ -2,6 +2,7 @@
   "template": "<PhoneNumberInput{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "disabled": false,
     "error": "",
     "hiddenInputs": false,

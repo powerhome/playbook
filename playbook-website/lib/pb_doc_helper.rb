@@ -113,8 +113,6 @@ module PlaybookWebsite
         url = case type
               when "react"
                 kit_show_reacts_path(kit)
-              when "swift"
-                kit_show_swift_path(kit)
               else
                 kit_show_path(kit)
               end

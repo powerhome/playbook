@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Nav, NavItem, SectionSeparator } from "playbook-ui";
 import globalPropsValues from "../../../components/AvailableProps/globalPropsValues";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
+import { formatPropNameForPlatform } from "../../../helpers/platform";
 interface PropsTabProps {
   availableProps?: string;
   platform?: string;
@@ -24,14 +25,6 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
   // Parse the schema JSON
   const schema = JSON.parse(availableProps);
 
-  const formatPropName = (propName: string) =>
-    platform === "rails"
-      ? propName
-          .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
-          .replace(/-/g, "_")
-          .toLowerCase()
-      : propName;
-  
   // Extract props from our kit.schema.json format
   // Schema structure: { $schema, name, description, platforms, props: {...}, globalProps, usage }
   const props = schema.props && typeof schema.props === 'object' ? schema.props : schema;
@@ -48,7 +41,7 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
     const isForPlatform = platforms.length === 0 || platforms.includes(platform);
     
     if (!isGlobalProp && isForPlatform) {
-      kitProps[formatPropName(propName)] = prop;
+      kitProps[formatPropNameForPlatform(propName, platform)] = prop;
     }
   }
 
@@ -75,7 +68,7 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
         </Card.Body>
         <SectionSeparator dark={darkMode} />
         {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={darkMode} />}
-        {!showKitTab && <GlobalProps darkMode={darkMode} />}
+        {!showKitTab && <GlobalProps darkMode={darkMode} platform={platform} />}
       </Card>
     </Flex>
   );

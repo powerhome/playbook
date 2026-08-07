@@ -10,6 +10,7 @@
 <%= pb_rails("typeahead", props: { id: "typeahead-pills-example1", default_options: [options.first], options: options, label: "Products", name: :foo, pills: true }) %>
 
 <%= pb_rails("button", props: {id: "clear-pills", text: "Clear All Options", variant: "secondary"}) %>
+<%= pb_rails("button", props: {id: "set-pills", text: "Restore Default Options", variant: "secondary"}) %>
 
 <!-- This section is an example of the available JavaScript event hooks -->
 <%= javascript_tag defer: "defer" do %>
@@ -27,5 +28,11 @@
 
   document.querySelector('#clear-pills').addEventListener('click', function() {
     document.dispatchEvent(new CustomEvent('pb-typeahead-kit-typeahead-pills-example1:clear'))
+  })
+
+  document.querySelector('#set-pills').addEventListener('click', function() {
+    document.dispatchEvent(new CustomEvent('pb-typeahead-kit-typeahead-pills-example1:set', {
+      detail: [{ label: 'Windows', value: '#FFA500' }]
+    }))
   })
 <% end %>

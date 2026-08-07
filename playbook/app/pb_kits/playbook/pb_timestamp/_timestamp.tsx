@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 import DateTime from '../pb_kit/dateTime';
+import { resolveTimeZone } from './activeSupportTimeZones'
 
 import Caption from '../pb_caption/_caption'
 
@@ -58,25 +59,26 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     className
   )
 
+  const resolvedTimezone = resolveTimeZone(timezone)
   const currentYear = new Date().getFullYear().toString()
   const shouldShowUser = showUser == true && text.length > 0
   const shouldShowTimezone = showTimezone == true && timezone.length > 0
   const updatedText = hideUpdated ? "" : "Last updated"
   const userDisplay = shouldShowUser ? ` by ${text}` : ''
 
-  let timeDisplay = `${DateTime.toHour(timestamp, timezone)}:${DateTime.toMinute(timestamp, timezone)}${DateTime.toMeridiem(timestamp, timezone)}`
+  let timeDisplay = `${DateTime.toHour(timestamp, resolvedTimezone)}:${DateTime.toMinute(timestamp, resolvedTimezone)}${DateTime.toMeridiem(timestamp, resolvedTimezone)}`
 
   const fullTimeDisplay = () => {
     if (shouldShowTimezone) {
-      timeDisplay = `${timeDisplay} ${DateTime.toTimeZone(timestamp, timezone)}`
+      timeDisplay = `${timeDisplay} ${DateTime.toTimeZone(timestamp, resolvedTimezone)}`
     }
     return timeDisplay
   }
 
   const baseDateDisplay = () => {
-  let display = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
-  if (DateTime.toYear(timestamp, timezone).toString() !== currentYear || showCurrentYear) {
-    display = `${display}, ${DateTime.toYear(timestamp, timezone)}`
+  let display = `${DateTime.toMonth(timestamp, resolvedTimezone)} ${DateTime.toDay(timestamp, resolvedTimezone)}`
+  if (DateTime.toYear(timestamp, resolvedTimezone).toString() !== currentYear || showCurrentYear) {
+    display = `${display}, ${DateTime.toYear(timestamp, resolvedTimezone)}`
   }
   return display
 }
@@ -90,8 +92,8 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     const finalUpdatedString = []
     if (shouldShowUser) finalUpdatedString.push(`by ${text}`)
     if (showDate && !showTime) finalUpdatedString.push(`on ${baseDateDisplay()}`)
-    if (showDate && showTime) finalUpdatedString.push(`on ${baseDateDisplay()} at ${timeDisplay}`)
-    if (showTime && !showDate) finalUpdatedString.push(`at ${timeDisplay}`)
+    if (showDate && showTime) finalUpdatedString.push(`on ${baseDateDisplay()} at ${fullTimeDisplay()}`)
+    if (showTime && !showDate) finalUpdatedString.push(`at ${fullTimeDisplay()}`)
     return `Last updated ${finalUpdatedString.join(' ')}`
   }
 

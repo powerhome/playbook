@@ -47,11 +47,13 @@ function generate() {
     .map(([name, prop]) => {
       const type = getTypeFromSchema(prop);
       const values = formatValues(prop);
-      
+      const platforms = prop.platforms || ['react', 'rails'];
+
       return `  {
     prop: "${name}",
     type: "${type}",
-    values: ${values}
+    values: ${values},
+    platforms: ${JSON.stringify(platforms)}
   }`;
     });
 

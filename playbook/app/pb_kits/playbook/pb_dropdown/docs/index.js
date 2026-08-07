@@ -36,3 +36,5 @@ export { default as DropdownRequiredIndicator } from "./_dropdown_required_indic
 export { default as DropdownDisabledOption } from "./_dropdown_disabled_option.jsx";
 export { default as DropdownCustomDisplayDisabledOption } from "./_dropdown_custom_display_disabled_option.jsx";
 export { default as DropdownDisabled } from "./_dropdown_disabled.jsx";
+export { default as DropdownGroupedOptions } from "./_dropdown_grouped_options.jsx";
+export { default as DropdownDefaultValueWithAutocomplete } from './_dropdown_default_value_with_autocomplete.jsx'

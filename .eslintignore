@@ -1,5 +1,4 @@
 playbook/fonts/**
 playbook/dist
-playbook-swift
 node_modules
 playbook-website

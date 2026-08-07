@@ -203,7 +203,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         : undefined;
     const errorId = error ? `${selectId}-error` : undefined;
 
-    const [filterItem, setFilterItem] = useState("");
     const initialSelected = useMemo(() => {
       // Handle quickpick variant with string defaultValue (e.g., "This Month")
       if (variant === "quickpick" && typeof defaultValue === "string" && defaultValue) {
@@ -225,6 +224,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const [selected, setSelected] = useState<GenericObject | GenericObject[]>(
       initialSelected
     );
+
+    // Autocomplete displays the selection in the input; seed from defaultValue
+    const [filterItem, setFilterItem] = useState(() => {
+      if (!autocomplete || multiSelect) return "";
+      if (Array.isArray(initialSelected)) return "";
+      return (initialSelected as GenericObject)?.label || "";
+    });
 
     const filterResetDefaultSerialized = useMemo(
         () => serializeDropdownFilterResetDefault(variant, multiSelect, defaultValue, dropdownOptions),
@@ -320,10 +326,17 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     }, [optionsWithBlankSelection, selectedArray, multiSelect]);
     
     const filteredOptions = useMemo(() => {
+          // When the input shows the selected label, do not filter the list down to that one option
+          const selectedLabel =
+            !multiSelect &&
+            !Array.isArray(selected) &&
+            (selected as GenericObject)?.label;
+          const filterText =
+            selectedLabel && filterItem === selectedLabel ? "" : filterItem;
           return availableOptions.filter((opt: GenericObject) =>
-            String(opt.label).toLowerCase().includes(filterItem.toLowerCase())
+            String(opt.label).toLowerCase().includes(filterText.toLowerCase())
           );
-        }, [availableOptions, filterItem]);
+        }, [availableOptions, filterItem, multiSelect, selected]);
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
@@ -460,6 +473,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setSelected({});
         onSelect && onSelect(null);
         setFocusedOptionIndex(-1);
+        setFilterItem("");
         
         // Clear linked DatePickers as well if this is a quickpick variant with controls
         if (variant === "quickpick") {
@@ -593,6 +607,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     onSelect,
                     optionsWithBlankSelection,
                     selected,
+                    setFilterItem,
                     setFocusedOptionIndex,
                     setIsDropDownClosed,
                     setIsInputFocused,
