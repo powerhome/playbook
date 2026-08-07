@@ -25,3 +25,5 @@ Reformat only when:
 
 1. The user explicitly asks, or
 2. A hook / CI failure requires a fix on lines you already changed
+
+Matching **local** style on lines you already add or edit (indentation, alphabetical prop order in that block, quote style) is required — that is not drive-by formatting. See [`readable-code.mdc`](readable-code.mdc).

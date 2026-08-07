@@ -57,6 +57,19 @@ useVirtualizer({ count: enabled ? n : 0 /* hook still always runs */ })
 {enabled ? <VirtualizedProvider>{children}</VirtualizedProvider> : children}
 ```
 
+## Match local style on new / changed lines
+
+Agents often miss small-but-required local conventions. For every line you add or edit, match the surrounding file — do not invent a parallel style.
+
+Typical kit patterns (confirm in the file you are editing):
+
+- **Indentation / wrapping** — same indent width and multiline break style as neighbors (JSX props, destructuring, `classnames(` lists)
+- **Alphabetical prop / key order** — type fields, destructuring, and JSX attributes usually sorted alphabetically (see kits like `pb_badge/_badge.tsx`)
+- **Quote / trailing style** — match single vs double quotes and trailing commas already used in that file
+- **`className` last** in React `classnames(buildCss(...), globalProps(props), className)`
+
+Before finishing, skim your diff: indentation, prop order, and list order should look like the rest of the file.
+
 ## Balance with minimal diffs
 
-Do not refactor untouched code for style. Apply this rule to **new and changed** code; keep unrelated lines alone ([`minimal-diffs.mdc`](minimal-diffs.mdc)).
+Do not refactor untouched code for style. Apply readability **and** local style only to **new and changed** code; keep unrelated lines alone ([`minimal-diffs.mdc`](minimal-diffs.mdc)).
