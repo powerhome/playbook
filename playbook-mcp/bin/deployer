@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ -t 0 ]; then
+  INTERACTIVE="--interactive"
+  AWS_CREDS_MOUNT="--mount type=bind,source=${HOME}/.aws/credentials,destination=/root/.aws/credentials,readonly"
+fi
+
+DEPLOYER_IMAGE="image-registry.powerapp.cloud/app/deployer:main-b7d3415b8760f3f9ea3c1fb6cede68c56404f951-61"
+# Mount monorepo root (parent of playbook-mcp) so playbook/ gem context is available if needed.
+REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+DEPLOYER_MOUNTS="${AWS_CREDS_MOUNT} --mount type=bind,source=${REPO_ROOT},destination=/app --mount type=bind,source=${HOME}/.kube,destination=/root/.kube"
+RUN_DEPLOYER="docker run --tty ${INTERACTIVE} ${EXTRA_ARGS} --rm --env AWS_ACCESS_KEY_ID --env AWS_SECRET_ACCESS_KEY ${DEPLOYER_MOUNTS} ${DEPLOYER_IMAGE}"
+
+docker image inspect $DEPLOYER_IMAGE > /dev/null 2>&1 || docker pull $DEPLOYER_IMAGE > /dev/null
+
+${RUN_DEPLOYER} "$@"

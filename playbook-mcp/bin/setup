@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+bundle check || bundle install
+mkdir -p tmp/pids log vendor/chart-peers
+if [[ "${PLAYBOOK_MCP_SKIP_VENDOR_CHARTS:-}" != "1" ]]; then
+  if [[ ! -s vendor/chart-peers/playbook-charts.js ]]; then
+    echo "Building self-contained chart IIFE (esbuild) for MCP-UI iframes..."
+    bin/vendor_chart_peers || echo "WARN: chart bundle failed; charts will be non-interactive until bin/vendor_chart_peers succeeds"
+  fi
+fi
+echo "playbook-mcp ready. Start with: bundle exec puma -C config/puma.rb"
