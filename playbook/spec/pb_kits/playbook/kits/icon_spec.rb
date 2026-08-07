@@ -206,6 +206,28 @@ RSpec.describe Playbook::PbIcon::Icon do
     ensure
       reset_icon_path_index_cache!
     end
+
+    it "reads indexed icons when configured icon_path resolves outside Rails.root", :aggregate_failures do
+      Dir.mktmpdir("pb_icon_outside") do |icons_dir|
+        File.write(File.join(icons_dir, "widget.svg"), "<svg xmlns=\"http://www.w3.org/2000/svg\"></svg>")
+        secret = File.join(icons_dir, "master.key")
+        File.write(secret, "fake_secret_key_base")
+        File.symlink(secret, File.join(icons_dir, "poison.svg"))
+
+        allow(Rails.application.config).to receive(:respond_to?).and_wrap_original do |method, name, *args|
+          name == :icon_path || method.call(name, *args)
+        end
+        # Absolute path outside Rails.root (mirrors ../node_modules/... in playbook-website).
+        allow(Rails.application.config).to receive(:icon_path).and_return(icons_dir)
+        reset_icon_path_index_cache!
+
+        expect(Pathname.new(icons_dir).realpath.to_s).not_to start_with("#{Rails.root.realpath}#{File::SEPARATOR}")
+        expect(subject.new(icon: "widget").send(:svg_content)).to include("<svg")
+        expect(subject.new(icon: "poison").send(:svg_content)).to eq("")
+      end
+    ensure
+      reset_icon_path_index_cache!
+    end
   end
 
   describe "#valid_emoji?" do

@@ -363,9 +363,12 @@ module Playbook
         false
       end
 
-      # An SVG may live in the host application or in any mounted engine
-      # (Playbook itself, or a host app's component engines), so every loaded
-      # engine root is allowed in addition to Rails.root.
+      # An SVG may live in the host application, any mounted engine
+      # (Playbook itself, or a host app's component engines), or the configured
+      # icon_path directory. playbook-website points development icon_path at
+      # ../node_modules/@powerhome/playbook-icons/icons, which resolves outside
+      # Rails.root / Engine.root — that directory must still be allowed, while
+      # realpath + svg_file? keep symlink-to-non-svg blocked.
       def allowed_svg_roots
         @allowed_svg_roots ||= svg_root_candidates.filter_map { |candidate| real_path(candidate) }.uniq
       end
@@ -373,8 +376,17 @@ module Playbook
       def svg_root_candidates
         Rails::Engine.descendants
                      .map { |engine| engine_root(engine) }
-                     .push(Playbook::Engine.root, Rails.root)
+                     .push(Playbook::Engine.root, Rails.root, configured_icon_path_root)
                      .compact
+      end
+
+      def configured_icon_path_root
+        return unless Rails.application.config.respond_to?(:icon_path)
+
+        base = Rails.application.config.icon_path
+        return if base.blank?
+
+        Rails.root.join(base)
       end
 
       def engine_root(engine)
