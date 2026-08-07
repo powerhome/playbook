@@ -1,0 +1,8 @@
+$justify_items_values: (
+  start: start,
+  center: center,
+  end: end,
+  stretch: stretch,
+);
+
+@include global_props_responsive_css($justify_items_values, 'justify_items', 'justify-items');

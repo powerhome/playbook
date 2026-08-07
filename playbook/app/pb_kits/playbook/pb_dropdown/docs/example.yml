@@ -22,6 +22,7 @@ examples:
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_multi_select_with_default: Multi Select Default Value
+  - dropdown_default_value_with_autocomplete: Default Value with Autocomplete
   - dropdown_blank_selection: Blank Selection
   - dropdown_with_placeholder: Placeholder
   - dropdown_separators_hidden: Separators Hidden
@@ -63,6 +64,7 @@ examples:
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_multi_select_with_default: Multi Select Default Value
+  - dropdown_default_value_with_autocomplete: Default Value with Autocomplete
   - dropdown_blank_selection: Blank Selection
   - dropdown_with_placeholder: Placeholder
   - dropdown_clear_selection: Clear Selection

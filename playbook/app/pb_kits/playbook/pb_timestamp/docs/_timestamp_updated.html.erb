@@ -12,3 +12,22 @@
   variant: "updated",
   show_user: false
 }) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  show_timezone: true,
+  timestamp: DateTime.now,
+  timezone: "America/New_York",
+  variant: "updated",
+}) %>
+
+<br />
+
+<%= pb_rails("timestamp", props: {
+  show_date: false,
+  show_timezone: true,
+  timestamp: DateTime.now,
+  timezone: "Asia/Hong_Kong",
+  variant: "updated",
+}) %>

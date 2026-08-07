@@ -52,6 +52,10 @@ module Playbook
         tag(:input, all_input_options)
       end
 
+      def sanitized_input_tag
+        tag(:input, data: "sanitized-pb-input", id: sanitized_id, name: name, style: "display: none;")
+      end
+
       def has_add_on?
         add_on.present?
       end

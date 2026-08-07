@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent, waitFor } from '../utilities/test-utils'
+import { render, screen, fireEvent, waitFor, act } from '../utilities/test-utils'
 import Typeahead from './_typeahead'
 
 const options = [
@@ -484,5 +484,149 @@ test('pill reorder commit dispatches custom event on drop', () => {
   document.removeEventListener(
     'pb-typeahead-kit-reorder-event-typeahead-result-option-reorder',
     reorderHandler,
+  )
+})
+
+test('publishes data-default-value from initial defaultValue', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'default-stamp-test' }}
+        defaultValue={[options[0], options[1]]}
+        id="default-stamp-typeahead"
+        isMulti
+        options={options}
+    />
+  )
+
+  expect(screen.getByTestId('default-stamp-test')).toHaveAttribute(
+    'data-default-value',
+    JSON.stringify([
+      { label: 'Orange', value: '#FFA500' },
+      { label: 'Red', value: '#FF0000' },
+    ]),
+  )
+})
+
+test('data-default-value only includes label and value', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'slim-default-test' }}
+        defaultValue={[
+          {
+            label: 'Orange',
+            value: '#FFA500',
+            imageUrl: 'https://example.com/orange.png',
+            meta: { nested: true },
+          },
+        ]}
+        id="slim-default-typeahead"
+        isMulti
+        options={options}
+    />
+  )
+
+  expect(screen.getByTestId('slim-default-test')).toHaveAttribute(
+    'data-default-value',
+    JSON.stringify([{ label: 'Orange', value: '#FFA500' }]),
+  )
+})
+
+test('omits data-default-value when serialization fails', () => {
+  const circular = { label: 'Broken' }
+  circular.value = circular
+
+  render(
+    <Typeahead
+        data={{ testid: 'bad-default-test' }}
+        defaultValue={[circular]}
+        id="bad-default-typeahead"
+        isMulti
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('bad-default-test')
+  expect(kit).toBeInTheDocument()
+  expect(kit).not.toHaveAttribute('data-default-value')
+})
+
+test(':set updates values; :set after :clear restores', async () => {
+  render(
+    <Typeahead
+        data={{ testid: 'set-event-test' }}
+        defaultValue={[options[0]]}
+        id="set-event-typeahead"
+        isMulti
+        name="products"
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('set-event-test')
+  expect(kit.querySelectorAll('.pb_form_pill_kit')).toHaveLength(1)
+
+  await act(async () => {
+    document.dispatchEvent(new CustomEvent('pb-typeahead-kit-set-event-typeahead:clear'))
+  })
+  await waitFor(() => expect(kit.querySelectorAll('.pb_form_pill_kit')).toHaveLength(0))
+
+  await act(async () => {
+    document.dispatchEvent(
+      new CustomEvent('pb-typeahead-kit-set-event-typeahead:set', {
+        detail: [options[0], options[2]],
+      }),
+    )
+  })
+
+  await waitFor(() => {
+    const pills = kit.querySelectorAll('.pb_form_pill_kit')
+    expect(pills).toHaveLength(2)
+    expect(pills[0]).toHaveTextContent('Orange')
+    expect(pills[1]).toHaveTextContent('Green')
+  })
+
+  const hiddenValues = Array.from(
+    kit.querySelectorAll('input[type="hidden"][name="products"]'),
+  ).map((input) => input.value)
+  expect(hiddenValues).toEqual(['#FFA500', '#00FF00'])
+})
+
+test(':set calls onChange but does not dispatch result-option-select', async () => {
+  const handleChange = jest.fn()
+  const selectHandler = jest.fn()
+
+  document.addEventListener(
+    'pb-typeahead-kit-set-side-effects-typeahead-result-option-select',
+    selectHandler,
+  )
+
+  render(
+    <Typeahead
+        data={{ testid: 'set-side-effects-test' }}
+        id="set-side-effects-typeahead"
+        isMulti
+        onChange={handleChange}
+        options={options}
+    />
+  )
+
+  await act(async () => {
+    document.dispatchEvent(
+      new CustomEvent('pb-typeahead-kit-set-side-effects-typeahead:set', {
+        detail: [options[0], options[1]],
+      }),
+    )
+  })
+
+  await waitFor(() => {
+    expect(screen.getByTestId('set-side-effects-test').querySelectorAll('.pb_form_pill_kit')).toHaveLength(2)
+  })
+
+  expect(handleChange).toHaveBeenCalled()
+  expect(selectHandler).not.toHaveBeenCalled()
+
+  document.removeEventListener(
+    'pb-typeahead-kit-set-side-effects-typeahead-result-option-select',
+    selectHandler,
   )
 })

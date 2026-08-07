@@ -2,6 +2,7 @@
   "template": "<Icon{{props}} />",
   "propTargets": {},
   "defaults": {
+    "border": false,
     "fixedWidth": true,
     "inverse": false,
     "listItem": false,

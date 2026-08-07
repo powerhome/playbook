@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
+    "dark": false,
     "timezone": "America/New_York",
     "showCurrentYear": false,
     "showDate": true,

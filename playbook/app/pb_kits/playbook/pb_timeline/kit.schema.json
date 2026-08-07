@@ -8,7 +8,7 @@
   ],
   "props": {
     "orientation": {
-      "type": "string",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"

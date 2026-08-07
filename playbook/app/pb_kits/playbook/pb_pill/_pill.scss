@@ -1,14 +1,18 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/opacity";
+@import "../tokens/typography";
 @import "../pb_body/body";
 
 $pb_pill_height: 22px;
+$pb_pill_height_sm: 17px;
 
 // Base styles for all pill variations
 @each $color_name, $color_value in $status_color_text {
   .pb_pill_kit_#{$color_name}_lowercase,
-  .pb_pill_kit_#{$color_name}_none {
+  .pb_pill_kit_#{$color_name}_none,
+  .pb_pill_kit_#{$color_name}_lowercase_sm,
+  .pb_pill_kit_#{$color_name}_none_sm {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -26,11 +30,28 @@ $pb_pill_height: 22px;
 
 // Text transform specific styles
 @each $color_name, $color_value in $status_color_text {
-  .pb_pill_kit_#{$color_name}_lowercase {
+  .pb_pill_kit_#{$color_name}_lowercase,
+  .pb_pill_kit_#{$color_name}_lowercase_sm {
     text-transform: lowercase;
   }
 
-  .pb_pill_kit_#{$color_name}_none {
+  .pb_pill_kit_#{$color_name}_none,
+  .pb_pill_kit_#{$color_name}_none_sm {
     text-transform: none;
+  }
+}
+
+// Small size styles
+@each $color_name, $color_value in $status_color_text {
+  .pb_pill_kit_#{$color_name}_lowercase_sm,
+  .pb_pill_kit_#{$color_name}_none_sm {
+    height: $pb_pill_height_sm;
+    padding: 0 $space_xs;
+    border-radius: $pb_pill_height_sm/2;
+
+    .pb_pill_text {
+      font-size: $font_smallest !important;
+      line-height: 1.7;
+    }
   }
 }

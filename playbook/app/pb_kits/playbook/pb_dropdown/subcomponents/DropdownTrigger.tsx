@@ -103,8 +103,9 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     "Select..."
   );
 
+  const hideJoinedLabelInBody = Boolean(autocomplete && filterItem === joinedLabels);
   const defaultDisplayPlaceholder = joinedLabels
-    ? joinedLabels
+    ? (hideJoinedLabelInBody ? "" : joinedLabels)
     : autocomplete
     ? ""
     : placeholder
@@ -252,9 +253,9 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       }}
                       key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
                   >
-                    {(!blankSelection || selected?.value !== optionsWithBlankSelection?.[0]?.value) && (
-                      <>
-                        {clearable !== false && selectedArray.length > 0 && (
+                    {(!blankSelection || selected?.value !== optionsWithBlankSelection?.[0]?.value) &&
+                    clearable !== false &&
+                    selectedArray.length > 0 ? (
                           <div onClick={(e)=>{e.stopPropagation(); !disabled && handleBackspace()}}>
                             <Icon
                                 cursor={disabled ? "default" : "pointer"}
@@ -264,8 +265,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                                 size="sm"
                             />
                           </div>
-                        )}
-                      </>
+                    ) : (
+                      <></>
                     )}
                     <Icon
                         cursor={disabled ? "default" : "pointer"}

@@ -12,6 +12,7 @@
     "fullWidthCell": false,
     "inlineRowLoading": false,
     "loading": false,
+    "maxHeight": "auto",
     "responsive": "scroll",
     "scrollBarNone": false,
     "selectableRows": false,

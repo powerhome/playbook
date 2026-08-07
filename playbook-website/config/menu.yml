@@ -80,7 +80,7 @@ kits:
   - name: styling
     description: "Styling per row or column: padding, color, and border."
     parent: advanced_table
-    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling with Multiple Headers", "Column Styling Background Color", "Column Styling Background Color (Custom)", "Column Styling Background Color with Multiple Headers","Column Styling Individual Cell Background Color", "Padding Control using Column Styling", "Column Group Border Color"]
+    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling Width", "Column Styling with Multiple Headers", "Column Styling Background Color", "Column Styling Background Color (Custom)", "Column Styling Background Color with Multiple Headers","Column Styling Individual Cell Background Color", "Padding Control using Column Styling", "Column Group Border Color"]
     platforms: *1
     status: stable
     icons_used: true
@@ -144,12 +144,6 @@ kits:
     platforms: *1
     description: Round icon-only button; the icon must clearly show the action because there is no label.
     status: stable
-    icons_used: true
-    react_rendered: false
-    enhanced_element_used: false
-  - name: icon_button
-    platforms: *1
-    status: deprecated
     icons_used: true
     react_rendered: false
     enhanced_element_used: false

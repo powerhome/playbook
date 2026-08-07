@@ -1,6 +1,6 @@
 AdvancedTable column width is controlled in two equivalent places on each leaf `columnDefinitions` entry. Playbook maps them to inline styles on header and body cells (and forwards numeric values into TanStack Table’s column model).
 
-1) Playbook `columnStyling` and TanStack `ColumnDef` use the same three ideas:
+**1)** Playbook `columnStyling` and TanStack `ColumnDef` use the same three ideas:
 
 - Preferred / target width: `columnStyling` `width` maps to TanStack `size` on the same column object.
 - Minimum width (floor): `columnStyling` `minWidth` maps to TanStack `minSize`.
@@ -10,7 +10,7 @@ Numbers are pixels. You can also pass CSS length strings on `columnStyling` (e.g
 
 If both APIs set the same axis, `columnStyling` wins for that axis when Playbook builds cell styles.
 
-2) Fixed width: set `width` only
+**2)** Fixed width: set `width` only
 
 If you pass only `width` (or only `size`) and do not set `minWidth` / `maxWidth` (or `minSize` / `maxSize`), Playbook treats that as a fixed column: it sets all three to the same value under the hood so you do not have to repeat yourself.
 
@@ -26,7 +26,7 @@ size: 200
 
 Use this when the column should stay one width (e.g. a hierarchy column with expand controls).
 
-3) Floor only: `minWidth` / `minSize`
+**3)** Floor only: `minWidth` / `minSize`
 
 Set only a minimum when the column may grow with the table or content but must not shrink below a baseline (common fix for horizontal “jump” when rows expand):
 
@@ -34,7 +34,7 @@ Set only a minimum when the column may grow with the table or content but must n
 columnStyling: { minWidth: 160 }
 ```
 
-4) Flexible band: min + preferred + max
+**4)** Flexible band: min + preferred + max
 
 Set two or three values when you want a range. CSS uses preferred `width` clamped between `minWidth` and `maxWidth`:
 
@@ -46,7 +46,7 @@ Example from the table below (Attendance): `minWidth: 108`, `width: 124`, `maxWi
 
 You only need all three when you want that band. If min and max are omitted, `width` alone is enough for a fixed column.
 
-5) TanStack band without `columnStyling`
+**5)** TanStack band without `columnStyling`
 
 The Meetings column uses only TanStack fields:
 
@@ -56,7 +56,7 @@ The Meetings column uses only TanStack fields:
 
 Playbook applies the same min / preferred / max idea to cell styles. Setting only `size: 200` would lock all three to 200, same as `width: 200` in `columnStyling`.
 
-6) What the example table shows
+**6)** What the example table shows
 
 - Year (fixed): `columnStyling: { width: 128 }` — locked to 128px.
 - Enrollments (floor): `columnStyling: { minWidth: 160 }` — at least 160px; can grow.

@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "background": true,
+    "minWidth": "360px",
     "placement": "bottom-start",
     "double": false,
     "filters": {
@@ -10,7 +11,6 @@
       "City": "San Francisco"
     },
     "isCollapsed": false,
-    "minWidth": "360px",
     "onCollapse": "() => {}",
     "onSortChange": "() => {}",
     "popoverProps": {},

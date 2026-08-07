@@ -1,4 +1,9 @@
 {
+  "externalDependencies": {
+    "packages": ["maplibre-gl"],
+    "optional": true,
+    "note": "Map wraps MapLibre. The host app must already have maplibre-gl (and any required CSS) installed. Agents must not install packages — tell the user if they are missing."
+  },
   "structureModes": {
     "default": "maplibre",
     "modes": {
