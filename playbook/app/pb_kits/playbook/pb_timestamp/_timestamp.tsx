@@ -92,8 +92,8 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     const finalUpdatedString = []
     if (shouldShowUser) finalUpdatedString.push(`by ${text}`)
     if (showDate && !showTime) finalUpdatedString.push(`on ${baseDateDisplay()}`)
-    if (showDate && showTime) finalUpdatedString.push(`on ${baseDateDisplay()} at ${timeDisplay}`)
-    if (showTime && !showDate) finalUpdatedString.push(`at ${timeDisplay}`)
+    if (showDate && showTime) finalUpdatedString.push(`on ${baseDateDisplay()} at ${fullTimeDisplay()}`)
+    if (showTime && !showDate) finalUpdatedString.push(`at ${fullTimeDisplay()}`)
     return `Last updated ${finalUpdatedString.join(' ')}`
   }
 

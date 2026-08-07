@@ -81,7 +81,6 @@ jobs:
         if: github.event.pull_request.head.repo.full_name == github.repository
         run: |
           bin/build_gem
-          rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
           echo "${{ env.new_ruby_alpha_version }}"
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/
       - name: Leave PR comment
@@ -275,7 +274,6 @@ jobs:
             exit 0
           fi
           bin/build_gem
-          rm -rf dist/playbook-doc.js dist/playbook-rails.js dist/app  dist/pb_doc_helper.rb dist/menu.yml
           gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/
       - name: Create GitHub Release
         env:
