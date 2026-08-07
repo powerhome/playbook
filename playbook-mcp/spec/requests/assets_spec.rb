@@ -20,6 +20,13 @@ RSpec.describe "Assets", type: :request do
     expect(response.body).to include("__defProp")
   end
 
+  it "serves playbook-mcp-resize.js for mcp-ui iframe sizing" do
+    get "/assets/playbook-mcp-resize.js"
+    expect(response).to have_http_status(:ok)
+    expect(response.body).to include("ui-size-change")
+    expect(response.headers["Access-Control-Allow-Origin"]).to eq("*")
+  end
+
   it "answers OPTIONS preflight for font/CORS clients" do
     process :options, "/assets/playbook.css"
     expect(response).to have_http_status(:no_content)

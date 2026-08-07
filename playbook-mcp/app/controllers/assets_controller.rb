@@ -20,6 +20,11 @@ class AssetsController < ActionController::Base
     "chunks/",
   ].freeze
 
+  # Exact filenames served from playbook-mcp/public (not the Playbook gem tree).
+  MCP_PUBLIC_FILES = %w[
+    playbook-mcp-resize.js
+  ].freeze
+
   CONTENT_TYPES = {
     ".css" => "text/css; charset=utf-8",
     ".js" => "application/javascript; charset=utf-8",
@@ -86,6 +91,8 @@ private
       # the caller path under Engine.root itself.
       resolve_under(Playbook::Engine.root.join("fonts"), rest) ||
         resolve_under(Playbook::Engine.root.join("dist", "fonts"), rest)
+    elsif MCP_PUBLIC_FILES.include?(relative)
+      resolve_under(Rails.root.join("public"), relative)
     else
       return nil unless dist_allowlisted?(relative)
 

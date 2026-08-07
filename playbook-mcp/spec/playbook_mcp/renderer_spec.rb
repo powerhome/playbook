@@ -10,6 +10,7 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).to include("pb_button")
     expect(html).to include("/assets/playbook.css?v=")
     expect(html).to include("/assets/playbook-rails.js?v=")
+    expect(html).to include("/assets/playbook-mcp-resize.js?v=")
     expect(html).not_to match(/100vh/)
     expect(html).to include("Go")
   end
@@ -19,6 +20,7 @@ RSpec.describe PlaybookMcp::Renderer do
     html = renderer.render_kit(kit: "table", props: { "size" => "sm" }, children: children)
     expect(html).to include("pb_table")
     expect(html).to include("<th>A</th>")
+    expect(html).to include("/assets/playbook-mcp-resize.js?v=")
   end
 
   it "uses the absolute asset origin in CSP (srcdoc 'self' is opaque)" do
@@ -81,6 +83,7 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).not_to include("react.esm.js")
     expect(html).not_to include("esm.sh")
     expect(html).to include("/assets/vendor/playbook-charts.js?v=")
+    expect(html).to include("/assets/playbook-mcp-resize.js?v=")
     expect(html).not_to include("playbook-rails-charts-bindings.js")
     expect(html).to include("data-pb-react-component")
     expect(html).not_to include("useHTML")

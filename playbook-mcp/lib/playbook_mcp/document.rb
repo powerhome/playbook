@@ -83,11 +83,15 @@ module PlaybookMcp
     end
 
     def scripts
-      if @charts
-        chart_scripts
-      else
-        %(<script src="#{asset_url('playbook-rails.js')}"></script>)
-      end
+      parts = []
+      parts << if @charts
+                 chart_scripts
+               else
+                 %(<script src="#{asset_url('playbook-rails.js')}"></script>)
+               end
+      # Every kit (tables/cards/layouts/charts): tell @mcp-ui/client the iframe height.
+      parts << %(<script src="#{asset_url('playbook-mcp-resize.js')}"></script>)
+      parts.join("\n")
     end
 
     def chart_scripts

@@ -10,8 +10,10 @@ puts "== button (static HTML) =="
 button_html = renderer.render_kit(kit: "button", props: { "text" => "Submit", "variant" => "primary" })
 raise "button missing pb_button" unless button_html.include?("pb_button")
 raise "fixed viewport height risks LibreChat clip" if button_html.match?(/100vh|height:\s*100%/)
+raise "button missing mcp-ui resize reporter" unless button_html.include?("playbook-mcp-resize.js")
 
 puts "ok (#{button_html.bytesize} bytes)"
+
 
 puts "== table + JS hydration hooks (iframe-JS risk) =="
 table_children = <<~HTML
@@ -28,8 +30,10 @@ raise "table missing playbook.css" unless table_html.include?("/assets/playbook.
 raise "table missing version-stamped assets" unless table_html.include?("?v=")
 raise "table missing playbook-rails.js (needed in sandboxed iframe)" unless table_html.include?("playbook-rails.js")
 raise "table missing data-pb-table-wrapper for JS hydrate" unless table_html.include?("data-pb-table-wrapper")
+raise "table missing mcp-ui resize reporter" unless table_html.include?("playbook-mcp-resize.js")
 
 puts "ok (#{table_html.bytesize} bytes) — verify collapse/responsive in LibreChat iframe"
+
 
 puts "== chart mount markup =="
 chart_html = renderer.render_kit(

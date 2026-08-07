@@ -35,9 +35,4 @@ if [[ ! -s "$OUT" ]]; then
   exit 1
 fi
 
-if ! grep -q 'ui-size-change' "$OUT"; then
-  echo "ERROR: chart bundle missing ui-size-change reporter (required for mcp-ui iframe resize)" >&2
-  exit 1
-fi
-
 ls -la "$OUT"
