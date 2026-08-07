@@ -1,0 +1,75 @@
+---
+description: Prefer less reusable code, clear names, performance, and no DS regressions
+alwaysApply: true
+---
+
+# Readable, reusable, safe code
+
+This is a **design system**: changes ship to many apps. Write the smallest clear solution, keep it fast, and do not break existing kit behavior or public APIs.
+
+## Prefer
+
+- **Less code** — solve the request without extra abstractions, wrappers, or “just in case” options
+- **Reuse** — extend helpers, utilities, and patterns already in the repo before adding parallel ones
+- **Readable names** — functions/variables that say what they do (`getLocallyImportedNames`, not `gln` / `processStuff`)
+- **Straight-line logic** — early returns and small helpers over deep nesting
+- **One job per function** — extract only when it improves clarity or reuse
+- **Performance-aware** — avoid unnecessary re-renders, rebuilds, bundle weight, or work on hot paths (kit render, table cells, context, CSS in the main bundle)
+- **Regression-safe** — preserve public props, defaults, classnames, and documented behavior unless the change is an intentional breaking change
+
+## Avoid
+
+- Clever one-liners that hide intent
+- Duplicating nearby logic with slight renames
+- Vague names (`data`, `util`, `helper`, `temp`, `handleThing`)
+- Premature abstraction (generic frameworks for a one-off)
+- Comments that restate the code — comment only non-obvious *why*
+- Eager work for optional features (load/register only when used)
+- Silent behavior changes in shared kits “while you’re here”
+
+## Design system bar
+
+Before finishing a kit or shared utility change, check:
+
+1. **API** — existing consumers keep working (props, slots, CSS hooks, import paths)
+2. **Perf** — no extra cost on the default/common path; gate heavy deps and expensive setup
+3. **Tests / docs** — cover new behavior; update playground/docs when usage changes
+4. **Scope** — Rails and React both considered when the kit spans platforms
+
+## Examples
+
+```ts
+// Bad — vague + duplicated filtering
+const items = list.filter((x) => !!x)
+const more = other.filter((y) => !!y)
+
+// Good — named intent + reuse
+const present = <T,>(value: T | null | undefined): value is T => value != null
+const items = list.filter(present)
+const more = other.filter(present)
+```
+
+```ts
+// Bad — always pay for an optional feature
+useVirtualizer({ count: enabled ? n : 0 /* hook still always runs */ })
+
+// Good — only mount heavy setup when the feature is on (via a child tree, not conditional hooks)
+{enabled ? <VirtualizedProvider>{children}</VirtualizedProvider> : children}
+```
+
+## Match local style on new / changed lines
+
+Agents often miss small-but-required local conventions. For every line you add or edit, match the surrounding file — do not invent a parallel style.
+
+Typical kit patterns (confirm in the file you are editing):
+
+- **Indentation / wrapping** — same indent width and multiline break style as neighbors (JSX props, destructuring, `classnames(` lists)
+- **Alphabetical prop / key order** — type fields, destructuring, and JSX attributes usually sorted alphabetically (see kits like `pb_badge/_badge.tsx`)
+- **Quote / trailing style** — match single vs double quotes and trailing commas already used in that file
+- **`className` last** in React `classnames(buildCss(...), globalProps(props), className)`
+
+Before finishing, skim your diff: indentation, prop order, and list order should look like the rest of the file.
+
+## Balance with minimal diffs
+
+Do not refactor untouched code for style. Apply readability **and** local style only to **new and changed** code; keep unrelated lines alone ([`minimal-diffs.mdc`](minimal-diffs.mdc)).
