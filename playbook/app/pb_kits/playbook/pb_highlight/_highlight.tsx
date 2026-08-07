@@ -1,9 +1,8 @@
-/* eslint-disable react/no-multi-comp, flowtype/space-before-type-colon */
-import Highlighter from 'react-highlight-words'
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
-import { buildHtmlProps } from '../utilities/props'
+import { buildDataProps, buildHtmlProps } from '../utilities/props'
+import { findHighlightChunks } from './_highlightChunks'
 
 type HighlightProps = {
   className?: string,
@@ -26,20 +25,39 @@ const Highlight = (props: HighlightProps): React.ReactElement => {
     text = '',
   } = props
 
+  const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const highlightContent: any = text || children;
+  const highlightContent: string = (text || children || '') as string
+  const highlightClassName = classnames(globalProps(props), className)
+  const chunks = findHighlightChunks(highlightContent, highlightedText)
 
   return (
-    <Highlighter
-        autoEscape
-        data={data}
-        highlightClassName={classnames(globalProps(props), className)}
-        highlightTag="mark"
-        id={id}
-        searchWords={highlightedText}
-        textToHighlight={highlightContent}
+    <span
+        {...dataProps}
         {...htmlProps}
-    />
+        id={id}
+    >
+      {chunks.map((chunk, index) => {
+        const chunkText = highlightContent.substring(chunk.start, chunk.end)
+
+        if (chunk.highlight) {
+          return (
+            <mark
+                className={highlightClassName}
+                key={index}
+            >
+              {chunkText}
+            </mark>
+          )
+        }
+
+        return (
+          <span key={index}>
+            {chunkText}
+          </span>
+        )
+      })}
+    </span>
   )
 }
 
