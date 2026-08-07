@@ -2,7 +2,7 @@
   <%= object.render_svg %>
 <% elsif object.valid_emoji? %>
   <span class="pb_icon_kit_emoji">
-    <%= object.icon.html_safe %>
+    <%= object.icon %>
   </span>
 <% else %>
   <%= pb_content_tag(:i) do %>
