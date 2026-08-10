@@ -1,11 +1,11 @@
 [class^=pb_table] {
   &.vertical-border {
     td, th, .pb_table_td, .pb_table_th {
-      border-right: 1px solid $border_light !important;
+      border-right: 1px solid var(--column-border-color, #{$border_light}) !important;
     }
 
     thead tr:not(:first-child) th {
-      border-right: 1px solid $border_light !important;
+      border-right: 1px solid var(--column-border-color, #{$border_light}) !important;
     }
 
     // **Advanced Table** specific rules to eliminate double borders when vertical-border is active

@@ -57,3 +57,4 @@ export { default as AdvancedTableSortParentOnly } from './_advanced_table_sort_p
 export { default as AdvancedTableSkippingSubrowHeaders } from './_advanced_table_skipping_subrow_headers.jsx'
 export { default as AdvancedTablePinnedRowsBottom } from './_advanced_table_pinned_rows_bottom.jsx'
 export { default as AdvancedTablePinnedRowsBoth } from './_advanced_table_pinned_rows_both.jsx'
+export { default as advancedTableContrastBorder } from './_advanced_table_contrast_border.jsx'
