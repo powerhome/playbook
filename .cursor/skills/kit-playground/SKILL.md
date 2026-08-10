@@ -67,9 +67,11 @@ cd playbook && yarn generate:playground-configs --kit=<kit_name> --overwrite
 
 ### 3. Website allowlist
 
-If the Playground tab should show the kit, add it in:
+If the Playground tab should show the kit, add the kit name to `PLAYGROUND_ENABLED_KITS` in:
 
-`playbook-website/app/javascript/components/Website/src/pages/KitShow/index.tsx`
+`playbook-website/app/javascript/components/Website/src/pages/KitShow/playgroundEnabledKits.ts`
+
+(`KitShow/index.tsx` only checks that list; it is not where the allowlist is defined.)
 
 ### 4. Patterns to prefer
 
@@ -97,7 +99,7 @@ Presets should show real usage, not every prop combo.
 
 - [ ] Overrides JSON valid
 - [ ] `_playground.json` regenerated
-- [ ] Allowlisted if user-facing
+- [ ] Added to `PLAYGROUND_ENABLED_KITS` in `playgroundEnabledKits.ts` if user-facing
 - [ ] Presets / required data / wrappers correct
 - [ ] `git diff --check` clean
 
