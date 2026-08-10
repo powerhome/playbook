@@ -1,5 +1,5 @@
 ---
-description: Prefer less reusable code, clear names, performance, and no DS regressions
+description: Prefer less code, reuse existing helpers, clear names, performance, and no DS regressions
 alwaysApply: true
 ---
 
