@@ -236,7 +236,7 @@
   .pb_advanced_table_header {
     > tr:not(:first-child) {
       .last-header-cell {
-        border-right: 1px solid var(--column-border-color) !important;
+        border-right: 1px solid $border_light !important;
       }
       th {
         border-radius: 0px !important;
@@ -247,7 +247,7 @@
       }
     }
     th[colspan]:not([colspan="1"]) {
-      border-right: 1px solid var(--column-border-color) !important;
+      border-right: 1px solid $border_light !important;
     }
     .table-header-cells-custom {
       text-align: center;
@@ -296,7 +296,7 @@
   .pb_advanced_table_body {
     tr {
       .last-cell:not(:last-of-type) {
-        border-right: 1px solid var(--column-border-color) !important;
+        border-right: 1px solid $border_light !important;
       }
     }
     tr td:first-child {
@@ -506,7 +506,7 @@
 
   // Color for collapsible trail
   .collapsible-trail {
-    background-color: var(--table-border-color, #{$border_light}) !important;
+    background-color: $border_light !important;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -514,9 +514,8 @@
   }
 
   // Make sure all horizontal borders use the default border color
-  // Respects Table's contrastBorder via --table-border-color when set through tableProps
   tr, th, td {
-    border-bottom-color: var(--table-border-color, #{$border_light}) !important;
+    border-bottom-color: $border_light !important;
   }
 
   // Apply border colors when columnGroupBorderColor is set
@@ -576,12 +575,11 @@
   }
 
   // Restore vertical border styling when verticalBorder is true
-  .pb_table[data-vertical-border="true"],
-  .pb_table.vertical-border {
+  .pb_table[data-vertical-border="true"] {
     .pb_advanced_table_header {
       > tr:not(:first-child) {
         th:not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
+          border-right: 1px solid $border_light !important;
         }
       }
     }
@@ -589,13 +587,13 @@
     .pb_advanced_table_body {
       td:not(:last-child),
       .pb_table_td:not(:last-child) {
-        border-right: 1px solid var(--column-border-color) !important;
+        border-right: 1px solid $border_light !important;
       }
     }
 
     tr.virtualized-table-row {
       td:not(:last-child) {
-        border-right: 1px solid var(--column-border-color) !important;
+        border-right: 1px solid $border_light !important;
       }
     }
 
@@ -1059,13 +1057,13 @@
     .pb_advanced_table_header {
       th[colspan]:not([colspan="1"]):not(:last-child) {
         border-right: none !important;
-        box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+        box-shadow: 1px 0 0 0 $border_light !important;
       }
 
       .last-header-cell:not(:last-child),
       > tr:last-child .last-header-cell:not(:last-child) {
         border-right: none !important;
-        box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+        box-shadow: 1px 0 0 0 $border_light !important;
       }
     }
 
@@ -1074,7 +1072,7 @@
       td.last-cell:not(:last-child),
       .pb_table_td.last-cell:not(:last-child) {
         border-right: none !important;
-        box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+        box-shadow: 1px 0 0 0 $border_light !important;
       }
     }
 
@@ -1180,7 +1178,7 @@
     .pb_advanced_table_body .last-cell:not(:last-child),
     .pb_advanced_table_header .last-header-cell:not(:last-child) {
       box-shadow: none !important;
-      border-right: 1px solid var(--column-border-color) !important;
+      border-right: 1px solid $border_light !important;
     }
 
     // Dark mode
