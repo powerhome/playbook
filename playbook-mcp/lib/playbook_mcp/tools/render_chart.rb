@@ -62,9 +62,9 @@ module PlaybookMcp
 
           # Fresh Renderer per call — shared ActionView context is not thread-safe.
           html = PlaybookMcp::Renderer.new.render_kit(kit: resolved, props: kit_props)
-          ui = McpUiServer.create_ui_resource(
+          ui = PlaybookMcp::UiResource.build(
             uri: "ui://playbook/chart/#{resolved}/#{SecureRandom.hex(6)}",
-            content: { type: :raw_html, htmlString: html }
+            html: html
           )
           MCP::Tool::Response.new([
                                     { type: "text", text: "Rendered Playbook chart '#{resolved}'." },

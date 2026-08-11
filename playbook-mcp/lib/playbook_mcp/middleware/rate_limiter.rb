@@ -11,7 +11,7 @@ module PlaybookMcp
 
       def call(env)
         path = env["PATH_INFO"].to_s
-        return @app.call(env) if path.start_with?("/health") || path.start_with?("/assets")
+        return @app.call(env) if path.start_with?("/health") || path.start_with?("/assets") || path.start_with?("/ui/")
 
         max = Rails.application.config.playbook_mcp.rate_limit_max
         window = Rails.application.config.playbook_mcp.rate_limit_window

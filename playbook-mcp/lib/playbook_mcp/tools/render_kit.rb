@@ -32,9 +32,9 @@ module PlaybookMcp
         def call(kit:, props: nil, children: nil, server_context: nil) # rubocop:disable Lint/UnusedMethodArgument
           # Fresh Renderer per call — shared ActionView context is not thread-safe.
           html = PlaybookMcp::Renderer.new.render_kit(kit: kit, props: props || {}, children: children)
-          ui = McpUiServer.create_ui_resource(
+          ui = PlaybookMcp::UiResource.build(
             uri: "ui://playbook/kit/#{kit}/#{SecureRandom.hex(6)}",
-            content: { type: :raw_html, htmlString: html }
+            html: html
           )
           MCP::Tool::Response.new([
                                     { type: "text", text: "Rendered Playbook kit '#{kit}'." },

@@ -19,8 +19,11 @@ module PlaybookMcp
           Prefer list_kits / get_kit_schema before rendering an unfamiliar kit — don't guess prop names.
           Use render_layout to compose multiple kits into ONE document (one inline panel);
           render_kit for a single component; render_chart for charts.
-          Kit ids are snake_case (card, table, stat_value, badge, section_separator, …);
+          Kit ids are snake_case (card, table, icon_stat_value, badge, section_separator, …);
           props are camelCase from the dist/ai schemas.
+          Icon names must be valid @powerhome/playbook-icons ids (kebab-case, e.g. chart-line,
+          users, cart-shopping, currency-dollar). Call list_icons to discover or filter names —
+          unknown icons render as empty circles (no Font Awesome webfont in MCP docs).
           Composition kits (card, table) accept a sanitized HTML children string.
           For charts (pb_bar_graph, pb_line_graph, pb_gauge_chart, pb_circle_chart),
           pass the Highcharts config verbatim under props.options — real Highcharts keys
@@ -29,6 +32,7 @@ module PlaybookMcp
         INSTRUCTIONS
         tools: [
           PlaybookMcp::Tools::ListKits,
+          PlaybookMcp::Tools::ListIcons,
           PlaybookMcp::Tools::GetKitSchema,
           PlaybookMcp::Tools::RenderKit,
           PlaybookMcp::Tools::RenderLayout,

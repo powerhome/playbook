@@ -18,15 +18,18 @@ module PlaybookMcp
     # Playbook Icon kit inlines SVGs when these are set (same pattern as playbook-website).
     # Without them, icons fall back to Font Awesome <i> classes with no webfont in the
     # MCP document — which shows up as empty colored circles in icon_stat_value / icon_circle.
-    config.icon_path = if Rails.env.development?
-                         "../node_modules/@powerhome/playbook-icons/icons"
-                       else
+    # Production image vendors icons; local/dev/test fall back to monorepo node_modules.
+    vendor_icons = root.join("vendor/playbook-icons/icons")
+    vendor_aliases = root.join("vendor/playbook-icons/aliases.json")
+    config.icon_path = if Rails.env.production? || vendor_icons.exist?
                          "vendor/playbook-icons/icons"
+                       else
+                         "../node_modules/@powerhome/playbook-icons/icons"
                        end
-    config.icon_alias_path = if Rails.env.development?
-                               "../node_modules/@powerhome/playbook-icons/aliases.json"
-                             else
+    config.icon_alias_path = if Rails.env.production? || vendor_aliases.exist?
                                "vendor/playbook-icons/aliases.json"
+                             else
+                               "../node_modules/@powerhome/playbook-icons/aliases.json"
                              end
 
     # version.rb defines PlaybookMcp::VERSION (not ::Version); require it manually.

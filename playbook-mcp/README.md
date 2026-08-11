@@ -4,6 +4,8 @@ Hosted MCP-UI render server for Playbook. Renders kits server-side via `pb_rails
 
 Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from this service’s `/assets` (gem `dist/` + `fonts/`) with **permissive CORS** (`Access-Control-Allow-Origin: *`) so sandboxed MCP-UI iframes with opaque origin can load web fonts. Icons are inlined as SVG from `@powerhome/playbook-icons` (configured via `icon_path` / `icon_alias_path`; vendored into the image at `vendor/playbook-icons/`) — not Font Awesome webfonts. Charts load one self-contained IIFE (`bin/vendor_chart_peers` → `/assets/vendor/playbook-charts.js`) — no importmap / jsDelivr `/+esm`.
 
+When `PLAYBOOK_MCP_ASSET_BASE_URL` is an absolute origin, render tools return MCP-UI **`external_url`** pointing at ephemeral `/ui/:id` HTML (TTL ~15m). That keeps large inline-SVG dashboards out of the tool-result payload so hosts like LibreChat do not truncate mid-document. Without an absolute base (local smoke), tools fall back to `rawHtml`.
+
 Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standalone SSE.
 
 ## Tools
@@ -11,6 +13,7 @@ Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standa
 | Tool | Purpose |
 |------|---------|
 | `list_kits` | Discover rails-renderable kits from `dist/ai` |
+| `list_icons` | Discover valid kebab-case icon ids (`chart-line`, `users`, …) |
 | `get_kit_schema` | Kit schema + slim playground (conditionals, hints, structureModes) |
 | `render_kit` | Validate + render one kit → MCP-UI HTML |
 | `render_layout` | Compose multiple kits into one HTML document |
@@ -98,7 +101,9 @@ Review stacks set `PLAYBOOK_MCP_ALLOWLIST=*` because **PR hosts are VPN-only** a
 | `PLAYBOOK_MCP_RATE_LIMIT_MAX` | `60` | Max MCP requests per window per IP |
 | `PLAYBOOK_MCP_RATE_LIMIT_WINDOW` | `60` | Window seconds |
 | `PLAYBOOK_MCP_MAX_PROPS_BYTES` | `65536` | Max props+children JSON/HTML bytes |
-| `PLAYBOOK_MCP_ASSET_BASE_URL` | relative `/assets` | Absolute origin for iframe asset URLs |
+| `PLAYBOOK_MCP_ASSET_BASE_URL` | relative `/assets` | Absolute origin for iframe assets + `/ui/:id` external_url |
+| `PLAYBOOK_MCP_RENDER_TTL_SECONDS` | `900` | Ephemeral `/ui/:id` HTML lifetime |
+| `PLAYBOOK_MCP_RENDER_MAX_ENTRIES` | `256` | Max in-memory rendered documents |
 | `SECRET_KEY_BASE` | dev default only | **Required in production** (boot fails if missing) |
 | `PORT` | `3099` | Puma port |
 

@@ -31,6 +31,26 @@ RSpec.describe "MCP tools" do
     expect(ui.dig(:resource, :uri) || ui.dig("resource", "uri")).to start_with("ui://playbook/kit/table/")
   end
 
+  it "list_icons returns playbook-icons names" do
+    skip "icon_path not configured" unless PlaybookMcp::IconCatalog.available?
+
+    response = PlaybookMcp::Tools::ListIcons.call(**deliver(query: "chart"), server_context: nil)
+    expect(response.error?).to be(false)
+    payload = JSON.parse(response.content.first[:text])
+    expect(payload["icons"]).to include("chart-line")
+  end
+
+  it "icon_stat_value inlines SVG without XML prolog" do
+    skip "icon_path not configured" unless PlaybookMcp::IconCatalog.available?
+
+    html = PlaybookMcp::Renderer.new.render_kit(
+      kit: "icon_stat_value",
+      props: { "icon" => "chart-line", "text" => "Revenue", "value" => 1 }
+    )
+    expect(html).to include("<svg")
+    expect(html).not_to include("<?xml")
+  end
+
   it "render_chart maps bar to pb_bar_graph" do
     response = PlaybookMcp::Tools::RenderChart.call(
       **deliver(type: "bar", options: { series: [{ data: [1, 2, 3] }] }),

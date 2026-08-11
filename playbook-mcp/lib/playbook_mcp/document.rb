@@ -17,6 +17,7 @@ module PlaybookMcp
     def to_html
       # Keep free of 100vh / fixed viewport heights — LibreChat auto-resizes
       # the MCP-UI iframe to content height; fixed heights clip.
+      body = HtmlPostprocess.clean(@body_html)
       <<~HTML
         <!DOCTYPE html>
         <html lang="en">
@@ -28,7 +29,7 @@ module PlaybookMcp
           <link rel="stylesheet" href="#{asset_url('playbook.css')}" />
         </head>
         <body style="margin:0;padding:16px;background:#fff;">
-          #{@body_html}
+          #{body}
           #{scripts}
         </body>
         </html>

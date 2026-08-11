@@ -78,4 +78,10 @@ RSpec.describe PlaybookMcp::Middleware::SharedSecret do
     )
     expect(status).to eq(200)
   end
+
+  it "allows /ui without key so browser iframes can load external_url" do
+    allow(Rails.application.config.playbook_mcp).to receive(:shared_secret).and_return("s3cret")
+    status, = described_class.new(app).call("PATH_INFO" => "/ui/abc", "rack.input" => StringIO.new)
+    expect(status).to eq(200)
+  end
 end

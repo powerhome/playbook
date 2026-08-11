@@ -16,7 +16,8 @@ module PlaybookMcp
         return @app.call(env) if secret.blank?
 
         path = env["PATH_INFO"].to_s
-        return @app.call(env) if path.start_with?("/health") || path.start_with?("/assets")
+        # /ui/* is loaded by the browser iframe (no custom headers); /assets likewise.
+        return @app.call(env) if path.start_with?("/health") || path.start_with?("/assets") || path.start_with?("/ui/")
 
         provided = env[HEADER].to_s
         authorized = provided.bytesize == secret.bytesize &&
