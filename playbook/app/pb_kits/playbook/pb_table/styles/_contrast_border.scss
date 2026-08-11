@@ -7,6 +7,7 @@
   &.contrast-border {
     --table-border-color: #{$input_border_default_dark};
     --column-border-color: #{$input_border_default_dark};
+    --table-border-hover-color: #{darken($input_border_default_dark, 10%)};
     $contrast_border_hover_color: darken($input_border_default_dark, 10%);
 
     td, th, .pb_table_td, .pb_table_th {
@@ -51,4 +52,11 @@
       }
     }
   }
+}
+
+// Scroll wrapper owns the outer left/right edges; inherit contrast color from the nested table
+.table-responsive-scroll:has(> [class^=pb_table].contrast-border) {
+  --table-border-color: #{$input_border_default_dark};
+  --column-border-color: #{$input_border_default_dark};
+  --table-border-hover-color: #{darken($input_border_default_dark, 10%)};
 }

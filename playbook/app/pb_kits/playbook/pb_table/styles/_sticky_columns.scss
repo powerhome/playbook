@@ -14,7 +14,7 @@
     }
 
     .with-border-right {
-        border-right: 1px solid $border_light !important;
+        border-right: 1px solid var(--table-border-color, #{$border_light}) !important;
         left: 0;
     }
 
@@ -25,7 +25,7 @@
     }
 
     .with-border-left {
-        border-left: 1px solid $border_light !important;
+        border-left: 1px solid var(--table-border-color, #{$border_light}) !important;
         right: 0;
     }
 }
