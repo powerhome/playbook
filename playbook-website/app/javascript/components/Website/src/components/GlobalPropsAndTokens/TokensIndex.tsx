@@ -46,10 +46,18 @@ const Tokens = () => {
         maxWidth="lg"
       >
         <Title size={1} text="Tokens" marginBottom="sm" />
-        <Body text="Tokens are reusable values that define core design elements like colors, typography, and spacing. They provide consistency across components and Global Props, ensuring scalable and cohesive design throughout the application." />
+        <Body>
+          Tokens are reusable values that define core design elements like colors, typography, and spacing. They provide consistency across components and Global Props, ensuring scalable and cohesive design throughout the application. See{" "}
+          <RouterLink to="/tokens/using_tokens">Using Tokens</RouterLink>
+          {" "}for how to import and consume token exports in React and Rails.
+        </Body>
         <Layout layout="collection" marginY="xl" paddingBottom="xl">
           <Layout.Body>
-            {TokenCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => (
+            {TokenCards.sort((a, b) => {
+              if (a.link === "/tokens/using_tokens") return -1;
+              if (b.link === "/tokens/using_tokens") return 1;
+              return a.title.localeCompare(b.title);
+            }).map(({ title, description, link, icon }) => (
               <RouterLink key={title} to={link} style={linkStyle}>
                 <Card padding="none" hover={{ shadow: "deep" }} flex={1}>
                   <Background backgroundColor="light">

@@ -7,7 +7,8 @@ export type SyntaxLanguage =
   | "tsx"
   | "markup"
   | "erb"
-  | "ruby";
+  | "ruby"
+  | "scss";
 
 type SyntaxHighlightedCodeProps = {
   code: string;
