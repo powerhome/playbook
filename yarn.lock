@@ -10482,10 +10482,10 @@ react-fast-compare@^3.0.1:
   resolved "https://npm.powerapp.cloud/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-hook-form@^7.28.1:
-  version "7.54.2"
-  resolved "https://npm.powerapp.cloud/react-hook-form/-/react-hook-form-7.54.2.tgz#8c26ed54c71628dff57ccd3c074b1dd377cfb211"
-  integrity sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==
+react-hook-form@^7.85.0:
+  version "7.85.0"
+  resolved "https://npm.powerapp.cloud/react-hook-form/-/react-hook-form-7.85.0.tgz#45b95cc794f9ed752ffc9121cc6ddcc92e97acf0"
+  integrity sha512-U2MTriFXnclmV4rOE20p2DcRFv5WEg3FIcBFOKcOLFHDVvGIMPvLTkTWefUsonmlaVy23khVDxDWym6uJVGOzw==
 
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
