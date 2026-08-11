@@ -86,13 +86,18 @@ export const OtherNavItems = ({
 
   const tokensMenu =
     global_props_and_tokens?.tokens
-      ?.map((item: Record<string, any>) => ({
+      ?.map((item: string) => ({
         name: item
           .replace(/_/g, " ")
           .replace(/\b\w/g, (char: string) => char.toUpperCase()),
         link: createLink(`/tokens/${item}`),
+        itemKey: item,
       }))
-      .sort((a, b) => a.name.localeCompare(b.name)) || [];
+      .sort((a, b) => {
+        if (a.itemKey === "using_tokens") return -1;
+        if (b.itemKey === "using_tokens") return 1;
+        return a.name.localeCompare(b.name);
+      }) || [];
 
   if (name === "Global Props") {
     menuItems = globalPropsMenu;
