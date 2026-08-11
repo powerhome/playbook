@@ -121,7 +121,12 @@ const UsingTokens = () => {
           <Body text="JS maps import from playbook-ui. Ruby helpers are available for colors; other token sets will follow." />
           <PropsExamplesTable
             firstColumnBold={false}
-            headers={["Token Set", "JS", "Ruby", "Values"]}
+            headers={[
+              "Token Set",
+              <div key="js" style={{ width: 360 }}>JS</div>,
+              "Ruby",
+              "Values",
+            ]}
             rows={TOKEN_EXPORTS.map(({ tokenSet, jsImport, rubyAccess, valuesPath }) => [
               <Title key={`${jsImport}-set`} size={4}>{tokenSet}</Title>,
               <ExampleCodeCard
