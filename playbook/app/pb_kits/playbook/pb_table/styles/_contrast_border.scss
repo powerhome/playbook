@@ -1,0 +1,25 @@
+@import "../../tokens/colors";
+
+[class^=pb_table] {
+  --table-border-color: #{$border_light};
+
+  &.contrast-border {
+    --table-border-color: #{$input_border_default_dark};
+    --column-border-color: #{$input_border_default_dark};
+
+    td, th, .pb_table_td, .pb_table_th {
+      border-color: var(--table-border-color) !important;
+    }
+
+    &.vertical-border {
+      td, th, .pb_table_td, .pb_table_th {
+        border-right-color: var(--table-border-color) !important;
+      }
+
+      thead tr:not(:first-child) th,
+      .pb_table_thead .pb_table_tr:not(:first-child) .pb_table_th {
+        border-right-color: var(--table-border-color) !important;
+      }
+    }
+  }
+}

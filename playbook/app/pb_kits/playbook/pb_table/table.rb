@@ -29,6 +29,8 @@ module Playbook
                                  default: []
       prop :vertical_border, type: Playbook::Props::Boolean,
                              default: false
+      prop :contrast_border, type: Playbook::Props::Boolean,
+                             default: false
       prop :striped, type: Playbook::Props::Boolean,
                      default: false
       prop :tag, type: Playbook::Props::Enum,
@@ -66,7 +68,7 @@ module Playbook
         generate_classname(
           "pb_table", "table-#{size_class}", single_line_class, dark_class,
           disable_hover_class, container_class, data_table_class, sticky_class, sticky_left_column_class,
-          sticky_right_column_class, collapse_class, vertical_border_class, striped_class, outer_padding_class,
+          sticky_right_column_class, collapse_class, vertical_border_class, contrast_border_class, striped_class, outer_padding_class,
           "table-responsive-#{responsive}", header_style_class, separator: " "
         )
       end
@@ -143,6 +145,10 @@ module Playbook
 
       def vertical_border_class
         vertical_border ? "vertical-border" : nil
+      end
+
+      def contrast_border_class
+        contrast_border ? "contrast-border" : nil
       end
 
       def outer_padding_class

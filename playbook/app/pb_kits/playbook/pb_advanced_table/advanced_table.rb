@@ -31,8 +31,6 @@ module Playbook
                      default: []
       prop :scroll_bar_none, type: Playbook::Props::Boolean,
                              default: false
-      prop :contrast_border, type: Playbook::Props::Boolean,
-                             default: false
       prop :row_styling, type: Playbook::Props::Array,
                          default: []
       prop :inline_row_loading, type: Playbook::Props::Boolean,
@@ -53,7 +51,6 @@ module Playbook
           sticky_header_class,
         ]
         additional_classes << "column-group-border-#{column_group_border_color}" if column_group_border_color != "none"
-        additional_classes << "contrast_border" if contrast_border
         additional_classes << "advanced-table-no-table-container" if no_table_card_container?
         generate_classname("pb_advanced_table", *additional_classes, separator: " ")
       end

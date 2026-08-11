@@ -23,7 +23,6 @@ import { updateStickyLayoutHeights, scheduleStickyActionBarHeightUpdate } from "
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
   actions?: React.ReactNode[] | React.ReactNode
-  contrastBorder?: boolean
   cascadeCollapse?: boolean
   children?: React.ReactNode | React.ReactNode[]
   className?: string
@@ -86,7 +85,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const {
     aria = {},
     actions,
-    contrastBorder = false,
     cascadeCollapse = false,
     children,
     className,
@@ -255,7 +253,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     { 'advanced-table-no-table-container': noTableCardContainer },
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
     scrollBarNone ? 'advanced-table-hide-scrollbar' : '',
-    contrastBorder ? `contrast_border` : '',
     globalProps(props),
     className
   );

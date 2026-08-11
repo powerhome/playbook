@@ -7,7 +7,6 @@
     "subRowHeaders": "AdvancedTable.Body.props"
   },
   "defaults": {
-    "contrastBorder": false,
     "columnGroupBorderColor": "none",
     "enableToggleExpansion": "header",
     "fullWidthCell": false,

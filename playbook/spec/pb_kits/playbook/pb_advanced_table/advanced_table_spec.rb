@@ -33,7 +33,6 @@ RSpec.describe Playbook::PbAdvancedTable::AdvancedTable do
   it { is_expected.to define_boolean_prop(:show_actions_bar).with_default(true) }
   it { is_expected.to define_array_prop(:actions).with_default([]) }
   it { is_expected.to define_boolean_prop(:scroll_bar_none).with_default(false) }
-  it { is_expected.to define_boolean_prop(:contrast_border).with_default(false) }
   it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
   it { is_expected.to define_boolean_prop(:full_width_cell).with_default(false) }
   it { is_expected.to define_boolean_prop(:persist_toggle_expansion_button).with_default(false) }
@@ -70,13 +69,6 @@ RSpec.describe Playbook::PbAdvancedTable::AdvancedTable do
       it "adds hide scrollbar class when true", :aggregate_failures do
         expect(subject.new(scroll_bar_none: true).classname).to include "advanced-table-hide-scrollbar"
         expect(subject.new(scroll_bar_none: false).classname).not_to include "advanced-table-hide-scrollbar"
-      end
-    end
-
-    context "contrast_border prop" do
-      it "adds contrast_border class when true", :aggregate_failures do
-        expect(subject.new(contrast_border: true).classname).to include "contrast_border"
-        expect(subject.new(contrast_border: false).classname).not_to include "contrast_border"
       end
     end
 

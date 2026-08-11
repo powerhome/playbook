@@ -1,6 +1,5 @@
 examples:
   rails:
-  - advanced_table_contrast_border: Dark Row Border
   - advanced_table_beta: Default (Required Props)
   - advanced_table_loading: Loading State
   - advanced_table_beta_subrow_headers: SubRow Headers
@@ -41,7 +40,6 @@ examples:
 
 
   react:
-  - advanced_table_contrast_border: Dark Row Border
   - advanced_table_default: Default (Required Props)
   - advanced_table_sort: Enable Sorting
   - advanced_table_sort_control: Sort Control

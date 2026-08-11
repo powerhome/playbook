@@ -14,14 +14,6 @@
         "rails"
       ]
     },
-    "contrastBorder": {
-      "type": "boolean",
-      "platforms": [
-        "react",
-        "rails"
-      ],
-      "default": false
-    },
     "cascadeCollapse": {
       "type": "boolean",
       "platforms": [
