@@ -11,7 +11,6 @@ import {
 type TokenExportRow = {
   tokenSet: string;
   jsImport: string;
-  sassImport: string;
   rubyAccess?: string;
   valuesPath: string;
 };
@@ -20,62 +19,52 @@ const TOKEN_EXPORTS: TokenExportRow[] = [
   {
     tokenSet: "Border Radius",
     jsImport: "borderRadius",
-    sassImport: "playbook-ui/dist/tokens/border_radius",
     valuesPath: "/tokens/border_radius",
   },
   {
     tokenSet: "Colors",
     jsImport: "colors",
-    sassImport: "playbook-ui/dist/tokens/colors",
     rubyAccess: "Playbook::Tokens.colors",
     valuesPath: "/tokens/colors",
   },
   {
     tokenSet: "Line Height",
     jsImport: "lineHeight",
-    sassImport: "playbook-ui/dist/tokens/line_height",
     valuesPath: "/tokens/line_height",
   },
   {
     tokenSet: "Opacity",
     jsImport: "opacity",
-    sassImport: "playbook-ui/dist/tokens/opacity",
     valuesPath: "/tokens/opacity",
   },
   {
     tokenSet: "Positioning",
     jsImport: "positioning",
-    sassImport: "playbook-ui/dist/tokens/positioning",
     valuesPath: "/tokens/position",
   },
   {
     tokenSet: "Scale",
     jsImport: "scale",
-    sassImport: "playbook-ui/dist/tokens/scale",
     valuesPath: "/tokens/scale",
   },
   {
     tokenSet: "Screen Sizes",
     jsImport: "screenSizes",
-    sassImport: "playbook-ui/dist/tokens/screen_sizes",
     valuesPath: "/tokens/screen_sizes",
   },
   {
     tokenSet: "Shadows",
     jsImport: "shadows",
-    sassImport: "playbook-ui/dist/tokens/shadows",
     valuesPath: "/tokens/shadow",
   },
   {
     tokenSet: "Spacing",
     jsImport: "spacing",
-    sassImport: "playbook-ui/dist/tokens/spacing",
     valuesPath: "/tokens/spacing",
   },
   {
     tokenSet: "Typography",
     jsImport: "typography",
-    sassImport: "playbook-ui/dist/tokens/typography",
     valuesPath: "/tokens/typography",
   },
 ];
@@ -127,19 +116,28 @@ const UsingTokens = () => {
       title="Using Tokens"
     >
       <Flex flexDirection="column" gap="xl" width="100%">
-        <Flex flexDirection="column" gap="sm" id="available-js-exports" width="100%">
-          <Title size={2} text="Available JS Exports" />
-          <Body text="Import these maps from playbook-ui. Each links to the full value reference." />
+        <Flex flexDirection="column" gap="sm" id="available-token-exports" width="100%">
+          <Title size={2} text="Available Token Exports" />
+          <Body text="JS maps import from playbook-ui. Ruby helpers are available for colors; other token sets will follow." />
           <PropsExamplesTable
             firstColumnBold={false}
-            headers={["Token Set", "Import Name", "Values"]}
-            rows={TOKEN_EXPORTS.map(({ tokenSet, jsImport, valuesPath }) => [
+            headers={["Token Set", "JS", "Ruby", "Values"]}
+            rows={TOKEN_EXPORTS.map(({ tokenSet, jsImport, rubyAccess, valuesPath }) => [
               <Title key={`${jsImport}-set`} size={4}>{tokenSet}</Title>,
               <ExampleCodeCard
-                key={`${jsImport}-import`}
+                key={`${jsImport}-js`}
                 id={`js-export-${jsImport}`}
-                text={jsImport}
+                text={`import { ${jsImport} } from "playbook-ui"`}
               />,
+              rubyAccess ? (
+                <ExampleCodeCard
+                  key={`${jsImport}-ruby`}
+                  id={`ruby-export-${jsImport}`}
+                  text={rubyAccess}
+                />
+              ) : (
+                "—"
+              ),
               <Link key={`${jsImport}-values`} to={valuesPath}>
                 View Tokens
               </Link>,
@@ -157,48 +155,9 @@ const UsingTokens = () => {
           />
         </Flex>
 
-        <Flex flexDirection="column" gap="sm" id="available-rails-exports" width="100%">
-          <Title size={2} text="Available Rails Exports" />
-          <Body text="Import these partials into Sass for stylesheet variables. Ruby helper access is available for colors only." />
-          <PropsExamplesTable
-            firstColumnBold={false}
-            headers={["Token Set", "Sass Import", "Ruby", "Values"]}
-            rows={TOKEN_EXPORTS.map(({ tokenSet, sassImport, rubyAccess, valuesPath, jsImport }) => [
-              <Title key={`${jsImport}-rails-set`} size={4}>{tokenSet}</Title>,
-              <ExampleCodeCard
-                key={`${jsImport}-sass`}
-                id={`sass-export-${jsImport}`}
-                text={sassImport}
-              />,
-              rubyAccess ? (
-                <ExampleCodeCard
-                  key={`${jsImport}-ruby`}
-                  id={`ruby-export-${jsImport}`}
-                  text={rubyAccess}
-                />
-              ) : (
-                "—"
-              ),
-              <Link key={`${jsImport}-rails-values`} to={valuesPath}>
-                View Tokens
-              </Link>,
-            ])}
-          />
-        </Flex>
-
-        <Flex flexDirection="column" gap="sm" id="use-in-rails" width="100%">
-          <Title size={2} text="Use in Rails" />
-          <Body text="In Rails apps, import Playbook token partials into your Sass and use $variables in stylesheets." />
-          <DocCodeSnippet
-            code={RAILS_SASS_EXAMPLE}
-            label="SCSS"
-            language="scss"
-          />
-        </Flex>
-
         <Flex flexDirection="column" gap="sm" id="use-in-ruby-colors" width="100%">
           <Title size={2} text="Use in Ruby (colors)" />
-          <Body text="When you need color values in Ruby (helpers, presenters, etc.), use Playbook::Tokens. Other token sets are not yet exposed; use Sass or JS exports instead." />
+          <Body text="When you need color values in Ruby (helpers, presenters, etc.), use Playbook::Tokens. Note: other token sets are not yet exposed." />
           <DocCodeSnippet
             code={RUBY_EXAMPLE}
             label="RAILS"
@@ -217,10 +176,6 @@ const UsingTokens = () => {
                 <Link key="global-props" to="/global_props">Global Props</Link>,
               ],
               [
-                "Custom CSS in a Rails app",
-                "Token Sass imports (Use in Rails)",
-              ],
-              [
                 "Inline styles or custom React UI",
                 "JS token exports (Use in React / TSX)",
               ],
@@ -233,6 +188,16 @@ const UsingTokens = () => {
                 <Link key="how-to-theme" to="/guides/getting_started/how_to_theme">How to Theme</Link>,
               ],
             ]}
+          />
+        </Flex>
+
+        <Flex flexDirection="column" gap="sm" id="sass-variables-optional" width="100%">
+          <Title size={2} text="Sass variables (optional)" />
+          <Body text="Most Power apps already load Playbook’s bundled CSS and won’t need this. If you’re writing custom SCSS and want token values as $variables, you can import individual partials from playbook-ui/dist/tokens." />
+          <DocCodeSnippet
+            code={RAILS_SASS_EXAMPLE}
+            label="SCSS"
+            language="scss"
           />
         </Flex>
       </Flex>
