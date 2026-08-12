@@ -38,6 +38,23 @@ RSpec.describe PlaybookMcp::Middleware::Allowlist do
     status, = described_class.new(app).call("PATH_INFO" => "/health", "REMOTE_ADDR" => "1.2.3.4")
     expect(status).to eq(200)
   end
+
+  it "allows /assets and /ui from non-allowlisted browser IPs" do
+    allow(Rails.application.config.playbook_mcp).to receive(:allowlist).and_return(["10.0.0.1"])
+    mw = described_class.new(app)
+    expect(mw.call("PATH_INFO" => "/assets/playbook.css", "REMOTE_ADDR" => "1.2.3.4").first).to eq(200)
+    expect(mw.call("PATH_INFO" => "/ui/abc", "REMOTE_ADDR" => "1.2.3.4").first).to eq(200)
+  end
+
+  it "still allowlists /mcp" do
+    allow(Rails.application.config.playbook_mcp).to receive(:allowlist).and_return(["10.0.0.1"])
+    status, = described_class.new(app).call(
+      "PATH_INFO" => "/mcp",
+      "REMOTE_ADDR" => "1.2.3.4",
+      "rack.input" => StringIO.new
+    )
+    expect(status).to eq(403)
+  end
 end
 
 RSpec.describe PlaybookMcp::Middleware::RateLimiter do

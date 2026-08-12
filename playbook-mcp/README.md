@@ -6,6 +6,8 @@ Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from 
 
 When `PLAYBOOK_MCP_ASSET_BASE_URL` is an absolute origin, render tools return MCP-UI **`external_url`** pointing at ephemeral `/ui/:id` HTML (TTL ~15m). That keeps large inline-SVG dashboards out of the tool-result payload so hosts like LibreChat do not truncate mid-document. Without an absolute base (local smoke), tools fall back to `rawHtml`.
 
+`RenderStore` is **process-local memory**, so deploy **`replicas: 1`** until a shared store (Redis/Memcached) exists. Sticky sessions cannot fix this: LibreChat calls `/mcp` and the browser iframe loads `/ui/:id` as a different client.
+
 Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standalone SSE.
 
 ## Tools
@@ -95,7 +97,7 @@ Review stacks set `PLAYBOOK_MCP_ALLOWLIST=*` because **PR hosts are VPN-only** a
 
 | Env | Default | Meaning |
 |-----|---------|---------|
-| `PLAYBOOK_MCP_ALLOWLIST` | empty (dev allow-all) | **Required in production** — comma-separated client IPs |
+| `PLAYBOOK_MCP_ALLOWLIST` | empty (dev allow-all) | **Required in production** — LibreChat/server egress IPs for `/mcp` (`/assets` + `/ui` are exempt for browser iframes) |
 | `PLAYBOOK_MCP_TRUSTED_PROXIES` | unset | Ingress CIDRs for correct `remote_ip` |
 | `PLAYBOOK_MCP_SHARED_SECRET` | unset | If set, require `X-Playbook-Mcp-Key` on `/mcp` |
 | `PLAYBOOK_MCP_RATE_LIMIT_MAX` | `60` | Max MCP requests per window per IP |
@@ -107,7 +109,7 @@ Review stacks set `PLAYBOOK_MCP_ALLOWLIST=*` because **PR hosts are VPN-only** a
 | `SECRET_KEY_BASE` | dev default only | **Required in production** (boot fails if missing) |
 | `PORT` | `3099` | Puma port |
 
-Puma runs with `workers 0` because streamable-http session state is in-memory. Use ingress session affinity (see `config/deploy`).
+Puma runs with `workers 0` because streamable-http session state is in-memory. Deploy `replicas: 1` while `RenderStore` is process-local (see above).
 
 Deploy manifests live under `config/deploy/`. Image build:
 

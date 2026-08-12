@@ -12,7 +12,9 @@ module PlaybookMcp
         return @app.call(env) if allowed.empty?
 
         path = env["PATH_INFO"].to_s
-        return @app.call(env) if path.start_with?("/health")
+        # Browser iframe loads for external_url HTML + CSS/fonts come from
+        # end-user IPs, not LibreChat egress. Keep /mcp behind the allowlist.
+        return @app.call(env) if path.start_with?("/health") || path.start_with?("/assets") || path.start_with?("/ui/")
 
         ip = ClientIp.from_env(env)
         return @app.call(env) if allowed.include?(ip) || allowed.include?("*")

@@ -5,6 +5,10 @@ require "securerandom"
 module PlaybookMcp
   # Short-lived HTML store so MCP-UI can use external_url instead of inlining
   # large htmlString payloads (LibreChat and other hosts truncate tool results).
+  #
+  # Process-local only. Deploy with replicas: 1 until this is backed by a shared
+  # store (Redis/Memcached). /mcp and /ui/:id are different clients, so sticky
+  # sessions cannot keep the GET on the pod that stored the HTML.
   class RenderStore
     Entry = Struct.new(:html, :expires_at, keyword_init: true)
 
