@@ -89,11 +89,11 @@ const RAILS_SASS_EXAMPLE = `@import "playbook-ui/dist/tokens/spacing";
   color: $primary;
 }`;
 
-const RUBY_EXAMPLE = `Playbook::Tokens.colors[:input_text_error]
-# => "#DA0014"
+const RUBY_EXAMPLE = `Playbook::Tokens.colors.primary
+# => "#0056CF"
 
-Playbook::Tokens.colors.status_text_primary
-# => "#0056CF"`;
+Playbook::Tokens.colors.secondary
+# => "#F9BB00"`;
 
 type DocCodeSnippetProps = {
   code: string;
