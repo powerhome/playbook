@@ -744,7 +744,7 @@ export default function Playground() {
             structureModeDropdownOptions={structureModeDropdownOptions}
         />
       </div>
-      <PlaygroundPromptBuilder
+      {/* <PlaygroundPromptBuilder
           clearSignal={promptClearSignal}
           diagnostics={promptDiagnostics}
           hasPreviousIteration={playgroundHistory.length > 0}
@@ -755,7 +755,7 @@ export default function Playground() {
           onRestorePreviousIteration={() => handleRestorePreviousPlaygroundState(true)}
           onSubmit={handlePromptSubmit}
           status={promptStatus}
-      />
+      /> */}
       <div
           aria-hidden
           className="builder-drag-tooltip"
