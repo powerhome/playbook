@@ -1,0 +1,45 @@
+---
+description: Core Playbook monorepo conventions for kit and docs maintainers
+alwaysApply: true
+---
+
+# Playbook repo (maintainers)
+
+This is the design-system monorepo, not a Playbook consumer app. Kit and shared changes must stay **performant** and **regression-safe** — many apps consume this package ([`readable-code.mdc`](readable-code.mdc)).
+
+## Packages
+
+- `playbook/` — kits (React + Rails), tokens, AI schema scripts
+- `playbook-website/` — docs site, `config/menu.yml`, playground UI
+- Repo root — `yarn generate:docs-metadata`, setup/run scripts
+
+## Generated files (do not hand-edit)
+
+Edit sources, then regenerate. Never patch these by hand:
+
+- `**/kit.schema.json`
+- `**/docs/_playground.json`
+- `**/utilities/global-props.schema.json`
+- `**/AvailableProps/globalPropsValues.ts`
+- `playbook/dist/ai/**`
+
+Playground authoring source: `**/docs/_playground.overrides.json`
+
+## After relevant source changes
+
+From repo root:
+
+```bash
+yarn generate:docs-metadata
+```
+
+Triggers for regenerate: kit `.tsx`/`.ts`/`.rb` props, `globalProps.ts`, `types/*.ts`, spacing/breakpoint tokens, `_playground.overrides.json`.
+
+Pre-commit also regenerates and fails if generated output is dirty — stage the regenerated files and commit again.
+
+## Docs map
+
+- AI / `dist/ai`: `docs/AI_METADATA.md`
+- Playground: `docs/PLAYGROUND_CONFIG.md`
+- Global props: `docs/ADDING_GLOBAL_PROPS.md`
+- Cross-agent entry: `AGENTS.md`

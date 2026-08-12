@@ -300,10 +300,11 @@ export function buildPropSyncHints(
 };
 
 export const prepareExampleCode = (source: string): string => {
-  let code = source
-    .split("\n")
-    .filter((l) => !l.trim().startsWith("import "))
-    .join("\n");
+  // Strip single- and multi-line import statements for react-live scope.
+  let code = source.replace(
+    /^\s*import\s+[\s\S]*?from\s+["'][^"']+["']\s*;?\s*$/gm,
+    ""
+  );
 
   const defaultExportRegex = /export\s+default\s+([A-Za-z0-9_]+)/;
   if (defaultExportRegex.test(code)) {
@@ -311,7 +312,7 @@ export const prepareExampleCode = (source: string): string => {
     code += `\nrender(<__Exported />)`;
   }
 
-  return code;
+  return code.replace(/^\s*\n/, "");
 };
 
 /** Value as codegen/runtime would see it, including implicit defaults when `enabled` is false. */

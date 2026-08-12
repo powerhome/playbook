@@ -4,7 +4,7 @@ description: As a design system primarily used for business software application
 icon: palette
 ---
 
-For all our Color Tokens refer to [Colors](https://playbook.powerapp.cloud/tokens/colors) in [Tokens](https://playbook.powerapp.cloud/tokens)
+For all our Color Tokens refer to [Colors](/tokens/colors) in [Tokens](/tokens). For using color exports in React or Rails, see [Using Tokens](/tokens/using_tokens).
 
 #### Index
 

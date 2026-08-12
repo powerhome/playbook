@@ -35,6 +35,7 @@ global_props:
   - border
 
 tokens:
+  - using_tokens
   - animation
   - border_radius
   - colors

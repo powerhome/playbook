@@ -33,6 +33,8 @@ import {
   removeInstanceFromTree,
   updateInstanceInTree,
 } from "./treeUtils";
+import { type BuildingBlock } from "./buildingBlocks";
+import { PlaygroundBuildingBlocks } from "./PlaygroundBuildingBlocks";
 import { PlaygroundCanvas } from "./PlaygroundCanvas";
 import { PlaygroundHeader } from "./PlaygroundHeader";
 import { PlaygroundInspector } from "./PlaygroundInspector";
@@ -49,6 +51,7 @@ import "./styles.scss";
 
 type PlaygroundSnapshot = {
   addTargetId: string;
+  buildingBlockId: string | null;
   instances: BuilderInstance[];
   selectedId: string | null;
 };
@@ -67,6 +70,9 @@ export default function Playground() {
   const { global_props_schema, playground_kits = [] } =
     useLoaderData() as PlaygroundLoaderData;
   const [instances, setInstances] = useState<BuilderInstance[]>([]);
+  const [activeBuildingBlockId, setActiveBuildingBlockId] = useState<
+    string | null
+  >(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [addTargetId, setAddTargetId] = useState(ROOT_TARGET_ID);
@@ -205,6 +211,7 @@ export default function Playground() {
   const savePlaygroundSnapshot = () => {
     const snapshot = {
       addTargetId,
+      buildingBlockId: activeBuildingBlockId,
       instances: cloneInstances(instances),
       selectedId,
     };
@@ -235,6 +242,7 @@ export default function Playground() {
     const nextInstance = createInstance(kit, global_props_schema?.props);
 
     savePlaygroundSnapshot();
+    setActiveBuildingBlockId(null);
 
     if (targetId === ROOT_TARGET_ID) {
       setInstances((current) => [...current, nextInstance]);
@@ -251,6 +259,31 @@ export default function Playground() {
     if (acceptsChildren(kit)) {
       setAddTargetId(nextInstance.id);
     }
+  };
+
+  const handleSelectBuildingBlock = (block: BuildingBlock) => {
+    if (block.id === activeBuildingBlockId) return;
+
+    const compiled = compilePromptPlan(
+      {
+        instances: block.buildPlan(),
+        mode: "replace",
+        summary: `Loaded ${block.name} as a starting point.`,
+      },
+      kitsByName,
+      global_props_schema?.props,
+    );
+
+    savePlaygroundSnapshot();
+    setActiveBuildingBlockId(block.id);
+    setInstances(compiled.instances);
+    setSelectedId(compiled.instances[0]?.id ?? null);
+    setAddTargetId(
+      compiled.instances[0] &&
+        acceptsChildren(kitsByName[compiled.instances[0].kitName])
+        ? compiled.instances[0].id
+        : ROOT_TARGET_ID,
+    );
   };
 
   const handleDropKit = (kitName: string, targetId: string) => {
@@ -458,6 +491,7 @@ export default function Playground() {
 
       if (modification.handled) {
         if (modification.instances !== instances) savePlaygroundSnapshot();
+        setActiveBuildingBlockId(null);
         setInstances(modification.instances);
         setPromptDiagnostics(modification.diagnostics);
         setPromptStatus(
@@ -487,6 +521,7 @@ export default function Playground() {
 
     const mode = getPromptPlanMode(recipeResult.plan);
     savePlaygroundSnapshot();
+    setActiveBuildingBlockId(null);
     setInstances((current) =>
       mode === "append"
         ? [...current, ...compiledPlan.instances]
@@ -509,6 +544,7 @@ export default function Playground() {
     setInstances(cloneInstances(previous.instances));
     setSelectedId(previous.selectedId);
     setAddTargetId(previous.addTargetId);
+    setActiveBuildingBlockId(previous.buildingBlockId);
     setPromptDiagnostics([]);
     if (showPromptStatus === true) {
       setPromptStatus("Restored previous playground state.");
@@ -524,6 +560,7 @@ export default function Playground() {
 
   const handleClearAll = () => {
     setInstances([]);
+    setActiveBuildingBlockId(null);
     setSelectedId(null);
     setAddTargetId(ROOT_TARGET_ID);
     setPlaygroundHistory([]);
@@ -635,6 +672,11 @@ export default function Playground() {
           onRestorePreviousState={() => handleRestorePreviousPlaygroundState()}
       />
 
+      <PlaygroundBuildingBlocks
+          activeBuildingBlockId={activeBuildingBlockId}
+          onSelect={handleSelectBuildingBlock}
+      />
+
       <div className="full-playground-workbench">
         <PlaygroundSidebar
             activeAddTargetId={activeAddTargetId}
@@ -713,12 +755,12 @@ export default function Playground() {
           onRestorePreviousIteration={() => handleRestorePreviousPlaygroundState(true)}
           onSubmit={handlePromptSubmit}
           status={promptStatus}
-      />
+      /> */}
       <div
           aria-hidden
           className="builder-drag-tooltip"
           ref={dragTooltipRef}
-      /> */}
+      />
     </Flex>
   );
 }
