@@ -7,5 +7,6 @@ git_source(:github) do |repo_name|
 end
 
 gem "vite_rails"
+gem "vite_ruby", "3.8.0"
 
 gemspec

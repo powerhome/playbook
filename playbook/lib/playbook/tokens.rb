@@ -7,12 +7,13 @@ module Playbook
   # scripts/generate-tokens.js (yarn generate:tokens, run from playbook/). Source: token SCSS + types.
   #
   # @example
+  #   Playbook::Tokens.colors[:primary]           # => "#0056CF"
+  #   Playbook::Tokens.colors.primary             # => "#0056CF"
   #   Playbook::Tokens.colors[:input_text_error]  # => "#DA0014"
-  #   Playbook::Tokens.colors.input_text_error    # => "#DA0014"
   #
   # --- Current design ---
-  # Only colors: tokens/colors.json (accessible keys from _colors.module.scss + types/colors.ts).
-  # When you add or change accessible color tokens, run `yarn generate:tokens` and stage the updated
+  # Colors: tokens/colors.json (all keys from _colors.module.scss — legacy + accessible).
+  # When you add or change color tokens, run `yarn generate:tokens` and stage the updated
   # colors.json; otherwise Overcommit will run the generator on commit and fail until you do.
   #
   # --- Next steps for additional token types ---
@@ -34,7 +35,7 @@ module Playbook
   #
   module Tokens
     class << self
-      # Load colors from generated tokens/colors.json (accessible keys only).
+      # Load colors from generated tokens/colors.json (legacy + accessible).
       #
       # @return [ColorHash] colors with both hash and method access
       def colors
