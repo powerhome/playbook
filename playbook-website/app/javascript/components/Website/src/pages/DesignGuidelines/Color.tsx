@@ -27,8 +27,9 @@ const Color = () => {
           
           <Body marginBottom="md">
             For all our Color Tokens refer to{" "}
-            <a href="https://playbook.powerapp.cloud/tokens/colors">Colors</a> in{" "}
-            <a href="https://playbook.powerapp.cloud/tokens">Tokens</a>
+            <a href="/tokens/colors">Colors</a> in{" "}
+            <a href="/tokens">Tokens</a>. For using color exports in React or Rails, see{" "}
+            <a href="/tokens/using_tokens">Using Tokens</a>.
           </Body>
 
           <Title text="Index" size={4} marginBottom="sm" />

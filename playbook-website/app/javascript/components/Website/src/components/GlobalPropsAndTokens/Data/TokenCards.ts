@@ -1,5 +1,12 @@
 export const TokenCards = [
   {
+    title: "Using Tokens",
+    description:
+      "How to import and use Playbook CSS token exports in React, Sass, and Ruby.",
+    icon: "code",
+    link: "/tokens/using_tokens",
+  },
+  {
     title: "Animation",
     description:
       "Predefined duration and easing values for consistent motion effects.",

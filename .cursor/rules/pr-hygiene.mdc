@@ -1,0 +1,26 @@
+---
+description: PR and commit checklist for Playbook maintainers
+alwaysApply: true
+---
+
+# PR / commit hygiene
+
+When helping with commits or pull requests, align with `.github/PULL_REQUEST_TEMPLATE.md`.
+
+## Before committing
+
+- Tests for new/changed kit behavior or props (Jest and/or RSpec as applicable)
+- Playground overrides updated for kits/props touched; regenerate with `yarn generate:docs-metadata`
+- Stage regenerated metadata if the pre-commit hook updates it
+- Do not commit secrets; do not skip hooks unless the user explicitly requests
+
+## PR checklist (remind when creating/updating a PR)
+
+- Changelog label: `enhancement`, `bug`, `improvement`, `new kit`, `deprecated`, or `breaking`
+- Exactly one semver label: `major`, `minor`, or `patch` (CI requires this)
+- `milano` when ready for review
+- Optional `inactive RC` when not an active RC
+
+## Commit messages
+
+No enforced Conventional Commits format in this repo. Match recent history style; do not invent a format unless the user asks.
