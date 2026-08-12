@@ -13,11 +13,18 @@ const toClassToken = (value: string | number) =>
  * (direct child of the flex/grid container). Playground wraps each kit in
  * `.builder-instance`, so these must be mirrored onto that wrapper.
  */
+const isUnsetUtilityValue = (value: unknown, allowNone: boolean) =>
+  value === undefined ||
+  value === null ||
+  value === "" ||
+  (!allowNone && value === "none");
+
 const responsiveUtilityClass = (
   value: unknown,
   classPrefix: string,
+  { allowNone = false }: { allowNone?: boolean } = {},
 ): string => {
-  if (value === undefined || value === null || value === "" || value === "none") {
+  if (isUnsetUtilityValue(value, allowNone)) {
     return "";
   }
 
@@ -25,12 +32,12 @@ const responsiveUtilityClass = (
     const entries = value as Record<string, string | number>;
     const classes: string[] = [];
 
-    if (entries.default !== undefined && entries.default !== null && entries.default !== "") {
+    if (!isUnsetUtilityValue(entries.default, allowNone)) {
       classes.push(`${classPrefix}_${toClassToken(entries.default)}`);
     }
 
     Object.entries(entries).forEach(([key, entryValue]) => {
-      if (!SCREEN_SIZES.has(key) || entryValue === undefined || entryValue === null || entryValue === "") {
+      if (!SCREEN_SIZES.has(key) || isUnsetUtilityValue(entryValue, allowNone)) {
         return;
       }
       classes.push(`${classPrefix}_${key}_${toClassToken(entryValue)}`);
@@ -59,7 +66,8 @@ export const getBuilderInstanceLayout = (
     responsiveUtilityClass(props.alignSelf, "align_self"),
     responsiveUtilityClass(props.justifySelf, "justify_self"),
     responsiveUtilityClass(props.order, "flex_order"),
-    responsiveUtilityClass(props.flex, "flex"),
+    // `none` is a real flex value (`flex_none` → flex: none).
+    responsiveUtilityClass(props.flex, "flex", { allowNone: true }),
     binaryUtilityClass(props.flexGrow, "flex_grow"),
     binaryUtilityClass(props.flexShrink, "flex_shrink"),
   ];
