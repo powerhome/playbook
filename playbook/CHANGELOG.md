@@ -1,9 +1,14 @@
-# 17.0.0
+# 🏡 Advanced Table Has a New Address 🏡
 ##### August 12, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
-Your feature description goes here.
+Advanced Table got its own place. 🚘
+Starting in 17.0.0, Advanced Table and TanStack live behind a separate entrypoint, so they only join the party when you actually use the kit. No extra packages to install, just one import change:
+
+`import { AdvancedTable } from "playbook-ui/advanced-table"`
+
+Smaller main bundle. Same Advanced Table. Less JavaScript tagging along for the ride.
 
 [17.0.0](https://github.com/powerhome/playbook/tree/17.0.0) full list of changes:
 
