@@ -1,7 +1,9 @@
 @import "../../tokens/colors";
 @import "../../tokens/screen_sizes";
 
-[class^=pb_table] {
+// Use `.pb_table` (not `[class^=pb_table]`) so subkit classes like
+// `pb_table_td` / `pb_table_th` don't reset the CSS variables on each cell.
+.pb_table {
   --table-border-color: #{$border_light};
 
   &.contrast-border {
@@ -12,6 +14,29 @@
 
     td, th, .pb_table_td, .pb_table_th {
       border-color: var(--table-border-color) !important;
+    }
+
+    // Sticky column divider + outer edges
+    .with-border-right {
+      border-right: 1px solid var(--table-border-color) !important;
+    }
+
+    .with-border-left {
+      border-left: 1px solid var(--table-border-color) !important;
+    }
+
+    &.sticky-left-column {
+      td:first-child, th:first-child,
+      .pb_table_td:first-child, .pb_table_th:first-child {
+        border-left-color: var(--table-border-color) !important;
+      }
+    }
+
+    &.sticky-right-column {
+      td:last-child, th:last-child,
+      .pb_table_td:last-child, .pb_table_th:last-child {
+        border-right-color: var(--table-border-color) !important;
+      }
     }
 
     &.vertical-border {
@@ -54,8 +79,8 @@
   }
 }
 
-// Scroll wrapper owns the outer left/right edges; inherit contrast color from the nested table
-.table-responsive-scroll:has(> [class^=pb_table].contrast-border) {
+// Scroll wrapper owns the outer left/right edges; only when nested table has contrastBorder
+.table-responsive-scroll:has(> .pb_table.contrast-border) {
   --table-border-color: #{$input_border_default_dark};
   --column-border-color: #{$input_border_default_dark};
   --table-border-hover-color: #{darken($input_border_default_dark, 10%)};
