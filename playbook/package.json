@@ -17,6 +17,12 @@
       "require": "./dist/charts.js",
       "default": "./dist/charts.js"
     },
+    "./advanced-table": {
+      "types": "./dist/types/advanced-table.d.ts",
+      "import": "./dist/advanced-table.js",
+      "require": "./dist/advanced-table.js",
+      "default": "./dist/advanced-table.js"
+    },
     "./dist/playbook.css": "./dist/playbook.css",
     "./dist/reset.css": "./dist/reset.css",
     "./dist/*": "./dist/*",

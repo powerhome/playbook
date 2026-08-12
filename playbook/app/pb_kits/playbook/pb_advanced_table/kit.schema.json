@@ -312,7 +312,7 @@
   "globalProps": true,
   "usage": {
     "react": {
-      "import": "import { AdvancedTable } from 'playbook-ui'",
+      "import": "import { AdvancedTable } from 'playbook-ui/advanced-table'",
       "example": "<AdvancedTable columnGroupBorderColor=\"text_lt_default\" enableToggleExpansion=\"all\"></AdvancedTable>"
     },
     "rails": {
