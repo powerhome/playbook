@@ -11,6 +11,7 @@ import {
   displayPropType,
   formatKitName,
 } from "./kitUtils";
+import { getBuilderInstanceLayout } from "./builderInstanceLayout";
 import {
   getLivePreviewCode,
   getRuntimeScope,
@@ -166,6 +167,8 @@ export const BuilderPreviewItem = ({
   const configuredChildren = instance.configuredChildren?.trim();
   const directChildren = childNodes.length > 0 ? childNodes : configuredChildren || undefined;
   const targetLabel = formatKitName(kit?.name ?? instance.kitName);
+  const renderableProps = getRenderableProps(instance, kit, globalProps);
+  const layout = getBuilderInstanceLayout(renderableProps);
   const isInnermostEventTarget = (
     event:
       | React.DragEvent<HTMLElement>
@@ -194,7 +197,7 @@ export const BuilderPreviewItem = ({
     >
       {React.createElement(
         Component,
-        getRenderableProps(instance, kit, globalProps),
+        renderableProps,
         canRenderChildren ? directChildren : undefined
       )}
     </RenderBoundary>
@@ -206,7 +209,7 @@ export const BuilderPreviewItem = ({
 
   return (
     <div
-      className={`builder-instance ${isSelected ? "is-selected" : ""} ${
+      className={`builder-instance ${layout.className} ${isSelected ? "is-selected" : ""} ${
         canRenderChildren && instance.children.length === 0 ? "is-empty-container" : ""
       } ${
         draggingInstanceId === instance.id ? "is-dragging" : ""
@@ -215,6 +218,7 @@ export const BuilderPreviewItem = ({
       }`}
       data-builder-instance-id={instance.id}
       draggable={false}
+      style={layout.style}
       onDragEnd={(event) => {
         event.stopPropagation();
         onDragEndDrag?.();
