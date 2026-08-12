@@ -18,6 +18,7 @@ import Transition from "./Examples/Transition";
 import Typography from "./Examples/Typography";
 import Colors from "./Examples/Colors";
 import Spacing from "./Examples/Spacing";
+import UsingTokens from "./Examples/UsingTokens";
 
 const COMPONENT_MAP = {
   animation: Animation,
@@ -37,6 +38,7 @@ const COMPONENT_MAP = {
   titles: Titles,
   transition: Transition,
   typography: Typography,
+  using_tokens: UsingTokens,
   vertical_align: VerticalAlign,
   z_index: ZIndex,
 };

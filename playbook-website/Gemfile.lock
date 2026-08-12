@@ -104,7 +104,7 @@ GEM
     debug_inspector (1.2.0)
     diff-lcs (1.4.4)
     drb (2.2.3)
-    dry-cli (1.1.0)
+    dry-cli (1.4.1)
     erubi (1.13.0)
     faker (3.4.2)
       i18n (>= 1.8.11, < 2)
@@ -191,8 +191,8 @@ GEM
     puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (2.2.9)
-    rack-proxy (0.7.7)
+    rack (2.2.23)
+    rack-proxy (0.8.3)
       rack
     rack-session (1.0.2)
       rack (< 3)
@@ -323,7 +323,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     will_paginate (4.0.1)
-    zeitwerk (2.6.17)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   aarch64-linux
@@ -367,6 +367,7 @@ DEPENDENCIES
   turbo-rails (~> 1.4.0)
   tzinfo-data
   vite_rails
+  vite_ruby (= 3.8.0)
   web-console
   will_paginate
 
