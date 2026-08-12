@@ -377,11 +377,20 @@
 
 // Each kit is wrapped in .builder-instance. Forcing width:100% on Flex
 // children breaks compact patterns (user display, banner icon + text).
+// Do not set the `flex` shorthand here — item flex/grow/shrink props are
+// lifted onto .builder-instance and must be able to win.
 .pb_flex_kit_orientation_row > .builder-instance,
 .pb_flex_kit_orientation_column > .builder-instance {
-  flex: 0 1 auto;
   max-width: 100%;
+  min-width: 0;
   width: auto;
+}
+
+// When display:grid is on a parent kit, children are builder wrappers too.
+[class*="display_grid"] > .builder-instance,
+.pb_layout_kit > .builder-instance,
+[class*="pb_layout_kit"] > .builder-instance {
+  min-width: 0;
 }
 
 // Full-bleed layout kits should still span a column Flex.
