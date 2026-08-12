@@ -59,6 +59,9 @@ module PlaybookMcp
 
     def prepare_props(kit, props)
       hash = Props.deep_stringify_keys(props || {})
+      # Map colloquial / FA icon names onto @powerhome/playbook-icons ids so we
+      # never emit empty Font Awesome <i> fallbacks inside MCP documents.
+      hash = IconResolver.apply(hash)
       return hash unless Document.charts_kit?(kit)
 
       hash = ChartOptionsSanitizer.sanitize_props(hash)
