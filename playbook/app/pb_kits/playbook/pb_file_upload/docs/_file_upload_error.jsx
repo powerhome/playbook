@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import FileUpload from '../_file_upload'
 import List from '../../pb_list/_list'
 import ListItem from '../../pb_list/_list_item'
-import Icon from '../../pb_icon/_icon'
 
 const AcceptedFilesList = ({ files }) => (
   <List>
@@ -19,10 +18,6 @@ const FileUploadError = (props) => {
     setFilesToUpload([...filesToUpload, ...files])
   }
 
-  const error = (<>
-    <Icon icon="warning" /> Please upload a valid file
-  </>)
-
   return (
     <div>
       <AcceptedFilesList
@@ -30,7 +25,7 @@ const FileUploadError = (props) => {
           {...props}
       />
       <FileUpload
-          error={error}
+          error="Please upload a valid file."
           onFilesAccepted={handleOnFilesAccepted}
           {...props}
       />
