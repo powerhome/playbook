@@ -127,10 +127,6 @@
         transition: box-shadow 0.15s ease-in-out;
       }
 
-      &.dropdown_trigger_wrapper_select_only {
-        box-shadow: inset 0 -11px 20px rgba($status_border_primary, 0.05);
-      }
-
       &.dropdown_trigger_wrapper_focus {
         box-shadow: 0px 0px 0 1px $status_border_primary !important;
         transition: box-shadow 0.1s ease-in-out;
@@ -398,11 +394,8 @@
             background-color: $input_background_state_dark !important;
           }
         }
-        [class^="pb_body"] {
+        [class^="pb_body"]:not(.pb_body_kit_lighter) {
           color: $text_default_dark;
-        }
-        &.dropdown_trigger_wrapper_select_only {
-          box-shadow: inset 0 -11px 20px rgba($status_border_primary_dark, 0.05);
         }
         .dropdown_input {
           background-color: unset;

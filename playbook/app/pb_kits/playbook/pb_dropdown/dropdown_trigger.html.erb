@@ -26,7 +26,7 @@
                         <div data-dropdown-trigger-custom-display style="display: none;">
                             <%= object.custom_display %>
                         </div>
-                        <%= pb_rails("body", props: {text: object.default_display_placeholder, data: { 'dropdown-trigger-display': true }}) %>
+                        <%= pb_rails("body", props: {color: "lighter", text: object.default_display_placeholder, data: { 'dropdown-trigger-display': true }}) %>
                     <% end %>
                 <% else %>
                     <% if object.multi_select %>
@@ -43,7 +43,7 @@
                                     autocomplete="off"
                                 />
                             <% else %>
-                                <%= pb_rails("body", props: {text: object.default_display_placeholder, data: { "dropdown-trigger-display-multi-select": true }}) %>
+                                <%= pb_rails("body", props: {color: "lighter", text: object.default_display_placeholder, data: { "dropdown-trigger-display-multi-select": true }}) %>
                             <% end %>
                         <% end %>
                     <% else %>
@@ -57,7 +57,7 @@
                                 autocomplete="off"
                             />
                         <% else %>
-                            <%= pb_rails("body", props: {text: object.default_display_placeholder, data: { 'dropdown-trigger-display': true }}) %>
+                            <%= pb_rails("body", props: {color: "lighter", text: object.default_display_placeholder, data: { 'dropdown-trigger-display': true }}) %>
                         <% end %>
                     <% end %>
                 <% end %>

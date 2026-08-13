@@ -821,7 +821,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (triggerElement) {
       if (!this.isMultiSelect) {
         const selectedLabel = JSON.parse(value).label;
-        triggerElement.textContent = selectedLabel;
+        this.setTriggerElementText(selectedLabel);
         this.emitSelectionChange();
 
         // Handle quickpick variant: populate start/end date hidden inputs
@@ -900,7 +900,7 @@ export default class PbDropdown extends PbEnhancedElement {
         }
       }
       if (customDisplayElement) {
-        triggerElement.textContent = "";
+        this.setTriggerElementText("");
         customDisplayElement.style.display = "block";
         customDisplayElement.style.paddingRight = "8px";
       }
@@ -1230,6 +1230,9 @@ export default class PbDropdown extends PbEnhancedElement {
     const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
     if (triggerElement) {
       triggerElement.textContent = text;
+      const placeholderText = this.placeholder?.dataset?.dropdownPlaceholder;
+      const isPlaceholder = Boolean(text) && text === placeholderText;
+      triggerElement.classList.toggle("pb_body_kit_lighter", isPlaceholder);
     }
   }
 
