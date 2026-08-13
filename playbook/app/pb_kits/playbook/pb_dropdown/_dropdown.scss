@@ -408,7 +408,7 @@
             background-color: $input_background_state_dark !important;
           }
         }
-        .pb_body_kit {
+        [class^="pb_body"] {
           color: $text_default_dark;
         }
         .pb_body_kit[data-dropdown-trigger-display],
