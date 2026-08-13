@@ -962,17 +962,17 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <ColorSwatch color="#8D5500" />,
+              <ColorSwatch color="#635445" />,
               <Title size={4}>$product_11_background</Title>,
-              "#8D5500",
+              "#635445",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
                 <Body>Product 11 Background</Body>
               </Card>,
             ],  
             [
-              <ColorSwatch color="#A36D00" />,
+              <ColorSwatch color="#A48D77" />,
               <Title size={4}>$product_11_highlight</Title>,
-              "#A36D00",
+              "#A48D77",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
                 <Body>Product 11 Highlight</Body>
               </Card>,
