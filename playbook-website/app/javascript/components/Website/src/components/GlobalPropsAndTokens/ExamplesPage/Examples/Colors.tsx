@@ -978,6 +978,22 @@ const Colors = () => {
               </Card>,
             ],
             [
+              <ColorSwatch color="#6F83AF" />,
+              <Title size={4}>$product_12_background</Title>,
+              "#6F83AF",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Product 12 Background</Body>
+              </Card>,
+            ],  
+            [
+              <ColorSwatch color="#7E94C6" />,
+              <Title size={4}>$product_12_highlight</Title>,
+              "#7E94C6",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Product 12 Highlight</Body>
+              </Card>,
+            ],
+            [
               <ColorSwatch color="#003DB2" />,
               <Title size={4}>$windows</Title>,
               "$product_1_background",

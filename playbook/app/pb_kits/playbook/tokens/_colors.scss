@@ -255,6 +255,8 @@ $product_10_background: #20c997 !default;
 $product_10_highlight:  #38d9a9 !default;
 $product_11_background: #635445 !default;
 $product_11_highlight:  #A48D77 !default;
+$product_12_background: #6F83AF !default;
+$product_12_highlight:  #7E94C6 !default;
 $windows:               $product_1_background !default; // deprecated
 $siding:                $product_2_background !default; // deprecated
 $doors:                 $product_3_background !default; // deprecated
@@ -293,7 +295,9 @@ $product_colors: (
   product_10_background:  $product_10_background,
   product_10_highlight:   $product_10_highlight,
   product_11_background:  $product_11_background,
-  product_11_highlight:   $product_11_highlight
+  product_11_highlight:   $product_11_highlight,
+  product_12_background:  $product_12_background,
+  product_12_highlight:   $product_12_highlight
 ) !default;
 
 /* Category colors ---------------------*/
