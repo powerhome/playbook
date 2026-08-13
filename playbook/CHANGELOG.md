@@ -1,3 +1,54 @@
+# 🏡 Advanced Table Has a New Address 🏡
+##### August 12, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Advanced Table got its own place. 🚘
+Starting in 17.0.0, Advanced Table and TanStack live behind a separate entrypoint, so they only join the party when you actually use the kit. No extra packages to install, just one import change:
+
+`import { AdvancedTable } from "playbook-ui/advanced-table"`
+
+Smaller main bundle. Same Advanced Table. Less JavaScript tagging along for the ride.
+
+[17.0.0](https://github.com/powerhome/playbook/tree/17.0.0) full list of changes:
+
+**Breaking:**
+
+- Advanced Table: Move Advanced Table to Own Entrypoint to Tree Shake Tanstack [\#6478](https://github.com/powerhome/playbook/pull/6478) ([nidaqg](https://github.com/nidaqg))
+
+**Kit Enhancements:**
+
+- Timestamp Kit: Support Showtimezone on Updated Variant [\#6461](https://github.com/powerhome/playbook/pull/6461) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Grid Global Props [\#6422](https://github.com/powerhome/playbook/pull/6422) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Ruby Colors Helper (playbook::tokens.colors) - All Color Tokens [\#6496](https://github.com/powerhome/playbook/pull/6496) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Using Tokens Page [\#6495](https://github.com/powerhome/playbook/pull/6495) ([kangaree](https://github.com/kangaree))
+- Upgrade Vite_ruby to 3.8.0 [\#6491](https://github.com/powerhome/playbook/pull/6491) ([nidaqg](https://github.com/nidaqg))
+- Update Dependency Trix to V2.1.17 [security] [\#6482](https://github.com/powerhome/playbook/pull/6482) ([renovate[bot]](https://github.com/renovate[bot]))
+- Agent Rules for Working In Playbook [\#6480](https://github.com/powerhome/playbook/pull/6480) ([nidaqg](https://github.com/nidaqg))
+- Highlight Kit: Remove React-highlight-words Dependency [\#6477](https://github.com/powerhome/playbook/pull/6477) ([nidaqg](https://github.com/nidaqg))
+- Remove Build/publish Processes for Unused Playbook_ui_docs Gem [\#6474](https://github.com/powerhome/playbook/pull/6474) ([nidaqg](https://github.com/nidaqg))
+- Fixes for Rails Metadata Examples Using Jsx [\#6473](https://github.com/powerhome/playbook/pull/6473) ([nidaqg](https://github.com/nidaqg))
+- Metadata Enhancements [\#6459](https://github.com/powerhome/playbook/pull/6459) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Playground Updates [\#6439](https://github.com/powerhome/playbook/pull/6439) ([nidaqg](https://github.com/nidaqg))
+
+
+**Fixed Bugs:**
+
+- Playbook Website: Fixes for Pagination Doc In Rails [\#6476](https://github.com/powerhome/playbook/pull/6476) ([nidaqg](https://github.com/nidaqg))
+- Form Group: Disabled State Not Getting to Typeahead In Form Group [\#6475](https://github.com/powerhome/playbook/pull/6475) ([nickamantia](https://github.com/nickamantia))
+- Rails Textinput With Add On feature [\#6469](https://github.com/powerhome/playbook/pull/6469) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dropdown - Autocomplete + Default Value [\#6447](https://github.com/powerhome/playbook/pull/6447) ([nickamantia](https://github.com/nickamantia))
+
+**Deprecated:**
+
+- Deprecate IconButton Kit [\#6466](https://github.com/powerhome/playbook/pull/6466) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/16.12.0...17.0.0)
+
+
 # 🎉 All the Cool Kits Refactor: Distribution Bar Goes Native
 
 ##### July 29, 2026
