@@ -1,5 +1,6 @@
 const CHART_COMPONENTS = ["PbBarGraph", "PbCircleChart", "PbGaugeChart", "PbLineGraph"];
 const ADVANCED_TABLE_COMPONENTS = ["AdvancedTable"];
+const TYPEAHEAD_COMPONENTS = ["Typeahead"];
 
 export function formatReactSnippet(source: string, darkMode: boolean): string {
   let formatted = source
@@ -30,10 +31,14 @@ export function formatReactSnippet(source: string, darkMode: boolean): string {
   const advancedTableImports = allComponents.filter((component) =>
     ADVANCED_TABLE_COMPONENTS.includes(component),
   );
+  const typeaheadImports = allComponents.filter((component) =>
+    TYPEAHEAD_COMPONENTS.includes(component),
+  );
   const regularImports = allComponents.filter(
     (component) =>
       !CHART_COMPONENTS.includes(component) &&
-      !ADVANCED_TABLE_COMPONENTS.includes(component),
+      !ADVANCED_TABLE_COMPONENTS.includes(component) &&
+      !TYPEAHEAD_COMPONENTS.includes(component),
   );
 
   if (allComponents.length > 0) {
@@ -46,6 +51,11 @@ export function formatReactSnippet(source: string, darkMode: boolean): string {
     if (advancedTableImports.length > 0) {
       newImports.push(
         `import { ${advancedTableImports.join(", ")} } from 'playbook-ui/advanced-table'`,
+      );
+    }
+    if (typeaheadImports.length > 0) {
+      newImports.push(
+        `import { ${typeaheadImports.join(", ")} } from 'playbook-ui/typeahead'`,
       );
     }
     if (chartImports.length > 0) {

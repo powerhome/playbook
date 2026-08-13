@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Body, Button, Flex, Typeahead } from 'playbook-ui'
+import { Body, Button, Flex } from 'playbook-ui'
+import { Typeahead } from 'playbook-ui/typeahead'
 
 const options = [
   { label: 'Year', value: 'year' },

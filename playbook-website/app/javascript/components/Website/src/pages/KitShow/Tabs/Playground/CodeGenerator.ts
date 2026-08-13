@@ -144,6 +144,44 @@ function getLocallyImportedNames(importStatements: string[]): Set<string> {
   return importedNames;
 }
 
+const ENTRYPOINT_IMPORT_PATHS: Record<string, string> = {
+  AdvancedTable: "playbook-ui/advanced-table",
+  Typeahead: "playbook-ui/typeahead",
+  PbBarGraph: "playbook-ui/charts",
+  PbCircleChart: "playbook-ui/charts",
+  PbGaugeChart: "playbook-ui/charts",
+  PbLineGraph: "playbook-ui/charts",
+};
+
+const playbookExportName = (item: string) =>
+  item.includes(" as ") ? item.split(" as ")[0].trim() : item.trim();
+
+const buildPlaybookImportStatements = (importItems: string[]): string => {
+  const regular: string[] = [];
+  const byPath = new Map<string, string[]>();
+
+  importItems.forEach((item) => {
+    const path = ENTRYPOINT_IMPORT_PATHS[playbookExportName(item)];
+    if (!path) {
+      regular.push(item);
+      return;
+    }
+    const items = byPath.get(path) || [];
+    items.push(item);
+    byPath.set(path, items);
+  });
+
+  const lines: string[] = [];
+  if (regular.length > 0) {
+    lines.push(`import { ${regular.join(", ")} } from 'playbook-ui'`);
+  }
+  byPath.forEach((items, path) => {
+    lines.push(`import { ${items.join(", ")} } from '${path}'`);
+  });
+
+  return lines.length > 0 ? `${lines.join("\n")}\n\n` : "";
+};
+
 /**
  * JSX `name={{ default: true }}` style — avoids JSON `{"default":true}` quoted keys in snippets.
  */
@@ -331,7 +369,11 @@ export const generateCode = ({
   let importStatement = "";
   if (includeImport) {
     const importPath =
-      formattedName === "AdvancedTable" ? "playbook-ui/advanced-table" : "playbook-ui";
+      formattedName === "AdvancedTable"
+        ? "playbook-ui/advanced-table"
+        : formattedName === "Typeahead"
+          ? "playbook-ui/typeahead"
+          : "playbook-ui";
     importStatement = `import { ${formattedName} } from '${importPath}'\n\n`;
   }
 
@@ -605,7 +647,7 @@ export const generateFromTemplate = ({
     }
     const externalImportStatement =
       externalImports.length > 0 ? `${externalImports.join("\n")}\n` : "";
-    const importStatement = importItems.length > 0 ? `import { ${importItems.join(", ")} } from 'playbook-ui'\n\n` : "";
+    const importStatement = buildPlaybookImportStatements(importItems);
     result = externalImportStatement + importStatement + variableDefinitions + result;
   } else {
     result = variableDefinitions + result;

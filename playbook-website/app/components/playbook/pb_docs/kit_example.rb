@@ -57,6 +57,8 @@ module Playbook
         chart_components = %w[PbBarGraph PbCircleChart PbGaugeChart PbLineGraph]
         # Advanced Table imports from a separate entrypoint so TanStack stays optional
         advanced_table_components = %w[AdvancedTable]
+        # Typeahead imports from a separate entrypoint so react-select stays optional
+        typeahead_components = %w[Typeahead]
 
         stringified_code = stringified_code.gsub('"../.."', '"playbook-ui"')
                                            .gsub('"../../"', '"playbook-ui"')
@@ -75,8 +77,9 @@ module Playbook
 
         chart_imports = all_components.select { |comp| chart_components.include?(comp) }
         advanced_table_imports = all_components.select { |comp| advanced_table_components.include?(comp) }
+        typeahead_imports = all_components.select { |comp| typeahead_components.include?(comp) }
         regular_imports = all_components.reject do |comp|
-          chart_components.include?(comp) || advanced_table_components.include?(comp)
+          chart_components.include?(comp) || advanced_table_components.include?(comp) || typeahead_components.include?(comp)
         end
 
         if all_components.any?
@@ -87,6 +90,7 @@ module Playbook
           new_imports = []
           new_imports << "import { #{regular_imports.join(', ')} } from 'playbook-ui'" if regular_imports.any?
           new_imports << "import { #{advanced_table_imports.join(', ')} } from 'playbook-ui/advanced-table'" if advanced_table_imports.any?
+          new_imports << "import { #{typeahead_imports.join(', ')} } from 'playbook-ui/typeahead'" if typeahead_imports.any?
           new_imports << "import { #{chart_imports.join(', ')} } from 'playbook-ui/charts'" if chart_imports.any?
 
           # Insert after React import

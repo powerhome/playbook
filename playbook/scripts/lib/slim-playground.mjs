@@ -433,7 +433,7 @@ export function usageFromPreset(kitName, pascalName, playground) {
 
   return {
     react: {
-      import: `import { ${pascalName} } from 'playbook-ui'`,
+      import: `import { ${pascalName} } from '${kitName === 'typeahead' ? 'playbook-ui/typeahead' : 'playbook-ui'}'`,
       example: reactExample,
       preset: preset.name || null,
     },

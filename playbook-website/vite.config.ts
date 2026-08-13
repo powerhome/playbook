@@ -57,6 +57,7 @@ const config = {
       'playbook-ui/dist/tokens': resolve(__dirname, '../playbook/dist/tokens'),
       'playbook-ui/charts': resolve(__dirname, '../playbook/app/entrypoints/playbook-charts.js'),
       'playbook-ui/advanced-table': resolve(__dirname, '../playbook/app/entrypoints/playbook-advanced-table.js'),
+      'playbook-ui/typeahead': resolve(__dirname, '../playbook/app/entrypoints/playbook-typeahead.js'),
       'playbook-ui': resolve(__dirname, '../playbook/app/entrypoints/playbook.js'),
       'playbook-tokens': resolve(__dirname, '../playbook/dist/tokens'),
       'playbook-kits': resolve(__dirname, '../playbook/app/pb_kits/playbook'),
