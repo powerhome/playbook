@@ -117,8 +117,8 @@
       }
 
       // Rails select-only / multi-select Body placeholders (autocomplete uses ::placeholder above)
-      [class^="pb_body"][data-dropdown-trigger-display],
-      [class^="pb_body"][data-dropdown-trigger-display-multi-select] {
+      .pb_body_kit[data-dropdown-trigger-display],
+      .pb_body_kit[data-dropdown-trigger-display-multi-select] {
         color: $input_text_default;
       }
 
@@ -142,7 +142,7 @@
     // Selected value: restore default text color (Rails reuses the placeholder Body node)
     &:has([data-dropdown-clear-icon]:not([style*="display: none"])),
     &:has(.pb_dropdown_option_selected) {
-      [class^="pb_body"][data-dropdown-trigger-display] {
+      .pb_body_kit[data-dropdown-trigger-display] {
         color: $text_default_color;
       }
     }
@@ -408,11 +408,11 @@
             background-color: $input_background_state_dark !important;
           }
         }
-        [class^="pb_body"]:not(.pb_body_kit_lighter) {
+        .pb_body_kit {
           color: $text_default_dark;
         }
-        [class^="pb_body"][data-dropdown-trigger-display],
-        [class^="pb_body"][data-dropdown-trigger-display-multi-select] {
+        .pb_body_kit[data-dropdown-trigger-display],
+        .pb_body_kit[data-dropdown-trigger-display-multi-select] {
           color: $input_text_default_dark;
         }
         .dropdown_input {
@@ -426,7 +426,7 @@
 
       &:has([data-dropdown-clear-icon]:not([style*="display: none"])),
       &:has(.pb_dropdown_option_selected) {
-        [class^="pb_body"][data-dropdown-trigger-display] {
+        .pb_body_kit[data-dropdown-trigger-display] {
           color: $text_default_dark;
         }
       }
