@@ -42,12 +42,12 @@ $border_hover_color_dark: lighten($border_dark, 5%);
             &:hover {
               box-shadow: 0 2px 10px 0 rgba($slate, $opacity-6);
               td, .pb_table_td {
-                border-color: darken($border_light, 10%);
+                border-color: var(--table-border-hover-color, #{darken($border_light, 10%)});
                 border-top-width: 0;
                 border-top-color: transparent;
                 &:after {
                   transition: background-color $transition-speed ease, height $transition-speed ease;
-                  background-color: darken($border_light, 10%);
+                  background-color: var(--table-border-hover-color, #{darken($border_light, 10%)});
                   height: 1px;
                 }
               }

@@ -42,6 +42,7 @@ sections:
     examples:
       - table_data_table
       - table_vertical_border
+      - table_contrast_border
       - table_striped
 
   - title: "Header Variants"

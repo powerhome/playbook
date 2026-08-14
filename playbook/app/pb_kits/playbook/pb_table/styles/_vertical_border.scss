@@ -1,11 +1,11 @@
 [class^=pb_table] {
   &.vertical-border {
     td, th, .pb_table_td, .pb_table_th {
-      border-right: 1px solid $border_light !important;
+      border-right: 1px solid var(--table-border-color, #{$border_light}) !important;
     }
 
     thead tr:not(:first-child) th {
-      border-right: 1px solid $border_light !important;
+      border-right: 1px solid var(--table-border-color, #{$border_light}) !important;
     }
 
     // **Advanced Table** specific rules to eliminate double borders when vertical-border is active
@@ -18,7 +18,7 @@
       .pb_table_td:first-child,
       .checkbox-cell.checkbox-cell-header:first-child {
         box-shadow: none !important;
-        border-right: 1px solid var(--column-border-color, #{$border_light}) !important;
+        border-right: 1px solid var(--column-border-color, var(--table-border-color, #{$border_light})) !important;
       }
 
       .pb_table_td:nth-child(2) {
@@ -30,7 +30,7 @@
     @media screen and (min-width: $screen-xs-min) {
       tr:hover, .pb_table_tr:hover {
         td:last-child, .pb_table_td:last-child {
-          border-right-color: darken($border_light, 10%) !important;
+          border-right-color: var(--table-border-hover-color, #{darken($border_light, 10%)}) !important;
         }
       }
     }
@@ -41,14 +41,14 @@
       &.sticky-header {
         th:not(:last-child) {
           border-right: none !important;
-          box-shadow: 1px 0 0 0 $border_light !important;
+          box-shadow: 1px 0 0 0 var(--table-border-color, #{$border_light}) !important;
         }
 
         .pb_advanced_table_body {
           .pinned-row {
             td:not(:first-child):not(:last-child) {
               border-right: none !important;
-              box-shadow: 1px 0 0 0 $border_light !important;
+              box-shadow: 1px 0 0 0 var(--table-border-color, #{$border_light}) !important;
             }
           }
         }
@@ -58,7 +58,7 @@
       &.sticky-left-column {
         td[style="left"], th[style="left"] {
           border-right: none !important;
-          box-shadow: 1px 0 0 0 $border_light !important;
+          box-shadow: 1px 0 0 0 var(--table-border-color, #{$border_light}) !important;
         }
       }
 
@@ -66,7 +66,7 @@
       &.sticky-right-column {
         td[style="right"], th[style="right"] {
           border-right: none !important;
-          box-shadow: 1px 0 0 0 $border_light !important;
+          box-shadow: 1px 0 0 0 var(--table-border-color, #{$border_light}) !important;
         }
       }
 
@@ -76,7 +76,7 @@
           td:last-child, .pb_table_td:last-child {
             &[style="left"], &[style="right"] {
               border-right: none !important;
-              box-shadow: 1px 0 0 0 darken($border_light, 10%) !important;
+              box-shadow: 1px 0 0 0 var(--table-border-hover-color, #{darken($border_light, 10%)}) !important;
             }
           }
         }
