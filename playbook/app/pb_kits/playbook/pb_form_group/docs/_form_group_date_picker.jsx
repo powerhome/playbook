@@ -1,26 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import FormGroup from '../_form_group'
 
 import DatePicker from '../../pb_date_picker/_date_picker'
 import TextInput from '../../pb_text_input/_text_input'
 
-const FormGroupDatePicker = (props) => (
-  <div>
-    <FormGroup>
-      <TextInput
-          id="event-name"
-          label="Event"
-          placeholder="Event Name"
-          {...props}
-      />
-      <DatePicker
-          label="event date"
-          pickerId="date-picker-default"
-          {...props}
-      />
-    </FormGroup>
-  </div>
-)
+const FormGroupDatePicker = (props) => {
+  const [eventName, setEventName] = useState('')
+
+  const handleUpdateEventName = ({ target }) => {
+    setEventName(target.value)
+  }
+
+  return (
+    <div>
+      <FormGroup>
+        <TextInput
+            id="event-name"
+            label="Event"
+            onChange={handleUpdateEventName}
+            placeholder="Event Name"
+            value={eventName}
+            {...props}
+        />
+        <DatePicker
+            label="event date"
+            pickerId="date-picker-default"
+            {...props}
+        />
+      </FormGroup>
+    </div>
+  )
+}
 
 export default FormGroupDatePicker
