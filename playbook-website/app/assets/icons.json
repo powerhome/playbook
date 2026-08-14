@@ -1460,6 +1460,10 @@
     "category": "Interface Core"
   },
   {
+    "name": "square-list",
+    "category": "Interface Core"
+  },
+  {
     "name": "square-plus",
     "category": "Interface Core"
   },
