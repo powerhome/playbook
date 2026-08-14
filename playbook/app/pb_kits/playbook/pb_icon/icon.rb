@@ -46,8 +46,19 @@ module Playbook
       prop :tabindex
 
       def valid_emoji?
-        emoji_regex = /\p{Emoji}/
-        emoji_regex.match?(icon)
+        str = icon.to_s
+        return false if str.blank?
+        # Digits / # / * match \p{Emoji} as keycap bases; require real emoji forms.
+        # Also reject markup so we never treat HTML-like strings as emoji.
+        return false if str.match?(%r{[<>&"'A-Za-z/\\]})
+
+        str.match?(
+          /
+            \p{Emoji_Presentation}
+            | \p{Extended_Pictographic}
+            | [\d#*]\u{FE0F}?\u{20E3}
+          /x
+        )
       end
 
       def classname
@@ -103,7 +114,11 @@ module Playbook
           if Rails.application.config.respond_to?(:icon_path)
             resolved_icon = resolve_alias(icon)
             path = self.class.icon_path_index[resolved_icon]
-            path if path && File.exist?(path)
+            # icon_path_index keys off the *.svg basename, so apply the same
+            # realpath / .svg / allowed-root checks as custom_icon loading —
+            # otherwise a foo.svg symlink to a non-svg file would be File.read
+            # directly in svg_content.
+            path && File.exist?(path) ? allowed_svg_path(path)&.to_s : nil
           end
       end
 
@@ -302,8 +317,9 @@ module Playbook
         source = source.to_s
         return "" if source.blank?
 
-        remote = remote_svg_uri(source)
-        return read_remote_svg(remote) if remote
+        # Remote http(s) fetch removed: untrusted custom_icon/icon values must not
+        # trigger server-side requests (SSRF). Use local / engine SVG paths only.
+        return "" if remote_svg_uri(source)
 
         path = allowed_svg_path(source)
         return "" unless path
@@ -318,16 +334,11 @@ module Playbook
         nil
       end
 
-      def read_remote_svg(uri)
-        uri.open("User-Agent" => "Playbook-Icon-Kit/1.0 (https://github.com/powerhome/playbook)", redirect: false, &:read)
-      rescue OpenURI::HTTPError, StandardError
-        ""
-      end
-
       def allowed_svg_path(source)
         candidate = Pathname.new(source)
         candidate = Rails.root.join(candidate) unless candidate.absolute?
-        resolved = candidate.expand_path
+        resolved = real_path(candidate.expand_path)
+        return nil unless resolved
         return nil unless svg_file?(resolved)
         return nil unless path_within_allowed_root?(resolved)
 
@@ -337,7 +348,8 @@ module Playbook
       # Only ever read real .svg files. This keeps non-svg files that happen to
       # live inside an allowed root (config/master.key, credentials, .env, ...)
       # structurally out of the read path rather than relying on the is_svg?
-      # gate to exclude them.
+      # gate to exclude them. Extension is checked on the resolved real path so
+      # a *.svg symlink to a non-svg file cannot bypass the filter.
       def svg_file?(path)
         path.file? && path.extname.casecmp(".svg").zero?
       end
@@ -351,9 +363,12 @@ module Playbook
         false
       end
 
-      # An SVG may live in the host application or in any mounted engine
-      # (Playbook itself, or a host app's component engines), so every loaded
-      # engine root is allowed in addition to Rails.root.
+      # An SVG may live in the host application, any mounted engine
+      # (Playbook itself, or a host app's component engines), or the configured
+      # icon_path directory. playbook-website points development icon_path at
+      # ../node_modules/@powerhome/playbook-icons/icons, which resolves outside
+      # Rails.root / Engine.root — that directory must still be allowed, while
+      # realpath + svg_file? keep symlink-to-non-svg blocked.
       def allowed_svg_roots
         @allowed_svg_roots ||= svg_root_candidates.filter_map { |candidate| real_path(candidate) }.uniq
       end
@@ -361,8 +376,17 @@ module Playbook
       def svg_root_candidates
         Rails::Engine.descendants
                      .map { |engine| engine_root(engine) }
-                     .push(Playbook::Engine.root, Rails.root)
+                     .push(Playbook::Engine.root, Rails.root, configured_icon_path_root)
                      .compact
+      end
+
+      def configured_icon_path_root
+        return unless Rails.application.config.respond_to?(:icon_path)
+
+        base = Rails.application.config.icon_path
+        return if base.blank?
+
+        Rails.root.join(base)
       end
 
       def engine_root(engine)

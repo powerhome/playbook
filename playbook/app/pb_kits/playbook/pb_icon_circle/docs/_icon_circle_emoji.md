@@ -1,1 +1,1 @@
-The Icon Circle also allows you to pass in an HTML emoji in place of an icon if needed. To do so, pass any emoji or its hexa/decimal ref (see [here](https://www.w3schools.com/charsets/ref_emoji.asp)) as a string to the `icon` prop as shown in the code snippet below.
+The Icon Circle also allows you to pass an emoji in place of an icon if needed. Pass any emoji as a string to the `icon` prop as shown in the code snippet below.
