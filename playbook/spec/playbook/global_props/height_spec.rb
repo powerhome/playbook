@@ -23,32 +23,35 @@ RSpec.describe Playbook::Flex do
     Playbook::PbBadge::Badge,
   ]
 
-  valid_height_values = %w[auto xs sm md lg xl xxl xxxl]
+  valid_height_values = %w[auto xs sm md lg xl xxl xxxl 100% 100vh]
+  height_classname = ->(v) { "height_#{v.gsub('%', '_percent')}" }
+  min_height_classname = ->(v) { "min_height_#{v.gsub('%', '_percent')}" }
+  max_height_classname = ->(v) { "max_height_#{v.gsub('%', '_percent')}" }
 
   test_global_prop(
     :height,
     valid_height_values,
-    ->(v) { "height_#{v}" },
+    height_classname,
     test_subjects: test_subjects
   )
 
   test_global_prop(
     :min_height,
     valid_height_values,
-    ->(v) { "min_height_#{v}" },
+    min_height_classname,
     test_subjects: test_subjects
   )
 
   test_global_prop(
     :max_height,
     valid_height_values,
-    ->(v) { "max_height_#{v}" },
+    max_height_classname,
     test_subjects: test_subjects
   )
 
   test_global_prop_absence(
     :height,
-    %w[height_auto height_xs height_sm height_md height_lg height_xl height_xxl height_xxxl]
+    %w[height_auto height_xs height_sm height_md height_lg height_xl height_xxl height_xxxl height_100_percent height_100vh]
   )
 
   # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
