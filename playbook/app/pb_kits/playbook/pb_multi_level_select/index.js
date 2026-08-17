@@ -63,7 +63,6 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this._unsubscribePortalReposition = null
 
     this.bindEventListeners()
-    this.observeHiddenInputs()
     this.observeRogueErrorInsideInnerContainer()
     this.bindClearApi()
     this.render()
@@ -72,7 +71,6 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   disconnect() {
     this.unmountPortalMenu()
     this.unbindEventListeners()
-    this.mutationObserver?.disconnect()
     this.rogueErrorObserver?.disconnect()
     this.unbindClearApi()
   }
@@ -409,6 +407,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   }
 
   emitChange() {
+    this.clearError()
     const value = this.selectedItems()
     this.element.dispatchEvent(
       new CustomEvent("pb-multi-level-select-change", {
@@ -776,23 +775,6 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
         this.handleErrorLabel(100, attempts + 1)
       }
     }, delay)
-  }
-
-  observeHiddenInputs() {
-    if (!this.innerContainer) return
-
-    this.mutationObserver = new MutationObserver(() => {
-      const hiddenInputs = this.innerContainer.querySelectorAll(
-        'input[type="hidden"]'
-      )
-      if (hiddenInputs.length > 0) {
-        this.clearError()
-      }
-    })
-
-    this.mutationObserver.observe(this.innerContainer, {
-      childList: true,
-    })
   }
 
   observeRogueErrorInsideInnerContainer() {
