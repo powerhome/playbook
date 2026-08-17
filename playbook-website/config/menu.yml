@@ -525,8 +525,8 @@ kits:
     description: The MultiLevelSelect component renders a multi leveled select dropdown based on data from the User.
     status: stable
     icons_used: true
-    react_rendered: true
-    enhanced_element_used: false
+    react_rendered: false
+    enhanced_element_used: true
   - name: select
     platforms: *1
     description: Dropdown where the user picks one option from a list, styled like other form fields.
