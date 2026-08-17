@@ -1,1 +1,14 @@
-<%= react_component("PhoneNumberInput", object.phone_number_input_options) %>
+<%= pb_content_tag(:div, id: nil) do %>
+  <%= pb_rails("text_input", props: {
+    dark: object.dark,
+    disabled: object.disabled,
+    error: object.error.presence,
+    id: object.id,
+    label: object.label,
+    name: object.name,
+    required: object.required,
+    required_indicator: object.required_indicator,
+    type: "tel",
+    value: object.value,
+  }) %>
+<% end %>
