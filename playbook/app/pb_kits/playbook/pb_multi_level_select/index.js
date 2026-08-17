@@ -333,8 +333,8 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     const updatedTree = this.changeItem(filtered[0], check)
     this.formattedData = updatedTree
     this.syncSelectedCollections()
-    this.emitChange()
     this.render()
+    this.emitChange()
   }
 
   handleRadioButtonClick(selectedItemID, inputText) {
@@ -367,8 +367,8 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.filterItem = ""
     this.syncSelectedCollections()
     this.closeDropdown()
-    this.emitChange()
     this.render()
+    this.emitChange()
   }
 
   handlePillClose(event, itemId) {
@@ -378,8 +378,8 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     const updatedTree = this.changeItem(clickedItem[0], false)
     this.formattedData = updatedTree
     this.syncSelectedCollections()
-    this.emitChange()
     this.render()
+    this.emitChange()
   }
 
   changeItem(item, check) {
@@ -402,8 +402,8 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.defaultReturn = []
     this.singleSelectedItem = { id: [], value: "", item: [] }
     this.filterItem = ""
-    this.emitChange()
     this.render()
+    this.emitChange()
   }
 
   emitChange() {
