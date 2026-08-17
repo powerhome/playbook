@@ -19,7 +19,6 @@ import {
   modifyRecursive,
   modifyValue,
   recursiveCheckParent,
-  selectedItemsFromTree,
 } from "./tree_helpers"
 
 const SELECTOR = "[data-pb-multi-level-select]"
@@ -36,19 +35,22 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.readConfig()
 
     this.isDropdownClosed = true
+    this.optionsDirty = true
     this.filterItem = ""
     this.formattedData = addCheckedAndParentProperty(
-      cloneTree(this.treeData),
+      this.treeData,
       this.variant === "single" ? [this.selectedIds[0]] : this.selectedIds,
       {
         returnAllSelected: this.returnAllSelected,
         variant: this.variant,
       }
     )
-    this.expanded = getExpandedItems(
-      this.treeData,
-      this.selectedIds,
-      this.showCheckedChildren
+    this.expanded = new Set(
+      getExpandedItems(
+        this.treeData,
+        this.selectedIds,
+        this.showCheckedChildren
+      )
     )
     this.singleSelectedItem = this.initialSingleSelectedItem()
     this.syncSelectedCollections()
@@ -163,12 +165,9 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     }
   }
 
-  selectedItems() {
-    return selectedItemsFromTree(this.formattedData, {
-      returnAllSelected: this.returnAllSelected,
-      variant: this.variant,
-      singleSelectedItem: this.singleSelectedItem,
-    })
+  currentSelected() {
+    if (this.returnAllSelected) return this.returnedArray
+    return this.defaultReturn
   }
 
   bindEventListeners() {
@@ -182,6 +181,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.handleLabelClick = this.handleLabelClick.bind(this)
     this.handleInvalid = this.handleInvalid.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+    this.handleInnerContainerClick = this.handleInnerContainerClick.bind(this)
 
     this.inputWrapper?.addEventListener("click", this.handleInputWrapperClick)
     this.searchInput?.addEventListener("input", this.handleSearchChange)
@@ -192,7 +192,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.menu?.addEventListener("click", this.handleMenuClick)
     this.menu?.addEventListener("change", this.handleMenuChange)
     this.labelEl?.addEventListener("click", this.handleLabelClick)
-    window.addEventListener("click", this.handleClickOutside)
+    this.innerContainer?.addEventListener("click", this.handleInnerContainerClick)
   }
 
   unbindEventListeners() {
@@ -207,6 +207,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.portalShell?.removeEventListener("click", this.handleMenuClick)
     this.portalShell?.removeEventListener("change", this.handleMenuChange)
     this.labelEl?.removeEventListener("click", this.handleLabelClick)
+    this.innerContainer?.removeEventListener("click", this.handleInnerContainerClick)
     window.removeEventListener("click", this.handleClickOutside)
   }
 
@@ -251,6 +252,14 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.toggleDropdown()
   }
 
+  handleInnerContainerClick(event) {
+    const close = event.target.closest(".pb_form_pill_close")
+    if (!close) return
+    const pill = close.closest("[data-pb-mls-pill]")
+    const itemId = pill?.dataset.itemId
+    if (itemId) this.handlePillClose(event, itemId)
+  }
+
   handleSearchChange(event) {
     const inputText = event.target.value
     if (this.variant === "single") {
@@ -261,8 +270,12 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     } else {
       this.filterItem = inputText
     }
-    this.renderOptions()
     this.renderSelectionUi()
+    if (this.isDropdownClosed) {
+      this.optionsDirty = true
+      return
+    }
+    this.renderOptions()
   }
 
   handleClickOutside(event) {
@@ -315,14 +328,12 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     const clickedItem = filterFormattedDataById(this.formattedData, id)
     if (!clickedItem[0]) return
 
-    let expandedArray = [...this.expanded]
-    const itemExpanded = this.isTreeRowExpanded(clickedItem[0])
-    if (itemExpanded) {
-      expandedArray = expandedArray.filter((i) => i != clickedItem[0].id)
+    const clickedId = clickedItem[0].id
+    if (this.expanded.has(clickedId)) {
+      this.expanded.delete(clickedId)
     } else {
-      expandedArray.push(clickedItem[0].id)
+      this.expanded.add(clickedId)
     }
-    this.expanded = expandedArray
     this.renderOptions()
   }
 
@@ -408,11 +419,10 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
 
   emitChange() {
     this.clearError()
-    const value = this.selectedItems()
     this.element.dispatchEvent(
       new CustomEvent("pb-multi-level-select-change", {
         bubbles: true,
-        detail: { name: this.fieldName, value },
+        detail: { name: this.fieldName, value: this.currentSelected() },
       })
     )
   }
@@ -430,8 +440,12 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.isDropdownClosed = false
     this.mountPortalMenu()
     this.updateOpenUi()
-    this.renderOptions()
+    if (this.optionsDirty) {
+      this.renderOptions()
+      this.optionsDirty = false
+    }
     this.repositionPortal()
+    window.addEventListener("click", this.handleClickOutside)
   }
 
   closeDropdown() {
@@ -439,6 +453,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.isDropdownClosed = true
     this.unmountPortalMenu()
     this.updateOpenUi()
+    window.removeEventListener("click", this.handleClickOutside)
   }
 
   updateOpenUi() {
@@ -450,14 +465,19 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   }
 
   isTreeRowExpanded(item) {
-    return this.expanded.indexOf(item.id) > -1
+    return this.expanded.has(item.id)
   }
 
   render() {
     this.renderSelectionUi()
-    this.renderOptions()
     this.updateOpenUi()
-    if (!this.isDropdownClosed) this.repositionPortal()
+    if (this.isDropdownClosed) {
+      this.optionsDirty = true
+      return
+    }
+    this.renderOptions()
+    this.optionsDirty = false
+    this.repositionPortal()
   }
 
   renderSelectionUi() {
@@ -467,12 +487,8 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
       .querySelectorAll("[data-pb-mls-hidden], [data-pb-mls-pill], .mls-pill-break")
       .forEach((node) => node.remove())
 
-    const selected =
-      this.variant === "single"
-        ? this.defaultReturn
-        : this.returnAllSelected
-          ? this.returnedArray
-          : this.defaultReturn
+    const selected = this.currentSelected()
+    const fragment = document.createDocumentFragment()
 
     selected.forEach((item) => {
       const hidden = document.createElement("input")
@@ -482,7 +498,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
       hidden.value = item.id
       if (this.disabled) hidden.disabled = true
       if (this.required) hidden.required = true
-      this.innerContainer.insertBefore(hidden, this.searchInput)
+      fragment.appendChild(hidden)
     })
 
     if (
@@ -492,12 +508,14 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     ) {
       selected.forEach((item) => {
         const pill = this.buildPill(item)
-        if (pill) this.innerContainer.insertBefore(pill, this.searchInput)
+        if (pill) fragment.appendChild(pill)
       })
       const br = document.createElement("br")
       br.className = "mls-pill-break"
-      this.innerContainer.insertBefore(br, this.searchInput)
+      fragment.appendChild(br)
     }
+
+    this.innerContainer.insertBefore(fragment, this.searchInput)
 
     if (this.variant === "single") {
       this.searchInput.value = this.singleSelectedItem.value || this.filterItem
@@ -521,11 +539,6 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     pill.dataset.itemId = item.id
     const tag = pill.querySelector(".pb_form_pill_tag")
     if (tag) tag.textContent = item.label
-    const close = pill.querySelector(".pb_form_pill_close")
-    close?.addEventListener("click", (event) => {
-      event.stopPropagation()
-      this.handlePillClose(event, item.id)
-    })
     return pill
   }
 
@@ -535,6 +548,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
       ? findByFilter(this.formattedData, this.filterItem)
       : this.formattedData
     this.menu.replaceChildren(this.buildOptionsList(items))
+    this.optionsDirty = false
   }
 
   buildOptionsList(items) {
@@ -778,7 +792,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   }
 
   observeRogueErrorInsideInnerContainer() {
-    if (!this.innerContainer) return
+    if (!this.innerContainer || !this.required) return
 
     this.rogueErrorObserver = new MutationObserver((mutations) => {
       for (const mutation of mutations) {

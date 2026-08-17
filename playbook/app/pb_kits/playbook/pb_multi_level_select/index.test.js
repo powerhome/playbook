@@ -191,4 +191,18 @@ describe("PbMultiLevelSelect change event", () => {
 
     expect(events).toHaveLength(0)
   })
+
+  test("does not build option DOM during connect", () => {
+    const { element } = mountKit()
+
+    expect(element.querySelectorAll(".dropdown_item")).toHaveLength(0)
+  })
+
+  test("builds option DOM on first open", () => {
+    const { element, kit } = mountKit()
+
+    kit.openDropdown()
+
+    expect(element.querySelectorAll(".dropdown_item").length).toBeGreaterThan(0)
+  })
 })
