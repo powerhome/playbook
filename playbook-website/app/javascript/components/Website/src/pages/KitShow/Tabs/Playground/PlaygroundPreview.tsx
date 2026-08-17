@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { LiveProvider, LivePreview, LiveError } from "react-live";
 import { Card, colors, Flex } from "playbook-ui";
 import * as PB from "playbook-ui";
+import * as PBAdvancedTable from "playbook-ui/advanced-table";
 import * as PBCharts from "playbook-ui/charts";
 import maplibreglModule from "maplibre-gl";
 import { useEditor, EditorContent } from "@tiptap/react";
@@ -32,6 +33,7 @@ const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({
     useCallback: React.useCallback,
     Fragment: React.Fragment,
     ...PBrest,
+    ...PBAdvancedTable,
     ...PBCharts,
     EditorContent,
     FormattedDate,

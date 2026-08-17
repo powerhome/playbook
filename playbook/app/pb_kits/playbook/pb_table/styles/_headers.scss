@@ -20,7 +20,7 @@
         }
 
         th, .pb_table_th {
-          border-bottom: 1px solid $border_light;
+          border-bottom: 1px solid var(--table-border-color, #{$border_light});
         }
       }
     }
@@ -58,7 +58,7 @@
 // ensures top border is from first row of body to prevent double borders
 .header-borderless > tbody > tr:first-child > td,
 .header-borderless > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td {
-  border-top: 1px solid $border_light !important;
+  border-top: 1px solid var(--table-border-color, #{$border_light}) !important;
 }
 
 // floating code - this carries over everything for header-borderless
@@ -90,7 +90,7 @@
 
 .header-floating > tbody > tr:first-child > td,
 .header-floating > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td {
-  border-top: 1px solid $border_light !important;
+  border-top: 1px solid var(--table-border-color, #{$border_light}) !important;
 }
 
 // flatten out corners for floating headerstyle variant to avoid small triangle of white/empty space

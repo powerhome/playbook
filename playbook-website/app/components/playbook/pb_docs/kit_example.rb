@@ -55,6 +55,8 @@ module Playbook
       def sanitize_code(stringified_code)
         # Chart components that should import from playbook-ui/charts
         chart_components = %w[PbBarGraph PbCircleChart PbGaugeChart PbLineGraph]
+        # Advanced Table imports from a separate entrypoint so TanStack stays optional
+        advanced_table_components = %w[AdvancedTable]
 
         stringified_code = stringified_code.gsub('"../.."', '"playbook-ui"')
                                            .gsub('"../../"', '"playbook-ui"')
@@ -67,12 +69,15 @@ module Playbook
         end
         stringified_code = stringified_code.gsub("import { FormattedDate }", "import { Date as FormattedDate }")
 
-        # Separate chart components from regular components
+        # Separate entrypoint-specific components from regular components
         imports = stringified_code.scan(/^\s*import\s+{([^}]+)}\s+from\s+['"]playbook-ui['"]/)
         all_components = imports.flatten.join(", ").split(",").map(&:strip).uniq
 
         chart_imports = all_components.select { |comp| chart_components.include?(comp) }
-        regular_imports = all_components.reject { |comp| chart_components.include?(comp) }
+        advanced_table_imports = all_components.select { |comp| advanced_table_components.include?(comp) }
+        regular_imports = all_components.reject do |comp|
+          chart_components.include?(comp) || advanced_table_components.include?(comp)
+        end
 
         if all_components.any?
           # Remove all old import statements
@@ -81,6 +86,7 @@ module Playbook
           # Build new import statements
           new_imports = []
           new_imports << "import { #{regular_imports.join(', ')} } from 'playbook-ui'" if regular_imports.any?
+          new_imports << "import { #{advanced_table_imports.join(', ')} } from 'playbook-ui/advanced-table'" if advanced_table_imports.any?
           new_imports << "import { #{chart_imports.join(', ')} } from 'playbook-ui/charts'" if chart_imports.any?
 
           # Insert after React import

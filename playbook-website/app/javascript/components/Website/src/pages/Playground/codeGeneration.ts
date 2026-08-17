@@ -628,6 +628,35 @@ const collectComponentNamesFromCode = (code: string) =>
 const formatPlaybookImportName = (name: string) =>
   name === "FormattedDate" ? "Date as FormattedDate" : name;
 
+const getLocallyImportedNames = (importStatements: string[]) => {
+  const importedNames = new Set<string>();
+
+  importStatements.forEach((statement) => {
+    const namedImportMatch = statement.match(/import\s*\{([^}]+)\}\s*from/);
+    if (namedImportMatch) {
+      namedImportMatch[1].split(",").forEach((item) => {
+        const parts = item.trim().split(/\s+as\s+/);
+        const localName = (parts[1] || parts[0] || "").trim();
+        if (localName) importedNames.add(localName);
+      });
+    }
+
+    const namespaceImportMatch = statement.match(
+      /import\s+\*\s+as\s+([A-Za-z_$][\w$]*)\s+from/
+    );
+    if (namespaceImportMatch) {
+      importedNames.add(namespaceImportMatch[1]);
+    }
+
+    const defaultImportMatch = statement.match(/import\s+([A-Za-z_$][\w$]*)\s+from/);
+    if (defaultImportMatch) {
+      importedNames.add(defaultImportMatch[1]);
+    }
+  });
+
+  return importedNames;
+};
+
 const REACT_HOOK_IMPORTS = [
   "useCallback",
   "useEffect",
@@ -649,9 +678,11 @@ const buildReactImport = (source: string) => {
 const buildPlaybookImport = (
   instances: BuilderInstance[],
   kitsByName: Record<string, PlaygroundKit>,
-  source: string
+  source: string,
+  externalImports: string[] = []
 ) => {
   const localNames = collectLocalDeclarationNames(source);
+  const externallyImportedNames = getLocallyImportedNames(externalImports);
   const names = new Set<string>();
 
   collectImportNames(instances, kitsByName).forEach((name) => names.add(name));
@@ -659,11 +690,13 @@ const buildPlaybookImport = (
   collectComponentNamesFromCode(source).forEach((name) => names.add(name));
 
   const importNames = Array.from(names)
-    .filter((name) => !localNames.has(name))
+    .filter((name) => !localNames.has(name) && !externallyImportedNames.has(name))
     .map(formatPlaybookImportName)
     .sort();
 
-  return `import { ${importNames.length ? importNames.join(", ") : "Card"} } from "playbook-ui";`;
+  if (importNames.length === 0) return "";
+
+  return `import { ${importNames.join(", ")} } from "playbook-ui";`;
 };
 
 export const generateCode = (
@@ -693,7 +726,7 @@ ${renderedInstances}
   const imports = [
     buildReactImport(source),
     ...externalImports,
-    buildPlaybookImport(instances, kitsByName, source),
+    buildPlaybookImport(instances, kitsByName, source, externalImports),
   ].filter(Boolean);
 
   return `${imports.join("\n")}

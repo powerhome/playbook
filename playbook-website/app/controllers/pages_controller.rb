@@ -69,8 +69,11 @@ class PagesController < ApplicationController
 
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
-    # Read kit description from _description.md file
-    kit_description = read_kit_file("_description.md")
+    # Prefer platform-specific kit description (_description_react.md / _description_rails.md),
+    # then fall back to shared _description.md.
+    platform_suffix = @type == "rails" ? "_rails" : "_react"
+    kit_description = read_kit_file("_description#{platform_suffix}.md")
+    kit_description = read_kit_file("_description.md") if kit_description.blank?
 
     # Read kit sections from _sections.yml file if it exists
     kit_sections = read_kit_sections

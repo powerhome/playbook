@@ -90,6 +90,8 @@ module.exports = {
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '.+\\.(css|scss)$': 'identity-obj-proxy',
+    'playbook-ui/advanced-table': '<rootDir>/app/entrypoints/playbook-advanced-table.js',
+    'playbook-ui/charts': '<rootDir>/app/entrypoints/playbook-charts.js',
     'playbook-ui': '<rootDir>/app/entrypoints/playbook.js',
   },
 

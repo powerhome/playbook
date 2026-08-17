@@ -12,6 +12,7 @@ gem "rails", "~> 7.2.2.1"
 gem "turbo-rails", "~> 1.4.0"
 gem "puma", "~> 6.4.2"
 gem "vite_rails"
+gem "vite_ruby", "3.8.0"
 # Make Compatible with Ruby 3.1.0 Upgrade
 gem "psych", "< 4"
 gem "bootsnap", ">= 1.1.0", require: false

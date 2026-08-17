@@ -31,7 +31,7 @@ export type CompilePromptPlanResult = {
   instances: BuilderInstance[];
 };
 
-const MAX_PROMPT_INSTANCES = 40;
+const MAX_PROMPT_INSTANCES = 80;
 
 const normalizeKitName = (name: string) =>
   name
@@ -62,13 +62,28 @@ const coerceValueForPropDefinition = (
 ): { ok: boolean; value?: unknown } => {
   const type = displayPropType(definition);
   const enumValues = definition?.values ?? [];
+  const allowsObjectValue =
+    Boolean(definition?.responsive) ||
+    type.includes("responsive") ||
+    type.includes("object") ||
+    type.includes("hash");
+
+  if (isPlainObject(value) && allowsObjectValue) {
+    return { ok: true, value };
+  }
 
   if (enumValues.length > 0) {
+    if (typeof value === "number" || typeof value === "boolean") {
+      const match = enumValues.find(
+        (option) => String(option).toLowerCase() === String(value).toLowerCase()
+      );
+      return match !== undefined ? { ok: true, value: match } : { ok: false };
+    }
     if (typeof value !== "string") return { ok: false };
     const match = enumValues.find(
-      (option) => option.toLowerCase() === value.toLowerCase()
+      (option) => String(option).toLowerCase() === value.toLowerCase()
     );
-    return match ? { ok: true, value: match } : { ok: false };
+    return match !== undefined ? { ok: true, value: match } : { ok: false };
   }
 
   if (type.includes("boolean")) {

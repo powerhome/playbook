@@ -73,6 +73,11 @@ test("when striped is true", () => {
   expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card striped table-collapse-sm")
 })
 
+test("when contrastBorder is true", () => {
+  const kit = renderKit(Table, props, { contrastBorder: true })
+  expect(kit).toHaveClass("contrast-border")
+})
+
 test("Renders Table.Head subkit for Div Table", () => {
   render (<DivsTable/>)
 

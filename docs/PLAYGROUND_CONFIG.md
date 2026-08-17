@@ -106,7 +106,8 @@ Replace `KitName` with the React component name, such as `Button`, `Overlay`, or
    - `docs/_playground.overrides.json` is the source you maintain.
    - `docs/_playground.json` is the generated file the website reads.
 4. Add the kit to the Playground allowlist if it is not already enabled:
-   - `playbook-website/app/javascript/components/Website/src/pages/KitShow/index.tsx`
+   - Add the kit name to `PLAYGROUND_ENABLED_KITS` in `playbook-website/app/javascript/components/Website/src/pages/KitShow/playgroundEnabledKits.ts`
+   - (`KitShow/index.tsx` only checks that list; do not edit the allowlist there.)
 5. Validate generated examples when you add templates, wrappers, or complex children.
 
 Pre-commit also regenerates docs metadata when schema or override files change, but running the command locally makes failures easier to understand.
@@ -662,7 +663,7 @@ yarn generate:playground-configs --kit=<kit_name> --overwrite --base-only
 
 Before handing off a playground override:
 
-- The kit is in the website playground allowlist if it should be visible.
+- The kit is in `PLAYGROUND_ENABLED_KITS` (`playgroundEnabledKits.ts`) if it should be visible.
 - `docs/_playground.overrides.json` is valid JSON.
 - `docs/_playground.json` was regenerated.
 - Presets demonstrate real usage patterns.
