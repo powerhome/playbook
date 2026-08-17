@@ -1,3 +1,119 @@
 <%= pb_content_tag do %>
-  <%= react_component("MultiLevelSelect", object.multi_level_select_options)  %>
+  <% if object.label.present? %>
+    <label for="<%= object.input_id %>" data-pb-mls-label>
+      <% if object.required_indicator %>
+        <%= pb_rails("caption", props: {
+          classname: "pb_multi_level_select_kit_label",
+          color: "lighter",
+          dark: object.dark,
+          margin_bottom: "xs",
+        }) do %>
+          <%= object.label %> <span class="required_indicator">*</span>
+        <% end %>
+      <% else %>
+        <%= pb_rails("caption", props: {
+          classname: "pb_multi_level_select_kit_label",
+          color: "lighter",
+          dark: object.dark,
+          margin_bottom: "xs",
+          text: object.label,
+        }) %>
+      <% end %>
+    </label>
+  <% end %>
+
+  <div class="wrapper" data-pb-mls-wrapper>
+    <div class="input_wrapper" data-pb-mls-input-wrapper>
+      <div class="input_inner_container" data-pb-mls-inner>
+        <input
+          <% if object.error_id.present? %>
+          aria-describedby="<%= object.error_id %>"
+          aria-invalid="true"
+          <% end %>
+          data-pb-mls-search
+          <%= "disabled" if object.disabled %>
+          id="<%= object.input_id %>"
+          placeholder="<%= object.placeholder %>"
+          <%= "required" if object.required %>
+          type="text"
+        />
+      </div>
+      <div data-pb-mls-arrow-down id="<%= object.arrow_down_id %>">
+        <%= pb_rails("icon", props: { icon: "chevron-down", id: object.arrow_down_id, size: "sm" }) %>
+      </div>
+      <div data-pb-mls-arrow-up id="<%= object.arrow_up_id %>" style="display: none;">
+        <%= pb_rails("icon", props: { icon: "chevron-up", id: object.arrow_up_id, size: "sm" }) %>
+      </div>
+    </div>
+
+    <div class="dropdown_menu close" data-pb-mls-menu></div>
+  </div>
+
+  <% if object.error.present? %>
+    <%= pb_rails("body", props: {
+      aria: { atomic: "true", live: "polite" },
+      dark: object.dark,
+      html_options: { role: "alert" },
+      id: object.error_id,
+      status: "negative",
+      text: object.error,
+    }) %>
+  <% end %>
+
+  <template data-pb-mls-template="checkbox-row">
+    <div>
+      <li class="dropdown_item">
+        <div class="dropdown_item_checkbox_row">
+          <div data-pb-mls-toggle-slot></div>
+          <%= pb_rails("checkbox", props: { dark: object.dark, name: "mls_option", text: "Label", value: "placeholder" }) %>
+        </div>
+        <div data-pb-mls-nested></div>
+      </li>
+    </div>
+  </template>
+
+  <template data-pb-mls-template="radio-row">
+    <div>
+      <li class="dropdown_item">
+        <div class="dropdown_item_checkbox_row">
+          <div data-pb-mls-toggle-slot></div>
+          <%= pb_rails("radio", props: {
+            dark: object.dark,
+            name: object.input_name.presence || "mls_radio",
+            text: "Label",
+            value: "placeholder",
+          }) %>
+        </div>
+        <div data-pb-mls-nested></div>
+      </li>
+    </div>
+  </template>
+
+  <template data-pb-mls-template="hide-radio-row">
+    <div>
+      <li class="dropdown_item">
+        <div class="dropdown_item_checkbox_row">
+          <div data-pb-mls-toggle-slot></div>
+          <%= pb_rails("body", props: { dark: object.dark, text: "Label" }) %>
+        </div>
+        <div data-pb-mls-nested></div>
+      </li>
+    </div>
+  </template>
+
+  <template data-pb-mls-template="chevron-down">
+    <%= pb_rails("circle_icon_button", props: { icon: "chevron-down", variant: "link" }) %>
+  </template>
+
+  <template data-pb-mls-template="chevron-right">
+    <%= pb_rails("circle_icon_button", props: { icon: "chevron-right", variant: "link" }) %>
+  </template>
+
+  <template data-pb-mls-template="pill">
+    <%= pb_rails("form_pill", props: {
+      color: object.pill_color,
+      text: "Label",
+      wrapped: object.wrapped,
+    }) %>
+  </template>
 <% end %>

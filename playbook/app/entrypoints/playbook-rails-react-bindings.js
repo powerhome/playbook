@@ -3,12 +3,10 @@
 import ComponentRegistry from '../utils/componentRegistry'
 import '../utils/mountComponent'
 
-import MultiLevelSelect from 'kits/pb_multi_level_select/_multi_level_select'
 import Typeahead from 'kits/pb_typeahead/_typeahead'
 import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
 
 ComponentRegistry.registerComponents({
-  MultiLevelSelect,
   Typeahead,
   PhoneNumberInput,
 })
