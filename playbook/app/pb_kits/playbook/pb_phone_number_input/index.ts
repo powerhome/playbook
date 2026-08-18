@@ -356,12 +356,30 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     }
   }
 
+  private errorElementId() {
+    const inputId = this.input?.id
+    return inputId ? `${inputId}-error` : "pb-phone-number-input-error"
+  }
+
+  private syncErrorAria(errorId: string | null) {
+    if (!this.input) return
+
+    if (errorId) {
+      this.input.setAttribute("aria-invalid", "true")
+      this.input.setAttribute("aria-describedby", errorId)
+    } else {
+      this.input.setAttribute("aria-invalid", "false")
+      this.input.removeAttribute("aria-describedby")
+    }
+  }
+
   private renderError(message: string) {
     this.textInputKit?.classList.add("error")
 
     const container = this.element.querySelector(MESSAGE_CONTAINER_SELECTOR)
     if (!container) return
 
+    const errorId = this.errorElementId()
     let errorEl = container.querySelector(ERROR_MESSAGE_SELECTOR) as HTMLElement | null
     if (!errorEl) {
       errorEl = document.createElement("div")
@@ -371,12 +389,15 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       errorEl.setAttribute("aria-live", "polite")
       container.appendChild(errorEl)
     }
+    errorEl.id = errorId
     errorEl.textContent = message
+    this.syncErrorAria(errorId)
   }
 
   private removeError() {
     this.textInputKit?.classList.remove("error")
     this.element.querySelector(ERROR_MESSAGE_SELECTOR)?.remove()
+    this.syncErrorAria(null)
   }
 
   private updateValidationState(hasError: boolean) {

@@ -131,6 +131,36 @@ describe("PbPhoneNumberInput enhanced element", () => {
     expect(element.querySelector(".pb_text_input_kit")).toHaveClass("error")
   })
 
+  test("sets aria-invalid and aria-describedby when a validation error is shown", () => {
+    intlTelInput._instance.getValidationError.mockReturnValue(2)
+    const { element, input } = mountKit()
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+
+    const errorEl = element.querySelector(".pb_body_kit_negative")
+    expect(errorEl).toHaveAttribute("id", "phone-error")
+    expect(input).toHaveAttribute("aria-invalid", "true")
+    expect(input).toHaveAttribute("aria-describedby", "phone-error")
+  })
+
+  test("clears aria-invalid and aria-describedby when the error is removed", () => {
+    intlTelInput._instance.getValidationError.mockReturnValue(2)
+    const { element, input } = mountKit()
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(input).toHaveAttribute("aria-invalid", "true")
+
+    intlTelInput._instance.getValidationError.mockReturnValue(0)
+    input.value = "5555555555"
+    input.dispatchEvent(new Event("blur"))
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(input).toHaveAttribute("aria-invalid", "false")
+    expect(input).not.toHaveAttribute("aria-describedby")
+  })
+
   test("sets data-pb-phone-validation-error when required field is invalid", () => {
     intlTelInput._instance.getValidationError.mockReturnValue(2)
     const { element, input } = mountKit({ required: true }, "required")
