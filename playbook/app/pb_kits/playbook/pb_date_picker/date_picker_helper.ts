@@ -599,7 +599,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     minDate: effectiveMinDate,
     mode,
     nextArrow: `<div style="height: 14px;">${angleRightString}</div>`,
-    parseDate: (datestr, format) => flatpickr.parseDate(withDateSeparators(datestr, format), format),
+    ...(allowInput && {
+      parseDate: (datestr, format) => flatpickr.parseDate(withDateSeparators(datestr, format), format),
+    }),
     onOpen: [(_selectedDates, _dateStr, fp) => {
       activePortalZIndex = portalHost
         ? resolvePortaledFloatingZIndex(
