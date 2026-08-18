@@ -28,6 +28,29 @@ const getPositionElement = (element: string | Element) => {
   return (typeof element === 'string') ? document.querySelectorAll(element)[0] : element
 }
 
+// For allowInput: digits a zero-padded value occupies for each flatpickr date token
+const dateTokenWidths: { [key: string]: number } = { Y: 4, d: 2, j: 2, m: 2, n: 2, y: 2 }
+
+// Flatpickr parses format separators as "any character", so allowInput values typed without them 
+// ("08152026" for "m/d/Y") get mis-grouped into day "52", which overflows to 09/21/2026. Put the separators back before it parses.
+const withDateSeparators = (dateStr: string, format: string) => {
+  if (typeof dateStr !== 'string' || !/^\d+$/.test(dateStr.trim())) return dateStr
+
+  const digits = dateStr.trim()
+  const tokens = [...(format || '').split(' ')[0]]
+  const expectedLength = tokens.reduce((total, token) => total + (dateTokenWidths[token] || 0), 0)
+  const hasUnsupportedToken = tokens.some((token) => /[a-z]/i.test(token) && !dateTokenWidths[token])
+  if (hasUnsupportedToken || digits.length !== expectedLength) return dateStr
+
+  let position = 0
+  return tokens.map((token) => {
+    const width = dateTokenWidths[token]
+    if (!width) return token
+    position += width
+    return digits.slice(position - width, position)
+  }).join('')
+}
+
 type DatePickerConfig = {
   closeOnSelect?: boolean,
   customQuickPickDates: { override: boolean, dates: any[] },
@@ -576,6 +599,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     minDate: effectiveMinDate,
     mode,
     nextArrow: `<div style="height: 14px;">${angleRightString}</div>`,
+    parseDate: (datestr, format) => flatpickr.parseDate(withDateSeparators(datestr, format), format),
     onOpen: [(_selectedDates, _dateStr, fp) => {
       activePortalZIndex = portalHost
         ? resolvePortaledFloatingZIndex(
