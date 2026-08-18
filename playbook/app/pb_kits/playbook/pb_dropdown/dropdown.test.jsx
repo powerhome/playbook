@@ -197,6 +197,38 @@ test('placeholder shows default "Select..." when not provided', () => {
   expect(trigger).toHaveTextContent('Select...')
 })
 
+test('placeholder Body uses lighter color', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        options={options}
+        placeholder="Choose a country"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const placeholderBody = kit.querySelector('.dropdown_trigger_wrapper_select_only .pb_body_kit_lighter')
+  expect(placeholderBody).toBeInTheDocument()
+  expect(placeholderBody).toHaveTextContent('Choose a country')
+})
+
+test('selected value Body does not use lighter color', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        defaultValue={options[0]}
+        options={options}
+        placeholder="Choose a country"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const triggerBodies = kit.querySelectorAll('.dropdown_trigger_wrapper_select_only [class^="pb_body_kit"]')
+  const selectedBody = Array.from(triggerBodies).find((el) => el.textContent === options[0].label)
+  expect(selectedBody).toBeTruthy()
+  expect(selectedBody).not.toHaveClass('pb_body_kit_lighter')
+})
+
 test('generated label prop', () => { 
   render (
     <Dropdown
