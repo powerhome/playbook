@@ -48,11 +48,11 @@ module Playbook
                     when :max_width
                       value.to_s.end_with?("%") ? "max_width_#{value.to_i}_percent" : "max_width_#{value.downcase}"
                     when :height
-                      "height_#{value.downcase}"
+                      value.to_s.end_with?("%") ? "height_#{value.to_i}_percent" : "height_#{value.downcase}"
                     when :min_height
-                      "min_height_#{value.downcase}"
+                      value.to_s.end_with?("%") ? "min_height_#{value.to_i}_percent" : "min_height_#{value.downcase}"
                     when :max_height
-                      "max_height_#{value.downcase}"
+                      value.to_s.end_with?("%") ? "max_height_#{value.to_i}_percent" : "max_height_#{value.downcase}"
                     when :position
                       "position_#{value}"
                     when :vertical_alignment

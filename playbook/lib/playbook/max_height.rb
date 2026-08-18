@@ -6,13 +6,13 @@ module Playbook
       base.prop :max_height
     end
 
-    MAX_HEIGHT_VALUES = %w[auto xs sm md lg xl xxl xxxl].freeze
+    MAX_HEIGHT_VALUES = %w[auto xs sm md lg xl xxl xxxl 100% 100vh].freeze
 
     def max_height_props
       value = max_height
       return nil unless value
 
-      "max_height_#{value}" if MAX_HEIGHT_VALUES.include?(value.to_s)
+      "max_height_#{filter_classname(value.to_s)}" if MAX_HEIGHT_VALUES.include?(value.to_s)
     end
 
     def max_height_options
