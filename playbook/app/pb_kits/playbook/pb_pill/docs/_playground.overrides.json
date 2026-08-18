@@ -56,7 +56,6 @@
       "name": "Notification",
       "props": {
         "text": "1",
-        "variant": "primary",
         "notification": true,
         "textTransform": "none"
       },
@@ -82,7 +81,7 @@
     },
     "notification": {
       "when": {},
-      "message": "notification applies a solid fill. Combine with variant for color — primary matches Badge notification, error matches Badge notificationError.",
+      "message": "notification uses a solid primary fill by default. set variant to error for the red treatment.",
       "type": "info"
     },
     "text_transform": {

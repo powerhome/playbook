@@ -17,7 +17,7 @@ module Playbook
                             default: "lowercase"
 
       def classname
-        generate_classname("pb_pill_kit", variant, text_transform, notification_class, size)
+        generate_classname("pb_pill_kit", color_variant, text_transform, notification_class, size)
       end
 
       def display_text
@@ -25,6 +25,10 @@ module Playbook
       end
 
     private
+
+      def color_variant
+        notification && variant != "error" ? "primary" : variant
+      end
 
       def notification_class
         notification ? "notification" : nil

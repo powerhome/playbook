@@ -82,13 +82,26 @@ test('displays size sm with variant and textTransform', () => {
   expect(kit).toHaveClass('pb_pill_kit_success_none_sm')
 })
 
-test('displays notification', () => {
+test('displays notification as primary by default', () => {
   render(
     <Pill
         data={{ testid: testId }}
         notification
         text="1"
-        variant="primary"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('pb_pill_kit_primary_lowercase_notification')
+})
+
+test('displays notification as primary when variant is not error', () => {
+  render(
+    <Pill
+        data={{ testid: testId }}
+        notification
+        text="1"
+        variant="success"
     />
   )
 
@@ -117,7 +130,6 @@ test('displays notification with size sm', () => {
         notification
         size="sm"
         text="1"
-        variant="primary"
     />
   )
 

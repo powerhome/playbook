@@ -74,7 +74,7 @@ export const KIT_VISUAL_CUES = {
     not: ['badge', 'form_pill', 'label_pill'],
     gotchas: [
       'Use text prop — children are ignored and render empty',
-      'Use notification with variant for Badge notification parity (primary / error); there is no notificationError variant',
+      'notification uses primary by default; set variant to error for the red treatment. Other variants are ignored when notification is true',
     ],
     cues: { typicalProps: ['text', 'variant'] },
   },

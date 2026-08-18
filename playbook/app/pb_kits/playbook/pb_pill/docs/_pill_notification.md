@@ -1,1 +1,1 @@
-Set `notification` for a solid fill that matches Badge's notification treatment. Combine with `variant` for color — `primary` matches Badge `notification`, and `error` matches Badge `notificationError`.
+Set `notification` for a solid primary fill that matches Badge's notification treatment. Pass `variant="error"` / `variant: "error"` for the red notificationError treatment.

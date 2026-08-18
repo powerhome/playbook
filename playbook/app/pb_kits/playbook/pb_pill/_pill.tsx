@@ -32,10 +32,11 @@ const Pill = (props: PillProps) => {
     textTransform = 'lowercase',
   } = props
 
+  const colorVariant = notification && variant !== 'error' ? 'primary' : variant
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const classes = classnames(buildCss('pb_pill_kit', variant, textTransform, notification ? 'notification' : '', size || ''), globalProps(props), className)
+  const classes = classnames(buildCss('pb_pill_kit', colorVariant, textTransform, notification ? 'notification' : '', size || ''), globalProps(props), className)
 
   return (
     <div
