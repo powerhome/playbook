@@ -2,6 +2,7 @@
   "template": "<Pill{{props}}>{{children}}</Pill>",
   "propTargets": {},
   "defaults": {
+    "notification": false,
     "variant": "neutral",
     "textTransform": "lowercase",
     "text": "neutral"
@@ -24,6 +25,7 @@
       "name": "Appearance",
       "props": [
         "variant",
+        "notification",
         "size",
         "textTransform"
       ]
@@ -66,6 +68,26 @@
         "textTransform": "none"
       },
       "children": ""
+    },
+    {
+      "name": "Notification",
+      "props": {
+        "text": "1",
+        "variant": "primary",
+        "notification": true,
+        "textTransform": "none"
+      },
+      "children": ""
+    },
+    {
+      "name": "Notification error",
+      "props": {
+        "text": "1",
+        "variant": "error",
+        "notification": true,
+        "textTransform": "none"
+      },
+      "children": ""
     }
   ],
   "conditionals": {},
@@ -73,6 +95,11 @@
     "variant": {
       "when": {},
       "message": "variant controls the visual color for the pill.",
+      "type": "info"
+    },
+    "notification": {
+      "when": {},
+      "message": "notification applies a solid fill. Combine with variant for color — primary matches Badge notification, error matches Badge notificationError.",
       "type": "info"
     },
     "text_transform": {

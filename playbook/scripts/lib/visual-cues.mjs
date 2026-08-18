@@ -72,7 +72,10 @@ export const KIT_VISUAL_CUES = {
       'Colored tag next to a title (Active, Pending, etc.)',
     ],
     not: ['badge', 'form_pill', 'label_pill'],
-    gotchas: ['Use text prop — children are ignored and render empty'],
+    gotchas: [
+      'Use text prop — children are ignored and render empty',
+      'Use notification with variant for Badge notification parity (primary / error); there is no notificationError variant',
+    ],
     cues: { typicalProps: ['text', 'variant'] },
   },
   badge: {

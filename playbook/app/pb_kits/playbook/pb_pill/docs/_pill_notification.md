@@ -1,0 +1,1 @@
+Set `notification` for a solid fill that matches Badge's notification treatment. Combine with `variant` for color — `primary` matches Badge `notification`, and `error` matches Badge `notificationError`.
