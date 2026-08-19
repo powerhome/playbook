@@ -3,6 +3,7 @@ import HtmlOptions from "./Examples/HtmlOptions";
 import Margin from "./Examples/Margin";
 import Cursor from "./Examples/Cursor";
 import Hover from "./Examples/Hover";
+import OnClick from "./Examples/OnClick";
 import Dark from "./Examples/Dark";
 import LineHeight from "./Examples/LineHeightGlobalProps";
 import FlexBox from "./Examples/FlexBoxGlobalProps";
@@ -49,6 +50,7 @@ const COMPONENT_MAP = {
   height: Height,
   hover: Hover,
   html_options: HtmlOptions,
+  on_click: OnClick,
   margin: Margin,
   line_height: LineHeight,
   display: Display,
