@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalEventProps, globalProps, GlobalEventProps, GlobalProps } from '../utilities/globalProps'
 
 import Highlight from '../pb_highlight/_highlight'
 
@@ -21,7 +21,7 @@ type BodyProps = {
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
   variant?: null | 'link',
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const Body = (props: BodyProps): React.ReactElement => {
   if (props.variant) deprecatedProps() //status prop is deprecated, use color instead please
@@ -56,6 +56,7 @@ const Body = (props: BodyProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >
