@@ -207,27 +207,26 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     const descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")
     if (!descriptor?.get || !descriptor?.set) return
 
+    const input = this.input
     const nativeGet = descriptor.get
     const nativeSet = descriptor.set
 
-    Object.defineProperty(this.input, "value", {
+    Object.defineProperty(input, "value", {
       configurable: true,
       enumerable: descriptor.enumerable,
-      get() {
-        return nativeGet.call(this)
-      },
-      set(nextValue: string) {
-        const previousUnformatted = kit.lastUnformattedValue
-        nativeSet.call(this, nextValue)
-        if (kit.syncingFromDom) return
+      get: () => nativeGet.call(input),
+      set: (nextValue: string) => {
+        const previousUnformatted = this.lastUnformattedValue
+        nativeSet.call(input, nextValue)
+        if (this.syncingFromDom) return
 
         const nextUnformatted = unformatNumber(String(nextValue ?? ""))
         if (!nextUnformatted || Math.abs(nextUnformatted.length - previousUnformatted.length) > 1) {
-          kit.syncAfterExternalValueChange()
+          this.syncAfterExternalValueChange()
           return
         }
 
-        queueMicrotask(() => kit.handleProgrammaticValueChange())
+        queueMicrotask(() => this.handleProgrammaticValueChange())
       },
     })
     this.valuePatched = true
