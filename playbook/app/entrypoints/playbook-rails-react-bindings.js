@@ -3,11 +3,9 @@
 import ComponentRegistry from '../utils/componentRegistry'
 import '../utils/mountComponent'
 
-import MultiLevelSelect from 'kits/pb_multi_level_select/_multi_level_select'
 import Typeahead from 'kits/pb_typeahead/_typeahead'
 
 ComponentRegistry.registerComponents({
-  MultiLevelSelect,
   Typeahead,
 })
 
