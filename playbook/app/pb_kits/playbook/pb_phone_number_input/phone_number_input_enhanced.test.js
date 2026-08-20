@@ -11,6 +11,7 @@ jest.mock("intl-tel-input/build/js/intlTelInputWithUtils.js", () => {
     })),
     getValidationError: jest.fn(() => 0),
     isValidNumber: jest.fn(() => true),
+    setNumber: jest.fn(),
   }
   const fn = jest.fn((input, options) => {
     if (options.autoPlaceholder === "polite") {
@@ -43,23 +44,30 @@ const defaultConfig = {
 const mountKit = (config = {}, inputAttrs = "") => {
   const mergedConfig = { ...defaultConfig, ...config }
   document.body.innerHTML = `
-    <div class="pb_phone_number_input"
-         data-pb-phone-number-input="true"
-         data-pb-phone-number-input-config='${JSON.stringify(mergedConfig)}'>
-      <div class="pb_text_input_kit mb_sm">
-        <div class="text_input_wrapper" data-pb-validation-container="true">
-          <input class="text_input" type="tel" id="phone" name="${mergedConfig.name}" ${inputAttrs} />
+    <form>
+      <div class="pb_phone_number_input"
+           data-pb-phone-number-input="true"
+           data-pb-phone-number-input-config='${JSON.stringify(mergedConfig)}'>
+        <div class="pb_text_input_kit mb_sm">
+          <div class="text_input_wrapper" data-pb-validation-container="true">
+            <input class="text_input" type="tel" id="phone" name="${mergedConfig.name}" ${inputAttrs} />
+          </div>
         </div>
       </div>
-    </div>
+      <button type="submit">Filter</button>
+    </form>
   `
+  const form = document.querySelector("form")
+  form.addEventListener("submit", (event) => event.preventDefault())
   const element = document.querySelector("[data-pb-phone-number-input]")
   const kit = new PbPhoneNumberInput(element)
   kit.connect()
   return {
     element,
+    form,
     input: element.querySelector("input"),
     kit,
+    submit: form.querySelector("button"),
     textInputKit: element.querySelector(".pb_text_input_kit"),
   }
 }
@@ -170,6 +178,60 @@ describe("PbPhoneNumberInput enhanced element", () => {
 
     expect(element).toHaveAttribute("data-pb-phone-validation-error", "true")
     expect(input.validationMessage).toBe("Invalid United States phone number (too short)")
+  })
+
+  test("clears stale validity when filter Default sets value without an input event", async () => {
+    intlTelInput._instance.getValidationError.mockReturnValue(2)
+    const { element, input } = mountKit({ required: false })
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
+    expect(input.validity.customError).toBe(true)
+
+    input.value = ""
+    await Promise.resolve()
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(element.querySelector(".pb_text_input_kit")).not.toHaveClass("error")
+    expect(input.validity.customError).toBe(false)
+  })
+
+  test("syncs intl-tel-input and drops the error when filter Default restores a value", async () => {
+    intlTelInput._instance.getValidationError.mockReturnValue(2)
+    const { element, input } = mountKit({ required: false, formatAsYouType: true })
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
+
+    intlTelInput._instance.getValidationError.mockReturnValue(0)
+    input.value = "(555) 555-5555"
+    await Promise.resolve()
+
+    expect(intlTelInput._instance.setNumber).toHaveBeenCalledWith("(555) 555-5555")
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(input.validity.customError).toBe(false)
+  })
+
+  test("Filter click drops leftover customValidity so an optional empty field does not show a blank error", async () => {
+    intlTelInput._instance.getValidationError.mockReturnValue(2)
+    const { element, input, submit, textInputKit } = mountKit({ required: false })
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+
+    input.value = ""
+    await Promise.resolve()
+
+    input.setCustomValidity("stale")
+    textInputKit.classList.add("error")
+
+    submit.dispatchEvent(new MouseEvent("click", { bubbles: true }))
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(textInputKit).not.toHaveClass("error")
+    expect(input.validity.customError).toBe(false)
   })
 
   test("clears stale error UI when the value is reset to empty", () => {

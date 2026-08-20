@@ -29,6 +29,7 @@ type PhoneNumberInputConfig = {
   required?: boolean,
   showPlaceholder?: boolean,
   strictMode?: boolean,
+  value?: string,
 }
 
 type IntlTelInputInstance = {
@@ -36,6 +37,7 @@ type IntlTelInputInstance = {
   getSelectedCountryData: () => { dialCode?: string, iso2?: string, name?: string },
   getValidationError: () => number,
   isValidNumber: () => boolean,
+  setNumber?: (number: string) => void,
 }
 
 const formatToGlobalCountryName = (countryName: string) => {
@@ -76,6 +78,11 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
   private formSubmitted = false
   private hasStartedValidating = false
   private placeholderTemplate: string | null = null
+  private form: HTMLFormElement | null = null
+  private receivedInputEvent = false
+  private lastUnformattedValue = ""
+  private valuePatched = false
+  private syncingFromDom = false
   private handleInvalidBound = (event: Event) => this.handleInvalid(event)
 
   connect(): void {
@@ -89,7 +96,11 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     if (this.error) this.formSubmitted = true
     if (!this.input) return
 
+    this.form = this.input.closest("form")
+    this.lastUnformattedValue = unformatNumber(this.input.value)
     this.initIntlTelInput()
+    this.ensureFilterResetDefaultValue()
+    this.interceptValueSetter()
     this.bindEvents()
     this.updatePhoneNumberData()
     this.updateValidationState(this.error.length > 0)
@@ -104,11 +115,17 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       this.input.removeEventListener("blur", this.handleBlur)
       this.input.removeEventListener("input", this.handleInput)
       this.input.removeEventListener("change", this.handleInput)
+      if (this.valuePatched) Reflect.deleteProperty(this.input, "value")
     }
 
+    this.form?.removeEventListener("click", this.handleFormClickCapture, true)
+    this.form?.removeEventListener("keydown", this.handleFormKeydown, true)
+    this.form?.removeEventListener("reset", this.handleFormReset)
     document.removeEventListener("invalid", this.handleInvalidBound, true)
     this.iti?.destroy?.()
     this.iti = null
+    this.form = null
+    this.valuePatched = false
   }
 
   private parseConfig(): PhoneNumberInputConfig {
@@ -171,7 +188,121 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     this.input.addEventListener("blur", this.handleBlur)
     this.input.addEventListener("input", this.handleInput)
     this.input.addEventListener("change", this.handleInput)
+    this.form?.addEventListener("click", this.handleFormClickCapture, true)
+    this.form?.addEventListener("keydown", this.handleFormKeydown, true)
+    this.form?.addEventListener("reset", this.handleFormReset)
     document.addEventListener("invalid", this.handleInvalidBound, true)
+  }
+
+  private ensureFilterResetDefaultValue() {
+    if (!this.input || this.input.getAttribute("data-default-value")) return
+
+    const defaultValue = this.config.value
+    if (defaultValue) this.input.setAttribute("data-default-value", defaultValue)
+  }
+
+  private interceptValueSetter() {
+    if (!this.input || this.valuePatched) return
+
+    const descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")
+    if (!descriptor?.get || !descriptor?.set) return
+
+    const nativeGet = descriptor.get
+    const nativeSet = descriptor.set
+
+    Object.defineProperty(this.input, "value", {
+      configurable: true,
+      enumerable: descriptor.enumerable,
+      get() {
+        return nativeGet.call(this)
+      },
+      set: (nextValue: string) => {
+        const previousUnformatted = this.lastUnformattedValue
+        nativeSet.call(this, nextValue)
+        if (this.syncingFromDom) return
+
+        const nextUnformatted = unformatNumber(String(nextValue ?? ""))
+        if (!nextUnformatted || Math.abs(nextUnformatted.length - previousUnformatted.length) > 1) {
+          this.syncAfterExternalValueChange()
+          return
+        }
+
+        queueMicrotask(() => this.handleProgrammaticValueChange())
+      },
+    })
+    this.valuePatched = true
+  }
+
+  private syncItiFromInput() {
+    if (!this.input || this.syncingFromDom) return
+    this.syncingFromDom = true
+    try {
+      this.iti?.setNumber?.(this.input.value)
+    } finally {
+      this.syncingFromDom = false
+    }
+  }
+
+  private clearClientValidation() {
+    this.error = ""
+    this.formSubmitted = false
+    this.removeError()
+    this.updateValidationState(false)
+  }
+
+  private syncAfterExternalValueChange() {
+    this.receivedInputEvent = false
+    this.lastUnformattedValue = unformatNumber(this.inputValue())
+    this.syncItiFromInput()
+    this.updatePhoneNumberData()
+
+    if (!this.inputValue().trim()) {
+      this.clearClientValidation()
+      return
+    }
+
+    if (this.error) this.validateErrors()
+  }
+
+  private handleProgrammaticValueChange() {
+    if (!this.inputValue().trim()) {
+      this.syncAfterExternalValueChange()
+      return
+    }
+
+    if (this.receivedInputEvent) {
+      this.receivedInputEvent = false
+      return
+    }
+
+    if (unformatNumber(this.inputValue()) === this.lastUnformattedValue) return
+    this.syncAfterExternalValueChange()
+  }
+
+  private syncConstraintValidityToCurrentValue() {
+    this.syncItiFromInput()
+    this.updatePhoneNumberData()
+    this.formSubmitted = true
+    this.validateErrors()
+  }
+
+  private handleFormClickCapture = (event: Event) => {
+    const target = event.target as Element | null
+    if (!target || target.closest(".iti__dropdown-content, .iti__country-container")) return
+    if (!target.closest("button, input[type='submit'], input[type='reset']")) return
+
+    this.syncConstraintValidityToCurrentValue()
+  }
+
+  private handleFormKeydown = (event: KeyboardEvent) => {
+    if (event.key !== "Enter") return
+    if ((event.target as HTMLElement)?.tagName === "TEXTAREA") return
+
+    this.syncConstraintValidityToCurrentValue()
+  }
+
+  private handleFormReset = () => {
+    queueMicrotask(() => this.handleProgrammaticValueChange())
   }
 
   private handleCountryChange = () => {
@@ -215,16 +346,14 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
   }
 
   private handleInput = () => {
+    this.receivedInputEvent = true
+    this.lastUnformattedValue = unformatNumber(this.inputValue())
     this.formSubmitted = false
     this.updatePhoneNumberData()
 
     // Filter reset / programmatic clear removes the value but can leave a stale
     // customValidity and an empty error slot. Drop the old error until blur or submit.
-    if (!this.inputValue().trim()) {
-      this.error = ""
-      this.removeError()
-      this.updateValidationState(false)
-    }
+    if (!this.inputValue().trim()) this.clearClientValidation()
   }
 
   private handleInvalid(event: Event) {
