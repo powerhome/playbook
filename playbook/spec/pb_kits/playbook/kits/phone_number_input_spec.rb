@@ -46,16 +46,6 @@ RSpec.describe Playbook::PbPhoneNumberInput do
       expect(config["initialCountry"]).to eq "us"
       expect(config["required"]).to be true
     end
-
-    it "includes data-default-value when value is present" do
-      example = subject.new(value: "5555555555")
-      expect(example.data[:default_value]).to eq "5555555555"
-      expect(JSON.parse(example.data[:pb_phone_number_input_config])["value"]).to eq "5555555555"
-    end
-
-    it "omits data-default-value when value is blank" do
-      expect(subject.new(value: "").data[:default_value]).to be_nil
-    end
   end
 
   describe "#phone_number_input_config" do

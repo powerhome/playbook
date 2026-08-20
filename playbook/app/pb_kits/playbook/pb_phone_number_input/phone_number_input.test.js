@@ -13,7 +13,6 @@ jest.mock("intl-tel-input/build/js/intlTelInputWithUtils.js", () => {
     jest.spyOn(instance, "getSelectedCountryData")
     jest.spyOn(instance, "getValidationError")
     jest.spyOn(instance, "isValidNumber")
-    if (typeof instance.setNumber === "function") jest.spyOn(instance, "setNumber")
     return instance
   })
   if (typeof actualDefault.getCountryData === "function") {
@@ -310,30 +309,23 @@ describe("PbPhoneNumberInput enhanced element", () => {
   const mountKit = (config = {}, inputAttrs = "") => {
     const mergedConfig = { ...defaultConfig, ...config }
     document.body.innerHTML = `
-      <form>
-        <div class="pb_phone_number_input"
-             data-pb-phone-number-input="true"
-             data-pb-phone-number-input-config='${JSON.stringify(mergedConfig)}'>
-          <div class="pb_text_input_kit mb_sm">
-            <div class="text_input_wrapper" data-pb-validation-container="true">
-              <input class="text_input" type="tel" id="phone" name="${mergedConfig.name}" ${inputAttrs} />
-            </div>
+      <div class="pb_phone_number_input"
+           data-pb-phone-number-input="true"
+           data-pb-phone-number-input-config='${JSON.stringify(mergedConfig)}'>
+        <div class="pb_text_input_kit mb_sm">
+          <div class="text_input_wrapper" data-pb-validation-container="true">
+            <input class="text_input" type="tel" id="phone" name="${mergedConfig.name}" ${inputAttrs} />
           </div>
         </div>
-        <button type="submit">Filter</button>
-      </form>
+      </div>
     `
-    const form = document.querySelector("form")
-    form.addEventListener("submit", (event) => event.preventDefault())
     const element = document.querySelector("[data-pb-phone-number-input]")
     const kit = new PbPhoneNumberInput(element)
     kit.connect()
     return {
       element,
-      form,
       input: element.querySelector("input[type='tel']"),
       kit,
-      submit: form.querySelector("button[type='submit']"),
       textInputKit: element.querySelector(".pb_text_input_kit"),
     }
   }
@@ -439,48 +431,6 @@ describe("PbPhoneNumberInput enhanced element", () => {
 
     expect(element).toHaveAttribute("data-pb-phone-validation-error", "true")
     expect(input.validationMessage).toBe("Invalid United States phone number (too short)")
-  })
-
-  test("filter Default and Filter click clear stale validation on an optional field", async () => {
-    const { element, input, submit, textInputKit } = mountKit({ required: false })
-    lastIti().getValidationError.mockReturnValue(2)
-
-    input.value = "12"
-    input.dispatchEvent(new Event("blur"))
-    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
-    expect(input.validity.customError).toBe(true)
-
-    input.value = ""
-    await Promise.resolve()
-
-    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
-    expect(textInputKit).not.toHaveClass("error")
-    expect(input.validity.customError).toBe(false)
-
-    input.setCustomValidity("stale")
-    textInputKit.classList.add("error")
-    submit.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-
-    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
-    expect(textInputKit).not.toHaveClass("error")
-    expect(input.validity.customError).toBe(false)
-  })
-
-  test("syncs intl-tel-input when filter Default restores a value", async () => {
-    const { element, input } = mountKit({ required: false, formatAsYouType: true })
-    lastIti().getValidationError.mockReturnValue(2)
-
-    input.value = "12"
-    input.dispatchEvent(new Event("blur"))
-    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
-
-    lastIti().getValidationError.mockReturnValue(0)
-    input.value = "(555) 555-5555"
-    await Promise.resolve()
-
-    expect(lastIti().setNumber).toHaveBeenCalledWith("(555) 555-5555")
-    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
-    expect(input.validity.customError).toBe(false)
   })
 
   test("clears stale error UI when the value is reset to empty", () => {

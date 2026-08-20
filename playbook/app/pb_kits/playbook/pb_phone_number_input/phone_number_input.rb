@@ -46,9 +46,7 @@ module Playbook
         Hash(values[:data]).merge(
           pb_phone_number_input: true,
           pb_phone_number_input_config: phone_number_input_config.to_json
-        ).tap do |attrs|
-          attrs[:default_value] = value if value.present?
-        end
+        )
       end
 
       def phone_number_input_config
@@ -67,7 +65,6 @@ module Playbook
           required: required,
           showPlaceholder: show_placeholder,
           strictMode: strict_mode,
-          value: value,
         }
       end
     end
