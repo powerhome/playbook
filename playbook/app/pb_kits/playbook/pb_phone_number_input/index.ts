@@ -216,18 +216,18 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       get() {
         return nativeGet.call(this)
       },
-      set: (nextValue: string) => {
-        const previousUnformatted = this.lastUnformattedValue
+      set(nextValue: string) {
+        const previousUnformatted = kit.lastUnformattedValue
         nativeSet.call(this, nextValue)
-        if (this.syncingFromDom) return
+        if (kit.syncingFromDom) return
 
         const nextUnformatted = unformatNumber(String(nextValue ?? ""))
         if (!nextUnformatted || Math.abs(nextUnformatted.length - previousUnformatted.length) > 1) {
-          this.syncAfterExternalValueChange()
+          kit.syncAfterExternalValueChange()
           return
         }
 
-        queueMicrotask(() => this.handleProgrammaticValueChange())
+        queueMicrotask(() => kit.handleProgrammaticValueChange())
       },
     })
     this.valuePatched = true
