@@ -36,6 +36,7 @@ type IntlTelInputInstance = {
   getSelectedCountryData: () => { dialCode?: string, iso2?: string, name?: string },
   getValidationError: () => number,
   isValidNumber: () => boolean,
+  setNumber?: (number: string) => void,
 }
 
 const formatToGlobalCountryName = (countryName: string) => {
@@ -76,6 +77,9 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
   private formSubmitted = false
   private hasStartedValidating = false
   private placeholderTemplate: string | null = null
+  private applyingValue = false
+  private skipProgrammaticSync = false
+  private valuePatched = false
   private handleInvalidBound = (event: Event) => this.handleInvalid(event)
 
   connect(): void {
@@ -90,6 +94,7 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     if (!this.input) return
 
     this.initIntlTelInput()
+    this.watchProgrammaticValueChanges()
     this.bindEvents()
     this.updatePhoneNumberData()
     this.updateValidationState(this.error.length > 0)
@@ -104,11 +109,13 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       this.input.removeEventListener("blur", this.handleBlur)
       this.input.removeEventListener("input", this.handleInput)
       this.input.removeEventListener("change", this.handleInput)
+      if (this.valuePatched) Reflect.deleteProperty(this.input, "value")
     }
 
     document.removeEventListener("invalid", this.handleInvalidBound, true)
     this.iti?.destroy?.()
     this.iti = null
+    this.valuePatched = false
   }
 
   private parseConfig(): PhoneNumberInputConfig {
@@ -174,6 +181,69 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     document.addEventListener("invalid", this.handleInvalidBound, true)
   }
 
+  private watchProgrammaticValueChanges() {
+    if (!this.input || this.valuePatched) return
+
+    const descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")
+    if (!descriptor?.get || !descriptor?.set) return
+
+    const input = this.input
+    const nativeGet = descriptor.get
+    const nativeSet = descriptor.set
+
+    Object.defineProperty(input, "value", {
+      configurable: true,
+      enumerable: descriptor.enumerable,
+      get: () => nativeGet.call(input),
+      set: (nextValue: string) => {
+        nativeSet.call(input, nextValue)
+        if (this.applyingValue) return
+
+        if (!String(nextValue ?? "").trim()) {
+          this.syncProgrammaticValueChange()
+          return
+        }
+
+        queueMicrotask(() => this.syncProgrammaticValueChange())
+      },
+    })
+    this.valuePatched = true
+  }
+
+  private syncProgrammaticValueChange() {
+    if (!this.inputValue().trim()) {
+      this.skipProgrammaticSync = false
+      this.applyItiNumber("")
+      this.clearClientValidation()
+      return
+    }
+
+    if (this.skipProgrammaticSync) {
+      this.skipProgrammaticSync = false
+      return
+    }
+
+    this.applyItiNumber(this.inputValue())
+    this.updatePhoneNumberData()
+    this.clearClientValidation()
+  }
+
+  private applyItiNumber(value: string) {
+    this.applyingValue = true
+    try {
+      this.iti?.setNumber?.(value)
+    } finally {
+      this.applyingValue = false
+    }
+  }
+
+  private clearClientValidation() {
+    this.error = ""
+    this.formSubmitted = false
+    this.removeError()
+    this.updateValidationState(false)
+  }
+
   private handleCountryChange = () => {
     this.updatePhoneNumberData()
     this.validateErrors()
@@ -215,14 +285,11 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
   }
 
   private handleInput = () => {
+    this.skipProgrammaticSync = true
     this.formSubmitted = false
     this.updatePhoneNumberData()
 
-    if (!this.inputValue().trim()) {
-      this.error = ""
-      this.removeError()
-      this.updateValidationState(false)
-    }
+    if (!this.inputValue().trim()) this.clearClientValidation()
   }
 
   private handleInvalid(event: Event) {

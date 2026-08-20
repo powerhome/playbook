@@ -433,6 +433,23 @@ describe("PbPhoneNumberInput enhanced element", () => {
     expect(input.validationMessage).toBe("Invalid United States phone number (too short)")
   })
 
+  test("clears error when Default sets the value empty without an input event", async () => {
+    const { element, input } = mountKit({ required: false })
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
+    expect(input.validity.customError).toBe(true)
+
+    input.value = ""
+    await Promise.resolve()
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(element.querySelector(".pb_text_input_kit")).not.toHaveClass("error")
+    expect(input.validity.customError).toBe(false)
+  })
+
   test("clears stale error UI when the value is reset to empty", () => {
     const { element, input } = mountKit({ required: true }, "required")
     lastIti().getValidationError.mockReturnValue(2)
