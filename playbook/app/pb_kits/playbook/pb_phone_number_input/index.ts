@@ -107,6 +107,8 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       this.input.removeEventListener("close:countrydropdown", this.handleDropdownClose)
       this.input.removeEventListener("focus", this.handleFocus)
       this.input.removeEventListener("blur", this.handleBlur)
+      this.input.removeEventListener("input", this.handleInputCapture, true)
+      this.input.removeEventListener("change", this.handleInputCapture, true)
       this.input.removeEventListener("input", this.handleInput)
       this.input.removeEventListener("change", this.handleInput)
       if (this.valuePatched) Reflect.deleteProperty(this.input, "value")
@@ -176,6 +178,8 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     this.input.addEventListener("close:countrydropdown", this.handleDropdownClose)
     this.input.addEventListener("focus", this.handleFocus)
     this.input.addEventListener("blur", this.handleBlur)
+    this.input.addEventListener("input", this.handleInputCapture, true)
+    this.input.addEventListener("change", this.handleInputCapture, true)
     this.input.addEventListener("input", this.handleInput)
     this.input.addEventListener("change", this.handleInput)
     document.addEventListener("invalid", this.handleInvalidBound, true)
@@ -196,6 +200,7 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       enumerable: descriptor.enumerable,
       get: () => nativeGet.call(input),
       set: (nextValue: string) => {
+        const skipThisAssignment = this.skipProgrammaticSync
         nativeSet.call(input, nextValue)
         if (this.applyingValue) return
 
@@ -204,7 +209,8 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
           return
         }
 
-        queueMicrotask(() => this.syncProgrammaticValueChange())
+        if (skipThisAssignment) return
+        this.syncProgrammaticValueChange()
       },
     })
     this.valuePatched = true
@@ -215,11 +221,6 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       this.skipProgrammaticSync = false
       this.applyItiNumber("")
       this.clearClientValidation()
-      return
-    }
-
-    if (this.skipProgrammaticSync) {
-      this.skipProgrammaticSync = false
       return
     }
 
@@ -284,12 +285,17 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     this.validateErrors()
   }
 
-  private handleInput = () => {
+  private handleInputCapture = () => {
     this.skipProgrammaticSync = true
+    queueMicrotask(() => { this.skipProgrammaticSync = false })
+  }
+
+  private handleInput = () => {
     this.formSubmitted = false
     this.updatePhoneNumberData()
 
     if (!this.inputValue().trim()) this.clearClientValidation()
+    this.skipProgrammaticSync = false
   }
 
   private handleInvalid(event: Event) {

@@ -450,6 +450,21 @@ describe("PbPhoneNumberInput enhanced element", () => {
     expect(input.validity.customError).toBe(false)
   })
 
+  test("syncs intl-tel-input for a non-empty programmatic set after typing", async () => {
+    const { input } = mountKit()
+    const iti = lastIti()
+    jest.spyOn(iti, "setNumber")
+
+    input.value = "12"
+    input.dispatchEvent(new Event("input", { bubbles: true }))
+    await Promise.resolve()
+
+    iti.setNumber.mockClear()
+    input.value = "(555) 555-5555"
+
+    expect(iti.setNumber).toHaveBeenCalledWith("(555) 555-5555")
+  })
+
   test("clears stale error UI when the value is reset to empty", () => {
     const { element, input } = mountKit({ required: true }, "required")
     lastIti().getValidationError.mockReturnValue(2)
