@@ -103,6 +103,7 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       this.input.removeEventListener("focus", this.handleFocus)
       this.input.removeEventListener("blur", this.handleBlur)
       this.input.removeEventListener("input", this.handleInput)
+      this.input.removeEventListener("change", this.handleInput)
     }
 
     document.removeEventListener("invalid", this.handleInvalidBound, true)
@@ -169,6 +170,7 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     this.input.addEventListener("focus", this.handleFocus)
     this.input.addEventListener("blur", this.handleBlur)
     this.input.addEventListener("input", this.handleInput)
+    this.input.addEventListener("change", this.handleInput)
     document.addEventListener("invalid", this.handleInvalidBound, true)
   }
 
@@ -215,15 +217,19 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
   private handleInput = () => {
     this.formSubmitted = false
     this.updatePhoneNumberData()
+
+    // Filter reset / programmatic clear removes the value but can leave a stale
+    // customValidity and an empty error slot. Drop the old error until blur or submit.
+    if (!this.inputValue().trim()) {
+      this.error = ""
+      this.removeError()
+      this.updateValidationState(false)
+    }
   }
 
   private handleInvalid(event: Event) {
-    const target = event.target as HTMLInputElement
-    const phoneNumberContainer = target.closest(".pb_phone_number_input")
-    if (phoneNumberContainer !== this.element) return
-
-    const invalidInputName = target.name || target.getAttribute("name")
-    if (invalidInputName !== (this.config.name || this.input?.name)) return
+    const target = event.target as Element | null
+    if (!target || !this.element.contains(target)) return
 
     this.formSubmitted = true
     this.validateErrors()

@@ -172,6 +172,40 @@ describe("PbPhoneNumberInput enhanced element", () => {
     expect(input.validationMessage).toBe("Invalid United States phone number (too short)")
   })
 
+  test("clears stale error UI when the value is reset to empty", () => {
+    intlTelInput._instance.getValidationError.mockReturnValue(2)
+    const { element, input } = mountKit({ required: true }, "required")
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
+    expect(input.validationMessage).toBe("Invalid United States phone number (too short)")
+
+    input.value = ""
+    input.dispatchEvent(new Event("input"))
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(element.querySelector(".pb_text_input_kit")).not.toHaveClass("error")
+    expect(input.validity.customError).toBe(false)
+  })
+
+  test("shows missing phone number on submit after the value was cleared", () => {
+    intlTelInput._instance.getValidationError.mockReturnValue(2)
+    const { element, input } = mountKit({ required: true, name: "phone" }, "required")
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+
+    input.value = ""
+    input.removeAttribute("name")
+    input.dispatchEvent(new Event("input"))
+
+    input.dispatchEvent(new Event("invalid", { bubbles: true }))
+
+    expect(element.querySelector(".pb_body_kit_negative").textContent).toBe("Missing phone number")
+    expect(element.querySelector(".pb_text_input_kit")).toHaveClass("error")
+  })
+
   test("hides example placeholder on focus and restores it on blur when empty", () => {
     const { input } = mountKit({ showPlaceholder: true })
 

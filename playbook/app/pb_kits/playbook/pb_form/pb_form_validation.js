@@ -72,26 +72,24 @@ class PbFormValidation extends PbEnhancedElement {
 
     // Check if this is a phone number input
     const isPhoneNumberInput = kitElement.classList.contains('pb_phone_number_input')
+      || !!kitElement.closest('.pb_phone_number_input')
     
     // Check if this is a TimePicker input
     const isTimePickerInput = kitElement.classList.contains('pb_time_picker')
+      || !!kitElement.closest('.pb_time_picker')
+
+    if (isPhoneNumberInput || isTimePickerInput) return
 
     // ensure clean error message state
     this.clearError(target)
     kitElement.classList.add('error')
 
-    // Only add error message if it's NOT a phone number input or TimePicker input
-    if (!isPhoneNumberInput && !isTimePickerInput) {
-      // set the error message element
-      const errorMessageContainer = this.errorMessageContainer
+    const errorMessageContainer = this.errorMessageContainer
 
-      if (target.dataset.message) target.setCustomValidity(target.dataset.message)
+    if (target.dataset.message) target.setCustomValidity(target.dataset.message)
 
-      errorMessageContainer.innerHTML = target.validationMessage
-
-      // add the error message element to the dom tree
-      messageContainer.appendChild(errorMessageContainer)
-    }
+    errorMessageContainer.innerHTML = target.validationMessage
+    messageContainer.appendChild(errorMessageContainer)
   }
 
   clearError(target) {
