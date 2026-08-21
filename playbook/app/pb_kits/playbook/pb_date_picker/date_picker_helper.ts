@@ -31,24 +31,39 @@ const getPositionElement = (element: string | Element) => {
 // For allowInput: digits a zero-padded value occupies for each flatpickr date token
 const dateTokenWidths: { [key: string]: number } = { Y: 4, d: 2, j: 2, m: 2, n: 2, y: 2 }
 
-// Flatpickr parses format separators as "any character", so allowInput values typed without them 
-// ("08152026" for "m/d/Y") get mis-grouped into day "52", which overflows to 09/21/2026. Put the separators back before it parses.
-const withDateSeparators = (dateStr: string, format: string) => {
-  if (typeof dateStr !== 'string' || !/^\d+$/.test(dateStr.trim())) return dateStr
+const escapeForCharacterClass = (char: string) => char.replace(/[\\\]^-]/g, '\\$&')
 
-  const digits = dateStr.trim()
+// Flatpickr parses format separators as "any character" and re-matches a growing regex per token,
+// so allowInput values with missing separators get mis-grouped: "08152026" (m/d/Y) reads day "52"
+// and "0326/2026" reads day "6". Rebuild the leading date run with the format's own separators
+// whenever it holds exactly the digits the format expects, leaving any suffix (enableTime's
+// "at 12:00 AM") untouched. Partial ("0326/2026") and unseparated ("03262026") input both normalize;
+const withDateSeparators = (dateStr: string, format: string) => {
+  if (typeof dateStr !== 'string') return dateStr
+
   const tokens = [...(format || '').split(' ')[0]]
   const expectedLength = tokens.reduce((total, token) => total + (dateTokenWidths[token] || 0), 0)
   const hasUnsupportedToken = tokens.some((token) => /[a-z]/i.test(token) && !dateTokenWidths[token])
-  if (hasUnsupportedToken || digits.length !== expectedLength) return dateStr
+  if (hasUnsupportedToken || expectedLength === 0) return dateStr
+
+  const separators = [...new Set(tokens.filter((token) => !dateTokenWidths[token]))]
+  const separatorClass = separators.map(escapeForCharacterClass).join('')
+  const match = dateStr.match(new RegExp(`^(\\s*)([\\d${separatorClass}]*\\d)([\\s\\S]*)$`))
+  if (!match) return dateStr
+
+  const [, leadingSpace, dateRun, rest] = match
+  const digits = separatorClass ? dateRun.replace(new RegExp(`[${separatorClass}]`, 'g'), '') : dateRun
+  if (digits.length !== expectedLength) return dateStr
 
   let position = 0
-  return tokens.map((token) => {
+  const dated = tokens.map((token) => {
     const width = dateTokenWidths[token]
     if (!width) return token
     position += width
     return digits.slice(position - width, position)
   }).join('')
+
+  return `${leadingSpace}${dated}${rest}`
 }
 
 type DatePickerConfig = {
