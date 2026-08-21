@@ -1,5 +1,6 @@
 import React from "react";
 import * as Playbook from "playbook-ui";
+import * as PlaybookAdvancedTable from "playbook-ui/advanced-table";
 import { Body, Card } from "playbook-ui";
 
 import { PlaygroundPreview } from "../KitShow/Tabs/Playground";
@@ -11,6 +12,7 @@ import {
   displayPropType,
   formatKitName,
 } from "./kitUtils";
+import { getBuilderInstanceLayout } from "./builderInstanceLayout";
 import {
   getLivePreviewCode,
   getRuntimeScope,
@@ -136,7 +138,8 @@ export const BuilderPreviewItem = ({
 }: BuilderPreviewItemProps) => {
   const kit = kitsByName[instance.kitName];
   const Component = kit?.kit_schema?.name
-    ? (Playbook as any)[kit.kit_schema.name]
+    ? (Playbook as any)[kit.kit_schema.name] ??
+      (PlaybookAdvancedTable as any)[kit.kit_schema.name]
     : null;
   const childNodes = instance.children.map((child) => (
     <BuilderPreviewItem
@@ -166,6 +169,8 @@ export const BuilderPreviewItem = ({
   const configuredChildren = instance.configuredChildren?.trim();
   const directChildren = childNodes.length > 0 ? childNodes : configuredChildren || undefined;
   const targetLabel = formatKitName(kit?.name ?? instance.kitName);
+  const renderableProps = getRenderableProps(instance, kit, globalProps);
+  const layout = getBuilderInstanceLayout(renderableProps);
   const isInnermostEventTarget = (
     event:
       | React.DragEvent<HTMLElement>
@@ -194,7 +199,7 @@ export const BuilderPreviewItem = ({
     >
       {React.createElement(
         Component,
-        getRenderableProps(instance, kit, globalProps),
+        renderableProps,
         canRenderChildren ? directChildren : undefined
       )}
     </RenderBoundary>
@@ -206,7 +211,7 @@ export const BuilderPreviewItem = ({
 
   return (
     <div
-      className={`builder-instance ${isSelected ? "is-selected" : ""} ${
+      className={`builder-instance ${layout.className} ${isSelected ? "is-selected" : ""} ${
         canRenderChildren && instance.children.length === 0 ? "is-empty-container" : ""
       } ${
         draggingInstanceId === instance.id ? "is-dragging" : ""
@@ -215,6 +220,7 @@ export const BuilderPreviewItem = ({
       }`}
       data-builder-instance-id={instance.id}
       draggable={false}
+      style={layout.style}
       onDragEnd={(event) => {
         event.stopPropagation();
         onDragEndDrag?.();

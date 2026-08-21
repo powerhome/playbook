@@ -26,6 +26,7 @@ examples:
     - table_icon_buttons: Table with Icon Buttons
     - table_with_background_kit: Table With Background Kit
     - table_vertical_border: Vertical Borders
+    - table_contrast_border: Contrast Border
     - table_striped: Striped Table
     - table_with_subcomponents_rails: Table with Sub Components (Table Elements)
     - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
@@ -71,6 +72,7 @@ examples:
     - table_icon_buttons: Table with Icon Buttons
     - table_with_background_kit: Table With Background Kit
     - table_vertical_border: Vertical Borders
+    - table_contrast_border: Contrast Border
     - table_striped: Striped Table
     - table_with_subcomponents: Table with Sub Components (Table Elements)
     - table_with_subcomponents_as_divs: Table with Sub Components (Divs)

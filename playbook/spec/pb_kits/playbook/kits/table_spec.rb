@@ -17,6 +17,8 @@ RSpec.describe Playbook::PbTable::Table do
   it { is_expected.to define_boolean_prop(:container).with_default(true) }
   it { is_expected.to define_prop(:text) }
   it { is_expected.to define_boolean_prop(:sticky).with_default(false) }
+  it { is_expected.to define_boolean_prop(:vertical_border).with_default(false) }
+  it { is_expected.to define_boolean_prop(:contrast_border).with_default(false) }
   it { is_expected.to define_enum_prop(:tag).with_default("table").with_values("div", "table") }
   it { is_expected.to define_enum_prop(:header_style).with_default("default").with_values("default", "borderless", "floating") }
   it { is_expected.to define_enum_prop(:variant).with_default("default").with_values("default", "with_filter") }
@@ -49,6 +51,8 @@ RSpec.describe Playbook::PbTable::Table do
       expect(subject.new(sticky_left_column: %w[1 2 3]).classname).to eq "pb_table table-md table-card sticky-left-column sticky-left-columns-ids-1-2-3 table-collapse-sm table-responsive-collapse"
       expect(subject.new(header_style: "borderless").classname).to eq "pb_table table-md table-card table-collapse-sm table-responsive-collapse header-borderless"
       expect(subject.new(header_style: "floating").classname).to eq "pb_table table-md table-card table-collapse-sm table-responsive-collapse header-floating"
+      expect(subject.new(contrast_border: true).classname).to include "contrast-border"
+      expect(subject.new(vertical_border: true).classname).to include "vertical-border"
     end
   end
 

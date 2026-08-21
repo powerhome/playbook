@@ -8,6 +8,7 @@ import {
   highchartsLoader,
   mapboxDrawLoader,
   maplibreLoader,
+  playbookAdvancedTableLoader,
   playbookChartsLoader,
   reactHookFormLoader,
   reactSelectLoader,
@@ -18,6 +19,10 @@ import {
 } from "./ThirdPartyLoaders";
 // Pull in all Playbook React exports so we don't have to specify individual imports
 import * as PB from "playbook-ui";
+
+// Module-level so PBrest stays stable across re-renders (avoids remounting live previews).
+// Rename Date so it does not shadow the global Date constructor.
+const { Date: FormattedDate, ...PBrest } = PB as any;
 
 /**
  * NOTE:
@@ -98,6 +103,7 @@ const LIB_LOADERS: ThirdPartyLoader[] = [
   highchartsLoader,
   mapboxDrawLoader,
   maplibreLoader,
+  playbookAdvancedTableLoader,
   playbookChartsLoader,
   reactHookFormLoader,
   reactSelectLoader,
@@ -133,8 +139,6 @@ const LiveExample: React.FC<LiveExampleProps> = ({
 }) => {
   const prepared = useMemo(() => prepareCode(code), [code]);
   const { darkMode } = useDarkMode();
-  // prevent Date kit from shadowing the global Date constructor. Do FormattedDate like we do in the docs
-  const { Date: FormattedDate, ...PBrest } = PB as any;
 
   // Check if Date is imported with an alias (e.g., "Date as DateKit")
   const dateAlias = useMemo(() => parseDateAlias(code), [code]);
@@ -236,7 +240,7 @@ const LiveExample: React.FC<LiveExampleProps> = ({
       baseScope[dateAlias] = FormattedDate;
     }
     return baseScope;
-  }, [thirdParty, mergedExampleProps, PBrest, FormattedDate, dateAlias, darkMode]);
+  }, [thirdParty, mergedExampleProps, dateAlias, darkMode]);
 
   // Handle clicks to prevent href="#" navigation (only preventDefault, not stopPropagation)
   const handleContainerClick = useCallback((e: React.MouseEvent) => {

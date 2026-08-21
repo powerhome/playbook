@@ -15,6 +15,8 @@ const MinHeight = () => {
     'xl': '1280px',
     'xxl': '1440px',
     'xxxl': '1920px',
+    '100%': '100%',
+    '100vh': '100vh',
   }
 
   const VisualGuideCard = () => {
@@ -24,7 +26,7 @@ const MinHeight = () => {
           overflow="auto"
           width="100%"
       >
-        <Flex justify="between" orientation="row">
+        <Flex height="100%" justify="between" orientation="row">
           {Object.keys(SIZES).map((size: string) => (
             <Background
                 backgroundColor="primary"
@@ -163,6 +165,20 @@ const MinHeight = () => {
               <Flex gap="xs" wrap><ValueCardWithTooltip text="xxxl" tooltipText="1920px"/></Flex>,
               <ExampleCodeCard id="min-height-xxxl-rails" text='min_height: "xxxl"' />,
               <ExampleCodeCard id="min-height-xxxl-react" text='minHeight="xxxl"' />,
+            ],
+            [
+              "100%",
+              <ExampleCodeCard text="string" copyIcon={false} />,
+              <Flex gap="xs" wrap><ExampleCodeCard text="100%" copyIcon={false} /></Flex>,
+              <ExampleCodeCard id="min-height-100-rails" text='min_height: "100%"' />,
+              <ExampleCodeCard id="min-height-100-react" text='minHeight="100%"' />,
+            ],
+            [
+              "100vh",
+              <ExampleCodeCard text="string" copyIcon={false} />,
+              <Flex gap="xs" wrap><ExampleCodeCard text="100vh" copyIcon={false} /></Flex>,
+              <ExampleCodeCard id="min-height-100vh-rails" text='min_height: "100vh"' />,
+              <ExampleCodeCard id="min-height-100vh-react" text='minHeight="100vh"' />,
             ],
           ]}
         />

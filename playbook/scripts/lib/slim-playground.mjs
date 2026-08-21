@@ -355,7 +355,7 @@ export function usageFromPreset(kitName, pascalName, playground) {
 
     return {
       react: {
-        import: "import { AdvancedTable } from 'playbook-ui'",
+        import: "import { AdvancedTable } from 'playbook-ui/advanced-table'",
         example: `${reactSetup}\n\n<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n/>`,
         preset: playground.presets?.[0]?.name || 'Default',
       },

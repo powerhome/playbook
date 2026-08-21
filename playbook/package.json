@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "16.12.0",
+  "version": "17.0.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
@@ -16,6 +16,12 @@
       "import": "./dist/charts.js",
       "require": "./dist/charts.js",
       "default": "./dist/charts.js"
+    },
+    "./advanced-table": {
+      "types": "./dist/types/advanced-table.d.ts",
+      "import": "./dist/advanced-table.js",
+      "require": "./dist/advanced-table.js",
+      "default": "./dist/advanced-table.js"
     },
     "./dist/playbook.css": "./dist/playbook.css",
     "./dist/reset.css": "./dist/reset.css",
