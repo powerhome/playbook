@@ -11,7 +11,9 @@ import { PropsTab } from "./Tabs/PropsTab";
 // import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
 // import { ReferencesTab } from "./Tabs/ReferencesTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
+import { RailsPlaygroundTab } from "./Tabs/RailsPlaygroundTab";
 import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
+import { RAILS_PLAYGROUND_POC_KITS } from "./railsPlaygroundEnabledKits";
 
 const KitShow = () => {
   const { name } = useParams();
@@ -92,7 +94,10 @@ const KitShow = () => {
   }, [currentKit, loaderData]);
 
   const [activeTab, setActiveTab] = useState<string>("docs");
-  const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);
+  const showPlayground =
+    PLAYGROUND_ENABLED_KITS.includes(currentKit) &&
+    (platform !== "rails" ||
+      (RAILS_PLAYGROUND_POC_KITS as readonly string[]).includes(currentKit));
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
 
@@ -228,8 +233,17 @@ const KitShow = () => {
 
       <div className="kit-show-wrapper">
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">
-          {/* Playground Tab Content (React-only for now; hidden on Rails) */}
-           {showPlayground && displayTab === "playground" && (
+          {showPlayground && displayTab === "playground" && platform === "rails" && (
+            <RailsPlaygroundTab
+              kitSchema={kit_schema}
+              globalPropsSchema={global_props_schema}
+              kitName={currentKit}
+              defaultExample={examples?.[0]}
+              playgroundConfig={playground_config}
+            />
+          )}
+
+          {showPlayground && displayTab === "playground" && platform !== "rails" && (
             <PlaygroundTab
               kitSchema={kit_schema}
               globalPropsSchema={global_props_schema}
