@@ -89,7 +89,6 @@ import datePickerHelper from 'kits/pb_date_picker/date_picker_helper'
 window.datePickerHelper = datePickerHelper
 
 // Third-party libraries
-import 'lazysizes'
 import 'flatpickr'
 
 // React-Rendered Rails Kits
