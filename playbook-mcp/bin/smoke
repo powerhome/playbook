@@ -1,0 +1,93 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+ENV["RAILS_ENV"] ||= "development"
+require_relative "../config/environment"
+
+renderer = PlaybookMcp::Renderer.new
+
+puts "== button (static HTML) =="
+button_html = renderer.render_kit(kit: "button", props: { "text" => "Submit", "variant" => "primary" })
+raise "button missing pb_button" unless button_html.include?("pb_button")
+raise "fixed viewport height risks LibreChat clip" if button_html.match?(/100vh|height:\s*100%/)
+raise "button missing mcp-ui resize reporter" unless button_html.include?("playbook-mcp-resize.js")
+
+puts "ok (#{button_html.bytesize} bytes)"
+
+
+puts "== table + JS hydration hooks (iframe-JS risk) =="
+table_children = <<~HTML
+  <thead><tr><th>Name</th><th>Value</th></tr></thead>
+  <tbody><tr><td>Alpha</td><td>1</td></tr><tr><td>Beta</td><td>2</td></tr></tbody>
+HTML
+table_html = renderer.render_kit(
+  kit: "table",
+  props: { "size" => "sm", "responsive" => "collapse", "collapse" => "sm" },
+  children: table_children
+)
+raise "table missing pb_table" unless table_html.include?("pb_table")
+raise "table missing playbook.css" unless table_html.include?("/assets/playbook.css")
+raise "table missing version-stamped assets" unless table_html.include?("?v=")
+raise "table missing playbook-rails.js (needed in sandboxed iframe)" unless table_html.include?("playbook-rails.js")
+raise "table missing data-pb-table-wrapper for JS hydrate" unless table_html.include?("data-pb-table-wrapper")
+raise "table missing mcp-ui resize reporter" unless table_html.include?("playbook-mcp-resize.js")
+
+puts "ok (#{table_html.bytesize} bytes) — verify collapse/responsive in LibreChat iframe"
+
+
+puts "== chart mount markup =="
+chart_html = renderer.render_kit(
+  kit: "pb_bar_graph",
+  props: {
+    "options" => {
+      "title" => { "text" => "Smoke" },
+      "series" => [{ "name" => "NA", "data" => [1, 2, 3] }],
+      "xAxis" => { "categories" => %w[Q1 Q2 Q3] },
+      "yAxis" => { "title" => { "text" => "USD" } },
+    },
+  }
+)
+raise "chart missing react mount hook" unless chart_html.include?("data-pb-react-component")
+raise "chart must not load esm.sh at runtime" if chart_html.include?("esm.sh")
+raise "chart must not use importmap" if chart_html.include?("importmap")
+raise "chart must load self-contained IIFE" unless chart_html.include?("/assets/vendor/playbook-charts.js")
+raise "chart options snake_cased (x_axis)" if chart_html.match?(/["']x_axis["']/)
+raise "chart options missing camelCase xAxis" unless chart_html.include?("xAxis")
+raise "chart mount missing reserved height" unless chart_html.match?(/data-pb-react-component="PbBarGraph"[^>]*style="[^"]*height:400px/)
+raise "chart options missing chart.height" unless chart_html.include?("&quot;height&quot;:400") || chart_html.include?('"height":400')
+
+
+
+doc_with_origin = PlaybookMcp::Document.new(
+  body_html: "<div/>",
+  asset_base_url: "https://mcp.example.test",
+  charts: false
+).to_html
+raise "CSP must not use 'self' for srcdoc" if doc_with_origin.include?("script-src 'self'")
+raise "CSP must allow absolute asset origin" unless doc_with_origin.include?("script-src https://mcp.example.test")
+raise "CSP must not require unsafe-inline for scripts" if doc_with_origin.include?(
+  "script-src https://mcp.example.test 'unsafe-inline'"
+)
+
+puts "ok (#{chart_html.bytesize} bytes) — bundle #{PlaybookMcp::ChartPeers.available? ? 'built' : 'MISSING (bin/vendor_chart_peers)'}"
+
+puts "== ui resource =="
+ui = McpUiServer.create_ui_resource(
+  uri: "ui://playbook/smoke/table",
+  content: { type: :raw_html, htmlString: table_html }
+)
+raise "bad ui type" unless ui[:type] == "resource" || ui["type"] == "resource"
+
+puts "ok uri=#{ui.dig(:resource, :uri) || ui.dig('resource', 'uri')}"
+
+puts "== validation =="
+begin
+  renderer.render_kit(kit: "button", props: { "onClick" => "nope" })
+  raise "expected validation failure"
+rescue PlaybookMcp::ValidationError => e
+  puts "ok rejected react-only prop (#{e.message})"
+end
+
+puts "SMOKE PASS"
+puts "Manual Phase 0 gate: open LibreChat → Streamable HTTP → http://localhost:3099/mcp"
+puts "  confirm Button styles + Table responsive/collapse (or Chart) inside the sandboxed iframe."
