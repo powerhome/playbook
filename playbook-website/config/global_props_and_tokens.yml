@@ -13,6 +13,7 @@ global_props:
   - height
   - hover
   - html_options
+  - on_click
   - margin
   - line_height
   - display

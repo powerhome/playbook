@@ -105,6 +105,13 @@ export const GlobalPropsCards = [
     link: "/global_props/html_options",
   },
   {
+    title: "onClick",
+    description:
+      "Documents the React-only onClick proof of concept for simple root kits, plus how it differs from existing kit-specific click APIs.",
+    icon: "hand-pointer",
+    link: "/global_props/on_click",
+  },
+  {
     title: "Line Height",
     description:
       "Adjusts the vertical spacing between lines of text, with options like “tight,” “normal,” or “loose.”",

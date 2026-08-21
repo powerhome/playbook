@@ -272,6 +272,18 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & ColumnGap & RowGap & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
+// Event handlers are not CSS-class global props. Keep them off GlobalProps so
+// kits with kit-specific onClick signatures (e.g. StarRating) do not conflict.
+export type GlobalEventProps = {
+  onClick?: React.MouseEventHandler<HTMLElement>,
+}
+
+export const globalEventProps = (
+  props: GlobalEventProps
+): Pick<GlobalEventProps, 'onClick'> => {
+  return props.onClick ? { onClick: props.onClick } : {}
+}
+
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
   const screenSizeValues = ["xs", "sm", "md", "lg", "xl"]

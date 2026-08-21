@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalProps'
+import { deprecatedProps, GlobalEventProps, GlobalProps, globalEventProps, globalProps } from '../utilities/globalProps'
 
 type SizeType = 1 | 2 | 3 | 4 | "1" | "2" | "3" | "4" | "display"
 type SizeResponsiveType = {[key: string]: SizeType}
@@ -20,7 +20,7 @@ type TitleProps = {
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
   text?: string,
   variant?: null | "link",
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const Title = (props: TitleProps): React.ReactElement => {
   if (props.variant) deprecatedProps() //variant prop is deprecated, use color instead
@@ -87,6 +87,7 @@ const Title = (props: TitleProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

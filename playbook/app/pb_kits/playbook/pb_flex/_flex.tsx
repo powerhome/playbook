@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalEventProps, GlobalProps, globalEventProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 import { GenericObject, Sizes } from '../types'
 
 type SizeType = Sizes | "none"
@@ -26,7 +26,7 @@ type FlexProps = {
   columnGap?: SizeType | SizeResponsiveType,
   wrap?: boolean,
   alignSelf?: "start" | "end" | "center" | "stretch" | "none"
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const Flex = (props: FlexProps): React.ReactElement => {
   const {
@@ -97,6 +97,7 @@ const Flex = (props: FlexProps): React.ReactElement => {
         style={dynamicInlineProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
     >
       {children}
     </div>
