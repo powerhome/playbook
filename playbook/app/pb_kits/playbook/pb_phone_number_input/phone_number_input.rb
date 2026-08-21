@@ -49,6 +49,12 @@ module Playbook
         )
       end
 
+      # Always present so Nitro Default assigns through the value setter, even
+      # when the initial value is empty (Text Input omits blank defaults).
+      def text_input_data
+        { default_value: value.to_s }
+      end
+
       def phone_number_input_config
         {
           countrySearch: country_search,

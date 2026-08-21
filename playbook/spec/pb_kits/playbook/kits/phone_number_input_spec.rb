@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "../../../../app/pb_kits/playbook/pb_phone_number_input/phone_number_input"
+require_relative "../../../../app/pb_kits/playbook/pb_text_input/add_on"
+require_relative "../../../../app/pb_kits/playbook/pb_text_input/text_input"
 
 RSpec.describe Playbook::PbPhoneNumberInput do
   subject { Playbook::PbPhoneNumberInput::PhoneNumberInput }
@@ -45,6 +47,28 @@ RSpec.describe Playbook::PbPhoneNumberInput do
       config = JSON.parse(example.data[:pb_phone_number_input_config])
       expect(config["initialCountry"]).to eq "us"
       expect(config["required"]).to be true
+    end
+  end
+
+  describe "#text_input_data" do
+    it "includes an empty data-default-value when value is blank" do
+      expect(subject.new({}).text_input_data[:default_value]).to eq ""
+      expect(subject.new(value: "").text_input_data[:default_value]).to eq ""
+    end
+
+    it "includes the initial value for filter Default restore" do
+      expect(subject.new(value: "5555555555").text_input_data[:default_value]).to eq "5555555555"
+    end
+
+    it "emits data-default-value on the inner text input when value is blank" do
+      text_input = Playbook::PbTextInput::TextInput.new(
+        input_options: { data: subject.new({}).text_input_data },
+        name: "q[phone_number_eq]",
+        type: "tel",
+        value: ""
+      )
+
+      expect(text_input.input_tag).to include('data-default-value=""')
     end
   end
 
