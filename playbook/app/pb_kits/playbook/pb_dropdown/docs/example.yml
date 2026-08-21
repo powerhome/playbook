@@ -39,6 +39,7 @@ examples:
   - dropdown_disabled: Disabled Input
   - dropdown_grouped_options: Grouped Options
   - dropdown_custom_event_type: Custom Event Type
+  - dropdown_dynamic_options: Dynamic Options
 
   react:
   - dropdown_default: Default

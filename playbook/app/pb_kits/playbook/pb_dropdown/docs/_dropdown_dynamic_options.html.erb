@@ -1,0 +1,83 @@
+<%= pb_rails("select", props: {
+  id: "region_context",
+  label: "Choose a Region",
+  name: "region_name",
+  options: [
+    { value: "northeast", value_text: "Northeast" },
+    { value: "west", value_text: "West" },
+    { value: "south", value_text: "South" },
+  ],
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  id: "city-dropdown-dynamic",
+  label: "Pick a City",
+  margin_bottom: "sm",
+  name: "city_name",
+  context_selector: "region_context",
+  options_by_context: {
+    "northeast" => [
+      { id: "nyc", label: "New York", value: "nyc" },
+      { id: "bos", label: "Boston", value: "bos" },
+      { id: "phl", label: "Philadelphia", value: "phl" },
+    ],
+    "west" => [
+      { id: "la", label: "Los Angeles", value: "la" },
+      { id: "sf", label: "San Francisco", value: "sf" },
+      { id: "sea", label: "Seattle", value: "sea" },
+    ],
+    "south" => [
+      { id: "atl", label: "Atlanta", value: "atl" },
+      { id: "mia", label: "Miami", value: "mia" },
+      { id: "dal", label: "Dallas", value: "dal" },
+    ],
+  },
+  options: [
+    { id: "nyc", label: "New York", value: "nyc" },
+    { id: "bos", label: "Boston", value: "bos" },
+    { id: "phl", label: "Philadelphia", value: "phl" },
+  ],
+}) %>
+
+<%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center", margin_bottom: "md" }) do %>
+  <%= pb_rails("button", props: { id: "update-cities-btn", text: "Update via event", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { id: "select-city-btn", text: "Select Boston", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { id: "clear-city-btn", text: "Clear", variant: "primary" }) %>
+<% end %>
+
+<script>
+  (function() {
+    var dropdownId = "city-dropdown-dynamic";
+
+    document.getElementById("update-cities-btn").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:updateOptions", {
+        detail: {
+          dropdownId: dropdownId,
+          options: [
+            { id: "por", label: "Portland", value: "por" },
+            { id: "den", label: "Denver", value: "den" },
+            { id: "aus", label: "Austin", value: "aus" },
+          ],
+        },
+      }));
+    });
+
+    document.getElementById("select-city-btn").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:select", {
+        detail: { dropdownId: dropdownId, optionId: "bos" },
+      }));
+    });
+
+    document.getElementById("clear-city-btn").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:clear", {
+        detail: { dropdownId: dropdownId },
+      }));
+    });
+
+    document.addEventListener("pb:dropdown:selected", function(e) {
+      if (e.target && e.target.id === dropdownId) {
+        console.log("City selected:", e.detail);
+      }
+    });
+  })();
+</script>

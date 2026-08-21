@@ -248,6 +248,33 @@
       ],
       "type": "string",
       "default": ""
+    },
+    "optionsByContext": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "GenericObject"
+    },
+    "contextSelector": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
+    "clearOnContextChange": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": true
+    },
+    "optionsEventType": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
     }
   },
   "globalProps": true,
