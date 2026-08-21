@@ -184,11 +184,13 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updateClearButton();
     this.applyDisabledState();
 
-    // Listen for clear and select events from external source
+    // Listen for clear, select, and updateOptions events from external source
     this.handleClearEventBound = this.handleClearEvent.bind(this);
     document.addEventListener("pb:dropdown:clear", this.handleClearEventBound);
     this.handleSelectEventBound = this.handleSelectEvent.bind(this);
     document.addEventListener("pb:dropdown:select", this.handleSelectEventBound);
+    this.handleUpdateOptionsEventBound = this.handleUpdateOptionsEvent.bind(this);
+    document.addEventListener("pb:dropdown:updateOptions", this.handleUpdateOptionsEventBound);
 
     // Listen for custom_event_type to clear on custom events
     const customEventTypeString = this.element.dataset.customEventType;
@@ -202,6 +204,21 @@ export default class PbDropdown extends PbEnhancedElement {
         document.addEventListener(eventType, this.handleCustomClearBound);
       });
     }
+
+    // Listen for options_event_type to replace options on custom/Turbo events
+    const optionsEventTypeString = this.element.dataset.optionsEventType;
+    if (optionsEventTypeString) {
+      this.optionsEventTypes = optionsEventTypeString
+        .split(",")
+        .map((e) => e.trim())
+        .filter(Boolean);
+      this.handleOptionsEventTypeBound = this.handleOptionsEventType.bind(this);
+      this.optionsEventTypes.forEach((eventType) => {
+        document.addEventListener(eventType, this.handleOptionsEventTypeBound);
+      });
+    }
+
+    this.bindContextSelector();
   }
 
   disconnect() {
@@ -263,10 +280,21 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.handleSelectEventBound) {
       document.removeEventListener("pb:dropdown:select", this.handleSelectEventBound)
     }
+    if (this.handleUpdateOptionsEventBound) {
+      document.removeEventListener("pb:dropdown:updateOptions", this.handleUpdateOptionsEventBound)
+    }
     if (this.customClearEventTypes && this.handleCustomClearBound) {
       this.customClearEventTypes.forEach((eventType) => {
         document.removeEventListener(eventType, this.handleCustomClearBound)
       })
+    }
+    if (this.optionsEventTypes && this.handleOptionsEventTypeBound) {
+      this.optionsEventTypes.forEach((eventType) => {
+        document.removeEventListener(eventType, this.handleOptionsEventTypeBound)
+      })
+    }
+    if (this.contextElement && this.handleContextChangeBound) {
+      this.contextElement.removeEventListener("change", this.handleContextChangeBound)
     }
   }
 
@@ -630,6 +658,214 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   // ----- External events handling section -----
+
+  get optionsByContext() {
+    return this.element.dataset.pbDropdownOptionsByContext
+      ? JSON.parse(this.element.dataset.pbDropdownOptionsByContext)
+      : null;
+  }
+
+  get contextElement() {
+    const selector = this.element.dataset.pbDropdownContextSelector;
+    if (!selector) return null;
+
+    return (
+      this.element.parentNode?.querySelector(`#${CSS.escape(selector)}`) ||
+      this.element.closest(`#${CSS.escape(selector)}`) ||
+      document.getElementById(selector)
+    );
+  }
+
+  get clearOnContextChange() {
+    return this.element.dataset.pbDropdownClearOnContextChange !== "false";
+  }
+
+  bindContextSelector() {
+    const contextEl = this.contextElement;
+    if (!contextEl || !this.optionsByContext) return;
+
+    this.handleContextChangeBound = this.handleContextChange.bind(this);
+    contextEl.addEventListener("change", this.handleContextChangeBound);
+  }
+
+  handleContextChange() {
+    if (this.isDisabled || !this.optionsByContext) return;
+
+    const contextValue = this.contextElement?.value;
+    const options = this.optionsByContext[contextValue] || [];
+    this.replaceOptions(options, { clearSelection: this.clearOnContextChange });
+  }
+
+  normalizeOption(option) {
+    const normalized = { ...option };
+    if (normalized.id == null && normalized.value != null) {
+      normalized.id = normalized.value;
+    }
+    if (normalized.value == null && normalized.id != null) {
+      normalized.value = normalized.id;
+    }
+    return normalized;
+  }
+
+  getOptionsParent() {
+    const container = this.target;
+    if (!container) return null;
+
+    return container.querySelector(".pb_list_kit") || container;
+  }
+
+  buildOptionElement(option) {
+    const normalized = this.normalizeOption(option);
+    const disabled = normalized.disabled === true;
+    const optionEl = document.createElement("div");
+    optionEl.className = `pb_dropdown_option_list${disabled ? " disabled" : ""}`;
+    if (normalized.id != null && normalized.id !== "") {
+      optionEl.id = String(normalized.id);
+    }
+    optionEl.setAttribute("aria-disabled", disabled ? "true" : "false");
+    optionEl.dataset.dropdownOptionLabel = JSON.stringify(normalized);
+    optionEl.dataset.dropdownOptionDisabled = disabled ? "true" : "false";
+
+    const listItem = document.createElement("div");
+    listItem.className =
+      "pb_list_item_kit display_flex justify_content_center p_none cursor_pointer";
+
+    const wrapper = document.createElement("div");
+    wrapper.className = disabled
+      ? "dropdown_option_wrapper disabled"
+      : "dropdown_option_wrapper";
+
+    const body = document.createElement("div");
+    body.className = "pb_body_kit_light";
+    body.textContent =
+      normalized.label != null ? String(normalized.label) : "";
+
+    wrapper.appendChild(body);
+    listItem.appendChild(wrapper);
+    optionEl.appendChild(listItem);
+
+    return optionEl;
+  }
+
+  replaceOptions(options, { clearSelection = true } = {}) {
+    if (this.isDisabled || !Array.isArray(options)) return;
+
+    const parent = this.getOptionsParent();
+    if (!parent) return;
+
+    this.queryAllOptions().forEach((opt) => opt.remove());
+    this.removeNoOptionsMessage();
+
+    options.forEach((option) => {
+      parent.appendChild(this.buildOptionElement(option));
+    });
+
+    if (clearSelection) {
+      this.clearSelection();
+    } else {
+      this.reconcileSelectionWithOptions();
+    }
+
+    if (this.target?.classList.contains("open")) {
+      this.adjustDropdownHeight();
+    }
+  }
+
+  reconcileSelectionWithOptions() {
+    const optionEls = Array.from(this.queryAllOptions());
+    const validIds = new Set(
+      optionEls.map((opt) => {
+        try {
+          return JSON.parse(opt.dataset.dropdownOptionLabel).id;
+        } catch {
+          return null;
+        }
+      }),
+    );
+
+    if (this.isMultiSelect) {
+      const nextSelected = Array.from(this.selectedOptions).filter((raw) => {
+        try {
+          return validIds.has(JSON.parse(raw).id);
+        } catch {
+          return false;
+        }
+      });
+      if (nextSelected.length !== this.selectedOptions.size) {
+        this.selectedOptions.clear();
+        nextSelected.forEach((raw) => this.selectedOptions.add(raw));
+        optionEls.forEach((opt) => {
+          opt.classList.remove("pb_dropdown_option_selected");
+          opt.style.display = "";
+        });
+        this.selectedOptions.forEach((raw) => {
+          const id = JSON.parse(raw).id;
+          const opt = optionEls.find((o) => {
+            try {
+              return JSON.parse(o.dataset.dropdownOptionLabel).id === id;
+            } catch {
+              return false;
+            }
+          });
+          if (opt) {
+            opt.style.display = "none";
+          }
+        });
+        this.updatePills();
+        this.syncHiddenInputs();
+        this.updateClearButton();
+        this.emitSelectionChange();
+      }
+      return;
+    }
+
+    const hiddenInput = this.baseInput;
+    const currentId = hiddenInput?.value;
+    if (!currentId || !validIds.has(currentId)) {
+      this.clearSelection();
+      return;
+    }
+
+    optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
+    const selectedOption = optionEls.find((opt) => {
+      try {
+        return JSON.parse(opt.dataset.dropdownOptionLabel).id === currentId;
+      } catch {
+        return false;
+      }
+    });
+    if (selectedOption) {
+      selectedOption.classList.add("pb_dropdown_option_selected");
+    }
+  }
+
+  // Handles pb:dropdown:updateOptions - replace options when event.detail.dropdownId matches.
+  // detail: { dropdownId, options: [{ id, label, value }], clearSelection?: boolean }
+  handleUpdateOptionsEvent(event) {
+    if (this.isDisabled) return;
+    const targetId = event.detail?.dropdownId;
+    if (!targetId || this.element.id !== targetId) return;
+
+    const options = event.detail?.options;
+    if (!Array.isArray(options)) return;
+
+    const clearSelection = event.detail?.clearSelection !== false;
+    this.replaceOptions(options, { clearSelection });
+  }
+
+  // Handles options_event_type events - replace options when detail.options is present.
+  handleOptionsEventType(event) {
+    if (this.isDisabled) return;
+    const targetId = event.detail?.dropdownId;
+    if (targetId != null && this.element.id !== targetId) return;
+
+    const options = event.detail?.options;
+    if (!Array.isArray(options)) return;
+
+    const clearSelection = event.detail?.clearSelection !== false;
+    this.replaceOptions(options, { clearSelection });
+  }
+
   // Handles pb:dropdown:clear - clear this dropdown when event.detail.dropdownId matches.
   handleClearEvent(event) {
     if (this.isDisabled) return;
