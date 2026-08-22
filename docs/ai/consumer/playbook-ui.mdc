@@ -61,6 +61,7 @@ node_modules/playbook-ui/dist/ai/
 7. Read `playgrounds/<name>.json` for presets, hints, conditionals, nested templates.
 8. Prefer playground presets over inventing prop combinations.
 9. For AdvancedTable, copy `columnDefinitions` / `tableData` from `playgrounds/advanced_table.json`.
+10. For Typeahead, import from `playbook-ui/typeahead` (not `playbook-ui`).
 
 ### Platform Detection
 

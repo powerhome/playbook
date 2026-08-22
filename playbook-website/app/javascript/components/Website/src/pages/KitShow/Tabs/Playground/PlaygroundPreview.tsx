@@ -4,6 +4,7 @@ import { Card, colors, Flex } from "playbook-ui";
 import * as PB from "playbook-ui";
 import * as PBAdvancedTable from "playbook-ui/advanced-table";
 import * as PBCharts from "playbook-ui/charts";
+import * as PBTypeahead from "playbook-ui/typeahead";
 import maplibreglModule from "maplibre-gl";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -35,6 +36,7 @@ const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({
     ...PBrest,
     ...PBAdvancedTable,
     ...PBCharts,
+    ...PBTypeahead,
     EditorContent,
     FormattedDate,
     StarterKit,

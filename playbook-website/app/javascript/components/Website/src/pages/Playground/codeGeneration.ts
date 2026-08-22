@@ -628,6 +628,44 @@ const collectComponentNamesFromCode = (code: string) =>
 const formatPlaybookImportName = (name: string) =>
   name === "FormattedDate" ? "Date as FormattedDate" : name;
 
+const ENTRYPOINT_IMPORT_PATHS: Record<string, string> = {
+  AdvancedTable: "playbook-ui/advanced-table",
+  Typeahead: "playbook-ui/typeahead",
+  PbBarGraph: "playbook-ui/charts",
+  PbCircleChart: "playbook-ui/charts",
+  PbGaugeChart: "playbook-ui/charts",
+  PbLineGraph: "playbook-ui/charts",
+};
+
+const playbookExportName = (item: string) =>
+  item.includes(" as ") ? item.split(" as ")[0].trim() : item.trim();
+
+const buildSplitPlaybookImports = (importNames: string[]): string[] => {
+  const regular: string[] = [];
+  const byPath = new Map<string, string[]>();
+
+  importNames.forEach((item) => {
+    const path = ENTRYPOINT_IMPORT_PATHS[playbookExportName(item)];
+    if (!path) {
+      regular.push(item);
+      return;
+    }
+    const items = byPath.get(path) || [];
+    items.push(item);
+    byPath.set(path, items);
+  });
+
+  const lines: string[] = [];
+  if (regular.length > 0) {
+    lines.push(`import { ${regular.join(", ")} } from "playbook-ui";`);
+  }
+  byPath.forEach((items, path) => {
+    lines.push(`import { ${items.join(", ")} } from "${path}";`);
+  });
+
+  return lines;
+};
+
 const getLocallyImportedNames = (importStatements: string[]) => {
   const importedNames = new Set<string>();
 
@@ -696,7 +734,7 @@ const buildPlaybookImport = (
 
   if (importNames.length === 0) return "";
 
-  return `import { ${importNames.join(", ")} } from "playbook-ui";`;
+  return buildSplitPlaybookImports(importNames).join("\n");
 };
 
 export const generateCode = (

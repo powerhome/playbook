@@ -25,6 +25,7 @@ export default defineConfig({
         'chunks/vendor.js': resolve(__dirname, 'app/entrypoints/playbook.js'),
         'charts.js': resolve(__dirname, 'app/entrypoints/playbook-charts.js'),
         'advanced-table.js': resolve(__dirname, 'app/entrypoints/playbook-advanced-table.js'),
+        'typeahead.js': resolve(__dirname, 'app/entrypoints/playbook-typeahead.js'),
       },
       output: {
         assetFileNames: ({name}) => {

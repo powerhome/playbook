@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { Button, Date as DateKit, DatePicker, Dropdown, Pagination, Select, Table, TextInput, Typeahead, Flex } from "playbook-ui"
+import { Button, Date as DateKit, DatePicker, Dropdown, Pagination, Select, Table, TextInput, Flex } from "playbook-ui"
+import { Typeahead } from "playbook-ui/typeahead"
 
 
 // Mock Data for Table

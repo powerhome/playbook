@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Card, Date as DateKit, DatePicker, Dropdown, Filter, Flex, SectionSeparator, Select, Table, TextInput, Title, Typeahead } from "playbook-ui";
+import { Button, Card, Date as DateKit, DatePicker, Dropdown, Filter, Flex, SectionSeparator, Select, Table, TextInput, Title } from "playbook-ui";
+import { Typeahead } from "playbook-ui/typeahead";
 
 const TableFilterCard = (props) => {
   const [territory, setTerritory] = useState("");

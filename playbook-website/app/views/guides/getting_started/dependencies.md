@@ -51,6 +51,13 @@ AdvancedTable is available through a separate entrypoint so TanStack stays out o
 ```javascript
 import { AdvancedTable } from 'playbook-ui/advanced-table'
 ```
+
+**Typeahead**:
+
+Typeahead is available through a separate entrypoint so react-select stays out of the main `playbook-ui` bundle until the kit is used. react-select is still bundled with that entrypoint — no additional installation is required. Import it using:
+```javascript
+import { Typeahead } from 'playbook-ui/typeahead'
+```
 ## Bundled Dependencies
 
 These kits use dependencies that are bundled with them; no additional installation is required.

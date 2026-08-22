@@ -1,6 +1,7 @@
 import React from "react";
 import * as Playbook from "playbook-ui";
 import * as PlaybookAdvancedTable from "playbook-ui/advanced-table";
+import * as PlaybookTypeahead from "playbook-ui/typeahead";
 import { Body, Card } from "playbook-ui";
 
 import { PlaygroundPreview } from "../KitShow/Tabs/Playground";
@@ -139,7 +140,8 @@ export const BuilderPreviewItem = ({
   const kit = kitsByName[instance.kitName];
   const Component = kit?.kit_schema?.name
     ? (Playbook as any)[kit.kit_schema.name] ??
-      (PlaybookAdvancedTable as any)[kit.kit_schema.name]
+      (PlaybookAdvancedTable as any)[kit.kit_schema.name] ??
+      (PlaybookTypeahead as any)[kit.kit_schema.name]
     : null;
   const childNodes = instance.children.map((child) => (
     <BuilderPreviewItem

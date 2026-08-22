@@ -92,6 +92,7 @@ module.exports = {
     '.+\\.(css|scss)$': 'identity-obj-proxy',
     'playbook-ui/advanced-table': '<rootDir>/app/entrypoints/playbook-advanced-table.js',
     'playbook-ui/charts': '<rootDir>/app/entrypoints/playbook-charts.js',
+    'playbook-ui/typeahead': '<rootDir>/app/entrypoints/playbook-typeahead.js',
     'playbook-ui': '<rootDir>/app/entrypoints/playbook.js',
   },
 

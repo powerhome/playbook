@@ -108,6 +108,8 @@ For each component:
 
 For **AdvancedTable**, read `playgrounds/advanced_table.json` and copy shapes from `samples` / `requiredProps` / preset `props` (`columnDefinitions`, `tableData`, nested `children`, first-column `cellAccessors`).
 
+For **Typeahead**, import from `playbook-ui/typeahead` (not `playbook-ui`).
+
 ### Step 4: Generate Code
 
 **React:**

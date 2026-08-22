@@ -23,6 +23,12 @@
       "require": "./dist/advanced-table.js",
       "default": "./dist/advanced-table.js"
     },
+    "./typeahead": {
+      "types": "./dist/types/typeahead.d.ts",
+      "import": "./dist/typeahead.js",
+      "require": "./dist/typeahead.js",
+      "default": "./dist/typeahead.js"
+    },
     "./dist/playbook.css": "./dist/playbook.css",
     "./dist/reset.css": "./dist/reset.css",
     "./dist/*": "./dist/*",

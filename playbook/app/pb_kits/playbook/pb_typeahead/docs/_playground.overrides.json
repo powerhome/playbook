@@ -1,4 +1,7 @@
 {
+  "externalImports": [
+    "import { Typeahead } from 'playbook-ui/typeahead'"
+  ],
   "customProps": {
     "isMulti": {
       "type": "boolean",

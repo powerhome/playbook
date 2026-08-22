@@ -324,7 +324,7 @@
   "globalProps": true,
   "usage": {
     "react": {
-      "import": "import { Typeahead } from 'playbook-ui'",
+      "import": "import { Typeahead } from 'playbook-ui/typeahead'",
       "example": "<Typeahead inputDisplay=\"pills\" marginBottom=\"none\"></Typeahead>"
     },
     "rails": {

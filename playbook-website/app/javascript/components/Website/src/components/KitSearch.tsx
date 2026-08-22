@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Typeahead, Badge, Flex } from 'playbook-ui'
+import { Badge, Flex } from 'playbook-ui'
+import { Typeahead } from 'playbook-ui/typeahead'
 import { matchSorter } from 'match-sorter'
 import { useDarkMode } from '../contexts/DarkModeContext'
 

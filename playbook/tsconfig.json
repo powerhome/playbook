@@ -33,6 +33,7 @@
     "app/entrypoints/playbook.js",
     "app/entrypoints/playbook-charts.js",
     "app/entrypoints/playbook-advanced-table.js",
+    "app/entrypoints/playbook-typeahead.js",
     "app/entrypoints/playbook-rails-react-bindings.js",
     "app/entrypoints/playbook-rails.js",
   ]
