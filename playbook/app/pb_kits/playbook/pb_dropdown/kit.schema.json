@@ -115,6 +115,25 @@
       ],
       "default": false
     },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onBlur": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onChange": {
+      "type": "any",
+      "platforms": [
+        "react"
+      ]
+    },
     "onSelect": {
       "type": "function",
       "platforms": [
@@ -193,12 +212,6 @@
         "rails"
       ],
       "default": false
-    },
-    "name": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
     },
     "required": {
       "platforms": [

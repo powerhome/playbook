@@ -996,3 +996,85 @@ test('disabled prop disables autocomplete input', () => {
 
   expect(input).toBeDisabled()
 })
+
+test('onChange receives selected option for non react-hook-form handlers', () => {
+  const onChange = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        onChange={onChange}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(onChange).toHaveBeenCalledWith(options[0])
+})
+
+test('onChange uses react-hook-form event shape when handler reads target', () => {
+  const calls = []
+  function onChange(event) {
+    calls.push(event.target)
+  }
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        name="color"
+        onChange={onChange}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(calls[0]).toEqual({ name: 'color', value: options[0] })
+})
+
+test('react-hook-form onChange receives selected options for multiSelect', () => {
+  const calls = []
+  function onChange(event) {
+    calls.push(event.target)
+  }
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        multiSelect
+        name="languages"
+        onChange={onChange}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(calls[0]).toEqual({ name: 'languages', value: [options[0]] })
+  expect(calls[1]).toEqual({ name: 'languages', value: [options[0], options[1]] })
+})
+
+test('onSelect still fires when onChange is provided', () => {
+  const onSelect = jest.fn()
+  const onChange = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        onChange={onChange}
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(onSelect).toHaveBeenCalledWith(options[0])
+  expect(onChange).toHaveBeenCalledWith(options[0])
+})
