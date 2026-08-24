@@ -17,7 +17,7 @@ module Playbook
       prop :url
 
       def classname
-        generate_classname("pb_image_kit#{size_class} #{transition_class} lazyload") + rounded_class
+        generate_classname("pb_image_kit#{size_class} #{transition_class}") + rounded_class
       end
 
     private

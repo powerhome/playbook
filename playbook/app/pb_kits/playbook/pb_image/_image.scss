@@ -23,30 +23,36 @@ $image-sizes: (
   }
 
   &.fade {
-    opacity: 0;
-    &.lazyloaded {
-      opacity: 1;
-      transition: opacity 300ms ease-in;
-    }
+    animation: pb_image_fade 300ms ease-in forwards;
   }
 
   &.blur {
-    filter: blur(5px);
-    &.lazyloaded {
-      -webkit-filter: blur(0);
-      filter: blur(0);
-      transition: filter 300ms ease-in;
-    }
+    animation: pb_image_blur 300ms ease-in forwards;
   }
 
   &.scale {
+    animation: pb_image_scale 700ms ease-in forwards;
+  }
+}
+
+@keyframes pb_image_fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pb_image_blur {
+  from { filter: blur(5px); }
+  to { filter: blur(0); }
+}
+
+@keyframes pb_image_scale {
+  from {
     opacity: 0;
     transform: scale(0.9);
-    &.lazyloaded {
-      opacity: 1;
-      transform: scale(1);
-      transition: 700ms ease-in;
-    }
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
