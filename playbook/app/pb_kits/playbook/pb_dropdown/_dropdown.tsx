@@ -113,7 +113,6 @@ type DropdownProps = {
     label?: string;
     multiSelect?: boolean;
     name?: string;
-    onBlur?: (event: React.FocusEvent) => void;
     onChange?: (event: { target: { name?: string; value: any } }) => void;
     onSelect?: (arg: GenericObject) => null;
     options?: GenericObject;
@@ -160,7 +159,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         multiSelect = false,
         formPillProps,
         name,
-        onBlur,
         onChange,
         onSelect,
         options,
@@ -653,8 +651,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                   </label>
                 )}
                 <div className={`dropdown_wrapper ${error ? 'error' : ''}`}
-                    onBlur={(e) => {
-                        onBlur && onBlur(e);
+                    onBlur={() => {
                         // Debounce to delay the execution to prevent jumpiness in Focus state
                         setTimeout(() => {
                             const active = document.activeElement;
