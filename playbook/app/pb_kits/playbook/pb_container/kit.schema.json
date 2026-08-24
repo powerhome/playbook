@@ -1,0 +1,22 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Container",
+  "description": "Container component",
+  "platforms": [
+    "rails",
+    "react"
+  ],
+  "props": {
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Container } from 'playbook-ui'",
+      "example": "<Container />"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"container\") %>"
+    }
+  }
+}

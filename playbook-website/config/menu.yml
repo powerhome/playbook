@@ -647,6 +647,13 @@ kits:
 - category: layout_and_structure
   description: Components for structuring and organizing page layouts and content containers.
   components:
+  - name: container
+    platforms: *1
+    description: The Container component is used as a wrapper for the content of a page or to any container.
+    status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: flex
     platforms: *1
     description: Flexbox layout helper for responsive rows, columns, spacing, and alignment in UIs.
