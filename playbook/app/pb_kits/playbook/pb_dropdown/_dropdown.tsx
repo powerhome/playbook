@@ -114,7 +114,7 @@ type DropdownProps = {
     multiSelect?: boolean;
     name?: string;
     onBlur?: (event: React.FocusEvent) => void;
-    onChange?: any;
+    onChange?: (event: { target: { name?: string; value: any } }) => void;
     onSelect?: (arg: GenericObject) => null;
     options?: GenericObject;
     placeholder?: string;
@@ -422,14 +422,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const handleSelectionChange = (value: any) => {
         onSelect && onSelect(value);
-        if (onChange) {
-            const isReactHookForm = onChange.toString().includes("target");
-            if (isReactHookForm) {
-                onChange({ target: { name, value } });
-            } else {
-                onChange(value);
-            }
-        }
+        onChange && onChange({ target: { name, value } });
     };
 
       const handleOptionClick = (clickedItem: GenericObject) => {
