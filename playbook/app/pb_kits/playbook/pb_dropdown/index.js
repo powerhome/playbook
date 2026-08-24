@@ -162,6 +162,8 @@ export default class PbDropdown extends PbEnhancedElement {
     const baseInput = this.baseInput;
     this.wasOriginallyRequired =
       baseInput && baseInput.hasAttribute("required");
+    // Apply context options before default value so SSR/default selection matches current context
+    this.bindContextSelector();
     this.setDefaultValue();
     this.bindEventListeners();
     this.bindSearchInput();
@@ -217,8 +219,6 @@ export default class PbDropdown extends PbEnhancedElement {
         document.addEventListener(eventType, this.handleOptionsEventTypeBound);
       });
     }
-
-    this.bindContextSelector();
   }
 
   disconnect() {
@@ -686,14 +686,23 @@ export default class PbDropdown extends PbEnhancedElement {
 
     this.handleContextChangeBound = this.handleContextChange.bind(this);
     contextEl.addEventListener("change", this.handleContextChangeBound);
+
+    // Sync to the current context value on connect (default/restored select), without clearing
+    this.applyOptionsForCurrentContext({ clearSelection: false });
+  }
+
+  applyOptionsForCurrentContext({ clearSelection } = {}) {
+    if (this.isDisabled || !this.optionsByContext) return;
+
+    const options = this.optionsByContext[this.contextElement?.value] || [];
+    this.replaceOptions(options, {
+      clearSelection:
+        clearSelection != null ? clearSelection : this.clearOnContextChange,
+    });
   }
 
   handleContextChange() {
-    if (this.isDisabled || !this.optionsByContext) return;
-
-    const contextValue = this.contextElement?.value;
-    const options = this.optionsByContext[contextValue] || [];
-    this.replaceOptions(options, { clearSelection: this.clearOnContextChange });
+    this.applyOptionsForCurrentContext();
   }
 
   normalizeOption(option) {
@@ -753,12 +762,17 @@ export default class PbDropdown extends PbEnhancedElement {
     const parent = this.getOptionsParent();
     if (!parent) return;
 
-    this.queryAllOptions().forEach((opt) => opt.remove());
+    // Clear option nodes and any SSR empty-state ("No option") placeholder
+    parent.replaceChildren();
     this.removeNoOptionsMessage();
 
     options.forEach((option) => {
       parent.appendChild(this.buildOptionElement(option));
     });
+
+    // Clear typed filters and keyboard focus so new options aren't left unfiltered /
+    // focused against stale indexes from the previous list
+    this.resetInteractiveOptionState();
 
     if (clearSelection) {
       this.clearSelection();
@@ -771,72 +785,61 @@ export default class PbDropdown extends PbEnhancedElement {
     }
   }
 
+  resetInteractiveOptionState() {
+    this.resetFocus();
+
+    if (this.searchBar) {
+      this.searchBar.value = "";
+    }
+
+    if (this.searchInput) {
+      this.searchInput.value = "";
+    }
+  }
+
   reconcileSelectionWithOptions() {
     const optionEls = Array.from(this.queryAllOptions());
-    const validIds = new Set(
-      optionEls.map((opt) => {
-        try {
-          return JSON.parse(opt.dataset.dropdownOptionLabel).id;
-        } catch {
-          return null;
+    const optionsById = new Map();
+    optionEls.forEach((opt) => {
+      try {
+        const optionData = JSON.parse(opt.dataset.dropdownOptionLabel);
+        if (optionData?.id != null) {
+          optionsById.set(optionData.id, opt);
         }
-      }),
-    );
+      } catch {
+        // ignore invalid option payloads
+      }
+    });
 
     if (this.isMultiSelect) {
-      const nextSelected = Array.from(this.selectedOptions).filter((raw) => {
-        try {
-          return validIds.has(JSON.parse(raw).id);
-        } catch {
-          return false;
-        }
-      });
-      if (nextSelected.length !== this.selectedOptions.size) {
-        this.selectedOptions.clear();
-        nextSelected.forEach((raw) => this.selectedOptions.add(raw));
-        optionEls.forEach((opt) => {
-          opt.classList.remove("pb_dropdown_option_selected");
-          opt.style.display = "";
-        });
-        this.selectedOptions.forEach((raw) => {
-          const id = JSON.parse(raw).id;
-          const opt = optionEls.find((o) => {
-            try {
-              return JSON.parse(o.dataset.dropdownOptionLabel).id === id;
-            } catch {
-              return false;
-            }
-          });
-          if (opt) {
-            opt.style.display = "none";
+      const keptIds = Array.from(this.selectedOptions)
+        .map((raw) => {
+          try {
+            return JSON.parse(raw).id;
+          } catch {
+            return null;
           }
-        });
-        this.updatePills();
-        this.syncHiddenInputs();
-        this.updateClearButton();
-        this.emitSelectionChange();
+        })
+        .filter((id) => id != null && optionsById.has(id));
+
+      if (keptIds.length === 0) {
+        this.clearSelection();
+        return;
       }
+
+      // Rebuild from current option payloads so labels/values stay in sync
+      this.setSelectionByOptionIds(keptIds);
       return;
     }
 
-    const hiddenInput = this.baseInput;
-    const currentId = hiddenInput?.value;
-    if (!currentId || !validIds.has(currentId)) {
+    const currentId = this.baseInput?.value;
+    if (!currentId || !optionsById.has(currentId)) {
       this.clearSelection();
       return;
     }
 
-    optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
-    const selectedOption = optionEls.find((opt) => {
-      try {
-        return JSON.parse(opt.dataset.dropdownOptionLabel).id === currentId;
-      } catch {
-        return false;
-      }
-    });
-    if (selectedOption) {
-      selectedOption.classList.add("pb_dropdown_option_selected");
-    }
+    // Re-apply selection so trigger/autocomplete use the updated option payload
+    this.setSelectionByOptionId(currentId);
   }
 
   // Handles pb:dropdown:updateOptions - replace options when event.detail.dropdownId matches.

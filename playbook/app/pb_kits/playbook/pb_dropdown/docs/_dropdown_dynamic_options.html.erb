@@ -1,83 +1,34 @@
 <%= pb_rails("select", props: {
-  id: "region_context",
-  label: "Choose a Region",
-  name: "region_name",
+  id: "color_context_dropdown",
+  label: "Choose a Color",
+  name: "color_name",
   options: [
-    { value: "northeast", value_text: "Northeast" },
-    { value: "west", value_text: "West" },
-    { value: "south", value_text: "South" },
+    { value: "red", value_text: "Red" },
+    { value: "blue", value_text: "Blue" },
+    { value: "green", value_text: "Green" },
   ],
 }) %>
 
 <%= pb_rails("dropdown", props: {
-  id: "city-dropdown-dynamic",
-  label: "Pick a City",
-  margin_bottom: "sm",
-  name: "city_name",
-  context_selector: "region_context",
+  id: "dropdown-dynamic-options",
+  label: "Pick a Shade",
+  name: "shade_name",
+  context_selector: "color_context_dropdown",
   options_by_context: {
-    "northeast" => [
-      { id: "nyc", label: "New York", value: "nyc" },
-      { id: "bos", label: "Boston", value: "bos" },
-      { id: "phl", label: "Philadelphia", value: "phl" },
+    "red" => [
+      { id: "scarlet", label: "Scarlet", value: "scarlet" },
+      { id: "mahogany", label: "Mahogany", value: "mahogany" },
+      { id: "crimson", label: "Crimson", value: "crimson" },
     ],
-    "west" => [
-      { id: "la", label: "Los Angeles", value: "la" },
-      { id: "sf", label: "San Francisco", value: "sf" },
-      { id: "sea", label: "Seattle", value: "sea" },
+    "blue" => [
+      { id: "sky", label: "Sky Blue", value: "sky" },
+      { id: "cerulean", label: "Cerulean", value: "cerulean" },
+      { id: "navy", label: "Navy", value: "navy" },
     ],
-    "south" => [
-      { id: "atl", label: "Atlanta", value: "atl" },
-      { id: "mia", label: "Miami", value: "mia" },
-      { id: "dal", label: "Dallas", value: "dal" },
+    "green" => [
+      { id: "emerald", label: "Emerald", value: "emerald" },
+      { id: "mint", label: "Mint", value: "mint" },
+      { id: "olive", label: "Olive", value: "olive" },
     ],
   },
-  options: [
-    { id: "nyc", label: "New York", value: "nyc" },
-    { id: "bos", label: "Boston", value: "bos" },
-    { id: "phl", label: "Philadelphia", value: "phl" },
-  ],
 }) %>
-
-<%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center", margin_bottom: "md" }) do %>
-  <%= pb_rails("button", props: { id: "update-cities-btn", text: "Update via event", variant: "secondary" }) %>
-  <%= pb_rails("button", props: { id: "select-city-btn", text: "Select Boston", variant: "secondary" }) %>
-  <%= pb_rails("button", props: { id: "clear-city-btn", text: "Clear", variant: "primary" }) %>
-<% end %>
-
-<script>
-  (function() {
-    var dropdownId = "city-dropdown-dynamic";
-
-    document.getElementById("update-cities-btn").addEventListener("click", function() {
-      document.dispatchEvent(new CustomEvent("pb:dropdown:updateOptions", {
-        detail: {
-          dropdownId: dropdownId,
-          options: [
-            { id: "por", label: "Portland", value: "por" },
-            { id: "den", label: "Denver", value: "den" },
-            { id: "aus", label: "Austin", value: "aus" },
-          ],
-        },
-      }));
-    });
-
-    document.getElementById("select-city-btn").addEventListener("click", function() {
-      document.dispatchEvent(new CustomEvent("pb:dropdown:select", {
-        detail: { dropdownId: dropdownId, optionId: "bos" },
-      }));
-    });
-
-    document.getElementById("clear-city-btn").addEventListener("click", function() {
-      document.dispatchEvent(new CustomEvent("pb:dropdown:clear", {
-        detail: { dropdownId: dropdownId },
-      }));
-    });
-
-    document.addEventListener("pb:dropdown:selected", function(e) {
-      if (e.target && e.target.id === dropdownId) {
-        console.log("City selected:", e.detail);
-      }
-    });
-  })();
-</script>
