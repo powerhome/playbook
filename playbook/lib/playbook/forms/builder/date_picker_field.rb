@@ -4,9 +4,17 @@ module Playbook
   module Forms
     class Builder
       def date_picker(name, props: {})
+        props = props.dup
         prefix = @object_name
         html_attribute_name = "#{prefix}[#{name}]"
         html_id = "#{prefix}_#{name}"
+
+        apply_form_error!(props, name)
+
+        unless props.key?(:default_date)
+          serialized = serialize_date_picker_default(form_attribute_value(name))
+          props[:default_date] = serialized if serialized.present?
+        end
 
         if props[:label] == true
           props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)

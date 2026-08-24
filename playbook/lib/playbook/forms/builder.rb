@@ -3,6 +3,7 @@
 module Playbook
   module Forms
     class Builder < ::ActionView::Helpers::FormBuilder
+      require_relative "builder/attribute_defaults"
       require_relative "builder/action_area"
       require_relative "builder/checkbox_field"
       require_relative "builder/collection_select_field"
@@ -17,6 +18,8 @@ module Playbook
       require_relative "builder/time_zone_select_field"
       require_relative "builder/time_picker_field"
       require_relative "builder/typeahead_field"
+
+      include AttributeDefaults
 
       prepend(FormFieldBuilder.new(:email_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:number_field, kit_name: "text_input"))
