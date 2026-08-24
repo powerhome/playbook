@@ -10,6 +10,7 @@ type ContainerProps = {
   className?: string,
   data?: { [key: string]: string },
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) | ((event: any) => void) | any },
+  tag?: "div" | "span" | "a" | "button" | "option" | "table" | "tbody" | "thead" | "tfoot" | "tr" | "td" | "th" | "img" | "section" | "article" | "main" | "header" | "footer" | "nav" | "aside"
   id?: string,
 } & GlobalProps
 
@@ -20,6 +21,7 @@ const Container = (props: ContainerProps): React.ReactElement => {
     className,
     data = {},
     htmlOptions = {},
+    tag = 'div',
     id,
   } = props
 
@@ -28,8 +30,10 @@ const Container = (props: ContainerProps): React.ReactElement => {
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_container_kit'), globalProps(props), className)
 
+  const Tag = tag
+
   return (
-    <div
+    <Tag
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
@@ -37,7 +41,7 @@ const Container = (props: ContainerProps): React.ReactElement => {
         id={id}
     >
       {children}
-    </div>
+    </Tag>
   )
 }
 

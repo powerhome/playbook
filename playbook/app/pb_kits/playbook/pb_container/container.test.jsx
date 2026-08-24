@@ -8,11 +8,21 @@ import { Container } from 'playbook-ui'
   - https://jestjs.io/docs/en/using-matchers
 */
 
-test('generated scaffold test - update me', () => {
+test('Container renders with default props', () => {
   const props = {
-    data: { testid: 'default' }
+    children: 'Container Content'
   }
 
-  render(<Container {...props} />)
-    expect(screen.getByTestId('default')).toBeInTheDocument()
+  render(<Container {...props}>{props.children}</Container>)
+  expect(screen.getByText(props.children)).toBeInTheDocument()
+})
+
+test('Container renders with custom tag', () => {
+  const props = {
+    tag: 'span',
+    children: 'Container Content'
+  }
+
+  render(<Container {...props}>{props.children}</Container>)
+  expect(screen.getByText(props.children)).toBeInTheDocument()
 })
