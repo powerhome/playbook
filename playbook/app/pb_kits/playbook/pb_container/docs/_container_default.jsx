@@ -5,7 +5,7 @@ const ContainerDefault = (props) => (
   <Container
       {...props}
   >
-    Container content
+    Hello, I am a div container
   </Container>
 )
 

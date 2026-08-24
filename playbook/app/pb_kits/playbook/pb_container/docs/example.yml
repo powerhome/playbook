@@ -2,8 +2,9 @@ examples:
   
   rails:
   - container_default: Default
+  - container_tag: Tag
   
   
   react:
   - container_default: Default
-  
+  - container_tag: Tag
