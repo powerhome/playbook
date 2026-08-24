@@ -129,7 +129,7 @@
       ]
     },
     "onChange": {
-      "type": "any",
+      "type": "function",
       "platforms": [
         "react"
       ]
