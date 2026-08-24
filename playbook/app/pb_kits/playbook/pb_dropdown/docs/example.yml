@@ -81,3 +81,6 @@ examples:
   - dropdown_required_indicator: Required Indicator
   - dropdown_disabled: Disabled Input
   - dropdown_grouped_options: Grouped Options
+  - dropdown_react_hook: React Hook
+  - dropdown_multi_select_react_hook: React Hook Multi Select
+
