@@ -1,0 +1,1 @@
+Dynamic options also work with `multi_select`. Use the same `context_selector` and `options_by_context` setup as Dynamic Options, and set `multi_select: true` to allow selecting multiple shades. Changing the color select replaces the available options and clears the current selections by default.

@@ -1,0 +1,1 @@
+Dynamic options also work with `autocomplete`. Use the same `context_selector` and `options_by_context` setup as Dynamic Options, and set `autocomplete: true` so the shade Dropdown can be filtered by typing. Changing the color select still replaces the available options and clears the current selection by default.
