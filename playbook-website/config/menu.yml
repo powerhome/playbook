@@ -468,8 +468,8 @@ kits:
     description: International phone number input with country code selection and formatting.
     status: stable
     icons_used: false
-    react_rendered: true
-    enhanced_element_used: false
+    react_rendered: false
+    enhanced_element_used: true
   - name: text_input
     platforms: *1
     description: Area where user can enter small amount of text. Commonly used in forms.
