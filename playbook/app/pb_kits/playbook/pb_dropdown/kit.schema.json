@@ -122,12 +122,6 @@
         "rails"
       ]
     },
-    "onBlur": {
-      "type": "function",
-      "platforms": [
-        "react"
-      ]
-    },
     "onChange": {
       "type": "function",
       "platforms": [

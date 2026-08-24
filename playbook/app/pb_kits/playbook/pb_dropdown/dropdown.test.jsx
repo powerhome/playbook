@@ -1199,32 +1199,3 @@ test('autocomplete selection still fires onSelect', () => {
 
   expect(onSelect).toHaveBeenCalledWith(options[1])
 })
-
-test('onBlur is optional and does not throw', () => {
-  render(
-    <Dropdown
-        data={{ testid: testId }}
-        options={options}
-    />
-  )
-
-  const kit = screen.getByTestId(testId)
-  fireEvent.blur(kit.querySelector('.dropdown_wrapper'))
-})
-
-test('onBlur fires when provided', () => {
-  const onBlur = jest.fn()
-
-  render(
-    <Dropdown
-        data={{ testid: testId }}
-        onBlur={onBlur}
-        options={options}
-    />
-  )
-
-  const kit = screen.getByTestId(testId)
-  fireEvent.blur(kit.querySelector('.dropdown_wrapper'))
-
-  expect(onBlur).toHaveBeenCalledTimes(1)
-})
