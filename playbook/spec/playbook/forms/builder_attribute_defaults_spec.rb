@@ -212,6 +212,19 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
 
       expect(rendered).to include("101").and include("102")
     end
+
+    it "stringifies integer ids so they match tree_data ids" do
+      model = build_model(attributes: { department_ids: [101, 102] })
+
+      rendered = render_form_with(model) do |form|
+        form.multi_level_select :department_ids, props: {
+          label: true,
+          tree_data: [{ label: "People", value: "People", id: "101" }],
+        }
+      end
+
+      expect(rendered).to include('data-selected-ids="[&quot;101&quot;,&quot;102&quot;]"')
+    end
   end
 
   describe "#typeahead" do
