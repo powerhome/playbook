@@ -52,16 +52,35 @@ module Playbook
           end
         end
 
+        # Dropdown only accepts option hashes for default_value. Never return a
+        # bare id/string — that raises in Dropdown#input_default_value.
         def resolve_dropdown_default(value, options)
-          return value if value.is_a?(Hash) || value.is_a?(Array)
-          return value if options.blank?
+          case value
+          when Hash
+            value
+          when Array
+            resolve_dropdown_array_default(value, options)
+          else
+            find_dropdown_option(value, options)
+          end
+        end
+
+        def resolve_dropdown_array_default(values, options)
+          return values if values.all? { |entry| entry.is_a?(Hash) }
+
+          matched = values.filter_map { |entry| find_dropdown_option(entry, options) }
+          matched.presence
+        end
+
+        def find_dropdown_option(value, options)
+          return nil if options.blank?
 
           Array(options).find do |option|
-            next false unless option.respond_to?(:[])
+            next false unless option.respond_to?(:transform_keys)
 
-            option = option.transform_keys(&:to_s)
-            option["id"].to_s == value.to_s || option["value"].to_s == value.to_s
-          end || value
+            normalized = option.transform_keys(&:to_s)
+            normalized["id"].to_s == value.to_s || normalized["value"].to_s == value.to_s
+          end
         end
       end
     end

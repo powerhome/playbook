@@ -141,17 +141,57 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
   end
 
   describe "#dropdown_field" do
-    it "auto-populates default_value from the model attribute matched to options" do
-      options = [
+    let(:dropdown_options) do
+      [
         { label: "Open", value: "open", id: "open" },
         { label: "Closed", value: "closed", id: "closed" },
       ]
+    end
+
+    it "auto-populates default_value from the model attribute matched to options" do
       model = build_model(attributes: { status: "open" })
 
       rendered = render_form_with(model) do |form|
         form.dropdown_field :status, props: {
           label: true,
-          options: options,
+          options: dropdown_options,
+        }
+      end
+
+      expect(rendered).to include('data-default-value="open"')
+    end
+
+    it "does not pass an unmatched id through as default_value" do
+      model = build_model(attributes: { status: "unknown" })
+
+      expect do
+        render_form_with(model) do |form|
+          form.dropdown_field :status, props: {
+            label: true,
+            options: dropdown_options,
+          }
+        end
+      end.not_to raise_error
+    end
+
+    it "does not pass a bare id when options are blank" do
+      model = build_model(attributes: { status: "open" })
+
+      expect do
+        render_form_with(model) do |form|
+          form.dropdown_field :status, props: { label: true }
+        end
+      end.not_to raise_error
+    end
+
+    it "resolves an array of ids to option hashes for multi_select" do
+      model = build_model(attributes: { status: %w[open missing] })
+
+      rendered = render_form_with(model) do |form|
+        form.dropdown_field :status, props: {
+          label: true,
+          multi_select: true,
+          options: dropdown_options,
         }
       end
 

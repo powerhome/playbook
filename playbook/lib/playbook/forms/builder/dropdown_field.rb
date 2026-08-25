@@ -12,7 +12,10 @@ module Playbook
 
         unless props.key?(:default_value)
           value = form_attribute_value(name)
-          props[:default_value] = resolve_dropdown_default(value, props[:options]) unless value.nil?
+          unless value.nil?
+            resolved = resolve_dropdown_default(value, props[:options])
+            props[:default_value] = resolved unless resolved.nil?
+          end
         end
 
         if props[:label] == true

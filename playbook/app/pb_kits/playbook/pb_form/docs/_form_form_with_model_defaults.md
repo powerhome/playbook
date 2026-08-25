@@ -6,5 +6,5 @@ Shown below: `text_field`, `email_field`, `number_field`, `text_area`, `date_pic
 
 **Notes**
 - Explicit props still win when you pass them.
-- Dropdown needs `options` so a stored id/value can be matched to an option.
+- Dropdown needs `options` so a stored id/value can be matched to an option hash; unmatched ids are left unset.
 - Typeahead only auto-binds `default_options` when the attribute is already option-shaped (`{ label, value }` or an array of those). A bare database id still needs an explicit `default_options`.

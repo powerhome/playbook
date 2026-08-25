@@ -25,5 +25,5 @@ On edit, `starts_at` is pre-populated and any `errors.full_messages_for(:starts_
 | `typeahead` | `default_options` only if already option-shaped | yes |
 | text / textarea / select / `collection_select` | via Rails | yes |
 
-**Caveats:** dropdown needs `options` to resolve a stored id/value to an option. Typeahead with a bare database id still needs an explicit `default_options`.
+**Caveats:** dropdown needs `options` to resolve a stored id/value to an option hash; unmatched ids are ignored (not passed through). Typeahead with a bare database id still needs an explicit `default_options`.
 
