@@ -1,8 +1,11 @@
-# 17.1.0
+# 📦 Introducing the New Container Kit ✨
 ##### August 25, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
+Meet Container, a lightweight wrapper kit that can render as different HTML elements and ships with zero SCSS. It supports all global props and htmlOptions, giving you flexibility without needing to write extra CSS!
+
+Plus, continuing our journey for removing React-rendering from our Rails kits, PhoneNumberInput and MultiLevelSelect are now officially enhanced elements instead of React-rendered Rails kits! Typeahead is officially the last one standing. 👀
 
 [17.1.0](https://github.com/powerhome/playbook/tree/17.1.0) full list of changes:
 
