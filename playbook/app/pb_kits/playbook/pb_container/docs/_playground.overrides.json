@@ -1,15 +1,16 @@
 {
   "template": "<Container{{props}}>\n  {{children}}\n</Container>",
-  "propTargets": {},
+  "children": {
+    "editable": true,
+    "default": "Hello, I am a div container"
+  },
   "defaults": {
     "tag": "div"
   },
   "groups": [
     {
       "name": "Layout",
-      "props": [
-        "tag"
-      ]
+      "props": ["tag"]
     }
   ],
   "presets": [
@@ -49,9 +50,5 @@
       "message": "Use htmlOptions to add href and other HTML attributes when tag is a.",
       "type": "info"
     }
-  },
-  "children": {
-    "editable": true,
-    "default": "Hello, I am a div container"
   }
 }
