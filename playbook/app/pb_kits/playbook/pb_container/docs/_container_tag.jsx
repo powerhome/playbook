@@ -16,7 +16,7 @@ const ContainerTag = (props) => {
       tag="a"
       {...props}
   >
-    Hello, I am a a container
+    Hello, I am an a container
   </Container>
   </>
   )
