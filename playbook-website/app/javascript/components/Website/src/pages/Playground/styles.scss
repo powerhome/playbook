@@ -17,9 +17,11 @@
 
 .full-playground-heading {
   align-items: flex-start;
+  flex-direction: column;
 
   @include break_on($screen-md-min) {
     align-items: flex-end;
+    flex-direction: row;
   }
 }
 

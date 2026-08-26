@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { Flex } from "playbook-ui";
 
@@ -40,6 +40,11 @@ import { PlaygroundHeader } from "./PlaygroundHeader";
 import { PlaygroundInspector } from "./PlaygroundInspector";
 import { PlaygroundPromptBuilder } from "./PlaygroundPromptBuilder";
 import { PlaygroundSidebar } from "./PlaygroundSidebar";
+import {
+  clearPersistedPlaygroundState,
+  loadPersistedPlaygroundState,
+  savePersistedPlaygroundState,
+} from "./playgroundStorage";
 import type {
   BuilderInstance,
   PlaygroundKit,
@@ -69,13 +74,28 @@ const cloneInstances = (items: BuilderInstance[]): BuilderInstance[] =>
 export default function Playground() {
   const { global_props_schema, playground_kits = [] } =
     useLoaderData() as PlaygroundLoaderData;
-  const [instances, setInstances] = useState<BuilderInstance[]>([]);
+  const [persistedState] = useState(() =>
+    loadPersistedPlaygroundState(
+      new Set(
+        playground_kits
+          .filter((kit) => PLAYGROUND_ENABLED_KITS.includes(kit.name))
+          .map((kit) => kit.name),
+      ),
+    ),
+  );
+  const [instances, setInstances] = useState<BuilderInstance[]>(
+    () => persistedState?.instances ?? [],
+  );
   const [activeBuildingBlockId, setActiveBuildingBlockId] = useState<
     string | null
-  >(null);
+  >(() => persistedState?.buildingBlockId ?? null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [addTargetId, setAddTargetId] = useState(ROOT_TARGET_ID);
+  const [selectedId, setSelectedId] = useState<string | null>(
+    () => persistedState?.selectedId ?? null,
+  );
+  const [addTargetId, setAddTargetId] = useState(
+    () => persistedState?.addTargetId ?? ROOT_TARGET_ID,
+  );
   const [dragOverTargetId, setDragOverTargetId] = useState<string | null>(null);
   const [draggedKitName, setDraggedKitName] = useState<string | null>(null);
   const [draggingInstanceId, setDraggingInstanceId] = useState<string | null>(null);
@@ -83,6 +103,7 @@ export default function Playground() {
   const [promptStatus, setPromptStatus] = useState<string | null>(null);
   const [promptDiagnostics, setPromptDiagnostics] = useState<string[]>([]);
   const [playgroundHistory, setPlaygroundHistory] = useState<PlaygroundSnapshot[]>([]);
+  const [playgroundFuture, setPlaygroundFuture] = useState<PlaygroundSnapshot[]>([]);
   const [isPromptMinimized, setIsPromptMinimized] = useState(true);
   const dragSourceElementRef = useRef<HTMLElement | null>(null);
   const dragOverTargetRef = useRef<string | null>(null);
@@ -208,17 +229,31 @@ export default function Playground() {
   );
   const instanceCount = useMemo(() => countInstances(instances), [instances]);
 
-  const savePlaygroundSnapshot = () => {
-    const snapshot = {
-      addTargetId,
-      buildingBlockId: activeBuildingBlockId,
-      instances: cloneInstances(instances),
-      selectedId,
-    };
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      savePersistedPlaygroundState({
+        addTargetId,
+        buildingBlockId: activeBuildingBlockId,
+        instances,
+        selectedId,
+      });
+    }, 400);
 
+    return () => window.clearTimeout(timeoutId);
+  }, [addTargetId, activeBuildingBlockId, instances, selectedId]);
+
+  const buildPlaygroundSnapshot = (): PlaygroundSnapshot => ({
+    addTargetId,
+    buildingBlockId: activeBuildingBlockId,
+    instances: cloneInstances(instances),
+    selectedId,
+  });
+
+  const savePlaygroundSnapshot = () => {
     setPlaygroundHistory((current) =>
-      [...current, snapshot].slice(-MAX_PLAYGROUND_HISTORY),
+      [...current, buildPlaygroundSnapshot()].slice(-MAX_PLAYGROUND_HISTORY),
     );
+    setPlaygroundFuture([]);
   };
 
   const updateInstance = (
@@ -541,6 +576,9 @@ export default function Playground() {
     if (!previous) return;
 
     setPlaygroundHistory((current) => current.slice(0, -1));
+    setPlaygroundFuture((current) =>
+      [...current, buildPlaygroundSnapshot()].slice(-MAX_PLAYGROUND_HISTORY),
+    );
     setInstances(cloneInstances(previous.instances));
     setSelectedId(previous.selectedId);
     setAddTargetId(previous.addTargetId);
@@ -550,6 +588,21 @@ export default function Playground() {
       setPromptStatus("Restored previous playground state.");
       setIsPromptMinimized(false);
     }
+  };
+
+  const handleRedoPlaygroundState = () => {
+    const next = playgroundFuture[playgroundFuture.length - 1];
+    if (!next) return;
+
+    setPlaygroundFuture((current) => current.slice(0, -1));
+    setPlaygroundHistory((current) =>
+      [...current, buildPlaygroundSnapshot()].slice(-MAX_PLAYGROUND_HISTORY),
+    );
+    setInstances(cloneInstances(next.instances));
+    setSelectedId(next.selectedId);
+    setAddTargetId(next.addTargetId);
+    setActiveBuildingBlockId(next.buildingBlockId);
+    setPromptDiagnostics([]);
   };
 
   const handleClearPromptBuilder = () => {
@@ -564,6 +617,8 @@ export default function Playground() {
     setSelectedId(null);
     setAddTargetId(ROOT_TARGET_ID);
     setPlaygroundHistory([]);
+    setPlaygroundFuture([]);
+    clearPersistedPlaygroundState();
     handleClearPromptBuilder();
   };
 
@@ -666,9 +721,11 @@ export default function Playground() {
         width="100%"
     >
       <PlaygroundHeader
+          canRedo={playgroundFuture.length > 0}
           canRestorePreviousState={playgroundHistory.length > 0}
           kitCount={enabledPlaygroundKits.length}
           onClear={handleClearAll}
+          onRedo={handleRedoPlaygroundState}
           onRestorePreviousState={() => handleRestorePreviousPlaygroundState()}
       />
 
