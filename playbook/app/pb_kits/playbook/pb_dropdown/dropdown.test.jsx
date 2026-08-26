@@ -197,6 +197,38 @@ test('placeholder shows default "Select..." when not provided', () => {
   expect(trigger).toHaveTextContent('Select...')
 })
 
+test('placeholder Body uses lighter color', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        options={options}
+        placeholder="Choose a country"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const placeholderBody = kit.querySelector('.dropdown_trigger_wrapper_select_only .pb_body_kit_lighter')
+  expect(placeholderBody).toBeInTheDocument()
+  expect(placeholderBody).toHaveTextContent('Choose a country')
+})
+
+test('selected value Body does not use lighter color', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        defaultValue={options[0]}
+        options={options}
+        placeholder="Choose a country"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const triggerBodies = kit.querySelectorAll('.dropdown_trigger_wrapper_select_only [class^="pb_body_kit"]')
+  const selectedBody = Array.from(triggerBodies).find((el) => el.textContent === options[0].label)
+  expect(selectedBody).toBeTruthy()
+  expect(selectedBody).not.toHaveClass('pb_body_kit_lighter')
+})
+
 test('generated label prop', () => { 
   render (
     <Dropdown
@@ -348,6 +380,41 @@ test("autocomplete prop to render input", () => {
   const kit = screen.getByTestId(testId)
   const input = kit.querySelector('.dropdown_input')
   expect(input).toBeInTheDocument()
+})
+
+test("defaultValue renders in autocomplete input", () => {
+  render(
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        defaultValue={options[2]}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = kit.querySelector('.dropdown_input')
+  expect(input).toBeInTheDocument()
+  expect(input).toHaveValue(options[2].label)
+  expect(input).toHaveAttribute("placeholder", "")
+})
+
+test("autocomplete defaultValue still shows all options when opened", () => {
+  render(
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        defaultValue={options[2]}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const optionEls = kit.querySelectorAll('.pb_dropdown_option_list, .pb_dropdown_option_selected')
+  expect(optionEls).toHaveLength(options.length)
+  expect(kit).toHaveTextContent(options[0].label)
+  expect(kit).toHaveTextContent(options[1].label)
+  expect(kit).toHaveTextContent(options[2].label)
 })
 
 test("searchbar prop to render TextInput in container", () => {  

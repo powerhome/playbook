@@ -4,6 +4,7 @@
   "defaults": {
     "align": "left",
     "color": "light",
+    "dark": false,
     "text": "Loading",
     "variant": "dotted"
   },

@@ -3187,15 +3187,15 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
-"@powerhome/playbook-icons-react@2.5.0":
-  version "2.5.0"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/045d750f92e1f72832b5d283170e976128d78676#045d750f92e1f72832b5d283170e976128d78676"
-  integrity sha512-kRxl8bJNempM0coxHQjMerkjWmEGDgBOxk0cyWLgFgd7EOpnLAnMcv09ZZQFfm02VOAFeirFVU7QeKJLCIIoLw==
+"@powerhome/playbook-icons-react@2.7.1":
+  version "2.7.1"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/e89c095ee7cb4bf5053d0a2d4dee57bd8105a724#e89c095ee7cb4bf5053d0a2d4dee57bd8105a724"
+  integrity sha512-JnAa/xorxZBRkvw/oESsN0ZnfDngR/AQWWo09/VmSVLbks7Ln+PZyz+MxZlTlT9syx7MAIiTr82MieLr6pkhoA==
 
-"@powerhome/playbook-icons@2.5.0":
-  version "2.5.0"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/a348fc5ed50322813a4a63f0bd20304ee444b653#a348fc5ed50322813a4a63f0bd20304ee444b653"
-  integrity sha512-Xsvbxcq7eWnEYTC5qLjcywZ4+Es+Wg2/5DEQ4vfBMA3oDNIo/Tdvvx14JInY6LOXDILRiwavEbojNcx61o8dtQ==
+"@powerhome/playbook-icons@2.7.1":
+  version "2.7.1"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/63c9c44f41424536d242f27a8c1cbcca7c2cb730#63c9c44f41424536d242f27a8c1cbcca7c2cb730"
+  integrity sha512-KJYJivp1RFiBJjxFkjReBf3DqcRkCq+djtuANwYdGYzWvbRWmCYNm6UTNV45fIc1avky2Z3WtGGLsu9KfbNghQ==
 
 "@powerhome/power-fonts@0.0.1":
   version "0.0.1"
@@ -3901,13 +3901,6 @@
   version "18.0.11"
   resolved "https://npm.powerapp.cloud/@types/react-dom/-/react-dom-18.0.11.tgz#321351c1459bc9ca3d216aefc8a167beec334e33"
   integrity sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-highlight-words@^0.20.0":
-  version "0.20.0"
-  resolved "https://npm.powerapp.cloud/@types/react-highlight-words/-/react-highlight-words-0.20.0.tgz#c7e3e8302acb5082980e611ce2d93c6e6d3b4022"
-  integrity sha512-Qm512TiOakvtNzHJ2+TNVHnLn5cJ2wLQV0+LrhuispVth6dRf5b8ydjq3Kc0thpZ7bz4s6RnG6meboAXHWRK+Q==
   dependencies:
     "@types/react" "*"
 
@@ -7220,11 +7213,6 @@ highcharts@^11.4.8:
   resolved "https://npm.powerapp.cloud/highcharts/-/highcharts-11.4.8.tgz#252e71b81c24ec9f99e756b76dbebd7546e18dda"
   integrity sha512-5Tke9LuzZszC4osaFisxLIcw7xgNGz4Sy3Jc9pRMV+ydm6sYqsPYdU8ELOgpzGNrbrRNDRBtveoR5xS3SzneEA==
 
-highlight-words-core@^1.2.0:
-  version "1.2.2"
-  resolved "https://npm.powerapp.cloud/highlight-words-core/-/highlight-words-core-1.2.2.tgz#1eff6d7d9f0a22f155042a00791237791b1eeaaa"
-  integrity sha512-BXUKIkUuh6cmmxzi5OIbUJxrG8OAk2MqoL1DtO3Wo9D2faJg2ph5ntyuQeLqaHJmzER6H5tllCDA9ZnNe9BVGg==
-
 highlight.js@^10.4.1, highlight.js@~10.7.0:
   version "10.7.3"
   resolved "https://npm.powerapp.cloud/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
@@ -8615,11 +8603,6 @@ kleur@^3.0.3:
   resolved "https://npm.powerapp.cloud/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-lazysizes@^5.3.2:
-  version "5.3.2"
-  resolved "https://npm.powerapp.cloud/lazysizes/-/lazysizes-5.3.2.tgz#27f974c26f5fcc33e7db765c0f4930488c8a2984"
-  integrity sha512-22UzWP+Vedi/sMeOr8O7FWimRVtiNJV2HCa+V8+peZOw6QbswN9k58VUhd7i6iK5bw5QkYrF01LJbeJe0PV8jg==
-
 lazystream@^1.0.0:
   version "1.0.1"
   resolved "https://npm.powerapp.cloud/lazystream/-/lazystream-1.0.1.tgz#494c831062f1f9408251ec44db1cba29242a2638"
@@ -9011,11 +8994,6 @@ mdurl@^2.0.0:
   version "2.0.0"
   resolved "https://npm.powerapp.cloud/mdurl/-/mdurl-2.0.0.tgz#80676ec0433025dd3e17ee983d0fe8de5a2237e0"
   integrity sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==
-
-memoize-one@^4.0.0:
-  version "4.1.0"
-  resolved "https://npm.powerapp.cloud/memoize-one/-/memoize-one-4.1.0.tgz#a2387c58c03fff27ca390c31b764a79addf3f906"
-  integrity sha512-2GApq0yI/b22J2j9rhbrAlsHb0Qcz+7yWxeLG8h+95sl1XPUgeLimQSOdur4Vw7cUhrBHwaUZxWFZueojqNRzA==
 
 memoize-one@^6.0.0:
   version "6.0.0"
@@ -10305,7 +10283,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://npm.powerapp.cloud/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -10550,15 +10528,6 @@ react-fast-compare@^3.0.1:
   version "3.2.0"
   resolved "https://npm.powerapp.cloud/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
-
-react-highlight-words@^0.20.0:
-  version "0.20.0"
-  resolved "https://npm.powerapp.cloud/react-highlight-words/-/react-highlight-words-0.20.0.tgz#c60bfff5d14678c8f0e8fbe4bdcf083e6c70d507"
-  integrity sha512-asCxy+jCehDVhusNmCBoxDf2mm1AJ//D+EzDx1m5K7EqsMBIHdZ5G4LdwbSEXqZq1Ros0G0UySWmAtntSph7XA==
-  dependencies:
-    highlight-words-core "^1.2.0"
-    memoize-one "^4.0.0"
-    prop-types "^15.5.8"
 
 react-hook-form@^7.28.1:
   version "7.54.2"
@@ -12062,10 +12031,10 @@ trim-lines@^3.0.0:
   resolved "https://npm.powerapp.cloud/trim-lines/-/trim-lines-3.0.1.tgz#d802e332a07df861c48802c04321017b1bd87338"
   integrity sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==
 
-trix@2.1.16:
-  version "2.1.16"
-  resolved "https://npm.powerapp.cloud/trix/-/trix-2.1.16.tgz#601be839258b87cc83019915650c50eb7cbc161e"
-  integrity sha512-XtZgWI+oBvLzX7CWnkIf+ZWC+chL+YG/TkY43iMTV0Zl+CJjn18B1GJUCEWJ8qgfpcyMBuysnNAfPWiv2sV14A==
+trix@2.1.17:
+  version "2.1.17"
+  resolved "https://npm.powerapp.cloud/trix/-/trix-2.1.17.tgz#a47c4ee1925a7abb26aee5c094ec7ef9fe49575a"
+  integrity sha512-nkHg7VgIItGVx1CFA645dDlAoCgah+9gv80Yc+97aS8jkZmO5K4MxkSqmU9t/C8upqZB8uhfJs90epoDfYz/6Q==
   dependencies:
     dompurify "^3.2.5"
 

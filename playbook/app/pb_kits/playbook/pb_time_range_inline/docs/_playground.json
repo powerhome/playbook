@@ -4,6 +4,7 @@
   "defaults": {
     "alignment": "left",
     "size": "sm",
+    "dark": false,
     "icon": false,
     "timezone": false
   },

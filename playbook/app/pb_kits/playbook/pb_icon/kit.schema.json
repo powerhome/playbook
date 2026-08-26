@@ -8,10 +8,23 @@
   ],
   "props": {
     "border": {
-      "type": "boolean | BorderPropValue",
+      "type": "enum",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "values": [
+        false,
+        true,
+        "none",
+        "default",
+        "active",
+        "default_thick",
+        "active_thick",
+        "default_thicker",
+        "active_thicker"
+      ],
+      "default": false
     },
     "color": {
       "type": "string",
@@ -168,11 +181,11 @@
   "usage": {
     "react": {
       "import": "import { Icon } from 'playbook-ui'",
-      "example": "<Icon flip=\"horizontal\" pull=\"left\"></Icon>"
+      "example": "<Icon border=\"false\" flip=\"horizontal\"></Icon>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"icon\", props: { flip: \"horizontal\", pull: \"left\" }) %>"
+      "example": "<%= pb_rails(\"icon\", props: { border: \"false\", flip: \"horizontal\" }) %>"
     }
   }
 }

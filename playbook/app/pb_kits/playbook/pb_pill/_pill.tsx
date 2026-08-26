@@ -11,6 +11,7 @@ type PillProps = {
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
+  notification?: boolean,
   size?: "sm",
   text: string,
   variant?: "success" | "warning" | "error" | "info" | "neutral" | "primary",
@@ -24,16 +25,18 @@ const Pill = (props: PillProps) => {
     data = {},
     htmlOptions = {},
     id,
+    notification = false,
     size,
     text,
     variant = 'neutral',
     textTransform = 'lowercase',
   } = props
 
+  const colorVariant = notification && variant !== 'error' ? 'primary' : variant
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const classes = classnames(buildCss('pb_pill_kit', variant, textTransform, size || ''), globalProps(props), className)
+  const classes = classnames(buildCss('pb_pill_kit', colorVariant, textTransform, notification ? 'notification' : '', size || ''), globalProps(props), className)
 
   return (
     <div

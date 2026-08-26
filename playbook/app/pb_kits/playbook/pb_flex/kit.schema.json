@@ -116,19 +116,22 @@
     "gap": {
       "type": "SizeType | SizeResponsiveType",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "rowGap": {
       "type": "SizeType | SizeResponsiveType",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "columnGap": {
       "type": "SizeType | SizeResponsiveType",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "wrap": {

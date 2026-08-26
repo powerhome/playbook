@@ -76,6 +76,9 @@ body.pages.application .pb--website-react-host {
   pre.highlight {
     padding: 44px 24px;
     margin: 0;
+    width: max-content;
+    min-width: 100%;
+    box-sizing: border-box;
   }
   .highlight {
     background: $bg_dark;

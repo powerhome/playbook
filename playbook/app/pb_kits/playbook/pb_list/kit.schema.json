@@ -18,8 +18,10 @@
     "dark": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "enableDrag": {
       "type": "boolean",

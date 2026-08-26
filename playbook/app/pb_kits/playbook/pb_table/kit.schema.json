@@ -211,6 +211,14 @@
       ],
       "default": "default"
     },
+    "contrastBorder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "verticalBorder": {
       "type": "boolean",
       "platforms": [

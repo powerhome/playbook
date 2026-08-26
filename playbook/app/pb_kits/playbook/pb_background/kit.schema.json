@@ -14,7 +14,7 @@
       ]
     },
     "backgroundColor": {
-      "type": "ResponsiveProp<BackgroundColors> | BackgroundColors",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -85,7 +85,7 @@
       "default": "light"
     },
     "backgroundSize": {
-      "type": "ResponsiveProp<BackgroundSizes> | BackgroundSizes",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -106,7 +106,7 @@
       "default": null
     },
     "backgroundRepeat": {
-      "type": "ResponsiveProp<BackgroundRepeat> | BackgroundRepeat",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"

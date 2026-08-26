@@ -44,7 +44,8 @@
           color: $input_text_active;
         }
       }
-      .text_input {
+      // React select control only — Rails <input class="text_input"> must keep max-height: 45px
+      div.text_input {
         max-height: none;
       }
       & > input:first-child {
@@ -142,6 +143,7 @@
       &__control {
         &--is-disabled {
           background-color: $input_background_disabled;
+          border-color: $input_border_disabled;
         }
         &--is-focused {
           @include pb_textarea_focus;

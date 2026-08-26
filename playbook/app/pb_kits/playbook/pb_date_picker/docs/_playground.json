@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "allowInput": false,
+    "dark": false,
     "defaultDate": "",
     "disableInput": false,
     "enableTime": false,

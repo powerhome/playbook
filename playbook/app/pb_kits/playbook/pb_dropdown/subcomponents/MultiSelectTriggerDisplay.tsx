@@ -24,8 +24,10 @@ const MultiSelectTriggerDisplay = ({
   if (selected.length === 0) {
     if (autocomplete) return null;
     return (
-    <Body dark={dark} 
-        text={placeholder ? placeholder : "Select..."} 
+    <Body
+        color="lighter"
+        dark={dark}
+        text={placeholder ? placeholder : "Select..."}
     />
     )
   }

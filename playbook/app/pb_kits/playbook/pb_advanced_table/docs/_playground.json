@@ -12,6 +12,7 @@
     "fullWidthCell": false,
     "inlineRowLoading": false,
     "loading": false,
+    "maxHeight": "auto",
     "responsive": "scroll",
     "scrollBarNone": false,
     "selectableRows": false,
@@ -258,6 +259,11 @@
     }
   },
   "hints": {
+    "advanced_table_import": {
+      "when": {},
+      "message": "AdvancedTable is imported from playbook-ui/advanced-table so apps can keep TanStack out of the main playbook-ui bundle until this kit is used.",
+      "type": "info"
+    },
     "sorting_info": {
       "when": {
         "enableSortingRemoval": true
@@ -315,6 +321,9 @@
       "type": "info"
     }
   },
+  "externalImports": [
+    "import { AdvancedTable } from 'playbook-ui/advanced-table'"
+  ],
   "structureModes": {
     "default": "implicit",
     "modes": {

@@ -684,6 +684,14 @@
     "category": "Communication"
   },
   {
+    "name": "comment-code",
+    "category": "Communication"
+  },
+  {
+    "name": "comment-plus",
+    "category": "Communication"
+  },
+  {
     "name": "comment-slash",
     "category": "Communication"
   },
@@ -976,6 +984,10 @@
     "category": "Files"
   },
   {
+    "name": "file-music",
+    "category": "Files"
+  },
+  {
     "name": "file-pdf",
     "category": "Files"
   },
@@ -1141,6 +1153,10 @@
   },
   {
     "name": "arrow-pointer",
+    "category": "Interface Core"
+  },
+  {
+    "name": "backspace",
     "category": "Interface Core"
   },
   {
@@ -1441,6 +1457,10 @@
   },
   {
     "name": "spinner",
+    "category": "Interface Core"
+  },
+  {
+    "name": "square-list",
     "category": "Interface Core"
   },
   {
@@ -1908,6 +1928,10 @@
     "category": "Power Products"
   },
   {
+    "name": "circle-product-multi",
+    "category": "Power Products"
+  },
+  {
     "name": "circle-product-roofing",
     "category": "Power Products"
   },
@@ -1949,6 +1973,10 @@
   },
   {
     "name": "product-hardboard-siding",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-multi",
     "category": "Power Products"
   },
   {
@@ -2209,6 +2237,14 @@
   },
   {
     "name": "wand-magic-sparkles",
+    "category": "Technology"
+  },
+  {
+    "name": "wifi-slash",
+    "category": "Technology"
+  },
+  {
+    "name": "wifi",
     "category": "Technology"
   },
   {

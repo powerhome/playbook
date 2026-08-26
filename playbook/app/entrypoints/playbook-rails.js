@@ -5,6 +5,7 @@ import PbKitRegistry from 'kits/pb_kit_registry'
 
 // Import all kits
 import PbTextInput from 'kits/pb_text_input'
+import PbPhoneNumberInput from 'kits/pb_phone_number_input'
 import { PbCopyButton, addCopyEventListeners } from 'kits/pb_copy_button'
 import PbCollapsible from 'kits/pb_collapsible'
 import PbPopover from 'kits/pb_popover'
@@ -36,6 +37,7 @@ import PbFormValidation from 'kits/pb_form/pb_form_validation'
 // Please note: the order of this array determines the order of kit initialization, which can be important for kits that depend on others (e.g., a kit that enhances a text input should be registered after PbTextInput)
 const kits = [
   PbTextInput,
+  PbPhoneNumberInput,
   PbCopyButton,
   PbCollapsible,
   PbPopover,
@@ -89,7 +91,6 @@ import datePickerHelper from 'kits/pb_date_picker/date_picker_helper'
 window.datePickerHelper = datePickerHelper
 
 // Third-party libraries
-import 'lazysizes'
 import 'flatpickr'
 
 // React-Rendered Rails Kits

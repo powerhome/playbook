@@ -16,4 +16,4 @@ So long as you have a valid React `<SVG>` node, you can send it as the `customIc
 
 ### Rails
 
-Some Rails applications use only webpack(er) which means using `image_url` will be successful over `image_path` in most cases especially development where Webpack Dev Server is serving assets over HTTP. Rails applications still using Asset Pipeline may use `image_path` or `image_url`. Of course, YMMV depending on any custom configurations in your Rails application.
+Pass a local filesystem path to an SVG under your application or a mounted engine (for example `Playbook::Engine.root.join("app/pb_kits/playbook/utilities/icons/clock.svg").to_s`) via the `custom_icon` prop. Remote `http(s)` URLs are not fetched — only local / engine paths are supported.

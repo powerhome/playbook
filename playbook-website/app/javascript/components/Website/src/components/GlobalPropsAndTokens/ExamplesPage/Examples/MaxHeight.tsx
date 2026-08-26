@@ -15,6 +15,8 @@ const MaxHeight = () => {
     'xl': '1280px',
     'xxl': '1440px',
     'xxxl': '1920px',
+    '100%': '100%',
+    '100vh': '100vh',
   }
 
   const VisualGuideCard = () => {
@@ -24,7 +26,7 @@ const MaxHeight = () => {
           overflow="auto"
           width="100%"
       >
-        <Flex justify="between" orientation="row">
+        <Flex height="100%" justify="between" orientation="row">
           {Object.keys(SIZES).map((size: string) => (
             <Background
                 backgroundColor="primary"
@@ -163,6 +165,20 @@ const MaxHeight = () => {
               <Flex gap="xs" wrap><ValueCardWithTooltip text="xxxl" tooltipText="1920px"/></Flex>,
               <ExampleCodeCard id="max-height-xxxl-rails" text='max_height: "xxxl"' />,
               <ExampleCodeCard id="max-height-xxxl-react" text='maxHeight="xxxl"' />,
+            ],
+            [
+              "100%",
+              <ExampleCodeCard text="string" copyIcon={false} />,
+              <Flex gap="xs" wrap><ExampleCodeCard text="100%" copyIcon={false} /></Flex>,
+              <ExampleCodeCard id="max-height-100-rails" text='max_height: "100%"' />,
+              <ExampleCodeCard id="max-height-100-react" text='maxHeight="100%"' />,
+            ],
+            [
+              "100vh",
+              <ExampleCodeCard text="string" copyIcon={false} />,
+              <Flex gap="xs" wrap><ExampleCodeCard text="100vh" copyIcon={false} /></Flex>,
+              <ExampleCodeCard id="max-height-100vh-rails" text='max_height: "100vh"' />,
+              <ExampleCodeCard id="max-height-100vh-react" text='maxHeight="100vh"' />,
             ],
           ]}
         />

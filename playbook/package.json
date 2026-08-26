@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "16.11.0",
+  "version": "17.1.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
@@ -16,6 +16,12 @@
       "import": "./dist/charts.js",
       "require": "./dist/charts.js",
       "default": "./dist/charts.js"
+    },
+    "./advanced-table": {
+      "types": "./dist/types/advanced-table.d.ts",
+      "import": "./dist/advanced-table.js",
+      "require": "./dist/advanced-table.js",
+      "default": "./dist/advanced-table.js"
     },
     "./dist/playbook.css": "./dist/playbook.css",
     "./dist/reset.css": "./dist/reset.css",
@@ -39,7 +45,7 @@
     "generate:global-props-metadata": "node scripts/generate-global-props-metadata.mjs",
     "generate:all-ai-metadata": "node scripts/generate-ai-metadata.mjs && node scripts/generate-global-props-metadata.mjs",
     "build:ai": "node scripts/build-ai-dist.mjs",
-    "build:ai:full": "yarn generate:all-ai-metadata && yarn build:ai"
+    "build:ai:full": "yarn generate:all-ai-metadata && yarn generate:playground-configs --overwrite && yarn build:ai"
   },
   "repository": {
     "type": "git",
@@ -82,7 +88,6 @@
     "@types/jest": "26.0.14",
     "@types/react": "17.0.54",
     "@types/react-dom": "^18.0.11",
-    "@types/react-highlight-words": "^0.20.0",
     "@types/react-modal": "3.16.1",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
@@ -100,11 +105,9 @@
     "jest": "26.6.3",
     "jest-axe": "11.0.0",
     "jest-fail-on-console": "3.2.0",
-    "lazysizes": "^5.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dropzone": "^14.3.5",
-    "react-highlight-words": "^0.20.0",
     "react-modal": "^3.16.1",
     "react-popper": "^2.3.0",
     "react-select": "5.8.0",

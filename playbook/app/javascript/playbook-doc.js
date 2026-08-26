@@ -18,6 +18,7 @@ import * as Checkbox from '../pb_kits/playbook/pb_checkbox/docs'
 import * as CircleIconButton from '../pb_kits/playbook/pb_circle_icon_button/docs'
 import * as Collapsible from '../pb_kits/playbook/pb_collapsible/docs'
 import * as Contact from '../pb_kits/playbook/pb_contact/docs'
+import * as Container from '../pb_kits/playbook/pb_container/docs'
 import * as CopyButton from '../pb_kits/playbook/pb_copy_button/docs'
 import * as Currency from '../pb_kits/playbook/pb_currency/docs'
 import * as DashboardValue from '../pb_kits/playbook/pb_dashboard_value/docs'
@@ -46,7 +47,6 @@ import * as Hashtag from '../pb_kits/playbook/pb_hashtag/docs'
 import * as Highlight from '../pb_kits/playbook/pb_highlight/docs'
 import * as HomeAddressStreet from '../pb_kits/playbook/pb_home_address_street/docs'
 import * as Icon from '../pb_kits/playbook/pb_icon/docs'
-import * as IconButton from '../pb_kits/playbook/pb_icon_button/docs'
 import * as IconCircle from '../pb_kits/playbook/pb_icon_circle/docs'
 import * as IconStatValue from '../pb_kits/playbook/pb_icon_stat_value/docs'
 import * as IconValue from '../pb_kits/playbook/pb_icon_value/docs'
@@ -128,6 +128,7 @@ ComponentRegistry.registerComponents({
   ...CircleIconButton,
   ...Collapsible,
   ...Contact,
+  ...Container,
   ...CopyButton,
   ...Currency,
   ...DashboardValue,
@@ -156,7 +157,6 @@ ComponentRegistry.registerComponents({
   ...Highlight,
   ...HomeAddressStreet,
   ...Icon,
-  ...IconButton,
   ...IconCircle,
   ...IconStatValue,
   ...IconValue,

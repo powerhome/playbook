@@ -8,7 +8,7 @@
   ],
   "props": {
     "background": {
-      "type": "BackgroundColors | ProductColors | \"none\"",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -39,6 +39,8 @@
         "product_10_highlight",
         "product_11_background",
         "product_11_highlight",
+        "product_12_background",
+        "product_12_highlight",
         "windows",
         "siding",
         "doors",
@@ -66,7 +68,8 @@
     "borderRadius": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "xs",
@@ -76,7 +79,8 @@
         "xl",
         "none",
         "rounded"
-      ]
+      ],
+      "default": "md"
     },
     "dragId": {
       "type": "string",

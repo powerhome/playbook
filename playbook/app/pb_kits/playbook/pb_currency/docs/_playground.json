@@ -4,6 +4,7 @@
   "defaults": {
     "abbreviate": false,
     "align": "left",
+    "dark": false,
     "decimals": "default",
     "emphasized": true,
     "label": "Balance",

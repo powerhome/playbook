@@ -37,14 +37,17 @@
     "maxHeight": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "minWidth": {
       "type": "string",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": "auto"
     },
     "onCollapse": {
       "type": "function",

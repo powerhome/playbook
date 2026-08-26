@@ -2,11 +2,15 @@
 
 Playground configs power the kit Playground tab on the docs site.
 
-Do not hand-edit `docs/_playground.json` for normal kit work. That file is generated and will be overwritten. Put kit-specific choices in:
+Do not hand-edit `docs/_playground.json` for normal kit work. That file is generated and will be overwritten. After regeneration, `yarn build:ai` (also run by `yarn generate:docs-metadata`) exports a slim copy into `playbook/dist/ai/playgrounds/` for Nitro and other consuming apps — the website continues to read the full `_playground.json` files.
+
+Put kit-specific choices in:
 
 ```text
 playbook/app/pb_kits/playbook/<kit>/docs/_playground.overrides.json
 ```
+
+For kits that need host-app packages (Highcharts, TipTap, MapLibre, …), add an `externalDependencies` object in that overrides file. It is exported into `dist/ai` for consuming-app agents (they should **warn**, not install packages).
 
 Then regenerate from the repo root (preferred):
 
@@ -102,7 +106,8 @@ Replace `KitName` with the React component name, such as `Button`, `Overlay`, or
    - `docs/_playground.overrides.json` is the source you maintain.
    - `docs/_playground.json` is the generated file the website reads.
 4. Add the kit to the Playground allowlist if it is not already enabled:
-   - `playbook-website/app/javascript/components/Website/src/pages/KitShow/index.tsx`
+   - Add the kit name to `PLAYGROUND_ENABLED_KITS` in `playbook-website/app/javascript/components/Website/src/pages/KitShow/playgroundEnabledKits.ts`
+   - (`KitShow/index.tsx` only checks that list; do not edit the allowlist there.)
 5. Validate generated examples when you add templates, wrappers, or complex children.
 
 Pre-commit also regenerates docs metadata when schema or override files change, but running the command locally makes failures easier to understand.
@@ -658,7 +663,7 @@ yarn generate:playground-configs --kit=<kit_name> --overwrite --base-only
 
 Before handing off a playground override:
 
-- The kit is in the website playground allowlist if it should be visible.
+- The kit is in `PLAYGROUND_ENABLED_KITS` (`playgroundEnabledKits.ts`) if it should be visible.
 - `docs/_playground.overrides.json` is valid JSON.
 - `docs/_playground.json` was regenerated.
 - Presets demonstrate real usage patterns.

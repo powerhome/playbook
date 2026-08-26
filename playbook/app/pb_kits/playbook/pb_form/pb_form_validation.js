@@ -4,6 +4,7 @@ import { debounce } from '../utilities/object'
 // Kit selectors
 const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"]'
 const ERROR_MESSAGE_SELECTOR   = '.pb_body_kit_negative'
+const MESSAGE_CONTAINER_SELECTOR = '[data-pb-validation-container="true"]'
 
 // Validation selectors
 const FORM_SELECTOR            = 'form[data-pb-form-validation="true"]'
@@ -63,8 +64,8 @@ class PbFormValidation extends PbEnhancedElement {
   }
 
   showValidationMessage(target) {
-    const { parentElement } = target
-    const kitElement = parentElement.closest(KIT_SELECTOR)
+    const messageContainer = this.messageContainerFor(target)
+    const kitElement = messageContainer.closest(KIT_SELECTOR)
 
     // FIX: Add null check for kitElement
     if (!kitElement) return
@@ -89,18 +90,22 @@ class PbFormValidation extends PbEnhancedElement {
       errorMessageContainer.innerHTML = target.validationMessage
 
       // add the error message element to the dom tree
-      parentElement.appendChild(errorMessageContainer)
+      messageContainer.appendChild(errorMessageContainer)
     }
   }
 
   clearError(target) {
-    const { parentElement } = target
-    const kitElement = parentElement.closest(KIT_SELECTOR)
+    const messageContainer = this.messageContainerFor(target)
+    const kitElement = messageContainer.closest(KIT_SELECTOR)
     // Remove error class from kit element
     if (kitElement) kitElement.classList.remove('error')
-    // Remove error message from parent element
-    const errorMessageContainer = parentElement.querySelector(ERROR_MESSAGE_SELECTOR)
+    // Remove error message from the message container (which is the parent element most of thetime)
+    const errorMessageContainer = messageContainer.querySelector(ERROR_MESSAGE_SELECTOR)
     if (errorMessageContainer) errorMessageContainer.remove()
+  }
+
+  messageContainerFor(target) {
+    return target.closest(MESSAGE_CONTAINER_SELECTOR) || target.parentElement
   }
 
   // Check if there are phone number input errors

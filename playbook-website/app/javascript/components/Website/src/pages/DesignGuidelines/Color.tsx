@@ -27,8 +27,9 @@ const Color = () => {
           
           <Body marginBottom="md">
             For all our Color Tokens refer to{" "}
-            <a href="https://playbook.powerapp.cloud/tokens/colors">Colors</a> in{" "}
-            <a href="https://playbook.powerapp.cloud/tokens">Tokens</a>
+            <a href="/tokens/colors">Colors</a> in{" "}
+            <a href="/tokens">Tokens</a>. For using color exports in React or Rails, see{" "}
+            <a href="/tokens/using_tokens">Using Tokens</a>.
           </Body>
 
           <Title text="Index" size={4} marginBottom="sm" />
@@ -306,7 +307,7 @@ const Color = () => {
 
           <Title text="Product Colors" size={4} marginTop="md" marginBottom="sm" />
           <Body marginBottom="md">
-            Playbook's offers a set of eleven product tokens, useful for grouping reoccurring items with a consistent color assignment.
+            Playbook's offers a set of twelve product tokens, useful for grouping reoccurring items with a consistent color assignment.
             Each product color is accompanied by corresponding background and highlight token, providing flexibility in design implementation. Background tokens are ideal for accommodating text, while highlight tokens stand out independently, perfect for icons or emphasis within design elements.
           </Body>
 
@@ -321,12 +322,12 @@ const Color = () => {
             <tbody>
               <tr>
                 <td><img src="https://github.com/powerhome/playbook/assets/89551222/9729ae41-c614-4436-a79d-c2962e804bde" alt="Product Background" /></td>
-                <td><small>PRODUCT BACKGROUND 1 - 11<br />$product_1_background - $product_11_background</small></td>
+                <td><small>PRODUCT BACKGROUND 1 - 12<br />$product_1_background - $product_12_background</small></td>
                 <td>Used as a background color and text color for a grouping of reoccurring items</td>
               </tr>
               <tr>
                 <td><img src="https://github.com/powerhome/playbook/assets/89551222/43b5012c-c27d-4587-9e72-5fff35785c82" alt="Product Highlight" /></td>
-                <td><small>PRODUCT HIGHLIGHT 1 - 11<br />$product_1_highlight - $product_11_highlight</small></td>
+                <td><small>PRODUCT HIGHLIGHT 1 - 12<br />$product_1_highlight - $product_12_highlight</small></td>
                 <td>Used as a highlight color perfect for icons or emphasis for a grouping of reoccurring items</td>
               </tr>
             </tbody>

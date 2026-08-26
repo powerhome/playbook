@@ -139,6 +139,46 @@ type RowGap = {
   rowGap?: string,
 }
 
+type GridTemplateColumns = {
+  gridTemplateColumns?: string,
+}
+
+type GridTemplateRows = {
+  gridTemplateRows?: string,
+}
+
+type GridTemplateAreas = {
+  gridTemplateAreas?: string,
+}
+
+type GridColumn = {
+  gridColumn?: string,
+}
+
+type GridRow = {
+  gridRow?: string,
+}
+
+type GridArea = {
+  gridArea?: string,
+}
+
+type GridAutoColumns = {
+  gridAutoColumns?: string,
+}
+
+type GridAutoRows = {
+  gridAutoRows?: string,
+}
+
+type GridAutoFlow = {
+  gridAutoFlow?: "row" | "column" | "dense" | "rowDense" | "columnDense"
+}
+
+type JustifyItems = {
+  justifyItems?: Alignment | "stretch"
+}
+
 type NumberSpacing = {
   numberSpacing?: "tabular",
 }
@@ -226,7 +266,9 @@ type MinHeight = {
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderProp & BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
-  FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
+  FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf & JustifyItems &
+  GridTemplateColumns & GridTemplateRows & GridTemplateAreas & GridColumn & GridRow & GridArea &
+  GridAutoColumns & GridAutoRows & GridAutoFlow &
   LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & ColumnGap & RowGap & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
@@ -272,6 +314,8 @@ const filterClassName = (value: string): string => {
     return value;
   }
 };
+
+const HEIGHT_PROP_VALUES = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "100%", "100vh"]
 
 const BORDER_PROP_VALUES: BorderPropValue[] = [
   "none",
@@ -495,24 +539,21 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     }
   },
   minHeightProps: ({ minHeight }: MinHeight) => {
-    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
-    if (heightValues.includes(minHeight)) {
+    if (HEIGHT_PROP_VALUES.includes(minHeight)) {
       let css = ''
       css += minHeight ? `min_height_${filterClassName(minHeight)} ` : ''
       return css.trimEnd()
     }
   },
   maxHeightProps: ({ maxHeight }: MaxHeight) => {
-    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
-    if (heightValues.includes(maxHeight)) {
+    if (HEIGHT_PROP_VALUES.includes(maxHeight)) {
       let css = ''
       css += maxHeight ? `max_height_${filterClassName(maxHeight)} ` : ''
       return css.trimEnd()
     }
   },
   heightProps: ({ height }: Height) => {
-    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
-    if (heightValues.includes(height)) {
+    if (HEIGHT_PROP_VALUES.includes(height)) {
       let css = ''
       css += height ? `height_${filterClassName(height)} ` : ''
       return css.trimEnd()
@@ -644,6 +685,20 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       return justifySelf ? `justify_self_${justifySelf}` : ''
     }
   },
+  justifyItemsProps: ({ justifyItems }: JustifyItems) => {
+    if (typeof justifyItems === 'object') {
+      return getResponsivePropClasses(justifyItems, 'justify_items')
+    } else {
+      return justifyItems ? `justify_items_${camelToSnakeCase(justifyItems)}` : ''
+    }
+  },
+  gridAutoFlowProps: ({ gridAutoFlow }: GridAutoFlow) => {
+    if (typeof gridAutoFlow === 'object') {
+      return getResponsivePropClasses(gridAutoFlow, 'grid_auto_flow')
+    } else {
+      return gridAutoFlow ? `grid_auto_flow_${camelToSnakeCase(gridAutoFlow)}` : ''
+    }
+  },
   orderProps: ({ order }: Order) => {
     if (typeof order === 'object') {
       return getResponsivePropClasses(order, 'flex_order')
@@ -686,15 +741,56 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
 
 const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[key: string]: any}} = {
   heightProps: ({ height }: Height) => {
-    return height ? { height } : {};
+    if (height && !HEIGHT_PROP_VALUES.includes(height)) {
+      return { height }
+    }
+    return {}
   },
 
   maxHeightProps: ({ maxHeight }: MaxHeight) => {
-    return maxHeight ? { maxHeight } : {};
+    if (maxHeight && !HEIGHT_PROP_VALUES.includes(maxHeight)) {
+      return { maxHeight }
+    }
+    return {}
   },
 
   minHeightProps: ({ minHeight }: MinHeight) => {
-    return minHeight ? { minHeight } : {};
+    if (minHeight && !HEIGHT_PROP_VALUES.includes(minHeight)) {
+      return { minHeight }
+    }
+    return {}
+  },
+
+  gridTemplateColumnsProps: ({ gridTemplateColumns }: GridTemplateColumns) => {
+    return gridTemplateColumns ? { gridTemplateColumns } : {};
+  },
+
+  gridTemplateRowsProps: ({ gridTemplateRows }: GridTemplateRows) => {
+    return gridTemplateRows ? { gridTemplateRows } : {};
+  },
+
+  gridTemplateAreasProps: ({ gridTemplateAreas }: GridTemplateAreas) => {
+    return gridTemplateAreas ? { gridTemplateAreas } : {};
+  },
+
+  gridColumnProps: ({ gridColumn }: GridColumn) => {
+    return gridColumn ? { gridColumn } : {};
+  },
+
+  gridRowProps: ({ gridRow }: GridRow) => {
+    return gridRow ? { gridRow } : {};
+  },
+
+  gridAreaProps: ({ gridArea }: GridArea) => {
+    return gridArea ? { gridArea } : {};
+  },
+
+  gridAutoColumnsProps: ({ gridAutoColumns }: GridAutoColumns) => {
+    return gridAutoColumns ? { gridAutoColumns } : {};
+  },
+
+  gridAutoRowsProps: ({ gridAutoRows }: GridAutoRows) => {
+    return gridAutoRows ? { gridAutoRows } : {};
   },
 }
 
