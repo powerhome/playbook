@@ -32,6 +32,7 @@ import {
   moveInstanceToTarget,
   removeInstanceFromTree,
   updateInstanceInTree,
+  wrapInstancesInTree,
 } from "./treeUtils";
 import { type BuildingBlock } from "./buildingBlocks";
 import { PlaygroundBuildingBlocks } from "./PlaygroundBuildingBlocks";
@@ -101,6 +102,11 @@ export default function Playground() {
   const [selectedId, setSelectedId] = useState<string | null>(
     () => persistedState?.selectedId ?? null,
   );
+  // Ids picked up while isSelectMode is on, for wrapping several kits at
+  // once. Empty outside of that flow — selectedId drives everything else.
+  const [isSelectMode, setIsSelectMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [wrapDiagnostic, setWrapDiagnostic] = useState<string | null>(null);
   const [addTargetId, setAddTargetId] = useState(
     () => persistedState?.addTargetId ?? ROOT_TARGET_ID,
   );
@@ -152,6 +158,27 @@ export default function Playground() {
         formatKitName(a.name).localeCompare(formatKitName(b.name)),
       );
   }, [enabledPlaygroundKits, searchQuery]);
+
+  const wrappableKitOptions = useMemo(
+    () =>
+      enabledPlaygroundKits
+        .filter((kit) => acceptsChildren(kit))
+        .map((kit) => ({
+          id: kit.name,
+          label: formatKitName(kit.name),
+          value: kit.name,
+        }))
+        .sort((a, b) => a.label.localeCompare(b.label)),
+    [enabledPlaygroundKits],
+  );
+
+  // While select mode is on, highlighting reflects only the multi-selection
+  // (which can legitimately be empty after toggling everything off) —
+  // falling back to selectedId would show a stale, unrelated highlight.
+  const effectiveSelectedIds = useMemo(
+    () => (isSelectMode ? selectedIds : selectedId ? [selectedId] : []),
+    [isSelectMode, selectedId, selectedIds],
+  );
 
   const selectedInstance = findInstance(instances, selectedId);
   const selectedKit = selectedInstance
@@ -306,14 +333,61 @@ export default function Playground() {
     setInstances((current) => updateInstanceInTree(current, id, updater));
   };
 
-  const handleSelectInstance = (id: string) => {
+  const handleSelectInstance = (id: string, multi = false) => {
+    if (multi) {
+      setSelectedIds((current) =>
+        current.includes(id)
+          ? current.filter((existingId) => existingId !== id)
+          : [...current, id],
+      );
+      return;
+    }
+
     const instance = findInstance(instances, id);
     const kit = instance ? kitsByName[instance.kitName] : undefined;
 
+    setSelectedIds([]);
     setSelectedId(id);
     if (acceptsChildren(kit)) {
       setAddTargetId(id);
     }
+  };
+
+  const handleToggleSelectMode = (nextIsSelectMode: boolean) => {
+    setIsSelectMode(nextIsSelectMode);
+    setSelectedIds(nextIsSelectMode && selectedId ? [selectedId] : []);
+    setWrapDiagnostic(null);
+  };
+
+  const handleClearMultiSelect = () => {
+    setSelectedIds([]);
+    setWrapDiagnostic(null);
+  };
+
+  const handleWrapSelection = (wrapperKitName: string) => {
+    const wrapperKit = kitsByName[wrapperKitName];
+    if (!wrapperKit || !acceptsChildren(wrapperKit)) return;
+
+    const targetIds = selectedIds.length > 0 ? selectedIds : selectedId ? [selectedId] : [];
+    if (targetIds.length === 0) return;
+
+    const wrapperInstance = createInstance(wrapperKit, global_props_schema?.props);
+    const result = wrapInstancesInTree(instances, targetIds, wrapperInstance);
+
+    if (!result.wrapped) {
+      setWrapDiagnostic(
+        "Selected kits must be next to each other (same parent, no gaps) to wrap them together.",
+      );
+      return;
+    }
+
+    savePlaygroundSnapshot();
+    setActiveBuildingBlockId(null);
+    setInstances(result.instances);
+    setSelectedIds([]);
+    setSelectedId(wrapperInstance.id);
+    setAddTargetId(wrapperInstance.id);
+    setWrapDiagnostic(null);
   };
 
   const addKit = (kit: PlaygroundKit, targetId = activeAddTargetId) => {
@@ -658,6 +732,8 @@ export default function Playground() {
     setInstances([]);
     setActiveBuildingBlockId(null);
     setSelectedId(null);
+    setSelectedIds([]);
+    setWrapDiagnostic(null);
     setAddTargetId(ROOT_TARGET_ID);
     setPlaygroundHistory([]);
     setPlaygroundFuture([]);
@@ -804,8 +880,12 @@ export default function Playground() {
             globalProps={global_props_schema?.props}
             instanceCount={instanceCount}
             instances={instances}
+            isSelectMode={isSelectMode}
             kitsByName={kitsByName}
-            onCanvasClick={() => setSelectedId(null)}
+            onCanvasClick={() => {
+            setSelectedId(null);
+            setSelectedIds([]);
+          }}
             onCanvasDragLeave={handleCanvasDragLeave}
             onCanvasDragOver={handleCanvasDragOver}
             onCanvasDrop={handleCanvasDrop}
@@ -818,7 +898,8 @@ export default function Playground() {
             onLeaveDragTarget={handleLeaveDragTarget}
             onMoveInstance={handleMoveInstance}
             onSelect={handleSelectInstance}
-            selectedId={selectedId}
+            onToggleSelectMode={handleToggleSelectMode}
+            selectedIds={effectiveSelectedIds}
         />
 
         <PlaygroundInspector
@@ -828,16 +909,20 @@ export default function Playground() {
             builderPropsPanel={builderPropsPanel}
             dataPresetDropdownOptions={dataPresetDropdownOptions}
             instanceOptionsCount={instanceOptions.length}
+            isSelectMode={isSelectMode}
+            multiSelectedCount={selectedIds.length}
             onAddInsideSelected={() => {
             if (selectedInstance) setAddTargetId(selectedInstance.id);
           }}
             onChildrenChange={handleChildrenChange}
+            onClearMultiSelect={handleClearMultiSelect}
             onDataPresetChange={handleDataPresetChange}
             onMoveSelected={moveSelected}
             onPropChange={handlePropChange}
             onRemoveSelected={removeSelected}
             onSelectedInstanceChange={handleSelectedInstanceChange}
             onStructureModeChange={handleStructureModeChange}
+            onWrap={handleWrapSelection}
             selectedDataPresetOptionsCount={selectedDataPresetOptions.length}
             selectedId={selectedId}
             selectedInstance={selectedInstance}
@@ -845,6 +930,8 @@ export default function Playground() {
             selectedKit={selectedKit}
             selectedStructureModeOptionsCount={selectedStructureModeOptions.length}
             structureModeDropdownOptions={structureModeDropdownOptions}
+            wrapDiagnostic={wrapDiagnostic}
+            wrappableKitOptions={wrappableKitOptions}
         />
       </div>
       <PlaygroundPromptBuilder

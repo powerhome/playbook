@@ -96,6 +96,15 @@
   > [class*="pb_card"] {
     width: 100%;
   }
+
+  // With nothing selected, the top card is the only child (no PropsPanel
+  // sibling) and would otherwise stretch to the grid column's content-based
+  // "auto" width. Pin it to PropsPanel's own default width (see
+  // PROPS_PANEL_DEFAULT_WIDTH in PropsPanel.tsx) so the inspector doesn't
+  // change width between the empty and selected states.
+  > .playground-panel-controls:only-child {
+    width: 330px;
+  }
 }
 
 .builder-prop-toggle,
