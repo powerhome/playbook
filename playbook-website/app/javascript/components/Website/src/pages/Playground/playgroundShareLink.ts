@@ -40,6 +40,46 @@ export const buildPlaygroundShareUrl = (
   return url.toString();
 };
 
+// `__playgroundCode` is an internal escape hatch (see PropControl.tsx and
+// codeGeneration.ts) that lets a prop value carry a raw JS expression, which
+// codegen splices verbatim into the source the react-live preview evaluates.
+// That's fine for props a user typed into their own session, but a share
+// link is untrusted cross-user input — allowing it through here would let a
+// crafted link run arbitrary JS in whoever opens it. `__proto__` /
+// `constructor` / `prototype` are blocked too as defense-in-depth against
+// prototype pollution in anything that later merges these parsed objects.
+const UNSAFE_KEYS = new Set([
+  "__playgroundCode",
+  "__proto__",
+  "constructor",
+  "prototype",
+]);
+const MAX_SCAN_DEPTH = 50;
+
+const containsUnsafeValue = (value: unknown, depth = 0): boolean => {
+  if (depth > MAX_SCAN_DEPTH) return true;
+
+  if (Array.isArray(value)) {
+    return value.some((item) => containsUnsafeValue(item, depth + 1));
+  }
+
+  if (value && typeof value === "object") {
+    return Object.entries(value as Record<string, unknown>).some(
+      ([key, entryValue]) =>
+        UNSAFE_KEYS.has(key) || containsUnsafeValue(entryValue, depth + 1),
+    );
+  }
+
+  return false;
+};
+
+const hasUnsafeProps = (instances: BuilderInstance[]): boolean =>
+  instances.some(
+    (instance) =>
+      containsUnsafeValue(instance.props) ||
+      hasUnsafeProps(instance.children),
+  );
+
 export type PlaygroundShareReadResult =
   | { status: "ok"; instances: BuilderInstance[] }
   | { status: "invalid" }
@@ -56,7 +96,9 @@ export const readPlaygroundShareState = (
   try {
     const parsed = JSON.parse(base64UrlToUtf8(encoded));
     const instances = sanitizeInstances(parsed, validKitNames);
-    if (instances.length === 0) return { status: "invalid" };
+    if (instances.length === 0 || hasUnsafeProps(instances)) {
+      return { status: "invalid" };
+    }
 
     return { status: "ok", instances };
   } catch {
