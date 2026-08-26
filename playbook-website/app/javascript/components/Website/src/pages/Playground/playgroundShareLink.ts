@@ -1,39 +1,148 @@
 import { sanitizeInstances } from "./playgroundStorage";
 import type { BuilderInstance } from "./types";
 
+// This workspace's TypeScript (4.3.5) predates CompressionStream/
+// DecompressionStream in the bundled DOM lib types, so declare them
+// ourselves rather than bumping the shared tsconfig `lib` target.
+declare const CompressionStream: any;
+declare const DecompressionStream: any;
+
 const SHARE_PARAM = "state";
 
-const utf8ToBase64Url = (value: string): string => {
-  const utf8Bytes = encodeURIComponent(value).replace(
-    /%([0-9A-F]{2})/g,
-    (_match, hex) => String.fromCharCode(parseInt(hex, 16)),
-  );
+// Format markers prefixed onto the encoded payload so a reader always knows
+// how to decode it, regardless of which path the writer's browser took.
+const FORMAT_GZIP = "g";
+const FORMAT_PLAIN = "p";
+
+const utf8Encoder = new TextEncoder();
+const utf8Decoder = new TextDecoder();
+
+const supportsCompression = () =>
+  typeof CompressionStream === "function" &&
+  typeof DecompressionStream === "function";
+
+const bytesToBase64Url = (bytes: Uint8Array): string => {
+  let binary = "";
+  bytes.forEach((byte) => {
+    binary += String.fromCharCode(byte);
+  });
 
   return window
-    .btoa(utf8Bytes)
+    .btoa(binary)
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
 };
 
-const base64UrlToUtf8 = (value: string): string => {
+const base64UrlToBytes = (value: string): Uint8Array => {
   const base64 = value.replace(/-/g, "+").replace(/_/g, "/");
   const padded = base64 + "=".repeat((4 - (base64.length % 4)) % 4);
   const binary = window.atob(padded);
+  const bytes = new Uint8Array(binary.length);
 
-  return decodeURIComponent(
-    Array.from(binary)
-      .map((char) => `%${char.charCodeAt(0).toString(16).padStart(2, "0")}`)
-      .join(""),
-  );
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+
+  return bytes;
 };
 
-export const buildPlaygroundShareUrl = (
-  instances: BuilderInstance[],
-): string => {
-  const encoded = utf8ToBase64Url(JSON.stringify(instances));
-  const url = new URL(window.location.href);
+const gzipCompress = async (text: string): Promise<Uint8Array> => {
+  const stream = new Blob([utf8Encoder.encode(text)])
+    .stream()
+    .pipeThrough(new CompressionStream("gzip"));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+};
 
+const gzipDecompress = async (bytes: Uint8Array): Promise<string> => {
+  const stream = new Blob([bytes])
+    .stream()
+    .pipeThrough(new DecompressionStream("gzip"));
+  return utf8Decoder.decode(await new Response(stream).arrayBuffer());
+};
+
+// A BuilderInstance carries every prop the kit schema defines (defaulted in
+// at creation time — see createInstance/getInitialInstanceState), even
+// though only the "enabled" ones affect rendering. Serializing that whole
+// object bloats the share link with props nobody turned on. This compact
+// form keeps only what's needed to reproduce the rendered result: enabled
+// props (enabledProps itself is dropped and rebuilt from that key set on
+// read), short field names, and omitted empty/null fields. On top of that,
+// the JSON itself is gzip-compressed before it's base64url-encoded into the
+// URL (falling back to plain base64url on browsers without
+// Compression/DecompressionStream).
+type CompactInstance = {
+  id: string;
+  k: string;
+  c?: CompactInstance[];
+  d?: string;
+  p?: Record<string, unknown>;
+  s?: string;
+  x?: string;
+};
+
+const toCompactInstance = (instance: BuilderInstance): CompactInstance => {
+  const enabledProps = Object.fromEntries(
+    Object.entries(instance.props).filter(
+      ([name]) => instance.enabledProps[name],
+    ),
+  );
+  const compact: CompactInstance = { id: instance.id, k: instance.kitName };
+
+  if (Object.keys(enabledProps).length > 0) compact.p = enabledProps;
+  if (instance.structureMode) compact.s = instance.structureMode;
+  if (instance.dataPresetKey) compact.d = instance.dataPresetKey;
+  if (instance.configuredChildren) compact.x = instance.configuredChildren;
+  if (instance.children.length > 0) {
+    compact.c = instance.children.map(toCompactInstance);
+  }
+
+  return compact;
+};
+
+const isCompactInstance = (value: unknown): value is CompactInstance =>
+  Boolean(value) &&
+  typeof value === "object" &&
+  typeof (value as Record<string, unknown>).id === "string" &&
+  typeof (value as Record<string, unknown>).k === "string";
+
+// Expands the compact wire shape back into something sanitizeInstances can
+// validate — a pure format conversion, not a trust decision. Anything
+// malformed here just fails that validation afterward.
+const fromCompactInstance = (value: unknown): unknown => {
+  if (!isCompactInstance(value)) return value;
+
+  const props =
+    value.p && typeof value.p === "object" ? value.p : ({} as Record<string, unknown>);
+  const enabledProps = Object.fromEntries(
+    Object.keys(props).map((name) => [name, true]),
+  );
+
+  return {
+    id: value.id,
+    kitName: value.k,
+    structureMode: typeof value.s === "string" ? value.s : null,
+    dataPresetKey: typeof value.d === "string" ? value.d : null,
+    configuredChildren: typeof value.x === "string" ? value.x : null,
+    props,
+    enabledProps,
+    children: Array.isArray(value.c) ? value.c.map(fromCompactInstance) : [],
+  };
+};
+
+export const buildPlaygroundShareUrl = async (
+  instances: BuilderInstance[],
+): Promise<string> => {
+  const compact = instances.map(toCompactInstance);
+  const json = JSON.stringify(compact);
+  const useGzip = supportsCompression();
+  const bytes = useGzip
+    ? await gzipCompress(json)
+    : utf8Encoder.encode(json);
+  const marker = useGzip ? FORMAT_GZIP : FORMAT_PLAIN;
+  const encoded = marker + bytesToBase64Url(bytes);
+
+  const url = new URL(window.location.href);
   url.search = "";
   url.searchParams.set(SHARE_PARAM, encoded);
 
@@ -85,17 +194,27 @@ export type PlaygroundShareReadResult =
   | { status: "invalid" }
   | { status: "none" };
 
-export const readPlaygroundShareState = (
+export const readPlaygroundShareState = async (
   validKitNames: Set<string>,
-): PlaygroundShareReadResult => {
+): Promise<PlaygroundShareReadResult> => {
   const encoded = new URLSearchParams(window.location.search).get(
     SHARE_PARAM,
   );
   if (!encoded) return { status: "none" };
 
   try {
-    const parsed = JSON.parse(base64UrlToUtf8(encoded));
-    const instances = sanitizeInstances(parsed, validKitNames);
+    const marker = encoded[0];
+    const bytes = base64UrlToBytes(encoded.slice(1));
+    const json =
+      marker === FORMAT_GZIP
+        ? await gzipDecompress(bytes)
+        : utf8Decoder.decode(bytes);
+
+    const parsed = JSON.parse(json);
+    const expanded = Array.isArray(parsed)
+      ? parsed.map(fromCompactInstance)
+      : parsed;
+    const instances = sanitizeInstances(expanded, validKitNames);
     if (instances.length === 0 || hasUnsafeProps(instances)) {
       return { status: "invalid" };
     }

@@ -11,7 +11,7 @@ type PlaygroundHeaderProps = {
   onClear: () => void;
   onRedo: () => void;
   onRestorePreviousState: () => void;
-  onShare: () => string;
+  onShare: () => Promise<string>;
   shareStatus: ShareLoadStatus;
 };
 
@@ -29,9 +29,8 @@ export const PlaygroundHeader = ({
   const [shareCopyState, setShareCopyState] = useState(false);
 
   const handleShareClick = async () => {
-    const url = onShare();
-
     try {
+      const url = await onShare();
       await navigator.clipboard.writeText(url);
       setShareCopyState(true);
       setTimeout(() => setShareCopyState(false), 2000);
