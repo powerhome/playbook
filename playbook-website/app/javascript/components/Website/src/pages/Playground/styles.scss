@@ -127,6 +127,29 @@
   }
 }
 
+.builder-prompt-examples {
+  flex-wrap: wrap;
+}
+
+.builder-prompt-example-chip {
+  appearance: none;
+  background: $white;
+  border: 1px solid $border_light;
+  border-radius: 999px;
+  color: $text_lt_light;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.2;
+  padding: 4px $space_xs;
+
+  &:hover,
+  &:focus {
+    border-color: $primary;
+    color: $primary;
+    outline: none;
+  }
+}
+
 .builder-prompt-floating {
   bottom: $space_md;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
