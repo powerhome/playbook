@@ -45,6 +45,12 @@ import {
   loadPersistedPlaygroundState,
   savePersistedPlaygroundState,
 } from "./playgroundStorage";
+import type { PersistedPlaygroundState } from "./playgroundStorage";
+import {
+  buildPlaygroundShareUrl,
+  clearPlaygroundShareParam,
+  readPlaygroundShareState,
+} from "./playgroundShareLink";
 import type {
   BuilderInstance,
   PlaygroundKit,
@@ -71,11 +77,52 @@ const cloneInstances = (items: BuilderInstance[]): BuilderInstance[] =>
     props: { ...instance.props },
   }));
 
+type ShareLoadStatus = "loaded" | "invalid" | null;
+
+type InitialPlaygroundLoad = {
+  shareStatus: ShareLoadStatus;
+  state: PersistedPlaygroundState | null;
+};
+
+const resolveInitialPlaygroundState = (
+  validKitNames: Set<string>,
+): InitialPlaygroundLoad => {
+  const shareResult = readPlaygroundShareState(validKitNames);
+
+  if (shareResult.status === "none") {
+    return {
+      shareStatus: null,
+      state: loadPersistedPlaygroundState(validKitNames),
+    };
+  }
+
+  // A share link was present in the URL — consume it and strip the param so
+  // reloading or editing afterward doesn't keep re-importing the shared state.
+  clearPlaygroundShareParam();
+
+  if (shareResult.status === "invalid") {
+    return {
+      shareStatus: "invalid",
+      state: loadPersistedPlaygroundState(validKitNames),
+    };
+  }
+
+  return {
+    shareStatus: "loaded",
+    state: {
+      addTargetId: ROOT_TARGET_ID,
+      buildingBlockId: null,
+      instances: shareResult.instances,
+      selectedId: null,
+    },
+  };
+};
+
 export default function Playground() {
   const { global_props_schema, playground_kits = [] } =
     useLoaderData() as PlaygroundLoaderData;
-  const [persistedState] = useState(() =>
-    loadPersistedPlaygroundState(
+  const [initialLoad] = useState(() =>
+    resolveInitialPlaygroundState(
       new Set(
         playground_kits
           .filter((kit) => PLAYGROUND_ENABLED_KITS.includes(kit.name))
@@ -83,6 +130,8 @@ export default function Playground() {
       ),
     ),
   );
+  const persistedState = initialLoad.state;
+  const [shareStatus] = useState<ShareLoadStatus>(initialLoad.shareStatus);
   const [instances, setInstances] = useState<BuilderInstance[]>(
     () => persistedState?.instances ?? [],
   );
@@ -723,10 +772,13 @@ export default function Playground() {
       <PlaygroundHeader
           canRedo={playgroundFuture.length > 0}
           canRestorePreviousState={playgroundHistory.length > 0}
+          disableShare={instanceCount === 0}
           kitCount={enabledPlaygroundKits.length}
           onClear={handleClearAll}
           onRedo={handleRedoPlaygroundState}
           onRestorePreviousState={() => handleRestorePreviousPlaygroundState()}
+          onShare={() => buildPlaygroundShareUrl(instances)}
+          shareStatus={shareStatus}
       />
 
       <PlaygroundBuildingBlocks

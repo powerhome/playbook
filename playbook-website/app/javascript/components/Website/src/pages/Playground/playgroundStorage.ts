@@ -23,7 +23,7 @@ const isBuilderInstance = (value: unknown): value is BuilderInstance => {
   );
 };
 
-const sanitizeInstances = (
+export const sanitizeInstances = (
   value: unknown,
   validKitNames: Set<string>,
 ): BuilderInstance[] => {
