@@ -16,7 +16,7 @@ module Playbook
           value = form_attribute_value(name)
           if value.is_a?(Hash)
             props[:default_options] = [value]
-          elsif value.is_a?(Array) && value.first.is_a?(Hash)
+          elsif value.is_a?(Array) && value.any? && value.all? { |option| option.is_a?(Hash) }
             props[:default_options] = value
           end
         end

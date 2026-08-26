@@ -262,6 +262,16 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
       expect(rendered).not_to include("data-default-options")
       expect(CGI.unescapeHTML(rendered)).not_to include('"value":"42"')
     end
+
+    it "does not auto-bind a mixed array that is not all option hashes" do
+      model = build_model(attributes: { owners: [{ label: "Gary", value: "1" }, "2"] })
+
+      rendered = render_form_with(model) do |form|
+        form.typeahead :owners, props: { label: true }
+      end
+
+      expect(rendered).not_to include("data-default-options")
+    end
   end
 
   describe "#star_rating_field" do
