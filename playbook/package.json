@@ -38,6 +38,7 @@
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "release": "rm -rf dist; npx vite build && yarn build:ai:full",
     "watch": "npx vite build --watch",
+    "analyze:bundle": "vite-bundle-visualizer",
     "generate:tokens": "node scripts/generate-tokens.js",
     "generate:playground-configs": "node scripts/generate-playground-configs.js",
     "generate:ai-metadata": "node scripts/generate-ai-metadata.mjs",
@@ -60,6 +61,9 @@
   "files": [
     "dist/*",
     "fonts/*"
+  ],
+  "sideEffects": [
+    "**/*.css"
   ],
   "bugs": {
     "url": "https://github.com/powerhome/playbook/issues"

@@ -15,10 +15,6 @@ export default defineConfig({
   },
   build: {
     minify: isProduction ? 'terser' : false,
-    terserOptions: {
-      mangle: false,
-      compress: false,
-    },
     rollupOptions: {
       preserveEntrySignatures: 'strict',
       input: {

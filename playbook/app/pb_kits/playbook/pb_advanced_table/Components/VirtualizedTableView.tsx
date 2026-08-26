@@ -4,6 +4,7 @@ import { flexRender, Cell, Row } from "@tanstack/react-table"
 import { VirtualItem } from "@tanstack/react-virtual"
 
 import { GenericObject } from "../../types"
+import { debounce } from "../../utilities/object"
 
 import { isChrome } from "../Utilities/BrowserCheck"
 import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
@@ -75,19 +76,6 @@ export const VirtualizedTableView = ({
     });
 
     return widths;
-  };
-
-  // Debounce function to prevent too many updates during resize
-  const debounce = <T extends (...args: any[]) => any>(func: T, wait: number): ((...args: Parameters<T>) => void) => {
-    let timeout: ReturnType<typeof setTimeout>;
-    return function executedFunction(...args: Parameters<T>) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
   };
 
   // Update column widths when component mounts and when sorting changes
