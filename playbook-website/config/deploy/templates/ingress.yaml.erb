@@ -40,6 +40,10 @@ metadata:
   name: playbook-traefik
   labels:
     app: playbook
+  <% if environment == 'production' %>
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: https,https-public
+  <% end %>
 spec:
   ingressClassName: traefik
   tls:
