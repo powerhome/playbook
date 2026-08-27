@@ -36,6 +36,7 @@ type RichTextEditorProps = {
   maxWidth?: string
   TrixEditor?: React.ComponentType<any>,
   trixInstance?: any,
+  bulletList?: any,
 } & GlobalProps
 
 const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
@@ -67,6 +68,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     label,
     TrixEditor,
     trixInstance: trixInstance = undefined,
+    bulletList = false,
   } = props
 
   const ariaProps = buildAriaProps(aria),
@@ -183,6 +185,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     )}
       {advancedEditor ? (
         <TipTapEditor
+            bulletList={bulletList}
             editor={advancedEditor}
             extensions={extensions}
             inputHeight={inputHeight}

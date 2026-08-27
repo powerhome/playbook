@@ -150,6 +150,12 @@
       "platforms": [
         "react"
       ]
+    },
+    "bulletList": {
+      "type": "any",
+      "platforms": [
+        "react"
+      ]
     }
   },
   "globalProps": true,

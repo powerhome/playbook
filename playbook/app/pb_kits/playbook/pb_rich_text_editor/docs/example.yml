@@ -5,6 +5,7 @@ examples:
   - rich_text_editor_rails_simple: "Rails (TipTap — Simple toolbar)"
 
   react:
+  - rich_text_editor_bullet_list: Advanced (Bullet List)
   - rich_text_editor_advanced_default: Advanced Default
   - rich_text_editor_more_extensions: Advanced (Extra Extensions)
   - rich_text_editor_toolbar_disabled: Advanced (Toolbar disabled)
