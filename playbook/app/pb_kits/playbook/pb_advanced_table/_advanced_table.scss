@@ -1078,8 +1078,8 @@
 
     // Firefox-specific fix for vertical borders disappearing upon row hover
     .pb_table.vertical-border .pb_advanced_table_body {
-      td:not(:last-child):not(.last-cell),
-      .pb_table_td:not(:last-child):not(.last-cell) {
+      tr:not(.virtualized-table-row) td:not(:last-child):not(.last-cell),
+      .pb_table_tr:not(.virtualized-table-row) .pb_table_td:not(:last-child):not(.last-cell) {
         position: relative;
         border-right-color: transparent !important;
 
@@ -1148,8 +1148,8 @@
 
       // --table-border-color stays light in dark mode, matches token of base kit's dark vertical border
       .pb_table.vertical-border .pb_advanced_table_body {
-        td:not(:last-child):not(.last-cell)::before,
-        .pb_table_td:not(:last-child):not(.last-cell)::before {
+        tr:not(.virtualized-table-row) td:not(:last-child):not(.last-cell)::before,
+        .pb_table_tr:not(.virtualized-table-row) .pb_table_td:not(:last-child):not(.last-cell)::before {
           background-color: $border_dark;
         }
       }
