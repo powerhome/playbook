@@ -1076,6 +1076,30 @@
       }
     }
 
+    // Firefox-specific fix for vertical borders disappearing upon row hover
+    .pb_table.vertical-border .pb_advanced_table_body {
+      td:not(:last-child):not(.last-cell),
+      .pb_table_td:not(:last-child):not(.last-cell) {
+        position: relative;
+        border-right-color: transparent !important;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -1px;
+          bottom: -1px;
+          width: 1px;
+          background-color: var(--table-border-color);
+        }
+
+        // The base kit gives the first column's divider the column group color
+        &:first-child::before {
+          background-color: var(--column-border-color);
+        }
+      }
+    }
+
     &[class*="column-group-border-"] {
       .pb_advanced_table_header {
         th[colspan]:not([colspan="1"]):not(:last-child),
@@ -1119,6 +1143,14 @@
         .pb_table_td.last-cell:not(:last-child) {
           border-right: none !important;
           box-shadow: 1px 0 0 0 $border_dark !important;
+        }
+      }
+
+      // --table-border-color stays light in dark mode, matches token of base kit's dark vertical border
+      .pb_table.vertical-border .pb_advanced_table_body {
+        td:not(:last-child):not(.last-cell)::before,
+        .pb_table_td:not(:last-child):not(.last-cell)::before {
+          background-color: $border_dark;
         }
       }
 
