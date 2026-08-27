@@ -69,14 +69,9 @@ const EditorToolbar = ({ editor, extensions, simple, sticky, bulletList }: any):
     },
   ]
 
-  const itemsAndList = [...toolbaritems, ...bulletListItems]
-  const simpleItemsAndlist = [...simpleToolbaritems, ...bulletListItems]
-
-
   return (
     <Background backgroundColor="white"
         className={`toolbar ${sticky ? 'pb_rich_text_editor_tiptap_toolbar_sticky' : ''}`}
-
     >
       <Flex flex="0"
           justify="between"
@@ -87,49 +82,41 @@ const EditorToolbar = ({ editor, extensions, simple, sticky, bulletList }: any):
           simple ? (
             <>
               <Flex className="toolbar_block">
-
-                {bulletList ? (
-                  <>
-                    {simpleItemsAndlist.map(
-                      ({ icon, text, classname, onclick }: ToolbarTypes, index: number) => (
-                        <EditorButton
-                            classname={classname}
-                            icon={icon}
-                            key={index}
-                            onclick={onclick}
-                            text={text}
-                        />
-                      )
-                    )}
-                  </>
-                ) : (
-                  <>
-                    {simpleToolbaritems && simpleToolbaritems.map(
-                      ({ icon, text, classname, onclick }: ToolbarTypes, index: number) => (
-                        <EditorButton
-                            classname={classname}
-                            icon={icon}
-                            key={index}
-                            onclick={onclick}
-                            text={text}
-                        /> 
-                      )
-                    )}
-                  </>
+                {simpleToolbaritems && simpleToolbaritems.map(
+                  ({ icon, text, classname, onclick }: ToolbarTypes, index: number) => (
+                    <EditorButton
+                        classname={classname}
+                        icon={icon}
+                        key={index}
+                        onclick={onclick}
+                        text={text}
+                    />
+                  )
                 )}
               </Flex>
             </>
           ) : (
             <>
-              <FlexItem 
-                  className="toolbar_block"
-                  ådisplayFlex
+              <FlexItem className="toolbar_block"
+                  displayFlex
               >
                 <ToolbarDropdown editor={editor} />
                 <SectionSeparator orientation="vertical" />
+                {toolbaritems && toolbaritems.map(
+                  ({ icon, text, classname, onclick }: ToolbarTypes, index: number) => (
+                    <EditorButton
+                        classname={classname}
+                        icon={icon}
+                        key={index}
+                        onclick={onclick}
+                        text={text}
+                    />
+                  )
+                )}
                 {bulletList ? (
                   <>
-                    {itemsAndList.map(
+                    <SectionSeparator orientation="vertical" />
+                    {bulletListItems.map(
                       ({ icon, text, classname, onclick }: ToolbarTypes, index: number) => (
                         <EditorButton
                             classname={classname}
@@ -141,21 +128,7 @@ const EditorToolbar = ({ editor, extensions, simple, sticky, bulletList }: any):
                       )
                     )}
                   </>
-                ) : (
-                  <>
-                    {toolbaritems && toolbaritems.map(
-                      ({ icon, text, classname, onclick }: ToolbarTypes, index: number) => (
-                        <EditorButton
-                            classname={classname}
-                            icon={icon}
-                            key={index}
-                            onclick={onclick}
-                            text={text}
-                        />
-                      )
-                    )}
-                  </>
-                )}
+                ) : (<></>)}
                 <SectionSeparator orientation="vertical" />
                 <ToolbarNodes editor={editor} />
                 {
