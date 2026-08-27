@@ -221,7 +221,6 @@ export const PlaygroundInspector = ({
                     variant="secondary"
                 />
                 {acceptsChildren(selectedKit) && (
-                  <>
                   <Button
                       fullWidth
                       icon="plus"
@@ -230,7 +229,12 @@ export const PlaygroundInspector = ({
                       text="Add Kits inside Selected Kit"
                       variant="secondary"
                   />
-                  <Flex width="100%" gap="xs">
+                )}
+
+                <Flex
+                    gap="xs"
+                    width="100%"
+                >
                   <Button
                       icon="arrow-up"
                       onClick={() => onMoveSelected(-1)}
@@ -248,8 +252,6 @@ export const PlaygroundInspector = ({
                       width="100%"
                   />
                 </Flex>
-                </>
-                )}
 
                 {wrapControls}
 
