@@ -2,6 +2,9 @@ import {
   displayPropType,
   getAllPropDefinitionsWithGlobals,
   getConfiguredChildren,
+  getFirstPreset,
+  getRuntimeProps,
+  getStructureModeProps,
 } from "./kitUtils";
 import { sanitizeInstances } from "./playgroundStorage";
 import type { BuilderInstance, PlaygroundKit, PropDefinition } from "./types";
@@ -168,11 +171,17 @@ export const buildPlaygroundShareUrl = async (
 // crafted link run arbitrary JS in whoever opens it. `__proto__` /
 // `constructor` / `prototype` are blocked too as defense-in-depth against
 // prototype pollution in anything that later merges these parsed objects.
+// `dangerouslySetInnerHTML` / `__html` are blocked as defense-in-depth too —
+// the real fix for that specific vector is the prop-name allowlist below
+// (buildHtmlProps forwards any key under `props.htmlOptions` straight onto
+// the rendered DOM node), but this catches the shape wherever it appears.
 const UNSAFE_KEYS = new Set([
   "__playgroundCode",
   "__proto__",
   "constructor",
   "prototype",
+  "dangerouslySetInnerHTML",
+  "__html",
 ]);
 const MAX_SCAN_DEPTH = 50;
 
@@ -216,6 +225,38 @@ const isDefaultConfiguredChildren = (
   );
 };
 
+// Every prop name this kit's own config could legitimately mark "enabled"
+// on an instance: real schema props, plus whatever the kit's data
+// presets/structure modes/first preset inject as runtime props (see
+// createInstance/getInitialInstanceState — those go through the same
+// enabledProps=true path as a user-toggled prop, so they're legitimate even
+// though they aren't always literally in kit_schema.props). Nothing outside
+// this set — most importantly framework-level escape hatches like
+// `htmlOptions`, `className`, `data`, `aria` — is ever a real prop a kit
+// exposes, so any of those showing up in a share payload is exactly the
+// forged-key attack this allowlist exists to catch, not a legitimate share.
+const getKnownPropNames = (
+  kit: PlaygroundKit | undefined,
+  instance: BuilderInstance,
+  globalProps: Record<string, PropDefinition> | undefined,
+): Set<string> => {
+  const names = new Set(
+    Object.keys(getAllPropDefinitionsWithGlobals(kit, globalProps)),
+  );
+
+  Object.keys(getRuntimeProps(kit, instance.dataPresetKey)).forEach((name) =>
+    names.add(name),
+  );
+  Object.keys(getStructureModeProps(kit, instance.structureMode)).forEach(
+    (name) => names.add(name),
+  );
+  Object.keys((kit && getFirstPreset(kit)?.props) || {}).forEach((name) =>
+    names.add(name),
+  );
+
+  return names;
+};
+
 // codeGeneration.ts's formatCodeValue splices a function-typed prop's value
 // verbatim as raw code with no __playgroundCode wrapper required — a string
 // value for an onClick-style prop IS the code that runs. Checked against the
@@ -241,9 +282,12 @@ const hasUnsafeCode = (
     }
 
     const propDefinitions = getAllPropDefinitionsWithGlobals(kit, globalProps);
+    const knownPropNames = getKnownPropNames(kit, instance, globalProps);
 
     const hasUnsafeProp = Object.entries(instance.props).some(
       ([name, value]) => {
+        if (!knownPropNames.has(name)) return true;
+
         const type = displayPropType(propDefinitions[name]);
         const isFunctionTyped =
           type.includes("function") || type.includes("=>");
