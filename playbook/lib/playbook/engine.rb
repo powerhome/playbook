@@ -11,7 +11,7 @@ module Playbook
       g.test_framework :rspec
     end
 
-    config.view_component.render_monkey_patch_enabled = false
+    config.view_component.render_monkey_patch_enabled = false if config.view_component.respond_to?(:render_monkey_patch_enabled=)
 
     if config.respond_to?(:assets)
       config.assets.paths ||= []
