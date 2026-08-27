@@ -298,6 +298,11 @@ export default function Playground() {
         return;
       }
 
+      // Preserve whatever was already on the canvas (e.g. restored from
+      // localStorage on this same mount) as an undo point before a share
+      // import overwrites it — otherwise it's gone the moment autosave's
+      // 400ms debounce fires, with no way back.
+      savePlaygroundSnapshot();
       setInstances(result.instances);
       setSelectedId(null);
       setAddTargetId(ROOT_TARGET_ID);
