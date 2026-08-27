@@ -289,14 +289,17 @@ export default function Playground() {
       );
       if (cancelled || result.status === "none") return;
 
-      // A share link was present in the URL — consume it and strip the param
-      // so reloading or editing afterward doesn't keep re-importing it.
-      clearPlaygroundShareParam();
-
       if (result.status === "invalid") {
+        // Leave the param in place: stripping it here would make the error
+        // unrecoverable on refresh and the broken link impossible to retry
+        // or hand to someone else to debug.
         setShareStatus("invalid");
         return;
       }
+
+      // A share link was successfully consumed — strip the param so
+      // reloading or editing afterward doesn't keep re-importing it.
+      clearPlaygroundShareParam();
 
       // Preserve whatever was already on the canvas (e.g. restored from
       // localStorage on this same mount) as an undo point before a share
