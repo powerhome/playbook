@@ -1,6 +1,7 @@
 import {
   displayPropType,
   getAllPropDefinitionsWithGlobals,
+  getConfiguredChildren,
 } from "./kitUtils";
 import { sanitizeInstances } from "./playgroundStorage";
 import type { BuilderInstance, PlaygroundKit, PropDefinition } from "./types";
@@ -96,9 +97,15 @@ const toCompactInstance = (instance: BuilderInstance): CompactInstance => {
   if (Object.keys(enabledProps).length > 0) compact.p = enabledProps;
   if (instance.structureMode) compact.s = instance.structureMode;
   if (instance.dataPresetKey) compact.d = instance.dataPresetKey;
-  if (instance.configuredChildren) compact.x = instance.configuredChildren;
+  // codegen/preview prefer nested child instances over configuredChildren
+  // whenever both are present (see getTemplateChildren / renderInstanceCode),
+  // so it's dead weight once there are real children — including the wrap
+  // feature's wrapper, which still carries createInstance's default
+  // configuredChildren even though it's never actually used.
   if (instance.children.length > 0) {
     compact.c = instance.children.map(toCompactInstance);
+  } else if (instance.configuredChildren) {
+    compact.x = instance.configuredChildren;
   }
 
   return compact;
@@ -186,22 +193,53 @@ const containsUnsafeValue = (value: unknown, depth = 0): boolean => {
   return false;
 };
 
+// configuredChildren is always spliced as literal JSX/code (see
+// renderInstanceCode / getTemplateChildren), so a user-typed value there is
+// just as dangerous as __playgroundCode. But createInstance always fills it
+// in with the kit's own default template (Card's placeholder text, Table's
+// default JSX, etc. — see getConfiguredChildren), so most shared instances
+// legitimately carry it even though nobody typed anything. Comparing
+// against the kit's actual computed default (checking both call
+// conventions used across this codebase — createInstance's implicit first
+// preset, and the explicit-no-preset form structure-mode changes use)
+// distinguishes that first-party config from a real edit.
+const isDefaultConfiguredChildren = (
+  kit: PlaygroundKit | undefined,
+  structureMode: string | null,
+  configuredChildren: string,
+): boolean => {
+  if (!kit) return false;
+
+  return (
+    configuredChildren === getConfiguredChildren(kit, structureMode) ||
+    configuredChildren === getConfiguredChildren(kit, structureMode, null)
+  );
+};
+
 // codeGeneration.ts's formatCodeValue splices a function-typed prop's value
 // verbatim as raw code with no __playgroundCode wrapper required — a string
-// value for an onClick-style prop IS the code that runs. And
-// configuredChildren is always spliced as literal JSX/code (see
-// renderInstanceCode / getTemplateChildren), independent of any prop's
-// declared type. Both are checked against the kit's real schema so this
-// matches exactly what codegen is actually willing to treat as code.
+// value for an onClick-style prop IS the code that runs. Checked against the
+// kit's real schema so this matches exactly what codegen is actually
+// willing to treat as code.
 const hasUnsafeCode = (
   instances: BuilderInstance[],
   kitsByName: Record<string, PlaygroundKit>,
   globalProps: Record<string, PropDefinition> | undefined,
 ): boolean =>
   instances.some((instance) => {
-    if (instance.configuredChildren) return true;
-
     const kit = kitsByName[instance.kitName];
+
+    if (
+      instance.configuredChildren &&
+      !isDefaultConfiguredChildren(
+        kit,
+        instance.structureMode,
+        instance.configuredChildren,
+      )
+    ) {
+      return true;
+    }
+
     const propDefinitions = getAllPropDefinitionsWithGlobals(kit, globalProps);
 
     const hasUnsafeProp = Object.entries(instance.props).some(
