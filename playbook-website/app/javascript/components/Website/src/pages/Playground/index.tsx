@@ -281,12 +281,12 @@ export default function Playground() {
     let cancelled = false;
 
     (async () => {
-      const validKitNames = new Set(
-        playground_kits
-          .filter((kit) => PLAYGROUND_ENABLED_KITS.includes(kit.name))
-          .map((kit) => kit.name),
+      const validKitNames = new Set(Object.keys(kitsByName));
+      const result = await readPlaygroundShareState(
+        validKitNames,
+        kitsByName,
+        global_props_schema?.props,
       );
-      const result = await readPlaygroundShareState(validKitNames);
       if (cancelled || result.status === "none") return;
 
       // A share link was present in the URL — consume it and strip the param

@@ -1,5 +1,9 @@
+import {
+  displayPropType,
+  getAllPropDefinitionsWithGlobals,
+} from "./kitUtils";
 import { sanitizeInstances } from "./playgroundStorage";
-import type { BuilderInstance } from "./types";
+import type { BuilderInstance, PlaygroundKit, PropDefinition } from "./types";
 
 // This workspace's TypeScript (4.3.5) predates CompressionStream/
 // DecompressionStream in the bundled DOM lib types, so declare them
@@ -182,12 +186,41 @@ const containsUnsafeValue = (value: unknown, depth = 0): boolean => {
   return false;
 };
 
-const hasUnsafeProps = (instances: BuilderInstance[]): boolean =>
-  instances.some(
-    (instance) =>
-      containsUnsafeValue(instance.props) ||
-      hasUnsafeProps(instance.children),
-  );
+// codeGeneration.ts's formatCodeValue splices a function-typed prop's value
+// verbatim as raw code with no __playgroundCode wrapper required — a string
+// value for an onClick-style prop IS the code that runs. And
+// configuredChildren is always spliced as literal JSX/code (see
+// renderInstanceCode / getTemplateChildren), independent of any prop's
+// declared type. Both are checked against the kit's real schema so this
+// matches exactly what codegen is actually willing to treat as code.
+const hasUnsafeCode = (
+  instances: BuilderInstance[],
+  kitsByName: Record<string, PlaygroundKit>,
+  globalProps: Record<string, PropDefinition> | undefined,
+): boolean =>
+  instances.some((instance) => {
+    if (instance.configuredChildren) return true;
+
+    const kit = kitsByName[instance.kitName];
+    const propDefinitions = getAllPropDefinitionsWithGlobals(kit, globalProps);
+
+    const hasUnsafeProp = Object.entries(instance.props).some(
+      ([name, value]) => {
+        const type = displayPropType(propDefinitions[name]);
+        const isFunctionTyped =
+          type.includes("function") || type.includes("=>");
+        if (isFunctionTyped && typeof value === "string" && value.trim()) {
+          return true;
+        }
+
+        return containsUnsafeValue(value);
+      },
+    );
+
+    return (
+      hasUnsafeProp || hasUnsafeCode(instance.children, kitsByName, globalProps)
+    );
+  });
 
 export type PlaygroundShareReadResult =
   | { status: "ok"; instances: BuilderInstance[] }
@@ -196,6 +229,8 @@ export type PlaygroundShareReadResult =
 
 export const readPlaygroundShareState = async (
   validKitNames: Set<string>,
+  kitsByName: Record<string, PlaygroundKit>,
+  globalProps?: Record<string, PropDefinition>,
 ): Promise<PlaygroundShareReadResult> => {
   const encoded = new URLSearchParams(window.location.search).get(
     SHARE_PARAM,
@@ -215,7 +250,10 @@ export const readPlaygroundShareState = async (
       ? parsed.map(fromCompactInstance)
       : parsed;
     const instances = sanitizeInstances(expanded, validKitNames);
-    if (instances.length === 0 || hasUnsafeProps(instances)) {
+    if (
+      instances.length === 0 ||
+      hasUnsafeCode(instances, kitsByName, globalProps)
+    ) {
       return { status: "invalid" };
     }
 
