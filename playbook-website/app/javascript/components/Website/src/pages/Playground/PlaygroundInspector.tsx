@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Body, Button, Caption, Card, Dropdown, Flex, Title } from "playbook-ui";
+import { Body, Button, Caption, Card, Dropdown, Flex, Title, Icon, Tooltip } from "playbook-ui";
 
 import { PropsPanel } from "../KitShow/Tabs/Playground";
 import type { PropValue } from "../KitShow/Tabs/Playground";
@@ -89,7 +89,11 @@ export const PlaygroundInspector = ({
         orientation="column"
         width="100%"
     >
-      <Caption text="Wrap in" />
+      <Flex align="center" gap="xs"><Caption text="Wrap Selected Kits" /> 
+      <Tooltip text="Toggle the 'Select Kits to Wrap' control to wrap selected kits within a new kit">
+      <Icon icon="circle-info" />
+      </Tooltip>
+      </Flex>
       <Flex gap="xs">
         <Dropdown
             className={panelDropdownClassName("playground-panel", !!wrapTargetKitName)}
@@ -110,6 +114,7 @@ export const PlaygroundInspector = ({
             onClick={handleWrapClick}
             text="Wrap"
             variant="secondary"
+            size="sm"
         />
       </Flex>
       {wrapDiagnostic && (
@@ -216,13 +221,34 @@ export const PlaygroundInspector = ({
                     variant="secondary"
                 />
                 {acceptsChildren(selectedKit) && (
+                  <>
                   <Button
+                      fullWidth
                       icon="plus"
                       onClick={onAddInsideSelected}
                       size="sm"
-                      text="Add kits inside this"
+                      text="Add Kits inside Selected Kit"
                       variant="secondary"
                   />
+                  <Flex width="100%" gap="xs">
+                  <Button
+                      icon="arrow-up"
+                      onClick={() => onMoveSelected(-1)}
+                      size="sm"
+                      text="Move Kit Up"
+                      variant="secondary"
+                      width="100%"
+                  />
+                  <Button
+                      icon="arrow-down"
+                      onClick={() => onMoveSelected(1)}
+                      size="sm"
+                      text="Move Kit Down"
+                      variant="secondary"
+                      width="100%"
+                  />
+                </Flex>
+                </>
                 )}
 
                 {wrapControls}
@@ -282,23 +308,6 @@ export const PlaygroundInspector = ({
                     />
                   </Flex>
                 )}
-
-                <Flex gap="xs">
-                  <Button
-                      icon="arrow-up"
-                      onClick={() => onMoveSelected(-1)}
-                      size="sm"
-                      text="Up"
-                      variant="secondary"
-                  />
-                  <Button
-                      icon="arrow-down"
-                      onClick={() => onMoveSelected(1)}
-                      size="sm"
-                      text="Down"
-                      variant="secondary"
-                  />
-                </Flex>
               </Flex>
             )}
           </>
