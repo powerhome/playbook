@@ -4,6 +4,7 @@
   "defaults": {
     "requiredIndicator": false,
     "simple": false,
+    "bulletList": false,
     "advancedEditorToolbar": true,
     "inputHeight": "md",
     "inputMinHeight": "sm",

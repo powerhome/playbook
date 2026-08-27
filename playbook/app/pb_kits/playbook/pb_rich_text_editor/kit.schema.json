@@ -154,8 +154,10 @@
     "bulletList": {
       "type": "any",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     }
   },
   "globalProps": true,

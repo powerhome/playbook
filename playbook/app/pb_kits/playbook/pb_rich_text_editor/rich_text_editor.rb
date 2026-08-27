@@ -12,6 +12,7 @@ module Playbook
       # When true, TipTap toolbar matches React `simple`: Bold + Italic only (no block-style Popover).
       # Use in modals or narrow layouts where the block dropdown misbehaves.
       prop :simple, type: Playbook::Props::Boolean, default: false
+      prop :bullet_list, type: Playbook::Props::Boolean, default: false
 
       # Match React default (globalProps maxWidth "md").
       def max_width
