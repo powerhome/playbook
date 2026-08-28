@@ -202,6 +202,63 @@ const containsUnsafeValue = (value: unknown, depth = 0): boolean => {
   return false;
 };
 
+// Quoted attributes are inert against JSX-expression injection (see
+// containsBareCurlyBrace below), but they aren't inert once they land on a
+// real DOM node: `href`/`url`/`src`-style string props get forwarded
+// verbatim to native `<a>`/`<img>` elements by kits like Link and Image, in
+// both the createElement canvas preview and the react-live template
+// preview. A `javascript:`/`vbscript:` value executes on click; `data:` can
+// carry an executable payload (e.g. `data:text/html,<script>...`). Browsers
+// strip ASCII control characters before parsing a URL's scheme, so an
+// obfuscated "java\tscript:" still resolves to "javascript:" there — strip
+// the same characters here before matching, or this check is trivially
+// bypassed.
+const DANGEROUS_URL_SCHEMES = ["javascript:", "vbscript:", "data:"];
+
+const CONTROL_CHARS_PATTERN = new RegExp(
+  "[" + String.fromCharCode(0) + "-" + String.fromCharCode(31) + String.fromCharCode(127) + "]+",
+  "g",
+);
+
+const normalizeForSchemeCheck = (text: string): string =>
+  text.replace(CONTROL_CHARS_PATTERN, "").trim().toLowerCase();
+
+// A prop value becomes a dangerous URL only when the *entire* value is the
+// scheme (that's how href/url/src are actually consumed) — a plain text
+// prop that merely mentions "javascript:" mid-sentence isn't a navigation
+// target.
+const isDangerousUrlPropValue = (value: unknown): boolean =>
+  typeof value === "string" &&
+  DANGEROUS_URL_SCHEMES.some((scheme) =>
+    normalizeForSchemeCheck(value).startsWith(scheme),
+  );
+
+const containsDangerousUrlScheme = (value: unknown, depth = 0): boolean => {
+  if (depth > MAX_SCAN_DEPTH) return true;
+
+  if (typeof value === "string") return isDangerousUrlPropValue(value);
+
+  if (Array.isArray(value)) {
+    return value.some((item) => containsDangerousUrlScheme(item, depth + 1));
+  }
+
+  if (value && typeof value === "object") {
+    return Object.values(value as Record<string, unknown>).some(
+      (entryValue) => containsDangerousUrlScheme(entryValue, depth + 1),
+    );
+  }
+
+  return false;
+};
+
+// configuredChildren is a whole blob of markup, so the scheme can appear
+// anywhere inside it (e.g. `<a href="javascript:...">`) rather than being
+// the entire string — scan for it rather than requiring an exact prefix.
+const hasDangerousUrlScheme = (text: string): boolean =>
+  DANGEROUS_URL_SCHEMES.some((scheme) =>
+    normalizeForSchemeCheck(text).includes(scheme),
+  );
+
 // A JSX expression container (`{...}`) is the *only* way configuredChildren
 // can turn into something codegen actually executes — plain markup with
 // quoted string attributes just becomes inert React.createElement calls
@@ -245,8 +302,11 @@ const containsBareCurlyBrace = (text: string): boolean => {
 // see getConfiguredChildren), so checking against that first (both call
 // conventions used across this codebase — createInstance's implicit first
 // preset, and the explicit-no-preset form structure-mode changes use)
-// covers the common untouched case for free. Anything else falls through
-// to the curly-brace check above.
+// covers the common untouched case for free — it's the kit author's own
+// source, not attacker-controlled. Anything else falls through to the
+// curly-brace check (JSX-expression injection) and the URL-scheme check
+// (a real `href`/`src` a kit renders verbatim onto a native DOM node,
+// which quoting alone doesn't neutralize).
 const isSafeConfiguredChildren = (
   kit: PlaygroundKit | undefined,
   structureMode: string | null,
@@ -260,7 +320,10 @@ const isSafeConfiguredChildren = (
     return true;
   }
 
-  return !containsBareCurlyBrace(configuredChildren);
+  return (
+    !containsBareCurlyBrace(configuredChildren) &&
+    !hasDangerousUrlScheme(configuredChildren)
+  );
 };
 
 // Every prop name this kit's own config could legitimately mark "enabled"
@@ -325,7 +388,7 @@ const sanitizeShareConfiguredChildren = (
 
   // eslint-disable-next-line no-console
   console.warn(
-    `[playground share] stripped: configuredChildren on kit "${instance.kitName}" contained a JSX expression ("{...}") outside a quoted string — falling back to the kit's default instead of rejecting the whole share.`,
+    `[playground share] stripped: configuredChildren on kit "${instance.kitName}" contained a JSX expression ("{...}") outside a quoted string, or a javascript:/data:/vbscript: URL — falling back to the kit's default instead of rejecting the whole share.`,
   );
   return null;
 };
@@ -363,6 +426,14 @@ const sanitizeShareProps = (
       // eslint-disable-next-line no-console
       console.warn(
         `[playground share] stripped: prop "${name}" on kit "${instance.kitName}" contained an unsafe key (e.g. __playgroundCode, __proto__, dangerouslySetInnerHTML).`,
+      );
+      return;
+    }
+
+    if (containsDangerousUrlScheme(value)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[playground share] stripped: prop "${name}" on kit "${instance.kitName}" is a javascript:/data:/vbscript: URL — quoting doesn't neutralize it once a kit renders it as a real href/src.`,
       );
       return;
     }
