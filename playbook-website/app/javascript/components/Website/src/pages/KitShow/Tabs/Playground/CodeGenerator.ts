@@ -164,11 +164,24 @@ function formatJsxObjectProp(name: string, value: object): string {
   return `${name}={{${inner}}}`;
 }
 
+// A double quote (or backslash) in a string value can't sit inside `name="value"` without
+// breaking the generated JSX, so fall back to a JS string literal expression when present.
+const formatQuotedString = (name: string, value: string): string => {
+  if (value.includes('"') || value.includes("\\")) {
+    return `${name}={${JSON.stringify(value)}}`;
+  }
+  return `${name}="${value}"`;
+};
+
 const formatPropValue = (
   name: string,
   value: any,
   definition: PropDefinition
 ): string | null => {
+  if (value === "" && definition.emitEmptyString) {
+    return `${name}=""`;
+  }
+
   if (value === undefined || value === null || value === "") {
     return null;
   }
@@ -250,7 +263,7 @@ const formatPropValue = (
 
   if (propType === "string" || propType.includes("string")) {
     if (typeof value === "string" && value.trim()) {
-      return `${name}="${value}"`;
+      return formatQuotedString(name, value);
     }
     return null;
   }
@@ -268,7 +281,7 @@ const formatPropValue = (
 
   if (propType === "enum" || definition.values?.length) {
     if (typeof value === "string" && value.trim()) {
-      return `${name}="${value}"`;
+      return formatQuotedString(name, value);
     }
     return null;
   }
@@ -281,7 +294,7 @@ const formatPropValue = (
   }
 
   if (typeof value === "string") {
-    return `${name}="${value}"`;
+    return formatQuotedString(name, value);
   }
 
   if (

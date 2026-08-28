@@ -134,6 +134,7 @@ The base layer can infer simple things like component name, schema defaults, and
 | `conditionals` | Disable controls until requirements are met. |
 | `hints` | Info/warning/error banners above the preview. |
 | `hiddenProps` | Props to omit from the props panel. |
+| `emitEmptyStringProps` | Prop names for which an explicitly empty string is a meaningful value. Emits `prop=""` instead of omitting the prop when enabled and cleared. |
 | `requiredProps` | Props that should always be present and non-disableable. Useful for required arrays/data like `treeData`. |
 | `customProps` | Playground-only controls not in the schema, often used for subcomponent props. Prefer the real prop names developers pass (for example `text`, `marginY`) when they do not collide with the parent kit. |
 | `propTargets` | Routes a prop into a template marker other than `{{props}}`. |
@@ -249,6 +250,20 @@ Use `codegenDefaultProps` when the kit schema default and React runtime default 
 ```
 
 In this example, the control can still start from `md`, but selecting `md` emits `size="md"` because codegen knows the React kit would otherwise fall back to `sm`.
+
+## Emitting Explicit Empty Strings
+
+By default, an enabled string/enum prop control that is cleared to `""` is omitted from generated code entirely — the codegen treats "empty" the same as "unset." This is correct for most props (`href`, `text`, and the like), where an empty value has no meaning of its own.
+
+Some props are the opposite: an explicit empty string is itself a meaningful value the kit distinguishes from "not passed." For example, `Link`'s `rel` prop defaults to `rel="noreferrer"` for any non-`child` `target`; passing `rel=""` is how a consumer opts out of that default. If the playground just omits `rel` when the field is cleared, there's no way to demonstrate that value in generated code.
+
+Use `emitEmptyStringProps` to opt specific props into emitting `prop=""` instead of being dropped:
+
+```json
+"emitEmptyStringProps": ["rel"]
+```
+
+This is opt-in and scoped to the listed prop names only — every other prop, on every other kit, keeps the default "empty means omitted" behavior. Do not reach for this unless clearing the field is meant to represent a real, distinct value; if a prop just doesn't apply when empty, leave it out of `emitEmptyStringProps`.
 
 ## Required Props
 
@@ -639,6 +654,10 @@ Do not put required data only in `defaults`. Defaults seed controls but may not 
 ### If the schema default differs from the React kit default, use `codegenDefaultProps`
 
 Do not change a kit default just to make the playground emit a prop. Add the real React runtime default to `codegenDefaultProps` in `docs/_playground.overrides.json`, then regenerate `_playground.json`.
+
+### If a prop's empty string is a real value, use `emitEmptyStringProps`
+
+Clearing an enabled string/enum control normally drops the prop from generated code. If the kit gives `""` its own meaning (for example `Link`'s `rel=""`), add the prop name to `emitEmptyStringProps` so the playground can demonstrate it instead of silently omitting it.
 
 ## Manual Commands
 
