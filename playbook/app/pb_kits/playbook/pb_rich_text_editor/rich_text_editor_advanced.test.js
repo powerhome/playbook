@@ -7,7 +7,7 @@ import Link from "@tiptap/extension-link";
 
 import RichTextEditor from "./_rich_text_editor";
 import { normalizeListSelection } from "./TipTap/listSelection";
-import { markdownToHTML } from "./TipTap/markdownPaste";
+import { handleMarkdownPaste, markdownToHTML } from "./TipTap/markdownPaste";
 
 const kitClass = "pb_rich_text_editor_advanced_container";
 
@@ -111,11 +111,23 @@ describe("TipTap list selection", () => {
 });
 
 describe("TipTap Markdown paste", () => {
-  const createClipboardData = (text) => ({
+  const createClipboardData = (text, html = "") => ({
     files: [],
-    getData: (format) => format === "text/plain" ? text : "",
-    types: ["text/plain"],
+    getData: (format) => {
+      if (format === "text/plain") return text;
+      if (format === "text/html") return html;
+      return "";
+    },
+    types: html ? ["text/plain", "text/html"] : ["text/plain"],
   });
+
+  const createPasteEvent = (text, html = "") => {
+    const event = new Event("paste", { bubbles: true, cancelable: true });
+    Object.defineProperty(event, "clipboardData", {
+      value: createClipboardData(text, html),
+    });
+    return event;
+  };
 
   test("converts common Markdown blocks and inline formatting to HTML", () => {
     const markdown = [
@@ -162,5 +174,32 @@ describe("TipTap Markdown paste", () => {
     fireEvent.paste(editorElement, { clipboardData: createClipboardData("**Markdown**") });
 
     await waitFor(() => expect(editorElement.innerHTML).toContain("<strong>Markdown</strong>"));
+  });
+
+  test("stops TipTap's paste handler after converting Markdown", () => {
+    const pasteEvent = createPasteEvent("**Markdown**");
+    const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
+    const insertHTML = jest.fn();
+
+    expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(true);
+    expect(pasteEvent.defaultPrevented).toBe(true);
+    expect(stopImmediatePropagation).toHaveBeenCalled();
+    expect(insertHTML).toHaveBeenCalledWith("<p><strong>Markdown</strong></p>");
+  });
+
+  test("leaves rich HTML paste handling to TipTap", async () => {
+    const { container } = render(<EditorTest markdownSupport />);
+    const editorElement = container.querySelector(".ProseMirror");
+    const pasteEvent = createPasteEvent(
+      "**Markdown**",
+      "<p><strong>Rendered HTML</strong></p>"
+    );
+    const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
+
+    fireEvent(editorElement, pasteEvent);
+
+    await waitFor(() => expect(editorElement.innerHTML).toContain("<strong>Rendered HTML</strong>"));
+    expect(stopImmediatePropagation).not.toHaveBeenCalled();
+    stopImmediatePropagation.mockRestore();
   });
 });

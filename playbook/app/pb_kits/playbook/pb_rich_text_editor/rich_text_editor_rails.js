@@ -43,10 +43,12 @@ async function initPlaybookRichTextEditorRails(container) {
     let markdownToHtml;
 
     if (markdownSupport) {
-      Promise.all([
-        import("https://esm.sh/prosemirror-markdown@1.13.2"),
-        import("https://esm.sh/prosemirror-model@1.25.0"),
-      ]).then(([{ defaultMarkdownParser }, { DOMSerializer }]) => {
+      try {
+        const [{ defaultMarkdownParser }, { DOMSerializer }] = await Promise.all([
+          import("https://esm.sh/prosemirror-markdown@1.13.2"),
+          import("https://esm.sh/prosemirror-model@1.25.0"),
+        ]);
+
         markdownToHtml = (text) => {
           const documentNode = defaultMarkdownParser.parse(text);
           if (!documentNode) return null;
@@ -57,7 +59,9 @@ async function initPlaybookRichTextEditorRails(container) {
           wrapper.querySelectorAll("[data-tight]").forEach((node) => node.removeAttribute("data-tight"));
           return wrapper.innerHTML;
         };
-      }).catch(() => undefined);
+      } catch (_error) {
+        markdownToHtml = undefined;
+      }
     }
 
     const editor = new Editor({
@@ -71,10 +75,11 @@ async function initPlaybookRichTextEditorRails(container) {
       onUpdate: ({ editor: ed }) => syncToHiddenInput(ed),
     });
 
-    if (markdownSupport) {
+    if (markdownSupport && markdownToHtml) {
       editorNode.addEventListener("paste", (event) => {
         const text = event.clipboardData?.getData("text/plain");
-        if (!text || !markdownPattern.test(text) || !markdownToHtml) return;
+        const richHtml = event.clipboardData?.getData("text/html");
+        if (richHtml || !text || !markdownPattern.test(text) || !markdownToHtml) return;
 
         let html;
         try {
@@ -85,6 +90,7 @@ async function initPlaybookRichTextEditorRails(container) {
         if (!html) return;
 
         event.preventDefault();
+        event.stopImmediatePropagation();
         editor.chain().focus().insertContent(html).run();
       }, true);
     }

@@ -17,4 +17,26 @@ const markdownToHTML = (text: string): string | null => {
   return container.innerHTML
 }
 
-export { markdownToHTML }
+const handleMarkdownPaste = (
+  event: ClipboardEvent,
+  insertHTML: (html: string) => void
+): boolean => {
+  const text = event.clipboardData?.getData("text/plain")
+  const richHtml = event.clipboardData?.getData("text/html")
+  if (richHtml || !text || !MARKDOWN_PATTERN.test(text)) return false
+
+  let html
+  try {
+    html = markdownToHTML(text)
+  } catch (_error) {
+    return false
+  }
+  if (!html) return false
+
+  event.preventDefault()
+  event.stopImmediatePropagation()
+  insertHTML(html)
+  return true
+}
+
+export { handleMarkdownPaste, markdownToHTML }
