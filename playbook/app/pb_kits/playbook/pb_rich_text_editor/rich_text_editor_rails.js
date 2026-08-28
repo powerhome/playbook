@@ -101,6 +101,50 @@ async function initPlaybookRichTextEditorRails(container) {
     };
 
     const applyBlockType = (value) => {
+      let { selection } = editor.state;
+
+      if ((value === "bulletList" || value === "orderedList") && !selection.empty) {
+        if (selection.$from.nodeBefore?.type.name === "hardBreak") {
+          const selectedSize = selection.to - selection.from;
+          const breakPosition = selection.from - 1;
+
+          editor.chain()
+            .deleteRange({ from: breakPosition, to: selection.from })
+            .setTextSelection(breakPosition)
+            .splitBlock()
+            .run();
+
+          const from = editor.state.selection.from;
+          editor.commands.setTextSelection({ from, to: from + selectedSize });
+          selection = editor.state.selection;
+        }
+
+        const { $from, $to } = selection;
+        let { from, to } = selection;
+
+        if (
+          $from.depth > 0 &&
+          $from.parent.isTextblock &&
+          $from.parentOffset === $from.parent.content.size
+        ) {
+          const nextBlockStart = $from.after($from.depth) + 1;
+          if (nextBlockStart < to) from = nextBlockStart;
+        }
+
+        if (
+          $to.depth > 0 &&
+          $to.parent.isTextblock &&
+          $to.parentOffset === 0
+        ) {
+          const previousBlockEnd = $to.before($to.depth) - 1;
+          if (previousBlockEnd > from) to = previousBlockEnd;
+        }
+
+        if (from !== selection.from || to !== selection.to) {
+          chain.setTextSelection({ from, to });
+        }
+      }
+
       const chain = editor.chain().focus();
       if (value === "paragraph") chain.setParagraph().run();
       else if (value === "heading-1") chain.toggleHeading({ level: 1 }).run();

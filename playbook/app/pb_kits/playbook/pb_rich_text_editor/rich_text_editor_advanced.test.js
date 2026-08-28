@@ -1,10 +1,12 @@
 import React from "react";
 import { render } from "../utilities/test-utils";
+import { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 
 import RichTextEditor from "./_rich_text_editor";
+import { normalizeListSelection } from "./TipTap/listSelection";
 
 const kitClass = "pb_rich_text_editor_advanced_container";
 
@@ -44,4 +46,65 @@ test("doesn't returns toolbar class name", () => {
   expect(
     container.getElementsByClassName(`${kitClass} toolbar-active`).length
   ).toBe(0);
+});
+
+describe("TipTap list selection", () => {
+  const content = "<h2>How should it work?</h2><p>First paragraph</p><p>Second paragraph</p>";
+
+  test.each([
+    ["bulletList", "ul"],
+    ["orderedList", "ol"],
+  ])("excludes a heading touched only at its end boundary from a %s", (listType, tag) => {
+    const editor = new Editor({ extensions: [StarterKit], content });
+    const headingEnd = editor.state.doc.child(0).nodeSize - 1;
+    const paragraphEnd = headingEnd + editor.state.doc.child(1).nodeSize;
+
+    editor.commands.setTextSelection({ from: headingEnd, to: paragraphEnd });
+    normalizeListSelection(editor);
+    if (listType === "bulletList") editor.chain().toggleBulletList().run();
+    else editor.chain().toggleOrderedList().run();
+
+    expect(editor.getHTML()).toBe(
+      `<h2>How should it work?</h2><${tag}><li><p>First paragraph</p></li></${tag}><p>Second paragraph</p>`
+    );
+
+    editor.destroy();
+  });
+
+  test("excludes a paragraph touched only at its start boundary", () => {
+    const editor = new Editor({ extensions: [StarterKit], content });
+    const firstParagraphStart = editor.state.doc.child(0).nodeSize + 1;
+    const secondParagraphStart =
+      editor.state.doc.child(0).nodeSize + editor.state.doc.child(1).nodeSize + 1;
+
+    editor.commands.setTextSelection({ from: firstParagraphStart, to: secondParagraphStart });
+    normalizeListSelection(editor);
+    editor.chain().toggleBulletList().run();
+
+    expect(editor.getHTML()).toBe(
+      "<h2>How should it work?</h2><ul><li><p>First paragraph</p></li></ul><p>Second paragraph</p>"
+    );
+
+    editor.destroy();
+  });
+
+  test("separates a pasted heading and body joined by a hard break", () => {
+    const editor = new Editor({
+      extensions: [StarterKit],
+      content: "<p><strong>How should it work?</strong><br>Keep React and Rails visible.</p>",
+    });
+    const hardBreakEnd = editor.state.doc.child(0).child(1).nodeSize +
+      editor.state.doc.child(0).child(0).nodeSize + 1;
+    const paragraphEnd = editor.state.doc.child(0).nodeSize - 1;
+
+    editor.commands.setTextSelection({ from: hardBreakEnd, to: paragraphEnd });
+    normalizeListSelection(editor);
+    editor.chain().toggleBulletList().run();
+
+    expect(editor.getHTML()).toBe(
+      "<p><strong>How should it work?</strong></p><ul><li><p>Keep React and Rails visible.</p></li></ul>"
+    );
+
+    editor.destroy();
+  });
 });
