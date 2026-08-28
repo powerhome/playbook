@@ -142,8 +142,13 @@ describe("TipTap Markdown paste", () => {
     render(<EditorTest />);
 
     const markdownListeners = addEventListener.mock.calls.filter(
-      ([eventName, handler, capture]) =>
-        eventName === "paste" && handler.name === "handleMarkdownPaste" && capture === true
+      (call, index) => {
+        const [eventName, , capture] = call;
+        const eventTarget = addEventListener.mock.instances[index];
+        return eventName === "paste" &&
+          capture === true &&
+          eventTarget.classList?.contains("ProseMirror");
+      }
     );
 
     expect(markdownListeners).toHaveLength(0);
