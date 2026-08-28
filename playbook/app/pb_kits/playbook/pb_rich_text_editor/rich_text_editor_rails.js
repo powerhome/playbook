@@ -40,21 +40,25 @@ async function initPlaybookRichTextEditorRails(container) {
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
     const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
     const markdownPattern = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\[[^\]]+\]\([^)]+\)/m;
+    let markdownToHtml;
 
-    const markdownToHtml = async (text) => {
-      if (!markdownPattern.test(text)) return null;
+    if (markdownSupport) {
+      Promise.all([
+        import("https://esm.sh/prosemirror-markdown@1.13.2"),
+        import("https://esm.sh/prosemirror-model@1.25.0"),
+      ]).then(([{ defaultMarkdownParser }, { DOMSerializer }]) => {
+        markdownToHtml = (text) => {
+          const documentNode = defaultMarkdownParser.parse(text);
+          if (!documentNode) return null;
 
-      const { DOMSerializer } = await import(`https://esm.sh/@tiptap/pm@${RTE_TIPTAP_VERSION}/model`);
-      const { defaultMarkdownParser } = await import(`https://esm.sh/@tiptap/pm@${RTE_TIPTAP_VERSION}/markdown`);
-      const documentNode = defaultMarkdownParser.parse(text);
-      if (!documentNode) return null;
-
-      const wrapper = document.createElement("div");
-      const serializer = DOMSerializer.fromSchema(documentNode.type.schema);
-      wrapper.appendChild(serializer.serializeFragment(documentNode.content));
-      wrapper.querySelectorAll("[data-tight]").forEach((node) => node.removeAttribute("data-tight"));
-      return wrapper.innerHTML;
-    };
+          const wrapper = document.createElement("div");
+          const serializer = DOMSerializer.fromSchema(documentNode.type.schema);
+          wrapper.appendChild(serializer.serializeFragment(documentNode.content));
+          wrapper.querySelectorAll("[data-tight]").forEach((node) => node.removeAttribute("data-tight"));
+          return wrapper.innerHTML;
+        };
+      }).catch(() => undefined);
+    }
 
     const editor = new Editor({
       element: editorNode,
@@ -68,14 +72,19 @@ async function initPlaybookRichTextEditorRails(container) {
     });
 
     if (markdownSupport) {
-      editorNode.addEventListener("paste", async (event) => {
+      editorNode.addEventListener("paste", (event) => {
         const text = event.clipboardData?.getData("text/plain");
-        if (!text || !markdownPattern.test(text)) return;
+        if (!text || !markdownPattern.test(text) || !markdownToHtml) return;
 
-        event.preventDefault();
-        const html = await markdownToHtml(text);
+        let html;
+        try {
+          html = markdownToHtml(text);
+        } catch (_error) {
+          return;
+        }
         if (!html) return;
 
+        event.preventDefault();
         editor.chain().focus().insertContent(html).run();
       }, true);
     }

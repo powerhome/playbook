@@ -62,6 +62,8 @@ export default defineConfig({
         'trix',
         'react-trix',
         'tiptap/react',
+        'prosemirror-markdown',
+        'prosemirror-model',
         'highcharts',
         'highcharts-react-official',
         'highcharts/highcharts-more',

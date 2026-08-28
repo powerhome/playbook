@@ -1,5 +1,5 @@
-import { DOMSerializer } from "@tiptap/pm/model"
-import { defaultMarkdownParser } from "@tiptap/pm/markdown"
+import { defaultMarkdownParser } from "prosemirror-markdown"
+import { DOMSerializer } from "prosemirror-model"
 
 const MARKDOWN_PATTERN = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\[[^\]]+\]\([^)]+\)/m
 
