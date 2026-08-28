@@ -202,27 +202,65 @@ const containsUnsafeValue = (value: unknown, depth = 0): boolean => {
   return false;
 };
 
-// configuredChildren is always spliced as literal JSX/code (see
-// renderInstanceCode / getTemplateChildren), so a user-typed value there is
-// just as dangerous as __playgroundCode. But createInstance always fills it
-// in with the kit's own default template (Card's placeholder text, Table's
-// default JSX, etc. — see getConfiguredChildren), so most shared instances
-// legitimately carry it even though nobody typed anything. Comparing
-// against the kit's actual computed default (checking both call
+// A JSX expression container (`{...}`) is the *only* way configuredChildren
+// can turn into something codegen actually executes — plain markup with
+// quoted string attributes just becomes inert React.createElement calls
+// with string literals. So rather than reject anything that isn't the
+// kit's exact default (which breaks the very common case of someone
+// legitimately typing custom content into the "Children" editor — e.g.
+// custom Table rows), only reject a bare `{` that isn't inside a quoted
+// string. Mirrors the quote-tracking in codeGeneration.ts's
+// findTopLevelJsxStart.
+const containsBareCurlyBrace = (text: string): boolean => {
+  let quote: "'" | "\"" | "`" | null = null;
+  let escaped = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
+      continue;
+    }
+
+    if (char === "'" || char === "\"" || char === "`") {
+      quote = char;
+      continue;
+    }
+
+    if (char === "{") return true;
+  }
+
+  return false;
+};
+
+// createInstance always fills configuredChildren in with the kit's own
+// default template (Card's placeholder text, Table's default JSX, etc. —
+// see getConfiguredChildren), so checking against that first (both call
 // conventions used across this codebase — createInstance's implicit first
 // preset, and the explicit-no-preset form structure-mode changes use)
-// distinguishes that first-party config from a real edit.
-const isDefaultConfiguredChildren = (
+// covers the common untouched case for free. Anything else falls through
+// to the curly-brace check above.
+const isSafeConfiguredChildren = (
   kit: PlaygroundKit | undefined,
   structureMode: string | null,
   configuredChildren: string,
 ): boolean => {
-  if (!kit) return false;
+  if (
+    kit &&
+    (configuredChildren === getConfiguredChildren(kit, structureMode) ||
+      configuredChildren === getConfiguredChildren(kit, structureMode, null))
+  ) {
+    return true;
+  }
 
-  return (
-    configuredChildren === getConfiguredChildren(kit, structureMode) ||
-    configuredChildren === getConfiguredChildren(kit, structureMode, null)
-  );
+  return !containsBareCurlyBrace(configuredChildren);
 };
 
 // Every prop name this kit's own config could legitimately mark "enabled"
@@ -257,51 +295,109 @@ const getKnownPropNames = (
   return names;
 };
 
-// codeGeneration.ts's formatCodeValue splices a function-typed prop's value
-// verbatim as raw code with no __playgroundCode wrapper required — a string
-// value for an onClick-style prop IS the code that runs. Checked against the
-// kit's real schema so this matches exactly what codegen is actually
-// willing to treat as code.
-const hasUnsafeCode = (
+// Unlike configuredChildren, a function-typed prop's value is *supposed* to
+// be executable code (an onClick/onSortChange-style callback) — there's no
+// syntactic tell that separates a legitimate demo callback from a
+// malicious one, since valid JS doesn't need braces at all
+// (`() => fetch('evil')`). So this can't be validated as "safe" the way
+// configuredChildren can; it can only be trusted from the same session
+// that typed it, never from a share link. Rejecting the *entire* share
+// over one such prop (or one forged prop name, or one non-default
+// configuredChildren) is also too blunt — most of a shared canvas is
+// still perfectly renderable JSON data. So this sanitizes in place:
+// strip exactly the unsafe piece and keep everything else, rather than
+// failing the whole import.
+const sanitizeShareConfiguredChildren = (
+  instance: BuilderInstance,
+  kit: PlaygroundKit | undefined,
+): string | null => {
+  if (!instance.configuredChildren) return instance.configuredChildren;
+
+  if (
+    isSafeConfiguredChildren(
+      kit,
+      instance.structureMode,
+      instance.configuredChildren,
+    )
+  ) {
+    return instance.configuredChildren;
+  }
+
+  // eslint-disable-next-line no-console
+  console.warn(
+    `[playground share] stripped: configuredChildren on kit "${instance.kitName}" contained a JSX expression ("{...}") outside a quoted string — falling back to the kit's default instead of rejecting the whole share.`,
+  );
+  return null;
+};
+
+const sanitizeShareProps = (
+  instance: BuilderInstance,
+  kit: PlaygroundKit | undefined,
+  globalProps: Record<string, PropDefinition> | undefined,
+): { props: Record<string, unknown>; enabledProps: Record<string, boolean> } => {
+  const propDefinitions = getAllPropDefinitionsWithGlobals(kit, globalProps);
+  const knownPropNames = getKnownPropNames(kit, instance, globalProps);
+  const props: Record<string, unknown> = {};
+  const enabledProps: Record<string, boolean> = {};
+
+  Object.entries(instance.props).forEach(([name, value]) => {
+    if (!knownPropNames.has(name)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[playground share] stripped: prop "${name}" on kit "${instance.kitName}" isn't in the known-prop allowlist (e.g. htmlOptions, className, data, aria are never real kit props).`,
+      );
+      return;
+    }
+
+    const type = displayPropType(propDefinitions[name]);
+    const isFunctionTyped = type.includes("function") || type.includes("=>");
+    if (isFunctionTyped && typeof value === "string" && value.trim()) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[playground share] stripped: prop "${name}" on kit "${instance.kitName}" is function-typed with a raw string value — that's exactly the code codegen would execute, and can't be told apart from a real callback.`,
+      );
+      return;
+    }
+
+    if (containsUnsafeValue(value)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[playground share] stripped: prop "${name}" on kit "${instance.kitName}" contained an unsafe key (e.g. __playgroundCode, __proto__, dangerouslySetInnerHTML).`,
+      );
+      return;
+    }
+
+    props[name] = value;
+    enabledProps[name] = true;
+  });
+
+  return { props, enabledProps };
+};
+
+const sanitizeShareInstances = (
   instances: BuilderInstance[],
   kitsByName: Record<string, PlaygroundKit>,
   globalProps: Record<string, PropDefinition> | undefined,
-): boolean =>
-  instances.some((instance) => {
+): BuilderInstance[] =>
+  instances.map((instance) => {
     const kit = kitsByName[instance.kitName];
-
-    if (
-      instance.configuredChildren &&
-      !isDefaultConfiguredChildren(
-        kit,
-        instance.structureMode,
-        instance.configuredChildren,
-      )
-    ) {
-      return true;
-    }
-
-    const propDefinitions = getAllPropDefinitionsWithGlobals(kit, globalProps);
-    const knownPropNames = getKnownPropNames(kit, instance, globalProps);
-
-    const hasUnsafeProp = Object.entries(instance.props).some(
-      ([name, value]) => {
-        if (!knownPropNames.has(name)) return true;
-
-        const type = displayPropType(propDefinitions[name]);
-        const isFunctionTyped =
-          type.includes("function") || type.includes("=>");
-        if (isFunctionTyped && typeof value === "string" && value.trim()) {
-          return true;
-        }
-
-        return containsUnsafeValue(value);
-      },
+    const { props, enabledProps } = sanitizeShareProps(
+      instance,
+      kit,
+      globalProps,
     );
 
-    return (
-      hasUnsafeProp || hasUnsafeCode(instance.children, kitsByName, globalProps)
-    );
+    return {
+      ...instance,
+      configuredChildren: sanitizeShareConfiguredChildren(instance, kit),
+      props,
+      enabledProps,
+      children: sanitizeShareInstances(
+        instance.children,
+        kitsByName,
+        globalProps,
+      ),
+    };
   });
 
 export type PlaygroundShareReadResult =
@@ -328,19 +424,32 @@ export const readPlaygroundShareState = async (
         : utf8Decoder.decode(bytes);
 
     const parsed = JSON.parse(json);
-    const expanded = Array.isArray(parsed)
-      ? parsed.map(fromCompactInstance)
-      : parsed;
-    const instances = sanitizeInstances(expanded, validKitNames);
-    if (
-      instances.length === 0 ||
-      hasUnsafeCode(instances, kitsByName, globalProps)
-    ) {
+    if (!Array.isArray(parsed)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        "[playground share] rejected: decoded payload isn't an array.",
+        { parsed },
+      );
       return { status: "invalid" };
     }
 
-    return { status: "ok", instances };
-  } catch {
+    const expanded = parsed.map(fromCompactInstance);
+    const instances = sanitizeInstances(expanded, validKitNames);
+    if (instances.length === 0) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        "[playground share] rejected: no instances survived sanitizeInstances — check kit names against validKitNames.",
+        { expanded, validKitNames: Array.from(validKitNames) },
+      );
+      return { status: "invalid" };
+    }
+
+    const sanitized = sanitizeShareInstances(instances, kitsByName, globalProps);
+
+    return { status: "ok", instances: sanitized };
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn("[playground share] rejected: decode/parse threw.", err);
     return { status: "invalid" };
   }
 };
