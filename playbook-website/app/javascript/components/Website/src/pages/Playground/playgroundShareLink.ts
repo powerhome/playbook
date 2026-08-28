@@ -1,4 +1,5 @@
 import {
+  EXCLUDED_PROPS,
   displayPropType,
   getAllPropDefinitionsWithGlobals,
   getConfiguredChildren,
@@ -172,9 +173,12 @@ export const buildPlaygroundShareUrl = async (
 // `constructor` / `prototype` are blocked too as defense-in-depth against
 // prototype pollution in anything that later merges these parsed objects.
 // `dangerouslySetInnerHTML` / `__html` are blocked as defense-in-depth too —
-// the real fix for that specific vector is the prop-name allowlist below
-// (buildHtmlProps forwards any key under `props.htmlOptions` straight onto
-// the rendered DOM node), but this catches the shape wherever it appears.
+// the primary fix for the `htmlOptions` vector is excluding it from the
+// prop-name allowlist entirely (EXCLUDED_PROPS, see getKnownPropNames
+// below) — buildHtmlProps forwards any key under `props.htmlOptions`
+// straight onto the rendered DOM node with no filtering of its own, so
+// nothing downstream of the allowlist can be trusted to catch it. This
+// list catches the same key shapes wherever else they might appear.
 const UNSAFE_KEYS = new Set([
   "__playgroundCode",
   "__proto__",
@@ -183,6 +187,15 @@ const UNSAFE_KEYS = new Set([
   "dangerouslySetInnerHTML",
   "__html",
 ]);
+// Lowercase `on...` (onclick, onerror, onmouseover, ...) is the raw HTML
+// attribute-name convention, not React's camelCase event-prop convention
+// (onClick) — a string value under one of these keys becomes a live inline
+// DOM event handler the moment it's set as an attribute (buildHtmlProps and
+// similar spreads use setAttribute-equivalent semantics for unknown keys),
+// with no function value required. Belt-and-suspenders alongside the
+// allowlist fix, in case some other legitimate object-typed prop is ever
+// spread onto a DOM node the same way `htmlOptions` is.
+const DOM_EVENT_HANDLER_KEY_PATTERN = /^on[a-z]/;
 const MAX_SCAN_DEPTH = 50;
 
 const containsUnsafeValue = (value: unknown, depth = 0): boolean => {
@@ -195,7 +208,9 @@ const containsUnsafeValue = (value: unknown, depth = 0): boolean => {
   if (value && typeof value === "object") {
     return Object.entries(value as Record<string, unknown>).some(
       ([key, entryValue]) =>
-        UNSAFE_KEYS.has(key) || containsUnsafeValue(entryValue, depth + 1),
+        UNSAFE_KEYS.has(key) ||
+        DOM_EVENT_HANDLER_KEY_PATTERN.test(key) ||
+        containsUnsafeValue(entryValue, depth + 1),
     );
   }
 
@@ -331,11 +346,17 @@ const isSafeConfiguredChildren = (
 // presets/structure modes/first preset inject as runtime props (see
 // createInstance/getInitialInstanceState — those go through the same
 // enabledProps=true path as a user-toggled prop, so they're legitimate even
-// though they aren't always literally in kit_schema.props). Nothing outside
-// this set — most importantly framework-level escape hatches like
-// `htmlOptions`, `className`, `data`, `aria` — is ever a real prop a kit
-// exposes, so any of those showing up in a share payload is exactly the
-// forged-key attack this allowlist exists to catch, not a legitimate share.
+// though they aren't always literally in kit_schema.props). But a structure
+// mode's own props CAN legitimately contain a framework-level escape hatch
+// like Map's `htmlOptions: { style: {...} }` — that's the kit author
+// wiring internal styling, not something meant to ever be
+// user/share-editable. EXCLUDED_PROPS (kitUtils.ts) is the canonical list
+// the prop editor already hides for exactly this reason; subtract it here
+// too, unconditionally, regardless of which of the sources above a name
+// came from — otherwise a kit whose structure mode happens to reference
+// `htmlOptions` reopens it as an allowlisted share field, and
+// `buildHtmlProps` spreads it onto a real DOM node with no key filtering
+// (e.g. `htmlOptions: { onclick: "alert(1)" }`).
 const getKnownPropNames = (
   kit: PlaygroundKit | undefined,
   instance: BuilderInstance,
@@ -354,6 +375,8 @@ const getKnownPropNames = (
   Object.keys((kit && getFirstPreset(kit)?.props) || {}).forEach((name) =>
     names.add(name),
   );
+
+  EXCLUDED_PROPS.forEach((name) => names.delete(name));
 
   return names;
 };
