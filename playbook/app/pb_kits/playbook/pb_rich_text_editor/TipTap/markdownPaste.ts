@@ -1,21 +1,35 @@
 import { defaultMarkdownParser } from "prosemirror-markdown"
 import { DOMSerializer } from "prosemirror-model"
 
-const MARKDOWN_PATTERN = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\*[^*\n]+\*|_[^_\n]+_|\[[^\]]+\]\([^)]+\)/m
-const RICH_TEXT_SELECTOR = "h1, h2, h3, h4, h5, h6, strong, b, em, i, a, ul, ol, li, blockquote"
+const NEUTRAL_CLIPBOARD_TAGS = new Set(["html", "head", "body", "meta", "div", "span", "p"])
+
+type MarkdownJSONNode = {
+  content?: MarkdownJSONNode[],
+  marks?: unknown[],
+  type: string,
+}
 
 const hasRichTextFormatting = (html: string): boolean => {
   if (!html) return false
 
   const clipboardDocument = new DOMParser().parseFromString(html, "text/html")
-  return !!clipboardDocument.querySelector(RICH_TEXT_SELECTOR)
+  return [...clipboardDocument.querySelectorAll("*")].some(
+    (element) =>
+      !NEUTRAL_CLIPBOARD_TAGS.has(element.tagName.toLowerCase()) ||
+      element.hasAttribute("style")
+  )
+}
+
+const hasMarkdownFormatting = (node: MarkdownJSONNode): boolean => {
+  const isFormattedNode = !["doc", "paragraph", "text"].includes(node.type)
+  if (isFormattedNode || node.marks?.length) return true
+
+  return node.content?.some(hasMarkdownFormatting) || false
 }
 
 const markdownToHTML = (text: string): string | null => {
-  if (!MARKDOWN_PATTERN.test(text)) return null
-
   const documentNode = defaultMarkdownParser.parse(text)
-  if (!documentNode) return null
+  if (!documentNode || !hasMarkdownFormatting(documentNode.toJSON())) return null
 
   const container = document.createElement("div")
   const serializer = DOMSerializer.fromSchema(documentNode.type.schema)
@@ -31,7 +45,7 @@ const handleMarkdownPaste = (
 ): boolean => {
   const text = event.clipboardData?.getData("text/plain")
   const richHtml = event.clipboardData?.getData("text/html")
-  if (hasRichTextFormatting(richHtml) || !text || !MARKDOWN_PATTERN.test(text)) return false
+  if (hasRichTextFormatting(richHtml) || !text) return false
 
   let html
   try {

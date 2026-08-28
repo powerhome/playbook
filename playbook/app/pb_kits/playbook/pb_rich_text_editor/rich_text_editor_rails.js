@@ -39,8 +39,7 @@ async function initPlaybookRichTextEditorRails(container) {
     const { Editor } = await import(RTE_TIPTAP_ESM("@tiptap/core"));
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
     const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
-    const markdownPattern = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\*[^*\n]+\*|_[^_\n]+_|\[[^\]]+\]\([^)]+\)/m;
-    const richTextSelector = "h1, h2, h3, h4, h5, h6, strong, b, em, i, a, ul, ol, li, blockquote";
+    const neutralClipboardTags = new Set(["html", "head", "body", "meta", "div", "span", "p"]);
     let markdownToHtml;
 
     if (markdownSupport) {
@@ -53,6 +52,13 @@ async function initPlaybookRichTextEditorRails(container) {
         markdownToHtml = (text) => {
           const documentNode = defaultMarkdownParser.parse(text);
           if (!documentNode) return null;
+          const hasMarkdownFormatting = (node) => {
+            const isFormattedNode = !["doc", "paragraph", "text"].includes(node.type);
+            if (isFormattedNode || node.marks?.length) return true;
+
+            return node.content?.some(hasMarkdownFormatting) || false;
+          };
+          if (!hasMarkdownFormatting(documentNode.toJSON())) return null;
 
           const wrapper = document.createElement("div");
           const serializer = DOMSerializer.fromSchema(documentNode.type.schema);
@@ -81,8 +87,12 @@ async function initPlaybookRichTextEditorRails(container) {
         const text = event.clipboardData?.getData("text/plain");
         const richHtml = event.clipboardData?.getData("text/html");
         const clipboardDocument = new DOMParser().parseFromString(richHtml || "", "text/html");
-        const hasRichTextFormatting = !!clipboardDocument.querySelector(richTextSelector);
-        if (hasRichTextFormatting || !text || !markdownPattern.test(text) || !markdownToHtml) return;
+        const hasRichTextFormatting = [...clipboardDocument.querySelectorAll("*")].some(
+          (element) =>
+            !neutralClipboardTags.has(element.tagName.toLowerCase()) ||
+            element.hasAttribute("style")
+        );
+        if (hasRichTextFormatting || !text || !markdownToHtml) return;
 
         let html;
         try {

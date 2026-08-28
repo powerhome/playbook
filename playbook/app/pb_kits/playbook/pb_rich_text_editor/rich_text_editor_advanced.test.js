@@ -148,6 +148,10 @@ describe("TipTap Markdown paste", () => {
     expect(markdownToHTML("Keep React and Rails visible.")).toBeNull();
   });
 
+  test("does not treat intraword underscores as Markdown", () => {
+    expect(markdownToHTML("foo_bar_baz")).toBeNull();
+  });
+
   test.each(["*Italic*", "_Italic_"])(
     "converts italic-only Markdown using %s delimiters",
     (markdown) => {
@@ -175,12 +179,27 @@ describe("TipTap Markdown paste", () => {
   });
 
   test("formats Markdown when markdownSupport is enabled", async () => {
+    const addEventListener = jest.spyOn(HTMLElement.prototype, "addEventListener");
     const { container } = render(<EditorTest markdownSupport />);
     const editorElement = container.querySelector(".ProseMirror");
+
+    await waitFor(() => {
+      const markdownListeners = addEventListener.mock.calls.filter(
+        (call, index) => {
+          const [eventName, , capture] = call;
+          const eventTarget = addEventListener.mock.instances[index];
+          return eventName === "paste" &&
+            capture === true &&
+            eventTarget.classList?.contains("ProseMirror");
+        }
+      );
+      expect(markdownListeners).toHaveLength(1);
+    });
 
     fireEvent.paste(editorElement, { clipboardData: createClipboardData("**Markdown**") });
 
     await waitFor(() => expect(editorElement.innerHTML).toContain("<strong>Markdown</strong>"));
+    addEventListener.mockRestore();
   });
 
   test("stops TipTap's paste handler after converting Markdown", () => {
@@ -197,7 +216,7 @@ describe("TipTap Markdown paste", () => {
   test("converts manually copied Markdown wrapped in clipboard HTML", () => {
     const pasteEvent = createPasteEvent(
       "**Markdown**",
-      "<pre><code>**Markdown**</code></pre>"
+      "<div><span>**Markdown**</span></div>"
     );
     const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
     const insertHTML = jest.fn();
@@ -205,6 +224,19 @@ describe("TipTap Markdown paste", () => {
     expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(true);
     expect(stopImmediatePropagation).toHaveBeenCalled();
     expect(insertHTML).toHaveBeenCalledWith("<p><strong>Markdown</strong></p>");
+  });
+
+  test("leaves spreadsheet HTML paste handling to TipTap", () => {
+    const pasteEvent = createPasteEvent(
+      "1. Q1",
+      "<table><tbody><tr><td>1. Q1</td></tr></tbody></table>"
+    );
+    const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
+    const insertHTML = jest.fn();
+
+    expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(false);
+    expect(stopImmediatePropagation).not.toHaveBeenCalled();
+    expect(insertHTML).not.toHaveBeenCalled();
   });
 
   test("leaves rich HTML paste handling to TipTap", async () => {

@@ -98,25 +98,26 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     if (!editorElement) return
 
     let active = true
-    let handleMarkdownPaste: ((event: ClipboardEvent, insertHTML: (html: string) => void) => boolean) | undefined
+    let handleMarkdownSupport: ((event: ClipboardEvent) => void) | undefined
 
     import('./TipTap/markdownPaste')
-      .then((markdownPaste) => {
-        if (active) handleMarkdownPaste = markdownPaste.handleMarkdownPaste
+      .then(({ handleMarkdownPaste }) => {
+        if (!active) return
+
+        handleMarkdownSupport = (event: ClipboardEvent) => {
+          handleMarkdownPaste(event, (html) => {
+            advancedEditor.chain().focus().insertContent(html).run()
+          })
+        }
+        editorElement.addEventListener("paste", handleMarkdownSupport, true)
       })
       .catch(() => undefined)
 
-    const handleMarkdownSupport = (event: ClipboardEvent) => {
-      handleMarkdownPaste?.(event, (html) => {
-        advancedEditor.chain().focus().insertContent(html).run()
-      })
-    }
-
-    editorElement.addEventListener("paste", handleMarkdownSupport, true)
-
     return () => {
       active = false
-      editorElement.removeEventListener("paste", handleMarkdownSupport, true)
+      if (handleMarkdownSupport) {
+        editorElement.removeEventListener("paste", handleMarkdownSupport, true)
+      }
     }
   }, [advancedEditor, markdownSupport])
 
