@@ -18,6 +18,7 @@ async function initPlaybookRichTextEditorRails(container) {
   const editorNode = document.getElementById(`${containerId}-editor`);
   const toolbar = document.getElementById(`${containerId}-toolbar`);
   const rteSimple = container.dataset.rteSimple === "true";
+  const markdownSupport = container.dataset.markdownSupport === "true";
   const blockTooltipId = `${containerId}-toolbar-block-tooltip`;
   const iconTemplatesRoot = rteSimple
     ? null
@@ -38,6 +39,22 @@ async function initPlaybookRichTextEditorRails(container) {
     const { Editor } = await import(RTE_TIPTAP_ESM("@tiptap/core"));
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
     const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
+    const markdownPattern = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\[[^\]]+\]\([^)]+\)/m;
+
+    const markdownToHtml = async (text) => {
+      if (!markdownPattern.test(text)) return null;
+
+      const { DOMSerializer } = await import(`https://esm.sh/@tiptap/pm@${RTE_TIPTAP_VERSION}/model`);
+      const { defaultMarkdownParser } = await import(`https://esm.sh/@tiptap/pm@${RTE_TIPTAP_VERSION}/markdown`);
+      const documentNode = defaultMarkdownParser.parse(text);
+      if (!documentNode) return null;
+
+      const wrapper = document.createElement("div");
+      const serializer = DOMSerializer.fromSchema(documentNode.type.schema);
+      wrapper.appendChild(serializer.serializeFragment(documentNode.content));
+      wrapper.querySelectorAll("[data-tight]").forEach((node) => node.removeAttribute("data-tight"));
+      return wrapper.innerHTML;
+    };
 
     const editor = new Editor({
       element: editorNode,
@@ -49,6 +66,19 @@ async function initPlaybookRichTextEditorRails(container) {
       editable: true,
       onUpdate: ({ editor: ed }) => syncToHiddenInput(ed),
     });
+
+    if (markdownSupport) {
+      editorNode.addEventListener("paste", async (event) => {
+        const text = event.clipboardData?.getData("text/plain");
+        if (!text || !markdownPattern.test(text)) return;
+
+        event.preventDefault();
+        const html = await markdownToHtml(text);
+        if (!html) return;
+
+        editor.chain().focus().insertContent(html).run();
+      }, true);
+    }
 
     syncToHiddenInput(editor);
 
@@ -141,7 +171,7 @@ async function initPlaybookRichTextEditorRails(container) {
         }
 
         if (from !== selection.from || to !== selection.to) {
-          chain.setTextSelection({ from, to });
+          editor.commands.setTextSelection({ from, to });
         }
       }
 

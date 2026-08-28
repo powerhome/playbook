@@ -2,6 +2,7 @@
   "template": "<RichTextEditor{{props}} />",
   "propTargets": {},
   "defaults": {
+    "markdownSupport": false,
     "requiredIndicator": false,
     "simple": false,
     "advancedEditorToolbar": true,
@@ -16,7 +17,8 @@
       "name": "Content",
       "props": [
         "label",
-        "name"
+        "name",
+        "markdownSupport"
       ]
     },
     {
@@ -109,6 +111,9 @@
     "inputMinHeight": {
       "structureMode": "advanced"
     },
+    "markdownSupport": {
+      "structureMode": "advanced"
+    },
     "sticky": {
       "structureMode": "advanced"
     }
@@ -173,6 +178,9 @@
       "structureMode": "advanced"
     },
     "inputMinHeight": {
+      "structureMode": "advanced"
+    },
+    "markdownSupport": {
       "structureMode": "advanced"
     },
     "sticky": {

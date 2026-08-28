@@ -31,6 +31,7 @@
     "inputHeight": "md",
     "inputMinHeight": "sm",
     "label": "Description",
+    "markdownSupport": false,
     "maxWidth": "md",
     "name": "description",
     "requiredIndicator": false,
@@ -50,7 +51,7 @@
   "groups": [
     {
       "name": "Content",
-      "props": ["label", "name"]
+      "props": ["label", "name", "markdownSupport"]
     },
     {
       "name": "Toolbar",
@@ -131,6 +132,9 @@
     "inputMinHeight": {
       "structureMode": "advanced"
     },
+    "markdownSupport": {
+      "structureMode": "advanced"
+    },
     "sticky": {
       "structureMode": "advanced"
     }
@@ -143,6 +147,9 @@
       "structureMode": "advanced"
     },
     "inputMinHeight": {
+      "structureMode": "advanced"
+    },
+    "markdownSupport": {
       "structureMode": "advanced"
     },
     "sticky": {

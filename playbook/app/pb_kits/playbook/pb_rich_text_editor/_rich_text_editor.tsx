@@ -22,6 +22,7 @@ type RichTextEditorProps = {
   id?: string,
   inline?: boolean,
   label?: string,
+  markdownSupport?: boolean,
   extensions?: { [key: string]: string }[],
   name?: string,
   onChange: (html: string, text: string) => void,
@@ -65,6 +66,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     maxWidth = "md",
     requiredIndicator = false,
     label,
+    markdownSupport = false,
     TrixEditor,
     trixInstance: trixInstance = undefined,
   } = props
@@ -88,6 +90,30 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     dom.setAttribute("role", "textbox")
     dom.setAttribute("aria-multiline", "true")
   }, [advancedEditor, fieldId, labelElementId])
+
+  useEffect(() => {
+    if (!markdownSupport) return
+
+    const editorElement = advancedEditor?.view?.dom
+    if (!editorElement) return
+
+    const handleMarkdownSupport = async (event: ClipboardEvent) => {
+      const text = event.clipboardData?.getData("text/plain")
+      const markdownPattern = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\[[^\]]+\]\([^)]+\)/m
+      if (!text || !markdownPattern.test(text)) return
+
+      event.preventDefault()
+      const { markdownToHTML } = await import('./TipTap/markdownPaste')
+      const html = markdownToHTML(text)
+      if (!html) return
+
+      advancedEditor.chain().focus().insertContent(html).run()
+    }
+
+      editorElement.addEventListener("paste", handleMarkdownSupport, true)
+
+    return () => editorElement.removeEventListener("paste", handleMarkdownSupport, true)
+  }, [advancedEditor, markdownSupport])
 
   //===========focus prop with advanced editor=================
   const isClickInPopover = (event: Event): boolean => {

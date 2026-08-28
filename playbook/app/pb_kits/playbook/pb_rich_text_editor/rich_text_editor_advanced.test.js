@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "../utilities/test-utils";
+import { fireEvent, render, waitFor } from "../utilities/test-utils";
 import { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -7,6 +7,7 @@ import Link from "@tiptap/extension-link";
 
 import RichTextEditor from "./_rich_text_editor";
 import { normalizeListSelection } from "./TipTap/listSelection";
+import { markdownToHTML } from "./TipTap/markdownPaste";
 
 const kitClass = "pb_rich_text_editor_advanced_container";
 
@@ -106,5 +107,55 @@ describe("TipTap list selection", () => {
     );
 
     editor.destroy();
+  });
+});
+
+describe("TipTap Markdown paste", () => {
+  const createClipboardData = (text) => ({
+    files: [],
+    getData: (format) => format === "text/plain" ? text : "",
+    types: ["text/plain"],
+  });
+
+  test("converts common Markdown blocks and inline formatting to HTML", () => {
+    const markdown = [
+      "## How should it work?",
+      "",
+      "Keep **React** and [Rails](https://example.com) visible.",
+      "",
+      "- React Playground",
+      "- Rails Playground",
+    ].join("\n");
+
+    expect(markdownToHTML(markdown)).toBe(
+      '<h2>How should it work?</h2><p>Keep <strong>React</strong> and <a href="https://example.com">Rails</a> visible.</p><ul><li><p>React Playground</p></li><li><p>Rails Playground</p></li></ul>'
+    );
+  });
+
+  test("leaves ordinary plain text to TipTap's default paste handling", () => {
+    expect(markdownToHTML("Keep React and Rails visible.")).toBeNull();
+  });
+
+  test("is disabled by default", () => {
+    const addEventListener = jest.spyOn(HTMLElement.prototype, "addEventListener");
+
+    render(<EditorTest />);
+
+    const markdownListeners = addEventListener.mock.calls.filter(
+      ([eventName, handler, capture]) =>
+        eventName === "paste" && handler.name === "handleMarkdownPaste" && capture === true
+    );
+
+    expect(markdownListeners).toHaveLength(0);
+    addEventListener.mockRestore();
+  });
+
+  test("formats Markdown when markdownSupport is enabled", async () => {
+    const { container } = render(<EditorTest markdownSupport />);
+    const editorElement = container.querySelector(".ProseMirror");
+
+    fireEvent.paste(editorElement, { clipboardData: createClipboardData("**Markdown**") });
+
+    await waitFor(() => expect(editorElement.innerHTML).toContain("<strong>Markdown</strong>"));
   });
 });
