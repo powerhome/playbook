@@ -94,7 +94,7 @@ export const PlaygroundInspector = ({
       <Icon icon="circle-info" />
       </Tooltip>
       </Flex>
-      <Flex gap="xs">
+      <Flex gap="xs" width="100%">
         <Dropdown
             className={panelDropdownClassName("playground-panel", !!wrapTargetKitName)}
             clearable={false}
