@@ -148,6 +148,13 @@ describe("TipTap Markdown paste", () => {
     expect(markdownToHTML("Keep React and Rails visible.")).toBeNull();
   });
 
+  test.each(["*Italic*", "_Italic_"])(
+    "converts italic-only Markdown using %s delimiters",
+    (markdown) => {
+      expect(markdownToHTML(markdown)).toBe("<p><em>Italic</em></p>");
+    }
+  );
+
   test("is disabled by default", () => {
     const addEventListener = jest.spyOn(HTMLElement.prototype, "addEventListener");
 

@@ -1,7 +1,7 @@
 import { defaultMarkdownParser } from "prosemirror-markdown"
 import { DOMSerializer } from "prosemirror-model"
 
-const MARKDOWN_PATTERN = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\[[^\]]+\]\([^)]+\)/m
+const MARKDOWN_PATTERN = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\*[^*\n]+\*|_[^_\n]+_|\[[^\]]+\]\([^)]+\)/m
 const RICH_TEXT_SELECTOR = "h1, h2, h3, h4, h5, h6, strong, b, em, i, a, ul, ol, li, blockquote"
 
 const hasRichTextFormatting = (html: string): boolean => {
