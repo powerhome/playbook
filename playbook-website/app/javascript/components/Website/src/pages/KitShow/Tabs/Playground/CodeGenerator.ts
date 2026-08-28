@@ -178,7 +178,6 @@ const formatPropValue = (
   if (rawExpression) {
     return `${name}={${rawExpression}}`;
   }
-  const looksLikeFunction = typeof value === "string" && (value.includes("=>") || value.trim().startsWith("function"));
 
   // Handle arrays first (e.g., string[] or string | string[])
   if (Array.isArray(value)) {
@@ -241,7 +240,7 @@ const formatPropValue = (
     return `${name}={${value}}`;
   }
 
-  if (propType === "function" || propType.includes("=>") || looksLikeFunction) {
+  if (propType === "function" || propType.includes("=>")) {
     if (typeof value === "string" && value.trim()) {
       return `${name}={${value}}`;
     }
@@ -250,7 +249,7 @@ const formatPropValue = (
 
   if (propType === "string" || propType.includes("string")) {
     if (typeof value === "string" && value.trim()) {
-      return `${name}="${value}"`;
+      return `${name}={${JSON.stringify(value)}}`;
     }
     return null;
   }
@@ -261,14 +260,14 @@ const formatPropValue = (
 
   if (propType === "reactnode" || propType.includes("reactnode") || propType.includes("node")) {
     if (typeof value === "string" && value.trim()) {
-      return `${name}={<>${value}</>}`;
+      return `${name}={${JSON.stringify(value)}}`;
     }
     return null;
   }
 
   if (propType === "enum" || definition.values?.length) {
     if (typeof value === "string" && value.trim()) {
-      return `${name}="${value}"`;
+      return `${name}={${JSON.stringify(value)}}`;
     }
     return null;
   }
@@ -281,7 +280,7 @@ const formatPropValue = (
   }
 
   if (typeof value === "string") {
-    return `${name}="${value}"`;
+    return `${name}={${JSON.stringify(value)}}`;
   }
 
   if (

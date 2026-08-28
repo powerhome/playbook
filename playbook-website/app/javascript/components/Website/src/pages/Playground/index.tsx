@@ -307,6 +307,18 @@ export default function Playground() {
       // import overwrites it — otherwise it's gone the moment autosave's
       // 400ms debounce fires, with no way back.
       savePlaygroundSnapshot();
+
+      // Persist the imported state synchronously, not via the debounced
+      // autosave effect: the share param above is already gone, so a
+      // reload/close inside that 400ms window would otherwise restore the
+      // previous canvas with no param left to retry the import from.
+      savePersistedPlaygroundState({
+        addTargetId: ROOT_TARGET_ID,
+        buildingBlockId: null,
+        instances: result.instances,
+        selectedId: null,
+      });
+
       setInstances(result.instances);
       setSelectedId(null);
       setAddTargetId(ROOT_TARGET_ID);
