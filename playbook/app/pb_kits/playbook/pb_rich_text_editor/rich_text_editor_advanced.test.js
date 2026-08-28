@@ -187,6 +187,19 @@ describe("TipTap Markdown paste", () => {
     expect(insertHTML).toHaveBeenCalledWith("<p><strong>Markdown</strong></p>");
   });
 
+  test("converts manually copied Markdown wrapped in clipboard HTML", () => {
+    const pasteEvent = createPasteEvent(
+      "**Markdown**",
+      "<pre><code>**Markdown**</code></pre>"
+    );
+    const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
+    const insertHTML = jest.fn();
+
+    expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(true);
+    expect(stopImmediatePropagation).toHaveBeenCalled();
+    expect(insertHTML).toHaveBeenCalledWith("<p><strong>Markdown</strong></p>");
+  });
+
   test("leaves rich HTML paste handling to TipTap", async () => {
     const { container } = render(<EditorTest markdownSupport />);
     const editorElement = container.querySelector(".ProseMirror");

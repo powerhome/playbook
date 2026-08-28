@@ -2,6 +2,15 @@ import { defaultMarkdownParser } from "prosemirror-markdown"
 import { DOMSerializer } from "prosemirror-model"
 
 const MARKDOWN_PATTERN = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\[[^\]]+\]\([^)]+\)/m
+const RICH_TEXT_SELECTOR = "h1, h2, h3, h4, h5, h6, strong, b, em, i, a, ul, ol, li, blockquote"
+
+const hasRichTextFormatting = (html: string): boolean => {
+  if (!html) return false
+
+  const container = document.createElement("div")
+  container.innerHTML = html
+  return !!container.querySelector(RICH_TEXT_SELECTOR)
+}
 
 const markdownToHTML = (text: string): string | null => {
   if (!MARKDOWN_PATTERN.test(text)) return null
@@ -23,7 +32,7 @@ const handleMarkdownPaste = (
 ): boolean => {
   const text = event.clipboardData?.getData("text/plain")
   const richHtml = event.clipboardData?.getData("text/html")
-  if (richHtml || !text || !MARKDOWN_PATTERN.test(text)) return false
+  if (hasRichTextFormatting(richHtml) || !text || !MARKDOWN_PATTERN.test(text)) return false
 
   let html
   try {

@@ -40,6 +40,7 @@ async function initPlaybookRichTextEditorRails(container) {
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
     const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
     const markdownPattern = /(^|\n)\s{0,3}(#{1,6}\s|[-+*]\s|\d+[.)]\s|>\s|```)|\*\*[^*]+\*\*|__[^_]+__|\[[^\]]+\]\([^)]+\)/m;
+    const richTextSelector = "h1, h2, h3, h4, h5, h6, strong, b, em, i, a, ul, ol, li, blockquote";
     let markdownToHtml;
 
     if (markdownSupport) {
@@ -79,7 +80,10 @@ async function initPlaybookRichTextEditorRails(container) {
       editorNode.addEventListener("paste", (event) => {
         const text = event.clipboardData?.getData("text/plain");
         const richHtml = event.clipboardData?.getData("text/html");
-        if (richHtml || !text || !markdownPattern.test(text) || !markdownToHtml) return;
+        const richHtmlWrapper = document.createElement("div");
+        richHtmlWrapper.innerHTML = richHtml;
+        const hasRichTextFormatting = !!richHtmlWrapper.querySelector(richTextSelector);
+        if (hasRichTextFormatting || !text || !markdownPattern.test(text) || !markdownToHtml) return;
 
         let html;
         try {
