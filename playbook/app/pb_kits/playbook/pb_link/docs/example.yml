@@ -16,3 +16,4 @@ examples:
   - link_disabled: Disabled
   - link_tag: Tag
   - link_target: Target
+  - link_rel: Rel
