@@ -7,6 +7,15 @@
 <%= csrf_meta_tags%>
 <%= csp_meta_tag%>
 
+<%# LOCAL POC: bootstrap auth for SPA nav (Playground link) %>
+<script>
+  window.__PLAYBOOK_AUTH__ = <%= raw({
+    playgroundAccessible: playground_authenticated?,
+    loginPath: entrypoint_path(:user),
+    logoutPath: logout_path,
+  }.to_json) %>;
+</script>
+
 <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport" />
 
 <style>

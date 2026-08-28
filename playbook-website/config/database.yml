@@ -5,6 +5,7 @@ base: &base
   username: <%= ENV['DATABASE_USER'] || "root" %>
   password: <%= ENV['DATABASE_PASSWORD'] || "password" %>
   host: <%= ENV['DATABASE_HOST'] || "db" %>
+  port: <%= ENV['DATABASE_PORT'] || 3306 %>
   database: <%= ENV['DATABASE_NAME'] || "playbook_website" %>
   advisory_locks: <%= ENV['DATABASE_ADVISORY_LOCKS'] || false %>
 

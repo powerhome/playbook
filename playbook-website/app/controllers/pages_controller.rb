@@ -9,6 +9,9 @@ class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
   rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
+  # LOCAL POC: gate full Playground page + /playground.json (not kit Playground tabs)
+  before_action :require_playground_auth, if: :playground_request?
+
   def application
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
@@ -220,6 +223,7 @@ class PagesController < ApplicationController
         render json: {
           kits: @kits,
           dark: @dark,
+          playground_accessible: playground_authenticated?,
           type: @type,
           examples: examples,
           kit: @kit,
@@ -313,6 +317,26 @@ class PagesController < ApplicationController
   helper_method :get_source, :get_description
 
 private
+
+  def playground_request?
+    request.path.include?("playground")
+  end
+
+  def require_playground_auth
+    return if current_identity(scope: :user).present?
+
+    if request.format.json?
+      render json: {
+        error: "unauthorized",
+        login_url: entrypoint_path(:user),
+      }, status: :unauthorized
+      return
+    end
+
+    session[:scope] = "user"
+    session[:return_to] = request.fullpath
+    authenticate_user!(scope: :user)
+  end
 
   # will_paginate expects a numeric page; guide routes use params[:page] for the markdown slug.
   def will_paginate_page

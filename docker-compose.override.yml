@@ -1,0 +1,5 @@
+# Local dev: expose MySQL on localhost:3306 when running Rails via yarn start-dev (not inside Docker).
+services:
+  db:
+    ports:
+      - "3306:3306"

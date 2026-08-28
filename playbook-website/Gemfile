@@ -28,6 +28,11 @@ gem "will_paginate"
 gem "sentry-ruby"
 gem "sentry-rails"
 
+# LOCAL POC only — path assumes ~/Projects/nitro-id beside ~/Projects/playbook.
+# Do not merge to main until private-gem packaging is settled with SHIELD.
+gem "omniauth-nitro-id", "1.3.3"
+gem "cittadella", path: "../../nitro-id/cittadella"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]

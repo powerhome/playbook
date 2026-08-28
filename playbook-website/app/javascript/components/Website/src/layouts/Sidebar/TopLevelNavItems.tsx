@@ -6,6 +6,25 @@ import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 import { OtherNavItems } from "./NavComponents/OtherNavComponent";
 import { CollapsedHoverNav } from "./CollapsedHoverNav";
 
+declare global {
+  interface Window {
+    __PLAYBOOK_AUTH__?: {
+      playgroundAccessible?: boolean;
+      loginPath?: string;
+      logoutPath?: string;
+    };
+  }
+}
+
+// LOCAL POC: hide Playground nav unless Nitro ID session is present (server still enforces).
+const visibleSideBarNavItems = () => {
+  if (typeof window === "undefined") return SideBarNavItems;
+  if (window.__PLAYBOOK_AUTH__?.playgroundAccessible) return SideBarNavItems;
+  return SideBarNavItems.filter((item) => item.link !== "/playground");
+};
+
+const NAV_ITEMS = visibleSideBarNavItems();
+
 export const TopLevelNavItem = ({
   dark,
   type,
@@ -23,7 +42,7 @@ export const TopLevelNavItem = ({
   const location = useLocation();
   const currentURL = location.pathname + location.search;
   //hook into collapsible logic for top level item
-  const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
+  const topLevelCollapsibles = NAV_ITEMS.map(() => useCollapsible());
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const itemElsRef = useRef<Record<string, HTMLElement | null>>({});
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -75,7 +94,7 @@ export const TopLevelNavItem = ({
 
   //set up toggling for top level item
   const handleComponentsClick = (item, index) => {
-    const linkPath = TopLevelLink(SideBarNavItems[index].link);
+    const linkPath = TopLevelLink(NAV_ITEMS[index].link);
     if (linkPath && navigate) {
       navigate(linkPath);
     }
@@ -265,8 +284,8 @@ export const TopLevelNavItem = ({
     );
   };
 
-  const hoveredItem = SideBarNavItems.find((item) => item.key === hoveredKey);
-  const hoveredIndex = SideBarNavItems.findIndex((item) => item.key === hoveredKey);
+  const hoveredItem = NAV_ITEMS.find((item) => item.key === hoveredKey);
+  const hoveredIndex = NAV_ITEMS.findIndex((item) => item.key === hoveredKey);
 
   const updateTopLevelNavFromHover = (index: number) => {
     topLevelCollapsibles.forEach((collapsible, i) => {
@@ -282,7 +301,7 @@ export const TopLevelNavItem = ({
 
   return (
     <>
-      {SideBarNavItems.map(({ name, key, children, leftIcon, link }, i) => {
+      {NAV_ITEMS.map(({ name, key, children, leftIcon, link }, i) => {
         return renderTopItems(name, key, children, leftIcon, link, i);
       })}
       {sidebarCollapsed && hoveredItem && hoveredKey && (

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # LOCAL POC: Nitro ID / Cittadella (login, callback, logout)
+  mount Cittadella::Engine, at: "/"
+
   root to: "pages#application"
 
   # Legacy /beta/* redirects (301)
