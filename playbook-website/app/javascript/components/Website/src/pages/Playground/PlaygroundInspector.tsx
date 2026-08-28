@@ -41,6 +41,7 @@ type PlaygroundInspectorProps = {
   onRemoveSelected: () => void;
   onSelectedInstanceChange: (id: string | null) => void;
   onStructureModeChange: (value: string | null) => void;
+  onUnwrap: () => void;
   onWrap: (wrapperKitName: string) => void;
 };
 
@@ -71,6 +72,7 @@ export const PlaygroundInspector = ({
   onRemoveSelected,
   onSelectedInstanceChange,
   onStructureModeChange,
+  onUnwrap,
   onWrap,
 }: PlaygroundInspectorProps) => {
   const [wrapTargetKitName, setWrapTargetKitName] = useState<string | null>(null);
@@ -227,6 +229,17 @@ export const PlaygroundInspector = ({
                       onClick={onAddInsideSelected}
                       size="sm"
                       text="Add Kits inside Selected Kit"
+                      variant="secondary"
+                  />
+                )}
+
+                {selectedInstance.children.length > 0 && (
+                  <Button
+                      fullWidth
+                      icon="box-open"
+                      onClick={onUnwrap}
+                      size="sm"
+                      text="Unwrap (Keep Kits inside Selected Kit)"
                       variant="secondary"
                   />
                 )}

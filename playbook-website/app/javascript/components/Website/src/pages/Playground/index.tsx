@@ -31,6 +31,7 @@ import {
   moveInstanceInTree,
   moveInstanceToTarget,
   removeInstanceFromTree,
+  unwrapInstanceInTree,
   updateInstanceInTree,
   wrapInstancesInTree,
 } from "./treeUtils";
@@ -577,6 +578,18 @@ export default function Playground() {
     if (addTargetId === selectedInstance.id) setAddTargetId(ROOT_TARGET_ID);
   };
 
+  const unwrapSelected = () => {
+    if (!selectedInstance) return;
+
+    const result = unwrapInstanceInTree(instances, selectedInstance.id);
+    if (!result.unwrapped) return;
+
+    savePlaygroundSnapshot();
+    setInstances(result.instances);
+    setSelectedId(selectedInstance.children[0]?.id ?? null);
+    if (addTargetId === selectedInstance.id) setAddTargetId(ROOT_TARGET_ID);
+  };
+
   const moveSelected = (direction: -1 | 1) => {
     if (!selectedInstance) return;
     savePlaygroundSnapshot();
@@ -930,6 +943,7 @@ export default function Playground() {
             onRemoveSelected={removeSelected}
             onSelectedInstanceChange={handleSelectedInstanceChange}
             onStructureModeChange={handleStructureModeChange}
+            onUnwrap={unwrapSelected}
             onWrap={handleWrapSelection}
             selectedDataPresetOptionsCount={selectedDataPresetOptions.length}
             selectedId={selectedId}

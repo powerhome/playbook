@@ -180,6 +180,40 @@ export const wrapInstancesInTree = (
   return { instances: nextInstances, wrapped };
 };
 
+// The inverse of wrapInstancesInTree: dissolves the target instance,
+// promoting its own children into its place among its former siblings.
+export const unwrapInstanceInTree = (
+  instances: BuilderInstance[],
+  id: string
+): { instances: BuilderInstance[]; unwrapped: boolean } => {
+  const index = instances.findIndex((instance) => instance.id === id);
+
+  if (index >= 0) {
+    const target = instances[index];
+    return {
+      instances: [
+        ...instances.slice(0, index),
+        ...target.children,
+        ...instances.slice(index + 1),
+      ],
+      unwrapped: true,
+    };
+  }
+
+  let unwrapped = false;
+  const nextInstances = instances.map((instance) => {
+    if (unwrapped) return instance;
+
+    const childResult = unwrapInstanceInTree(instance.children, id);
+    if (!childResult.unwrapped) return instance;
+
+    unwrapped = true;
+    return { ...instance, children: childResult.instances };
+  });
+
+  return { instances: nextInstances, unwrapped };
+};
+
 export const buildTargetOptions = (
   instances: BuilderInstance[],
   kitsByName: Record<string, PlaygroundKit>,
