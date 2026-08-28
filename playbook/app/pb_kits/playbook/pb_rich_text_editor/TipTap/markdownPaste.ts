@@ -7,9 +7,8 @@ const RICH_TEXT_SELECTOR = "h1, h2, h3, h4, h5, h6, strong, b, em, i, a, ul, ol,
 const hasRichTextFormatting = (html: string): boolean => {
   if (!html) return false
 
-  const container = document.createElement("div")
-  container.innerHTML = html
-  return !!container.querySelector(RICH_TEXT_SELECTOR)
+  const clipboardDocument = new DOMParser().parseFromString(html, "text/html")
+  return !!clipboardDocument.querySelector(RICH_TEXT_SELECTOR)
 }
 
 const markdownToHTML = (text: string): string | null => {

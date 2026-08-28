@@ -80,9 +80,8 @@ async function initPlaybookRichTextEditorRails(container) {
       editorNode.addEventListener("paste", (event) => {
         const text = event.clipboardData?.getData("text/plain");
         const richHtml = event.clipboardData?.getData("text/html");
-        const richHtmlWrapper = document.createElement("div");
-        richHtmlWrapper.innerHTML = richHtml;
-        const hasRichTextFormatting = !!richHtmlWrapper.querySelector(richTextSelector);
+        const clipboardDocument = new DOMParser().parseFromString(richHtml || "", "text/html");
+        const hasRichTextFormatting = !!clipboardDocument.querySelector(richTextSelector);
         if (hasRichTextFormatting || !text || !markdownPattern.test(text) || !markdownToHtml) return;
 
         let html;
