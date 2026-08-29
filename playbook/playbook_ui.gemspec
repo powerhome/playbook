@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Playbook Design System"
   s.description = "Playbook UI is built out in Ruby View Components and React Components. Playbook takes a modern design approach and applies it in a way that makes it easy to support bleeding edge or legacy systems."
   s.license     = "ISC"
-  s.metadata = {
+  s.metadata    = {
     "source_code_uri" => "https://github.com/powerhome/playbook",
     "changelog_uri" => "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md",
     "bug_tracker_uri" => "https://github.com/powerhome/playbook/issues",
