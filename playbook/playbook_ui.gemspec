@@ -13,10 +13,6 @@ Gem::Specification.new do |s|
   s.summary     = "Playbook Design System"
   s.description = "Playbook UI is built out in Ruby View Components and React Components. Playbook takes a modern design approach and applies it in a way that makes it easy to support bleeding edge or legacy systems."
   s.license     = "ISC"
-
-  # Published gems do not carry the changelog, so tooling that wants release notes
-  # has to be pointed at the repository. changelog_uri names the file directly
-  # because it lives under playbook/, not at the repository root.
   s.metadata = {
     "source_code_uri" => "https://github.com/powerhome/playbook",
     "changelog_uri" => "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md",
