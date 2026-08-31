@@ -39,6 +39,9 @@ examples:
   - dropdown_disabled: Disabled Input
   - dropdown_grouped_options: Grouped Options
   - dropdown_custom_event_type: Custom Event Type
+  - dropdown_dynamic_options: Dynamic Options
+  - dropdown_dynamic_options_with_autocomplete: Dynamic Options with Autocomplete
+  - dropdown_dynamic_options_with_multi_select: Dynamic Options with Multi Select
 
   react:
   - dropdown_default: Default
@@ -81,3 +84,6 @@ examples:
   - dropdown_required_indicator: Required Indicator
   - dropdown_disabled: Disabled Input
   - dropdown_grouped_options: Grouped Options
+  - dropdown_react_hook: React Hook
+  - dropdown_multi_select_react_hook: React Hook Multi Select
+
