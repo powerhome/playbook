@@ -33,7 +33,7 @@ export const buildPromptPlanFromRecipes = (
     instances = buildProfilePlan(prompt);
   } else if (promptIncludesAny(prompt, ["table", "records", "data grid"])) {
     instances = buildTablePlan(prompt);
-  } else if (promptIncludesAny(prompt, ["form", "fields", "input"])) {
+  } else if (promptIncludesAny(prompt, ["form", "fields", "input", "crud"])) {
     instances = buildFormPlan(prompt);
   } else {
     instances = buildDirectKitRecipeItems(prompt, kitsByName);
