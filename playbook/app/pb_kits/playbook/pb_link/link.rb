@@ -11,6 +11,7 @@ module Playbook
       prop :href
       prop :icon
       prop :icon_right
+      prop :rel
       prop :tabindex
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[a h1 h2 h3 h4 h5 h6 p span div],
@@ -30,6 +31,12 @@ module Playbook
 
       def target_attribute
         target if target && href
+      end
+
+      def rel_attribute
+        return rel unless rel.nil?
+
+        target == "child" ? nil : "noreferrer"
       end
 
     private
