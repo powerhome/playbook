@@ -80,9 +80,9 @@ type DocCodeSnippetProps = {
   language: SyntaxLanguage;
 };
 
-const DocCodeSnippet = ({ code, label, language }: DocCodeSnippetProps) => (
+const DocCodeSnippet = ({ code, language }: DocCodeSnippetProps) => (
   <Card borderNone borderRadius="md" padding="none" width="100%">
-    <Caption color="lighter" paddingBottom="xs" text={label} />
+    <Caption color="lighter" paddingBottom="xs" />
     <SyntaxHighlightedCode code={code} language={language} />
   </Card>
 );
@@ -188,7 +188,7 @@ const IconsIndex = ({
                         <Body text="{icon-name} is the kebab-case name printed under each Icon in the Cards below (e.g. the asterisk Icon maps to pb-icon-asterisk). Click on any Icon to copy its name." />
                         <Body text="Icons are decorative by default, so mark the element aria-hidden='true' unless it's conveying meaning with no adjacent text as a label." />
                         <DocCodeSnippet
-                          code={`<span className="pb-icon-asterisk" aria-hidden="true"></span>`}
+                          code={`<span class="pb-icon-asterisk" aria-hidden="true"></span>`}
                           language="html"
                         />
                       </Flex>
@@ -196,7 +196,7 @@ const IconsIndex = ({
                         <Title size={4} text="Controlling Size" />
                         <Body text="Size is set with the --pb-icon-size custom property and not a font-size or size attribute. It needs to be set inline or in a stylesheet rule targeting the class." />
                         <DocCodeSnippet
-                          code={`<span className="pb-icon-asterisk" style="--pb-icon-size: 1em" aria-hidden="true"></span>`}
+                          code={`<span class="pb-icon-asterisk" style="--pb-icon-size: 1em" aria-hidden="true"></span>`}
                           language="html"
                         />
                         <Body text="For Playbook and matching the Icon component sizes, following this mapping: xs=0.75em, sm=0.875em, 1x=1em (default), lg=1.33em, 2x=2em, 3x=3em, 4x=4em, 5x=5em" />
@@ -205,7 +205,7 @@ const IconsIndex = ({
                         <Title size={4} text="Controlling Color" />
                         <Body text="Icons render in currentColor, so set color on the element the same way you would for other text." />
                         <DocCodeSnippet
-                          code={`<span className="pb-icon-asterisk" style="color: blue;" aria-hidden="true"></span>`}
+                          code={`<span class="pb-icon-asterisk" style="color: blue;" aria-hidden="true"></span>`}
                           language="html"
                         />
                       </Flex>
@@ -213,7 +213,7 @@ const IconsIndex = ({
                         <Title size={4} text="Animating an Icon" />
                         <Body text="Animations can be added through utility classes." />
                         <DocCodeSnippet
-                          code={`<span className="pb-icon-asterisk" pb-icon-spin aria-hidden="true"></span>`}
+                          code={`<span class="pb-icon-asterisk pb-icon-spin" aria-hidden="true"></span>`}
                           language="html"
                         />
                       </Flex>
