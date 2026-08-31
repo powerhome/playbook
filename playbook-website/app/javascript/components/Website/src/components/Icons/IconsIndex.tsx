@@ -7,6 +7,9 @@ import {
   Body,
   Button,
   Caption,
+  Card,
+  Collapsible,
+  Container,
   Dropdown,
   EmptyState,
   Flex,
@@ -18,6 +21,11 @@ import {
 } from 'playbook-ui'
 
 import IconCard from './IconCard'
+
+import {
+  SyntaxHighlightedCode,
+  type SyntaxLanguage,
+} from "../SyntaxHighlightedCode";
 
 type IconCategory = {
   label: string,
@@ -66,6 +74,18 @@ const LazySection = ({ children, estimatedHeight = '200px' }: { children: React.
     </div>
   )
 }
+
+type DocCodeSnippetProps = {
+  code: string;
+  language: SyntaxLanguage;
+};
+
+const DocCodeSnippet = ({ code, language }: DocCodeSnippetProps) => (
+  <Card borderNone borderRadius="md" padding="none" width="100%">
+    <Caption color="lighter" paddingBottom="xs" />
+    <SyntaxHighlightedCode code={code} language={language} />
+  </Card>
+);
 
 const IconsIndex = ({
   bannerImageUrl,
@@ -155,7 +175,75 @@ const IconsIndex = ({
                   To use them in your project, check out our Icon kit.
                 </a>
               </div>
+              <Card padding="none" width="100%">
+                <Collapsible>
+                  <Collapsible.Main padding="none">
+                    <Caption text="Icon CSS API" />
+                  </Collapsible.Main>
+                  <Collapsible.Content padding="none">
+                    <Container>
+                      <Flex gap="xs" marginTop="xl" orientation="column">
+                        <Title size={4} text="Overview" />
+                        <Body text="Every icon on this page can also be rendered with a single CSS class without the need of importing the Icon component. It's as simple as adding the class to any element and the icon appears: pb-icon-{icon-name}." />
+                        <Body text="{icon-name} is the kebab-case name printed under each Icon in the Cards below (e.g. the asterisk Icon maps to pb-icon-asterisk). Click on any Icon to copy its name." />
+                        <Body text="Icons are decorative by default, so mark the element aria-hidden='true' unless it's conveying meaning with no adjacent text as a label." />
+                        <DocCodeSnippet
+                          code={`<span class="pb-icon-asterisk" aria-hidden="true"></span>`}
+                          language="html"
+                        />
+                      </Flex>
+                      <Flex gap="xs" marginTop="xl" orientation="column">
+                        <Title size={4} text="Controlling Size" />
+                        <Body text="Size is set with the --pb-icon-size custom property and not a font-size or size attribute. It needs to be set inline or in a stylesheet rule targeting the class." />
+                        <DocCodeSnippet
+                          code={`<span class="pb-icon-asterisk" style="--pb-icon-size: 1em" aria-hidden="true"></span>`}
+                          language="html"
+                        />
+                        <Body text="For Playbook and matching the Icon component sizes, following this mapping: xs=0.75em, sm=0.875em, 1x=1em (default), lg=1.33em, 2x=2em, 3x=3em, 4x=4em, 5x=5em" />
+                      </Flex>
+                      <Flex gap="xs" marginTop="xl" orientation="column">
+                        <Title size={4} text="Controlling Color" />
+                        <Body text="Icons render in currentColor, so set color on the element the same way you would for other text." />
+                        <DocCodeSnippet
+                          code={`<span class="pb-icon-asterisk" style="color: blue;" aria-hidden="true"></span>`}
+                          language="html"
+                        />
+                      </Flex>
+                      <Flex gap="xs" marginTop="xl" orientation="column">
+                        <Title size={4} text="Animating an Icon" />
+                        <Body text="Animations can be added through utility classes." />
+                        <DocCodeSnippet
+                          code={`<span class="pb-icon-asterisk pb-icon-spin" aria-hidden="true"></span>`}
+                          language="html"
+                        />
+                      </Flex>
+                      <Flex gap="xs" marginTop="xl" orientation="column">
+                        <Title size={4} text="Setup / Import" />
+                        <Body text="To use the Icon CSS classes, import the Playbook Icons stylesheet into your application. For JavaScript applications, you can import the stylesheet from your application entrypoint or a dedicated Playbook Icons entrypoint." />
+                        <DocCodeSnippet
+                          code={`import "@powerhome/playbook-icons/css/pb-icons.css"`}
+                          language="jsx"
+                        />
+                        <Body text="For a Rails engine, add the Playbook Icons CSS directory to the asset and Sass load paths in the engine initializer." />
+                        <DocCodeSnippet
+                          code={`initializer "nitro_theme.playbook_icons_assets" do |app|
+  playbook_icons_css = app.root.join(
+    "node_modules",
+    "@powerhome",
+    "playbook-icons",
+    "css"
+  )
 
+  app.config.assets.paths << playbook_icons_css
+  app.config.sass.load_paths << playbook_icons_css
+end`}
+                          language="ruby"
+                        />
+                      </Flex>
+                    </Container>
+                  </Collapsible.Content>
+                </Collapsible>
+              </Card>
               <div className="icons-index-toolbar">
                 <div className="icons-index-search">
                   <TextInput
