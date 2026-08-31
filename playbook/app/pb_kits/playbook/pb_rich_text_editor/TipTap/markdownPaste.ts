@@ -2,6 +2,7 @@ import { defaultMarkdownParser } from "prosemirror-markdown"
 import { DOMSerializer } from "prosemirror-model"
 
 const NEUTRAL_CLIPBOARD_TAGS = new Set(["html", "head", "body", "meta", "div", "span", "p"])
+const MARKDOWN_SOURCE_TAGS = new Set([...NEUTRAL_CLIPBOARD_TAGS, "pre", "code"])
 
 type MarkdownJSONNode = {
   content?: MarkdownJSONNode[],
@@ -9,15 +10,24 @@ type MarkdownJSONNode = {
   type: string,
 }
 
-const hasRichTextFormatting = (html: string): boolean => {
+const hasRichTextFormatting = (html: string, text: string): boolean => {
   if (!html) return false
 
   const clipboardDocument = new DOMParser().parseFromString(html, "text/html")
-  return [...clipboardDocument.querySelectorAll("*")].some(
-    (element) =>
-      !NEUTRAL_CLIPBOARD_TAGS.has(element.tagName.toLowerCase()) ||
-      element.hasAttribute("style")
+  const elements = [...clipboardDocument.querySelectorAll("*")]
+  const hasStyledElement = elements.some((element) => element.hasAttribute("style"))
+  if (hasStyledElement) return true
+
+  const hasOnlyNeutralTags = elements.every((element) =>
+    NEUTRAL_CLIPBOARD_TAGS.has(element.tagName.toLowerCase())
   )
+  if (hasOnlyNeutralTags) return false
+
+  const hasOnlyMarkdownSourceTags = elements.every((element) =>
+    MARKDOWN_SOURCE_TAGS.has(element.tagName.toLowerCase())
+  )
+  const sourceTextMatches = clipboardDocument.body.textContent?.trim() === text.trim()
+  return !(hasOnlyMarkdownSourceTags && sourceTextMatches)
 }
 
 const hasMarkdownFormatting = (node: MarkdownJSONNode): boolean => {
@@ -45,7 +55,7 @@ const handleMarkdownPaste = (
 ): boolean => {
   const text = event.clipboardData?.getData("text/plain")
   const richHtml = event.clipboardData?.getData("text/html")
-  if (hasRichTextFormatting(richHtml) || !text) return false
+  if (!text || hasRichTextFormatting(richHtml, text)) return false
 
   let html
   try {

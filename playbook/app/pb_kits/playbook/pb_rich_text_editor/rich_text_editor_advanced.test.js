@@ -226,6 +226,19 @@ describe("TipTap Markdown paste", () => {
     expect(insertHTML).toHaveBeenCalledWith("<p><strong>Markdown</strong></p>");
   });
 
+  test("converts a partial selection copied from a Markdown source block", () => {
+    const pasteEvent = createPasteEvent(
+      "*selected Markdown*",
+      "<pre><code>*selected Markdown*</code></pre>"
+    );
+    const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
+    const insertHTML = jest.fn();
+
+    expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(true);
+    expect(stopImmediatePropagation).toHaveBeenCalled();
+    expect(insertHTML).toHaveBeenCalledWith("<p><em>selected Markdown</em></p>");
+  });
+
   test("leaves spreadsheet HTML paste handling to TipTap", () => {
     const pasteEvent = createPasteEvent(
       "1. Q1",

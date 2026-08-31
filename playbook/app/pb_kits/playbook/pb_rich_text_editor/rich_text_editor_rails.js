@@ -40,6 +40,7 @@ async function initPlaybookRichTextEditorRails(container) {
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
     const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
     const neutralClipboardTags = new Set(["html", "head", "body", "meta", "div", "span", "p"]);
+    const markdownSourceTags = new Set([...neutralClipboardTags, "pre", "code"]);
     let markdownToHtml;
 
     if (markdownSupport) {
@@ -87,11 +88,17 @@ async function initPlaybookRichTextEditorRails(container) {
         const text = event.clipboardData?.getData("text/plain");
         const richHtml = event.clipboardData?.getData("text/html");
         const clipboardDocument = new DOMParser().parseFromString(richHtml || "", "text/html");
-        const hasRichTextFormatting = [...clipboardDocument.querySelectorAll("*")].some(
-          (element) =>
-            !neutralClipboardTags.has(element.tagName.toLowerCase()) ||
-            element.hasAttribute("style")
+        const elements = [...clipboardDocument.querySelectorAll("*")];
+        const hasStyledElement = elements.some((element) => element.hasAttribute("style"));
+        const hasOnlyNeutralTags = elements.every((element) =>
+          neutralClipboardTags.has(element.tagName.toLowerCase())
         );
+        const hasOnlyMarkdownSourceTags = elements.every((element) =>
+          markdownSourceTags.has(element.tagName.toLowerCase())
+        );
+        const sourceTextMatches = clipboardDocument.body.textContent?.trim() === text?.trim();
+        const hasRichTextFormatting = hasStyledElement ||
+          (!hasOnlyNeutralTags && !(hasOnlyMarkdownSourceTags && sourceTextMatches));
         if (hasRichTextFormatting || !text || !markdownToHtml) return;
 
         let html;
