@@ -182,7 +182,7 @@ const IconsIndex = ({
                   </Collapsible.Main>
                   <Collapsible.Content padding="none">
                     <Container>
-                      <Flex gap="xs" marginTop="md" orientation="column">
+                      <Flex gap="xs" marginTop="xl" orientation="column">
                         <Title size={4} text="Overview" />
                         <Body text="Every icon on this page can also be rendered with a single CSS class without the need of importing the Icon component. It's as simple as adding the class to any element and the icon appears: pb-icon-{icon-name}." />
                         <Body text="{icon-name} is the kebab-case name printed under each Icon in the Cards below (e.g. the asterisk Icon maps to pb-icon-asterisk). Click on any Icon to copy its name." />
@@ -192,7 +192,7 @@ const IconsIndex = ({
                           language="html"
                         />
                       </Flex>
-                      <Flex gap="xs" marginTop="md" orientation="column">
+                      <Flex gap="xs" marginTop="xl" orientation="column">
                         <Title size={4} text="Controlling Size" />
                         <Body text="Size is set with the --pb-icon-size custom property and not a font-size or size attribute. It needs to be set inline or in a stylesheet rule targeting the class." />
                         <DocCodeSnippet
@@ -201,7 +201,7 @@ const IconsIndex = ({
                         />
                         <Body text="For Playbook and matching the Icon component sizes, following this mapping: xs=0.75em, sm=0.875em, 1x=1em (default), lg=1.33em, 2x=2em, 3x=3em, 4x=4em, 5x=5em" />
                       </Flex>
-                      <Flex gap="xs" marginTop="md" orientation="column">
+                      <Flex gap="xs" marginTop="xl" orientation="column">
                         <Title size={4} text="Controlling Color" />
                         <Body text="Icons render in currentColor, so set color on the element the same way you would for other text." />
                         <DocCodeSnippet
@@ -209,7 +209,7 @@ const IconsIndex = ({
                           language="html"
                         />
                       </Flex>
-                      <Flex gap="xs" marginTop="md" orientation="column">
+                      <Flex gap="xs" marginTop="xl" orientation="column">
                         <Title size={4} text="Animating an Icon" />
                         <Body text="Animations can be added through utility classes." />
                         <DocCodeSnippet
@@ -217,7 +217,7 @@ const IconsIndex = ({
                           language="html"
                         />
                       </Flex>
-                      <Flex gap="xs" marginTop="md" orientation="column">
+                      <Flex gap="xs" marginTop="xl" orientation="column">
                         <Title size={4} text="Setup / Import" />
                         <Body text="To use the Icon CSS classes, import the Playbook Icons stylesheet into your application. For JavaScript applications, you can import the stylesheet from your application entrypoint or a dedicated Playbook Icons entrypoint." />
                         <DocCodeSnippet
