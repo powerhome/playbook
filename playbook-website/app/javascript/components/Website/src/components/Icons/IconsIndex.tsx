@@ -175,8 +175,8 @@ const IconsIndex = ({
                   To use them in your project, check out our Icon kit.
                 </a>
               </div>
-              <Card padding="none">
-                <Collapsible collapsed={false}>
+              <Card padding="none" width="100%">
+                <Collapsible>
                   <Collapsible.Main padding="none">
                     <Caption text="Icon CSS API" />
                   </Collapsible.Main>
@@ -184,7 +184,7 @@ const IconsIndex = ({
                     <Container>
                       <Flex gap="xs" marginTop="md" orientation="column">
                         <Title size={4} text="Overview" />
-                        <Body text="Every icon on this page can be rendered with a single CSS class without the need of importing the Icon component. It's as simple as adding the class to any element and the icon appears: pb-icon-{icon-name}." />
+                        <Body text="Every icon on this page can also be rendered with a single CSS class without the need of importing the Icon component. It's as simple as adding the class to any element and the icon appears: pb-icon-{icon-name}." />
                         <Body text="{icon-name} is the kebab-case name printed under each Icon in the Cards below (e.g. the asterisk Icon maps to pb-icon-asterisk). Click on any Icon to copy its name." />
                         <Body text="Icons are decorative by default, so mark the element aria-hidden='true' unless it's conveying meaning with no adjacent text as a label." />
                         <DocCodeSnippet
