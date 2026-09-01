@@ -1,5 +1,7 @@
-<%= pb_rails("flex", props: { gap: "md", wrap: false, margin_bottom: "md" }) do %>
-  <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+<% load Playbook.kit_path("form", "docs", "sample_data.rb").to_s %>
+
+<%= pb_rails("flex", props: PlaybookFormDocsSampleData.demo_panel_flex_props.merge(margin_bottom: "md")) do %>
+  <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
     <%= pb_rails("caption", props: { text: "Rails form_with", margin_bottom: "xs" }) %>
     <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
       <div class="pb--codeCopy pb--codeCopy_compact">
@@ -11,7 +13,7 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+  <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
     <%= pb_rails("caption", props: { text: "Playbook pb_form_with", margin_bottom: "xs" }) %>
     <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
       <div class="pb--codeCopy pb--codeCopy_compact">

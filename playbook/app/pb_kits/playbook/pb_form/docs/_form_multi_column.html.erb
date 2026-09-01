@@ -1,8 +1,11 @@
-<% demo_id = "multi_column" %>
+<%
+  load Playbook.kit_path("form", "docs", "sample_data.rb").to_s
+  demo_id = "multi_column"
+%>
 
 <div data-form-docs-demo="<%= demo_id %>">
-  <%= pb_rails("flex", props: { gap: "md", wrap: false, align: "stretch" }) do %>
-    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+  <%= pb_rails("flex", props: PlaybookFormDocsSampleData.demo_panel_flex_props) do %>
+    <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
       <%= pb_form_with(scope: :multi_column, url: "", method: :get, html: { onsubmit: "return false;" }) do |form| %>
         <%= pb_rails("flex", props: { gap: "sm", wrap: true }) do %>
           <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
@@ -36,7 +39,7 @@
     <% end %>
     <% end %>
 
-    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+    <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
       <%= pb_rails("caption", props: { text: "Submitted Form Data", margin_bottom: "xs" }) %>
       <%= pb_rails("card", props: { background: "light", padding: "md" }) do %>
         <div data-form-docs-empty>

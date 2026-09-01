@@ -89,6 +89,16 @@ module_function
 
   # Interactive demo snippets are authored at mixed indent levels. Inside the
   # assembled pb_form_with block, body lines should start with two spaces.
+  # Side-by-side demo panels on wide viewports; stacks on narrow when the row
+  # cannot fit two columns (fixed_size + wrap, not grow-only flex: "1").
+  def demo_panel_flex_props
+    { gap: "md", wrap: true, align: "stretch" }
+  end
+
+  def demo_panel_column_props
+    { grow: true, fixed_size: "280px", min_width: "0" }
+  end
+
   def form_body_snippet(text)
     text.lines.map do |line|
       body = line.chomp

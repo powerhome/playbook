@@ -35,8 +35,8 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("flex", props: { gap: "md", wrap: false, align: "stretch" }) do %>
-    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+  <%= pb_rails("flex", props: PlaybookFormDocsSampleData.demo_panel_flex_props) do %>
+    <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
       <%= pb_form_with(scope: :default_values, url: "", method: :get, html: { onsubmit: "return false;" }) do |form| %>
         <% input_types.each do |input_type| %>
           <div data-form-docs-panel="<%= input_type[:key] %>"
@@ -156,7 +156,7 @@
       <% end %>
     <% end %>
 
-    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
+    <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
       <%= pb_rails("caption", props: { text: "Submitted Form Data", margin_bottom: "xs" }) %>
       <%= pb_rails("card", props: { background: "light", padding: "md" }) do %>
         <div data-form-docs-empty>
