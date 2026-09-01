@@ -87,6 +87,18 @@ module_function
     ].join("\n")
   end
 
+  # Interactive demo snippets are authored at mixed indent levels. Inside the
+  # assembled pb_form_with block, body lines should start with two spaces.
+  def form_body_snippet(text)
+    text.lines.map do |line|
+      body = line.chomp
+      next "\n" if body.empty?
+      next "#{body}\n" if body.start_with?("  ")
+
+      "  #{body}\n"
+    end.join
+  end
+
   def input_types
     [
       { key: "checkbox", label: "Checkbox" },

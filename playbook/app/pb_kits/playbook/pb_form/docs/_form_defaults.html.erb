@@ -42,7 +42,9 @@
           <div data-form-docs-panel="<%= input_type[:key] %>"
                style="<%= input_type[:key] == default_key ? "" : "display: none;" %>">
             <div data-form-docs-snippet hidden><%= raw render_code(
-              File.read(Playbook.kit_path("form", "docs", "snippets", "defaults_#{input_type[:key]}.txt")),
+              PlaybookFormDocsSampleData.form_body_snippet(
+                File.read(Playbook.kit_path("form", "docs", "snippets", "defaults_#{input_type[:key]}.txt"))
+              ),
               "erb"
             ) %></div>
             <% case input_type[:key]

@@ -9,7 +9,13 @@ window.PbFormDocsDemo = window.PbFormDocsDemo || function (demoId) {
   var formOpenEl = root.querySelector("[data-form-docs-open]")
   var formCloseEl = root.querySelector("[data-form-docs-close]")
   var formOpenHtml = formOpenEl ? formOpenEl.innerHTML.trim() : ""
-  var formCloseHtml = formCloseEl ? formCloseEl.innerHTML.trim() : ""
+  var formCloseHtml = formCloseEl ? trimHighlightHtml(formCloseEl.innerHTML) : ""
+
+  function trimHighlightHtml(html) {
+    // Rouge keeps leading indent as literal spaces before the first span.
+    // String trim() would strip those; only drop trailing newlines.
+    return html.replace(/\n+$/g, "")
+  }
 
   function clearSubmittedData() {
     if (dataOutput) {
@@ -56,10 +62,10 @@ window.PbFormDocsDemo = window.PbFormDocsDemo || function (demoId) {
       var key = panel.getAttribute("data-form-docs-panel")
       if (!selected[key]) return
       var snippetEl = panel.querySelector("[data-form-docs-snippet]")
-      if (snippetEl) fieldSnippets.push(snippetEl.innerHTML.trim())
+      if (snippetEl) fieldSnippets.push(trimHighlightHtml(snippetEl.innerHTML))
     })
 
-    codeOutput.innerHTML = [formOpenHtml].concat(fieldSnippets).concat([formCloseHtml]).join("")
+    codeOutput.innerHTML = [formOpenHtml].concat(fieldSnippets).concat([formCloseHtml]).join("\n")
   }
 
   function syncSelection(keys) {
