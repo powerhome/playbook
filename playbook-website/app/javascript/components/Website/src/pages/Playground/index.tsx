@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { Flex } from "playbook-ui";
 
@@ -31,7 +31,9 @@ import {
   moveInstanceInTree,
   moveInstanceToTarget,
   removeInstanceFromTree,
+  unwrapInstanceInTree,
   updateInstanceInTree,
+  wrapInstancesInTree,
 } from "./treeUtils";
 import { type BuildingBlock } from "./buildingBlocks";
 import { PlaygroundBuildingBlocks } from "./PlaygroundBuildingBlocks";
@@ -40,6 +42,16 @@ import { PlaygroundHeader } from "./PlaygroundHeader";
 import { PlaygroundInspector } from "./PlaygroundInspector";
 import { PlaygroundPromptBuilder } from "./PlaygroundPromptBuilder";
 import { PlaygroundSidebar } from "./PlaygroundSidebar";
+import {
+  clearPersistedPlaygroundState,
+  loadPersistedPlaygroundState,
+  savePersistedPlaygroundState,
+} from "./playgroundStorage";
+import {
+  buildPlaygroundShareUrl,
+  clearPlaygroundShareParam,
+  readPlaygroundShareState,
+} from "./playgroundShareLink";
 import type {
   BuilderInstance,
   PlaygroundKit,
@@ -66,16 +78,39 @@ const cloneInstances = (items: BuilderInstance[]): BuilderInstance[] =>
     props: { ...instance.props },
   }));
 
+type ShareLoadStatus = "loaded" | "invalid" | null;
+
 export default function Playground() {
   const { global_props_schema, playground_kits = [] } =
     useLoaderData() as PlaygroundLoaderData;
-  const [instances, setInstances] = useState<BuilderInstance[]>([]);
+  const [persistedState] = useState(() =>
+    loadPersistedPlaygroundState(
+      new Set(
+        playground_kits
+          .filter((kit) => PLAYGROUND_ENABLED_KITS.includes(kit.name))
+          .map((kit) => kit.name),
+      ),
+    ),
+  );
+  const [shareStatus, setShareStatus] = useState<ShareLoadStatus>(null);
+  const [instances, setInstances] = useState<BuilderInstance[]>(
+    () => persistedState?.instances ?? [],
+  );
   const [activeBuildingBlockId, setActiveBuildingBlockId] = useState<
     string | null
-  >(null);
+  >(() => persistedState?.buildingBlockId ?? null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [addTargetId, setAddTargetId] = useState(ROOT_TARGET_ID);
+  const [selectedId, setSelectedId] = useState<string | null>(
+    () => persistedState?.selectedId ?? null,
+  );
+  // Ids picked up while isSelectMode is on, for wrapping several kits at
+  // once. Empty outside of that flow — selectedId drives everything else.
+  const [isSelectMode, setIsSelectMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [wrapDiagnostic, setWrapDiagnostic] = useState<string | null>(null);
+  const [addTargetId, setAddTargetId] = useState(
+    () => persistedState?.addTargetId ?? ROOT_TARGET_ID,
+  );
   const [dragOverTargetId, setDragOverTargetId] = useState<string | null>(null);
   const [draggedKitName, setDraggedKitName] = useState<string | null>(null);
   const [draggingInstanceId, setDraggingInstanceId] = useState<string | null>(null);
@@ -83,6 +118,7 @@ export default function Playground() {
   const [promptStatus, setPromptStatus] = useState<string | null>(null);
   const [promptDiagnostics, setPromptDiagnostics] = useState<string[]>([]);
   const [playgroundHistory, setPlaygroundHistory] = useState<PlaygroundSnapshot[]>([]);
+  const [playgroundFuture, setPlaygroundFuture] = useState<PlaygroundSnapshot[]>([]);
   const [isPromptMinimized, setIsPromptMinimized] = useState(true);
   const dragSourceElementRef = useRef<HTMLElement | null>(null);
   const dragOverTargetRef = useRef<string | null>(null);
@@ -123,6 +159,27 @@ export default function Playground() {
         formatKitName(a.name).localeCompare(formatKitName(b.name)),
       );
   }, [enabledPlaygroundKits, searchQuery]);
+
+  const wrappableKitOptions = useMemo(
+    () =>
+      enabledPlaygroundKits
+        .filter((kit) => acceptsChildren(kit))
+        .map((kit) => ({
+          id: kit.name,
+          label: formatKitName(kit.name),
+          value: kit.name,
+        }))
+        .sort((a, b) => a.label.localeCompare(b.label)),
+    [enabledPlaygroundKits],
+  );
+
+  // While select mode is on, highlighting reflects only the multi-selection
+  // (which can legitimately be empty after toggling everything off) —
+  // falling back to selectedId would show a stale, unrelated highlight.
+  const effectiveSelectedIds = useMemo(
+    () => (isSelectMode ? selectedIds : selectedId ? [selectedId] : []),
+    [isSelectMode, selectedId, selectedIds],
+  );
 
   const selectedInstance = findInstance(instances, selectedId);
   const selectedKit = selectedInstance
@@ -208,17 +265,86 @@ export default function Playground() {
   );
   const instanceCount = useMemo(() => countInstances(instances), [instances]);
 
-  const savePlaygroundSnapshot = () => {
-    const snapshot = {
-      addTargetId,
-      buildingBlockId: activeBuildingBlockId,
-      instances: cloneInstances(instances),
-      selectedId,
-    };
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      savePersistedPlaygroundState({
+        addTargetId,
+        buildingBlockId: activeBuildingBlockId,
+        instances,
+        selectedId,
+      });
+    }, 400);
 
+    return () => window.clearTimeout(timeoutId);
+  }, [addTargetId, activeBuildingBlockId, instances, selectedId]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      const validKitNames = new Set(Object.keys(kitsByName));
+      const result = await readPlaygroundShareState(
+        validKitNames,
+        kitsByName,
+        global_props_schema?.props,
+      );
+      if (cancelled || result.status === "none") return;
+
+      if (result.status === "invalid") {
+        // Leave the param in place: stripping it here would make the error
+        // unrecoverable on refresh and the broken link impossible to retry
+        // or hand to someone else to debug.
+        setShareStatus("invalid");
+        return;
+      }
+
+      // A share link was successfully consumed — strip the param so
+      // reloading or editing afterward doesn't keep re-importing it.
+      clearPlaygroundShareParam();
+
+      // Preserve whatever was already on the canvas (e.g. restored from
+      // localStorage on this same mount) as an undo point before a share
+      // import overwrites it — otherwise it's gone the moment autosave's
+      // 400ms debounce fires, with no way back.
+      savePlaygroundSnapshot();
+
+      // Persist the imported state synchronously, not via the debounced
+      // autosave effect: the share param above is already gone, so a
+      // reload/close inside that 400ms window would otherwise restore the
+      // previous canvas with no param left to retry the import from.
+      savePersistedPlaygroundState({
+        addTargetId: ROOT_TARGET_ID,
+        buildingBlockId: null,
+        instances: result.instances,
+        selectedId: null,
+      });
+
+      setInstances(result.instances);
+      setSelectedId(null);
+      setAddTargetId(ROOT_TARGET_ID);
+      setActiveBuildingBlockId(null);
+      setShareStatus("loaded");
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+    // Only consume a share link once, on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const buildPlaygroundSnapshot = (): PlaygroundSnapshot => ({
+    addTargetId,
+    buildingBlockId: activeBuildingBlockId,
+    instances: cloneInstances(instances),
+    selectedId,
+  });
+
+  const savePlaygroundSnapshot = () => {
     setPlaygroundHistory((current) =>
-      [...current, snapshot].slice(-MAX_PLAYGROUND_HISTORY),
+      [...current, buildPlaygroundSnapshot()].slice(-MAX_PLAYGROUND_HISTORY),
     );
+    setPlaygroundFuture([]);
   };
 
   const updateInstance = (
@@ -228,14 +354,61 @@ export default function Playground() {
     setInstances((current) => updateInstanceInTree(current, id, updater));
   };
 
-  const handleSelectInstance = (id: string) => {
+  const handleSelectInstance = (id: string, multi = false) => {
+    if (multi) {
+      setSelectedIds((current) =>
+        current.includes(id)
+          ? current.filter((existingId) => existingId !== id)
+          : [...current, id],
+      );
+      return;
+    }
+
     const instance = findInstance(instances, id);
     const kit = instance ? kitsByName[instance.kitName] : undefined;
 
+    setSelectedIds([]);
     setSelectedId(id);
     if (acceptsChildren(kit)) {
       setAddTargetId(id);
     }
+  };
+
+  const handleToggleSelectMode = (nextIsSelectMode: boolean) => {
+    setIsSelectMode(nextIsSelectMode);
+    setSelectedIds(nextIsSelectMode && selectedId ? [selectedId] : []);
+    setWrapDiagnostic(null);
+  };
+
+  const handleClearMultiSelect = () => {
+    setSelectedIds([]);
+    setWrapDiagnostic(null);
+  };
+
+  const handleWrapSelection = (wrapperKitName: string) => {
+    const wrapperKit = kitsByName[wrapperKitName];
+    if (!wrapperKit || !acceptsChildren(wrapperKit)) return;
+
+    const targetIds = selectedIds.length > 0 ? selectedIds : selectedId ? [selectedId] : [];
+    if (targetIds.length === 0) return;
+
+    const wrapperInstance = createInstance(wrapperKit, global_props_schema?.props);
+    const result = wrapInstancesInTree(instances, targetIds, wrapperInstance);
+
+    if (!result.wrapped) {
+      setWrapDiagnostic(
+        "Selected kits must be next to each other (same parent, no gaps) to wrap them together.",
+      );
+      return;
+    }
+
+    savePlaygroundSnapshot();
+    setActiveBuildingBlockId(null);
+    setInstances(result.instances);
+    setSelectedIds([]);
+    setSelectedId(wrapperInstance.id);
+    setAddTargetId(wrapperInstance.id);
+    setWrapDiagnostic(null);
   };
 
   const addKit = (kit: PlaygroundKit, targetId = activeAddTargetId) => {
@@ -417,6 +590,18 @@ export default function Playground() {
     if (addTargetId === selectedInstance.id) setAddTargetId(ROOT_TARGET_ID);
   };
 
+  const unwrapSelected = () => {
+    if (!selectedInstance) return;
+
+    const result = unwrapInstanceInTree(instances, selectedInstance.id);
+    if (!result.unwrapped) return;
+
+    savePlaygroundSnapshot();
+    setInstances(result.instances);
+    setSelectedId(selectedInstance.children[0]?.id ?? null);
+    if (addTargetId === selectedInstance.id) setAddTargetId(ROOT_TARGET_ID);
+  };
+
   const moveSelected = (direction: -1 | 1) => {
     if (!selectedInstance) return;
     savePlaygroundSnapshot();
@@ -541,6 +726,9 @@ export default function Playground() {
     if (!previous) return;
 
     setPlaygroundHistory((current) => current.slice(0, -1));
+    setPlaygroundFuture((current) =>
+      [...current, buildPlaygroundSnapshot()].slice(-MAX_PLAYGROUND_HISTORY),
+    );
     setInstances(cloneInstances(previous.instances));
     setSelectedId(previous.selectedId);
     setAddTargetId(previous.addTargetId);
@@ -550,6 +738,21 @@ export default function Playground() {
       setPromptStatus("Restored previous playground state.");
       setIsPromptMinimized(false);
     }
+  };
+
+  const handleRedoPlaygroundState = () => {
+    const next = playgroundFuture[playgroundFuture.length - 1];
+    if (!next) return;
+
+    setPlaygroundFuture((current) => current.slice(0, -1));
+    setPlaygroundHistory((current) =>
+      [...current, buildPlaygroundSnapshot()].slice(-MAX_PLAYGROUND_HISTORY),
+    );
+    setInstances(cloneInstances(next.instances));
+    setSelectedId(next.selectedId);
+    setAddTargetId(next.addTargetId);
+    setActiveBuildingBlockId(next.buildingBlockId);
+    setPromptDiagnostics([]);
   };
 
   const handleClearPromptBuilder = () => {
@@ -562,8 +765,12 @@ export default function Playground() {
     setInstances([]);
     setActiveBuildingBlockId(null);
     setSelectedId(null);
+    setSelectedIds([]);
+    setWrapDiagnostic(null);
     setAddTargetId(ROOT_TARGET_ID);
     setPlaygroundHistory([]);
+    setPlaygroundFuture([]);
+    clearPersistedPlaygroundState();
     handleClearPromptBuilder();
   };
 
@@ -666,10 +873,15 @@ export default function Playground() {
         width="100%"
     >
       <PlaygroundHeader
+          canRedo={playgroundFuture.length > 0}
           canRestorePreviousState={playgroundHistory.length > 0}
+          disableShare={instanceCount === 0}
           kitCount={enabledPlaygroundKits.length}
           onClear={handleClearAll}
+          onRedo={handleRedoPlaygroundState}
           onRestorePreviousState={() => handleRestorePreviousPlaygroundState()}
+          onShare={() => buildPlaygroundShareUrl(instances)}
+          shareStatus={shareStatus}
       />
 
       <PlaygroundBuildingBlocks
@@ -701,8 +913,12 @@ export default function Playground() {
             globalProps={global_props_schema?.props}
             instanceCount={instanceCount}
             instances={instances}
+            isSelectMode={isSelectMode}
             kitsByName={kitsByName}
-            onCanvasClick={() => setSelectedId(null)}
+            onCanvasClick={() => {
+            setSelectedId(null);
+            setSelectedIds([]);
+          }}
             onCanvasDragLeave={handleCanvasDragLeave}
             onCanvasDragOver={handleCanvasDragOver}
             onCanvasDrop={handleCanvasDrop}
@@ -715,7 +931,8 @@ export default function Playground() {
             onLeaveDragTarget={handleLeaveDragTarget}
             onMoveInstance={handleMoveInstance}
             onSelect={handleSelectInstance}
-            selectedId={selectedId}
+            onToggleSelectMode={handleToggleSelectMode}
+            selectedIds={effectiveSelectedIds}
         />
 
         <PlaygroundInspector
@@ -725,16 +942,21 @@ export default function Playground() {
             builderPropsPanel={builderPropsPanel}
             dataPresetDropdownOptions={dataPresetDropdownOptions}
             instanceOptionsCount={instanceOptions.length}
+            isSelectMode={isSelectMode}
+            multiSelectedCount={selectedIds.length}
             onAddInsideSelected={() => {
             if (selectedInstance) setAddTargetId(selectedInstance.id);
           }}
             onChildrenChange={handleChildrenChange}
+            onClearMultiSelect={handleClearMultiSelect}
             onDataPresetChange={handleDataPresetChange}
             onMoveSelected={moveSelected}
             onPropChange={handlePropChange}
             onRemoveSelected={removeSelected}
             onSelectedInstanceChange={handleSelectedInstanceChange}
             onStructureModeChange={handleStructureModeChange}
+            onUnwrap={unwrapSelected}
+            onWrap={handleWrapSelection}
             selectedDataPresetOptionsCount={selectedDataPresetOptions.length}
             selectedId={selectedId}
             selectedInstance={selectedInstance}
@@ -742,6 +964,8 @@ export default function Playground() {
             selectedKit={selectedKit}
             selectedStructureModeOptionsCount={selectedStructureModeOptions.length}
             structureModeDropdownOptions={structureModeDropdownOptions}
+            wrapDiagnostic={wrapDiagnostic}
+            wrappableKitOptions={wrappableKitOptions}
         />
       </div>
       {/* <PlaygroundPromptBuilder

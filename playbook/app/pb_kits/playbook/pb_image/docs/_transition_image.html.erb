@@ -42,9 +42,10 @@
         const updateTransition = (transition) => {
           const imageTransition = document.querySelector('.transition-image')
             imageTransition.removeAttribute("style")
-            imageTransition.classList.remove("fade", "blur", "scale", "lazyloaded")
-            imageTransition.classList.add(transition, "lazyload")
+            imageTransition.classList.remove("fade", "blur", "scale")
             imageTransition.src = "https://unsplash.it/500/400/?image=634"
+            void imageTransition.offsetWidth
+            imageTransition.classList.add(transition)
         }
       
         button.addEventListener('click', function() {

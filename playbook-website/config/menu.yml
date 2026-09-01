@@ -206,7 +206,7 @@ kits:
     react_rendered: false
     enhanced_element_used: false
   - name: pb_gauge_chart
-    platforms: web
+    platforms: *1
     description: Circular gauge chart for displaying a single value within a range.
     status: stable
     icons_used: false
@@ -221,14 +221,14 @@ kits:
     react_rendered: true
     enhanced_element_used: false
   - name: pb_circle_chart
-    platforms: web
+    platforms: *1
     description: Circular chart for displaying proportional data.
     status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: pb_line_graph
-    platforms: web
+    platforms: *1
     description: Line graph for displaying data trends over time.
     status: stable
     icons_used: false
@@ -468,8 +468,8 @@ kits:
     description: International phone number input with country code selection and formatting.
     status: stable
     icons_used: false
-    react_rendered: true
-    enhanced_element_used: false
+    react_rendered: false
+    enhanced_element_used: true
   - name: text_input
     platforms: *1
     description: Area where user can enter small amount of text. Commonly used in forms.
@@ -579,7 +579,7 @@ kits:
     react_rendered: false
     enhanced_element_used: false
   - name: time_picker
-    platforms: web
+    platforms: *1
     description: A time picker component that allows users to select a time independently of the date.
     status: stable
     icons_used: true
@@ -647,6 +647,13 @@ kits:
 - category: layout_and_structure
   description: Components for structuring and organizing page layouts and content containers.
   components:
+  - name: container
+    platforms: *1
+    description: The Container component is used as a wrapper for the content of a page or to any container.
+    status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: flex
     platforms: *1
     description: Flexbox layout helper for responsive rows, columns, spacing, and alignment in UIs.
@@ -756,14 +763,14 @@ kits:
     subcomponents:
       - Nav.Item
   - name: pagination
-    platforms: *4
+    platforms: *1
     description: Pagination for navigating through multiple pages of content.
     status: stable
 - category: state_and_progress_indicators
   description: Components for showing loading states, progress, and timelines.
   components:
   - name: empty_state
-    platforms: *2
+    platforms: *1
     description: Empty state placeholder for when no content is available.
     status: stable
     icons_used: false

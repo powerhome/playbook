@@ -162,6 +162,8 @@ export default class PbDropdown extends PbEnhancedElement {
     const baseInput = this.baseInput;
     this.wasOriginallyRequired =
       baseInput && baseInput.hasAttribute("required");
+    // Apply context options before default value so SSR/default selection matches current context
+    this.bindContextSelector();
     this.setDefaultValue();
     this.bindEventListeners();
     this.bindSearchInput();
@@ -184,11 +186,13 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updateClearButton();
     this.applyDisabledState();
 
-    // Listen for clear and select events from external source
+    // Listen for clear, select, and updateOptions events from external source
     this.handleClearEventBound = this.handleClearEvent.bind(this);
     document.addEventListener("pb:dropdown:clear", this.handleClearEventBound);
     this.handleSelectEventBound = this.handleSelectEvent.bind(this);
     document.addEventListener("pb:dropdown:select", this.handleSelectEventBound);
+    this.handleUpdateOptionsEventBound = this.handleUpdateOptionsEvent.bind(this);
+    document.addEventListener("pb:dropdown:updateOptions", this.handleUpdateOptionsEventBound);
 
     // Listen for custom_event_type to clear on custom events
     const customEventTypeString = this.element.dataset.customEventType;
@@ -200,6 +204,19 @@ export default class PbDropdown extends PbEnhancedElement {
       this.handleCustomClearBound = this.handleCustomClearEvent.bind(this);
       this.customClearEventTypes.forEach((eventType) => {
         document.addEventListener(eventType, this.handleCustomClearBound);
+      });
+    }
+
+    // Listen for options_event_type to replace options on custom/Turbo events
+    const optionsEventTypeString = this.element.dataset.optionsEventType;
+    if (optionsEventTypeString) {
+      this.optionsEventTypes = optionsEventTypeString
+        .split(",")
+        .map((e) => e.trim())
+        .filter(Boolean);
+      this.handleOptionsEventTypeBound = this.handleOptionsEventType.bind(this);
+      this.optionsEventTypes.forEach((eventType) => {
+        document.addEventListener(eventType, this.handleOptionsEventTypeBound);
       });
     }
   }
@@ -263,10 +280,21 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.handleSelectEventBound) {
       document.removeEventListener("pb:dropdown:select", this.handleSelectEventBound)
     }
+    if (this.handleUpdateOptionsEventBound) {
+      document.removeEventListener("pb:dropdown:updateOptions", this.handleUpdateOptionsEventBound)
+    }
     if (this.customClearEventTypes && this.handleCustomClearBound) {
       this.customClearEventTypes.forEach((eventType) => {
         document.removeEventListener(eventType, this.handleCustomClearBound)
       })
+    }
+    if (this.optionsEventTypes && this.handleOptionsEventTypeBound) {
+      this.optionsEventTypes.forEach((eventType) => {
+        document.removeEventListener(eventType, this.handleOptionsEventTypeBound)
+      })
+    }
+    if (this.contextElement && this.handleContextChangeBound) {
+      this.contextElement.removeEventListener("change", this.handleContextChangeBound)
     }
   }
 
@@ -630,6 +658,217 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   // ----- External events handling section -----
+
+  get optionsByContext() {
+    return this.element.dataset.pbDropdownOptionsByContext
+      ? JSON.parse(this.element.dataset.pbDropdownOptionsByContext)
+      : null;
+  }
+
+  get contextElement() {
+    const selector = this.element.dataset.pbDropdownContextSelector;
+    if (!selector) return null;
+
+    return (
+      this.element.parentNode?.querySelector(`#${CSS.escape(selector)}`) ||
+      this.element.closest(`#${CSS.escape(selector)}`) ||
+      document.getElementById(selector)
+    );
+  }
+
+  get clearOnContextChange() {
+    return this.element.dataset.pbDropdownClearOnContextChange !== "false";
+  }
+
+  bindContextSelector() {
+    const contextEl = this.contextElement;
+    if (!contextEl || !this.optionsByContext) return;
+
+    this.handleContextChangeBound = this.handleContextChange.bind(this);
+    contextEl.addEventListener("change", this.handleContextChangeBound);
+
+    // Sync to the current context value on connect (default/restored select), without clearing
+    this.applyOptionsForCurrentContext({ clearSelection: false });
+  }
+
+  applyOptionsForCurrentContext({ clearSelection } = {}) {
+    if (this.isDisabled || !this.optionsByContext) return;
+
+    const options = this.optionsByContext[this.contextElement?.value] || [];
+    this.replaceOptions(options, {
+      clearSelection:
+        clearSelection != null ? clearSelection : this.clearOnContextChange,
+    });
+  }
+
+  handleContextChange() {
+    this.applyOptionsForCurrentContext();
+  }
+
+  normalizeOption(option) {
+    const normalized = { ...option };
+    if (normalized.id == null && normalized.value != null) {
+      normalized.id = normalized.value;
+    }
+    if (normalized.value == null && normalized.id != null) {
+      normalized.value = normalized.id;
+    }
+    return normalized;
+  }
+
+  getOptionsParent() {
+    const container = this.target;
+    if (!container) return null;
+
+    return container.querySelector(".pb_list_kit") || container;
+  }
+
+  buildOptionElement(option) {
+    const normalized = this.normalizeOption(option);
+    const disabled = normalized.disabled === true;
+    const optionEl = document.createElement("div");
+    optionEl.className = `pb_dropdown_option_list${disabled ? " disabled" : ""}`;
+    if (normalized.id != null && normalized.id !== "") {
+      optionEl.id = String(normalized.id);
+    }
+    optionEl.setAttribute("aria-disabled", disabled ? "true" : "false");
+    optionEl.dataset.dropdownOptionLabel = JSON.stringify(normalized);
+    optionEl.dataset.dropdownOptionDisabled = disabled ? "true" : "false";
+
+    const listItem = document.createElement("div");
+    listItem.className =
+      "pb_list_item_kit display_flex justify_content_center p_none cursor_pointer";
+
+    const wrapper = document.createElement("div");
+    wrapper.className = disabled
+      ? "dropdown_option_wrapper disabled"
+      : "dropdown_option_wrapper";
+
+    const body = document.createElement("div");
+    body.className = "pb_body_kit_light";
+    body.textContent =
+      normalized.label != null ? String(normalized.label) : "";
+
+    wrapper.appendChild(body);
+    listItem.appendChild(wrapper);
+    optionEl.appendChild(listItem);
+
+    return optionEl;
+  }
+
+  replaceOptions(options, { clearSelection = true } = {}) {
+    if (this.isDisabled || !Array.isArray(options)) return;
+
+    const parent = this.getOptionsParent();
+    if (!parent) return;
+
+    // Clear option nodes and any SSR empty-state ("No option") placeholder
+    parent.replaceChildren();
+    this.removeNoOptionsMessage();
+
+    options.forEach((option) => {
+      parent.appendChild(this.buildOptionElement(option));
+    });
+
+    // Clear typed filters and keyboard focus so new options aren't left unfiltered /
+    // focused against stale indexes from the previous list
+    this.resetInteractiveOptionState();
+
+    if (clearSelection) {
+      this.clearSelection();
+    } else {
+      this.reconcileSelectionWithOptions();
+    }
+
+    if (this.target?.classList.contains("open")) {
+      this.adjustDropdownHeight();
+    }
+  }
+
+  resetInteractiveOptionState() {
+    this.resetFocus();
+
+    if (this.searchBar) {
+      this.searchBar.value = "";
+    }
+
+    if (this.searchInput) {
+      this.searchInput.value = "";
+    }
+  }
+
+  reconcileSelectionWithOptions() {
+    const optionEls = Array.from(this.queryAllOptions());
+    const optionsById = new Map();
+    optionEls.forEach((opt) => {
+      try {
+        const optionData = JSON.parse(opt.dataset.dropdownOptionLabel);
+        if (optionData?.id != null) {
+          optionsById.set(optionData.id, opt);
+        }
+      } catch {
+        // ignore invalid option payloads
+      }
+    });
+
+    if (this.isMultiSelect) {
+      const keptIds = Array.from(this.selectedOptions)
+        .map((raw) => {
+          try {
+            return JSON.parse(raw).id;
+          } catch {
+            return null;
+          }
+        })
+        .filter((id) => id != null && optionsById.has(id));
+
+      if (keptIds.length === 0) {
+        this.clearSelection();
+        return;
+      }
+
+      // Rebuild from current option payloads so labels/values stay in sync
+      this.setSelectionByOptionIds(keptIds);
+      return;
+    }
+
+    const currentId = this.baseInput?.value;
+    if (!currentId || !optionsById.has(currentId)) {
+      this.clearSelection();
+      return;
+    }
+
+    // Re-apply selection so trigger/autocomplete use the updated option payload
+    this.setSelectionByOptionId(currentId);
+  }
+
+  // Handles pb:dropdown:updateOptions - replace options when event.detail.dropdownId matches.
+  // detail: { dropdownId, options: [{ id, label, value }], clearSelection?: boolean }
+  handleUpdateOptionsEvent(event) {
+    if (this.isDisabled) return;
+    const targetId = event.detail?.dropdownId;
+    if (!targetId || this.element.id !== targetId) return;
+
+    const options = event.detail?.options;
+    if (!Array.isArray(options)) return;
+
+    const clearSelection = event.detail?.clearSelection !== false;
+    this.replaceOptions(options, { clearSelection });
+  }
+
+  // Handles options_event_type events - replace options when detail.options is present.
+  handleOptionsEventType(event) {
+    if (this.isDisabled) return;
+    const targetId = event.detail?.dropdownId;
+    if (targetId != null && this.element.id !== targetId) return;
+
+    const options = event.detail?.options;
+    if (!Array.isArray(options)) return;
+
+    const clearSelection = event.detail?.clearSelection !== false;
+    this.replaceOptions(options, { clearSelection });
+  }
+
   // Handles pb:dropdown:clear - clear this dropdown when event.detail.dropdownId matches.
   handleClearEvent(event) {
     if (this.isDisabled) return;

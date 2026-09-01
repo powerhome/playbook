@@ -7,6 +7,14 @@
     "rails"
   ],
   "props": {
+    "notification": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "size": {
       "type": "enum",
       "platforms": [
