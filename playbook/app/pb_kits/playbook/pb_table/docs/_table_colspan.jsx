@@ -6,6 +6,7 @@ const TableSm = (props) => {
   return (
     <Table
         size="sm"
+        verticalBorder
         {...props}
     >
       <Table.Head>

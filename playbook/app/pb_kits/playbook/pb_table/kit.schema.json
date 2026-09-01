@@ -227,6 +227,12 @@
       ],
       "default": false
     },
+    "colSpan": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
     "text": {
       "platforms": [
         "rails"
