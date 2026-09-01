@@ -378,9 +378,23 @@ test("Table.Cell renders colSpan as HTML colspan attribute", () => {
     </Table>
   )
 
-  const cell = container.querySelector(".pb_table_td")
-  expect(cell).toBeInTheDocument()
-  expect(cell).toHaveAttribute("colspan", "2")
+  const cells = container.querySelectorAll(".pb_table_td")
+  expect(cells[0]).toHaveAttribute("colspan", "2")
+  expect(cells[1]).not.toHaveAttribute("colspan")
+})
+
+test("Table.Cell keeps htmlOptions.colspan when the dedicated prop is omitted", () => {
+  const { container } = render(
+    <Table>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell htmlOptions={{ colspan: 3 }}>{"Spans three columns"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_table_td")).toHaveAttribute("colspan", "3")
 })
 
 test("Table.Header renders colSpan as HTML colspan attribute", () => {
@@ -395,7 +409,21 @@ test("Table.Header renders colSpan as HTML colspan attribute", () => {
     </Table>
   )
 
-  const header = container.querySelector(".pb_table_th")
-  expect(header).toBeInTheDocument()
-  expect(header).toHaveAttribute("colspan", "2")
+  const headers = container.querySelectorAll(".pb_table_th")
+  expect(headers[0]).toHaveAttribute("colspan", "2")
+  expect(headers[1]).not.toHaveAttribute("colspan")
+})
+
+test("Table.Header keeps htmlOptions.colspan when the dedicated prop is omitted", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header htmlOptions={{ colspan: 3 }}>{"Spans three columns"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_table_th")).toHaveAttribute("colspan", "3")
 })

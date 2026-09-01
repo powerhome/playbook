@@ -6,7 +6,7 @@ RSpec.describe Playbook::PbTable::TableCell do
   subject { Playbook::PbTable::TableCell }
 
   it { is_expected.to define_enum_prop(:tag).with_default("table").with_values("div", "table") }
-  it { is_expected.to define_prop(:colspan).of_type(Playbook::Props::Number) }
+  it { is_expected.to define_prop(:colspan).of_type(Playbook::Props::Number).with_default(nil) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

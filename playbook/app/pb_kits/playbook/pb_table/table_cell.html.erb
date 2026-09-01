@@ -1,5 +1,5 @@
 <% if object.tag == "table" %>
-    <%= pb_content_tag(:td, colspan: object.colspan) do %>
+    <%= pb_content_tag(:td, { colspan: object.colspan }.compact) do %>
       <%= content.presence || object.text %>
     <% end %>
 <% else %>
