@@ -67,28 +67,32 @@ module_function
     }]
   end
 
+  def default_input_key
+    "text_field"
+  end
+
   def input_types
     [
-      { key: "text_field", label: "Text Field" },
-      { key: "email_field", label: "Email" },
-      { key: "number_field", label: "Number" },
-      { key: "search_field", label: "Search" },
-      { key: "password_field", label: "Password" },
-      { key: "url_field", label: "URL" },
-      { key: "textarea", label: "Textarea" },
-      { key: "select", label: "Select" },
-      { key: "collection_select", label: "Collection Select" },
-      { key: "dropdown", label: "Dropdown" },
-      { key: "multi_select", label: "Multi Select" },
       { key: "checkbox", label: "Checkbox" },
+      { key: "collection_select", label: "Collection Select" },
       { key: "date_picker", label: "Date Picker" },
+      { key: "dropdown", label: "Dropdown" },
+      { key: "email_field", label: "Email" },
+      { key: "intl_telephone", label: "Intl Telephone" },
+      { key: "multi_level_select", label: "Multi Level Select" },
+      { key: "multi_select", label: "Multi Select" },
+      { key: "number_field", label: "Number" },
+      { key: "password_field", label: "Password" },
+      { key: "phone_number", label: "Phone Number" },
+      { key: "search_field", label: "Search" },
+      { key: "select", label: "Select" },
+      { key: "star_rating", label: "Star Rating" },
+      { key: "text_field", label: "Text Field" },
+      { key: "textarea", label: "Textarea" },
       { key: "time_picker", label: "Time Picker" },
       { key: "time_zone_select", label: "Time Zone Select" },
       { key: "typeahead", label: "Typeahead" },
-      { key: "phone_number", label: "Phone Number" },
-      { key: "intl_telephone", label: "Intl Telephone" },
-      { key: "star_rating", label: "Star Rating" },
-      { key: "multi_level_select", label: "Multi Level Select" },
+      { key: "url_field", label: "URL" },
     ]
   end
 end

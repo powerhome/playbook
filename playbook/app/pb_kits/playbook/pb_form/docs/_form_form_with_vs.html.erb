@@ -1,5 +1,5 @@
-<%= pb_rails("flex", props: { gap: "md", wrap: true, margin_bottom: "md" }) do %>
-  <%= pb_rails("flex", props: { orientation: "column", grow: true }) do %>
+<%= pb_rails("flex", props: { gap: "md", wrap: false, margin_bottom: "md" }) do %>
+  <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
     <%= pb_rails("caption", props: { text: "Rails form_with", margin_bottom: "xs" }) %>
     <%= pb_rails("card", props: { background: "dark", dark: true, padding: "md" }) do %>
       <pre style="margin: 0; overflow: auto; color: white; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><code><%=
@@ -8,7 +8,7 @@
     <% end %>
   <% end %>
 
-  <%= pb_rails("flex", props: { orientation: "column", grow: true }) do %>
+  <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
     <%= pb_rails("caption", props: { text: "Playbook pb_form_with", margin_bottom: "xs" }) %>
     <%= pb_rails("card", props: { background: "dark", dark: true, padding: "md" }) do %>
       <pre style="margin: 0; overflow: auto; color: white; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><code><%=

@@ -2,6 +2,7 @@
   load Playbook.kit_path("form", "docs", "sample_data.rb").to_s
   demo_id = "validation"
   input_types = PlaybookFormDocsSampleData.input_types
+  default_key = PlaybookFormDocsSampleData.default_input_key
   select_choices = PlaybookFormDocsSampleData.select_choices
   dropdown_options = PlaybookFormDocsSampleData.dropdown_options("-val")
   typeahead_options = PlaybookFormDocsSampleData.typeahead_options
@@ -17,7 +18,7 @@
         margin_bottom: "xs",
       }) %>
   <%= pb_rails("flex", props: { gap: "xs", wrap: true, margin_bottom: "md" }) do %>
-    <% input_types.each_with_index do |input_type, index| %>
+    <% input_types.each do |input_type| %>
       <div data-form-docs-pill="<%= input_type[:key] %>"
            role="button"
            tabindex="0"
@@ -25,18 +26,18 @@
         <%= pb_rails("pill", props: {
               text: input_type[:label],
               text_transform: "none",
-              variant: index.zero? ? "primary" : "neutral",
+              variant: input_type[:key] == default_key ? "primary" : "neutral",
             }) %>
       </div>
     <% end %>
   <% end %>
 
-  <%= pb_rails("flex", props: { gap: "md", wrap: true, align: "stretch" }) do %>
-    <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+  <%= pb_rails("flex", props: { gap: "md", wrap: false, align: "stretch" }) do %>
+    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
       <%= pb_form_with(scope: :validation, url: "", method: :get, validate: true, html: { onsubmit: "return false;" }) do |form| %>
-        <% input_types.each_with_index do |input_type, index| %>
+        <% input_types.each do |input_type| %>
           <div data-form-docs-panel="<%= input_type[:key] %>"
-               style="<%= index.zero? ? "" : "display: none;" %>">
+               style="<%= input_type[:key] == default_key ? "" : "display: none;" %>">
             <div data-form-docs-snippet hidden><%=
               File.read(Playbook.kit_path("form", "docs", "snippets", "validation_#{input_type[:key]}.txt"))
             %></div>
@@ -187,7 +188,7 @@
       <% end %>
     <% end %>
 
-    <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+    <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
       <%= pb_rails("caption", props: { text: "Submitted Form Data", margin_bottom: "xs" }) %>
       <%= pb_rails("card", props: { background: "light", padding: "md" }) do %>
         <div data-form-docs-empty>
