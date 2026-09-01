@@ -23,6 +23,31 @@ window.PbFormDocsDemo = window.PbFormDocsDemo || function (demoId) {
       dataOutput.style.display = "none"
     }
     if (emptyState) emptyState.style.display = ""
+    clearQueryParams()
+  }
+
+  function clearQueryParams() {
+    var url = window.location.pathname + window.location.hash
+    if (window.location.search) history.replaceState(null, "", url)
+  }
+
+  function formDataToQueryString(form) {
+    var params = new URLSearchParams()
+    var formData = new FormData(form)
+
+    formData.forEach(function (value, key) {
+      if (key === "authenticity_token" || key === "utf8" || key === "_method") return
+      params.append(key, value)
+    })
+
+    return params.toString()
+  }
+
+  function updateQueryParams(form) {
+    var query = formDataToQueryString(form)
+    var url = window.location.pathname + window.location.hash
+    if (query) url += "?" + query
+    history.replaceState(null, "", url)
   }
 
   function setPillActive(pillEl, active) {
@@ -189,6 +214,7 @@ window.PbFormDocsDemo = window.PbFormDocsDemo || function (demoId) {
       event.stopPropagation()
       if (typeof form.reportValidity === "function" && !form.reportValidity()) return
       showSubmittedData(formDataToObject(form))
+      updateQueryParams(form)
     }, true)
 
     form.addEventListener("reset", function () {
