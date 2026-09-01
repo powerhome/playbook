@@ -365,3 +365,37 @@ test("renders withFilter variant with cardProps and titleProps", () => {
   expect(title).toBeInTheDocument()
   expect(title).toHaveClass("pl_lg")
 })
+
+test("Table.Cell renders colSpan as HTML colspan attribute", () => {
+  const { container } = render(
+    <Table data={{ testid: "table-colspan-cell" }}>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell colSpan={2}>{"Spans two columns"}</Table.Cell>
+          <Table.Cell>{"Value 2"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  const cell = container.querySelector(".pb_table_td")
+  expect(cell).toBeInTheDocument()
+  expect(cell).toHaveAttribute("colspan", "2")
+})
+
+test("Table.Header renders colSpan as HTML colspan attribute", () => {
+  const { container } = render(
+    <Table data={{ testid: "table-colspan-header" }}>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header colSpan={2}>{"Spans two columns"}</Table.Header>
+          <Table.Header>{"Column 3"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  const header = container.querySelector(".pb_table_th")
+  expect(header).toBeInTheDocument()
+  expect(header).toHaveAttribute("colspan", "2")
+})

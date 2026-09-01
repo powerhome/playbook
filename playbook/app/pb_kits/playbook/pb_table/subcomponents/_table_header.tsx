@@ -11,6 +11,7 @@ type TableHeaderPropTypes = {
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   className: string;
+  colSpan?: number;
   data?: { [key: string]: string };
   headerStyle?: "default" | "borderless" | "floating";
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
@@ -24,6 +25,7 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
     aria = {},
     children,
     className,
+    colSpan,
     data = {},
     headerStyle = "default",
     htmlOptions = {},
@@ -45,6 +47,8 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
     className
   );
   const isTableTag = tag === "table";
+  const resolvedColSpan = colSpan ?? (htmlOptions.colSpan as number | undefined);
+
 
   return (
     <>
@@ -54,6 +58,7 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
             {...dataProps}
             {...htmlProps}
             className={classes}
+            colSpan={resolvedColSpan}
             id={id}
         >
           {text || children}
