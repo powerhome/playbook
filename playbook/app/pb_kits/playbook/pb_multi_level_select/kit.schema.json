@@ -23,6 +23,12 @@
       ],
       "default": ""
     },
+    "formatSelectedDisplay": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
     "inputDisplay": {
       "type": "enum",
       "platforms": [
