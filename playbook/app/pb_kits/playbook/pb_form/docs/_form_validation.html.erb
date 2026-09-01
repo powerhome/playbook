@@ -1,27 +1,12 @@
 <%
+  load Playbook.kit_path("form", "docs", "sample_data.rb").to_s
   demo_id = "validation"
-  input_types = [
-    { key: "text_field", label: "Text Field" },
-    { key: "select", label: "Select" },
-    { key: "checkbox", label: "Checkbox" },
-    { key: "textarea", label: "Textarea" },
-    { key: "date_picker", label: "Date Picker" },
-    { key: "typeahead", label: "Typeahead" },
-    { key: "phone_number", label: "Phone Number" },
-    { key: "multi_select", label: "Multi Select" },
-  ]
-  select_choices = [["Red", "red"], ["Blue", "blue"], ["Green", "green"]]
-  dropdown_options = [
-    { label: "United States", value: "United States", id: "us-val" },
-    { label: "Canada", value: "Canada", id: "ca-val" },
-    { label: "Pakistan", value: "Pakistan", id: "pk-val" },
-  ]
-  typeahead_options = [
-    { label: "Orange", value: "#FFA500" },
-    { label: "Red", value: "#FF0000" },
-    { label: "Green", value: "#00FF00" },
-    { label: "Blue", value: "#0000FF" },
-  ]
+  input_types = PlaybookFormDocsSampleData.input_types
+  select_choices = PlaybookFormDocsSampleData.select_choices
+  dropdown_options = PlaybookFormDocsSampleData.dropdown_options("-val")
+  typeahead_options = PlaybookFormDocsSampleData.typeahead_options
+  collection = PlaybookFormDocsSampleData.collection
+  tree_data = PlaybookFormDocsSampleData.tree_data("validation")
 %>
 
 <div data-form-docs-demo="<%= demo_id %>"
@@ -62,6 +47,41 @@
                     required: true,
                     validation: { message: "Full name is required" },
                   } %>
+            <% when "email_field" %>
+              <%= form.email_field :email, props: {
+                    label: "Email",
+                    required: true,
+                    validation: { message: "Email is required" },
+                  } %>
+            <% when "number_field" %>
+              <%= form.number_field :quantity, props: {
+                    label: "Quantity",
+                    required: true,
+                    validation: { message: "Quantity is required" },
+                  } %>
+            <% when "search_field" %>
+              <%= form.search_field :project_number, props: {
+                    label: "Project Number",
+                    required: true,
+                    validation: {
+                      pattern: "[0-9]{2}-[0-9]{5}",
+                      message: "Please enter a valid project number (example: 33-12345).",
+                    },
+                  } %>
+            <% when "password_field" %>
+              <%= form.password_field :password, props: {
+                    label: "Password",
+                    required: true,
+                    validation: { message: "Password is required" },
+                  } %>
+            <% when "url_field" %>
+              <%= form.url_field :website, props: {
+                    label: "Website",
+                    required: true,
+                    validation: { message: "Website is required" },
+                  } %>
+            <% when "textarea" %>
+              <%= form.text_area :bio, props: { label: "Bio", required: true } %>
             <% when "select" %>
               <%= form.select :favorite_color, select_choices,
                     props: {
@@ -70,13 +90,30 @@
                       required: true,
                       validation_message: "Please select a color",
                     } %>
+            <% when "collection_select" %>
+              <%= form.collection_select :state, collection, :value, :name,
+                    props: {
+                      label: "State",
+                      blank_selection: "Select one...",
+                      required: true,
+                      validation_message: "Please select a state",
+                    } %>
+            <% when "dropdown" %>
+              <%= form.dropdown_field "validation[country]",
+                    props: { label: "Country", options: dropdown_options, required: true } %>
+            <% when "multi_select" %>
+              <%= form.dropdown_field "validation[countries]",
+                    props: {
+                      label: "Countries",
+                      options: dropdown_options,
+                      multi_select: true,
+                      required: true,
+                    } %>
             <% when "checkbox" %>
               <%= form.check_box :newsletter,
                     props: { text: "Subscribe to newsletter", label: "Checkbox", required: true },
                     checked_value: "yes",
                     unchecked_value: "no" %>
-            <% when "textarea" %>
-              <%= form.text_area :bio, props: { label: "Bio", required: true } %>
             <% when "date_picker" %>
               <%= form.date_picker :start_date, props: {
                     label: "Start Date",
@@ -84,6 +121,20 @@
                     required: true,
                     validation_message: "Start date is required",
                   } %>
+            <% when "time_picker" %>
+              <%= form.time_picker :start_time, props: {
+                    label: "Start Time",
+                    required: true,
+                    validation_message: "Start time is required",
+                  } %>
+            <% when "time_zone_select" %>
+              <%= form.time_zone_select_field :time_zone, ActiveSupport::TimeZone.us_zones,
+                    { default: "Eastern Time (US & Canada)" },
+                    props: {
+                      label: "Time Zone",
+                      blank_selection: "Select a Time Zone...",
+                      required: true,
+                    } %>
             <% when "typeahead" %>
               <%= form.typeahead "validation[color_search]",
                     props: {
@@ -99,12 +150,19 @@
                     label: "Phone Number",
                     required: true,
                   } %>
-            <% when "multi_select" %>
-              <%= form.dropdown_field "validation[countries]",
+            <% when "intl_telephone" %>
+              <%= form.intl_telephone "validation[intl_phone]",
+                    props: { label: "Intl Telephone", required: true } %>
+            <% when "star_rating" %>
+              <%= form.star_rating_field "validation[rating]",
+                    props: { variant: "interactive", label: "Rating", required: true } %>
+            <% when "multi_level_select" %>
+              <%= form.multi_level_select "validation[department]",
                     props: {
-                      label: "Countries",
-                      options: dropdown_options,
-                      multi_select: true,
+                      id: "mls-validation",
+                      tree_data: tree_data,
+                      margin_bottom: "sm",
+                      label: "Department",
                       required: true,
                     } %>
             <% end %>

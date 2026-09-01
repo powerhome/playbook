@@ -1,0 +1,2 @@
+<%= form.intl_telephone "default_values[intl_phone]",
+      props: { label: "Intl Telephone", value: "5551234567" } %>

@@ -1,27 +1,12 @@
 <%
+  load Playbook.kit_path("form", "docs", "sample_data.rb").to_s
   demo_id = "defaults"
-  input_types = [
-    { key: "text_field", label: "Text Field" },
-    { key: "select", label: "Select" },
-    { key: "checkbox", label: "Checkbox" },
-    { key: "textarea", label: "Textarea" },
-    { key: "date_picker", label: "Date Picker" },
-    { key: "typeahead", label: "Typeahead" },
-    { key: "phone_number", label: "Phone Number" },
-    { key: "multi_select", label: "Multi Select" },
-  ]
-  select_choices = [["Red", "red"], ["Blue", "blue"], ["Green", "green"]]
-  dropdown_options = [
-    { label: "United States", value: "United States", id: "us" },
-    { label: "Canada", value: "Canada", id: "ca" },
-    { label: "Pakistan", value: "Pakistan", id: "pk" },
-  ]
-  typeahead_options = [
-    { label: "Orange", value: "#FFA500" },
-    { label: "Red", value: "#FF0000" },
-    { label: "Green", value: "#00FF00" },
-    { label: "Blue", value: "#0000FF" },
-  ]
+  input_types = PlaybookFormDocsSampleData.input_types
+  select_choices = PlaybookFormDocsSampleData.select_choices
+  dropdown_options = PlaybookFormDocsSampleData.dropdown_options
+  typeahead_options = PlaybookFormDocsSampleData.typeahead_options
+  collection = PlaybookFormDocsSampleData.collection
+  tree_data = PlaybookFormDocsSampleData.tree_data("defaults")
 %>
 
 <div data-form-docs-demo="<%= demo_id %>">
@@ -57,18 +42,47 @@
             <% case input_type[:key]
                when "text_field" %>
               <%= form.text_field :full_name, props: { label: "Full Name" } %>
+            <% when "email_field" %>
+              <%= form.email_field :email, props: { label: "Email" } %>
+            <% when "number_field" %>
+              <%= form.number_field :quantity, props: { label: "Quantity" } %>
+            <% when "search_field" %>
+              <%= form.search_field :project_number, props: { label: "Project Number" } %>
+            <% when "password_field" %>
+              <%= form.password_field :password, props: { label: "Password" } %>
+            <% when "url_field" %>
+              <%= form.url_field :website, props: { label: "Website" } %>
+            <% when "textarea" %>
+              <%= form.text_area :bio, props: { label: "Bio" } %>
             <% when "select" %>
               <%= form.select :favorite_color, select_choices,
                     props: { label: "Favorite Color", blank_selection: "Select one..." } %>
+            <% when "collection_select" %>
+              <%= form.collection_select :state, collection, :value, :name,
+                    props: { label: "State", blank_selection: "Select one..." } %>
+            <% when "dropdown" %>
+              <%= form.dropdown_field "defaults[country]",
+                    props: { label: "Country", options: dropdown_options } %>
+            <% when "multi_select" %>
+              <%= form.dropdown_field "defaults[countries]",
+                    props: {
+                      label: "Countries",
+                      options: dropdown_options,
+                      multi_select: true,
+                    } %>
             <% when "checkbox" %>
               <%= form.check_box :newsletter,
                     props: { text: "Subscribe to newsletter", label: "Checkbox" },
                     checked_value: "yes",
                     unchecked_value: "no" %>
-            <% when "textarea" %>
-              <%= form.text_area :bio, props: { label: "Bio" } %>
             <% when "date_picker" %>
               <%= form.date_picker :start_date, props: { label: "Start Date", allow_input: true } %>
+            <% when "time_picker" %>
+              <%= form.time_picker :start_time, props: { label: "Start Time" } %>
+            <% when "time_zone_select" %>
+              <%= form.time_zone_select_field :time_zone, ActiveSupport::TimeZone.us_zones,
+                    { default: "Eastern Time (US & Canada)" },
+                    props: { label: "Time Zone" } %>
             <% when "typeahead" %>
               <%= form.typeahead "defaults[color_search]",
                     props: {
@@ -79,12 +93,18 @@
                     } %>
             <% when "phone_number" %>
               <%= form.phone_number_field "defaults[phone]", props: { label: "Phone Number" } %>
-            <% when "multi_select" %>
-              <%= form.dropdown_field "defaults[countries]",
+            <% when "intl_telephone" %>
+              <%= form.intl_telephone "defaults[intl_phone]", props: { label: "Intl Telephone" } %>
+            <% when "star_rating" %>
+              <%= form.star_rating_field "defaults[rating]",
+                    props: { variant: "interactive", label: "Rating" } %>
+            <% when "multi_level_select" %>
+              <%= form.multi_level_select "defaults[department]",
                     props: {
-                      label: "Countries",
-                      options: dropdown_options,
-                      multi_select: true,
+                      id: "mls-defaults",
+                      tree_data: tree_data,
+                      margin_bottom: "sm",
+                      label: "Department",
                     } %>
             <% end %>
           </div>

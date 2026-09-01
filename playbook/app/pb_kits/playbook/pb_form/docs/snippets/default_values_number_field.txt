@@ -1,0 +1,1 @@
+<%= form.number_field :quantity, props: { label: "Quantity", value: 3 } %>

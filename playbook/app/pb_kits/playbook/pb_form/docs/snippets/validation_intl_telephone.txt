@@ -1,0 +1,2 @@
+<%= form.intl_telephone "validation[intl_phone]",
+      props: { label: "Intl Telephone", required: true } %>
