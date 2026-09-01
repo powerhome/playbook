@@ -1,6 +1,7 @@
 @import "playbook-tokens/colors";
 @import "playbook-tokens/typography";
 @import "playbook-tokens/spacing";
+@import "playbook-tokens/border_radius";
 
 
 // Rails & REACT
@@ -539,5 +540,19 @@
   }
   .codeSnippetGuidelines {
     overflow-x: auto;
+  }
+
+  &.pb--codeCopy_compact {
+    border-radius: $border_rad_heavier;
+    overflow: hidden;
+
+    .highlight {
+      margin: 0;
+    }
+
+    pre.highlight {
+      padding: 16px;
+      margin: 0;
+    }
   }
 }

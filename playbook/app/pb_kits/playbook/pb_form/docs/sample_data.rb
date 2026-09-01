@@ -71,6 +71,22 @@ module_function
     "text_field"
   end
 
+  def form_open(scope:, validate: false)
+    open = "<%= pb_form_with(scope: :#{scope}, url: \"\", method: :get"
+    open += ", validate: true" if validate
+    "#{open}) do |form| %>"
+  end
+
+  def form_close
+    [
+      "  <%= form.actions do |action| %>",
+      "    <%= action.submit %>",
+      '    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>',
+      "  <% end %>",
+      "<% end %>",
+    ].join("\n")
+  end
+
   def input_types
     [
       { key: "checkbox", label: "Checkbox" },

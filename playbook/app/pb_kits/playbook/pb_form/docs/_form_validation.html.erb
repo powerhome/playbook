@@ -8,10 +8,13 @@
   typeahead_options = PlaybookFormDocsSampleData.typeahead_options
   collection = PlaybookFormDocsSampleData.collection
   tree_data = PlaybookFormDocsSampleData.tree_data("validation")
+  form_open_source = PlaybookFormDocsSampleData.form_open(scope: demo_id, validate: true)
+  form_close_source = PlaybookFormDocsSampleData.form_close
 %>
 
-<div data-form-docs-demo="<%= demo_id %>"
-     data-form-docs-validate="true">
+<div data-form-docs-demo="<%= demo_id %>">
+  <div hidden data-form-docs-open><%= raw render_code(form_open_source, "erb") %></div>
+  <div hidden data-form-docs-close><%= raw render_code(form_close_source, "erb") %></div>
   <%= pb_rails("body", props: {
         text: "Select one or more inputs to add them to the form.",
         color: "light",
@@ -38,9 +41,10 @@
         <% input_types.each do |input_type| %>
           <div data-form-docs-panel="<%= input_type[:key] %>"
                style="<%= input_type[:key] == default_key ? "" : "display: none;" %>">
-            <div data-form-docs-snippet hidden><%=
-              File.read(Playbook.kit_path("form", "docs", "snippets", "validation_#{input_type[:key]}.txt"))
-            %></div>
+            <div data-form-docs-snippet hidden><%= raw render_code(
+              File.read(Playbook.kit_path("form", "docs", "snippets", "validation_#{input_type[:key]}.txt")),
+              "erb"
+            ) %></div>
             <% case input_type[:key]
                when "text_field" %>
               <%= form.text_field :full_name, props: {
@@ -183,8 +187,10 @@
             margin_bottom: "sm",
           }) %>
 
-      <%= pb_rails("card", props: { background: "dark", dark: true, padding: "md" }) do %>
-        <pre style="margin: 0; overflow: auto; color: white; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><code data-form-docs-code></code></pre>
+      <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
+        <div class="pb--codeCopy pb--codeCopy_compact">
+          <pre class="highlight" data-form-docs-code style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
+        </div>
       <% end %>
     <% end %>
 

@@ -6,18 +6,10 @@ window.PbFormDocsDemo = window.PbFormDocsDemo || function (demoId) {
   var dataOutput = root.querySelector("[data-form-docs-output]")
   var emptyState = root.querySelector("[data-form-docs-empty]")
   var codeOutput = root.querySelector("[data-form-docs-code]")
-  var validate = root.getAttribute("data-form-docs-validate") === "true"
-  var scope = root.getAttribute("data-form-docs-scope") || demoId
-  var formOpen = validate
-    ? '<%= pb_form_with(scope: :' + scope + ', url: "", method: :get, validate: true) do |form| %>'
-    : '<%= pb_form_with(scope: :' + scope + ', url: "", method: :get) do |form| %>'
-  var formClose = [
-    "  <%= form.actions do |action| %>",
-    "    <%= action.submit %>",
-    '    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>',
-    "  <% end %>",
-    "<% end %>",
-  ].join("\n")
+  var formOpenEl = root.querySelector("[data-form-docs-open]")
+  var formCloseEl = root.querySelector("[data-form-docs-close]")
+  var formOpenHtml = formOpenEl ? formOpenEl.innerHTML.trim() : ""
+  var formCloseHtml = formCloseEl ? formCloseEl.innerHTML.trim() : ""
 
   function clearSubmittedData() {
     if (dataOutput) {
@@ -64,10 +56,10 @@ window.PbFormDocsDemo = window.PbFormDocsDemo || function (demoId) {
       var key = panel.getAttribute("data-form-docs-panel")
       if (!selected[key]) return
       var snippetEl = panel.querySelector("[data-form-docs-snippet]")
-      if (snippetEl) fieldSnippets.push(snippetEl.textContent.replace(/^\n+|\n+$/g, ""))
+      if (snippetEl) fieldSnippets.push(snippetEl.innerHTML.trim())
     })
 
-    codeOutput.textContent = [formOpen].concat(fieldSnippets).concat([formClose]).join("\n")
+    codeOutput.innerHTML = [formOpenHtml].concat(fieldSnippets).concat([formCloseHtml]).join("")
   }
 
   function syncSelection(keys) {

@@ -26,11 +26,14 @@
             margin_bottom: "sm",
           }) %>
 
-      <%= pb_rails("card", props: { background: "dark", dark: true, padding: "md" }) do %>
-        <pre style="margin: 0; overflow: auto; color: white; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><code><%=
-          File.read(Playbook.kit_path("form", "docs", "snippets", "multi_column.txt"))
-        %></code></pre>
-      <% end %>
+      <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
+      <div class="pb--codeCopy pb--codeCopy_compact">
+        <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><%= raw render_code(
+          File.read(Playbook.kit_path("form", "docs", "snippets", "multi_column.txt")),
+          "erb"
+        ) %></pre>
+      </div>
+    <% end %>
     <% end %>
 
     <%= pb_rails("flex/flex_item", props: { flex: "1" }) do %>
