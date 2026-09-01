@@ -1,0 +1,20 @@
+sections:
+  - title: "Rails form_with vs pb_form_with"
+    examples:
+      - form_form_with_vs
+
+  - title: "Defaults"
+    examples:
+      - form_defaults
+
+  - title: "Validation and Error Messages"
+    examples:
+      - form_validation
+
+  - title: "Default Values"
+    examples:
+      - form_default_values
+
+  - title: "Multi-Column Layout"
+    examples:
+      - form_multi_column

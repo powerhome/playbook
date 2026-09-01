@@ -1,0 +1,52 @@
+<% demo_id = "multi_column" %>
+
+<div data-form-docs-demo="<%= demo_id %>">
+  <%= pb_rails("flex", props: { gap: "md", wrap: true, align: "stretch" }) do %>
+    <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+      <%= pb_form_with(scope: :multi_column, url: "", method: :get) do |form| %>
+        <%= pb_rails("flex", props: { gap: "sm", wrap: true }) do %>
+          <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+            <%= form.text_field :first_name, props: { label: "First Name" } %>
+          <% end %>
+          <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+            <%= form.text_field :last_name, props: { label: "Last Name" } %>
+          <% end %>
+        <% end %>
+
+        <%= form.actions do |action| %>
+          <%= action.submit %>
+          <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+        <% end %>
+      <% end %>
+
+      <%= pb_rails("body", props: {
+            text: "Submit the form to see the data on the right.",
+            color: "light",
+            margin_top: "sm",
+            margin_bottom: "sm",
+          }) %>
+
+      <%= pb_rails("card", props: { background: "dark", dark: true, padding: "md" }) do %>
+        <pre style="margin: 0; overflow: auto; color: white; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><code><%=
+          File.read(Playbook.kit_path("form", "docs", "snippets", "multi_column.txt"))
+        %></code></pre>
+      <% end %>
+    <% end %>
+
+    <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+      <%= pb_rails("caption", props: { text: "Submitted Form Data", margin_bottom: "xs" }) %>
+      <%= pb_rails("card", props: { background: "light", padding: "md" }) do %>
+        <div data-form-docs-empty>
+          <%= pb_rails("body", props: { text: "No data submitted yet.", color: "light" }) %>
+        </div>
+        <pre data-form-docs-output
+             style="display: none; margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+<%= raw File.read(Playbook.kit_path("form", "docs", "_form_docs_demo.js")) %>
+PbFormDocsDemo("<%= demo_id %>")
+</script>

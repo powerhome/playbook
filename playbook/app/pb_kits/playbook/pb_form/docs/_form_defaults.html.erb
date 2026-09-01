@@ -1,0 +1,127 @@
+<%
+  demo_id = "defaults"
+  input_types = [
+    { key: "text_field", label: "Text Field" },
+    { key: "select", label: "Select" },
+    { key: "checkbox", label: "Checkbox" },
+    { key: "textarea", label: "Textarea" },
+    { key: "date_picker", label: "Date Picker" },
+    { key: "typeahead", label: "Typeahead" },
+    { key: "phone_number", label: "Phone Number" },
+    { key: "multi_select", label: "Multi Select" },
+  ]
+  select_choices = [["Red", "red"], ["Blue", "blue"], ["Green", "green"]]
+  dropdown_options = [
+    { label: "United States", value: "United States", id: "us" },
+    { label: "Canada", value: "Canada", id: "ca" },
+    { label: "Pakistan", value: "Pakistan", id: "pk" },
+  ]
+  typeahead_options = [
+    { label: "Orange", value: "#FFA500" },
+    { label: "Red", value: "#FF0000" },
+    { label: "Green", value: "#00FF00" },
+    { label: "Blue", value: "#0000FF" },
+  ]
+%>
+
+<div data-form-docs-demo="<%= demo_id %>">
+  <%= pb_rails("body", props: {
+        text: "Select one or more inputs to add them to the form.",
+        color: "light",
+        margin_bottom: "xs",
+      }) %>
+  <%= pb_rails("flex", props: { gap: "xs", wrap: true, margin_bottom: "md" }) do %>
+    <% input_types.each_with_index do |input_type, index| %>
+      <div data-form-docs-pill="<%= input_type[:key] %>"
+           role="button"
+           tabindex="0"
+           style="cursor: pointer">
+        <%= pb_rails("pill", props: {
+              text: input_type[:label],
+              text_transform: "none",
+              variant: index.zero? ? "primary" : "neutral",
+            }) %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("flex", props: { gap: "md", wrap: true, align: "stretch" }) do %>
+    <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+      <%= pb_form_with(scope: :defaults, url: "", method: :get) do |form| %>
+        <% input_types.each_with_index do |input_type, index| %>
+          <div data-form-docs-panel="<%= input_type[:key] %>"
+               style="<%= index.zero? ? "" : "display: none;" %>">
+            <div data-form-docs-snippet hidden><%=
+              File.read(Playbook.kit_path("form", "docs", "snippets", "defaults_#{input_type[:key]}.txt"))
+            %></div>
+            <% case input_type[:key]
+               when "text_field" %>
+              <%= form.text_field :full_name, props: { label: "Full Name" } %>
+            <% when "select" %>
+              <%= form.select :favorite_color, select_choices,
+                    props: { label: "Favorite Color", blank_selection: "Select one..." } %>
+            <% when "checkbox" %>
+              <%= form.check_box :newsletter,
+                    props: { text: "Subscribe to newsletter", label: "Checkbox" },
+                    checked_value: "yes",
+                    unchecked_value: "no" %>
+            <% when "textarea" %>
+              <%= form.text_area :bio, props: { label: "Bio" } %>
+            <% when "date_picker" %>
+              <%= form.date_picker :start_date, props: { label: "Start Date", allow_input: true } %>
+            <% when "typeahead" %>
+              <%= form.typeahead "defaults[color_search]",
+                    props: {
+                      options: typeahead_options,
+                      pills: true,
+                      label: "Favorite Color",
+                      placeholder: "Search for a color",
+                    } %>
+            <% when "phone_number" %>
+              <%= form.phone_number_field "defaults[phone]", props: { label: "Phone Number" } %>
+            <% when "multi_select" %>
+              <%= form.dropdown_field "defaults[countries]",
+                    props: {
+                      label: "Countries",
+                      options: dropdown_options,
+                      multi_select: true,
+                    } %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%= form.actions do |action| %>
+          <%= action.submit %>
+          <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+        <% end %>
+      <% end %>
+
+      <%= pb_rails("body", props: {
+            text: "Submit the form to see the data on the right.",
+            color: "light",
+            margin_top: "sm",
+            margin_bottom: "sm",
+          }) %>
+
+      <%= pb_rails("card", props: { background: "dark", dark: true, padding: "md" }) do %>
+        <pre style="margin: 0; overflow: auto; color: white; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><code data-form-docs-code></code></pre>
+      <% end %>
+    <% end %>
+
+    <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+      <%= pb_rails("caption", props: { text: "Submitted Form Data", margin_bottom: "xs" }) %>
+      <%= pb_rails("card", props: { background: "light", padding: "md" }) do %>
+        <div data-form-docs-empty>
+          <%= pb_rails("body", props: { text: "No data submitted yet.", color: "light" }) %>
+        </div>
+        <pre data-form-docs-output
+             style="display: none; margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+<%= raw File.read(Playbook.kit_path("form", "docs", "_form_docs_demo.js")) %>
+PbFormDocsDemo("<%= demo_id %>")
+</script>
