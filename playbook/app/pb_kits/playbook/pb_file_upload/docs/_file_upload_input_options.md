@@ -1,0 +1,1 @@
+Use `input_options` to access the File Upload input directly. Common implemenation patterns use this to add a `name` prop directly to the input, among other props.
