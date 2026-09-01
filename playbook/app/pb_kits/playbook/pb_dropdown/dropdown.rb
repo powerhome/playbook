@@ -59,14 +59,6 @@ module Playbook
                                 default: false
       prop :custom_event_type, type: Playbook::Props::String,
                                default: ""
-      prop :options_by_context, type: Playbook::Props::HashProp,
-                                default: {}
-      prop :context_selector, type: Playbook::Props::String,
-                              default: ""
-      prop :clear_on_context_change, type: Playbook::Props::Boolean,
-                                     default: true
-      prop :options_event_type, type: Playbook::Props::String,
-                                default: ""
 
       def data
         Hash(prop(:data)).merge(
@@ -81,11 +73,7 @@ module Playbook
           end_date_id: variant == "quickpick" ? end_date_id : nil,
           controls_start_id: variant == "quickpick" && controls_start_id.present? ? controls_start_id : nil,
           controls_end_id: variant == "quickpick" && controls_end_id.present? ? controls_end_id : nil,
-          custom_event_type: custom_event_type.presence,
-          pb_dropdown_options_by_context: options_by_context.present? ? options_by_context.to_json : nil,
-          pb_dropdown_context_selector: context_selector.presence,
-          pb_dropdown_clear_on_context_change: clear_on_context_change,
-          options_event_type: options_event_type.presence
+          custom_event_type: custom_event_type.presence
         ).compact
       end
 
