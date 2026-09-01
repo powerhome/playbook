@@ -183,11 +183,15 @@ window.PbFormDocsDemo = window.PbFormDocsDemo || function (demoId) {
   })
 
   root.querySelectorAll("form").forEach(function (form) {
+    // Docs demos never navigate. Capture + return false cover the window before
+    // this script runs (live examples delay inline scripts ~100ms) and Turbo.
+    form.setAttribute("onsubmit", "return false;")
     form.addEventListener("submit", function (event) {
       event.preventDefault()
+      event.stopPropagation()
       if (typeof form.reportValidity === "function" && !form.reportValidity()) return
       showSubmittedData(formDataToObject(form))
-    })
+    }, true)
 
     form.addEventListener("reset", function () {
       setTimeout(clearSubmittedData, 0)

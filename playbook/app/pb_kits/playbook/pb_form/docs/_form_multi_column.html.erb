@@ -3,7 +3,7 @@
 <div data-form-docs-demo="<%= demo_id %>">
   <%= pb_rails("flex", props: { gap: "md", wrap: true, align: "stretch" }) do %>
     <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
-      <%= pb_form_with(scope: :multi_column, url: "", method: :get) do |form| %>
+      <%= pb_form_with(scope: :multi_column, url: "", method: :get, html: { onsubmit: "return false;" }) do |form| %>
         <%= pb_rails("flex", props: { gap: "sm", wrap: true }) do %>
           <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
             <%= form.text_field :first_name, props: { label: "First Name" } %>

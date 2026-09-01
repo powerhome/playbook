@@ -47,7 +47,7 @@
 
   <%= pb_rails("flex", props: { gap: "md", wrap: true, align: "stretch" }) do %>
     <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
-      <%= pb_form_with(scope: :defaults, url: "", method: :get) do |form| %>
+      <%= pb_form_with(scope: :defaults, url: "", method: :get, html: { onsubmit: "return false;" }) do |form| %>
         <% input_types.each_with_index do |input_type, index| %>
           <div data-form-docs-panel="<%= input_type[:key] %>"
                style="<%= index.zero? ? "" : "display: none;" %>">
