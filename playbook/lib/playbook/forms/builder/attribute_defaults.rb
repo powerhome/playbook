@@ -26,7 +26,7 @@ module Playbook
         end
 
         def apply_form_error!(props, name)
-          return if props.key?(:error)
+          return if props.key?(:error) # explicit error: (including nil) wins
 
           error = form_attribute_error(name)
           props[:error] = error if error.present?

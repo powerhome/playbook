@@ -28,19 +28,23 @@ module Playbook
         props[:name] = html_attribute_name
         props[:picker_id] = html_id
 
+        # Only forward error when present — `error: nil` would suppress auto-bind
+        # inside FormFieldBuilder (`return if props.key?(:error)`).
+        input_props = {
+          label: nil,
+          placeholder: props[:placeholder],
+          required: props[:required],
+          validation: props[:validation_message].present? ? { message: props[:validation_message] } : {},
+        }
+        input_props[:error] = props[:error] if props[:error].present?
+
         input = text_field(
           name,
           autocomplete: "off",
           disabled: props[:disable_input],
           data: props[:input_data],
           aria: props[:input_aria],
-          props: {
-            error: props[:error],
-            label: nil,
-            placeholder: props[:placeholder],
-            required: props[:required],
-            validation: props[:validation_message].present? ? { message: props[:validation_message] } : {},
-          }
+          props: input_props
         )
 
         @template.pb_rails("date_picker", props: props) do
