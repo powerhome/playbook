@@ -32,10 +32,6 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_boolean_prop(:constrain_height).with_default(false) }
   it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
   it { is_expected.to define_string_prop(:custom_event_type).with_default("") }
-  it { is_expected.to define_hash_prop(:options_by_context).with_default({}) }
-  it { is_expected.to define_string_prop(:context_selector).with_default("") }
-  it { is_expected.to define_boolean_prop(:clear_on_context_change).with_default(true) }
-  it { is_expected.to define_string_prop(:options_event_type).with_default("") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -469,47 +465,6 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     it "omits custom_event_type from data when not passed" do
       dropdown = subject.new({})
       expect(dropdown.data).not_to have_key(:custom_event_type)
-    end
-  end
-
-  describe "dynamic options props" do
-    let(:options_by_context) do
-      {
-        "red" => [{ id: "scarlet", label: "Scarlet", value: "scarlet" }],
-        "blue" => [{ id: "navy", label: "Navy", value: "navy" }],
-      }
-    end
-
-    it "includes options_by_context in data when present" do
-      dropdown = subject.new(options_by_context: options_by_context)
-      expect(dropdown.data).to include(
-        pb_dropdown_options_by_context: options_by_context.to_json
-      )
-    end
-
-    it "omits options_by_context from data when empty" do
-      dropdown = subject.new(options_by_context: {})
-      expect(dropdown.data).not_to have_key(:pb_dropdown_options_by_context)
-    end
-
-    it "includes context_selector in data when present" do
-      dropdown = subject.new(context_selector: "color_context")
-      expect(dropdown.data).to include(pb_dropdown_context_selector: "color_context")
-    end
-
-    it "includes clear_on_context_change in data" do
-      dropdown = subject.new(clear_on_context_change: false)
-      expect(dropdown.data).to include(pb_dropdown_clear_on_context_change: false)
-    end
-
-    it "includes options_event_type in data when present" do
-      dropdown = subject.new(options_event_type: "turbo:frame-load,cities:loaded")
-      expect(dropdown.data).to include(options_event_type: "turbo:frame-load,cities:loaded")
-    end
-
-    it "omits options_event_type from data when blank" do
-      dropdown = subject.new(options_event_type: "")
-      expect(dropdown.data).not_to have_key(:options_event_type)
     end
   end
 
