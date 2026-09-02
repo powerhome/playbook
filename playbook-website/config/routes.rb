@@ -20,11 +20,9 @@ Rails.application.routes.draw do
     }, as: nil
   end
 
-  # Everywhere else (prod / local): Playground always redirects to staging.
-  get "playground", to: redirect { |_params, request|
-    qs = request.query_string.present? ? "?#{request.query_string}" : ""
-    "https://staging.playbook.powerapp.cloud/playground#{qs}"
-  }
+  # Everywhere else (prod): Playground is served by the SPA so we can show a VPN
+  # message when staging is unreachable; the React app then sends users to staging.
+  get "playground", to: "pages#application"
 
   root to: "pages#application"
 

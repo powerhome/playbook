@@ -13,6 +13,8 @@ import { PropsTab } from "./Tabs/PropsTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
 import {
+  goToStaging,
+  isLocalHost,
   isStagingHost,
   kitShowTabHref,
   PROD_ORIGIN,
@@ -112,6 +114,8 @@ const KitShow = () => {
 
   // Kit Playground tab lives on staging; Docs/Props live on prod.
   useEffect(() => {
+    if (isLocalHost()) return
+
     const onStaging = isStagingHost();
     const wantsPlayground = tabFromUrl === "playground" && showPlayground;
 
@@ -121,7 +125,7 @@ const KitShow = () => {
     }
 
     if (!onStaging && wantsPlayground) {
-      window.location.replace(
+      void goToStaging(
         `${STAGING_ORIGIN}${location.pathname}?tab=playground${location.hash}`
       );
     }
@@ -136,12 +140,18 @@ const KitShow = () => {
   }, [currentKit, name]);
 
   const handleTabChange = (tab: string) => {
+    if (isLocalHost()) {
+      if (tab === "playground") setDarkMode(false);
+      setActiveTab(tab);
+      return;
+    }
+
     const onStaging = isStagingHost();
 
     if (tab === "playground") {
       setDarkMode(false);
       if (!onStaging) {
-        window.location.assign(kitShowTabHref("playground", location.pathname));
+        void goToStaging(kitShowTabHref("playground", location.pathname));
         return;
       }
     } else if (onStaging) {

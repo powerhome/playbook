@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { Flex } from "playbook-ui";
+import { Body, Flex } from "playbook-ui";
 
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
@@ -58,6 +58,12 @@ import type {
   PlaygroundLoaderData,
 } from "./types";
 import { ROOT_TARGET_ID } from "./types";
+import {
+  goToStaging,
+  isLocalHost,
+  isStagingHost,
+  STAGING_ORIGIN,
+} from "../../utils/siteNavigation";
 
 import "./styles.scss";
 
@@ -80,7 +86,7 @@ const cloneInstances = (items: BuilderInstance[]): BuilderInstance[] =>
 
 type ShareLoadStatus = "loaded" | "invalid" | null;
 
-export default function Playground() {
+function PlaygroundApp() {
   const { global_props_schema, playground_kits = [] } =
     useLoaderData() as PlaygroundLoaderData;
   const [persistedState] = useState(() =>
@@ -987,4 +993,49 @@ export default function Playground() {
       />
     </Flex>
   );
+}
+
+/** On prod, send users to staging (or show the VPN dialog if staging is unreachable). */
+export default function Playground() {
+  const [checkingStaging, setCheckingStaging] = useState(
+    () => !isStagingHost() && !isLocalHost()
+  );
+
+  useEffect(() => {
+    if (isStagingHost() || isLocalHost()) {
+      setCheckingStaging(false);
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      await goToStaging(
+        `${STAGING_ORIGIN}/playground${window.location.search}${window.location.hash}`
+      );
+      if (!cancelled) setCheckingStaging(false);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (checkingStaging) {
+    return (
+      <Flex align="center" justify="center" padding="xl" width="100%">
+        <Body text="Opening Playground…" />
+      </Flex>
+    );
+  }
+
+  if (!isStagingHost() && !isLocalHost()) {
+    // VPN dialog is open (or retry pending); don't mount the full builder on prod.
+    return (
+      <Flex align="center" justify="center" padding="xl" width="100%">
+        <Body text="Playground requires the company VPN. Connect, then try again from the sidebar." />
+      </Flex>
+    );
+  }
+
+  return <PlaygroundApp />;
 }
