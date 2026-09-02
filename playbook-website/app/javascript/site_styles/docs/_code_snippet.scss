@@ -544,6 +544,7 @@
 
   &.pb--codeCopy_compact {
     border-radius: $border_rad_heavier;
+    // Clip the card corners; scrolling happens on the pre so long lines stay reachable.
     overflow: hidden;
 
     .highlight {
@@ -551,8 +552,11 @@
     }
 
     pre.highlight {
-      padding: 16px;
       margin: 0;
+      max-width: 100%;
+      overflow-x: auto;
+      padding: 16px;
+      white-space: pre;
     }
   }
 }

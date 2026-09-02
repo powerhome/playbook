@@ -148,7 +148,7 @@
 
   <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
     <div class="pb--codeCopy pb--codeCopy_compact">
-      <pre class="highlight" data-form-docs-code style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
+      <pre class="highlight" data-form-docs-code style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre;"></pre>
     </div>
   <% end %>
 </div>
@@ -160,7 +160,7 @@
 <% end %>
 <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none", margin_bottom: "sm" }) do %>
   <div class="pb--codeCopy pb--codeCopy_compact">
-    <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><%= raw render_code(
+    <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre;"><%= raw render_code(
       File.read(Playbook.kit_path("form", "docs", "snippets", "defaults_scoped_fields.txt")),
       "erb"
     ) %></pre>

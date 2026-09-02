@@ -46,7 +46,7 @@
 
   <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
     <div class="pb--codeCopy pb--codeCopy_compact">
-      <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><%= raw render_code(
+      <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre;"><%= raw render_code(
         File.read(Playbook.kit_path("form", "docs", "snippets", "multi_column.txt")),
         "erb"
       ) %></pre>
