@@ -52,13 +52,13 @@
       "Example"
     end
   end.new(
-    name: "Gary",
+    name: "Gary 🎉",
     email: "gary@example.com",
     spots: 42,
     notes: "Early arrivals\nVIP seating",
     state_id: 2,
     region: 1,
-    starts_at: Time.utc(2026, 8, 18, 19, 37, 0),
+    starts_at: Time.utc(2026, 8, 22, 19, 37, 0),
     ends_at: Time.utc(2026, 8, 20, 23, 59, 0),
     opens_at: Time.utc(2026, 8, 18, 9, 30, 0),
     status: "open",
@@ -68,9 +68,9 @@
     mobile: "+15557654321",
     owner: { label: "Gary", value: "1" }
   )
-  example_model.errors.add(:name, "is invalid")
-  example_model.errors.add(:starts_at, "can't be blank")
-  example_model.errors.add(:spots, "must be greater than 0")
+  example_model.errors.add(:name, "cannot contain emoji")
+  example_model.errors.add(:starts_at, "must be before ends at")
+  example_model.errors.add(:spots, "must be 20 or fewer")
 %>
 
 <%= pb_form_with(model: example_model, method: :get, url: "") do |form| %>
