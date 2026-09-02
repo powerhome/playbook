@@ -1,6 +1,6 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useParams, useLocation } from "react-router-dom";
 import { Body, Card, Detail, Flex, FlexItem, Icon, Nav, NavItem, SectionSeparator, Title } from "playbook-ui";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 import { MarkdownContent } from "../../components/MarkdownContent";
@@ -12,9 +12,16 @@ import { PropsTab } from "./Tabs/PropsTab";
 // import { ReferencesTab } from "./Tabs/ReferencesTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
+import {
+  isStagingHost,
+  kitShowTabHref,
+  PROD_ORIGIN,
+  STAGING_ORIGIN,
+} from "../../utils/siteNavigation";
 
 const KitShow = () => {
   const { name } = useParams();
+  const location = useLocation();
   const { platform } = usePlatform();
   const loaderData = useLoaderData() as any;
   const {
@@ -91,10 +98,34 @@ const KitShow = () => {
     };
   }, [currentKit, loaderData]);
 
-  const [activeTab, setActiveTab] = useState<string>("docs");
   const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);
+  const tabFromUrl = new URLSearchParams(location.search).get("tab");
+  const [activeTab, setActiveTab] = useState<string>(
+    tabFromUrl === "playground" && showPlayground
+      ? "playground"
+      : tabFromUrl === "props"
+        ? "props"
+        : "docs"
+  );
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
+
+  // Kit Playground tab lives on staging; Docs/Props live on prod.
+  useEffect(() => {
+    const onStaging = isStagingHost();
+    const wantsPlayground = tabFromUrl === "playground" && showPlayground;
+
+    if (onStaging && !wantsPlayground) {
+      window.location.replace(`${PROD_ORIGIN}${location.pathname}${location.hash}`);
+      return;
+    }
+
+    if (!onStaging && wantsPlayground) {
+      window.location.replace(
+        `${STAGING_ORIGIN}${location.pathname}?tab=playground${location.hash}`
+      );
+    }
+  }, [location.pathname, location.hash, showPlayground, tabFromUrl]);
 
   const kitShowTitle = useMemo(() => {
     const sectionSlug = name ?? "";
@@ -105,8 +136,17 @@ const KitShow = () => {
   }, [currentKit, name]);
 
   const handleTabChange = (tab: string) => {
+    const onStaging = isStagingHost();
+
     if (tab === "playground") {
       setDarkMode(false);
+      if (!onStaging) {
+        window.location.assign(kitShowTabHref("playground", location.pathname));
+        return;
+      }
+    } else if (onStaging) {
+      window.location.assign(kitShowTabHref(tab, location.pathname));
+      return;
     }
 
     setActiveTab(tab);

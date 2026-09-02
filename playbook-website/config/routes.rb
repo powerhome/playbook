@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Staging host: Playground is served here; all other pages redirect to prod.
+  # Staging host: Playground (+ kit Playground tabs) is served here; all other pages redirect to prod.
   # `as: nil` avoids clashing with the named routes defined below for prod/local.
   constraints(host: "staging.playbook.powerapp.cloud") do
     get "playground", to: "pages#application", as: nil
+
+    # Kit show pages stay on staging when ?tab=playground (client redirects Docs/Props to prod).
+    get "kits",                                to: "pages#application", as: nil
+    get "kits/advanced_table/:name/:platform", to: "pages#application", as: nil
+    get "kits/:name/:platform",                to: "pages#application", as: nil
+    get "kits/:name",                          to: "pages#application", as: nil
 
     root to: redirect("https://playbook.powerapp.cloud/"), as: nil
 

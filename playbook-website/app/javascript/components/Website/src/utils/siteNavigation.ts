@@ -1,5 +1,5 @@
-const PROD_ORIGIN = "https://playbook.powerapp.cloud"
-const STAGING_ORIGIN = "https://staging.playbook.powerapp.cloud"
+export const PROD_ORIGIN = "https://playbook.powerapp.cloud"
+export const STAGING_ORIGIN = "https://staging.playbook.powerapp.cloud"
 const STAGING_HOST = "staging.playbook.powerapp.cloud"
 
 const normalizePath = (path: string) => (path.startsWith("/") ? path : `/${path}`)
@@ -42,4 +42,17 @@ export const navigateSite = (navigate: (to: string) => void, path: string) => {
   }
 
   navigate(href)
+}
+
+/** Kit-doc Playground tab lives on staging; Docs/Props live on prod. */
+export const kitShowTabHref = (tab: string, pathname: string) => {
+  const path = pathname || window.location.pathname
+  if (tab === "playground") {
+    return `${STAGING_ORIGIN}${path}?tab=playground`
+  }
+
+  const params = new URLSearchParams()
+  if (tab === "props") params.set("tab", "props")
+  const qs = params.toString()
+  return `${PROD_ORIGIN}${path}${qs ? `?${qs}` : ""}`
 }
