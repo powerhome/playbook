@@ -88,7 +88,6 @@
       "name": "Content",
       "props": [
         "label",
-        "name",
         "placeholder",
         "options",
         "defaultValue",
@@ -131,7 +130,6 @@
     {
       "name": "Events",
       "props": [
-        "onChange",
         "onSelect"
       ]
     }
