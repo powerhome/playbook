@@ -104,6 +104,15 @@
               <%= form.time_zone_select_field :time_zone, ActiveSupport::TimeZone.us_zones,
                     { default: "Pacific Time (US & Canada)" },
                     props: { label: "Time Zone" } %>
+            <% when "typeahead_default" %>
+              <%= form.typeahead "default_values[color_search_single]",
+                    props: {
+                      options: typeahead_options,
+                      is_multi: false,
+                      label: "Favorite Color",
+                      placeholder: "Search for a color",
+                      default_options: [{ label: "Blue", value: "#0000FF" }],
+                    } %>
             <% when "typeahead" %>
               <%= form.typeahead "default_values[color_search]",
                     props: {

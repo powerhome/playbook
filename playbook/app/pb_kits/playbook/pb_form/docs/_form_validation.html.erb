@@ -143,6 +143,16 @@
                       blank_selection: "Select a Time Zone...",
                       required: true,
                     } %>
+            <% when "typeahead_default" %>
+              <%= form.typeahead "validation[color_search_single]",
+                    props: {
+                      options: typeahead_options,
+                      is_multi: false,
+                      label: "Favorite Color",
+                      placeholder: "Search for a color",
+                      required: true,
+                      validation: { message: "Please select a color" },
+                    } %>
             <% when "typeahead" %>
               <%= form.typeahead "validation[color_search]",
                     props: {
