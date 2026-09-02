@@ -38,7 +38,7 @@ const treeData = [
       {
         label: "New Jersey",
         value: "newJersey",
-        id: "nj1",
+        id: "nj11",
         children: [
           {
             label: "Marketing & Sales NJ",
@@ -120,7 +120,7 @@ const treeData2 = [
       {
         label: "New Jersey",
         value: "newJersey",
-        id: "nj2",
+        id: "nj22",
         children: [
           {
             label: "Marketing & Sales NJ",
