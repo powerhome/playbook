@@ -1,6 +1,3 @@
-import { defaultMarkdownParser } from "prosemirror-markdown"
-import { DOMSerializer } from "prosemirror-model"
-
 const NEUTRAL_CLIPBOARD_TAGS = new Set(["html", "head", "body", "meta", "div", "span", "p"])
 const MARKDOWN_SOURCE_TAGS = new Set([...NEUTRAL_CLIPBOARD_TAGS, "pre", "code"])
 
@@ -8,6 +5,27 @@ type MarkdownJSONNode = {
   content?: MarkdownJSONNode[],
   marks?: unknown[],
   type: string,
+}
+
+type MarkdownDocumentNode = {
+  content: unknown,
+  toJSON: () => MarkdownJSONNode,
+  type: { schema: unknown },
+}
+
+type MarkdownParser = {
+  parse: (text: string) => MarkdownDocumentNode | null,
+}
+
+type MarkdownDOMSerializer = {
+  fromSchema: (schema: unknown) => {
+    serializeFragment: (content: unknown) => DocumentFragment,
+  },
+}
+
+type MarkdownDependencies = {
+  parser: MarkdownParser,
+  serializer: MarkdownDOMSerializer,
 }
 
 const hasRichTextFormatting = (html: string, text: string): boolean => {
@@ -37,12 +55,15 @@ const hasMarkdownFormatting = (node: MarkdownJSONNode): boolean => {
   return node.content?.some(hasMarkdownFormatting) || false
 }
 
-const markdownToHTML = (text: string): string | null => {
-  const documentNode = defaultMarkdownParser.parse(text)
+const createMarkdownToHTML = (
+  markdownParser: MarkdownParser,
+  domSerializer: MarkdownDOMSerializer
+) => (text: string): string | null => {
+  const documentNode = markdownParser.parse(text)
   if (!documentNode || !hasMarkdownFormatting(documentNode.toJSON())) return null
 
   const container = document.createElement("div")
-  const serializer = DOMSerializer.fromSchema(documentNode.type.schema)
+  const serializer = domSerializer.fromSchema(documentNode.type.schema)
   container.appendChild(serializer.serializeFragment(documentNode.content))
   container.querySelectorAll("[data-tight]").forEach((node) => node.removeAttribute("data-tight"))
 
@@ -51,7 +72,8 @@ const markdownToHTML = (text: string): string | null => {
 
 const handleMarkdownPaste = (
   event: ClipboardEvent,
-  insertHTML: (html: string) => void
+  insertHTML: (html: string) => void,
+  markdownToHTML: (text: string) => string | null
 ): boolean => {
   const text = event.clipboardData?.getData("text/plain")
   const richHtml = event.clipboardData?.getData("text/html")
@@ -71,4 +93,8 @@ const handleMarkdownPaste = (
   return true
 }
 
-export { handleMarkdownPaste, markdownToHTML }
+export {
+  createMarkdownToHTML,
+  handleMarkdownPaste,
+}
+export type { MarkdownDependencies }

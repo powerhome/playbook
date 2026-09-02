@@ -5,7 +5,9 @@
       "trix",
       "@tiptap/react",
       "@tiptap/starter-kit",
-      "@tiptap/extension-link"
+      "@tiptap/extension-link",
+      "prosemirror-markdown",
+      "prosemirror-model"
     ],
     "optional": true,
     "note": "Default React editor uses Trix (pass TrixEditor from react-trix). Advanced editor uses TipTap. The host app must already have the needed packages installed. Agents must not install packages — tell the user if they are missing. Rails advanced TipTap may load via the kit’s esm.sh script."
@@ -31,7 +33,6 @@
     "inputHeight": "md",
     "inputMinHeight": "sm",
     "label": "Description",
-    "markdownSupport": false,
     "maxWidth": "md",
     "name": "description",
     "requiredIndicator": false,
@@ -41,6 +42,7 @@
     "advancedEditor",
     "extensions",
     "inputOptions",
+    "markdownSupport",
     "onChange",
     "template",
     "TrixEditor",
@@ -51,7 +53,7 @@
   "groups": [
     {
       "name": "Content",
-      "props": ["label", "name", "markdownSupport"]
+      "props": ["label", "name"]
     },
     {
       "name": "Toolbar",
@@ -132,9 +134,6 @@
     "inputMinHeight": {
       "structureMode": "advanced"
     },
-    "markdownSupport": {
-      "structureMode": "advanced"
-    },
     "sticky": {
       "structureMode": "advanced"
     }
@@ -147,9 +146,6 @@
       "structureMode": "advanced"
     },
     "inputMinHeight": {
-      "structureMode": "advanced"
-    },
-    "markdownSupport": {
       "structureMode": "advanced"
     },
     "sticky": {

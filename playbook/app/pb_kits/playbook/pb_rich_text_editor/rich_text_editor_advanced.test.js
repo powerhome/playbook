@@ -4,12 +4,15 @@ import { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
+import { defaultMarkdownParser } from "prosemirror-markdown";
+import { DOMSerializer } from "prosemirror-model";
 
 import RichTextEditor from "./_rich_text_editor";
 import { normalizeListSelection } from "./TipTap/listSelection";
-import { handleMarkdownPaste, markdownToHTML } from "./TipTap/markdownPaste";
+import { createMarkdownToHTML, handleMarkdownPaste } from "./TipTap/markdownPaste";
 
 const kitClass = "pb_rich_text_editor_advanced_container";
+const markdownToHTML = createMarkdownToHTML(defaultMarkdownParser, DOMSerializer);
 
 const EditorTest = (props) => {
   const editor = useEditor({
@@ -180,7 +183,14 @@ describe("TipTap Markdown paste", () => {
 
   test("formats Markdown when markdownSupport is enabled", async () => {
     const addEventListener = jest.spyOn(HTMLElement.prototype, "addEventListener");
-    const { container } = render(<EditorTest markdownSupport />);
+    const { container } = render(
+      <EditorTest
+          markdownSupport={{
+            parser: defaultMarkdownParser,
+            serializer: DOMSerializer,
+          }}
+      />
+    );
     const editorElement = container.querySelector(".ProseMirror");
 
     await waitFor(() => {
@@ -207,7 +217,7 @@ describe("TipTap Markdown paste", () => {
     const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
     const insertHTML = jest.fn();
 
-    expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(true);
+    expect(handleMarkdownPaste(pasteEvent, insertHTML, markdownToHTML)).toBe(true);
     expect(pasteEvent.defaultPrevented).toBe(true);
     expect(stopImmediatePropagation).toHaveBeenCalled();
     expect(insertHTML).toHaveBeenCalledWith("<p><strong>Markdown</strong></p>");
@@ -221,7 +231,7 @@ describe("TipTap Markdown paste", () => {
     const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
     const insertHTML = jest.fn();
 
-    expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(true);
+    expect(handleMarkdownPaste(pasteEvent, insertHTML, markdownToHTML)).toBe(true);
     expect(stopImmediatePropagation).toHaveBeenCalled();
     expect(insertHTML).toHaveBeenCalledWith("<p><strong>Markdown</strong></p>");
   });
@@ -234,7 +244,7 @@ describe("TipTap Markdown paste", () => {
     const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
     const insertHTML = jest.fn();
 
-    expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(true);
+    expect(handleMarkdownPaste(pasteEvent, insertHTML, markdownToHTML)).toBe(true);
     expect(stopImmediatePropagation).toHaveBeenCalled();
     expect(insertHTML).toHaveBeenCalledWith("<p><em>selected Markdown</em></p>");
   });
@@ -247,13 +257,20 @@ describe("TipTap Markdown paste", () => {
     const stopImmediatePropagation = jest.spyOn(pasteEvent, "stopImmediatePropagation");
     const insertHTML = jest.fn();
 
-    expect(handleMarkdownPaste(pasteEvent, insertHTML)).toBe(false);
+    expect(handleMarkdownPaste(pasteEvent, insertHTML, markdownToHTML)).toBe(false);
     expect(stopImmediatePropagation).not.toHaveBeenCalled();
     expect(insertHTML).not.toHaveBeenCalled();
   });
 
   test("leaves rich HTML paste handling to TipTap", async () => {
-    const { container } = render(<EditorTest markdownSupport />);
+    const { container } = render(
+      <EditorTest
+          markdownSupport={{
+            parser: defaultMarkdownParser,
+            serializer: DOMSerializer,
+          }}
+      />
+    );
     const editorElement = container.querySelector(".ProseMirror");
     const pasteEvent = createPasteEvent(
       "**Markdown**",

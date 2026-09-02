@@ -5,6 +5,11 @@ import Caption from '../pb_caption/_caption'
 import colors from '../tokens/exports/_colors.module.scss'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
+import {
+  createMarkdownToHTML,
+  handleMarkdownPaste,
+} from './TipTap/markdownPaste'
+import type { MarkdownDependencies } from './TipTap/markdownPaste'
 import TipTapEditor from './_tiptap_editor'
 import TrixTextEditor from './_trix_editor'
 
@@ -22,7 +27,7 @@ type RichTextEditorProps = {
   id?: string,
   inline?: boolean,
   label?: string,
-  markdownSupport?: boolean,
+  markdownSupport?: MarkdownDependencies,
   extensions?: { [key: string]: string }[],
   name?: string,
   onChange: (html: string, text: string) => void,
@@ -66,7 +71,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     maxWidth = "md",
     requiredIndicator = false,
     label,
-    markdownSupport = false,
+    markdownSupport,
     TrixEditor,
     trixInstance: trixInstance = undefined,
   } = props
@@ -96,28 +101,22 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
     const editorElement = advancedEditor?.view?.dom
     if (!editorElement) return
+    const markdownToHTML = createMarkdownToHTML(
+      markdownSupport.parser,
+      markdownSupport.serializer
+    )
 
-    let active = true
-    let handleMarkdownSupport: ((event: ClipboardEvent) => void) | undefined
-
-    import('./TipTap/markdownPaste')
-      .then(({ handleMarkdownPaste }) => {
-        if (!active) return
-
-        handleMarkdownSupport = (event: ClipboardEvent) => {
-          handleMarkdownPaste(event, (html) => {
-            advancedEditor.chain().focus().insertContent(html).run()
-          })
-        }
-        editorElement.addEventListener("paste", handleMarkdownSupport, true)
-      })
-      .catch(() => undefined)
+    const handleMarkdownSupport = (event: ClipboardEvent) => {
+      handleMarkdownPaste(
+        event,
+        (html) => advancedEditor.chain().focus().insertContent(html).run(),
+        markdownToHTML
+      )
+    }
+    editorElement.addEventListener("paste", handleMarkdownSupport, true)
 
     return () => {
-      active = false
-      if (handleMarkdownSupport) {
-        editorElement.removeEventListener("paste", handleMarkdownSupport, true)
-      }
+      editorElement.removeEventListener("paste", handleMarkdownSupport, true)
     }
   }, [advancedEditor, markdownSupport])
 

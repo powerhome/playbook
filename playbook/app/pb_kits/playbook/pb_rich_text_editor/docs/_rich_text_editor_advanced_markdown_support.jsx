@@ -3,6 +3,8 @@ import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
+import { defaultMarkdownParser } from 'prosemirror-markdown'
+import { DOMSerializer } from 'prosemirror-model'
 
 const RichTextEditorAdvancedMarkdownSupport = (props) => {
   const editor = useEditor({
@@ -15,7 +17,10 @@ const RichTextEditorAdvancedMarkdownSupport = (props) => {
   return (
     <RichTextEditor
         advancedEditor={editor}
-        markdownSupport
+        markdownSupport={{
+          parser: defaultMarkdownParser,
+          serializer: DOMSerializer,
+        }}
         {...props}
     >
       <EditorContent editor={editor} />
