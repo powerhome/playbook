@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # Shared sample data for Form kit interactive docs.
-# Loaded from example ERBs via: load Playbook.kit_path("form", "docs", "sample_data.rb").to_s
+# Loaded from example ERBs via: load Playbook.kit_path("form", "docs", "_sample_data.rb").to_s
+# Underscore prefix keeps Zeitwerk from eager-loading this file (it is not a kit constant).
 
 module PlaybookFormDocsSampleData
 module_function
