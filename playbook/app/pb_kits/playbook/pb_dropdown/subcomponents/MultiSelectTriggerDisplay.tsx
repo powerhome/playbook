@@ -19,7 +19,7 @@ const MultiSelectTriggerDisplay = ({
   dark = false,
 }: MultiSelectTriggerDisplayProps) => {
 
-  const { setSelected, handleSelectionChange, formPillProps } = useContext(DropdownContext);
+  const { setSelected, onSelect, formPillProps } = useContext(DropdownContext);
 
   if (selected.length === 0) {
     if (autocomplete) return null;
@@ -35,7 +35,7 @@ const MultiSelectTriggerDisplay = ({
  const handleRemoveIconClick = (option: GenericObject) => {
   setSelected((prev: GenericObject[]) => {
       const next = prev.filter((item) => item.label !== option.label);
-      handleSelectionChange && handleSelectionChange(next);
+      onSelect && onSelect(next);
       return next;
     });
  } 
