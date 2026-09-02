@@ -14,6 +14,7 @@ RSpec.describe Playbook::PbLink::Link do
   it { is_expected.to define_prop(:href) }
   it { is_expected.to define_prop(:icon) }
   it { is_expected.to define_prop(:icon_right) }
+  it { is_expected.to define_prop(:rel) }
   it {
     is_expected.to define_enum_prop(:tag)
       .with_default("a")
@@ -38,6 +39,23 @@ RSpec.describe Playbook::PbLink::Link do
       instance = subject.new(href: "google.com")
       expect(instance.href).to eq("google.com")
       expect(instance).to have_attributes(href: "google.com")
+    end
+  end
+
+  describe "#rel_attribute" do
+    it "defaults to noreferrer for a named target" do
+      instance = subject.new(target: "namedTab")
+      expect(instance.rel_attribute).to eq("noreferrer")
+    end
+
+    it "defaults to nil for the child target" do
+      instance = subject.new(target: "child")
+      expect(instance.rel_attribute).to be_nil
+    end
+
+    it "is overridden by an explicit rel prop" do
+      instance = subject.new(rel: "", target: "namedTab")
+      expect(instance.rel_attribute).to eq("")
     end
   end
 end
