@@ -14,7 +14,7 @@ import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
 import {
   goToStaging,
-  isLocalHost,
+  isProductionHost,
   isStagingHost,
   kitShowTabHref,
   PROD_ORIGIN,
@@ -112,9 +112,10 @@ const KitShow = () => {
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
 
-  // Kit Playground tab lives on staging; Docs/Props live on prod.
+  // Production: kit Playground tab lives on staging; Docs/Props live on prod.
+  // Local / review: keep tabs on the current host.
   useEffect(() => {
-    if (isLocalHost()) return
+    if (!isProductionHost() && !isStagingHost()) return
 
     const onStaging = isStagingHost();
     const wantsPlayground = tabFromUrl === "playground" && showPlayground;
@@ -124,7 +125,7 @@ const KitShow = () => {
       return;
     }
 
-    if (!onStaging && wantsPlayground) {
+    if (isProductionHost() && wantsPlayground) {
       void goToStaging(
         `${STAGING_ORIGIN}${location.pathname}?tab=playground${location.hash}`
       );
@@ -140,7 +141,7 @@ const KitShow = () => {
   }, [currentKit, name]);
 
   const handleTabChange = (tab: string) => {
-    if (isLocalHost()) {
+    if (!isProductionHost() && !isStagingHost()) {
       if (tab === "playground") setDarkMode(false);
       setActiveTab(tab);
       return;

@@ -1,5 +1,6 @@
 export const PROD_ORIGIN = "https://playbook.powerapp.cloud"
 export const STAGING_ORIGIN = "https://staging.playbook.powerapp.cloud"
+const PROD_HOST = "playbook.powerapp.cloud"
 const STAGING_HOST = "staging.playbook.powerapp.cloud"
 const STAGING_CHECK_TIMEOUT_MS = 3500
 
@@ -15,26 +16,21 @@ const isPlaygroundPath = (path: string) => {
 export const isStagingHost = () =>
   typeof window !== "undefined" && window.location.hostname === STAGING_HOST
 
-export const isLocalHost = () => {
-  if (typeof window === "undefined") return false
-  const host = window.location.hostname
-  return host === "localhost" || host === "127.0.0.1"
-}
+/** True only on deployed prod — not localhost, review apps, or staging. */
+export const isProductionHost = () =>
+  typeof window !== "undefined" && window.location.hostname === PROD_HOST
 
 /** Absolute href when leaving the current host; otherwise the relative path. */
 export const siteHref = (path: string) => {
   const normalized = normalizePath(path)
 
-  // Local/dev: keep playground on this host so VPN is not required.
-  if (isLocalHost()) return normalized
-
-  const onStaging = isStagingHost()
-
-  if (isPlaygroundPath(normalized) && !onStaging) {
+  // Prod → staging for Playground only. Local / review keep same-host paths.
+  if (isPlaygroundPath(normalized) && isProductionHost()) {
     return `${STAGING_ORIGIN}${normalized}`
   }
 
-  if (!isPlaygroundPath(normalized) && onStaging) {
+  // Staging → prod for everything except Playground.
+  if (!isPlaygroundPath(normalized) && isStagingHost()) {
     return `${PROD_ORIGIN}${normalized}`
   }
 
@@ -47,7 +43,7 @@ export const showPlaygroundVpnRequired = () => {
 
 /** Best-effort check: staging is internal and usually unreachable off VPN. */
 export const isStagingReachable = async (): Promise<boolean> => {
-  if (isStagingHost() || isLocalHost()) return true
+  if (isStagingHost() || !isProductionHost()) return true
 
   const controller = new AbortController()
   const timeoutId = window.setTimeout(
@@ -72,6 +68,7 @@ export const isStagingReachable = async (): Promise<boolean> => {
 /**
  * Redirect to a staging URL after confirming staging is reachable.
  * Shows a VPN dialog instead of sending users to a failed browser load.
+ * Only used from the production host.
  */
 export const goToStaging = async (url: string) => {
   if (isStagingHost()) {
@@ -79,7 +76,8 @@ export const goToStaging = async (url: string) => {
     return
   }
 
-  if (isLocalHost()) {
+  // Local / review: never bounce to deployed staging.
+  if (!isProductionHost()) {
     const path = url.startsWith(STAGING_ORIGIN)
       ? url.slice(STAGING_ORIGIN.length) || "/playground"
       : url
@@ -98,7 +96,7 @@ export const goToStaging = async (url: string) => {
 
 /**
  * SPA navigate on the same host; full-page redirect when crossing staging ↔ prod
- * (Playground lives on staging; everything else on prod).
+ * (Playground lives on staging; everything else on prod). Local/review stay same-host.
  */
 export const navigateSite = (navigate: (to: string) => void, path: string) => {
   if (!path) return
@@ -116,11 +114,15 @@ export const navigateSite = (navigate: (to: string) => void, path: string) => {
   navigate(href)
 }
 
-/** Kit-doc Playground tab lives on staging; Docs/Props live on prod. */
+/**
+ * Kit-doc Playground tab lives on staging in production only.
+ * Docs/Props live on prod when leaving staging. Local/review stay same-host.
+ */
 export const kitShowTabHref = (tab: string, pathname: string) => {
   const path = pathname || window.location.pathname
+
   if (tab === "playground") {
-    if (isLocalHost()) {
+    if (!isProductionHost() && !isStagingHost()) {
       const params = new URLSearchParams(window.location.search)
       params.set("tab", "playground")
       return `${path}?${params.toString()}`
@@ -131,10 +133,11 @@ export const kitShowTabHref = (tab: string, pathname: string) => {
   const params = new URLSearchParams()
   if (tab === "props") params.set("tab", "props")
   const qs = params.toString()
+  const withQs = `${path}${qs ? `?${qs}` : ""}`
 
-  if (isLocalHost()) {
-    return `${path}${qs ? `?${qs}` : ""}`
+  if (!isProductionHost() && !isStagingHost()) {
+    return withQs
   }
 
-  return `${PROD_ORIGIN}${path}${qs ? `?${qs}` : ""}`
+  return `${PROD_ORIGIN}${withQs}`
 }

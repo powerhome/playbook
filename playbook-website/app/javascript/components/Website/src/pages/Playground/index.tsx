@@ -60,7 +60,7 @@ import type {
 import { ROOT_TARGET_ID } from "./types";
 import {
   goToStaging,
-  isLocalHost,
+  isProductionHost,
   isStagingHost,
   STAGING_ORIGIN,
 } from "../../utils/siteNavigation";
@@ -995,47 +995,46 @@ function PlaygroundApp() {
   );
 }
 
-/** On prod, send users to staging (or show the VPN dialog if staging is unreachable). */
+/** On production only, send users to staging (or show the VPN dialog if unreachable). */
 export default function Playground() {
-  const [checkingStaging, setCheckingStaging] = useState(
-    () => !isStagingHost() && !isLocalHost()
-  );
+  const shouldRedirectToStaging = isProductionHost()
+  const [checkingStaging, setCheckingStaging] = useState(shouldRedirectToStaging)
 
   useEffect(() => {
-    if (isStagingHost() || isLocalHost()) {
-      setCheckingStaging(false);
-      return;
+    if (!shouldRedirectToStaging) {
+      setCheckingStaging(false)
+      return
     }
 
-    let cancelled = false;
+    let cancelled = false
     void (async () => {
       await goToStaging(
         `${STAGING_ORIGIN}/playground${window.location.search}${window.location.hash}`
-      );
-      if (!cancelled) setCheckingStaging(false);
-    })();
+      )
+      if (!cancelled) setCheckingStaging(false)
+    })()
 
     return () => {
-      cancelled = true;
-    };
-  }, []);
+      cancelled = true
+    }
+  }, [shouldRedirectToStaging])
 
   if (checkingStaging) {
     return (
       <Flex align="center" justify="center" padding="xl" width="100%">
         <Body text="Opening Playground…" />
       </Flex>
-    );
+    )
   }
 
-  if (!isStagingHost() && !isLocalHost()) {
-    // VPN dialog is open (or retry pending); don't mount the full builder on prod.
+  // Production host after a failed staging check: VPN dialog is open.
+  if (shouldRedirectToStaging && !isStagingHost()) {
     return (
       <Flex align="center" justify="center" padding="xl" width="100%">
         <Body text="Playground requires the company VPN. Connect, then try again from the sidebar." />
       </Flex>
-    );
+    )
   }
 
-  return <PlaygroundApp />;
+  return <PlaygroundApp />
 }

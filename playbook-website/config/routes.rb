@@ -20,8 +20,9 @@ Rails.application.routes.draw do
     }, as: nil
   end
 
-  # Everywhere else (prod): Playground is served by the SPA so we can show a VPN
+  # Production host only: Playground SPA loads here first so we can show a VPN
   # message when staging is unreachable; the React app then sends users to staging.
+  # Localhost / review apps serve Playground on the current host (no staging bounce).
   get "playground", to: "pages#application"
 
   root to: "pages#application"
