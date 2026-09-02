@@ -37,6 +37,7 @@
 
   <%= pb_rails("flex", props: PlaybookFormDocsSampleData.demo_panel_flex_props) do %>
     <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
+      <%= pb_rails("card", props: { padding: "md" }) do %>
       <%= pb_form_with(scope: :validation, url: "", method: :get, validate: true, html: { onsubmit: "return false;" }) do |form| %>
         <% input_types.each do |input_type| %>
           <div data-form-docs-panel="<%= input_type[:key] %>"
@@ -181,18 +182,6 @@
           <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
         <% end %>
       <% end %>
-
-      <%= pb_rails("body", props: {
-            text: "Submit the form to see the data on the right.",
-            color: "light",
-            margin_top: "sm",
-            margin_bottom: "sm",
-          }) %>
-
-      <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
-        <div class="pb--codeCopy pb--codeCopy_compact">
-          <pre class="highlight" data-form-docs-code style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
-        </div>
       <% end %>
     <% end %>
 
@@ -206,6 +195,19 @@
              style="display: none; margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
       <% end %>
     <% end %>
+  <% end %>
+
+  <%= pb_rails("body", props: {
+        text: "Submit the form to see the data on the right.",
+        color: "light",
+        margin_top: "sm",
+        margin_bottom: "sm",
+      }) %>
+
+  <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
+    <div class="pb--codeCopy pb--codeCopy_compact">
+      <pre class="highlight" data-form-docs-code style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
+    </div>
   <% end %>
 </div>
 

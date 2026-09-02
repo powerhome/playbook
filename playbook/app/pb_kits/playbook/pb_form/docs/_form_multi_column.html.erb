@@ -6,37 +6,23 @@
 <div data-form-docs-demo="<%= demo_id %>">
   <%= pb_rails("flex", props: PlaybookFormDocsSampleData.demo_panel_flex_props) do %>
     <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
-      <%= pb_form_with(scope: :multi_column, url: "", method: :get, html: { onsubmit: "return false;" }) do |form| %>
-        <%= pb_rails("flex", props: { gap: "sm", wrap: true }) do %>
-          <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
-            <%= form.text_field :first_name, props: { label: "First Name" } %>
+      <%= pb_rails("card", props: { padding: "md" }) do %>
+        <%= pb_form_with(scope: :multi_column, url: "", method: :get, html: { onsubmit: "return false;" }) do |form| %>
+          <%= pb_rails("flex", props: { gap: "sm", wrap: true }) do %>
+            <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+              <%= form.text_field :first_name, props: { label: "First Name" } %>
+            <% end %>
+            <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
+              <%= form.text_field :last_name, props: { label: "Last Name" } %>
+            <% end %>
           <% end %>
-          <%= pb_rails("flex/flex_item", props: { grow: true }) do %>
-            <%= form.text_field :last_name, props: { label: "Last Name" } %>
-          <% end %>
-        <% end %>
 
-        <%= form.actions do |action| %>
-          <%= action.submit %>
-          <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+          <%= form.actions do |action| %>
+            <%= action.submit %>
+            <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+          <% end %>
         <% end %>
       <% end %>
-
-      <%= pb_rails("body", props: {
-            text: "Submit the form to see the data on the right.",
-            color: "light",
-            margin_top: "sm",
-            margin_bottom: "sm",
-          }) %>
-
-      <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
-      <div class="pb--codeCopy pb--codeCopy_compact">
-        <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><%= raw render_code(
-          File.read(Playbook.kit_path("form", "docs", "snippets", "multi_column.txt")),
-          "erb"
-        ) %></pre>
-      </div>
-    <% end %>
     <% end %>
 
     <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
@@ -49,6 +35,22 @@
              style="display: none; margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
       <% end %>
     <% end %>
+  <% end %>
+
+  <%= pb_rails("body", props: {
+        text: "Submit the form to see the data on the right.",
+        color: "light",
+        margin_top: "sm",
+        margin_bottom: "sm",
+      }) %>
+
+  <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
+    <div class="pb--codeCopy pb--codeCopy_compact">
+      <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"><%= raw render_code(
+        File.read(Playbook.kit_path("form", "docs", "snippets", "multi_column.txt")),
+        "erb"
+      ) %></pre>
+    </div>
   <% end %>
 </div>
 
