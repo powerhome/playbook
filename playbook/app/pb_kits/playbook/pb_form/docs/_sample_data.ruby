@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 # Shared sample data for Form kit interactive docs.
-# Loaded from example ERBs via: load Playbook.kit_path("form", "docs", "_sample_data.rb").to_s
-# Underscore prefix keeps Zeitwerk from eager-loading this file (it is not a kit constant).
+# Loaded from example ERBs via: load Playbook.kit_path("form", "docs", "_sample_data.ruby").to_s
+# Not a .rb file: any .rb under app/pb_kits/.../docs is eager-loaded by Zeitwerk and
+# will crash production boot (see #3318). `load` still works with this extension.
 
 module PlaybookFormDocsSampleData
 module_function
