@@ -1,6 +1,6 @@
-import { useLoaderData, useParams, useLocation } from "react-router-dom";
+import { useLoaderData, useParams, useLocation, useNavigate } from "react-router-dom";
 import { Body, Card, Detail, Flex, FlexItem, Icon, Nav, NavItem, SectionSeparator, Title } from "playbook-ui";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 import { MarkdownContent } from "../../components/MarkdownContent";
@@ -24,6 +24,7 @@ import {
 const KitShow = () => {
   const { name } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const { platform } = usePlatform();
   const loaderData = useLoaderData() as any;
   const {
@@ -112,6 +113,17 @@ const KitShow = () => {
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
 
+  // Keep UI in sync when ?tab= changes (back/forward, shared links).
+  useEffect(() => {
+    const nextTab =
+      tabFromUrl === "playground" && showPlayground
+        ? "playground"
+        : tabFromUrl === "props"
+          ? "props"
+          : "docs";
+    setActiveTab(nextTab);
+  }, [tabFromUrl, showPlayground]);
+
   // Production: kit Playground tab lives on staging; Docs/Props live on prod.
   // Local / review: keep tabs on the current host.
   useEffect(() => {
@@ -140,10 +152,30 @@ const KitShow = () => {
     return linkFormat(sectionSlug || currentKit);
   }, [currentKit, name]);
 
+  // Keep ?tab= in sync: Props/Playground set it; Docs clears it so refresh/share match the UI.
+  const syncTabInUrl = useCallback(
+    (tab: string) => {
+      const params = new URLSearchParams(location.search);
+      if (tab === "docs") {
+        params.delete("tab");
+      } else {
+        params.set("tab", tab);
+      }
+      const search = params.toString();
+      const next = `${location.pathname}${search ? `?${search}` : ""}${location.hash}`;
+      const current = `${location.pathname}${location.search}${location.hash}`;
+      if (next !== current) {
+        navigate(next, { replace: true });
+      }
+    },
+    [location.hash, location.pathname, location.search, navigate]
+  );
+
   const handleTabChange = (tab: string) => {
     if (!isProductionHost() && !isStagingHost()) {
       if (tab === "playground") setDarkMode(false);
       setActiveTab(tab);
+      syncTabInUrl(tab);
       return;
     }
 
@@ -161,6 +193,7 @@ const KitShow = () => {
     }
 
     setActiveTab(tab);
+    syncTabInUrl(tab);
   };
 
   const showStatusBadge = kitStatus === "beta" || kitStatus === "deprecated";
