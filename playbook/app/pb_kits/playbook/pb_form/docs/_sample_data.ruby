@@ -89,18 +89,28 @@ module_function
     ].join("\n")
   end
 
-  # Interactive demo snippets are authored at mixed indent levels. Inside the
-  # assembled pb_form_with block, body lines should start with two spaces.
   # Side-by-side demo panels on wide viewports; stacks on narrow when the row
-  # cannot fit two columns (fixed_size + wrap, not grow-only flex: "1").
+  # cannot fit both columns (flex-basis mins + wrap).
   def demo_panel_flex_props
     { gap: "md", wrap: true, align: "stretch" }
   end
 
-  def demo_panel_column_props
-    { grow: true, fixed_size: "280px", min_width: "0" }
+  # ~2/3 form column; basis keeps a readable floor before wrap.
+  def demo_form_column_style
+    "flex: 2 1 280px; min-width: 0;"
   end
 
+  # ~1/3 submitted-data column; 200px basis so JSON stays readable.
+  def demo_data_column_style
+    "flex: 1 1 200px; min-width: 0;"
+  end
+
+  def demo_form_card_props
+    { padding: "md", shadow: "deep" }
+  end
+
+  # Interactive demo snippets are authored at mixed indent levels. Inside the
+  # assembled pb_form_with block, body lines should start with two spaces.
   def form_body_snippet(text)
     text.lines.map do |line|
       body = line.chomp

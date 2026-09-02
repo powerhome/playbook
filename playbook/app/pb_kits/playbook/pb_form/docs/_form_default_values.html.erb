@@ -36,8 +36,8 @@
   <% end %>
 
   <%= pb_rails("flex", props: PlaybookFormDocsSampleData.demo_panel_flex_props) do %>
-    <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
-      <%= pb_rails("card", props: { padding: "md" }) do %>
+    <div style="<%= PlaybookFormDocsSampleData.demo_form_column_style %>">
+      <%= pb_rails("card", props: PlaybookFormDocsSampleData.demo_form_card_props) do %>
       <%= pb_form_with(scope: :default_values, url: "", method: :get, html: { onsubmit: "return false;" }) do |form| %>
         <% input_types.each do |input_type| %>
           <div data-form-docs-panel="<%= input_type[:key] %>"
@@ -143,9 +143,9 @@
         <% end %>
       <% end %>
       <% end %>
-    <% end %>
+    </div>
 
-    <%= pb_rails("flex/flex_item", props: PlaybookFormDocsSampleData.demo_panel_column_props) do %>
+    <div style="<%= PlaybookFormDocsSampleData.demo_data_column_style %>">
       <%= pb_rails("caption", props: { text: "Submitted Form Data", margin_bottom: "xs" }) %>
       <%= pb_rails("card", props: { background: "light", padding: "md" }) do %>
         <div data-form-docs-empty>
@@ -154,7 +154,7 @@
         <pre data-form-docs-output
              style="display: none; margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
 
   <%= pb_rails("body", props: {
