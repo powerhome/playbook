@@ -110,8 +110,6 @@
                     } %>
             <% when "phone_number" %>
               <%= form.phone_number_field "defaults[phone]", props: { label: "Phone Number" } %>
-            <% when "intl_telephone" %>
-              <%= form.intl_telephone "defaults[intl_phone]", props: { label: "Intl Telephone" } %>
             <% when "star_rating" %>
               <%= form.star_rating_field "defaults[rating]",
                     props: { variant: "interactive", label: "Rating" } %>

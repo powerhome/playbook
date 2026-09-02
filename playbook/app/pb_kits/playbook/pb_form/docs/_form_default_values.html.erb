@@ -127,9 +127,6 @@
                     label: "Phone Number",
                     value: "5551234567",
                   } %>
-            <% when "intl_telephone" %>
-              <%= form.intl_telephone "default_values[intl_phone]",
-                    props: { label: "Intl Telephone", value: "5551234567" } %>
             <% when "star_rating" %>
               <%= form.star_rating_field "default_values[rating]",
                     props: { variant: "interactive", label: "Rating", rating: 4 } %>

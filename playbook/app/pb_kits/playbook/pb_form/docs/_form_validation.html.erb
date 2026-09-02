@@ -168,9 +168,6 @@
                     label: "Phone Number",
                     required: true,
                   } %>
-            <% when "intl_telephone" %>
-              <%= form.intl_telephone "validation[intl_phone]",
-                    props: { label: "Intl Telephone", required: true } %>
             <% when "star_rating" %>
               <%= form.star_rating_field "validation[rating]",
                     props: { variant: "interactive", label: "Rating", required: true } %>

@@ -1,1 +1,0 @@
-<%= form.intl_telephone "defaults[intl_phone]", props: { label: "Intl Telephone" } %>
