@@ -17,6 +17,8 @@ export interface PropDefinition {
   responsive?: boolean;
   description?: string;
   example?: string;
+  /** When true, an empty string value is emitted as `prop=""` in generated code instead of being omitted. */
+  emitEmptyString?: boolean;
 }
 
 export interface KitSchema {
@@ -209,4 +211,6 @@ export interface PlaygroundConfig {
   /** Kit prop names to omit from the playground props panel (still in kit.schema.json). */
   hiddenProps?: string[];
   externalImports?: string[];
+  /** Prop names for which an explicit empty string is a meaningful value and should be emitted as `prop=""` instead of omitted. */
+  emitEmptyStringProps?: string[];
 }

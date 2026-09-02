@@ -1,9 +1,9 @@
 examples:
-
   rails:
-  - form_form_with: Default
-  - form_form_with_validate: Default + Validation
-  - form_form_with_validation_msg: Validation + Custom Validation Message
+  - form_form_with_vs: Rails form_with vs pb_form_with
+  - form_defaults: Defaults
+  - form_validation: Validation and Error Messages
+  - form_default_values: Default Values
   - form_form_with_model_defaults: Model Values + Errors
-  - form_form_with_loading: Default + Loading
-  - form_with_required_indicator: With Optional Required Indicator
+  - form_loading: Loading
+  - form_multi_column: Multi-Column Layout

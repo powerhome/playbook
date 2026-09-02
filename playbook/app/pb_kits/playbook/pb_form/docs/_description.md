@@ -1,8 +1,6 @@
-The `form` kit provides consumers with a convenient, consistently styled `<form>` wrapper.
+Use `pb_form_with` to build Rails forms with Playbook kits. It wraps Rails [`form_with`](https://guides.rubyonrails.org/form_helpers.html) and supplies a custom form builder so fields like text inputs, selects, and typeaheads render with consistent Playbook styling and behavior.
 
-### Form Helpers
-
-This kit uses rails `form_with` with our custom builder to render forms using other kits such as text_input, select, and typeahead to name a few. Doing so provides UI consistency within forms and makes adding a form to your page easier.
+Pick an input below to see Defaults, Validation, Default Values, Model Values + Errors, and Multi-Column layout patterns one field at a time.
 
 ### Model values and errors (edit forms)
 
@@ -26,4 +24,3 @@ On edit, `starts_at` is pre-populated and any `errors.full_messages_for(:starts_
 | text / textarea / select / `collection_select` | via Rails | yes |
 
 **Caveats:** dropdown needs `options` to resolve a stored id/value to an option hash; unmatched ids are ignored (not passed through). Typeahead with a bare database id still needs an explicit `default_options`.
-

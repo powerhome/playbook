@@ -1,0 +1,1 @@
+Use Container with global props instead of using a `div` and and having to write a SCSS file. This example shows usage of padding, border, borderRadius, hover, shadow, and maxWidth as props. See our [global props page](https://playbook.powerapp.cloud/global_props) for the full list of available options. 
