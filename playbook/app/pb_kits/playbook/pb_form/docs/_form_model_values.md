@@ -12,7 +12,7 @@ This example is an edit form after a failed validation: values come from the mod
 | `time_picker` | `default_time` (HH:MM) | yes |
 | `dropdown_field` | `default_value` (matched via `options`) | yes |
 | `star_rating_field` | `default_value` | n/a |
-| `multi_level_select` | `selected_ids` (stringified) | yes |
+| `multi_level_select` | `selected_ids` | yes |
 | `phone_number_field` / `intl_telephone` | `value` | yes |
 | `typeahead` | `default_options` only if already option-shaped | yes |
 | text / textarea / select / `collection_select` | via Rails | yes |

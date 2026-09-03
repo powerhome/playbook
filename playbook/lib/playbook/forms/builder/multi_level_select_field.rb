@@ -10,7 +10,7 @@ module Playbook
 
         unless props.key?(:selected_ids)
           value = form_attribute_value(name)
-          # Kit compares with includes(item.id); tree_data ids are typically strings.
+          # Kit compares ids as strings, so either string or numeric tree ids match.
           props[:selected_ids] = Array(value).map(&:to_s) if value.present?
         end
 

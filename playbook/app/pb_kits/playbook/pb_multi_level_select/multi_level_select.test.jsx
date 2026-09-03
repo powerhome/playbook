@@ -507,6 +507,32 @@ describe('MultiLevelSelect tree_helpers', () => {
       expect(formatted[0].children[1].checked).toBe(false)
     })
 
+    test('matches selected ids when selected_ids are numbers and tree ids are strings', () => {
+      const numericTree = [
+        {
+          id: '101',
+          label: 'Parent',
+          children: [{ id: '102', label: 'Child' }],
+        },
+      ]
+      const formatted = addCheckedAndParentProperty(cloneTree(numericTree), [102])
+      expect(formatted[0].children[0].checked).toBe(true)
+      expect(formatted[0].checked).toBe(false)
+    })
+
+    test('matches selected ids when selected_ids are strings and tree ids are numbers', () => {
+      const numericTree = [
+        {
+          id: 101,
+          label: 'Parent',
+          children: [{ id: 102, label: 'Child' }],
+        },
+      ]
+      const formatted = addCheckedAndParentProperty(cloneTree(numericTree), ['102'])
+      expect(formatted[0].children[0].checked).toBe(true)
+      expect(formatted[0].checked).toBe(false)
+    })
+
     test('cascades checked state to children in default multi mode', () => {
       const formatted = addCheckedAndParentProperty(cloneTree(helperTree), ['parent'])
       expect(formatted[0].checked).toBe(true)
