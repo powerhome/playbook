@@ -2,13 +2,6 @@ export const PROD_ORIGIN = "https://playbook.powerapp.cloud"
 export const STAGING_ORIGIN = "https://staging.playbook.powerapp.cloud"
 const PROD_HOST = "playbook.powerapp.cloud"
 const STAGING_HOST = "staging.playbook.powerapp.cloud"
-const STAGING_CHECK_TIMEOUT_MS = 3500
-
-export const PLAYGROUND_VPN_REQUIRED_EVENT = "pb-playground-vpn-required"
-
-export type PlaygroundVpnRequiredDetail = {
-  destinationUrl: string
-}
 
 const normalizePath = (path: string) => (path.startsWith("/") ? path : `/${path}`)
 
@@ -41,65 +34,22 @@ export const siteHref = (path: string) => {
   return normalized
 }
 
-export const showPlaygroundVpnRequired = (destinationUrl: string) => {
-  window.dispatchEvent(
-    new CustomEvent<PlaygroundVpnRequiredDetail>(PLAYGROUND_VPN_REQUIRED_EVENT, {
-      detail: { destinationUrl },
-    })
-  )
-}
-
-/** Best-effort check: staging is internal and usually unreachable off VPN. */
-export const isStagingReachable = async (): Promise<boolean> => {
-  if (isStagingHost() || !isProductionHost()) return true
-
-  const controller = new AbortController()
-  const timeoutId = window.setTimeout(
-    () => controller.abort(),
-    STAGING_CHECK_TIMEOUT_MS
-  )
-
-  try {
-    await fetch(`${STAGING_ORIGIN}/favicon.ico?_=${Date.now()}`, {
-      cache: "no-store",
-      mode: "no-cors",
-      signal: controller.signal,
-    })
-    return true
-  } catch {
-    return false
-  } finally {
-    window.clearTimeout(timeoutId)
-  }
-}
-
 /**
- * Redirect to a staging URL after confirming staging is reachable.
- * Shows a VPN dialog instead of sending users to a failed browser load.
- * Only used from the production host.
+ * Redirect to a staging URL. Only used from the production host; off VPN,
+ * staging is simply unreachable and the browser shows its normal error page —
+ * no app-level messaging.
  */
-export const goToStaging = async (url: string) => {
-  if (isStagingHost()) {
+export const goToStaging = (url: string) => {
+  if (isStagingHost() || isProductionHost()) {
     window.location.assign(url)
     return
   }
 
   // Local / review: never bounce to deployed staging.
-  if (!isProductionHost()) {
-    const path = url.startsWith(STAGING_ORIGIN)
-      ? url.slice(STAGING_ORIGIN.length) || "/playground"
-      : url
-    window.location.assign(path)
-    return
-  }
-
-  const reachable = await isStagingReachable()
-  if (!reachable) {
-    showPlaygroundVpnRequired(url)
-    return
-  }
-
-  window.location.assign(url)
+  const path = url.startsWith(STAGING_ORIGIN)
+    ? url.slice(STAGING_ORIGIN.length) || "/playground"
+    : url
+  window.location.assign(path)
 }
 
 /**

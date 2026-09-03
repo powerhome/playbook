@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { Body, Flex } from "playbook-ui";
+import { Flex } from "playbook-ui";
 
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
@@ -995,46 +995,17 @@ function PlaygroundApp() {
   );
 }
 
-/** On production only, send users to staging (or show the VPN dialog if unreachable). */
+/**
+ * Playground lives on staging. On production, redirect there immediately;
+ * off VPN, staging is unreachable and the browser shows its normal error page.
+ */
 export default function Playground() {
-  const shouldRedirectToStaging = isProductionHost()
-  const [checkingStaging, setCheckingStaging] = useState(shouldRedirectToStaging)
-
   useEffect(() => {
-    if (!shouldRedirectToStaging) {
-      setCheckingStaging(false)
-      return
-    }
+    if (!isProductionHost()) return
+    goToStaging(`${STAGING_ORIGIN}/playground${window.location.search}${window.location.hash}`)
+  }, [])
 
-    let cancelled = false
-    void (async () => {
-      await goToStaging(
-        `${STAGING_ORIGIN}/playground${window.location.search}${window.location.hash}`
-      )
-      if (!cancelled) setCheckingStaging(false)
-    })()
-
-    return () => {
-      cancelled = true
-    }
-  }, [shouldRedirectToStaging])
-
-  if (checkingStaging) {
-    return (
-      <Flex align="center" justify="center" padding="xl" width="100%">
-        <Body text="Opening Playground…" />
-      </Flex>
-    )
-  }
-
-  // Production host after a failed staging check: VPN dialog is open.
-  if (shouldRedirectToStaging && !isStagingHost()) {
-    return (
-      <Flex align="center" justify="center" padding="xl" width="100%">
-        <Body text="Playground requires the company VPN. Connect, then try again from the sidebar." />
-      </Flex>
-    )
-  }
+  if (isProductionHost() && !isStagingHost()) return null
 
   return <PlaygroundApp />
 }

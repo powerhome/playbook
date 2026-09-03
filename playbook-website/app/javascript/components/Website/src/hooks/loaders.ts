@@ -116,8 +116,8 @@ export const IconsLoader = async () => {
 let playgroundCache: any = null;
 
 export const PlaygroundLoader = async () => {
-  // Production never loads Playground payloads — UI redirects to staging / shows VPN dialog.
-  // Avoids fetching /playground.json before that gate runs.
+  // Production never loads Playground payloads — UI redirects to staging instead.
+  // Avoids fetching /playground.json before that redirect runs.
   if (isProductionHost()) {
     return {
       playground_kits: [],
