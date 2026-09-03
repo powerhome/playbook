@@ -51,17 +51,9 @@ export const showPlaygroundVpnRequired = (destinationUrl: string) => {
 
 /**
  * Best-effort check: staging is internal and usually unreachable off VPN.
- *
- * Uses an <img> probe rather than `fetch(..., { mode: "no-cors" })`. A no-cors
- * fetch resolves as soon as it gets *any* HTTP response — including a 404/403
- * block page served by an edge/WAF for off-VPN traffic — so it can't tell a
- * real block apart from a real success. That false-positive was also
- * browser-dependent (e.g. Firefox's default DNS-over-HTTPS can resolve the
- * staging host differently than Chrome's OS-level DNS, reaching the WAF where
- * Chrome's request fails outright), which is why the VPN dialog appeared in
- * Chrome but not Firefox. An <img> only fires `onload` if the bytes actually
- * decode as an image, so an HTML block/error page correctly fires `onerror`
- * in every browser regardless of how the underlying request was routed.
+ * Uses an <img> probe instead of a no-cors fetch — fetch resolves on any HTTP
+ * response (even an off-VPN block page), which caused browser-dependent false
+ * positives; an <img> only fires onload if the bytes actually decode as an image.
  */
 export const isStagingReachable = (): Promise<boolean> => {
   if (isStagingHost() || !isProductionHost()) return Promise.resolve(true)
