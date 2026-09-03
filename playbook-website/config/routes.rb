@@ -1,6 +1,30 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # Staging host: Playground (+ kit Playground tabs) is served here; all other pages redirect to prod.
+  # `as: nil` avoids clashing with the named routes defined below for prod/local.
+  constraints(host: "staging.playbook.powerapp.cloud") do
+    get "playground", to: "pages#application", as: nil
+
+    # Kit show pages stay on staging when ?tab=playground (client redirects Docs/Props to prod).
+    get "kits",                                to: "pages#application", as: nil
+    get "kits/advanced_table/:name/:platform", to: "pages#application", as: nil
+    get "kits/:name/:platform",                to: "pages#application", as: nil
+    get "kits/:name",                          to: "pages#application", as: nil
+
+    root to: redirect("https://playbook.powerapp.cloud/"), as: nil
+
+    get "(*path)", to: redirect { |_params, request|
+      qs = request.query_string.present? ? "?#{request.query_string}" : ""
+      "https://playbook.powerapp.cloud#{request.path}#{qs}"
+    }, as: nil
+  end
+
+  # Production host only: HTML shell for /playground so the SPA can show a VPN
+  # message / redirect to staging. Playground JSON is NOT served on production
+  # (see PagesController#application) — localhost / review apps serve both.
+  get "playground", to: "pages#application"
+
   root to: "pages#application"
 
   # Legacy /beta/* redirects (301)
@@ -17,7 +41,6 @@ Rails.application.routes.draw do
   get "kits/:name/:platform",                to: "pages#application"
   get "kits/:name",                          to: "pages#application"
   get "kit_category/:category",              to: "pages#application"
-  get "playground",                          to: "pages#application"
   get "worldcup",                            to: "pages#application"
   get "icons",                               to: "pages#application"
   get "changelog/:variant",                  to: "pages#application"
