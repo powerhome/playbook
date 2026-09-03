@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { Flex } from "playbook-ui";
+import { Body, Flex } from "playbook-ui";
 
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
@@ -998,7 +998,9 @@ function PlaygroundApp() {
 /**
  * Playground lives on staging. On production, goToStaging surfaces the VPN
  * warning dialog (mounted in Website/index.tsx) instead of redirecting right
- * away — the actual navigation happens once the user confirms there.
+ * away — the actual navigation happens once the user confirms there. This
+ * fallback text stays visible underneath it so declining (or landing here
+ * directly without confirming) never leaves a blank page with no explanation.
  */
 export default function Playground() {
   useEffect(() => {
@@ -1006,7 +1008,13 @@ export default function Playground() {
     goToStaging(`${STAGING_ORIGIN}/playground${window.location.search}${window.location.hash}`)
   }, [])
 
-  if (isProductionHost() && !isStagingHost()) return null
+  if (isProductionHost() && !isStagingHost()) {
+    return (
+      <Flex align="center" justify="center" padding="xl" width="100%">
+        <Body text="Playground requires the company VPN. Connect, then open Playground again from the sidebar." />
+      </Flex>
+    )
+  }
 
   return <PlaygroundApp />
 }
