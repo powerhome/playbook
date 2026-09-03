@@ -55,7 +55,7 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
   end
 
   describe "#date_picker" do
-    it "auto-populates default_date from the model attribute without forcing UTC" do
+    it "auto-populates default_date from the model wall-clock date" do
       starts_at = Time.utc(2026, 8, 18, 19, 37, 0)
       model = build_model(attributes: { starts_at: starts_at })
 
@@ -63,19 +63,34 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
         form.date_picker :starts_at, props: { label: true }
       end
 
-      expect(rendered).to include(starts_at.iso8601)
+      expect(rendered).to include("2026-08-18")
+      expect(rendered).not_to include("2026-08-18T")
       expect(rendered).to include("data-default-value")
     end
 
-    it "preserves the model timezone offset for date-sensitive values" do
-      starts_at = Time.new(2026, 8, 18, 0, 30, 0, "-04:00")
+    it "preserves the calendar day for timezone-sensitive evening values" do
+      # 10pm EDT is already the next calendar day in UTC
+      starts_at = Time.new(2026, 8, 18, 22, 0, 0, "-04:00")
       model = build_model(attributes: { starts_at: starts_at })
 
       rendered = render_form_with(model) do |form|
         form.date_picker :starts_at, props: { label: true }
       end
 
-      expect(rendered).to include(starts_at.iso8601)
+      expect(rendered).to include("2026-08-18")
+      expect(rendered).not_to include(starts_at.utc.iso8601)
+      expect(rendered).not_to include("2026-08-19")
+    end
+
+    it "includes wall-clock time when enable_time is set" do
+      starts_at = Time.new(2026, 8, 18, 22, 30, 0, "-04:00")
+      model = build_model(attributes: { starts_at: starts_at })
+
+      rendered = render_form_with(model) do |form|
+        form.date_picker :starts_at, props: { label: true, enable_time: true }
+      end
+
+      expect(rendered).to include("2026-08-18T22:30:00")
       expect(rendered).not_to include(starts_at.utc.iso8601)
     end
 

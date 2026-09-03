@@ -8,7 +8,7 @@ This example is an edit form after a failed validation: values come from the mod
 
 | Field | Auto value | Auto error |
 | --- | --- | --- |
-| `date_picker` | `default_date` (UTC ISO8601) | yes |
+| `date_picker` | `default_date` (wall-clock `YYYY-MM-DD`) | yes |
 | `time_picker` | `default_time` (HH:MM) | yes |
 | `dropdown_field` | `default_value` (matched via `options`) | yes |
 | `star_rating_field` | `default_value` | n/a |

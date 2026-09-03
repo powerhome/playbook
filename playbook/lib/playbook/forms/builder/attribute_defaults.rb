@@ -32,10 +32,17 @@ module Playbook
           props[:error] = error if error.present?
         end
 
-        def serialize_date_picker_default(value)
+        # Use wall-clock components from the model value's own zone/offset.
+        # Do not convert to UTC or emit a zoned ISO timestamp — browsers reparse
+        # those as absolute instants and can shift the selected calendar day.
+        def serialize_date_picker_default(value, enable_time: false)
           case value
           when Time, DateTime, ActiveSupport::TimeWithZone
-            value.iso8601
+            if enable_time
+              value.strftime("%Y-%m-%dT%H:%M:%S")
+            else
+              value.strftime("%Y-%m-%d")
+            end
           when Date
             value.iso8601
           else

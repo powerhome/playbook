@@ -12,7 +12,10 @@ module Playbook
         apply_form_error!(props, name)
 
         unless props.key?(:default_date)
-          serialized = serialize_date_picker_default(form_attribute_value(name))
+          serialized = serialize_date_picker_default(
+            form_attribute_value(name),
+            enable_time: props[:enable_time]
+          )
           props[:default_date] = serialized if serialized.present?
         end
 
