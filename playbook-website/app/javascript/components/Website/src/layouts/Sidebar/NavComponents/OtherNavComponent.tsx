@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavItem } from "playbook-ui";
 import { useNavigate, useLocation } from "react-router-dom";
-import { navigateSite } from "../../../utils/siteNavigation";
 
 type CollapsibleGroupConfig = {
   parentKey: string;
@@ -114,7 +113,7 @@ export const OtherNavItems = ({
 
   const handleItemClick = (link) => {
     if (navigate) {
-      navigateSite(navigate, link.link);
+      navigate(link.link);
     }
     updateTopLevelNav(parentIndex);
   };

@@ -1,5 +1,4 @@
 import { LoaderFunctionArgs } from "react-router-dom";
-import { isProductionHost } from "../utils/siteNavigation";
 
 interface ComponentTypes {
   name: string;
@@ -116,23 +115,8 @@ export const IconsLoader = async () => {
 let playgroundCache: any = null;
 
 export const PlaygroundLoader = async () => {
-  // Production never loads Playground payloads — UI redirects to staging / shows VPN dialog.
-  // Avoids fetching /playground.json before that gate runs.
-  if (isProductionHost()) {
-    return {
-      playground_kits: [],
-      global_props_schema: null,
-    };
-  }
-
   if (playgroundCache) return playgroundCache;
   const response = await fetch("/playground.json");
-  if (!response.ok) {
-    return {
-      playground_kits: [],
-      global_props_schema: null,
-    };
-  }
   const data = await response.json();
   playgroundCache = data;
   return data;

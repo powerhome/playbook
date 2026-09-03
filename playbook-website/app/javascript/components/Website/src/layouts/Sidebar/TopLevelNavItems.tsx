@@ -5,7 +5,6 @@ import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 import { OtherNavItems } from "./NavComponents/OtherNavComponent";
 import { CollapsedHoverNav } from "./CollapsedHoverNav";
-import { navigateSite } from "../../utils/siteNavigation";
 
 export const TopLevelNavItem = ({
   dark,
@@ -78,7 +77,7 @@ export const TopLevelNavItem = ({
   const handleComponentsClick = (item, index) => {
     const linkPath = TopLevelLink(SideBarNavItems[index].link);
     if (linkPath && navigate) {
-      navigateSite(navigate, linkPath);
+      navigate(linkPath);
     }
     
     topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {

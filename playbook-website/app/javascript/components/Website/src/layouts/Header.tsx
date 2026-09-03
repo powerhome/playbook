@@ -7,7 +7,6 @@ import KitSearch from "../components/KitSearch";
 import { PlatformToggle } from "../components/PlatformToggle";
 import DarkModeToggle from "../components/DarkModeToggle";
 import { useDarkMode } from "../contexts/DarkModeContext";
-import { isStagingHost, navigateSite, siteHref } from "../utils/siteNavigation";
 import "./header.scss";
 
 interface HeaderProps {
@@ -59,15 +58,9 @@ const Header = ({
             paddingBottom="xxs"
             paddingX="md"
           >
-            {isStagingHost() ? (
-              <a href={siteHref("/")}>
-                <Image alt="Playbook logo" url={PBLogo} />
-              </a>
-            ) : (
-              <Link to="/">
-                <Image alt="Playbook logo" url={PBLogo} />
-              </Link>
-            )}
+            <Link to="/">
+              <Image alt="Playbook logo" url={PBLogo} />
+            </Link>
             <Badge
               text={PBversion}
               dark={darkMode}
@@ -103,7 +96,7 @@ const Header = ({
                 kits={search_list}
                 platform={platform}
                 global_props_and_tokens={global_props_and_tokens}
-                onNavigate={(path) => navigateSite(navigate, path)}
+                onNavigate={(path) => navigate(path)}
                 marginBottom="none"
               />
               {isKitShowPage && <DarkModeToggle />}

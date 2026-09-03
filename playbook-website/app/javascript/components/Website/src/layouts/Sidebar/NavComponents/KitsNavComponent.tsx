@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { NavItem } from "playbook-ui";
 import { useNavigate, useLocation } from "react-router-dom";
 import { linkFormat } from "../../../../../../utilities/website_sidebar_helper";
-import { navigateSite } from "../../../utils/siteNavigation";
 
 export const kitsType = (type: string | null | undefined) => {
   if (type === null || type === undefined) {
@@ -29,7 +28,7 @@ export const KitsNavItem = ({
   const handleMainClick = (index:number, categoryKey:string) => {
     const linkPath = generateLink(categoryKey, null, type);
     if (linkPath && navigate) {
-      navigateSite(navigate, linkPath);
+      navigate(linkPath);
     }
     
     collapsibles.forEach(([, , setCollapsed], idx) => {
@@ -60,7 +59,7 @@ export const KitsNavItem = ({
   const handleSubItemClick = (subLinkIndex:number, sublink:string, Index:number) => {
     const linkPath = generateLink(Object.keys(link)[0], sublink, type);
     if (navigate) {
-      navigateSite(navigate, linkPath);
+      navigate(linkPath);
     }
     
     updateTopLevelNav(parentIndex);
@@ -71,7 +70,7 @@ export const KitsNavItem = ({
   const handleNonCollapseLinkClick = (linkName:string) => {
     const linkPath = generateLink(null, linkName, type);
     if (navigate) {
-      navigateSite(navigate, linkPath);
+      navigate(linkPath);
     }
     
     updateTopLevelNav(parentIndex);
