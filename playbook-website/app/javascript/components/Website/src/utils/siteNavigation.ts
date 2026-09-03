@@ -34,22 +34,42 @@ export const siteHref = (path: string) => {
   return normalized
 }
 
+export const PLAYGROUND_VPN_WARNING_EVENT = "pb-playground-vpn-warning"
+
+export type PlaygroundVpnWarningDetail = {
+  destinationUrl: string
+}
+
+export const showPlaygroundVpnWarning = (destinationUrl: string) => {
+  window.dispatchEvent(
+    new CustomEvent<PlaygroundVpnWarningDetail>(PLAYGROUND_VPN_WARNING_EVENT, {
+      detail: { destinationUrl },
+    })
+  )
+}
+
 /**
- * Redirect to a staging URL. Only used from the production host; off VPN,
- * staging is simply unreachable and the browser shows its normal error page —
- * no app-level messaging.
+ * Redirect to a staging URL. On production, staging is only reachable on the
+ * company VPN, and reachability can't be reliably detected client-side — so
+ * rather than navigate straight there, this warns the user up front and lets
+ * PlaygroundVpnWarningDialog perform the actual navigation once they confirm.
  */
 export const goToStaging = (url: string) => {
-  if (isStagingHost() || isProductionHost()) {
+  if (isStagingHost()) {
     window.location.assign(url)
     return
   }
 
   // Local / review: never bounce to deployed staging.
-  const path = url.startsWith(STAGING_ORIGIN)
-    ? url.slice(STAGING_ORIGIN.length) || "/playground"
-    : url
-  window.location.assign(path)
+  if (!isProductionHost()) {
+    const path = url.startsWith(STAGING_ORIGIN)
+      ? url.slice(STAGING_ORIGIN.length) || "/playground"
+      : url
+    window.location.assign(path)
+    return
+  }
+
+  showPlaygroundVpnWarning(url)
 }
 
 /**

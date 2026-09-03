@@ -996,8 +996,9 @@ function PlaygroundApp() {
 }
 
 /**
- * Playground lives on staging. On production, redirect there immediately;
- * off VPN, staging is unreachable and the browser shows its normal error page.
+ * Playground lives on staging. On production, goToStaging surfaces the VPN
+ * warning dialog (mounted in Website/index.tsx) instead of redirecting right
+ * away — the actual navigation happens once the user confirms there.
  */
 export default function Playground() {
   useEffect(() => {

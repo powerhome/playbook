@@ -12,6 +12,7 @@ import LayoutRight from "./src/layouts/LayoutRight";
 import Header from "./src/layouts/Header";
 import MobileNav, { MobileHamburger } from "./src/components/MobileNav";
 import { PlatformToggle } from "./src/components/PlatformToggle";
+import PlaygroundVpnWarningDialog from "./src/components/PlaygroundVpnWarningDialog";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { PlatformContext } from "./src/contexts/PlatformContext";
 import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
@@ -285,6 +286,7 @@ function WebsiteContent() {
           </Layout.Side>
           {kits.length > 0 && <LayoutRight />}
         </Layout>
+        <PlaygroundVpnWarningDialog />
       </div>
     </PlatformContext.Provider>
   );
