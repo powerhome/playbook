@@ -63,8 +63,9 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
         form.date_picker :starts_at, props: { label: true }
       end
 
-      expect(rendered).to include("2026-08-18")
-      expect(rendered).not_to include("2026-08-18T")
+      # Local midnight (no Z) — bare YYYY-MM-DD is UTC in JS and shifts US days.
+      expect(rendered).to include("2026-08-18T00:00:00")
+      expect(rendered).not_to include("2026-08-18T00:00:00Z")
       expect(rendered).to include("data-default-value")
     end
 
@@ -77,9 +78,19 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
         form.date_picker :starts_at, props: { label: true }
       end
 
-      expect(rendered).to include("2026-08-18")
+      expect(rendered).to include("2026-08-18T00:00:00")
       expect(rendered).not_to include(starts_at.utc.iso8601)
       expect(rendered).not_to include("2026-08-19")
+    end
+
+    it "serializes Date values as local midnight" do
+      model = build_model(attributes: { starts_at: Date.new(2026, 8, 18) })
+
+      rendered = render_form_with(model) do |form|
+        form.date_picker :starts_at, props: { label: true }
+      end
+
+      expect(rendered).to include("2026-08-18T00:00:00")
     end
 
     it "includes wall-clock time when enable_time is set" do

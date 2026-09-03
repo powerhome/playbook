@@ -35,16 +35,18 @@ module Playbook
         # Use wall-clock components from the model value's own zone/offset.
         # Do not convert to UTC or emit a zoned ISO timestamp — browsers reparse
         # those as absolute instants and can shift the selected calendar day.
+        # Date-only must include T00:00:00 (no Z): bare YYYY-MM-DD is UTC midnight
+        # in JS/Flatpickr and shows the previous day in US timezones.
         def serialize_date_picker_default(value, enable_time: false)
           case value
           when Time, DateTime, ActiveSupport::TimeWithZone
             if enable_time
               value.strftime("%Y-%m-%dT%H:%M:%S")
             else
-              value.strftime("%Y-%m-%d")
+              value.strftime("%Y-%m-%dT00:00:00")
             end
           when Date
-            value.iso8601
+            "#{value.iso8601}T00:00:00"
           else
             value.presence&.to_s
           end
