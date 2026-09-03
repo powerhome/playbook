@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 import { Dialog } from "playbook-ui"
 import {
   PLAYGROUND_VPN_WARNING_EVENT,
@@ -18,7 +18,13 @@ const PlaygroundVpnWarningDialog = () => {
     `${STAGING_ORIGIN}/playground`
   )
 
-  useEffect(() => {
+  // useLayoutEffect, not useEffect: React runs every component's layout
+  // effects (bottom-up, in tree order) before any component's passive
+  // effects run. Playground/KitShow dispatch this event from their own
+  // useEffect on mount — with a passive effect here, this dialog (a later
+  // sibling of the routed content) could still be waiting for its listener
+  // to attach when that fires, silently dropping the very first dispatch.
+  useLayoutEffect(() => {
     const open = (event: Event) => {
       const detail = (event as CustomEvent<PlaygroundVpnWarningDetail>).detail
       setDestinationUrl(detail?.destinationUrl || `${STAGING_ORIGIN}/playground`)
