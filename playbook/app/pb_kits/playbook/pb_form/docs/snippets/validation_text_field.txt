@@ -1,0 +1,5 @@
+  <%= form.text_field :full_name, props: {
+        label: "Full Name",
+        required: true,
+        validation: { message: "Full name is required" },
+      } %>

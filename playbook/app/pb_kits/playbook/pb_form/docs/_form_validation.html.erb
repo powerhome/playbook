@@ -1,0 +1,224 @@
+<%
+  load Playbook.kit_path("form", "docs", "_sample_data.ruby").to_s
+  demo_id = "validation"
+  input_types = PlaybookFormDocsSampleData.input_types
+  default_key = PlaybookFormDocsSampleData.default_input_key
+  select_choices = PlaybookFormDocsSampleData.select_choices
+  dropdown_options = PlaybookFormDocsSampleData.dropdown_options("-val")
+  typeahead_options = PlaybookFormDocsSampleData.typeahead_options
+  collection = PlaybookFormDocsSampleData.collection
+  tree_data = PlaybookFormDocsSampleData.tree_data("validation")
+  form_open_source = PlaybookFormDocsSampleData.form_open(scope: demo_id, validate: true)
+  form_close_source = PlaybookFormDocsSampleData.form_close
+%>
+
+<div data-form-docs-demo="<%= demo_id %>">
+  <div hidden data-form-docs-open><%= raw render_code(form_open_source, "erb") %></div>
+  <div hidden data-form-docs-close><%= raw render_code(form_close_source, "erb") %></div>
+  <%= pb_rails("body", props: {
+        text: "Select one or more inputs to add them to the form.",
+        color: "light",
+        margin_bottom: "xs",
+      }) %>
+  <%= pb_rails("flex", props: { gap: "xs", wrap: true, margin_bottom: "md" }) do %>
+    <% input_types.each do |input_type| %>
+      <div data-form-docs-pill="<%= input_type[:key] %>"
+           role="button"
+           tabindex="0"
+           style="cursor: pointer">
+        <%= pb_rails("pill", props: {
+              text: input_type[:label],
+              text_transform: "none",
+              variant: input_type[:key] == default_key ? "primary" : "neutral",
+            }) %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("flex", props: PlaybookFormDocsSampleData.demo_panel_flex_props) do %>
+    <div style="<%= PlaybookFormDocsSampleData.demo_form_column_style %>">
+      <%= pb_rails("card", props: PlaybookFormDocsSampleData.demo_form_card_props) do %>
+      <%= pb_form_with(scope: :validation, url: "", method: :get, validate: true, html: { onsubmit: "return false;" }) do |form| %>
+        <% input_types.each do |input_type| %>
+          <div data-form-docs-panel="<%= input_type[:key] %>"
+               style="<%= input_type[:key] == default_key ? "" : "display: none;" %>">
+            <div data-form-docs-snippet hidden><%= raw render_code(
+              PlaybookFormDocsSampleData.form_body_snippet(
+                File.read(Playbook.kit_path("form", "docs", "snippets", "validation_#{input_type[:key]}.txt"))
+              ),
+              "erb"
+            ) %></div>
+            <% case input_type[:key]
+               when "text_field" %>
+              <%= form.text_field :full_name, props: {
+                    label: "Full Name",
+                    required: true,
+                    validation: { message: "Full name is required" },
+                  } %>
+            <% when "email_field" %>
+              <%= form.email_field :email, props: {
+                    label: "Email",
+                    required: true,
+                    validation: { message: "Email is required" },
+                  } %>
+            <% when "number_field" %>
+              <%= form.number_field :quantity, props: {
+                    label: "Quantity",
+                    required: true,
+                    validation: { message: "Quantity is required" },
+                  } %>
+            <% when "search_field" %>
+              <%= form.search_field :project_number, props: {
+                    label: "Project Number",
+                    required: true,
+                    validation: {
+                      pattern: "[0-9]{2}-[0-9]{5}",
+                      message: "Please enter a valid project number (example: 33-12345).",
+                    },
+                  } %>
+            <% when "password_field" %>
+              <%= form.password_field :password, props: {
+                    label: "Password",
+                    required: true,
+                    validation: { message: "Password is required" },
+                  } %>
+            <% when "url_field" %>
+              <%= form.url_field :website, props: {
+                    label: "Website",
+                    required: true,
+                    validation: { message: "Website is required" },
+                  } %>
+            <% when "textarea" %>
+              <%= form.text_area :bio, props: { label: "Bio", required: true } %>
+            <% when "select" %>
+              <%= form.select :favorite_color, select_choices,
+                    props: {
+                      label: "Favorite Color",
+                      blank_selection: "Select one...",
+                      required: true,
+                      validation_message: "Please select a color",
+                    } %>
+            <% when "collection_select" %>
+              <%= form.collection_select :state, collection, :value, :name,
+                    props: {
+                      label: "State",
+                      blank_selection: "Select one...",
+                      required: true,
+                      validation_message: "Please select a state",
+                    } %>
+            <% when "dropdown" %>
+              <%= form.dropdown_field "validation[country]",
+                    props: { label: "Country", options: dropdown_options, required: true } %>
+            <% when "multi_select" %>
+              <%= form.dropdown_field "validation[countries]",
+                    props: {
+                      label: "Countries",
+                      options: dropdown_options,
+                      multi_select: true,
+                      required: true,
+                    } %>
+            <% when "checkbox" %>
+              <%= form.check_box :newsletter,
+                    props: { text: "Subscribe to newsletter", label: "Checkbox", required: true },
+                    checked_value: "yes",
+                    unchecked_value: "no" %>
+            <% when "date_picker" %>
+              <%= form.date_picker :start_date, props: {
+                    label: "Start Date",
+                    allow_input: true,
+                    required: true,
+                    validation_message: "Start date is required",
+                  } %>
+            <% when "time_picker" %>
+              <%= form.time_picker :start_time, props: {
+                    label: "Start Time",
+                    required: true,
+                    validation_message: "Start time is required",
+                  } %>
+            <% when "time_zone_select" %>
+              <%= form.time_zone_select_field :time_zone, ActiveSupport::TimeZone.us_zones,
+                    { default: "Eastern Time (US & Canada)" },
+                    props: {
+                      label: "Time Zone",
+                      blank_selection: "Select a Time Zone...",
+                      required: true,
+                    } %>
+            <% when "typeahead_default" %>
+              <%= form.typeahead "validation[color_search_single]",
+                    props: {
+                      options: typeahead_options,
+                      is_multi: false,
+                      label: "Favorite Color",
+                      placeholder: "Search for a color",
+                      required: true,
+                      validation: { message: "Please select a color" },
+                    } %>
+            <% when "typeahead" %>
+              <%= form.typeahead "validation[color_search]",
+                    props: {
+                      options: typeahead_options,
+                      pills: true,
+                      label: "Favorite Color",
+                      placeholder: "Search for a color",
+                      required: true,
+                      validation: { message: "Please select a color" },
+                    } %>
+            <% when "phone_number" %>
+              <%= form.phone_number_field "validation[phone]", props: {
+                    label: "Phone Number",
+                    required: true,
+                  } %>
+            <% when "star_rating" %>
+              <%= form.star_rating_field "validation[rating]",
+                    props: { variant: "interactive", label: "Rating", required: true } %>
+            <% when "multi_level_select" %>
+              <%= form.multi_level_select "validation[department]",
+                    props: {
+                      id: "mls-validation",
+                      tree_data: tree_data,
+                      margin_bottom: "sm",
+                      label: "Department",
+                      required: true,
+                    } %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%= form.actions do |action| %>
+          <%= action.submit %>
+          <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+        <% end %>
+      <% end %>
+      <% end %>
+    </div>
+
+    <div style="<%= PlaybookFormDocsSampleData.demo_data_column_style %>">
+      <%= pb_rails("caption", props: { text: "Submitted Form Data", margin_bottom: "xs" }) %>
+      <%= pb_rails("card", props: { background: "light", padding: "md" }) do %>
+        <div data-form-docs-empty>
+          <%= pb_rails("body", props: { text: "No data submitted yet.", color: "light" }) %>
+        </div>
+        <pre data-form-docs-output
+             style="display: none; margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= pb_rails("body", props: {
+        text: "Submit the form to see the data on the right.",
+        color: "light",
+        margin_top: "sm",
+        margin_bottom: "sm",
+      }) %>
+
+  <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
+    <div class="pb--codeCopy pb--codeCopy_compact">
+      <pre class="highlight" data-form-docs-code style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre;"></pre>
+    </div>
+  <% end %>
+</div>
+
+<script>
+<%= raw File.read(Playbook.kit_path("form", "docs", "_form_docs_demo.js")) %>
+PbFormDocsDemo("<%= demo_id %>")
+</script>
