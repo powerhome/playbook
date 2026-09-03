@@ -49,35 +49,28 @@ export const showPlaygroundVpnRequired = (destinationUrl: string) => {
   )
 }
 
-/**
- * Best-effort check: staging is internal and usually unreachable off VPN.
- * Uses an <img> probe instead of a no-cors fetch — fetch resolves on any HTTP
- * response (even an off-VPN block page), which caused browser-dependent false
- * positives; an <img> only fires onload if the bytes actually decode as an image.
- */
-export const isStagingReachable = (): Promise<boolean> => {
-  if (isStagingHost() || !isProductionHost()) return Promise.resolve(true)
+/** Best-effort check: staging is internal and usually unreachable off VPN. */
+export const isStagingReachable = async (): Promise<boolean> => {
+  if (isStagingHost() || !isProductionHost()) return true
 
-  return new Promise((resolve) => {
-    const probe = new Image()
-    let settled = false
-    let timeoutId = 0
+  const controller = new AbortController()
+  const timeoutId = window.setTimeout(
+    () => controller.abort(),
+    STAGING_CHECK_TIMEOUT_MS
+  )
 
-    const finish = (result: boolean) => {
-      if (settled) return
-      settled = true
-      window.clearTimeout(timeoutId)
-      probe.onload = null
-      probe.onerror = null
-      resolve(result)
-    }
-
-    timeoutId = window.setTimeout(() => finish(false), STAGING_CHECK_TIMEOUT_MS)
-
-    probe.onload = () => finish(true)
-    probe.onerror = () => finish(false)
-    probe.src = `${STAGING_ORIGIN}/favicon.ico?_=${Date.now()}`
-  })
+  try {
+    await fetch(`${STAGING_ORIGIN}/favicon.ico?_=${Date.now()}`, {
+      cache: "no-store",
+      mode: "no-cors",
+      signal: controller.signal,
+    })
+    return true
+  } catch {
+    return false
+  } finally {
+    window.clearTimeout(timeoutId)
+  }
 }
 
 /**
