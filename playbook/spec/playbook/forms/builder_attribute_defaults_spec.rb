@@ -209,6 +209,32 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
 
       expect(rendered).to include('data-default-value="open"')
     end
+
+    it "uses the first matched option when a single-select dropdown gets an id array" do
+      model = build_model(attributes: { status: %w[open closed] })
+
+      rendered = render_form_with(model) do |form|
+        form.dropdown_field :status, props: {
+          label: true,
+          options: dropdown_options,
+        }
+      end
+
+      expect(rendered).to include('data-default-value="open"')
+    end
+
+    it "does not crash when a single-select dropdown gets an array of option hashes" do
+      model = build_model(attributes: { status: dropdown_options })
+
+      expect do
+        render_form_with(model) do |form|
+          form.dropdown_field :status, props: {
+            label: true,
+            options: dropdown_options,
+          }
+        end
+      end.not_to raise_error
+    end
   end
 
   describe "#multi_level_select" do
