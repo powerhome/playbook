@@ -35,7 +35,7 @@ module Playbook
         def serialize_date_picker_default(value)
           case value
           when Time, DateTime, ActiveSupport::TimeWithZone
-            value.utc.iso8601
+            value.iso8601
           when Date
             value.iso8601
           else

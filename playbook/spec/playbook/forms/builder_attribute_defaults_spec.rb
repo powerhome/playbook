@@ -55,7 +55,7 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
   end
 
   describe "#date_picker" do
-    it "auto-populates default_date from the model attribute as UTC ISO8601" do
+    it "auto-populates default_date from the model attribute without forcing UTC" do
       starts_at = Time.utc(2026, 8, 18, 19, 37, 0)
       model = build_model(attributes: { starts_at: starts_at })
 
@@ -63,8 +63,20 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
         form.date_picker :starts_at, props: { label: true }
       end
 
-      expect(rendered).to include(starts_at.utc.iso8601)
+      expect(rendered).to include(starts_at.iso8601)
       expect(rendered).to include("data-default-value")
+    end
+
+    it "preserves the model timezone offset for date-sensitive values" do
+      starts_at = Time.new(2026, 8, 18, 0, 30, 0, "-04:00")
+      model = build_model(attributes: { starts_at: starts_at })
+
+      rendered = render_form_with(model) do |form|
+        form.date_picker :starts_at, props: { label: true }
+      end
+
+      expect(rendered).to include(starts_at.iso8601)
+      expect(rendered).not_to include(starts_at.utc.iso8601)
     end
 
     it "auto-populates error from the model" do
