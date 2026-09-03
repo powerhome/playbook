@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { render, screen, fireEvent, waitFor, act } from "../utilities/test-utils"
+import { useForm } from "react-hook-form"
 
 import { Dropdown, Icon, IconCircle } from 'playbook-ui'
 import DateTime from "../pb_kit/dateTime.ts"
@@ -1198,4 +1199,37 @@ test('autocomplete selection still fires onSelect', () => {
   fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[1])
 
   expect(onSelect).toHaveBeenCalledWith(options[1])
+})
+
+test('react-hook-form register supports submit through forwarded ref', async () => {
+  const onSubmit = jest.fn()
+
+  const ReactHookFormDropdown = () => {
+    const { handleSubmit, register } = useForm()
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Dropdown
+            data={{ testid: testId }}
+            label="Countries"
+            options={options}
+            {...register('country')}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    )
+  }
+
+  render(<ReactHookFormDropdown />)
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[1])
+  fireEvent.submit(screen.getByRole('button', { name: 'Submit' }).closest('form'))
+
+  await waitFor(() => {
+    expect(onSubmit).toHaveBeenCalledWith(
+      { country: options[1] },
+      expect.anything()
+    )
+  })
 })

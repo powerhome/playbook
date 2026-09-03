@@ -508,8 +508,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         dark
     });
 
-    // Create an internal ref object that holds the imperative handle methods
+    // Create an internal ref object that holds the imperative handle methods.
+    // Include focus/blur/name/value so react-hook-form register() can treat Dropdown like a field.
     const imperativeRef = useRef({
+      blur: () => {
+        inputRef.current?.blur();
+        inputWrapperRef.current?.blur();
+      },
       clearSelected: () => {
         if (multiSelect) {
           setSelected([]);
@@ -521,12 +526,25 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setFilterItem("");
         setIsDropDownClosed(true);
       },
+      focus: () => {
+        if (autocomplete) {
+          inputRef.current?.focus();
+          return;
+        }
+        inputWrapperRef.current?.focus();
+      },
+      name,
+      value: null as any,
     });
 
     // Update imperativeRef whenever dependencies change
     // (needed for external clearing of normal Dropdown + DatePicker-synced QuickPick Dropdown)
     useEffect(() => {
       imperativeRef.current = {
+        blur: () => {
+          inputRef.current?.blur();
+          inputWrapperRef.current?.blur();
+        },
         clearSelected: () => {
           if (multiSelect) {
             setSelected([]);
@@ -538,8 +556,21 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setFilterItem("");
           setIsDropDownClosed(true);
         },
+        focus: () => {
+          if (autocomplete) {
+            inputRef.current?.focus();
+            return;
+          }
+          inputWrapperRef.current?.focus();
+        },
+        name,
+        value: multiSelect
+          ? selectedArray
+          : selected && !Array.isArray(selected) && Object.keys(selected).length
+            ? selected
+            : null,
       };
-    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed]);
+    }, [autocomplete, multiSelect, handleSelectionChange, name, selected, selectedArray, setSelected, setFilterItem, setIsDropDownClosed]);
 
     useImperativeHandle(ref, () => imperativeRef.current);
 
