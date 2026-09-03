@@ -49,28 +49,43 @@ export const showPlaygroundVpnRequired = (destinationUrl: string) => {
   )
 }
 
-/** Best-effort check: staging is internal and usually unreachable off VPN. */
-export const isStagingReachable = async (): Promise<boolean> => {
-  if (isStagingHost() || !isProductionHost()) return true
+/**
+ * Best-effort check: staging is internal and usually unreachable off VPN.
+ *
+ * Uses an <img> probe rather than `fetch(..., { mode: "no-cors" })`. A no-cors
+ * fetch resolves as soon as it gets *any* HTTP response — including a 404/403
+ * block page served by an edge/WAF for off-VPN traffic — so it can't tell a
+ * real block apart from a real success. That false-positive was also
+ * browser-dependent (e.g. Firefox's default DNS-over-HTTPS can resolve the
+ * staging host differently than Chrome's OS-level DNS, reaching the WAF where
+ * Chrome's request fails outright), which is why the VPN dialog appeared in
+ * Chrome but not Firefox. An <img> only fires `onload` if the bytes actually
+ * decode as an image, so an HTML block/error page correctly fires `onerror`
+ * in every browser regardless of how the underlying request was routed.
+ */
+export const isStagingReachable = (): Promise<boolean> => {
+  if (isStagingHost() || !isProductionHost()) return Promise.resolve(true)
 
-  const controller = new AbortController()
-  const timeoutId = window.setTimeout(
-    () => controller.abort(),
-    STAGING_CHECK_TIMEOUT_MS
-  )
+  return new Promise((resolve) => {
+    const probe = new Image()
+    let settled = false
+    let timeoutId = 0
 
-  try {
-    await fetch(`${STAGING_ORIGIN}/favicon.ico?_=${Date.now()}`, {
-      cache: "no-store",
-      mode: "no-cors",
-      signal: controller.signal,
-    })
-    return true
-  } catch {
-    return false
-  } finally {
-    window.clearTimeout(timeoutId)
-  }
+    const finish = (result: boolean) => {
+      if (settled) return
+      settled = true
+      window.clearTimeout(timeoutId)
+      probe.onload = null
+      probe.onerror = null
+      resolve(result)
+    }
+
+    timeoutId = window.setTimeout(() => finish(false), STAGING_CHECK_TIMEOUT_MS)
+
+    probe.onload = () => finish(true)
+    probe.onerror = () => finish(false)
+    probe.src = `${STAGING_ORIGIN}/favicon.ico?_=${Date.now()}`
+  })
 }
 
 /**
