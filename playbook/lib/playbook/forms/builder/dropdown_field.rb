@@ -6,7 +6,7 @@ module Playbook
       def dropdown_field(name, props: {})
         props = props.dup
         props[:name] = name
-        props[:margin_bottom] = "sm"
+        props[:margin_bottom] ||= "sm"
 
         apply_form_error!(props, name)
 
