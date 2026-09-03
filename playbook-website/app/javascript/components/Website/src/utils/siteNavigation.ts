@@ -54,6 +54,11 @@ export const showPlaygroundVpnRequired = (destinationUrl: string) => {
  * Uses an <img> probe instead of a no-cors fetch — fetch resolves on any HTTP
  * response (even an off-VPN block page), which caused browser-dependent false
  * positives; an <img> only fires onload if the bytes actually decode as an image.
+ *
+ * Probes /vpn_check.gif, not /favicon.ico: favicon.ico isn't in staging's route
+ * allow-list (config/routes.rb), so it was falling through to staging's own
+ * catch-all and redirecting to prod — the probe was really checking prod, which
+ * always "succeeds," so the dialog could show even while on VPN.
  */
 export const isStagingReachable = (): Promise<boolean> => {
   if (isStagingHost() || !isProductionHost()) return Promise.resolve(true)
@@ -76,7 +81,7 @@ export const isStagingReachable = (): Promise<boolean> => {
 
     probe.onload = () => finish(true)
     probe.onerror = () => finish(false)
-    probe.src = `${STAGING_ORIGIN}/favicon.ico?_=${Date.now()}`
+    probe.src = `${STAGING_ORIGIN}/vpn_check.gif?_=${Date.now()}`
   })
 }
 

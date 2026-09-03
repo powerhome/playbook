@@ -12,6 +12,19 @@ Rails.application.routes.draw do
     get "kits/:name/:platform",                to: "pages#application", as: nil
     get "kits/:name",                          to: "pages#application", as: nil
 
+    # Client-side VPN-reachability probe (an <img> load, see siteNavigation.ts)
+    # hits this. Must be explicitly listed here — anything not listed above
+    # falls through to the catch-all redirect to prod below, which would make
+    # the probe "succeed" against prod's response instead of confirming
+    # staging itself is actually reachable.
+    get "vpn_check.gif", to: proc {
+      [
+        200,
+        { "Content-Type" => "image/gif", "Cache-Control" => "no-store" },
+        [Base64.decode64("R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==")],
+      ]
+    }, as: nil
+
     root to: redirect("https://playbook.powerapp.cloud/"), as: nil
 
     get "(*path)", to: redirect { |_params, request|
