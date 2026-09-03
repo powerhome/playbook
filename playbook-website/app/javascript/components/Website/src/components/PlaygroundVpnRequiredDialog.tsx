@@ -4,6 +4,7 @@ import {
   PLAYGROUND_VPN_REQUIRED_EVENT,
   STAGING_ORIGIN,
   goToStaging,
+  type PlaygroundVpnRequiredDetail,
 } from "../utils/siteNavigation"
 
 /**
@@ -12,9 +13,16 @@ import {
  */
 const PlaygroundVpnRequiredDialog = () => {
   const [opened, setOpened] = useState(false)
+  const [destinationUrl, setDestinationUrl] = useState(
+    `${STAGING_ORIGIN}/playground`
+  )
 
   useEffect(() => {
-    const open = () => setOpened(true)
+    const open = (event: Event) => {
+      const detail = (event as CustomEvent<PlaygroundVpnRequiredDetail>).detail
+      setDestinationUrl(detail?.destinationUrl || `${STAGING_ORIGIN}/playground`)
+      setOpened(true)
+    }
     window.addEventListener(PLAYGROUND_VPN_REQUIRED_EVENT, open)
     return () => window.removeEventListener(PLAYGROUND_VPN_REQUIRED_EVENT, open)
   }, [])
@@ -23,7 +31,7 @@ const PlaygroundVpnRequiredDialog = () => {
 
   const retry = () => {
     close()
-    void goToStaging(`${STAGING_ORIGIN}/playground`)
+    void goToStaging(destinationUrl)
   }
 
   return (

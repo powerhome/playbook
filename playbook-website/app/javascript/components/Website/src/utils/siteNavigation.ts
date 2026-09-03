@@ -6,6 +6,10 @@ const STAGING_CHECK_TIMEOUT_MS = 3500
 
 export const PLAYGROUND_VPN_REQUIRED_EVENT = "pb-playground-vpn-required"
 
+export type PlaygroundVpnRequiredDetail = {
+  destinationUrl: string
+}
+
 const normalizePath = (path: string) => (path.startsWith("/") ? path : `/${path}`)
 
 const isPlaygroundPath = (path: string) => {
@@ -37,8 +41,12 @@ export const siteHref = (path: string) => {
   return normalized
 }
 
-export const showPlaygroundVpnRequired = () => {
-  window.dispatchEvent(new CustomEvent(PLAYGROUND_VPN_REQUIRED_EVENT))
+export const showPlaygroundVpnRequired = (destinationUrl: string) => {
+  window.dispatchEvent(
+    new CustomEvent<PlaygroundVpnRequiredDetail>(PLAYGROUND_VPN_REQUIRED_EVENT, {
+      detail: { destinationUrl },
+    })
+  )
 }
 
 /** Best-effort check: staging is internal and usually unreachable off VPN. */
@@ -87,7 +95,7 @@ export const goToStaging = async (url: string) => {
 
   const reachable = await isStagingReachable()
   if (!reachable) {
-    showPlaygroundVpnRequired()
+    showPlaygroundVpnRequired(url)
     return
   }
 
