@@ -7,10 +7,21 @@ import {
   useLoaderData,
   useParams,
 } from 'react-router-dom'
-import { lazy, Suspense } from 'react'
-import { LoadingInline } from 'playbook-ui'
 
 import App from '../index'
+import Home from './pages/Home'
+import ComponentList from './pages/ComponentList'
+import CategoryShow from './pages/CategoryShow'
+import KitShow from './pages/KitShow'
+import Changelog from './pages/Changelog'
+import GettingStarted from './pages/GettingStarted'
+import DesignGuidelines from './pages/DesignGuidelines'
+import GuidePage from './pages/GuidePage'
+import Playground from './pages/Playground'
+import WorldCup from './pages/WorldCup'
+import Color from './pages/DesignGuidelines/Color'
+import Spacing from './pages/DesignGuidelines/Spacing'
+import Typography from './pages/DesignGuidelines/Typography'
 import Error from './components/Error'
 import {
   CategoryLoader,
@@ -21,31 +32,20 @@ import {
   IconsLoader,
   PlaygroundLoader,
 } from './hooks/loaders'
-
-// Route pages are lazy-loaded (via each Route's `lazy` prop, or React.lazy below
-// for the few pages rendered from an inline wrapper) so every page's code ships
-// as its own chunk fetched on demand, instead of all pages — including the full
-// Playground builder — bundling into one script every page has to download.
-const GlobalPropsExamples = lazy(() => import('./components/GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'))
-const TokensExamples = lazy(() => import('./components/GlobalPropsAndTokens/ExamplesPage/TokensExamplesIndex'))
-const IconsIndex = lazy(() => import('./components/Icons/IconsIndex'))
+import GlobalPropsIndex from './components/GlobalPropsAndTokens/GlobalPropsIndex'
+import GlobalPropsExamples from './components/GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'
+import TokensIndex from './components/GlobalPropsAndTokens/TokensIndex'
+import TokensExamples from './components/GlobalPropsAndTokens/ExamplesPage/TokensExamplesIndex'
+import IconsIndex from './components/Icons/IconsIndex'
 
 function GlobalPropsShowPage() {
   const { name } = useParams()
-  return (
-    <Suspense fallback={<LoadingInline />}>
-      <GlobalPropsExamples routeParamName={name} />
-    </Suspense>
-  )
+  return <GlobalPropsExamples routeParamName={name} />
 }
 
 function TokensShowPage() {
   const { name } = useParams()
-  return (
-    <Suspense fallback={<LoadingInline />}>
-      <TokensExamples routeParamName={name} />
-    </Suspense>
-  )
+  return <TokensExamples routeParamName={name} />
 }
 
 function IconsPage() {
@@ -57,14 +57,12 @@ function IconsPage() {
   }: any = useLoaderData()
 
   return (
-    <Suspense fallback={<LoadingInline />}>
-      <IconsIndex
-        bannerImageUrl={icon_banner_image_url}
-        iconCategories={icon_categories}
-        iconKitUrl={icon_kit_url}
-        iconsByCategory={icons_by_category}
-      />
-    </Suspense>
+    <IconsIndex
+      bannerImageUrl={icon_banner_image_url}
+      iconCategories={icon_categories}
+      iconKitUrl={icon_kit_url}
+      iconsByCategory={icons_by_category}
+    />
   )
 }
 
@@ -77,24 +75,18 @@ const router = createBrowserRouter(
       loader={ComponentsLoader}
       path="/"
     >
+      <Route element={<Home />} index />
       <Route
-        index
-        lazy={() => import('./pages/Home').then((mod) => ({ Component: mod.default }))}
-      />
-      <Route
-        lazy={() => import('./pages/KitShow').then((mod) => ({ Component: mod.default }))}
+        element={<KitShow />}
         loader={ComponentShowLoader}
         path="kits/advanced_table/:name/:platform"
       />
       <Route
-        lazy={() => import('./pages/KitShow').then((mod) => ({ Component: mod.default }))}
+        element={<KitShow />}
         loader={ComponentShowLoader}
         path="kits/:name/:platform"
       />
-      <Route
-        lazy={() => import('./pages/ComponentList').then((mod) => ({ Component: mod.default }))}
-        path="kits"
-      >
+      <Route path="kits" element={<ComponentList />}>
         <Route
           element={<Navigate to="react" />}
           loader={ComponentShowLoader}
@@ -102,12 +94,12 @@ const router = createBrowserRouter(
         />
       </Route>
       <Route
-        lazy={() => import('./pages/CategoryShow').then((mod) => ({ Component: mod.default }))}
+        element={<CategoryShow />}
         loader={CategoryLoader}
         path="kit_category/:category"
       />
       <Route
-        lazy={() => import('./components/GlobalPropsAndTokens/GlobalPropsIndex').then((mod) => ({ Component: mod.default }))}
+        element={<GlobalPropsIndex />}
         loader={ComponentsLoader}
         path="global_props"
       />
@@ -117,7 +109,7 @@ const router = createBrowserRouter(
         path="global_props/:name"
       />
       <Route
-        lazy={() => import('./components/GlobalPropsAndTokens/TokensIndex').then((mod) => ({ Component: mod.default }))}
+        element={<TokensIndex />}
         loader={ComponentsLoader}
         path="tokens"
       />
@@ -132,56 +124,53 @@ const router = createBrowserRouter(
         path="icons"
       />
       <Route
-        lazy={() => import('./pages/Playground').then((mod) => ({ Component: mod.default }))}
+        element={<Playground />}
         loader={PlaygroundLoader}
         path="playground"
       />
+      <Route element={<WorldCup />} path="worldcup" />
       <Route
-        lazy={() => import('./pages/WorldCup').then((mod) => ({ Component: mod.default }))}
-        path="worldcup"
-      />
-      <Route
-        lazy={() => import('./pages/Changelog').then((mod) => ({ Component: mod.default }))}
+        element={<Changelog />}
         loader={ComponentsLoader}
         path="changelog"
       />
       <Route
-        lazy={() => import('./pages/Changelog').then((mod) => ({ Component: mod.default }))}
+        element={<Changelog />}
         loader={ComponentsLoader}
         path="changelog/:variant"
       />
       <Route
-        lazy={() => import('./pages/GettingStarted').then((mod) => ({ Component: mod.default }))}
+        element={<GettingStarted />}
         loader={GuidesLoader}
         path="guides/getting_started"
       />
       <Route
-        lazy={() => import('./pages/GuidePage').then((mod) => ({ Component: mod.default }))}
+        element={<GuidePage />}
         loader={GuidePageLoader}
         path="guides/getting_started/:page"
       />
       <Route
-        lazy={() => import('./pages/DesignGuidelines').then((mod) => ({ Component: mod.default }))}
+        element={<DesignGuidelines />}
         loader={GuidesLoader}
         path="guides/design_guidelines"
       />
       <Route
-        lazy={() => import('./pages/DesignGuidelines/Color').then((mod) => ({ Component: mod.default }))}
+        element={<Color />}
         loader={GuidesLoader}
         path="guides/design_guidelines/color"
       />
       <Route
-        lazy={() => import('./pages/DesignGuidelines/Spacing').then((mod) => ({ Component: mod.default }))}
+        element={<Spacing />}
         loader={GuidesLoader}
         path="guides/design_guidelines/spacing"
       />
       <Route
-        lazy={() => import('./pages/DesignGuidelines/Typography').then((mod) => ({ Component: mod.default }))}
+        element={<Typography />}
         loader={GuidesLoader}
         path="guides/design_guidelines/typography"
       />
       <Route
-        lazy={() => import('./pages/GuidePage').then((mod) => ({ Component: mod.default }))}
+        element={<GuidePage />}
         loader={GuidePageLoader}
         path="guides/design_guidelines/:page"
       />
