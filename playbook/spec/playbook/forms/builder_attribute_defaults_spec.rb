@@ -177,6 +177,19 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
       expect(rendered).to include("custom error")
       expect(rendered).not_to include("from model")
     end
+
+    it "honors explicit error: nil on the nested text_field" do
+      model = build_model(
+        attributes: { starts_at: Time.utc(2026, 1, 1) },
+        errors: { starts_at: ["from model"] }
+      )
+
+      rendered = render_form_with(model) do |form|
+        form.date_picker :starts_at, props: { label: true, error: nil }
+      end
+
+      expect(rendered).not_to include("from model")
+    end
   end
 
   describe "#time_picker" do

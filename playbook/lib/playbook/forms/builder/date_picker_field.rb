@@ -31,15 +31,15 @@ module Playbook
         props[:name] = html_attribute_name
         props[:picker_id] = html_id
 
-        # Only forward error when present — `error: nil` would suppress auto-bind
-        # inside FormFieldBuilder (`return if props.key?(:error)`).
+        # Forward error when set — including explicit nil so the nested text_field
+        # does not re-run apply_form_error! and undo the opt-out.
         input_props = {
           label: nil,
           placeholder: props[:placeholder],
           required: props[:required],
           validation: props[:validation_message].present? ? { message: props[:validation_message] } : {},
         }
-        input_props[:error] = props[:error] if props[:error].present?
+        input_props[:error] = props[:error] if props.key?(:error)
 
         input = text_field(
           name,
