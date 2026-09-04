@@ -1,9 +1,13 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { Card } from "playbook-ui";
+import PbKitRegistry from "kits/pb_kit_registry";
+import { mountComponents } from "../../../../../utilities/mountComponent";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 type LiveExampleRailsProps = {
   html: string;
+  /** When false, skip re-executing inline scripts (safer for user-driven playground HTML). */
+  executeScripts?: boolean;
 };
 
 type ScriptSnapshot = {
@@ -29,8 +33,7 @@ const RAILS_EXAMPLE_WRAPPER_STYLE: React.CSSProperties = {
   width: "100%",
 };
 
-const EXECUTE_SCRIPT_DELAY_MS = 100;
-const REINITIALIZE_DELAY_MS = 200;
+const DEFERRED_SCRIPT_FOLLOWUP_MS = 50;
 
 const transformScriptForLiveExecution = (scriptContent: string): string => {
   // Rails examples are injected after the page has already loaded, so
@@ -136,7 +139,59 @@ const removePortaledPopovers = (
   });
 };
 
-const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
+const closeOpenDialogs = (container: HTMLElement): void => {
+  container.querySelectorAll("dialog[open]").forEach((dialog) => {
+    if (typeof dialog.close === "function") {
+      dialog.close();
+    }
+  });
+};
+
+const scriptUsesDeferredInit = (scriptContent: string): boolean =>
+  /DOMContentLoaded|addEventListener\s*\(\s*["']load["']/.test(scriptContent);
+
+const executeInlineScripts = (
+  container: HTMLElement,
+  scripts: ScriptSnapshot[],
+): boolean => {
+  let needsDeferredFollowUp = false;
+
+  scripts.forEach(({ attributes, content, element }) => {
+    const newScript = document.createElement("script");
+    attributes.forEach((attr) => {
+      newScript.setAttribute(attr.name, attr.value);
+    });
+
+    const wrappedContent = transformScriptForLiveExecution(content).trim();
+    const isolatedContent = wrappedContent.startsWith("(function")
+      ? wrappedContent
+      : `(function() {\n${wrappedContent}\n})();`;
+
+    newScript.textContent = isolatedContent;
+
+    if (element.parentNode) {
+      element.parentNode.replaceChild(newScript, element);
+    } else {
+      container.appendChild(newScript);
+    }
+
+    if (scriptUsesDeferredInit(content)) {
+      needsDeferredFollowUp = true;
+    }
+  });
+
+  return needsDeferredFollowUp;
+};
+
+const reinitializeRailsKits = (container: HTMLElement): void => {
+  PbKitRegistry.rescan(container);
+  mountComponents(container);
+};
+
+const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({
+  html,
+  executeScripts = true,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { darkMode } = useDarkMode();
 
@@ -171,20 +226,27 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
 
     // Keep a copy of inline scripts before Playbook popovers move their
     // tooltip content out of this live example and into document.body.
-    const scriptsToExecute: ScriptSnapshot[] = Array.from(
-      container.querySelectorAll("script"),
-    ).map((script) => ({
-      attributes: Array.from(script.attributes).map((attr) => ({
-        name: attr.name,
-        value: attr.value,
-      })),
-      content: script.textContent || "",
-      element: script,
-    }));
+    // Playground previews intentionally skip script execution — HTML there is
+    // user-driven and must not run arbitrary JS in the docs origin.
+    const scriptsToExecute: ScriptSnapshot[] = executeScripts
+      ? Array.from(container.querySelectorAll("script")).map((script) => ({
+          attributes: Array.from(script.attributes).map((attr) => ({
+            name: attr.name,
+            value: attr.value,
+          })),
+          content: script.textContent || "",
+          element: script,
+        }))
+      : [];
+
+    if (!executeScripts) {
+      container.querySelectorAll("script").forEach((script) => script.remove());
+    }
 
     // Returning from React to Rails can leave an older Rails tooltip in body.
     // Removing it prevents duplicate ids like filter-form... / filter-default.
     removePortaledPopovers(container, portaledTooltipIds);
+    closeOpenDialogs(container);
 
     const preventHashNavigation = (e: Event) => {
       const target = e.target as HTMLElement;
@@ -195,42 +257,36 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     };
     container.addEventListener('click', preventHashNavigation);
 
-    // First pass wires up enhanced Rails kits such as Popover.
-    window.dispatchEvent(new Event("turbo:frame-load"));
+    // Single init path: run inline scripts, then one scoped kit rescan.
+    const initFrame = requestAnimationFrame(() => {
+      const needsDeferredFollowUp = executeInlineScripts(container, scriptsToExecute);
+      reinitializeRailsKits(container);
 
-    // Then run the example's inline scripts, including date picker setup.
-    const scriptTimeout = setTimeout(() => {
-      scriptsToExecute.forEach(({ attributes, content, element }) => {
-        const newScript = document.createElement("script");
-        attributes.forEach((attr) => {
-          newScript.setAttribute(attr.name, attr.value);
-        });
+      if (!needsDeferredFollowUp) return;
 
-        newScript.textContent = transformScriptForLiveExecution(content);
+      // Scripts rewritten from DOMContentLoaded/load run on a short timer; rescan once after.
+      const deferredTimeout = window.setTimeout(() => {
+        reinitializeRailsKits(container);
+      }, DEFERRED_SCRIPT_FOLLOWUP_MS);
 
-        if (element.parentNode) {
-          element.parentNode.replaceChild(newScript, element);
-        } else {
-          container.appendChild(newScript);
-        }
-      });
-    }, EXECUTE_SCRIPT_DELAY_MS);
-
-    // One final pass catches any Rails kits inserted or moved by inline scripts.
-    const turboTimeout = setTimeout(() => {
-      window.dispatchEvent(new Event("turbo:frame-load"));
-    }, REINITIALIZE_DELAY_MS);
+      container.dataset.railsKitDeferredTimeout = String(deferredTimeout);
+    });
 
     return () => {
-      clearTimeout(scriptTimeout);
-      clearTimeout(turboTimeout);
+      cancelAnimationFrame(initFrame);
+      const deferredTimeoutId = container.dataset.railsKitDeferredTimeout;
+      if (deferredTimeoutId) {
+        window.clearTimeout(Number(deferredTimeoutId));
+        delete container.dataset.railsKitDeferredTimeout;
+      }
+      closeOpenDialogs(container);
       // Popovers and flatpickr calendars can own body-level DOM. Clean them
       // before the React tree drops this live example.
       destroyFlatpickrInstances(container);
       removePortaledPopovers(container, portaledTooltipIds);
       container.removeEventListener('click', preventHashNavigation);
     };
-  }, [html]);
+  }, [html, executeScripts]);
 
   if (!html) return null;
 

@@ -27,6 +27,8 @@ import {
   shouldApplyPropSyncOnEnable,
   groupPropDefinitions,
 } from "../utils";
+import { generateRailsCode } from "../RailsCodeGenerator";
+import { formatChildrenForRailsEditor } from "../jsxChildrenToRails";
 import { EXCLUDED_PROPS, GLOBAL_PROP_GROUPS } from "../constants";
 
 interface Example {
@@ -42,6 +44,7 @@ interface UsePlaygroundStateProps {
   kitName: string;
   defaultExample?: Example;
   playgroundConfig?: PlaygroundConfig | null;
+  platform?: "react" | "rails";
 }
 
 export const usePlaygroundState = ({
@@ -50,6 +53,7 @@ export const usePlaygroundState = ({
   kitName,
   defaultExample,
   playgroundConfig,
+  platform = "react",
 }: UsePlaygroundStateProps) => {
   // Initialize with first preset if available
   const firstPreset = playgroundConfig?.presets?.[0];
@@ -97,6 +101,17 @@ export const usePlaygroundState = ({
     return getDefaultChildren(kitName);
   }, [kitName, playgroundConfig]);
 
+  const normalizeChildren = useCallback(
+    (raw: string) => (platform === "rails" ? formatChildrenForRailsEditor(raw) : raw),
+    [platform]
+  );
+
+  const resolveChildren = useCallback(
+    (presetIndex: number | null, structureModeKey: string | null) =>
+      normalizeChildren(getChildrenForState(presetIndex, structureModeKey)),
+    [getChildrenForState, normalizeChildren]
+  );
+
   const initialStructureMode = getStructureModeForPreset(firstPresetIndex, defaultStructureMode);
   const initialDataPresetKey = getDataPresetForPreset(firstPresetIndex, null);
 
@@ -115,19 +130,19 @@ export const usePlaygroundState = ({
 
     const filtered: Record<string, PropDefinition> = {};
     Object.entries(kitSchema.props).forEach(([name, def]) => {
-      const isReactProp =
-        !def.platforms || def.platforms.length === 0 || def.platforms.includes("react");
+      const isPlatformProp =
+        !def.platforms || def.platforms.length === 0 || def.platforms.includes(platform);
       const isExcluded =
         EXCLUDED_PROPS.includes(name) || EXCLUDED_PROPS.includes(name.toLowerCase());
 
-      if (isReactProp && !isExcluded && !hiddenPropNames.has(name)) {
+      if (isPlatformProp && !isExcluded && !hiddenPropNames.has(name)) {
         filtered[name] = emitEmptyStringPropNames.has(name)
           ? { ...def, emitEmptyString: true }
           : def;
       }
     });
     return filtered;
-  }, [kitSchema, hiddenPropNames, emitEmptyStringPropNames]);
+  }, [kitSchema, hiddenPropNames, emitEmptyStringPropNames, platform]);
 
   const globalProps = useMemo(() => {
     if (!globalPropsSchema?.props || !kitSchema?.globalProps) return {};
@@ -169,7 +184,7 @@ export const usePlaygroundState = ({
     buildFullPropValues(initialDataPresetKey, initialStructureMode, firstPresetIndex)
   );
   const [children, setChildren] = useState<string>(() =>
-    getChildrenForState(firstPresetIndex, initialStructureMode)
+    resolveChildren(firstPresetIndex, initialStructureMode)
   );
   const [activePresetIndex, setActivePresetIndex] = useState<number | null>(
     firstPresetIndex
@@ -195,7 +210,7 @@ export const usePlaygroundState = ({
       )
     );
     setChildren(
-      getChildrenForState(
+      resolveChildren(
         nextPresetIndex,
         nextStructureMode
       )
@@ -260,7 +275,7 @@ export const usePlaygroundState = ({
         }
         if (nextStructureMode !== activeStructureMode) {
           setActiveStructureMode(nextStructureMode);
-          setChildren(getChildrenForState(null, nextStructureMode));
+          setChildren(resolveChildren(null, nextStructureMode));
         }
       }
 
@@ -335,14 +350,14 @@ export const usePlaygroundState = ({
       }
 
       setActivePresetIndex(presetIndex);
-      setChildren(getChildrenForState(presetIndex, nextStructureMode));
+      setChildren(resolveChildren(presetIndex, nextStructureMode));
     },
     [
       buildFullPropValues,
       activeDataPresetKey,
       activeStructureMode,
       getStructureModeForPreset,
-      getChildrenForState,
+      resolveChildren,
       playgroundConfig,
     ]
   );
@@ -378,6 +393,66 @@ export const usePlaygroundState = ({
     () => buildPropSyncHints(playgroundConfig),
     [playgroundConfig],
   );
+
+  const platformPresets = useMemo(() => {
+    const all = playgroundConfig?.presets ?? [];
+    if (platform !== "rails") return all;
+
+    return all.filter((preset) =>
+      Object.keys(preset.props ?? {}).every((name) => {
+        if (requiredPropNames.has(name)) return true;
+        return name in playgroundProps || name in globalProps;
+      }),
+    );
+  }, [playgroundConfig?.presets, platform, playgroundProps, globalProps, requiredPropNames]);
+
+  const activePlatformPresetIndex = useMemo(() => {
+    if (activePresetIndex == null || !playgroundConfig?.presets) return null;
+
+    const activeName = playgroundConfig.presets[activePresetIndex]?.name;
+    const idx = platformPresets.findIndex((preset) => preset.name === activeName);
+    return idx >= 0 ? idx : null;
+  }, [activePresetIndex, playgroundConfig?.presets, platformPresets]);
+
+  const applyPlatformPreset = useCallback(
+    (platformIndex: number) => {
+      const preset = platformPresets[platformIndex];
+      if (!preset || !playgroundConfig?.presets) return;
+
+      const originalIndex = playgroundConfig.presets.findIndex(
+        (candidate) => candidate.name === preset.name,
+      );
+      if (originalIndex >= 0) {
+        applyPreset(originalIndex);
+      }
+    },
+    [platformPresets, playgroundConfig?.presets, applyPreset],
+  );
+
+  useEffect(() => {
+    if (platform !== "rails" || activePresetIndex == null) return;
+
+    const activeName = playgroundConfig?.presets?.[activePresetIndex]?.name;
+    if (!activeName || platformPresets.some((preset) => preset.name === activeName)) {
+      return;
+    }
+
+    const fallbackPreset = platformPresets[0];
+    if (!fallbackPreset || !playgroundConfig?.presets) return;
+
+    const fallbackIndex = playgroundConfig.presets.findIndex(
+      (preset) => preset.name === fallbackPreset.name,
+    );
+    if (fallbackIndex >= 0) {
+      applyPreset(fallbackIndex);
+    }
+  }, [
+    platform,
+    activePresetIndex,
+    platformPresets,
+    playgroundConfig?.presets,
+    applyPreset,
+  ]);
 
   // Props that fail conditionals must not appear in generated code (or live preview)
   const propValuesForCodegen = useMemo(() => {
@@ -477,7 +552,7 @@ export const usePlaygroundState = ({
 
   // Resolve template and propTargets - structure mode takes precedence
   const activeTemplate = currentStructureMode?.template ?? playgroundConfig?.template;
-  const hasActiveTemplate = Boolean(activeTemplate);
+  const hasActiveTemplate = platform !== "rails" && Boolean(activeTemplate);
   
   // Merge propTargets: base config + structure mode overrides
   const activePropTargets = useMemo(() => {
@@ -508,6 +583,18 @@ export const usePlaygroundState = ({
     ],
     [playgroundConfig?.statefulProps, currentStructureMode?.statefulProps]
   );
+
+  const generatedRailsCode = useMemo(() => {
+    if (platform !== "rails") return "";
+
+    return generateRailsCode({
+      kitName,
+      propValues: propValuesForCodegen,
+      propDefinitions: allPropDefinitions,
+      children: needsChildren(kitName) ? children : undefined,
+      structureMode: activeStructureMode,
+    });
+  }, [platform, kitName, propValuesForCodegen, allPropDefinitions, children, activeStructureMode]);
 
   // Code generation
   const generatedDisplayCode = useMemo(() => {
@@ -575,17 +662,53 @@ export const usePlaygroundState = ({
   }, [hasActiveTemplate, hasModifiedProps, defaultExample, generatedLiveCode]);
 
   const displayCode = useMemo(() => {
+    if (platform === "rails") {
+      if (!hasModifiedProps && defaultExample?.source) {
+        return defaultExample.source;
+      }
+      return generatedRailsCode;
+    }
+
     if (hasActiveTemplate) return generatedDisplayCode;
     if (!hasModifiedProps && defaultExample?.source) {
       return defaultExample.source;
     }
     return generatedDisplayCode;
-  }, [hasActiveTemplate, hasModifiedProps, defaultExample, generatedDisplayCode]);
+  }, [
+    platform,
+    hasActiveTemplate,
+    hasModifiedProps,
+    defaultExample,
+    generatedDisplayCode,
+    generatedRailsCode,
+  ]);
+
+  const railsPreviewPayload = useMemo(() => {
+    const props: Record<string, unknown> = {};
+    const global_props: Record<string, unknown> = {};
+
+    Object.entries(propValuesForCodegen).forEach(([name, propValue]) => {
+      if (!propValue.enabled) return;
+
+      if (globalProps[name]) {
+        global_props[name] = propValue.value;
+      } else {
+        props[name] = propValue.value;
+      }
+    });
+
+    return {
+      props,
+      global_props,
+      children: showChildren && children.trim() ? children : undefined,
+      structure_mode: activeStructureMode,
+    };
+  }, [propValuesForCodegen, globalProps, showChildren, children, activeStructureMode]);
 
   const handleStructureModeChange = useCallback(
     (modeKey: string) => {
       setActiveStructureMode(modeKey);
-      setChildren(getChildrenForState(null, modeKey));
+      setChildren(resolveChildren(null, modeKey));
       setPropValues((prev) => {
         const preservedEnabledProps: Record<string, PropValue> = {};
         Object.entries(prev).forEach(([name, value]) => {
@@ -616,7 +739,7 @@ export const usePlaygroundState = ({
     [
       activeDataPresetKey,
       allPropDefinitions,
-      getChildrenForState,
+      resolveChildren,
       playgroundConfig,
       requiredProps,
     ]
@@ -638,7 +761,7 @@ export const usePlaygroundState = ({
       )
     );
     setChildren(
-      getChildrenForState(
+      resolveChildren(
         firstPresetIndex,
         nextStructureMode
       )
@@ -648,7 +771,7 @@ export const usePlaygroundState = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     buildFullPropValues,
-    getChildrenForState,
+    resolveChildren,
     getDataPresetForPreset,
     getStructureModeForPreset,
     playgroundConfig,
@@ -676,12 +799,16 @@ export const usePlaygroundState = ({
     showChildren,
     previewCode,
     displayCode,
+    railsPreviewPayload,
     availableStructureModes,
     availableDataPresets,
     requiredPropNames,
+    platformPresets,
+    activePlatformPresetIndex,
 
     handlePropChange,
     applyPreset,
+    applyPlatformPreset,
     setChildren,
     handleStructureModeChange,
     handleDataPresetChange,
