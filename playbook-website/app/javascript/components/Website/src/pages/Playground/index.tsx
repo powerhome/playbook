@@ -995,43 +995,23 @@ function PlaygroundApp() {
   );
 }
 
-/** On production only, send users to staging (or show the VPN dialog if unreachable). */
+/**
+ * Playground lives on staging. On production, goToStaging surfaces the VPN
+ * warning dialog (mounted in Website/index.tsx) instead of redirecting right
+ * away — the actual navigation happens once the user confirms there. This
+ * fallback text stays visible underneath it so declining (or landing here
+ * directly without confirming) never leaves a blank page with no explanation.
+ */
 export default function Playground() {
-  const shouldRedirectToStaging = isProductionHost()
-  const [checkingStaging, setCheckingStaging] = useState(shouldRedirectToStaging)
-
   useEffect(() => {
-    if (!shouldRedirectToStaging) {
-      setCheckingStaging(false)
-      return
-    }
+    if (!isProductionHost()) return
+    goToStaging(`${STAGING_ORIGIN}/playground${window.location.search}${window.location.hash}`)
+  }, [])
 
-    let cancelled = false
-    void (async () => {
-      await goToStaging(
-        `${STAGING_ORIGIN}/playground${window.location.search}${window.location.hash}`
-      )
-      if (!cancelled) setCheckingStaging(false)
-    })()
-
-    return () => {
-      cancelled = true
-    }
-  }, [shouldRedirectToStaging])
-
-  if (checkingStaging) {
+  if (isProductionHost() && !isStagingHost()) {
     return (
       <Flex align="center" justify="center" padding="xl" width="100%">
-        <Body text="Opening Playground…" />
-      </Flex>
-    )
-  }
-
-  // Production host after a failed staging check: VPN dialog is open.
-  if (shouldRedirectToStaging && !isStagingHost()) {
-    return (
-      <Flex align="center" justify="center" padding="xl" width="100%">
-        <Body text="Playground requires the company VPN. Connect, then try again from the sidebar." />
+        <Body text="Playground requires the company VPN. Connect, then open Playground again from the sidebar." />
       </Flex>
     )
   }

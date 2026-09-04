@@ -2,13 +2,6 @@ export const PROD_ORIGIN = "https://playbook.powerapp.cloud"
 export const STAGING_ORIGIN = "https://staging.playbook.powerapp.cloud"
 const PROD_HOST = "playbook.powerapp.cloud"
 const STAGING_HOST = "staging.playbook.powerapp.cloud"
-const STAGING_CHECK_TIMEOUT_MS = 3500
-
-export const PLAYGROUND_VPN_REQUIRED_EVENT = "pb-playground-vpn-required"
-
-export type PlaygroundVpnRequiredDetail = {
-  destinationUrl: string
-}
 
 const normalizePath = (path: string) => (path.startsWith("/") ? path : `/${path}`)
 
@@ -41,44 +34,27 @@ export const siteHref = (path: string) => {
   return normalized
 }
 
-export const showPlaygroundVpnRequired = (destinationUrl: string) => {
+export const PLAYGROUND_VPN_WARNING_EVENT = "pb-playground-vpn-warning"
+
+export type PlaygroundVpnWarningDetail = {
+  destinationUrl: string
+}
+
+export const showPlaygroundVpnWarning = (destinationUrl: string) => {
   window.dispatchEvent(
-    new CustomEvent<PlaygroundVpnRequiredDetail>(PLAYGROUND_VPN_REQUIRED_EVENT, {
+    new CustomEvent<PlaygroundVpnWarningDetail>(PLAYGROUND_VPN_WARNING_EVENT, {
       detail: { destinationUrl },
     })
   )
 }
 
-/** Best-effort check: staging is internal and usually unreachable off VPN. */
-export const isStagingReachable = async (): Promise<boolean> => {
-  if (isStagingHost() || !isProductionHost()) return true
-
-  const controller = new AbortController()
-  const timeoutId = window.setTimeout(
-    () => controller.abort(),
-    STAGING_CHECK_TIMEOUT_MS
-  )
-
-  try {
-    await fetch(`${STAGING_ORIGIN}/favicon.ico?_=${Date.now()}`, {
-      cache: "no-store",
-      mode: "no-cors",
-      signal: controller.signal,
-    })
-    return true
-  } catch {
-    return false
-  } finally {
-    window.clearTimeout(timeoutId)
-  }
-}
-
 /**
- * Redirect to a staging URL after confirming staging is reachable.
- * Shows a VPN dialog instead of sending users to a failed browser load.
- * Only used from the production host.
+ * Redirect to a staging URL. On production, staging is only reachable on the
+ * company VPN, and reachability can't be reliably detected client-side — so
+ * rather than navigate straight there, this warns the user up front and lets
+ * PlaygroundVpnWarningDialog perform the actual navigation once they confirm.
  */
-export const goToStaging = async (url: string) => {
+export const goToStaging = (url: string) => {
   if (isStagingHost()) {
     window.location.assign(url)
     return
@@ -93,13 +69,7 @@ export const goToStaging = async (url: string) => {
     return
   }
 
-  const reachable = await isStagingReachable()
-  if (!reachable) {
-    showPlaygroundVpnRequired(url)
-    return
-  }
-
-  window.location.assign(url)
+  showPlaygroundVpnWarning(url)
 }
 
 /**
