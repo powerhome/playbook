@@ -418,9 +418,37 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setIsDropDownClosed(false);
     };
 
-    const handleSelectionChange = (value: any) => {
-        onSelect && onSelect(value);
-        onChange && onChange({ target: { name, value } });
+    // register() stores onChange values in form state and consumers often render them.
+    // Keep onSelect as the rich option object; pass a primitive form value to onChange.
+    const toOptionFormValue = (option: GenericObject) => {
+        const optionValue = option.value;
+        if (
+            typeof optionValue === "string" ||
+            typeof optionValue === "number" ||
+            typeof optionValue === "boolean"
+        ) {
+            return optionValue;
+        }
+
+        if (option.label != null) return option.label;
+        if (option.text != null) return option.text;
+        return optionValue;
+    };
+
+    const toFormValue = (selection: any) => {
+        if (selection == null) return selection;
+        if (Array.isArray(selection)) {
+            return selection.map((option: GenericObject) => toOptionFormValue(option));
+        }
+        if (typeof selection === "object") {
+            return toOptionFormValue(selection as GenericObject);
+        }
+        return selection;
+    };
+
+    const handleSelectionChange = (selection: any) => {
+        onSelect && onSelect(selection);
+        onChange && onChange({ target: { name, value: toFormValue(selection) } });
     };
 
       const handleOptionClick = (clickedItem: GenericObject) => {
@@ -508,13 +536,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         dark
     });
 
-    // Create an internal ref object that holds the imperative handle methods.
-    // Include focus/blur/name/value so react-hook-form register() can treat Dropdown like a field.
+    // Create an internal ref object that holds the imperative handle methods
     const imperativeRef = useRef({
-      blur: () => {
-        inputRef.current?.blur();
-        inputWrapperRef.current?.blur();
-      },
       clearSelected: () => {
         if (multiSelect) {
           setSelected([]);
@@ -526,25 +549,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setFilterItem("");
         setIsDropDownClosed(true);
       },
-      focus: () => {
-        if (autocomplete) {
-          inputRef.current?.focus();
-          return;
-        }
-        inputWrapperRef.current?.focus();
-      },
-      name,
-      value: null as any,
     });
 
     // Update imperativeRef whenever dependencies change
     // (needed for external clearing of normal Dropdown + DatePicker-synced QuickPick Dropdown)
     useEffect(() => {
       imperativeRef.current = {
-        blur: () => {
-          inputRef.current?.blur();
-          inputWrapperRef.current?.blur();
-        },
         clearSelected: () => {
           if (multiSelect) {
             setSelected([]);
@@ -556,21 +566,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setFilterItem("");
           setIsDropDownClosed(true);
         },
-        focus: () => {
-          if (autocomplete) {
-            inputRef.current?.focus();
-            return;
-          }
-          inputWrapperRef.current?.focus();
-        },
-        name,
-        value: multiSelect
-          ? selectedArray
-          : selected && !Array.isArray(selected) && Object.keys(selected).length
-            ? selected
-            : null,
       };
-    }, [autocomplete, multiSelect, handleSelectionChange, name, selected, selectedArray, setSelected, setFilterItem, setIsDropDownClosed]);
+    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed]);
 
     useImperativeHandle(ref, () => imperativeRef.current);
 

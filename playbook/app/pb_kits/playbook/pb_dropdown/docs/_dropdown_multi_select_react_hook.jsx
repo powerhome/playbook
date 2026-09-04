@@ -36,7 +36,7 @@ const DropdownMultiSelectReactHook = (props) => {
           text="Selected Countries"
       />
       {selectedCountries && selectedCountries.map(country => (
-        <p key={country.id}>{`${country.label} - ${country.value}`}</p>
+        <p key={country}>{country}</p>
       ))}
     </>
   )

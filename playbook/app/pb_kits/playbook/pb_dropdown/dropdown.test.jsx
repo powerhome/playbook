@@ -1014,7 +1014,7 @@ test('onChange uses react-hook-form event shape', () => {
   fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
 
   expect(onChange).toHaveBeenCalledWith({
-    target: { name: 'color', value: options[0] },
+    target: { name: 'color', value: options[0].value },
   })
 })
 
@@ -1036,10 +1036,10 @@ test('react-hook-form onChange receives selected options for multiSelect', () =>
   fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
 
   expect(onChange.mock.calls[0][0]).toEqual({
-    target: { name: 'languages', value: [options[0]] },
+    target: { name: 'languages', value: [options[0].value] },
   })
   expect(onChange.mock.calls[1][0]).toEqual({
-    target: { name: 'languages', value: [options[0], options[1]] },
+    target: { name: 'languages', value: [options[0].value, options[1].value] },
   })
 })
 
@@ -1062,7 +1062,7 @@ test('onSelect still fires when onChange is provided', () => {
 
   expect(onSelect).toHaveBeenCalledWith(options[0])
   expect(onChange).toHaveBeenCalledWith({
-    target: { name: 'country', value: options[0] },
+    target: { name: 'country', value: options[0].value },
   })
 })
 
@@ -1228,8 +1228,47 @@ test('react-hook-form register supports submit through forwarded ref', async () 
 
   await waitFor(() => {
     expect(onSubmit).toHaveBeenCalledWith(
-      { country: options[1] },
+      { country: options[1].value },
       expect.anything()
     )
+  })
+})
+
+test('react-hook-form onChange value is safe to render as React child', async () => {
+  const onSubmit = jest.fn()
+
+  const ReactHookFormDropdown = () => {
+    const { handleSubmit, register, watch } = useForm()
+    const country = watch('country')
+
+    return (
+      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+        <Dropdown
+            data={{ testid: testId }}
+            options={[
+              { id: 'active', label: 'Active Only', text: 'Active Only', value: 'Active Only' },
+              { id: 'inactive', label: 'Inactive Only', text: 'Inactive Only', value: 'Inactive Only' },
+            ]}
+            {...register('country')}
+        />
+        <div data-testid="submitted-preview">{country}</div>
+        <button type="submit">Submit</button>
+      </form>
+    )
+  }
+
+  render(<ReactHookFormDropdown />)
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  await waitFor(() => {
+    expect(screen.getByTestId('submitted-preview')).toHaveTextContent('Active Only')
+  })
+
+  fireEvent.submit(screen.getByRole('button', { name: 'Submit' }).closest('form'))
+
+  await waitFor(() => {
+    expect(onSubmit).toHaveBeenCalledWith({ country: 'Active Only' })
   })
 })

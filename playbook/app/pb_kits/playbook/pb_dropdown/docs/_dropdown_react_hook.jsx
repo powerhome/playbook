@@ -28,7 +28,7 @@ const DropdownReactHook = (props) => {
           size={4}
           text="Selected Country"
       />
-      <p>{selectedCountry && `${selectedCountry.label} - ${selectedCountry.value}`}</p>
+      <p>{selectedCountry}</p>
     </>
   )
 }
