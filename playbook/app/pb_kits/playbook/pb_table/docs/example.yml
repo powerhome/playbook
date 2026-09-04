@@ -45,7 +45,8 @@ examples:
     - table_with_filter_variant_external_filter_rails: Variant with Filter (External Filter)
     - table_with_filter_variant_with_pagination: Variant with Filter and Pagination
     - table_with_filter_with_card_title_props: Variant with Filter (with Card and Title Props)
-
+    - table_colspan: Table with Colspan
+    
   react:
     - table_sm: Small
     - table_md: Medium
@@ -90,3 +91,4 @@ examples:
     - table_with_filter_variant: Variant with Filter
     - table_with_filter_variant_with_pagination: Variant with Filter and Pagination
     - table_with_filter_with_card_title_props: Variant with Filter (with Card and Title Props)
+    - table_colspan: Table with Colspan

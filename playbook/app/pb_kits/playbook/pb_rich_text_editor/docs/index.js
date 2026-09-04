@@ -1,5 +1,6 @@
 export { default as RichTextEditorDefault } from './_rich_text_editor_default.jsx'
 export { default as RichTextEditorAdvancedDefault } from './_rich_text_editor_advanced_default.jsx'
+export { default as RichTextEditorAdvancedMarkdownSupport } from './_rich_text_editor_advanced_markdown_support.jsx'
 export { default as RichTextEditorMoreExtensions } from './_rich_text_editor_more_extensions.jsx'
 export { default as RichTextEditorToolbarDisabled } from './_rich_text_editor_toolbar_disabled.jsx'
 export { default as RichTextEditorAdvancedPreview } from './_rich_text_editor_advanced_preview.jsx'

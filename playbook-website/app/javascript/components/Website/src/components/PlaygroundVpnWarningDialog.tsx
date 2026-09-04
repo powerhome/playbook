@@ -43,15 +43,15 @@ const PlaygroundVpnWarningDialog = () => {
 
   return (
     <Dialog
-      cancelButton="Go back"
-      confirmButton="Try again"
+      cancelButton="Cancel"
+      confirmButton="Enter Playground"
       onCancel={goBack}
       onClose={goBack}
       onConfirm={tryAgain}
       opened={opened}
-      size="sm"
-      text={'Access to Playground requires the company VPN. If you\'re not connected, sign in to VPN and click "Try again." If you don\'t have VPN access, click "Go back."'}
-      title="VPN required for Playground"
+      size="md"
+      text={'Access to Playground is only available on the Power VPN. Make sure you are on the VPN to access the Playground.'}
+      title="VPN Required"
     />
   )
 }

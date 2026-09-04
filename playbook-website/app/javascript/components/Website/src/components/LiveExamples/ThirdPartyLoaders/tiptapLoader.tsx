@@ -5,7 +5,9 @@ export const tiptapLoader: ThirdPartyLoader = {
   detect: (_raw, _defaults, sources) =>
     sources.includes("@tiptap/react") ||
     sources.includes("@tiptap/starter-kit") ||
-    sources.includes("@tiptap/extension-link"),
+    sources.includes("@tiptap/extension-link") ||
+    sources.includes("prosemirror-markdown") ||
+    sources.includes("prosemirror-model"),
 
   load: async (raw, defaults, _sources) => {
     const scope: ThirdPartyScope = {}
@@ -61,7 +63,19 @@ export const tiptapLoader: ThirdPartyLoader = {
     const textAlias = defaults.find((d) => d.source === "@tiptap/extension-text")?.local
     if (textAlias && textAlias !== "Text") scope[textAlias] = Text
 
+    const markdownMod: any = await import("prosemirror-markdown")
+    const markdownNamed = parseNamedImportsFor(raw, "prosemirror-markdown")
+    scope.defaultMarkdownParser = markdownMod.defaultMarkdownParser
+    markdownNamed.forEach(({ exported, local }) => {
+      if (exported === "defaultMarkdownParser") scope[local] = markdownMod.defaultMarkdownParser
+    })
 
+    const modelMod: any = await import("prosemirror-model")
+    const modelNamed = parseNamedImportsFor(raw, "prosemirror-model")
+    scope.DOMSerializer = modelMod.DOMSerializer
+    modelNamed.forEach(({ exported, local }) => {
+      if (exported === "DOMSerializer") scope[local] = modelMod.DOMSerializer
+    })
 
     return scope
   },

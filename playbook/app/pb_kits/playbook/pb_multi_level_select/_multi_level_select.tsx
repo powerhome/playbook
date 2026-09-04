@@ -49,12 +49,19 @@ interface MultiLevelSelectComponent extends React.ForwardRefExoticComponent<
   Options: typeof MultiLevelSelectOptions;
 }
 
+type MultiLevelSelectItem = { [key: string]: any };
+type SelectedDisplayContext = {
+  ancestors: MultiLevelSelectItem[];
+  path: MultiLevelSelectItem[];
+};
+
 type MultiLevelSelectProps = {
   aria?: { [key: string]: string };
   className?: string;
   data?: { [key: string]: string };
   disabled?: boolean;
   error?: string;
+  formatSelectedDisplay?: (item: MultiLevelSelectItem, context: SelectedDisplayContext) => string;
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   inputDisplay?: "pills" | "none";
@@ -105,6 +112,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       data = {},
       disabled = false,
       error,
+      formatSelectedDisplay,
       htmlOptions = {},
       id,
       inputDisplay = "pills",
@@ -174,6 +182,26 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       value: "",
       item: [],
     });
+
+    const getSelectedDisplay = (
+      item: MultiLevelSelectItem,
+      data: MultiLevelSelectItem[],
+    ) => {
+      const ancestors: MultiLevelSelectItem[] = [];
+      let parentId = item.parent_id;
+
+      while (parentId) {
+        const parent = filterFormattedDataById(data, parentId)[0];
+        if (!parent) break;
+
+        ancestors.unshift(parent);
+        parentId = parent.parent_id;
+      }
+
+      return formatSelectedDisplay
+        ? formatSelectedDisplay(item, { ancestors, path: [...ancestors, item] })
+        : item.label;
+    };
 
     const arrowDownElementId = `arrow_down_${id}`;
     const arrowUpElementId = `arrow_up_${id}`;
@@ -771,7 +799,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                       : placeholderText
                   }
                     required={required}
-                    value={singleSelectedItem.value || filterItem}
+                    value={singleSelectedItem.item.length
+                      ? getSelectedDisplay(singleSelectedItem.item[0], formattedData)
+                      : singleSelectedItem.value || filterItem}
                 />
               </div>
 

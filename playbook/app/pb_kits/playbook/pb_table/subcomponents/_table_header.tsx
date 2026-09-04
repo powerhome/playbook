@@ -11,6 +11,7 @@ type TableHeaderPropTypes = {
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   className: string;
+  colSpan?: number;
   data?: { [key: string]: string };
   headerStyle?: "default" | "borderless" | "floating";
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
@@ -24,6 +25,7 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
     aria = {},
     children,
     className,
+    colSpan,
     data = {},
     headerStyle = "default",
     htmlOptions = {},
@@ -32,9 +34,10 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
     text
   } = props;
 
+  const { colSpan: htmlColSpan, colspan: htmlColspan, ...restHtmlOptions } = htmlOptions;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  const htmlProps = buildHtmlProps(htmlOptions);
+  const htmlProps = buildHtmlProps(restHtmlOptions);
   const classes = classnames(
     "pb_table_th", 
     {
@@ -45,6 +48,7 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
     className
   );
   const isTableTag = tag === "table";
+  const resolvedColSpan = colSpan ?? htmlColSpan ?? htmlColspan;
 
   return (
     <>
@@ -54,6 +58,7 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
             {...dataProps}
             {...htmlProps}
             className={classes}
+            {...(resolvedColSpan != null && { colSpan: resolvedColSpan as number })}
             id={id}
         >
           {text || children}

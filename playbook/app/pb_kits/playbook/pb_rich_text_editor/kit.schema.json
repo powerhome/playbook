@@ -51,6 +51,14 @@
         "rails"
       ]
     },
+    "markdownSupport": {
+      "type": "MarkdownDependencies",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "extensions": {
       "type": "GenericObject",
       "platforms": [
