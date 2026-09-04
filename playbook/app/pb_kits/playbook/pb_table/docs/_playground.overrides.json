@@ -16,6 +16,14 @@
         "label": "Filter wrapper",
         "template": "<Table{{props}}>\n{{children}}\n</Table>",
         "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Title\" />\n    <Table.Header text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Engineer\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Manager\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+      },
+      "column_span": {
+        "label": "Column Span",
+        "template": "<Table{{props}}>\n  <Table.Head>\n    <Table.Row>\n      <Table.Header{{Table.Header.props}} text=\"Contact\" textAlign=\"center\" />\n      <Table.Header text=\"Status\" />\n    </Table.Row>\n  </Table.Head>\n  <Table.Body>\n{{children}}\n  </Table.Body>\n</Table>",
+        "children": "    <Table.Row>\n      <Table.Cell text=\"Ada Lovelace\" />\n      <Table.Cell text=\"ada@example.com\" />\n      <Table.Cell text=\"Active\" />\n    </Table.Row>\n    <Table.Row>\n      <Table.Cell text=\"Grace Hopper\" />\n      <Table.Cell text=\"grace@example.com\" />\n      <Table.Cell text=\"Pending\" />\n    </Table.Row>",
+        "props": {
+          "colSpan": 2
+        }
       }
     }
   },
@@ -28,6 +36,12 @@
       "type": "function",
       "platforms": ["react"]
     }
+  },
+  "propTargets": {
+    "colSpan": "Table.Header.props"
+  },
+  "propSyncOnEnable": {
+    "colSpan": { "structureMode": "column_span" }
   },
   "codegenDefaultProps": {
     "size": "sm"
@@ -44,6 +58,10 @@
     {
       "name": "Sticky Columns",
       "props": ["sticky", "stickyLeftColumn", "stickyRightColumn"]
+    },
+    {
+      "name": "Subcomponent Props",
+      "props": ["colSpan"]
     },
     {
       "name": "Filter Variant",
@@ -173,6 +191,11 @@
     "with_filter": {
       "presetName": "With Filter",
       "message": "With Filter shows the withFilter wrapper while keeping all table children editable.",
+      "type": "info"
+    },
+    "column_span": {
+      "when": { "colSpan": 2 },
+      "message": "colSpan belongs to Table.Header and Table.Cell, so it is only applied in the \"Column Span\" structure, where it routes to the first header. Add colSpan to any Table.Cell in children to span body cells, and drop the cells it covers so the row keeps the same column count.",
       "type": "info"
     }
   }

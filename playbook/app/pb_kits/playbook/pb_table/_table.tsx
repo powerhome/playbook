@@ -49,6 +49,15 @@ type TableProps = {
     verticalBorder?: boolean,
 } & GlobalProps
 
+/**
+ * Subcomponent props (Table.Header / Table.Cell). Must be a plain `type NameProps = { ... }` block—
+ * `yarn generate-ai-metadata` only parses that shape in this file (not Omit<> / intersection).
+ * Not used on the root component; playground routes these via propTargets.
+ */
+type _TableSubkitSchemaProps = {
+    colSpan?: number
+}
+
 type AllSizes = "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"
 
 const Table = (props: TableProps): React.ReactElement => {

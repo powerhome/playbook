@@ -11,6 +11,7 @@ type TableCellPropTypes = {
   aria?: { [key: string]: string };
   children: React.ReactNode[] | React.ReactNode;
   className: string;
+  colSpan?: number;
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
@@ -23,6 +24,7 @@ const TableCell = (props: TableCellPropTypes): React.ReactElement => {
     aria = {},
     children,
     className,
+    colSpan,
     data = {},
     htmlOptions = {},
     id,
@@ -30,11 +32,13 @@ const TableCell = (props: TableCellPropTypes): React.ReactElement => {
     text,
   } = props;
 
+  const { colSpan: htmlColSpan, colspan: htmlColspan, ...restHtmlOptions } = htmlOptions;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
-  const htmlProps = buildHtmlProps(htmlOptions);
+  const htmlProps = buildHtmlProps(restHtmlOptions);
   const classes = classnames("pb_table_td", globalProps(props), className);
   const isTableTag = tag === "table";
+  const resolvedColSpan = colSpan ?? htmlColSpan ?? htmlColspan;
 
   return (
     <>
@@ -44,6 +48,7 @@ const TableCell = (props: TableCellPropTypes): React.ReactElement => {
             {...dataProps}
             {...htmlProps}
             className={classes}
+            {...(resolvedColSpan != null && { colSpan: resolvedColSpan as number })}
             id={id}
         >
           {text || children}
