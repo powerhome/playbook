@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { render, screen, fireEvent, waitFor } from "../utilities/test-utils"
+import { render, screen, fireEvent, waitFor, act } from "../utilities/test-utils"
+import { useForm } from "react-hook-form"
 
 import { Dropdown, Icon, IconCircle } from 'playbook-ui'
 import DateTime from "../pb_kit/dateTime.ts"
@@ -995,4 +996,279 @@ test('disabled prop disables autocomplete input', () => {
   const input = kit.querySelector('.dropdown_input')
 
   expect(input).toBeDisabled()
+})
+
+test('onChange uses react-hook-form event shape', () => {
+  const onChange = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        name="color"
+        onChange={onChange}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(onChange).toHaveBeenCalledWith({
+    target: { name: 'color', value: options[0].value },
+  })
+})
+
+test('react-hook-form onChange receives selected options for multiSelect', () => {
+  const onChange = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        multiSelect
+        name="languages"
+        onChange={onChange}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(onChange.mock.calls[0][0]).toEqual({
+    target: { name: 'languages', value: [options[0].value] },
+  })
+  expect(onChange.mock.calls[1][0]).toEqual({
+    target: { name: 'languages', value: [options[0].value, options[1].value] },
+  })
+})
+
+test('onSelect still fires when onChange is provided', () => {
+  const onSelect = jest.fn()
+  const onChange = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        name="country"
+        onChange={onChange}
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(onSelect).toHaveBeenCalledWith(options[0])
+  expect(onChange).toHaveBeenCalledWith({
+    target: { name: 'country', value: options[0].value },
+  })
+})
+
+test('onSelect-only single select still receives the option object', () => {
+  const onSelect = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(onSelect).toHaveBeenCalledTimes(1)
+  expect(onSelect).toHaveBeenCalledWith(options[0])
+})
+
+test('onSelect-only multiSelect still receives the selected options array', () => {
+  const onSelect = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        multiSelect
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  expect(onSelect.mock.calls[0][0]).toEqual([options[0]])
+  expect(onSelect.mock.calls[1][0]).toEqual([options[0], options[1]])
+})
+
+test('onSelect-only clearSelected still receives null', () => {
+  const onSelect = jest.fn()
+  const dropdownRef = React.createRef()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        defaultValue={options[0]}
+        onSelect={onSelect}
+        options={options}
+        ref={dropdownRef}
+    />
+  )
+
+  act(() => {
+    dropdownRef.current.clearSelected()
+  })
+
+  expect(onSelect).toHaveBeenCalledWith(null)
+})
+
+test('onSelect-only clear icon still receives null', () => {
+  const onSelect = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        defaultValue={options[0]}
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelector('[aria-label="times icon"]').closest('div'))
+
+  expect(onSelect).toHaveBeenCalledWith(null)
+})
+
+test('onSelect-only removing a multiSelect pill still receives remaining options', () => {
+  const onSelect = jest.fn()
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        defaultValue={[options[0], options[1]]}
+        multiSelect
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelector('.pb_form_pill_close'))
+
+  expect(onSelect).toHaveBeenCalledWith([options[1]])
+})
+
+test('autocomplete typing does not fire onSelect or onChange', () => {
+  const onSelect = jest.fn()
+  const onChange = jest.fn()
+
+  render(
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        onChange={onChange}
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.change(kit.querySelector('.dropdown_input'), { target: { value: 'Can' } })
+
+  expect(onSelect).not.toHaveBeenCalled()
+  expect(onChange).not.toHaveBeenCalled()
+})
+
+test('autocomplete selection still fires onSelect', () => {
+  const onSelect = jest.fn()
+
+  render(
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[1])
+
+  expect(onSelect).toHaveBeenCalledWith(options[1])
+})
+
+test('react-hook-form register supports submit through forwarded ref', async () => {
+  const onSubmit = jest.fn()
+
+  const ReactHookFormDropdown = () => {
+    const { handleSubmit, register } = useForm()
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Dropdown
+            data={{ testid: testId }}
+            label="Countries"
+            options={options}
+            {...register('country')}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    )
+  }
+
+  render(<ReactHookFormDropdown />)
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[1])
+  fireEvent.submit(screen.getByRole('button', { name: 'Submit' }).closest('form'))
+
+  await waitFor(() => {
+    expect(onSubmit).toHaveBeenCalledWith(
+      { country: options[1].value },
+      expect.anything()
+    )
+  })
+})
+
+test('react-hook-form onChange value is safe to render as React child', async () => {
+  const onSubmit = jest.fn()
+
+  const ReactHookFormDropdown = () => {
+    const { handleSubmit, register, watch } = useForm()
+    const country = watch('country')
+
+    return (
+      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+        <Dropdown
+            data={{ testid: testId }}
+            options={[
+              { id: 'active', label: 'Active Only', text: 'Active Only', value: 'Active Only' },
+              { id: 'inactive', label: 'Inactive Only', text: 'Inactive Only', value: 'Inactive Only' },
+            ]}
+            {...register('country')}
+        />
+        <div data-testid="submitted-preview">{country}</div>
+        <button type="submit">Submit</button>
+      </form>
+    )
+  }
+
+  render(<ReactHookFormDropdown />)
+
+  const kit = screen.getByTestId(testId)
+  fireEvent.click(kit.querySelectorAll('.pb_dropdown_option_list')[0])
+
+  await waitFor(() => {
+    expect(screen.getByTestId('submitted-preview')).toHaveTextContent('Active Only')
+  })
+
+  fireEvent.submit(screen.getByRole('button', { name: 'Submit' }).closest('form'))
+
+  await waitFor(() => {
+    expect(onSubmit).toHaveBeenCalledWith({ country: 'Active Only' })
+  })
 })
