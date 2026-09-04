@@ -15,7 +15,8 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
     helper.pb_rails "form", props: { options: { model: model, url: "/users" } }, &block
   end
 
-  def build_model(attributes:, errors: {})
+  def build_model(attributes:, errors: {}, raw_attributes: nil, came_from_user: true)
+    raw_attributes ||= attributes
     model_name = double(
       name: "User",
       singular_route_key: "user",
@@ -40,14 +41,23 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
     allow(model).to receive(:class).and_return(model_class)
 
     attributes.each do |key, value|
+      raw_value = raw_attributes.key?(key) ? raw_attributes[key] : value
       allow(model).to receive(key).and_return(value)
-      allow(model).to receive("#{key}_before_type_cast").and_return(value)
+      allow(model).to receive("#{key}_before_type_cast").and_return(raw_value)
+      allow(model).to receive("#{key}_came_from_user?").and_return(came_from_user)
     end
 
     # FormBuilder may ask for other methods
     allow(model).to receive(:respond_to?) do |method_name, *|
+      method = method_name.to_s
+      attribute_name = method
+                       .sub(/_before_type_cast\z/, "")
+                       .sub(/_came_from_user\?\z/, "")
+                       .to_sym
+
       attributes.key?(method_name.to_sym) ||
-        attributes.key?(method_name.to_s) ||
+        attributes.key?(method) ||
+        attributes.key?(attribute_name) ||
         %i[errors to_model model_name persisted? to_key to_param id class].include?(method_name.to_sym)
     end
 
@@ -116,6 +126,37 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
       end
 
       expect(CGI.unescapeHTML(rendered)).to include("Starts at can't be blank")
+    end
+
+    it "preserves invalid user input via before_type_cast" do
+      model = build_model(
+        attributes: { starts_at: nil },
+        raw_attributes: { starts_at: "not-a-date" },
+        errors: { starts_at: ["Starts at is invalid"] }
+      )
+
+      rendered = render_form_with(model) do |form|
+        form.date_picker :starts_at, props: { label: true }
+      end
+
+      expect(rendered).to include("not-a-date")
+      expect(CGI.unescapeHTML(rendered)).to include("Starts at is invalid")
+    end
+
+    it "uses the cast attribute when the value did not come from the user" do
+      starts_at = Time.new(2026, 8, 18, 22, 0, 0, "-04:00")
+      model = build_model(
+        attributes: { starts_at: starts_at },
+        raw_attributes: { starts_at: "2026-08-19 02:00:00 UTC" },
+        came_from_user: false
+      )
+
+      rendered = render_form_with(model) do |form|
+        form.date_picker :starts_at, props: { label: true }
+      end
+
+      expect(rendered).to include("2026-08-18T00:00:00")
+      expect(rendered).not_to include("2026-08-19 02:00:00 UTC")
     end
 
     it "does not override an explicit default_date or error" do

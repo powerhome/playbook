@@ -9,11 +9,24 @@ module Playbook
       module AttributeDefaults
       private
 
+        # Prefer *_before_type_cast when the value came from user input (Rails
+        # text_field behavior) so invalid typed input is re-rendered for correction
+        # instead of the nil/blank cast attribute after a failed validation.
         def form_attribute_value(name)
           return nil unless @object
           return nil unless @object.respond_to?(name)
 
-          @object.public_send(name)
+          before_type_cast = "#{name}_before_type_cast"
+          if form_attribute_came_from_user?(name) && @object.respond_to?(before_type_cast)
+            @object.public_send(before_type_cast)
+          else
+            @object.public_send(name)
+          end
+        end
+
+        def form_attribute_came_from_user?(name)
+          came_from_user = "#{name}_came_from_user?"
+          !@object.respond_to?(came_from_user) || @object.public_send(came_from_user)
         end
 
         def form_attribute_error(name)
