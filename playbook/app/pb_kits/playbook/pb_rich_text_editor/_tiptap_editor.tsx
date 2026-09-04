@@ -12,6 +12,7 @@ type TipTapEditorProps = {
     shouldShowToolbar: boolean,
     simple?: boolean,
     sticky?: boolean,
+    bulletList?: boolean,
 }
 
 const TipTapEditor = ({
@@ -23,6 +24,7 @@ const TipTapEditor = ({
     shouldShowToolbar,
     simple = false,
     sticky = false,
+    bulletList,
 }: TipTapEditorProps): React.ReactElement => {
     return (
         <div
@@ -37,6 +39,7 @@ const TipTapEditor = ({
         >
             {shouldShowToolbar && (
                 <EditorToolbar
+                    bulletList={bulletList}
                     editor={editor}
                     extensions={extensions}
                     simple={simple}

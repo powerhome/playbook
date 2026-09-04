@@ -57,6 +57,7 @@ async function initPlaybookRichTextEditorRails(container) {
       italic: "toggleItalic",
       strike: "toggleStrike",
       codeBlock: "toggleCodeBlock",
+      bulletList: "toggleBulletList",
     };
 
     const getCurrentBlockValue = () => {
@@ -119,6 +120,7 @@ async function initPlaybookRichTextEditorRails(container) {
         if (action === "bold") active = editor.isActive("bold");
         else if (action === "italic") active = editor.isActive("italic");
         else if (action === "strike") active = editor.isActive("strike");
+        else if (action === "bulletList") active = editor.isActive("bulletList");
         else if (action === "codeBlock") active = editor.isActive("codeBlock");
         else if (action === "link") active = editor.isActive("link");
         btn.classList.toggle("is-active", active);
@@ -166,6 +168,10 @@ async function initPlaybookRichTextEditorRails(container) {
         } else {
           editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
         }
+      } else if (action === "liftListItem") {
+        editor.chain().focus().liftListItem("listItem").run();
+      } else if (action === "sinkListItem") {
+        editor.chain().focus().sinkListItem("listItem").run();
       } else {
         const chainMethod = actionToChain[action];
         if (chainMethod && typeof editor.chain().focus()[chainMethod] === "function") {

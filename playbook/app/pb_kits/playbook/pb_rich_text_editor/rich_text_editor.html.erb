@@ -1,5 +1,5 @@
 <%# TipTap loads via full URL dynamic import() in rich_text_editor_rails.js (esm.sh) — no import map, so no clash with Vite/host maps. %>
-<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_tiptap: true, input_id: object.input_id, initial_html: object.initial_html, rte_simple: object.simple }) do %>
+<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_tiptap: true, input_id: object.input_id, initial_html: object.initial_html, rte_simple: object.simple, rte_bullet_list: object.bullet_list }) do %>
   <div class="pb_rich_text_editor_kit">
   <% if object.label.present? %>
     <label for="<%= object.input_id %>">
@@ -115,6 +115,24 @@
               <%= pb_rails("icon", props: { icon: "strikethrough", size: "lg" }) %>
             <% end %>
           </button>
+          <% if object.bullet_list %>
+          <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+          <button type="button" class="toolbar_button" data-action="bulletList" title="Bullet List" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "list", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="liftListItem" title="De-Indent Bullet" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "angle-double-left", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="sinkListItem" title="Indent Bullet" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "angle-double-right", size: "lg" }) %>
+            <% end %>
+          </button>
+          <% end %>
           <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
           <button type="button" class="toolbar_button" data-action="codeBlock" title="Code block" role="button" tabindex="0">
             <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
