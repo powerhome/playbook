@@ -4,5 +4,6 @@ examples:
   - form_defaults: Defaults
   - form_validation: Validation and Error Messages
   - form_default_values: Default Values
+  - form_model_values: Model Values + Errors
   - form_loading: Loading
   - form_multi_column: Multi-Column Layout

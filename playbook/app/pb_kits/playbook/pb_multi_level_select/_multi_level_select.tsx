@@ -32,6 +32,7 @@ import {
   getDefaultCheckedItems,
   recursiveCheckParent,
   getExpandedItems,
+  selectedIdsInclude,
 } from "./_helper_functions";
 
 import { DialogContext } from "../pb_dialog/_dialog_context";
@@ -248,9 +249,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         const isDisabled =
           item.disabled || (parentDisabled && !returnAllSelected);
 
-          const explicitlySelected = Boolean(
-            selectedIds && selectedIds?.length && selectedIds.includes(item.id)
-          );
+          const explicitlySelected = selectedIdsInclude(selectedIds, item.id);
 
           const checked =
           !isDisabled &&
