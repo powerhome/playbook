@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 
 import DatePicker from '../_date_picker'
 import Body from '../../pb_body/_body'
@@ -11,26 +11,22 @@ DEFAULT_DATE.setMinutes(0)
 const DatePickerTime = (props) => {
   const [selectedDateTime, setSelectedDateTime] = useState(DEFAULT_DATE)
 
-  const refExample = React.createRef()
-
-  const handleOnInputChanged = (dateTime) => {
-    setSelectedDateTime(dateTime)
+  const handleOnClose = (selectedDates) => {
+    setSelectedDateTime(selectedDates[0])
   }
 
   return (
-    <div ref={refExample}>
-      <Body marginBottom="md">{selectedDateTime.toString()}</Body>
-      {useMemo(() => (
-        <DatePicker
-            closeOnSelect={false}
-            defaultDate={DEFAULT_DATE}
-            enableTime
-            onChange={handleOnInputChanged}
-            pickerId="date-picker-time"
-            showTimezone
-            {...props}
-        />
-      ), [props])}
+    <div>
+      <Body marginBottom="md">{selectedDateTime ? selectedDateTime.toString() : ''}</Body>
+      <DatePicker
+          defaultDate={DEFAULT_DATE}
+          enableTime
+          initializeOnce
+          onClose={handleOnClose}
+          pickerId="date-picker-time"
+          showTimezone
+          {...props}
+      />
     </div>
   )
 }
