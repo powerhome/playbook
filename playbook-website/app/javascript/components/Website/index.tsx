@@ -12,6 +12,7 @@ import LayoutRight from "./src/layouts/LayoutRight";
 import Header from "./src/layouts/Header";
 import MobileNav, { MobileHamburger } from "./src/components/MobileNav";
 import { PlatformToggle } from "./src/components/PlatformToggle";
+import PlaygroundVpnWarningDialog from "./src/components/PlaygroundVpnWarningDialog";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { PlatformContext } from "./src/contexts/PlatformContext";
 import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
@@ -22,6 +23,7 @@ import {
   syncStoredPlatformFromLocation,
   writeStoredPlatform,
 } from "./src/helpers/platform";
+import { navigateSite } from "./src/utils/siteNavigation";
 
 function WebsiteContent() {
   const {
@@ -134,7 +136,20 @@ function WebsiteContent() {
         `/${nextPlatform}`,
       );
       if (nextPath !== normalizedPath) {
-        navigate(`${nextPath}${location.search}${location.hash}`);
+        // Rails has no Playground tab — drop a stale ?tab=playground so we don't
+        // navigate through it. Route via navigateSite (not raw `navigate`) so a
+        // React→Rails switch made while on staging (Playground tab) goes straight
+        // to prod in one hop instead of rendering the staging route first and
+        // then bouncing to prod from KitShow's staging/prod sync effect.
+        const params = new URLSearchParams(location.search);
+        if (nextPlatform === "rails" && params.get("tab") === "playground") {
+          params.delete("tab");
+        }
+        const search = params.toString();
+        navigateSite(
+          navigate,
+          `${nextPath}${search ? `?${search}` : ""}${location.hash}`,
+        );
       }
       return;
     }
@@ -271,6 +286,7 @@ function WebsiteContent() {
           </Layout.Side>
           {kits.length > 0 && <LayoutRight />}
         </Layout>
+        <PlaygroundVpnWarningDialog />
       </div>
     </PlatformContext.Provider>
   );

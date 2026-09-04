@@ -2,7 +2,7 @@ import type { PropValue } from "../KitShow/Tabs/Playground";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import type { BuilderInstance, PlaygroundKit, PropDefinition } from "./types";
 
-const EXCLUDED_PROPS = new Set([
+export const EXCLUDED_PROPS = new Set([
   "aria",
   "children",
   "className",

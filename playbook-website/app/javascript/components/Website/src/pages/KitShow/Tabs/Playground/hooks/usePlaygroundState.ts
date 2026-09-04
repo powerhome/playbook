@@ -120,6 +120,11 @@ export const usePlaygroundState = ({
     [playgroundConfig?.hiddenProps]
   );
 
+  const emitEmptyStringPropNames = useMemo(
+    () => new Set(playgroundConfig?.emitEmptyStringProps ?? []),
+    [playgroundConfig?.emitEmptyStringProps]
+  );
+
   const reactProps = useMemo(() => {
     if (!kitSchema?.props) return {};
 
@@ -131,11 +136,13 @@ export const usePlaygroundState = ({
         EXCLUDED_PROPS.includes(name) || EXCLUDED_PROPS.includes(name.toLowerCase());
 
       if (isPlatformProp && !isExcluded && !hiddenPropNames.has(name)) {
-        filtered[name] = def;
+        filtered[name] = emitEmptyStringPropNames.has(name)
+          ? { ...def, emitEmptyString: true }
+          : def;
       }
     });
     return filtered;
-  }, [kitSchema, hiddenPropNames, platform]);
+  }, [kitSchema, hiddenPropNames, emitEmptyStringPropNames, platform]);
 
   const globalProps = useMemo(() => {
     if (!globalPropsSchema?.props || !kitSchema?.globalProps) return {};

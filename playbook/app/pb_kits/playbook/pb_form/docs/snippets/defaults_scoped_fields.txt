@@ -1,0 +1,5 @@
+<%= pb_form_with(scope: :defaults, url: "", method: :get) do |form| %>
+  <%= form.typeahead "defaults[color_search]", props: { ... } %>
+  <%= form.phone_number_field "defaults[phone]", props: { ... } %>
+  <%= form.dropdown_field "defaults[countries]", props: { ... } %>
+<% end %>
