@@ -199,7 +199,7 @@ const KitShow = () => {
   if (!kitMeta) {
     return (
       <div className="kit-show-wrapper">
-        <Flex justify="center" width="100%" paddingTop="xl">
+        <Flex justify="center" width="100%" paddingTop="xl" className="no-kit-empty-state-container">
           <EmptyState
             header="No Component Found"
             description={`We could not find a component at this URL. Check the component name and try again, or choose another component from the navigation or search.`}
