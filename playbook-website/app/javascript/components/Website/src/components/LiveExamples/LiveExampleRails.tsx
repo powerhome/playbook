@@ -162,12 +162,10 @@ const executeInlineScripts = (
       newScript.setAttribute(attr.name, attr.value);
     });
 
-    const wrappedContent = transformScriptForLiveExecution(content).trim();
-    const isolatedContent = wrappedContent.startsWith("(function")
-      ? wrappedContent
-      : `(function() {\n${wrappedContent}\n})();`;
-
-    newScript.textContent = isolatedContent;
+    // Do not wrap in an IIFE — docs examples often define top-level functions
+    // (e.g. handleReset) referenced by html_options/onclick. Playground previews
+    // already skip script execution via executeScripts={false}.
+    newScript.textContent = transformScriptForLiveExecution(content);
 
     if (element.parentNode) {
       element.parentNode.replaceChild(newScript, element);
