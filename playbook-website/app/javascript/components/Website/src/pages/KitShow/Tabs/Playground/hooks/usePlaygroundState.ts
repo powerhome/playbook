@@ -511,12 +511,19 @@ export const usePlaygroundState = ({
     activePresetIndex,
   ]);
 
+  // Baseline children for the active preset/structure — edits must count as
+  // modified so Rails (and React) leave defaultExample.source for codegen.
+  const baselineChildren = useMemo(
+    () => resolveChildren(activePresetIndex, activeStructureMode),
+    [resolveChildren, activePresetIndex, activeStructureMode]
+  );
+
   const hasModifiedProps = useMemo(
     () =>
       Object.entries(propValues).some(
         ([name, p]) => p.enabled && !requiredPropNames.has(name)
-      ),
-    [propValues, requiredPropNames]
+      ) || children !== baselineChildren,
+    [propValues, requiredPropNames, children, baselineChildren]
   );
 
   const showChildren = useMemo(() => {
