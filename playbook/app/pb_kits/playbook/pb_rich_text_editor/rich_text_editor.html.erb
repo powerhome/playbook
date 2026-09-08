@@ -1,5 +1,5 @@
 <%# TipTap loads via full URL dynamic import() in rich_text_editor_rails.js (esm.sh) — no import map, so no clash with Vite/host maps. %>
-<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_tiptap: true, input_id: object.input_id, initial_html: object.initial_html, rte_simple: object.simple }) do %>
+<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_tiptap: true, input_id: object.input_id, initial_html: object.initial_html, markdown_support: object.markdown_support, rte_simple: object.simple }) do %>
   <div class="pb_rich_text_editor_kit">
   <% if object.label.present? %>
     <label for="<%= object.input_id %>">

@@ -1,0 +1,7 @@
+  <%= form.select :favorite_color, [["Red", "red"], ["Blue", "blue"], ["Green", "green"]],
+        props: {
+          label: "Favorite Color",
+          blank_selection: "Select one...",
+          required: true,
+          validation_message: "Please select a color",
+        } %>

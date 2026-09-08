@@ -132,6 +132,7 @@ The base layer can infer simple things like component name, schema defaults, and
 | `groups` | Sections in the props panel. Use camelCase prop names. Props not listed still appear under `Other` unless hidden. |
 | `presets` | Feature pills. Each preset can set `props`, `children`, `structureMode`, or `dataPreset`. |
 | `conditionals` | Disable controls until requirements are met. |
+| `editableFunctionProps` | Render selected function props as editable code fields instead of handler preset dropdowns. |
 | `hints` | Info/warning/error banners above the preview. |
 | `hiddenProps` | Props to omit from the props panel. |
 | `emitEmptyStringProps` | Prop names for which an explicitly empty string is a meaningful value. Emits `prop=""` instead of omitting the prop when enabled and cleared. |

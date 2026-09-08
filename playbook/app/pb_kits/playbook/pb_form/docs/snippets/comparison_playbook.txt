@@ -1,0 +1,7 @@
+<%= pb_form_with scope: :example, url: example_path do |form| %>
+  <%= form.text_field :full_name, props: { label: "Full Name" } %>
+  <%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>

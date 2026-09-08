@@ -1,0 +1,7 @@
+<% dropdown_options = [
+     { label: "United States", value: "United States", id: "us" },
+     { label: "Canada", value: "Canada", id: "ca" },
+     { label: "Pakistan", value: "Pakistan", id: "pk" },
+   ] %>
+<%= form.dropdown_field "defaults[country]",
+      props: { label: "Country", options: dropdown_options } %>

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { Flex } from "playbook-ui";
+import { Body, Flex } from "playbook-ui";
 
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
@@ -58,6 +58,12 @@ import type {
   PlaygroundLoaderData,
 } from "./types";
 import { ROOT_TARGET_ID } from "./types";
+import {
+  goToStaging,
+  isProductionHost,
+  isStagingHost,
+  STAGING_ORIGIN,
+} from "../../utils/siteNavigation";
 
 import "./styles.scss";
 
@@ -80,7 +86,7 @@ const cloneInstances = (items: BuilderInstance[]): BuilderInstance[] =>
 
 type ShareLoadStatus = "loaded" | "invalid" | null;
 
-export default function Playground() {
+function PlaygroundApp() {
   const { global_props_schema, playground_kits = [] } =
     useLoaderData() as PlaygroundLoaderData;
   const [persistedState] = useState(() =>
@@ -987,4 +993,28 @@ export default function Playground() {
       />
     </Flex>
   );
+}
+
+/**
+ * Playground lives on staging. On production, goToStaging surfaces the VPN
+ * warning dialog (mounted in Website/index.tsx) instead of redirecting right
+ * away — the actual navigation happens once the user confirms there. This
+ * fallback text stays visible underneath it so declining (or landing here
+ * directly without confirming) never leaves a blank page with no explanation.
+ */
+export default function Playground() {
+  useEffect(() => {
+    if (!isProductionHost()) return
+    goToStaging(`${STAGING_ORIGIN}/playground${window.location.search}${window.location.hash}`)
+  }, [])
+
+  if (isProductionHost() && !isStagingHost()) {
+    return (
+      <Flex align="center" justify="center" padding="xl" width="100%">
+        <Body text="Playground requires the company VPN. Connect, then open Playground again from the sidebar." />
+      </Flex>
+    )
+  }
+
+  return <PlaygroundApp />
 }

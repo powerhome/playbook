@@ -1,0 +1,5 @@
+<%= form.number_field :quantity, props: {
+      label: "Quantity",
+      required: true,
+      validation: { message: "Quantity is required" },
+    } %>

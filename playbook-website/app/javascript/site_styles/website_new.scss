@@ -27,6 +27,9 @@ body.pages.application {
   height: 100%;
   margin: 0;
   overflow: hidden;
+  .pb_dialog_overlay.pb_dialog_overlay_after_open {
+   z-index: 10000;
+  }
 }
 
 body.pages.application .pb--website-layout-root,

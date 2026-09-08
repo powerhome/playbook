@@ -1,0 +1,13 @@
+  <% typeahead_options = [
+       { label: "Orange", value: "#FFA500" },
+       { label: "Red", value: "#FF0000" },
+       { label: "Green", value: "#00FF00" },
+       { label: "Blue", value: "#0000FF" },
+     ] %>
+  <%= form.typeahead "defaults[color_search_single]",
+        props: {
+          options: typeahead_options,
+          is_multi: false,
+          label: "Favorite Color",
+          placeholder: "Search for a color",
+        } %>
