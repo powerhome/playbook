@@ -2,10 +2,12 @@ examples:
 
   rails:
   - rich_text_editor_rails_default: "Rails (TipTap)"
+  - rich_text_editor_rails_markdown_support: "Rails (Markdown Support)"
   - rich_text_editor_rails_simple: "Rails (TipTap — Simple toolbar)"
 
   react:
   - rich_text_editor_advanced_default: Advanced Default
+  - rich_text_editor_advanced_markdown_support: Advanced (Markdown Support)
   - rich_text_editor_more_extensions: Advanced (Extra Extensions)
   - rich_text_editor_toolbar_disabled: Advanced (Toolbar disabled)
   - rich_text_editor_advanced_simple: Advanced (Simple)
@@ -20,8 +22,6 @@ examples:
   - rich_text_editor_advanced_required_indicator: Advanced Required Indicator
   - rich_text_editor_advanced_preview: Advanced Preview
   - rich_text_editor_default: Legacy Default (Trix)
-
-
 
 
 

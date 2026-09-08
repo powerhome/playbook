@@ -24,6 +24,7 @@ examples:
     - multi_level_select_default: Default
     - multi_level_select_react_hook: React Hook
     - multi_level_select_single: Single Select
+    - multi_level_select_format_selected_display: Custom Single Select Display
     - multi_level_select_single_children_only: Single Select w/ Hidden Radios
     - multi_level_select_return_all_selected: Return All Selected
     - multi_level_select_input_display: With Input Display None

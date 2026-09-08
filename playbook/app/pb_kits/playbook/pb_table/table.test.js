@@ -365,3 +365,65 @@ test("renders withFilter variant with cardProps and titleProps", () => {
   expect(title).toBeInTheDocument()
   expect(title).toHaveClass("pl_lg")
 })
+
+test("Table.Cell renders colSpan as HTML colspan attribute", () => {
+  const { container } = render(
+    <Table data={{ testid: "table-colspan-cell" }}>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell colSpan={2}>{"Spans two columns"}</Table.Cell>
+          <Table.Cell>{"Value 2"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  const cells = container.querySelectorAll(".pb_table_td")
+  expect(cells[0]).toHaveAttribute("colspan", "2")
+  expect(cells[1]).not.toHaveAttribute("colspan")
+})
+
+test("Table.Cell keeps htmlOptions.colspan when the dedicated prop is omitted", () => {
+  const { container } = render(
+    <Table>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell htmlOptions={{ colspan: 3 }}>{"Spans three columns"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_table_td")).toHaveAttribute("colspan", "3")
+})
+
+test("Table.Header renders colSpan as HTML colspan attribute", () => {
+  const { container } = render(
+    <Table data={{ testid: "table-colspan-header" }}>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header colSpan={2}>{"Spans two columns"}</Table.Header>
+          <Table.Header>{"Column 3"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  const headers = container.querySelectorAll(".pb_table_th")
+  expect(headers[0]).toHaveAttribute("colspan", "2")
+  expect(headers[1]).not.toHaveAttribute("colspan")
+})
+
+test("Table.Header keeps htmlOptions.colspan when the dedicated prop is omitted", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header htmlOptions={{ colspan: 3 }}>{"Spans three columns"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_table_th")).toHaveAttribute("colspan", "3")
+})

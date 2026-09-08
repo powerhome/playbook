@@ -1,0 +1,32 @@
+<%= pb_rails("table", props: { size: "sm", vertical_border: true }) do %>
+    <%= pb_rails("table/table_head") do %>
+        <%= pb_rails("table/table_row") do %>
+            <%= pb_rails("table/table_header", props: { text_align: "center", colspan: 2, text: "Column 1 (spans 2 columns)"}) %>
+            <%= pb_rails("table/table_header", props: { text: "Column 2"}) %>
+            <%= pb_rails("table/table_header", props: { text: "Column 3"}) %>
+            <%= pb_rails("table/table_header", props: { text: "Column 4"}) %>  
+         <% end %>
+    <% end %>
+    <%= pb_rails("table/table_body") do %>
+        <%= pb_rails("table/table_row") do %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+        <% end %>
+        <%= pb_rails("table/table_row") do %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 4 (spans 2 columns)", colspan: 2, text_align: "center"}) %>
+        <% end %>
+        <%= pb_rails("table/table_row") do %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
+            <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+        <% end %>
+    <% end %>
+<% end %>
