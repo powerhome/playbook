@@ -290,6 +290,34 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
       expect(rendered).to include('data-default-value="open"')
     end
 
+    it "wraps a single resolved id for multi_select" do
+      model = build_model(attributes: { status: "open" })
+
+      rendered = render_form_with(model) do |form|
+        form.dropdown_field :status, props: {
+          label: true,
+          multi_select: true,
+          options: dropdown_options,
+        }
+      end
+
+      expect(rendered).to include('data-default-value="open"')
+    end
+
+    it "wraps a single option hash for multi_select" do
+      model = build_model(attributes: { status: dropdown_options.first })
+
+      rendered = render_form_with(model) do |form|
+        form.dropdown_field :status, props: {
+          label: true,
+          multi_select: true,
+          options: dropdown_options,
+        }
+      end
+
+      expect(rendered).to include('data-default-value="open"')
+    end
+
     it "uses the first matched option when a single-select dropdown gets an id array" do
       model = build_model(attributes: { status: %w[open closed] })
 
