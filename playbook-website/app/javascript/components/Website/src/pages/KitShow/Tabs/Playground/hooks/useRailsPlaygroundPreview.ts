@@ -49,7 +49,8 @@ export const useRailsPlaygroundPreview = ({
 
       setLoading(true);
       setError(null);
-      setHtml(null);
+      // Keep last successful html until the new response arrives so the
+      // preview does not blank out on every debounced prop/children change.
 
       try {
         const response = await fetch(
