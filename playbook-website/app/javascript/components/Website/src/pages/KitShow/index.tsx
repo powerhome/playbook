@@ -1,5 +1,5 @@
 import { useLoaderData, useParams, useLocation, useNavigate } from "react-router-dom";
-import { Body, Card, Detail, Flex, FlexItem, Icon, Nav, NavItem, SectionSeparator, Title } from "playbook-ui";
+import { Body, Card, Detail, EmptyState, Flex, FlexItem, Icon, Nav, NavItem, SectionSeparator, Title } from "playbook-ui";
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
@@ -195,6 +195,21 @@ const KitShow = () => {
   };
 
   const showStatusBadge = kitStatus === "beta" || kitStatus === "deprecated";
+
+  if (!kitMeta) {
+    return (
+      <div className="kit-show-wrapper">
+        <Flex justify="center" width="100%" paddingTop="xl">
+          <EmptyState
+            header="No Component Found"
+            description={`We could not find a component at this URL. Check the component name and try again, or choose another component from the navigation or search.`}
+            image="default"
+            size="lg"
+          />
+        </Flex>
+      </div>
+    );
+  }
 
   return (
     <>
