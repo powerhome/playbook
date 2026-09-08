@@ -70,6 +70,10 @@ module Playbook
         }.compact
       end
 
+      def input_disabled?
+        !!merged_input_options[:disabled]
+      end
+
       def text_input_data
         input_props.with_indifferent_access.fetch(:data, {}).to_h
       end
