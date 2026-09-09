@@ -5,10 +5,9 @@ import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 
 const OnClick = () => {
-  const ClickableBody = Body as any;
-  const ClickableCard = Card as any;
-  const ClickableFlex = Flex as any;
-  const ClickableTitle = Title as any;
+  const clickableDemoHtmlOptions = {
+    style: { userSelect: "none" as const },
+  };
 
   const InteractiveExample = ({
     children,
@@ -45,66 +44,76 @@ const OnClick = () => {
     return (
       <Flex gap="sm" wrap width="100%">
         <Card padding="md" width="sm">
-          <Title size={4} text="Body (POC)" />
+          <Title size={4} text="Body" />
           <InteractiveExample
               count={bodyClicks}
               label="Body"
               reset={() => setBodyClicks(0)}
           >
-            <ClickableBody
+            <Body
                 cursor="pointer"
-                htmlOptions={{ role: "button", tabIndex: 0 }}
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
                 onClick={() => setBodyClicks((prev: number) => prev + 1)}
                 text="Click this Body example"
             />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
-          <Title size={4} text="Card (POC)" />
+          <Title size={4} text="Card" />
           <InteractiveExample
               count={cardClicks}
               label="Card"
               reset={() => setCardClicks(0)}
           >
-            <ClickableCard
+            <Card
                 cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
                 onClick={() => setCardClicks((prev: number) => prev + 1)}
                 padding="sm"
             >
               {"Click this Card example"}
-            </ClickableCard>
+            </Card>
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
-          <Title size={4} text="Flex (POC)" />
+          <Title size={4} text="Flex" />
           <InteractiveExample
               count={flexClicks}
               label="Flex"
               reset={() => setFlexClicks(0)}
           >
-            <ClickableFlex
+            <Flex
                 alignItems="center"
                 background="light"
                 borderRadius="sm"
                 cursor="pointer"
                 gap="xs"
+                htmlOptions={clickableDemoHtmlOptions}
                 onClick={() => setFlexClicks((prev: number) => prev + 1)}
                 padding="sm"
             >
               <Body text="Click this Flex example" />
-            </ClickableFlex>
+            </Flex>
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
-          <Title size={4} text="Title (POC)" />
+          <Title size={4} text="Title" />
           <InteractiveExample
               count={titleClicks}
               label="Title"
               reset={() => setTitleClicks(0)}
           >
-            <ClickableTitle
+            <Title
                 cursor="pointer"
-                htmlOptions={{ role: "button", tabIndex: 0 }}
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
                 onClick={() => setTitleClicks((prev: number) => prev + 1)}
                 size={4}
                 text="Click this Title example"
@@ -112,7 +121,7 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
-          <Title size={4} text="Button (existing API)" />
+          <Title size={4} text="Button (kit-specific)" />
           <InteractiveExample
               count={buttonClicks}
               label="Button"
@@ -120,7 +129,7 @@ const OnClick = () => {
           >
             <Button
                 onClick={() => setButtonClicks((prev: number) => prev + 1)}
-                text="Button API stays the same"
+                text="Uses kit-specific onClick"
             />
           </InteractiveExample>
         </Card>
@@ -130,28 +139,31 @@ const OnClick = () => {
 
   return (
     <ShowPage
+      pageType="global_event_props"
       title="onClick"
       description={
         <>
-          This page documents a React-only proof of concept for exposing{" "}
-          <code>onClick</code> as a first-class global prop on kits that do not
-          already define their own <code>onClick</code> behavior. It is not part
-          of the existing class-based Global Props pipeline, and Rails remains
-          out of scope.
+          <code>onClick</code> is a Global Event Prop for React kits that opt
+          into <code>GlobalEventProps</code>. It attaches a mouse event handler
+          to the kit&apos;s root element and is separate from the class-based
+          Global Props system. Rails kits do not support it — event handlers are
+          JavaScript callbacks, so they belong in React rather than server-rendered
+          props.
         </>
       }
       descriptionSecondary={
         <>
-          The goal is consistency for simple presentational kits with a clear
-          root element, while preserving kit-specific click behavior where it
-          already exists. Existing kits with their own <code>onClick</code> may
-          differ in typing, target element, and behavior.
+          Kits that already define their own <code>onClick</code> keep that
+          kit-specific API and behavior. Use{" "}
+          <code>cursor=&quot;pointer&quot;</code> and, when needed,{" "}
+          <code>htmlOptions</code> for accessibility attributes like{" "}
+          <code>role</code> and <code>tabIndex</code>.
         </>
       }
       VisualGuideCard={VisualGuideCard()}
     >
       <PropsExamplesTable
-        headers={["POC Kit", "Type", "React Example", "Notes"]}
+        headers={["Supported Kit", "Type", "React Example", "Notes"]}
         rows={[
           [
             "Body",
@@ -160,7 +172,7 @@ const OnClick = () => {
               id="onclick-body-react"
               text={`<Body onClick={() => alert("clicked")} text="Clickable body" />`}
             />,
-            "Attached to the root Body element in the POC.",
+            "Attached to the root Body element.",
           ],
           [
             "Card",
@@ -169,7 +181,7 @@ const OnClick = () => {
               id="onclick-card-react"
               text={`<Card onClick={() => alert("clicked")} cursor="pointer">Content</Card>`}
             />,
-            "Attached to the root Card tag in the POC.",
+            "Attached to the root Card tag.",
           ],
           [
             "Flex",
@@ -178,7 +190,7 @@ const OnClick = () => {
               id="onclick-flex-react"
               text={`<Flex onClick={() => alert("clicked")} cursor="pointer">...</Flex>`}
             />,
-            "Attached to the root Flex div in the POC.",
+            "Attached to the root Flex div.",
           ],
           [
             "Title",
@@ -187,41 +199,44 @@ const OnClick = () => {
               id="onclick-title-react"
               text={`<Title onClick={() => alert("clicked")} cursor="pointer" text="Clickable title" />`}
             />,
-            "Attached to the root Title tag in the POC.",
+            "Attached to the root Title tag.",
           ],
         ]}
       />
 
       <Card padding="md">
-        <Title size={3} text="Current POC Scope" />
-        <Body>
-          Only <strong>Body</strong>, <strong>Card</strong>, <strong>Flex</strong>,
-          {" "}and <strong>Title</strong> were updated in this branch. This page
-          intentionally documents the proof of concept rather than implying a
-          full repo-wide rollout.
+        <Title size={3} text="Precedence with htmlOptions" />
+        <Body marginBottom="sm">
+          When both are provided, the first-class <code>onClick</code> wins.
+          If you omit the first-class prop, <code>htmlOptions.onClick</code>{" "}
+          continues to work as before.
         </Body>
       </Card>
 
       <Card padding="md">
-        <Title size={3} text="Differences From Existing Kit-Specific onClick" />
+        <Title size={3} text="Kits with kit-specific onClick" />
+        <Body marginBottom="sm">
+          These kits already expose <code>onClick</code> with their own typing
+          and target element. Global Event Props does not change them.
+        </Body>
         <Table size="sm">
           <Table.Head>
             <Table.Row>
               <Table.Header>{"Kit"}</Table.Header>
               <Table.Header>{"Signature / Target"}</Table.Header>
-              <Table.Header>{"Difference"}</Table.Header>
+              <Table.Header>{"Notes"}</Table.Header>
             </Table.Row>
           </Table.Head>
           <Table.Body>
             <Table.Row>
               <Table.Cell>{"Button"}</Table.Cell>
               <Table.Cell>{"Mouse event on <button> only"}</Table.Cell>
-              <Table.Cell>{"When Button renders a link, its kit-specific onClick is not attached to the <a> path."}</Table.Cell>
+              <Table.Cell>{"Not attached when Button renders as a link."}</Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>{"CircleIconButton"}</Table.Cell>
               <Table.Cell>{"Mouse event on inner Button"}</Table.Cell>
-              <Table.Cell>{"htmlOptions live on the wrapper, but the kit-specific onClick belongs to the inner Button."}</Table.Cell>
+              <Table.Cell>{"htmlOptions apply to the wrapper; onClick belongs to the inner Button."}</Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>{"FormPill"}</Table.Cell>
@@ -229,29 +244,19 @@ const OnClick = () => {
               <Table.Cell>{"The pill body is not the click target."}</Table.Cell>
             </Table.Row>
             <Table.Row>
-              <Table.Cell>{"Nav"}</Table.Cell>
-              <Table.Cell>{"() => void on title link only"}</Table.Cell>
-              <Table.Cell>{"The nav root itself is not the click target."}</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>{"Nav.Item"}</Table.Cell>
-              <Table.Cell>{"() => void on item / collapsible behavior"}</Table.Cell>
-              <Table.Cell>{"Disabled state and collapsible behavior change how clicks are handled."}</Table.Cell>
+              <Table.Cell>{"Nav / Nav.Item"}</Table.Cell>
+              <Table.Cell>{"() => void on title / item"}</Table.Cell>
+              <Table.Cell>{"Targets navigation controls, not a generic root click."}</Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>{"StarRating"}</Table.Cell>
               <Table.Cell>{"(value: number) => void on stars"}</Table.Cell>
-              <Table.Cell>{"This is the key typing conflict that prevents putting onClick into the shared CSS GlobalProps type."}</Table.Cell>
+              <Table.Cell>{"Different signature from a mouse event handler."}</Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>{"Collapsible"}</Table.Cell>
-              <Table.Cell>{"() => void via context-driven main area"}</Table.Cell>
-              <Table.Cell>{"Its click logic participates in toggle behavior rather than acting like a simple root DOM click."}</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>{"ButtonToolbar"}</Table.Cell>
-              <Table.Cell>{"Typed publicly, not currently wired"}</Table.Cell>
-              <Table.Cell>{"This prop exists in the API but is not attached to the root today."}</Table.Cell>
+              <Table.Cell>{"() => void via main area"}</Table.Cell>
+              <Table.Cell>{"Participates in toggle behavior."}</Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>
@@ -261,9 +266,9 @@ const OnClick = () => {
         headers={["Conflict Case", "Result", "Reason"]}
         rows={[
           [
-            "POC kit + htmlOptions.onClick",
+            "Supported kit + htmlOptions.onClick",
             "First-class onClick wins",
-            "The helper is spread after htmlOptions.",
+            "globalEventProps is spread after htmlOptions.",
           ],
           [
             "Kit-specific onClick + htmlOptions.onClick",
@@ -273,20 +278,10 @@ const OnClick = () => {
           [
             "Nested clickable kits",
             "Both can fire",
-            "Normal React event bubbling still applies unless propagation is stopped.",
+            "Normal React event bubbling applies unless stopped.",
           ],
         ]}
       />
-
-      <Card padding="md">
-        <Title size={3} text="Recommendation" />
-        <Body>
-          If Playbook moves forward with a first-class global <code>onClick</code>,
-          it should be a React-only helper applied selectively to kits with a
-          clear root element. Kits that already define their own click behavior
-          should keep their existing APIs and semantics.
-        </Body>
-      </Card>
     </ShowPage>
   );
 };

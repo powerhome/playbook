@@ -35,14 +35,30 @@ const combineKitsandVisualGuidelines = (
     value: `/tokens/${item}`,
     type: 'token'
   })) || []
+
+  const GLOBAL_EVENT_PROP_LABELS: Record<string, string> = {
+    on_click: 'onClick',
+  }
+
+  const globalEventPropsItems = global_props_and_tokens?.global_event_props?.map((item: string) => ({
+    label:
+      GLOBAL_EVENT_PROP_LABELS[item] ||
+      item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
+    value: `/global_event_props/${item}`,
+    type: 'global_event_prop'
+  })) || []
   
-  return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
+  return [...kits, ...globalPropsItems, ...globalEventPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
 }
 
 const normalizePathForPlatform = (path: string, platform: string) => {
   if (!path || !path.startsWith('/')) return path
 
-  if (path.startsWith('/global_props/') || path.startsWith('/tokens/')) {
+  if (
+    path.startsWith('/global_props/') ||
+    path.startsWith('/global_event_props/') ||
+    path.startsWith('/tokens/')
+  ) {
     return path
   }
 

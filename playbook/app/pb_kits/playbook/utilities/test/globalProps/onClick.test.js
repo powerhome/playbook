@@ -10,14 +10,14 @@ import StarRating from '../../../pb_star_rating/_star_rating'
 import Title from '../../../pb_title/_title'
 import { globalEventProps, globalProps } from '../../globalProps'
 
-const pocKits = [
+const optedInKits = [
   { Kit: Body, name: 'Body', extraProps: { text: 'Test' } },
   { Kit: Card, name: 'Card', extraProps: { children: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
 ]
 
-describe('onClick global event prop (POC)', () => {
+describe('onClick GlobalEventProps', () => {
   describe('globalEventProps helper', () => {
     test('returns onClick when provided', () => {
       const onClick = jest.fn()
@@ -35,10 +35,10 @@ describe('onClick global event prop (POC)', () => {
   })
 
   describe('attaches to the kit root element', () => {
-    pocKits.forEach(({ Kit, name, extraProps }) => {
+    optedInKits.forEach(({ Kit, name, extraProps }) => {
       test(`fires on ${name}`, () => {
         const onClick = jest.fn()
-        const testId = `onclick-poc-${name.toLowerCase()}`
+        const testId = `onclick-${name.toLowerCase()}`
         render(
           <Kit
               data={{ testid: testId }}

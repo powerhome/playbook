@@ -13,7 +13,6 @@ global_props:
   - height
   - hover
   - html_options
-  - on_click
   - margin
   - line_height
   - display
@@ -34,6 +33,9 @@ global_props:
   - group_hover
   - shadow
   - border
+
+global_event_props:
+  - on_click
 
 tokens:
   - using_tokens
