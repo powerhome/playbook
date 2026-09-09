@@ -10677,10 +10677,10 @@ react-trix@0.10.1:
   dependencies:
     trix "^1.3.1"
 
-react-zoom-pan-pinch@3.6.0:
-  version "3.6.0"
-  resolved "https://npm.powerapp.cloud/react-zoom-pan-pinch/-/react-zoom-pan-pinch-3.6.0.tgz#aea299a27d120a96b832fd953b2490ca9bfc4954"
-  integrity sha512-qLAFbDmlRwwJ7F3KXIoT5zxVZD34ZO0a5jI65URmTUjthapoQ0UCAF8oxpSJV0bSVszI5T3WV/U4Jd6ypwOnAQ==
+react-zoom-pan-pinch@4.2.0:
+  version "4.2.0"
+  resolved "https://npm.powerapp.cloud/react-zoom-pan-pinch/-/react-zoom-pan-pinch-4.2.0.tgz#4ffa7e0e96f5c26bf67bcbafdcb6bedbc60e7efa"
+  integrity sha512-QSw1dvr6QGv5zHCUY7SEIY7EWRDbx1y6plylrWf2Nko9KOMW1MEoPC6oJ+Y/qOSeQjhvbkMV0m5bFF7pBxCH4A==
 
 react@^17.0.2:
   version "17.0.2"
