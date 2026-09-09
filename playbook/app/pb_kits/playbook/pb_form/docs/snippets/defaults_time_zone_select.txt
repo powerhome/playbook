@@ -1,0 +1,3 @@
+<%= form.time_zone_select_field :time_zone, ActiveSupport::TimeZone.us_zones,
+      { default: "Eastern Time (US & Canada)" },
+      props: { label: "Time Zone" } %>

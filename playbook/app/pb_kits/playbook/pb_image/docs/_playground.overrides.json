@@ -142,7 +142,7 @@
     },
     "blur_transition": {
       "presetName": "Blur Transition",
-      "message": "Use the transition prop to select the lazyload transition class: fade, blur, or scale.",
+      "message": "Use the transition prop to select fade, blur, or scale.",
       "type": "info"
     },
     "custom_error_handler": {

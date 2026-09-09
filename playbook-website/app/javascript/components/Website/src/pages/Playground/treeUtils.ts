@@ -126,6 +126,94 @@ export const moveInstanceInTree = (
   }));
 };
 
+// Wraps a set of sibling instances in a new instance (e.g. Card, Flex).
+// Only wraps when every target id lives at the same level AND is contiguous
+// there — a non-contiguous or cross-parent selection has no unambiguous
+// wrapped order, so it's left unwrapped rather than silently reordering.
+export const wrapInstancesInTree = (
+  instances: BuilderInstance[],
+  targetIds: string[],
+  wrapper: BuilderInstance
+): { instances: BuilderInstance[]; wrapped: boolean } => {
+  const targetIdSet = new Set(targetIds);
+  const matchedIndexes: number[] = [];
+  instances.forEach((instance, index) => {
+    if (targetIdSet.has(instance.id)) matchedIndexes.push(index);
+  });
+
+  if (matchedIndexes.length > 0 && matchedIndexes.length === targetIdSet.size) {
+    const isContiguous = matchedIndexes.every(
+      (value, index) => index === 0 || value === matchedIndexes[index - 1] + 1
+    );
+    if (!isContiguous) return { instances, wrapped: false };
+
+    const firstIndex = matchedIndexes[0];
+    const lastIndex = matchedIndexes[matchedIndexes.length - 1];
+    const nextWrapper: BuilderInstance = {
+      ...wrapper,
+      children: instances.slice(firstIndex, lastIndex + 1),
+    };
+
+    return {
+      instances: [
+        ...instances.slice(0, firstIndex),
+        nextWrapper,
+        ...instances.slice(lastIndex + 1),
+      ],
+      wrapped: true,
+    };
+  }
+
+  if (matchedIndexes.length > 0) return { instances, wrapped: false };
+
+  let wrapped = false;
+  const nextInstances = instances.map((instance) => {
+    if (wrapped) return instance;
+
+    const childResult = wrapInstancesInTree(instance.children, targetIds, wrapper);
+    if (!childResult.wrapped) return instance;
+
+    wrapped = true;
+    return { ...instance, children: childResult.instances };
+  });
+
+  return { instances: nextInstances, wrapped };
+};
+
+// The inverse of wrapInstancesInTree: dissolves the target instance,
+// promoting its own children into its place among its former siblings.
+export const unwrapInstanceInTree = (
+  instances: BuilderInstance[],
+  id: string
+): { instances: BuilderInstance[]; unwrapped: boolean } => {
+  const index = instances.findIndex((instance) => instance.id === id);
+
+  if (index >= 0) {
+    const target = instances[index];
+    return {
+      instances: [
+        ...instances.slice(0, index),
+        ...target.children,
+        ...instances.slice(index + 1),
+      ],
+      unwrapped: true,
+    };
+  }
+
+  let unwrapped = false;
+  const nextInstances = instances.map((instance) => {
+    if (unwrapped) return instance;
+
+    const childResult = unwrapInstanceInTree(instance.children, id);
+    if (!childResult.unwrapped) return instance;
+
+    unwrapped = true;
+    return { ...instance, children: childResult.instances };
+  });
+
+  return { instances: nextInstances, unwrapped };
+};
+
 export const buildTargetOptions = (
   instances: BuilderInstance[],
   kitsByName: Record<string, PlaygroundKit>,

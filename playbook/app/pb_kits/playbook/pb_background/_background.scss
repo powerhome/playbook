@@ -30,30 +30,15 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
   }
 
   &.fade {
-    opacity: 0;
-    &.lazyloaded {
-      opacity: 1;
-      transition: opacity 400ms ease-in;
-    }
+    animation: pb_background_fade 400ms ease-in forwards;
   }
 
   &.blur {
-    filter: blur(5px);
-    &.lazyloaded {
-      -webkit-filter: blur(0);
-      filter: blur(0);
-      transition: filter 400ms ease-in;
-    }
+    animation: pb_background_blur 400ms ease-in forwards;
   }
 
   &.scale {
-    opacity: 0;
-    transform: scale(0.9);
-    &.lazyloaded {
-      opacity: 1;
-      transform: scale(1);
-      transition: 700ms ease-in;
-    }
+    animation: pb_background_scale 700ms ease-in forwards;
   }
 
   &.imageoverlay {
@@ -80,5 +65,26 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
     &.imageoverlay_#{$key}::before {
       opacity: $value;
     }
+  }
+}
+
+@keyframes pb_background_fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pb_background_blur {
+  from { filter: blur(5px); }
+  to { filter: blur(0); }
+}
+
+@keyframes pb_background_scale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

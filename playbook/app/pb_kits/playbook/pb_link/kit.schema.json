@@ -56,6 +56,13 @@
         "rails"
       ]
     },
+    "rel": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
     "tabIndex": {
       "type": "number",
       "platforms": [

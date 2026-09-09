@@ -1,0 +1,39 @@
+<%= pb_form_with(scope: :example, url: "", method: :get, loading: true) do |form| %>
+  <%= form.text_field :example_text_field, props: { label: true } %>
+
+  <%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>
+
+<script>
+  (function () {
+    const loadingForm = document.querySelector(".pb_form_loading")
+    if (!loadingForm || loadingForm.dataset.loadingDemoBound) return
+    loadingForm.dataset.loadingDemoBound = "true"
+
+    loadingForm.addEventListener("submit", function (event) {
+      event.preventDefault()
+
+      const submitButton = event.submitter
+      const cancelButton = event.target.querySelector('button[type="reset"]')
+      if (!submitButton) return
+
+      // formHelper already applied loading; reset after a short delay for the docs demo
+      setTimeout(function () {
+        submitButton.disabled = false
+        submitButton.className = submitButton.className
+          .replace("pb_button_disabled", "pb_button_enabled")
+          .replace("pb_button_loading", "")
+          .replace(/\s+/g, " ")
+          .trim()
+
+        if (cancelButton) {
+          cancelButton.disabled = false
+          cancelButton.className = cancelButton.className.replace("_disabled", "_enabled")
+        }
+      }, 5000)
+    })
+  })()
+</script>

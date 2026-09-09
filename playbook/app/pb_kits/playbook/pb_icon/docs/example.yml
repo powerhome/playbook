@@ -9,6 +9,7 @@ examples:
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
   - icon_color: Icon Color
+  - icon_css_api: Icon CSS API
 
   react:
   - icon_default: Icon Default
@@ -20,6 +21,7 @@ examples:
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
   - icon_color: Icon Color
+  - icon_css_api: Icon CSS API
 
   swift:
   - icon_default_swift: Icon Default

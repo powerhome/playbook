@@ -1,3 +1,53 @@
+# 📦 Introducing the New Container Kit ✨
+##### August 25, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Meet Container, a lightweight wrapper kit that can render as different HTML elements and ships with zero SCSS. It supports all global props and htmlOptions, giving you flexibility without needing to write extra CSS!
+
+Plus, continuing our journey for removing React-rendering from our Rails kits, PhoneNumberInput and MultiLevelSelect are now officially enhanced elements instead of React-rendered Rails kits! Typeahead is officially the last one standing. 👀
+
+[17.1.0](https://github.com/powerhome/playbook/tree/17.1.0) full list of changes:
+
+**New Kits:**
+
+- New Kit: Container [\#6546](https://github.com/powerhome/playbook/pull/6546) ([nidaqg](https://github.com/nidaqg))
+
+**Kit Enhancements:**
+
+- Pill Kit: Add Notification Variant for Badge Parity - React & Rails [\#6524](https://github.com/powerhome/playbook/pull/6524) ([kangaree](https://github.com/kangaree))
+- Height Global Props: Add 100% and 100vh Values [\#6511](https://github.com/powerhome/playbook/pull/6511) ([kangaree](https://github.com/kangaree))
+- Table Kit: Add Prop for Darker Divider/border Color [\#6490](https://github.com/powerhome/playbook/pull/6490) ([nickamantia](https://github.com/nickamantia))
+- Phone Number Input Kit: React rendered to Enhanced Element [\#6518](https://github.com/powerhome/playbook/pull/6518) ([nidaqg](https://github.com/nidaqg))
+- Multilevelselect: Use Enhanced Element Not React Rendering [\#6517](https://github.com/powerhome/playbook/pull/6517) ([nidaqg](https://github.com/nidaqg))
+- Dropdown Kit: Placeholder Color and Select-only Input Styling [\#6502](https://github.com/powerhome/playbook/pull/6502) ([nickamantia](https://github.com/nickamantia))
+- Select Kit: Color Consistency - Rails & React [\#6498](https://github.com/powerhome/playbook/pull/6498) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Dialog/popover Aftermath: Remove "overflow: Visible" Docs [\#6551](https://github.com/powerhome/playbook/pull/6551) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Kit Category and Dependencies Page Updates [\#6543](https://github.com/powerhome/playbook/pull/6543) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Select Playground Interactivity [\#6536](https://github.com/powerhome/playbook/pull/6536) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dependencies: Remove Lazysizes from PB [\#6534](https://github.com/powerhome/playbook/pull/6534) ([nidaqg](https://github.com/nidaqg))
+- Dependencies: Upgrade Yarn to 1.22.22 [\#6528](https://github.com/powerhome/playbook/pull/6528) ([nidaqg](https://github.com/nidaqg))
+- Dependencies: Upgrades Playbook Icons [\#6527](https://github.com/powerhome/playbook/pull/6527) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Datepicker Required Indicator Docs Need Kebab-case Picker Ids [\#6519](https://github.com/powerhome/playbook/pull/6519) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Form Group React Docs Text Inputs Need State [\#6512](https://github.com/powerhome/playbook/pull/6512) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Upgrades Playbook Icons [\#6510](https://github.com/powerhome/playbook/pull/6510) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Add New Multi and Update Hardboard Siding Color Tokens In Product Colors [\#6505](https://github.com/powerhome/playbook/pull/6505) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Remove Icon from Error Docs [\#6504](https://github.com/powerhome/playbook/pull/6504) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: React Inputs Reset When Viewing Code [\#6501](https://github.com/powerhome/playbook/pull/6501) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Upgrades Playbook Icons [\#6500](https://github.com/powerhome/playbook/pull/6500) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+
+**Fixed Bugs:**
+
+- Date Picker Kit: Allow Input Formatting Issue [\#6525](https://github.com/powerhome/playbook/pull/6525) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Icon Kit: Harden Against Emoji Xss, Remote Svg Ssrf, and Symlink Bypass - Rails [\#6479](https://github.com/powerhome/playbook/pull/6479) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v17.1.0-rc.4...17.1.0)
+
+
 # 🏡 Advanced Table Has a New Address 🏡
 ##### August 12, 2026
 

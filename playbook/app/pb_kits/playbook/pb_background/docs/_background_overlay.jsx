@@ -9,7 +9,7 @@ const BackgroundOverlay = (props) => {
     <Background
         alt="colorful background"
         backgroundColor="category_21"
-        className="background lazyload"
+        className="background"
         imageOverlay="opacity_2"
         imageUrl="https://unsplash.it/500/400/?image=633"
         {...props}

@@ -1,6 +1,6 @@
-import { useLoaderData, useParams } from "react-router-dom";
-import { Body, Card, Detail, Flex, FlexItem, Icon, Nav, NavItem, SectionSeparator, Title } from "playbook-ui";
-import { useState, useMemo } from "react";
+import { useLoaderData, useParams, useLocation, useNavigate } from "react-router-dom";
+import { Body, Card, Detail, EmptyState, Flex, FlexItem, Icon, Nav, NavItem, SectionSeparator, Title } from "playbook-ui";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 import { MarkdownContent } from "../../components/MarkdownContent";
@@ -8,13 +8,21 @@ import { usePlatform } from "../../contexts/PlatformContext";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
-// import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
-// import { ReferencesTab } from "./Tabs/ReferencesTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
+import {
+  goToStaging,
+  isProductionHost,
+  isStagingHost,
+  kitShowTabHref,
+  PROD_ORIGIN,
+  STAGING_ORIGIN,
+} from "../../utils/siteNavigation";
 
 const KitShow = () => {
   const { name } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { platform } = usePlatform();
   const loaderData = useLoaderData() as any;
   const {
@@ -91,10 +99,48 @@ const KitShow = () => {
     };
   }, [currentKit, loaderData]);
 
-  const [activeTab, setActiveTab] = useState<string>("docs");
   const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);
+  const tabFromUrl = new URLSearchParams(location.search).get("tab");
+  const [activeTab, setActiveTab] = useState<string>(
+    tabFromUrl === "playground" && showPlayground
+      ? "playground"
+      : tabFromUrl === "props"
+        ? "props"
+        : "docs"
+  );
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
+
+  // Keep UI in sync when ?tab= changes (back/forward, shared links).
+  useEffect(() => {
+    const nextTab =
+      tabFromUrl === "playground" && showPlayground
+        ? "playground"
+        : tabFromUrl === "props"
+          ? "props"
+          : "docs";
+    setActiveTab(nextTab);
+  }, [tabFromUrl, showPlayground]);
+
+  // Production: kit Playground tab lives on staging; Docs/Props live on prod.
+  // Local / review: keep tabs on the current host.
+  useEffect(() => {
+    if (!isProductionHost() && !isStagingHost()) return
+
+    const onStaging = isStagingHost();
+    const wantsPlayground = tabFromUrl === "playground" && showPlayground;
+
+    if (onStaging && !wantsPlayground) {
+      window.location.replace(`${PROD_ORIGIN}${location.pathname}${location.hash}`);
+      return;
+    }
+
+    if (isProductionHost() && wantsPlayground) {
+      void goToStaging(
+        `${STAGING_ORIGIN}${location.pathname}?tab=playground${location.hash}`
+      );
+    }
+  }, [location.pathname, location.hash, showPlayground, tabFromUrl]);
 
   const kitShowTitle = useMemo(() => {
     const sectionSlug = name ?? "";
@@ -104,15 +150,66 @@ const KitShow = () => {
     return linkFormat(sectionSlug || currentKit);
   }, [currentKit, name]);
 
+  // Keep ?tab= in sync: Props/Playground set it; Docs clears it so refresh/share match the UI.
+  const syncTabInUrl = useCallback(
+    (tab: string) => {
+      const params = new URLSearchParams(location.search);
+      if (tab === "docs") {
+        params.delete("tab");
+      } else {
+        params.set("tab", tab);
+      }
+      const search = params.toString();
+      const next = `${location.pathname}${search ? `?${search}` : ""}${location.hash}`;
+      const current = `${location.pathname}${location.search}${location.hash}`;
+      if (next !== current) {
+        navigate(next, { replace: true });
+      }
+    },
+    [location.hash, location.pathname, location.search, navigate]
+  );
+
   const handleTabChange = (tab: string) => {
+    if (!isProductionHost() && !isStagingHost()) {
+      if (tab === "playground") setDarkMode(false);
+      setActiveTab(tab);
+      syncTabInUrl(tab);
+      return;
+    }
+
+    const onStaging = isStagingHost();
+
     if (tab === "playground") {
       setDarkMode(false);
+      if (!onStaging) {
+        void goToStaging(kitShowTabHref("playground", location.pathname));
+        return;
+      }
+    } else if (onStaging) {
+      window.location.assign(kitShowTabHref(tab, location.pathname));
+      return;
     }
 
     setActiveTab(tab);
+    syncTabInUrl(tab);
   };
 
   const showStatusBadge = kitStatus === "beta" || kitStatus === "deprecated";
+
+  if (!kitMeta) {
+    return (
+      <div className="kit-show-wrapper">
+        <Flex justify="center" width="100%" paddingTop="xl" className="no-kit-empty-state-container">
+          <EmptyState
+            header="No Component Found"
+            description={`We could not find a component at this URL. Check the component name and try again, or choose another component from the navigation or search.`}
+            image="default"
+            size="lg"
+          />
+        </Flex>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -210,17 +307,6 @@ const KitShow = () => {
               />
             )}
 
-            {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
-            {/* <NavItem
-            text="Building Blocks"
-            active={activeTab === "building-blocks"}
-            onClick={() => setActiveTab("building-blocks")}
-          />
-          <NavItem
-            text="References"
-            active={activeTab === "references"}
-            onClick={() => setActiveTab("references")}
-          /> */}
           </Nav>
         </Flex>
       </div>

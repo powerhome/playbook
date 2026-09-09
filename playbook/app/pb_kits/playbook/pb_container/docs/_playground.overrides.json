@@ -1,0 +1,54 @@
+{
+  "template": "<Container{{props}}>\n  {{children}}\n</Container>",
+  "children": {
+    "editable": true,
+    "default": "Hello, I am a div container"
+  },
+  "defaults": {
+    "tag": "div"
+  },
+  "groups": [
+    {
+      "name": "Layout",
+      "props": ["tag"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Hello, I am a div container"
+    },
+    {
+      "name": "Span",
+      "props": {
+        "tag": "span"
+      },
+      "children": "Hello, I am a span container"
+    },
+    {
+      "name": "Global Props",
+      "props": {
+        "border": "default",
+        "borderRadius": "lg",
+        "hover": {
+          "shadow": "deepest"
+        },
+        "maxWidth": "sm",
+        "padding": "md",
+        "shadow": "deep"
+      },
+      "children": "Hello, I am a styled container"
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "link_tag": {
+      "when": {
+        "tag": "a"
+      },
+      "message": "Use htmlOptions to add href and other HTML attributes when tag is a.",
+      "type": "info"
+    }
+  }
+}

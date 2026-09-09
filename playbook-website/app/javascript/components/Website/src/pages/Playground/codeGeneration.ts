@@ -93,9 +93,6 @@ const renderCodeProps = (
       if (value === "" || value === null || value === undefined) return null;
 
       if (typeof value === "boolean" && value === true) return name;
-      if (typeof value === "string" && !displayPropType(definition).includes("function")) {
-        return `${name}=${JSON.stringify(value)}`;
-      }
 
       return `${name}={${formatCodeValue(value, definition)}}`;
     })

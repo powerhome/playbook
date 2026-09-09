@@ -23,6 +23,9 @@ module Playbook
 
       prop :error, type: Playbook::Props::String
 
+      prop :custom_message, type: Playbook::Props::String,
+                            default: ""
+
       def classname
         file_upload_class = generate_classname("pb_file_upload_kit")
         file_upload_class + error_class + full_width_class

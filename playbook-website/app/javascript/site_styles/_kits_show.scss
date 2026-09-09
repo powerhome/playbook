@@ -24,6 +24,14 @@
   .card {
     max-width: fit-content;
   }
+  //workaround to set the width of the empty state container to 530px for the lg size till changes
+  //are made in the empty state component
+  // purpose: to prevent the title text from wrapping
+  .no-kit-empty-state-container {
+    .pb_empty_state_kit .lg-state-vertical {
+      width: 530px;
+    }
+  }
 }
 
 .multi-kits-container {

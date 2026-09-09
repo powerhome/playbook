@@ -2,6 +2,7 @@
   "children": {
     "default": "Link text"
   },
+  "emitEmptyStringProps": ["rel"],
   "defaults": {
     "color": "default",
     "disabled": false,
@@ -17,7 +18,7 @@
     },
     {
       "name": "Behavior",
-      "props": ["href", "target", "disabled", "tabIndex"]
+      "props": ["href", "target", "disabled", "tabIndex", "rel"]
     },
     {
       "name": "Appearance",

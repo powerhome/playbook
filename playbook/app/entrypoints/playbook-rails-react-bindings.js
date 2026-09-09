@@ -4,11 +4,9 @@ import ComponentRegistry from '../utils/componentRegistry'
 import '../utils/mountComponent'
 
 import Typeahead from 'kits/pb_typeahead/_typeahead'
-import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
 
 ComponentRegistry.registerComponents({
   Typeahead,
-  PhoneNumberInput,
 })
 
 //export mount/unmount functions for use if needed

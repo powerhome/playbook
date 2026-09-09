@@ -33,3 +33,35 @@ spec:
                 port:
                   number: 80
     <% end %>
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: playbook-traefik
+  labels:
+    app: playbook
+  <% if environment == 'production' %>
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: https,https-public
+  <% end %>
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+      <% urls.each do |url| %>
+      - <%= url.host %>
+      <% end %>
+    secretName: playbook-tls
+  rules:
+    <% urls.each do |url| %>
+    - host: <%= url.host %>
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: playbook
+                port:
+                  number: 80
+    <% end %>

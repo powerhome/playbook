@@ -1,0 +1,32 @@
+<%= pb_rails("file_upload", props: {
+  accept: ".pdf,.xlsx",
+  custom_message: "Choose a file. The accepted file types are Adobe (.pdf) and Microsoft (.xlsx)",
+  id: "file-upload-custom-message-file-types",
+}) %>
+
+<%= pb_rails("file_upload", props: {
+  custom_message: "Max Size: 10MB.",
+  id: "file-upload-custom-message-max-size",
+  margin_top: "md",
+}) %>
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.getElementById("upload-file-upload-custom-message-max-size")
+    const maxSize = 10 * 1000 * 1000
+
+    if (!fileInput) return
+
+    fileInput.addEventListener("change", function () {
+      const files = Array.from(fileInput.files || [])
+      const fileTooLarge = files.some((file) => file.size > maxSize)
+
+      if (fileTooLarge) {
+        fileInput.setCustomValidity("File size is too large. Maximum file size is 10MB.")
+        fileInput.reportValidity()
+      } else {
+        fileInput.setCustomValidity("")
+      }
+    })
+  })
+<% end %>

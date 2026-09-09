@@ -21,20 +21,20 @@ test('alt attribute', () => {
 
 test('default classname', () => {
   const kit = renderKit(Image, props)
-  expect(kit).toHaveClass('pb_image_kit lazyload')
+  expect(kit).toHaveClass('pb_image_kit')
 })
 
 test('size = xs', () => {
   const kit = renderKit(Image, props, { size: 'xs' })
-  expect(kit).toHaveClass('pb_image_kit_size_xs lazyload')
+  expect(kit).toHaveClass('pb_image_kit_size_xs')
 })
 
 test('transition = blur', () => {
   const kit = renderKit(Image, props, { transition: 'blur' })
-  expect(kit).toHaveClass('pb_image_kit lazyload blur')
+  expect(kit).toHaveClass('pb_image_kit blur')
 })
 
 test('rounded = true', () => {
   const kit = renderKit(Image, props, { rounded: true })
-  expect(kit).toHaveClass('pb_image_kit lazyload rounded')
+  expect(kit).toHaveClass('pb_image_kit rounded')
 })

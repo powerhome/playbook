@@ -120,3 +120,32 @@ test('should render child target prop', () => {
 
   expect(kit).toHaveAttribute('target', 'child')
 })
+
+test('defaults to noreferrer for a named target', () => {
+  render(
+      <Link
+          data={{ testid: 'rel-default-test' }}
+          href="https://playbook.powerapp.cloud/"
+          target="namedTab"
+      />
+  )
+
+  const kit = screen.getByTestId('rel-default-test')
+
+  expect(kit).toHaveAttribute('rel', 'noreferrer')
+})
+
+test('rel prop overrides the default noreferrer', () => {
+  render(
+      <Link
+          data={{ testid: 'rel-override-test' }}
+          href="https://playbook.powerapp.cloud/"
+          rel=""
+          target="namedTab"
+      />
+  )
+
+  const kit = screen.getByTestId('rel-override-test')
+
+  expect(kit).toHaveAttribute('rel', '')
+})

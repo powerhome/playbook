@@ -164,7 +164,7 @@ function renderMarkdownBlocks(source: string): ReactNode[] {
     const line = lines[index];
     const disclaimerMatch = line.trim().match(DISCLAIMER_MARKER_PATTERN);
 
-    if (!insideFence && disclaimerMatch) {
+    if (disclaimerMatch) {
       flushText();
       blocks.push(
         <Pill

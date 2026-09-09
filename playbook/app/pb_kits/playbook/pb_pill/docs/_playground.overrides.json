@@ -11,7 +11,7 @@
     },
     {
       "name": "Appearance",
-      "props": ["variant", "size", "textTransform"]
+      "props": ["variant", "notification", "size", "textTransform"]
     }
   ],
   "presets": [
@@ -51,6 +51,25 @@
         "textTransform": "none"
       },
       "children": ""
+    },
+    {
+      "name": "Notification",
+      "props": {
+        "text": "1",
+        "notification": true,
+        "textTransform": "none"
+      },
+      "children": ""
+    },
+    {
+      "name": "Notification error",
+      "props": {
+        "text": "1",
+        "variant": "error",
+        "notification": true,
+        "textTransform": "none"
+      },
+      "children": ""
     }
   ],
   "conditionals": {},
@@ -58,6 +77,11 @@
     "variant": {
       "when": {},
       "message": "variant controls the visual color for the pill.",
+      "type": "info"
+    },
+    "notification": {
+      "when": {},
+      "message": "notification uses a solid primary fill by default. set variant to error for the red treatment.",
       "type": "info"
     },
     "text_transform": {

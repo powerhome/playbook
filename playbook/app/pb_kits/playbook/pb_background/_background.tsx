@@ -127,7 +127,6 @@ const Background = (props: BackgroundProps): React.ReactElement => {
   // Build CSS classes and styles using responsive values.
   const classes = classnames(
     buildCss('pb_background_kit'),
-    'lazyload',
     globalProps(props),
     transition,
     {

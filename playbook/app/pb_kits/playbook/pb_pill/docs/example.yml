@@ -4,6 +4,7 @@ examples:
   - pill_default: Default
   - pill_variants: Variants
   - pill_size: Size
+  - pill_notification: Notification
   - pill_example: Example
  
   
@@ -12,6 +13,7 @@ examples:
   - pill_default: Default
   - pill_variants: Variants
   - pill_size: Size
+  - pill_notification: Notification
   - pill_example: Example
 
   swift:

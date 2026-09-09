@@ -1,4 +1,8 @@
 {
+  "template": "<Select{{props}} onChange={handleSelectChange} value={selectValue} />",
+  "wrapper": "const SelectPlayground = () => {\n  const [selectValue, setSelectValue] = useState(value)\n\n  const handleSelectChange = (event) => {\n    const { multiple, selectedOptions } = event.target\n\n    setSelectValue(multiple ? Array.from(selectedOptions, (option) => option.value) : event.target.value)\n  }\n\n  return {{component}}\n}\n\n<SelectPlayground />",
+  "statefulProps": ["value"],
+  "externalImports": ["import React, { useState } from 'react'"],
   "defaults": {
     "blankSelection": "Select an option",
     "compact": false,
@@ -69,6 +73,7 @@
         "label": "Teams",
         "name": "teams",
         "multiple": true,
+        "value": [],
         "options": [
           { "value": "eng", "text": "Engineering" },
           { "value": "design", "text": "Design" },
@@ -96,6 +101,10 @@
     "requiredIndicator": { "requires": "label" }
   },
   "hints": {
+    "controlled_state": {
+      "message": "Select is controlled when value is set, so the snippet uses useState and onChange to keep the selection changeable.",
+      "type": "info"
+    },
     "default": {
       "presetName": "Default",
       "message": "Default shows a labeled select with a selected value and a simple options array.",

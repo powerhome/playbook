@@ -1,0 +1,3 @@
+Use the `custom_message` prop to provide additional information about the files that can be uploaded, such as accepted file types or maximum file size. The `custom_message` is informational only.
+
+The first example demonstrates using it along with the `accept` prop and serves as a description of accepted files. The second example demonstrates using it as a max size warning with a script tag mimicking a client-side alert; however, when actually implemented file size limits should be enforced server-side when processing the uploaded file.

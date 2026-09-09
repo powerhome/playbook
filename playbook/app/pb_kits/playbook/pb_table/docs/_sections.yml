@@ -14,7 +14,7 @@ sections:
       - table_with_subcomponents
       - table_with_subcomponents_as_divs
       - table_with_background_kit
-
+      - table_colspan
 
   - title: "Sticky & Positional Behaviors"
     examples:
@@ -59,6 +59,7 @@ sections:
       - table_with_filter_variant_external_filter_rails
       - table_with_filter_variant_with_pagination
       - table_disable_hover
+      - table_with_filter_with_card_title_props
 
   - title: "Table Actions"
     examples:

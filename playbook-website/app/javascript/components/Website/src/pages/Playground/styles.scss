@@ -17,9 +17,11 @@
 
 .full-playground-heading {
   align-items: flex-start;
+  flex-direction: column;
 
   @include break_on($screen-md-min) {
     align-items: flex-end;
+    flex-direction: row;
   }
 }
 
@@ -94,6 +96,15 @@
   > [class*="pb_card"] {
     width: 100%;
   }
+
+  // With nothing selected, the top card is the only child (no PropsPanel
+  // sibling) and would otherwise stretch to the grid column's content-based
+  // "auto" width. Pin it to PropsPanel's own default width (see
+  // PROPS_PANEL_DEFAULT_WIDTH in PropsPanel.tsx) so the inspector doesn't
+  // change width between the empty and selected states.
+  > .playground-panel-controls:only-child {
+    width: 330px;
+  }
 }
 
 .builder-prop-toggle,
@@ -122,6 +133,29 @@
   &:disabled {
     background: $bg_light;
     color: $text_lt_light;
+  }
+}
+
+.builder-prompt-examples {
+  flex-wrap: wrap;
+}
+
+.builder-prompt-example-chip {
+  appearance: none;
+  background: $white;
+  border: 1px solid $border_light;
+  border-radius: 999px;
+  color: $text_lt_light;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.2;
+  padding: 4px $space_xs;
+
+  &:hover,
+  &:focus {
+    border-color: $primary;
+    color: $primary;
+    outline: none;
   }
 }
 

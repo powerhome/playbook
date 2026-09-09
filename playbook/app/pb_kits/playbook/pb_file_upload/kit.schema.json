@@ -18,8 +18,10 @@
     "customMessage": {
       "type": "string",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": ""
     },
     "dark": {
       "type": "boolean",

@@ -1,0 +1,1 @@
+Pass `loading: true` on `pb_form_with` so submit shows a spinner and disables the submit and cancel buttons. Press Submit in the example to see that state for a few seconds (demo-only script; production forms keep the loading state until navigation or your own reset).

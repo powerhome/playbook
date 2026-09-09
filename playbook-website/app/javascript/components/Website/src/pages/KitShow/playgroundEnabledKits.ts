@@ -13,6 +13,7 @@ export const PLAYGROUND_ENABLED_KITS = [
   "circle_icon_button",
   "collapsible",
   "contact",
+  "container",
   "copy_button",
   "currency",
   "dashboard_value",
