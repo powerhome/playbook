@@ -59,16 +59,16 @@ const Changelog = () => {
             <Title text="What's New" tag="h1" size={1} />
             <Nav orientation="horizontal">
               <NavLink to="/changelog/web">
-                <NavItem text="Web" active={activeVariant === 'web'} />
+                <NavItem text="Releases" active={activeVariant === 'web'} />
               </NavLink>
-              <NavLink to="/changelog/swift">
+              {/* <NavLink to="/changelog/swift">
                 <NavItem text="Swift" active={activeVariant === 'swift'} />
               </NavLink>
               <NavLink to="/changelog/figma">
                 <NavItem text="Figma" active={activeVariant === 'figma'} />
-              </NavLink>
+              </NavLink> */}
               <NavLink to="/changelog/rc">
-                <NavItem text="RC" active={activeVariant === 'rc'} />
+                <NavItem text="Release Candidates" active={activeVariant === 'rc'} />
               </NavLink>
             </Nav>
             <SectionSeparator flexGrow={1} />
