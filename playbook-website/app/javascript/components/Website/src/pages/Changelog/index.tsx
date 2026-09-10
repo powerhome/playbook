@@ -19,6 +19,8 @@ const Changelog = () => {
         return loaderData.swift_changelog_releases || []
       case 'figma':
         return loaderData.figma_changelog_releases || []
+      case 'rc':
+        return loaderData.rc_changelog_releases || []
       default:
         return loaderData.changelog_releases || []
     }
@@ -64,6 +66,9 @@ const Changelog = () => {
               </NavLink>
               <NavLink to="/changelog/figma">
                 <NavItem text="Figma" active={activeVariant === 'figma'} />
+              </NavLink>
+              <NavLink to="/changelog/rc">
+                <NavItem text="RC" active={activeVariant === 'rc'} />
               </NavLink>
             </Nav>
             <SectionSeparator flexGrow={1} />

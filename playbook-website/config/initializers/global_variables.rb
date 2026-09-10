@@ -66,6 +66,12 @@ navigation[:whats_new] = {
       page_id: "FIGMA",
       frontmatter: {},
     },
+    {
+      url: "changelog/rc",
+      title: "RC Changelog",
+      page_id: "RC",
+      frontmatter: {},
+    },
   ],
 }
 
