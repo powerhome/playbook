@@ -55,18 +55,6 @@ navigation[:whats_new] = {
       frontmatter: {},
     },
     {
-      url: "changelog/swift",
-      title: "Swift Changelog",
-      page_id: "SWIFT",
-      frontmatter: {},
-    },
-    {
-      url: "changelog/figma",
-      title: "Figma Changelog",
-      page_id: "FIGMA",
-      frontmatter: {},
-    },
-    {
       url: "changelog/rc",
       title: "RC Changelog",
       page_id: "RC",
