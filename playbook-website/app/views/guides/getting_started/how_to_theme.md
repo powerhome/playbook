@@ -8,15 +8,6 @@ For a full token reference, see [Tokens](/tokens). Source files live in the [tok
 
 Do you have design requirements that differ from Playbook's default settings? How you customize depends on how your app loads Playbook styles.
 
-#### Index
-
-[Using the prebuilt CSS bundle](#Using-the-prebuilt-CSS-bundle)
-[Compiling Playbook Sass](#Compiling-Playbook-Sass)
-‣ [Sass Variable Assignment](#Sass-Variable-Assignment)
-‣ [The !default Flag](#The-default-Flag)
-‣ [Order of Variable Assignment](#Order-of-Variable-Assignment)
-‣ [Example: Customizing z-index](#Example-Customizing-z-index)
-
 ## Using the prebuilt CSS bundle
 
 Most apps follow the setup guides and import the prebuilt stylesheet:
