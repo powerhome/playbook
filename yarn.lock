@@ -10372,10 +10372,10 @@ prosemirror-keymap@^1.0.0, prosemirror-keymap@^1.2.2:
     prosemirror-state "^1.0.0"
     w3c-keyname "^2.2.0"
 
-prosemirror-markdown@^1.13.1:
-  version "1.13.2"
-  resolved "https://npm.powerapp.cloud/prosemirror-markdown/-/prosemirror-markdown-1.13.2.tgz#863eb3fd5f57a444e4378174622b562735b1c503"
-  integrity sha512-FPD9rHPdA9fqzNmIIDhhnYQ6WgNoSWX9StUZ8LEKapaXU9i6XgykaHKhp6XMyXlOWetmaFgGDS/nu/w9/vUc5g==
+prosemirror-markdown@^1.13.1, prosemirror-markdown@^1.13.7:
+  version "1.13.7"
+  resolved "https://npm.powerapp.cloud/prosemirror-markdown/-/prosemirror-markdown-1.13.7.tgz#a0b8fd5cc78f1d6a1c2b6c78db09374b0a9662f1"
+  integrity sha512-NV57Oxe3fXR+bNGXS5XW4sKt/XGIyY3n0eHVUoJORcismeF4FFMpLBnl0YESy2BvJQHloexX+9P+zT3VqFj/CQ==
   dependencies:
     "@types/markdown-it" "^14.0.0"
     markdown-it "^14.0.0"
