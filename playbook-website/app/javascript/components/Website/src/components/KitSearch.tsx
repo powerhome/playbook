@@ -1,12 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Typeahead, Badge, Flex } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
 import { useDarkMode } from '../contexts/DarkModeContext'
+import { formatPropNameForPlatform } from '../helpers/platform'
 
 type Kit = {
   label: string,
+  props?: KitProp[],
   value: string,
   type?: string,
+}
+
+type KitProp = {
+  name: string,
+  platforms: string[],
 }
 
 type KitSearchProps = {
@@ -20,10 +27,26 @@ type KitSearchProps = {
   searchResetKey?: string,
 }
 
+const putPropsLast = (items: Kit[]): Kit[] => [
+  ...items.filter(({ type }) => type !== 'prop'),
+  ...items.filter(({ type }) => type === 'prop'),
+]
+
 const combineKitsandVisualGuidelines = (
   kits: Kit[],
+  platform: string,
   global_props_and_tokens?: Record<string, any>,
 ): Kit[] => {
+  const propItems = kits.flatMap((kit) =>
+    kit.props
+      ?.filter(({ platforms }) => platforms.length === 0 || platforms.includes(platform))
+      .map(({ name }) => ({
+        label: `${formatPropNameForPlatform(name, platform)} (${kit.label})`,
+        type: 'prop',
+        value: kit.value,
+      })) || [],
+  )
+
   const globalPropsItems = global_props_and_tokens?.global_props?.map((item: string) => ({
     label: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
     value: `/global_props/${item}`,
@@ -36,7 +59,10 @@ const combineKitsandVisualGuidelines = (
     type: 'token'
   })) || []
   
-  return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
+  const items = [...kits, ...globalPropsItems, ...tokensItems, ...propItems]
+    .sort((a, b) => a.label.localeCompare(b.label))
+
+  return putPropsLast(items)
 }
 
 const normalizePathForPlatform = (path: string, platform: string) => {
@@ -65,9 +91,17 @@ const normalizePathForPlatform = (path: string, platform: string) => {
 }
 
 const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_tokens, marginBottom, onNavigate, searchResetKey }: KitSearchProps) => {
-  const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
+  const kitsAndGuidelines = useMemo(
+    () => combineKitsandVisualGuidelines(kits, platform, global_props_and_tokens),
+    [kits, platform, global_props_and_tokens],
+  )
   const { darkMode } = useDarkMode()
-  const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
+  const [query, setQuery] = useState('')
+  const filteredKits = useMemo(() => {
+    if (!query) return kitsAndGuidelines
+
+    return putPropsLast(matchSorter(kitsAndGuidelines, query, { keys: ['label'] }))
+  }, [kitsAndGuidelines, query])
 
   useEffect(() => {
     if (id === 'desktop-kit-search') {
@@ -93,12 +127,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
   }
 
   const handleFilteredKits = (query: string) => {
-    if (query) {
-      const results = matchSorter(kitsAndGuidelines, query, { keys: ['label'] })
-      setFilteredKits(results)
-    } else {
-      setFilteredKits(kitsAndGuidelines)
-    }
+    setQuery(query)
   }
 
   const Item = ({ labelLeft, type }: { labelLeft: string, type: string }) => (
@@ -107,7 +136,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
         <Badge
           dark={darkMode}
           margin="xs"
-          text={type === 'global_prop' ? 'Global Prop' : 'Token'}
+          text={type === 'global_prop' ? 'Global Prop' : type === 'prop' ? 'Kit Prop' : 'Token'}
           variant="primary"
         />
     </Flex>
@@ -118,6 +147,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
         key={`${id}__${searchResetKey ?? ''}`}
         className={classname}
         dark={darkMode}
+        filterOption={() => true}
         id={id}
         marginBottom={marginBottom || 'sm'}
         onChange={handleChange}
@@ -125,7 +155,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
         options={filteredKits}
         placeholder="Search..."
         valueComponent={(option: Kit) => {
-          if (option.type === 'global_prop' || option.type === 'token') {
+          if (option.type === 'global_prop' || option.type === 'prop' || option.type === 'token') {
             return <Item labelLeft={option.label} type={option.type} />
           }
           return <>{option.label}</>
