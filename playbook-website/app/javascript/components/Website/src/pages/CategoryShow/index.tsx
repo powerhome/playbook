@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { NavLink, useLoaderData } from "react-router-dom";
 import { Body, Flex } from "playbook-ui";
 
@@ -8,6 +8,7 @@ import { KitGrid } from "../../components/KitGrid";
 import { PageContainer } from "../../components/PageContainer";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { usePlatform } from "../../contexts/PlatformContext";
+import NotFound from "../NotFound";
 
 import "./styles.scss";
 
@@ -26,7 +27,8 @@ type LoaderData = {
 };
 
 export default function CategoryShow() {
-  const { components, category, description } = useLoaderData() as LoaderData;
+  const categoryData = useLoaderData() as LoaderData | null;
+  const components = useMemo(() => categoryData?.components ?? [], [categoryData]);
   const [kitsToShow, setKitsToShow] = useState(components);
   const { platform } = usePlatform();
 
@@ -42,6 +44,10 @@ export default function CategoryShow() {
     });
     setKitsToShow(filtered);
   }, [platform, components]);
+
+  if (!categoryData) return <NotFound />;
+
+  const { category, description } = categoryData;
 
   return (
     <>

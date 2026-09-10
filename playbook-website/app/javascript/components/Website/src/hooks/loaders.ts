@@ -78,12 +78,14 @@ export const ComponentShowLoader = async ({
 
 export const CategoryLoader: (
   props: LoaderFunctionArgs
-) => Promise<ComponentTypes> = async ({ params }) => {
+) => Promise<CategoryTypes | null> = async ({ params }) => {
   const { kits } = await fetchKits();
 
   const filteredData = kits.find(
     (kit: CategoryTypes) => kit.category === params.category
   );
+
+  if (!filteredData) return null;
 
   filteredData.components.sort(sortByName);
 
