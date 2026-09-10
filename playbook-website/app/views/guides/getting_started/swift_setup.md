@@ -4,37 +4,42 @@ icon: mobile
 description: Finally a Design System built for SwiftUI. Get cross device consistency by using Playbook for SwiftUI.
 ---
 
-Integrate Playbook's design system seamlessly into your Swift app with the Playbook Swift Package. Get started today with our easy-to-follow tutorial.
+Integrate Playbook's design system into your Swift app with the Playbook Swift package.
 
-# Playbook Swift Design System 📱
+## Playbook Swift
 
-Playbook Swift is the SwiftUI version of [Playbook](https://playbook.powerapp.cloud/), optimizing Playbook's designs for iOS & macOS apps. With Playbook Swift, all of Playbook's design components are now replicated for Apple's devices.
+Playbook Swift is the SwiftUI version of [Playbook](https://playbook.powerapp.cloud/), bringing Playbook designs to iOS and macOS. It is maintained in a [separate repository](https://github.com/powerhome/playbook-swift).
 
 Built and maintained by the User Experience Team at [Power Home Remodeling](https://www.techatpower.com/).
 
 ## Installation
 
+Follow the canonical steps in the upstream [Installation guide](https://github.com/powerhome/playbook-swift/blob/main/Installation.md). Summary:
+
 ### Prerequisites
 
 - [Xcode 15](https://developer.apple.com/xcode/)
+- [Homebrew](https://brew.sh/) (for contributor tooling such as pre-commit)
 
-### Playbook Swift can be added via the Swift Package Manager
+### Add via Swift Package Manager
 
-1. Search for: `git@github.com:powerhome/playbook-swift.git`
-1. Choose `Add Package`
-2. Choose `Packages > Resolve Package Versions`
-3. In your Swift view file:
-    ```swift
-    import Playbook
-    ```
+1. In Xcode, add a package and search for: `git@github.com:powerhome/playbook-swift.git`
+2. Choose **Add Package**
+3. Choose **Packages > Resolve Package Versions**
+4. In your Swift view file:
+
+```swift
+import Playbook
+```
+
 5. Build the project
 
-## Component Examples via PlaybookShowcase
+You may also declare the package in a YAML packages configuration — see the [Installation guide](https://github.com/powerhome/playbook-swift/blob/main/Installation.md) for the exact snippet.
 
-The Playbook Swift repo contains the `PlaybookShowcase` app, which provides interactive examples of each component.
+## Component examples
 
-You can find further Playbook Swift component documentation within Playbook website's [component library](https://playbook.powerapp.cloud/kits?type=swift).
+The Playbook Swift repo includes the `PlaybookShowcase` app with interactive examples of each component.
 
-# Contribution Documentation 
-Once you've installed Playbook Swift into your project and kicked its tires a bit, you may find that you'd like to contribute to its growth and development to better-serve your needs (and all other Playbook users), and we'd love to hear from you! Please see our [contribution docs](https://github.com/powerhome/playbook-swift/blob/main/Contribution.md) for more information on how to help us continuing growing Playbook Swift.
+## Contributing
 
+See the [contribution docs](https://github.com/powerhome/playbook-swift/blob/main/Contribution.md) in the Playbook Swift repository.
