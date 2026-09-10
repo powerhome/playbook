@@ -8,7 +8,8 @@ import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
 import StarRating from '../../../pb_star_rating/_star_rating'
 import Title from '../../../pb_title/_title'
-import { globalEventProps, globalProps } from '../../globalProps'
+import { globalProps } from '../../globalProps'
+import { globalEventProps } from '../../globalEventProps'
 
 const optedInKits = [
   { Kit: Body, name: 'Body', extraProps: { text: 'Test' } },

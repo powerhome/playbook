@@ -2,7 +2,8 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { deprecatedProps, globalEventProps, globalProps, GlobalEventProps, GlobalProps } from '../utilities/globalProps'
+import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
+import { globalEventProps, GlobalEventProps } from '../utilities/globalEventProps'
 
 import Highlight from '../pb_highlight/_highlight'
 

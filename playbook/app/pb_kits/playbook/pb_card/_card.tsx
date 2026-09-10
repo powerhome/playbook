@@ -6,7 +6,8 @@ import { get } from '../utilities/object'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { GlobalEventProps, GlobalProps, globalEventProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import type { ProductColors, CategoryColors, BackgroundColors, StatusColors } from '../types/colors'
 
 import Icon from '../pb_icon/_icon'

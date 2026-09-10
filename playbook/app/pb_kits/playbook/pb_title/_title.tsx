@@ -1,7 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { deprecatedProps, GlobalEventProps, GlobalProps, globalEventProps, globalProps } from '../utilities/globalProps'
+import { deprecatedProps, GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 type SizeType = 1 | 2 | 3 | 4 | "1" | "2" | "3" | "4" | "display"
 type SizeResponsiveType = {[key: string]: SizeType}

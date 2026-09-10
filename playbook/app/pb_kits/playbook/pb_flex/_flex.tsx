@@ -1,7 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { GlobalEventProps, GlobalProps, globalEventProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { GenericObject, Sizes } from '../types'
 
 type SizeType = Sizes | "none"
