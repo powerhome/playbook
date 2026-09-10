@@ -1,4 +1,7 @@
 import { EmptyState, Flex } from "playbook-ui";
+import ThisIsFineImage from "../../../../../images/this_is_fine.svg";
+
+import "./styles.scss";
 
 type NotFoundProps = {
   description?: string,
@@ -15,8 +18,9 @@ const NotFound = ({
         <EmptyState
           header={header}
           description={description}
-          image="default"
+          image={ThisIsFineImage}
           size="lg"
+          className="not-found-empty-state"
         />
       </Flex>
     </div>

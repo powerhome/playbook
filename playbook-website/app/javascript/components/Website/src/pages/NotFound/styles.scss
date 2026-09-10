@@ -1,0 +1,9 @@
+.not-found-empty-state {
+  .pb_image_kit {
+    max-width: 240px;
+  }
+}
+
+.pb--website-shell.dark .not-found-empty-state .pb_image_kit {
+  filter: invert(1);
+}
