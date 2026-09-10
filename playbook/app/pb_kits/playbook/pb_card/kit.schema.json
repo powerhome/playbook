@@ -183,6 +183,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Card } from 'playbook-ui'",

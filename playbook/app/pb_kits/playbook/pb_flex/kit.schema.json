@@ -159,6 +159,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Flex } from 'playbook-ui'",

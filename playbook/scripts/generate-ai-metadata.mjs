@@ -517,6 +517,13 @@ function generateUsage(kitName, props) {
 /**
  * Generate complete kit.schema.json for a component.
  */
+function usesGlobalEventProps(filePath) {
+  const content = readFile(filePath);
+  if (!content) return false;
+  // Opt-in is explicit: kits intersect GlobalEventProps on their props type.
+  return /&\s*GlobalEventProps\b/.test(content) || /\bGlobalEventProps\s*&/.test(content);
+}
+
 function generateSchema(kitName, options = {}) {
   const kitDir = path.join(CONFIG.pbKitsDir, `pb_${kitName}`);
   if (!fs.existsSync(kitDir)) return null;
@@ -544,6 +551,7 @@ function generateSchema(kitName, options = {}) {
     platforms,
     props,
     globalProps: true,
+    ...(usesGlobalEventProps(tsxFile) && { globalEventProps: true }),
     usage: generateUsage(kitName, props),
   };
 

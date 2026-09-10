@@ -17,7 +17,7 @@ if [ -z "$STAGED_FILES" ]; then
 fi
 
 if ! echo "$STAGED_FILES" | grep -Eq \
-  'playbook/app/pb_kits/playbook/(pb_[^/]+/.+\.(tsx|ts|rb)|utilities/globalProps\.ts|types/[^/]+\.ts|tokens/_(spacing|screen_sizes)\.scss|pb_[^/]+/kit\.schema\.json|pb_[^/]+/docs/_playground\.overrides\.json)'; then
+  'playbook/app/pb_kits/playbook/(pb_[^/]+/.+\.(tsx|ts|rb)|utilities/globalProps\.ts|utilities/globalEventProps\.ts|types/[^/]+\.ts|tokens/_(spacing|screen_sizes)\.scss|pb_[^/]+/kit\.schema\.json|pb_[^/]+/docs/_playground\.overrides\.json)'; then
   exit 0
 fi
 
@@ -37,6 +37,7 @@ list_generated_files() {
     find playbook/app/pb_kits/playbook -name 'kit.schema.json' 2>/dev/null
     find playbook/app/pb_kits/playbook -path '*/docs/_playground.json' 2>/dev/null
     echo 'playbook/app/pb_kits/playbook/utilities/global-props.schema.json'
+    echo 'playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json'
     echo 'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts'
   } | sort -u
 }
