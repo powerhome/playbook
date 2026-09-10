@@ -82,6 +82,7 @@ if [ "$BEFORE" != "$AFTER" ]; then
     'playbook/app/pb_kits/playbook/*/kit.schema.json' \
     'playbook/app/pb_kits/playbook/*/docs/_playground.json' \
     'playbook/app/pb_kits/playbook/utilities/global-props.schema.json' \
+    'playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json' \
     'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts' \
     2>/dev/null || true)"
 
@@ -93,6 +94,7 @@ if [ "$BEFORE" != "$AFTER" ]; then
   echo "  git add playbook/app/pb_kits/playbook/*/kit.schema.json"
   echo "  git add playbook/app/pb_kits/playbook/*/docs/_playground.json"
   echo "  git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json"
+  echo "  git add playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json"
   echo "  git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts"
   echo ""
   echo "Or regenerate first with: yarn generate:docs-metadata"

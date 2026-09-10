@@ -117,13 +117,19 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
     }
   }
 
+  const SEARCH_TYPE_BADGES: Record<string, string> = {
+    global_prop: 'Global Prop',
+    global_event_prop: 'Global Event Prop',
+    token: 'Token',
+  }
+
   const Item = ({ labelLeft, type }: { labelLeft: string, type: string }) => (
     <Flex alignItems="center" justify="between">
         {labelLeft}
         <Badge
           dark={darkMode}
           margin="xs"
-          text={type === 'global_prop' ? 'Global Prop' : 'Token'}
+          text={SEARCH_TYPE_BADGES[type]}
           variant="primary"
         />
     </Flex>
@@ -141,7 +147,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
         options={filteredKits}
         placeholder="Search..."
         valueComponent={(option: Kit) => {
-          if (option.type === 'global_prop' || option.type === 'token') {
+          if (option.type && SEARCH_TYPE_BADGES[option.type]) {
             return <Item labelLeft={option.label} type={option.type} />
           }
           return <>{option.label}</>
