@@ -4,25 +4,36 @@ description: You can customize and theme Playbook components by setting your own
 icon: wrench
 ---
 
-For a full token reference, see [Tokens](/tokens). For using token exports in React or Rails without recompiling Sass, see [Using Tokens](/tokens/using_tokens). Source token files live in the [tokens directory](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens).
+For a full token reference, see [Tokens](/tokens). Source files live in the [tokens directory](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens).
+
+Do you have design requirements that differ from Playbook's default settings? How you customize depends on how your app loads Playbook styles.
 
 #### Index
 
-[Most apps: use tokens and Global Props](#Most-apps-use-tokens-and-Global-Props)
-[Sass variable overrides](#Sass-variable-overrides)
+[Using the prebuilt CSS bundle](#Using-the-prebuilt-CSS-bundle)
+[Compiling Playbook Sass](#Compiling-Playbook-Sass)
+‣ [Sass Variable Assignment](#Sass-Variable-Assignment)
 ‣ [The !default Flag](#The-default-Flag)
 ‣ [Order of Variable Assignment](#Order-of-Variable-Assignment)
-[Example: Customizing z-index](#Example-Customizing-z-index)
+‣ [Example: Customizing z-index](#Example-Customizing-z-index)
 
-## Most apps: use tokens and Global Props
+## Using the prebuilt CSS bundle
 
-Most applications load Playbook’s **prebuilt** `playbook.css`. In that setup, Sass `!default` overrides do **not** change kit styles — the CSS is already compiled.
+Most apps follow the setup guides and import the prebuilt stylesheet:
 
-Prefer:
+```js
+import 'playbook-ui/dist/playbook.css'
+```
 
-- [Global Props](/global_props) for spacing, color, and layout on kits
-- [Using Tokens](/tokens/using_tokens) for JS maps (`import { colors, spacing } from "playbook-ui"`) and Ruby color helpers (`Playbook::Tokens.colors`)
-- Individual Sass token imports only when you need `$variables` in **your** custom SCSS:
+That file is **already compiled**. Sass variables like `$primary` or `$z_10` cannot change it after the fact.
+
+With the prebuilt bundle, customize like this instead:
+
+- **[Global Props](/global_props)** — spacing, color, and layout on individual kits
+- **[Using Tokens](/tokens/using_tokens)** — read token values in React (`import { colors, spacing } from "playbook-ui"`) or Ruby (`Playbook::Tokens.colors`) for your own styles
+- **Your own CSS** — override kit classes where you need one-off exceptions
+
+You can also import token partials for `$variables` in *your* custom SCSS (this does not retheme Playbook kits themselves):
 
 ```scss
 @import "playbook-ui/dist/tokens/colors";
@@ -34,13 +45,29 @@ Prefer:
 }
 ```
 
-## Sass variable overrides
+## Compiling Playbook Sass
 
-Use this section only if you compile Playbook kit Sass yourself (uncommon). Tokens ship with the `!default` flag so you can set values **before** those partials are imported.
+To change Playbook’s default look across kits (true theming), compile Playbook’s Sass in your app instead of relying only on the prebuilt `playbook.css`.
+
+Tokens use the `!default` flag, so values you set **before** importing Playbook Sass are kept when CSS is generated. Use that compiled output in place of the stock prebuilt bundle.
+
+### Sass Variable Assignment
+
+When you assign a new value to a Sass variable, the previous value is overwritten:
+
+```scss
+// Initial value
+$primary: red;
+
+// New value
+$primary: blue;
+```
 
 ### The !default Flag
 
-For example, color tokens:
+Playbook tokens ship with `!default` so you can configure variables before CSS is generated.
+
+For instance, some of our color tokens:
 
 ```scss
 $royal:   #0056CF !default;
@@ -53,33 +80,43 @@ $primary: $royal !default;
 `!default` assigns a value only if the variable is unset or `null`. If you already set `$primary`, the Playbook default is skipped:
 
 ```scss
-// Your value
+// Custom value
 $primary: red;
 
-// Playbook default is not applied
+// Default value isn't assigned
 $primary: $royal !default;
 ```
 
-See the [Sass documentation](https://sass-lang.com/documentation/variables/#default-values) for details.
+For more details, see the [Sass documentation](https://sass-lang.com/documentation/variables/#default-values).
 
 ### Order of Variable Assignment
 
-Set custom variables **before** importing Playbook token or kit Sass. If you import first, defaults are already assigned and later assignments will not retheme compiled kit rules.
+Set your custom variables *before* importing Playbook Sass. If you import first, defaults are already applied and later assignments will not retheme kit rules.
+
+For example, declaring `@import 'playbook.scss'` and *then* setting `$primary` leaves kits on the default color:
 
 ```scss
-// Too late — defaults already applied when kits/tokens were imported
-@import "playbook-ui/dist/tokens/colors";
+@import 'playbook.scss';
+
+// _colors.scss
+$primary: $royal !default;
+
+// _reset.scss
+// Link colors are still $royal
+a {
+  color: $primary;
+}
+
+// application.scss
+// Only later uses of $primary are red
 $primary: red;
 ```
 
-## Example: Customizing z-index
+### Example: Customizing z-index
 
-Assign the variable before importing positioning (or any kit Sass that uses it):
+Assign the variable before importing Playbook:
 
 ```scss
 $z_10: 1000000;
-
-@import "playbook-ui/dist/tokens/positioning";
+@import 'playbook.scss';
 ```
-
-This only affects styles you compile after the override. It does not rewrite the prebuilt `playbook.css` bundle.
