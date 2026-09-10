@@ -8,10 +8,9 @@ import { usePlatform } from "../../contexts/PlatformContext";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
-// import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
-// import { ReferencesTab } from "./Tabs/ReferencesTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 import { RailsPlaygroundTab } from "./Tabs/RailsPlaygroundTab";
+import NotFound from "../NotFound";
 import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
 import { RAILS_PLAYGROUND_POC_KITS } from "./railsPlaygroundEnabledKits";
 import {
@@ -203,6 +202,15 @@ const KitShow = () => {
 
   const showStatusBadge = kitStatus === "beta" || kitStatus === "deprecated";
 
+  if (!kitMeta) {
+    return (
+      <NotFound
+        header="No Component Found"
+        description="We could not find a component at this URL. Check the component name and try again, or choose another component from the navigation or search."
+      />
+    );
+  }
+
   return (
     <>
       <div className={`pb--kit-show ${currentKit}-kit`}>
@@ -299,17 +307,6 @@ const KitShow = () => {
               />
             )}
 
-            {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
-            {/* <NavItem
-            text="Building Blocks"
-            active={activeTab === "building-blocks"}
-            onClick={() => setActiveTab("building-blocks")}
-          />
-          <NavItem
-            text="References"
-            active={activeTab === "references"}
-            onClick={() => setActiveTab("references")}
-          /> */}
           </Nav>
         </Flex>
       </div>

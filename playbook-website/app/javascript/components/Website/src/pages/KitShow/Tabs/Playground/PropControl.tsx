@@ -536,9 +536,37 @@ const FunctionControl: React.FC<ExtendedPropControlProps> = ({
   onChange,
   definition,
   info,
+  playgroundConfig,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, "");
   const currentValue = String(displayValue ?? "");
+
+  if (playgroundConfig?.editableFunctionProps?.includes(name)) {
+    const exampleFunction = playgroundConfig.presets?.find(
+      (preset) => preset.props?.[name],
+    )?.props?.[name];
+
+    return (
+      <PropControlRow
+        alignItems="start"
+        filled={isFilledDisplayValue(currentValue)}
+        info={info}
+        label={<PropControlLabel name={name} />}
+      >
+        <PropsPanelTextarea
+          dialogTitle={formatPropName(name)}
+          exampleFormat={String(exampleFunction ?? currentValue)}
+          exampleLanguage="jsx"
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            onChange(name, { value: e.target.value, enabled: true });
+          }}
+          placeholder={`Enter ${name} function...`}
+          value={currentValue}
+        />
+      </PropControlRow>
+    );
+  }
+
   const functionOptions = FUNCTION_PRESETS.map((preset) => ({
     id: preset.value || "none",
     label: preset.label,
