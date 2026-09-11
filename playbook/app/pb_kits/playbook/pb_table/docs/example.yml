@@ -46,7 +46,7 @@ examples:
     - table_with_filter_variant_with_pagination: Variant with Filter and Pagination
     - table_with_filter_with_card_title_props: Variant with Filter (with Card and Title Props)
     - table_colspan: Table with Colspan
-    - table_as_wrapper: Table as Wrapper
+    - table_as_wrapper: Table as Wrapper (Legacy)
     
   react:
     - table_sm: Small
@@ -93,4 +93,4 @@ examples:
     - table_with_filter_variant_with_pagination: Variant with Filter and Pagination
     - table_with_filter_with_card_title_props: Variant with Filter (with Card and Title Props)
     - table_colspan: Table with Colspan
-    - table_as_wrapper: Table as Wrapper
+    - table_as_wrapper: Table as Wrapper (Legacy)
