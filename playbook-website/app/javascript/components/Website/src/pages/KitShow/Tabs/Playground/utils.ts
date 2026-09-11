@@ -5,20 +5,28 @@ import {
   PropDefinition,
 } from "./types";
 
-/** Resolve React default from kit schema (handles `{ react, rails }` merge shape). */
-export function resolveSchemaDefault(def?: PropDefinition): unknown {
+/** Resolve platform-specific default from kit schema (handles `{ react, rails }` merge shape). */
+export function resolveSchemaDefaultForPlatform(
+  def?: PropDefinition,
+  platform: "react" | "rails" = "react",
+): unknown {
   if (!def || def.default === undefined) return undefined;
   const d = def.default as Record<string, unknown> | unknown;
   if (
     d !== null &&
     typeof d === "object" &&
     !Array.isArray(d) &&
-    "react" in d &&
-    (d as Record<string, unknown>).react !== undefined
+    platform in (d as Record<string, unknown>) &&
+    (d as Record<string, unknown>)[platform] !== undefined
   ) {
-    return (d as Record<string, unknown>).react;
+    return (d as Record<string, unknown>)[platform];
   }
   return def.default;
+}
+
+/** Resolve React default from kit schema (handles `{ react, rails }` merge shape). */
+export function resolveSchemaDefault(def?: PropDefinition): unknown {
+  return resolveSchemaDefaultForPlatform(def, "react");
 }
 
 /** Example value for object/array prop dialogs — prefers playground config defaults over schema. */
