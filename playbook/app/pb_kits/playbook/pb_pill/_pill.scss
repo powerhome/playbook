@@ -74,7 +74,7 @@ $pb_pill_notification_colors: (
     border-radius: $border_rad_light;
     white-space: nowrap;
     background: $color_value;
-    width: 16px;
+    min-width: 16px;
 
     .pb_pill_text {
       color: $white !important;
