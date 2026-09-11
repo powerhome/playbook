@@ -1,0 +1,76 @@
+#!/bin/bash
+set -o pipefail
+
+workDir=$(cd "$(dirname "$0")/.." && pwd)
+cd "$workDir"
+
+environmentValuesFile=""
+if [ -e "${workDir}/config/deploy/$environment/values.yaml" ]; then
+  environmentValuesFile="@${workDir}/config/deploy/$environment/values.yaml"
+else
+  environmentValuesFile="@${workDir}/config/deploy/prs/values.yaml"
+fi
+
+environmentSecretsFile=""
+secret_key_base_binding=""
+allowlist_binding=""
+
+if [ -e "${workDir}/config/deploy/$environment/secrets.yaml" ]; then
+  # Staging/production: sops-encrypted secrets only (never commit plaintext).
+  sops --decrypt "${workDir}/config/deploy/${environment}/secrets.yaml" > "${workDir}/config/deploy/${environment}/secrets.dec.yaml"
+  environmentSecretsFile="@${workDir}/config/deploy/$environment/secrets.dec.yaml"
+elif [ -e "${workDir}/config/deploy/prs/secrets.yaml" ]; then
+  # Optional: sops-encrypted PR secrets if/when added. Do not commit plaintext secrets.
+  if grep -q '^sops:' "${workDir}/config/deploy/prs/secrets.yaml"; then
+    sops --decrypt "${workDir}/config/deploy/prs/secrets.yaml" > "${workDir}/config/deploy/prs/secrets.dec.yaml"
+    environmentSecretsFile="@${workDir}/config/deploy/prs/secrets.dec.yaml"
+  else
+    echo "ERROR: playbook-mcp/config/deploy/prs/secrets.yaml must be sops-encrypted (public repo)." >&2
+    exit 1
+  fi
+else
+  # PR/review default: generate ephemeral SECRET_KEY_BASE at deploy time (not in git).
+  # allowlist comes from prs/values.yaml (appConfig.allowlist: "*"); VPN-only ingress.
+  secret_key_base_binding="secretKeyBase=$(openssl rand -hex 64)"
+fi
+
+# Milano PR DEPLOY_URL looks like: https://pr6468.playbook.wc.beta.gm.powerapp.cloud
+# MCP needs its own host (separate /assets from the website):
+#   https://mcp-pr6468.playbook.wc.beta.gm.powerapp.cloud
+# Legacy/alternate: https://playbook-pr-N... → https://playbook-mcp-pr-N...
+mcp_deploy_url="${deploy_url}"
+if [[ "${deploy_url}" == *"://mcp-"* ]] || [[ "${deploy_url}" == *"://playbook-mcp-"* ]]; then
+  mcp_deploy_url="${deploy_url}"
+elif [[ "${deploy_url}" == *"://playbook-"* ]]; then
+  mcp_deploy_url="${deploy_url/playbook-/playbook-mcp-}"
+elif [[ -n "${deploy_url}" ]]; then
+  # Prefix the first DNS label: pr6468.playbook... → mcp-pr6468.playbook...
+  mcp_deploy_url="$(echo "${deploy_url}" | sed -E 's#^(https?://)#\1mcp-#')"
+fi
+
+extraBindings="{\"ingress\":{\"hosts\":[\"${mcp_deploy_url}\"]}}"
+
+namespace="${namespace:-playbook-${environment}}"
+
+echo "Deploying playbook-mcp to namespace=${namespace} host=${mcp_deploy_url} image_tag=${tag}"
+
+krane render \
+  --filenames="${workDir}/config/deploy/templates" \
+  --bindings="@${workDir}/config/deploy/values.yaml" \
+  ${environmentValuesFile} \
+  ${environmentSecretsFile} \
+  "image_tag=${tag}" \
+  "environment=${environment}" \
+  ${secret_key_base_binding} \
+  ${allowlist_binding} \
+  ${extraBindings} \
+  --current-sha="${tag}" | krane deploy "${namespace}" "${cluster}" \
+  --selector='app=playbook-mcp' \
+  --verbose-log-prefix \
+  --stdin
+
+deploy_exit=$?
+rm -f ${workDir}/config/deploy/**/*.dec.yaml 2>/dev/null || true
+
+echo "playbook-mcp review URL: ${mcp_deploy_url}/mcp"
+exit $deploy_exit

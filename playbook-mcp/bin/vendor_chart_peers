@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Bundle React + Highcharts + chart kit mounts into one classic IIFE script.
+# jsDelivr /+esm peers are NOT self-contained (they import /npm/… URLs) and break
+# inside LibreChat srcdoc iframes — do not reintroduce them.
+set -euo pipefail
+
+MCP_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$MCP_ROOT/.." && pwd)"
+BUILD_JS="$MCP_ROOT/chart-bundle/build.mjs"
+OUT="$MCP_ROOT/vendor/chart-peers/playbook-charts.js"
+
+if [[ ! -f "$BUILD_JS" ]]; then
+  echo "ERROR: missing chart bundle builder: $BUILD_JS" >&2
+  exit 1
+fi
+
+if [[ ! -d "$REPO_ROOT/node_modules/esbuild" ]] || [[ ! -d "$REPO_ROOT/node_modules/sass" ]]; then
+  echo "ERROR: esbuild/sass not found under $REPO_ROOT/node_modules. Run yarn install at the monorepo root." >&2
+  exit 1
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "ERROR: node is required to build the chart IIFE" >&2
+  exit 1
+fi
+
+echo "Bundling MCP chart IIFE → $OUT"
+(
+  cd "$REPO_ROOT"
+  node "$BUILD_JS"
+)
+
+if [[ ! -s "$OUT" ]]; then
+  echo "ERROR: chart bundle was not written: $OUT" >&2
+  exit 1
+fi
+
+ls -la "$OUT"

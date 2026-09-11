@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+ruby "3.3.11"
+
+gem "playbook_ui", path: "../playbook"
+
+gem "bootsnap", ">= 1.1.0", require: false
+gem "mcp", "~> 1.0"
+gem "mcp_ui_server", "~> 0.1"
+gem "puma", "~> 6.4"
+gem "rack", "~> 3.0"
+gem "rails", "~> 7.2.2"
+
+group :development, :test do
+  gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "rspec-html-matchers", "~> 0.9"
+  gem "rspec-rails", "~> 6.0"
+end
