@@ -12,6 +12,12 @@ metadata:
     <% end %>
     <% if environment == 'production' %>
     nginx.ingress.kubernetes.io/whitelist-source-range: '0.0.0.0/0'
+    <% else %>
+    # Staging is VPN-only; deny/not-found responses must not be cached or they
+    # stick after the user reconnects (refresh still 404; incognito works).
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers -s 403,404 "Cache-Control: private, no-store, no-cache, must-revalidate";
+      more_set_headers -s 403,404 "Pragma: no-cache";
     <% end %>
 spec:
   tls:

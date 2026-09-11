@@ -2,6 +2,8 @@ export const PROD_ORIGIN = "https://playbook.powerapp.cloud"
 export const STAGING_ORIGIN = "https://staging.playbook.powerapp.cloud"
 const PROD_HOST = "playbook.powerapp.cloud"
 const STAGING_HOST = "staging.playbook.powerapp.cloud"
+/** Query param used to avoid reusing a browser-cached off-VPN 404 for staging. */
+export const STAGING_CACHE_BUST_PARAM = "_pb"
 
 const normalizePath = (path: string) => (path.startsWith("/") ? path : `/${path}`)
 
@@ -10,8 +12,30 @@ const isPlaygroundPath = (path: string) => {
   return normalized === "/playground" || normalized.startsWith("/playground?")
 }
 
+/**
+ * Append a one-time cache-busting query so navigation to staging does not reuse
+ * a previously cached off-VPN block/404 for the same path.
+ */
+export const withStagingCacheBust = (url: string) => {
+  const parsed = new URL(
+    url,
+    typeof window !== "undefined" ? window.location.origin : PROD_ORIGIN
+  )
+  parsed.searchParams.set(STAGING_CACHE_BUST_PARAM, String(Date.now()))
+  return parsed.toString()
+}
+
 export const isStagingHost = () =>
   typeof window !== "undefined" && window.location.hostname === STAGING_HOST
+
+/** Remove the one-time `_pb` param after a successful staging load. */
+export const stripStagingCacheBustFromUrl = () => {
+  if (!isStagingHost()) return
+  const url = new URL(window.location.href)
+  if (!url.searchParams.has(STAGING_CACHE_BUST_PARAM)) return
+  url.searchParams.delete(STAGING_CACHE_BUST_PARAM)
+  window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`)
+}
 
 /** True only on deployed prod — not localhost, review apps, or staging. */
 export const isProductionHost = () =>
@@ -56,7 +80,7 @@ export const showPlaygroundVpnWarning = (destinationUrl: string) => {
  */
 export const goToStaging = (url: string) => {
   if (isStagingHost()) {
-    window.location.assign(url)
+    window.location.assign(withStagingCacheBust(url))
     return
   }
 

@@ -13,6 +13,10 @@ interface CategoryTypes {
   components: ComponentTypes[];
 }
 
+// Bypass HTTP cache so a prior off-VPN 404 (or HTML block page) is not reused
+// after the user reconnects and refreshes.
+const FETCH_NO_STORE: RequestInit = { cache: "no-store" };
+
 const sortByName = (a: ComponentTypes, b: ComponentTypes): number => {
   return a.name.localeCompare(b.name);
 }
@@ -26,7 +30,10 @@ let kitsCache: any = null;
 
 async function fetchKits() {
   if (kitsCache) return kitsCache;
-  const response = await fetch("/kits.json");
+  const response = await fetch("/kits.json", FETCH_NO_STORE);
+  if (!response.ok) {
+    throw new Response("Failed to load kits", { status: response.status });
+  }
   const data = await response.json();
   data.kits.forEach(sortComponentsByName);
   kitsCache = data;
@@ -71,7 +78,10 @@ export const ComponentShowLoader = async ({
     url = `${url}${requestUrl.search}`;
   }
 
-  const response = await fetch(url);
+  const response = await fetch(url, FETCH_NO_STORE);
+  if (!response.ok) {
+    throw new Response("Failed to load kit", { status: response.status });
+  }
   const data = await response.json();
   return data;
 };
@@ -100,7 +110,10 @@ export const GuidePageLoader = async ({ params, request }: LoaderFunctionArgs) =
   const guidePath = params.page;
   const { pathname } = new URL(request.url);
   const guideType = pathname.includes('getting_started') ? 'getting_started' : 'design_guidelines';
-  const response = await fetch(`/guides/${guideType}/${guidePath}.json`);
+  const response = await fetch(`/guides/${guideType}/${guidePath}.json`, FETCH_NO_STORE);
+  if (!response.ok) {
+    throw new Response("Failed to load guide", { status: response.status });
+  }
   const data = await response.json();
   return data;
 };
@@ -109,7 +122,10 @@ let iconsCache: any = null;
 
 export const IconsLoader = async () => {
   if (iconsCache) return iconsCache;
-  const response = await fetch("/icons.json");
+  const response = await fetch("/icons.json", FETCH_NO_STORE);
+  if (!response.ok) {
+    throw new Response("Failed to load icons", { status: response.status });
+  }
   const data = await response.json();
   iconsCache = data;
   return data;
@@ -128,7 +144,7 @@ export const PlaygroundLoader = async () => {
   }
 
   if (playgroundCache) return playgroundCache;
-  const response = await fetch("/playground.json");
+  const response = await fetch("/playground.json", FETCH_NO_STORE);
   if (!response.ok) {
     return {
       playground_kits: [],
