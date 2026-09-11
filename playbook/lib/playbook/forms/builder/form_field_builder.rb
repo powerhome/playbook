@@ -18,6 +18,8 @@ module Playbook
             props   = props.dup
             options = Hash(options)
 
+            apply_form_error!(props, name)
+
             options[:skip_default_ids] = false unless options.key?(:skip_default_ids)
             # The add-on and error styles are keyed off `.text_input`, so form-built inputs need it too.
             options[:class] = [options[:class], "text_input"].compact.join(" ").strip if kit_name == "text_input"

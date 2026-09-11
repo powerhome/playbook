@@ -4,7 +4,22 @@ module Playbook
   module Forms
     class Builder
       def typeahead(name, _options = {}, _html_options = {}, props: {})
+        props = props.dup
         props[:name] = name
+
+        apply_form_error!(props, name)
+
+        # Only auto-bind when the attribute is already option-shaped ({label,value} or array).
+        # Raw ids/strings still need an explicit default_options from the caller.
+        # Do not use Array(hash) — that flattens to [[:key, val], ...] pairs.
+        unless props.key?(:default_options)
+          value = form_attribute_value(name)
+          if value.is_a?(Hash)
+            props[:default_options] = [value]
+          elsif value.is_a?(Array) && value.any? && value.all? { |option| option.is_a?(Hash) }
+            props[:default_options] = value
+          end
+        end
 
         input_id = "#{name}_input"
         props[:input_options] ||= {}
