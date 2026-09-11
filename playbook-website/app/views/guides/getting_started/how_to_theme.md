@@ -4,21 +4,43 @@ description: You can customize and theme Playbook components by setting your own
 icon: wrench
 ---
 
-For a comprehensive overview of our tokens, refer to the [Tokens](/tokens) page, [Using Tokens](/tokens/using_tokens) for export usage in React and Rails, or review our [variables](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens).
+For a full token reference, see [Tokens](/tokens). Source files live in the [tokens directory](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens).
 
-#### Index
+Do you have design requirements that differ from Playbook's default settings? How you customize depends on how your app loads Playbook styles.
 
-[Assigning Variable Values](#Assigning-Variable-Values)
-‣ [Sass Variable Assignment](#Sass-Variable-Assignment)
-‣ [The !default Flag](#The-default-Flag)
-‣ [Order of Variable Assignment](#Order-of-Variable-Assignment)
-[Example: Customizing z-index](#Example-Customizing-z-index)
+## Using the prebuilt CSS bundle
 
-Do you have design requirements that differ from Playbook's default settings?
+Most apps follow the setup guides and import the prebuilt stylesheet:
 
-You can customize and theme Playbook components by setting your own variable values instead of using the default Sass values. 
+```js
+import 'playbook-ui/dist/playbook.css'
+```
 
-## Assigning Variable Values
+That file is **already compiled**. Sass variables like `$primary` or `$z_10` cannot change it after the fact.
+
+With the prebuilt bundle, customize like this instead:
+
+- **[Global Props](/global_props)** — spacing, color, and layout on individual kits
+- **[Using Tokens](/tokens/using_tokens)** — read token values in React (`import { colors, spacing } from "playbook-ui"`) or Ruby (`Playbook::Tokens.colors`) for your own styles
+- **Your own CSS** — override kit classes where you need one-off exceptions
+
+You can also import token partials for `$variables` in *your* custom SCSS (this does not retheme Playbook kits themselves):
+
+```scss
+@import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/spacing";
+
+.my-panel {
+  padding: $space_sm;
+  color: $primary;
+}
+```
+
+## Compiling Playbook Sass
+
+To change Playbook’s default look across kits (true theming), compile Playbook’s Sass in your app instead of relying only on the prebuilt `playbook.css`.
+
+Tokens use the `!default` flag, so values you set **before** importing Playbook Sass are kept when CSS is generated. Use that compiled output in place of the stock prebuilt bundle.
 
 ### Sass Variable Assignment
 
@@ -26,77 +48,66 @@ When you assign a new value to a Sass variable, the previous value is overwritte
 
 ```scss
 // Initial value
- $primary: red;
+$primary: red;
 
- // New value
- $primary: blue;
+// New value
+$primary: blue;
 ```
 
 ### The !default Flag
 
-To accommodate your design system needs, we use the `!default` flag with Playbook's tokens. This allows you to configure variables before the CSS is generated.
+Playbook tokens ship with `!default` so you can configure variables before CSS is generated.
 
-For instance, here are some of our color tokens:
+For instance, some of our color tokens:
+
 ```scss
-$royal:               #0056CF !default;
- $purple:              #9E64E9 !default;
- $teal:                #00C4D7 !default;
- $default:             #93a8b8 !default;
- $primary:             $royal !default;
+$royal:   #0056CF !default;
+$purple:  #9E64E9 !default;
+$teal:    #00C4D7 !default;
+$default: #93a8b8 !default;
+$primary: $royal !default;
 ```
 
-The `!default` flag ensures that a variable is assigned a value only if it hasn't already been defined or if its value is null. If the variable already has a value, the existing value will be retained:
+`!default` assigns a value only if the variable is unset or `null`. If you already set `$primary`, the Playbook default is skipped:
 
 ```scss
 // Custom value
- $primary: red;
+$primary: red;
 
- // Default value isn't assigned
- $primary: $royal !default;
+// Default value isn't assigned
+$primary: $royal !default;
 ```
 
-For more details, refer to the [Sass documentation](https://sass-lang.com/documentation/variables/#default-values). 
+For more details, see the [Sass documentation](https://sass-lang.com/documentation/variables/#default-values).
 
 ### Order of Variable Assignment
 
-The order in which you assign variables is crucial when using `!default`. Ensure that you set your custom variables *before* Playbook Sass styles. 
+Set your custom variables *before* importing Playbook Sass. If you import first, defaults are already applied and later assignments will not retheme kit rules.
 
-If you declare variables after importing Playbook, the default values will remain unchanged.
-
-For example, if you first declare `@import 'playbook.scss'` and then set `$primary` to another color, Playbook components will use the default color instead of your custom color:
+For example, declaring `@import 'playbook.scss'` and *then* setting `$primary` leaves kits on the default color:
 
 ```scss
 @import 'playbook.scss';
 
- // _colors.scss
- $primary: $royal !default;
+// _colors.scss
+$primary: $royal !default;
 
- // _reset.scss
- // Link colors are $royal
- a {
+// _reset.scss
+// Link colors are still $royal
+a {
   color: $primary;
- }
+}
 
- // application.scss
- // Only later uses of $primary are red
- $primary: red;
+// application.scss
+// Only later uses of $primary are red
+$primary: red;
 ```
 
-## Example: Customizing z-index
-
-Let's say you need to increase the max z-index value in Playbook.
+### Example: Customizing z-index
 
 Assign the variable before importing Playbook:
 
 ```scss
 $z_10: 1000000;
- @import 'playbook.scss';
-```
-
-Alternatively, if you use the `@use` rule:
-
-```scss
-@use 'playbook' with (
-   $z_10: 1000000,
- );
+@import 'playbook.scss';
 ```
