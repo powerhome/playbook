@@ -1,12 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Typeahead, Badge, Flex } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
 import { useDarkMode } from '../contexts/DarkModeContext'
 
 type Kit = {
   label: string,
+  platforms?: string[],
+  props?: KitProp[],
+  searchTerms?: string[],
   value: string,
   type?: string,
+}
+
+type KitProp = {
+  name: string,
+  platforms: string[],
 }
 
 type KitSearchProps = {
@@ -20,10 +28,56 @@ type KitSearchProps = {
   searchResetKey?: string,
 }
 
+const putPropsLast = (items: Kit[]): Kit[] => [
+  ...items.filter(({ type }) => type !== 'prop'),
+  ...items.filter(({ type }) => type === 'prop'),
+]
+
+const normalizePropName = (name: string): string =>
+  name.replace(/[_-]/g, '').toLowerCase()
+
+const kitPropBadge = (platforms: string[]): string => {
+  const supportsReact = platforms.includes('react')
+  const supportsRails = platforms.includes('rails')
+
+  if (supportsReact && supportsRails) return 'Kit Prop (React & Rails)'
+  if (supportsReact) return 'Kit Prop (React)'
+  if (supportsRails) return 'Kit Prop (Rails)'
+  return 'Kit Prop'
+}
+
+const kitPropItems = (kit: Kit): Kit[] => {
+  const propsByName = new Map<string, { name: string, platforms: Set<string>, searchTerms: Set<string> }>()
+
+  kit.props?.forEach(({ name, platforms }) => {
+    const normalizedName = normalizePropName(name)
+    const prop = propsByName.get(normalizedName) || {
+      name,
+      platforms: new Set<string>(),
+      searchTerms: new Set<string>(),
+    }
+    const supportedPlatforms = platforms.length > 0 ? platforms : ['react', 'rails']
+
+    supportedPlatforms.forEach((supportedPlatform) => prop.platforms.add(supportedPlatform))
+    prop.searchTerms.add(name)
+    propsByName.set(normalizedName, prop)
+  })
+
+  return Array.from(propsByName.values()).map(({ name, platforms, searchTerms }) => ({
+    label: `${name} (${kit.label})`,
+    platforms: Array.from(platforms),
+    searchTerms: Array.from(searchTerms),
+    type: 'prop',
+    value: kit.value,
+  }))
+}
+
 const combineKitsandVisualGuidelines = (
   kits: Kit[],
   global_props_and_tokens?: Record<string, any>,
 ): Kit[] => {
+  const propItems = kits.flatMap(kitPropItems)
+
   const globalPropsItems = global_props_and_tokens?.global_props?.map((item: string) => ({
     label: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
     value: `/global_props/${item}`,
@@ -36,7 +90,10 @@ const combineKitsandVisualGuidelines = (
     type: 'token'
   })) || []
   
-  return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
+  const items = [...kits, ...globalPropsItems, ...tokensItems, ...propItems]
+    .sort((a, b) => a.label.localeCompare(b.label))
+
+  return putPropsLast(items)
 }
 
 const normalizePathForPlatform = (path: string, platform: string) => {
@@ -65,9 +122,17 @@ const normalizePathForPlatform = (path: string, platform: string) => {
 }
 
 const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_tokens, marginBottom, onNavigate, searchResetKey }: KitSearchProps) => {
-  const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
+  const kitsAndGuidelines = useMemo(
+    () => combineKitsandVisualGuidelines(kits, global_props_and_tokens),
+    [kits, global_props_and_tokens],
+  )
   const { darkMode } = useDarkMode()
-  const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
+  const [query, setQuery] = useState('')
+  const filteredKits = useMemo(() => {
+    if (!query) return kitsAndGuidelines
+
+    return putPropsLast(matchSorter(kitsAndGuidelines, query, { keys: ['label', 'searchTerms'] }))
+  }, [kitsAndGuidelines, query])
 
   useEffect(() => {
     if (id === 'desktop-kit-search') {
@@ -80,9 +145,12 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
     }
   }, [ id ])
 
-  const handleChange = (selection: any) => {
+  const handleChange = (selection: Kit | null) => {
     if (selection) {
-      const nextPath = normalizePathForPlatform(selection.value, platform)
+      const selectedPlatform = selection.type === 'prop' && selection.platforms?.length === 1
+        ? selection.platforms[0]
+        : platform
+      const nextPath = normalizePathForPlatform(selection.value, selectedPlatform)
 
       if (onNavigate) {
         onNavigate(nextPath)
@@ -93,21 +161,20 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
   }
 
   const handleFilteredKits = (query: string) => {
-    if (query) {
-      const results = matchSorter(kitsAndGuidelines, query, { keys: ['label'] })
-      setFilteredKits(results)
-    } else {
-      setFilteredKits(kitsAndGuidelines)
-    }
+    setQuery(query)
   }
 
-  const Item = ({ labelLeft, type }: { labelLeft: string, type: string }) => (
+  const Item = ({ labelLeft, platforms = [], type }: { labelLeft: string, platforms?: string[], type: string }) => (
     <Flex alignItems="center" justify="between">
         {labelLeft}
         <Badge
           dark={darkMode}
           margin="xs"
-          text={type === 'global_prop' ? 'Global Prop' : 'Token'}
+          text={type === 'global_prop'
+            ? 'Global Prop'
+            : type === 'prop'
+              ? kitPropBadge(platforms)
+              : 'Token'}
           variant="primary"
         />
     </Flex>
@@ -118,6 +185,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
         key={`${id}__${searchResetKey ?? ''}`}
         className={classname}
         dark={darkMode}
+        filterOption={() => true}
         id={id}
         marginBottom={marginBottom || 'sm'}
         onChange={handleChange}
@@ -125,8 +193,8 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
         options={filteredKits}
         placeholder="Search..."
         valueComponent={(option: Kit) => {
-          if (option.type === 'global_prop' || option.type === 'token') {
-            return <Item labelLeft={option.label} type={option.type} />
+          if (option.type === 'global_prop' || option.type === 'prop' || option.type === 'token') {
+            return <Item labelLeft={option.label} platforms={option.platforms} type={option.type} />
           }
           return <>{option.label}</>
         }}
