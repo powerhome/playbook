@@ -1,43 +1,43 @@
 <%= pb_rails("table", props: { size: "sm" }) do %>
-  <thead>
-    <tr>
-      <th>Column 1</th>
-      <th>Column 2</th>
-      <th>Column 3</th>
-      <th>Column 4</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td align="right">
-      <%= pb_rails("button", props: { text: "Tertiary Action", variant: "link", padding_left: "none" }) %>
-      <%= pb_rails("button", props: { text: "Secondary Action", variant: "secondary" }) %>
-      </td>
-    </tr>
-    <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td align="right">
-      <%= pb_rails("button", props: { text: "Tertiary Action", variant: "link", padding_left: "none" }) %>
-      <%= pb_rails("button", props: { text: "Secondary Action", variant: "secondary" }) %>
-      </td>
-    </tr>
-    <tr>
-      <td>Value 1</td>
-      <td>Value 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td align="right">
-      <%= pb_rails("button", props: { text: "Tertiary Action", variant: "link", padding_left: "none" }) %>
-      <%= pb_rails("button", props: { text: "Secondary Action", variant: "secondary" }) %>
-      </td>    
-      </tr>
-  </tbody>
+  <%= pb_rails("table/table_head") do %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_header", props: { text: "Column 1" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 2" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 3" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 4" }) %>
+      <%= pb_rails("table/table_header", props: { text: "" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("table/table_body") do %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 1" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 2" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 3" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 4" }) %>
+      <%= pb_rails("table/table_cell", props: { text_align: "right" }) do %>
+        <%= pb_rails("button", props: { text: "Tertiary Action", variant: "link", padding_left: "none" }) %>
+        <%= pb_rails("button", props: { text: "Secondary Action", variant: "secondary" }) %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 1" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 2" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 3" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 4" }) %>
+      <%= pb_rails("table/table_cell", props: { text_align: "right" }) do %>
+        <%= pb_rails("button", props: { text: "Tertiary Action", variant: "link", padding_left: "none" }) %>
+        <%= pb_rails("button", props: { text: "Secondary Action", variant: "secondary" }) %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 1" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 2" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 3" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 4" }) %>
+      <%= pb_rails("table/table_cell", props: { text_align: "right" }) do %>
+        <%= pb_rails("button", props: { text: "Tertiary Action", variant: "link", padding_left: "none" }) %>
+        <%= pb_rails("button", props: { text: "Secondary Action", variant: "secondary" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
