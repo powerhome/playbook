@@ -28,6 +28,13 @@ export const SideBarNavItems = [
         leftIcon:"globe"
     },
     {
+        name: "Global Event Props",
+        key: "top-nav-item-10",
+        link: "/global_event_props",
+        children: true,
+        leftIcon:"arrow-pointer"
+    },
+    {
         name: "Tokens",
         key: "top-nav-item-8",
         link: "/tokens",

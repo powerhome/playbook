@@ -36,6 +36,7 @@ dist/ai/
 ├── visual-index.json           # Screenshot / visual → kit map (looksLike, lookalikes, tokens)
 ├── external-dependencies.json  # Kits that need host-app packages (Highcharts, TipTap, …)
 ├── global-props.schema.json    # Props available on ALL components
+├── global-event-props.schema.json # React-only event handlers for opted-in kits
 ├── all-schemas.json            # All kit schemas in one file (schemas only)
 ├── kits/                       # Individual component schemas
 │   ├── button.schema.json
@@ -56,6 +57,7 @@ dist/ai/
 | `visual-index.json` | small | Map screenshots/visuals → kits before guessing |
 | `external-dependencies.json` | small | Kits whose engines are peer/optional host deps |
 | `global-props.schema.json` | ~24KB | Spacing, layout, display props |
+| `global-event-props.schema.json` | small | React event handlers for kits with `globalEventProps: true` |
 | `all-schemas.json` | ~280KB | Bulk schema lookup (no playgrounds) |
 | `kits/*.schema.json` | ~2–4KB each | Props + menu descriptions + usage from presets |
 | `playgrounds/*.json` | slim | Presets, hints, conditionals, composition patterns |
@@ -142,7 +144,8 @@ Playgrounds are **opt-in for agents**: keep loading schemas by default, then rea
 | `yarn generate:docs-metadata` (repo root) | **Preferred.** Kit schemas + global props + playgrounds + `dist/ai` |
 | `yarn generate:ai-metadata` | Generate kit.schema.json for all components |
 | `yarn generate:global-props-metadata` | Generate global-props.schema.json |
-| `yarn generate:all-ai-metadata` | Generate both kit and global props schemas |
+| `yarn generate:global-event-props-metadata` | Generate global-event-props.schema.json |
+| `yarn generate:all-ai-metadata` | Generate kit, global props, and global event props schemas |
 | `yarn generate:playground-configs` | Generate per-kit `_playground.json` from schema + overrides |
 | `yarn build:ai` | Clean and build `dist/ai/` (schemas + slim playgrounds) |
 | `yarn build:ai --no-clean` | Incremental build without cleaning |
@@ -190,11 +193,19 @@ The Ruby parsing has similar limitations:
 
 When Playbook changes, the schema updates automatically - no manual edits needed.
 
+### Global Event Props Generation (`generate-global-event-props-metadata.mjs`)
+
+Parses `utilities/globalEventProps.ts` into `utilities/global-event-props.schema.json`.
+
+- React-only (JavaScript event callbacks)
+- Opt-in: kit schemas set `globalEventProps: true` when props include `& GlobalEventProps`
+- Separate from class-based `GlobalProps` / `global-props.schema.json`
+
 ### Build Distribution (`build-ai-dist.mjs`)
 
 1. Loads kit catalog from `playbook-website/config/menu.yml` (descriptions, categories)
 2. Copies all `kit.schema.json` files to `dist/ai/kits/`, enriching thin descriptions from menu.yml and `usage` from the first playground preset
-3. Copies `global-props.schema.json` to `dist/ai/`
+3. Copies `global-props.schema.json` and `global-event-props.schema.json` to `dist/ai/`
 4. Creates `all-schemas.json` with schemas only (playgrounds stay separate to avoid bloat)
 5. Creates slim `dist/ai/playgrounds/<kit>.json` from each `_playground.json`
 6. Builds `visual-index.json` (menu catalog + curated lookalike/visual cues)
@@ -296,6 +307,7 @@ The Husky pre-commit hook keeps generated docs metadata in sync. When you commit
 **Triggered by changes to:**
 - `playbook/app/pb_kits/playbook/pb_*/**/*.{tsx,ts,rb}` - Kit sources
 - `playbook/app/pb_kits/playbook/utilities/globalProps.ts` - Global props
+- `playbook/app/pb_kits/playbook/utilities/globalEventProps.ts` - Global event props (React)
 - `playbook/app/pb_kits/playbook/types/*.ts` - Type definitions
 - `playbook/app/pb_kits/playbook/tokens/_spacing.scss` - Spacing tokens
 - `playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss` - Breakpoints
@@ -311,6 +323,7 @@ Generated files were updated. Please stage them and commit again:
   git add playbook/app/pb_kits/playbook/*/kit.schema.json
   git add playbook/app/pb_kits/playbook/*/docs/_playground.json
   git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json
+  git add playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json
   git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts
 ```
 
@@ -331,7 +344,8 @@ Lower-level commands (still available under `playbook/`):
 
 1. **New component / modified props**: `yarn generate:ai-metadata` (optional `--kit=component_name`)
 2. **Global props schema only**: `yarn generate:global-props-metadata`
-3. **Update dist**: `yarn build:ai`
+3. **Global event props schema only**: `yarn generate:global-event-props-metadata`
+4. **Update dist**: `yarn build:ai`
 
 ### Dry Run
 
@@ -370,6 +384,7 @@ Optional consumer rule/skill drafts (not applied anywhere): `docs/ai/consumer/`.
 - `props[name].platforms` - Which platforms support this prop (`react`, `rails`)
 - `props[name].default` - Default value if any
 - `globalProps: true` - Indicates component accepts all global props
+- `globalEventProps: true` - Indicates component opts into React GlobalEventProps (see `global-event-props.schema.json`)
 - `usage.react.example` - Example React JSX (seeded from first playground preset in dist)
 - `usage.rails.example` - Example Rails ERB
 - `playgrounds/<kit>.json` - Presets, hints, conditionals, templates, structure modes
@@ -393,6 +408,7 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `scripts/generate-docs-metadata.sh` (repo root) | Shared generator for schemas, values, playgrounds |
 | `playbook/scripts/generate-ai-metadata.mjs` | Generates kit schemas from TS/Ruby source |
 | `playbook/scripts/generate-global-props-metadata.mjs` | Generates global props schema |
+| `playbook/scripts/generate-global-event-props-metadata.mjs` | Generates global event props schema |
 | `playbook/scripts/build-ai-dist.mjs` | Builds dist/ai folder (schemas + playgrounds + visual-index) |
 | `playbook/scripts/lib/slim-playground.mjs` | Slim playground transform for AI export |
 | `playbook/scripts/lib/load-menu-catalog.mjs` | menu.yml → kit descriptions/categories |
@@ -402,6 +418,7 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `playbook/app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (generated) |
 | `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json` | Generated playground configs (website + AI source) |
 | `playbook/app/pb_kits/playbook/utilities/global-props.schema.json` | Global props schema (generated) |
+| `playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json` | Global event props schema (generated) |
 | `playbook/dist/ai/*` | Distribution folder (built; published with playbook-ui) |
 | `docs/ai/consumer/*` | Rule + skill templates for Nitro / consuming apps |
 | `.husky/pre-commit` | Runs lint-staged + docs metadata verification |
