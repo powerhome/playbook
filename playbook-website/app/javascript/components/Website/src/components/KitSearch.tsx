@@ -145,9 +145,12 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
     }
   }, [ id ])
 
-  const handleChange = (selection: any) => {
+  const handleChange = (selection: Kit | null) => {
     if (selection) {
-      const nextPath = normalizePathForPlatform(selection.value, platform)
+      const selectedPlatform = selection.type === 'prop' && selection.platforms?.length === 1
+        ? selection.platforms[0]
+        : platform
+      const nextPath = normalizePathForPlatform(selection.value, selectedPlatform)
 
       if (onNavigate) {
         onNavigate(nextPath)
