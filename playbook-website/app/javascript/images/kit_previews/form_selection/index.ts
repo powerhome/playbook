@@ -8,6 +8,7 @@ import selectableCard from "./selectable_card.svg";
 import selectableCardIcon from "./selectable_card_icon.svg";
 import selectableIcon from "./selectable_icon.svg";
 import selectableList from "./selectable_list.svg";
+import timePicker from "./time_picker.svg";
 
 export const formSelectionPreviewMap = {
   "form_selection/checkbox": checkbox,
@@ -20,4 +21,5 @@ export const formSelectionPreviewMap = {
   "form_selection/selectable_card_icon": selectableCardIcon,
   "form_selection/selectable_icon": selectableIcon,
   "form_selection/selectable_list": selectableList,
+  "form_selection/time_picker": timePicker,
 } as const;

@@ -16,6 +16,7 @@ RSpec.describe Playbook::PbPill::Pill do
       .with_default("neutral")
       .with_values("neutral", "success", "warning", "error", "info", "primary")
   }
+  it { is_expected.to define_boolean_prop(:notification).with_default(false) }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_pill_kit_neutral_lowercase"
@@ -23,6 +24,11 @@ RSpec.describe Playbook::PbPill::Pill do
       expect(subject.new(classname: "additional_class").classname).to eq "pb_pill_kit_neutral_lowercase additional_class"
       expect(subject.new(size: "sm").classname).to eq "pb_pill_kit_neutral_lowercase_sm"
       expect(subject.new(size: "sm", variant: "success", text_transform: "none").classname).to eq "pb_pill_kit_success_none_sm"
+      expect(subject.new(notification: true).classname).to eq "pb_pill_kit_primary_lowercase_notification"
+      expect(subject.new(notification: true, variant: "success").classname).to eq "pb_pill_kit_primary_lowercase_notification"
+      expect(subject.new(notification: true, variant: "error").classname).to eq "pb_pill_kit_error_lowercase_notification"
+      expect(subject.new(notification: true, size: "sm").classname).to eq "pb_pill_kit_primary_lowercase_notification_sm"
+      expect(subject.new(notification: true, size: "sm", text_transform: "none", variant: "error").classname).to eq "pb_pill_kit_error_none_notification_sm"
     end
   end
 end

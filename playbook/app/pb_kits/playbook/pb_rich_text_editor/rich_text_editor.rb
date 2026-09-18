@@ -9,6 +9,7 @@ module Playbook
       prop :input_options, type: Playbook::Props::HashProp, default: {}
       prop :label
       prop :required_indicator, type: Playbook::Props::Boolean, default: false
+      prop :markdown_support, type: Playbook::Props::Boolean, default: false
       # When true, TipTap toolbar matches React `simple`: Bold + Italic only (no block-style Popover).
       # Use in modals or narrow layouts where the block dropdown misbehaves.
       prop :simple, type: Playbook::Props::Boolean, default: false

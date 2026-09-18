@@ -6,7 +6,7 @@ export type ProductColors = 'windows' | 'siding' | 'doors' | 'solar' | 'roofing'
     'product_5_background' | 'product_5_highlight' | 'product_6_background' | 'product_6_highlight' |
     'product_7_background' | 'product_7_highlight' | 'product_8_background' | 'product_8_highlight' |
     'product_9_background' | 'product_9_highlight' | 'product_10_background' | 'product_10_highlight'|
-    'product_11_background' | 'product_11_highlight'
+    'product_11_background' | 'product_11_highlight' | 'product_12_background' | 'product_12_highlight'
 
 export type StatusColors = 'success' | 'success_secondary' | 'success_sm' | 'success_subtle' |
     'warning' | 'warning_secondary' | 'warning_subtle' | 'error' | 'error_secondary' | 'error_subtle' |

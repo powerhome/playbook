@@ -8,8 +8,13 @@ import Flex from '../../pb_flex/_flex'
 import Passphrase from '../../pb_passphrase/_passphrase'
 
 const FormGroupSelect = (props) => {
+  const [artistName, setArtistName] = useState('')
   const [input, setInput] = useState("");
   const handleChange = (e) => setInput(e.target.value);
+
+  const handleUpdateArtistName = ({ target }) => {
+    setArtistName(target.value)
+  }
 
   const options = [
     { value: 'Country' },
@@ -36,7 +41,9 @@ const FormGroupSelect = (props) => {
     >
       <FormGroup>
         <TextInput
+            onChange={handleUpdateArtistName}
             placeholder="Enter Artist Name"
+            value={artistName}
             {...props}
         />
         <Select

@@ -15,6 +15,11 @@ Important pages:
   rendering.
 - `GettingStarted`, `GuidePage`, and `DesignGuidelines` render guide content.
 - `IconList` and the icons route render Playbook icon documentation.
+- `NotFound` renders the Page Not Found empty state. It is the catch-all route
+  (`path="*"`) and is also rendered by pages whose route resolves but whose
+  content does not (unknown kit, global prop, token, guide, or kit category).
+  Direct hits on unknown URLs reach the SPA through the `get "*path"` catch-all
+  in `config/routes.rb`.
 
 ## Kit Show Anchors
 

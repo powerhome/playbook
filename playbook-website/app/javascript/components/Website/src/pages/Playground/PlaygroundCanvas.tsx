@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import {
   Badge,
   Button,
+  Caption,
   Card,
   Flex,
   FullScreen,
   Title,
+  Toggle,
 } from "playbook-ui";
 
 import {
@@ -25,8 +27,9 @@ type PlaygroundCanvasProps = {
   globalProps?: Record<string, PropDefinition>;
   instanceCount: number;
   instances: BuilderInstance[];
+  isSelectMode: boolean;
   kitsByName: Record<string, PlaygroundKit>;
-  selectedId: string | null;
+  selectedIds: string[];
   canDropIntoTarget: (targetId: string) => boolean;
   onCanvasClick: () => void;
   onCanvasDragLeave: (event: React.DragEvent<HTMLElement>) => void;
@@ -48,7 +51,8 @@ type PlaygroundCanvasProps = {
   ) => void;
   onLeaveDragTarget: (targetId: string) => void;
   onMoveInstance: (instanceId: string, targetId: string) => void;
-  onSelect: (id: string) => void;
+  onSelect: (id: string, multi?: boolean) => void;
+  onToggleSelectMode: (isSelectMode: boolean) => void;
 };
 
 export const PlaygroundCanvas = ({
@@ -59,8 +63,9 @@ export const PlaygroundCanvas = ({
   globalProps,
   instanceCount,
   instances,
+  isSelectMode,
   kitsByName,
-  selectedId,
+  selectedIds,
   canDropIntoTarget,
   onCanvasClick,
   onCanvasDragLeave,
@@ -75,6 +80,7 @@ export const PlaygroundCanvas = ({
   onLeaveDragTarget,
   onMoveInstance,
   onSelect,
+  onToggleSelectMode,
 }: PlaygroundCanvasProps) => {
   const [isDemoFullscreen, setIsDemoFullscreen] = useState(false);
   const previewStageProps: PlaygroundPreviewStageProps = {
@@ -83,8 +89,9 @@ export const PlaygroundCanvas = ({
     draggingInstanceId,
     globalProps,
     instances,
+    isSelectMode,
     kitsByName,
-    selectedId,
+    selectedIds,
     onCanvasClick,
     onCanvasDragLeave,
     onCanvasDragOver,
@@ -131,12 +138,34 @@ export const PlaygroundCanvas = ({
                 variant="primary"
             />
           </Flex>
-          <Button
-              icon="expand"
-              onClick={() => setIsDemoFullscreen(true)}
-              text="Full Screen"
-              variant="secondary"
-          />
+          <Flex
+              align="center"
+              gap="sm"
+          >
+            <Flex
+                align="center"
+                className="builder-select-mode-toggle"
+                gap="xs"
+            >
+              <Toggle
+                  aria={{ label: "Select kits to wrap" }}
+                  checked={isSelectMode}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  onToggleSelectMode(event.target.checked)
+                }
+              />
+              <Caption
+                  color="lighter"
+                  text="Select kits to wrap"
+              />
+            </Flex>
+            <Button
+                icon="expand"
+                onClick={() => setIsDemoFullscreen(true)}
+                text="Full Screen"
+                variant="secondary"
+            />
+          </Flex>
         </Flex>
         <ResponsivePreviewFrame showDragHint>
           <PlaygroundPreviewStage {...previewStageProps} />

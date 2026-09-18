@@ -8,7 +8,8 @@ export type SyntaxLanguage =
   | "markup"
   | "erb"
   | "ruby"
-  | "scss";
+  | "scss"
+  | "html";
 
 type SyntaxHighlightedCodeProps = {
   code: string;

@@ -2,7 +2,6 @@
 
 // vvv React Component JSX Imports from the React Kits vvv
 export { DraggableProvider} from '../pb_kits/playbook/pb_draggable/context'
-export { default as AdvancedTable} from '../pb_kits/playbook/pb_advanced_table/_advanced_table'
 export { default as Avatar } from '../pb_kits/playbook/pb_avatar/_avatar'
 export { default as Background } from '../pb_kits/playbook/pb_background/_background'
 export { default as Badge } from '../pb_kits/playbook/pb_badge/_badge'
@@ -17,6 +16,7 @@ export { default as Checkbox } from '../pb_kits/playbook/pb_checkbox/_checkbox'
 export { default as CircleIconButton } from '../pb_kits/playbook/pb_circle_icon_button/_circle_icon_button'
 export { default as Collapsible } from '../pb_kits/playbook/pb_collapsible/_collapsible'
 export { default as Contact } from '../pb_kits/playbook/pb_contact/_contact'
+export { default as Container } from '../pb_kits/playbook/pb_container/_container'
 export { default as CopyButton} from '../pb_kits/playbook/pb_copy_button/_copy_button'
 export { default as Currency } from '../pb_kits/playbook/pb_currency/_currency'
 export { default as DashboardValue } from '../pb_kits/playbook/pb_dashboard_value/_dashboard_value'

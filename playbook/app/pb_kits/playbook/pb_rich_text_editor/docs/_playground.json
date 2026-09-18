@@ -2,6 +2,7 @@
   "template": "<RichTextEditor{{props}} />",
   "propTargets": {},
   "defaults": {
+    "markdownSupport": false,
     "requiredIndicator": false,
     "simple": false,
     "advancedEditorToolbar": true,
@@ -133,7 +134,9 @@
       "trix",
       "@tiptap/react",
       "@tiptap/starter-kit",
-      "@tiptap/extension-link"
+      "@tiptap/extension-link",
+      "prosemirror-markdown",
+      "prosemirror-model"
     ],
     "optional": true,
     "note": "Default React editor uses Trix (pass TrixEditor from react-trix). Advanced editor uses TipTap. The host app must already have the needed packages installed. Agents must not install packages — tell the user if they are missing. Rails advanced TipTap may load via the kit’s esm.sh script."
@@ -158,6 +161,7 @@
     "advancedEditor",
     "extensions",
     "inputOptions",
+    "markdownSupport",
     "onChange",
     "template",
     "TrixEditor",

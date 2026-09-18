@@ -1,0 +1,4 @@
+  <%= form.phone_number_field "default_values[phone]", props: {
+        label: "Phone Number",
+        value: "5551234567",
+      } %>

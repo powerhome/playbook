@@ -42,26 +42,35 @@ module Playbook
         generate_classname("pb_phone_number_input")
       end
 
-      def phone_number_input_options
+      def data
+        Hash(values[:data]).merge(
+          pb_phone_number_input: true,
+          pb_phone_number_input_config: phone_number_input_config.to_json
+        )
+      end
+
+      # Always present so Nitro Default assigns through the value setter, even
+      # when the initial value is empty (Text Input omits blank defaults).
+      def text_input_data
+        { default_value: value.to_s }
+      end
+
+      def phone_number_input_config
         {
-          id: id,
+          countrySearch: country_search,
           dark: dark,
           disabled: disabled,
           error: error,
+          excludeCountries: exclude_countries,
           formatAsYouType: format_as_you_type,
-          strictMode: strict_mode,
           hiddenInputs: hidden_inputs,
           initialCountry: initial_country,
-          label: label,
           name: name,
           onlyCountries: only_countries,
-          excludeCountries: exclude_countries,
           preferredCountries: preferred_countries,
           required: required,
-          requiredIndicator: required_indicator,
-          value: value,
-          countrySearch: country_search,
           showPlaceholder: show_placeholder,
+          strictMode: strict_mode,
         }
       end
     end

@@ -1,5 +1,6 @@
 import React from "react";
 import * as Playbook from "playbook-ui";
+import * as PlaybookAdvancedTable from "playbook-ui/advanced-table";
 import { Body, Card } from "playbook-ui";
 
 import { PlaygroundPreview } from "../KitShow/Tabs/Playground";
@@ -11,6 +12,7 @@ import {
   displayPropType,
   formatKitName,
 } from "./kitUtils";
+import { getBuilderInstanceLayout } from "./builderInstanceLayout";
 import {
   getLivePreviewCode,
   getRuntimeScope,
@@ -94,6 +96,7 @@ type BuilderPreviewItemProps = {
   globalProps?: Record<string, PropDefinition>;
   instance: BuilderInstance;
   isSelected: boolean;
+  isSelectMode: boolean;
   kitsByName: Record<string, PlaygroundKit>;
   onDragEndDrag?: () => void;
   onDragOverTarget?: (
@@ -111,8 +114,8 @@ type BuilderPreviewItemProps = {
   onLeaveDragTarget?: (id: string) => void;
   onDropKit?: (kitName: string, targetId: string) => void;
   onMoveInstance?: (instanceId: string, targetId: string) => void;
-  onSelect: (id: string) => void;
-  selectedId: string | null;
+  onSelect: (id: string, multi?: boolean) => void;
+  selectedIds: string[];
 };
 
 export const BuilderPreviewItem = ({
@@ -122,6 +125,7 @@ export const BuilderPreviewItem = ({
   globalProps,
   instance,
   isSelected,
+  isSelectMode,
   kitsByName,
   onDragEndDrag,
   onDragOverTarget,
@@ -132,11 +136,12 @@ export const BuilderPreviewItem = ({
   onDropKit,
   onMoveInstance,
   onSelect,
-  selectedId,
+  selectedIds,
 }: BuilderPreviewItemProps) => {
   const kit = kitsByName[instance.kitName];
   const Component = kit?.kit_schema?.name
-    ? (Playbook as any)[kit.kit_schema.name]
+    ? (Playbook as any)[kit.kit_schema.name] ??
+      (PlaybookAdvancedTable as any)[kit.kit_schema.name]
     : null;
   const childNodes = instance.children.map((child) => (
     <BuilderPreviewItem
@@ -145,7 +150,8 @@ export const BuilderPreviewItem = ({
       draggingInstanceId={draggingInstanceId}
       globalProps={globalProps}
       instance={child}
-      isSelected={child.id === selectedId}
+      isSelectMode={isSelectMode}
+      isSelected={selectedIds.includes(child.id)}
       key={child.id}
       kitsByName={kitsByName}
       onDragEndDrag={onDragEndDrag}
@@ -157,7 +163,7 @@ export const BuilderPreviewItem = ({
       onDropKit={onDropKit}
       onMoveInstance={onMoveInstance}
       onSelect={onSelect}
-      selectedId={selectedId}
+      selectedIds={selectedIds}
     />
   ));
   const canRenderChildren = acceptsChildren(kit);
@@ -166,6 +172,8 @@ export const BuilderPreviewItem = ({
   const configuredChildren = instance.configuredChildren?.trim();
   const directChildren = childNodes.length > 0 ? childNodes : configuredChildren || undefined;
   const targetLabel = formatKitName(kit?.name ?? instance.kitName);
+  const renderableProps = getRenderableProps(instance, kit, globalProps);
+  const layout = getBuilderInstanceLayout(renderableProps);
   const isInnermostEventTarget = (
     event:
       | React.DragEvent<HTMLElement>
@@ -194,7 +202,7 @@ export const BuilderPreviewItem = ({
     >
       {React.createElement(
         Component,
-        getRenderableProps(instance, kit, globalProps),
+        renderableProps,
         canRenderChildren ? directChildren : undefined
       )}
     </RenderBoundary>
@@ -206,7 +214,7 @@ export const BuilderPreviewItem = ({
 
   return (
     <div
-      className={`builder-instance ${isSelected ? "is-selected" : ""} ${
+      className={`builder-instance ${layout.className} ${isSelected ? "is-selected" : ""} ${
         canRenderChildren && instance.children.length === 0 ? "is-empty-container" : ""
       } ${
         draggingInstanceId === instance.id ? "is-dragging" : ""
@@ -215,6 +223,7 @@ export const BuilderPreviewItem = ({
       }`}
       data-builder-instance-id={instance.id}
       draggable={false}
+      style={layout.style}
       onDragEnd={(event) => {
         event.stopPropagation();
         onDragEndDrag?.();
@@ -272,13 +281,13 @@ export const BuilderPreviewItem = ({
       }}
       onClick={(event) => {
         event.stopPropagation();
-        onSelect(instance.id);
+        onSelect(instance.id, isSelectMode);
       }}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           event.stopPropagation();
-          onSelect(instance.id);
+          onSelect(instance.id, isSelectMode);
         }
       }}
       role="button"

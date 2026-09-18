@@ -15,15 +15,18 @@ const Height = () => {
     'xl': '1280px',
     'xxl': '1440px',
     'xxxl': '1920px',
+    '100%': '100%',
+    '100vh': '100vh',
   }
 
   const VisualGuideCard = () => {
     return (
       <Background
           className="height-global"
+          height="xxxl"
           width="100%"
       >
-        <Flex justify="between" orientation="row">
+        <Flex height="100%" justify="between" orientation="row">
           {Object.keys(SIZES).map((size: string) => (
             <Background
                 backgroundColor="primary"
@@ -163,6 +166,20 @@ const Height = () => {
               <Flex gap="xs" wrap><ValueCardWithTooltip text="xxxl" tooltipText="1920px"/></Flex>,
               <ExampleCodeCard id="height-xxxl-rails" text='height: "xxxl"' />,
               <ExampleCodeCard id="height-xxxl-react" text='height="xxxl"' />,
+            ],
+            [
+              "100%",
+              <ExampleCodeCard text="string" copyIcon={false} />,
+              <Flex gap="xs" wrap><ExampleCodeCard text="100%" copyIcon={false} /></Flex>,
+              <ExampleCodeCard id="height-100-rails" text='height: "100%"' />,
+              <ExampleCodeCard id="height-100-react" text='height="100%"' />,
+            ],
+            [
+              "100vh",
+              <ExampleCodeCard text="string" copyIcon={false} />,
+              <Flex gap="xs" wrap><ExampleCodeCard text="100vh" copyIcon={false} /></Flex>,
+              <ExampleCodeCard id="height-100vh-rails" text='height: "100vh"' />,
+              <ExampleCodeCard id="height-100vh-react" text='height="100vh"' />,
             ],
           ]}
         />

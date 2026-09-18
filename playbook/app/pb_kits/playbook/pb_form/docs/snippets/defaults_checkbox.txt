@@ -1,0 +1,4 @@
+  <%= form.check_box :newsletter,
+        props: { text: "Subscribe to newsletter", label: "Checkbox" },
+        checked_value: "yes",
+        unchecked_value: "no" %>

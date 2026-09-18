@@ -40,30 +40,60 @@ module Playbook
                                    default: true
 
       def classname
-        generate_classname("pb_multi_level_select")
+        generate_classname("pb_multi_level_select") + error_class
       end
 
-      def multi_level_select_options
-        {
-          data: data,
-          disabled: disabled,
-          error: error,
-          id: id,
-          inputDisplay: input_display,
-          name: name,
-          label: label,
-          placeholder: placeholder,
-          treeData: tree_data,
-          required: required,
-          requiredIndicator: required_indicator,
-          returnAllSelected: return_all_selected,
-          selectedIds: selected_ids,
-          inputName: input_name,
+      def data
+        Hash(prop(:data)).merge(
+          pb_multi_level_select: true,
+          tree_data: tree_data.to_json,
+          selected_ids: selected_ids.to_json,
+          return_all_selected: bool_attr(return_all_selected),
+          input_display: input_display,
+          input_name: input_name,
           variant: variant,
-          pillColor: pill_color,
-          wrapped: wrapped,
-          showCheckedChildren: show_checked_children,
-        }
+          pill_color: pill_color,
+          wrapped: bool_attr(wrapped),
+          disabled: bool_attr(disabled),
+          required: bool_attr(required),
+          name: name,
+          placeholder: placeholder,
+          show_checked_children: bool_attr(show_checked_children)
+        )
+      end
+
+      def input_id
+        return "#{id}_input" if id.present?
+        return sanitize_for_id(name) if name.present?
+        return sanitize_for_id(label) if label.present?
+
+        "multiselect_input"
+      end
+
+      def error_id
+        error.present? ? "#{input_id}-error" : nil
+      end
+
+      def arrow_down_id
+        "arrow_down_#{id.presence || input_id}"
+      end
+
+      def arrow_up_id
+        "arrow_up_#{id.presence || input_id}"
+      end
+
+      def error_class
+        error.present? ? " error" : ""
+      end
+
+    private
+
+      def bool_attr(value)
+        value ? "true" : "false"
+      end
+
+      def sanitize_for_id(str)
+        str.to_s.downcase.gsub(/\s+/, "_").gsub(/[^a-z0-9_]/, "")
       end
     end
   end

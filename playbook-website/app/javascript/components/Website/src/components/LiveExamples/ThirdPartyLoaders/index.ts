@@ -1,6 +1,7 @@
 export { highchartsLoader } from "./highchartsLoader"
 export { mapboxDrawLoader } from "./mapboxDrawLoader"
 export { maplibreLoader } from "./maplibreLoader"
+export { playbookAdvancedTableLoader } from "./playbookAdvancedTableLoader"
 export { playbookChartsLoader } from "./playbookChartsLoader"
 export { reactHookFormLoader } from "./reactHookFormLoader"
 export { reactSelectLoader } from "./reactSelectLoader"

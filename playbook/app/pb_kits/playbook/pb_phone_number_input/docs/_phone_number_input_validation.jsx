@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Button from '../../pb_button/_button'
 import FixedConfirmationToast from '../../pb_fixed_confirmation_toast/_fixed_confirmation_toast'
 import PhoneNumberInput from '../../pb_phone_number_input/_phone_number_input'
-import Icon from '../../pb_icon/_icon'
 
 const PhoneNumberInputValidation = (props) => {
     const [formErrors, setFormErrors] = useState("");
@@ -16,7 +15,7 @@ const PhoneNumberInputValidation = (props) => {
     // Start with initial error - will be cleared on blur if valid
     const initialError = (
         <>
-            <Icon icon="warning" /> Missing phone number.
+            Missing phone number.
         </>
     );
 

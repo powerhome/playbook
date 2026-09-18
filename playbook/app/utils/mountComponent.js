@@ -52,7 +52,7 @@ function installTypeaheadLoadingMlsGuard() {
   document.__pbTypeaheadLoadingMlsGuardInstalled = true
 
   const MLS_SELECTOR =
-    '.pb_multi_level_select_kit, [data-pb-react-component="MultiLevelSelect"]'
+    '.pb_multi_level_select, [data-pb-multi-level-select], [data-pb-react-component="MultiLevelSelect"]'
   const LOADING_SELECTOR = '[data-pb-typeahead-loading="true"]'
 
   let isLoading = false

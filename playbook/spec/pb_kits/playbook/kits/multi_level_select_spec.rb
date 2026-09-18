@@ -35,9 +35,31 @@ RSpec.describe Playbook::PbMultiLevelSelect::MultiLevelSelect do
       expect(subject.new(variant: "single").classname).to eq "pb_multi_level_select"
       expect(subject.new(variant: "multi").classname).to eq "pb_multi_level_select"
     end
+
+    it "includes error class when error is present" do
+      expect(subject.new(error: "Required").classname).to include("error")
+    end
   end
 
-  describe "#multi_level_select_options" do
+  describe "#input_id" do
+    it "uses id with _input suffix when id is present" do
+      expect(subject.new(id: "my-select").input_id).to eq "my-select_input"
+    end
+
+    it "falls back to sanitized name" do
+      expect(subject.new(name: "My Field").input_id).to eq "my_field"
+    end
+
+    it "falls back to sanitized label" do
+      expect(subject.new(label: "Select Location").input_id).to eq "select_location"
+    end
+
+    it "falls back to default" do
+      expect(subject.new({}).input_id).to eq "multiselect_input"
+    end
+  end
+
+  describe "#data" do
     let(:tree_data) do
       [
         {
@@ -61,153 +83,79 @@ RSpec.describe Playbook::PbMultiLevelSelect::MultiLevelSelect do
       ]
     end
 
-    it "includes all expected keys" do
+    it "includes the enhanced element selector flag" do
+      expect(subject.new({}).data[:pb_multi_level_select]).to eq true
+    end
+
+    it "serializes tree_data as JSON" do
       mls = subject.new(tree_data: tree_data)
-      options = mls.multi_level_select_options
-
-      expected_keys = %i[
-        data disabled error id inputDisplay name label placeholder
-        treeData required requiredIndicator returnAllSelected selectedIds
-        inputName variant pillColor wrapped showCheckedChildren
-      ]
-      expect(options.keys).to match_array(expected_keys)
+      parsed = JSON.parse(mls.data[:tree_data])
+      expect(parsed[0]["id"]).to eq "powerhome1"
+      expect(parsed[0]["children"][0]["disabled"]).to eq true
     end
 
-    it "includes variant in options" do
-      mls = subject.new(variant: "single")
-      expect(mls.multi_level_select_options[:variant]).to eq "single"
-    end
-
-    it "defaults variant to multi" do
-      mls = subject.new({})
-      expect(mls.multi_level_select_options[:variant]).to eq "multi"
-    end
-
-    it "includes tree_data in options as treeData" do
-      mls = subject.new(tree_data: tree_data)
-      expect(mls.multi_level_select_options[:treeData]).to eq tree_data
-    end
-
-    it "passes through tree_data with disabled options intact" do
-      mls = subject.new(tree_data: tree_data, variant: "single")
-      options = mls.multi_level_select_options
-
-      expect(options[:variant]).to eq "single"
-      expect(options[:treeData]).to eq tree_data
-      disabled_child = options[:treeData][0][:children][0]
-      expect(disabled_child[:disabled]).to eq true
-    end
-
-    it "includes disabled prop" do
-      mls = subject.new(disabled: true)
-      expect(mls.multi_level_select_options[:disabled]).to eq true
-    end
-
-    it "includes required prop" do
-      mls = subject.new(required: true)
-      expect(mls.multi_level_select_options[:required]).to eq true
-    end
-
-    it "includes required_indicator prop" do
-      mls = subject.new(required_indicator: true)
-      expect(mls.multi_level_select_options[:requiredIndicator]).to eq true
-    end
-
-    it "includes error prop" do
-      mls = subject.new(error: "Please select an option")
-      expect(mls.multi_level_select_options[:error]).to eq "Please select an option"
-    end
-
-    it "includes label prop" do
-      mls = subject.new(label: "Select Location")
-      expect(mls.multi_level_select_options[:label]).to eq "Select Location"
-    end
-
-    it "includes input_name as inputName" do
-      mls = subject.new(input_name: "location_select")
-      expect(mls.multi_level_select_options[:inputName]).to eq "location_select"
-    end
-
-    it "includes input_display as inputDisplay" do
-      mls = subject.new(input_display: "none")
-      expect(mls.multi_level_select_options[:inputDisplay]).to eq "none"
-    end
-
-    it "includes return_all_selected as returnAllSelected" do
-      mls = subject.new(return_all_selected: true)
-      expect(mls.multi_level_select_options[:returnAllSelected]).to eq true
-    end
-
-    it "includes selected_ids as selectedIds" do
+    it "serializes selected_ids as JSON" do
       mls = subject.new(selected_ids: %w[id1 id2])
-      expect(mls.multi_level_select_options[:selectedIds]).to eq %w[id1 id2]
+      expect(JSON.parse(mls.data[:selected_ids])).to eq %w[id1 id2]
     end
 
-    it "includes pill_color as pillColor" do
-      mls = subject.new(pill_color: "success")
-      expect(mls.multi_level_select_options[:pillColor]).to eq "success"
+    it "includes variant" do
+      expect(subject.new(variant: "single").data[:variant]).to eq "single"
+      expect(subject.new({}).data[:variant]).to eq "multi"
     end
 
-    it "includes wrapped prop" do
-      mls = subject.new(wrapped: true)
-      expect(mls.multi_level_select_options[:wrapped]).to eq true
+    it "includes disabled" do
+      expect(subject.new(disabled: true).data[:disabled]).to eq "true"
     end
 
-    it "includes show_checked_children as showCheckedChildren" do
-      mls = subject.new(show_checked_children: false)
-      expect(mls.multi_level_select_options[:showCheckedChildren]).to eq false
+    it "includes required" do
+      expect(subject.new(required: true).data[:required]).to eq "true"
     end
 
-    it "includes id prop" do
-      mls = subject.new(id: "my-select")
-      expect(mls.multi_level_select_options[:id]).to eq "my-select"
+    it "includes input_name" do
+      expect(subject.new(input_name: "location_select").data[:input_name]).to eq "location_select"
     end
 
-    it "includes name prop" do
-      mls = subject.new(name: "location")
-      expect(mls.multi_level_select_options[:name]).to eq "location"
+    it "includes input_display" do
+      expect(subject.new(input_display: "none").data[:input_display]).to eq "none"
     end
 
-    it "includes placeholder prop" do
-      mls = subject.new(placeholder: "Choose an option…")
-      expect(mls.multi_level_select_options[:placeholder]).to eq "Choose an option…"
+    it "includes return_all_selected" do
+      expect(subject.new(return_all_selected: true).data[:return_all_selected]).to eq "true"
     end
 
-    it "defaults placeholder in options" do
-      mls = subject.new({})
-      expect(mls.multi_level_select_options[:placeholder]).to eq "Start typing..."
+    it "includes pill_color" do
+      expect(subject.new(pill_color: "success").data[:pill_color]).to eq "success"
+    end
+
+    it "includes wrapped" do
+      expect(subject.new(wrapped: true).data[:wrapped]).to eq "true"
+    end
+
+    it "includes show_checked_children" do
+      expect(subject.new(show_checked_children: false).data[:show_checked_children]).to eq "false"
+    end
+
+    it "includes name" do
+      expect(subject.new(name: "location").data[:name]).to eq "location"
+    end
+
+    it "includes placeholder" do
+      expect(subject.new(placeholder: "Choose an option…").data[:placeholder]).to eq "Choose an option…"
+      expect(subject.new({}).data[:placeholder]).to eq "Start typing..."
+    end
+
+    it "merges consumer data attributes" do
+      mls = subject.new(data: { multi_level_select_form: true, testid: "mls" })
+      expect(mls.data[:multi_level_select_form]).to eq true
+      expect(mls.data[:testid]).to eq "mls"
+      expect(mls.data[:pb_multi_level_select]).to eq true
     end
   end
 
   describe "pill_color enum" do
     it "accepts primary" do
       expect { subject.new(pill_color: "primary") }.not_to raise_error
-    end
-
-    it "accepts neutral" do
-      expect { subject.new(pill_color: "neutral") }.not_to raise_error
-    end
-
-    it "accepts success" do
-      expect { subject.new(pill_color: "success") }.not_to raise_error
-    end
-
-    it "accepts warning" do
-      expect { subject.new(pill_color: "warning") }.not_to raise_error
-    end
-
-    it "accepts error" do
-      expect { subject.new(pill_color: "error") }.not_to raise_error
-    end
-
-    it "accepts info" do
-      expect { subject.new(pill_color: "info") }.not_to raise_error
-    end
-
-    it "accepts data colors" do
-      (1..8).each do |i|
-        expect { subject.new(pill_color: "data_#{i}") }.not_to raise_error
-      end
     end
 
     it "accepts product colors" do

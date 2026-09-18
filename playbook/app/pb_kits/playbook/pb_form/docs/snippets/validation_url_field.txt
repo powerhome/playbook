@@ -1,0 +1,5 @@
+<%= form.url_field :website, props: {
+      label: "Website",
+      required: true,
+      validation: { message: "Website is required" },
+    } %>

@@ -55,3 +55,52 @@ $pb_pill_height_sm: 17px;
     }
   }
 }
+
+// Notification: primary by default, error when variant is error
+$pb_pill_notification_colors: (
+  primary: map-get($status_color_text, primary),
+  error: map-get($status_color_text, error),
+);
+
+@each $color_name, $color_value in $pb_pill_notification_colors {
+  .pb_pill_kit_#{$color_name}_lowercase_notification,
+  .pb_pill_kit_#{$color_name}_none_notification,
+  .pb_pill_kit_#{$color_name}_lowercase_notification_sm,
+  .pb_pill_kit_#{$color_name}_none_notification_sm {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 $space-sm/1.8;
+    height: $pb_pill_height;
+    border-radius: $pb_pill_height/2;
+    white-space: nowrap;
+    background: $color_value;
+
+    .pb_pill_text {
+      color: $white !important;
+    }
+  }
+
+  .pb_pill_kit_#{$color_name}_lowercase_notification,
+  .pb_pill_kit_#{$color_name}_lowercase_notification_sm {
+    text-transform: lowercase;
+  }
+
+  .pb_pill_kit_#{$color_name}_none_notification,
+  .pb_pill_kit_#{$color_name}_none_notification_sm {
+    text-transform: none;
+  }
+
+  .pb_pill_kit_#{$color_name}_lowercase_notification_sm,
+  .pb_pill_kit_#{$color_name}_none_notification_sm {
+    height: $pb_pill_height_sm;
+    padding: 0 $space_xs;
+    border-radius: $pb_pill_height_sm/2;
+
+    .pb_pill_text {
+      font-size: $font_smallest !important;
+      line-height: 1.7;
+      color: $white !important;
+    }
+  }
+}

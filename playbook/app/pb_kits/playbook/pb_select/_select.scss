@@ -18,6 +18,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-height: 45px;
+    &:has(option[value=""]:checked) {
+      color: $input_text_default;
+    }
     @media (hover:hover) {
       &:hover, &:active, &:focus {
         background-color: $input_background_state;
@@ -170,6 +173,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    &:has(option[value=""]:checked) {
+      color: $input_text_default_dark;
+    }
     @media (hover:hover) {
       &:hover, &:active, &:focus {
         background-color: $input_background_state_dark;

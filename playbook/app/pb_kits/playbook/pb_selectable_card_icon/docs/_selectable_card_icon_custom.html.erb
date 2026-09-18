@@ -1,8 +1,8 @@
 <div class="pb--doc-demo-row">
-  <% svg_url = "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wrench_font_awesome.svg" %>
+  <% svg_path = Playbook::Engine.root.join("app/pb_kits/playbook/utilities/icons/clock.svg").to_s %>
 
   <%= pb_rails("selectable_card_icon", props: {
-    custom_icon: svg_url,
+    custom_icon: svg_path,
     title_text: "Customization", 
     body_text: "Personalize everything",
     input_id: 1,

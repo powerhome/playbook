@@ -7,21 +7,24 @@ import Flex from '../../../pb_flex/_flex'
 import Link from '../../../pb_link/_link'
 import Badge from '../../../pb_badge/_badge'
 
-const validHeightValues = ['auto', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl']
+const validHeightValues = ['auto', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl', '100%', '100vh']
+const heightClassName = (v) => `height_${v.replace('%', '_percent')}`
+const minHeightClassName = (v) => `min_height_${v.replace('%', '_percent')}`
+const maxHeightClassName = (v) => `max_height_${v.replace('%', '_percent')}`
 
 // NOTE: TextInput excluded - height properties are not valid props for input elements
 // Test height prop
 testGlobalProp(
   'height',
   validHeightValues,
-  (v) => `height_${v}`,
+  heightClassName,
   null,
   [Body, Button, Card, Title, Flex, Link, Badge]
 )
 
 testGlobalPropAbsence(
   'height',
-  ['height_auto', 'height_xs', 'height_sm', 'height_md', 'height_lg', 'height_xl', 'height_xxl', 'height_xxxl'],
+  ['height_auto', 'height_xs', 'height_sm', 'height_md', 'height_lg', 'height_xl', 'height_xxl', 'height_xxxl', 'height_100_percent', 'height_100vh'],
   undefined,
   { skipNull: true }
 )
@@ -30,14 +33,14 @@ testGlobalPropAbsence(
 testGlobalProp(
   'minHeight',
   validHeightValues,
-  (v) => `min_height_${v}`,
+  minHeightClassName,
   null,
   [Body, Button, Card, Title, Flex, Link, Badge]
 )
 
 testGlobalPropAbsence(
   'minHeight',
-  ['min_height_auto', 'min_height_xs', 'min_height_sm', 'min_height_md', 'min_height_lg', 'min_height_xl', 'min_height_xxl', 'min_height_xxxl'],
+  ['min_height_auto', 'min_height_xs', 'min_height_sm', 'min_height_md', 'min_height_lg', 'min_height_xl', 'min_height_xxl', 'min_height_xxxl', 'min_height_100_percent', 'min_height_100vh'],
   undefined,
   { skipNull: true }
 )
@@ -46,14 +49,14 @@ testGlobalPropAbsence(
 testGlobalProp(
   'maxHeight',
   validHeightValues,
-  (v) => `max_height_${v}`,
+  maxHeightClassName,
   null,
   [Body, Button, Card, Title, Flex, Link, Badge]
 )
 
 testGlobalPropAbsence(
   'maxHeight',
-  ['max_height_auto', 'max_height_xs', 'max_height_sm', 'max_height_md', 'max_height_lg', 'max_height_xl', 'max_height_xxl', 'max_height_xxxl'],
+  ['max_height_auto', 'max_height_xs', 'max_height_sm', 'max_height_md', 'max_height_lg', 'max_height_xl', 'max_height_xxl', 'max_height_xxxl', 'max_height_100_percent', 'max_height_100vh'],
   undefined,
   { skipNull: true }
 )

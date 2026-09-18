@@ -1,1 +1,1 @@
-To add a lazyload on the background image simply use the `transition` prop and one of the three string options `"fade"`, `"blur"`, or `"scale"`.
+To add a transition on the background image, use the `transition` prop with `"fade"`, `"blur"`, or `"scale"`.

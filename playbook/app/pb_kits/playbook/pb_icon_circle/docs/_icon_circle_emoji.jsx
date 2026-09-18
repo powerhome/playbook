@@ -12,14 +12,14 @@ const IconCircleEmoji = (props) => {
       />
       <br/>
       <IconCircle
-          icon="&#128525;"
+          icon="😍"
           size="md"
           variant="red"
           {...props}
       />
       <br/>
       <IconCircle
-          icon="&#x1F389;"
+          icon="🎉"
           size="lg"
           variant="teal"
           {...props}

@@ -35,7 +35,6 @@ const Image = (props: ImageType): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const classes = classnames(
     buildCss('pb_image_kit', size ? `size_${size}` : null),
-    'lazyload',
     transition,
     { rounded },
     globalProps(props),
@@ -53,7 +52,6 @@ const Image = (props: ImageType): React.ReactElement => {
         {...htmlProps}
         alt={alt}
         className={classes}
-        data-src={url}
         id={id}
         onError={onError}
         src={url}

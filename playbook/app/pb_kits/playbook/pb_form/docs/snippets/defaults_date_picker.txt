@@ -1,0 +1,1 @@
+  <%= form.date_picker :start_date, props: { label: "Start Date", allow_input: true } %>

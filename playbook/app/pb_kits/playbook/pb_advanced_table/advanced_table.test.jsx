@@ -1,7 +1,8 @@
 import React, {useState} from "react"
 import { render, screen, waitFor } from "../utilities/test-utils"
 
-import { AdvancedTable, Pill, colors } from "playbook-ui"
+import { AdvancedTable } from "playbook-ui/advanced-table"
+import { Pill, colors } from "playbook-ui"
 
 global.ResizeObserver = class {
   observe() {}

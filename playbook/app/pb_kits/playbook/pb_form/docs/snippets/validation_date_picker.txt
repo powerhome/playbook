@@ -1,0 +1,6 @@
+  <%= form.date_picker :start_date, props: {
+        label: "Start Date",
+        allow_input: true,
+        required: true,
+        validation_message: "Start date is required",
+      } %>

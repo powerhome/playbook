@@ -145,7 +145,7 @@ module PlaybookWebsite
       def image(link, title, alt_text)
         return nil if link.nil?
 
-        %(<a href="#{link}" target="_blank">#{image_tag(link, title: title, alt: alt_text, class: 'imageloader lazyload')}</a>)
+        %(<a href="#{link}" target="_blank">#{image_tag(link, title: title, alt: alt_text)}</a>)
       end
     end
   end

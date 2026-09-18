@@ -2,4 +2,4 @@ The MultiLevelSelect kit renders a multi leveled select dropdown based on data f
 
 For the React version of the kit, the `onSelect` prop returns an array of objects. This array contains all checked items irrespective of whether it is a parent, child or grandchild. Open the console on this example and check and uncheck checkboxes to see this is action! 
 
-For the Rails version of the kit, there is no onselect. The form submits as a array of strings, following the typical rails pattern of utilizing hidden inputs. The strings are the values of the selected items' ids. For example, ["103", "106", "107"].
+For the Rails version of the kit, there is no onSelect. The form submits as an array of strings, following the typical Rails pattern of utilizing hidden inputs. The strings are the values of the selected items' ids. For example, ["103", "106", "107"]. Listen for `pb-multi-level-select-change` on the kit root for live updates; `event.detail.value` is the selected item objects.

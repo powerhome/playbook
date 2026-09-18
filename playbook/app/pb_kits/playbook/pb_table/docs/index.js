@@ -20,6 +20,7 @@ export { default as TableAlignmentShiftRow } from './_table_alignment_shift_row.
 export { default as TableAlignmentShiftData } from './_table_alignment_shift_data.jsx'
 export { default as TableWithBackgroundKit } from './_table_with_background_kit.jsx'
 export { default as TableVerticalBorder } from './_table_vertical_border.jsx'
+export { default as TableContrastBorder } from './_table_contrast_border.jsx'
 export { default as TableStriped } from './_table_striped.jsx'
 export { default as TableDiv } from './_table_div.jsx'
 export { default as TableWithSubcomponents } from './_table_with_subcomponents.jsx'
@@ -41,3 +42,4 @@ export { default as TableWithHeaderStyleFloating } from './_table_with_header_st
 export { default as TableWithFilterVariant } from './_table_with_filter_variant.jsx'
 export { default as TableWithFilterVariantWithPagination } from './_table_with_filter_variant_with_pagination.jsx'
 export { default as TableWithFilterWithCardTitleProps } from './_table_with_filter_with_card_title_props.jsx'
+export { default as TableColspan } from './_table_colspan.jsx'

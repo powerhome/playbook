@@ -30,7 +30,7 @@
             border-left-width: 1px !important;
             border-right-width: 1px !important;
             border-bottom-width: 0 !important;
-            border-color: $border_light !important;
+            border-color: var(--table-border-color, #{$border_light}) !important;
             min-height: 2.2em;
             position: relative;
             text-align:left;
@@ -52,7 +52,7 @@
             &:first-child {
               margin-top: $space_md !important;
               border-top-width: 1px !important;
-              border-top-color: $border_light !important;
+              border-top-color: var(--table-border-color, #{$border_light}) !important;
               border-radius: $border_rad_light $border_rad_light 0 0;
             }
 

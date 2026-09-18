@@ -51,8 +51,9 @@
 
         const updateTransition = (transition) => {
           const imageTransition = document.querySelector('.background-image')
-            imageTransition.classList.remove("fade", "blur", "scale", "lazyloaded")
-            imageTransition.classList.add(transition, "lazyload")   
+            imageTransition.classList.remove("fade", "blur", "scale")
+            void imageTransition.offsetWidth
+            imageTransition.classList.add(transition)
         } 
         (transitionDropdown).addEventListener('change', function() {
           updateTransition(option)

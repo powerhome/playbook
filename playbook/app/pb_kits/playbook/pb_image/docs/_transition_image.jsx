@@ -12,15 +12,14 @@ const TransitionImage = (props) => {
     url: '',
     transition: '',
   })
+  const [playKey, setPlayKey] = useState(0)
 
   const loadImage = () => {
-    document.querySelector('.image').classList.remove(transition, 'lazyloaded')
     setApply({
       url: 'https://unsplash.it/500/400/?image=634',
       transition: transition,
-    },
-    document.querySelector('.image').classList.add(transition, 'lazyload')
-    )
+    })
+    setPlayKey((key) => key + 1)
   }
 
   const handleTransition = ({ target }) => {
@@ -65,6 +64,7 @@ const TransitionImage = (props) => {
         <Image
             alt="picture of a misty forest"
             className="image"
+            key={playKey}
             transition={apply.transition}
             url={apply.url}
             {...props}

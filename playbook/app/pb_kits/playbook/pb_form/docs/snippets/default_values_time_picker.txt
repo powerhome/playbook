@@ -1,0 +1,1 @@
+<%= form.time_picker :start_time, props: { label: "Start Time", default_time: "09:30" } %>

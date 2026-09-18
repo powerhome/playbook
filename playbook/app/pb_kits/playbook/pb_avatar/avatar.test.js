@@ -24,7 +24,6 @@ test('loads the given image url and name', () => {
 
   expect(kit).toHaveClass('pb_avatar_kit_size_md')
   expect(kit).toHaveAttribute('data-initials', initials)
-  expect(image).toHaveAttribute('data-src', imageUrl)
   expect(image).toHaveAttribute('src', imageUrl)
   expect(image).toHaveAttribute('alt', imageAlt)
 })

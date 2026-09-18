@@ -19,6 +19,7 @@ type LinkProps = {
   icon?: string,
   iconRight?: string,
   id?: string,
+  rel?: string,
   tabIndex?: number,
   tag?: 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   target?: string,
@@ -39,6 +40,7 @@ const Link = (props: LinkProps): React.ReactElement => {
     icon = '',
     iconRight = '',
     id = '',
+    rel,
     tabIndex,
     tag = 'a',
     target = '',
@@ -62,6 +64,14 @@ const Link = (props: LinkProps): React.ReactElement => {
     }
 
     return undefined
+  }
+
+  const getRelAttribute = () => {
+    if (rel !== undefined) {
+      return rel
+    }
+
+    return target !== 'child' ? 'noreferrer' : undefined
   }
 
   const renderContent = () => (
@@ -99,7 +109,7 @@ const Link = (props: LinkProps): React.ReactElement => {
       <a
           {...commonProps}
           href={href}
-          rel={target !== 'child' ? 'noreferrer' : undefined}
+          rel={getRelAttribute()}
           tabIndex={tabIndex}
           target={getTargetAttribute()}
       >
@@ -111,7 +121,7 @@ const Link = (props: LinkProps): React.ReactElement => {
       <a
           {...commonProps}
           href={href}
-          rel={target !== 'child' ? 'noreferrer' : undefined}
+          rel={getRelAttribute()}
           tabIndex={tabIndex}
           target={getTargetAttribute()}
       >

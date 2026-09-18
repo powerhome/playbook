@@ -23,6 +23,12 @@
       ],
       "default": ""
     },
+    "formatSelectedDisplay": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
     "inputDisplay": {
       "type": "enum",
       "platforms": [
@@ -91,7 +97,10 @@
       "default": true
     },
     "treeData": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "array"
+      },
       "platforms": [
         "react",
         "rails"
@@ -118,7 +127,10 @@
       "default": "Start typing..."
     },
     "selectedIds": {
-      "type": "string[] | any",
+      "type": {
+        "react": "string[] | any",
+        "rails": "array"
+      },
       "platforms": [
         "react",
         "rails"

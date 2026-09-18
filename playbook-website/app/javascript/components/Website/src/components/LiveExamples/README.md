@@ -34,10 +34,11 @@ Without a loader, you'll see a `ReferenceError: <LibraryName> is not defined` in
 | `highchartsLoader` | `highcharts`, `highcharts/*`, `highcharts-react-official` | Highcharts, HighchartsReact, and modules like highcharts-more, solid-gauge |
 | `mapboxDrawLoader` | `@mapbox/mapbox-gl-draw` | MapboxDraw + CSS |
 | `maplibreLoader` | `maplibre-gl` | maplibregl + CSS |
+| `playbookAdvancedTableLoader` | `_advanced_table`, `playbook-ui/advanced-table` | AdvancedTable |
 | `playbookChartsLoader` | `_pb_bar_graph`, `_pb_circle_chart`, `_pb_gauge_chart`, `_pb_line_graph` | PbBarGraph, PbCircleChart, PbGaugeChart, PbLineGraph |
 | `reactHookFormLoader` | `react-hook-form` | useForm, useController, useFormContext, useWatch, useFieldArray, Controller, FormProvider |
 | `reactSelectLoader` | `react-select`, `react-select/*` | components, Select, async/creatable defaults |
-| `tiptapLoader` | `@tiptap/react`, `@tiptap/starter-kit`, `@tiptap/extension-*` | useEditor, EditorContent, StarterKit, Link, etc. |
+| `tiptapLoader` | `@tiptap/react`, `@tiptap/starter-kit`, `@tiptap/extension-*`, `prosemirror-markdown`, `prosemirror-model` | useEditor, EditorContent, StarterKit, Link, defaultMarkdownParser, DOMSerializer, etc. |
 | `trixLoader` | `trix`, `react-trix` | Trix, TrixEditor + CSS |
 
 ### How to Add a New Loader

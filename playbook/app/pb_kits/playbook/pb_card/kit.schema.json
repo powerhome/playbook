@@ -8,7 +8,10 @@
   ],
   "props": {
     "background": {
-      "type": "enum",
+      "type": {
+        "react": "BackgroundColors | ProductColors | \"none\"",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"
@@ -39,6 +42,8 @@
         "product_10_highlight",
         "product_11_background",
         "product_11_highlight",
+        "product_12_background",
+        "product_12_highlight",
         "windows",
         "siding",
         "doors",

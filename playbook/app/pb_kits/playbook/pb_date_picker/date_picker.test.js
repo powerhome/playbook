@@ -100,6 +100,85 @@ describe('DatePicker Kit', () => {
     expect(kit).not.toHaveAttribute('data-default-value')
   })
 
+  test.each([
+    ['no-separators', '08152026', '08/15/2026'],
+    ['all-separators', '08/15/2026', '08/15/2026'],
+    ['year-end', '12312026', '12/31/2026'],
+    ['separator-before-year-only', '0326/2026', '03/26/2026'],
+    ['separator-after-month-only', '03/262026', '03/26/2026'],
+  ])('allowInput saves the typed date %s as %s', async (caseName, typedValue, expectedValue) => {
+    const testId = `datepicker-allow-input-${caseName}`
+    render(
+      <DatePicker
+          allowInput
+          data={{ testid: testId }}
+          format="m/d/Y"
+          pickerId={`date-picker-allow-input-${caseName}`}
+          placeholder="mm/dd/yyyy"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy')
+
+    fireEvent.change(input, { target: { value: typedValue } })
+    fireEvent.blur(input)
+
+    await waitFor(() => {
+      expect(input).toHaveValue(expectedValue)
+    })
+  })
+
+  test.each([
+    ['no-slashes', '08122026 at 12:00 AM', '08/12/2026 at 12:00 AM'],
+    ['with-slashes', '08/12/2026 at 12:00 AM', '08/12/2026 at 12:00 AM'],
+  ])('allowInput with enableTime saves %s as %s', async (caseName, typedValue, expectedValue) => {
+    const testId = `datepicker-allow-input-time-${caseName}`
+    render(
+      <DatePicker
+          allowInput
+          data={{ testid: testId }}
+          enableTime
+          format="m/d/Y"
+          pickerId={`date-picker-allow-input-time-${caseName}`}
+          placeholder="mm/dd/yyyy"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy')
+
+    fireEvent.change(input, { target: { value: typedValue } })
+    fireEvent.blur(input)
+
+    await waitFor(() => {
+      expect(input).toHaveValue(expectedValue)
+    })
+  })
+
+  test('allowInput leaves ambiguous digit-only input to flatpickr', async () => {
+    const testId = 'datepicker-allow-input-unpadded'
+    render(
+      <DatePicker
+          allowInput
+          data={{ testid: testId }}
+          format="m/d/Y"
+          pickerId="date-picker-allow-input-unpadded"
+          placeholder="mm/dd/yyyy"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy')
+
+    fireEvent.change(input, { target: { value: '0815' } })
+    fireEvent.blur(input)
+
+    await waitFor(() => {
+      expect(input).not.toHaveValue('08/15')
+    })
+  })
+
   test('inLine alone adds inline-date-picker class and inline control icons, not the calendar icon', () => {
     const testId = 'datepicker-inline-only'
     render(

@@ -8,6 +8,7 @@ import Nav from '../../pb_nav/_nav'
 import NavItem from '../../pb_nav/_item'
 
 import { ToolbarTypes } from './EditorTypes'
+import { normalizeListSelection } from './listSelection'
 
 const ToolbarDropdown = ({editor}: any): React.ReactElement => {
   const [showPopover, setShowPopover] = useState(false)
@@ -46,14 +47,20 @@ const toolbarDropdownItems = [
         icon: "list",
         isActive: editor.isActive("bulletList"),
         text: "Bullet List",
-        onclick: () => editor.chain().focus().toggleBulletList().run(),
+        onclick: () => {
+          normalizeListSelection(editor)
+          editor.chain().focus().toggleBulletList().run()
+        },
     },
     {
         node: "orderedList",
         icon: "list-ol",
         isActive: editor.isActive("orderedList"),
         text: "Ordered List",
-        onclick: () =>   editor.chain().focus().toggleOrderedList().run()
+        onclick: () => {
+          normalizeListSelection(editor)
+          editor.chain().focus().toggleOrderedList().run()
+        }
         ,
     },
     {

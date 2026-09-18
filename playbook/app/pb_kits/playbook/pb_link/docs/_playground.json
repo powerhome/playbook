@@ -31,7 +31,8 @@
         "href",
         "target",
         "disabled",
-        "tabIndex"
+        "tabIndex",
+        "rel"
       ]
     },
     {
@@ -167,5 +168,8 @@
       "message": "Use tag to borrow link styling on semantic headings or inline text, but keep href when the element should still navigate.",
       "type": "info"
     }
-  }
+  },
+  "emitEmptyStringProps": [
+    "rel"
+  ]
 }

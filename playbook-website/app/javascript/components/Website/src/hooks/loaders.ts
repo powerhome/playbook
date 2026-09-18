@@ -1,4 +1,5 @@
 import { LoaderFunctionArgs } from "react-router-dom";
+import { isProductionHost } from "../utils/siteNavigation";
 
 interface ComponentTypes {
   name: string;
@@ -77,12 +78,14 @@ export const ComponentShowLoader = async ({
 
 export const CategoryLoader: (
   props: LoaderFunctionArgs
-) => Promise<ComponentTypes> = async ({ params }) => {
+) => Promise<CategoryTypes | null> = async ({ params }) => {
   const { kits } = await fetchKits();
 
   const filteredData = kits.find(
     (kit: CategoryTypes) => kit.category === params.category
   );
+
+  if (!filteredData) return null;
 
   filteredData.components.sort(sortByName);
 
@@ -115,8 +118,23 @@ export const IconsLoader = async () => {
 let playgroundCache: any = null;
 
 export const PlaygroundLoader = async () => {
+  // Production never loads Playground payloads — UI redirects to staging instead.
+  // Avoids fetching /playground.json before that redirect runs.
+  if (isProductionHost()) {
+    return {
+      playground_kits: [],
+      global_props_schema: null,
+    };
+  }
+
   if (playgroundCache) return playgroundCache;
   const response = await fetch("/playground.json");
+  if (!response.ok) {
+    return {
+      playground_kits: [],
+      global_props_schema: null,
+    };
+  }
   const data = await response.json();
   playgroundCache = data;
   return data;

@@ -1,8 +1,8 @@
 <%= pb_content_tag(:div) do %>
-      <%= pb_rails("form_group", props: {cursor: "pointer", full_width: object.full_width}) do %>
+      <%= pb_rails("form_group", props: {cursor: "pointer", full_width: object.full_width,  margin_bottom: object.custom_message.present? ? "none" : nil}) do %>
         <label
           for="upload-<%= object.id %>"
-          class="pb_button_kit pb_button_secondary pb_button_inline pb_button_enabled <%= 'dark' if object.dark %>"
+          class="pb_button_kit pb_button_secondary pb_button_inline pb_button_enabled <%= 'dark' if object.dark %> <%= 'file_upload_custom_message_spacing' if object.custom_message.present? %>"
         >
           <%= "#{object.label}" %>
         </label>
@@ -10,11 +10,20 @@
           type: "file",
           dark: object.dark,
           error: object.error.presence,
+          margin_bottom: object.custom_message.present? ? "xxs" : nil,
           input_options: {
+            accept: object.accept.presence,
             id: "upload-#{object.id}",
-            classname: "cursor_pointer",
-          }.merge(object.input_options)
+            classname: "cursor_pointer ",
+          }.compact.merge(object.input_options)
         }) %>
       <% end %>
-    </label>
+      <% if object.custom_message.present? %>
+        <%= pb_rails("body", props: {
+          text: object.custom_message,
+          dark: object.dark,
+          color: "lighter",
+          classname: "file_upload_custom_message"
+        }) %>
+      <% end %>
 <% end %>

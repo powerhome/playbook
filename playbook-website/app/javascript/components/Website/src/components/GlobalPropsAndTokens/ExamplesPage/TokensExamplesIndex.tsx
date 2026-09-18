@@ -1,4 +1,5 @@
 import { Background } from "playbook-ui";
+import NotFound from "../../../pages/NotFound";
 import Display from "./Examples/Display";
 import Animation from "./Examples/Animation";
 import BorderRadius from "./Examples/BorderRadius";
@@ -61,7 +62,7 @@ const TokensExamples = ({ routeParamName }: TokensExamplesProps = {}) => {
 
   return (
     <Background backgroundColor="white">
-      {ExampleComponent ? <ExampleComponent /> : null}
+      {ExampleComponent ? <ExampleComponent /> : <NotFound />}
     </Background>
   );
 };

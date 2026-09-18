@@ -11,7 +11,7 @@ return (
     <Button
         count={highlightActive ? (reactionCount + 1) : reactionCount}
         highlight = {highlightActive}
-        icon="&#127881;"
+        icon="🎉"
         onClick={()=> setHighlightActive(!highlightActive)}
         tabIndex={0}
         variant="reaction"

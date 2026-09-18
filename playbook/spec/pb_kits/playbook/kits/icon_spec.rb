@@ -1,10 +1,17 @@
 # frozen_string_literal: true
 
 require "tmpdir"
+require "fileutils"
 require_relative "../../../../app/pb_kits/playbook/pb_icon/icon"
 
 RSpec.describe Playbook::PbIcon::Icon do
   subject { Playbook::PbIcon::Icon }
+
+  def reset_icon_path_index_cache!
+    %i[@icon_path_index @icon_path_index_cache_key @icon_path_index_checked_at].each do |ivar|
+      subject.remove_instance_variable(ivar) if subject.instance_variable_defined?(ivar)
+    end
+  end
 
   xit "border" do
     is_expected.to define_prop(:border)
@@ -156,6 +163,88 @@ RSpec.describe Playbook::PbIcon::Icon do
       %w[file:///etc/passwd ftp://example.com/icon.svg].each do |source|
         expect(subject.new(custom_icon: source).send(:read_svg_content, source)).to eq("")
       end
+    end
+
+    it "does not fetch remote http(s) SVG sources" do
+      source = "https://example.com/icons/widget.svg"
+
+      expect(subject.new(custom_icon: source).send(:read_svg_content, source)).to eq("")
+    end
+
+    it "refuses a .svg symlink that resolves to a non-svg file" do
+      Dir.mktmpdir do |engine_dir|
+        secret = File.join(engine_dir, "master.key")
+        File.write(secret, "fake_secret_key_base")
+        link = File.join(engine_dir, "fake.svg")
+        File.symlink(secret, link)
+        Class.new(Rails::Engine) { define_singleton_method(:root) { Pathname.new(engine_dir) } }
+
+        expect(subject.new(custom_icon: link).send(:read_svg_content, link)).to eq("")
+      end
+    end
+
+    it "refuses an indexed icon_path .svg symlink to a non-svg file", :aggregate_failures do
+      tmp_root = Rails.root.join("tmp")
+      FileUtils.mkdir_p(tmp_root)
+
+      Dir.mktmpdir("pb_icon_index", tmp_root) do |icons_dir|
+        secret = File.join(icons_dir, "master.key")
+        File.write(secret, "fake_secret_key_base")
+        File.symlink(secret, File.join(icons_dir, "poison.svg"))
+        File.write(File.join(icons_dir, "ok.svg"), "<svg xmlns=\"http://www.w3.org/2000/svg\"></svg>")
+
+        relative_icon_path = Pathname.new(icons_dir).relative_path_from(Rails.root).to_s
+        allow(Rails.application.config).to receive(:respond_to?).and_wrap_original do |method, name, *args|
+          name == :icon_path || method.call(name, *args)
+        end
+        allow(Rails.application.config).to receive(:icon_path).and_return(relative_icon_path)
+        reset_icon_path_index_cache!
+
+        expect(subject.new(icon: "poison").send(:svg_content)).to eq("")
+        expect(subject.new(icon: "ok").send(:svg_content)).to include("<svg")
+      end
+    ensure
+      reset_icon_path_index_cache!
+    end
+
+    it "reads indexed icons when configured icon_path resolves outside Rails.root", :aggregate_failures do
+      Dir.mktmpdir("pb_icon_outside") do |icons_dir|
+        File.write(File.join(icons_dir, "widget.svg"), "<svg xmlns=\"http://www.w3.org/2000/svg\"></svg>")
+        secret = File.join(icons_dir, "master.key")
+        File.write(secret, "fake_secret_key_base")
+        File.symlink(secret, File.join(icons_dir, "poison.svg"))
+
+        allow(Rails.application.config).to receive(:respond_to?).and_wrap_original do |method, name, *args|
+          name == :icon_path || method.call(name, *args)
+        end
+        # Absolute path outside Rails.root (mirrors ../node_modules/... in playbook-website).
+        allow(Rails.application.config).to receive(:icon_path).and_return(icons_dir)
+        reset_icon_path_index_cache!
+
+        expect(Pathname.new(icons_dir).realpath.to_s).not_to start_with("#{Rails.root.realpath}#{File::SEPARATOR}")
+        expect(subject.new(icon: "widget").send(:svg_content)).to include("<svg")
+        expect(subject.new(icon: "poison").send(:svg_content)).to eq("")
+      end
+    ensure
+      reset_icon_path_index_cache!
+    end
+  end
+
+  describe "#valid_emoji?" do
+    it "accepts pictographic emoji and keycap sequences", :aggregate_failures do
+      expect(subject.new(icon: "😀").valid_emoji?).to be(true)
+      expect(subject.new(icon: "👍").valid_emoji?).to be(true)
+      expect(subject.new(icon: "1️⃣").valid_emoji?).to be(true)
+    end
+
+    it "rejects bare emoji keycap bases and HTML-like payloads", :aggregate_failures do
+      expect(subject.new(icon: "1").valid_emoji?).to be(false)
+      expect(subject.new(icon: "#").valid_emoji?).to be(false)
+      expect(subject.new(icon: "*").valid_emoji?).to be(false)
+      expect(subject.new(icon: "1<img src=x onerror=alert(1)>").valid_emoji?).to be(false)
+      expect(subject.new(icon: "user").valid_emoji?).to be(false)
+      expect(subject.new(icon: "&#128525;").valid_emoji?).to be(false)
+      expect(subject.new(icon: "&lt;script&gt;").valid_emoji?).to be(false)
     end
   end
 end

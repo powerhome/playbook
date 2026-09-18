@@ -4,6 +4,7 @@ export type PropDefinition = {
   values?: string[];
   default?: any;
   description?: string;
+  responsive?: boolean;
 };
 
 export type PlaygroundKit = {

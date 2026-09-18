@@ -1,0 +1,5 @@
+<%= form.email_field :email, props: {
+      label: "Email",
+      required: true,
+      validation: { message: "Email is required" },
+    } %>

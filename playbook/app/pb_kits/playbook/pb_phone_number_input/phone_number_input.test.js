@@ -1,6 +1,25 @@
 import React from "react";
 import { render, screen, act, within, waitFor, fireEvent } from "../utilities/test-utils";
+import intlTelInput from "intl-tel-input/build/js/intlTelInputWithUtils.js";
 import PhoneNumberInput from "./_phone_number_input";
+import PbPhoneNumberInput from "./index";
+
+jest.mock("intl-tel-input/build/js/intlTelInputWithUtils.js", () => {
+  const actual = jest.requireActual("intl-tel-input/build/js/intlTelInputWithUtils.js")
+  const actualDefault = actual.default || actual
+  const fn = jest.fn((input, options) => {
+    const instance = actualDefault(input, options)
+    jest.spyOn(instance, "destroy")
+    jest.spyOn(instance, "getSelectedCountryData")
+    jest.spyOn(instance, "getValidationError")
+    jest.spyOn(instance, "isValidNumber")
+    return instance
+  })
+  if (typeof actualDefault.getCountryData === "function") {
+    fn.getCountryData = actualDefault.getCountryData.bind(actualDefault)
+  }
+  return { __esModule: true, default: fn }
+})
 
 const testId = "phoneNumberInput";
 
@@ -266,3 +285,282 @@ test("restores latest placeholder on blur after country change", async () => {
         expect(input.getAttribute("placeholder")).toBe("+93 123 456 7890");
     });
 });
+
+describe("PbPhoneNumberInput enhanced element", () => {
+  const defaultConfig = {
+    countrySearch: false,
+    dark: false,
+    disabled: false,
+    error: "",
+    excludeCountries: [],
+    formatAsYouType: false,
+    hiddenInputs: false,
+    initialCountry: "us",
+    name: "phone",
+    onlyCountries: [],
+    preferredCountries: [],
+    required: false,
+    showPlaceholder: false,
+    strictMode: false,
+  }
+
+  const lastIti = () => intlTelInput.mock.results[intlTelInput.mock.results.length - 1].value
+
+  const mountKit = (config = {}, inputAttrs = "") => {
+    const mergedConfig = { ...defaultConfig, ...config }
+    document.body.innerHTML = `
+      <div class="pb_phone_number_input"
+           data-pb-phone-number-input="true"
+           data-pb-phone-number-input-config='${JSON.stringify(mergedConfig)}'>
+        <div class="pb_text_input_kit mb_sm">
+          <div class="text_input_wrapper" data-pb-validation-container="true">
+            <input class="text_input" type="tel" id="phone" name="${mergedConfig.name}" ${inputAttrs} />
+          </div>
+        </div>
+      </div>
+    `
+    const element = document.querySelector("[data-pb-phone-number-input]")
+    const kit = new PbPhoneNumberInput(element)
+    kit.connect()
+    return {
+      element,
+      input: element.querySelector("input[type='tel']"),
+      kit,
+      textInputKit: element.querySelector(".pb_text_input_kit"),
+    }
+  }
+
+  beforeEach(() => {
+    intlTelInput.mockClear()
+  })
+
+  afterEach(() => {
+    document.body.innerHTML = ""
+  })
+
+  test("initializes intl-tel-input with kit options", () => {
+    const { input } = mountKit({
+      countrySearch: true,
+      formatAsYouType: true,
+      initialCountry: "br",
+      onlyCountries: ["br", "us"],
+      preferredCountries: ["br"],
+      strictMode: true,
+    })
+
+    expect(intlTelInput).toHaveBeenCalledWith(input, expect.objectContaining({
+      allowDropdown: true,
+      autoPlaceholder: "off",
+      countrySearch: true,
+      excludeCountries: [],
+      formatAsYouType: true,
+      initialCountry: "br",
+      onlyCountries: ["br", "us"],
+      countryOrder: ["br"],
+      separateDialCode: true,
+      strictMode: true,
+    }))
+  })
+
+  test("passes hiddenInput names when hiddenInputs is true", () => {
+    mountKit({ hiddenInputs: true, name: "mobile" })
+
+    const options = intlTelInput.mock.calls[0][1]
+    expect(options.hiddenInput()).toEqual({
+      country: "mobile_country_code",
+      phone: "mobile_full",
+    })
+  })
+
+  test("does not pass hiddenInput when hiddenInputs is false", () => {
+    mountKit({ hiddenInputs: false })
+
+    const options = intlTelInput.mock.calls[0][1]
+    expect(options.hiddenInput).toBeNull()
+  })
+
+  test("shows formatted error on blur when the number is too short", () => {
+    const { element, input } = mountKit()
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+
+    expect(element.querySelector(".pb_body_kit_negative").textContent).toBe(
+      "Invalid United States phone number (too short)"
+    )
+    expect(element.querySelector(".pb_text_input_kit")).toHaveClass("error")
+  })
+
+  test("sets aria-invalid and aria-describedby when a validation error is shown", () => {
+    const { element, input } = mountKit()
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+
+    const errorEl = element.querySelector(".pb_body_kit_negative")
+    expect(errorEl).toHaveAttribute("id", "phone-error")
+    expect(input).toHaveAttribute("aria-invalid", "true")
+    expect(input).toHaveAttribute("aria-describedby", "phone-error")
+  })
+
+  test("clears aria-invalid and aria-describedby when the error is removed", () => {
+    const { element, input } = mountKit()
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(input).toHaveAttribute("aria-invalid", "true")
+
+    lastIti().getValidationError.mockReturnValue(0)
+    input.value = "5555555555"
+    input.dispatchEvent(new Event("blur"))
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(input).toHaveAttribute("aria-invalid", "false")
+    expect(input).not.toHaveAttribute("aria-describedby")
+  })
+
+  test("sets data-pb-phone-validation-error when required field is invalid", () => {
+    const { element, input } = mountKit({ required: true }, "required")
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+
+    expect(element).toHaveAttribute("data-pb-phone-validation-error", "true")
+    expect(input.validationMessage).toBe("Invalid United States phone number (too short)")
+  })
+
+  test("clears error when Default assigns an empty data-default-value", () => {
+    const { element, input } = mountKit({ required: false })
+    input.setAttribute("data-default-value", "")
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
+    expect(input.validity.customError).toBe(true)
+
+    input.value = input.getAttribute("data-default-value")
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(element.querySelector(".pb_text_input_kit")).not.toHaveClass("error")
+    expect(input.validity.customError).toBe(false)
+  })
+
+  test("clears error when Default sets the value empty without an input event", async () => {
+    const { element, input } = mountKit({ required: false })
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
+    expect(input.validity.customError).toBe(true)
+
+    input.value = ""
+    await Promise.resolve()
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(element.querySelector(".pb_text_input_kit")).not.toHaveClass("error")
+    expect(input.validity.customError).toBe(false)
+  })
+
+  test("syncs intl-tel-input for a non-empty programmatic set after typing", async () => {
+    const { input } = mountKit()
+    const iti = lastIti()
+    jest.spyOn(iti, "setNumber")
+
+    input.value = "12"
+    input.dispatchEvent(new Event("input", { bubbles: true }))
+    await Promise.resolve()
+
+    iti.setNumber.mockClear()
+    input.value = "(555) 555-5555"
+
+    expect(iti.setNumber).toHaveBeenCalledWith("(555) 555-5555")
+  })
+
+  test("clears stale error UI when the value is reset to empty", () => {
+    const { element, input } = mountKit({ required: true }, "required")
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+    expect(element.querySelector(".pb_body_kit_negative")).toBeTruthy()
+    expect(input.validationMessage).toBe("Invalid United States phone number (too short)")
+
+    input.value = ""
+    input.dispatchEvent(new Event("input"))
+
+    expect(element.querySelector(".pb_body_kit_negative")).toBeNull()
+    expect(element.querySelector(".pb_text_input_kit")).not.toHaveClass("error")
+    expect(input.validity.customError).toBe(false)
+  })
+
+  test("shows missing phone number on submit after the value was cleared", () => {
+    const { element, input } = mountKit({ required: true, name: "phone" }, "required")
+    lastIti().getValidationError.mockReturnValue(2)
+
+    input.value = "12"
+    input.dispatchEvent(new Event("blur"))
+
+    input.value = ""
+    input.removeAttribute("name")
+    input.dispatchEvent(new Event("input"))
+
+    input.dispatchEvent(new Event("invalid", { bubbles: true }))
+
+    expect(element.querySelector(".pb_body_kit_negative").textContent).toBe("Missing phone number")
+    expect(element.querySelector(".pb_text_input_kit")).toHaveClass("error")
+  })
+
+  test("hides example placeholder on focus and restores it on blur when empty", () => {
+    const { input } = mountKit({ showPlaceholder: true })
+
+    expect((input.getAttribute("placeholder") || "").length).toBeGreaterThan(0)
+    const whenIdle = input.getAttribute("placeholder")
+
+    input.dispatchEvent(new Event("focus"))
+    expect(input.getAttribute("placeholder")).toBe("")
+
+    input.dispatchEvent(new Event("blur"))
+    expect(input.getAttribute("placeholder")).toBe(whenIdle)
+  })
+
+  test("toggles dropdown_open on the text input kit", () => {
+    const { input, textInputKit } = mountKit()
+
+    input.dispatchEvent(new Event("open:countrydropdown"))
+    expect(textInputKit).toHaveClass("dropdown_open")
+
+    input.dispatchEvent(new Event("close:countrydropdown"))
+    expect(textInputKit).not.toHaveClass("dropdown_open")
+  })
+
+  test("writes data-phone-number on the input", () => {
+    const { input } = mountKit()
+
+    input.value = "5555555555"
+    input.dispatchEvent(new Event("input"))
+
+    expect(JSON.parse(input.getAttribute("data-phone-number")).number.replace(/\D/g, "")).toBe("5555555555")
+  })
+
+  test("unformats data-phone-number when formatAsYouType is true", () => {
+    const { input } = mountKit({ formatAsYouType: true })
+
+    input.value = "555-555-5555"
+    input.dispatchEvent(new Event("input"))
+
+    expect(JSON.parse(input.getAttribute("data-phone-number")).number).toBe("5555555555")
+  })
+
+  test("destroys intl-tel-input on disconnect", () => {
+    const { kit } = mountKit()
+    const iti = lastIti()
+    kit.disconnect()
+    expect(iti.destroy).toHaveBeenCalled()
+  })
+})

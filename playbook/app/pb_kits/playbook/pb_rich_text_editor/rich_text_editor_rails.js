@@ -18,6 +18,7 @@ async function initPlaybookRichTextEditorRails(container) {
   const editorNode = document.getElementById(`${containerId}-editor`);
   const toolbar = document.getElementById(`${containerId}-toolbar`);
   const rteSimple = container.dataset.rteSimple === "true";
+  const markdownSupport = container.dataset.markdownSupport === "true";
   const blockTooltipId = `${containerId}-toolbar-block-tooltip`;
   const iconTemplatesRoot = rteSimple
     ? null
@@ -38,6 +39,38 @@ async function initPlaybookRichTextEditorRails(container) {
     const { Editor } = await import(RTE_TIPTAP_ESM("@tiptap/core"));
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
     const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
+    const neutralClipboardTags = new Set(["html", "head", "body", "meta", "div", "span", "p"]);
+    const markdownSourceTags = new Set([...neutralClipboardTags, "pre", "code"]);
+    let markdownToHtml;
+
+    if (markdownSupport) {
+      try {
+        const [{ defaultMarkdownParser }, { DOMSerializer }] = await Promise.all([
+          import("https://esm.sh/prosemirror-markdown@1.13.2"),
+          import("https://esm.sh/prosemirror-model@1.25.0"),
+        ]);
+
+        markdownToHtml = (text) => {
+          const documentNode = defaultMarkdownParser.parse(text);
+          if (!documentNode) return null;
+          const hasMarkdownFormatting = (node) => {
+            const isFormattedNode = !["doc", "paragraph", "text"].includes(node.type);
+            if (isFormattedNode || node.marks?.length) return true;
+
+            return node.content?.some(hasMarkdownFormatting) || false;
+          };
+          if (!hasMarkdownFormatting(documentNode.toJSON())) return null;
+
+          const wrapper = document.createElement("div");
+          const serializer = DOMSerializer.fromSchema(documentNode.type.schema);
+          wrapper.appendChild(serializer.serializeFragment(documentNode.content));
+          wrapper.querySelectorAll("[data-tight]").forEach((node) => node.removeAttribute("data-tight"));
+          return wrapper.innerHTML;
+        };
+      } catch (_error) {
+        markdownToHtml = undefined;
+      }
+    }
 
     const editor = new Editor({
       element: editorNode,
@@ -49,6 +82,38 @@ async function initPlaybookRichTextEditorRails(container) {
       editable: true,
       onUpdate: ({ editor: ed }) => syncToHiddenInput(ed),
     });
+
+    if (markdownSupport && markdownToHtml) {
+      editorNode.addEventListener("paste", (event) => {
+        const text = event.clipboardData?.getData("text/plain");
+        const richHtml = event.clipboardData?.getData("text/html");
+        const clipboardDocument = new DOMParser().parseFromString(richHtml || "", "text/html");
+        const elements = [...clipboardDocument.querySelectorAll("*")];
+        const hasStyledElement = elements.some((element) => element.hasAttribute("style"));
+        const hasOnlyNeutralTags = elements.every((element) =>
+          neutralClipboardTags.has(element.tagName.toLowerCase())
+        );
+        const hasOnlyMarkdownSourceTags = elements.every((element) =>
+          markdownSourceTags.has(element.tagName.toLowerCase())
+        );
+        const sourceTextMatches = clipboardDocument.body.textContent?.trim() === text?.trim();
+        const hasRichTextFormatting = hasStyledElement ||
+          (!hasOnlyNeutralTags && !(hasOnlyMarkdownSourceTags && sourceTextMatches));
+        if (hasRichTextFormatting || !text || !markdownToHtml) return;
+
+        let html;
+        try {
+          html = markdownToHtml(text);
+        } catch (_error) {
+          return;
+        }
+        if (!html) return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        editor.chain().focus().insertContent(html).run();
+      }, true);
+    }
 
     syncToHiddenInput(editor);
 
@@ -101,6 +166,50 @@ async function initPlaybookRichTextEditorRails(container) {
     };
 
     const applyBlockType = (value) => {
+      let { selection } = editor.state;
+
+      if ((value === "bulletList" || value === "orderedList") && !selection.empty) {
+        if (selection.$from.nodeBefore?.type.name === "hardBreak") {
+          const selectedSize = selection.to - selection.from;
+          const breakPosition = selection.from - 1;
+
+          editor.chain()
+            .deleteRange({ from: breakPosition, to: selection.from })
+            .setTextSelection(breakPosition)
+            .splitBlock()
+            .run();
+
+          const from = editor.state.selection.from;
+          editor.commands.setTextSelection({ from, to: from + selectedSize });
+          selection = editor.state.selection;
+        }
+
+        const { $from, $to } = selection;
+        let { from, to } = selection;
+
+        if (
+          $from.depth > 0 &&
+          $from.parent.isTextblock &&
+          $from.parentOffset === $from.parent.content.size
+        ) {
+          const nextBlockStart = $from.after($from.depth) + 1;
+          if (nextBlockStart < to) from = nextBlockStart;
+        }
+
+        if (
+          $to.depth > 0 &&
+          $to.parent.isTextblock &&
+          $to.parentOffset === 0
+        ) {
+          const previousBlockEnd = $to.before($to.depth) - 1;
+          if (previousBlockEnd > from) to = previousBlockEnd;
+        }
+
+        if (from !== selection.from || to !== selection.to) {
+          editor.commands.setTextSelection({ from, to });
+        }
+      }
+
       const chain = editor.chain().focus();
       if (value === "paragraph") chain.setParagraph().run();
       else if (value === "heading-1") chain.toggleHeading({ level: 1 }).run();

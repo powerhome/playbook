@@ -1,0 +1,36 @@
+<%= pb_rails("flex", props: { align: "stretch", gap: "md", margin_bottom: "md", orientation: "column" }) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("caption", props: { text: "Rails form_with", margin_bottom: "xs" }) %>
+    <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
+      <div class="pb--codeCopy pb--codeCopy_compact">
+        <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre;"><%= raw render_code(
+          File.read(Playbook.kit_path("form", "docs", "snippets", "comparison_rails.txt")),
+          "erb"
+        ) %></pre>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("caption", props: { text: "Playbook pb_form_with", margin_bottom: "xs" }) %>
+    <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
+      <div class="pb--codeCopy pb--codeCopy_compact">
+        <pre class="highlight" style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre;"><%= raw render_code(
+          File.read(Playbook.kit_path("form", "docs", "snippets", "comparison_playbook.txt")),
+          "erb"
+        ) %></pre>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("title", props: { size: 4, text: "What pb_form_with adds", margin_bottom: "sm" }) %>
+<%= pb_rails("body", props: { tag: "div" }) do %>
+  <ul style="margin: 0; padding-left: 1.25rem;">
+    <li>Automatic Playbook styling via the <code>pb-form</code> class and kit-backed fields</li>
+    <li>A custom form builder for inputs such as <code>text_field</code>, <code>select</code>, <code>typeahead</code>, and more</li>
+    <li>Consistent spacing and action buttons through <code>form.actions</code></li>
+    <li>Optional client-side validation with <code>validate: true</code> and field-level messages</li>
+    <li>For <code>typeahead</code>, <code>phone_number_field</code>, and <code>dropdown_field</code>, pass a scoped string name that matches the form scope (e.g. <code>"user[phone]"</code> when <code>scope: :user</code>) so params nest together</li>
+  </ul>
+<% end %>

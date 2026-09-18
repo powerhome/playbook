@@ -31,7 +31,8 @@
         "name",
         "placeholder",
         "selectedIds",
-        "inputName"
+        "inputName",
+        "formatSelectedDisplay"
       ]
     },
     {
@@ -48,7 +49,8 @@
       "props": [
         "inputDisplay",
         "variant",
-        "wrapped"
+        "wrapped",
+        "pillColor"
       ]
     },
     {
@@ -89,6 +91,20 @@
         "selectedIds": [
           "talent1"
         ],
+        "onSelect": "(selectedNode) => console.log('Selected Node', selectedNode)"
+      }
+    },
+    {
+      "name": "Custom Single Select Display",
+      "structureMode": "standard",
+      "props": {
+        "variant": "single",
+        "label": "Pick one team",
+        "placeholder": "Choose...",
+        "selectedIds": [
+          "initiative1"
+        ],
+        "formatSelectedDisplay": "(_, { path }) => path.map(({ label }) => label).join(' / ')",
         "onSelect": "(selectedNode) => console.log('Selected Node', selectedNode)"
       }
     },
@@ -246,6 +262,11 @@
     }
   ],
   "conditionals": {
+    "formatSelectedDisplay": {
+      "requires": {
+        "variant": "single"
+      }
+    },
     "requiredIndicator": {
       "requires": "label"
     }
@@ -264,6 +285,11 @@
     "single_select": {
       "presetName": "Single Select",
       "message": "Single Select uses radios and should receive at most one selectedIds value because only one node can be selected.",
+      "type": "info"
+    },
+    "custom_single_select_display": {
+      "presetName": "Custom Single Select Display",
+      "message": "formatSelectedDisplay receives the selected item plus ancestors and path context, and must return the string shown in the single-select input. Edit the function in Content to choose which hierarchy details to display.",
       "type": "info"
     },
     "selected_ids": {
@@ -319,6 +345,9 @@
     "editable": false,
     "default": ""
   },
+  "editableFunctionProps": [
+    "formatSelectedDisplay"
+  ],
   "customProps": {
     "treeData": {
       "type": "array",
