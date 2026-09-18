@@ -52,11 +52,12 @@
     <div class="passphrase-text-input-wrapper">
       <%= pb_rails("text_input", props: object.text_input_props) %>
       <span
+        aria-disabled="<%= object.input_disabled? %>"
         aria-label="Passphrase currently hidden. Click icon to reveal password"
         aria-pressed="false"
         class="show-passphrase-icon"
         role="button"
-        tabindex="0"
+        tabindex="<%= object.input_disabled? ? -1 : 0 %>"
       >
         <%= pb_rails("body", props: { classname: "passphrase-toggle-icon", color: "light", dark: object.dark }) do %>
           <%= pb_rails("icon", props: { aria: { label: "eye icon" }, icon: "eye-slash" }) %>
