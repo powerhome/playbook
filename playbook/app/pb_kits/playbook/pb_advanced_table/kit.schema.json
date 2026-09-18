@@ -8,7 +8,10 @@
   ],
   "props": {
     "actions": {
-      "type": "React.ReactNode[] | React.ReactNode",
+      "type": {
+        "react": "React.ReactNode[] | React.ReactNode",
+        "rails": "array"
+      },
       "platforms": [
         "react",
         "rails"
@@ -115,7 +118,10 @@
       "default": false
     },
     "loading": {
-      "type": "boolean | string",
+      "type": {
+        "react": "boolean | string",
+        "rails": "boolean"
+      },
       "platforms": [
         "react",
         "rails"

@@ -40,7 +40,10 @@
       "default": "inbound"
     },
     "user": {
-      "type": "AvatarProps",
+      "type": {
+        "react": "AvatarProps",
+        "rails": "GenericObject"
+      },
       "platforms": [
         "react",
         "rails"
