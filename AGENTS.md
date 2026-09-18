@@ -10,13 +10,14 @@ Consumer-facing rule/skill drafts (for apps that import `playbook-ui`) live in [
 |------|------|
 | `playbook/` | Kit source (React + Rails gem), schemas, playground overrides |
 | `playbook-website/` | Docs site, menu.yml, playground UI |
+| `playbook-mcp/` | Hosted MCP-UI render server (Rails, `dist/ai`) |
 | `docs/` | Contributor docs (AI metadata, playground, global props) |
 | `.cursor/rules/` | Cursor project rules (also useful as reference for other agents) |
 | `.cursor/skills/` | Cursor project skills for common maintainer workflows |
 
 ## Non-negotiables
 
-1. **Know which package you are in** — `playbook/` vs `playbook-website/` vs repo root.
+1. **Know which package you are in** — `playbook/` vs `playbook-website/` vs `playbook-mcp/` vs repo root.
 2. **Prefer** `yarn generate:docs-metadata` **from the repo root** after changing kit props, global props, tokens, or playground overrides.
 3. **Never hand-edit generated files** — they are overwritten by generate/build and pre-commit:
    - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json`
@@ -27,13 +28,14 @@ Consumer-facing rule/skill drafts (for apps that import `playbook-ui`) live in [
 4. **Playground source of truth** is `docs/_playground.overrides.json` per kit — edit that, then regenerate.
 5. **Do not install packages** into consuming apps from this repo’s AI guidance; that rule is for consumers. Here, follow normal workspace yarn flows when adding deps intentionally.
 
-## Code change hygiene (always-on rules)
+## Code change hygiene (rules)
 
-Keep rules lean — general quality only. Workflow detail lives in skills + `docs/`.
+Keep rules lean — general quality only. Workflow detail lives in skills + `docs/`. The MCP rule is glob-scoped (`playbook-mcp/**`); the others always apply.
 
 | Topic | Rule |
 |-------|------|
 | Repo orientation | [`.cursor/rules/playbook-repo.mdc`](.cursor/rules/playbook-repo.mdc) — packages, generated files, regenerate |
+| Playbook MCP | [`.cursor/rules/playbook-mcp.mdc`](.cursor/rules/playbook-mcp.mdc) — render server, schemas, client instructions |
 | Minimal diffs | [`.cursor/rules/minimal-diffs.mdc`](.cursor/rules/minimal-diffs.mdc) — no drive-by formatting |
 | Readable code | [`.cursor/rules/readable-code.mdc`](.cursor/rules/readable-code.mdc) — less code, reuse, clear names, performance, no DS regressions |
 | PRs / commits | [`.cursor/rules/pr-hygiene.mdc`](.cursor/rules/pr-hygiene.mdc) — tests, labels/semver |
@@ -51,6 +53,7 @@ Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PUL
 | Deprecation warnings | [`docs/DEPRECATION_WARNINGS.md`](docs/DEPRECATION_WARNINGS.md) |
 | Kit status in menu | [`docs/PLATFORM_SPECIFIC_STATUS.md`](docs/PLATFORM_SPECIFIC_STATUS.md) |
 | Changelog generator | [`docs/CHANGELOG_GENERATOR.md`](docs/CHANGELOG_GENERATOR.md) |
+| MCP render server | [`.cursor/rules/playbook-mcp.mdc`](.cursor/rules/playbook-mcp.mdc) · [`playbook-mcp/README.md`](playbook-mcp/README.md) |
 
 ## Cursor-specific paths
 
