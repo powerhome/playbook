@@ -70,11 +70,11 @@ $pb_pill_notification_colors: (
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 0 $space-sm/1.8;
-    height: $pb_pill_height;
-    border-radius: $pb_pill_height/2;
+    padding: 0 $space_xs/2 !important;
+    border-radius: $border_rad_light;
     white-space: nowrap;
     background: $color_value;
+    min-width: 16px;
 
     .pb_pill_text {
       color: $white !important;
@@ -99,8 +99,13 @@ $pb_pill_notification_colors: (
 
     .pb_pill_text {
       font-size: $font_smallest !important;
-      line-height: 1.7;
+      line-height: 1.1;
       color: $white !important;
     }
+  }
+
+  .pb_pill_kit_#{$color_name}_lowercase_notification_sm {
+    text-transform: lowercase;
+    height: 16px !important;
   }
 }
