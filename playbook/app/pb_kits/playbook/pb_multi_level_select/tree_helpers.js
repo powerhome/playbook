@@ -1,5 +1,13 @@
 export const cloneTree = (value) => JSON.parse(JSON.stringify(value))
 
+// selected_ids / tree_data ids may be strings or numbers; includes() is strict.
+export const selectedIdsInclude = (selectedIds, id) => {
+  if (!selectedIds || !selectedIds.length) return false
+
+  const target = String(id)
+  return selectedIds.some((selectedId) => String(selectedId) === target)
+}
+
 export const filterFormattedDataById = (formattedData, id) => {
   const matched = []
   const recursiveSearch = (data, term) => {
@@ -138,7 +146,7 @@ export const getExpandedItems = (
       }
 
       if (showCheckedChildren) {
-        if (selectedIds && selectedIds.length && selectedIds.includes(item.id)) {
+        if (selectedIdsInclude(selectedIds, item.id)) {
           expandedItems.push(...itemAncestors.map((ancestor) => ancestor.id))
         }
         if (Array.isArray(item.children)) {
@@ -193,9 +201,7 @@ export const addCheckedAndParentProperty = (
     const isDisabled =
       item.disabled || (parentDisabled && !returnAllSelected)
 
-    const explicitlySelected = Boolean(
-      selectedIds && selectedIds.length && selectedIds.includes(item.id)
-    )
+    const explicitlySelected = selectedIdsInclude(selectedIds, item.id)
 
     const checked =
       !isDisabled &&
