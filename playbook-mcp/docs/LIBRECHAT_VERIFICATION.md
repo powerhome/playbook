@@ -37,13 +37,14 @@ Local helper: `bundle exec ruby bin/smoke` asserts hydration hooks; LibreChat co
 
 8. `render_layout` → **one** HTML document per call (multiple `ui://` resources become a carousel — wrong for dashboards).
 
-## UI Actions (known — skip discovery)
+## UI Actions (chart point clicks)
 
-LibreChat already handles **intent**, **tool**, and **prompt** action types (converted to chat messages via `handleUIAction`); other types are ignored (the ⚠️ in the mcp-ui host table).
+LibreChat handles **intent**, **tool**, and **prompt** action types (converted to chat messages / tool calls via `handleUIAction`); other types are ignored.
 
-- **v1 tools must not depend on UI Actions.**
-- Table filter/collapse and chart interactivity are **pure in-iframe JS**.
-- Optional 10-minute check: DW `hello-ui.mjs` prompt-action button — confirm host converts prompt actions; Playbook tools still do not emit them.
+- Chart kits stamp `data-pb-mcp-ui-action` and the chart IIFE posts `window.parent.postMessage({ type, payload }, "*")` on Highcharts point click.
+- Default action is a **prompt** (`Show details for {{category}}, series {{series}}, value {{value}}`). Override with tool-arg `uiAction`; `{ "type": "none" }` disables.
+- Table filter/collapse remains **pure in-iframe JS** (no UI Actions).
+- Shared / search transcripts are read-only — UI Actions will not run there.
 
 ## Security checks before shared use
 

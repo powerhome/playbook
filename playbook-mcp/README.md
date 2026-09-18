@@ -25,6 +25,18 @@ Kit ids are **snake_case** (`table`, `button`, `pb_bar_graph`). Props use **came
 
 HTML `children` are only accepted for composition kits (`table`, `card`, …) and are sanitized before render.
 
+Chart **point clicks** post MCP-UI actions to the host (LibreChat handles `prompt`, `tool`, and `intent`). Pass `uiAction` as a **sibling of `props`** (not Highcharts `events`):
+
+```json
+{
+  "type": "bar",
+  "options": { "series": [{ "name": "Revenue", "data": [10, 20] }], "xAxis": { "categories": ["Q1", "Q2"] } },
+  "uiAction": { "type": "prompt", "prompt": "Break down {{category}} for {{series}}" }
+}
+```
+
+Omit `uiAction` for a default prompt. `{ "type": "none" }` disables clicks. Templates: `{{category}}` `{{series}}` `{{value}}` `{{name}}` `{{x}}` `{{y}}`. Highcharts event functions are stripped.
+
 ## Local setup
 
 ```bash
@@ -66,7 +78,7 @@ See [docs/LIBRECHAT_VERIFICATION.md](docs/LIBRECHAT_VERIFICATION.md) and [docs/S
 
 **Phase 0 gate:** Button styles **and** table JS (or chart) working inside the real LibreChat sandboxed iframe — not only ActionView HTML in isolation.
 
-v1 does not depend on UI Actions (LibreChat already supports intent/tool/prompt; we simply do not emit them).
+Chart point clicks emit MCP-UI `prompt` / `tool` / `intent` actions (declarative `uiAction`; default is a prompt). Shared transcripts are read-only — clicks will not run there.
 
 ## Review / PR environment URL
 

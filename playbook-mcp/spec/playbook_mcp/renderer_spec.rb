@@ -66,6 +66,19 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).to include("pb_card")
   end
 
+  it "applies layout uiAction to chart items" do
+    html = renderer.render_layout(
+      items: [
+        { kit: "button", props: { text: "One" } },
+        { kit: "pb_bar_graph", props: { options: { series: [{ data: [1] }] } } },
+      ],
+      ui_action: { "type" => "tool", "toolName" => "render_kit", "params" => { "kit" => "card" } }
+    )
+    expect(html).to include("data-pb-mcp-ui-action")
+    expect(html).to include("render_kit")
+    expect(html).not_to match(/pb_button[^>]*data-pb-mcp-ui-action/)
+  end
+
   it "loads a self-contained chart IIFE and strips useHTML from options" do
     html = renderer.render_kit(
       kit: "pb_bar_graph",
@@ -95,5 +108,23 @@ RSpec.describe PlaybookMcp::Renderer do
     # Reserve height before Highcharts hydrates so LibreChat iframe auto-resize fits.
     expect(html).to match(/data-pb-react-component="PbBarGraph"[^>]*style="[^"]*height:400px/)
     expect(html).to include("&quot;chart&quot;:{&quot;height&quot;:400}")
+    expect(html).to include("data-pb-mcp-ui-action")
+    expect(html).to include("{{category}}")
+  end
+
+  it "stamps a custom chart uiAction and can disable clicks" do
+    html = renderer.render_kit(
+      kit: "pb_bar_graph",
+      props: { "options" => { "series" => [{ "data" => [1] }] } },
+      ui_action: { "type" => "prompt", "prompt" => "Break down {{category}}" }
+    )
+    expect(html).to include("Break down {{category}}")
+
+    html = renderer.render_kit(
+      kit: "pb_bar_graph",
+      props: { "options" => { "series" => [{ "data" => [1] }] } },
+      ui_action: { "type" => "none" }
+    )
+    expect(html).not_to include("data-pb-mcp-ui-action")
   end
 end

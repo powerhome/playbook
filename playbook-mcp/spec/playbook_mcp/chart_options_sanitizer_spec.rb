@@ -16,6 +16,13 @@ RSpec.describe PlaybookMcp::ChartOptionsSanitizer do
     expect(clean.dig("title", "text")).to eq("Hi")
   end
 
+  it "strips Highcharts events so only the Playbook click bridge runs" do
+    options = { "plotOptions" => { "series" => { "events" => { "click" => "bad()" }, "cursor" => "pointer" } } }
+    clean = described_class.sanitize(options)
+    expect(clean.dig("plotOptions", "series", "events")).to be_nil
+    expect(clean.dig("plotOptions", "series", "cursor")).to eq("pointer")
+  end
+
   it "strips script-like strings" do
     options = { "title" => { "text" => "<script>alert(1)</script>Ok" } }
     clean = described_class.sanitize(options)

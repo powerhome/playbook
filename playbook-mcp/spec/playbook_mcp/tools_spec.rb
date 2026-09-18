@@ -60,4 +60,21 @@ RSpec.describe "MCP tools" do
     ui = response.content.find { |c| (c[:type] || c["type"]) == "resource" }
     expect(ui.dig(:resource, :uri) || ui.dig("resource", "uri")).to include("pb_bar_graph")
   end
+
+  it "render_chart stamps uiAction onto the chart mount" do
+    allow(Rails.application.config.playbook_mcp).to receive(:asset_base_url).and_return("")
+    response = PlaybookMcp::Tools::RenderChart.call(
+      **deliver(
+        type: "bar",
+        options: { series: [{ data: [1, 2] }] },
+        uiAction: { type: "prompt", prompt: "Inspect {{series}}" }
+      ),
+      server_context: nil
+    )
+    expect(response.error?).to be(false)
+    ui = response.content.find { |c| (c[:type] || c["type"]) == "resource" }
+    html = ui.dig(:resource, :text) || ui.dig("resource", "text")
+    expect(html).to include("Inspect {{series}}")
+    expect(html).to include("data-pb-mcp-ui-action")
+  end
 end

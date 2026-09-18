@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "erb"
+
 module PlaybookMcp
   class Renderer
     # LibreChat measures iframe height before Highcharts hydrates. Reserve this
@@ -15,13 +17,20 @@ module PlaybookMcp
       @view.extend(Playbook::PbKitHelper) unless @view.class.included_modules.include?(Playbook::PbKitHelper)
     end
 
-    def render_kit(kit:, props: {}, children: nil, wrap_document: true)
-      result = @validator.validate_kit!(kit: kit, props: props, children: children)
+    def render_kit(kit:, props: {}, children: nil, wrap_document: true, ui_action: nil)
+      props_hash, nested_action = UiAction.take_from_props(props)
+      resolved_action = nil
+      if Document.charts_kit?(kit)
+        raw = ui_action.nil? ? nested_action : ui_action
+        resolved_action = UiAction.resolve(raw)
+      end
+
+      result = @validator.validate_kit!(kit: kit, props: props_hash, children: children)
       raise ValidationError, result.errors.join("; ") unless result.ok?
 
-      safe_props = prepare_props(kit, props)
+      safe_props = prepare_props(kit, props_hash)
       kit_props = Props.to_kit_props(safe_props)
-      fragment = render_fragment(kit.to_s, kit_props, children)
+      fragment = render_fragment(kit.to_s, kit_props, children, ui_action: resolved_action)
       return fragment unless wrap_document
 
       Document.new(
@@ -35,18 +44,20 @@ module PlaybookMcp
       raise RenderError, "Failed to render kit '#{kit}': #{e.class}: #{e.message}"
     end
 
-    def render_layout(items:, wrap_document: true)
-      result = @validator.validate_layout!(items: items)
+    def render_layout(items:, wrap_document: true, ui_action: nil)
+      normalized = Array(items).map { |item| normalize_layout_item(item) }
+      result = @validator.validate_layout!(items: normalized)
       raise ValidationError, result.errors.join("; ") unless result.ok?
 
       charts = false
-      fragments = Array(items).map do |item|
-        item = item.transform_keys(&:to_sym) if item.is_a?(Hash)
-        kit = (item[:kit] || item["kit"]).to_s
-        props = item[:props] || item["props"] || {}
-        children = item[:children] || item["children"]
+      fragments = normalized.map do |item|
+        kit = item["kit"].to_s
         charts ||= Document.charts_kit?(kit)
-        render_fragment(kit, Props.to_kit_props(prepare_props(kit, props)), children)
+        resolved_action = if Document.charts_kit?(kit)
+                            raw = item["uiAction"].nil? ? ui_action : item["uiAction"]
+                            UiAction.resolve(raw)
+                          end
+        render_fragment(kit, Props.to_kit_props(prepare_props(kit, item["props"])), item["children"], ui_action: resolved_action)
       end
 
       body = fragments.join("\n")
@@ -57,8 +68,23 @@ module PlaybookMcp
 
   private
 
+    def normalize_layout_item(item)
+      item = Props.deep_stringify_keys(item || {})
+      props_hash, nested_action = UiAction.take_from_props(item["props"] || {})
+      item_action = nested_action
+      item_action = item["uiAction"] || item["ui_action"] if item.key?("uiAction") || item.key?("ui_action")
+      {
+        "kit" => item["kit"],
+        "props" => props_hash,
+        "children" => item["children"],
+        "uiAction" => item_action,
+      }
+    end
+
     def prepare_props(kit, props)
       hash = Props.deep_stringify_keys(props || {})
+      hash.delete("uiAction")
+      hash.delete("ui_action")
       # Map colloquial / FA icon names onto @powerhome/playbook-icons ids so we
       # never emit empty Font Awesome <i> fallbacks inside MCP documents.
       hash = IconResolver.apply(hash)
@@ -80,7 +106,7 @@ module PlaybookMcp
       hash
     end
 
-    def render_fragment(kit, kit_props, children)
+    def render_fragment(kit, kit_props, children, ui_action: nil)
       html = if children.present?
                raise ValidationError, "Kit '#{kit}' does not allow HTML children" unless HtmlSanitizer.children_allowed?(kit)
 
@@ -90,8 +116,25 @@ module PlaybookMcp
                @view.pb_rails(kit, props: kit_props)
              end
 
-      html = reserve_chart_mount_height(html.to_s, kit_props) if Document.charts_kit?(kit)
-      html
+      html = html.to_s
+      return html unless Document.charts_kit?(kit)
+
+      html = reserve_chart_mount_height(html, kit_props)
+      attach_ui_action_attr(html, ui_action)
+    end
+
+    def attach_ui_action_attr(html, ui_action)
+      json = UiAction.attribute_json(ui_action)
+      return html unless json
+
+      encoded = ERB::Util.html_escape(json)
+      html.sub(/(<div\b(?=[^>]*\bdata-pb-react-component=)[^>]*)(>)/) do
+        open_tag = Regexp.last_match(1)
+        close = Regexp.last_match(2)
+        next "#{open_tag}#{close}" if open_tag.include?("data-pb-mcp-ui-action")
+
+        %(#{open_tag} data-pb-mcp-ui-action="#{encoded}"#{close})
+      end
     end
 
     def reserve_chart_mount_height(html, kit_props)

@@ -29,7 +29,8 @@ It is important to regularly update and upgrade the design system to ensure that
 - Input size caps (`PLAYBOOK_MCP_MAX_PROPS_BYTES`).
 - Kit names resolved only through Playbook `KitResolver` + `dist/ai` schema validation.
 - HTML `children` allowed only for composition kits (`table`, `card`, etc.) and sanitized with a SafeList (no scripts / event handlers).
-- Chart `options` are scrubbed of Highcharts HTML/JS sinks (`useHTML`, `*formatter`, etc.).
+- Chart `options` are scrubbed of Highcharts HTML/JS sinks (`useHTML`, `*formatter`, `events`, etc.).
+- Chart click follow-ups are **declarative** `uiAction` templates (`prompt` / `tool` / `intent`) posted via `postMessage`. User-supplied Highcharts event functions are not accepted.
 - Generated MCP-UI documents set a Content-Security-Policy; chart peers are self-hosted under `/assets/vendor` (run `bin/vendor_chart_peers`), not third-party CDNs at runtime.
 - Static assets are path-allowlisted under gem `dist/` / `fonts/` + vendored chart peers, with permissive CORS (`Access-Control-Allow-Origin: *`) so opaque-origin sandboxed iframes can load web fonts.
 - Optional shared secret: `PLAYBOOK_MCP_SHARED_SECRET` requires LibreChat custom header `X-Playbook-Mcp-Key`.

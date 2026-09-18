@@ -38,6 +38,7 @@ type = type["rails"] || type["react"] if type.is_a?(Hash)
 ```
 
 - Reject React-only props (`platforms` without `"rails"`). Do not invent a parallel schema.
+- Chart `uiAction` is a sibling of props (`prompt` / `tool` / `intent` / `none`), never Highcharts `events` or inline JS. Update server instructions + tool descriptions when client click behavior changes.
 
 ## Safety
 

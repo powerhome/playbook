@@ -55,6 +55,8 @@ raise "chart options snake_cased (x_axis)" if chart_html.match?(/["']x_axis["']/
 raise "chart options missing camelCase xAxis" unless chart_html.include?("xAxis")
 raise "chart mount missing reserved height" unless chart_html.match?(/data-pb-react-component="PbBarGraph"[^>]*style="[^"]*height:400px/)
 raise "chart options missing chart.height" unless chart_html.include?("&quot;height&quot;:400") || chart_html.include?('"height":400')
+raise "chart missing default uiAction click bridge" unless chart_html.include?("data-pb-mcp-ui-action")
+raise "chart missing uiAction templates" unless chart_html.include?("{{category}}")
 
 
 

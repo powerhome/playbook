@@ -29,7 +29,12 @@ module PlaybookMcp
           For charts (pb_bar_graph, pb_line_graph, pb_gauge_chart, pb_circle_chart),
           pass the Highcharts config verbatim under props.options — real Highcharts keys
           (series, xAxis, yAxis, title, subtitle); do NOT snake_case the keys inside options.
-          Components are display-only; do not emit UI Actions.
+          Chart point clicks post MCP-UI actions to the host (LibreChat handles prompt, tool, intent).
+          Pass uiAction as a sibling of props — not inside Highcharts options, and never as JS:
+          { type: "prompt", prompt: "Show details for {{category}}" } (default if omitted),
+          { type: "tool", toolName: "render_kit", params: { kit: "card" } },
+          { type: "intent", intent: "inspect-point" }, or { type: "none" } to disable.
+          Templates: {{category}} {{series}} {{value}} {{name}} {{x}} {{y}}.
         INSTRUCTIONS
         tools: [
           PlaybookMcp::Tools::ListKits,

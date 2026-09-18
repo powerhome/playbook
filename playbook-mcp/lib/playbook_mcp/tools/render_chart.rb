@@ -19,7 +19,7 @@ module PlaybookMcp
       }.freeze
 
       tool_name "render_chart"
-      description "Render an interactive Playbook chart kit (Highcharts mount) as an MCP-UI HTML resource."
+      description "Render an interactive Playbook chart kit (Highcharts mount) as an MCP-UI HTML resource. Point clicks post MCP-UI prompt/tool/intent actions to LibreChat."
       input_schema(
         properties: {
           type: {
@@ -38,13 +38,17 @@ module PlaybookMcp
             type: "object",
             description: "Shorthand Highcharts options merged into props.options",
           },
+          uiAction: {
+            type: "object",
+            description: "Declarative click action posted to the host. Types: prompt, tool, intent, none. Templates: {{category}} {{series}} {{value}} {{name}} {{x}} {{y}}. Omit for a default prompt; { type: none } to disable. Do not pass Highcharts event functions.",
+          },
         },
         required: []
       )
       annotations(read_only_hint: true, destructive_hint: false, open_world_hint: false)
 
       class << self
-        def call(type: nil, kit: nil, props: nil, options: nil, server_context: nil) # rubocop:disable Lint/UnusedMethodArgument
+        def call(type: nil, kit: nil, props: nil, options: nil, server_context: nil, **args) # rubocop:disable Lint/UnusedMethodArgument
           resolved = kit.presence || TYPE_TO_KIT[type.to_s]
           unless resolved
             return MCP::Tool::Response.new(
@@ -61,7 +65,11 @@ module PlaybookMcp
           end
 
           # Fresh Renderer per call — shared ActionView context is not thread-safe.
-          html = PlaybookMcp::Renderer.new.render_kit(kit: resolved, props: kit_props)
+          html = PlaybookMcp::Renderer.new.render_kit(
+            kit: resolved,
+            props: kit_props,
+            ui_action: UiAction.from_tool_args(args)
+          )
           ui = PlaybookMcp::UiResource.build(
             uri: "ui://playbook/chart/#{resolved}/#{SecureRandom.hex(6)}",
             html: html

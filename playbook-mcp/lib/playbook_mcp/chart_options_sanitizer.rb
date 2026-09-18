@@ -14,6 +14,7 @@ module PlaybookMcp
       tooltipFormatter
       labelFormatter
       positioner
+      events
     ].freeze
 
   module_function

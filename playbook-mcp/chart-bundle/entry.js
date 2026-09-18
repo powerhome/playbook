@@ -3,12 +3,15 @@
 // No importmap, no bare specifiers, no jsDelivr /npm/… transitive URLs.
 // iframe resize is handled by /assets/playbook-mcp-resize.js on every document.
 
+import Highcharts from "highcharts"
+
 import ComponentRegistry from "../../playbook/app/utils/componentRegistry"
 
 import PbBarGraph from "../../playbook/app/pb_kits/playbook/pb_pb_bar_graph/_pb_bar_graph"
 import PbCircleChart from "../../playbook/app/pb_kits/playbook/pb_pb_circle_chart/_pb_circle_chart"
 import PbLineGraph from "../../playbook/app/pb_kits/playbook/pb_pb_line_graph/_pb_line_graph"
 import PbGaugeChart from "../../playbook/app/pb_kits/playbook/pb_pb_gauge_chart/_pb_gauge_chart"
+import { bindChartUiActions } from "./uiAction"
 
 ComponentRegistry.registerComponents({
   PbBarGraph,
@@ -22,6 +25,7 @@ function mountPlaybookCharts(root = document) {
 }
 
 function boot() {
+  bindChartUiActions(Highcharts)
   mountPlaybookCharts(document)
 
   let mountTimeout = null
