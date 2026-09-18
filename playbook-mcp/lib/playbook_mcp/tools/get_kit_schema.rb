@@ -7,7 +7,7 @@ module PlaybookMcp
   module Tools
     class GetKitSchema < MCP::Tool
       tool_name "get_kit_schema"
-      description "Return dist/ai kit schema plus slim playground metadata (conditionals, hints, structureModes) for a kit."
+      description "Return dist/ai kit schema plus slim playground metadata (conditionals, hints, structureModes) for a kit. Prop type and default may be a string or { react, rails } when platforms differ; use the rails value when rendering with this server."
       input_schema(
         properties: {
           kit: {

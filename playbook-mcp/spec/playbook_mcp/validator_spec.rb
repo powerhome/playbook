@@ -46,4 +46,13 @@ RSpec.describe PlaybookMcp::Validator do
     )
     expect(result.ok?).to be(true)
   end
+
+  it "uses the rails type when schema type is split by platform" do
+    result = validator.validate_kit!(kit: "stat_value", props: { "value" => 42 })
+    expect(result.ok?).to be(true)
+
+    result = validator.validate_kit!(kit: "stat_value", props: { "value" => "42" })
+    expect(result.ok?).to be(false)
+    expect(result.errors.join).to include("must be a number")
+  end
 end

@@ -81,7 +81,7 @@ module PlaybookMcp
     end
 
     def validate_type(key, value, definition)
-      type = definition["type"]
+      type = rails_schema_type(definition)
       case type
       when "boolean"
         return ["Prop '#{key}' must be a boolean"] unless [true, false].include?(value)
@@ -96,6 +96,12 @@ module PlaybookMcp
         return ["Prop '#{key}' is a function and cannot be rendered server-side"]
       end
       []
+    end
+
+    # Kit schemas store a string, or `{ "react" => "...", "rails" => "..." }` when platforms differ.
+    def rails_schema_type(definition)
+      type = definition["type"]
+      type.is_a?(Hash) ? type["rails"] || type["react"] : type
     end
 
     def validate_conditionals(kit, camel_props)

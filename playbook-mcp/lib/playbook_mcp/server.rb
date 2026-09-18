@@ -17,6 +17,7 @@ module PlaybookMcp
         instructions: <<~INSTRUCTIONS.squish,
           Render Playbook design-system kits as MCP-UI HTML resources.
           Prefer list_kits / get_kit_schema before rendering an unfamiliar kit — don't guess prop names.
+          When a prop type or default is { react, rails }, use the rails entry.
           Use render_layout to compose multiple kits into ONE document (one inline panel);
           render_kit for a single component; render_chart for charts.
           Kit ids are snake_case (card, table, icon_stat_value, badge, section_separator, …);
