@@ -16,7 +16,16 @@ app.build(
     files: ["docker-compose.yml", "docker-compose.ci.yml"]
   ) { compose ->
     stage('Image Build') {
+      // Website image via compose bake; MCP image via explicit bake target.
+      // TAG must match Milano REVISION / image_tag used at deploy time.
       compose.bake(bakeFiles: ['docker-bake.hcl'])
+      shell """
+        docker build -f playbook-mcp/Dockerfile \
+          -t image-registry.powerapp.cloud/playbook/playbook-mcp:${env.GIT_COMMIT} \
+          -t image-registry.powerapp.cloud/playbook/playbook-mcp:local \
+          .
+        docker push image-registry.powerapp.cloud/playbook/playbook-mcp:${env.GIT_COMMIT}
+      """
     }
 
     stage('Test') {

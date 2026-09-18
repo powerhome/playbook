@@ -1,0 +1,36 @@
+# Optional standalone Milano config if deploying playbook-mcp alone.
+# PR stacks normally deploy via the repo-root milano.yml (website + mcp).
+dependencies:
+  override: []
+
+machine:
+  directory: playbook-mcp/
+  environment:
+    CLUSTER: wc-beta-hq
+
+deploy: &deploy
+  max_commits:
+  pre: []
+  override:
+    - ./bin/deployer bash -lc "cd /app/playbook-mcp && cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
+
+rollback:
+  <<: *deploy
+
+links:
+  logs: "https://splunk.powerapp.cloud/en-US/app/search/search?q=search%20k8s.namespace.name%3D%22$GITHUB_REPO_NAME-$ENVIRONMENT%22%20index%3D%22wc-beta-*%22&earliest=-15m&latest=now"
+
+ci:
+  require:
+    - powerhome/image
+  allow_failures:
+    - continuous-integration/jenkins/branch
+
+review:
+  checklist:
+    - Confirm /health returns ok
+    - Confirm /mcp streamable-http initializes
+    - Phase 0: Button + table JS (or chart) inside LibreChat sandboxed iframe
+
+status:
+  context: powerhome/deploy/playbook-mcp
