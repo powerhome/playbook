@@ -19,8 +19,14 @@ type ShowPageTypes = {
   descriptionSecondary?: string | ReactNode;
   VisualGuideCard?: ReactNode | ReactNode[];
   children?: ReactNode | ReactNode[];
-  pageType?: "tokens" | "global_props";
+  pageType?: "tokens" | "global_props" | "global_event_props";
 };
+
+const PAGE_TYPE_LABELS = {
+  global_props: "Global Props",
+  global_event_props: "Global Event Props",
+  tokens: "Tokens",
+} as const;
 
 const ShowPage = ({
   isFlex = false,
@@ -47,7 +53,7 @@ const ShowPage = ({
         <BreadCrumbs>
           <BreadCrumbItem>
             <Link to={`/${pageType}`}>
-              <Detail color="link">{pageType === "tokens" ? "Tokens" : "Global Props"}</Detail>
+              <Detail color="link">{PAGE_TYPE_LABELS[pageType]}</Detail>
             </Link>
           </BreadCrumbItem>
           {isFlex ? (

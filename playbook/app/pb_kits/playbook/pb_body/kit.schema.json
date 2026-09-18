@@ -94,6 +94,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Body } from 'playbook-ui'",
