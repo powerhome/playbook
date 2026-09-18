@@ -26,6 +26,7 @@ import {
   prepareExampleCode,
   shouldApplyPropSyncOnEnable,
   groupPropDefinitions,
+  resolveSchemaType,
 } from "../utils";
 import { EXCLUDED_PROPS, GLOBAL_PROP_GROUPS } from "../constants";
 
@@ -121,9 +122,12 @@ export const usePlaygroundState = ({
         EXCLUDED_PROPS.includes(name) || EXCLUDED_PROPS.includes(name.toLowerCase());
 
       if (isReactProp && !isExcluded && !hiddenPropNames.has(name)) {
-        filtered[name] = emitEmptyStringPropNames.has(name)
-          ? { ...def, emitEmptyString: true }
-          : def;
+        const reactType = resolveSchemaType(def, "react");
+        filtered[name] = {
+          ...def,
+          ...(reactType ? { type: reactType } : {}),
+          ...(emitEmptyStringPropNames.has(name) ? { emitEmptyString: true } : {}),
+        };
       }
     });
     return filtered;

@@ -16,7 +16,10 @@
       "default": ""
     },
     "checked": {
-      "type": "boolean, // removed default assignment here",
+      "type": {
+        "react": "boolean, // removed default assignment here",
+        "rails": "boolean"
+      },
       "platforms": [
         "react",
         "rails"
