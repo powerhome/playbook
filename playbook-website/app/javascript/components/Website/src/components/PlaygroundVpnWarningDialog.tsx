@@ -3,6 +3,7 @@ import { Dialog } from "playbook-ui"
 import {
   PLAYGROUND_VPN_WARNING_EVENT,
   STAGING_ORIGIN,
+  withStagingCacheBust,
 } from "../utils/siteNavigation"
 import type { PlaygroundVpnWarningDetail } from "../utils/siteNavigation"
 
@@ -38,7 +39,9 @@ const PlaygroundVpnWarningDialog = () => {
 
   const tryAgain = () => {
     setOpened(false)
-    window.location.assign(destinationUrl)
+    // Bust at confirm-time so a prior off-VPN 404 for this path is not reused
+    // after the user reconnects and enters Playground again.
+    window.location.assign(withStagingCacheBust(destinationUrl))
   }
 
   return (

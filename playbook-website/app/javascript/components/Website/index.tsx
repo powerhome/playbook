@@ -23,9 +23,12 @@ import {
   syncStoredPlatformFromLocation,
   writeStoredPlatform,
 } from "./src/helpers/platform";
-import { navigateSite } from "./src/utils/siteNavigation";
+import { navigateSite, stripStagingCacheBustFromUrl } from "./src/utils/siteNavigation";
 
 function WebsiteContent() {
+  useEffect(() => {
+    stripStagingCacheBustFromUrl()
+  }, [])
   const {
     kits,
     type,
