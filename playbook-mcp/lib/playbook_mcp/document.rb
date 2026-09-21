@@ -7,10 +7,13 @@ module PlaybookMcp
   class Document
     CHART_KITS = %w[pb_bar_graph pb_line_graph pb_circle_chart pb_gauge_chart].freeze
 
-    def initialize(body_html:, asset_base_url: nil, charts: false, title: "Playbook")
+    def initialize(body_html:, asset_base_url: nil, charts: false, include_rails: nil, title: "Playbook")
       @body_html = body_html
       @asset_base_url = (asset_base_url.presence || Rails.application.config.playbook_mcp.asset_base_url).to_s.chomp("/")
       @charts = charts
+      # Chart-only documents skip rails.js (chart IIFE hydrates mounts). Mixed
+      # layouts need rails.js for table/collapsible JS plus the chart IIFE.
+      @include_rails = include_rails.nil? ? !charts : include_rails
       @title = title
     end
 
@@ -85,11 +88,8 @@ module PlaybookMcp
 
     def scripts
       parts = []
-      parts << if @charts
-                 chart_scripts
-               else
-                 %(<script src="#{asset_url('playbook-rails.js')}"></script>)
-               end
+      parts << %(<script src="#{asset_url('playbook-rails.js')}"></script>) if @include_rails
+      parts << chart_scripts if @charts
       # Every kit (tables/cards/layouts/charts): tell @mcp-ui/client the iframe height.
       parts << %(<script src="#{asset_url('playbook-mcp-resize.js')}"></script>)
       parts.join("\n")

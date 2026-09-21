@@ -50,10 +50,13 @@ module PlaybookMcp
       raise ValidationError, result.errors.join("; ") unless result.ok?
 
       charts = false
+      include_rails = false
       fragments = normalized.map do |item|
         kit = item["kit"].to_s
-        charts ||= Document.charts_kit?(kit)
-        resolved_action = if Document.charts_kit?(kit)
+        chart_kit = Document.charts_kit?(kit)
+        charts ||= chart_kit
+        include_rails ||= !chart_kit
+        resolved_action = if chart_kit
                             raw = item["uiAction"].nil? ? ui_action : item["uiAction"]
                             UiAction.resolve(raw)
                           end
@@ -63,7 +66,12 @@ module PlaybookMcp
       body = fragments.join("\n")
       return body unless wrap_document
 
-      Document.new(body_html: body, charts: charts, title: "Playbook · layout").to_html
+      Document.new(
+        body_html: body,
+        charts: charts,
+        include_rails: include_rails,
+        title: "Playbook · layout"
+      ).to_html
     rescue ValidationError
       raise
     rescue => e

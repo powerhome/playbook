@@ -81,6 +81,33 @@ RSpec.describe PlaybookMcp::Renderer do
     end.to raise_error(PlaybookMcp::RenderError, /Failed to render layout.*NoMethodError/)
   end
 
+  it "loads playbook-rails.js and the chart IIFE for mixed layouts" do
+    children = "<thead><tr><th>A</th></tr></thead><tbody><tr><td>1</td></tr></tbody>"
+    html = renderer.render_layout(
+      items: [
+        { kit: "table", props: { "size" => "sm", "responsive" => "collapse" }, children: children },
+        { kit: "pb_bar_graph", props: { options: { series: [{ data: [1] }] } } },
+      ]
+    )
+    expect(html).to include("data-pb-table-wrapper")
+    expect(html).to include("/assets/playbook-rails.js?v=")
+    expect(html).to include("/assets/vendor/playbook-charts.js?v=")
+    expect(html).to include("/assets/playbook-mcp-resize.js?v=")
+  end
+
+  it "allows rails.js and chart IIFE from the same CSP origin" do
+    html = PlaybookMcp::Document.new(
+      body_html: "<div>ok</div>",
+      asset_base_url: "https://mcp-pr6468.example.test",
+      charts: true,
+      include_rails: true
+    ).to_html
+    expect(html).to include("/assets/playbook-rails.js?v=")
+    expect(html).to include("/assets/vendor/playbook-charts.js?v=")
+    expect(html).to include("script-src https://mcp-pr6468.example.test")
+    expect(html).not_to include("script-src https://mcp-pr6468.example.test 'unsafe-inline'")
+  end
+
   it "applies layout uiAction to chart items" do
     html = renderer.render_layout(
       items: [
@@ -112,6 +139,7 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).not_to include("esm.sh")
     expect(html).to include("/assets/vendor/playbook-charts.js?v=")
     expect(html).to include("/assets/playbook-mcp-resize.js?v=")
+    expect(html).not_to include("playbook-rails.js")
     expect(html).not_to include("playbook-rails-charts-bindings.js")
     expect(html).to include("data-pb-react-component")
     expect(html).not_to include("useHTML")
