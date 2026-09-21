@@ -39,6 +39,7 @@ type = type["rails"] || type["react"] if type.is_a?(Hash)
 
 - Reject React-only props (`platforms` without `"rails"`). Do not invent a parallel schema.
 - Chart `uiAction` is a sibling of props (`prompt` / `tool` / `intent` / `none`), never Highcharts `events` or inline JS. Update server instructions + tool descriptions when client click behavior changes.
+- Chart kits are detected from `dist/ai` metadata (`playbook-ui/charts` imports, `charts_import` hint, highcharts peers), not a hardcoded kit-id list. Mixed `render_layout` documents must keep the chart IIFE’s React registry private from `playbook-rails.js`.
 
 ## Safety
 

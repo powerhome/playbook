@@ -338,7 +338,8 @@ function formatRailsPropEntries(props) {
     })
     .map(([name, value]) => {
       const snake = name.replace(/[A-Z]/g, (c) => `_${c.toLowerCase()}`);
-      return `${snake}: ${formatRubyValue(value)}`;
+      const preserveKeys = name === 'options' || snake === 'options';
+      return `${snake}: ${formatRubyValue(value, { preserveKeys })}`;
     });
 }
 

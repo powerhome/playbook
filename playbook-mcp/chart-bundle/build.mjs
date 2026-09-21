@@ -127,6 +127,26 @@ const shared = {
   logLevel: "info",
 }
 
+const isolatedChartRegistryPlugin = {
+  name: "isolated-chart-registry",
+  setup(build) {
+    // playbook-rails.js also bundles this module and installs window.ComponentRegistry.
+    // Sharing that singleton across two React IIFEs makes Highcharts mounts fail
+    // (invalid hook call). Keep a private registry in the chart bundle.
+    build.onLoad({ filter: /(?:^|[\\/])componentRegistry\.js$/ }, (args) => {
+      const code = readFileSync(args.path, "utf8")
+      const next = code.replace(
+        /window\.ComponentRegistry = window\.ComponentRegistry \|\| new ComponentRegistry\(\);\s*export default window\.ComponentRegistry;/,
+        "const playbookChartRegistry = new ComponentRegistry();\nexport default playbookChartRegistry;"
+      )
+      if (next === code) {
+        throw new Error("isolated-chart-registry: componentRegistry.js singleton rewrite failed")
+      }
+      return { contents: next, loader: "js" }
+    })
+  },
+}
+
 function assertIife(out, outfile) {
   if (/\/npm\/[^"' ]+\/(\+esm|es-modules)/.test(out)) {
     console.error(`ERROR: ${outfile} still references jsDelivr /npm/… paths`)
@@ -144,12 +164,17 @@ function assertIife(out, outfile) {
     console.error(`ERROR: ${outfile} is missing table wrapper selector`)
     process.exit(1)
   }
+  if (outfile.endsWith("playbook-charts.js") && /window\.ComponentRegistry = window\.ComponentRegistry/.test(out)) {
+    console.error(`ERROR: ${outfile} must not share window.ComponentRegistry with playbook-rails.js`)
+    process.exit(1)
+  }
 }
 
-async function buildIife({ entry, outfile }) {
+async function buildIife({ entry, outfile, plugins = shared.plugins }) {
   mkdirSync(dirname(outfile), { recursive: true })
   await esbuild.build({
     ...shared,
+    plugins,
     entryPoints: [entry],
     outfile,
   })
@@ -161,6 +186,7 @@ async function buildIife({ entry, outfile }) {
 await buildIife({
   entry: resolve(__dirname, "entry.js"),
   outfile: resolve(vendorRoot, "playbook-charts.js"),
+  plugins: [...shared.plugins, isolatedChartRegistryPlugin],
 })
 
 await buildIife({

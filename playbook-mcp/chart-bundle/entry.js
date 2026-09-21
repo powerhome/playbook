@@ -25,7 +25,11 @@ function mountPlaybookCharts(root = document) {
 }
 
 function boot() {
-  bindChartUiActions(Highcharts)
+  try {
+    bindChartUiActions(Highcharts)
+  } catch (err) {
+    console.warn("[PB] Chart UI actions unavailable:", err)
+  }
   mountPlaybookCharts(document)
 
   let mountTimeout = null

@@ -43,6 +43,28 @@ RSpec.describe "MCP tools" do
     expect(response.content.first[:text]).to match(/Failed to render layout/)
   end
 
+  it "render_layout accepts children nested inside props" do
+    allow(Rails.application.config.playbook_mcp).to receive(:asset_base_url).and_return("")
+    response = PlaybookMcp::Tools::RenderLayout.call(
+      **deliver(items: [{ kit: "card", props: { children: "Hello nested" } }]),
+      server_context: nil
+    )
+    expect(response.error?).to be(false)
+    ui = response.content.find { |c| (c[:type] || c["type"]) == "resource" }
+    html = ui.dig(:resource, :text) || ui.dig("resource", "text")
+    expect(html).to include("Hello nested")
+  end
+
+  it "render_layout returns error: true when the chart bundle is missing" do
+    allow(PlaybookMcp::ChartPeers).to receive(:available?).and_return(false)
+    response = PlaybookMcp::Tools::RenderLayout.call(
+      **deliver(items: [{ kit: "pb_bar_graph", props: { options: { series: [{ data: [1] }] } } }]),
+      server_context: nil
+    )
+    expect(response.error?).to be(true)
+    expect(response.content.first[:text]).to match(/Highcharts mount/)
+  end
+
   it "list_icons returns playbook-icons names" do
     skip "icon_path not configured" unless PlaybookMcp::IconCatalog.available?
 

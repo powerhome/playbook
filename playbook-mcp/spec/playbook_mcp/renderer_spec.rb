@@ -93,6 +93,33 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).to include("/assets/vendor/playbook-rails.js?v=")
     expect(html).to include("/assets/vendor/playbook-charts.js?v=")
     expect(html).to include("/assets/playbook-mcp-resize.js?v=")
+    expect(html).to include("data-pb-react-component")
+  end
+
+  it "lifts props.children onto composition kits in a layout" do
+    html = renderer.render_layout(
+      items: [{ kit: "card", props: { "children" => "Hello nested" } }]
+    )
+    expect(html).to include("pb_card")
+    expect(html).to include("Hello nested")
+  end
+
+  it "still rejects nested children on kits that do not allow HTML children" do
+    expect do
+      renderer.render_layout(
+        items: [{ kit: "button", props: { "text" => "Hi", "children" => "<b>x</b>" } }]
+      )
+    end.to raise_error(PlaybookMcp::ValidationError, /does not allow HTML children/)
+  end
+
+  it "fails loudly when a layout includes a chart kit but the chart bundle is missing" do
+    allow(PlaybookMcp::ChartPeers).to receive(:available?).and_return(false)
+
+    expect do
+      renderer.render_layout(
+        items: [{ kit: "pb_bar_graph", props: { options: { series: [{ data: [1] }] } } }]
+      )
+    end.to raise_error(PlaybookMcp::RenderError, /Highcharts mount/)
   end
 
   it "allows rails.js and chart IIFE from the same CSP origin" do

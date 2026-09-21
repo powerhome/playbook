@@ -8,7 +8,16 @@ module PlaybookMcp
   module Tools
     class RenderLayout < MCP::Tool
       tool_name "render_layout"
-      description "Compose and render multiple Playbook kits into one MCP-UI HTML document. Chart items may set uiAction for point-click follow-ups."
+      description <<~DESC.squish
+        Compose and render multiple Playbook kits into one MCP-UI HTML document.
+        Chart kits (playbook-ui/charts / Highcharts, e.g. pb_bar_graph) hydrate via the
+        same playbook-charts.js mount as render_chart — included once per document.
+        Pass Highcharts config under props.options with real Highcharts keys
+        (series, xAxis, yAxis, title) — do not snake_case keys inside options.
+        Chart items may set uiAction for point-click follow-ups.
+        Composition kits (card, table) accept HTML children as an item-level string,
+        or nested under props.children (equivalent).
+      DESC
       input_schema(
         properties: {
           items: {
@@ -19,7 +28,10 @@ module PlaybookMcp
               properties: {
                 kit: { type: "string" },
                 props: { type: "object" },
-                children: { type: "string" },
+                children: {
+                  type: "string",
+                  description: "HTML children for composition kits (card, table). Equivalent to props.children.",
+                },
                 uiAction: {
                   type: "object",
                   description: "Chart click action (prompt|tool|intent|none). Overrides the layout uiAction for this item.",

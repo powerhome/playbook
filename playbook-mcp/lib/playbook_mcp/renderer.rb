@@ -19,6 +19,7 @@ module PlaybookMcp
 
     def render_kit(kit:, props: {}, children: nil, wrap_document: true, ui_action: nil)
       props_hash, nested_action = UiAction.take_from_props(props)
+      props_hash, children = lift_nested_children(props_hash, children)
       resolved_action = nil
       if Document.charts_kit?(kit)
         raw = ui_action.nil? ? nested_action : ui_action
@@ -27,6 +28,8 @@ module PlaybookMcp
 
       result = @validator.validate_kit!(kit: kit, props: props_hash, children: children)
       raise ValidationError, result.errors.join("; ") unless result.ok?
+
+      require_chart_mount!(kit) if Document.charts_kit?(kit)
 
       safe_props = prepare_props(kit, props_hash)
       kit_props = Props.to_kit_props(safe_props)
@@ -38,7 +41,7 @@ module PlaybookMcp
         charts: Document.charts_kit?(kit),
         title: "Playbook · #{kit}"
       ).to_html
-    rescue ValidationError
+    rescue ValidationError, RenderError
       raise
     rescue => e
       raise RenderError, "Failed to render kit '#{kit}': #{e.class}: #{e.message}"
@@ -56,6 +59,7 @@ module PlaybookMcp
         chart_kit = Document.charts_kit?(kit)
         charts ||= chart_kit
         include_rails ||= !chart_kit
+        require_chart_mount!(kit) if chart_kit
         resolved_action = if chart_kit
                             raw = item["uiAction"].nil? ? ui_action : item["uiAction"]
                             UiAction.resolve(raw)
@@ -72,7 +76,7 @@ module PlaybookMcp
         include_rails: include_rails,
         title: "Playbook · layout"
       ).to_html
-    rescue ValidationError
+    rescue ValidationError, RenderError
       raise
     rescue => e
       raise RenderError, "Failed to render layout: #{e.class}: #{e.message}"
@@ -83,14 +87,30 @@ module PlaybookMcp
     def normalize_layout_item(item)
       item = Props.deep_stringify_keys(item || {})
       props_hash, nested_action = UiAction.take_from_props(item["props"] || {})
+      props_hash, children = lift_nested_children(props_hash, item["children"])
       item_action = nested_action
       item_action = item["uiAction"] || item["ui_action"] if item.key?("uiAction") || item.key?("ui_action")
       {
         "kit" => item["kit"],
         "props" => props_hash,
-        "children" => item["children"],
+        "children" => children,
         "uiAction" => item_action,
       }
+    end
+
+    # Agents often nest HTML children under props; composition kits expect a sibling field.
+    def lift_nested_children(props, children)
+      hash = Props.deep_stringify_keys(props || {})
+      nested = hash.delete("children")
+      [hash, children.nil? ? nested : children]
+    end
+
+    def require_chart_mount!(kit)
+      return if ChartPeers.available?
+
+      raise RenderError,
+            "Chart kit '#{kit}' must hydrate via the Highcharts mount (playbook-charts.js). " \
+            "Run bin/vendor_chart_peers, or render it with render_chart as its own document."
     end
 
     def prepare_props(kit, props)

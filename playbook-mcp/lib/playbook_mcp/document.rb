@@ -5,8 +5,6 @@ require "uri"
 
 module PlaybookMcp
   class Document
-    CHART_KITS = %w[pb_bar_graph pb_line_graph pb_circle_chart pb_gauge_chart].freeze
-
     def initialize(body_html:, asset_base_url: nil, charts: false, include_rails: nil, title: "Playbook")
       @body_html = body_html
       @asset_base_url = (asset_base_url.presence || Rails.application.config.playbook_mcp.asset_base_url).to_s.chomp("/")
@@ -40,7 +38,7 @@ module PlaybookMcp
     end
 
     def self.charts_kit?(kit)
-      CHART_KITS.include?(kit.to_s)
+      SchemaStore.instance.chart_kit?(kit)
     end
 
   private

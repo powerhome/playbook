@@ -82,6 +82,7 @@ mixed_html = renderer.render_layout(
 )
 raise "mixed layout missing playbook-rails.js" unless mixed_html.include?("/assets/vendor/playbook-rails.js")
 raise "mixed layout missing chart IIFE" unless mixed_html.include?("/assets/vendor/playbook-charts.js")
+raise "mixed layout missing chart mount" unless mixed_html.include?("data-pb-react-component")
 raise "mixed layout missing table wrapper" unless mixed_html.include?("data-pb-table-wrapper")
 raise "mixed layout missing resize reporter" unless mixed_html.include?("playbook-mcp-resize.js")
 puts "ok (#{mixed_html.bytesize} bytes)"

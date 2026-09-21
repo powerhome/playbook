@@ -2,7 +2,7 @@
 
 Hosted MCP-UI render server for Playbook. Renders kits server-side via `pb_rails` and returns `ui://` HTML resources for LibreChat and other MCP-UI hosts.
 
-Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from this service’s `/assets` (gem `dist/` + `fonts/`) with **permissive CORS** (`Access-Control-Allow-Origin: *`) so sandboxed MCP-UI iframes with opaque origin can load web fonts. Icons are inlined as SVG from `@powerhome/playbook-icons` (configured via `icon_path` / `icon_alias_path`; vendored into the image at `vendor/playbook-icons/`) — not Font Awesome webfonts. Charts load one self-contained IIFE (`bin/vendor_chart_peers` → `/assets/vendor/playbook-charts.js`) — no importmap / jsDelivr `/+esm`. Mixed `render_layout` documents also load `/assets/vendor/playbook-rails.js` (same esbuild IIFE, React bundled in) so table/collapsible JS hydrates. Vite `yarn release` does not emit that file.
+Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from this service’s `/assets` (gem `dist/` + `fonts/`) with **permissive CORS** (`Access-Control-Allow-Origin: *`) so sandboxed MCP-UI iframes with opaque origin can load web fonts. Icons are inlined as SVG from `@powerhome/playbook-icons` (configured via `icon_path` / `icon_alias_path`; vendored into the image at `vendor/playbook-icons/`) — not Font Awesome webfonts. Charts load one self-contained IIFE (`bin/vendor_chart_peers` → `/assets/vendor/playbook-charts.js`) — no importmap / jsDelivr `/+esm`. Mixed `render_layout` documents load `/assets/vendor/playbook-rails.js` (table/collapsible JS) plus that chart IIFE when a Highcharts kit is present. The chart bundle uses a private React registry so it does not collide with rails.js. Vite `yarn release` does not emit `playbook-rails.js`.
 
 When `PLAYBOOK_MCP_ASSET_BASE_URL` is an absolute origin, render tools return MCP-UI **`external_url`** pointing at ephemeral `/ui/:id` HTML (TTL ~15m). That keeps large inline-SVG dashboards out of the tool-result payload so hosts like LibreChat do not truncate mid-document. Without an absolute base (local smoke), tools fall back to `rawHtml`.
 
@@ -23,7 +23,9 @@ Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standa
 
 Kit ids are **snake_case** (`table`, `button`, `pb_bar_graph`). Props use **camelCase** as in `playbook/dist/ai` schemas; the server converts to Ruby snake_case for `pb_rails`.
 
-HTML `children` are only accepted for composition kits (`table`, `card`, …) and are sanitized before render.
+HTML `children` are only accepted for composition kits (`table`, `card`, …) and are sanitized before render. In `render_layout`, `props.children` is treated as the item-level `children` field.
+
+Chart kits in `render_layout` hydrate via the same Highcharts mount as `render_chart` (`playbook-charts.js` once per document). Pass Highcharts config under `props.options` with real Highcharts keys (`series`, `xAxis`, `yAxis`) — do not snake_case keys inside `options`.
 
 Chart **point clicks** post MCP-UI actions to the host (LibreChat handles `prompt`, `tool`, and `intent`). Pass `uiAction` as a **sibling of `props`** (not Highcharts `events`):
 

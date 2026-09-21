@@ -4,6 +4,7 @@ require "json"
 
 module PlaybookMcp
   class SchemaStore
+    CHART_PACKAGES = %w[highcharts highcharts-react-official].freeze
     @mutex = Mutex.new
 
     def self.instance
@@ -22,6 +23,7 @@ module PlaybookMcp
       # Read-only after boot so Puma threads never Hash#[]= these caches.
       @kit_schemas.freeze
       @playgrounds.freeze
+      @chart_kit_ids.freeze
     end
 
     attr_reader :index, :global_props
@@ -51,9 +53,37 @@ module PlaybookMcp
       false
     end
 
+    def chart_kit?(kit)
+      @chart_kit_ids.include?(kit.to_s)
+    end
+
+    # Highcharts kits ship `playbook-ui/charts` imports, a charts_import hint,
+    # and/or highcharts peer packages — not a hardcoded kit-id list.
+    def self.chart_metadata?(schema: nil, playground: nil, kit_meta: nil)
+      schema ||= {}
+      playground ||= {}
+      kit_meta ||= {}
+
+      imports = Array(playground["externalImports"]) + Array(schema["externalImports"])
+      return true if imports.any? { |line| line.to_s.include?("playbook-ui/charts") }
+
+      hints = playground["hints"]
+      return true if hints.is_a?(Hash) && hints.key?("charts_import")
+
+      packages = []
+      [schema, playground, kit_meta].each do |src|
+        deps = src["externalDependencies"]
+        next unless deps.is_a?(Hash)
+
+        packages.concat(Array(deps["packages"]))
+      end
+      packages.any? { |pkg| CHART_PACKAGES.include?(pkg.to_s) }
+    end
+
   private
 
     def preload!
+      @chart_kit_ids = []
       kit_ids.each do |id|
         relative = index.dig("schemas", "kits", id)
         raise ValidationError, "Unknown kit: #{id}" unless relative
@@ -61,6 +91,13 @@ module PlaybookMcp
         @kit_schemas[id] = load_json(relative)
         path = @ai_root.join("playgrounds", "#{id}.json")
         @playgrounds[id] = path.file? ? JSON.parse(path.read) : nil
+        next unless self.class.chart_metadata?(
+          schema: @kit_schemas[id],
+          playground: @playgrounds[id],
+          kit_meta: kit_meta[id]
+        )
+
+        @chart_kit_ids << id
       end
     end
 

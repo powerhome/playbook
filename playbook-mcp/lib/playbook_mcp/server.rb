@@ -19,13 +19,16 @@ module PlaybookMcp
           Prefer list_kits / get_kit_schema before rendering an unfamiliar kit — don't guess prop names.
           When a prop type or default is { react, rails }, use the rails entry.
           Use render_layout to compose multiple kits into ONE document (one inline panel);
-          render_kit for a single component; render_chart for charts.
+          render_kit for a single component; render_chart for a chart-only document.
+          Chart kits in render_layout hydrate via the same Highcharts mount as render_chart
+          (playbook-charts.js once per document).
           Kit ids are snake_case (card, table, icon_stat_value, badge, section_separator, …);
           props are camelCase from the dist/ai schemas.
           Icon names must be valid @powerhome/playbook-icons ids (kebab-case, e.g. chart-line,
           users, cart-shopping, currency-dollar). Call list_icons to discover or filter names —
           unknown icons render as empty circles (no Font Awesome webfont in MCP docs).
-          Composition kits (card, table) accept a sanitized HTML children string.
+          Composition kits (card, table) accept a sanitized HTML children string
+          (item-level children, or props.children — equivalent).
           For charts (pb_bar_graph, pb_line_graph, pb_gauge_chart, pb_circle_chart),
           pass the Highcharts config verbatim under props.options — real Highcharts keys
           (series, xAxis, yAxis, title, subtitle); do NOT snake_case the keys inside options.
