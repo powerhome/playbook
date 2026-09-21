@@ -64,6 +64,10 @@ module PlaybookMcp
       return body unless wrap_document
 
       Document.new(body_html: body, charts: charts, title: "Playbook · layout").to_html
+    rescue ValidationError
+      raise
+    rescue => e
+      raise RenderError, "Failed to render layout: #{e.class}: #{e.message}"
     end
 
   private

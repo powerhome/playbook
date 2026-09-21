@@ -31,6 +31,18 @@ RSpec.describe "MCP tools" do
     expect(ui.dig(:resource, :uri) || ui.dig("resource", "uri")).to start_with("ui://playbook/kit/table/")
   end
 
+  it "render_layout returns error: true when pb_rails fails after validation" do
+    allow_any_instance_of(PlaybookMcp::Renderer).to receive(:render_fragment).and_raise(
+      NoMethodError, "undefined method `[]' for nil:NilClass"
+    )
+    response = PlaybookMcp::Tools::RenderLayout.call(
+      **deliver(items: [{ kit: "button", props: { text: "One" } }]),
+      server_context: nil
+    )
+    expect(response.error?).to be(true)
+    expect(response.content.first[:text]).to match(/Failed to render layout/)
+  end
+
   it "list_icons returns playbook-icons names" do
     skip "icon_path not configured" unless PlaybookMcp::IconCatalog.available?
 

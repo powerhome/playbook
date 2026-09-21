@@ -23,6 +23,7 @@ links:
 ci:
   require:
     - powerhome/image
+    - continuous-integration/jenkins/pr-merge
   allow_failures:
     - continuous-integration/jenkins/branch
 

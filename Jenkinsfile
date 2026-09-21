@@ -16,20 +16,27 @@ app.build(
     files: ["docker-compose.yml", "docker-compose.ci.yml"]
   ) { compose ->
     stage('Image Build') {
-      // Website image via compose bake; MCP image via explicit bake target.
-      // TAG must match Milano REVISION / image_tag used at deploy time.
+      // Website image via compose bake (pushed). MCP prod + test images stay
+      // local until Test passes — do not push playbook-mcp:${GIT_COMMIT} here.
       compose.bake(bakeFiles: ['docker-bake.hcl'])
       shell """
         docker build -f playbook-mcp/Dockerfile \
           -t image-registry.powerapp.cloud/playbook/playbook-mcp:${env.GIT_COMMIT} \
           -t image-registry.powerapp.cloud/playbook/playbook-mcp:local \
           .
-        docker push image-registry.powerapp.cloud/playbook/playbook-mcp:${env.GIT_COMMIT}
+        docker build -f playbook-mcp/Dockerfile --target test \
+          -t image-registry.powerapp.cloud/playbook/playbook-mcp:test \
+          .
       """
     }
 
     stage('Test') {
       shell "docker compose run --workdir /home/app/src/playbook web ./test.sh"
+      shell "docker compose run --no-deps --rm mcp ./test.sh"
+    }
+
+    stage('Push') {
+      shell "docker push image-registry.powerapp.cloud/playbook/playbook-mcp:${env.GIT_COMMIT}"
     }
   }
 }

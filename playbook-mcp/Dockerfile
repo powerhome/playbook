@@ -104,3 +104,19 @@ ENV RAILS_LOG_TO_STDOUT=true
 ENV PLAYBOOK_MCP_DISABLE_HOST_CHECK=1
 EXPOSE 3099
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-b", "tcp://0.0.0.0:3099"]
+
+# --- Test (rspec + smoke). Not pushed; used only in Jenkins Test. ---
+FROM base AS test-gems
+COPY --chown=9999:9999 playbook/playbook_ui.gemspec playbook/playbook_ui.gemspec
+COPY --chown=9999:9999 playbook/lib/playbook/version.rb playbook/lib/playbook/version.rb
+COPY --chown=9999:9999 playbook-mcp/Gemfile playbook-mcp/Gemfile.lock* playbook-mcp/
+RUN cd playbook-mcp && bundle install
+
+FROM prod AS test
+USER root
+COPY --from=test-gems $BUNDLE_TO $BUNDLE_TO
+WORKDIR /home/app/src/playbook-mcp
+RUN bundle config unset --local without || true
+USER app
+ENV RAILS_ENV=test
+ENV RACK_ENV=test

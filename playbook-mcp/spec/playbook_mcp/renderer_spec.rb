@@ -66,6 +66,21 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).to include("pb_card")
   end
 
+  it "does not wrap layout ValidationError as RenderError" do
+    expect do
+      renderer.render_layout(items: [{ "kit" => "not_a_real_kit" }])
+    end.to raise_error(PlaybookMcp::ValidationError)
+  end
+
+  it "converts unexpected layout pb_rails failures into RenderError" do
+    view = renderer.instance_variable_get(:@view)
+    allow(view).to receive(:pb_rails).and_raise(NoMethodError, "undefined method `[]' for nil:NilClass")
+
+    expect do
+      renderer.render_layout(items: [{ "kit" => "button", "props" => { "text" => "One" } }])
+    end.to raise_error(PlaybookMcp::RenderError, /Failed to render layout.*NoMethodError/)
+  end
+
   it "applies layout uiAction to chart items" do
     html = renderer.render_layout(
       items: [
