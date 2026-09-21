@@ -20,7 +20,7 @@ app.build(
       // local until Test passes — do not push playbook-mcp:${GIT_COMMIT} here.
       compose.bake(bakeFiles: ['docker-bake.hcl'])
       shell """
-        docker build -f playbook-mcp/Dockerfile \
+        docker build -f playbook-mcp/Dockerfile --target prod \
           -t image-registry.powerapp.cloud/playbook/playbook-mcp:${env.GIT_COMMIT} \
           -t image-registry.powerapp.cloud/playbook/playbook-mcp:local \
           .

@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.8.1
 # Build from monorepo root:
-#   docker build -f playbook-mcp/Dockerfile -t playbook-mcp .
+#   docker build -f playbook-mcp/Dockerfile --target prod -t playbook-mcp .
 #
 # Must produce playbook/dist (CSS/JS + dist/ai). That tree is gitignored, and
 # routes.rb boots SchemaStore at load time — without dist the process CrashLoops.

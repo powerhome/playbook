@@ -14,6 +14,7 @@ target "playbook" {
 target "playbook-mcp" {
   context = "."
   dockerfile = "playbook-mcp/Dockerfile"
+  target = "prod"
   tags = [
     "image-registry.powerapp.cloud/playbook/playbook-mcp:${TAG}",
   ]

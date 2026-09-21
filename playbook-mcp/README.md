@@ -126,7 +126,7 @@ Puma runs with `workers 0` because streamable-http session state is in-memory. D
 Deploy manifests live under `config/deploy/`. Image build:
 
 ```bash
-docker build -f playbook-mcp/Dockerfile -t playbook-mcp .
+docker build -f playbook-mcp/Dockerfile --target prod -t playbook-mcp .
 ```
 
 ## Decisions
