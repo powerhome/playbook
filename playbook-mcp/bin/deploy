@@ -5,11 +5,13 @@ workDir=$(cd "$(dirname "$0")/.." && pwd)
 cd "$workDir"
 
 environmentValuesFile=""
+environmentValuesPath=""
 if [ -e "${workDir}/config/deploy/$environment/values.yaml" ]; then
-  environmentValuesFile="@${workDir}/config/deploy/$environment/values.yaml"
+  environmentValuesPath="${workDir}/config/deploy/$environment/values.yaml"
 else
-  environmentValuesFile="@${workDir}/config/deploy/prs/values.yaml"
+  environmentValuesPath="${workDir}/config/deploy/prs/values.yaml"
 fi
+environmentValuesFile="@${environmentValuesPath}"
 
 environmentSecretsFile=""
 secret_key_base_binding=""
@@ -34,25 +36,32 @@ else
   secret_key_base_binding="secretKeyBase=$(openssl rand -hex 64)"
 fi
 
-# Milano PR DEPLOY_URL looks like: https://pr6468.playbook.wc.beta.gm.powerapp.cloud
-# MCP needs its own host (separate /assets from the website):
-#   https://mcp-pr6468.playbook.wc.beta.gm.powerapp.cloud
-# Legacy/alternate: https://playbook-pr-N... → https://playbook-mcp-pr-N...
-mcp_deploy_url="${deploy_url}"
-if [[ "${deploy_url}" == *"://mcp-"* ]] || [[ "${deploy_url}" == *"://playbook-mcp-"* ]]; then
+# Staging/production pin ingress.hosts in config/deploy/$environment/values.yaml.
+# Overwriting those from Milano DEPLOY_URL (the website host) yields the wrong
+# TLS/DNS/PLAYBOOK_MCP_ASSET_BASE_URL (mcp-playbook… or playbook-mcp-mcp…).
+# PR/review values do not set hosts — derive MCP host from the website URL.
+extraBindings=""
+mcp_deploy_url=""
+if ! grep -A5 '^ingress:' "${environmentValuesPath}" | grep -qE '^[[:space:]]+hosts:'; then
+  # Milano PR DEPLOY_URL looks like: https://pr6468.playbook.wc.beta.gm.powerapp.cloud
+  # MCP needs its own host (separate /assets from the website):
+  #   https://mcp-pr6468.playbook.wc.beta.gm.powerapp.cloud
+  # Legacy/alternate: https://playbook-pr-N... → https://playbook-mcp-pr-N...
   mcp_deploy_url="${deploy_url}"
-elif [[ "${deploy_url}" == *"://playbook-"* ]]; then
-  mcp_deploy_url="${deploy_url/playbook-/playbook-mcp-}"
-elif [[ -n "${deploy_url}" ]]; then
-  # Prefix the first DNS label: pr6468.playbook... → mcp-pr6468.playbook...
-  mcp_deploy_url="$(echo "${deploy_url}" | sed -E 's#^(https?://)#\1mcp-#')"
+  if [[ "${deploy_url}" == *"://mcp-"* ]] || [[ "${deploy_url}" == *"://playbook-mcp-"* ]]; then
+    mcp_deploy_url="${deploy_url}"
+  elif [[ "${deploy_url}" == *"://playbook-"* ]]; then
+    mcp_deploy_url="${deploy_url/playbook-/playbook-mcp-}"
+  elif [[ -n "${deploy_url}" ]]; then
+    # Prefix the first DNS label: pr6468.playbook... → mcp-pr6468.playbook...
+    mcp_deploy_url="$(echo "${deploy_url}" | sed -E 's#^(https?://)#\1mcp-#')"
+  fi
+  extraBindings="{\"ingress\":{\"hosts\":[\"${mcp_deploy_url}\"]}}"
 fi
-
-extraBindings="{\"ingress\":{\"hosts\":[\"${mcp_deploy_url}\"]}}"
 
 namespace="${namespace:-playbook-${environment}}"
 
-echo "Deploying playbook-mcp to namespace=${namespace} host=${mcp_deploy_url} image_tag=${tag}"
+echo "Deploying playbook-mcp to namespace=${namespace} image_tag=${tag}${mcp_deploy_url:+ host=${mcp_deploy_url}}"
 
 krane render \
   --filenames="${workDir}/config/deploy/templates" \
@@ -72,5 +81,7 @@ krane render \
 deploy_exit=$?
 rm -f ${workDir}/config/deploy/**/*.dec.yaml 2>/dev/null || true
 
-echo "playbook-mcp review URL: ${mcp_deploy_url}/mcp"
+if [ -n "${mcp_deploy_url}" ]; then
+  echo "playbook-mcp review URL: ${mcp_deploy_url}/mcp"
+fi
 exit $deploy_exit
