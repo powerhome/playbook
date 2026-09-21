@@ -97,7 +97,7 @@ const Table = (props: TableProps): React.ReactElement => {
     const ariaProps = buildAriaProps(aria)
     const dataProps = buildDataProps(data)
     const htmlProps = buildHtmlProps(htmlOptions)
-    const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
+    const tableCollapseCss = responsive === 'collapse' ? `table-collapse-${collapse}` : ''
     const contrastBorderCss = contrastBorder ? 'contrast-border' : ''
     const verticalBorderCss = verticalBorder ? 'vertical-border' : ''
     const spaceCssName = outerPadding !== 'none' ? 'space_' : ''

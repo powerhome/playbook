@@ -68,6 +68,24 @@ test("when sticky is true", () => {
   expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card sticky-header table-collapse-sm")
 })
 
+test("when responsive is scroll", () => {
+  const kit = renderKit(Table, props, { responsive: "scroll" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-scroll table-card")
+  expect(kit).not.toHaveClass("table-collapse-sm")
+  expect(kit.parentElement).toHaveClass("table-responsive-scroll")
+})
+
+test("when responsive is none", () => {
+  const kit = renderKit(Table, props, { responsive: "none" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-none table-card")
+  expect(kit).not.toHaveClass("table-collapse-sm")
+})
+
+test("when responsive is collapse", () => {
+  const kit = renderKit(Table, props, { responsive: "collapse" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card table-collapse-sm")
+})
+
 test("when striped is true", () => {
   const kit = renderKit(Table, props, { striped: true })
   expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card striped table-collapse-sm")
