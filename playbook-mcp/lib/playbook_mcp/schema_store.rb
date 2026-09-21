@@ -4,8 +4,12 @@ require "json"
 
 module PlaybookMcp
   class SchemaStore
+    @mutex = Mutex.new
+
     def self.instance
-      @instance ||= new
+      return @instance if @instance
+
+      @mutex.synchronize { @instance ||= new }
     end
 
     def initialize(ai_root: Playbook::Engine.root.join("dist/ai"))
@@ -14,6 +18,10 @@ module PlaybookMcp
       @global_props = load_json("global-props.schema.json")
       @kit_schemas = {}
       @playgrounds = {}
+      preload!
+      # Read-only after boot so Puma threads never Hash#[]= these caches.
+      @kit_schemas.freeze
+      @playgrounds.freeze
     end
 
     attr_reader :index, :global_props
@@ -28,20 +36,11 @@ module PlaybookMcp
 
     def schema_for(kit)
       kit = kit.to_s
-      @kit_schemas[kit] ||= begin
-        relative = index.dig("schemas", "kits", kit)
-        raise ValidationError, "Unknown kit: #{kit}" unless relative
-
-        load_json(relative)
-      end
+      @kit_schemas.fetch(kit) { raise ValidationError, "Unknown kit: #{kit}" }
     end
 
     def playground_for(kit)
-      kit = kit.to_s
-      return @playgrounds[kit] if @playgrounds.key?(kit)
-
-      path = @ai_root.join("playgrounds", "#{kit}.json")
-      @playgrounds[kit] = path.file? ? JSON.parse(path.read) : nil
+      @playgrounds[kit.to_s]
     end
 
     def rails_kit?(kit)
@@ -53,6 +52,17 @@ module PlaybookMcp
     end
 
   private
+
+    def preload!
+      kit_ids.each do |id|
+        relative = index.dig("schemas", "kits", id)
+        raise ValidationError, "Unknown kit: #{id}" unless relative
+
+        @kit_schemas[id] = load_json(relative)
+        path = @ai_root.join("playgrounds", "#{id}.json")
+        @playgrounds[id] = path.file? ? JSON.parse(path.read) : nil
+      end
+    end
 
     def load_json(relative)
       path = @ai_root.join(relative)

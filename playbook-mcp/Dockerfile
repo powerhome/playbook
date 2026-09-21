@@ -3,7 +3,7 @@
 #   docker build -f playbook-mcp/Dockerfile --target prod -t playbook-mcp .
 #
 # Must produce playbook/dist (CSS/JS + dist/ai). That tree is gitignored, and
-# routes.rb boots SchemaStore at load time — without dist the process CrashLoops.
+# SchemaStore preloads at boot — without dist the process CrashLoops.
 FROM --platform=linux/amd64 ruby:3.3.11-bookworm AS base
 
 ENV TZ=America/New_York
