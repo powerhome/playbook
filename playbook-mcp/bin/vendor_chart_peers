@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# Bundle React + Highcharts + chart kit mounts into one classic IIFE script.
+# Bundle self-contained classic IIFE scripts for MCP-UI iframes:
+#   playbook-charts.js  — React + Highcharts + chart kit mounts
+#   playbook-rails.js   — React + table/collapsible/kit JS (Vite yarn release
+#                         does not emit this; it marks react as external)
 # jsDelivr /+esm peers are NOT self-contained (they import /npm/… URLs) and break
 # inside LibreChat srcdoc iframes — do not reintroduce them.
 set -euo pipefail
@@ -7,10 +10,12 @@ set -euo pipefail
 MCP_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 REPO_ROOT="$(cd "$MCP_ROOT/.." && pwd)"
 BUILD_JS="$MCP_ROOT/chart-bundle/build.mjs"
-OUT="$MCP_ROOT/vendor/chart-peers/playbook-charts.js"
+VENDOR="$MCP_ROOT/vendor/chart-peers"
+OUT_CHARTS="$VENDOR/playbook-charts.js"
+OUT_RAILS="$VENDOR/playbook-rails.js"
 
 if [[ ! -f "$BUILD_JS" ]]; then
-  echo "ERROR: missing chart bundle builder: $BUILD_JS" >&2
+  echo "ERROR: missing iframe bundle builder: $BUILD_JS" >&2
   exit 1
 fi
 
@@ -20,19 +25,20 @@ if [[ ! -d "$REPO_ROOT/node_modules/esbuild" ]] || [[ ! -d "$REPO_ROOT/node_modu
 fi
 
 if ! command -v node >/dev/null 2>&1; then
-  echo "ERROR: node is required to build the chart IIFE" >&2
+  echo "ERROR: node is required to build iframe IIFEs" >&2
   exit 1
 fi
 
-echo "Bundling MCP chart IIFE → $OUT"
+echo "Bundling MCP iframe IIFEs → $VENDOR"
 (
   cd "$REPO_ROOT"
   node "$BUILD_JS"
 )
 
-if [[ ! -s "$OUT" ]]; then
-  echo "ERROR: chart bundle was not written: $OUT" >&2
-  exit 1
-fi
-
-ls -la "$OUT"
+for out in "$OUT_CHARTS" "$OUT_RAILS"; do
+  if [[ ! -s "$out" ]]; then
+    echo "ERROR: iframe bundle was not written: $out" >&2
+    exit 1
+  fi
+  ls -la "$out"
+done

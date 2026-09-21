@@ -12,7 +12,6 @@ class AssetsController < ActionController::Base
   DIST_PREFIXES = [
     "playbook.css",
     "reset.css",
-    "playbook-rails.js",
     "playbook-rails-react-bindings.js",
     "playbook-rails-charts-bindings.js",
     "playbook-charts.js",

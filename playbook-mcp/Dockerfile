@@ -63,13 +63,15 @@ RUN yarn install --frozen-lockfile
 FROM jsdeps AS assets
 COPY --chown=9999:9999 playbook /home/app/src/playbook
 RUN cd playbook && NODE_ENV=production yarn release
-# Build self-contained chart IIFE while node_modules + sass/esbuild are available.
+# Build self-contained iframe IIFEs (charts + playbook-rails) while node_modules + sass/esbuild are available.
 COPY --chown=9999:9999 playbook-mcp/chart-bundle /home/app/src/playbook-mcp/chart-bundle
 COPY --chown=9999:9999 playbook-mcp/bin/vendor_chart_peers /home/app/src/playbook-mcp/bin/vendor_chart_peers
 RUN chmod +x /home/app/src/playbook-mcp/bin/vendor_chart_peers \
     && /home/app/src/playbook-mcp/bin/vendor_chart_peers \
     && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js \
-    && ! grep -qE '/npm/|esm\.sh' /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js
+    && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-rails.js \
+    && ! grep -qE '/npm/|esm\.sh' /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js \
+    && ! grep -qE '/npm/|esm\.sh' /home/app/src/playbook-mcp/vendor/chart-peers/playbook-rails.js
 
 # --- Ruby gems ---
 FROM base AS gems
@@ -94,6 +96,7 @@ RUN mkdir -p tmp/pids log \
     && chown -R app:app tmp log vendor \
     && test -f /home/app/src/playbook/dist/ai/index.json \
     && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js \
+    && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-rails.js \
     && test -f vendor/playbook-icons/aliases.json \
     && test -f vendor/playbook-icons/icons/data-visualization/chart-line.svg
 

@@ -9,7 +9,7 @@ RSpec.describe PlaybookMcp::Renderer do
     html = renderer.render_kit(kit: "button", props: { "text" => "Go", "variant" => "secondary" })
     expect(html).to include("pb_button")
     expect(html).to include("/assets/playbook.css?v=")
-    expect(html).to include("/assets/playbook-rails.js?v=")
+    expect(html).to include("/assets/vendor/playbook-rails.js?v=")
     expect(html).to include("/assets/playbook-mcp-resize.js?v=")
     expect(html).not_to match(/100vh/)
     expect(html).to include("Go")
@@ -90,7 +90,7 @@ RSpec.describe PlaybookMcp::Renderer do
       ]
     )
     expect(html).to include("data-pb-table-wrapper")
-    expect(html).to include("/assets/playbook-rails.js?v=")
+    expect(html).to include("/assets/vendor/playbook-rails.js?v=")
     expect(html).to include("/assets/vendor/playbook-charts.js?v=")
     expect(html).to include("/assets/playbook-mcp-resize.js?v=")
   end
@@ -102,7 +102,7 @@ RSpec.describe PlaybookMcp::Renderer do
       charts: true,
       include_rails: true
     ).to_html
-    expect(html).to include("/assets/playbook-rails.js?v=")
+    expect(html).to include("/assets/vendor/playbook-rails.js?v=")
     expect(html).to include("/assets/vendor/playbook-charts.js?v=")
     expect(html).to include("script-src https://mcp-pr6468.example.test")
     expect(html).not_to include("script-src https://mcp-pr6468.example.test 'unsafe-inline'")

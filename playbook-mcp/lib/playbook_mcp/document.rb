@@ -88,11 +88,25 @@ module PlaybookMcp
 
     def scripts
       parts = []
-      parts << %(<script src="#{asset_url('playbook-rails.js')}"></script>) if @include_rails
+      parts << rails_scripts if @include_rails
       parts << chart_scripts if @charts
       # Every kit (tables/cards/layouts/charts): tell @mcp-ui/client the iframe height.
       parts << %(<script src="#{asset_url('playbook-mcp-resize.js')}"></script>)
       parts.join("\n")
+    end
+
+    def rails_scripts
+      unless RailsPeers.available?
+        missing = RailsPeers.missing.join(", ")
+        return <<~HTML
+          <!-- Rails kit bundle missing (#{ERB::Util.html_escape(missing)}). Run bin/vendor_chart_peers. -->
+          <p style="font:14px sans-serif;color:#666;">
+            Table/collapsible JS unavailable: run bin/vendor_chart_peers to build the self-contained playbook-rails bundle.
+          </p>
+        HTML
+      end
+
+      %(<script src="#{asset_url(RailsPeers.asset_relative_path)}"></script>)
     end
 
     def chart_scripts

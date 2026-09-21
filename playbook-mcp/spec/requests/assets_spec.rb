@@ -13,11 +13,12 @@ RSpec.describe "Assets", type: :request do
     expect(response.headers["ETag"]).to be_present
   end
 
-  it "serves playbook-rails.js cross-origin" do
-    get "/assets/playbook-rails.js"
+  it "serves playbook-rails.js IIFE cross-origin" do
+    get "/assets/vendor/playbook-rails.js"
     expect(response).to have_http_status(:ok)
     expect(response.headers["Access-Control-Allow-Origin"]).to eq("*")
-    expect(response.body).to include("__defProp")
+    expect(response.body).not_to match(/\A\s*import\s/)
+    expect(response.body).not_to include("from \"react\"")
   end
 
   it "serves playbook-mcp-resize.js for mcp-ui iframe sizing" do
