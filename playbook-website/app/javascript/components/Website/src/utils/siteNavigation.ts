@@ -34,7 +34,12 @@ export const stripStagingCacheBustFromUrl = () => {
   const url = new URL(window.location.href)
   if (!url.searchParams.has(STAGING_CACHE_BUST_PARAM)) return
   url.searchParams.delete(STAGING_CACHE_BUST_PARAM)
-  window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`)
+  // Keep React Router's history.state (idx/key/usr) so back/forward stay aligned.
+  window.history.replaceState(
+    window.history.state,
+    "",
+    `${url.pathname}${url.search}${url.hash}`
+  )
 }
 
 /** True only on deployed prod — not localhost, review apps, or staging. */
