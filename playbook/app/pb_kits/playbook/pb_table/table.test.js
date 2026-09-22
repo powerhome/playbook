@@ -516,3 +516,29 @@ test("Table.Header enables sort dropdown when sortDropdown is true", () => {
   expect(container.querySelector(".pb_popover_reference_wrapper")).toBeInTheDocument()
   expect(container.querySelector("a")).toHaveAttribute("href", "#")
 })
+
+test("Table.Header keeps click-to-cycle sorting when colSpan > 1 and sortDropdown is false", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              colSpan={2}
+              id="name"
+              sortDropdown={false}
+              sortMenu={[
+                { item: "First Name", link: "?sort=firstname_desc", active: false, direction: "desc" },
+                { item: "First Name", link: "?sort=firstname_asc", active: false, direction: "asc" },
+                { item: "Last Name", link: "?sort=lastname_desc", active: false, direction: "desc" },
+                { item: "Last Name", link: "?sort=lastname_asc", active: false, direction: "asc" },
+              ]}
+              text="Full Name"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_popover_reference_wrapper")).not.toBeInTheDocument()
+  expect(container.querySelector("a")).toHaveAttribute("href", "?sort=firstname_desc")
+})

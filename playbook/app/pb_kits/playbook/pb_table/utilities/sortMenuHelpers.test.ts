@@ -57,8 +57,12 @@ describe("sortMenuHelpers", () => {
     expect(getSortIcon("desc", true)).toBe("sort-amount-down")
   })
 
-  test("isDropdownSelect is true for colspan greater than 1", () => {
-    expect(isDropdownSelect(territoryMenu, 2, false)).toBe(true)
+  test("isDropdownSelect is true for colspan greater than 1 when sortDropdown is unset", () => {
+    expect(isDropdownSelect(territoryMenu, 2, undefined)).toBe(true)
+  })
+
+  test("isDropdownSelect is false for colspan greater than 1 when sortDropdown is false", () => {
+    expect(isDropdownSelect(territoryMenu, 2, false)).toBe(false)
   })
 
   test("isDropdownSelect is true when sortDropdown is true", () => {
@@ -66,6 +70,7 @@ describe("sortMenuHelpers", () => {
   })
 
   test("isDropdownSelect is false without colspan or sortDropdown", () => {
+    expect(isDropdownSelect(territoryMenu, 1, undefined)).toBe(false)
     expect(isDropdownSelect(territoryMenu, 1, false)).toBe(false)
   })
 })

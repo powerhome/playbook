@@ -77,6 +77,8 @@ export const getSortIcon = (
 export const isDropdownSelect = (
   sortMenu: SortMenuItem[] | undefined,
   colSpan: number | undefined,
-  sortDropdown: boolean
+  sortDropdown?: boolean
 ): boolean =>
-  isSortingStyle(sortMenu) && ((colSpan != null && colSpan > 1) || sortDropdown)
+  isSortingStyle(sortMenu) &&
+  (sortDropdown === true ||
+    (sortDropdown !== false && colSpan != null && colSpan > 1))

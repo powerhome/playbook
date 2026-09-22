@@ -69,7 +69,7 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
     id,
     justifySortIcon = "between",
     placement = "bottom-end",
-    sortDropdown = false,
+    sortDropdown,
     sortMenu = [{}] as SortMenuItem[],
     tag = "table",
     text,
