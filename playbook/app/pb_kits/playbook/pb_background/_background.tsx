@@ -98,7 +98,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     imageUrl: getResponsiveValue(imageUrl),
   });
 
-  // Update responsive values on window resize.
+  // Keep responsive values in sync when props change, and on window resize.
   useEffect(() => {
     const updateResponsiveProps = () => {
       setResponsiveProps({
@@ -109,6 +109,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         imageUrl: getResponsiveValue(imageUrl),
       });
     };
+    updateResponsiveProps();
     window.addEventListener('resize', updateResponsiveProps);
     return () => window.removeEventListener('resize', updateResponsiveProps);
   }, [backgroundSize, backgroundPosition, backgroundRepeat, backgroundColor, imageUrl]);
@@ -153,7 +154,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     ...dynamicInlineProps
   };
 
-  const Tag: React.ReactElement | any = `${tag}`;
+  const Tag = tag as React.ElementType;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);

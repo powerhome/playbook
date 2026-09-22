@@ -427,3 +427,92 @@ test("Table.Header keeps htmlOptions.colspan when the dedicated prop is omitted"
 
   expect(container.querySelector(".pb_table_th")).toHaveAttribute("colspan", "3")
 })
+test("Table.Header renders sort link and icon when sortMenu is provided", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              sortMenu={[
+                { item: "Territory", link: "?sort=territory_asc", active: false, direction: "asc" },
+                { item: "Territory", link: "?sort=territory_desc", active: false, direction: "desc" },
+              ]}
+              text="Territory"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector("a")).toHaveAttribute("href", "?sort=territory_asc")
+  expect(container.querySelector(".pb_th_link")).toBeInTheDocument()
+})
+
+test("Table.Header cycles next sort link when an item is active", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              sortMenu={[
+                { item: "Territory", link: "?sort=territory_asc", active: true, direction: "asc" },
+                { item: "Territory", link: "?sort=territory_desc", active: false, direction: "desc" },
+              ]}
+              text="Territory"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector("a")).toHaveAttribute("href", "?sort=territory_desc")
+  expect(container.querySelector(".pb_th_active")).toBeInTheDocument()
+})
+
+test("Table.Header opens sort dropdown when colSpan is greater than 1", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              colSpan={2}
+              id="name"
+              sortMenu={[
+                { item: "First Name", link: "?sort=firstname_desc", active: false, direction: "desc" },
+                { item: "First Name", link: "?sort=firstname_asc", active: false, direction: "asc" },
+                { item: "Last Name", link: "?sort=lastname_desc", active: false, direction: "desc" },
+                { item: "Last Name", link: "?sort=lastname_asc", active: false, direction: "asc" },
+              ]}
+              text="Full Name"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_popover_reference_wrapper")).toBeInTheDocument()
+  expect(container.querySelector("a")).toHaveAttribute("href", "#")
+})
+
+test("Table.Header enables sort dropdown when sortDropdown is true", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              id="age"
+              sortDropdown
+              sortMenu={[
+                { item: "Age Descending", link: "?sort=age_desc", active: false, direction: "desc" },
+                { item: "Age Ascending", link: "?sort=age_asc", active: false, direction: "asc" },
+              ]}
+              text="Age"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_popover_reference_wrapper")).toBeInTheDocument()
+  expect(container.querySelector("a")).toHaveAttribute("href", "#")
+})

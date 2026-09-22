@@ -56,6 +56,7 @@ examples:
     - table_sticky_left_columns: Sticky Left Column
     - table_sticky_right_columns: Sticky Right Column
     - table_sticky_columns: Sticky Left and Right Columns
+    - table_header: Table Header
     - table_alignment_row: Row Alignment
     - table_alignment_column: Cell Alignment
     - table_alignment_shift_row: Row Shift
