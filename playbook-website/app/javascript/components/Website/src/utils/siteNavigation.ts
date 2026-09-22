@@ -13,8 +13,10 @@ const isPlaygroundPath = (path: string) => {
 }
 
 /**
- * Append a one-time cache-busting query so navigation to staging does not reuse
- * a previously cached off-VPN block/404 for the same path.
+ * Append a cache-busting query so navigation to staging does not reuse a
+ * previously cached off-VPN block/404 for the same path. Leave `_pb` on the
+ * URL for the tab lifetime — stripping it would put the next refresh back on
+ * the poisoned unbusted cache key.
  */
 export const withStagingCacheBust = (url: string) => {
   const parsed = new URL(
@@ -27,20 +29,6 @@ export const withStagingCacheBust = (url: string) => {
 
 export const isStagingHost = () =>
   typeof window !== "undefined" && window.location.hostname === STAGING_HOST
-
-/** Remove the one-time `_pb` param after a successful staging load. */
-export const stripStagingCacheBustFromUrl = () => {
-  if (!isStagingHost()) return
-  const url = new URL(window.location.href)
-  if (!url.searchParams.has(STAGING_CACHE_BUST_PARAM)) return
-  url.searchParams.delete(STAGING_CACHE_BUST_PARAM)
-  // Keep React Router's history.state (idx/key/usr) so back/forward stay aligned.
-  window.history.replaceState(
-    window.history.state,
-    "",
-    `${url.pathname}${url.search}${url.hash}`
-  )
-}
 
 /** True only on deployed prod — not localhost, review apps, or staging. */
 export const isProductionHost = () =>
