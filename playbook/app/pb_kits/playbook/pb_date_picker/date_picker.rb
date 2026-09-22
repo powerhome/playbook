@@ -91,6 +91,8 @@ module Playbook
                     default: "pointer"
       prop :year_ascending, type: Playbook::Props::Boolean,
                             default: false
+      prop :close_on_select, type: Playbook::Props::Boolean,
+                             default: true
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -101,6 +103,7 @@ module Playbook
       def date_picker_config
         {
           allowInput: allow_input,
+          closeOnSelect: close_on_select,
           customQuickPickDates: custom_quick_pick_dates,
           defaultDate: default_date,
           disableDate: disable_date,

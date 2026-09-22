@@ -15,6 +15,14 @@
       ],
       "default": false
     },
+    "closeOnSelect": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
     "customQuickPickDates": {
       "type": "GenericObject",
       "platforms": [
