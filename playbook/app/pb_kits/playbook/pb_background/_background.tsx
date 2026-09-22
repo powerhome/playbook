@@ -154,7 +154,9 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     ...dynamicInlineProps
   };
 
-  const Tag = tag as React.ElementType;
+  // Dynamic HTML tag from props; matches other kits (Title, Collapsible, etc.).
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag: React.ReactElement | any = `${tag}`;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
