@@ -6,7 +6,6 @@ import Button from '../../pb_button/_button'
 import Flex from '../../pb_flex/_flex'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
-import Title from '../../pb_title/_title'
 
 const FilterResponsive = (props) => {
   const options = [
@@ -18,115 +17,59 @@ const FilterResponsive = (props) => {
   ]
 
   return (
-    <>
-      <Filter
-          filters={{
-            'Full Name': 'John Wick',
-            'City': 'San Francisco',
-            'Territory': 'Pacific Northwest',
-          }}
-          marginBottom="xl"
-          minWidth="360px"
-          responsive="stacked"
-          results={546}
-          sortOptions={{
-            popularity: 'Popularity',
-            // eslint-disable-next-line
-            manager_title: 'Manager\'s Title',
-            // eslint-disable-next-line
-            manager_name: 'Manager\'s Name',
-          }}
-          sortValue={[{ name: 'popularity', dir: 'desc' }]}
-          {...props}
-      >
-        {({ closePopover }) => (
-          <form>
-            <TextInput
-                label="Full Name"
-                placeholder="Enter name"
+    <Filter
+        filters={{
+          'Full Name': 'John Wick',
+          'City': 'San Francisco',
+          'Territory': 'Pacific Northwest',
+          'Status': 'Active',
+          'Role': 'Manager',
+        }}
+        minWidth="360px"
+        responsive="stacked"
+        results={546}
+        sortOptions={{
+          popularity: 'Popularity',
+          // eslint-disable-next-line
+          manager_title: 'Manager\'s Title',
+          // eslint-disable-next-line
+          manager_name: 'Manager\'s Name',
+        }}
+        sortValue={[{ name: 'popularity', dir: 'desc' }]}
+        {...props}
+    >
+      {({ closePopover }) => (
+        <form>
+          <TextInput
+              label="Full Name"
+              placeholder="Enter name"
+              {...props}
+          />
+          <Select
+              blankSelection="Select One..."
+              label="Territory"
+              name="location"
+              options={options}
+              {...props}
+          />
+          <Flex
+              spacing="between"
+              {...props}
+          >
+            <Button
+                onClick={closePopover}
+                text="Apply"
                 {...props}
             />
-            <Select
-                blankSelection="Select One..."
-                label="Territory"
-                name="location"
-                options={options}
+            <Button
+                text="Clear"
+                variant="secondary"
                 {...props}
             />
-            <Flex
-                spacing="between"
-                {...props}
-            >
-              <Button
-                  onClick={closePopover}
-                  text="Apply"
-                  {...props}
-              />
-              <Button
-                  text="Clear"
-                  variant="secondary"
-                  {...props}
-              />
-            </Flex>
-          </form>
-        )}
-      </Filter>
-
-      <Title
-          marginBottom="sm"
-          size={4}
-          text="Many applied filters"
-          {...props}
-      />
-      <Filter
-          filters={{
-            'Full Name': 'John Wick',
-            'City': 'San Francisco',
-            'Territory': 'Pacific Northwest',
-            'Status': 'Active',
-            'Role': 'Manager',
-            'Department': 'Engineering',
-            'Start Date': 'Jan 1, 2024',
-          }}
-          minWidth="360px"
-          responsive="stacked"
-          results={1284}
-          sortOptions={{
-            popularity: 'Popularity',
-            // eslint-disable-next-line
-            manager_title: 'Manager\'s Title',
-            // eslint-disable-next-line
-            manager_name: 'Manager\'s Name',
-          }}
-          sortValue={[{ name: 'popularity', dir: 'desc' }]}
-          {...props}
-      >
-        {({ closePopover }) => (
-          <form>
-            <TextInput
-                label="Full Name"
-                placeholder="Enter name"
-                {...props}
-            />
-            <Flex
-                spacing="between"
-                {...props}
-            >
-              <Button
-                  onClick={closePopover}
-                  text="Apply"
-                  {...props}
-              />
-              <Button
-                  text="Clear"
-                  variant="secondary"
-                  {...props}
-              />
-            </Flex>
-          </form>
-        )}
-      </Filter>
-    </>
+          </Flex>
+        </form>
+      )}
+    </Filter>
   )
 }
 
