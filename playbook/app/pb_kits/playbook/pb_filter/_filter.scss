@@ -1,6 +1,7 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/border_radius";
+@import "../tokens/screen_sizes";
 
 .pb_filter_sort_menu {
   li {
@@ -122,6 +123,149 @@
     }
     .maskContainer::after {
       opacity:0;
+    }
+  }
+
+  // Extra containment when responsive="stacked" uses the two-row layout.
+  // Plain double consumers stay unchanged.
+  //
+  // React toggles `.pb_filter_responsive_stacked` via matchMedia.
+  // Rails uses `.pb_filter_responsive` + CSS grid/media queries.
+  &.pb_filter_responsive_stacked,
+  &.pb_filter_responsive {
+    overflow: hidden;
+
+    .maskContainer {
+      flex: 1 1 auto;
+      min-width: 0;
+      position: relative;
+    }
+
+    .filters {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .maskContainer::after {
+      background: linear-gradient(to right, rgba($white, 0), $white 65%);
+      content: "";
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: $space_xl + $space_sm;
+      z-index: 1;
+    }
+
+    .maskContainer::before {
+      display: none;
+    }
+  }
+
+  &.pb_filter_responsive_stacked {
+    .filter-bottom {
+      align-items: flex-start !important;
+      flex-direction: column !important;
+      gap: $space_xs;
+      padding-bottom: $space_sm !important;
+      padding-top: $space_sm !important;
+    }
+  }
+
+  // Rails layout switch: one row above md, two rows at ≤767px
+  &.pb_filter_responsive {
+    .pb_filter_responsive_layout {
+      align-items: center;
+      column-gap: $space_xs;
+      display: grid;
+      grid-template-areas: "filters results-inline sort";
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      width: 100%;
+    }
+
+    .pb_filter_responsive_filters {
+      align-items: center;
+      display: flex;
+      grid-area: filters;
+      min-width: 0;
+    }
+
+    .pb_filter_responsive_results_inline {
+      grid-area: results-inline;
+      flex-shrink: 0;
+    }
+
+    .pb_filter_responsive_sep {
+      display: none;
+      grid-area: sep;
+    }
+
+    .pb_filter_responsive_results_bar {
+      display: none;
+      grid-area: results-bar;
+    }
+
+    .pb_filter_responsive_sort {
+      align-items: center;
+      display: flex;
+      flex-shrink: 0;
+      grid-area: sort;
+      gap: $space_xs;
+    }
+
+    .pb_filter_responsive_sort_label {
+      display: none;
+    }
+
+    @include break_at($screen-md-max) {
+      .pb_filter_responsive_layout {
+        align-items: center;
+        grid-template-areas:
+          "filters filters"
+          "sep sep"
+          "results-bar sort";
+        grid-template-columns: minmax(0, 1fr) auto;
+        row-gap: 0;
+      }
+
+      .pb_filter_responsive_results_inline {
+        display: none;
+      }
+
+      .pb_filter_responsive_sep {
+        display: block;
+      }
+
+      .pb_filter_responsive_results_bar {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        padding-bottom: $space_sm;
+        padding-left: $space_sm;
+        padding-top: $space_sm;
+      }
+
+      .pb_filter_responsive_sort {
+        justify-content: flex-end;
+        padding-bottom: $space_sm;
+        padding-right: $space_sm;
+        padding-top: $space_sm;
+      }
+
+      .pb_filter_responsive_sort_label {
+        display: inline;
+      }
+    }
+  }
+
+  &.pb_filter_responsive_stacked.dark,
+  &.pb_filter_responsive.dark {
+    .maskContainer::after {
+      background: linear-gradient(to right, rgba($card_dark, 0), $card_dark 65%);
+      opacity: 1;
     }
   }
 }

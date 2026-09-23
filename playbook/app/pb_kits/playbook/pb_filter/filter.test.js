@@ -152,3 +152,39 @@ test("generates quickpick options for interactive dropdown filters", () => {
 
   expect(handleChange).toHaveBeenCalledWith("quickpick-last-month");
 });
+
+test("renders double layout when double is true", () => {
+  render(<FilterTest double />);
+
+  expect(screen.getByText("sort by:")).toBeInTheDocument();
+});
+
+test("responsive stacked uses double layout below md breakpoint", async () => {
+  mockMatchMedia(true);
+
+  render(<FilterTest responsive="stacked" />);
+
+  expect(await screen.findByText("sort by:")).toBeInTheDocument();
+});
+
+test("responsive stacked uses single layout above md breakpoint", () => {
+  mockMatchMedia(false);
+
+  render(<FilterTest responsive="stacked" />);
+
+  expect(screen.queryByText("sort by:")).not.toBeInTheDocument();
+  expect(screen.getByText("Popularity")).toBeInTheDocument();
+});
+
+test("responsive stacked ignores explicit double when viewport is wide", () => {
+  mockMatchMedia(false);
+
+  render(
+    <FilterTest
+        double
+        responsive="stacked"
+    />
+  );
+
+  expect(screen.queryByText("sort by:")).not.toBeInTheDocument();
+});

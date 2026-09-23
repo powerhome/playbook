@@ -62,6 +62,7 @@
     "onSortChange": "() => {}",
     "placement": "bottom-start",
     "popoverProps": {},
+    "responsive": "",
     "results": 546,
     "sortOptions": {
       "popularity": "Popularity",
@@ -80,6 +81,7 @@
       "name": "Layout",
       "props": [
         "double",
+        "responsive",
         "variant",
         "background",
         "results"

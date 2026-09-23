@@ -93,6 +93,17 @@
         "rails"
       ]
     },
+    "responsive": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "stacked"
+      ],
+      "default": null
+    },
     "results": {
       "type": "number",
       "platforms": [
@@ -148,11 +159,11 @@
   "usage": {
     "react": {
       "import": "import { Filter } from 'playbook-ui'",
-      "example": "<Filter placement=\"top\" template=\"default\"></Filter>"
+      "example": "<Filter placement=\"top\" responsive=\"stacked\"></Filter>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"filter\", props: { placement: \"top\", template: \"default\" }) %>"
+      "example": "<%= pb_rails(\"filter\", props: { placement: \"top\", responsive: \"stacked\" }) %>"
     }
   }
 }

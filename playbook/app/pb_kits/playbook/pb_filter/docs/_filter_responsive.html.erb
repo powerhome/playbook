@@ -1,0 +1,79 @@
+<%=
+  pb_rails("filter", props: {
+    id: "filter-responsive-1",
+    margin_bottom: "xl",
+    min_width: "360px",
+    responsive: "stacked",
+    filters: [
+      { name: "Full Name", value: "John Wick" },
+      { name: "City", value: "San Francisco" },
+      { name: "Territory", value: "Pacific Northwest" },
+    ],
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Manager's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    template: "single",
+    results: 546,
+  }) do
+%>
+  <%
+    example_collection = [
+      OpenStruct.new(name: "USA", value: 1),
+      OpenStruct.new(name: "Canada", value: 2),
+      OpenStruct.new(name: "Brazil", value: 3),
+      OpenStruct.new(name: "Philippines", value: 4),
+    ]
+  %>
+  <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+    <%= form.text_field :example_text_field, props: { label: true } %>
+    <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
+    <%= form.actions do |action| %>
+      <%= action.submit props: {
+        text: "Apply",
+        data: {
+          disable_with: "pb_rails('icon', props: { icon: 'spinner', spin: true, fixed_width: true })Searching...".html_safe
+      },}%>
+      <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("title", props: { size: 4, text: "Many applied filters", margin_bottom: "sm" }) %>
+
+<%=
+  pb_rails("filter", props: {
+    id: "filter-responsive-2",
+    min_width: "360px",
+    responsive: "stacked",
+    filters: [
+      { name: "Full Name", value: "John Wick" },
+      { name: "City", value: "San Francisco" },
+      { name: "Territory", value: "Pacific Northwest" },
+      { name: "Status", value: "Active" },
+      { name: "Role", value: "Manager" },
+      { name: "Department", value: "Engineering" },
+      { name: "Start Date", value: "Jan 1, 2024" },
+    ],
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Manager's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    template: "single",
+    results: 1284,
+  }) do
+%>
+  <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+    <%= form.text_field :example_text_field, props: { label: true } %>
+    <%= form.actions do |action| %>
+      <%= action.submit props: {
+        text: "Apply",
+        data: {
+          disable_with: "pb_rails('icon', props: { icon: 'spinner', spin: true, fixed_width: true })Searching...".html_safe
+      },}%>
+      <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+    <% end %>
+  <% end %>
+<% end %>
