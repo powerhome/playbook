@@ -87,7 +87,7 @@ export const FORM_METHODS = [
   },
   directMethod('dropdown_field', {
     binding: { ...directBinding, value: 'Supply props.default_value explicitly; the builder does not read the model.' },
-    submission: { submits: true, value: 'Selected option id in a CSS-hidden input (not input type=hidden).', multi: 'multi_select adds [] to the name but uses one input with comma-joined ids. user[country][] therefore submits a single array entry such as "ca,us", not separate entries per option.' },
+    submission: { submits: true, value: 'Selected option id in a CSS-hidden input (not input type=hidden).', multi: 'Comma-joining is only the default-value encoding (data-default-value and a temporary baseInput.value). After kit JS runs, syncHiddenInputs emits one input type="hidden" per selected id, all named name[] (the CSS-hidden input already has [] appended), then clears that original CSS-hidden input. Rails receives separate array entries such as ["ca","us"], not "ca,us".' },
     validation: { required: 'props.required sets required on the CSS-hidden input. Do not assume a focusable native validation UI.', indicator: 'props.required_indicator is visual only.', error: messageError, client: 'No validation or input_options prop is exposed by this Rails kit.' },
     example: formExample('f.dropdown_field "user[country]", props: { label: "Country", options: [{ id: "ca", value: "canada", label: "Canada" }], required: true, error: @user.errors[:country].to_sentence }'),
   }),

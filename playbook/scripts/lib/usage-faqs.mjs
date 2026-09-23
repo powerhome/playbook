@@ -43,7 +43,7 @@ export const KIT_USAGE_FAQS = {
   dropdown: [{
     id: 'dropdown.builder-name', platforms: ['rails'],
     questions: ['Does dropdown_field scope country to user[country]?', 'Does multi_select submit separate array values?'],
-    answer: 'Pass user[country] explicitly to dropdown_field. multi_select appends [] but stores comma-joined option ids in one input; it does not emit an input for each selected id.',
+    answer: 'Pass user[country] explicitly to dropdown_field. multi_select appends [] to the CSS-hidden input name. Comma-joining is only for default-value encoding. After kit JS runs, Playbook emits one type="hidden" input per selected id (all named name[]), clears the original CSS-hidden input, and Rails receives separate array entries.',
     contractPaths: ['form.rails.builder.methods'], props: ['name', 'multiSelect', 'options'],
   }, {
     id: 'dropdown.builder-block', platforms: ['rails'],
