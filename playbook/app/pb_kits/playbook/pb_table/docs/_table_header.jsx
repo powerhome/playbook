@@ -13,12 +13,14 @@ const DATA_ROWS = [
   { territory: 'Central', firstname: 'David', lastname: 'Wilson', age: 32, job: 'Analyst' },
 ]
 
+const TABLE_ID = 'table-header'
+
 const getSortFromSearch = () => {
   if (typeof window === 'undefined') return ''
   return new URLSearchParams(window.location.search).get('sort') || ''
 }
 
-const sortLink = (sortKey) => `?sort=${sortKey}#table-header`
+const sortLink = (sortKey) => `?sort=${sortKey}#${TABLE_ID}`
 
 const sortKeyFromHref = (href) => {
   if (!href) return null
@@ -34,7 +36,7 @@ const syncSortToUrl = (sortKey) => {
   const params = new URLSearchParams(window.location.search)
   params.set('sort', sortKey)
   const search = params.toString()
-  const next = `${window.location.pathname}?${search}#table-header`
+  const next = `${window.location.pathname}?${search}#${TABLE_ID}`
   window.history.replaceState(null, '', next)
 }
 
@@ -52,36 +54,39 @@ const sortRows = (rows, sort) => {
   })
 }
 
+const isClickFromThisExample = (anchor, table) => {
+  if (table.contains(anchor)) return true
+
+  // Dropdown menus portal to document.body; tie them back via the header id.
+  const ownerId = anchor
+      .closest('[data-pb-table-header]')
+      ?.getAttribute('data-pb-table-header')
+
+  return !!(ownerId && table.querySelector(`#${CSS.escape(ownerId)}`))
+}
+
 const TableHeaderDoc = (props) => {
   const [sort, setSort] = useState(getSortFromSearch)
   const dataRows = useMemo(() => sortRows(DATA_ROWS, sort), [sort])
 
   useEffect(() => {
+    const table = document.getElementById(TABLE_ID)
+    if (!table) return undefined
+
     const onClick = (event) => {
       const anchor = event.target.closest('a[href]')
-      if (!anchor) return
+      if (!anchor || !isClickFromThisExample(anchor, table)) return
 
-      const href = anchor.getAttribute('href') || ''
-      // Demo links use #table-header; listen on document so portaled dropdown items are included.
-      if (!href.includes('#table-header')) return
-
-      const nextSort = sortKeyFromHref(href)
+      const nextSort = sortKeyFromHref(anchor.getAttribute('href'))
       if (!nextSort) return
-
-      // Dropdown header toggles use href="#"; menu picks still use ?sort= links.
-      // Also ignore any leftover nextLink on colspan headers so the popover can open.
-      const isDropdownMenuItem = !!anchor.closest('.pb_table_header_dropdown')
-      if (!isDropdownMenuItem) {
-        const headerCell = anchor.closest('th, [class*="pb_table_th"]')
-        const colSpan = Number(headerCell?.getAttribute('colspan') || 0)
-        if (colSpan > 1) return
-      }
 
       event.preventDefault()
       setSort(nextSort)
       syncSortToUrl(nextSort)
     }
 
+    // Capture phase so we can preventDefault before React Router navigates.
+    // Still scoped to this table / its portaled dropdown via isClickFromThisExample.
     document.addEventListener('click', onClick, true)
     return () => document.removeEventListener('click', onClick, true)
   }, [])
@@ -89,7 +94,7 @@ const TableHeaderDoc = (props) => {
   return (
     <Table
         dataTable
-        id="table-header"
+        id={TABLE_ID}
         verticalBorder
         {...props}
     >

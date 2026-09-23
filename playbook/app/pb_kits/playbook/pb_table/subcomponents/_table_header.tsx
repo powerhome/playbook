@@ -151,7 +151,10 @@ const TableHeader = (props: TableHeaderPropTypes): React.ReactElement => {
         shouldClosePopover={closeSortPopover}
         show={showSortPopover}
     >
-      <Nav className="pb_table_header_dropdown">
+      <Nav
+          className="pb_table_header_dropdown"
+          data={{ "pb-table-header": headerId }}
+      >
         {getSortItems(sortMenu).map((sortItemName) => {
           const item = getActiveOrFirstItem(getSortItemsFor(sortMenu, sortItemName));
           return (
