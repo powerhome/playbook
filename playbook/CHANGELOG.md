@@ -1,3 +1,61 @@
+# 18.0.0
+##### September 23, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Your feature description goes here.
+
+[18.0.0](https://github.com/powerhome/playbook/tree/18.0.0) full list of changes:
+
+**Breaking:**
+- Update Viewcomponent to 4.3.0 [\#6485](https://github.com/powerhome/playbook/pull/6485) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Kit Enhancements:**
+
+- Form Kits: Allow Margin Bottom Override for Applicable Form Builder Fields [\#6605](https://github.com/powerhome/playbook/pull/6605) ([thestephenmarshall](https://github.com/thestephenmarshall))
+- MultiLevelSelect Kit: Ability to Customize Single-select Display [\#6598](https://github.com/powerhome/playbook/pull/6598) ([nidaqg](https://github.com/nidaqg))
+- Table Kit: Add Colspan Support + Docs to React and Rails [\#6596](https://github.com/powerhome/playbook/pull/6596) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- File Upload Kit: Add Custom_message for Parity [\#6578](https://github.com/powerhome/playbook/pull/6578) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Link Kit: Add Configurable Rel Prop [\#6577](https://github.com/powerhome/playbook/pull/6577) ([nidaqg](https://github.com/nidaqg))
+
+
+**Improvements:**
+
+- Metadata: Kit Schemas Split Typing by Platform [\#6669](https://github.com/powerhome/playbook/pull/6669) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Declare Playbook's Mysql Cluster In the Service Catalog [\#6654](https://github.com/powerhome/playbook/pull/6654) ([indiebrain](https://github.com/indiebrain))
+- Table Kit Docs: Update Docs to Use Table With Subcomponents [\#6653](https://github.com/powerhome/playbook/pull/6653) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Update Getting Started Docs [\#6649](https://github.com/powerhome/playbook/pull/6649) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Add Catch-all Error Page for Invalid Playbook Urls [\#6648](https://github.com/powerhome/playbook/pull/6648) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: RC Changelog [\#6647](https://github.com/powerhome/playbook/pull/6647) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Error Page for Nonexistent Kit Url [\#6634](https://github.com/powerhome/playbook/pull/6634) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Dialog for Vpn Access Styling [\#6624](https://github.com/powerhome/playbook/pull/6624) ([nidaqg](https://github.com/nidaqg))
+- Datepicker Docs: Update Timeselection Doc [\#6623](https://github.com/powerhome/playbook/pull/6623) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Remove Dialog on Redirect [\#6616](https://github.com/powerhome/playbook/pull/6616) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Optimize Website Routing [\#6614](https://github.com/powerhome/playbook/pull/6614) ([nidaqg](https://github.com/nidaqg))
+- Vite Upgrade to 6.4.3 [\#6607](https://github.com/powerhome/playbook/pull/6607) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Route Playgrounds to Staging Behind Vpn [\#6606](https://github.com/powerhome/playbook/pull/6606) ([nickamantia](https://github.com/nickamantia))
+- Table Kit Docs: Reveal All Rails Docs [\#6597](https://github.com/powerhome/playbook/pull/6597) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Form Docs V2 [\#6595](https://github.com/powerhome/playbook/pull/6595) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Icon Css Api Documentation [\#6590](https://github.com/powerhome/playbook/pull/6590) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Update Dependency Powerhome/ci-kubed to V10.6.0 [\#6581](https://github.com/powerhome/playbook/pull/6581) ([renovate[bot]](https://github.com/renovate[bot]))
+- Add Repository Metadata to the Playbook_ui Gemspec [\#6580](https://github.com/powerhome/playbook/pull/6580) ([garettarrowood](https://github.com/garettarrowood))
+- Feat: Render Traefik Ingress In Production [\#6571](https://github.com/powerhome/playbook/pull/6571) ([rafatio](https://github.com/rafatio))
+- Feat: Add Traefik Ingress Alongside Nginx on Staging [\#6563](https://github.com/powerhome/playbook/pull/6563) ([rafatio](https://github.com/rafatio))
+- Playground: Persistence, Sharing, and Editing Tools [\#6562](https://github.com/powerhome/playbook/pull/6562) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Add Kit Category Svgs for Container and Full Screen [\#6553](https://github.com/powerhome/playbook/pull/6553) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Bump jest-axe from 4.1.0 to 11.0.0 (#6446) @dependabot[/6446](https://github.com/powerhome/playbook/pull/6446) ([dependabot[bot]](https://github.com/dependabot[bot]))
+
+
+**Fixed Bugs:**
+
+- Rich Text Editor: Fixes for Formatting Issues When You Copy Paste from Ai Chats [\#6579](https://github.com/powerhome/playbook/pull/6579) ([nidaqg](https://github.com/nidaqg))
+- Fix: Bind Playbook Traefik Ingress to Public Entrypoint In Production [\#6574](https://github.com/powerhome/playbook/pull/6574) ([rafatio](https://github.com/rafatio))
+- Advanced Table: Vertical Borders Disappear Upon Hover Firefox Only [\#6573](https://github.com/powerhome/playbook/pull/6573) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/17.1.0...18.0.0)
+
+
 # 📦 Introducing the New Container Kit ✨
 ##### August 25, 2026
 
