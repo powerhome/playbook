@@ -11,6 +11,8 @@ on:
 permissions:
   contents: read
 
+cache-mode: none
+
 jobs:
   update_release_draft:
     permissions:
