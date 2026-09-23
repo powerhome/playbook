@@ -1,9 +1,9 @@
-# 18.0.0
+# ⚡ ViewComponent 4.3.0 Clears the Way for Rails 8!
 ##### September 23, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
-Your feature description goes here.
+Playbook has officially upgraded to ViewComponent 4.3.0! This clears the ViewComponent blocker for Rails 8, so all Power apps should now be unblocked to move forward with their Rails 8 upgrades. 🚀
 
 [18.0.0](https://github.com/powerhome/playbook/tree/18.0.0) full list of changes:
 
