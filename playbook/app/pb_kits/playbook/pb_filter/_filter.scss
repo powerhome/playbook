@@ -183,6 +183,8 @@
       display: grid;
       grid-template-areas: "filters results-inline sort";
       grid-template-columns: minmax(0, 1fr) auto auto;
+      // Match single-template Flex padding_right: "lg"
+      padding-right: $space_lg;
       width: 100%;
     }
 
@@ -228,6 +230,7 @@
           "sep sep"
           "results-bar sort";
         grid-template-columns: minmax(0, 1fr) auto;
+        padding-right: 0;
         row-gap: 0;
       }
 
