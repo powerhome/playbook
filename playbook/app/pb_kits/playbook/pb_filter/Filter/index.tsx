@@ -52,11 +52,7 @@ const Filter = ({
   }: FilterProps): React.ReactElement => {
   const isStackedViewport = useStackedBreakpoint(responsive === 'stacked')
   const useDouble = responsive === 'stacked' ? isStackedViewport : double === true
-  // Opt-in class for stacked overflow/layout containment without
-  // changing default double consumers.
-  const stackedClassName = responsive === 'stacked' && useDouble
-    ? 'pb_filter_responsive_stacked'
-    : undefined
+  const responsiveClassName = responsive === 'stacked' ? 'pb_filter_responsive' : undefined
 
   const displayFilter = () => {
     if (variant === 'sidebar') {
@@ -67,13 +63,16 @@ const Filter = ({
     if (useDouble) {
       return (
         <FilterDouble
-            className={stackedClassName}
+            className={responsiveClassName}
             {...templateProps}
         />
       )
     } else {
       return (
-        <FilterSingle {...templateProps} />
+        <FilterSingle
+            className={responsiveClassName}
+            {...templateProps}
+        />
       )
     }
   }

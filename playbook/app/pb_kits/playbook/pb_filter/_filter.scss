@@ -126,12 +126,6 @@
     }
   }
 
-  // Extra containment when responsive="stacked" uses the two-row layout.
-  // Plain double consumers stay unchanged.
-  //
-  // React toggles `.pb_filter_responsive_stacked` via matchMedia.
-  // Rails uses `.pb_filter_responsive` + CSS grid/media queries.
-  &.pb_filter_responsive_stacked,
   &.pb_filter_responsive {
     overflow: hidden;
 
@@ -163,27 +157,13 @@
     .maskContainer::before {
       display: none;
     }
-  }
 
-  &.pb_filter_responsive_stacked {
-    .filter-bottom {
-      align-items: flex-start !important;
-      flex-direction: column !important;
-      gap: $space_xs;
-      padding-bottom: $space_sm !important;
-      padding-top: $space_sm !important;
-    }
-  }
-
-  // Rails layout switch: one row above md, two rows at ≤767px
-  &.pb_filter_responsive {
     .pb_filter_responsive_layout {
       align-items: center;
       column-gap: $space_xs;
       display: grid;
       grid-template-areas: "filters results-inline sort";
       grid-template-columns: minmax(0, 1fr) auto auto;
-      // Match single-template Flex padding_right: "lg"
       padding-right: $space_lg;
       width: 100%;
     }
@@ -264,7 +244,6 @@
     }
   }
 
-  &.pb_filter_responsive_stacked.dark,
   &.pb_filter_responsive.dark {
     .maskContainer::after {
       background: linear-gradient(to right, rgba($card_dark, 0), $card_dark 65%);

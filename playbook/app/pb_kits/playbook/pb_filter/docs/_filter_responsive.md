@@ -1,3 +1,3 @@
-Use `responsive: "stacked"` (Rails) or `responsive="stacked"` (React) to switch to the two-row layout at viewports `≤767px`, and the one-row layout above that.
+Use `responsive="stacked"` (React) or `responsive: "stacked"` (Rails) to use the two-row layout below `767px` and the one-row layout above.
 
-When `responsive` is `"stacked"`, it owns the layout: Rails ignores `template` for `default`/`single` chrome, and React ignores `double`. `filter_only` / `sort_only` are unchanged. Narrow viewports also get chip fade/scroll containment so content stays inside the kit.
+When set, `responsive` controls the layout (`double` / `template` are ignored for the default and single layouts). `filter_only` and `sort_only` are unchanged.

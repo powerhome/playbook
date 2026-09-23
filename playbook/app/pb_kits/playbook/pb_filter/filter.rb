@@ -35,8 +35,8 @@ module Playbook
         base.merge(pb_filter_responsive: "stacked")
       end
 
-      # Opt-in stacked mode for default/single templates only.
-      # Wide = one-row layout; narrow = two-row layout.
+      # Wide = one-row layout; narrow (≤767px) = two-row layout.
+      # Only applies when template is default or single.
       def responsive_stacked?
         responsive == "stacked" && %w[default single].include?(template)
       end

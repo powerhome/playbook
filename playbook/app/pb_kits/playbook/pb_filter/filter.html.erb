@@ -1,8 +1,6 @@
 <%= pb_content_tag(:div) do %>
     <%= object.wrapper do %>
       <% if object.responsive_stacked? %>
-        <%# CSS grid toggles default (two-row) vs single at ≤767px.
-            One sort trigger keeps popover IDs valid. template is ignored while responsive. %>
         <div class="pb_filter_responsive_layout">
           <div class="pb_filter_responsive_filters">
             <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "filter", id:"filter#{object.id}"}) %>
