@@ -188,3 +188,17 @@ test("responsive stacked ignores explicit double when viewport is wide", () => {
 
   expect(screen.queryByText("sort by:")).not.toBeInTheDocument();
 });
+
+test("responsive stacked merges kit className with caller className", async () => {
+  mockMatchMedia(true);
+
+  const { container } = render(
+    <FilterTest
+        className="consumer-class"
+        responsive="stacked"
+    />
+  );
+
+  await screen.findByText("sort by:");
+  expect(container.querySelector(".pb_filter_kit.pb_filter_responsive.consumer-class")).toBeInTheDocument();
+});

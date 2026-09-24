@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import classnames from 'classnames'
+
 import FilterSingle, { FilterSingleProps } from './FilterSingle'
 import FilterDouble, { FilterDoubleProps } from './FilterDouble'
 import FilterSidebar, { FilterSidebarProps } from './FilterSidebar'
@@ -19,11 +21,17 @@ type FilterProps =
     variant?: null | 'sidebar',
   })
 
+const getStackedMatch = (): boolean => (
+  typeof window !== 'undefined' &&
+  !!window.matchMedia?.(STACKED_MEDIA_QUERY).matches
+)
+
 const useStackedBreakpoint = (enabled: boolean): boolean => {
-  const [isBelowMd, setIsBelowMd] = useState(false)
+  const [isBelowMd, setIsBelowMd] = useState(() => (enabled ? getStackedMatch() : false))
 
   useEffect(() => {
     if (!enabled || typeof window === 'undefined' || !window.matchMedia) {
+      setIsBelowMd(false)
       return
     }
 
@@ -41,7 +49,7 @@ const useStackedBreakpoint = (enabled: boolean): boolean => {
     return () => mediaQuery.removeListener(updateMatch)
   }, [enabled])
 
-  return isBelowMd
+  return enabled && isBelowMd
 }
 
 const Filter = ({
@@ -52,26 +60,33 @@ const Filter = ({
   }: FilterProps): React.ReactElement => {
   const isStackedViewport = useStackedBreakpoint(responsive === 'stacked')
   const useDouble = responsive === 'stacked' ? isStackedViewport : double === true
-  const responsiveClassName = responsive === 'stacked' ? 'pb_filter_responsive' : undefined
+  const { className, ...layoutProps } = templateProps
+  const mergedClassName = classnames(
+    responsive === 'stacked' && 'pb_filter_responsive',
+    className,
+  )
 
   const displayFilter = () => {
     if (variant === 'sidebar') {
       return (
-        <FilterSidebar {...templateProps} />
+        <FilterSidebar
+            className={className}
+            {...layoutProps}
+        />
       )
     }
     if (useDouble) {
       return (
         <FilterDouble
-            className={responsiveClassName}
-            {...templateProps}
+            {...layoutProps}
+            className={mergedClassName}
         />
       )
     } else {
       return (
         <FilterSingle
-            className={responsiveClassName}
-            {...templateProps}
+            {...layoutProps}
+            className={mergedClassName}
         />
       )
     }
