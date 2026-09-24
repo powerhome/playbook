@@ -268,3 +268,13 @@ describe('isNativeSelectMenuInteraction', () => {
     expect(isNativeSelectMenuInteraction(dialog, select)).toBe(false)
   })
 })
+
+test("applies htmlOptions to Dialog.Body", () => {
+  render(
+    <Dialog.Body htmlOptions={{ title: "body title" }}>
+      {"Body content"}
+    </Dialog.Body>
+  )
+
+  expect(document.querySelector(".dialog_body")).toHaveAttribute("title", "body title")
+})
