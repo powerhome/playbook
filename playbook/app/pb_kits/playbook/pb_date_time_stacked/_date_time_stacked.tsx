@@ -12,6 +12,7 @@ import TimeStacked from '../pb_time_stacked/_time_stacked'
 import DateStacked from '../pb_date_stacked/_date_stacked'
 
 type DateTimeStackedProps = {
+  className?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   date: Date,
@@ -28,6 +29,7 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
     date,
     datetime,
     dark,
+    className,
     htmlOptions = {},
     timeZone = 'America/New_York',
     showCurrentYear = false,
@@ -36,6 +38,7 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
   const classes = classnames(
     buildCss('pb_date_time_stacked_kit'),
     globalProps(props),
+    className
   )
   const htmlProps = buildHtmlProps(htmlOptions)
 
