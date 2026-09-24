@@ -41,8 +41,9 @@ const EditorButton = ({
             className="toolbar_button_icon"
             justify="center"
         >
-          <Icon icon={icon}
-              size="lg"
+          <Icon
+              icon={icon}
+              size="1x"
           />
         </Flex>
       </button>

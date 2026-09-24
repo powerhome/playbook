@@ -1,50 +1,49 @@
-import React, {useCallback} from "react";
+import React from "react";
 import EditorButton from "./EditorButton";
-import { ToolbarTypes } from "./EditorTypes";
+import { normalizeListSelection } from "./listSelection";
 
 const ToolbarNodes = ({editor}: any): React.ReactElement => {
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const setLink = useCallback(() => {
-  const previousUrl = editor.getAttributes("link").href;
-  const url = window.prompt("URL", previousUrl);
-
-  // cancelled
-  if (url === null) {
-    return;
-  }
-
-  // empty
-  if (url === "") {
-    editor.chain().focus().extendMarkRange("link").unsetLink().run();
-
-    return;
-  }
-
-  // update link
-  editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
-}, [editor]);
-
-const toolbarNodesItems = [
+  const toolbarNodesItems = [
         {
-          onclick: () => editor.chain().focus().toggleCodeBlock().run(),
-          icon: "code",
-          isActive: editor.isActive("codeBlock"),
-          text: "Codeblock",
+          onclick: () => {
+            normalizeListSelection(editor)
+            editor.chain().focus().toggleOrderedList().run()
+          },
+          icon: "list-ol",
+          isActive: editor.isActive("orderedList"),
+          text: "Ordered List",
         },
         {
-          onclick: setLink,
-          icon: "link",
-          isActive: editor.isActive("link"),
-          text: "Link",
+          onclick: () => {
+            normalizeListSelection(editor)
+            editor.chain().focus().toggleBulletList().run()
+          },
+          icon: "list",
+          isActive: editor.isActive("bulletList"),
+          text: "Bullet List",
+        },
+        {
+          onclick: () => editor.chain().focus().liftListItem("listItem").run(),
+          icon: "outdent",
+          isActive: false,
+          text: "Outdent",
+          disable: !editor.can().chain().focus().liftListItem("listItem").run(),
+        },
+        {
+          onclick: () => editor.chain().focus().sinkListItem("listItem").run(),
+          icon: "indent",
+          isActive: false,
+          text: "Indent",
+          disable: !editor.can().chain().focus().sinkListItem("listItem").run(),
         },
       ];
 
 return (
     <>
-        {toolbarNodesItems.map(({ onclick, icon, text, isActive }: ToolbarTypes, index: number) => (
+        {toolbarNodesItems.map(({ onclick, icon, text, isActive, disable }, index) => (
             <EditorButton
                 classname={`toolbar_button ${isActive ? 'is-active' : ''}`}
+                disable={disable}
                 icon={icon}
                 key={index}
                 onclick={onclick}

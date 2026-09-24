@@ -124,6 +124,51 @@ async function initPlaybookRichTextEditorRails(container) {
       codeBlock: "toggleCodeBlock",
     };
 
+    const normalizeListSelection = () => {
+      let { selection } = editor.state;
+      if (selection.empty) return;
+
+      if (selection.$from.nodeBefore?.type.name === "hardBreak") {
+        const selectedSize = selection.to - selection.from;
+        const breakPosition = selection.from - 1;
+
+        editor.chain()
+          .deleteRange({ from: breakPosition, to: selection.from })
+          .setTextSelection(breakPosition)
+          .splitBlock()
+          .run();
+
+        const from = editor.state.selection.from;
+        editor.commands.setTextSelection({ from, to: from + selectedSize });
+        selection = editor.state.selection;
+      }
+
+      const { $from, $to } = selection;
+      let { from, to } = selection;
+
+      if (
+        $from.depth > 0 &&
+        $from.parent.isTextblock &&
+        $from.parentOffset === $from.parent.content.size
+      ) {
+        const nextBlockStart = $from.after($from.depth) + 1;
+        if (nextBlockStart < to) from = nextBlockStart;
+      }
+
+      if (
+        $to.depth > 0 &&
+        $to.parent.isTextblock &&
+        $to.parentOffset === 0
+      ) {
+        const previousBlockEnd = $to.before($to.depth) - 1;
+        if (previousBlockEnd > from) to = previousBlockEnd;
+      }
+
+      if (from !== selection.from || to !== selection.to) {
+        editor.commands.setTextSelection({ from, to });
+      }
+    };
+
     const getCurrentBlockValue = () => {
       let value = "paragraph";
       if (editor.isActive("heading", { level: 1 })) value = "heading-1";
@@ -166,48 +211,8 @@ async function initPlaybookRichTextEditorRails(container) {
     };
 
     const applyBlockType = (value) => {
-      let { selection } = editor.state;
-
-      if ((value === "bulletList" || value === "orderedList") && !selection.empty) {
-        if (selection.$from.nodeBefore?.type.name === "hardBreak") {
-          const selectedSize = selection.to - selection.from;
-          const breakPosition = selection.from - 1;
-
-          editor.chain()
-            .deleteRange({ from: breakPosition, to: selection.from })
-            .setTextSelection(breakPosition)
-            .splitBlock()
-            .run();
-
-          const from = editor.state.selection.from;
-          editor.commands.setTextSelection({ from, to: from + selectedSize });
-          selection = editor.state.selection;
-        }
-
-        const { $from, $to } = selection;
-        let { from, to } = selection;
-
-        if (
-          $from.depth > 0 &&
-          $from.parent.isTextblock &&
-          $from.parentOffset === $from.parent.content.size
-        ) {
-          const nextBlockStart = $from.after($from.depth) + 1;
-          if (nextBlockStart < to) from = nextBlockStart;
-        }
-
-        if (
-          $to.depth > 0 &&
-          $to.parent.isTextblock &&
-          $to.parentOffset === 0
-        ) {
-          const previousBlockEnd = $to.before($to.depth) - 1;
-          if (previousBlockEnd > from) to = previousBlockEnd;
-        }
-
-        if (from !== selection.from || to !== selection.to) {
-          editor.commands.setTextSelection({ from, to });
-        }
+      if (value === "bulletList" || value === "orderedList") {
+        normalizeListSelection();
       }
 
       const chain = editor.chain().focus();
@@ -230,6 +235,8 @@ async function initPlaybookRichTextEditorRails(container) {
         else if (action === "strike") active = editor.isActive("strike");
         else if (action === "codeBlock") active = editor.isActive("codeBlock");
         else if (action === "link") active = editor.isActive("link");
+        else if (action === "bulletList") active = editor.isActive("bulletList");
+        else if (action === "orderedList") active = editor.isActive("orderedList");
         btn.classList.toggle("is-active", active);
       });
       toolbar.querySelectorAll("button[data-action='undo']").forEach((btn) => {
@@ -237,6 +244,12 @@ async function initPlaybookRichTextEditorRails(container) {
       });
       toolbar.querySelectorAll("button[data-action='redo']").forEach((btn) => {
         btn.disabled = !editor.can().redo();
+      });
+      toolbar.querySelectorAll("button[data-action='outdent']").forEach((btn) => {
+        btn.disabled = !editor.can().liftListItem("listItem");
+      });
+      toolbar.querySelectorAll("button[data-action='indent']").forEach((btn) => {
+        btn.disabled = !editor.can().sinkListItem("listItem");
       });
     };
 
@@ -275,6 +288,16 @@ async function initPlaybookRichTextEditorRails(container) {
         } else {
           editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
         }
+      } else if (action === "bulletList") {
+        normalizeListSelection();
+        editor.chain().focus().toggleBulletList().run();
+      } else if (action === "orderedList") {
+        normalizeListSelection();
+        editor.chain().focus().toggleOrderedList().run();
+      } else if (action === "outdent") {
+        editor.chain().focus().liftListItem("listItem").run();
+      } else if (action === "indent") {
+        editor.chain().focus().sinkListItem("listItem").run();
       } else {
         const chainMethod = actionToChain[action];
         if (chainMethod && typeof editor.chain().focus()[chainMethod] === "function") {
