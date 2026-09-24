@@ -26,9 +26,12 @@ const Filter = ({
   variant,
   ...templateProps
   }: FilterProps): React.ReactElement => {
-  const { className, ...layoutProps } = templateProps
+  const { children, className, ...layoutProps } = templateProps
+  // Match Rails: stacked only for default/single (has filter children).
+  // Sort-only (no children) stays on FilterSingle.
+  const useResponsiveStacked = responsive === 'stacked' && Boolean(children)
   const mergedClassName = classnames(
-    responsive === 'stacked' && 'pb_filter_responsive',
+    useResponsiveStacked && 'pb_filter_responsive',
     className,
   )
 
@@ -38,15 +41,19 @@ const Filter = ({
         <FilterSidebar
             className={className}
             {...layoutProps}
-        />
+        >
+          {children}
+        </FilterSidebar>
       )
     }
-    if (responsive === 'stacked') {
+    if (useResponsiveStacked) {
       return (
         <FilterResponsive
             {...layoutProps}
             className={mergedClassName}
-        />
+        >
+          {children}
+        </FilterResponsive>
       )
     }
     if (double === true) {
@@ -54,14 +61,18 @@ const Filter = ({
         <FilterDouble
             {...layoutProps}
             className={className}
-        />
+        >
+          {children}
+        </FilterDouble>
       )
     }
     return (
       <FilterSingle
           {...layoutProps}
           className={className}
-      />
+      >
+        {children}
+      </FilterSingle>
     )
   }
 

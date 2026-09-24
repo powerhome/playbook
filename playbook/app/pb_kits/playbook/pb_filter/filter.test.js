@@ -200,3 +200,19 @@ test("responsive stacked merges kit className with caller className", () => {
 
   expect(container.querySelector(".pb_filter_kit.pb_filter_responsive.consumer-class")).toBeInTheDocument();
 });
+
+test("responsive stacked without children keeps sort-only FilterSingle", () => {
+  const { container } = render(
+    <Filter
+        responsive="stacked"
+        results={1}
+        sortOptions={{ popularity: "Popularity" }}
+        sortValue={[{ name: "popularity", dir: "desc" }]}
+    />
+  );
+
+  expect(container.querySelector(".pb_filter_responsive_layout")).not.toBeInTheDocument();
+  expect(container.querySelector(".pb_filter_responsive")).not.toBeInTheDocument();
+  expect(screen.queryByText("No Filter Selected")).not.toBeInTheDocument();
+  expect(screen.getByText("Popularity")).toBeInTheDocument();
+});
