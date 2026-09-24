@@ -159,39 +159,38 @@ test("renders double layout when double is true", () => {
   expect(screen.getByText("sort by:")).toBeInTheDocument();
 });
 
-test("responsive stacked uses double layout below md breakpoint", async () => {
-  mockMatchMedia(true);
+test("responsive stacked renders a stable CSS layout shell", () => {
+  const { container, rerender } = render(<FilterTest responsive="stacked" />);
 
-  render(<FilterTest responsive="stacked" />);
-
-  expect(await screen.findByText("sort by:")).toBeInTheDocument();
-});
-
-test("responsive stacked uses single layout above md breakpoint", () => {
-  mockMatchMedia(false);
-
-  render(<FilterTest responsive="stacked" />);
-
-  expect(screen.queryByText("sort by:")).not.toBeInTheDocument();
+  const layout = container.querySelector(".pb_filter_responsive_layout");
+  expect(layout).toBeInTheDocument();
+  expect(container.querySelector(".pb_filter_kit.pb_filter_responsive")).toBeInTheDocument();
+  expect(screen.getByText("sort by:")).toBeInTheDocument();
   expect(screen.getByText("Popularity")).toBeInTheDocument();
+
+  // Resize must not remount into Single/Double — shell stays mounted.
+  mockMatchMedia(true);
+  rerender(<FilterTest responsive="stacked" />);
+  expect(container.querySelector(".pb_filter_responsive_layout")).toBe(layout);
+
+  mockMatchMedia(false);
+  rerender(<FilterTest responsive="stacked" />);
+  expect(container.querySelector(".pb_filter_responsive_layout")).toBe(layout);
 });
 
-test("responsive stacked ignores explicit double when viewport is wide", () => {
-  mockMatchMedia(false);
-
-  render(
+test("responsive stacked ignores explicit double", () => {
+  const { container } = render(
     <FilterTest
         double
         responsive="stacked"
     />
   );
 
-  expect(screen.queryByText("sort by:")).not.toBeInTheDocument();
+  expect(container.querySelector(".pb_filter_responsive_layout")).toBeInTheDocument();
+  expect(container.querySelector(".filter-bottom")).not.toBeInTheDocument();
 });
 
-test("responsive stacked merges kit className with caller className", async () => {
-  mockMatchMedia(true);
-
+test("responsive stacked merges kit className with caller className", () => {
   const { container } = render(
     <FilterTest
         className="consumer-class"
@@ -199,6 +198,5 @@ test("responsive stacked merges kit className with caller className", async () =
     />
   );
 
-  await screen.findByText("sort by:");
   expect(container.querySelector(".pb_filter_kit.pb_filter_responsive.consumer-class")).toBeInTheDocument();
 });

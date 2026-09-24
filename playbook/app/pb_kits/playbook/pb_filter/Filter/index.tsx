@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 
 import FilterSingle, { FilterSingleProps } from './FilterSingle'
 import FilterDouble, { FilterDoubleProps } from './FilterDouble'
+import FilterResponsive from './FilterResponsive'
 import FilterSidebar, { FilterSidebarProps } from './FilterSidebar'
 import FilterSection from './FilterSection'
-
-const STACKED_MEDIA_QUERY = '(max-width: 767px)'
 
 type FilterProps =
   | (FilterSingleProps & {
@@ -21,45 +20,12 @@ type FilterProps =
     variant?: null | 'sidebar',
   })
 
-const getStackedMatch = (): boolean => (
-  typeof window !== 'undefined' &&
-  !!window.matchMedia?.(STACKED_MEDIA_QUERY).matches
-)
-
-const useStackedBreakpoint = (enabled: boolean): boolean => {
-  const [isBelowMd, setIsBelowMd] = useState(() => (enabled ? getStackedMatch() : false))
-
-  useEffect(() => {
-    if (!enabled || typeof window === 'undefined' || !window.matchMedia) {
-      setIsBelowMd(false)
-      return
-    }
-
-    const mediaQuery = window.matchMedia(STACKED_MEDIA_QUERY)
-    const updateMatch = () => setIsBelowMd(mediaQuery.matches)
-
-    updateMatch()
-
-    if (typeof mediaQuery.addEventListener === 'function') {
-      mediaQuery.addEventListener('change', updateMatch)
-      return () => mediaQuery.removeEventListener('change', updateMatch)
-    }
-
-    mediaQuery.addListener(updateMatch)
-    return () => mediaQuery.removeListener(updateMatch)
-  }, [enabled])
-
-  return enabled && isBelowMd
-}
-
 const Filter = ({
   double = false,
   responsive,
   variant,
   ...templateProps
   }: FilterProps): React.ReactElement => {
-  const isStackedViewport = useStackedBreakpoint(responsive === 'stacked')
-  const useDouble = responsive === 'stacked' ? isStackedViewport : double === true
   const { className, ...layoutProps } = templateProps
   const mergedClassName = classnames(
     responsive === 'stacked' && 'pb_filter_responsive',
@@ -75,22 +41,30 @@ const Filter = ({
         />
       )
     }
-    if (useDouble) {
+    if (responsive === 'stacked') {
       return (
-        <FilterDouble
-            {...layoutProps}
-            className={mergedClassName}
-        />
-      )
-    } else {
-      return (
-        <FilterSingle
+        <FilterResponsive
             {...layoutProps}
             className={mergedClassName}
         />
       )
     }
+    if (double === true) {
+      return (
+        <FilterDouble
+            {...layoutProps}
+            className={className}
+        />
+      )
+    }
+    return (
+      <FilterSingle
+          {...layoutProps}
+          className={className}
+      />
+    )
   }
+
   return (
     <>
       {displayFilter()}
