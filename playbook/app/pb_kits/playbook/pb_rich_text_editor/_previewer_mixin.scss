@@ -12,7 +12,7 @@
 }
 
 @mixin preview_tiptap_p {
-    margin: 1rem 0 0 0;
+    margin: $space_xs 0 0 0;
     min-height: 1rem;
 }
 
@@ -31,12 +31,11 @@
     vertical-align: top;
     font-family: monospace;
     font-size: 0.9em;
-    padding: 0.5em;
     overflow-x: auto;
     background: $bg_dark;
-    padding: $space_sm;
+    padding: $space_xs;
     border-radius: $border_rad_heaviest;
-    margin: 1.5rem 0 2rem 0;
+    margin: $space_sm 0;
 
     code {
         background: transparent !important;
@@ -57,9 +56,9 @@
 
 @mixin preview_tiptap_blockquote {
     font-size: $font_larger;
-    padding: $space_sm $space_md;
+    padding: $space_xs $space_sm;
     font-style: italic;
-    margin: 1rem 0 0 0;
+    margin: $space_xs 0 0 0;
     p {
         margin: 0;
     }
@@ -70,7 +69,7 @@
     line-height: $text_larger;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
-    margin: 2.1rem 0 0 0;
+    margin: $space_md 0 0 0;
 }
 
 @mixin preview_tiptap_h2 {
@@ -78,7 +77,7 @@
     line-height: $text_larger;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
-    margin: 1.9rem 0 0 0;
+    margin: $space_sm + $space_xxs 0 0 0;
 }
 
 @mixin preview_tiptap_h3 {
@@ -86,7 +85,7 @@
     line-height: $text_large;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
-    margin: 1.7rem 0 0 0;
+    margin: $space_sm 0 0 0;
 }
 
 @mixin preview_tiptap_smaller_headings {
@@ -94,11 +93,11 @@
     line-height: $text_base;
     letter-spacing: $lspace_tight;
     font-weight: $bolder;
-    margin: 1rem 0 0 0;
+    margin: $space_xs 0 0 0;
 }
 
 @mixin preview_tiptap_hr {
-    margin: 2.2rem 0;
+    margin: $space_md 0;
     box-sizing: content-box;
     overflow: hidden;
     background: transparent;
@@ -110,11 +109,11 @@
 }
 
 @mixin preview_tiptap_ol {
-    margin: 1rem 0 0 0;
+    margin: $space_xs 0 0 0;
     padding-left: $space_md;
     list-style: decimal;
     li {
-      margin: 2px 0;
+      margin: 0;
       p {
         margin: 0;
       }
@@ -123,10 +122,10 @@
 
 @mixin preview_tiptap_ul {
     list-style-position: disc;
-    margin: 1rem 0 0 0;
+    margin: $space_xs 0 0 0;
     padding-left: $space_md;
     li {
-      margin: 2px 0;
+      margin: 0;
       p {
         margin: 0;
       }
