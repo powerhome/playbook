@@ -26,6 +26,8 @@ export type FilterResponsiveProps = {
 
 // One tree for responsive="stacked": CSS grid (shared with Rails) toggles
 // one-row vs two-row chrome without remounting across the breakpoint.
+// Stacked bottom reuses `.filter-bottom` (via `.pb_filter_responsive_bottom`)
+// so Results/Sort match FilterDouble sizing.
 const FilterResponsive = ({
   children,
   dark,
@@ -79,30 +81,32 @@ const FilterResponsive = ({
           <SectionSeparator dark={dark} />
         </div>
 
-        <div className="pb_filter_responsive_results_bar">
-          <ResultsCount
-              dark={dark}
-              results={results}
-              title
-          />
-        </div>
+        <div className="pb_filter_responsive_bottom filter-bottom">
+          <div className="pb_filter_responsive_results_bar">
+            <ResultsCount
+                dark={dark}
+                results={results}
+                title
+            />
+          </div>
 
-        <div className="pb_filter_responsive_sort">
-          {showSort &&
-            <>
-              <Caption
-                  className="pb_filter_responsive_sort_label"
-                  dark={dark}
-                  text="sort by:"
-              />
-              <SortMenu
-                  dark={dark}
-                  onChange={onSortChange}
-                  options={sortOptions}
-                  value={sortValue}
-              />
-            </>
-          }
+          <div className="pb_filter_responsive_sort">
+            {showSort &&
+              <>
+                <Caption
+                    className="pb_filter_responsive_sort_label"
+                    dark={dark}
+                    text="sort by:"
+                />
+                <SortMenu
+                    dark={dark}
+                    onChange={onSortChange}
+                    options={sortOptions}
+                    value={sortValue}
+                />
+              </>
+            }
+          </div>
         </div>
       </div>
     </FilterBackground>

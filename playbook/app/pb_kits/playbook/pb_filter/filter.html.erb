@@ -109,22 +109,24 @@
             <%= pb_rails("section_separator") %>
           </div>
 
-          <div class="pb_filter_responsive_results_bar">
-            <%= pb_rails("title_count", props: {title: "Results:",count: object.results, align:"center"}) %>
-          </div>
+          <div class="pb_filter_responsive_bottom filter-bottom">
+            <div class="pb_filter_responsive_results_bar">
+              <%= pb_rails("title_count", props: {title: "Results:",count: object.results, align:"center"}) %>
+            </div>
 
-          <div class="pb_filter_responsive_sort">
-            <%= pb_rails("caption", props: { text: "sort by:", classname: "pb_filter_responsive_sort_label"}) %>
-            <% unless object.sort_menu == [{}] %>
-              <%= pb_rails("button", props: {variant: "link",id: "sort-button#{object.id}",padding_right: "none"}) do %>
-                <% object.sort_menu.each do |item| %>
-                  <% if item[:active] == true %>
-                    <%= item[:item] %>
-                    <%= pb_rails("icon", props: { icon: object.sort_icon(item[:direction]), fixed_width: true }) %>
+            <div class="pb_filter_responsive_sort">
+              <%= pb_rails("caption", props: { text: "sort by:", classname: "pb_filter_responsive_sort_label"}) %>
+              <% unless object.sort_menu == [{}] %>
+                <%= pb_rails("button", props: {variant: "link",id: "sort-button#{object.id}",padding_right: "none"}) do %>
+                  <% object.sort_menu.each do |item| %>
+                    <% if item[:active] == true %>
+                      <%= item[:item] %>
+                      <%= pb_rails("icon", props: { icon: object.sort_icon(item[:direction]), fixed_width: true }) %>
+                    <% end %>
                   <% end %>
                 <% end %>
               <% end %>
-            <% end %>
+            </div>
           </div>
         </div>
       <% else %>

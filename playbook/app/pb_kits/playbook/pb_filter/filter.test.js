@@ -187,7 +187,7 @@ test("responsive stacked ignores explicit double", () => {
   );
 
   expect(container.querySelector(".pb_filter_responsive_layout")).toBeInTheDocument();
-  expect(container.querySelector(".filter-bottom")).not.toBeInTheDocument();
+  expect(container.querySelector(".pb_filter_responsive_bottom.filter-bottom")).toBeInTheDocument();
 });
 
 test("responsive stacked merges kit className with caller className", () => {

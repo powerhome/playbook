@@ -185,9 +185,14 @@
       grid-area: sep;
     }
 
+    // Wide: contents so `sort` still occupies the one-row grid area.
+    // Stacked: becomes the FilterDouble bottom bar (see break_at below).
+    .pb_filter_responsive_bottom {
+      display: contents;
+    }
+
     .pb_filter_responsive_results_bar {
       display: none;
-      grid-area: results-bar;
     }
 
     .pb_filter_responsive_sort {
@@ -206,10 +211,10 @@
       .pb_filter_responsive_layout {
         align-items: center;
         grid-template-areas:
-          "filters filters"
-          "sep sep"
-          "results-bar sort";
-        grid-template-columns: minmax(0, 1fr) auto;
+          "filters"
+          "sep"
+          "bottom";
+        grid-template-columns: minmax(0, 1fr);
         padding-right: 0;
         row-gap: 0;
       }
@@ -222,24 +227,20 @@
         display: block;
       }
 
+      .pb_filter_responsive_bottom {
+        align-items: center;
+        display: flex;
+        grid-area: bottom;
+        justify-content: space-between;
+      }
+
       .pb_filter_responsive_results_bar {
         align-items: center;
         display: flex;
-        justify-content: flex-start;
-        padding-bottom: $space_sm;
-        padding-left: $space_sm;
-        padding-top: $space_sm;
-      }
-
-      .pb_filter_responsive_sort {
-        justify-content: flex-end;
-        padding-bottom: $space_sm;
-        padding-right: $space_sm;
-        padding-top: $space_sm;
       }
 
       .pb_filter_responsive_sort_label {
-        display: inline;
+        display: revert;
       }
     }
   }
