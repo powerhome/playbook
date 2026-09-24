@@ -2,6 +2,8 @@ examples:
 
   rails:
   - rich_text_editor_rails_default: "Rails (TipTap)"
+  - rich_text_editor_rails_text_align: "Rails (Text Alignment)"
+  - rich_text_editor_rails_extensions: "Rails (Playbook Extensions)"
   - rich_text_editor_rails_markdown_support: "Rails (Markdown Support)"
   - rich_text_editor_rails_simple: "Rails (TipTap — Simple toolbar)"
 
