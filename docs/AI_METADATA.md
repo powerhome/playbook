@@ -304,13 +304,15 @@ The Husky pre-commit hook keeps generated docs metadata in sync. When you commit
 4. **Fails if any generated files changed** (stage them and commit again)
 
 **Triggered by changes to:**
-- `playbook/app/pb_kits/playbook/pb_*/**/*.{tsx,ts,rb}` - Kit sources
+- `playbook/app/pb_kits/playbook/pb_*/**/*.{tsx,ts,jsx,js,rb,erb}` - Kit sources (including Rails templates / kit JS)
 - `playbook/app/pb_kits/playbook/utilities/globalProps.ts` - Global props
 - `playbook/app/pb_kits/playbook/types/*.ts` - Type definitions
 - `playbook/app/pb_kits/playbook/tokens/_spacing.scss` - Spacing tokens
 - `playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss` - Breakpoints
 - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json` - Kit schemas
 - `playbook/app/pb_kits/playbook/pb_*/docs/_playground.overrides.json` - Playground overrides
+- `playbook/lib/playbook/forms/**/*.rb`, `playbook/lib/playbook/pb_forms*.rb`, `playbook/lib/playbook/kit_base.rb` - Rails form builder / helpers
+- `playbook/scripts/build-ai-dist.mjs`, `playbook/scripts/review-form-metadata.mjs`, `playbook/scripts/lib/*form*`, `playbook/scripts/lib/usage-faqs.mjs` - Form metadata pipeline
 
 **If the hook fails:**
 ```bash
