@@ -30,9 +30,9 @@ const railsBinding = {
 };
 const textHtmlOptions = {
   argument: '**options',
-  description: 'Pass HTML attributes as builder keyword arguments, outside props. The Rails helper renders the input; props.input_options is not a general attribute pass-through in this builder path.',
+  description: 'Pass HTML attributes as builder keyword arguments, outside props, or in props.input_options. The Rails helper renders the input and receives both.',
   examples: { maxlength: 255, min: 0, step: '0.01', autocomplete: 'email', data: { controller: 'field' } },
-  overrides: 'The builder sets placeholder from props (default empty), forwards props.required when true, and forwards explicit props.type, value, disabled, autocomplete, mask and validation. It derives props.input_options.id from the rendered input.',
+  overrides: 'The builder sets placeholder from props (default empty), forwards props.required when true, and forwards explicit props.type, value, disabled, autocomplete, mask and validation. props.input_options is merged last, so it overrides those and the keyword options: input_options.classname is appended to class, input_options.data is merged key by key, and a literal input_options.class is ignored. It derives props.input_options.id from the rendered input.',
 };
 const textValidation = {
   required: 'props.required: true sets required on the Rails-generated input. required: true as a builder HTML option also works.',
@@ -80,7 +80,7 @@ export const FORM_METHODS = [
     name: 'check_box',
     binding: railsBinding,
     submission: { submits: true, value: 'checked_value and unchecked_value are extracted from keyword options and passed positionally to Rails check_box. Set both explicitly; this wrapper passes nil when omitted.', example: 'checked_value: "1", unchecked_value: "0"' },
-    htmlOptions: { argument: '**options', description: 'Remaining keywords are passed as Rails check_box options.' },
+    htmlOptions: { argument: '**options', description: 'Remaining keywords are passed as Rails check_box options. props.input_options is merged over them last, with classname appended to class and data merged key by key.' },
     validation: { required: 'props.required sets the HTML required option.', indicator: 'props.required_indicator is visual only.', error: { ...messageError, type: 'boolean', example: '@user.errors[:terms].any?', description: 'The Checkbox error prop is a boolean styling flag. Render any error message separately.' } },
     block: { supported: false, description: 'The builder supplies the Rails checkbox as kit content; caller blocks are not forwarded.' },
     example: formExample('f.check_box :terms, checked_value: "1", unchecked_value: "0", props: { label: true, required: true, error: @user.errors[:terms].any? }'),
