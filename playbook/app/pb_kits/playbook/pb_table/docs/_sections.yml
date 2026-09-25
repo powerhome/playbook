@@ -15,6 +15,7 @@ sections:
       - table_with_subcomponents_as_divs
       - table_with_background_kit
       - table_colspan
+      - table_as_wrapper
 
   - title: "Sticky & Positional Behaviors"
     examples:

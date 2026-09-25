@@ -12,22 +12,22 @@ const TableIconButtons = (props) => {
         size="sm"
         {...props}
     >
-      <thead>
-        <tr>
-          <th>{'Column 1'}</th>
-          <th>{'Column 2'}</th>
-          <th>{'Column 3'}</th>
-          <th>{'Column 4'}</th>
-          <th>{''}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{'Value 1'}</td>
-          <td>{'Value 2'}</td>
-          <td>{'Value 3'}</td>
-          <td>{'Value 4'}</td>
-          <td align="right">
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{'Column 1'}</Table.Header>
+          <Table.Header>{'Column 2'}</Table.Header>
+          <Table.Header>{'Column 3'}</Table.Header>
+          <Table.Header>{'Column 4'}</Table.Header>
+          <Table.Header>{''}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>{'Value 1'}</Table.Cell>
+          <Table.Cell>{'Value 2'}</Table.Cell>
+          <Table.Cell>{'Value 3'}</Table.Cell>
+          <Table.Cell>{'Value 4'}</Table.Cell>
+          <Table.Cell textAlign="right">
             <Flex
                 justifyContent="end"
                 orientation="row"
@@ -47,15 +47,15 @@ const TableIconButtons = (props) => {
                 />
               </FlexItem>
             </Flex>
-          </td>
-        </tr>
-        <tr>
-          <td>{'Value 1'}</td>
-          <td>{'Value 2'}</td>
-          <td>{'Value 3'}</td>
-          <td>{'Value 4'}</td>
-          <td align="right">
-            <Flex 
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>{'Value 1'}</Table.Cell>
+          <Table.Cell>{'Value 2'}</Table.Cell>
+          <Table.Cell>{'Value 3'}</Table.Cell>
+          <Table.Cell>{'Value 4'}</Table.Cell>
+          <Table.Cell textAlign="right">
+            <Flex
                 justifyContent="end"
                 orientation="row"
             >
@@ -74,15 +74,15 @@ const TableIconButtons = (props) => {
                 />
               </FlexItem>
             </Flex>
-          </td>
-        </tr>
-        <tr>
-          <td>{'Value 1'}</td>
-          <td>{'Value 2'}</td>
-          <td>{'Value 3'}</td>
-          <td>{'Value lk'}</td>
-          <td align="right">
-            <Flex 
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>{'Value 1'}</Table.Cell>
+          <Table.Cell>{'Value 2'}</Table.Cell>
+          <Table.Cell>{'Value 3'}</Table.Cell>
+          <Table.Cell>{'Value 4'}</Table.Cell>
+          <Table.Cell textAlign="right">
+            <Flex
                 justifyContent="end"
                 orientation="row"
             >
@@ -101,9 +101,9 @@ const TableIconButtons = (props) => {
                 />
               </FlexItem>
             </Flex>
-          </td>
-        </tr>
-      </tbody>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
     </Table>
   )
 }
