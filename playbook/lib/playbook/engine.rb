@@ -11,8 +11,6 @@ module Playbook
       g.test_framework :rspec
     end
 
-    config.view_component.render_monkey_patch_enabled = false
-
     if config.respond_to?(:assets)
       config.assets.paths ||= []
       config.assets.paths << Playbook::Engine.root.join("fonts")

@@ -35,6 +35,7 @@ dist/ai/
 ├── index.json                  # Manifest: schemas, playgrounds, kitMeta, visualIndex
 ├── visual-index.json           # Screenshot / visual → kit map (looksLike, lookalikes, tokens)
 ├── external-dependencies.json  # Kits that need host-app packages (Highcharts, TipTap, …)
+├── forms.json                 # Rails builder setup, methods, actions, common FAQs
 ├── global-props.schema.json    # Props available on ALL components
 ├── all-schemas.json            # All kit schemas in one file (schemas only)
 ├── kits/                       # Individual component schemas
@@ -303,13 +304,15 @@ The Husky pre-commit hook keeps generated docs metadata in sync. When you commit
 4. **Fails if any generated files changed** (stage them and commit again)
 
 **Triggered by changes to:**
-- `playbook/app/pb_kits/playbook/pb_*/**/*.{tsx,ts,rb}` - Kit sources
+- `playbook/app/pb_kits/playbook/pb_*/**/*.{tsx,ts,jsx,js,rb,erb}` - Kit sources (including Rails templates / kit JS)
 - `playbook/app/pb_kits/playbook/utilities/globalProps.ts` - Global props
 - `playbook/app/pb_kits/playbook/types/*.ts` - Type definitions
 - `playbook/app/pb_kits/playbook/tokens/_spacing.scss` - Spacing tokens
 - `playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss` - Breakpoints
 - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json` - Kit schemas
 - `playbook/app/pb_kits/playbook/pb_*/docs/_playground.overrides.json` - Playground overrides
+- `playbook/lib/playbook/forms/**/*.rb`, `playbook/lib/playbook/pb_forms*.rb`, `playbook/lib/playbook/kit_base.rb` - Rails form builder / helpers
+- `playbook/scripts/build-ai-dist.mjs`, `playbook/scripts/review-form-metadata.mjs`, `playbook/scripts/lib/*form*`, `playbook/scripts/lib/usage-faqs.mjs` - Form metadata pipeline
 
 **If the hook fails:**
 ```bash
@@ -415,3 +418,106 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `docs/ai/consumer/*` | Rule + skill templates for Nitro / consuming apps |
 | `.husky/pre-commit` | Runs lint-staged + docs metadata verification |
 | `.git-hooks/pre_commit/verify_docs_metadata.sh` | Pre-commit verification script |
+
+## Rails form-builder contracts and usage FAQs
+
+These additions document existing behavior; they do not change kit APIs.
+
+Author shared and method-specific facts in `playbook/scripts/lib/form-contracts.mjs`.
+Author common and kit-specific FAQ questions, answers, aliases and examples in
+`playbook/scripts/lib/usage-faqs.mjs`, similarly to `visual-cues.mjs`. These are
+independent of playground presets. Source paths in contracts are package-relative.
+
+`build-ai-dist.mjs` resolves this content into:
+
+- `forms.json`: package version, metadata format version, builder setup, all
+  registered field methods, action-area methods and common FAQs.
+- `kits/<kit>.schema.json`: `form.rails.builder` with shared setup and that kit's
+  methods, plus resolved `faqs`. `all-schemas.json` contains the same additions.
+- `index.json`: `metadataVersion: 1` and `forms: "forms.json"`.
+
+The build uses Ruby’s standard-library Ripper parser (no Rails boot or added gem)
+to extract method names, exact signatures, kit mappings and source paths from
+builder registrations and implementations. Curated contracts supply behavior
+and examples, keyed by method name; they cannot override structural fields.
+
+Each method records its exact signature, kit, binding, submission, HTML option
+routing, validation, block behavior, example and source paths. Separate methods
+may map to one kit. The builder contract is Rails-only; kit prop platform lists
+and standalone `usage` remain unchanged. Method examples are the authority for
+builder questions, while `usage.rails` describes standalone kit usage.
+
+In particular, the generic Rails field wrapper passes HTML options to a Rails
+helper and supplies the result as kit content. Direct wrappers such as
+`dropdown_field` do not automatically gain model-scoped names or model values.
+Do not infer a common behavior merely because two methods share a kit prop name.
+A missing field is unknown, not unsupported. Explicit false/supported:false is a
+negative fact; conditional submission includes a `when` field.
+
+FAQ entries have stable `id`, `platforms`, `questions`, `answer`, optional
+`aliases`/`example`/`props`, and `contractPaths` pointing to resolved kit fields.
+`props` tags use canonical metadata prop names and may mention a missing prop
+when the FAQ explains the distinction between kit and builder APIs. Answers
+must agree with the referenced contract; the build checks reference existence,
+not natural-language equivalence.
+
+The build rejects missing, stale or duplicate method contracts, unknown kit
+mappings and unresolved FAQ references. Extraction follows the current explicit
+FormFieldBuilder registrations and required Ruby modules. Unsupported dynamic
+kit mappings or new registration conventions fail with an error instead of
+inventing a mapping; update the extractor when introducing a new convention.
+
+### Keeping form descriptions current
+
+`playbook/scripts/lib/form-contract-reviews.json` records reviewed SHA-256 source
+fingerprints per kit, plus a shared `builder` scope. Before cleaning or writing
+`dist/ai`, the build checks those fingerprints. Existing method behavior changes
+therefore fail generation even when the signatures and prop schemas are unchanged.
+
+Sources include each builder implementation, relevant kit Ruby/ERB/JS/TS/React
+files, form helper and validation/registry code. Cross-kit dependencies such as
+Typeahead's TextInput are listed explicitly in `form-source-reviews.mjs`; changes
+to those files flag each affected kit. Add dependency entries when new cross-kit
+behavior is introduced. New and deleted runtime files are detected. Docs, tests,
+SCSS and generated metadata are excluded. File contents are hashed conservatively
+(including comments); CRLF/LF differences are normalized.
+
+After a source change:
+
+1. Run `yarn generate:docs-metadata` from the repo root, or run
+   `node scripts/review-form-metadata.mjs` from `playbook/` for the review check alone.
+2. Read the listed changed source files. Update behavior in `form-contracts.mjs`
+   and related answers in `usage-faqs.mjs` as needed. If behavior is unchanged,
+   the review acknowledgment alone is sufficient.
+3. Acknowledge **only the scopes you reviewed**, for example from `playbook/`:
+
+   ```sh
+   node scripts/review-form-metadata.mjs --accept dropdown
+   ```
+
+4. Regenerate metadata and commit the review file with any contract/FAQ edits.
+
+The normal generator and pre-commit hooks never update fingerprints. The explicit
+review command also requires valid structural coverage and FAQ references before
+accepting a scope. Other pending scopes remain pending. This records an intentional
+review; it cannot prove that a human or agent actually reviewed the prose or that
+all semantic claims are correct.
+
+Both Husky and Overcommit trigger the metadata check for builder/helper changes,
+kit ERB/JS/TS/Ruby changes, and form-metadata source/review changes. Normal kit schema
+generation is unchanged. Consumers need only the generated JSON, not Ruby.
+
+Run from `playbook/`:
+
+```sh
+yarn build:ai
+node --test scripts/lib/form-metadata.test.mjs scripts/lib/form-source-reviews.test.mjs
+```
+
+The gem file list includes `dist/ai/**/*`; npm already includes `dist/*`. Build
+metadata as part of the release before packaging either artifact. Do not edit
+`dist/ai` or source `kit.schema.json` by hand.
+
+The lookup reference and external skill adoption instructions live in
+`docs/ai/consumer/ask-playbook/`. It returns these fields from the installed
+package only, including on older packages that lack the new form contract.
