@@ -8,7 +8,10 @@
   ],
   "props": {
     "background": {
-      "type": "enum",
+      "type": {
+        "react": "BackgroundColors | ProductColors | \"none\"",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"

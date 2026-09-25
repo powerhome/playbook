@@ -8,7 +8,10 @@
   ],
   "props": {
     "border": {
-      "type": "enum",
+      "type": {
+        "react": "boolean | BorderPropValue",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"
@@ -34,7 +37,10 @@
       ]
     },
     "customIcon": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "string"
+      },
       "platforms": [
         "react",
         "rails"

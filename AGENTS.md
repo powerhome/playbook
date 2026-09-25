@@ -50,6 +50,7 @@ Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PUL
 | Advanced Table docs | [`docs/ADVANCED_TABLE_DOCS.md`](docs/ADVANCED_TABLE_DOCS.md) |
 | Deprecation warnings | [`docs/DEPRECATION_WARNINGS.md`](docs/DEPRECATION_WARNINGS.md) |
 | Kit status in menu | [`docs/PLATFORM_SPECIFIC_STATUS.md`](docs/PLATFORM_SPECIFIC_STATUS.md) |
+| Changelog generator | [`docs/CHANGELOG_GENERATOR.md`](docs/CHANGELOG_GENERATOR.md) |
 
 ## Cursor-specific paths
 

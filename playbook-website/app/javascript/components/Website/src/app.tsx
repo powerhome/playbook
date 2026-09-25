@@ -185,6 +185,10 @@ const router = createBrowserRouter(
         loader={GuidePageLoader}
         path="guides/design_guidelines/:page"
       />
+      <Route
+        lazy={() => import('./pages/NotFound').then((mod) => ({ Component: mod.default }))}
+        path="*"
+      />
     </Route>
   )
 )

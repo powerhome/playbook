@@ -124,6 +124,8 @@ class PagesController < ApplicationController
     swift_changelog_releases   = nil
     figma_changelog_content    = nil
     figma_changelog_releases   = nil
+    rc_changelog_content       = nil
+    rc_changelog_releases      = nil
 
     if on_changelog || on_home
       changelog_content = Rails.cache.fetch("changelog_file_content") do
@@ -145,6 +147,13 @@ class PagesController < ApplicationController
       end
       figma_changelog_releases = Rails.cache.fetch("figma_changelog_releases") do
         paginate_changelog(figma_changelog_content)
+      end
+
+      rc_changelog_content = Rails.cache.fetch("rc_changelog_file_content") do
+        Playbook::Engine.root.join("RC_CHANGELOG.md").read
+      end
+      rc_changelog_releases = Rails.cache.fetch("rc_changelog_releases") do
+        paginate_changelog(rc_changelog_content)
       end
     end
 
@@ -257,6 +266,8 @@ class PagesController < ApplicationController
           swift_changelog_releases: swift_changelog_releases,
           figma_changelog_content: figma_changelog_content,
           figma_changelog_releases: figma_changelog_releases,
+          rc_changelog_content: rc_changelog_content,
+          rc_changelog_releases: rc_changelog_releases,
           getting_started_content: getting_started_content,
           design_guidelines_content: design_guidelines_content,
           guide_page_content: guide_page_content,
