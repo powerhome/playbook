@@ -22,7 +22,7 @@ export const COMMON_FORM_FAQS = [
   {
     id: 'forms.html-options', platforms: ['rails'],
     questions: ['Where do name id required maxlength min step autocomplete and data attributes go?', 'What can I put in input_options?'],
-    answer: 'Use the method htmlOptions contract. Text field wrappers accept HTML keyword arguments outside props; select wrappers accept positional html_options. Direct wrappers generally accept only props. Do not assume props.input_options reaches a Rails-generated field.',
+    answer: 'Use the method htmlOptions contract. Text field wrappers accept HTML keyword arguments outside props; select wrappers accept positional html_options. Direct wrappers generally accept only props. Text field wrappers and check_box also merge props.input_options into the Rails-generated field; other methods do not.',
     contractPaths: ['form.rails.builder.methods'], props: ['inputOptions', 'required', 'name', 'id'],
   },
   {
@@ -54,7 +54,7 @@ export const KIT_USAGE_FAQS = {
   text_input: [{
     id: 'text-input.builder-options', platforms: ['rails'],
     questions: ['How do I add maxlength to f.text_field?', 'Do builder input_options override the input?'],
-    answer: 'Pass maxlength: 255 as a builder keyword outside props. The builder renders the Rails helper input and supplies it as kit content, so generic props.input_options attributes do not configure that input.',
+    answer: 'Pass maxlength: 255 as a builder keyword outside props, or in props.input_options. The builder merges input_options into the Rails helper input last, so it overrides the keyword and props-derived options; classname is appended to class and data is merged key by key.',
     example: '<%= f.text_field :email, maxlength: 255, autocomplete: "email", props: { label: "Email", required: true, error: @user.errors[:email].to_sentence } %>',
     contractPaths: ['form.rails.builder.methods'], props: ['inputOptions'],
   }],
