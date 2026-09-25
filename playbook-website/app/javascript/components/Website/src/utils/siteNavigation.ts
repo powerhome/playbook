@@ -2,12 +2,29 @@ export const PROD_ORIGIN = "https://playbook.powerapp.cloud"
 export const STAGING_ORIGIN = "https://staging.playbook.powerapp.cloud"
 const PROD_HOST = "playbook.powerapp.cloud"
 const STAGING_HOST = "staging.playbook.powerapp.cloud"
+/** Query param used to avoid reusing a browser-cached off-VPN 404 for staging. */
+export const STAGING_CACHE_BUST_PARAM = "_pb"
 
 const normalizePath = (path: string) => (path.startsWith("/") ? path : `/${path}`)
 
 const isPlaygroundPath = (path: string) => {
   const normalized = normalizePath(path)
   return normalized === "/playground" || normalized.startsWith("/playground?")
+}
+
+/**
+ * Append a cache-busting query so navigation to staging does not reuse a
+ * previously cached off-VPN block/404 for the same path. Leave `_pb` on the
+ * URL for the tab lifetime — stripping it would put the next refresh back on
+ * the poisoned unbusted cache key.
+ */
+export const withStagingCacheBust = (url: string) => {
+  const parsed = new URL(
+    url,
+    typeof window !== "undefined" ? window.location.origin : PROD_ORIGIN
+  )
+  parsed.searchParams.set(STAGING_CACHE_BUST_PARAM, String(Date.now()))
+  return parsed.toString()
 }
 
 export const isStagingHost = () =>
@@ -56,7 +73,7 @@ export const showPlaygroundVpnWarning = (destinationUrl: string) => {
  */
 export const goToStaging = (url: string) => {
   if (isStagingHost()) {
-    window.location.assign(url)
+    window.location.assign(withStagingCacheBust(url))
     return
   }
 

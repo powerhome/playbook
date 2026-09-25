@@ -9,6 +9,11 @@ class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
   rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
+  # SPA shells and JSON loaders must not be HTTP-cached. Off-VPN staging can
+  # return a block/404 that browsers otherwise reuse after reconnect (incognito
+  # works because it has an empty cache).
+  before_action :disable_http_caching, only: :application
+
   def application
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
@@ -607,6 +612,12 @@ private
   # Deployed production website host only (not review apps / localhost / staging).
   def playbook_production_host?
     request.host == "playbook.powerapp.cloud"
+  end
+
+  def disable_http_caching
+    response.headers["Cache-Control"] = "private, no-store, no-cache, must-revalidate"
+    response.headers["Expires"] = "0"
+    response.headers["Pragma"] = "no-cache"
   end
 
   # JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects
