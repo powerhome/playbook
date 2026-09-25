@@ -11,6 +11,7 @@ examples:
   - filter_max_height: Max Height for Popover Inside of Filter
   - filter_placement: Filter Placement
   - filter_popover_props: Popover Props
+  - filter_responsive: Responsive
   - filter_within_turbo_frames: Within Turbo Frames
   - filter_interactive: Interactive Applied Filters
 
@@ -25,6 +26,7 @@ examples:
   - filter_max_height: Max Height for Popover Inside of Filter
   - filter_placement: Filter Placement
   - filter_popover_props: Popover Props
+  - filter_responsive: Responsive
   - filter_sidebar: Sidebar
   - filter_interactive_react: Interactive Applied Filters
 

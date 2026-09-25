@@ -1,110 +1,151 @@
 <%= pb_content_tag(:div) do %>
     <%= object.wrapper do %>
-      <%= pb_rails("flex", props: { orientation: "row", padding_right: "lg", vertical: "center" }) do %>
-        <% if (object.template != "sort_only") %>
-          <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "filter", id:"filter#{object.id}"}) %>
-          <div class="maskContainer">
-            <div class="filters">
-              <div class="left_gradient"></div>
-              <% if object.filters&.none? { |filter| filter[:name].present? } %>
-                <div>
-                  <%= pb_rails("body", props: {
-                    color: "light",
-                    padding_left: "xs",
-                    size: 4,
-                    tag:"span",
-                    text: "No Filter Selected"
-                  }) %>
-                </div>
-              <% end %>
-              <% object.filters&.each do |filter| %>
-                <% next unless filter[:name].present? %>
-                <% interactive_config = object.interactive_config_for(filter[:name]) %>
-                <% if interactive_config.present? %>
-                  <%
-                    chip_id        = "pb-interactive-filter-#{object.id || 'kit'}-#{filter[:name].to_s.parameterize}"
-                    popover_id     = "#{chip_id}-popover"
-                    type           = object.interactive_value(interactive_config, :type).to_s
-                    display_value  = object.interactive_display_value(interactive_config, filter[:value])
-                    is_date_picker = type == "date-picker"
-                    is_options     = %w[select dropdown].include?(type)
+      <% if object.responsive_stacked? || object.template != "sort_only" %>
+      <% filter_trigger_and_chips = capture do %>
+        <%= pb_rails("circle_icon_button", props: { variant: "secondary", icon: "filter", id:"filter#{object.id}"}) %>
+        <div class="maskContainer">
+          <div class="filters">
+            <div class="left_gradient"></div>
+            <% if object.filters&.none? { |filter| filter[:name].present? } %>
+              <div>
+                <%= pb_rails("body", props: {
+                  color: "light",
+                  padding_left: "xs",
+                  size: 4,
+                  tag:"span",
+                  text: "No Filter Selected"
+                }) %>
+              </div>
+            <% end %>
+            <% object.filters&.each do |filter| %>
+              <% next unless filter[:name].present? %>
+              <% interactive_config = object.interactive_config_for(filter[:name]) %>
+              <% if interactive_config.present? %>
+                <%
+                  chip_id        = "pb-interactive-filter-#{object.id || 'kit'}-#{filter[:name].to_s.parameterize}"
+                  popover_id     = "#{chip_id}-popover"
+                  type           = object.interactive_value(interactive_config, :type).to_s
+                  display_value  = object.interactive_display_value(interactive_config, filter[:value])
+                  is_date_picker = type == "date-picker"
+                  is_options     = %w[select dropdown].include?(type)
 
-                    chip_data_attrs = {
-                      "pb-interactive-filter" => "true",
-                      "pb-filter-name"        => filter[:name],
-                      "pb-filter-type"        => type,
-                      "pb-filter-popover-id"  => popover_id,
-                      "pb-filter-target"      => object.interactive_value(interactive_config, :target_input),
-                      "pb-filter-value"       => filter[:value],
-                      "pb-filter-auto-submit" => object.interactive_value(interactive_config, :auto_submit),
-                    }
-                    if is_date_picker
-                      chip_data_attrs.merge!(
-                        "pb-filter-date-format" => object.interactive_value(interactive_config, :format),
-                        "pb-filter-date-mode"   => object.interactive_value(interactive_config, :mode),
-                        "pb-filter-date-min"    => object.interactive_value(interactive_config, :min_date),
-                        "pb-filter-date-max"    => object.interactive_value(interactive_config, :max_date),
-                      )
-                    end
-                  %>
-                  <div class="filter interactive">
-                    <button type="button"
-                            class="pb_interactive_filter_trigger"
-                            id="<%= chip_id %>"
-                            <%= chip_data_attrs.compact_blank.map { |k, v| "data-#{k}=\"#{ERB::Util.html_escape(v)}\"" }.join(" ").html_safe %>>
-                      <div class="pb_interactive_filter_text">
-                        <%= pb_rails("caption", props: { text: filter[:name] }) %>
-                        <%= pb_rails("flex", props: { align_items: "center", gap: "xxs" }) do %>
-                          <%= pb_rails("title", props: {
-                            text: display_value.presence || "—",
-                            size: 4,
-                            data: { "pb-filter-value-display" => true },
-                          }) %>
-                          <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, size: "xs", color: "primary" }) %>
-                        <% end %>
-                      </div>
-                    </button>
+                  chip_data_attrs = {
+                    "pb-interactive-filter" => "true",
+                    "pb-filter-name"        => filter[:name],
+                    "pb-filter-type"        => type,
+                    "pb-filter-popover-id"  => popover_id,
+                    "pb-filter-target"      => object.interactive_value(interactive_config, :target_input),
+                    "pb-filter-value"       => filter[:value],
+                    "pb-filter-auto-submit" => object.interactive_value(interactive_config, :auto_submit),
+                  }
+                  if is_date_picker
+                    chip_data_attrs.merge!(
+                      "pb-filter-date-format" => object.interactive_value(interactive_config, :format),
+                      "pb-filter-date-mode"   => object.interactive_value(interactive_config, :mode),
+                      "pb-filter-date-min"    => object.interactive_value(interactive_config, :min_date),
+                      "pb-filter-date-max"    => object.interactive_value(interactive_config, :max_date),
+                    )
+                  end
+                %>
+                <div class="filter interactive">
+                  <button type="button"
+                          class="pb_interactive_filter_trigger"
+                          id="<%= chip_id %>"
+                          <%= chip_data_attrs.compact_blank.map { |k, v| "data-#{k}=\"#{ERB::Util.html_escape(v)}\"" }.join(" ").html_safe %>>
+                    <div class="pb_interactive_filter_text">
+                      <%= pb_rails("caption", props: { text: filter[:name] }) %>
+                      <%= pb_rails("flex", props: { align_items: "center", gap: "xxs" }) do %>
+                        <%= pb_rails("title", props: {
+                          text: display_value.presence || "—",
+                          size: 4,
+                          data: { "pb-filter-value-display" => true },
+                        }) %>
+                        <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, size: "xs", color: "primary" }) %>
+                      <% end %>
+                    </div>
+                  </button>
 
-                    <%# Popover tooltip is moved to <body> in index.ts (connect)
-                        to escape the filter row's overflow-x clipping. We
-                        reuse pb_popover's CSS classes for visual consistency
-                        rather than using the popover kit directly because
-                        that kit doesn't portal its tooltip out of its DOM
-                        parent. %>
-                    <div class="pb_popover_tooltip hide pb_interactive_filter_editor pb_interactive_filter_editor--<%= type %>" id="<%= popover_id %>" role="tooltip">
-                      <div class="pb_popover_body">
-                        <% if is_options %>
-                          <ul class="pb_interactive_filter_options" role="listbox">
-                            <% object.interactive_options(interactive_config).each do |opt| %>
-                              <% opt_value = object.interactive_option_value(interactive_config, opt) %>
-                              <% is_active = opt_value.to_s == filter[:value].to_s %>
-                              <% opt_label = object.interactive_option_label(opt, opt_value) %>
-                              <li class="pb_interactive_filter_option<%= ' active' if is_active %>"
-                                  tabindex="0"
-                                  role="option"
-                                  aria-selected="<%= is_active %>"
-                                  data-pb-filter-option-value="<%= opt_value %>"
-                                  data-pb-filter-option-label="<%= opt_label %>">
-                                <span><%= opt_label %></span>
-                              </li>
-                            <% end %>
-                          </ul>
-                        <% elsif is_date_picker %>
-                          <div data-pb-filter-date-mount></div>
-                        <% end %>
-                      </div>
+                  <%# Popover tooltip is moved to <body> in index.ts (connect)
+                      to escape the filter row's overflow-x clipping. We
+                      reuse pb_popover's CSS classes for visual consistency
+                      rather than using the popover kit directly because
+                      that kit doesn't portal its tooltip out of its DOM
+                      parent. %>
+                  <div class="pb_popover_tooltip hide pb_interactive_filter_editor pb_interactive_filter_editor--<%= type %>" id="<%= popover_id %>" role="tooltip">
+                    <div class="pb_popover_body">
+                      <% if is_options %>
+                        <ul class="pb_interactive_filter_options" role="listbox">
+                          <% object.interactive_options(interactive_config).each do |opt| %>
+                            <% opt_value = object.interactive_option_value(interactive_config, opt) %>
+                            <% is_active = opt_value.to_s == filter[:value].to_s %>
+                            <% opt_label = object.interactive_option_label(opt, opt_value) %>
+                            <li class="pb_interactive_filter_option<%= ' active' if is_active %>"
+                                tabindex="0"
+                                role="option"
+                                aria-selected="<%= is_active %>"
+                                data-pb-filter-option-value="<%= opt_value %>"
+                                data-pb-filter-option-label="<%= opt_label %>">
+                              <span><%= opt_label %></span>
+                            </li>
+                          <% end %>
+                        </ul>
+                      <% elsif is_date_picker %>
+                        <div data-pb-filter-date-mount></div>
+                      <% end %>
                     </div>
                   </div>
-                <% else %>
-                  <div class="filter">
-                    <%= pb_rails("caption", props: { text: filter[:name] }) %>
-                    <%= pb_rails("title", props: { size: 4, tag: "h4", text: filter[:value] }) %>
-                  </div>
+                </div>
+              <% else %>
+                <div class="filter">
+                  <%= pb_rails("caption", props: { text: filter[:name] }) %>
+                  <%= pb_rails("title", props: { size: 4, tag: "h4", text: filter[:value] }) %>
+                </div>
+              <% end %>
+            <% end %>
+            <div class="right_gradient"></div>
+          </div>
+        </div>
+      <% end %>
+      <% end %>
+
+      <% if object.responsive_stacked? %>
+        <div class="pb_filter_responsive_layout">
+          <div class="pb_filter_responsive_filters">
+            <%= filter_trigger_and_chips %>
+          </div>
+
+          <div class="pb_filter_responsive_results_inline">
+            <%= pb_rails("caption", props: {text: object.result_text, size:"xs", classname:"filter-results"})%>
+          </div>
+
+          <div class="pb_filter_responsive_sep">
+            <%= pb_rails("section_separator") %>
+          </div>
+
+          <div class="pb_filter_responsive_bottom filter-bottom">
+            <div class="pb_filter_responsive_results_bar">
+              <%= pb_rails("title_count", props: {title: "Results:",count: object.results, align:"center"}) %>
+            </div>
+
+            <div class="pb_filter_responsive_sort">
+              <%= pb_rails("caption", props: { text: "sort by:", classname: "pb_filter_responsive_sort_label"}) %>
+              <% unless object.sort_menu == [{}] %>
+                <%= pb_rails("button", props: {variant: "link",id: "sort-button#{object.id}",padding_right: "none"}) do %>
+                  <% object.sort_menu.each do |item| %>
+                    <% if item[:active] == true %>
+                      <%= item[:item] %>
+                      <%= pb_rails("icon", props: { icon: object.sort_icon(item[:direction]), fixed_width: true }) %>
+                    <% end %>
+                  <% end %>
                 <% end %>
               <% end %>
-              <div class="right_gradient"></div>
             </div>
           </div>
+        </div>
+      <% else %>
+      <%= pb_rails("flex", props: { orientation: "row", padding_right: "lg", vertical: "center" }) do %>
+        <% if (object.template != "sort_only") %>
+          <%= filter_trigger_and_chips %>
           <% if (object.template != "default") %>
             <%= pb_rails("caption", props: {text: object.result_text, size:"xs", classname:"filter-results"})%>
           <% end %>
@@ -140,6 +181,7 @@
               <% end %>
             <% end %>
         <% end %>
+      <% end %>
       <% end %>
     <% end %>
 

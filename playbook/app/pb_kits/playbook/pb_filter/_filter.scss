@@ -1,6 +1,7 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
 @import "../tokens/border_radius";
+@import "../tokens/screen_sizes";
 
 .pb_filter_sort_menu {
   li {
@@ -122,6 +123,132 @@
     }
     .maskContainer::after {
       opacity:0;
+    }
+  }
+
+  &.pb_filter_responsive {
+    overflow: hidden;
+
+    .maskContainer {
+      flex: 1 1 auto;
+      min-width: 0;
+      position: relative;
+    }
+
+    .filters {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .maskContainer::after {
+      background: linear-gradient(to right, rgba($white, 0), $white 65%);
+      content: "";
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: $space_xl + $space_sm;
+      z-index: 1;
+    }
+
+    .maskContainer::before {
+      display: none;
+    }
+
+    .pb_filter_responsive_layout {
+      align-items: center;
+      column-gap: $space_xs;
+      display: grid;
+      grid-template-areas: "filters results-inline sort";
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      padding-right: $space_lg;
+      width: 100%;
+    }
+
+    .pb_filter_responsive_filters {
+      align-items: center;
+      display: flex;
+      grid-area: filters;
+      min-width: 0;
+    }
+
+    .pb_filter_responsive_results_inline {
+      grid-area: results-inline;
+      flex-shrink: 0;
+    }
+
+    .pb_filter_responsive_sep {
+      display: none;
+      grid-area: sep;
+    }
+
+    // Wide: contents so `sort` still occupies the one-row grid area.
+    // Stacked: becomes the FilterDouble bottom bar (see break_at below).
+    .pb_filter_responsive_bottom {
+      display: contents;
+    }
+
+    .pb_filter_responsive_results_bar {
+      display: none;
+    }
+
+    .pb_filter_responsive_sort {
+      align-items: center;
+      display: flex;
+      flex-shrink: 0;
+      grid-area: sort;
+      gap: $space_xs;
+    }
+
+    .pb_filter_responsive_sort_label {
+      display: none;
+    }
+
+    @include break_at($screen-md-max) {
+      .pb_filter_responsive_layout {
+        align-items: center;
+        grid-template-areas:
+          "filters"
+          "sep"
+          "bottom";
+        grid-template-columns: minmax(0, 1fr);
+        padding-right: 0;
+        row-gap: 0;
+      }
+
+      .pb_filter_responsive_results_inline {
+        display: none;
+      }
+
+      .pb_filter_responsive_sep {
+        display: block;
+      }
+
+      .pb_filter_responsive_bottom {
+        align-items: center;
+        display: flex;
+        grid-area: bottom;
+        justify-content: space-between;
+      }
+
+      .pb_filter_responsive_results_bar {
+        align-items: center;
+        display: flex;
+      }
+
+      .pb_filter_responsive_sort_label {
+        display: revert;
+      }
+    }
+  }
+
+  &.pb_filter_responsive.dark {
+    .maskContainer::after {
+      background: linear-gradient(to right, rgba($card_dark, 0), $card_dark 65%);
+      opacity: 1;
     }
   }
 }

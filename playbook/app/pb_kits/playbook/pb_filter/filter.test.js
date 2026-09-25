@@ -152,3 +152,67 @@ test("generates quickpick options for interactive dropdown filters", () => {
 
   expect(handleChange).toHaveBeenCalledWith("quickpick-last-month");
 });
+
+test("renders double layout when double is true", () => {
+  render(<FilterTest double />);
+
+  expect(screen.getByText("sort by:")).toBeInTheDocument();
+});
+
+test("responsive stacked renders a stable CSS layout shell", () => {
+  const { container, rerender } = render(<FilterTest responsive="stacked" />);
+
+  const layout = container.querySelector(".pb_filter_responsive_layout");
+  expect(layout).toBeInTheDocument();
+  expect(container.querySelector(".pb_filter_kit.pb_filter_responsive")).toBeInTheDocument();
+  expect(screen.getByText("sort by:")).toBeInTheDocument();
+  expect(screen.getByText("Popularity")).toBeInTheDocument();
+
+  // Resize must not remount into Single/Double — shell stays mounted.
+  mockMatchMedia(true);
+  rerender(<FilterTest responsive="stacked" />);
+  expect(container.querySelector(".pb_filter_responsive_layout")).toBe(layout);
+
+  mockMatchMedia(false);
+  rerender(<FilterTest responsive="stacked" />);
+  expect(container.querySelector(".pb_filter_responsive_layout")).toBe(layout);
+});
+
+test("responsive stacked ignores explicit double", () => {
+  const { container } = render(
+    <FilterTest
+        double
+        responsive="stacked"
+    />
+  );
+
+  expect(container.querySelector(".pb_filter_responsive_layout")).toBeInTheDocument();
+  expect(container.querySelector(".pb_filter_responsive_bottom.filter-bottom")).toBeInTheDocument();
+});
+
+test("responsive stacked merges kit className with caller className", () => {
+  const { container } = render(
+    <FilterTest
+        className="consumer-class"
+        responsive="stacked"
+    />
+  );
+
+  expect(container.querySelector(".pb_filter_kit.pb_filter_responsive.consumer-class")).toBeInTheDocument();
+});
+
+test("responsive stacked without children keeps sort-only FilterSingle", () => {
+  const { container } = render(
+    <Filter
+        responsive="stacked"
+        results={1}
+        sortOptions={{ popularity: "Popularity" }}
+        sortValue={[{ name: "popularity", dir: "desc" }]}
+    />
+  );
+
+  expect(container.querySelector(".pb_filter_responsive_layout")).not.toBeInTheDocument();
+  expect(container.querySelector(".pb_filter_responsive")).not.toBeInTheDocument();
+  expect(screen.queryByText("No Filter Selected")).not.toBeInTheDocument();
+  expect(screen.getByText("Popularity")).toBeInTheDocument();
+});
