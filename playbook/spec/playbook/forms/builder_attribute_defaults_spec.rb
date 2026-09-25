@@ -35,9 +35,13 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
     allow(model).to receive(:to_model).and_return(model)
     allow(model).to receive(:errors).and_return(errors_proxy)
 
-    model_class = double("UserClass", model_name: model_name)
-    allow(model_class).to receive(:respond_to?).with(:human_attribute_name).and_return(true)
-    allow(model_class).to receive(:human_attribute_name) { |attr| attr.to_s.humanize }
+    # Use a real class so respond_to?(:human_attribute_name) works without stubbing
+    # respond_to? on an RSpec double (that pattern raises under current rspec-mocks).
+    captured_model_name = model_name
+    model_class = Class.new do
+      define_singleton_method(:model_name) { captured_model_name }
+      define_singleton_method(:human_attribute_name) { |attr| attr.to_s.humanize }
+    end
     allow(model).to receive(:class).and_return(model_class)
 
     attributes.each do |key, value|
