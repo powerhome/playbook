@@ -50,6 +50,16 @@ export const KIT_USAGE_FAQS = {
     questions: ['Can dropdown_field yield a custom trigger?', 'Can I pass a block to the dropdown builder?'],
     answer: 'dropdown_field does not forward a block. The standalone pb_rails("dropdown") API accepts content in place of its default trigger and container; it is a separate composition API.',
     contractPaths: ['form.rails.builder.methods'],
+  }, {
+    id: 'dropdown.dynamic-options', platforms: ['rails'],
+    questions: ['How do I change dropdown options based on another field?', 'How do I replace dropdown options from a Turbo or custom event?'],
+    answer: 'Pass options_by_context keyed by the other field value together with context_selector naming that element id; the kit swaps options on its change event and clears the selection unless clear_on_context_change is false. To push options from JavaScript, dispatch pb:dropdown:updateOptions with detail { dropdownId, options } or list your own event names in options_event_type. No request is made for you; supply every context upfront or provide the options in the event.',
+    contractPaths: ['form.rails.builder.methods'], props: ['optionsByContext', 'contextSelector', 'clearOnContextChange', 'optionsEventType'],
+  }, {
+    id: 'dropdown.react-form-libraries', platforms: ['react'],
+    questions: ['Can I use Dropdown with react-hook-form?', 'Does the React Dropdown submit a value?'],
+    answer: 'Spread register("country") onto Dropdown. It accepts name and onChange, and calls onChange with { target: { name, value } } in addition to any onSelect. value is the selected option object, an array for multiSelect and null or [] when cleared, so read value.value in form state. The ref from register resolves to the kit imperative handle, not an input, and no named input is rendered; the React kit has no native form submission.',
+    props: ['name', 'onChange', 'onSelect', 'multiSelect'],
   }],
   text_input: [{
     id: 'text-input.builder-options', platforms: ['rails'],
