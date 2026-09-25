@@ -30,8 +30,9 @@ const popoverReference = (
         className="toolbar_button_icon"
         justify="center"
     >
-      <Icon icon="ellipsis"
-          size="lg"
+      <Icon
+          icon="ellipsis"
+          size="1x"
       />
     </Flex>
   </button>

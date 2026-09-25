@@ -60,12 +60,13 @@
     align-items: center;
     background: $transparent;
     border: none;
-    border-radius: $border_rad_heaviest;
+    border-radius: $border_radius_md;
     color: $text_lt_light;
     cursor: pointer;
     &_icon {
-      width: $space_xl + 2;
-      height: $space_xl + 2;
+      // 36px hit area per approved toolbar design
+      width: $space_lg + $space_xxs;
+      height: $space_lg + $space_xxs;
     }
     &.open {
       color: $primary;
@@ -114,57 +115,74 @@
   .toolbar {
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $input_border_default;
-    overflow-x: auto;
-    // Single horizontal row + scroll in narrow modals/sidebars (wrap used to stack controls vertically).
+    position: relative;
+
+    // Compact toolbar shell: controls wrap; undo/redo stay top-right.
+    &_inner {
+      box-sizing: border-box;
+      min-height: $space_lg + $space_xxs + $space_xxs * 2; // 36px button + vertical padding
+      padding: $space_xxs $space_sm;
+      // Leave room for absolute undo/redo (2 × 36px buttons)
+      padding-right: $space_sm + (($space_lg + $space_xxs) * 2);
+      position: relative;
+    }
+
+    &_controls {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      min-width: 0;
+      row-gap: $space_xxs;
+    }
+
+    &_history {
+      align-items: center;
+      display: flex;
+      position: absolute;
+      right: $space_sm;
+      top: $space_xxs;
+    }
+
     &_block {
       align-items: center;
       display: flex;
-      flex-wrap: nowrap;
-      gap: $space_xs;
+      flex-wrap: wrap;
+      gap: 0;
       min-width: 0;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      row-gap: $space_xxs;
     }
 
-    // React: full-width row with history on the far right; horizontal scroll stays on .toolbar.
-    &:not(.rte-rails-toolbar-layout) {
-      > .pb_flex_kit.pb_flex_kit_justify_content_between {
-        box-sizing: border-box;
-        column-gap: $space_sm;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        min-width: 100%;
-        width: max-content;
-      }
-
-      > .pb_flex_kit > .pb_flex_item_kit.toolbar_block {
-        flex: 0 0 auto;
-        min-width: 0;
-        overflow-x: visible;
-      }
-
-      > .pb_flex_kit > .pb_flex_item_kit:last-child {
-        flex: 0 0 auto;
-      }
-    }
-
-    // Vertical section separators use ::before/::after with height: 100%. With
-    // align-items: center on .toolbar_block the kit’s cross size was 0, so the
-    // lines disappeared (master only had gap on .toolbar_block, default stretch).
-    .pb_section_separator_kit.pb_section_separator_vertical {
+    // Separators: padding xs so the line is shorter than 36px buttons
+    &_separator {
+      align-items: stretch;
       align-self: center;
+      box-sizing: border-box;
+      display: flex;
       flex-shrink: 0;
-      height: $space_xl;
+      height: $space_lg + $space_xxs;
+      padding: $space_xs 0;
+
+      .pb_section_separator_kit.pb_section_separator_vertical {
+        align-self: stretch;
+        flex-shrink: 0;
+        height: auto;
+        margin-left: 0;
+        margin-right: 0;
+        min-height: 0;
+      }
     }
 
-    // React ToolbarDropdown — match master (fixed width trigger; prod playbook.cloud).
+    // React ToolbarDropdown — 36px trigger height, light text
     .editor-dropdown-button {
       background: transparent;
       border: none;
       color: $text_lt_light;
       cursor: pointer;
       font-weight: $light;
-      padding: ($space_xs - 1) 0px;
+      height: $space_lg + $space_xxs;
+      min-height: $space_lg + $space_xxs;
+      padding: 0 $space_xs;
       width: $space_xl * 3;
 
       &:focus-visible {
@@ -176,49 +194,49 @@
       max-width: 100%;
       min-width: 0;
 
+      .toolbar_inner,
       .rte-rails-toolbar-row {
-        align-items: center;
         box-sizing: border-box;
-        column-gap: $space_sm;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        min-width: 100%;
+        min-height: $space_lg + $space_xxs + $space_xxs * 2;
         padding: $space_xxs $space_sm;
-        width: max-content;
+        padding-right: $space_sm + (($space_lg + $space_xxs) * 2);
+        position: relative;
       }
 
-      .rte-toolbar-left {
+      .rte-toolbar-left,
+      .toolbar_controls {
         align-items: center;
         display: flex;
-        flex: 0 0 auto;
-        flex-wrap: nowrap;
-        gap: $space_xs;
+        flex-wrap: wrap;
+        gap: 0;
         min-width: 0;
-        overflow-x: visible;
+        row-gap: $space_xxs;
       }
 
-      .rte-toolbar-right {
+      .rte-toolbar-right,
+      .toolbar_history {
         align-items: center;
         display: flex;
-        flex: 0 0 auto;
-        gap: $space_xs;
+        position: absolute;
+        right: $space_sm;
+        top: $space_xxs;
       }
 
-      // Align dropdown trigger with icon row (React wraps Popover + SectionSeparator in one flex line).
+      // Align dropdown trigger with icon row
       .pb_popover_reference_wrapper {
         align-items: center;
         display: inline-flex;
       }
 
-      // Override master’s fixed-width React trigger: Rails block-style label + icons needs flexible width.
+      // Rails block-style label + icons needs flexible width.
       .editor-dropdown-button {
+        height: $space_lg + $space_xxs;
         justify-content: flex-start;
         letter-spacing: normal;
         line-height: 1;
         max-width: 100%;
-        min-height: unset;
-        padding: ($space_xs - 1) $space_xs;
+        min-height: $space_lg + $space_xxs;
+        padding: 0 $space_xs;
         text-align: left;
         width: auto;
 

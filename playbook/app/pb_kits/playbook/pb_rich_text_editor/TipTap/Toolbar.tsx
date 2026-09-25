@@ -1,38 +1,23 @@
 import React from "react";
 import Background from "../../pb_background/_background";
 import Flex from "../../pb_flex/_flex";
-import FlexItem from "../../pb_flex/_flex_item";
 import SectionSeparator from "../../pb_section_separator/_section_separator";
 
 import EditorButton  from "./EditorButton";
 import ToolbarDropdown from "./ToolbarDropdown";
+import ToolbarFormatItems from "./ToolbarFormatItems";
 import ToolbarNodes from "./ToolbarNodes";
 import { ToolbarTypes } from "./EditorTypes";
 import ToolbarHistoryItems from "./ToolbarHistory";
 import MoreExtensionsDropdown from "./MoreExtensionsDropdown";
 
-const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.ReactElement => {
-  const toolbaritems = [
-    {
-        icon: "bold",
-        text: "Bold",
-        classname:`toolbar_button ${editor.isActive('bold') ? 'is-active' : ''}`,
-        onclick:()=>editor.chain().focus().toggleBold().run(),
-    },
-    {
-        icon: "italic",
-        text: "Italic",
-        classname:`toolbar_button ${editor.isActive('italic') ? 'is-active' : ''}`,
-        onclick:() => editor.chain().focus().toggleItalic().run(),
-    },
-    {
-        icon: "strikethrough",
-        text: "Strikethrough",
-        classname:`toolbar_button ${editor.isActive('strike') ? 'is-active' : ''}`,
-        onclick:() => editor.chain().focus().toggleStrike().run(),
-    },
-  ]
+const ToolbarSeparator = (): React.ReactElement => (
+  <div className="toolbar_separator">
+    <SectionSeparator orientation="vertical" />
+  </div>
+);
 
+const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.ReactElement => {
   const simpleToolbaritems = [
     {
         icon: "bold",
@@ -53,62 +38,57 @@ const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.React
         className={`toolbar ${sticky ? 'pb_rich_text_editor_tiptap_toolbar_sticky' : ''}`}
         
     >
-      <Flex flex="0"
-          justify="between"
-          paddingX="sm"
-          paddingY="xxs"
-      >
-        {
-          simple ? (
-            <>
-              <Flex className="toolbar_block">
-                {simpleToolbaritems && simpleToolbaritems.map(
-                  ({ icon, text, classname, onclick}: ToolbarTypes, index: number) => (
-                    <EditorButton
-                        classname={classname}
-                        icon={icon}
-                        key={index}
-                        onclick={onclick}
-                        text={text}
-                    />
-                  )
-                )}
-              </Flex>
-            </>
-          ) : (
-            <>
-        <FlexItem className="toolbar_block"
-            displayFlex
-        >
-          <ToolbarDropdown editor={editor}/>
-          <SectionSeparator orientation="vertical" />
-            {toolbaritems && toolbaritems.map(
-              ({ icon, text, classname, onclick}: ToolbarTypes, index: number) => (
-                <EditorButton
-                    classname={classname}
-                    icon={icon}
-                    key={index}
-                    onclick={onclick}
-                    text={text}
-                />
-              )
-            )}
-            <SectionSeparator orientation="vertical" />
-            <ToolbarNodes editor={editor} />
-            {
-              extensions && (
-                <>
-                  <MoreExtensionsDropdown extensions={extensions}/>
-                </>
-              )
-            }
-        </FlexItem>
-        <ToolbarHistoryItems editor={editor} />
-        </>
-          )
-        }
-       
-      </Flex>
+      {
+        simple ? (
+          <div className="toolbar_inner">
+            <Flex
+                align="center"
+                className="toolbar_controls"
+                wrap
+            >
+              {simpleToolbaritems && simpleToolbaritems.map(
+                ({ icon, text, classname, onclick}: ToolbarTypes, index: number) => (
+                  <EditorButton
+                      classname={classname}
+                      icon={icon}
+                      key={index}
+                      onclick={onclick}
+                      text={text}
+                  />
+                )
+              )}
+            </Flex>
+            <div className="toolbar_history">
+              <ToolbarHistoryItems editor={editor} />
+            </div>
+          </div>
+        ) : (
+          <div className="toolbar_inner">
+            <Flex
+                align="center"
+                className="toolbar_controls"
+                wrap
+            >
+              <ToolbarDropdown editor={editor}/>
+              <ToolbarSeparator />
+              <ToolbarFormatItems editor={editor} />
+              <ToolbarSeparator />
+              <ToolbarNodes editor={editor} />
+              {
+                extensions && (
+                  <>
+                    <ToolbarSeparator />
+                    <MoreExtensionsDropdown extensions={extensions}/>
+                  </>
+                )
+              }
+            </Flex>
+            <div className="toolbar_history">
+              <ToolbarHistoryItems editor={editor} />
+            </div>
+          </div>
+        )
+      }
     </Background>
   );
 };

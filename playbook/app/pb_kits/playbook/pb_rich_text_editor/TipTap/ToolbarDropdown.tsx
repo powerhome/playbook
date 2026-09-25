@@ -91,8 +91,9 @@ for (const { text, isActive, icon } of toolbarDropdownItems) {
           gap="xs"
           key={icon}
       >
-        <Icon icon={icon}
-            size="lg"
+        <Icon
+            icon={icon}
+            size="1x"
         />
         <div>{text}</div>
         <Icon
@@ -122,8 +123,9 @@ const popoverReference = (
               gap="xs"
               key="paragraph"
           >
-            <Icon icon="paragraph"
-                size="lg"
+            <Icon
+                icon="paragraph"
+                size="1x"
             />
             <div>Paragraph</div>
             <Icon
