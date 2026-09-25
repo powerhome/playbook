@@ -32,6 +32,14 @@ RSpec.describe Playbook::PbRichTextEditor::RichTextEditor do
     end
   end
 
+  describe "#initial_html" do
+    it "seeds the hidden input so a failed TipTap mount does not wipe content", :aggregate_failures do
+      expect(kit_class.new(value: "<p>Saved body</p>").initial_html).to eq "<p>Saved body</p>"
+      expect(kit_class.new(value: "Plain text").initial_html).to eq "<p>Plain text</p>"
+      expect(kit_class.new.initial_html).to eq "<p></p>"
+    end
+  end
+
   describe "#show_extensions_dropdown?" do
     it "shows the extensions dropdown in the full toolbar" do
       kit = kit_class.new(extensions: ["image"])

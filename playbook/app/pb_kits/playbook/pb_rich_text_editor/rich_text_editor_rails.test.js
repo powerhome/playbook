@@ -95,6 +95,25 @@ describe("Rails RichTextEditor extensions", () => {
     );
   });
 
+  test("overwrites the seeded hidden input value once the editor mounts", () => {
+    const editor = createEditor();
+    const hiddenInput = document.createElement("input");
+    hiddenInput.value = "<p>Saved body</p>";
+
+    syncToHiddenInput(editor, hiddenInput);
+
+    expect(hiddenInput.value).toBe(editor.getHTML());
+  });
+
+  test("leaves the seeded hidden input value alone when the editor never loads", () => {
+    const hiddenInput = document.createElement("input");
+    hiddenInput.value = "<p>Saved body</p>";
+
+    syncToHiddenInput(undefined, hiddenInput);
+
+    expect(hiddenInput.value).toBe("<p>Saved body</p>");
+  });
+
   test.each([
     ["underline", "toggleUnderline", undefined],
     ["textAlign", "setTextAlign", { alignment: "justify" }],
