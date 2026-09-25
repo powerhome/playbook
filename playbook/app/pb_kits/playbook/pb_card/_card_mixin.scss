@@ -25,6 +25,16 @@ $additional_colors: (
 );
 $background_colors: map-merge($product_colors, $additional_colors);
 $pb_card_header_colors: map-merge(map-merge(map-merge($product_colors, $additional_colors), $category_colors), $status_colors);
+// Prop sizes only — legacy $border_radius keys like "light" collide with background_light.
+$pb_card_border_radius_values: (
+  xs: $border_radius_xs,
+  sm: $border_radius_sm,
+  md: $border_radius_md,
+  lg: $border_radius_lg,
+  xl: $border_radius_xl,
+  none: $border_radius_none,
+  rounded: $border_radius_rounded,
+);
 
 @mixin pb_card_selected($border_color: $primary) {
   border-color: $border_color;
@@ -63,8 +73,8 @@ $pb_card_header_colors: map-merge(map-merge(map-merge($product_colors, $addition
     }
   }
 
-  @each $name, $radius in $border_radius {
-    &[class*=_#{$name}] {
+  @each $name, $radius in $pb_card_border_radius_values {
+    &.pb_card_kit_border_radius_#{$name} {
       border-radius: $radius;
     }
   }
