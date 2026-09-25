@@ -22,6 +22,7 @@ Consumer-facing rule/skill drafts (for apps that import `playbook-ui`) live in [
    - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json`
    - `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json`
    - `playbook/app/pb_kits/playbook/utilities/global-props.schema.json`
+   - `playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json`
    - `playbook-website/.../AvailableProps/globalPropsValues.ts`
    - `playbook/dist/ai/**`
 4. **Playground source of truth** is `docs/_playground.overrides.json` per kit — edit that, then regenerate.

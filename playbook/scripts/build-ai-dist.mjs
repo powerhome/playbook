@@ -61,6 +61,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const KITS_DIR = path.resolve(__dirname, '../app/pb_kits/playbook');
 const OUTPUT_DIR = path.resolve(__dirname, '../dist/ai');
 const GLOBAL_PROPS_PATH = path.join(KITS_DIR, 'utilities/global-props.schema.json');
+const GLOBAL_EVENT_PROPS_PATH = path.join(KITS_DIR, 'utilities/global-event-props.schema.json');
 
 // =============================================================================
 // HELPERS
@@ -153,6 +154,16 @@ async function main() {
     console.log('⚠️  global-props.schema.json not found');
   }
 
+  if (fs.existsSync(GLOBAL_EVENT_PROPS_PATH)) {
+    fs.copyFileSync(
+      GLOBAL_EVENT_PROPS_PATH,
+      path.join(OUTPUT_DIR, 'global-event-props.schema.json')
+    );
+    console.log('✅ global-event-props.schema.json');
+  } else {
+    console.log('⚠️  global-event-props.schema.json not found');
+  }
+
   const menuCatalog = loadMenuCatalog();
   const menuKitCount = Object.keys(menuCatalog.kits || {}).length;
   console.log(`✅ menu.yml catalog (${menuKitCount} kits)`);
@@ -164,6 +175,9 @@ async function main() {
     generated: new Date().toISOString(),
     schemas: {
       globalProps: 'global-props.schema.json',
+      ...(fs.existsSync(GLOBAL_EVENT_PROPS_PATH) && {
+        globalEventProps: 'global-event-props.schema.json',
+      }),
       kits: {},
     },
     playgrounds: {
@@ -176,6 +190,9 @@ async function main() {
   };
   const allSchemas = {
     globalProps: readJson(GLOBAL_PROPS_PATH),
+    ...(fs.existsSync(GLOBAL_EVENT_PROPS_PATH) && {
+      globalEventProps: readJson(GLOBAL_EVENT_PROPS_PATH),
+    }),
     kits: {},
   };
   const playgroundsIndex = {

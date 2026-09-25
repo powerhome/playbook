@@ -34,6 +34,9 @@ global_props:
   - shadow
   - border
 
+global_event_props:
+  - on_click
+
 tokens:
   - using_tokens
   - animation

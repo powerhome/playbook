@@ -27,6 +27,7 @@ import {
 // as its own chunk fetched on demand, instead of all pages — including the full
 // Playground builder — bundling into one script every page has to download.
 const GlobalPropsExamples = lazy(() => import('./components/GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'))
+const GlobalEventPropsExamples = lazy(() => import('./components/GlobalPropsAndTokens/ExamplesPage/GlobalEventPropsExamplesIndex'))
 const TokensExamples = lazy(() => import('./components/GlobalPropsAndTokens/ExamplesPage/TokensExamplesIndex'))
 const IconsIndex = lazy(() => import('./components/Icons/IconsIndex'))
 
@@ -35,6 +36,15 @@ function GlobalPropsShowPage() {
   return (
     <Suspense fallback={<LoadingInline />}>
       <GlobalPropsExamples routeParamName={name} />
+    </Suspense>
+  )
+}
+
+function GlobalEventPropsShowPage() {
+  const { name } = useParams()
+  return (
+    <Suspense fallback={<LoadingInline />}>
+      <GlobalEventPropsExamples routeParamName={name} />
     </Suspense>
   )
 }
@@ -115,6 +125,16 @@ const router = createBrowserRouter(
         element={<GlobalPropsShowPage />}
         loader={ComponentsLoader}
         path="global_props/:name"
+      />
+      <Route
+        lazy={() => import('./components/GlobalPropsAndTokens/GlobalEventPropsIndex').then((mod) => ({ Component: mod.default }))}
+        loader={ComponentsLoader}
+        path="global_event_props"
+      />
+      <Route
+        element={<GlobalEventPropsShowPage />}
+        loader={ComponentsLoader}
+        path="global_event_props/:name"
       />
       <Route
         lazy={() => import('./components/GlobalPropsAndTokens/TokensIndex').then((mod) => ({ Component: mod.default }))}
