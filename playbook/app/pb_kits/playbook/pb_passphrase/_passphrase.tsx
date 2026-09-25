@@ -65,6 +65,8 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
     [value, uncontrolledValue, uncontrolled]
   )
 
+  const isDisabled = Boolean(inputProps.disabled)
+
   const toggleShowPopover = () => setShowPopover(!showPopover)
   const handleShouldClosePopover = (shouldClosePopover: boolean) => {
     setShowPopover(!shouldClosePopover)
@@ -72,6 +74,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
 
   const toggleShowPassphrase = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
+    if (isDisabled) return
     setShowPassphrase(!showPassphrase)
   }
 
@@ -181,6 +184,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
               {...inputProps}
           />
           <span
+              aria-disabled={isDisabled || undefined}
               aria-label={
                 showPassphrase
                   ? "Passphrase currently visible. Click icon to hide password"
@@ -196,7 +200,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
                 }
               }}
               role="button"
-              tabIndex={0}
+              tabIndex={isDisabled ? -1 : 0}
           >
             <Body
                 className={showPassphrase ? "hide-icon" : ""}
