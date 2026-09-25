@@ -63,9 +63,13 @@
       "default": false
     },
     "extensions": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "array"
+      },
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "name": {

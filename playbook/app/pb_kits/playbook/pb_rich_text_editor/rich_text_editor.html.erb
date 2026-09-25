@@ -1,5 +1,5 @@
 <%# TipTap loads via full URL dynamic import() in rich_text_editor_rails.js (esm.sh) — no import map, so no clash with Vite/host maps. %>
-<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_tiptap: true, input_id: object.input_id, initial_html: object.initial_html, markdown_support: object.markdown_support, rte_simple: object.simple }) do %>
+<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_tiptap: true, input_id: object.input_id, initial_html: object.initial_html, markdown_support: object.markdown_support, rte_extensions: object.enabled_extensions.to_json, rte_simple: object.simple }) do %>
   <div class="pb_rich_text_editor_kit">
   <% if object.label.present? %>
     <label for="<%= object.input_id %>">
@@ -10,7 +10,8 @@
       <% end %>
     </label>
   <% end %>
-  <input type="hidden" name="<%= object.input_name %>" id="<%= object.input_id %>" value="" />
+  <%# Seeded with the current content so a failed/slow TipTap mount submits the existing value instead of wiping it. %>
+  <input type="hidden" name="<%= object.input_name %>" id="<%= object.input_id %>" value="<%= object.initial_html %>" />
   <div class="pb_rich_text_editor_advanced_container toolbar-active<%= " pb_rich_text_editor_rte--simple" if object.simple %>">
     <% if object.simple %>
     <%# Compact toolbar: Bold/Italic + Undo/Redo — no block-style Popover (avoids dialog positioning issues). %>
@@ -126,6 +127,49 @@
               <%= pb_rails("icon", props: { icon: "link", size: "lg" }) %>
             <% end %>
           </button>
+          <% if object.show_extensions_dropdown? %>
+            <% extension_options = [] %>
+            <% extension_options << { value: "underline", text: "Underline", icon: "underline" } if object.extension_enabled?("underline") %>
+            <% if object.extension_enabled?("text_align") %>
+              <% extension_options.concat([
+                { value: "textAlign-left", text: "Align left", icon: "align-left" },
+                { value: "textAlign-center", text: "Align center", icon: "align-center" },
+                { value: "textAlign-right", text: "Align right", icon: "align-right" },
+                { value: "textAlign-justify", text: "Justify", icon: "align-justify" },
+              ]) %>
+            <% end %>
+            <% extension_options << { value: "horizontalRule", text: "Horizontal rule", icon: "horizontal-rule" } if object.extension_enabled?("horizontal_rule") %>
+            <% extension_options << { value: "image", text: "Image", icon: "image" } if object.extension_enabled?("image") %>
+            <span class="pb_popover_reference_wrapper">
+              <button type="button" class="toolbar_button" id="<%= object.rte_extensions_trigger_id %>" title="More formatting" aria-label="More formatting" aria-haspopup="true" role="button" tabindex="0">
+                <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                  <%= pb_rails("icon", props: { icon: "ellipsis", size: "lg" }) %>
+                <% end %>
+              </button>
+            </span>
+            <%= pb_rails("popover", props: {
+              trigger_element_id: object.rte_extensions_trigger_id,
+              tooltip_id: object.rte_extensions_tooltip_id,
+              position: "bottom",
+              padding: "none",
+              close_on_click: "any",
+              offset: true,
+            }) do %>
+              <%= pb_rails("nav", props: { variant: "subtle", padding_top: extension_options.many? ? "xs" : "none", padding_bottom: extension_options.many? ? "xs" : "none" }) do %>
+                <% extension_options.each do |extension| %>
+                  <%= pb_rails("nav/item", props: {
+                    link: "##{extension[:value]}",
+                    text: extension[:text],
+                    icon_left: extension[:icon],
+                    classname: "pb_tiptap_toolbar_dropdown_list_item",
+                    margin: "none",
+                    padding_top: "xxs",
+                    padding_bottom: "xxs",
+                  }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
         <div class="toolbar_block rte-toolbar-right">
           <button type="button" class="toolbar_button" data-action="undo" title="Undo" role="button" tabindex="0">

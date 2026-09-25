@@ -320,6 +320,9 @@
     hr {
       @include preview_tiptap_hr;
     }
+    img {
+      @include preview_tiptap_img;
+    }
     ol {
       @include preview_tiptap_ol;
     }
@@ -501,6 +504,9 @@
   }
   hr {
     @include preview_tiptap_hr;
+  }
+  img {
+    @include preview_tiptap_img;
   }
   ol {
     @include preview_tiptap_ol;

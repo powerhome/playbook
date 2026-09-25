@@ -3,6 +3,88 @@
 
 const RTE_TIPTAP_VERSION = "2.8.0";
 const RTE_TIPTAP_ESM = (pkg) => `https://esm.sh/${pkg}@${RTE_TIPTAP_VERSION}`;
+const RTE_EXTENSIONS = new Set(["underline", "text_align", "horizontal_rule", "image"]);
+
+function parseExtensions(value) {
+  try {
+    const parsed = JSON.parse(value || "[]");
+    if (!Array.isArray(parsed)) return [];
+
+    return [...new Set(parsed.filter((extension) => RTE_EXTENSIONS.has(extension)))];
+  } catch (_error) {
+    return [];
+  }
+}
+
+function extensionActionFromHref(href) {
+  const value = href?.startsWith("#") ? href.slice(1) : "";
+  if (value.startsWith("textAlign-")) {
+    return { action: "textAlign", alignment: value.replace("textAlign-", "") };
+  }
+  if (["horizontalRule", "image", "underline"].includes(value)) return { action: value };
+
+  return null;
+}
+
+async function loadOptionalExtensions(extensionNames, importer = (pkg) => import(RTE_TIPTAP_ESM(pkg))) {
+  const extensions = [];
+
+  if (extensionNames.includes("underline")) {
+    const { default: Underline } = await importer("@tiptap/extension-underline");
+    extensions.push(Underline);
+  }
+  if (extensionNames.includes("text_align")) {
+    const { default: TextAlign } = await importer("@tiptap/extension-text-align");
+    extensions.push(TextAlign.configure({ types: ["heading", "paragraph"] }));
+  }
+  if (extensionNames.includes("image")) {
+    const { default: Image } = await importer("@tiptap/extension-image");
+    extensions.push(Image);
+  }
+
+  return extensions;
+}
+
+function syncToHiddenInput(editor, hiddenInput) {
+  if (editor && hiddenInput) hiddenInput.value = editor.getHTML();
+}
+
+function runToolbarAction(editor, action, { alignment, prompt = window.prompt } = {}) {
+  if (action === "undo" || action === "redo") {
+    editor.chain().focus()[action]().run();
+    return;
+  }
+  if (action === "link") {
+    const previousUrl = editor.getAttributes("link").href || "";
+    const url = prompt("URL", previousUrl);
+    if (url === null) return;
+    const chain = editor.chain().focus().extendMarkRange("link");
+    if (url === "") chain.unsetLink().run();
+    else chain.setLink({ href: url }).run();
+    return;
+  }
+  if (action === "image") {
+    const url = prompt("Image URL");
+    if (url) editor.chain().focus().setImage({ src: url }).run();
+    return;
+  }
+  if (action === "textAlign" && alignment) {
+    editor.chain().focus().setTextAlign(alignment).run();
+    return;
+  }
+
+  const actionToChain = {
+    bold: "toggleBold",
+    italic: "toggleItalic",
+    strike: "toggleStrike",
+    codeBlock: "toggleCodeBlock",
+    horizontalRule: "setHorizontalRule",
+    underline: "toggleUnderline",
+  };
+  const chainMethod = actionToChain[action];
+  const chain = editor.chain().focus();
+  if (chainMethod && typeof chain[chainMethod] === "function") chain[chainMethod]().run();
+}
 
 async function initPlaybookRichTextEditorRails(container) {
   if (!container || container.dataset.pbRteInitialized || container.dataset.pbRtePending) return;
@@ -18,8 +100,10 @@ async function initPlaybookRichTextEditorRails(container) {
   const editorNode = document.getElementById(`${containerId}-editor`);
   const toolbar = document.getElementById(`${containerId}-toolbar`);
   const rteSimple = container.dataset.rteSimple === "true";
+  const extensionNames = parseExtensions(container.dataset.rteExtensions);
   const markdownSupport = container.dataset.markdownSupport === "true";
   const blockTooltipId = `${containerId}-toolbar-block-tooltip`;
+  const extensionsTooltipId = `${containerId}-toolbar-extensions-tooltip`;
   const iconTemplatesRoot = rteSimple
     ? null
     : document.getElementById(`${containerId}-block-icon-templates`);
@@ -29,16 +113,11 @@ async function initPlaybookRichTextEditorRails(container) {
     return;
   }
 
-  function syncToHiddenInput(editor) {
-    if (editor && hiddenInput) {
-      hiddenInput.value = editor.getHTML();
-    }
-  }
-
   try {
     const { Editor } = await import(RTE_TIPTAP_ESM("@tiptap/core"));
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
     const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
+    const optionalExtensions = await loadOptionalExtensions(extensionNames);
     const neutralClipboardTags = new Set(["html", "head", "body", "meta", "div", "span", "p"]);
     const markdownSourceTags = new Set([...neutralClipboardTags, "pre", "code"]);
     let markdownToHtml;
@@ -77,10 +156,11 @@ async function initPlaybookRichTextEditorRails(container) {
       extensions: [
         StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
         Link.configure({ openOnClick: false, HTMLAttributes: { target: "_blank", rel: "noopener" } }),
+        ...optionalExtensions,
       ],
       content: initialHtml,
       editable: true,
-      onUpdate: ({ editor: ed }) => syncToHiddenInput(ed),
+      onUpdate: ({ editor: ed }) => syncToHiddenInput(ed, hiddenInput),
     });
 
     if (markdownSupport && markdownToHtml) {
@@ -115,14 +195,7 @@ async function initPlaybookRichTextEditorRails(container) {
       }, true);
     }
 
-    syncToHiddenInput(editor);
-
-    const actionToChain = {
-      bold: "toggleBold",
-      italic: "toggleItalic",
-      strike: "toggleStrike",
-      codeBlock: "toggleCodeBlock",
-    };
+    syncToHiddenInput(editor, hiddenInput);
 
     const getCurrentBlockValue = () => {
       let value = "paragraph";
@@ -220,17 +293,33 @@ async function initPlaybookRichTextEditorRails(container) {
       else if (value === "blockquote") chain.toggleBlockquote().run();
     };
 
+    const isToolbarActionActive = (action, alignment) => {
+      if (action === "bold") return editor.isActive("bold");
+      if (action === "italic") return editor.isActive("italic");
+      if (action === "strike") return editor.isActive("strike");
+      if (action === "codeBlock") return editor.isActive("codeBlock");
+      if (action === "link") return editor.isActive("link");
+      if (action === "underline") return editor.isActive("underline");
+      if (action === "image") return editor.isActive("image");
+      if (action === "horizontalRule") return editor.isActive("horizontalRule");
+      if (action === "textAlign") return editor.isActive({ textAlign: alignment });
+
+      return false;
+    };
+
     const updateActiveStates = () => {
       syncBlockTrigger();
       toolbar.querySelectorAll("button[data-action]").forEach((btn) => {
         const action = btn.dataset.action;
-        let active = false;
-        if (action === "bold") active = editor.isActive("bold");
-        else if (action === "italic") active = editor.isActive("italic");
-        else if (action === "strike") active = editor.isActive("strike");
-        else if (action === "codeBlock") active = editor.isActive("codeBlock");
-        else if (action === "link") active = editor.isActive("link");
-        btn.classList.toggle("is-active", active);
+        btn.classList.toggle("is-active", isToolbarActionActive(action, btn.dataset.alignment));
+      });
+      const extensionsTooltip = document.getElementById(extensionsTooltipId);
+      extensionsTooltip?.querySelectorAll("a.pb_nav_list_item_link").forEach((link) => {
+        const extensionAction = extensionActionFromHref(link.getAttribute("href"));
+        const active = extensionAction
+          ? isToolbarActionActive(extensionAction.action, extensionAction.alignment)
+          : false;
+        link.classList.toggle("is-active", active);
       });
       toolbar.querySelectorAll("button[data-action='undo']").forEach((btn) => {
         btn.disabled = !editor.can().undo();
@@ -256,31 +345,26 @@ async function initPlaybookRichTextEditorRails(container) {
       }
     }
 
+    const extensionsTooltip = document.getElementById(extensionsTooltipId);
+    if (extensionsTooltip) {
+      extensionsTooltip.addEventListener("click", (event) => {
+        const link = event.target.closest("a[href^='#']");
+        if (!link || !extensionsTooltip.contains(link)) return;
+        const extensionAction = extensionActionFromHref(link.getAttribute("href"));
+        if (!extensionAction) return;
+
+        event.preventDefault();
+        runToolbarAction(editor, extensionAction.action, { alignment: extensionAction.alignment });
+        updateActiveStates();
+      });
+    }
+
     toolbar.addEventListener("click", (e) => {
       const btn = e.target.closest("button[data-action]");
       if (!btn) return;
       e.preventDefault();
       const action = btn.dataset.action;
-
-      if (action === "undo") {
-        editor.chain().focus().undo().run();
-      } else if (action === "redo") {
-        editor.chain().focus().redo().run();
-      } else if (action === "link") {
-        const previousUrl = editor.getAttributes("link").href || "";
-        const url = window.prompt("URL", previousUrl);
-        if (url === null) return;
-        if (url === "") {
-          editor.chain().focus().extendMarkRange("link").unsetLink().run();
-        } else {
-          editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
-        }
-      } else {
-        const chainMethod = actionToChain[action];
-        if (chainMethod && typeof editor.chain().focus()[chainMethod] === "function") {
-          editor.chain().focus()[chainMethod]().run();
-        }
-      }
+      runToolbarAction(editor, action, { alignment: btn.dataset.alignment });
       updateActiveStates();
     });
 
@@ -308,4 +392,12 @@ if (document.readyState === "loading") {
 
 document.addEventListener("turbo:load", mountAllPlaybookRichTextEditorRails);
 
-export { initPlaybookRichTextEditorRails, mountAllPlaybookRichTextEditorRails };
+export {
+  extensionActionFromHref,
+  initPlaybookRichTextEditorRails,
+  loadOptionalExtensions,
+  mountAllPlaybookRichTextEditorRails,
+  parseExtensions,
+  runToolbarAction,
+  syncToHiddenInput,
+};
