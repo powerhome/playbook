@@ -42,6 +42,15 @@ class FormStructure
     node[1]
   end
 
+  # Private helpers are implementation detail; only public methods belong to the form API.
+  def public_defs(tree)
+    private_line = nodes(tree, :vcall).find { |node| node[1][1] == "private" }&.dig(1, 2, 0)
+    definitions = nodes(tree, :def)
+    return definitions unless private_line
+
+    definitions.reject { |definition| definition[1][2][0] > private_line }
+  end
+
   def signature(file, definition)
     name = definition[1][1]
     return name if definition[2][0] == :params && definition[2].drop(1).all?(&:nil?)
@@ -115,15 +124,15 @@ class FormStructure
       next if [GENERIC, ACTIONS].include?(file)
       raise "Unsupported builder require: #{relative}" unless relative.start_with?("builder/") && !relative.include?("..")
 
-      nodes(parse(file), :def).each do |definition|
+      public_defs(parse(file)).each do |definition|
         methods << { name: definition[1][1], kit: kit_for(definition), signature: signature(file, definition), sources: [BUILDER, file] }
       end
     end
-    builder_defs = nodes(builder, :def)
+    builder_defs = public_defs(builder)
     raise "Expected only actions directly on Builder; update the extractor for new definitions" unless builder_defs.map { |node| node[1][1] } == ["actions"]
 
     actions = parse(ACTIONS)
-    action_defs = nodes(actions, :def).reject { |node| node[1][1] == "initialize" }
+    action_defs = public_defs(actions).reject { |node| node[1][1] == "initialize" }
     {
       methods: methods,
       actions: { name: "actions", signature: signature(BUILDER, builder_defs.first), kit: kit_for(actions), methods: action_defs.map { |definition| signature(ACTIONS, definition) }, sources: [BUILDER, ACTIONS] },

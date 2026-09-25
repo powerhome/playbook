@@ -40,6 +40,104 @@ RSpec.describe Playbook::Forms::Builder::FormFieldBuilder, type: :helper do
       expect(rendered).to have_tag("input[name='example[note]'][data-pb-emoji-mask='true']")
     end
 
+    describe "input_options" do
+      it "passes data on text_field" do
+        rendered = render_form do |builder|
+          concat builder.text_field(:name, props: { input_options: { data: { something: true } } })
+        end
+
+        expect(rendered).to have_tag("input[name='example[name]'][data-something='true']")
+      end
+
+      it "merges data with mask data on text_field" do
+        rendered = render_form do |builder|
+          concat builder.text_field(:amount, props: { mask: "currency", input_options: { data: { something: true } } })
+        end
+
+        expect(rendered).to have_tag("input[name='example[amount]'][data-something='true'][data-pb-input-mask='true']")
+      end
+
+      it "appends classname to the text_input class on text_field" do
+        rendered = render_form do |builder|
+          concat builder.text_field(:name, props: { input_options: { classname: "custom" } })
+        end
+
+        expect(rendered).to have_tag("input.text_input.custom[name='example[name]']")
+      end
+
+      it "passes extra attributes on text_field" do
+        rendered = render_form do |builder|
+          concat builder.text_field(
+            :name,
+            props: { input_options: { id: "name-input", autocomplete: "one-time-code" } }
+          )
+        end
+
+        expect(rendered).to have_tag("input#name-input[name='example[name]'][autocomplete='one-time-code']")
+      end
+
+      it "uses classname and ignores class on text_field" do
+        rendered = render_form do |builder|
+          concat builder.text_field(
+            :name,
+            props: { input_options: { class: "ignored", classname: "custom" } }
+          )
+        end
+
+        expect(rendered).to have_tag("input.text_input.custom[name='example[name]']")
+        expect(rendered).not_to have_tag("input.ignored")
+      end
+
+      it "passes data on email_field" do
+        rendered = render_form do |builder|
+          concat builder.email_field(:email, props: { input_options: { data: { something: true } } })
+        end
+
+        expect(rendered).to have_tag("input[type=email][name='example[email]'][data-something='true']")
+      end
+
+      it "passes data on text_area" do
+        rendered = render_form do |builder|
+          concat builder.text_area(:bio, props: { input_options: { data: { something: true } } })
+        end
+
+        expect(rendered).to have_tag("textarea[name='example[bio]'][data-something='true']")
+      end
+
+      it "merges data with emoji_mask data on text_area" do
+        rendered = render_form do |builder|
+          concat builder.text_area(:bio, props: { emoji_mask: true, input_options: { data: { something: true } } })
+        end
+
+        expect(rendered).to have_tag("textarea[name='example[bio]'][data-something='true'][data-pb-emoji-mask='true']")
+      end
+
+      it "appends classname on text_area" do
+        rendered = render_form do |builder|
+          concat builder.text_area(:bio, props: { input_options: { classname: "custom" } })
+        end
+
+        expect(rendered).to have_tag("textarea.custom[name='example[bio]']")
+      end
+
+      it "passes extra attributes on text_area" do
+        rendered = render_form do |builder|
+          concat builder.text_area(:bio, props: { input_options: { id: "bio-input", maxlength: 200 } })
+        end
+
+        expect(rendered).to have_tag("textarea#bio-input[name='example[bio]'][maxlength='200']")
+      end
+
+      it "uses classname and ignores class on text_area" do
+        rendered = render_form do |builder|
+          concat builder.text_area(:bio, props: { input_options: { class: "ignored", classname: "custom" } })
+        end
+
+        expect(rendered).to have_tag("textarea.custom[name='example[bio]']")
+        expect(rendered).not_to have_tag("textarea.ignored")
+      end
+    end
+
     it "uses a humanized label when label is true and required_indicator is set" do
       rendered = render_form do |builder|
         concat builder.text_field(:full_name, props: { label: true, required_indicator: true })
