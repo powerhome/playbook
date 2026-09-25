@@ -22,7 +22,10 @@
       ]
     },
     "filters": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "array"
+      },
       "platforms": [
         "react",
         "rails"

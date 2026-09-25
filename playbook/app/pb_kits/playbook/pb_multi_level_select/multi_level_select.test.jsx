@@ -384,7 +384,46 @@ describe('MultiLevelSelect single variant', () => {
 
     expect(input.value).toBe('Power Home Remodeling')
   })
+
+  test('should format the selected input display with hierarchy context', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          formatSelectedDisplay={(item, { path }) =>
+            path.map(({ label }) => label).join(' / ')
+          }
+          treeData={treeData}
+          variant="single"
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    const input = kit.querySelector('#multiselect_input')
+    fireEvent.click(input)
+    fireEvent.click(kit.querySelector('#people1'))
+
+    expect(input.value).toBe('Power Home Remodeling / People')
+  })
+
+  test('should format the selected input display from selectedIds', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          formatSelectedDisplay={(item, { ancestors }) => {
+            const parent = ancestors[ancestors.length - 1]
+            return `${parent.label}: ${item.label}`
+          }}
+          selectedIds={['talent1']}
+          treeData={treeData}
+          variant="single"
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    const input = kit.querySelector('#multiselect_input')
+
+    expect(input.value).toBe('People: Talent Acquisition')
+  })
 })
+
 
 describe('MultiLevelSelect disabled parent behavior', () => {
   test('children of disabled parent should also be disabled in single variant', () => {
@@ -833,4 +872,3 @@ describe('PbMultiLevelSelect Rails enhanced element', () => {
     expect(element.querySelectorAll('.dropdown_item').length).toBeGreaterThan(0)
   })
 })
-

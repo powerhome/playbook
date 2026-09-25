@@ -53,7 +53,10 @@
       "default": false
     },
     "customQuickPickDates": {
-      "type": "CustomQuickPickDates",
+      "type": {
+        "react": "CustomQuickPickDates",
+        "rails": "GenericObject"
+      },
       "platforms": [
         "react",
         "rails"
@@ -135,7 +138,10 @@
       ]
     },
     "options": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "array"
+      },
       "platforms": [
         "react",
         "rails"

@@ -5,6 +5,11 @@ import Caption from '../pb_caption/_caption'
 import colors from '../tokens/exports/_colors.module.scss'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
+import {
+  createMarkdownToHTML,
+  handleMarkdownPaste,
+} from './TipTap/markdownPaste'
+import type { MarkdownDependencies } from './TipTap/markdownPaste'
 import TipTapEditor from './_tiptap_editor'
 import TrixTextEditor from './_trix_editor'
 
@@ -22,6 +27,7 @@ type RichTextEditorProps = {
   id?: string,
   inline?: boolean,
   label?: string,
+  markdownSupport?: MarkdownDependencies,
   extensions?: { [key: string]: string }[],
   name?: string,
   onChange: (html: string, text: string) => void,
@@ -65,6 +71,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     maxWidth = "md",
     requiredIndicator = false,
     label,
+    markdownSupport,
     TrixEditor,
     trixInstance: trixInstance = undefined,
   } = props
@@ -88,6 +95,30 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     dom.setAttribute("role", "textbox")
     dom.setAttribute("aria-multiline", "true")
   }, [advancedEditor, fieldId, labelElementId])
+
+  useEffect(() => {
+    if (!markdownSupport) return
+
+    const editorElement = advancedEditor?.view?.dom
+    if (!editorElement) return
+    const markdownToHTML = createMarkdownToHTML(
+      markdownSupport.parser,
+      markdownSupport.serializer
+    )
+
+    const handleMarkdownSupport = (event: ClipboardEvent) => {
+      handleMarkdownPaste(
+        event,
+        (html) => advancedEditor.chain().focus().insertContent(html).run(),
+        markdownToHTML
+      )
+    }
+    editorElement.addEventListener("paste", handleMarkdownSupport, true)
+
+    return () => {
+      editorElement.removeEventListener("paste", handleMarkdownSupport, true)
+    }
+  }, [advancedEditor, markdownSupport])
 
   //===========focus prop with advanced editor=================
   const isClickInPopover = (event: Event): boolean => {

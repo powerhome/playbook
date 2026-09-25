@@ -146,6 +146,33 @@
     margin: 1.5rem 0 2rem 0;
   }
 
+  .markdown-table,
+  .pb_table {
+    margin: $space_md 0 $space_lg 0;
+    width: 100%;
+
+    th {
+      white-space: nowrap;
+    }
+
+    td,
+    th {
+      vertical-align: top;
+
+      p {
+        margin: 0;
+      }
+
+      code {
+        white-space: nowrap;
+      }
+    }
+
+    a code {
+      color: inherit;
+    }
+  }
+
   // Decorators
   u {
     text-decoration-color: $text_lt_light;

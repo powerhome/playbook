@@ -10,11 +10,15 @@ require "uri"
 require "playbook/version"
 
 module Playbook
-  # Builds a website-ready release section from labeled GitHub PRs and prepends it to CHANGELOG.md.
+  # Builds a website-ready release section from labeled GitHub PRs.
+  # Web mode prepends one section to CHANGELOG.md.
+  # RC mode prepends every RC missing from RC_CHANGELOG.md since the last heading.
   module ChangelogGenerator
     REPO = "powerhome/playbook"
     MAX_PER_SECTION = 25
     CHANGELOG_PATH = File.expand_path("../../CHANGELOG.md", __dir__)
+    RC_CHANGELOG_PATH = File.expand_path("../../RC_CHANGELOG.md", __dir__)
+    MODES = %i[web rc].freeze
 
     OTHER_HEADER = "**Other:**"
     RELEASE_IMAGE = "![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)"
@@ -38,20 +42,71 @@ module Playbook
 
   module_function
 
-    def run!(changelog_path: CHANGELOG_PATH)
+    def run!(mode: :web, changelog_path: nil)
+      mode = mode.to_sym
+      abort "Unknown changelog mode: #{mode.inspect}. Use :web or :rc." unless MODES.include?(mode)
+
+      return run_rc!(changelog_path: changelog_path || RC_CHANGELOG_PATH) if mode == :rc
+
+      run_web!(changelog_path: changelog_path || CHANGELOG_PATH)
+    end
+
+    def run_web!(changelog_path:)
       version = Playbook::VERSION
       previous_version = Playbook::PREVIOUS_VERSION
       existing = File.read(changelog_path)
-
       version_link = %r{\[#{Regexp.escape(version)}\]\(https://github\.com/powerhome/playbook/tree/#{Regexp.escape(version)}\)}
       abort "CHANGELOG.md already has a section for #{version}. Aborting." if existing.match?(version_link)
 
       ensure_github_auth!
       since_time = tag_time(previous_version)
-      compare_from = resolve_compare_tag(version, previous_version)
-      already_listed = existing_pr_numbers(existing)
-      pulls = fetch_merged_pulls(since_time, already_listed)
+      pulls = fetch_merged_pulls(since_time, existing_pr_numbers(existing))
+      section = build_release_section(
+        version,
+        resolve_compare_tag(version, previous_version),
+        group_pulls(pulls)
+      )
 
+      File.write(changelog_path, "#{section}\n\n#{existing.lstrip}")
+      puts "Prepended #{version} release section to #{File.basename(changelog_path)}"
+      puts "Edit the title and description placeholders before publishing."
+    end
+
+    def run_rc!(changelog_path:)
+      existing = File.exist?(changelog_path) ? File.read(changelog_path) : ""
+      last_documented = last_documented_rc(existing)
+      missing = missing_rc_versions(existing)
+      abort rc_nothing_to_do_message(last_documented) if missing.empty?
+
+      ensure_github_auth!
+      earliest_since = since_for_rc(missing.first, last_documented: last_documented)
+      pulls = fetch_merged_pulls(tag_time(earliest_since), existing_pr_numbers(existing))
+
+      unused = pulls.dup
+      sections = missing.reverse.map do |rc_version|
+        window = select_pulls_for_rc(unused, rc_version, last_documented: last_documented)
+        unused -= window
+        release_time = tag_time_if_present(rc_version)
+        build_release_section(
+          rc_version,
+          since_for_rc(rc_version, last_documented: last_documented),
+          group_pulls(window),
+          mode: :rc,
+          heading_version: gem_rc_version(rc_version),
+          release_date: (release_time || Time.now).to_date
+        )
+      end
+
+      new_content = sections.join("\n")
+      File.write(
+        changelog_path,
+        existing.strip.empty? ? "#{new_content.rstrip}\n" : "#{new_content.rstrip}\n\n#{existing.lstrip}"
+      )
+      headings = missing.reverse.map { |rc_version| gem_rc_version(rc_version) }.join(", ")
+      puts "Prepended #{headings} to #{File.basename(changelog_path)}"
+    end
+
+    def group_pulls(pulls)
       grouped = Hash.new { |hash, key| hash[key] = [] }
 
       pulls.each do |pull_request|
@@ -60,10 +115,114 @@ module Playbook
         grouped[header] << pull_request if grouped[header].size < MAX_PER_SECTION
       end
 
-      section = build_release_section(version, compare_from, grouped)
-      File.write(changelog_path, "#{section}\n\n#{existing.lstrip}")
-      puts "Prepended #{version} release section to CHANGELOG.md"
-      puts "Edit the title and description placeholders before publishing."
+      grouped
+    end
+
+    def missing_rc_versions(existing)
+      versions = known_rc_versions
+      abort <<~MSG if versions.empty?
+        No RC tag found.
+        Create a tag like v17.2.0-rc.1 or set RC_VERSION=17.2.0-rc.1
+      MSG
+
+      last_documented = last_documented_rc(existing) || Playbook::VERSION
+      last_key = version_sort_key(last_documented)
+      versions.select { |version| (version_sort_key(version) <=> last_key) == 1 }.sort_by { |version| rc_sort_key(version) }
+    end
+
+    def known_rc_versions
+      versions = rc_versions
+      from_env = ENV["RC_VERSION"].to_s.strip
+      return versions if from_env.empty?
+
+      ceiling = normalize_rc_version(from_env)
+      (versions + [ceiling]).uniq
+                            .select { |version| version_sort_key(version) <= version_sort_key(ceiling) }
+                            .sort_by { |version| rc_sort_key(version) }
+                            .reverse
+    end
+
+    def last_documented_rc(content)
+      existing_rc_versions(content).max_by { |version| rc_sort_key(version) }
+    end
+
+    def existing_rc_versions(content)
+      content.to_s.scan(/^# .+$/).filter_map { |line| parse_rc_version(line) }.uniq
+    end
+
+    def since_for_rc(current_rc, last_documented: nil)
+      previous_same_series = resolve_previous_rc_version(current_rc)
+      return previous_same_series if previous_same_series
+
+      [Playbook::VERSION, last_documented].compact.max_by { |version| version_sort_key(version) }
+    end
+
+    def select_pulls_for_rc(pulls, rc_version, last_documented: nil)
+      start_time = tag_time(since_for_rc(rc_version, last_documented: last_documented))
+      end_time = tag_time_if_present(rc_version)
+
+      pulls.select do |pull_request|
+        merged_at = pull_request["merged_at"]
+        next false if merged_at <= start_time
+        next false if end_time && merged_at > end_time
+
+        true
+      end
+    end
+
+    def rc_nothing_to_do_message(last_documented)
+      reference = last_documented ? gem_rc_version(last_documented) : Playbook::VERSION
+      "RC_CHANGELOG.md already has every RC since #{reference}. Nothing to do."
+    end
+
+    def resolve_previous_rc_version(current_rc)
+      base, number = current_rc.match(/\A(\d+\.\d+\.\d+)-rc\.(\d+)\z/).captures
+
+      rc_versions
+        .select { |version| version.start_with?("#{base}-rc.") }
+        .filter_map do |version|
+          other_number = version[/\d+\z/].to_i
+          next unless other_number < number.to_i
+
+          [other_number, version]
+        end
+        .max_by(&:first)
+        &.last
+    end
+
+    def rc_versions
+      git_tags.filter_map { |tag| parse_rc_version(tag) }.uniq.sort_by { |version| rc_sort_key(version) }.reverse
+    end
+
+    def parse_rc_version(value)
+      text = value.to_s.sub(".pre.rc.", "-rc.")
+      text[/\d+\.\d+\.\d+-rc\.\d+/]
+    end
+
+    def normalize_rc_version(value)
+      parsed = parse_rc_version(value)
+      abort "Invalid RC version: #{value.inspect}" unless parsed
+
+      parsed
+    end
+
+    def rc_sort_key(version)
+      version_sort_key(version)
+    end
+
+    def version_sort_key(version)
+      if (match = version.to_s.match(/\A(\d+)\.(\d+)\.(\d+)-rc\.(\d+)\z/))
+        return match.captures.map(&:to_i)
+      end
+
+      match = version.to_s.match(/\A(\d+)\.(\d+)\.(\d+)\z/)
+      abort "Invalid version for sorting: #{version.inspect}" unless match
+
+      match.captures.map(&:to_i) + [1_000_000]
+    end
+
+    def gem_rc_version(npm_rc)
+      npm_rc.sub("-rc.", ".pre.rc.")
     end
 
     def ensure_github_auth!
@@ -83,7 +242,7 @@ module Playbook
       nil
     end
 
-    def tag_time(version)
+    def tag_time_if_present(version)
       [version, "v#{version}"].each do |tag|
         timestamp = `git -C #{Shellwords.escape(git_root)} log -1 --format=%cI #{Shellwords.escape(tag)} 2>/dev/null`.strip
         next if timestamp.empty?
@@ -91,8 +250,14 @@ module Playbook
         return Time.iso8601(timestamp)
       end
 
-      warn "Could not resolve time for tag #{version}; using 30 days ago."
-      Time.now - (30 * 24 * 60 * 60)
+      nil
+    end
+
+    def tag_time(version)
+      tag_time_if_present(version) || begin
+        warn "Could not resolve time for tag #{version}; using 30 days ago."
+        Time.now - (30 * 24 * 60 * 60)
+      end
     end
 
     def sanitize_iso_date(value)
@@ -106,17 +271,20 @@ module Playbook
       changelog_content.scan(/\[\\?#(\d+)\]/).flatten.map(&:to_i).to_set
     end
 
+    def git_tags
+      `git -C #{Shellwords.escape(git_root)} tag --sort=-creatordate`.split("\n").map(&:strip).reject(&:empty?)
+    end
+
     def resolve_compare_tag(version, previous_version)
-      tags = `git -C #{Shellwords.escape(git_root)} tag --sort=-creatordate`.split("\n").map(&:strip).reject(&:empty?)
       rc_pattern = /\Av?#{Regexp.escape(version)}-rc\.\d+\z/
 
       # Prefer the newest RC tag for this VERSION (e.g. v16.10.0-rc.3...16.10.0).
-      newest_rc = tags.find { |tag| tag.match?(rc_pattern) }
+      newest_rc = git_tags.find { |tag| tag.match?(rc_pattern) }
       return newest_rc if newest_rc
 
       # Otherwise use the previous release tag if present.
       previous_candidates = [previous_version, "v#{previous_version}"]
-      previous_tag = tags.find { |tag| previous_candidates.include?(tag) }
+      previous_tag = git_tags.find { |tag| previous_candidates.include?(tag) }
       return previous_tag if previous_tag
 
       previous_version
@@ -162,6 +330,7 @@ module Playbook
           "title" => item["title"],
           "user" => { "login" => item.dig("user", "login") },
           "labels" => Array(item["labels"]),
+          "merged_at" => merged_at,
         }
       end
     end
@@ -180,16 +349,28 @@ module Playbook
       response.body
     end
 
-    def build_release_section(version, compare_from, grouped)
+    def build_release_section(version, compare_from, grouped, mode: :web, heading_version: nil, release_date: Date.today)
       lines = []
-      lines << "# Awesome Release Title Here!"
+      formatted_date = release_date.strftime("%B %d, %Y")
+
+      title = if mode == :rc
+                "# ✨ #{heading_version || gem_rc_version(version)}"
+              else
+                "# Awesome Release Title Here!"
+              end
+      lines << title
+
       lines << ""
-      lines << "##### #{Date.today.strftime('%B %d, %Y')}"
+      lines << "##### #{formatted_date}"
       lines << ""
-      lines << RELEASE_IMAGE
-      lines << ""
-      lines << "Your feature description goes here."
-      lines << ""
+
+      unless mode == :rc
+        lines << RELEASE_IMAGE
+        lines << ""
+        lines << "Your feature description goes here."
+        lines << ""
+      end
+
       lines << "[#{version}](https://github.com/#{REPO}/tree/#{version}) full list of changes:"
       lines << ""
 

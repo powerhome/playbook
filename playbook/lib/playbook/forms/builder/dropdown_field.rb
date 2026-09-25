@@ -5,7 +5,7 @@ module Playbook
     class Builder
       def dropdown_field(name, props: {})
         props[:name] = name
-        props[:margin_bottom] = "sm"
+        props[:margin_bottom] ||= "sm"
         if props[:label] == true
           props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)
                             @object.class.human_attribute_name(name)

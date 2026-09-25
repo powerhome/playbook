@@ -9,8 +9,10 @@ export type PropType =
   | "array"
   | string;
 
+export type PlatformSplit<T> = { react?: T; rails?: T };
+
 export interface PropDefinition {
-  type: PropType;
+  type: PropType | PlatformSplit<PropType>;
   platforms: ("react" | "rails")[];
   values?: string[];
   default?: any;
@@ -213,4 +215,6 @@ export interface PlaygroundConfig {
   externalImports?: string[];
   /** Prop names for which an explicit empty string is a meaningful value and should be emitted as `prop=""` instead of omitted. */
   emitEmptyStringProps?: string[];
+  /** Function props that should use an editable code field instead of handler presets. */
+  editableFunctionProps?: string[];
 }

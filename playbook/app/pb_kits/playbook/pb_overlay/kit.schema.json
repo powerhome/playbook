@@ -26,7 +26,10 @@
       "default": "card_light"
     },
     "dynamic": {
-      "type": "false",
+      "type": {
+        "react": "false",
+        "rails": "boolean"
+      },
       "platforms": [
         "react",
         "rails"

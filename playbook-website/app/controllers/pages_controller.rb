@@ -87,10 +87,11 @@ class PagesController < ApplicationController
       Rails.logger.error("Error reading kit schema: #{e.message}")
     end
 
-    # Get kit schema and global props schema for playground
+    # Get kit schema and global props schema for playground.
+    # On production, omit playground_config — kit Playground tabs run on staging only.
     kit_schema = read_kit_schema(@kit)
     global_props_schema = read_global_props_schema
-    playground_config = read_playground_config(@kit)
+    playground_config = playbook_production_host? ? nil : read_playground_config(@kit)
 
     # first example from each kit
     examples = @examples.map do |example|
@@ -123,6 +124,8 @@ class PagesController < ApplicationController
     swift_changelog_releases   = nil
     figma_changelog_content    = nil
     figma_changelog_releases   = nil
+    rc_changelog_content       = nil
+    rc_changelog_releases      = nil
 
     if on_changelog || on_home
       changelog_content = Rails.cache.fetch("changelog_file_content") do
@@ -144,6 +147,13 @@ class PagesController < ApplicationController
       end
       figma_changelog_releases = Rails.cache.fetch("figma_changelog_releases") do
         paginate_changelog(figma_changelog_content)
+      end
+
+      rc_changelog_content = Rails.cache.fetch("rc_changelog_file_content") do
+        Playbook::Engine.root.join("RC_CHANGELOG.md").read
+      end
+      rc_changelog_releases = Rails.cache.fetch("rc_changelog_releases") do
+        paginate_changelog(rc_changelog_content)
       end
     end
 
@@ -198,6 +208,12 @@ class PagesController < ApplicationController
     end
 
     if on_playground && request.format.json?
+      # Production must not expose Playground builder payloads (VPN / staging only).
+      if playbook_production_host?
+        head :not_found
+        return
+      end
+
       render json: {
         playground_kits: playground_kits,
         global_props_schema: global_props_schema,
@@ -250,6 +266,8 @@ class PagesController < ApplicationController
           swift_changelog_releases: swift_changelog_releases,
           figma_changelog_content: figma_changelog_content,
           figma_changelog_releases: figma_changelog_releases,
+          rc_changelog_content: rc_changelog_content,
+          rc_changelog_releases: rc_changelog_releases,
           getting_started_content: getting_started_content,
           design_guidelines_content: design_guidelines_content,
           guide_page_content: guide_page_content,
@@ -584,6 +602,11 @@ private
         end
       end
     end
+  end
+
+  # Deployed production website host only (not review apps / localhost / staging).
+  def playbook_production_host?
+    request.host == "playbook.powerapp.cloud"
   end
 
   # JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects
