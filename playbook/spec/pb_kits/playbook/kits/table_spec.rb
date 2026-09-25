@@ -54,6 +54,17 @@ RSpec.describe Playbook::PbTable::Table do
       expect(subject.new(contrast_border: true).classname).to include "contrast-border"
       expect(subject.new(vertical_border: true).classname).to include "vertical-border"
     end
+
+    it "adds table-collapse class only when responsive is collapse", :aggregate_failures do
+      expect(subject.new(responsive: "collapse").classname).to include "table-collapse-sm"
+      expect(subject.new(responsive: "collapse").classname).to include "table-responsive-collapse"
+
+      expect(subject.new(responsive: "scroll").classname).to include "table-responsive-scroll"
+      expect(subject.new(responsive: "scroll").classname).not_to include "table-collapse-sm"
+
+      expect(subject.new(responsive: "none").classname).to include "table-responsive-none"
+      expect(subject.new(responsive: "none").classname).not_to include "table-collapse-sm"
+    end
   end
 
   describe "#with_filter_variant?" do
@@ -79,6 +90,12 @@ RSpec.describe Playbook::PbTable::Table do
     it "uses md collapse by default for with_filter variant" do
       table = subject.new(variant: "with_filter")
       expect(table.classname).to include("table-collapse-md")
+    end
+
+    it "does not add table-collapse when with_filter uses responsive scroll" do
+      table = subject.new(variant: "with_filter", responsive: "scroll")
+      expect(table.classname).to include("table-responsive-scroll")
+      expect(table.classname).not_to match(/table-collapse-/)
     end
 
     it "accepts filter prop for pre-rendered external filter" do

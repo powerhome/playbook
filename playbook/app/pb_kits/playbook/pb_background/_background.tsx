@@ -98,7 +98,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     imageUrl: getResponsiveValue(imageUrl),
   });
 
-  // Update responsive values on window resize.
+  // Keep responsive values in sync when props change, and on window resize.
   useEffect(() => {
     const updateResponsiveProps = () => {
       setResponsiveProps({
@@ -109,6 +109,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         imageUrl: getResponsiveValue(imageUrl),
       });
     };
+    updateResponsiveProps();
     window.addEventListener('resize', updateResponsiveProps);
     return () => window.removeEventListener('resize', updateResponsiveProps);
   }, [backgroundSize, backgroundPosition, backgroundRepeat, backgroundColor, imageUrl]);
@@ -153,6 +154,8 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     ...dynamicInlineProps
   };
 
+  // Dynamic HTML tag from props; matches other kits (Title, Collapsible, etc.).
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Tag: React.ReactElement | any = `${tag}`;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
