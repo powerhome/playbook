@@ -1,0 +1,15 @@
+appConfig:
+  rackEnv: "production"
+  railsEnv: "production"
+
+# MUST stay 1 while RenderStore is process-local memory.
+# /mcp (LibreChat) and /ui/:id (browser iframe) are different clients — ingress
+# sticky sessions cannot pin both to the same pod. Scale only after a shared
+# store (Redis/Memcached) backs RenderStore.
+replicas: 1
+
+ingress:
+  hosts:
+    - https://playbook-mcp.powerapp.cloud
+  issueCert: true
+

@@ -83,30 +83,30 @@ function isHtmlTag(name) {
   return /^[a-z][a-z0-9]*$/.test(name);
 }
 
-function formatRubyValue(value) {
+function formatRubyValue(value, opts = {}) {
   if (typeof value === 'boolean') return value ? 'true' : 'false';
   if (typeof value === 'number') return String(value);
   if (value === null) return 'nil';
   if (Array.isArray(value)) {
-    return `[${value.map((v) => formatRubyValue(v)).join(', ')}]`;
+    return `[${value.map((v) => formatRubyValue(v, opts)).join(', ')}]`;
   }
-  if (typeof value === 'object') return formatRubyHash(value);
+  if (typeof value === 'object') return formatRubyHash(value, opts);
   return JSON.stringify(String(value));
 }
 
-function formatRubyHashKey(key) {
+function formatRubyHashKey(key, { preserveKeys = false } = {}) {
   const raw = String(key);
-  // Identifiers (camelCase or snake_case) → snake_case symbol keys.
-  // Leave labels / paths / spaced keys as quoted hash rockets.
+  // Identifiers (camelCase or snake_case) → snake_case symbol keys,
+  // unless this hash is an opaque blob (Highcharts `options`).
   if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(raw)) {
-    return `${camelToSnake(raw)}:`;
+    return `${preserveKeys ? raw : camelToSnake(raw)}:`;
   }
   return `${JSON.stringify(raw)} =>`;
 }
 
-function formatRubyHash(obj) {
+function formatRubyHash(obj, opts = {}) {
   const parts = Object.entries(obj).map(
-    ([k, v]) => `${formatRubyHashKey(k)} ${formatRubyValue(v)}`
+    ([k, v]) => `${formatRubyHashKey(k, opts)} ${formatRubyValue(v, opts)}`
   );
   return `{ ${parts.join(', ')} }`;
 }
