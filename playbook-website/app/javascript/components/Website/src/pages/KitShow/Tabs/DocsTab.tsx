@@ -293,7 +293,7 @@ export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
         <Flex justify="center" width="100%">
           <EmptyState
             header="No Docs Found"
-            description={`This component is not available in ${platform.toUpperCase()}, please refer to ${platform === "rails" ? "REACT" : "RAILS"} documentation for more information.`}
+            description={`This component is not available in ${platform.charAt(0).toUpperCase() + platform.slice(1)}, try switching to ${platform === "rails" ? "React" : "Rails"} to see its documentation.`}
             image="default"
             size="lg"
           />

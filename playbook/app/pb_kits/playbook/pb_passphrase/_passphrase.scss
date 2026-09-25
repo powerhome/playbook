@@ -61,6 +61,10 @@
         display: none;
       }
     }
+
+    &:has(input:disabled) .show-passphrase-icon {
+      pointer-events: none;
+    }
   }
 
   .pb_progress_simple_wrapper, .pb_progress_simple_wrapper_dark {

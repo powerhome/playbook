@@ -22,6 +22,7 @@ Consumer-facing rule/skill drafts (for apps that import `playbook-ui`) live in [
    - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json`
    - `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json`
    - `playbook/app/pb_kits/playbook/utilities/global-props.schema.json`
+   - `playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json`
    - `playbook-website/.../AvailableProps/globalPropsValues.ts`
    - `playbook/dist/ai/**`
 4. **Playground source of truth** is `docs/_playground.overrides.json` per kit — edit that, then regenerate.
@@ -50,6 +51,7 @@ Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PUL
 | Advanced Table docs | [`docs/ADVANCED_TABLE_DOCS.md`](docs/ADVANCED_TABLE_DOCS.md) |
 | Deprecation warnings | [`docs/DEPRECATION_WARNINGS.md`](docs/DEPRECATION_WARNINGS.md) |
 | Kit status in menu | [`docs/PLATFORM_SPECIFIC_STATUS.md`](docs/PLATFORM_SPECIFIC_STATUS.md) |
+| Changelog generator | [`docs/CHANGELOG_GENERATOR.md`](docs/CHANGELOG_GENERATOR.md) |
 
 ## Cursor-specific paths
 

@@ -14,6 +14,8 @@ module Playbook
         options.delete(:checked_value)
         options.delete(:unchecked_value)
 
+        options = merge_input_options(options, props[:input_options])
+
         input = super(name, options, checked_value, unchecked_value)
 
         if props[:label]

@@ -10,51 +10,51 @@ const TableWithBackgroundKit = (props) => {
         <Table
             {...props}
         >
-          <thead>
-            <tr>
-                <th>{'Column 1'}</th>
-                <th>{'Column 2'}</th>
-                <th>{'Column 3'}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
+          <Table.Head>
+            <Table.Row>
+              <Table.Header>{'Column 1'}</Table.Header>
+              <Table.Header>{'Column 2'}</Table.Header>
+              <Table.Header>{'Column 3'}</Table.Header>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
+            </Table.Row>
             <Background
                 backgroundColor="error_subtle"
-                tag='tr'
+                tag="tr"
             >
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
             </Background>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
+            <Table.Row>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
+            </Table.Row>
             <Background
                 backgroundColor="warning_subtle"
-                tag='tr'
+                tag="tr"
             >
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
             </Background>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
-          </tbody>
+            <Table.Row>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
+            </Table.Row>
+          </Table.Body>
         </Table>
       </div>
       <div>
@@ -65,56 +65,46 @@ const TableWithBackgroundKit = (props) => {
           <colgroup>
             <Background
                 backgroundColor="error_subtle"
-                tag='col'
+                tag="col"
             />
             <Background
                 backgroundColor="info_subtle"
-                tag='col'
+                tag="col"
             />
             <Background
                 backgroundColor="warning_subtle"
-                tag='col'
+                tag="col"
             />
           </colgroup>
-          <thead>
-            <tr>
-              <th>{'Column 1'}</th>
-              <th>{'Column 2'}</th>
-              <th>{'Column 3'}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
-            <tr>
-              <td>{'Value 1'}</td>
-              <td>{'Value 2'}</td>
-              <td>{'Value 3'}</td>
-            </tr>
-          </tbody>
+          <Table.Head>
+            <Table.Row>
+              <Table.Header>{'Column 1'}</Table.Header>
+              <Table.Header>{'Column 2'}</Table.Header>
+              <Table.Header>{'Column 3'}</Table.Header>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>{'Value 1'}</Table.Cell>
+              <Table.Cell>{'Value 2'}</Table.Cell>
+              <Table.Cell>{'Value 3'}</Table.Cell>
+            </Table.Row>
+          </Table.Body>
         </Table>
         </div>
     </div>

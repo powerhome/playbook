@@ -38,6 +38,13 @@ RSpec.describe Playbook::PbPassphrase::Passphrase do
     end
   end
 
+  describe "input_disabled?" do
+    it "reflects input_props disabled" do
+      expect(subject.new.input_disabled?).to be false
+      expect(subject.new(input_props: { disabled: true }).input_disabled?).to be true
+    end
+  end
+
   describe "text_input_props" do
     it "merges input props and min_length", :aggregate_failures do
       kit = subject.new(

@@ -52,6 +52,8 @@ module Playbook
 
             options[:data] = (options[:data] || {}).merge(pb_emoji_mask: true) if props.key?(:emoji_mask) && props[:emoji_mask]
 
+            options = merge_input_options(options, props[:input_options])
+
             input = super(name, **options, &block)
 
             input_id = input[/\bid="([^"]+)"/, 1] || "#{@object_name}_#{name}"

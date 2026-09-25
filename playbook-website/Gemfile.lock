@@ -1,11 +1,11 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (17.1.0)
-      actionpack (>= 5.2.4.5)
-      actionview (>= 5.2.4.5)
-      activesupport (>= 5.2.4.5)
-      view_component (= 2.83.0)
+    playbook_ui (18.0.0)
+      actionpack (>= 7.1.0)
+      actionview (>= 7.1.0)
+      activesupport (>= 7.1.0)
+      view_component (= 4.3.0)
       vite_rails
 
 GEM
@@ -146,7 +146,6 @@ GEM
       net-pop
       net-smtp
     marcel (1.1.0)
-    method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (5.25.1)
@@ -161,7 +160,7 @@ GEM
       timeout
     net-smtp (0.5.1)
       net-protocol
-    nio4r (2.7.3)
+    nio4r (2.7.5)
     nokogiri (1.19.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
@@ -189,7 +188,7 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     psych (3.3.4)
-    puma (6.4.2)
+    puma (7.2.1)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.23)
@@ -302,10 +301,10 @@ GEM
       tzinfo (>= 1.0.0)
     unicode-display_width (2.5.0)
     useragent (0.16.11)
-    view_component (2.83.0)
-      activesupport (>= 5.2.0, < 8.0)
-      concurrent-ruby (~> 1.0)
-      method_source (~> 1.0)
+    view_component (4.3.0)
+      actionview (>= 7.1.0)
+      activesupport (>= 7.1.0)
+      concurrent-ruby (~> 1)
     vite_rails (3.0.17)
       railties (>= 5.1, < 8)
       vite_ruby (~> 3.0, >= 3.2.2)
@@ -355,7 +354,7 @@ DEPENDENCIES
   mysql2 (= 0.5.6)
   playbook_ui!
   psych (< 4)
-  puma (~> 6.4.2)
+  puma (~> 7.2.0)
   rails (~> 7.2.2.1)
   rails-controller-testing
   redcarpet (~> 3.6)

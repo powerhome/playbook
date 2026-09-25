@@ -110,25 +110,6 @@ $top_bottom_radius: 0px;
 
 
 .pb_pagination:has(> .pagination-desktop) {
-
-  @media (min-width: 768px) {
-    padding: $space_xxs 0px !important;
-    overflow: hidden;
-
-    .pagination-left > a,
-    .pagination-left > span,
-    .pagination-right > a,
-    .pagination-right > span {
-      padding: 6px 11px 5px;
-    }
-
-    .pagination-number > a,
-    .pagination-number > span,
-    .active > span {
-      padding: 6px 13px 5px 13px !important;
-    }
-  }
-
   .pagination-left,
   .pagination-right {
     padding: 0;
@@ -177,6 +158,28 @@ $top_bottom_radius: 0px;
       @media (max-width: 435px) {
         padding: 6px 10px !important;
       }
+    }
+  }
+
+  // Match React desktop: inline (not inline-flex) + space_xs; vertical-align clears baseline gap.
+  @media (min-width: 768px) {
+    padding: $space_xs 0px !important;
+    overflow: hidden;
+    vertical-align: top;
+
+    .pagination-left > a,
+    .pagination-left > span,
+    .pagination-right > a,
+    .pagination-right > span {
+      display: inline;
+      padding: 7px 11px 6px;
+    }
+
+    .pagination-number > a,
+    .pagination-number > span,
+    .active > span {
+      display: inline;
+      padding: $pagination_padding !important;
     }
   }
 }

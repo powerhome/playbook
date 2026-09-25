@@ -52,7 +52,10 @@
       ]
     },
     "markdownSupport": {
-      "type": "MarkdownDependencies",
+      "type": {
+        "react": "MarkdownDependencies",
+        "rails": "boolean"
+      },
       "platforms": [
         "react",
         "rails"

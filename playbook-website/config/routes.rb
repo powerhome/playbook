@@ -51,6 +51,11 @@ Rails.application.routes.draw do
   get "guides/design_guidelines",            to: "pages#application"
   get "global_props/:name",                  to: "pages#application"
   get "global_props",                        to: "pages#application"
+  get "global_event_props/:name",            to: "pages#application"
+  get "global_event_props",                  to: "pages#application"
   get "tokens/:name",                        to: "pages#application"
   get "tokens",                              to: "pages#application"
+
+  get "*path", to: "pages#application",
+               constraints: ->(request) { File.extname(request.path).empty? && !request.path.match?(%r{\A/(rails|health_check)(/|\z)}) }
 end

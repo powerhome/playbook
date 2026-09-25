@@ -495,19 +495,20 @@ describe('Global Props Integration Tests', () => {
     })
 
     test('Button with onClick and global props in Card with global props', () => {
-      const handleClick = jest.fn()
+      const cardOnClick = jest.fn()
+      const buttonOnClick = jest.fn()
       
       render(
         <Card
             data={{ testid: 'card-clickable' }}
             margin="lg"
-            onClick={handleClick}
+            onClick={cardOnClick}
             padding="md"
         >
           <Button
               data={{ testid: 'button-clickable' }}
               margin="sm"
-              onClick={handleClick}
+              onClick={buttonOnClick}
               text="Click me"
               variant="primary"
           />
@@ -522,9 +523,10 @@ describe('Global Props Integration Tests', () => {
       expect(card).toHaveClass('p_md')
       expect(button).toHaveClass('m_sm')
       
-      // Both should be clickable
+      // Nested click behavior should preserve both handlers
       button.click()
-      expect(handleClick).toHaveBeenCalledTimes(1)
+      expect(buttonOnClick).toHaveBeenCalledTimes(1)
+      expect(cardOnClick).toHaveBeenCalledTimes(1)
     })
 
     test('Responsive global props in nested layout', () => {

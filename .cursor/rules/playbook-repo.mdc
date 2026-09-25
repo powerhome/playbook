@@ -20,6 +20,7 @@ Edit sources, then regenerate. Never patch these by hand:
 - `**/kit.schema.json`
 - `**/docs/_playground.json`
 - `**/utilities/global-props.schema.json`
+- `**/utilities/global-event-props.schema.json`
 - `**/AvailableProps/globalPropsValues.ts`
 - `playbook/dist/ai/**`
 
