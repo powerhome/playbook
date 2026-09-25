@@ -2,12 +2,11 @@ import { useLoaderData } from "react-router-dom";
 import { MarkdownContent } from "../../components/MarkdownContent";
 import {
   Flex,
-  FlexItem,
   Background,
   Title,
-  Body,
 } from "playbook-ui";
 import HeaderImage from "../../../../../images/getting-started.svg";
+import NotFound from "../NotFound";
 
 const GuidePage = () => {
   const loaderData = useLoaderData() as any;
@@ -18,24 +17,7 @@ const GuidePage = () => {
     guide_page_content?.replace(/^---[\s\S]*?---\n/, "") || "";
 
   if (!guide_page_content) {
-    return (
-      <Flex orientation="column" align="center">
-        <FlexItem className="minw0 w100">
-          <Background
-            display="flex"
-            justifyContent="center"
-            className="markdown w100"
-            backgroundColor="white"
-            paddingX="sm"
-            paddingY="md"
-          >
-            <Background maxWidth="md" backgroundColor="white">
-              <Body text="Page content not found" />
-            </Background>
-          </Background>
-        </FlexItem>
-      </Flex>
-    );
+    return <NotFound />;
   }
 
   return (

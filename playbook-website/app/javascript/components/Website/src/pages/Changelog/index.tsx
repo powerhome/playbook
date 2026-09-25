@@ -19,6 +19,8 @@ const Changelog = () => {
         return loaderData.swift_changelog_releases || []
       case 'figma':
         return loaderData.figma_changelog_releases || []
+      case 'rc':
+        return loaderData.rc_changelog_releases || []
       default:
         return loaderData.changelog_releases || []
     }
@@ -57,13 +59,16 @@ const Changelog = () => {
             <Title text="What's New" tag="h1" size={1} />
             <Nav orientation="horizontal">
               <NavLink to="/changelog/web">
-                <NavItem text="Web" active={activeVariant === 'web'} />
+                <NavItem text="Releases" active={activeVariant === 'web'} />
               </NavLink>
-              <NavLink to="/changelog/swift">
+              {/* <NavLink to="/changelog/swift">
                 <NavItem text="Swift" active={activeVariant === 'swift'} />
               </NavLink>
               <NavLink to="/changelog/figma">
                 <NavItem text="Figma" active={activeVariant === 'figma'} />
+              </NavLink> */}
+              <NavLink to="/changelog/rc">
+                <NavItem text="Release Candidates" active={activeVariant === 'rc'} />
               </NavLink>
             </Nav>
             <SectionSeparator flexGrow={1} />
