@@ -40,13 +40,12 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
     globalProps(props),
     className
   )
-  const htmlProps = buildHtmlProps(htmlOptions)
 
   return (
     <Flex
+        htmlOptions={htmlOptions}
         inline={false}
         vertical="stretch"
-        {...htmlProps}
         {...props}
         className={classes}
     >
