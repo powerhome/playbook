@@ -8,78 +8,78 @@ const TableStickyLeftColumns = () => {
             size="md"
             stickyLeftColumn={["1", "2", "3"]}
         >
-            <thead>
-                <tr>
-                    <th data-sticky-id="1">{'Column 1'}</th>
-                    <th data-sticky-id="2">{'Column 2'}</th>
-                    <th data-sticky-id="3">{'Column 3'}</th>
-                    <th>{'Column 4'}</th>
-                    <th>{'Column 5'}</th>
-                    <th>{'Column 6'}</th>
-                    <th>{'Column 7'}</th>
-                    <th>{'Column 8'}</th>
-                    <th>{'Column 9'}</th>
-                    <th>{'Column 10'}</th>
-                    <th>{'Column 11'}</th>
-                    <th>{'Column 12'}</th>
-                    <th>{'Column 13'}</th>
-                    <th>{'Column 14'}</th>
-                    <th>{'Column 15'}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td data-sticky-id="1">{'Value 1'}</td>
-                    <td data-sticky-id="2">{'Value 2'}</td>
-                    <td data-sticky-id="3">{'Value 3'}</td>
-                    <td>{'Value 4'}</td>
-                    <td>{'Value 5'}</td>
-                    <td>{'Value 6'}</td>
-                    <td>{'Value 7'}</td>
-                    <td>{'Value 8'}</td>
-                    <td>{'Value 9'}</td>
-                    <td>{'Value 10'}</td>
-                    <td>{'Value 11'}</td>
-                    <td>{'Value 12'}</td>
-                    <td>{'Value 13'}</td>
-                    <td>{'Value 14'}</td>
-                    <td>{'Value 15'}</td>
-                </tr>
-                <tr>
-                    <td data-sticky-id="1">{'Value 1'}</td>
-                    <td data-sticky-id="2">{'Value 2'}</td>
-                    <td data-sticky-id="3">{'Value 3'}</td>
-                    <td>{'Value 4'}</td>
-                    <td>{'Value 5'}</td>
-                    <td>{'Value 6'}</td>
-                    <td>{'Value 7'}</td>
-                    <td>{'Value 8'}</td>
-                    <td>{'Value 9'}</td>
-                    <td>{'Value 10'}</td>
-                    <td>{'Value 11'}</td>
-                    <td>{'Value 12'}</td>
-                    <td>{'Value 13'}</td>
-                    <td>{'Value 14'}</td>
-                    <td>{'Value 15'}</td>
-                </tr>
-                <tr>
-                    <td data-sticky-id="1">{'Value 1'}</td>
-                    <td data-sticky-id="2">{'Value 2'}</td>
-                    <td data-sticky-id="3">{'Value 3'}</td>
-                    <td>{'Value 4'}</td>
-                    <td>{'Value 5'}</td>
-                    <td>{'Value 6'}</td>
-                    <td>{'Value 7'}</td>
-                    <td>{'Value 8'}</td>
-                    <td>{'Value 9'}</td>
-                    <td>{'Value 10'}</td>
-                    <td>{'Value 11'}</td>
-                    <td>{'Value 12'}</td>
-                    <td>{'Value 13'}</td>
-                    <td>{'Value 14'}</td>
-                    <td>{'Value 15'}</td>
-                </tr>
-            </tbody>
+            <Table.Head>
+                <Table.Row>
+                <Table.Header htmlOptions={{ 'data-sticky-id': '1' }}>{'Column 1'}</Table.Header>
+                <Table.Header htmlOptions={{ 'data-sticky-id': '2' }}>{'Column 2'}</Table.Header>
+                <Table.Header htmlOptions={{ 'data-sticky-id': '3' }}>{'Column 3'}</Table.Header>
+                <Table.Header>{'Column 4'}</Table.Header>
+                <Table.Header>{'Column 5'}</Table.Header>
+                <Table.Header>{'Column 6'}</Table.Header>
+                <Table.Header>{'Column 7'}</Table.Header>
+                <Table.Header>{'Column 8'}</Table.Header>
+                <Table.Header>{'Column 9'}</Table.Header>
+                <Table.Header>{'Column 10'}</Table.Header>
+                <Table.Header>{'Column 11'}</Table.Header>
+                <Table.Header>{'Column 12'}</Table.Header>
+                <Table.Header>{'Column 13'}</Table.Header>
+                <Table.Header>{'Column 14'}</Table.Header>
+                <Table.Header>{'Column 15'}</Table.Header>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '1' }}>{'Value 1'}</Table.Cell>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '2' }}>{'Value 2'}</Table.Cell>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '3' }}>{'Value 3'}</Table.Cell>
+                    <Table.Cell>{'Value 4'}</Table.Cell>
+                    <Table.Cell>{'Value 5'}</Table.Cell>
+                    <Table.Cell>{'Value 6'}</Table.Cell>
+                    <Table.Cell>{'Value 7'}</Table.Cell>
+                    <Table.Cell>{'Value 8'}</Table.Cell>
+                    <Table.Cell>{'Value 9'}</Table.Cell>
+                    <Table.Cell>{'Value 10'}</Table.Cell>
+                    <Table.Cell>{'Value 11'}</Table.Cell>
+                    <Table.Cell>{'Value 12'}</Table.Cell>
+                    <Table.Cell>{'Value 13'}</Table.Cell>
+                    <Table.Cell>{'Value 14'}</Table.Cell>
+                    <Table.Cell>{'Value 15'}</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '1' }}>{'Value 1'}</Table.Cell>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '2' }}>{'Value 2'}</Table.Cell>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '3' }}>{'Value 3'}</Table.Cell>
+                    <Table.Cell>{'Value 4'}</Table.Cell>
+                    <Table.Cell>{'Value 5'}</Table.Cell>
+                    <Table.Cell>{'Value 6'}</Table.Cell>
+                    <Table.Cell>{'Value 7'}</Table.Cell>
+                    <Table.Cell>{'Value 8'}</Table.Cell>
+                    <Table.Cell>{'Value 9'}</Table.Cell>
+                    <Table.Cell>{'Value 10'}</Table.Cell>
+                    <Table.Cell>{'Value 11'}</Table.Cell>
+                    <Table.Cell>{'Value 12'}</Table.Cell>
+                    <Table.Cell>{'Value 13'}</Table.Cell>
+                    <Table.Cell>{'Value 14'}</Table.Cell>
+                    <Table.Cell>{'Value 15'}</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '1' }}>{'Value 1'}</Table.Cell>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '2' }}>{'Value 2'}</Table.Cell>
+                    <Table.Cell htmlOptions={{ 'data-sticky-id': '3' }}>{'Value 3'}</Table.Cell>
+                    <Table.Cell>{'Value 4'}</Table.Cell>
+                    <Table.Cell>{'Value 5'}</Table.Cell>
+                    <Table.Cell>{'Value 6'}</Table.Cell>
+                    <Table.Cell>{'Value 7'}</Table.Cell>
+                    <Table.Cell>{'Value 8'}</Table.Cell>
+                    <Table.Cell>{'Value 9'}</Table.Cell>
+                    <Table.Cell>{'Value 10'}</Table.Cell>
+                    <Table.Cell>{'Value 11'}</Table.Cell>
+                    <Table.Cell>{'Value 12'}</Table.Cell>
+                    <Table.Cell>{'Value 13'}</Table.Cell>
+                    <Table.Cell>{'Value 14'}</Table.Cell>
+                    <Table.Cell>{'Value 15'}</Table.Cell>
+                </Table.Row>
+            </Table.Body>
         </Table>
     )
 }
