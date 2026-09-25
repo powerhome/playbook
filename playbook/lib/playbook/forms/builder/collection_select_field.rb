@@ -4,6 +4,9 @@ module Playbook
   module Forms
     class Builder
       def collection_select(name, collection, value_method, text_method, options = {}, html_options = {}, props: {})
+        props = props.dup
+        apply_form_error!(props, name)
+
         props[:input_options] ||= {}
         props[:input_options][:id] ||= "#{@object_name}_#{name}"
 

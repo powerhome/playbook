@@ -9,14 +9,14 @@ export const COMMON_FORM_FAQS = [
   {
     id: 'forms.validation', platforms: ['rails'],
     questions: ['How do I show ActiveRecord errors?', 'Does required_indicator validate?', 'How do I enable client validation?'],
-    answer: 'The builder does not automatically map record.errors. Follow each method validation.error contract: most use an explicit message, Checkbox uses a boolean, and StarRating has no error prop. A required indicator is visual only. pb_form_with validate: true enables Playbook client validation; it does not run model validations.',
+    answer: 'Most builder fields auto-map record.errors.full_messages_for(attribute) into props.error unless error is set explicitly (including nil to opt out). Checkbox still needs an explicit boolean error flag, and StarRating has no error prop. A required indicator is visual only. pb_form_with validate: true enables Playbook client validation; it does not run model validations.',
     contractPaths: ['form.rails.builder.validation', 'form.rails.builder.methods'],
     props: ['error', 'required', 'requiredIndicator', 'validation', 'validationMessage'],
   },
   {
     id: 'forms.binding', platforms: ['rails'],
     questions: ['How does the value POST?', 'Are names model scoped?', 'Does the builder read the model value?'],
-    answer: 'Check the method binding and submission fields. Rails-helper wrappers and direct kit wrappers have different naming and model-value behavior. A generated id or label does not prove that the input is model bound.',
+    answer: 'Check the method binding and submission fields. With a bound model, most fields auto-populate values (default_date, default_value, selected_ids, default_options, etc.) unless those props are set. Rails-helper wrappers use model-scoped names; direct kit wrappers assign the name argument to props.name verbatim—pass the attribute for auto-bind, or a nested string like user[country] when you need that parameter shape.',
     contractPaths: ['form.rails.builder.methods'], props: ['name', 'value', 'defaultValue'],
   },
   {
@@ -43,7 +43,7 @@ export const KIT_USAGE_FAQS = {
   dropdown: [{
     id: 'dropdown.builder-name', platforms: ['rails'],
     questions: ['Does dropdown_field scope country to user[country]?', 'Does multi_select submit separate array values?'],
-    answer: 'Pass user[country] explicitly to dropdown_field. multi_select appends [] to the CSS-hidden input name. Comma-joining is only for default-value encoding. After kit JS runs, Playbook emits one type="hidden" input per selected id (all named name[]), clears the original CSS-hidden input, and Rails receives separate array entries.',
+    answer: 'Pass the attribute (e.g. :country) so the builder can auto-bind default_value and errors from the model; pass user[country] explicitly when you need that nested parameter name instead. multi_select appends [] to the CSS-hidden input name. Comma-joining is only for default-value encoding. After kit JS runs, Playbook emits one type="hidden" input per selected id (all named name[]), clears the original CSS-hidden input, and Rails receives separate array entries.',
     contractPaths: ['form.rails.builder.methods'], props: ['name', 'multiSelect', 'options'],
   }, {
     id: 'dropdown.builder-block', platforms: ['rails'],
@@ -65,7 +65,7 @@ export const KIT_USAGE_FAQS = {
     id: 'text-input.builder-options', platforms: ['rails'],
     questions: ['How do I add maxlength to f.text_field?', 'Do builder input_options override the input?'],
     answer: 'Pass maxlength: 255 as a builder keyword outside props, or in props.input_options. The builder merges input_options into the Rails helper input last, so it overrides the keyword and props-derived options; classname is appended to class and data is merged key by key.',
-    example: '<%= f.text_field :email, maxlength: 255, autocomplete: "email", props: { label: "Email", required: true, error: @user.errors[:email].to_sentence } %>',
+    example: '<%= f.text_field :email, maxlength: 255, autocomplete: "email", props: { label: "Email", required: true } %>',
     contractPaths: ['form.rails.builder.methods'], props: ['inputOptions'],
   }],
   textarea: [{

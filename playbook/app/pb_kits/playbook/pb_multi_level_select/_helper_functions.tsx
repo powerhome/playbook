@@ -1,3 +1,14 @@
+// selected_ids / tree_data ids may be strings or numbers; includes() is strict.
+export const selectedIdsInclude = (
+  selectedIds: Array<string | number> | null | undefined,
+  id: string | number
+): boolean => {
+  if (!selectedIds || !selectedIds.length) return false
+
+  const target = String(id)
+  return selectedIds.some((selectedId) => String(selectedId) === target)
+};
+
 // Function is going over formattedData and returning all objects that match the
 // ID of the clicked item from the dropdown
 export const filterFormattedDataById = (
@@ -160,7 +171,7 @@ export const getExpandedItems = (
 
       // Only expand based on selected items if showCheckedChildren is true
       if (showCheckedChildren) {
-        if (selectedIds && selectedIds.length && selectedIds.includes(item.id)) {
+        if (selectedIdsInclude(selectedIds, item.id)) {
           expandedItems.push(...itemAncestors.map((ancestor: any) => ancestor.id));
         }
         if (Array.isArray(item.children)) {

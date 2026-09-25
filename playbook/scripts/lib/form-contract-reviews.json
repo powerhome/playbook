@@ -8,7 +8,8 @@
       "app/pb_kits/playbook/pb_form/formHelper.js": "9ef4f42e786793dc5af76ba713c69a6b3d55f9930d1ac5e6a2ac0cb7f14afd8e",
       "app/pb_kits/playbook/pb_form/pb_form_validation.js": "3c6645a56b42664a719c0c533e25f6dd978082d0462cd29a6a7f613a06d66191",
       "app/pb_kits/playbook/pb_kit_registry/index.ts": "030703e167d2c3703ddeee437516ea4b497fb3ea41552e0266aabf6e4e5b5ef6",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/attribute_defaults.rb": "afb01565d1176ff37af1b79e4ffc5ac92775e77974b09b7a7f8081c64fc8ec83",
       "lib/playbook/kit_base.rb": "66ccf6998dec64d2b7e6e1cb33877bc5e43a7b397b0885e413a91ba3a243dcd6",
       "lib/playbook/pb_forms_global_props_helper.rb": "f7559fa68ecd802c8ae0fdbc97a7b8abb78d6a3a04ef84c81048328469618e94",
       "lib/playbook/pb_forms_helper.rb": "bdd00f83ec6bebd6215586c2dcf975e10f653be49b687fd9cd998fd979874625"
@@ -18,7 +19,7 @@
       "app/pb_kits/playbook/pb_button/button.html.erb": "80362bbc66b290462c3c5b70264e9e15e4224466cc1d35d590fe83f9f62f2787",
       "app/pb_kits/playbook/pb_button/button.rb": "2a97f0363cb17978dbfb104a241c49d96a038e1217f5bd3cb41540cf35f4e2e4",
       "app/pb_kits/playbook/pb_button/index.js": "dba912c3e6eec5e9ecd0de33f18626770002eb52a742ba8ae923f4d3524f13ff",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
       "lib/playbook/forms/builder/action_area.rb": "09fcbdbeefd7ab4d9991b2ff58e7bd76f99114605ec996c57598da207bb0ca01"
     },
     "checkbox": {
@@ -26,7 +27,7 @@
       "app/pb_kits/playbook/pb_checkbox/checkbox.html.erb": "d5a566fac5e12834db9bbcc308ee14c28fd874c6c427446b26ec3c3a436716cc",
       "app/pb_kits/playbook/pb_checkbox/checkbox.rb": "efe59a9e09d799ece5d43833762b56055d6b798344924359b10b791fb5b5e2c1",
       "app/pb_kits/playbook/pb_checkbox/index.js": "3664f7091fe6ecb6566b54866c42dcf2accdeb330d0480daf23c014f74e4a780",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
       "lib/playbook/forms/builder/checkbox_field.rb": "eaca1a4df0c51063297a51c575cced7425c19e3a5f00bcb21c305e8a4ac50a6f"
     },
     "date_picker": {
@@ -44,8 +45,8 @@
       "app/pb_kits/playbook/pb_text_input/inputMask.ts": "dbc41f36fde3278ca2d679db4f83c082c76a4e9e044bc05e1322e79a87ac583a",
       "app/pb_kits/playbook/pb_text_input/text_input.html.erb": "db54b76817459fd879c2f8924b48a240a97108712142ce5684322a175765e4de",
       "app/pb_kits/playbook/pb_text_input/text_input.rb": "31245f663bb670d928d893cd1bdbfe841872d6481e3fd71e55e073e22ba9022e",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/date_picker_field.rb": "ac923e5efc47747f60f1a351f0dcd5e593df3cd8d6bded22df9b3b578357e8af"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/date_picker_field.rb": "68b9594dcb727fd072c460671a11ab9712160c640d864ecd7d677342c2d04030"
     },
     "dropdown": {
       "app/pb_kits/playbook/pb_dropdown/_dropdown.tsx": "28aff3393d8a675f2bd66d171d8156dfa957cf12eb3875ccd2a88ef60b3609db",
@@ -81,8 +82,8 @@
       "app/pb_kits/playbook/pb_text_input/inputMask.ts": "dbc41f36fde3278ca2d679db4f83c082c76a4e9e044bc05e1322e79a87ac583a",
       "app/pb_kits/playbook/pb_text_input/text_input.html.erb": "db54b76817459fd879c2f8924b48a240a97108712142ce5684322a175765e4de",
       "app/pb_kits/playbook/pb_text_input/text_input.rb": "31245f663bb670d928d893cd1bdbfe841872d6481e3fd71e55e073e22ba9022e",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/dropdown_field.rb": "2cf2308aeb8af2de2053349c41d8ffe423ed58768da524353bd2b10f6b8f1355"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/dropdown_field.rb": "9a1c1d602fe90abdddf8bdc2cca9b2dcc8ce84c5932210cbec7cfd0bae22d963"
     },
     "multi_level_select": {
       "app/pb_kits/playbook/pb_checkbox/_checkbox.tsx": "96d032b5815aedd9c75b5ce5b1fb5b4e553ef74fc4e8504d4625e2c53bbc0958",
@@ -92,20 +93,20 @@
       "app/pb_kits/playbook/pb_form_pill/_form_pill.tsx": "ed58387f96b79f4733f2a4942acba26f56149faf4499d647cf81005a4d633bee",
       "app/pb_kits/playbook/pb_form_pill/form_pill.html.erb": "d42a27b2864aafdb54481773e175436da9bb2d09ec43a7012b348d1d8228e3e6",
       "app/pb_kits/playbook/pb_form_pill/form_pill.rb": "95129b12cd15d268aa596e32ad32c9c89cde7d557c245b5931716d7472ef6ba3",
-      "app/pb_kits/playbook/pb_multi_level_select/_helper_functions.tsx": "ccd8707e594f310d6e94cd3ebe192c1be95c25c9f6c533eb45f3174842252cd3",
-      "app/pb_kits/playbook/pb_multi_level_select/_multi_level_select.tsx": "766deb6980ffa8c398817e65b11dbcb371e67c26d06be020b76c32828f0dbe60",
+      "app/pb_kits/playbook/pb_multi_level_select/_helper_functions.tsx": "610caeed15af1cf1105b3f9da1884f85ccbe3e9b856b4dfee446afc30093604c",
+      "app/pb_kits/playbook/pb_multi_level_select/_multi_level_select.tsx": "6006e857f4ddfe36f0b23fd2eed1d58f657b2ff7634f2a3d127d726f2cfae9d1",
       "app/pb_kits/playbook/pb_multi_level_select/context/index.tsx": "0f58c239205213db851e31b27406d74372874f7f1367139bf3e8dab0ca4805c7",
       "app/pb_kits/playbook/pb_multi_level_select/index.js": "0b8a7595e5c5aef4313541bf3ef5ac75a688c65139619e8ab4f91f4a16db929d",
       "app/pb_kits/playbook/pb_multi_level_select/multi_level_select.html.erb": "c1b08d151ac43b16dd32e2f696fa9ad18dda0becf6e6c7c04fb6c53f57d5a6e9",
       "app/pb_kits/playbook/pb_multi_level_select/multi_level_select.rb": "5653646c358647ddb6eb943e62599cd0b6f60a03d18e1f1bfe2e6a2c38778d1c",
       "app/pb_kits/playbook/pb_multi_level_select/multi_level_select_options.tsx": "996efac1a6e9dae2c997e7180602ec95e6a1d6d3fd9bd3d893b6e4920d9e7667",
-      "app/pb_kits/playbook/pb_multi_level_select/tree_helpers.js": "5308b9b8e0e1db9e71f3d075d86514a250839984375bbc8c1b4815dcd43f0882",
+      "app/pb_kits/playbook/pb_multi_level_select/tree_helpers.js": "2b09a56e23870aefafd0721296e11c5fab39cc7d5f3cfeb85d3b1f0d488f0e73",
       "app/pb_kits/playbook/pb_radio/_radio.tsx": "5ecd88d740fbb06b8f5eeec7aaf3561ec85d8a08037ec78bddf3b9c03e6af0db",
       "app/pb_kits/playbook/pb_radio/index.js": "42aa881eaafe635daec438edfa474731d9961ae468d7dd125ee9a85ef11ef4ca",
       "app/pb_kits/playbook/pb_radio/radio.html.erb": "89950d281e14c0482598877cf491d52743607cb70b864e0e3c30452135ed8a80",
       "app/pb_kits/playbook/pb_radio/radio.rb": "f0c94638c16257a7bd1ec43321c4dbb3ec08405e48ce975c7891473579fbbef9",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/multi_level_select_field.rb": "51d7c2ed45c47d7883228652979e5819fb91a4342eca6c5b6607698542f3032c"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/multi_level_select_field.rb": "cef525418df90f2f16ad6b7b874d7ca5223ecd827e89b6e557c8918c2ad8b676"
     },
     "phone_number_input": {
       "app/pb_kits/playbook/pb_phone_number_input/_phone_number_input.tsx": "3c092b8fcbd64d87e9a1a1b61a0443466ece638593cdf2e702b5e8363f99000f",
@@ -120,18 +121,18 @@
       "app/pb_kits/playbook/pb_text_input/inputMask.ts": "dbc41f36fde3278ca2d679db4f83c082c76a4e9e044bc05e1322e79a87ac583a",
       "app/pb_kits/playbook/pb_text_input/text_input.html.erb": "db54b76817459fd879c2f8924b48a240a97108712142ce5684322a175765e4de",
       "app/pb_kits/playbook/pb_text_input/text_input.rb": "31245f663bb670d928d893cd1bdbfe841872d6481e3fd71e55e073e22ba9022e",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/intl_telephone_field.rb": "c67e5745a9f5c947cf8547c90e72c6005f02f131cbd152d850a5a0b4712b1641",
-      "lib/playbook/forms/builder/phone_number_field.rb": "7271aab5fb577ec05d56af4fdd2c8cec38dad09f59ae8740a1762725ec27bf1e"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/intl_telephone_field.rb": "1e116c0b8974d87535295ed80663351d27a3422433091db24ba418f3f49d623e",
+      "lib/playbook/forms/builder/phone_number_field.rb": "df95e667ee0e3b041c0c1277b63689236066bbf370daf8406f1386cdb822d43c"
     },
     "select": {
       "app/pb_kits/playbook/pb_select/_select.tsx": "aa4d7f5d4a7b877ca0ba4b2178d8e750313ef44b194c7c827d5ec554c31e349f",
       "app/pb_kits/playbook/pb_select/index.js": "d5e9dc32de069d23fd7b6a5118ac94ee4dbe07b5641dda461d5c71d38220eb98",
       "app/pb_kits/playbook/pb_select/select.html.erb": "546783d28b106400d0a69417b129749ef20d705f3fc08cf67206bc2b036a2fdd",
       "app/pb_kits/playbook/pb_select/select.rb": "d1b7eab307d58b775a27fd51e1a0535ebdcbbc92f6806dfee8c3b187ec53012d",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/collection_select_field.rb": "2278c2138bc9032ba542b09d8d7701f88686a9093514dc8f34209aea43afaa6a",
-      "lib/playbook/forms/builder/select_field.rb": "a295eb71e1f28c3f5b95f09d56a80e29345c7f7923adde8f516c3a492eb7cd11",
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/collection_select_field.rb": "9aaac214d79e6b9ae1f5517283a5fa2abb4c25164e2379abe34a6ab5d22a6cd0",
+      "lib/playbook/forms/builder/select_field.rb": "8ca88c16de0babd7f918e798aaeec454557f46dcc24059a7e6d3dfba5eef940e",
       "lib/playbook/forms/builder/time_zone_select_field.rb": "4fa1d423b1e4c48b696a1f08af1c9630091277ca737e8b98146cab85545f2964"
     },
     "star_rating": {
@@ -142,8 +143,8 @@
       "app/pb_kits/playbook/pb_star_rating/stars/utils.tsx": "06b5ac5b40e32b7c7bd60644a1d9ad8d7c7f79b4d255e46b79b385d012ca96bf",
       "app/pb_kits/playbook/pb_star_rating/subcomponents/_star_rating_display.tsx": "0abca94bbe1645790d6c2e7b8ab0d5d42412ca9d4e114900d0ef2f288d304bfa",
       "app/pb_kits/playbook/pb_star_rating/subcomponents/_star_rating_interactive.tsx": "ae2c8da8308a7960885238988f871ce3cc276dce09d6527537baea92933336b3",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/star_rating_field.rb": "b07bc86e048c72b78634040d17322dda5c45bcd017e736368237d0c8d8a52bc3"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/star_rating_field.rb": "6409443f9708fcd49608ec9b8436591577c08bd2a44d64dd183d65c50132037c"
     },
     "text_input": {
       "app/pb_kits/playbook/pb_text_input/_text_input.tsx": "f2d91da6fa50c79f663194155c750b088d3d1b7969f7b8a0e1ed15dab1d54c3d",
@@ -153,16 +154,16 @@
       "app/pb_kits/playbook/pb_text_input/inputMask.ts": "dbc41f36fde3278ca2d679db4f83c082c76a4e9e044bc05e1322e79a87ac583a",
       "app/pb_kits/playbook/pb_text_input/text_input.html.erb": "db54b76817459fd879c2f8924b48a240a97108712142ce5684322a175765e4de",
       "app/pb_kits/playbook/pb_text_input/text_input.rb": "31245f663bb670d928d893cd1bdbfe841872d6481e3fd71e55e073e22ba9022e",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/form_field_builder.rb": "b7cacdd799a25cf88c64cfa36b518f7479e89a066ebc1e94a1b1ada39f3b9554"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/form_field_builder.rb": "85f59d755cf37909ef4df3d1398d1dd2c6637f3a8a487bb5ad5d3840f8d6a98b"
     },
     "textarea": {
       "app/pb_kits/playbook/pb_textarea/_textarea.tsx": "cdf211afd90b52afc3dc6902fc9a6f5ab86f2896eadff273f56a8125a55e332d",
       "app/pb_kits/playbook/pb_textarea/index.ts": "2d8b0e32c46e0cd84180d0dfd8a8add33fe78efce2019a3d65d45f89f1202f0c",
       "app/pb_kits/playbook/pb_textarea/textarea.html.erb": "353d6c210593ee63665fe316fddc9e2a5c530c5596d20e18645dced9ba55030a",
       "app/pb_kits/playbook/pb_textarea/textarea.rb": "ddb3b89d6b72e84419a82c324ad574228b657d3cad39bcc6d05e512993a062ba",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/form_field_builder.rb": "b7cacdd799a25cf88c64cfa36b518f7479e89a066ebc1e94a1b1ada39f3b9554"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/form_field_builder.rb": "85f59d755cf37909ef4df3d1398d1dd2c6637f3a8a487bb5ad5d3840f8d6a98b"
     },
     "time_picker": {
       "app/pb_kits/playbook/pb_radio/_radio.tsx": "5ecd88d740fbb06b8f5eeec7aaf3561ec85d8a08037ec78bddf3b9c03e6af0db",
@@ -181,8 +182,8 @@
       "app/pb_kits/playbook/pb_time_picker/time_picker.html.erb": "3f1591fee0b56c5b90ab5171220fd1061b6ae49eeb4ea9a6c529c4bfac39d8db",
       "app/pb_kits/playbook/pb_time_picker/time_picker.rb": "d6f9756b0ca1105e9a64d98da9b42bb3f24a5dbec38703fa9d136ceef6f1652a",
       "app/pb_kits/playbook/pb_time_picker/time_picker_helper.ts": "ed1d85ffef96ec750863b9cf492caecd12e32e367d8d0aab112400a3725a8b61",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/time_picker_field.rb": "52ae34ad445bb71cad67da8e381b186c17a666fb69d534947bf611a559363d41"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/time_picker_field.rb": "a193e6b802923e99343d77232b366f1048a44b76fbbbd4a932a4227de3d359c6"
     },
     "typeahead": {
       "app/pb_kits/playbook/pb_form_pill/_form_pill.tsx": "ed58387f96b79f4733f2a4942acba26f56149faf4499d647cf81005a4d633bee",
@@ -210,8 +211,8 @@
       "app/pb_kits/playbook/pb_typeahead/typeahead.html.erb": "5f13f86994c9392fe21cc3928831057a07f53f3d5800abcc1b9907b9f2f58b02",
       "app/pb_kits/playbook/pb_typeahead/typeahead.rb": "145b041b222f806e638b1a427b4bb517605e0b38db4f94a98c5d9627c96ba16f",
       "app/pb_kits/playbook/pb_typeahead/types.d.ts": "722ed49037c79406726439eaf798a3ccb0714220fe4d344eff4e3044be91448b",
-      "lib/playbook/forms/builder.rb": "da23a9342f8005bfe84b2f0f1dc7851404df35a9a26456a4299ad4f4fb6b9c34",
-      "lib/playbook/forms/builder/typeahead_field.rb": "c17bd23e9db7757b9ed0af774e368f4130e31e3547895668007b2e2b3892ad06"
+      "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
+      "lib/playbook/forms/builder/typeahead_field.rb": "7e4afc36eb340fe93478a1d5158da1e26cce538a1a9aabfd10935a64f5b39766"
     }
   }
 }
