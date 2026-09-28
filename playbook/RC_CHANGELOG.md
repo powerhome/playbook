@@ -1,3 +1,18 @@
+# ✨ 18.1.0.pre.rc.1
+
+##### September 28, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.1.0-rc.1](https://github.com/powerhome/playbook/tree/18.1.0-rc.1) full list of changes:
+
+**Kit Enhancements:**
+
+- Form Kits: Auto-bind Model Values and Errors In Fields [\#6608](https://github.com/powerhome/playbook/pull/6608) ([kangaree](https://github.com/kangaree))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.1.0-rc.0...18.1.0-rc.1)
+
 # ✨ 18.1.0.pre.rc.0
 ##### September 25, 2026
 

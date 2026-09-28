@@ -23,6 +23,7 @@ module Playbook
 
     OTHER_HEADER = "**Other:**"
     RELEASE_IMAGE = "![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)"
+    RC_RELEASE_IMAGE = "![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)"
 
     SECTIONS = [
       { header: "**New Kits:**", labels: ["new kit"] },
@@ -165,9 +166,14 @@ module Playbook
       start_time = tag_time(since_version)
       end_time = tag_time_if_present(rc_version)
       released_numbers = pr_numbers_in_tag(since_version)
+      # GitHub merged_at can be a second after the tagged commit, which drops
+      # the PR the RC tag itself points at. Trust the tag history for those.
+      shipped_numbers = pr_numbers_in_tag(rc_version) - released_numbers
 
       pulls.select do |pull_request|
-        next false if released_numbers.include?(pull_request["number"])
+        number = pull_request["number"]
+        next false if released_numbers.include?(number)
+        next true if shipped_numbers.include?(number)
 
         merged_at = pull_request["merged_at"]
         next false if merged_at <= start_time
@@ -385,12 +391,15 @@ module Playbook
       lines << "##### #{formatted_date}"
       lines << ""
 
-      unless mode == :rc
+      if mode == :rc
+        lines << RC_RELEASE_IMAGE
+      else
         lines << RELEASE_IMAGE
         lines << ""
         lines << "Your feature description goes here."
-        lines << ""
       end
+
+      lines << ""
 
       lines << "[#{version}](https://github.com/#{REPO}/tree/#{version}) full list of changes:"
       lines << ""
