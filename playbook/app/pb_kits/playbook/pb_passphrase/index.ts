@@ -14,7 +14,7 @@ export default class PbPassphrase extends PbEnhancedElement {
     this.input = this.element.querySelector('.passphrase-text-input input')
     this.visible = false
 
-    if (!this.toggle || !this.input) return
+    if (!this.toggle || !this.input || this.input.disabled) return
 
     this.toggle.addEventListener('click', this.handleToggle)
     this.toggle.addEventListener('keydown', this.handleKeydown)

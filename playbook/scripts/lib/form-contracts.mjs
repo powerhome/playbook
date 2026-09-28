@@ -30,9 +30,9 @@ const railsBinding = {
 };
 const textHtmlOptions = {
   argument: '**options',
-  description: 'Pass HTML attributes as builder keyword arguments, outside props. The Rails helper renders the input; props.input_options is not a general attribute pass-through in this builder path.',
+  description: 'Pass HTML attributes as builder keyword arguments, outside props, or in props.input_options. The Rails helper renders the input and receives both.',
   examples: { maxlength: 255, min: 0, step: '0.01', autocomplete: 'email', data: { controller: 'field' } },
-  overrides: 'The builder sets placeholder from props (default empty), forwards props.required when true, and forwards explicit props.type, value, disabled, autocomplete, mask and validation. It derives props.input_options.id from the rendered input.',
+  overrides: 'The builder sets placeholder from props (default empty), forwards props.required when true, and forwards explicit props.type, value, disabled, autocomplete, mask and validation. props.input_options is merged last, so it overrides those and the keyword options: input_options.classname is appended to class, input_options.data is merged key by key, and a literal input_options.class is ignored. It derives props.input_options.id from the rendered input.',
 };
 const textValidation = {
   required: 'props.required: true sets required on the Rails-generated input. required: true as a builder HTML option also works.',
@@ -80,14 +80,14 @@ export const FORM_METHODS = [
     name: 'check_box',
     binding: railsBinding,
     submission: { submits: true, value: 'checked_value and unchecked_value are extracted from keyword options and passed positionally to Rails check_box. Set both explicitly; this wrapper passes nil when omitted.', example: 'checked_value: "1", unchecked_value: "0"' },
-    htmlOptions: { argument: '**options', description: 'Remaining keywords are passed as Rails check_box options.' },
+    htmlOptions: { argument: '**options', description: 'Remaining keywords are passed as Rails check_box options. props.input_options is merged over them last, with classname appended to class and data merged key by key.' },
     validation: { required: 'props.required sets the HTML required option.', indicator: 'props.required_indicator is visual only.', error: { ...messageError, type: 'boolean', example: '@user.errors[:terms].any?', description: 'The Checkbox error prop is a boolean styling flag. Render any error message separately.' } },
     block: { supported: false, description: 'The builder supplies the Rails checkbox as kit content; caller blocks are not forwarded.' },
     example: formExample('f.check_box :terms, checked_value: "1", unchecked_value: "0", props: { label: true, required: true, error: @user.errors[:terms].any? }'),
   },
   directMethod('dropdown_field', {
     binding: { ...directBinding, value: 'Supply props.default_value explicitly; the builder does not read the model.' },
-    submission: { submits: true, value: 'Selected option id in a CSS-hidden input (not input type=hidden).', multi: 'Comma-joining is only the default-value encoding (data-default-value and a temporary baseInput.value). After kit JS runs, syncHiddenInputs emits one input type="hidden" per selected id, all named name[] (the CSS-hidden input already has [] appended), then clears that original CSS-hidden input. Rails receives separate array entries such as ["ca","us"], not "ca,us".' },
+    submission: { submits: true, value: 'Selected option id in a CSS-hidden input (not input type=hidden).', multi: 'Comma-joining is only the default-value encoding (data-default-value and a temporary baseInput.value). After kit JS runs, syncHiddenInputs emits one input type="hidden" per selected id, all named name[] (the CSS-hidden input already has [] appended), then clears that original CSS-hidden input. Rails receives separate array entries such as ["ca","us"], not "ca,us".', dynamicOptions: 'props.options_by_context with props.context_selector replaces the rendered options when the referenced element fires change, and props.clear_on_context_change (default true) then clears the selection, so a context change can submit an empty value. A pb:dropdown:updateOptions event, or an event named in props.options_event_type, replaces options the same way; clearSelection: false keeps only selections whose id exists in the replacement options.' },
     validation: { required: 'props.required sets required on the CSS-hidden input. Do not assume a focusable native validation UI.', indicator: 'props.required_indicator is visual only.', error: messageError, client: 'No validation or input_options prop is exposed by this Rails kit.' },
     example: formExample('f.dropdown_field "user[country]", props: { label: "Country", options: [{ id: "ca", value: "canada", label: "Canada" }], required: true, error: @user.errors[:country].to_sentence }'),
   }),

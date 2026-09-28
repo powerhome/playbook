@@ -89,17 +89,30 @@ const combineKitsandVisualGuidelines = (
     value: `/tokens/${item}`,
     type: 'token'
   })) || []
-  
-  const items = [...kits, ...globalPropsItems, ...tokensItems, ...propItems]
-    .sort((a, b) => a.label.localeCompare(b.label))
 
-  return putPropsLast(items)
+  const GLOBAL_EVENT_PROP_LABELS: Record<string, string> = {
+    on_click: 'onClick',
+  }
+
+  const globalEventPropsItems = global_props_and_tokens?.global_event_props?.map((item: string) => ({
+    label:
+      GLOBAL_EVENT_PROP_LABELS[item] ||
+      item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
+    value: `/global_event_props/${item}`,
+    type: 'global_event_prop'
+  })) || []
+  
+  return [...kits, ...globalPropsItems, ...globalEventPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
 }
 
 const normalizePathForPlatform = (path: string, platform: string) => {
   if (!path || !path.startsWith('/')) return path
 
-  if (path.startsWith('/global_props/') || path.startsWith('/tokens/')) {
+  if (
+    path.startsWith('/global_props/') ||
+    path.startsWith('/global_event_props/') ||
+    path.startsWith('/tokens/')
+  ) {
     return path
   }
 
@@ -164,17 +177,21 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
     setQuery(query)
   }
 
+  const SEARCH_TYPE_BADGES: Record<string, string> = {
+    global_prop: 'Global Prop',
+    global_event_prop: 'Global Event Prop',
+    token: 'Token',
+  }
+
   const Item = ({ labelLeft, platforms = [], type }: { labelLeft: string, platforms?: string[], type: string }) => (
     <Flex alignItems="center" justify="between">
         {labelLeft}
         <Badge
           dark={darkMode}
           margin="xs"
-          text={type === 'global_prop'
-            ? 'Global Prop'
-            : type === 'prop'
-              ? kitPropBadge(platforms)
-              : 'Token'}
+          text={type === 'prop'
+            ? kitPropBadge(platforms)
+            : SEARCH_TYPE_BADGES[type]}
           variant="primary"
         />
     </Flex>
@@ -193,7 +210,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
         options={filteredKits}
         placeholder="Search..."
         valueComponent={(option: Kit) => {
-          if (option.type === 'global_prop' || option.type === 'prop' || option.type === 'token') {
+          if (option.type === 'prop' || (option.type && SEARCH_TYPE_BADGES[option.type])) {
             return <Item labelLeft={option.label} platforms={option.platforms} type={option.type} />
           }
           return <>{option.label}</>

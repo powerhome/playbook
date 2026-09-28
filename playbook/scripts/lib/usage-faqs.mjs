@@ -22,7 +22,7 @@ export const COMMON_FORM_FAQS = [
   {
     id: 'forms.html-options', platforms: ['rails'],
     questions: ['Where do name id required maxlength min step autocomplete and data attributes go?', 'What can I put in input_options?'],
-    answer: 'Use the method htmlOptions contract. Text field wrappers accept HTML keyword arguments outside props; select wrappers accept positional html_options. Direct wrappers generally accept only props. Do not assume props.input_options reaches a Rails-generated field.',
+    answer: 'Use the method htmlOptions contract. Text field wrappers accept HTML keyword arguments outside props; select wrappers accept positional html_options. Direct wrappers generally accept only props. Text field wrappers and check_box also merge props.input_options into the Rails-generated field; other methods do not.',
     contractPaths: ['form.rails.builder.methods'], props: ['inputOptions', 'required', 'name', 'id'],
   },
   {
@@ -50,11 +50,21 @@ export const KIT_USAGE_FAQS = {
     questions: ['Can dropdown_field yield a custom trigger?', 'Can I pass a block to the dropdown builder?'],
     answer: 'dropdown_field does not forward a block. The standalone pb_rails("dropdown") API accepts content in place of its default trigger and container; it is a separate composition API.',
     contractPaths: ['form.rails.builder.methods'],
+  }, {
+    id: 'dropdown.dynamic-options', platforms: ['rails'],
+    questions: ['How do I change dropdown options based on another field?', 'How do I replace dropdown options from a Turbo or custom event?'],
+    answer: 'Pass options_by_context keyed by the other field value together with context_selector naming that element id; the kit swaps options on its change event and clears the selection unless clear_on_context_change is false. To push options from JavaScript, dispatch pb:dropdown:updateOptions with detail { dropdownId, options } or list your own event names in options_event_type. No request is made for you; supply every context upfront or provide the options in the event.',
+    contractPaths: ['form.rails.builder.methods'], props: ['optionsByContext', 'contextSelector', 'clearOnContextChange', 'optionsEventType'],
+  }, {
+    id: 'dropdown.react-form-libraries', platforms: ['react'],
+    questions: ['Can I use Dropdown with react-hook-form?', 'Does the React Dropdown submit a value?'],
+    answer: 'Spread register("country") onto Dropdown. It accepts name and onChange, and calls onChange with { target: { name, value } } in addition to any onSelect. value is the selected option object, an array for multiSelect and null or [] when cleared, so read value.value in form state. The ref from register resolves to the kit imperative handle, not an input, and no named input is rendered; the React kit has no native form submission.',
+    props: ['name', 'onChange', 'onSelect', 'multiSelect'],
   }],
   text_input: [{
     id: 'text-input.builder-options', platforms: ['rails'],
     questions: ['How do I add maxlength to f.text_field?', 'Do builder input_options override the input?'],
-    answer: 'Pass maxlength: 255 as a builder keyword outside props. The builder renders the Rails helper input and supplies it as kit content, so generic props.input_options attributes do not configure that input.',
+    answer: 'Pass maxlength: 255 as a builder keyword outside props, or in props.input_options. The builder merges input_options into the Rails helper input last, so it overrides the keyword and props-derived options; classname is appended to class and data is merged key by key.',
     example: '<%= f.text_field :email, maxlength: 255, autocomplete: "email", props: { label: "Email", required: true, error: @user.errors[:email].to_sentence } %>',
     contractPaths: ['form.rails.builder.methods'], props: ['inputOptions'],
   }],

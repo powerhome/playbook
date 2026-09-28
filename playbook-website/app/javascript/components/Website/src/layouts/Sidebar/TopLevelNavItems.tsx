@@ -111,6 +111,9 @@ export const TopLevelNavItem = ({
       if (link === "/global_props") {
         return currentURL === "/global_props" || currentURL === "/global_props?";
       }
+      if (link === "/global_event_props") {
+        return currentURL === "/global_event_props" || currentURL === "/global_event_props?";
+      }
       if (link === "/tokens") {
         return currentURL === "/tokens" || currentURL === "/tokens?";
       }
@@ -139,6 +142,9 @@ export const TopLevelNavItem = ({
     }
     if (link === "/global_props") {
       return currentURL.startsWith("/global_props");
+    }
+    if (link === "/global_event_props") {
+      return currentURL.startsWith("/global_event_props");
     }
     if (link === "/tokens") {
       return currentURL.startsWith("/tokens");
