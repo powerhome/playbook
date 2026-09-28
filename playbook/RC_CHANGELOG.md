@@ -1,6 +1,8 @@
 # ✨ 18.1.0.pre.rc.0
-
 ##### September 25, 2026
+
+<img width="889" height="477" alt="playbookgenericrcrelease(2)" src="https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277" />
+
 
 [18.1.0-rc.0](https://github.com/powerhome/playbook/tree/18.1.0-rc.0) full list of changes:
 
@@ -27,8 +29,10 @@
 [Full Changelog](https://github.com/powerhome/playbook/compare/18.0.0...18.1.0-rc.0)
 
 # ✨ 17.2.0.pre.rc.3
-
 ##### September 04, 2026
+
+<img width="889" height="477" alt="playbookgenericrcrelease(2)" src="https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277" />
+
 
 [17.2.0-rc.3](https://github.com/powerhome/playbook/tree/17.2.0-rc.3) full list of changes:
 
@@ -54,8 +58,10 @@
 [Full Changelog](https://github.com/powerhome/playbook/compare/17.2.0-rc.2...17.2.0-rc.3)
 
 # ✨ 17.2.0.pre.rc.1
-
 ##### August 31, 2026
+
+<img width="889" height="477" alt="playbookgenericrcrelease(2)" src="https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277" />
+
 
 [17.2.0-rc.1](https://github.com/powerhome/playbook/tree/17.2.0-rc.1) full list of changes:
 
