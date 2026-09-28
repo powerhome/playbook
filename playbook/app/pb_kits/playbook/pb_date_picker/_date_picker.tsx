@@ -292,70 +292,70 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
             )}
           </label>
         )}
-          <>
-            <div className="date_picker_input_wrapper">
-              <input
-                  aria-describedby={errorId}
-                  aria-invalid={!!error}
-                  autoComplete="off"
-                  className="date_picker_input"
-                  disabled={disableInput}
-                  id={pickerId}
-                  name={name}
-                  onChange={inputOnChange}
-                  placeholder={placeholder}
-                  style={{ cursor: getCursorStyle(filteredProps.cursor) }}
-                  value={inputValue}
+        <div className="date_picker_field">
+          <div className="date_picker_input_wrapper">
+            <input
+                aria-describedby={errorId}
+                aria-invalid={!!error}
+                autoComplete="off"
+                className="date_picker_input"
+                disabled={disableInput}
+                id={pickerId}
+                name={name}
+                onChange={inputOnChange}
+                placeholder={placeholder}
+                style={{ cursor: getCursorStyle(filteredProps.cursor) }}
+                value={inputValue}
+            />
+
+            {error &&
+                <Body
+                    aria={{ atomic: "true", live: "polite" }}
+                    htmlOptions={{ role: "alert" }}
+                    id={errorId}
+                    status="negative"
+                    text={error}
+                    variant={null}
+                />
+            }
+          </div>
+
+          {!hideIcon && !inLine &&
+            <div
+                className={iconWrapperClass()}
+                id={`cal-icon-${pickerId}`}
+            >
+              <Icon
+                  className="cal_icon"
+                  icon="calendar-alt"
               />
-
-              {error &&
-                  <Body
-                      aria={{ atomic: "true", live: "polite" }}
-                      htmlOptions={{ role: "alert" }}
-                      id={errorId}
-                      status="negative"
-                      text={error}
-                      variant={null}
-                  />
-              }
             </div>
+          }
 
-            {!hideIcon && !inLine &&
+          {inLine ?
+            <div>
               <div
-                  className={iconWrapperClass()}
-                  id={`cal-icon-${pickerId}`}
+                  className={`${iconWrapperClass()} date-picker-inline-icon-plus`}
+                  id={`${pickerId}-icon-plus`}
               >
                 <Icon
-                    className="cal_icon"
-                    icon="calendar-alt"
+                    className="date-picker-plus-icon"
+                    icon="plus"
                 />
               </div>
-            }
-
-            {inLine ?
-              <div>
-                <div
-                    className={`${iconWrapperClass()} date-picker-inline-icon-plus`}
-                    id={`${pickerId}-icon-plus`}
-                >
-                  <Icon
-                      className="date-picker-plus-icon"
-                      icon="plus"
-                  />
-                </div>
-                <div
-                    className={`${iconWrapperClass()} date-picker-inline-angle-down`}
-                    id={`${pickerId}-angle-down`}
-                >
-                  <Icon
-                      className="angle_down_icon svg-inline--fa"
-                      customIcon={angleDown}
-                  />
-                </div>
+              <div
+                  className={`${iconWrapperClass()} date-picker-inline-angle-down`}
+                  id={`${pickerId}-angle-down`}
+              >
+                <Icon
+                    className="angle_down_icon svg-inline--fa"
+                    customIcon={angleDown}
+                />
               </div>
-              : null
-            }
-          </>
+            </div>
+            : null
+          }
+        </div>
       </div>
     </div>
   )

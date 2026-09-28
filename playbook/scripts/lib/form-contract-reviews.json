@@ -30,8 +30,8 @@
       "lib/playbook/forms/builder/checkbox_field.rb": "eaca1a4df0c51063297a51c575cced7425c19e3a5f00bcb21c305e8a4ac50a6f"
     },
     "date_picker": {
-      "app/pb_kits/playbook/pb_date_picker/_date_picker.tsx": "c64a5c678b74e617cb3e22cf475bfe1486238fbade56213e5242c122947faf90",
-      "app/pb_kits/playbook/pb_date_picker/date_picker.html.erb": "96ebb71ba5a99f3768a4a718eb872cc34196df3e0b722f09b13e2a6100aa218e",
+      "app/pb_kits/playbook/pb_date_picker/_date_picker.tsx": "2d08f4fb5288b3d7ee3a78c4e5d8f5eb7f9c208655b8b98822560f2dc92be18c",
+      "app/pb_kits/playbook/pb_date_picker/date_picker.html.erb": "f28916fa7cdb2e7cbc61333ea945ec461c56b5dcf2ca7b8c474ba3671ba1b9f5",
       "app/pb_kits/playbook/pb_date_picker/date_picker.rb": "4ac4160fb2561f326d36252d8f8f8c67d47a12a489e91ecf013f4ed867ad6ccc",
       "app/pb_kits/playbook/pb_date_picker/date_picker_helper.ts": "10a4b308b1d193c6cd0195fcb6aeafb5d51232327e4443f4a558e1e99c8e11b8",
       "app/pb_kits/playbook/pb_date_picker/index.ts": "7940baf5d2ce6c08fbf9e7103966ff0be8acb1c4cd26c99864108ec0a3c4d8a0",

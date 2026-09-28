@@ -40,6 +40,27 @@ describe('DatePicker Kit', () => {
     expect(kit).toHaveClass('pb_date_picker_kit mb_sm')
   })
 
+  test('keeps calendar icon inside the input field wrapper so label wrap does not shift it', () => {
+    const testId = 'datepicker-label-wrap'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          label="Start Date (Joined Date)"
+          pickerId="date-picker-label-wrap"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const field = kit.querySelector('.date_picker_field')
+    const label = kit.querySelector('label')
+    const calIcon = kit.querySelector('#cal-icon-date-picker-label-wrap')
+
+    expect(field).toBeInTheDocument()
+    expect(label).toBeInTheDocument()
+    expect(field.contains(label)).toBe(false)
+    expect(field.contains(calIcon)).toBe(true)
+  })
+
   test('exposes data-default-value on kit root when defaultDate is set', () => {
     const testId = 'datepicker-def-attr'
     render(

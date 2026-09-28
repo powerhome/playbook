@@ -3,7 +3,7 @@
 .cal_icon_wrapper {
   pointer-events: none;
   position: absolute;
-  top: $space_md + 2;
+  top: 0;
   right: 0;
   border-left: 1px solid $input_border_default;
   width: $space_xl + $space_xs;
@@ -22,6 +22,7 @@
     color: $input_text_default_dark;
     border-left: 1px solid $input_border_default_dark;
   }
+  // Retained for backward compatibility; default top is already 0.
   &.no_label_shift {
     top: 0;
   }
