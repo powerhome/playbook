@@ -6,7 +6,7 @@
 
 **Kit Enhancements:**
 
-- Forms: Ensure That Formbuilder Passes Down Input_options to All Kits Properly [\#6676](https://github.com/powerhome/playbook/pull/6676) ([nidaqg](https://github.com/nidaqg))
+- Forms: Ensure That Formbuilder Passes Down Input_options to All Kits Properly [\#6676](https://github.com/powerhome/playbook/pull/6676) ([thestephenmarshall](https://github.com/thestephenmarshall), [nidaqg](https://github.com/nidaqg))
 - Pill Kit: Notification Variant Style Matching to Badge [\#6646](https://github.com/powerhome/playbook/pull/6646) ([nickamantia](https://github.com/nickamantia))
 - Global Event Props: Onclick Prop (React-Only) [\#6642](https://github.com/powerhome/playbook/pull/6642) ([kangaree](https://github.com/kangaree))
 - Pagination Kit: Align React and Rails Styling [\#6641](https://github.com/powerhome/playbook/pull/6641) ([kangaree](https://github.com/kangaree))
