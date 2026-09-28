@@ -4,55 +4,42 @@ description: Framework agnostic. Utility classes help you work within the constr
 icon: file-code
 ---
 
-If you have another environment like PHP you can still use Playbook through the raw CSS and using the copy HTML button on and Rails kit. See details below:
+If you use another environment (for example PHP), you can still use Playbook via the published CSS and the **Copy HTML** control on Rails kit examples.
 
-#### Add the Playbook NPM Package
-
-```sh
-yarn add "playbook-ui@stable"
-```
-
-This will allow you to choose what version you want.
+#### Install the npm package
 
 ```sh
-yarn install
+yarn add playbook-ui
 ```
 
-#### Import the CSS
+#### Import CSS
 
-```sass
-@import "playbook-ui/dis/playbook";
- @import "playbook-ui/dist/reset";
-```
-
-#### Optionally you can import the Javascript if you want some of the interactivity
-This will add all the Javascript to use the popovers & graphs for example.
+Import reset first, then Playbook styles:
 
 ```js
-import 'playbook-ui/dist/playbook-rails.js';
+import 'playbook-ui/dist/reset.css'
+import 'playbook-ui/dist/playbook.css'
 ```
 
-#### Navigate to the Rails Kits and copy the raw HTML from the examples
-
-![Copy the raw HTML from the examples](/images/getting_started/copy_html.png) 
-
-#### How to include CSS and Javascript Assets
-To include CSS and JavaScript files in an HTML document, follow these steps:
-1. Create a CSS file with the extension ".css" and a JavaScript file with the extension ".js". Place them in a directory on your server, preferably in a subdirectory named "css" or "js" respectively.
-2. Open the HTML file you want to add the assets to in a text editor.
-3. To include a CSS file in the HTML document, add the following code to the "head" section of the HTML document:
+Or link the files from `node_modules` in your HTML:
 
 ```html
-<link rel="stylesheet" type="text/css" href="path/to/your/css/file.css">
+<link rel="stylesheet" href="node_modules/playbook-ui/dist/reset.css" />
+<link rel="stylesheet" href="node_modules/playbook-ui/dist/playbook.css" />
 ```
 
-Replace "path/to/your/css/file.css" with the actual path to your CSS file.
-4. To include a JavaScript file in the HTML document, add the following code to the "head" section of the HTML document:
+For icons, also install [Playbook Icons](/icons) and include its stylesheet:
 
-```html
-<script src="path/to/your/js/file.js"></script>
+```js
+import '@powerhome/playbook-icons/css/pb-icons.css'
 ```
 
-Replace "path/to/your/js/file.js" with the actual path to your JavaScript file.
-5. Save the HTML file and upload all the files (HTML, CSS, and JavaScript) to your server.
-6. Test your HTML document in a web browser to ensure that the assets are being loaded correctly.
+#### Optional JavaScript
+
+Import kit JavaScript if you need interactivity (popovers, date picker, and similar):
+
+```js
+import 'playbook-ui/dist/playbook-rails.js'
+```
+
+See [Dependencies](/guides/getting_started/dependencies) for optional packages (maps, charts, rich text, and more).

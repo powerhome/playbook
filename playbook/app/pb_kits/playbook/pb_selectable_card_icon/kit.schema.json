@@ -24,7 +24,10 @@
       "default": false
     },
     "customIcon": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "string"
+      },
       "platforms": [
         "react",
         "rails"

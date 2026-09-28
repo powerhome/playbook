@@ -69,6 +69,8 @@ node_modules/playbook-ui/dist/ai/
 | `.tsx`, `.jsx` | React | `<Button variant="primary" />` |
 | `.erb` | Rails | `<%= pb_rails("button", props: { variant: "primary" }) %>` |
 
+When a prop's `type` or `default` is `{ "react": ..., "rails": ... }`, use the entry for that platform. Example: StatValue `value` is `string | number` in React and `number` in Rails.
+
 ### Valid Spacing Values
 
 Use tokens, not raw pixels: `none`, `xxs`, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`  

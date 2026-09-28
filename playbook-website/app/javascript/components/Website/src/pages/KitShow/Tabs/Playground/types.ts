@@ -9,8 +9,10 @@ export type PropType =
   | "array"
   | string;
 
+export type PlatformSplit<T> = { react?: T; rails?: T };
+
 export interface PropDefinition {
-  type: PropType;
+  type: PropType | PlatformSplit<PropType>;
   platforms: ("react" | "rails")[];
   values?: string[];
   default?: any;

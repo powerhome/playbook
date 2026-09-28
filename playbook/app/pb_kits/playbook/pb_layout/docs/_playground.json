@@ -6,10 +6,7 @@
     "full": false,
     "position": "left",
     "responsive": false,
-    "size": {
-      "react": "sm",
-      "rails": "md"
-    },
+    "size": "sm",
     "variant": "light",
     "transparent": false,
     "layout": "sidebar"

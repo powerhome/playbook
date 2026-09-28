@@ -43,3 +43,4 @@ export { default as TableWithFilterVariant } from './_table_with_filter_variant.
 export { default as TableWithFilterVariantWithPagination } from './_table_with_filter_variant_with_pagination.jsx'
 export { default as TableWithFilterWithCardTitleProps } from './_table_with_filter_with_card_title_props.jsx'
 export { default as TableColspan } from './_table_colspan.jsx'
+export { default as TableAsWrapper } from './_table_as_wrapper.jsx'

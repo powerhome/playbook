@@ -189,7 +189,10 @@
       "default": "Select Date"
     },
     "positionElement": {
-      "type": "HTMLElement | null",
+      "type": {
+        "react": "HTMLElement | null",
+        "rails": "string"
+      },
       "platforms": [
         "react",
         "rails"

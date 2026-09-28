@@ -8,7 +8,7 @@
  * How it works:
  *   1. Parse .tsx files for React prop definitions
  *   2. Parse .rb files for Rails prop definitions  
- *   3. Merge props from both platforms
+ *   3. Merge props from both platforms (`type` and `default` split to `{ react, rails }` when they differ)
  *   4. Generate descriptions from component names
  * 
  * Limitations (regex-based parsing):
@@ -446,6 +446,21 @@ function parseRuby(filePath) {
 // =============================================================================
 
 /**
+ * When React and Rails disagree, store `{ react, rails }`.
+ * When they agree or only one side has a value, store that single value.
+ */
+function mergePlatformValue(reactVal, railsVal) {
+  if (
+    reactVal !== undefined &&
+    railsVal !== undefined &&
+    JSON.stringify(reactVal) !== JSON.stringify(railsVal)
+  ) {
+    return { react: reactVal, rails: railsVal };
+  }
+  return reactVal !== undefined ? reactVal : railsVal;
+}
+
+/**
  * Merge React and Rails props into unified schema.
  */
 function mergeProps(react, rails) {
@@ -458,7 +473,7 @@ function mergeProps(react, rails) {
 
     if (r && rb) {
       merged[name] = {
-        type: r.type || rb.type,
+        type: mergePlatformValue(r.type, rb.type),
         platforms: ['react', 'rails'],
       };
 
@@ -474,14 +489,15 @@ function mergeProps(react, rails) {
           rbValues.length > 1 &&
           rbValues.includes(rValues[0]);
         merged[name].values = reactLooksTruncated || !rValues.length ? rbValues : rValues;
-        if (r.type === 'enum' || rb.type === 'enum') merged[name].type = 'enum';
+        // Promote to enum only when type was not already split by platform.
+        if (typeof merged[name].type === 'string' && (r.type === 'enum' || rb.type === 'enum')) {
+          merged[name].type = 'enum';
+        }
       }
-      
+
       const rd = r.default, rbd = rb.default;
       if (rd !== undefined || rbd !== undefined) {
-        merged[name].default = (rd !== undefined && rbd !== undefined && JSON.stringify(rd) !== JSON.stringify(rbd))
-          ? { react: rd, rails: rbd }
-          : (rd ?? rbd);
+        merged[name].default = mergePlatformValue(rd, rbd);
       }
     } else {
       merged[name] = { ...(r || rb) };
@@ -517,6 +533,13 @@ function generateUsage(kitName, props) {
 /**
  * Generate complete kit.schema.json for a component.
  */
+function usesGlobalEventProps(filePath) {
+  const content = readFile(filePath);
+  if (!content) return false;
+  // Opt-in is explicit: kits intersect GlobalEventProps on their props type.
+  return /&\s*GlobalEventProps\b/.test(content) || /\bGlobalEventProps\s*&/.test(content);
+}
+
 function generateSchema(kitName, options = {}) {
   const kitDir = path.join(CONFIG.pbKitsDir, `pb_${kitName}`);
   if (!fs.existsSync(kitDir)) return null;
@@ -544,6 +567,7 @@ function generateSchema(kitName, options = {}) {
     platforms,
     props,
     globalProps: true,
+    ...(usesGlobalEventProps(tsxFile) && { globalEventProps: true }),
     usage: generateUsage(kitName, props),
   };
 

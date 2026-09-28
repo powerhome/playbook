@@ -53,7 +53,10 @@
       "default": false
     },
     "customQuickPickDates": {
-      "type": "CustomQuickPickDates",
+      "type": {
+        "react": "CustomQuickPickDates",
+        "rails": "GenericObject"
+      },
       "platforms": [
         "react",
         "rails"
@@ -115,6 +118,19 @@
       ],
       "default": false
     },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
     "onSelect": {
       "type": "function",
       "platforms": [
@@ -122,7 +138,10 @@
       ]
     },
     "options": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "array"
+      },
       "platforms": [
         "react",
         "rails"
@@ -194,12 +213,6 @@
       ],
       "default": false
     },
-    "name": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
-    },
     "required": {
       "platforms": [
         "rails"
@@ -243,6 +256,33 @@
       "default": "end_date_name"
     },
     "customEventType": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
+    "optionsByContext": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "GenericObject"
+    },
+    "contextSelector": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
+    "clearOnContextChange": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": true
+    },
+    "optionsEventType": {
       "platforms": [
         "rails"
       ],

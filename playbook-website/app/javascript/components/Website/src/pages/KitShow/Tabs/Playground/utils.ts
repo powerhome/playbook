@@ -5,28 +5,51 @@ import {
   PropDefinition,
 } from "./types";
 
+type SchemaPlatform = "react" | "rails";
+
+function isPlatformSplit(
+  value: unknown
+): value is { react?: unknown; rails?: unknown } {
+  return (
+    value !== null &&
+    typeof value === "object" &&
+    !Array.isArray(value) &&
+    ("react" in value || "rails" in value)
+  );
+}
+
+/** Resolve a `{ react, rails }` schema field for one platform. */
+export function resolvePlatformSplit<T>(
+  value: T,
+  platform: SchemaPlatform = "react"
+): T {
+  if (!isPlatformSplit(value)) return value;
+  const resolved = value[platform] ?? value.react ?? value.rails;
+  return (resolved as T);
+}
+
 /** Resolve platform-specific default from kit schema (handles `{ react, rails }` merge shape). */
 export function resolveSchemaDefaultForPlatform(
   def?: PropDefinition,
-  platform: "react" | "rails" = "react",
+  platform: SchemaPlatform = "react",
 ): unknown {
   if (!def || def.default === undefined) return undefined;
-  const d = def.default as Record<string, unknown> | unknown;
-  if (
-    d !== null &&
-    typeof d === "object" &&
-    !Array.isArray(d) &&
-    platform in (d as Record<string, unknown>) &&
-    (d as Record<string, unknown>)[platform] !== undefined
-  ) {
-    return (d as Record<string, unknown>)[platform];
-  }
-  return def.default;
+  return resolvePlatformSplit(def.default, platform);
 }
 
 /** Resolve React default from kit schema (handles `{ react, rails }` merge shape). */
 export function resolveSchemaDefault(def?: PropDefinition): unknown {
   return resolveSchemaDefaultForPlatform(def, "react");
+}
+
+/** Resolve kit schema `type` for one platform (handles `{ react, rails }` merge shape). */
+export function resolveSchemaType(
+  def?: PropDefinition,
+  platform: SchemaPlatform = "react"
+): string | undefined {
+  if (!def || def.type === undefined) return undefined;
+  const resolved = resolvePlatformSplit(def.type, platform);
+  return typeof resolved === "string" ? resolved : undefined;
 }
 
 /** Example value for object/array prop dialogs — prefers playground config defaults over schema. */

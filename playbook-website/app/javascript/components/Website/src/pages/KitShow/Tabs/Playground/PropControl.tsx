@@ -24,6 +24,7 @@ import {
   getPlaygroundPropExampleValue,
   playgroundObjectToEditableLiteral,
   resolveSchemaDefault,
+  resolveSchemaType,
 } from "./utils";
 import { PropsPanelTextarea } from "./components/PropsPanelTextarea";
 
@@ -945,7 +946,7 @@ const getControlForType = (
   isRequired?: boolean,
 ) => {
   const { definition } = props;
-  const rawType = definition.type || "";
+  const rawType = resolveSchemaType(definition) || "";
   /** Lowercase so `GenericObject` matches object controls (schema uses PascalCase). */
   const propType = normalizeType(rawType);
 

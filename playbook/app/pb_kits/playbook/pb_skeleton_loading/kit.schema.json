@@ -24,7 +24,10 @@
       "default": "100%"
     },
     "borderRadius": {
-      "type": "enum",
+      "type": {
+        "react": "string",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"
@@ -41,7 +44,10 @@
       "default": "sm"
     },
     "gap": {
-      "type": "enum",
+      "type": {
+        "react": "Sizes | \"none\"",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"

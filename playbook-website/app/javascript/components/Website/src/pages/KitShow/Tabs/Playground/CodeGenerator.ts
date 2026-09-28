@@ -3,7 +3,7 @@ import {
   PropDefinition,
   PlaygroundChildrenConfig,
 } from "./types";
-import { resolveSchemaDefault } from "./utils";
+import { resolveSchemaDefault, resolveSchemaType } from "./utils";
 
 /**
  * Omit emitting a prop when it matches the kit runtime default. By default this uses the schema
@@ -186,7 +186,7 @@ const formatPropValue = (
     return null;
   }
 
-  const propType = String(definition.type ?? "any").toLowerCase();
+  const propType = String(resolveSchemaType(definition) ?? "any").toLowerCase();
   const rawExpression = getRawJsExpression(value);
   if (rawExpression) {
     return `${name}={${rawExpression}}`;

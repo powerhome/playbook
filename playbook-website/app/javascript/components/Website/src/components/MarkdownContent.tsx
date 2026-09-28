@@ -1,6 +1,6 @@
 import { useMemo, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
-import { Pill } from "playbook-ui";
+import { Pill, Table } from "playbook-ui";
 
 type MarkdownContentProps = {
   children: string;
@@ -115,7 +115,16 @@ function renderMarkdownTable(rows: string[], key: string): ReactNode {
   const bodyRows = rows.slice(2).map(splitMarkdownTableRow);
 
   return (
-    <table key={key}>
+    <Table
+      key={key}
+      className="markdown-table"
+      container
+      disableHover
+      marginBottom="md"
+      marginTop="sm"
+      responsive="collapse"
+      size="sm"
+    >
       <thead>
         <tr>
           {headerCells.map((cell, index) => (
@@ -139,7 +148,7 @@ function renderMarkdownTable(rows: string[], key: string): ReactNode {
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 }
 

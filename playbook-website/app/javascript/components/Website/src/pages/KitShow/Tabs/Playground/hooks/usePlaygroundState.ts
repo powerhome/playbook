@@ -26,6 +26,7 @@ import {
   prepareExampleCode,
   shouldApplyPropSyncOnEnable,
   groupPropDefinitions,
+  resolveSchemaType,
 } from "../utils";
 import { generateRailsCode } from "../RailsCodeGenerator";
 import { formatChildrenForRailsEditor } from "../jsxChildrenToRails";
@@ -136,9 +137,12 @@ export const usePlaygroundState = ({
         EXCLUDED_PROPS.includes(name) || EXCLUDED_PROPS.includes(name.toLowerCase());
 
       if (isPlatformProp && !isExcluded && !hiddenPropNames.has(name)) {
-        filtered[name] = emitEmptyStringPropNames.has(name)
-          ? { ...def, emitEmptyString: true }
-          : def;
+        const resolvedType = resolveSchemaType(def, platform);
+        filtered[name] = {
+          ...def,
+          ...(resolvedType ? { type: resolvedType } : {}),
+          ...(emitEmptyStringPropNames.has(name) ? { emitEmptyString: true } : {}),
+        };
       }
     });
     return filtered;

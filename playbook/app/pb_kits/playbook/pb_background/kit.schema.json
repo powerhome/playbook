@@ -14,7 +14,10 @@
       ]
     },
     "backgroundColor": {
-      "type": "enum",
+      "type": {
+        "react": "ResponsiveProp<BackgroundColors> | BackgroundColors",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"
@@ -85,7 +88,10 @@
       "default": "light"
     },
     "backgroundSize": {
-      "type": "enum",
+      "type": {
+        "react": "ResponsiveProp<BackgroundSizes> | BackgroundSizes",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"
@@ -98,7 +104,10 @@
       "default": "cover"
     },
     "backgroundPosition": {
-      "type": "ResponsiveProp<string> | string",
+      "type": {
+        "react": "ResponsiveProp<string> | string",
+        "rails": "string"
+      },
       "platforms": [
         "react",
         "rails"
@@ -106,7 +115,10 @@
       "default": null
     },
     "backgroundRepeat": {
-      "type": "enum",
+      "type": {
+        "react": "ResponsiveProp<BackgroundRepeat> | BackgroundRepeat",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"

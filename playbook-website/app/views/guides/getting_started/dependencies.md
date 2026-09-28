@@ -10,81 +10,99 @@ Playbook UI's React library needs the following packages installed in your proje
 
 ```json
 "react"
- "react-dom"
- "react-is"
- "react-trix"
+"react-dom"
+"react-is"
 ```
+
+Match your project's versions with Playbook's peer dependency ranges (currently React 17).
 
 ## Playbook UI Dependencies | Rails
 
-Playbook UI's Rails gem requires React for its components javascript to fully function. Follow the instructions in the [Ruby & React Setup](/guides/getting_started/rails_&_react_setup) guide to add react to your Rails app.
+The `playbook_ui` gem provides ViewComponents (`pb_rails`). Interactive kits need the npm `playbook-ui` package and `playbook-rails.js`. Chart kits also need Highcharts and `playbook-rails-charts-bindings.js`. Follow [Ruby & React Setup](/guides/getting_started/rails_&_react_setup) or [Ruby on Rails Setup](/guides/getting_started/ruby_on_rails_setup).
+
+## Icons
+
+Icon kits ([Icon](/kits/icon/react), [Icon Circle](/kits/icon_circle/react), [Icon Stat Value](/kits/icon_stat_value/react), and [Icon Value](/kits/icon_value/react)) use **Playbook Icons** by default. Font Awesome is **not required**.
+
+### Playbook Icons (recommended)
+
+Install and set up [Playbook Icons](/icons):
+
+| Package | NPM |
+|---------|-----|
+| `@powerhome/playbook-icons` | [playbook-icons](https://www.npmjs.com/package/@powerhome/playbook-icons) |
+| `@powerhome/playbook-icons-react` | [playbook-icons-react](https://www.npmjs.com/package/@powerhome/playbook-icons-react) |
+
+Import the stylesheet:
+
+```js
+import "@powerhome/playbook-icons/css/pb-icons.css"
+```
+
+For React, register icons on `window.PB_ICONS` from `@powerhome/playbook-icons-react`. See the [Playbook Icons](/icons) page for full setup details.
+
+### Font Awesome (optional)
+
+The Icon kit remains compatible with Font Awesome class patterns if your application already provides Font Awesome stylesheets. Font Awesome is not bundled with Playbook and is not required for Icon kits to work.
 
 ## Unbundled Dependencies
 
-These kits require you to install additional libraries to get full functionality.
+These kits require you to install additional libraries for full functionality.
 
-To install them add them to your project using `yarn add`, `npm install`, or manually add them to your `package.json` file.
+Add them with `yarn add`, `npm install`, or by updating your `package.json`.
 
-| Kit                 | Kit Link                                                                    | NPM Link(s)                                                                                              | Dependency(s)                               |
-|---------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|---------------------------------------------|
-| **Icon**            | [Icon](https://playbook.powerapp.cloud/kits/icon/react)                     | [fontawesome-free](https://www.npmjs.com/package/fontawesome-free)                                       | fontawesome-free                            |
-| **Icon Circle**     | [Icon Circle](https://playbook.powerapp.cloud/kits/icon_circle/react)       | [fontawesome-free](https://www.npmjs.com/package/fontawesome-free)                                       | fontawesome-free                            |
-| **Icon Stat Value** | [Icon Stat Value](https://playbook.powerapp.cloud/kits/icon_stat_value/react) | [fontawesome-free](https://www.npmjs.com/package/fontawesome-free)                                       | fontawesome-free                            |
-| **Icon Value**      | [Icon Value](https://playbook.powerapp.cloud/kits/icon_value/react)         | [fontawesome-free](https://www.npmjs.com/package/fontawesome-free)                                       | fontawesome-free                            |
-| **Map**             | [Map](https://playbook.powerapp.cloud/kits/map/react)                       | [maplibre-gl](https://www.npmjs.com/package/maplibre-gl)                                                 | maplibre-gl                                 |
-| **PB Bar Graph** | [PB Bar Graph](https://playbook.powerapp.cloud/kits/pb_bar_graph/react) | [highcharts](https://www.npmjs.com/package/highcharts) | highcharts |
-| | | [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) | highcharts-react-official |
-| **PB Circle Chart** | [PB Circle Chart](https://playbook.powerapp.cloud/kits/pb_circle_chart/react) | [highcharts](https://www.npmjs.com/package/highcharts) | highcharts |
-| | | [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) | highcharts-react-official |
-| **PB Gauge Chart** | [PB Gauge Chart](https://playbook.powerapp.cloud/kits/pb_gauge_chart/react) | [highcharts](https://www.npmjs.com/package/highcharts) | highcharts |
-| | | [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) | highcharts-react-official |
-| **PB Line Graph** | [PB Line Graph](https://playbook.powerapp.cloud/kits/pb_line_graph/react) | [highcharts](https://www.npmjs.com/package/highcharts) | highcharts |
-| | | [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) | highcharts-react-official |
-| **Rich Text Editor** (TipTap Editor) | [Rich Text Editor](https://playbook.powerapp.cloud/kits/rich_text_editor/react) | [@tiptap/core](https://www.npmjs.com/package/@tiptap/core) | @tiptap/core |
-| | | [@tiptap/react](https://www.npmjs.com/package/@tiptap/react) | @tiptap/react |
-| | | [@tiptap/starter-kit](https://www.npmjs.com/package/@tiptap/starter-kit) | @tiptap/starter-kit |
-| | | [@tiptap/extension-document](https://www.npmjs.com/package/@tiptap/extension-document) | @tiptap/extension-document |
-| | | [@tiptap/extension-highlight](https://www.npmjs.com/package/@tiptap/extension-highlight) | @tiptap/extension-highlight |
-| | | [@tiptap/extension-horizontal-rule](https://www.npmjs.com/package/@tiptap/extension-horizontal-rule) | @tiptap/extension-horizontal-rule |
-| | | [@tiptap/extension-link](https://www.npmjs.com/package/@tiptap/extension-link) | @tiptap/extension-link |
-| | | [@tiptap/extension-paragraph](https://www.npmjs.com/package/@tiptap/extension-paragraph) | @tiptap/extension-paragraph |
-| | | [@tiptap/extension-text](https://www.npmjs.com/package/@tiptap/extension-text) | @tiptap/extension-text |
-| | | [@tiptap/pm](https://www.npmjs.com/package/@tiptap/pm) | @tiptap/pm |
+| Kit | Packages |
+|-----|----------|
+| [Map](/kits/map/react) | [maplibre-gl](https://www.npmjs.com/package/maplibre-gl) |
+| [PB Bar Graph](/kits/pb_bar_graph/react) | [highcharts](https://www.npmjs.com/package/highcharts), [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) |
+| [PB Circle Chart](/kits/pb_circle_chart/react) | [highcharts](https://www.npmjs.com/package/highcharts), [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) |
+| [PB Gauge Chart](/kits/pb_gauge_chart/react) | [highcharts](https://www.npmjs.com/package/highcharts), [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) |
+| [PB Line Graph](/kits/pb_line_graph/react) | [highcharts](https://www.npmjs.com/package/highcharts), [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) |
+| [Rich Text Editor](/kits/rich_text_editor/react) (TipTap) | [@tiptap/react](https://www.npmjs.com/package/@tiptap/react), [@tiptap/starter-kit](https://www.npmjs.com/package/@tiptap/starter-kit), [@tiptap/extension-link](https://www.npmjs.com/package/@tiptap/extension-link) |
+| [Rich Text Editor](/kits/rich_text_editor/react) (Trix / legacy) | [trix](https://www.npmjs.com/package/trix), [react-trix](https://www.npmjs.com/package/react-trix) |
 
-**Chart Kits**: 
+**Chart kits (React)**: PbBarGraph, PbCircleChart, PbGaugeChart, and PbLineGraph are available through a separate entrypoint so Highcharts stays optional:
 
-PbBarGraph, PbCircleChart, PbGaugeChart, and PbLineGraph are available through a separate entrypoint to keep Highcharts optional. Import them using:
 ```javascript
 import { PbBarGraph, PbCircleChart, PbGaugeChart, PbLineGraph } from 'playbook-ui/charts'
 ```
 
-**Advanced Table**:
+**Chart kits (Rails)**: After `playbook-rails.js`, also import the chart bindings and install Highcharts:
 
-AdvancedTable is available through a separate entrypoint so TanStack stays out of the main `playbook-ui` bundle until the kit is used. TanStack is still bundled with that entrypoint — no additional installation is required. Import it using:
+```javascript
+import 'playbook-ui/dist/playbook-rails.js'
+import 'playbook-ui/dist/playbook-rails-charts-bindings.js'
+```
+
+**Map**: Also include MapLibre CSS (CDN or local import). See the [Map kit docs](/kits/map/react) for details.
+
+**Advanced Table**: Available through a separate entrypoint so TanStack stays out of the main `playbook-ui` bundle until the kit is used. TanStack is bundled with that entrypoint — no additional installation is required:
+
 ```javascript
 import { AdvancedTable } from 'playbook-ui/advanced-table'
 ```
+
 ## Bundled Dependencies
 
-These kits use dependencies that are bundled with them; no additional installation is required.
+These kits use dependencies that ship with Playbook; no additional installation is required.
 
-| Kit                    | Kit Link                                                                    | NPM Link(s)                                                                                       | Dependency(s)                           |
-|------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------|
-| **Advanced Table** | [Advanced Table](https://playbook.powerapp.cloud/kits/advanced_table/react) | [@tanstack/react-table](https://www.npmjs.com/package/@tanstack/react-table), [@tanstack/react-virtual](https://www.npmjs.com/package/@tanstack/react-virtual) | @tanstack/react-table, @tanstack/react-virtual |
-| **Date Picker**        | [Date Picker](https://playbook.powerapp.cloud/kits/date_picker/react)       | [flatpickr](https://www.npmjs.com/package/flatpickr)                                              | flatpickr                               |
-| **Dialog**             | [Dialog](https://playbook.powerapp.cloud/kits/dialog/react)                 | [react-modal](https://www.npmjs.com/package/react-modal)                                          | react-modal                             |
-| **File Upload**        | [File Upload](https://playbook.powerapp.cloud/kits/file_upload/react)       | [react-dropzone](https://www.npmjs.com/package/react-dropzone)                                    | react-dropzone                          |
-| **Filter**             | [Filter](https://playbook.powerapp.cloud/kits/filter/react)                 | [react-popper](https://www.npmjs.com/package/react-popper)                                        | react-popper                            |
-| **LightBox**           | [LightBox](https://playbook.powerapp.cloud/kits/lightbox/react)             | [react-zoom-pan-pinch](https://www.npmjs.com/package/react-zoom-pan-pinch)                        | react-zoom-pan-pinch                    |
-| **Passphrase**         | [Passphrase](https://playbook.powerapp.cloud/kits/passphrase/react)         | [react-popper](https://www.npmjs.com/package/react-popper)                                        | react-popper                            |
-| **Phone Number Input** | [Phone Number Input](https://playbook.powerapp.cloud/kits/phone_number_input/react) | [intl-tel-input](https://www.npmjs.com/package/intl-tel-input)                                    | intl-tel-input                          |
-| **Popover**            | [Popover](https://playbook.powerapp.cloud/kits/popover/react)               | [react-popper](https://www.npmjs.com/package/react-popper) | react-popper                 |
-| **Rich Text Editor** (Trix Editor) | [Rich Text Editor](https://playbook.powerapp.cloud/kits/rich_text_editor/react) | [trix](https://www.npmjs.com/package/trix) | trix |
-| | | [react-trix](https://www.npmjs.com/package/react-trix) | react-trix |
-| **Tooltip**            | [Tooltip](https://playbook.powerapp.cloud/kits/tooltip/react)               | [@floating-ui/react](https://www.npmjs.com/package/@floating-ui/react)                            | @floating-ui/react                      |
-| **Typeahead**          | [Typeahead](https://playbook.powerapp.cloud/kits/typeahead/react)           | [react-select](https://www.npmjs.com/package/react-select)| react-select
+| Kit | Packages |
+|-----|----------|
+| [Advanced Table](/kits/advanced_table/react) | [@tanstack/react-table](https://www.npmjs.com/package/@tanstack/react-table), [@tanstack/react-virtual](https://www.npmjs.com/package/@tanstack/react-virtual) |
+| [Date Picker](/kits/date_picker/react) | [flatpickr](https://www.npmjs.com/package/flatpickr) |
+| [Dialog](/kits/dialog/react) | [react-modal](https://www.npmjs.com/package/react-modal) |
+| [File Upload](/kits/file_upload/react) | [react-dropzone](https://www.npmjs.com/package/react-dropzone) |
+| [Filter](/kits/filter/react) | [react-popper](https://www.npmjs.com/package/react-popper) |
+| [LightBox](/kits/lightbox/react) | [react-zoom-pan-pinch](https://www.npmjs.com/package/react-zoom-pan-pinch) |
+| [Passphrase](/kits/passphrase/react) | [react-popper](https://www.npmjs.com/package/react-popper) |
+| [Phone Number Input](/kits/phone_number_input/react) | [intl-tel-input](https://www.npmjs.com/package/intl-tel-input) |
+| [Popover](/kits/popover/react) | [react-popper](https://www.npmjs.com/package/react-popper) |
+| [Tooltip](/kits/tooltip/react) | [@floating-ui/react](https://www.npmjs.com/package/@floating-ui/react) |
+| [Typeahead](/kits/typeahead/react) | [react-select](https://www.npmjs.com/package/react-select) |
 
 ## Notes
-**Rich Text Editor**: This kit supports two different editors:
-**TipTap Editor**: Requires manual installation of `tiptap` and various `@tiptap/*` extensions (listed above under Unbundled Dependencies).
-**Trix Editor**: Dependencies (`trix` and `react-trix`) are bundled with the kit; no extra installation is needed.
+
+**Rich Text Editor**: This kit supports two editors:
+
+- **TipTap** (advanced): Install `@tiptap/react`, `@tiptap/starter-kit`, and `@tiptap/extension-link`. Add other [@tiptap](https://tiptap.dev/extensions) extensions as needed for your project.
+- **Trix** (legacy default): Install `trix` and `react-trix` in your project. These are not bundled with Playbook.

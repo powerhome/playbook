@@ -35,7 +35,9 @@ dist/ai/
 ├── index.json                  # Manifest: schemas, playgrounds, kitMeta, visualIndex
 ├── visual-index.json           # Screenshot / visual → kit map (looksLike, lookalikes, tokens)
 ├── external-dependencies.json  # Kits that need host-app packages (Highcharts, TipTap, …)
+├── forms.json                 # Rails builder setup, methods, actions, common FAQs
 ├── global-props.schema.json    # Props available on ALL components
+├── global-event-props.schema.json # React-only event handlers for opted-in kits
 ├── all-schemas.json            # All kit schemas in one file (schemas only)
 ├── kits/                       # Individual component schemas
 │   ├── button.schema.json
@@ -56,6 +58,7 @@ dist/ai/
 | `visual-index.json` | small | Map screenshots/visuals → kits before guessing |
 | `external-dependencies.json` | small | Kits whose engines are peer/optional host deps |
 | `global-props.schema.json` | ~24KB | Spacing, layout, display props |
+| `global-event-props.schema.json` | small | React event handlers for kits with `globalEventProps: true` |
 | `all-schemas.json` | ~280KB | Bulk schema lookup (no playgrounds) |
 | `kits/*.schema.json` | ~2–4KB each | Props + menu descriptions + usage from presets |
 | `playgrounds/*.json` | slim | Presets, hints, conditionals, composition patterns |
@@ -106,6 +109,15 @@ Playgrounds are **opt-in for agents**: keep loading schemas by default, then rea
 }
 ```
 
+When React and Rails types (or defaults) differ, the field is split instead of preferring React:
+
+```json
+"value": {
+  "type": { "react": "string | number", "rails": "number" },
+  "platforms": ["react", "rails"]
+}
+```
+
 ### Global Props Schema
 
 ```json
@@ -142,7 +154,8 @@ Playgrounds are **opt-in for agents**: keep loading schemas by default, then rea
 | `yarn generate:docs-metadata` (repo root) | **Preferred.** Kit schemas + global props + playgrounds + `dist/ai` |
 | `yarn generate:ai-metadata` | Generate kit.schema.json for all components |
 | `yarn generate:global-props-metadata` | Generate global-props.schema.json |
-| `yarn generate:all-ai-metadata` | Generate both kit and global props schemas |
+| `yarn generate:global-event-props-metadata` | Generate global-event-props.schema.json |
+| `yarn generate:all-ai-metadata` | Generate kit, global props, and global event props schemas |
 | `yarn generate:playground-configs` | Generate per-kit `_playground.json` from schema + overrides |
 | `yarn build:ai` | Clean and build `dist/ai/` (schemas + slim playgrounds) |
 | `yarn build:ai --no-clean` | Incremental build without cleaning |
@@ -157,7 +170,7 @@ Playgrounds are **opt-in for agents**: keep loading schemas by default, then rea
 1. Scans `app/pb_kits/playbook/pb_*/` directories
 2. Parses TypeScript (`.tsx`) files for React prop types
 3. Parses Ruby (`.rb`) files for Rails prop definitions
-4. Merges props from both platforms
+4. Merges props from both platforms. Shared `type` and `default` become `{ react, rails }` when they differ; otherwise a single value is stored.
 5. Generates descriptions from component names
 6. Outputs `kit.schema.json` in each component folder
 
@@ -190,11 +203,19 @@ The Ruby parsing has similar limitations:
 
 When Playbook changes, the schema updates automatically - no manual edits needed.
 
+### Global Event Props Generation (`generate-global-event-props-metadata.mjs`)
+
+Parses `utilities/globalEventProps.ts` into `utilities/global-event-props.schema.json`.
+
+- React-only (JavaScript event callbacks)
+- Opt-in: kit schemas set `globalEventProps: true` when props include `& GlobalEventProps`
+- Separate from class-based `GlobalProps` / `global-props.schema.json`
+
 ### Build Distribution (`build-ai-dist.mjs`)
 
 1. Loads kit catalog from `playbook-website/config/menu.yml` (descriptions, categories)
 2. Copies all `kit.schema.json` files to `dist/ai/kits/`, enriching thin descriptions from menu.yml and `usage` from the first playground preset
-3. Copies `global-props.schema.json` to `dist/ai/`
+3. Copies `global-props.schema.json` and `global-event-props.schema.json` to `dist/ai/`
 4. Creates `all-schemas.json` with schemas only (playgrounds stay separate to avoid bloat)
 5. Creates slim `dist/ai/playgrounds/<kit>.json` from each `_playground.json`
 6. Builds `visual-index.json` (menu catalog + curated lookalike/visual cues)
@@ -294,13 +315,16 @@ The Husky pre-commit hook keeps generated docs metadata in sync. When you commit
 4. **Fails if any generated files changed** (stage them and commit again)
 
 **Triggered by changes to:**
-- `playbook/app/pb_kits/playbook/pb_*/**/*.{tsx,ts,rb}` - Kit sources
+- `playbook/app/pb_kits/playbook/pb_*/**/*.{tsx,ts,jsx,js,rb,erb}` - Kit sources (including Rails templates / kit JS)
 - `playbook/app/pb_kits/playbook/utilities/globalProps.ts` - Global props
+- `playbook/app/pb_kits/playbook/utilities/globalEventProps.ts` - Global event props (React)
 - `playbook/app/pb_kits/playbook/types/*.ts` - Type definitions
 - `playbook/app/pb_kits/playbook/tokens/_spacing.scss` - Spacing tokens
 - `playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss` - Breakpoints
 - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json` - Kit schemas
 - `playbook/app/pb_kits/playbook/pb_*/docs/_playground.overrides.json` - Playground overrides
+- `playbook/lib/playbook/forms/**/*.rb`, `playbook/lib/playbook/pb_forms*.rb`, `playbook/lib/playbook/kit_base.rb` - Rails form builder / helpers
+- `playbook/scripts/build-ai-dist.mjs`, `playbook/scripts/review-form-metadata.mjs`, `playbook/scripts/lib/*form*`, `playbook/scripts/lib/usage-faqs.mjs` - Form metadata pipeline
 
 **If the hook fails:**
 ```bash
@@ -311,6 +335,7 @@ Generated files were updated. Please stage them and commit again:
   git add playbook/app/pb_kits/playbook/*/kit.schema.json
   git add playbook/app/pb_kits/playbook/*/docs/_playground.json
   git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json
+  git add playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json
   git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts
 ```
 
@@ -331,7 +356,8 @@ Lower-level commands (still available under `playbook/`):
 
 1. **New component / modified props**: `yarn generate:ai-metadata` (optional `--kit=component_name`)
 2. **Global props schema only**: `yarn generate:global-props-metadata`
-3. **Update dist**: `yarn build:ai`
+3. **Global event props schema only**: `yarn generate:global-event-props-metadata`
+4. **Update dist**: `yarn build:ai`
 
 ### Dry Run
 
@@ -365,11 +391,12 @@ Optional consumer rule/skill drafts (not applied anywhere): `docs/ai/consumer/`.
 
 ### Key Fields
 
-- `props[name].type` - The prop type (`string`, `boolean`, `enum`, `function`, `ReactNode`, etc.)
+- `props[name].type` - The prop type (`string`, `boolean`, `enum`, `function`, `ReactNode`, etc.). When React and Rails types differ, this is `{ "react": "...", "rails": "..." }` instead of a single string. Use the entry for the platform you are generating.
 - `props[name].values` - Allowed values for enum types
 - `props[name].platforms` - Which platforms support this prop (`react`, `rails`)
-- `props[name].default` - Default value if any
+- `props[name].default` - Default value if any. Same `{ react, rails }` split when defaults differ.
 - `globalProps: true` - Indicates component accepts all global props
+- `globalEventProps: true` - Indicates component opts into React GlobalEventProps (see `global-event-props.schema.json`)
 - `usage.react.example` - Example React JSX (seeded from first playground preset in dist)
 - `usage.rails.example` - Example Rails ERB
 - `playgrounds/<kit>.json` - Presets, hints, conditionals, templates, structure modes
@@ -393,6 +420,7 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `scripts/generate-docs-metadata.sh` (repo root) | Shared generator for schemas, values, playgrounds |
 | `playbook/scripts/generate-ai-metadata.mjs` | Generates kit schemas from TS/Ruby source |
 | `playbook/scripts/generate-global-props-metadata.mjs` | Generates global props schema |
+| `playbook/scripts/generate-global-event-props-metadata.mjs` | Generates global event props schema |
 | `playbook/scripts/build-ai-dist.mjs` | Builds dist/ai folder (schemas + playgrounds + visual-index) |
 | `playbook/scripts/lib/slim-playground.mjs` | Slim playground transform for AI export |
 | `playbook/scripts/lib/load-menu-catalog.mjs` | menu.yml → kit descriptions/categories |
@@ -402,7 +430,111 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `playbook/app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (generated) |
 | `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json` | Generated playground configs (website + AI source) |
 | `playbook/app/pb_kits/playbook/utilities/global-props.schema.json` | Global props schema (generated) |
+| `playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json` | Global event props schema (generated) |
 | `playbook/dist/ai/*` | Distribution folder (built; published with playbook-ui) |
 | `docs/ai/consumer/*` | Rule + skill templates for Nitro / consuming apps |
 | `.husky/pre-commit` | Runs lint-staged + docs metadata verification |
 | `.git-hooks/pre_commit/verify_docs_metadata.sh` | Pre-commit verification script |
+
+## Rails form-builder contracts and usage FAQs
+
+These additions document existing behavior; they do not change kit APIs.
+
+Author shared and method-specific facts in `playbook/scripts/lib/form-contracts.mjs`.
+Author common and kit-specific FAQ questions, answers, aliases and examples in
+`playbook/scripts/lib/usage-faqs.mjs`, similarly to `visual-cues.mjs`. These are
+independent of playground presets. Source paths in contracts are package-relative.
+
+`build-ai-dist.mjs` resolves this content into:
+
+- `forms.json`: package version, metadata format version, builder setup, all
+  registered field methods, action-area methods and common FAQs.
+- `kits/<kit>.schema.json`: `form.rails.builder` with shared setup and that kit's
+  methods, plus resolved `faqs`. `all-schemas.json` contains the same additions.
+- `index.json`: `metadataVersion: 1` and `forms: "forms.json"`.
+
+The build uses Ruby’s standard-library Ripper parser (no Rails boot or added gem)
+to extract method names, exact signatures, kit mappings and source paths from
+builder registrations and implementations. Curated contracts supply behavior
+and examples, keyed by method name; they cannot override structural fields.
+
+Each method records its exact signature, kit, binding, submission, HTML option
+routing, validation, block behavior, example and source paths. Separate methods
+may map to one kit. The builder contract is Rails-only; kit prop platform lists
+and standalone `usage` remain unchanged. Method examples are the authority for
+builder questions, while `usage.rails` describes standalone kit usage.
+
+In particular, the generic Rails field wrapper passes HTML options to a Rails
+helper and supplies the result as kit content. Direct wrappers such as
+`dropdown_field` do not automatically gain model-scoped names or model values.
+Do not infer a common behavior merely because two methods share a kit prop name.
+A missing field is unknown, not unsupported. Explicit false/supported:false is a
+negative fact; conditional submission includes a `when` field.
+
+FAQ entries have stable `id`, `platforms`, `questions`, `answer`, optional
+`aliases`/`example`/`props`, and `contractPaths` pointing to resolved kit fields.
+`props` tags use canonical metadata prop names and may mention a missing prop
+when the FAQ explains the distinction between kit and builder APIs. Answers
+must agree with the referenced contract; the build checks reference existence,
+not natural-language equivalence.
+
+The build rejects missing, stale or duplicate method contracts, unknown kit
+mappings and unresolved FAQ references. Extraction follows the current explicit
+FormFieldBuilder registrations and required Ruby modules. Unsupported dynamic
+kit mappings or new registration conventions fail with an error instead of
+inventing a mapping; update the extractor when introducing a new convention.
+
+### Keeping form descriptions current
+
+`playbook/scripts/lib/form-contract-reviews.json` records reviewed SHA-256 source
+fingerprints per kit, plus a shared `builder` scope. Before cleaning or writing
+`dist/ai`, the build checks those fingerprints. Existing method behavior changes
+therefore fail generation even when the signatures and prop schemas are unchanged.
+
+Sources include each builder implementation, relevant kit Ruby/ERB/JS/TS/React
+files, form helper and validation/registry code. Cross-kit dependencies such as
+Typeahead's TextInput are listed explicitly in `form-source-reviews.mjs`; changes
+to those files flag each affected kit. Add dependency entries when new cross-kit
+behavior is introduced. New and deleted runtime files are detected. Docs, tests,
+SCSS and generated metadata are excluded. File contents are hashed conservatively
+(including comments); CRLF/LF differences are normalized.
+
+After a source change:
+
+1. Run `yarn generate:docs-metadata` from the repo root, or run
+   `node scripts/review-form-metadata.mjs` from `playbook/` for the review check alone.
+2. Read the listed changed source files. Update behavior in `form-contracts.mjs`
+   and related answers in `usage-faqs.mjs` as needed. If behavior is unchanged,
+   the review acknowledgment alone is sufficient.
+3. Acknowledge **only the scopes you reviewed**, for example from `playbook/`:
+
+   ```sh
+   node scripts/review-form-metadata.mjs --accept dropdown
+   ```
+
+4. Regenerate metadata and commit the review file with any contract/FAQ edits.
+
+The normal generator and pre-commit hooks never update fingerprints. The explicit
+review command also requires valid structural coverage and FAQ references before
+accepting a scope. Other pending scopes remain pending. This records an intentional
+review; it cannot prove that a human or agent actually reviewed the prose or that
+all semantic claims are correct.
+
+Both Husky and Overcommit trigger the metadata check for builder/helper changes,
+kit ERB/JS/TS/Ruby changes, and form-metadata source/review changes. Normal kit schema
+generation is unchanged. Consumers need only the generated JSON, not Ruby.
+
+Run from `playbook/`:
+
+```sh
+yarn build:ai
+node --test scripts/lib/form-metadata.test.mjs scripts/lib/form-source-reviews.test.mjs
+```
+
+The gem file list includes `dist/ai/**/*`; npm already includes `dist/*`. Build
+metadata as part of the release before packaging either artifact. Do not edit
+`dist/ai` or source `kit.schema.json` by hand.
+
+The lookup reference and external skill adoption instructions live in
+`docs/ai/consumer/ask-playbook/`. It returns these fields from the installed
+package only, including on older packages that lack the new form contract.

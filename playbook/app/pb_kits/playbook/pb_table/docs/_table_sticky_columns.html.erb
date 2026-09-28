@@ -1,74 +1,75 @@
 <%= pb_rails("table", props: { size: "md", responsive: "scroll", sticky_left_column: ["a"], sticky_right_column: ["b"] }) do %>
-  <thead>
-    <tr>
-      <th data-sticky-id="a">Column 1</th>
-      <th>Column 2</th>
-      <th>Column 3</th>
-      <th>Column 4</th>
-      <th>Column 5</th>
-      <th>Column 6</th>
-      <th>Column 7</th>
-      <th>Column 8</th>
-      <th>Column 9</th>
-      <th>Column 10</th>
-      <th>Column 11</th>
-      <th>Column 12</th>
-      <th>Column 13</th>
-      <th>Column 14</th>
-      <th data-sticky-id="b">Column 15</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td data-sticky-id="a">Value 1</td>
-      <td>Value 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
-      <td>Value 6</td>
-      <td>Value 7</td>
-      <td>Value 8</td>
-      <td>Value 9</td>
-      <td>Value 10</td>
-      <td>Value 11</td>
-      <td>Value 12</td>
-      <td>Value 13</td>
-      <td>Value 14</td>
-      <td data-sticky-id="b">Value 15</td>
-    </tr>
-    <tr>
-      <td data-sticky-id="a">Value 1</td>
-      <td>Value 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
-      <td>Value 6</td>
-      <td>Value 7</td>
-      <td>Value 8</td>
-      <td>Value 9</td>
-      <td>Value 10</td>
-      <td>Value 11</td>
-      <td>Value 12</td>
-      <td>Value 13</td>
-      <td>Value 14</td>
-      <td data-sticky-id="b">Value 15</td>
-    </tr>
-    <tr>
-      <td data-sticky-id="a">Value 1</td>
-      <td>Value 2</td>
-      <td>Value 3</td>
-      <td>Value 4</td>
-      <td>Value 5</td>
-      <td>Value 6</td>
-      <td>Value 7</td>
-      <td>Value 8</td>
-      <td>Value 9</td>
-      <td>Value 10</td>
-      <td>Value 11</td>
-      <td>Value 12</td>
-      <td>Value 13</td>
-      <td>Value 14</td>
-      <td data-sticky-id="b">Value 15</td>
-    </tr>
-  </tbody>
+<%= pb_rails("table/table_head") do %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_header", props: { html_options: { "data-sticky-id": "a" }, text: "Column 1" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 2" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 3" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 4" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 5" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 6" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 7" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 8" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 9" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 10" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 11" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 12" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 13" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Column 14" }) %>
+      <%= pb_rails("table/table_header", props: { html_options: { "data-sticky-id": "b" }, text: "Column 15" }) %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("table/table_body") do %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_cell", props: { html_options: { "data-sticky-id": "a" }, text: "Value 1" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 2" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 3" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 4" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 5" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 6" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 7" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 8" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 9" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 10" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 11" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 12" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 13" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 14" }) %>
+      <%= pb_rails("table/table_cell", props: { html_options: { "data-sticky-id": "b" }, text: "Value 15" }) %>
+    <% end %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_cell", props: { html_options: { "data-sticky-id": "a" }, text: "Value 1" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 2" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 3" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 4" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 5" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 6" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 7" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 8" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 9" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 10" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 11" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 12" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 13" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 14" }) %>
+      <%= pb_rails("table/table_cell", props: { html_options: { "data-sticky-id": "b" }, text: "Value 15" }) %>
+    <% end %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_cell", props: { html_options: { "data-sticky-id": "a" }, text: "Value 1" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 2" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 3" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 4" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 5" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 6" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 7" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 8" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 9" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 10" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 11" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 12" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 13" }) %>
+      <%= pb_rails("table/table_cell", props: { text: "Value 14" }) %>
+      <%= pb_rails("table/table_cell", props: { html_options: { "data-sticky-id": "b" }, text: "Value 15" }) %>
+    <% end %>
+  <% end %>
 <% end %>

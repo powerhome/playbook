@@ -169,6 +169,11 @@ ALL Playbook components accept global props for spacing, layout, and styling.
 ### React-only / Rails-only
 Check the schema's `platforms` field.
 
+### Prop type / default differences
+When `type` or `default` is `{ "react": ..., "rails": ... }`, use the value for the platform you are generating. Do not apply the React type on Rails.
+
+Example: StatValue `value` is `string | number` in React and `number` in Rails. Rails MCP/codegen must emit a number (`1048`), not a formatted string (`"2,000"`).
+
 ### Prop name differences
 Some props differ by platform (e.g. React `htmlType="submit"` → Rails `type: "submit"`). Check schema for `reactEquivalent` / `railsEquivalent` mappings.
 

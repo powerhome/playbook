@@ -67,7 +67,7 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
           </Nav>
         </Card.Body>
         <SectionSeparator dark={darkMode} />
-        {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={darkMode} />}
+        {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={darkMode} platform={platform} />}
         {!showKitTab && <GlobalProps darkMode={darkMode} platform={platform} />}
       </Card>
     </Flex>
