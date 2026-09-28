@@ -28,10 +28,18 @@ type KitSearchProps = {
   searchResetKey?: string,
 }
 
-const putPropsLast = (items: Kit[]): Kit[] => [
-  ...items.filter(({ type }) => type !== 'prop'),
-  ...items.filter(({ type }) => type === 'prop'),
-]
+const SEARCH_GROUP_ORDER: Record<string, number> = {
+  kit: 0,
+  global_prop: 1,
+  global_event_prop: 1,
+  prop: 2,
+  token: 3,
+}
+
+const searchGroupRank = ({ type }: Kit): number => SEARCH_GROUP_ORDER[type ?? ''] ?? 0
+
+const sortBySearchGroup = (items: Kit[]): Kit[] =>
+  [...items].sort((a, b) => searchGroupRank(a) - searchGroupRank(b))
 
 const normalizePropName = (name: string): string =>
   name.replace(/[_-]/g, '').toLowerCase()
@@ -76,7 +84,8 @@ const combineKitsandVisualGuidelines = (
   kits: Kit[],
   global_props_and_tokens?: Record<string, any>,
 ): Kit[] => {
-  const propItems = kits.flatMap(kitPropItems)
+  const kitItems = kits.map((kit) => ({ ...kit, type: kit.type ?? 'kit' }))
+  const propItems = kitItems.flatMap(kitPropItems)
 
   const globalPropsItems = global_props_and_tokens?.global_props?.map((item: string) => ({
     label: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
@@ -102,7 +111,10 @@ const combineKitsandVisualGuidelines = (
     type: 'global_event_prop'
   })) || []
   
-  return [...kits, ...globalPropsItems, ...globalEventPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
+  const items = [...kitItems, ...globalPropsItems, ...globalEventPropsItems, ...tokensItems, ...propItems]
+    .sort((a, b) => a.label.localeCompare(b.label))
+
+  return sortBySearchGroup(items)
 }
 
 const normalizePathForPlatform = (path: string, platform: string) => {
@@ -144,7 +156,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
   const filteredKits = useMemo(() => {
     if (!query) return kitsAndGuidelines
 
-    return putPropsLast(matchSorter(kitsAndGuidelines, query, { keys: ['label', 'searchTerms'] }))
+    return sortBySearchGroup(matchSorter(kitsAndGuidelines, query, { keys: ['label', 'searchTerms'] }))
   }, [kitsAndGuidelines, query])
 
   useEffect(() => {
@@ -178,6 +190,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
   }
 
   const SEARCH_TYPE_BADGES: Record<string, string> = {
+    kit: 'Component',
     global_prop: 'Global Prop',
     global_event_prop: 'Global Event Prop',
     token: 'Token',
