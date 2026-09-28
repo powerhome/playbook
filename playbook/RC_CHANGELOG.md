@@ -1,3 +1,31 @@
+# ✨ 18.1.0.pre.rc.0
+
+##### September 25, 2026
+
+[18.1.0-rc.0](https://github.com/powerhome/playbook/tree/18.1.0-rc.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Forms: Ensure That Formbuilder Passes Down Input_options to All Kits Properly [\#6676](https://github.com/powerhome/playbook/pull/6676) ([nidaqg](https://github.com/nidaqg))
+- Pill Kit: Notification Variant Style Matching to Badge [\#6646](https://github.com/powerhome/playbook/pull/6646) ([nickamantia](https://github.com/nickamantia))
+- Global Event Props: Onclick Prop (React-Only) [\#6642](https://github.com/powerhome/playbook/pull/6642) ([kangaree](https://github.com/kangaree))
+- Pagination Kit: Align React and Rails Styling [\#6641](https://github.com/powerhome/playbook/pull/6641) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Rails Dynamic Options and Event Integration + React Hook Form Support for React [\#6609](https://github.com/powerhome/playbook/pull/6609) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Add Cache Mode to Github Actions [\#6684](https://github.com/powerhome/playbook/pull/6684) ([nidaqg](https://github.com/nidaqg))
+- Metadata: Forms, Rules, Configs [\#6681](https://github.com/powerhome/playbook/pull/6681) ([nidaqg](https://github.com/nidaqg))
+- Update Dependency Puma to V7 [security] [\#6560](https://github.com/powerhome/playbook/pull/6560) ([renovate[bot]](https://github.com/renovate[bot]))
+
+**Fixed Bugs:**
+
+- Border Radius Global Prop: Fix Conflict With Background_light [\#6655](https://github.com/powerhome/playbook/pull/6655) ([kangaree](https://github.com/kangaree))
+- Passphrase Kit: Disable Eye Icon When Disabled: React & Rails [\#6635](https://github.com/powerhome/playbook/pull/6635) ([kangaree](https://github.com/kangaree))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.0.0...18.1.0-rc.0)
+
 # ✨ 17.2.0.pre.rc.3
 
 ##### September 04, 2026
