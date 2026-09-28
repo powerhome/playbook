@@ -16,6 +16,30 @@ test('should render classname', () => {
   expect(kit).toHaveClass('pb_pill_kit_neutral_lowercase')
 })
 
+test('displays children when text is omitted', () => {
+  render(
+    <Pill data={{ testid: testId }}>
+      <span>icon</span>
+    </Pill>
+  )
+
+  expect(screen.getByText('icon')).toBeInTheDocument()
+})
+
+test('text takes precedence over children', () => {
+  render(
+    <Pill
+        data={{ testid: testId }}
+        text="label"
+    >
+      <span>icon</span>
+    </Pill>
+  )
+
+  expect(screen.getByText('label')).toBeInTheDocument()
+  expect(screen.queryByText('icon')).not.toBeInTheDocument()
+})
+
 test('displays text content', () => {
   render(
     <Pill
