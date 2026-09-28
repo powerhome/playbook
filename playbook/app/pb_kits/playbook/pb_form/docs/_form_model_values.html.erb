@@ -1,0 +1,43 @@
+<%
+  load Playbook.kit_path("form", "docs", "_sample_data.ruby").to_s
+
+  dropdown_options = [
+    { label: "Open", value: "open", id: "status-open" },
+    { label: "Closed", value: "closed", id: "status-closed" },
+  ]
+
+  example_model = Class.new do
+    include ActiveModel::Model
+    attr_accessor :name, :spots, :starts_at, :ends_at, :status, :phone
+
+    def self.name
+      "Example"
+    end
+  end.new(
+    name: "Gary 🎉",
+    spots: 42,
+    starts_at: Time.utc(2026, 8, 22, 19, 37, 0),
+    ends_at: Time.utc(2026, 8, 20, 23, 59, 0),
+    status: "open",
+    phone: "+15551234567"
+  )
+  example_model.errors.add(:name, "cannot contain emoji")
+  example_model.errors.add(:spots, "must be 20 or fewer")
+  example_model.errors.add(:starts_at, "must be before ends at")
+%>
+
+<%= pb_rails("card", props: PlaybookFormDocsSampleData.demo_form_card_props) do %>
+  <%= pb_form_with(model: example_model, method: :get, url: "", html: { onsubmit: "return false;" }) do |form| %>
+    <%= form.text_field :name, props: { label: true } %>
+    <%= form.number_field :spots, props: { label: true } %>
+    <%= form.date_picker :starts_at, props: { label: true } %>
+    <%= form.date_picker :ends_at, props: { label: true } %>
+    <%= form.dropdown_field :status, props: { label: true, options: dropdown_options } %>
+    <%= form.phone_number_field :phone, props: { label: true } %>
+
+    <%= form.actions do |action| %>
+      <%= action.submit %>
+      <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+    <% end %>
+  <% end %>
+<% end %>
