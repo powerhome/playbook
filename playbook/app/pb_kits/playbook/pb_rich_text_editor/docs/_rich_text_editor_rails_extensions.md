@@ -5,3 +5,5 @@ The Rails kit accepts a closed list of string extension names: `underline`, `tex
 The image control prompts for an external image URL and inserts it into the document. It does not upload files or integrate with an asset pipeline.
 
 `simple: true` hides these toolbar controls even when `extensions` is set, while enabled schemas continue to parse their existing HTML.
+
+**Note**: This is not the same as React’s extensions prop, which takes toolbar menu item objects for the ellipsis dropdown. On Rails, pass only the allowlisted strings above.
