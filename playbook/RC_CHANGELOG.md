@@ -9,12 +9,11 @@
 **Kit Enhancements:**
 
 - Pill Kit: Accepts Children [\#6698](https://github.com/powerhome/playbook/pull/6698) ([nidaqg](https://github.com/nidaqg))
-- Poc: Responsive Filter- Rails and React [\#6680](https://github.com/powerhome/playbook/pull/6680) ([kangaree](https://github.com/kangaree))
+- Responsive Filter Kit: Rails and React [\#6680](https://github.com/powerhome/playbook/pull/6680) ([kangaree](https://github.com/kangaree))
 
 **Improvements:**
 
 - Upgrades Playbook Icons [\#6702](https://github.com/powerhome/playbook/pull/6702) ([ElisaShapiro](https://github.com/ElisaShapiro))
-- Update Rc_changelog.md With Image [\#6700](https://github.com/powerhome/playbook/pull/6700) ([nidaqg](https://github.com/nidaqg))
 - Bump Activestorage from 7.2.3 to 7.2.3.2 In /playbook [\#6696](https://github.com/powerhome/playbook/pull/6696) ([dependabot[bot]](https://github.com/dependabot[bot]))
 
 **Fixed Bugs:**
