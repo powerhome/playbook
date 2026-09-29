@@ -5,6 +5,7 @@ import { useDarkMode } from '../contexts/DarkModeContext'
 
 type Kit = {
   label: string,
+  path?: string,
   platforms?: string[],
   props?: KitProp[],
   searchTerms?: string[],
@@ -83,10 +84,11 @@ const kitPropItems = (kit: Kit): Kit[] => {
 
   return Array.from(propsByName.values()).map(({ name, platforms, searchTerms }) => ({
     label: `${name} (${kit.label})`,
+    path: kit.value,
     platforms: Array.from(platforms),
     searchTerms: Array.from(searchTerms),
     type: 'prop',
-    value: kit.value,
+    value: `${kit.value}#${name}`,
   }))
 }
 
@@ -163,6 +165,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
   )
   const { darkMode } = useDarkMode()
   const [query, setQuery] = useState('')
+  const [selectionReset, setSelectionReset] = useState(0)
   const filteredKits = useMemo(() => {
     if (!query) return kitsAndGuidelines
 
@@ -187,17 +190,20 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
   }, [ id ])
 
   const handleChange = (selection: Kit | null) => {
-    if (selection) {
-      const selectedPlatform = selection.type === 'prop' && selection.platforms?.length === 1
-        ? selection.platforms[0]
-        : platform
-      const nextPath = normalizePathForPlatform(selection.value, selectedPlatform)
+    if (!selection) return
 
-      if (onNavigate) {
-        onNavigate(nextPath)
-      } else {
-        window.location.href = nextPath
-      }
+    const selectedPlatform = selection.type === 'prop' && selection.platforms?.length === 1
+      ? selection.platforms[0]
+      : platform
+    const nextPath = normalizePathForPlatform(selection.path ?? selection.value, selectedPlatform)
+
+    setQuery('')
+    setSelectionReset((count) => count + 1)
+
+    if (onNavigate) {
+      onNavigate(nextPath)
+    } else {
+      window.location.href = nextPath
     }
   }
 
@@ -247,7 +253,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
 
   return (
       <Typeahead
-        key={`${id}__${searchResetKey ?? ''}`}
+        key={`${id}__${searchResetKey ?? ''}__${selectionReset}`}
         className={classname}
         dark={darkMode}
         filterOption={() => true}
