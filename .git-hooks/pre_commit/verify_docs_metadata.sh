@@ -17,7 +17,7 @@ if [ -z "$STAGED_FILES" ]; then
 fi
 
 if ! echo "$STAGED_FILES" | grep -Eq \
-  'playbook/app/pb_kits/playbook/(pb_[^/]+/.+\.(tsx|ts|rb)|utilities/globalProps\.ts|types/[^/]+\.ts|tokens/_(spacing|screen_sizes)\.scss|pb_[^/]+/kit\.schema\.json|pb_[^/]+/docs/_playground\.overrides\.json)'; then
+  'playbook/app/pb_kits/playbook/(pb_[^/]+/.+\.(tsx|ts|jsx|js|rb|erb)|utilities/globalProps\.ts|types/[^/]+\.ts|tokens/_(spacing|screen_sizes)\.scss|pb_[^/]+/kit\.schema\.json|pb_[^/]+/docs/_playground\.overrides\.json)|playbook/lib/playbook/(forms/|pb_forms[^/]*\.rb|kit_base\.rb)|playbook/scripts/(build-ai-dist\.mjs|review-form-metadata\.mjs|lib/(.*form.*|usage-faqs\.mjs))'; then
   exit 0
 fi
 

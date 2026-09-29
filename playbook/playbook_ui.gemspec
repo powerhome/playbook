@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/*.rb",
     "lib/playbook/**/*",
     "dist/chunks/*",
+    "dist/ai/**/*",
     "dist/playbook.css",
     "dist/reset.css",
     "dist/playbook-rails.js",
