@@ -1,4 +1,8 @@
 {
+  "children": {
+    "editable": true,
+    "default": "<Flex alignItems=\"center\">\n  <Title color=\"success\" size={4} tag=\"div\" text=\"Complete\" />\n  <Icon color=\"success\" icon=\"check\" size=\"sm\" />\n</Flex>"
+  },
   "defaults": {
     "text": "neutral",
     "variant": "neutral",
@@ -70,6 +74,14 @@
         "textTransform": "none"
       },
       "children": ""
+    },
+    {
+      "name": "Children",
+      "props": {
+        "variant": "success",
+        "textTransform": "none"
+      },
+      "children": "<Flex alignItems=\"center\">\n  <Title color=\"success\" size={4} tag=\"div\" text=\"Complete\" />\n  <Icon color=\"success\" icon=\"check\" size=\"sm\" />\n</Flex>"
     }
   ],
   "conditionals": {},
@@ -82,6 +94,11 @@
     "notification": {
       "when": {},
       "message": "notification uses a solid primary fill by default. set variant to error for the red treatment.",
+      "type": "info"
+    },
+    "text": {
+      "presetName": "Children",
+      "message": "Clear text to render children. Passing text replaces children.",
       "type": "info"
     },
     "text_transform": {
