@@ -48,6 +48,13 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       )
     end
 
+    it "exports the full async default option" do
+      option = { id: 42, label: "Ada", department_id: 7 }
+      expect(subject.new(async: true, default_value: option).data[:pb_dropdown_default_value]).to eq(option.to_json)
+      expect(subject.new(async: true, multi_select: true, default_value: [option]).data[:pb_dropdown_default_value]).to eq([option].to_json)
+      expect(subject.new(default_value: option).data).not_to have_key(:pb_dropdown_default_value)
+    end
+
     it "exports custom search timing" do
       expect(subject.new(async: true, search_term_minimum_length: 1, search_debounce_timeout: 100).data).to include(
         pb_dropdown_search_term_minimum_length: 1,

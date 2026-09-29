@@ -136,6 +136,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   asyncRequestId = 0;
+  selectedOptionJson = null;
   selectedOptions = new Set();
   clearBtn = null;
 
@@ -701,9 +702,11 @@ export default class PbDropdown extends PbEnhancedElement {
 
       const value = option.dataset.dropdownOptionLabel;
       if (this.isMultiSelect) {
-        const alreadySelected = this.selectedOptions.has(value);
-        if (alreadySelected) {
-          this.selectedOptions.delete(value);
+        const selected = Array.from(this.selectedOptions).find((raw) =>
+          String(JSON.parse(raw).id) === String(JSON.parse(value).id),
+        );
+        if (selected) {
+          this.selectedOptions.delete(selected);
         } else {
           this.selectedOptions.add(value);
         }
@@ -804,10 +807,13 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   buildAsyncOptionElement(result) {
-    if (result.option && (result.content instanceof Element || result.content instanceof DocumentFragment)) {
-      return this.buildOptionElement(result.option, result.content);
+    const richContent = result.option && (result.content instanceof Element || result.content instanceof DocumentFragment);
+    const option = this.buildOptionElement(richContent ? result.option : result, richContent ? result.content : null);
+    const id = JSON.parse(option.dataset.dropdownOptionLabel).id;
+    if (this.isMultiSelect && Array.from(this.selectedOptions).some((raw) => String(JSON.parse(raw).id) === String(id))) {
+      option.style.display = "none";
     }
-    return this.buildOptionElement(result);
+    return option;
   }
 
   buildOptionElement(option, content) {
@@ -894,7 +900,7 @@ export default class PbDropdown extends PbEnhancedElement {
       try {
         const optionData = JSON.parse(opt.dataset.dropdownOptionLabel);
         if (optionData?.id != null) {
-          optionsById.set(optionData.id, opt);
+          optionsById.set(String(optionData.id), opt);
         }
       } catch {
         // ignore invalid option payloads
@@ -910,7 +916,7 @@ export default class PbDropdown extends PbEnhancedElement {
             return null;
           }
         })
-        .filter((id) => id != null && optionsById.has(id));
+        .filter((id) => id != null && optionsById.has(String(id)));
 
       if (keptIds.length === 0) {
         this.clearSelection();
@@ -1000,7 +1006,7 @@ export default class PbDropdown extends PbEnhancedElement {
     const optionEls = Array.from(this.queryAllOptions());
     const selectedOption = optionEls.find((opt) => {
       try {
-        return JSON.parse(opt.dataset.dropdownOptionLabel).id === optionId;
+        return String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === String(optionId);
       } catch {
         return false;
       }
@@ -1011,7 +1017,8 @@ export default class PbDropdown extends PbEnhancedElement {
     optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
     selectedOption.classList.add("pb_dropdown_option_selected");
     if (hiddenInput) hiddenInput.value = optionId;
-    const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
+    this.selectedOptionJson = selectedOption.dataset.dropdownOptionLabel;
+    const optionData = JSON.parse(this.selectedOptionJson);
     const customDisplayElement = this.element.querySelector(
       '[data-dropdown-trigger-custom-display]',
     );
@@ -1071,7 +1078,7 @@ export default class PbDropdown extends PbEnhancedElement {
     optionIds.forEach((id) => {
       const opt = optionEls.find((o) => {
         try {
-          return JSON.parse(o.dataset.dropdownOptionLabel).id === id;
+          return String(JSON.parse(o.dataset.dropdownOptionLabel).id) === String(id);
         } catch {
           return false;
         }
@@ -1122,14 +1129,8 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.isMultiSelect) {
       detail = Array.from(this.selectedOptions).map(JSON.parse);
     } else {
-      const hiddenInput = this.baseInput;
-      detail = hiddenInput.value
-        ? JSON.parse(
-            (this.target || this.element).querySelector(
-              OPTION_SELECTOR +
-                `[data-dropdown-option-label*='"id":"${hiddenInput.value}"']`,
-            ).dataset.dropdownOptionLabel,
-          )
+      detail = this.baseInput.value && this.selectedOptionJson
+        ? JSON.parse(this.selectedOptionJson)
         : null;
     }
     this.element.setAttribute("data-option-selected", JSON.stringify(detail));
@@ -1142,6 +1143,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   onOptionSelected(value, selectedOption) {
+    if (!this.isMultiSelect) this.selectedOptionJson = value;
     if (this.isAsync) this.cancelAsyncSearch();
     const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
     const customDisplayElement = this.element.querySelector(
@@ -1152,7 +1154,6 @@ export default class PbDropdown extends PbEnhancedElement {
       if (!this.isMultiSelect) {
         const selectedLabel = JSON.parse(value).label;
         triggerElement.textContent = selectedLabel;
-        this.emitSelectionChange();
 
         // Handle quickpick variant: populate start/end date hidden inputs
         const optionData = JSON.parse(value);
@@ -1239,7 +1240,6 @@ export default class PbDropdown extends PbEnhancedElement {
     const autocompleteInput = this.element.querySelector(SEARCH_INPUT_SELECTOR);
     if (autocompleteInput && !this.isMultiSelect) {
       autocompleteInput.value = JSON.parse(value).label;
-      this.emitSelectionChange();
     }
 
     const shouldCloseOnOptionSelect =
@@ -1251,7 +1251,6 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const options = this.queryAllOptions();
     if (this.isMultiSelect) {
-      this.emitSelectionChange();
       Array.from(this.selectedOptions).map((option) => {
         if (
           JSON.parse(option).id ===
@@ -1273,6 +1272,7 @@ export default class PbDropdown extends PbEnhancedElement {
       selectedOption.classList.add("pb_dropdown_option_selected");
     }
     this.updateClearButton();
+    this.emitSelectionChange();
   }
 
   showElement(elem) {
@@ -1408,6 +1408,15 @@ export default class PbDropdown extends PbEnhancedElement {
     const optionEls = Array.from(
       this.queryAllOptions(),
     );
+    // Async defaults may not appear in the first remote result page.
+    if (this.isAsync && this.element.dataset.pbDropdownDefaultValue) {
+      const defaults = JSON.parse(this.element.dataset.pbDropdownDefaultValue);
+      (this.isMultiSelect ? defaults : [defaults]).forEach((option) => {
+        if (!optionEls.some((opt) => String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === String(option.id))) {
+          optionEls.push(this.buildOptionElement(option));
+        }
+      });
+    }
     const defaultValue = hiddenInput.dataset.defaultValue || "";
     if (!defaultValue) return;
 
@@ -1416,7 +1425,7 @@ export default class PbDropdown extends PbEnhancedElement {
       ids.forEach((id) => {
         const selectedOption = optionEls.find((opt) => {
           try {
-            return JSON.parse(opt.dataset.dropdownOptionLabel).id === id;
+            return String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === String(id);
           } catch {
             return false;
           }
@@ -1441,7 +1450,7 @@ export default class PbDropdown extends PbEnhancedElement {
       const selectedOption = optionEls.find((opt) => {
         try {
           return (
-            JSON.parse(opt.dataset.dropdownOptionLabel).id === defaultValue
+            String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === defaultValue
           );
         } catch {
           return false;
@@ -1450,7 +1459,8 @@ export default class PbDropdown extends PbEnhancedElement {
       if (!selectedOption) return;
 
       selectedOption.classList.add("pb_dropdown_option_selected");
-      const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
+      this.selectedOptionJson = selectedOption.dataset.dropdownOptionLabel;
+      const optionData = JSON.parse(this.selectedOptionJson);
       this.setTriggerElementText(optionData.label);
 
       // Autocomplete trigger has no [data-dropdown-trigger-display]; set the input value instead
@@ -1524,6 +1534,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   resetDropdownValue() {
+    this.selectedOptionJson = null;
     if (this.isAsync) this.cancelAsyncSearch();
     const hiddenInput = this.baseInput;
     const options = this.queryAllOptions();
@@ -1615,10 +1626,8 @@ export default class PbDropdown extends PbEnhancedElement {
         const id = pill.dataset.pillId;
         this.selectedOptions.delete(option);
 
-        const optEl = (this.target || this.element).querySelector(
-          `${OPTION_SELECTOR}[data-dropdown-option-label*='"id":${JSON.stringify(
-            id,
-          )}']`,
+        const optEl = Array.from(this.queryAllOptions()).find((opt) =>
+          String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === id,
         );
         if (optEl) {
           optEl.style.display = "";
@@ -1741,7 +1750,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.selectedOptions.forEach((raw) => {
       const optionData = JSON.parse(raw);
       // Use id if available, otherwise fall back to value
-      const id = optionData.id || optionData.value;
+      const id = optionData.id ?? optionData.value;
       const inp = document.createElement("input");
       inp.type = "hidden";
       inp.name = name;
@@ -1766,6 +1775,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleBackspaceClear() {
     if (!this.isMultiSelect) {
+      this.selectedOptionJson = null;
       this.queryAllOptions().forEach((opt) => {
         opt.classList.remove("pb_dropdown_option_selected");
         opt.style.display = "";
@@ -1784,7 +1794,9 @@ export default class PbDropdown extends PbEnhancedElement {
         const optValue = opt.dataset.dropdownOptionLabel;
         if (
           this.selectedOptions.size > 0 &&
-          this.selectedOptions.has(optValue)
+          Array.from(this.selectedOptions).some((raw) =>
+            String(JSON.parse(raw).id) === String(JSON.parse(optValue).id),
+          )
         ) {
           opt.style.display = "none";
         } else {

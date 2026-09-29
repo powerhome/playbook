@@ -75,6 +75,7 @@ module Playbook
         Hash(prop(:data)).merge(
           pb_dropdown: true,
           pb_dropdown_async: async,
+          pb_dropdown_default_value: async && default_value.present? ? default_value.to_json : nil,
           pb_dropdown_search_term_minimum_length: async ? search_term_minimum_length : nil,
           pb_dropdown_search_debounce_timeout: async ? search_debounce_timeout : nil,
           pb_dropdown_multi_select: multi_select,

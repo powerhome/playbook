@@ -592,6 +592,100 @@ describe("PbDropdown async search", () => {
     expect(instance.queryAllOptions()[0].querySelector("strong")).toBeNull();
   });
 
+  test.each([42, 0, 'user\'"[42]'])("selection preserves full data for id %p", (id) => {
+    const option = {
+      id, label: "Ada", value: "employee", department_id: 7,
+      address: { city: "Austin", unit: null }, roles: ["admin", "user"], active: false,
+    };
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([option]);
+    const selected = jest.fn();
+    root.addEventListener("pb:dropdown:selected", selected);
+    instance.queryAllOptions()[0].click();
+    expect(selected).toHaveBeenCalledTimes(1);
+    expect(selected.mock.calls[0][0].detail).toEqual(option);
+    expect(instance.baseInput.value).toBe(String(id));
+    expect(JSON.parse(root.dataset.optionSelected)).toEqual(option);
+
+    // Event consumers must not mutate the kit's retained selection.
+    selected.mock.calls[0][0].detail.address.city = "Changed";
+    type("another");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[1][0].detail.setResults([]);
+    instance.emitSelectionChange();
+    expect(selected.mock.calls[selected.mock.calls.length - 1][0].detail).toEqual(option);
+    instance.clearSelection();
+    expect(selected.mock.calls[selected.mock.calls.length - 1][0].detail).toBeNull();
+  });
+
+  test("external selection accepts a string id for a numeric option without changing its payload", () => {
+    const option = { id: 42, label: "Ada", value: 42, department_id: 7 };
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([option]);
+    const selected = jest.fn();
+    root.addEventListener("pb:dropdown:selected", selected);
+    document.dispatchEvent(new CustomEvent("pb:dropdown:select", {
+      detail: { dropdownId: root.id, optionId: "42" },
+    }));
+    expect(input.value).toBe("Ada");
+    expect(selected.mock.calls[0][0].detail).toEqual(option);
+  });
+
+  test.each([false, true])("async defaults retain their payload without rendered options (multi: %p)", (multi) => {
+    instance.disconnect();
+    const option = { id: 42, label: "Existing user", value: 42, department_id: 7 };
+    root.dataset.pbDropdownMultiSelect = String(multi);
+    root.dataset.pbDropdownDefaultValue = JSON.stringify(multi ? [option] : option);
+    root.querySelector("[data-dropdown-selected-option]").dataset.defaultValue = "42";
+    instance = new PbDropdown(root);
+    instance.connect();
+    const selected = jest.fn();
+    root.addEventListener("pb:dropdown:selected", selected);
+    instance.emitSelectionChange();
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(selected.mock.calls[0][0].detail).toEqual(multi ? [option] : option);
+    if (multi) {
+      expect(root.querySelector("input[data-generated]").value).toBe("42");
+    } else {
+      expect(input.value).toBe("Existing user");
+      expect(instance.baseInput.value).toBe("42");
+    }
+  });
+
+  test("multi-select retains complete selections across searches and matches repeated results by id", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownMultiSelect = "true";
+    const pills = document.createElement("div");
+    pills.setAttribute("data-dropdown-pills-wrapper", "");
+    root.appendChild(pills);
+    instance = new PbDropdown(root);
+    instance.connect();
+    const first = { id: 0, label: "Ada", value: "not-the-id", department_id: 7 };
+    const second = { id: 43, label: "Grace", value: 43, address: { city: "Boston" } };
+    const selected = jest.fn();
+    root.addEventListener("pb:dropdown:selected", selected);
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([first]);
+    instance.queryAllOptions()[0].click();
+    expect(root.querySelector("input[data-generated]").value).toBe("0");
+
+    type("grace");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[1][0].detail.setResults([{ ...first, label: "Ada updated" }, second]);
+    expect(instance.queryAllOptions()[0].style.display).toBe("none");
+    instance.queryAllOptions()[1].click();
+    expect(selected.mock.calls[selected.mock.calls.length - 1][0].detail).toEqual([first, second]);
+    expect(pills.querySelectorAll("[data-pill-id]")).toHaveLength(2);
+    expect(instance.queryAllOptions()[0].style.display).toBe("none");
+
+    pills.querySelector(".pb_form_pill_close").click();
+    expect(selected.mock.calls[selected.mock.calls.length - 1][0].detail).toEqual([second]);
+    expect(instance.queryAllOptions()[0].style.display).toBe("");
+  });
+
   test("disabled dropdowns do not search", () => {
     instance.isDisabled = true;
     type("abc");

@@ -61,6 +61,11 @@ export const KIT_USAGE_FAQS = {
     answer: 'Enable async with autocomplete or searchbar. The bubbling pb:dropdown:search event exposes searchingFor, setResults(options), and setError(). The kit debounces searches (search_debounce_timeout defaults to 250ms), requires search_term_minimum_length characters (default 3), and manages loading, empty results, errors and stale callbacks. Consumers fetch and map standard option objects or rich { option, content } entries, where content is an Element or DocumentFragment cloned into the option wrapper and option retains serializable selection data. Results bypass local label filtering. The typed query is not submitted by the Dropdown selected-id input. Keep a separate application field when free text must be submitted.',
     props: ['async', 'autocomplete', 'searchbar', 'searchTermMinimumLength', 'searchDebounceTimeout'],
   }, {
+    id: 'dropdown.async-selection-data', platforms: ['rails'],
+    questions: ['Does async Dropdown preserve custom selection fields?', 'Can an async Dropdown have a default before options load?'],
+    answer: 'pb:dropdown:selected emits the complete serializable option object (an array for multi_select, null or [] when cleared), preserving custom fields and numeric IDs. Form input values are strings. Selected data is retained when remote results change; matching multi-select IDs remain hidden even if new result metadata differs. Pass an explicit default_value option object or array with id and label to initialize async selection with options: []. The builder cannot infer that payload from an unmatched model ID.',
+    props: ['async', 'defaultValue', 'multiSelect'],
+  }, {
     id: 'dropdown.react-form-libraries', platforms: ['react'],
     questions: ['Can I use Dropdown with react-hook-form?', 'Does the React Dropdown submit a value?'],
     answer: 'Spread register("country") onto Dropdown. It accepts name and onChange, and calls onChange with { target: { name, value } } in addition to any onSelect. value is the selected option object, an array for multiSelect and null or [] when cleared, so read value.value in form state. The ref from register resolves to the kit imperative handle, not an input, and no named input is rendered; the React kit has no native form submission.',
