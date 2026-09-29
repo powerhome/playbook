@@ -118,6 +118,19 @@
       ],
       "default": false
     },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
     "onSelect": {
       "type": "function",
       "platforms": [
@@ -200,12 +213,6 @@
       ],
       "default": false
     },
-    "name": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
-    },
     "required": {
       "platforms": [
         "rails"
@@ -249,6 +256,33 @@
       "default": "end_date_name"
     },
     "customEventType": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
+    "optionsByContext": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "GenericObject"
+    },
+    "contextSelector": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
+    "clearOnContextChange": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": true
+    },
+    "optionsEventType": {
       "platforms": [
         "rails"
       ],

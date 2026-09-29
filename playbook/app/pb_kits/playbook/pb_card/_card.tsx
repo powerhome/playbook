@@ -7,6 +7,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import type { ProductColors, CategoryColors, BackgroundColors, StatusColors } from '../types/colors'
 
 import Icon from '../pb_icon/_icon'
@@ -34,7 +35,7 @@ type CardPropTypes = {
   padding?: string,
   selected?: boolean,
   tag?: "div" | "section" | "footer" | "header" | "article" | "aside" | "main" | "nav",
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 type CardHeaderProps = {
   headerColor?: BackgroundColors | ProductColors | CategoryColors | StatusColors | "none",
@@ -156,6 +157,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
             {...dataProps}
             className={classnames(cardCss, globalProps(props), className)}
             {...restHtmlProps}
+            {...globalEventProps(props)}
             style={mergedStyles}
         >
           {subComponentTags('Header')}
@@ -185,6 +187,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
               {...dataProps}
               className={classnames(cardCss, globalProps(props), className)}
               {...restHtmlProps}
+              {...globalEventProps(props)}
               style={mergedStyles}
             >
               {subComponentTags('Header')}
