@@ -41,8 +41,14 @@ const searchGroupRank = ({ type }: Kit): number => SEARCH_GROUP_ORDER[type ?? ''
 const sortBySearchGroup = (items: Kit[]): Kit[] =>
   [...items].sort((a, b) => searchGroupRank(a) - searchGroupRank(b))
 
+const stripPropSeparators = (value: string): string =>
+  value.replace(/[_-]/g, '')
+
 const normalizePropName = (name: string): string =>
-  name.replace(/[_-]/g, '').toLowerCase()
+  stripPropSeparators(name).toLowerCase()
+
+const normalizedSearchTerms = (item: Kit): string[] =>
+  (item.searchTerms ?? []).map(stripPropSeparators)
 
 const kitPropBadge = (platforms: string[]): string => {
   const supportsReact = platforms.includes('react')
@@ -156,7 +162,13 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
   const filteredKits = useMemo(() => {
     if (!query) return kitsAndGuidelines
 
-    return sortBySearchGroup(matchSorter(kitsAndGuidelines, query, { keys: ['label', 'searchTerms'] }))
+    // kit.schema.json stores camelCase. Rails queries use snake_case.
+    // Drop the same separators normalizePropName ignores so both match.
+    const searchableQuery = stripPropSeparators(query) || query
+
+    return sortBySearchGroup(matchSorter(kitsAndGuidelines, searchableQuery, {
+      keys: ['label', normalizedSearchTerms],
+    }))
   }, [kitsAndGuidelines, query])
 
   useEffect(() => {
