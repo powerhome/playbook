@@ -106,7 +106,7 @@ module Playbook
 
       def collapse_class
         effective_collapse = variant == "with_filter" && collapse == "sm" ? "md" : collapse
-        responsive != "none" ? "table-collapse-#{effective_collapse}" : ""
+        responsive == "collapse" ? "table-collapse-#{effective_collapse}" : ""
       end
 
       def sticky_class
