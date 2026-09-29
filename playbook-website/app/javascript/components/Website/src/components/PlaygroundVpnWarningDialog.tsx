@@ -58,6 +58,9 @@ const PlaygroundVpnWarningDialog = () => {
     checkingRef.current = true
     setChecking(true)
     const reachable = await stagingIsReachable()
+    // Escape / the header close control calls goBack while this is in flight
+    // and clears the ref. Confirm stays disabled, but that close path does not.
+    if (!checkingRef.current) return
     if (!reachable) {
       checkingRef.current = false
       setChecking(false)

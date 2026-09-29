@@ -5,7 +5,7 @@ import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 import { OtherNavItems } from "./NavComponents/OtherNavComponent";
 import { CollapsedHoverNav } from "./CollapsedHoverNav";
-import { navigateSite } from "../../utils/siteNavigation";
+import { navigateSite, STAGING_CACHE_BUST_PARAM } from "../../utils/siteNavigation";
 
 export const TopLevelNavItem = ({
   dark,
@@ -64,13 +64,25 @@ export const TopLevelNavItem = ({
     return () => clearCloseTimeout();
   }, []);
 
+  // Ignore the session cache-bust param so /playground?_pb=… still counts as Playground.
+  // Otherwise this equality check treats that URL as a different page and a click
+  // navigates to the bare path.
+  const withoutCacheBust = (url: string) => {
+    const queryIndex = url.indexOf("?");
+    if (queryIndex === -1) return url;
+    const params = new URLSearchParams(url.slice(queryIndex + 1));
+    params.delete(STAGING_CACHE_BUST_PARAM);
+    const search = params.toString();
+    return `${url.slice(0, queryIndex)}${search ? `?${search}` : ""}`;
+  };
+
   //logic to make it so no navigation if already on that page(prevent unneeded rerenders)
   const TopLevelLink = (link) => {
     if (link === "/kits") {
       const kitsLink = `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
       return currentURL === kitsLink ? "" : kitsLink;
     } else {
-      return currentURL === link ? "" : link;
+      return withoutCacheBust(currentURL) === link ? "" : link;
     }
   };
 

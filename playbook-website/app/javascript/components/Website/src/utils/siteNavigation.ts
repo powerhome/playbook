@@ -14,9 +14,10 @@ const isPlaygroundPath = (path: string) => {
 }
 
 /**
- * New cache key for this staging URL. A browser stores a 404 against the exact
- * URL, and a refresh replays it; `_pb` stays on the URL so that refresh does
- * not fall back onto the poisoned key.
+ * New cache key for a first hop onto staging. A browser stores a 404 against
+ * the exact URL; this param is a different key. In-app navigations must keep
+ * the same value (see `appendSessionCacheBust`) so they do not fall back to
+ * the bare path.
  */
 export const withStagingCacheBust = (url: string) => {
   const parsed = new URL(
@@ -60,6 +61,20 @@ export const stagingIsReachable = async () => {
 export const isProductionHost = () =>
   typeof window !== "undefined" && window.location.hostname === PROD_HOST
 
+/** Keep the session `_pb` on same-host staging paths so the address bar never returns to the cached bare URL. */
+const appendSessionCacheBust = (path: string) => {
+  if (typeof window === "undefined" || !isStagingHost()) return path
+
+  const current = new URLSearchParams(window.location.search).get(STAGING_CACHE_BUST_PARAM)
+  if (!current) return path
+
+  const parsed = new URL(path, window.location.origin)
+  if (!parsed.searchParams.has(STAGING_CACHE_BUST_PARAM)) {
+    parsed.searchParams.set(STAGING_CACHE_BUST_PARAM, current)
+  }
+  return `${parsed.pathname}${parsed.search}${parsed.hash}`
+}
+
 /** Absolute href when leaving the current host; otherwise the relative path. */
 export const siteHref = (path: string) => {
   const normalized = normalizePath(path)
@@ -74,7 +89,7 @@ export const siteHref = (path: string) => {
     return `${PROD_ORIGIN}${normalized}`
   }
 
-  return normalized
+  return appendSessionCacheBust(normalized)
 }
 
 export const PLAYGROUND_VPN_WARNING_EVENT = "pb-playground-vpn-warning"
@@ -130,6 +145,11 @@ export const navigateSite = (navigate: (to: string) => void, path: string) => {
   if (href.startsWith("http")) {
     window.location.assign(href)
     return
+  }
+
+  if (typeof window !== "undefined") {
+    const current = `${window.location.pathname}${window.location.search}${window.location.hash}`
+    if (href === current) return
   }
 
   navigate(href)
