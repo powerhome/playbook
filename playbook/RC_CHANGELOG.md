@@ -1,3 +1,30 @@
+# ✨ 18.1.0.pre.rc.3
+
+##### September 29, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.1.0-rc.3](https://github.com/powerhome/playbook/tree/18.1.0-rc.3) full list of changes:
+
+**Kit Enhancements:**
+
+- Pill Kit: Accepts Children [\#6698](https://github.com/powerhome/playbook/pull/6698) ([nidaqg](https://github.com/nidaqg))
+- Poc: Responsive Filter- Rails and React [\#6680](https://github.com/powerhome/playbook/pull/6680) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Upgrades Playbook Icons [\#6702](https://github.com/powerhome/playbook/pull/6702) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Update Rc_changelog.md With Image [\#6700](https://github.com/powerhome/playbook/pull/6700) ([nidaqg](https://github.com/nidaqg))
+- Bump Activestorage from 7.2.3 to 7.2.3.2 In /playbook [\#6696](https://github.com/powerhome/playbook/pull/6696) ([dependabot[bot]](https://github.com/dependabot[bot]))
+
+**Fixed Bugs:**
+
+- Global Props Not Working As Expected With Several Kits [\#6686](https://github.com/powerhome/playbook/pull/6686) ([nickamantia](https://github.com/nickamantia))
+- And Table Kit: Fix Responsive Scroll, Remove Collapse Styles, and Column Sorting- React and Rails [\#6671](https://github.com/powerhome/playbook/pull/6671) ([kangaree](https://github.com/kangaree))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.1.0-rc.1...18.1.0-rc.3)
+
 # ✨ 18.1.0.pre.rc.1
 
 ##### September 28, 2026
