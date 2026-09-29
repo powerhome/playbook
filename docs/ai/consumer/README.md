@@ -8,3 +8,6 @@ Copy these into apps that consume `playbook-ui` as agent rules/skills. They are 
 | `playbook-ui-generation.SKILL.md` | Skill: metadata workflow + prompt/screenshot paths |
 
 Playbook publishes metadata under `node_modules/playbook-ui/dist/ai/` on package release (`yarn build:ai` / `yarn generate:docs-metadata`). Screen-level prompt recipes are intentionally **not** in this package yet — enforce Playbook-first via these rules until recipes live elsewhere.
+
+The [ask-playbook lookup reference](ask-playbook/README.md) includes installed-version
+form contracts, FAQs, and adoption instructions for the external read-only skill.

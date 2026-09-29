@@ -11,6 +11,8 @@ const PillNotification = (props) => {
             {...props}
         />
 
+        &nbsp;
+
         <Pill
             notification
             text="4"
@@ -25,6 +27,8 @@ const PillNotification = (props) => {
             variant="error"
             {...props}
         />
+
+        &nbsp;
 
         <Pill
             notification
@@ -41,6 +45,8 @@ const PillNotification = (props) => {
             text="1"
             {...props}
         />
+
+        &nbsp;
 
         <Pill
             notification

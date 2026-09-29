@@ -112,6 +112,8 @@ type DropdownProps = {
     isClosed?: boolean;
     label?: string;
     multiSelect?: boolean;
+    name?: string;
+    onChange?: (event: { target: { name?: string; value: any } }) => void;
     onSelect?: (arg: GenericObject) => null;
     options?: GenericObject;
     placeholder?: string;
@@ -156,6 +158,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         label,
         multiSelect = false,
         formPillProps,
+        name,
+        onChange,
         onSelect,
         options,
         placeholder,
@@ -414,6 +418,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setIsDropDownClosed(false);
     };
 
+    const handleSelectionChange = (value: any) => {
+        onSelect && onSelect(value);
+        onChange && onChange({ target: { name, value } });
+    };
 
       const handleOptionClick = (clickedItem: GenericObject) => {
                 if (disabled) return;
@@ -426,7 +434,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                        const next = exists
                        ? list.filter((option) => option.value !== clickedItem.value)
                            : [...list, clickedItem];
-                   onSelect && onSelect(next);
+                   handleSelectionChange(next);
                        return next;
                    });
                    setFilterItem("");
@@ -439,7 +447,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
-                   onSelect && onSelect(clickedItem);
+                   handleSelectionChange(clickedItem);
                    
                    // Sync with DatePickers if this is a quickpick variant
                    if (variant === "quickpick" && Array.isArray(clickedItem.value)) {
@@ -468,10 +476,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       if (disabled) return;
       if (multiSelect) {
         setSelected([]);
-        onSelect && onSelect([]);
+        handleSelectionChange([]);
       } else {
         setSelected({});
-        onSelect && onSelect(null);
+        handleSelectionChange(null);
         setFocusedOptionIndex(-1);
         setFilterItem("");
         
@@ -505,10 +513,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       clearSelected: () => {
         if (multiSelect) {
           setSelected([]);
-          onSelect && onSelect([]);
+          handleSelectionChange([]);
         } else {
           setSelected({});
-          onSelect && onSelect(null);
+          handleSelectionChange(null);
         }
         setFilterItem("");
         setIsDropDownClosed(true);
@@ -522,16 +530,16 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         clearSelected: () => {
           if (multiSelect) {
             setSelected([]);
-            onSelect && onSelect([]);
+            handleSelectionChange([]);
           } else {
             setSelected({});
-            onSelect && onSelect(null);
+            handleSelectionChange(null);
           }
           setFilterItem("");
           setIsDropDownClosed(true);
         },
       };
-    }, [multiSelect, onSelect, setSelected, setFilterItem, setIsDropDownClosed]);
+    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed]);
 
     useImperativeHandle(ref, () => imperativeRef.current);
 
@@ -594,6 +602,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     handleBackspace,
                     handleChange,
                     handleOptionClick,
+                    handleSelectionChange,
                     handleWrapperClick,
                     inputRef,
                     inputWrapperRef,

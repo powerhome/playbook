@@ -38,7 +38,18 @@ PreCommit:
     command: ['bash', '.git-hooks/pre_commit/verify_docs_metadata.sh']
     include:
       - 'playbook/app/pb_kits/playbook/pb_*/**/*.tsx'
+      - 'playbook/app/pb_kits/playbook/pb_*/**/*.ts'
+      - 'playbook/app/pb_kits/playbook/pb_*/**/*.jsx'
+      - 'playbook/app/pb_kits/playbook/pb_*/**/*.js'
+      - 'playbook/app/pb_kits/playbook/pb_*/**/*.erb'
       - 'playbook/app/pb_kits/playbook/pb_*/**/*.rb'
+      - 'playbook/lib/playbook/forms/**/*.rb'
+      - 'playbook/lib/playbook/pb_forms*.rb'
+      - 'playbook/lib/playbook/kit_base.rb'
+      - 'playbook/scripts/build-ai-dist.mjs'
+      - 'playbook/scripts/review-form-metadata.mjs'
+      - 'playbook/scripts/lib/*form*'
+      - 'playbook/scripts/lib/usage-faqs.mjs'
       - 'playbook/app/pb_kits/playbook/utilities/globalProps.ts'
       - 'playbook/app/pb_kits/playbook/types/*.ts'
       - 'playbook/app/pb_kits/playbook/tokens/_spacing.scss'

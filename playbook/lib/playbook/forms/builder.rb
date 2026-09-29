@@ -3,6 +3,7 @@
 module Playbook
   module Forms
     class Builder < ::ActionView::Helpers::FormBuilder
+      require_relative "builder/attribute_defaults"
       require_relative "builder/action_area"
       require_relative "builder/checkbox_field"
       require_relative "builder/collection_select_field"
@@ -18,6 +19,8 @@ module Playbook
       require_relative "builder/time_picker_field"
       require_relative "builder/typeahead_field"
 
+      include AttributeDefaults
+
       prepend(FormFieldBuilder.new(:email_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:number_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:search_field, kit_name: "text_input"))
@@ -32,6 +35,20 @@ module Playbook
         context.content_tag :ol, class: "pb-form-actions" do
           yield ActionArea.new(@template, submit_default_value)
         end
+      end
+
+    private
+
+      # Kits apply `input_options` when they build the control. Form-built
+      # controls are rendered by Rails, so ensure the same options are merged here.
+      def merge_input_options(options, input_options)
+        input_options = Hash(input_options)
+        return options unless input_options.present?
+
+        options = options.dup
+        options[:class] = [options[:class], input_options[:classname]].compact.join(" ").strip if input_options[:classname].present?
+        options[:data] = (options[:data] || {}).merge(input_options[:data]) if input_options[:data].present?
+        options.merge(input_options.except(:class, :classname, :data))
       end
     end
   end

@@ -19,6 +19,7 @@ export type FilterProps = {
   onSortChange?: (value: SortValue[]) => void,
   placement?: "top" | "bottom" | "left" | "right" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end",
   popoverProps?: Record<string, unknown>,
+  responsive?: "stacked",
   results?: number,
   sortOptions?: Record<string, unknown>,
   sortValue?: SortValue[],

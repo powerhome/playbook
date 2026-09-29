@@ -11,6 +11,7 @@
  *   - playgrounds/*.json (slim patterns for agent codegen)
  *   - visual-index.json (screenshot / visual → kit map)
  *   - external-dependencies.json (aggregated from playground overrides)
+ *   - forms.json (Rails builder contracts, also resolved into kit schemas)
  *
  * Usage:
  *   yarn build:ai              # Clean and build (default)
@@ -20,6 +21,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { buildFormsIndex, enrichSchemaForms, validateFormContracts } from './lib/build-form-metadata.mjs';
+import { validateFormReviews } from './lib/form-source-reviews.mjs';
 import { buildVisualIndex } from './lib/build-visual-index.mjs';
 import { enrichSchemaFromMenu, loadMenuCatalog } from './lib/load-menu-catalog.mjs';
 import {
@@ -58,6 +61,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const KITS_DIR = path.resolve(__dirname, '../app/pb_kits/playbook');
 const OUTPUT_DIR = path.resolve(__dirname, '../dist/ai');
 const GLOBAL_PROPS_PATH = path.join(KITS_DIR, 'utilities/global-props.schema.json');
+const GLOBAL_EVENT_PROPS_PATH = path.join(KITS_DIR, 'utilities/global-event-props.schema.json');
 
 // =============================================================================
 // HELPERS
@@ -125,6 +129,10 @@ function enrichSchemaUsage(schema, kitName, slimPlayground) {
 
 async function main() {
   const clean = !process.argv.includes('--no-clean');
+  const kits = getKitDirs();
+  const packageRoot = path.resolve(__dirname, '..');
+  const formMetadata = validateFormContracts(packageRoot, kits.map(({ name }) => name));
+  validateFormReviews(packageRoot, formMetadata);
 
   console.log('\n📦 Building AI Metadata Distribution');
   console.log(`${'═'.repeat(45)}\n`);
@@ -146,16 +154,30 @@ async function main() {
     console.log('⚠️  global-props.schema.json not found');
   }
 
+  if (fs.existsSync(GLOBAL_EVENT_PROPS_PATH)) {
+    fs.copyFileSync(
+      GLOBAL_EVENT_PROPS_PATH,
+      path.join(OUTPUT_DIR, 'global-event-props.schema.json')
+    );
+    console.log('✅ global-event-props.schema.json');
+  } else {
+    console.log('⚠️  global-event-props.schema.json not found');
+  }
+
   const menuCatalog = loadMenuCatalog();
   const menuKitCount = Object.keys(menuCatalog.kits || {}).length;
   console.log(`✅ menu.yml catalog (${menuKitCount} kits)`);
 
-  const kits = getKitDirs();
   const manifest = {
     version: getVersion(),
+    metadataVersion: 1,
+    forms: 'forms.json',
     generated: new Date().toISOString(),
     schemas: {
       globalProps: 'global-props.schema.json',
+      ...(fs.existsSync(GLOBAL_EVENT_PROPS_PATH) && {
+        globalEventProps: 'global-event-props.schema.json',
+      }),
       kits: {},
     },
     playgrounds: {
@@ -168,6 +190,9 @@ async function main() {
   };
   const allSchemas = {
     globalProps: readJson(GLOBAL_PROPS_PATH),
+    ...(fs.existsSync(GLOBAL_EVENT_PROPS_PATH) && {
+      globalEventProps: readJson(GLOBAL_EVENT_PROPS_PATH),
+    }),
     kits: {},
   };
   const playgroundsIndex = {
@@ -210,6 +235,7 @@ async function main() {
     }
     schema = enrichSchemaUsage(schema, name, slimPlayground);
     schema = enrichSchemaExternalDeps(schema, slimPlayground);
+    schema = enrichSchemaForms(schema, name, formMetadata);
 
     writeJson(path.join(kitsOutputDir, `${name}.schema.json`), schema);
     manifest.schemas.kits[name] = `kits/${name}.schema.json`;
@@ -241,6 +267,9 @@ async function main() {
     }
   }
 
+  writeJson(path.join(OUTPUT_DIR, 'forms.json'), buildFormsIndex(getVersion(), formMetadata));
+  console.log('✅ forms.json');
+
   const visualIndex = buildVisualIndex({
     menuCatalog,
     kitNames: kits.map((k) => k.name),
@@ -269,7 +298,7 @@ async function main() {
   console.log('✅ playgrounds/index.json');
 
   console.log(`\n${'─'.repeat(45)}`);
-  console.log(`📊 Built ${kits.length + playgroundCount + 5} files to dist/ai/`);
+  console.log(`📊 Built ${kits.length + playgroundCount + 6} files to dist/ai/`);
   console.log(`${'─'.repeat(45)}\n✨ Done!\n`);
 }
 

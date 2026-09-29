@@ -16,11 +16,7 @@ module Playbook
 
       def display_badge
         @display_badge ||= begin
-          badge_path = File.join(
-            File.dirname(self.class.source_location),
-            "badges",
-            "#{badge}.svg"
-          )
+          badge_path = Playbook.kit_path("user_badge", "badges", "#{badge}.svg")
           File.read(badge_path).html_safe
         end
       end

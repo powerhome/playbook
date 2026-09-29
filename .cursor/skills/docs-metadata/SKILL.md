@@ -12,7 +12,7 @@ disable-model-invocation: true
 ## When to use
 
 - Changed kit React/Rails props
-- Changed `globalProps.ts`, `types/*.ts`, spacing/breakpoint tokens
+- Changed `globalProps.ts`, `globalEventProps.ts`, `types/*.ts`, spacing/breakpoint tokens
 - Changed `_playground.overrides.json` or `visual-cues.mjs`
 - Husky reports docs metadata out of sync
 
@@ -28,7 +28,7 @@ This runs schemas → global props values → playground configs → `playbook/d
 
 ## Do not hand-edit
 
-- `kit.schema.json`, `_playground.json`, `global-props.schema.json`
+- `kit.schema.json`, `_playground.json`, `global-props.schema.json`, `global-event-props.schema.json`
 - `globalPropsValues.ts`
 - Anything under `playbook/dist/ai/`
 
@@ -40,6 +40,7 @@ If verify fails after generate:
 git add playbook/app/pb_kits/playbook/*/kit.schema.json
 git add playbook/app/pb_kits/playbook/*/docs/_playground.json
 git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json
+git add playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json
 git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts
 ```
 
@@ -51,6 +52,7 @@ git add playbook-website/app/javascript/components/Website/src/components/Availa
 |------|---------|
 | One kit schema | `yarn generate:ai-metadata --kit=<name>` |
 | Global props schema only | `yarn generate:global-props-metadata` |
+| Global event props schema only | `yarn generate:global-event-props-metadata` |
 | One playground | `yarn generate:playground-configs --kit=<name> --overwrite` |
 | dist/ai only | `yarn build:ai` |
 | Schemas + dist | `yarn build:ai:full` |

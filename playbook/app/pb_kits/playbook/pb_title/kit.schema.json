@@ -93,6 +93,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Title } from 'playbook-ui'",

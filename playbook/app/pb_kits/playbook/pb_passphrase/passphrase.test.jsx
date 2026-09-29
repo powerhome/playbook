@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, within } from '../utilities/test-utils'
+import { fireEvent, render, screen, within } from '../utilities/test-utils'
 import { Passphrase } from 'playbook-ui'
 
 const testId = 'text-input1',
@@ -54,14 +54,41 @@ test('passes input props to input element', () => {
           id: 'test-input-id',
           disabled: true,
         }}
+        uncontrolled
     />
   )
 
   const kit = screen.getByTestId(testId)
   const input = kit.getElementsByTagName('input')[0]
+  const toggle = kit.querySelector('.show-passphrase-icon')
+
   expect(input).toHaveAttribute('name', 'test-name')
   expect(input).toHaveAttribute('id', 'test-input-id')
   expect(input).toBeDisabled()
+  expect(toggle).toHaveAttribute('aria-disabled', 'true')
+  expect(toggle).toHaveAttribute('tabindex', '-1')
+
+  fireEvent.click(toggle)
+  expect(input).toHaveAttribute('type', 'password')
+})
+
+test('toggles passphrase visibility when eye icon is clicked', () => {
+  render(
+    <Passphrase
+        data={{ testid: testId }}
+        uncontrolled
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = kit.getElementsByTagName('input')[0]
+  const toggle = kit.querySelector('.show-passphrase-icon')
+
+  fireEvent.click(toggle)
+  expect(input).toHaveAttribute('type', 'text')
+
+  fireEvent.click(toggle)
+  expect(input).toHaveAttribute('type', 'password')
 })
 
 test('popover target shows when tips are given', () => {

@@ -200,7 +200,7 @@ Some props differ by platform (e.g. React `htmlType="submit"` → Rails `type: "
 ✗ padding="16px"   → use tokens: "md"
 ✗ onClick in .erb  → Rails uses data attributes, not JS handlers
 ✗ invent nested NavItem props without reading nav playground
-✗ Pill children    → use text prop
+✗ Pill with both text and children → text wins; omit text to render children
 ✗ Table for nested expand rows → AdvancedTable
 ```
 
