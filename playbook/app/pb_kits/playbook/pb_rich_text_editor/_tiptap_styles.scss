@@ -95,7 +95,8 @@
     background-color: $bg_light;
   }
 
-  .pb_rich_text_editor_tiptap_toolbar_sticky {
+  // Must beat `.toolbar { position: relative }` (same node gets both classes when sticky).
+  .toolbar.pb_rich_text_editor_tiptap_toolbar_sticky {
     position: sticky;
     top: 0;
     z-index: 10;
