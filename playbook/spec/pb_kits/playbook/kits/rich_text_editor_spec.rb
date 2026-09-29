@@ -6,6 +6,16 @@ RSpec.describe Playbook::PbRichTextEditor::RichTextEditor do
   subject(:kit_class) { described_class }
 
   it { is_expected.to define_array_prop(:extensions).with_default([]) }
+  it {
+    is_expected.to define_enum_prop(:input_height)
+      .with_default(nil)
+      .with_values("sm", "md", "lg", nil)
+  }
+  it {
+    is_expected.to define_enum_prop(:input_min_height)
+      .with_default(nil)
+      .with_values("sm", "md", "lg", nil)
+  }
 
   describe "#enabled_extensions" do
     it "accepts every Playbook-owned extension" do
@@ -37,6 +47,22 @@ RSpec.describe Playbook::PbRichTextEditor::RichTextEditor do
       expect(kit_class.new(value: "<p>Saved body</p>").initial_html).to eq "<p>Saved body</p>"
       expect(kit_class.new(value: "Plain text").initial_html).to eq "<p>Plain text</p>"
       expect(kit_class.new.initial_html).to eq "<p></p>"
+    end
+  end
+
+  describe "#advanced_container_classname" do
+    it "matches the React TipTap height classes", :aggregate_failures do
+      expect(kit_class.new.advanced_container_classname)
+        .to eq "pb_rich_text_editor_advanced_container toolbar-active"
+      expect(kit_class.new(input_height: "sm", input_min_height: "lg").advanced_container_classname)
+        .to eq "pb_rich_text_editor_advanced_container toolbar-active input_height_sm input_min_height_lg"
+      expect(kit_class.new(simple: true, input_height: "md").advanced_container_classname)
+        .to eq "pb_rich_text_editor_advanced_container toolbar-active pb_rich_text_editor_rte--simple input_height_md"
+    end
+
+    it "rejects heights outside sm, md, and lg" do
+      expect { kit_class.new(input_height: "xl") }.to raise_error(Playbook::Props::Error)
+      expect { kit_class.new(input_min_height: "xl") }.to raise_error(Playbook::Props::Error)
     end
   end
 

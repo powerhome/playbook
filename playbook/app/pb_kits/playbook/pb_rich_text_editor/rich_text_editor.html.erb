@@ -12,7 +12,7 @@
   <% end %>
   <%# Seeded with the current content so a failed/slow TipTap mount submits the existing value instead of wiping it. %>
   <input type="hidden" name="<%= object.input_name %>" id="<%= object.input_id %>" value="<%= object.initial_html %>" />
-  <div class="pb_rich_text_editor_advanced_container toolbar-active<%= " pb_rich_text_editor_rte--simple" if object.simple %>">
+  <div class="<%= object.advanced_container_classname %>">
     <% if object.simple %>
     <%# Compact toolbar: Bold/Italic + Undo/Redo — no block-style Popover (avoids dialog positioning issues). %>
     <div class="pb_background_kit pb_background_color_white toolbar rte-rails-toolbar-layout rte-rails-toolbar-layout--simple" id="<%= object.toolbar_id %>">

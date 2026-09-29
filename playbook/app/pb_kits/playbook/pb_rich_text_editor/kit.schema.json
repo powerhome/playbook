@@ -94,24 +94,28 @@
     "inputHeight": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "sm",
         "md",
         "lg"
-      ]
+      ],
+      "default": null
     },
     "inputMinHeight": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "sm",
         "md",
         "lg"
-      ]
+      ],
+      "default": null
     },
     "requiredIndicator": {
       "type": "boolean",

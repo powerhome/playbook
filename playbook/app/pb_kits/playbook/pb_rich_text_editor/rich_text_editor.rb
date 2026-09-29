@@ -16,6 +16,12 @@ module Playbook
       # When true, TipTap toolbar matches React `simple`: Bold + Italic only (no block-style Popover).
       # Use in modals or narrow layouts where the block dropdown misbehaves.
       prop :simple, type: Playbook::Props::Boolean, default: false
+      prop :input_height, type: Playbook::Props::Enum,
+                          values: ["sm", "md", "lg", nil],
+                          default: nil
+      prop :input_min_height, type: Playbook::Props::Enum,
+                              values: ["sm", "md", "lg", nil],
+                              default: nil
 
       # Match React default (globalProps maxWidth "md").
       def max_width
@@ -25,6 +31,15 @@ module Playbook
 
       def classname
         generate_classname("pb_rich_text_editor_kit", "rte-container")
+      end
+
+      # Same classes as React TipTapEditor so scss can bev reused
+      def advanced_container_classname
+        classes = %w[pb_rich_text_editor_advanced_container toolbar-active]
+        classes << "pb_rich_text_editor_rte--simple" if simple
+        classes << "input_height_#{input_height}" if input_height.present?
+        classes << "input_min_height_#{input_min_height}" if input_min_height.present?
+        classes.join(" ")
       end
 
       def input_id

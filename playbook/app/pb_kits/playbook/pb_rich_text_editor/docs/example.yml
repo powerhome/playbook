@@ -6,6 +6,8 @@ examples:
   - rich_text_editor_rails_text_align: "Extensions (Text Alignment)"
   - rich_text_editor_rails_markdown_support: "Markdown Support"
   - rich_text_editor_rails_simple: "Simple toolbar"
+  - rich_text_editor_rails_height: "Height"
+  - rich_text_editor_rails_min_height: "Min Height"
 
   react:
   - rich_text_editor_advanced_default: Advanced Default
