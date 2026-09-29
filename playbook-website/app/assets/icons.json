@@ -420,6 +420,10 @@
     "category": "Arrows"
   },
   {
+    "name": "summary-new-line",
+    "category": "Arrows"
+  },
+  {
     "name": "sync-alt",
     "category": "Arrows"
   },
@@ -1148,7 +1152,19 @@
     "category": "Health"
   },
   {
+    "name": "align-center",
+    "category": "Interface Core"
+  },
+  {
+    "name": "align-justify",
+    "category": "Interface Core"
+  },
+  {
     "name": "align-left",
+    "category": "Interface Core"
+  },
+  {
+    "name": "align-right",
     "category": "Interface Core"
   },
   {
@@ -2012,7 +2028,19 @@
     "category": "Power Tooling"
   },
   {
+    "name": "oracle",
+    "category": "Power Tooling"
+  },
+  {
     "name": "playbook",
+    "category": "Power Tooling"
+  },
+  {
+    "name": "rails",
+    "category": "Power Tooling"
+  },
+  {
+    "name": "react",
     "category": "Power Tooling"
   },
   {
@@ -2117,6 +2145,10 @@
   },
   {
     "name": "camcorder",
+    "category": "Technology"
+  },
+  {
+    "name": "code-simple",
     "category": "Technology"
   },
   {

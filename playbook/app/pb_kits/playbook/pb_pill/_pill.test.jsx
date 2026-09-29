@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 import Pill from './_pill'
+import Icon from '../pb_icon/_icon'
 
 const testId = 'pill'
 
@@ -14,6 +15,48 @@ test('should render classname', () => {
 
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveClass('pb_pill_kit_neutral_lowercase')
+})
+
+test('displays children when text is omitted', () => {
+  render(
+    <Pill data={{ testid: testId }}>
+      <span>icon</span>
+    </Pill>
+  )
+
+  expect(screen.getByText('icon')).toBeInTheDocument()
+})
+
+test('displays an icon passed as children', () => {
+  render(
+    <Pill
+        data={{ testid: testId }}
+        variant="success"
+    >
+      <Icon
+          data={{ testid: 'pill-icon' }}
+          icon="check"
+      />
+    </Pill>
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toContainElement(screen.getByTestId('pill-icon'))
+  expect(kit.querySelector('.pb_pill_text')).not.toBeInTheDocument()
+})
+
+test('text takes precedence over children', () => {
+  render(
+    <Pill
+        data={{ testid: testId }}
+        text="label"
+    >
+      <span>icon</span>
+    </Pill>
+  )
+
+  expect(screen.getByText('label')).toBeInTheDocument()
+  expect(screen.queryByText('icon')).not.toBeInTheDocument()
 })
 
 test('displays text content', () => {
