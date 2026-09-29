@@ -1,0 +1,44 @@
+<%= pb_rails("dropdown", props: {
+  id: "async-title-dropdown",
+  label: "Job Title",
+  name: "async_title",
+  autocomplete: true,
+  async: true,
+  options: [],
+}) %>
+
+<template id="async-title-option-template">
+  <%= pb_rails("flex", props: { orientation: "column", align: "start" }) do %>
+    <%= pb_rails("body", props: { text: "Title", data: { async_title_name: true } }) %>
+    <%= pb_rails("detail", props: { text: "Department", data: { async_title_department: true } }) %>
+  <% end %>
+</template>
+
+<script>
+  (() => {
+    const dropdown = document.getElementById("async-title-dropdown");
+    const template = document.getElementById("async-title-option-template");
+    if (!dropdown || !template || dropdown.dataset.asyncExampleBound) return;
+    dropdown.dataset.asyncExampleBound = "true";
+
+    dropdown.addEventListener("pb:dropdown:search", (event) => {
+      const { searchingFor, setResults } = event.detail;
+      // Simulate a remote response. Applications supply their own fetch call.
+      window.setTimeout(() => {
+        const titles = [
+          { id: "engineer", label: "Software Engineer", department: "Engineering" },
+          { id: "designer", label: "Product Designer", department: "Design" },
+          { id: "manager", label: "Engineering Manager", department: "Engineering" },
+        ];
+        setResults(titles
+          .filter(({ label }) => label.toLowerCase().includes(searchingFor.toLowerCase()))
+          .map((option) => {
+            const content = template.content.cloneNode(true);
+            content.querySelector("[data-async-title-name]").textContent = option.label;
+            content.querySelector("[data-async-title-department]").textContent = option.department;
+            return { option, content };
+          }));
+      }, 500);
+    });
+  })();
+</script>

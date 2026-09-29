@@ -629,7 +629,7 @@ export default class PbDropdown extends PbEnhancedElement {
         this.target.querySelector("[data-dropdown-async-status]")?.remove();
         const parent = this.getOptionsParent();
         parent.replaceChildren();
-        options.forEach((option) => parent.appendChild(this.buildOptionElement(option)));
+        options.forEach((result) => parent.appendChild(this.buildAsyncOptionElement(result)));
         if (failed) this.showAsyncStatus("Unable to load options. Try again.");
         else if (!options.length) this.showNoOptionsMessage();
         this.adjustDropdownHeight();
@@ -803,7 +803,14 @@ export default class PbDropdown extends PbEnhancedElement {
     return container.querySelector(".pb_list_kit") || container;
   }
 
-  buildOptionElement(option) {
+  buildAsyncOptionElement(result) {
+    if (result.option && (result.content instanceof Element || result.content instanceof DocumentFragment)) {
+      return this.buildOptionElement(result.option, result.content);
+    }
+    return this.buildOptionElement(result);
+  }
+
+  buildOptionElement(option, content) {
     const normalized = this.normalizeOption(option);
     const disabled = normalized.disabled === true;
     const optionEl = document.createElement("div");
@@ -824,12 +831,15 @@ export default class PbDropdown extends PbEnhancedElement {
       ? "dropdown_option_wrapper disabled"
       : "dropdown_option_wrapper";
 
-    const body = document.createElement("div");
-    body.className = "pb_body_kit_light";
-    body.textContent =
-      normalized.label != null ? String(normalized.label) : "";
-
-    wrapper.appendChild(body);
+    if (content) {
+      wrapper.appendChild(content.cloneNode(true));
+    } else {
+      const body = document.createElement("div");
+      body.className = "pb_body_kit_light";
+      body.textContent =
+        normalized.label != null ? String(normalized.label) : "";
+      wrapper.appendChild(body);
+    }
     listItem.appendChild(wrapper);
     optionEl.appendChild(listItem);
 

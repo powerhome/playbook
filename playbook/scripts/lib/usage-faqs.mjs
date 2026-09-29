@@ -58,7 +58,7 @@ export const KIT_USAGE_FAQS = {
   }, {
     id: 'dropdown.async-search', platforms: ['rails'],
     questions: ['How do I load Rails Dropdown options as the user types?'],
-    answer: 'Enable async with autocomplete or searchbar. The bubbling pb:dropdown:search event exposes searchingFor, setResults(options), and setError(). The kit debounces searches (search_debounce_timeout defaults to 250ms), requires search_term_minimum_length characters (default 3), and manages loading, empty results, errors and stale callbacks. Consumers fetch and map standard option objects; results bypass local label filtering. The typed query is not submitted by the Dropdown selected-id input. Keep a separate application field when free text must be submitted.',
+    answer: 'Enable async with autocomplete or searchbar. The bubbling pb:dropdown:search event exposes searchingFor, setResults(options), and setError(). The kit debounces searches (search_debounce_timeout defaults to 250ms), requires search_term_minimum_length characters (default 3), and manages loading, empty results, errors and stale callbacks. Consumers fetch and map standard option objects or rich { option, content } entries, where content is an Element or DocumentFragment cloned into the option wrapper and option retains serializable selection data. Results bypass local label filtering. The typed query is not submitted by the Dropdown selected-id input. Keep a separate application field when free text must be submitted.',
     props: ['async', 'autocomplete', 'searchbar', 'searchTermMinimumLength', 'searchDebounceTimeout'],
   }, {
     id: 'dropdown.react-form-libraries', platforms: ['react'],

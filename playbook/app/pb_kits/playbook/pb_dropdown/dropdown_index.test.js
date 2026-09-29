@@ -518,6 +518,80 @@ describe("PbDropdown async search", () => {
     expect(selected.mock.calls[0][0].detail).toEqual({ id: "ca", label: "Canada", value: "ca" });
   });
 
+  test("rich results clone template content and keep markup separate from option data", () => {
+    const template = document.createElement("template");
+    template.innerHTML = '<div data-user-id="42"><strong>Ada</strong></div><span>Engineering</span>';
+    const option = { id: "42", label: "Ada", value: "42", department: "Engineering" };
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { option, content: template.content },
+      { id: "plain", label: "Plain option" },
+    ]);
+
+    const rows = instance.queryAllOptions();
+    expect(rows).toHaveLength(2);
+    expect(rows[0].querySelector("[data-user-id]")).toHaveAttribute("data-user-id", "42");
+    expect(rows[0].querySelector("span")).toHaveTextContent("Engineering");
+    expect(JSON.parse(rows[0].dataset.dropdownOptionLabel)).toEqual(option);
+    expect(rows[1]).toHaveTextContent("Plain option");
+    expect(template.content.childNodes).toHaveLength(2);
+    expect(rows[0].querySelector("strong")).not.toBe(template.content.querySelector("strong"));
+
+    const selected = jest.fn();
+    root.addEventListener("pb:dropdown:selected", selected);
+    rows[0].querySelector("strong").click();
+    expect(instance.baseInput.value).toBe("42");
+    expect(input.value).toBe("Ada");
+    expect(selected.mock.calls[0][0].detail).toEqual(option);
+  });
+
+  test("rich Element content works after portaling and disabled rows cannot be selected", () => {
+    const content = document.createElement("span");
+    content.textContent = "Rich user row";
+    const container = instance.target;
+    document.body.appendChild(container);
+    type("user");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { option: { id: "disabled", label: "Disabled", disabled: true }, content },
+      { option: { id: "enabled", label: "Enabled" }, content },
+    ]);
+
+    const rows = instance.queryAllOptions();
+    rows[0].querySelector("span").click();
+    expect(instance.baseInput.value).toBe("");
+    expect(rows[0]).toHaveAttribute("aria-disabled", "true");
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(instance.baseInput.value).toBe("enabled");
+    expect(input.value).toBe("Enabled");
+    expect(content.textContent).toBe("Rich user row");
+  });
+
+  test("stale rich results do not replace the current results or consume template content", () => {
+    const content = document.createDocumentFragment();
+    content.appendChild(document.createElement("span"));
+    type("old");
+    jest.advanceTimersByTime(250);
+    const oldRequest = search.mock.calls[0][0].detail;
+    type("new");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[1][0].detail.setResults([{ id: "new", label: "New" }]);
+    oldRequest.setResults([{ option: { id: "old", label: "Old" }, content }]);
+    expect(instance.queryAllOptions()).toHaveLength(1);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("New");
+    expect(content.childNodes).toHaveLength(1);
+  });
+
+  test("plain result labels are rendered as text", () => {
+    type("label");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "1", label: "<strong>Label</strong>" }]);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("<strong>Label</strong>");
+    expect(instance.queryAllOptions()[0].querySelector("strong")).toBeNull();
+  });
+
   test("disabled dropdowns do not search", () => {
     instance.isDisabled = true;
     type("abc");
