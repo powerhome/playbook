@@ -74,3 +74,15 @@ test('hides current year by default', () => {
     expect(yearElement).toBeNull()
   }
 })
+
+test('applies kit class and global props to the root', () => {
+  const kit = renderKit(DateTimeStacked, {
+    data: { testid: 'datetimestacked-root' },
+    datetime,
+    dark: false,
+    margin: 'md',
+  })
+
+  expect(kit).toHaveClass('pb_date_time_stacked_kit')
+  expect(kit).toHaveClass('m_md')
+})

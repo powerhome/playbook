@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Button from '../pb_button/_button'
@@ -13,6 +13,7 @@ type CopyButtonProps = {
   aria?: { [key: string]: string }
   className?: string
   data?: { [key: string]: string }
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)}
   id?: string
   from?: string
   text?: string
@@ -29,6 +30,7 @@ const CopyButton = (props: CopyButtonProps) => {
     className,
     data = {},
     from = '',
+    htmlOptions = {},
     id,
     text = 'Copy',
     timeout = 1000,
@@ -42,12 +44,14 @@ const CopyButton = (props: CopyButtonProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_copy_button_kit'), globalProps(props), className)
 
   return (
     <div 
         {...ariaProps}
         {...dataProps}
+        {...htmlProps}
         className={classes}
         id={id}
     >

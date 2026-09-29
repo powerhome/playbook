@@ -153,6 +153,20 @@ test("generates quickpick options for interactive dropdown filters", () => {
   expect(handleChange).toHaveBeenCalledWith("quickpick-last-month");
 });
 
+test("applies htmlOptions to the root element", () => {
+  render(
+    <Filter
+        htmlOptions={{ title: "filter title" }}
+        results={1}
+    />
+  );
+
+  expect(document.querySelector(".pb_filter_kit")).toHaveAttribute(
+    "title",
+    "filter title"
+  );
+});
+
 test("renders double layout when double is true", () => {
   render(<FilterTest double />);
 
