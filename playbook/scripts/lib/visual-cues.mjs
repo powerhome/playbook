@@ -73,7 +73,7 @@ export const KIT_VISUAL_CUES = {
     ],
     not: ['badge', 'form_pill', 'label_pill'],
     gotchas: [
-      'Use text prop — children are ignored and render empty',
+      'Omit text to render children such as an Icon. Passing text takes precedence over children',
       'notification uses primary by default; set variant to error for the red treatment. Other variants are ignored when notification is true',
     ],
     cues: { typicalProps: ['text', 'variant'] },

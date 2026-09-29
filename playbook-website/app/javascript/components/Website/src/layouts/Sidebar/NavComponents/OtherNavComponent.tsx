@@ -100,8 +100,27 @@ export const OtherNavItems = ({
         return a.name.localeCompare(b.name);
       }) || [];
 
+  const GLOBAL_EVENT_PROP_LABELS: Record<string, string> = {
+    on_click: "onClick",
+  };
+
+  const globalEventPropsMenu =
+    global_props_and_tokens?.global_event_props
+      ?.map((item: string) => ({
+        name:
+          GLOBAL_EVENT_PROP_LABELS[item] ||
+          item
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (char: string) => char.toUpperCase()),
+        link: createLink(`/global_event_props/${item}`),
+        itemKey: item,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name)) || [];
+
   if (name === "Global Props") {
     menuItems = globalPropsMenu;
+  } else if (name === "Global Event Props") {
+    menuItems = globalEventPropsMenu;
   } else if (name === "Tokens") {
     menuItems = tokensMenu;
   } else if (name === "Getting Started") {

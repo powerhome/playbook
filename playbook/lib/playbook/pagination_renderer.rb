@@ -25,7 +25,7 @@ module Playbook
 
         desktop = template.content_tag(
           :div,
-          template.safe_join(desktop_items, @options[:link_separator].to_s),
+          template.safe_join(desktop_items),
           class: "pagination-desktop"
         )
         mobile = mobile_pagination
