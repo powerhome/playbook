@@ -14,7 +14,9 @@ export class PbDropdownKeyboard {
     );
     // Store bound handlers for cleanup
     this.handleKeyDownBound = this.handleKeyDown.bind(this);
-    this.handleSearchInputBound = () => this.openDropdownIfClosed();
+    this.handleSearchInputBound = () => {
+      if (!this.dropdown.isAsync) this.openDropdownIfClosed();
+    };
     this.init();
   }
 

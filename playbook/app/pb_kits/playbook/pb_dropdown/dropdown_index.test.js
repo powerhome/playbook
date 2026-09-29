@@ -370,3 +370,158 @@ describe("PbDropdown dynamic options", () => {
     expect(dropdownEl.querySelectorAll(OPTION_SELECTOR).length).toBe(1);
   });
 });
+
+describe("PbDropdown async search", () => {
+  let root;
+  let instance;
+  let input;
+  let search;
+
+  const type = (term) => {
+    input.value = term;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+    root = buildDropdownElement({ options: [] });
+    root.dataset.pbDropdownAsync = "true";
+    input = document.createElement("input");
+    input.setAttribute("data-dropdown-autocomplete", "");
+    root.querySelector(".pb_dropdown_trigger").appendChild(input);
+    search = jest.fn();
+    root.addEventListener("pb:dropdown:search", search);
+    instance = new PbDropdown(root);
+    instance.connect();
+  });
+
+  afterEach(() => {
+    instance.disconnect();
+    jest.clearAllTimers();
+    jest.useRealTimers();
+    document.body.innerHTML = "";
+  });
+
+  test("requires three characters and debounces typing for 250ms", () => {
+    type("ab");
+    jest.advanceTimersByTime(250);
+    expect(search).not.toHaveBeenCalled();
+    expect(instance.target).not.toHaveClass("open");
+    type("abc");
+    jest.advanceTimersByTime(200);
+    type("abcd");
+    jest.advanceTimersByTime(249);
+    expect(search).not.toHaveBeenCalled();
+    jest.advanceTimersByTime(1);
+    expect(search).toHaveBeenCalledTimes(1);
+    expect(search.mock.calls[0][0].detail.searchingFor).toBe("abcd");
+    expect(instance.target).toHaveClass("open");
+    expect(root).toHaveAttribute("aria-busy", "true");
+  });
+
+  test("honors configured thresholds and supports the search bar", () => {
+    instance.disconnect();
+    input.removeAttribute("data-dropdown-autocomplete");
+    input.setAttribute("data-dropdown-search", "");
+    root.dataset.pbDropdownSearchTermMinimumLength = "1";
+    root.dataset.pbDropdownSearchDebounceTimeout = "50";
+    instance.connect();
+    type("a");
+    jest.advanceTimersByTime(50);
+    expect(search).toHaveBeenCalledTimes(1);
+  });
+
+  test("renders remote results without local filtering or clearing the query", () => {
+    type("abc");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "1", label: "Different label" }]);
+    expect(input.value).toBe("abc");
+    expect(instance.queryAllOptions()).toHaveLength(1);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("Different label");
+    expect(instance.queryAllOptions()[0].style.display).toBe("");
+    expect(root).toHaveAttribute("aria-busy", "false");
+    expect(instance.target.querySelector("[data-dropdown-async-status]")).toBeNull();
+  });
+
+  test("invalidates old callbacks immediately, before the next debounce finishes", () => {
+    type("abc");
+    jest.advanceTimersByTime(250);
+    const first = search.mock.calls[0][0].detail;
+    type("abcd");
+    first.setResults([{ id: "old", label: "Old" }]);
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    jest.advanceTimersByTime(250);
+    const latest = search.mock.calls[1][0].detail;
+    latest.setResults([{ id: "new", label: "New" }]);
+    first.setError();
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("New");
+    latest.setResults([]);
+    expect(instance.queryAllOptions()).toHaveLength(1);
+  });
+
+  test("empty results and failed requests end loading with distinct messages", () => {
+    type("abc");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([]);
+    expect(instance.target.querySelector(".dropdown_no_options")).not.toBeNull();
+    expect(root).toHaveAttribute("aria-busy", "false");
+    type("def");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[1][0].detail.setError();
+    expect(instance.target).toHaveTextContent("Unable to load options");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+    expect(root).toHaveAttribute("aria-busy", "false");
+  });
+
+  test("unfinished requests time out", () => {
+    type("abc");
+    jest.advanceTimersByTime(15250);
+    expect(root).toHaveAttribute("aria-busy", "false");
+    expect(instance.target).toHaveTextContent("Unable to load options");
+  });
+
+  test.each(["short query", "clear", "disconnect"])("%s invalidates pending results", (action) => {
+    type("abc");
+    jest.advanceTimersByTime(250);
+    const request = search.mock.calls[0][0].detail;
+    if (action === "short query") type("a");
+    if (action === "clear") instance.clearSelection();
+    if (action === "disconnect") instance.disconnect();
+    request.setResults([{ id: "late", label: "Late" }]);
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(root).toHaveAttribute("aria-busy", "false");
+  });
+
+  test("events bubble from the kit root and results use the cached portaled container", () => {
+    const listener = jest.fn();
+    document.addEventListener("pb:dropdown:search", listener);
+    const container = instance.target;
+    document.body.appendChild(container);
+    type("abc");
+    jest.advanceTimersByTime(250);
+    expect(listener.mock.calls[0][0].target).toBe(root);
+    listener.mock.calls[0][0].detail.setResults([{ id: "1", label: "Result" }]);
+    expect(container.querySelector(OPTION_SELECTOR)).toHaveTextContent("Result");
+    document.removeEventListener("pb:dropdown:search", listener);
+  });
+
+  test("loaded options support keyboard selection and form submission", () => {
+    type("can");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "ca", label: "Canada", value: "ca" }]);
+    const selected = jest.fn();
+    root.addEventListener("pb:dropdown:selected", selected);
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(instance.baseInput.value).toBe("ca");
+    expect(input.value).toBe("Canada");
+    expect(selected.mock.calls[0][0].detail).toEqual({ id: "ca", label: "Canada", value: "ca" });
+  });
+
+  test("disabled dropdowns do not search", () => {
+    instance.isDisabled = true;
+    type("abc");
+    jest.advanceTimersByTime(250);
+    expect(search).not.toHaveBeenCalled();
+  });
+});

@@ -220,6 +220,25 @@
       "type": "boolean",
       "default": false
     },
+    "async": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "searchTermMinimumLength": {
+      "platforms": [
+        "rails"
+      ],
+      "default": 3
+    },
+    "searchDebounceTimeout": {
+      "platforms": [
+        "rails"
+      ],
+      "default": 250
+    },
     "searchbar": {
       "platforms": [
         "rails"

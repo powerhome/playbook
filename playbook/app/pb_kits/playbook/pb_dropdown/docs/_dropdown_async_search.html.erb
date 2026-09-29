@@ -1,0 +1,33 @@
+<%= pb_rails("dropdown", props: {
+  id: "async-country-dropdown",
+  label: "Country",
+  name: "async_country",
+  autocomplete: true,
+  async: true,
+  search_term_minimum_length: 3,
+  search_debounce_timeout: 250,
+  options: [],
+}) %>
+
+<script>
+  (() => {
+    const dropdown = document.getElementById("async-country-dropdown");
+    if (!dropdown || dropdown.dataset.asyncExampleBound) return;
+    dropdown.dataset.asyncExampleBound = "true";
+
+    dropdown.addEventListener("pb:dropdown:search", (event) => {
+      const { searchingFor, setResults } = event.detail;
+      // Simulate a remote response. Applications supply their own fetch call.
+      window.setTimeout(() => {
+        const countries = [
+          { id: "ca", label: "Canada", value: "ca" },
+          { id: "us", label: "United States", value: "us" },
+          { id: "gb", label: "United Kingdom", value: "gb" },
+        ];
+        setResults(countries.filter(({ label }) =>
+          label.toLowerCase().includes(searchingFor.toLowerCase())
+        ));
+      }, 500);
+    });
+  })();
+</script>

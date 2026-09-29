@@ -37,6 +37,30 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_boolean_prop(:clear_on_context_change).with_default(true) }
   it { is_expected.to define_string_prop(:options_event_type).with_default("") }
 
+  it { is_expected.to define_boolean_prop(:async).with_default(false) }
+
+  describe "async search configuration" do
+    it "exports the Typeahead-compatible defaults when enabled" do
+      expect(subject.new(async: true).data).to include(
+        pb_dropdown_async: true,
+        pb_dropdown_search_term_minimum_length: 3,
+        pb_dropdown_search_debounce_timeout: 250
+      )
+    end
+
+    it "exports custom search timing" do
+      expect(subject.new(async: true, search_term_minimum_length: 1, search_debounce_timeout: 100).data).to include(
+        pb_dropdown_search_term_minimum_length: 1,
+        pb_dropdown_search_debounce_timeout: 100
+      )
+    end
+
+    it "omits async timing when disabled" do
+      expect(subject.new.data).not_to have_key(:pb_dropdown_search_debounce_timeout)
+      expect(subject.new.data).not_to have_key(:pb_dropdown_search_term_minimum_length)
+    end
+  end
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_dropdown_default"

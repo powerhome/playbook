@@ -56,6 +56,11 @@ export const KIT_USAGE_FAQS = {
     answer: 'Pass options_by_context keyed by the other field value together with context_selector naming that element id; the kit swaps options on its change event and clears the selection unless clear_on_context_change is false. To push options from JavaScript, dispatch pb:dropdown:updateOptions with detail { dropdownId, options } or list your own event names in options_event_type. No request is made for you; supply every context upfront or provide the options in the event.',
     contractPaths: ['form.rails.builder.methods'], props: ['optionsByContext', 'contextSelector', 'clearOnContextChange', 'optionsEventType'],
   }, {
+    id: 'dropdown.async-search', platforms: ['rails'],
+    questions: ['How do I load Rails Dropdown options as the user types?'],
+    answer: 'Enable async with autocomplete or searchbar. The bubbling pb:dropdown:search event exposes searchingFor, setResults(options), and setError(). The kit debounces searches (search_debounce_timeout defaults to 250ms), requires search_term_minimum_length characters (default 3), and manages loading, empty results, errors and stale callbacks. Consumers fetch and map standard option objects; results bypass local label filtering. The typed query is not submitted by the Dropdown selected-id input. Keep a separate application field when free text must be submitted.',
+    props: ['async', 'autocomplete', 'searchbar', 'searchTermMinimumLength', 'searchDebounceTimeout'],
+  }, {
     id: 'dropdown.react-form-libraries', platforms: ['react'],
     questions: ['Can I use Dropdown with react-hook-form?', 'Does the React Dropdown submit a value?'],
     answer: 'Spread register("country") onto Dropdown. It accepts name and onChange, and calls onChange with { target: { name, value } } in addition to any onSelect. value is the selected option object, an array for multiSelect and null or [] when cleared, so read value.value in form state. The ref from register resolves to the kit imperative handle, not an input, and no named input is rendered; the React kit has no native form submission.',
