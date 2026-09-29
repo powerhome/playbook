@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Typeahead, Badge, Flex } from 'playbook-ui'
+import { Typeahead, Pill, Flex, Title, Icon} from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
 import { useDarkMode } from '../contexts/DarkModeContext'
 
@@ -50,15 +50,19 @@ const normalizePropName = (name: string): string =>
 const normalizedSearchTerms = (item: Kit): string[] =>
   (item.searchTerms ?? []).map(stripPropSeparators)
 
-const kitPropBadge = (platforms: string[]): string => {
-  const supportsReact = platforms.includes('react')
-  const supportsRails = platforms.includes('rails')
-
-  if (supportsReact && supportsRails) return 'Kit Prop (React & Rails)'
-  if (supportsReact) return 'Kit Prop (React)'
-  if (supportsRails) return 'Kit Prop (Rails)'
-  return 'Kit Prop'
-}
+const PlatformMarks = ({ platforms }: { platforms: string[] }) => (
+  <>
+    {platforms.map((platform, index) => (
+      <Icon
+        color="primary"
+        icon={platform}
+        key={platform}
+        marginRight={index === 0 && platforms.length === 2 ? 'xxs' : undefined}
+        size="xs"
+      />
+    ))}
+  </>
+)
 
 const kitPropItems = (kit: Kit): Kit[] => {
   const propsByName = new Map<string, { name: string, platforms: Set<string>, searchTerms: Set<string> }>()
@@ -211,14 +215,33 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
   const Item = ({ labelLeft, platforms = [], type }: { labelLeft: string, platforms?: string[], type: string }) => (
     <Flex alignItems="center" justify="between">
         {labelLeft}
-        <Badge
+        <Pill
           dark={darkMode}
           margin="xs"
-          text={type === 'prop'
-            ? kitPropBadge(platforms)
-            : SEARCH_TYPE_BADGES[type]}
+          size="sm"
+          textTransform="none"
           variant="primary"
-        />
+        >
+          {type === 'prop' ? (
+            <Flex alignItems="center" justify="center">
+              <Title
+              className="pb_pill_text"
+              size={4}
+              tag="div"
+              text="Kit Prop"
+              marginRight="xxs"
+            />
+            <PlatformMarks platforms={platforms} />
+            </Flex>
+          ) : (
+            <Title
+              className="pb_pill_text"
+              size={4}
+              tag="div"
+              text={SEARCH_TYPE_BADGES[type]}
+            />
+          )}
+        </Pill>
     </Flex>
   )
 
