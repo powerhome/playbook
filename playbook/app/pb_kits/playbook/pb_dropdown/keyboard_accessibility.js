@@ -151,7 +151,7 @@ moveFocus(direction) {
     if (optionEl.dataset.dropdownOptionDisabled === "true") return;
 
     this.dropdown.handleOptionClick({ target: optionEl });
-    this.dropdown.toggleElement(this.dropdown.target);
+    if (!this.dropdown.isAsync) this.dropdown.toggleElement(this.dropdown.target);
     this.dropdown.updateClearButton();
   }
 }

@@ -62,7 +62,8 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       )
     end
 
-    it "omits async timing when disabled" do
+    it "omits async attributes when disabled" do
+      expect(subject.new.data).not_to have_key(:pb_dropdown_async)
       expect(subject.new.data).not_to have_key(:pb_dropdown_search_debounce_timeout)
       expect(subject.new.data).not_to have_key(:pb_dropdown_search_term_minimum_length)
     end

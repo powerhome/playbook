@@ -686,10 +686,288 @@ describe("PbDropdown async search", () => {
     expect(instance.queryAllOptions()[0].style.display).toBe("");
   });
 
+  test("input events are immediate, including below the search threshold", () => {
+    const changed = jest.fn();
+    root.addEventListener("pb:dropdown:input", changed);
+    type("a");
+    expect(changed).toHaveBeenCalledTimes(1);
+    expect(changed.mock.calls[0][0].detail).toEqual({ value: "a", reason: "input" });
+    expect(changed.mock.calls[0][0].target).toBe(root);
+    expect(search).not.toHaveBeenCalled();
+    type("");
+    expect(changed.mock.calls[1][0].detail).toEqual({ value: "", reason: "input" });
+  });
+
+  test("clearing typed text invalidates a single selection regardless of edit method", () => {
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "42", label: "Ada" }]);
+    instance.queryAllOptions()[0].click();
+    const selected = jest.fn();
+    root.addEventListener("pb:dropdown:selected", selected);
+    type("");
+    expect(instance.baseInput.value).toBe("");
+    expect(selected).toHaveBeenCalledTimes(1);
+    expect(selected.mock.calls[0][0].detail).toBeNull();
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(instance.target).toHaveClass("close");
+  });
+
+  test("query-only clear button and public clear remove results and notify consumers", () => {
+    instance.disconnect();
+    const clear = document.createElement("button");
+    clear.setAttribute("data-dropdown-clear-icon", "");
+    root.appendChild(clear);
+    instance.connect();
+    const changed = jest.fn();
+    root.addEventListener("pb:dropdown:input", changed);
+    type("ada");
+    expect(clear.style.display).toBe("");
+    jest.advanceTimersByTime(250);
+    const pending = search.mock.calls[0][0].detail;
+    clear.click();
+    pending.setResults([{ id: "late", label: "Late" }]);
+    expect(input.value).toBe("");
+    expect(clear.style.display).toBe("none");
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(changed.mock.calls[changed.mock.calls.length - 1][0].detail).toEqual({ value: "", reason: "clear" });
+
+    type("new");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[1][0].detail.setResults([{ id: "new", label: "New" }]);
+    document.dispatchEvent(new CustomEvent("pb:dropdown:clear", { detail: { dropdownId: root.id } }));
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(instance.target).toHaveClass("close");
+    expect(root).toHaveAttribute("aria-busy", "false");
+  });
+
+  test("portaled search bar edits and clear events are scoped to the kit root", () => {
+    instance.disconnect();
+    input.removeAttribute("data-dropdown-autocomplete");
+    input.setAttribute("data-dropdown-search", "");
+    instance.target.prepend(input);
+    instance.connect();
+    document.body.appendChild(instance.target);
+    const changed = jest.fn();
+    root.addEventListener("pb:dropdown:input", changed);
+    type("ada");
+    expect(changed.mock.calls[0][0].target).toBe(root);
+    instance.clearSelection();
+    expect(input.value).toBe("");
+    expect(changed.mock.calls[1][0].detail).toEqual({ value: "", reason: "clear" });
+  });
+
+  test("native form reset clears results and callbacks, while canceled reset leaves state intact", async () => {
+    instance.disconnect();
+    const form = document.createElement("form");
+    document.body.appendChild(form);
+    form.appendChild(root);
+    instance.connect();
+    const changed = jest.fn();
+    root.addEventListener("pb:dropdown:input", changed);
+    type("ada");
+    jest.advanceTimersByTime(250);
+    const pending = search.mock.calls[0][0].detail;
+    const preventReset = (event) => event.preventDefault();
+    form.addEventListener("reset", preventReset);
+    form.reset();
+    await Promise.resolve();
+    expect(input.value).toBe("ada");
+    expect(root).toHaveAttribute("aria-busy", "true");
+    form.removeEventListener("reset", preventReset);
+    form.reset();
+    await Promise.resolve();
+    pending.setResults([{ id: "late", label: "Late" }]);
+    expect(input.value).toBe("");
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(root).toHaveAttribute("aria-busy", "false");
+    expect(changed.mock.calls[changed.mock.calls.length - 1][0].detail).toEqual({ value: "", reason: "reset" });
+  });
+
+  test("reconnecting does not duplicate form reset listeners and disconnect cancels queued resets", async () => {
+    instance.disconnect();
+    const form = document.createElement("form");
+    document.body.appendChild(form);
+    form.appendChild(root);
+    instance.connect();
+    instance.disconnect();
+    instance.connect();
+    const changed = jest.fn();
+    root.addEventListener("pb:dropdown:input", changed);
+    form.reset();
+    await Promise.resolve();
+    expect(changed).toHaveBeenCalledTimes(1);
+    form.reset();
+    instance.disconnect();
+    await Promise.resolve();
+    expect(changed).toHaveBeenCalledTimes(1);
+  });
+
+  test("editing a multi-select query does not clear selected pills", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownMultiSelect = "true";
+    instance.connect();
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "42", label: "Ada" }]);
+    instance.queryAllOptions()[0].click();
+    type("new");
+    type("");
+    expect(Array.from(instance.selectedOptions).map(JSON.parse)).toEqual([{ id: "42", label: "Ada", value: "42" }]);
+    expect(root.querySelector("input[data-generated]").value).toBe("42");
+  });
+
+  test("clear followed by immediate retyping accepts only the latest response", () => {
+    root.dataset.pbDropdownSearchDebounceTimeout = "0";
+    type("old");
+    jest.advanceTimersByTime(0);
+    const previous = search.mock.calls[0][0].detail;
+    instance.clearSelection();
+    type("new");
+    jest.advanceTimersByTime(0);
+    previous.setResults([{ id: "old", label: "Old" }]);
+    search.mock.calls[1][0].detail.setResults([{ id: "new", label: "New" }]);
+    expect(instance.target).toHaveClass("open");
+    expect(instance.queryAllOptions()).toHaveLength(1);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("New");
+  });
+
+  test("clearing the search bar preserves the selection", () => {
+    instance.disconnect();
+    input.removeAttribute("data-dropdown-autocomplete");
+    input.setAttribute("data-dropdown-search", "");
+    instance.connect();
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "42", label: "Ada" }]);
+    instance.queryAllOptions()[0].click();
+    type("");
+    expect(instance.baseInput.value).toBe("42");
+  });
+
+  test("clearable false still hides the clear control while typing", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownClearable = "false";
+    const clear = document.createElement("button");
+    clear.setAttribute("data-dropdown-clear-icon", "");
+    root.appendChild(clear);
+    instance.connect();
+    type("ada");
+    expect(clear.style.display).toBe("none");
+  });
+
+  test("a selection handler can publicly clear an async picker without keyboard selection reopening it", () => {
+    root.addEventListener("pb:dropdown:selected", ({ detail }) => {
+      if (detail) {
+        document.dispatchEvent(new CustomEvent("pb:dropdown:clear", { detail: { dropdownId: root.id } }));
+      }
+    });
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "42", label: "Ada" }]);
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(input.value).toBe("");
+    expect(instance.baseInput.value).toBe("");
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(instance.target).toHaveClass("close");
+  });
+
   test("disabled dropdowns do not search", () => {
     instance.isDisabled = true;
     type("abc");
     jest.advanceTimersByTime(250);
     expect(search).not.toHaveBeenCalled();
+  });
+});
+
+
+describe("PbDropdown synchronous compatibility", () => {
+  let root;
+  let instance;
+  let input;
+
+  beforeEach(() => {
+    root = buildDropdownElement();
+    input = document.createElement("input");
+    input.setAttribute("data-dropdown-autocomplete", "");
+    root.querySelector(".pb_dropdown_trigger").appendChild(input);
+    const form = document.createElement("form");
+    document.body.appendChild(form);
+    form.appendChild(root);
+    instance = new PbDropdown(root);
+    instance.connect();
+  });
+
+  afterEach(() => {
+    instance.disconnect();
+    document.body.innerHTML = "";
+  });
+
+  test("local filtering is immediate and emits no async events", () => {
+    const changed = jest.fn();
+    root.addEventListener("pb:dropdown:input", changed);
+    root.addEventListener("pb:dropdown:search", changed);
+    input.value = "can";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    expect(instance.queryAllOptions()[0].style.display).toBe("none");
+    expect(instance.queryAllOptions()[1].style.display).toBe("");
+    expect(changed).not.toHaveBeenCalled();
+    expect(root).not.toHaveAttribute("aria-busy");
+  });
+
+  test("selection retains legacy notification timing and payload, and clear keeps static options", () => {
+    const selected = jest.fn(() => {
+      expect(instance.target).not.toHaveClass("close");
+    });
+    instance.target.classList.remove("close");
+    instance.target.classList.add("open");
+    root.addEventListener("pb:dropdown:selected", selected);
+    instance.queryAllOptions()[0].click();
+    // The legacy composite trigger emits once per display (text and autocomplete).
+    expect(selected).toHaveBeenCalledTimes(2);
+    expect(selected.mock.calls[0][0].detail).toEqual({ id: "us", label: "United States", value: "us" });
+    root.removeEventListener("pb:dropdown:selected", selected);
+    const changed = jest.fn();
+    root.addEventListener("pb:dropdown:input", changed);
+    instance.clearSelection();
+    expect(instance.queryAllOptions()).toHaveLength(2);
+    expect(changed).not.toHaveBeenCalled();
+    expect(root).not.toHaveAttribute("aria-busy");
+  });
+
+  test("Quick Pick still updates and clears its date fields", () => {
+    root.dataset.pbDropdownVariant = "quickpick";
+    root.dataset.startDateId = "compat-start";
+    root.dataset.endDateId = "compat-end";
+    const start = document.createElement("input");
+    start.id = "compat-start";
+    const end = document.createElement("input");
+    end.id = "compat-end";
+    root.append(start, end);
+    const option = {
+      id: "today", label: "Today", value: "today",
+      formatted_start_date: "09/29/2026", formatted_end_date: "09/29/2026",
+    };
+    instance.replaceOptions([option]);
+    instance.queryAllOptions()[0].click();
+    expect(start.value).toBe("09/29/2026");
+    expect(end.value).toBe("09/29/2026");
+    expect(JSON.parse(root.dataset.optionSelected)).toEqual(option);
+    instance.clearSelection();
+    expect(start.value).toBe("");
+    expect(end.value).toBe("");
+    expect(instance.queryAllOptions()).toHaveLength(1);
+  });
+
+  test("native reset still clears synchronously without selection or input notifications", () => {
+    instance.setSelectionByOptionId("ca");
+    const changed = jest.fn();
+    root.addEventListener("pb:dropdown:input", changed);
+    root.addEventListener("pb:dropdown:selected", changed);
+    root.closest("form").reset();
+    expect(instance.baseInput.value).toBe("");
+    expect(instance.queryAllOptions()).toHaveLength(2);
+    expect(changed).not.toHaveBeenCalled();
   });
 });

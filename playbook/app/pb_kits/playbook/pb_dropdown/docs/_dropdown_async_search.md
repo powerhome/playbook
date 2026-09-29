@@ -23,3 +23,31 @@ Async Quick Pick is not supported; Quick Pick uses static date presets.
 Selected data is retained independently of remote result rows. A later search returning different options does not discard the selection or its metadata. In multi-select, previously selected IDs remain hidden when they reappear, even if the server returns updated labels or other fields. The selected payload stays as it was when selected until the selection is explicitly changed.
 
 To initialize an async Dropdown before any results load, supply a complete `default_value` option object (an array for multi-select), including `id` and `label`. For example: `async: true, autocomplete: true, options: [], default_value: { id: 42, label: "Ada", department_id: 7 }`. When using `dropdown_field`, pass that explicit default: the builder cannot resolve an initial model ID from an empty options array.
+
+#### Input and reset events
+
+With `async: true`, `pb:dropdown:input` bubbles from the Dropdown root immediately on every edit, including text below the search minimum. Its detail is `{ value, reason }`:
+
+- `reason: "input"`: the autocomplete or search-bar text was edited. `value` is the current text, without debouncing.
+- `reason: "clear"`: the clear control or public `pb:dropdown:clear` command cleared the Dropdown. `value` is `""`.
+- `reason: "reset"`: a native form reset cleared the Dropdown. `value` is `""`.
+
+Selection changes continue to use `pb:dropdown:selected`; choosing an option does not emit an input event. For free-text forms such as a name search, maintain a separate field from both events:
+
+```javascript
+dropdown.addEventListener("pb:dropdown:input", ({ detail }) => {
+  nameField.value = detail.value;
+  // Application-owned IDs can be invalidated on any edit.
+  userIdField.value = "";
+});
+dropdown.addEventListener("pb:dropdown:selected", ({ detail }) => {
+  nameField.value = detail?.label || "";
+  userIdField.value = detail?.id ?? "";
+});
+```
+
+Editing nonempty text retains the Dropdown's selected value until it is changed or cleared. Emptying a single-select autocomplete clears its selected ID and emits `pb:dropdown:selected` with `null`. Emptying a search-bar query does not discard the selected option; emptying a multi-select query does not discard selected pills.
+
+Explicit clear and native form reset clear query text, selection, remote results, loading/error messages, and pending callbacks, and close the menu. They emit the normal cleared selection payload (`null` or `[]`) and the input notification. Native reset completes after the browser resets form controls; a canceled reset leaves kit state intact. Reset clears the selection rather than restoring `default_value`, matching the kit's existing reset convention.
+
+The clear control is also available for an unselected async query unless `clearable: false`. No async input notifications, remote-result cleanup, or changed reset timing are applied to synchronous Dropdowns.
