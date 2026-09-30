@@ -306,24 +306,30 @@
     }
   }
 
-  // TipTap content — match master (prod playbook React tab).
+  // TipTap content — compact spacing via container padding; blocks are flush (margin: 0).
   .ProseMirror {
     background: $white;
     border: 1px solid $input_border_default;
     border-radius: $border_rad_heaviest;
     height: 100%;
-    line-height: $lh_loose;
+    line-height: $lh_normal;
     padding: 1rem 1.5rem 1.5rem 1.5rem;
     @include transition_default;
 
+    h1,
+    h2,
+    h3,
     h4,
     h5,
     h6,
     ul,
     ol,
-    blockquote,
     p {
-      margin: 1rem 0 0 0;
+      margin: 0;
+    }
+
+    p {
+      @include preview_tiptap_p;
     }
 
     code {
@@ -368,11 +374,6 @@
     }
     ul {
       @include preview_tiptap_ul;
-    }
-
-    // After heading mixins: first block should not pick up extra top margin (wins over `p { margin-top: 1rem }`).
-    > :first-child {
-      margin-top: 0;
     }
   }
 
@@ -521,7 +522,17 @@
 
 
 .tiptap-content {
-  @include preview_tiptap_first_child;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  p {
+    margin: 0;
+  }
   a {
     @include preview_tiptap_a;
   }

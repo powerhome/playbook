@@ -1,5 +1,7 @@
 @import "../tokens/border_radius";
 @import "../tokens/colors";
+@import "../tokens/colors_accessible";
+@import "../tokens/line_height";
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
@@ -12,14 +14,12 @@
 }
 
 @mixin preview_tiptap_p {
-    margin: $space_xs 0 0 0;
     min-height: 1rem;
 }
 
 @mixin preview_tiptap_code {
     font-family: monospace;
     background: $bg_light;
-    padding: 0.1rem 0.3rem;
     box-shadow: 0 2px 10px $shadow;
     border-radius: 0.25rem;
     overflow: hidden;
@@ -30,12 +30,12 @@
     width: 100%;
     vertical-align: top;
     font-family: monospace;
-    font-size: 0.9em;
+    font-size: $font_small;
     overflow-x: auto;
     background: $bg_dark;
-    padding: $space_xs;
+    padding: $space_xs $space_sm;
     border-radius: $border_rad_heaviest;
-    margin: $space_sm 0;
+    margin: 1rem 0;
 
     code {
         background: transparent !important;
@@ -55,49 +55,42 @@
 }
 
 @mixin preview_tiptap_blockquote {
-    font-size: $font_larger;
-    padding: $space_xs $space_sm;
-    font-style: italic;
-    margin: $space_xs 0 0 0;
-    p {
-        margin: 0;
-    }
+    border-left: $space_xxs solid $text_lighter;
+    color: $text_light;
+    font-size: $font_default;
+    margin: 1rem 0;
+    padding-left: $space_xs;
 }
 
 @mixin preview_tiptap_h1 {
     font-size: $text_largest;
-    line-height: $text_larger;
+    line-height: $lh_tight;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
-    margin: $space_md 0 0 0;
 }
 
 @mixin preview_tiptap_h2 {
     font-size: $text_larger;
-    line-height: $text_larger;
+    line-height: $lh_tight;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
-    margin: $space_sm + $space_xxs 0 0 0;
 }
 
 @mixin preview_tiptap_h3 {
     font-size: $text_large;
-    line-height: $text_large;
+    line-height: $lh_tight;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
-    margin: $space_sm 0 0 0;
 }
 
 @mixin preview_tiptap_smaller_headings {
     font-size: $text_base;
-    line-height: $text_base;
+    line-height: $lh_tight;
     letter-spacing: $lspace_tight;
     font-weight: $bolder;
-    margin: $space_xs 0 0 0;
 }
 
 @mixin preview_tiptap_hr {
-    margin: $space_md 0;
     box-sizing: content-box;
     overflow: hidden;
     background: transparent;
@@ -106,6 +99,7 @@
     padding: 0;
     background-color: $input_border_default;
     border: 0;
+    margin: $space_sm 0;
 }
 
 @mixin preview_tiptap_img {
@@ -115,27 +109,15 @@
 }
 
 @mixin preview_tiptap_ol {
-    margin: $space_xs 0 0 0;
     padding-left: $space_md;
     list-style: decimal;
-    li {
-      margin: 0;
-      p {
-        margin: 0;
-      }
-    }
+    line-height: $lh_tight;
 }
 
 @mixin preview_tiptap_ul {
     list-style-position: disc;
-    margin: $space_xs 0 0 0;
     padding-left: $space_md;
-    li {
-      margin: 0;
-      p {
-        margin: 0;
-      }
-    }
+    line-height: $lh_tight;
 }
 
 // Trix mixins section (Rails and React default editor)
