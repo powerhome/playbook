@@ -272,8 +272,9 @@
       height: $space_lg + $space_xxs;
       justify-content: flex-start;
       min-height: $space_lg + $space_xxs;
-      // Left pad comes from toolbar_inner ($space_sm)
-      padding: 0 $space_xs 0 0;
+      // Pull left so toolbar $space_sm + button pad don't double-inset; keep xs pad for hover
+      margin-left: -$space_xs;
+      padding: 0 $space_xs;
       width: auto;
 
       &:hover:not([disabled]),
@@ -332,7 +333,8 @@
         line-height: 1;
         max-width: 100%;
         min-height: $space_lg + $space_xxs;
-        padding: 0 $space_xs 0 0;
+        margin-left: -$space_xs;
+        padding: 0 $space_xs;
         text-align: left;
         width: auto;
 
