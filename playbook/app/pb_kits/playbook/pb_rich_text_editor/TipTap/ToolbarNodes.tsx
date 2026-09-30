@@ -24,16 +24,14 @@ const ToolbarNodes = ({editor}: any): React.ReactElement => {
         },
         {
           onclick: () => editor.chain().focus().liftListItem("listItem").run(),
-          // playbook-icons: left-to-line (flip for indent)
-          icon: "left-to-line",
+          icon: "dedent",
           isActive: false,
           text: "Dedent",
           disable: !editor.can().chain().focus().liftListItem("listItem").run(),
         },
         {
           onclick: () => editor.chain().focus().sinkListItem("listItem").run(),
-          flip: "horizontal" as const,
-          icon: "left-to-line",
+          icon: "indent",
           isActive: false,
           text: "Indent",
           disable: !editor.can().chain().focus().sinkListItem("listItem").run(),
@@ -42,11 +40,10 @@ const ToolbarNodes = ({editor}: any): React.ReactElement => {
 
 return (
     <>
-        {toolbarNodesItems.map(({ onclick, flip, icon, text, isActive, disable }, index) => (
+        {toolbarNodesItems.map(({ onclick, icon, text, isActive, disable }, index) => (
             <EditorButton
                 classname={`toolbar_button ${isActive ? 'is-active' : ''}`}
                 disable={disable}
-                flip={flip}
                 icon={icon}
                 key={index}
                 onclick={onclick}

@@ -8,7 +8,6 @@ import Tooltip from "../../pb_tooltip/_tooltip";
 type EditorButtonProps = {
   classname?: string,
   onclick?: () => undefined | void,
-  flip?: "horizontal" | "vertical" | "both" | "none",
   icon?: string;
   text?: string;
   disable?: boolean
@@ -17,7 +16,6 @@ type EditorButtonProps = {
 const EditorButton = ({
   classname,
   disable,
-  flip,
   onclick,
   icon,
   text,
@@ -44,7 +42,6 @@ const EditorButton = ({
             justify="center"
         >
           <Icon
-              flip={flip}
               icon={icon}
               size="1x"
           />
