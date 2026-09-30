@@ -259,13 +259,14 @@ body {
 // Seasonal Styles (Ghost and Santa Frog)
 .ghosts-container, .santa-frogs-container {
   position: absolute;
-  width: 100%;
+  width: 250px;
   height: 120px;
   pointer-events: none;
   overflow: hidden;
   top: -10px;
   left: 0;
-  right: 0;
+  right: auto;
+  z-index: $z_10;
   &::before {
     content: "";
     position: absolute;
@@ -397,6 +398,57 @@ body {
   }
   90% {
     opacity: 0.8;
+  }
+}
+
+@keyframes fly6 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(-12px, 60px) rotate(-6deg);
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes fly7 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(14px, 68px) rotate(9deg);
+    opacity: 0.95;
+  }
+  90% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes fly8 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-8px, 52px) rotate(-5deg);
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.7;
   }
 }
 }
