@@ -195,6 +195,11 @@
       .toolbar_group_tools {
         flex: 1 1 100%;
         order: 3;
+
+        // Tools on their own row — no leading pipe
+        > .toolbar_separator:first-child {
+          display: none;
+        }
       }
     }
 
@@ -203,10 +208,25 @@
         .toolbar_group_tools {
           flex: 0 1 auto;
           order: 2;
+
+          > .toolbar_separator:first-child {
+            display: flex;
+          }
         }
 
         .toolbar_group_more {
           order: 3;
+        }
+      }
+    }
+
+    // No "more": when the bar is too narrow for format + tools, stack tools and drop the leading pipe
+    @container rte-toolbar (max-width: 36rem) {
+      .toolbar_controls:not(:has(.toolbar_group_more)) .toolbar_group_tools {
+        flex: 1 1 100%;
+
+        > .toolbar_separator:first-child {
+          display: none;
         }
       }
     }
