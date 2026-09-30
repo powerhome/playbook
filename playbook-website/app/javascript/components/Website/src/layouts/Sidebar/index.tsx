@@ -17,13 +17,12 @@ const Sidebar = ({
 }: any) => {
   
   // --------------Halloween only-----------------------------
-  // Check if we're in the last week of October (Oct 25-31)
-  // Add special Halloween decorations during this week!
-  const isHalloweenWeek = () => {
+  // Check if we're in October (from midnight Oct 1 through Oct 31)
+  // Add special Halloween decorations during this month!
+  const isHalloweenMonth = () => {
     const today = new Date();
     const month = today.getMonth(); // 0-indexed, so October is 9
-    const date = today.getDate();
-    return month === 9 && date >= 25 && date <= 31;
+    return month === 9;
   };
   // --------------------------------------------------------
 
@@ -58,7 +57,7 @@ const Sidebar = ({
 
   return (
     <>
-      {isHalloweenWeek() && <FlyingGhosts />}
+      {isHalloweenMonth() && <FlyingGhosts />}
       <Nav dark={dark} variant="bold" paddingTop="md">
         <TopLevelNavItem
           dark={dark}
