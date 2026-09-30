@@ -211,7 +211,7 @@
       }
     }
 
-    // Separators: shorter than buttons (vertical xs); xxs gap left/right so hover chips don't kiss the line
+    // Separators: slightly inset from button height; xxs gap left/right
     &_separator {
       align-items: stretch;
       align-self: center;
@@ -219,7 +219,7 @@
       display: flex;
       flex-shrink: 0;
       height: $space_lg + $space_xxs;
-      padding: $space_xs $space_xxs;
+      padding: $space_xxs;
 
       .pb_section_separator_kit.pb_section_separator_vertical {
         align-self: stretch;
