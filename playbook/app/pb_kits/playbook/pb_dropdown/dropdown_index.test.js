@@ -873,6 +873,54 @@ describe("PbDropdown async search", () => {
     expect(instance.target).toHaveClass("close");
   });
 
+  test.each(["click", "ArrowDown", "Enter"])("%s after selection and clear does not open an empty menu", (action) => {
+    const down = document.createElement("span");
+    down.setAttribute("data-dropdown-open-icon", "");
+    const up = document.createElement("span");
+    up.setAttribute("data-dropdown-close-icon", "");
+    root.append(down, up);
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "42", label: "Ada" }]);
+    instance.queryAllOptions()[0].click();
+    instance.clearSelection();
+    jest.advanceTimersByTime(0);
+    if (action === "click") input.click();
+    else input.dispatchEvent(new KeyboardEvent("keydown", { key: action, bubbles: true }));
+    expect(instance.target).toHaveClass("close");
+    expect(instance.target).not.toHaveClass("open");
+    expect(down.style.display).not.toBe("none");
+    expect(up.style.display).toBe("none");
+    type("new");
+    jest.advanceTimersByTime(250);
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target).toHaveTextContent("Loading");
+  });
+
+  test("an empty async search-bar menu can still open so the user can type", () => {
+    instance.disconnect();
+    input.removeAttribute("data-dropdown-autocomplete");
+    input.setAttribute("data-dropdown-search", "");
+    instance.target.prepend(input);
+    instance.connect();
+    instance.clearSelection();
+    root.querySelector(".pb_dropdown_trigger").click();
+    expect(instance.target).toHaveClass("open");
+  });
+
+  test.each(["empty", "error"])("async %s status can be reopened", (status) => {
+    type("ada");
+    jest.advanceTimersByTime(250);
+    const request = search.mock.calls[0][0].detail;
+    if (status === "empty") request.setResults([]);
+    else request.setError();
+    instance.hideElement(instance.target);
+    jest.advanceTimersByTime(0);
+    input.click();
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target).toHaveTextContent(status === "empty" ? "no option" : "Unable to load options");
+  });
+
   test("disabled dropdowns do not search", () => {
     instance.isDisabled = true;
     type("abc");

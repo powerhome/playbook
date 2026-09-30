@@ -135,6 +135,14 @@ export default class PbDropdown extends PbEnhancedElement {
     return this.element.dataset.pbDropdownAsync === "true";
   }
 
+  get canOpenMenu() {
+    return !this.isAsync || Boolean(
+      this.searchBar || this.target?.querySelector(
+        `${OPTION_SELECTOR}, [data-dropdown-async-status], .dropdown_no_options`,
+      ),
+    );
+  }
+
   asyncRequestId = 0;
   selectedOptionJson = null;
   selectedOptions = new Set();
@@ -1316,7 +1324,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   showElement(elem) {
-    if (this.isDisabled) return;
+    if (this.isDisabled || !this.canOpenMenu) return;
 
     // When autocomplete is showing the selected label (not an active search), show all options
     this.resetOptionFilterForSelectedLabel();
@@ -1396,7 +1404,7 @@ export default class PbDropdown extends PbEnhancedElement {
       rootElement: this.element,
       downSelector: DOWN_ARROW_SELECTOR,
       upSelector: UP_ARROW_SELECTOR,
-      showDownArrow: !isOpen,
+      showDownArrow: !(isOpen && this.canOpenMenu),
     });
   }
 
