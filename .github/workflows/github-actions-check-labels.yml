@@ -2,7 +2,7 @@ name: Check Labels
 run-name: ${{ github.actor }} is checking labels 🚀
 on:
   pull_request:
-    types: [ labeled, unlabeled ]
+    types: [ opened, reopened, ready_for_review, synchronize, labeled, unlabeled ]
 cache-mode: none
 jobs:
   Checking-Labels:
@@ -79,8 +79,24 @@ jobs:
               per_page: 100,
             });
 
-            for (const comment of comments) {
-              if ((comment.body || "").includes(marker)) {
+            const existing = comments.filter((comment) => (comment.body || "").includes(marker));
+
+            if (process.env.CHECK_OUTCOME === "success" || !process.env.ERROR_MESSAGE) {
+              for (const comment of existing) {
+                await github.rest.issues.deleteComment({
+                  owner,
+                  repo,
+                  comment_id: comment.id,
+                });
+              }
+              return;
+            }
+
+            const body = `${process.env.ERROR_MESSAGE}\n\n${marker}`;
+            const same = existing.find((comment) => comment.body === body);
+
+            for (const comment of existing) {
+              if (!same || comment.id !== same.id) {
                 await github.rest.issues.deleteComment({
                   owner,
                   repo,
@@ -89,13 +105,11 @@ jobs:
               }
             }
 
-            if (process.env.CHECK_OUTCOME === "success" || !process.env.ERROR_MESSAGE) {
-              return;
+            if (!same) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
             }
-
-            await github.rest.issues.createComment({
-              owner,
-              repo,
-              issue_number,
-              body: `${process.env.ERROR_MESSAGE}\n\n${marker}`,
-            });
