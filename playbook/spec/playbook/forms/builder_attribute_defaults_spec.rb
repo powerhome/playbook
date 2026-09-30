@@ -55,8 +55,8 @@ RSpec.describe Playbook::Forms::Builder, type: :kit do
     allow(model).to receive(:respond_to?) do |method_name, *|
       method = method_name.to_s
       attribute_name = method
-                       .sub(/_before_type_cast\z/, "")
-                       .sub(/_came_from_user\?\z/, "")
+                       .delete_suffix("_before_type_cast")
+                       .delete_suffix("_came_from_user?")
                        .to_sym
 
       attributes.key?(method_name.to_sym) ||
