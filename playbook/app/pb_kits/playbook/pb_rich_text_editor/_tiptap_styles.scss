@@ -85,12 +85,12 @@
       background-color: $neutral_subtle;
     }
     &:disabled {
-      color: $border_light;
+      color: $text_lt_lighter;
       cursor: default;
 
       .pb_icon_kit,
       .pb_custom_icon {
-        color: $border_light;
+        color: $text_lt_lighter;
       }
     }
     &:focus-visible {
