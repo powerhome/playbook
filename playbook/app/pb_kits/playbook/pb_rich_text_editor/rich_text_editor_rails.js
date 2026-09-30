@@ -82,7 +82,7 @@ function runToolbarAction(editor, action, { alignment, prompt = window.prompt, n
     editor.chain().focus().toggleOrderedList().run();
     return;
   }
-  if (action === "outdent") {
+  if (action === "dedent") {
     editor.chain().focus().liftListItem("listItem").run();
     return;
   }
@@ -350,7 +350,7 @@ async function initPlaybookRichTextEditorRails(container) {
       toolbar.querySelectorAll("button[data-action='redo']").forEach((btn) => {
         btn.disabled = !editor.can().redo();
       });
-      toolbar.querySelectorAll("button[data-action='outdent']").forEach((btn) => {
+      toolbar.querySelectorAll("button[data-action='dedent']").forEach((btn) => {
         btn.disabled = !editor.can().liftListItem("listItem");
       });
       toolbar.querySelectorAll("button[data-action='indent']").forEach((btn) => {

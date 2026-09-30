@@ -24,10 +24,10 @@ const ToolbarNodes = ({editor}: any): React.ReactElement => {
         },
         {
           onclick: () => editor.chain().focus().liftListItem("listItem").run(),
-          // playbook-icons: FA "outdent" → left-to-line (indent/outdent names are not in the set)
+          // playbook-icons: no "dedent"/"indent" — use left-to-line (+ flip for indent)
           icon: "left-to-line",
           isActive: false,
-          text: "Outdent",
+          text: "Dedent",
           disable: !editor.can().chain().focus().liftListItem("listItem").run(),
         },
         {
