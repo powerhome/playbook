@@ -654,7 +654,12 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const minimumLength = Number(this.element.dataset.pbDropdownSearchTermMinimumLength ?? 3);
     if (term.length < minimumLength) {
-      this.clearAsyncResults();
+      if (!this.searchBar) {
+        this.clearAsyncResults();
+      } else {
+        this.adjustDropdownHeight();
+        this.applyPortalPosition();
+      }
       return;
     }
 

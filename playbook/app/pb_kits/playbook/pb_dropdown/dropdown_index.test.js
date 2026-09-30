@@ -962,6 +962,62 @@ describe("PbDropdown async search", () => {
     expect(instance.target).not.toHaveClass("open");
   });
 
+  test.each([false, true])("search-bar typing stays open below the minimum (portaled: %p)", (portaled) => {
+    instance.disconnect();
+    input.removeAttribute("data-dropdown-autocomplete");
+    input.setAttribute("data-dropdown-search", "");
+    instance.target.prepend(input);
+    instance.connect();
+    instance.showElement(instance.target);
+    if (portaled) document.body.appendChild(instance.target);
+    input.focus();
+
+    for (const term of ["a", "ad"]) {
+      type(term);
+      jest.advanceTimersByTime(250);
+      expect(instance.target).toHaveClass("open");
+      expect(instance.target).not.toHaveClass("close");
+      expect(document.activeElement).toBe(input);
+      expect(search).not.toHaveBeenCalled();
+    }
+    type("ada");
+    jest.advanceTimersByTime(250);
+    expect(search).toHaveBeenCalledTimes(1);
+    expect(search.mock.calls[0][0].detail.searchingFor).toBe("ada");
+  });
+
+  test.each([false, true])("deleting a search-bar query clears results but retains the input (portaled: %p)", (portaled) => {
+    instance.disconnect();
+    input.removeAttribute("data-dropdown-autocomplete");
+    input.setAttribute("data-dropdown-search", "");
+    instance.target.prepend(input);
+    instance.connect();
+    instance.showElement(instance.target);
+    if (portaled) document.body.appendChild(instance.target);
+    input.focus();
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "42", label: "Ada" }]);
+    type("ad");
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(instance.target).toHaveClass("open");
+    expect(document.activeElement).toBe(input);
+
+    type("adam");
+    jest.advanceTimersByTime(250);
+    const pending = search.mock.calls[1][0].detail;
+    type("");
+    pending.setResults([{ id: "late", label: "Late" }]);
+    pending.setError();
+    jest.advanceTimersByTime(15000);
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(instance.target).toHaveClass("open");
+    expect(document.activeElement).toBe(input);
+    expect(root).toHaveAttribute("aria-busy", "false");
+    expect(instance.target.querySelector("[data-dropdown-async-status]")).toBeNull();
+    expect(search).toHaveBeenCalledTimes(2);
+  });
+
   test("disabled dropdowns do not search", () => {
     instance.isDisabled = true;
     type("abc");
