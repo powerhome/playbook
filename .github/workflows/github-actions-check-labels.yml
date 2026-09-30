@@ -3,6 +3,9 @@ run-name: ${{ github.actor }} is checking labels 🚀
 on:
   pull_request:
     types: [ labeled, unlabeled ]
+concurrency:
+  group: check-labels-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
 cache-mode: none
 jobs:
   Checking-Labels:
@@ -52,16 +55,60 @@ jobs:
             echo "Valid Semver label found: $NORMALIZED_LABEL"
           fi
       - name: Leave PR comment
-        if: failure()
+        if: success() || failure()
         uses: actions/github-script@v7
         env:
+          CHECK_OUTCOME: ${{ steps.check-labels.outcome }}
           ERROR_MESSAGE: ${{ steps.check-labels.outputs.message }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            await github.rest.issues.createComment({
-              issue_number: context.payload.pull_request.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: process.env.ERROR_MESSAGE
-            })
+            const marker = "<!-- playbook-label-check -->";
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+              per_page: 100,
+            });
+            const existing = comments.filter((comment) => {
+              const body = comment.body || "";
+              return body.includes(marker) ||
+                body.startsWith("No required label found.") ||
+                body.startsWith("No Semver label found.") ||
+                body.startsWith("Multiple Semver labels found.");
+            });
+
+            if (process.env.CHECK_OUTCOME === "success") {
+              for (const comment of existing) {
+                await github.rest.issues.deleteComment({
+                  owner,
+                  repo,
+                  comment_id: comment.id,
+                });
+              }
+              return;
+            }
+
+            const body = `${process.env.ERROR_MESSAGE}\n\n${marker}`;
+            const [current, ...duplicates] = existing;
+
+            if (!current) {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            } else if (current.body !== body) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: current.id,
+                body,
+              });
+            }
+
+            for (const comment of duplicates) {
+              await github.rest.issues.deleteComment({
+                owner,
+                repo,
+                comment_id: comment.id,
+              });
+            }
