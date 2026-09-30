@@ -7,30 +7,61 @@ cache-mode: none
 jobs:
   Checking-Labels:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: Check for Semver label
+        id: check-labels
         run: |
           LABELS=$(jq -r '.pull_request.labels[].name' "$GITHUB_EVENT_PATH")
           SEMVER_PATTERN="^(major|minor|patch)$"
+          REQUIRED_LABEL_PATTERN="^(enhancement|bug|improvement|new kit|deprecated|breaking)$"
 
           SEMVER_LABELS=$(echo "$LABELS" | grep -iE "$SEMVER_PATTERN" || true)
+          REQUIRED_LABELS=$(echo "$LABELS" | grep -iE "$REQUIRED_LABEL_PATTERN" || true)
+
+          fail() {
+            echo "Error: $1"
+            {
+              echo "message<<EOF"
+              echo "$1"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+            exit 1
+          }
+
+          if [ -z "$REQUIRED_LABELS" ]; then
+            fail "No required label found. Please add at least one of: enhancement, bug, improvement, new kit, deprecated, breaking (case-insensitive)"
+          fi
 
           # Check if SEMVER_LABELS is empty
           if [ -z "$SEMVER_LABELS" ]; then
-            echo "Error: No Semver label found. Please add exactly one of: major, minor, patch (case-insensitive)"
-            exit 1
+            fail "No Semver label found. Please add exactly one of: major, minor, patch (case-insensitive)"
           fi
 
           SEMVER_LABEL_COUNT=$(echo "$SEMVER_LABELS" | wc -l)
 
           if [ "$SEMVER_LABEL_COUNT" -eq 0 ]; then
-            echo "Error: No Semver label found. Please add exactly one of: major, minor, patch (case-insensitive)"
-            exit 1
+            fail "No Semver label found. Please add exactly one of: major, minor, patch (case-insensitive)"
           elif [ "$SEMVER_LABEL_COUNT" -gt 1 ]; then
-            echo "Error: Multiple Semver labels found. Please ensure only one is present:"
-            echo "$SEMVER_LABELS"
-            exit 1
+            SEMVER_LABEL_LIST=$(echo "$SEMVER_LABELS" | paste -sd ', ' -)
+            fail "Multiple Semver labels found. Please ensure only one is present: $SEMVER_LABEL_LIST"
           else
             NORMALIZED_LABEL=$(echo "$SEMVER_LABELS" | tr '[:upper:]' '[:lower:]')
             echo "Valid Semver label found: $NORMALIZED_LABEL"
           fi
+      - name: Leave PR comment
+        if: failure()
+        uses: actions/github-script@v7
+        env:
+          ERROR_MESSAGE: ${{ steps.check-labels.outputs.message }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: process.env.ERROR_MESSAGE
+            })
