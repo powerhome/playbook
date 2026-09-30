@@ -95,7 +95,6 @@ function runToolbarAction(editor, action, { alignment, prompt = window.prompt, n
     bold: "toggleBold",
     italic: "toggleItalic",
     strike: "toggleStrike",
-    codeBlock: "toggleCodeBlock",
     horizontalRule: "setHorizontalRule",
     underline: "toggleUnderline",
   };
@@ -268,6 +267,7 @@ async function initPlaybookRichTextEditorRails(container) {
       else if (editor.isActive("bulletList")) value = "bulletList";
       else if (editor.isActive("orderedList")) value = "orderedList";
       else if (editor.isActive("blockquote")) value = "blockquote";
+      else if (editor.isActive("codeBlock")) value = "codeBlock";
       return value;
     };
 
@@ -312,13 +312,13 @@ async function initPlaybookRichTextEditorRails(container) {
       else if (value === "bulletList") chain.toggleBulletList().run();
       else if (value === "orderedList") chain.toggleOrderedList().run();
       else if (value === "blockquote") chain.toggleBlockquote().run();
+      else if (value === "codeBlock") chain.toggleCodeBlock().run();
     };
 
     const isToolbarActionActive = (action, alignment) => {
       if (action === "bold") return editor.isActive("bold");
       if (action === "italic") return editor.isActive("italic");
       if (action === "strike") return editor.isActive("strike");
-      if (action === "codeBlock") return editor.isActive("codeBlock");
       if (action === "link") return editor.isActive("link");
       if (action === "bulletList") return editor.isActive("bulletList");
       if (action === "orderedList") return editor.isActive("orderedList");

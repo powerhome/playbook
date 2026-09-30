@@ -60,8 +60,7 @@ const toolbarDropdownItems = [
         onclick: () => {
           normalizeListSelection(editor)
           editor.chain().focus().toggleOrderedList().run()
-        }
-        ,
+        },
     },
     {
         node: "blockquote",
@@ -69,6 +68,13 @@ const toolbarDropdownItems = [
         isActive: editor.isActive("blockquote"),
         text: "Block Quote",
         onclick: () => editor.chain().focus().toggleBlockquote().run(),
+    },
+    {
+        node: "codeBlock",
+        icon: "code",
+        isActive: editor.isActive("codeBlock"),
+        text: "Code Block",
+        onclick: () => editor.chain().focus().toggleCodeBlock().run(),
     },
 ]
 

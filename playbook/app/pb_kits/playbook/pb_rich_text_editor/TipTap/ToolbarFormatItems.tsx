@@ -48,12 +48,6 @@ const ToolbarFormatItems = ({editor}: any): React.ReactElement => {
       classname: `toolbar_button ${editor.isActive("link") ? "is-active" : ""}`,
       onclick: setLink,
     },
-    {
-      icon: "code",
-      text: "Codeblock",
-      classname: `toolbar_button ${editor.isActive("codeBlock") ? "is-active" : ""}`,
-      onclick: () => editor.chain().focus().toggleCodeBlock().run(),
-    },
   ];
 
   return (

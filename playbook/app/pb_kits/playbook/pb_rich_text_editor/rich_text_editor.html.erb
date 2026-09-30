@@ -52,6 +52,7 @@
       { value: "bulletList", text: "Bullet List", icon: "list" },
       { value: "orderedList", text: "Ordered List", icon: "list-ol" },
       { value: "blockquote", text: "Block Quote", icon: "block-quote" },
+      { value: "codeBlock", text: "Code Block", icon: "code" },
     ] %>
     <div class="pb_background_kit pb_background_color_white toolbar rte-rails-toolbar-layout" id="<%= object.toolbar_id %>">
       <div class="toolbar_inner rte-rails-toolbar-row">
@@ -121,11 +122,6 @@
             <button type="button" class="toolbar_button" data-action="link" title="Link" role="button" tabindex="0">
               <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
                 <%= pb_rails("icon", props: { icon: "link", size: "1x" }) %>
-              <% end %>
-            </button>
-            <button type="button" class="toolbar_button" data-action="codeBlock" title="Code block" role="button" tabindex="0">
-              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-                <%= pb_rails("icon", props: { icon: "code", size: "1x" }) %>
               <% end %>
             </button>
             <div class="toolbar_separator">
