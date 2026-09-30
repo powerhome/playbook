@@ -7,4 +7,4 @@ The explicit `option.label` is used in the selected input, even when the row con
 
 Provide display content only: do not include another Dropdown option wrapper, interactive controls, or named form inputs in suggestions. Keep submitted fields outside the result content and update them from selection data. Cloning preserves markup and data attributes but does not copy JavaScript event listeners attached to the original nodes.
 
-The example renders Rails Body and Detail kits for the title and department. The same pattern works with a User kit or other custom display content.
+The example searches [DummyJSON’s public sample users API](https://dummyjson.com/docs/users) without credentials or an API key. Try `Emily` or `Michael`. It renders Rails Body and Detail kits for the name, job title, and department, retaining title and department in the selected option data. The same pattern works with a User kit or other custom display content.
