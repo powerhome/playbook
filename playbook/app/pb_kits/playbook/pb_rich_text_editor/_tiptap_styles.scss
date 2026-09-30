@@ -85,7 +85,11 @@
       background-color: $neutral_subtle;
     }
     &:disabled {
-      .pb_icon_kit {
+      color: $border_light;
+      cursor: default;
+
+      .pb_icon_kit,
+      .pb_custom_icon {
         color: $border_light;
       }
     }
