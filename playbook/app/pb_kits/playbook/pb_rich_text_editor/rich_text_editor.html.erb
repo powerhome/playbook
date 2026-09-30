@@ -69,9 +69,6 @@
               },
             }) do %>
               <span class="pb_flex_kit pb_flex_kit_orientation_row pb_flex_kit_justify_content_left pb_flex_kit_align_items_center pb_flex_kit_spacing_none pb_flex_kit_gap_xs gap_xs rte-block-style-trigger-inner" data-rte-block-trigger>
-                <span class="rte-block-style-trigger-icon">
-                  <%= pb_rails("icon", props: { icon: "paragraph", size: "1x" }) %>
-                </span>
                 <span class="rte-block-style-trigger-label">Paragraph</span>
                 <span class="display_inline_flex rte-block-style-chevron">
                   <%= pb_rails("icon", props: { icon: "chevron-down", fixed_width: true }) %>
@@ -92,7 +89,6 @@
                 <%= pb_rails("nav/item", props: {
                   link: "##{opt[:value]}",
                   text: opt[:text],
-                  icon_left: opt[:icon],
                   margin: "none",
                   padding_top: "xxs",
                   padding_bottom: "xxs",

@@ -286,9 +286,7 @@ async function initPlaybookRichTextEditorRails(container) {
         );
       }
       if (triggerRoot && tpl) {
-        const iconWrap = triggerRoot.querySelector(".rte-block-style-trigger-icon");
         const labelEl = triggerRoot.querySelector(".rte-block-style-trigger-label");
-        if (iconWrap) iconWrap.innerHTML = tpl.innerHTML;
         if (labelEl) labelEl.textContent = tpl.getAttribute("data-label") || "";
       }
       const tooltip = document.getElementById(blockTooltipId);

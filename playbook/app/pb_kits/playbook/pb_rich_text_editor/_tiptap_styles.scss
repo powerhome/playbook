@@ -154,7 +154,7 @@
       row-gap: $space_xxs;
     }
 
-    // Separators: padding xs so the line is shorter than 36px buttons
+    // Separators: shorter than buttons (vertical xs); xxs gap left/right so hover chips don't kiss the line
     &_separator {
       align-items: stretch;
       align-self: center;
@@ -162,7 +162,7 @@
       display: flex;
       flex-shrink: 0;
       height: $space_lg + $space_xxs;
-      padding: $space_xs 0;
+      padding: $space_xs $space_xxs;
 
       .pb_section_separator_kit.pb_section_separator_vertical {
         align-self: stretch;
@@ -171,23 +171,41 @@
         margin-left: 0;
         margin-right: 0;
         min-height: 0;
+        width: 1px;
+
+        &::before,
+        &::after {
+          width: 1px;
+        }
       }
     }
 
-    // React ToolbarDropdown — 36px trigger height, light text
+    // React ToolbarDropdown — match icon-button hover; width hugs label + chevron
     .editor-dropdown-button {
-      background: transparent;
-      border: none;
-      color: $text_lt_light;
+      align-items: center;
+      background: transparent !important;
+      border: none !important;
+      border-radius: $border_radius_md;
+      box-shadow: none !important;
+      box-sizing: border-box;
+      color: $text_lt_light !important;
       cursor: pointer;
+      display: inline-flex;
       font-weight: $light;
       height: $space_lg + $space_xxs;
+      justify-content: flex-start;
       min-height: $space_lg + $space_xxs;
       padding: 0 $space_xs;
-      width: $space_xl * 3;
+      width: auto;
+
+      &:hover:not([disabled]),
+      &:active:not([disabled]) {
+        background-color: $neutral_subtle !important;
+        color: $text_lt_light !important;
+      }
 
       &:focus-visible {
-        box-shadow: unset;
+        box-shadow: unset !important;
       }
     }
 
@@ -229,10 +247,9 @@
         display: inline-flex;
       }
 
-      // Rails block-style label + icons needs flexible width.
+      // Rails block-style label needs flexible width.
       .editor-dropdown-button {
         height: $space_lg + $space_xxs;
-        justify-content: flex-start;
         letter-spacing: normal;
         line-height: 1;
         max-width: 100%;
@@ -255,7 +272,6 @@
           align-items: center;
         }
 
-        .rte-block-style-trigger-icon,
         .rte-block-style-chevron {
           display: inline-flex;
           flex-shrink: 0;
