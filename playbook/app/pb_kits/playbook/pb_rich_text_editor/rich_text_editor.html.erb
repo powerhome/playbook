@@ -56,97 +56,101 @@
     <div class="pb_background_kit pb_background_color_white toolbar rte-rails-toolbar-layout" id="<%= object.toolbar_id %>">
       <div class="toolbar_inner rte-rails-toolbar-row">
         <div class="toolbar_controls rte-toolbar-left">
-          <span class="pb_popover_reference_wrapper">
-            <%# Button kit wraps content in <span class="pb_button_content"> — block <div>s inside are invalid and break layout. Single <span> row + JS sync from templates. %>
-            <%= pb_rails("button", props: {
-              id: object.rte_block_style_trigger_id,
-              variant: "secondary",
-              classname: "editor-dropdown-button",
-              html_options: {
-                type: "button",
-                "aria-label": "Text style",
-                "aria-haspopup": "true",
-              },
-            }) do %>
-              <span class="pb_flex_kit pb_flex_kit_orientation_row pb_flex_kit_justify_content_left pb_flex_kit_align_items_center pb_flex_kit_spacing_none pb_flex_kit_gap_xs gap_xs rte-block-style-trigger-inner" data-rte-block-trigger>
-                <span class="rte-block-style-trigger-label">Paragraph</span>
-                <span class="display_inline_flex rte-block-style-chevron">
-                  <%= pb_rails("icon", props: { icon: "chevron-down", fixed_width: true }) %>
+          <div class="toolbar_group toolbar_group_format">
+            <span class="pb_popover_reference_wrapper">
+              <%# Button kit wraps content in <span class="pb_button_content"> — block <div>s inside are invalid and break layout. Single <span> row + JS sync from templates. %>
+              <%= pb_rails("button", props: {
+                id: object.rte_block_style_trigger_id,
+                variant: "secondary",
+                classname: "editor-dropdown-button",
+                html_options: {
+                  type: "button",
+                  "aria-label": "Text style",
+                  "aria-haspopup": "true",
+                },
+              }) do %>
+                <span class="pb_flex_kit pb_flex_kit_orientation_row pb_flex_kit_justify_content_left pb_flex_kit_align_items_center pb_flex_kit_spacing_none pb_flex_kit_gap_xs gap_xs rte-block-style-trigger-inner" data-rte-block-trigger>
+                  <span class="rte-block-style-trigger-label">Paragraph</span>
+                  <span class="display_inline_flex rte-block-style-chevron">
+                    <%= pb_rails("icon", props: { icon: "chevron-down", fixed_width: true }) %>
+                  </span>
                 </span>
-              </span>
-            <% end %>
-          </span>
-          <%= pb_rails("popover", props: {
-            trigger_element_id: object.rte_block_style_trigger_id,
-            tooltip_id: object.rte_block_style_tooltip_id,
-            position: "bottom",
-            padding: "none",
-            close_on_click: "any",
-            offset: true,
-          }) do %>
-            <%= pb_rails("nav", props: { variant: "subtle", padding_top: "xs", padding_bottom: "xs" }) do %>
-              <% block_style_options.each do |opt| %>
-                <%= pb_rails("nav/item", props: {
-                  link: "##{opt[:value]}",
-                  text: opt[:text],
-                  margin: "none",
-                  padding_top: "xxs",
-                  padding_bottom: "xxs",
-                }) %>
+              <% end %>
+            </span>
+            <%= pb_rails("popover", props: {
+              trigger_element_id: object.rte_block_style_trigger_id,
+              tooltip_id: object.rte_block_style_tooltip_id,
+              position: "bottom",
+              padding: "none",
+              close_on_click: "any",
+              offset: true,
+            }) do %>
+              <%= pb_rails("nav", props: { variant: "subtle", padding_top: "xs", padding_bottom: "xs" }) do %>
+                <% block_style_options.each do |opt| %>
+                  <%= pb_rails("nav/item", props: {
+                    link: "##{opt[:value]}",
+                    text: opt[:text],
+                    margin: "none",
+                    padding_top: "xxs",
+                    padding_bottom: "xxs",
+                  }) %>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
-          <div class="toolbar_separator">
-            <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
           </div>
-          <button type="button" class="toolbar_button" data-action="bold" title="Bold" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "bold", size: "1x" }) %>
-            <% end %>
-          </button>
-          <button type="button" class="toolbar_button" data-action="italic" title="Italic" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "italic", size: "1x" }) %>
-            <% end %>
-          </button>
-          <button type="button" class="toolbar_button" data-action="strike" title="Strikethrough" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "strikethrough", size: "1x" }) %>
-            <% end %>
-          </button>
-          <button type="button" class="toolbar_button" data-action="link" title="Link" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "link", size: "1x" }) %>
-            <% end %>
-          </button>
-          <button type="button" class="toolbar_button" data-action="codeBlock" title="Code block" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "code", size: "1x" }) %>
-            <% end %>
-          </button>
-          <div class="toolbar_separator">
-            <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+          <div class="toolbar_group toolbar_group_tools">
+            <div class="toolbar_separator">
+              <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+            </div>
+            <button type="button" class="toolbar_button" data-action="bold" title="Bold" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "bold", size: "1x" }) %>
+              <% end %>
+            </button>
+            <button type="button" class="toolbar_button" data-action="italic" title="Italic" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "italic", size: "1x" }) %>
+              <% end %>
+            </button>
+            <button type="button" class="toolbar_button" data-action="strike" title="Strikethrough" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "strikethrough", size: "1x" }) %>
+              <% end %>
+            </button>
+            <button type="button" class="toolbar_button" data-action="link" title="Link" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "link", size: "1x" }) %>
+              <% end %>
+            </button>
+            <button type="button" class="toolbar_button" data-action="codeBlock" title="Code block" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "code", size: "1x" }) %>
+              <% end %>
+            </button>
+            <div class="toolbar_separator">
+              <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+            </div>
+            <button type="button" class="toolbar_button" data-action="orderedList" title="Ordered List" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "list-ol", size: "1x" }) %>
+              <% end %>
+            </button>
+            <button type="button" class="toolbar_button" data-action="bulletList" title="Bullet List" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "list", size: "1x" }) %>
+              <% end %>
+            </button>
+            <button type="button" class="toolbar_button" data-action="outdent" title="Outdent" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "outdent", size: "1x" }) %>
+              <% end %>
+            </button>
+            <button type="button" class="toolbar_button" data-action="indent" title="Indent" role="button" tabindex="0">
+              <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                <%= pb_rails("icon", props: { icon: "indent", size: "1x" }) %>
+              <% end %>
+            </button>
           </div>
-          <button type="button" class="toolbar_button" data-action="orderedList" title="Ordered List" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "list-ol", size: "1x" }) %>
-            <% end %>
-          </button>
-          <button type="button" class="toolbar_button" data-action="bulletList" title="Bullet List" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "list", size: "1x" }) %>
-            <% end %>
-          </button>
-          <button type="button" class="toolbar_button" data-action="outdent" title="Outdent" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "outdent", size: "1x" }) %>
-            <% end %>
-          </button>
-          <button type="button" class="toolbar_button" data-action="indent" title="Indent" role="button" tabindex="0">
-            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-              <%= pb_rails("icon", props: { icon: "indent", size: "1x" }) %>
-            <% end %>
-          </button>
           <% if object.show_extensions_dropdown? %>
             <% extension_options = [] %>
             <% extension_options << { value: "underline", text: "Underline", icon: "underline" } if object.extension_enabled?("underline") %>
@@ -160,38 +164,40 @@
             <% end %>
             <% extension_options << { value: "horizontalRule", text: "Horizontal rule", icon: "horizontal-rule" } if object.extension_enabled?("horizontal_rule") %>
             <% extension_options << { value: "image", text: "Image", icon: "image" } if object.extension_enabled?("image") %>
-            <div class="toolbar_separator">
-              <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
-            </div>
-            <span class="pb_popover_reference_wrapper">
-              <button type="button" class="toolbar_button" id="<%= object.rte_extensions_trigger_id %>" title="More formatting" aria-label="More formatting" aria-haspopup="true" role="button" tabindex="0">
-                <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
-                  <%= pb_rails("icon", props: { icon: "ellipsis", size: "1x" }) %>
-                <% end %>
-              </button>
-            </span>
-            <%= pb_rails("popover", props: {
-              trigger_element_id: object.rte_extensions_trigger_id,
-              tooltip_id: object.rte_extensions_tooltip_id,
-              position: "bottom",
-              padding: "none",
-              close_on_click: "any",
-              offset: true,
-            }) do %>
-              <%= pb_rails("nav", props: { variant: "subtle", padding_top: extension_options.many? ? "xs" : "none", padding_bottom: extension_options.many? ? "xs" : "none" }) do %>
-                <% extension_options.each do |extension| %>
-                  <%= pb_rails("nav/item", props: {
-                    link: "##{extension[:value]}",
-                    text: extension[:text],
-                    icon_left: extension[:icon],
-                    classname: "pb_tiptap_toolbar_dropdown_list_item",
-                    margin: "none",
-                    padding_top: "xxs",
-                    padding_bottom: "xxs",
-                  }) %>
+            <div class="toolbar_group toolbar_group_more">
+              <div class="toolbar_separator">
+                <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+              </div>
+              <span class="pb_popover_reference_wrapper">
+                <button type="button" class="toolbar_button" id="<%= object.rte_extensions_trigger_id %>" title="More formatting" aria-label="More formatting" aria-haspopup="true" role="button" tabindex="0">
+                  <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+                    <%= pb_rails("icon", props: { icon: "ellipsis", size: "1x" }) %>
+                  <% end %>
+                </button>
+              </span>
+              <%= pb_rails("popover", props: {
+                trigger_element_id: object.rte_extensions_trigger_id,
+                tooltip_id: object.rte_extensions_tooltip_id,
+                position: "bottom",
+                padding: "none",
+                close_on_click: "any",
+                offset: true,
+              }) do %>
+                <%= pb_rails("nav", props: { variant: "subtle", padding_top: extension_options.many? ? "xs" : "none", padding_bottom: extension_options.many? ? "xs" : "none" }) do %>
+                  <% extension_options.each do |extension| %>
+                    <%= pb_rails("nav/item", props: {
+                      link: "##{extension[:value]}",
+                      text: extension[:text],
+                      icon_left: extension[:icon],
+                      classname: "pb_tiptap_toolbar_dropdown_list_item",
+                      margin: "none",
+                      padding_top: "xxs",
+                      padding_bottom: "xxs",
+                    }) %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
+            </div>
           <% end %>
         </div>
         <div class="toolbar_history rte-toolbar-right">

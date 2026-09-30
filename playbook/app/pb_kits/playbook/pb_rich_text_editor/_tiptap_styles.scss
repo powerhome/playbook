@@ -121,6 +121,8 @@
   .toolbar {
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $input_border_default;
+    container-name: rte-toolbar;
+    container-type: inline-size;
     position: relative;
 
     // Compact toolbar shell: controls wrap; undo/redo stay top-right.
@@ -128,9 +130,16 @@
       box-sizing: border-box;
       min-height: $space_lg + $space_xxs + $space_xxs * 2; // 36px button + vertical padding
       padding: $space_xxs $space_sm;
-      // Leave room for absolute undo/redo (2 × 36px buttons)
+      // Leave room for absolute undo/redo when everything shares one row
       padding-right: $space_sm + (($space_lg + $space_xxs) * 2);
       position: relative;
+    }
+
+    // When the bar wraps, history stays on row 1 — drop the undo gutter for tools
+    @container rte-toolbar (max-width: 42rem) {
+      .toolbar_inner {
+        padding-right: $space_sm;
+      }
     }
 
     &_controls {
@@ -150,13 +159,52 @@
       top: $space_xxs;
     }
 
-    &_block {
+    // Groups: format | tools | more. With "more", narrow stacks tools under format|more.
+    &_group {
       align-items: center;
       display: flex;
+      flex-shrink: 0;
       flex-wrap: wrap;
       gap: 0;
       min-width: 0;
       row-gap: $space_xxs;
+
+      &_format {
+        order: 1;
+      }
+
+      &_tools {
+        flex-wrap: nowrap;
+        order: 2;
+      }
+
+      &_more {
+        order: 3;
+      }
+    }
+
+    &_controls:has(.toolbar_group_more) {
+      .toolbar_group_more {
+        order: 2;
+      }
+
+      .toolbar_group_tools {
+        flex: 1 1 100%;
+        order: 3;
+      }
+    }
+
+    @container rte-toolbar (min-width: 42rem) {
+      .toolbar_controls:has(.toolbar_group_more) {
+        .toolbar_group_tools {
+          flex: 0 1 auto;
+          order: 2;
+        }
+
+        .toolbar_group_more {
+          order: 3;
+        }
+      }
     }
 
     // Separators: shorter than buttons (vertical xs); xxs gap left/right so hover chips don't kiss the line

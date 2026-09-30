@@ -69,17 +69,21 @@ const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.React
                 className="toolbar_controls"
                 wrap
             >
-              <ToolbarDropdown editor={editor}/>
-              <ToolbarSeparator />
-              <ToolbarFormatItems editor={editor} />
-              <ToolbarSeparator />
-              <ToolbarNodes editor={editor} />
+              <div className="toolbar_group toolbar_group_format">
+                <ToolbarDropdown editor={editor}/>
+              </div>
+              <div className="toolbar_group toolbar_group_tools">
+                <ToolbarSeparator />
+                <ToolbarFormatItems editor={editor} />
+                <ToolbarSeparator />
+                <ToolbarNodes editor={editor} />
+              </div>
               {
                 extensions && (
-                  <>
+                  <div className="toolbar_group toolbar_group_more">
                     <ToolbarSeparator />
                     <MoreExtensionsDropdown extensions={extensions}/>
-                  </>
+                  </div>
                 )
               }
             </Flex>
