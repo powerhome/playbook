@@ -252,7 +252,8 @@
       height: $space_lg + $space_xxs;
       justify-content: flex-start;
       min-height: $space_lg + $space_xxs;
-      padding: 0 $space_xs;
+      // Left pad comes from toolbar_inner ($space_sm)
+      padding: 0 $space_xs 0 0;
       width: auto;
 
       &:hover:not([disabled]),
@@ -311,7 +312,7 @@
         line-height: 1;
         max-width: 100%;
         min-height: $space_lg + $space_xxs;
-        padding: 0 $space_xs;
+        padding: 0 $space_xs 0 0;
         text-align: left;
         width: auto;
 
@@ -469,6 +470,20 @@
     }
     .pb_nav_list_item_link {
       background-color: unset !important;
+    }
+  }
+}
+
+// Toolbar format/more menus (portaled): tighter inset so labels match the flush trigger
+.pb_tiptap_toolbar_dropdown_popover {
+  .pb_nav_list_kit_item {
+    margin-left: 0;
+    margin-right: 0;
+
+    &[class*="_link"],
+    .pb_nav_list_item_link {
+      padding-left: $space_xs;
+      padding-right: $space_xs;
     }
   }
 }
