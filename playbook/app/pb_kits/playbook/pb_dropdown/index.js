@@ -616,6 +616,7 @@ export default class PbDropdown extends PbEnhancedElement {
   cancelAsyncSearch() {
     this.asyncRequestId += 1;
     clearTimeout(this.asyncSearchTimer);
+    this.asyncSearchTimer = null;
     clearTimeout(this.asyncLoadingTimer);
     this.element.setAttribute("aria-busy", "false");
     this.target?.querySelector("[data-dropdown-async-status]")?.remove();
@@ -660,6 +661,7 @@ export default class PbDropdown extends PbEnhancedElement {
     const requestId = this.asyncRequestId;
     const delay = Number(this.element.dataset.pbDropdownSearchDebounceTimeout ?? 250);
     this.asyncSearchTimer = setTimeout(() => {
+      this.asyncSearchTimer = null;
       this.element.setAttribute("aria-busy", "true");
       this.showAsyncStatus("Loading…");
       this.showElement(this.target);
@@ -772,13 +774,13 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleDocumentClick(event) {
-    if (event.target.closest(SEARCH_BAR_SELECTOR)) return;
+    if (event.target.closest(SEARCH_BAR_SELECTOR) && (!this.isAsync || this.target.contains(event.target))) return;
     const shouldCloseOnOutsideClick =
       this.closeOnClick === "outside" || this.closeOnClick === "any";
     if (
       shouldCloseOnOutsideClick &&
       this.isClickOutside(event) &&
-      this.target.classList.contains("open")
+      (this.target.classList.contains("open") || (this.isAsync && this.asyncSearchTimer != null))
     ) {
       this.hideElement(this.target);
       this.updateArrowDisplay(false);
@@ -1367,6 +1369,12 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   hideElement(elem) {
+    if (this.isAsync) {
+      if (this.asyncSearchTimer != null || this.element.getAttribute("aria-busy") === "true") {
+        this.cancelAsyncSearch();
+      }
+      this.updateArrowDisplay(false);
+    }
     elem.style.height = elem.scrollHeight + "px";
     window.setTimeout(() => {
       if (this.useMenuPortal) {

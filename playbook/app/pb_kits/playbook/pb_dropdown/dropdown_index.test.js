@@ -921,6 +921,47 @@ describe("PbDropdown async search", () => {
     expect(instance.target).toHaveTextContent(status === "empty" ? "no option" : "Unable to load options");
   });
 
+  test.each(["Escape", "Tab", "outside click"])("%s cancels debounce even before the menu opens", (action) => {
+    type("ada");
+    if (action === "outside click") document.body.click();
+    else input.dispatchEvent(new KeyboardEvent("keydown", { key: action, bubbles: true }));
+    jest.advanceTimersByTime(250);
+    expect(search).not.toHaveBeenCalled();
+    expect(instance.target).not.toHaveClass("open");
+    expect(root).toHaveAttribute("aria-busy", "false");
+
+    type("new");
+    jest.advanceTimersByTime(250);
+    expect(search).toHaveBeenCalledTimes(1);
+    expect(instance.target).toHaveClass("open");
+  });
+
+  test.each(["Escape", "Tab", "outside click"])("%s invalidates in-flight callbacks and their timeout", (action) => {
+    type("ada");
+    jest.advanceTimersByTime(250);
+    const pending = search.mock.calls[0][0].detail;
+    if (action === "outside click") document.body.click();
+    else input.dispatchEvent(new KeyboardEvent("keydown", { key: action, bubbles: true }));
+    pending.setResults([{ id: "late", label: "Late" }]);
+    pending.setError();
+    jest.advanceTimersByTime(15000);
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(instance.target).not.toHaveClass("open");
+    expect(instance.target.querySelector("[data-dropdown-async-status]")).toBeNull();
+    expect(root).toHaveAttribute("aria-busy", "false");
+  });
+
+  test("clicking another Dropdown search bar dismisses a pending search", () => {
+    const otherInput = document.createElement("input");
+    otherInput.setAttribute("data-dropdown-search", "");
+    document.body.appendChild(otherInput);
+    type("ada");
+    otherInput.click();
+    jest.advanceTimersByTime(250);
+    expect(search).not.toHaveBeenCalled();
+    expect(instance.target).not.toHaveClass("open");
+  });
+
   test("disabled dropdowns do not search", () => {
     instance.isDisabled = true;
     type("abc");

@@ -97,7 +97,7 @@ export class PbDropdownKeyboard {
       case "Tab":
         this.dropdown.hideElement(this.dropdown.target);
         this.dropdown.updateArrowDisplay(false);
-        this.resetFocus();
+        this.dropdown.resetFocus();
         break;
       case "Backspace":
         if (this.searchInput) {
