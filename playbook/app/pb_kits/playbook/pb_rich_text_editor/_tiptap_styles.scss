@@ -182,6 +182,13 @@
         min-width: 0;
         order: 2;
         overflow-x: auto;
+
+        // Hide leading pipe by default — tools often wrap before container queries
+        // force a full-width stack, which left a lone "|" at the start of row 2.
+        // Only show it when the bar is wide enough for a reliable single row.
+        > .toolbar_separator:first-child {
+          display: none;
+        }
       }
 
       &_more {
@@ -198,10 +205,6 @@
       .toolbar_group_tools {
         flex: 1 1 100%;
         order: 3;
-
-        > .toolbar_separator:first-child {
-          display: none;
-        }
       }
     }
 
@@ -210,15 +213,15 @@
         padding-right: $history-gutter;
       }
 
+      .toolbar_group_tools > .toolbar_separator:first-child {
+        display: flex;
+      }
+
       .toolbar_controls:has(.toolbar_group_more) {
         .toolbar_group_tools {
           flex: 0 1 auto;
           order: 2;
           overflow-x: visible;
-
-          > .toolbar_separator:first-child {
-            display: flex;
-          }
         }
 
         .toolbar_group_more {
@@ -227,7 +230,7 @@
       }
     }
 
-    // No "more": full-width tools row + no leading pipe + no undo gutter when stacked
+    // No "more": full-width tools row + no undo gutter when stacked
     @container rte-toolbar (max-width: 40rem) {
       &:not(:has(.toolbar_group_more)) .toolbar_inner {
         padding-right: $space_sm;
@@ -235,10 +238,6 @@
 
       .toolbar_controls:not(:has(.toolbar_group_more)) .toolbar_group_tools {
         flex: 1 1 100%;
-
-        > .toolbar_separator:first-child {
-          display: none;
-        }
       }
     }
 
