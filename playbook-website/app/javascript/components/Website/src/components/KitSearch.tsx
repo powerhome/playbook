@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Typeahead, Pill, Flex, Title, Icon} from 'playbook-ui'
+import { Typeahead, Pill, Flex, Title, Icon, Body, Caption } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
 import { useDarkMode } from '../contexts/DarkModeContext'
 
 type Kit = {
+  kitLabel?: string,
   label: string,
   path?: string,
   platforms?: string[],
+  propName?: string,
   props?: KitProp[],
   searchTerms?: string[],
   value: string,
@@ -83,9 +85,11 @@ const kitPropItems = (kit: Kit): Kit[] => {
   })
 
   return Array.from(propsByName.values()).map(({ name, platforms, searchTerms }) => ({
+    kitLabel: kit.label,
     label: `${name} (${kit.label})`,
     path: kit.value,
     platforms: Array.from(platforms),
+    propName: name,
     searchTerms: Array.from(searchTerms),
     type: 'prop',
     value: `${kit.value}#${name}`,
@@ -218,9 +222,21 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
     token: 'Token',
   }
 
-  const Item = ({ labelLeft, platforms = [], type }: { labelLeft: string, platforms?: string[], type: string }) => (
+  const Item = ({ caption, labelLeft, platforms = [], type }: { caption?: string, labelLeft: string, platforms?: string[], type: string }) => (
     <Flex alignItems="center" justify="between">
-        {labelLeft}
+        {caption ? (
+          <div>
+            <Body
+                dark={darkMode}
+                text={labelLeft}
+            />
+            <Caption
+                dark={darkMode}
+                text={caption}
+                size="xs"
+            />
+          </div>
+        ) : labelLeft}
         <Pill
           dark={darkMode}
           margin="xs"
@@ -264,7 +280,10 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
         options={filteredKits}
         placeholder="Search..."
         valueComponent={(option: Kit) => {
-          if (option.type === 'prop' || (option.type && SEARCH_TYPE_BADGES[option.type])) {
+          if (option.type === 'prop') {
+            return <Item caption={option.kitLabel} labelLeft={option.propName ?? option.label} platforms={option.platforms} type={option.type} />
+          }
+          if (option.type && SEARCH_TYPE_BADGES[option.type]) {
             return <Item labelLeft={option.label} platforms={option.platforms} type={option.type} />
           }
           return <>{option.label}</>
