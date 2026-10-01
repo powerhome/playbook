@@ -123,27 +123,26 @@
   }
 
   .toolbar {
+    $history-gutter: $space_sm + (($space_lg + $space_xxs) * 2);
+
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $input_border_default;
     container-name: rte-toolbar;
     container-type: inline-size;
     position: relative;
 
-    // Compact toolbar shell: controls wrap; undo/redo stay top-right.
+    // Prefer one row; undo/redo stay top-right. Stack tools only when they cannot share a line.
     &_inner {
       box-sizing: border-box;
       min-height: $space_lg + $space_xxs + $space_xxs * 2; // 36px button + vertical padding
       padding: $space_xxs $space_sm;
-      // Leave room for absolute undo/redo when everything shares one row
-      padding-right: $space_sm + (($space_lg + $space_xxs) * 2);
+      padding-right: $history-gutter;
       position: relative;
     }
 
-    // When the bar wraps, history stays on row 1 — drop the undo gutter for tools
-    @container rte-toolbar (max-width: 42rem) {
-      .toolbar_inner {
-        padding-right: $space_sm;
-      }
+    // Tools on their own row: drop undo gutter so the tools scrollport can go edge-to-edge.
+    &:has(.toolbar_group_more) .toolbar_inner {
+      padding-right: $space_sm;
     }
 
     &_controls {
@@ -163,7 +162,6 @@
       top: $space_xxs;
     }
 
-    // Groups: format | tools | more. With "more", narrow stacks tools under format|more.
     &_group {
       align-items: center;
       display: flex;
@@ -178,8 +176,12 @@
       }
 
       &_tools {
+        box-sizing: border-box;
         flex-wrap: nowrap;
+        max-width: 100%;
+        min-width: 0;
         order: 2;
+        overflow-x: auto;
       }
 
       &_more {
@@ -187,6 +189,7 @@
       }
     }
 
+    // With "more": stack tools under format|more until wide enough for one row
     &_controls:has(.toolbar_group_more) {
       .toolbar_group_more {
         order: 2;
@@ -196,7 +199,6 @@
         flex: 1 1 100%;
         order: 3;
 
-        // Tools on their own row — no leading pipe
         > .toolbar_separator:first-child {
           display: none;
         }
@@ -204,10 +206,15 @@
     }
 
     @container rte-toolbar (min-width: 42rem) {
+      &:has(.toolbar_group_more) .toolbar_inner {
+        padding-right: $history-gutter;
+      }
+
       .toolbar_controls:has(.toolbar_group_more) {
         .toolbar_group_tools {
           flex: 0 1 auto;
           order: 2;
+          overflow-x: visible;
 
           > .toolbar_separator:first-child {
             display: flex;
@@ -220,8 +227,12 @@
       }
     }
 
-    // No "more": when the bar is too narrow for format + tools, stack tools and drop the leading pipe
-    @container rte-toolbar (max-width: 36rem) {
+    // No "more": full-width tools row + no leading pipe + no undo gutter when stacked
+    @container rte-toolbar (max-width: 40rem) {
+      &:not(:has(.toolbar_group_more)) .toolbar_inner {
+        padding-right: $space_sm;
+      }
+
       .toolbar_controls:not(:has(.toolbar_group_more)) .toolbar_group_tools {
         flex: 1 1 100%;
 
@@ -292,15 +303,6 @@
       max-width: 100%;
       min-width: 0;
 
-      .toolbar_inner,
-      .rte-rails-toolbar-row {
-        box-sizing: border-box;
-        min-height: $space_lg + $space_xxs + $space_xxs * 2;
-        padding: $space_xxs $space_sm;
-        padding-right: $space_sm + (($space_lg + $space_xxs) * 2);
-        position: relative;
-      }
-
       .rte-toolbar-left,
       .toolbar_controls {
         align-items: center;
@@ -320,7 +322,6 @@
         top: $space_xxs;
       }
 
-      // Align dropdown trigger with icon row
       .pb_popover_reference_wrapper {
         align-items: center;
         display: inline-flex;
