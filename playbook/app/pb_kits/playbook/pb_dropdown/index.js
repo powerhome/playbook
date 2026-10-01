@@ -910,6 +910,8 @@ export default class PbDropdown extends PbEnhancedElement {
     const parent = this.getOptionsParent();
     if (!parent) return;
 
+    if (this.isAsync) this.cancelAsyncSearch();
+
     // Clear option nodes and any SSR empty-state ("No option") placeholder
     parent.replaceChildren();
     this.removeNoOptionsMessage();
@@ -923,7 +925,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.resetInteractiveOptionState();
 
     if (clearSelection) {
-      this.clearSelection();
+      this.clearSelection("clear", { preserveOptions: true });
     } else {
       this.reconcileSelectionWithOptions();
     }
@@ -971,7 +973,7 @@ export default class PbDropdown extends PbEnhancedElement {
         .filter((id) => id != null && optionsById.has(String(id)));
 
       if (keptIds.length === 0) {
-        this.clearSelection();
+        this.clearSelection("clear", { preserveOptions: true });
         return;
       }
 
@@ -982,7 +984,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const currentId = this.baseInput?.value;
     if (!currentId || !optionsById.has(currentId)) {
-      this.clearSelection();
+      this.clearSelection("clear", { preserveOptions: true });
       return;
     }
 
@@ -1604,10 +1606,10 @@ export default class PbDropdown extends PbEnhancedElement {
     this.formElement.addEventListener("reset", this.formResetHandler);
   }
 
-  resetDropdownValue() {
+  resetDropdownValue({ preserveOptions = false } = {}) {
     this.selectedOptionJson = null;
     if (this.isAsync) {
-      this.clearAsyncResults();
+      if (!preserveOptions) this.clearAsyncResults();
       if (this.searchBar) this.searchBar.value = "";
     }
     const hiddenInput = this.baseInput;
@@ -1719,7 +1721,7 @@ export default class PbDropdown extends PbEnhancedElement {
     });
   }
 
-  clearSelection(reason = "clear") {
+  clearSelection(reason = "clear", { preserveOptions = false } = {}) {
     if (this.isDisabled && reason !== "reset") return;
     if (this.isMultiSelect) {
       this.selectedOptions.clear();
@@ -1769,7 +1771,7 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     }
 
-    this.resetDropdownValue();
+    this.resetDropdownValue({ preserveOptions });
     this.updatePills();
     this.updateClearButton();
     this.syncHiddenInputs();

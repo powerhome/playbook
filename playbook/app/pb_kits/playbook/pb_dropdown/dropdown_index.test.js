@@ -402,6 +402,33 @@ describe("PbDropdown async search", () => {
     document.body.innerHTML = "";
   });
 
+  test.each([true, false])("option updates retain async results when clearSelection is %p", (clearSelection) => {
+    type("old");
+    jest.advanceTimersByTime(250);
+    const pending = search.mock.calls[0][0].detail;
+    document.dispatchEvent(new CustomEvent("pb:dropdown:updateOptions", {
+      detail: { dropdownId: root.id, options: [{ id: "new", label: "New option" }], clearSelection },
+    }));
+    pending.setResults([{ id: "stale", label: "Stale option" }]);
+    pending.setError();
+    jest.advanceTimersByTime(15000);
+    expect(instance.queryAllOptions()).toHaveLength(1);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("New option");
+    expect(instance.baseInput.value).toBe("");
+    expect(root).toHaveAttribute("aria-busy", "false");
+    expect(instance.target.querySelector("[data-dropdown-async-status]")).toBeNull();
+  });
+
+  test("async multi-select reconciliation preserves replacement options", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownMultiSelect = "true";
+    instance.connect();
+    instance.replaceOptions([{ id: "new", label: "New option" }], { clearSelection: false });
+    expect(instance.queryAllOptions()).toHaveLength(1);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("New option");
+    expect(instance.selectedOptions.size).toBe(0);
+  });
+
   test("requires three characters and debounces typing for 250ms", () => {
     type("ab");
     jest.advanceTimersByTime(250);
