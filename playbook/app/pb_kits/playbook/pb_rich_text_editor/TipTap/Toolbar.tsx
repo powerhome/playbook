@@ -66,6 +66,11 @@ const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.React
 
     update();
     const rafId = requestAnimationFrame(update);
+
+    if (typeof ResizeObserver === "undefined") {
+      return () => cancelAnimationFrame(rafId);
+    }
+
     const observer = new ResizeObserver(update);
     observer.observe(root);
     if (toolbar) observer.observe(toolbar);
