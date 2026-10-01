@@ -131,7 +131,8 @@
     container-type: inline-size;
     position: relative;
 
-    // Prefer one row; undo/redo stay top-right. Stack tools only when they cannot share a line.
+    // Prefer one row; undo/redo stay top-right.
+    // `.toolbar_tools_stacked` is set in JS when tools wrap to a second row.
     &_inner {
       box-sizing: border-box;
       min-height: $space_lg + $space_xxs + $space_xxs * 2; // 36px button + vertical padding
@@ -140,8 +141,7 @@
       position: relative;
     }
 
-    // Tools on their own row: drop undo gutter so the tools scrollport can go edge-to-edge.
-    &:has(.toolbar_group_more) .toolbar_inner {
+    &.toolbar_tools_stacked .toolbar_inner {
       padding-right: $space_sm;
     }
 
@@ -177,18 +177,12 @@
 
       &_tools {
         box-sizing: border-box;
+        flex-grow: 1;
         flex-wrap: nowrap;
         max-width: 100%;
         min-width: 0;
         order: 2;
         overflow-x: auto;
-
-        // Hide leading pipe by default — tools often wrap before container queries
-        // force a full-width stack, which left a lone "|" at the start of row 2.
-        // Only show it when the bar is wide enough for a reliable single row.
-        > .toolbar_separator:first-child {
-          display: none;
-        }
       }
 
       &_more {
@@ -196,30 +190,27 @@
       }
     }
 
-    // With "more": stack tools under format|more until wide enough for one row
+    &.toolbar_tools_stacked .toolbar_group_tools > .toolbar_separator:first-child {
+      display: none;
+    }
+
+    // With "more": format|more on row 1, tools on row 2 until wide
     &_controls:has(.toolbar_group_more) {
       .toolbar_group_more {
         order: 2;
       }
 
       .toolbar_group_tools {
-        flex: 1 1 100%;
+        flex-basis: 100%;
+        flex-grow: 1;
         order: 3;
       }
     }
 
     @container rte-toolbar (min-width: 42rem) {
-      &:has(.toolbar_group_more) .toolbar_inner {
-        padding-right: $history-gutter;
-      }
-
-      .toolbar_group_tools > .toolbar_separator:first-child {
-        display: flex;
-      }
-
       .toolbar_controls:has(.toolbar_group_more) {
         .toolbar_group_tools {
-          flex: 0 1 auto;
+          flex-basis: auto;
           order: 2;
           overflow-x: visible;
         }
@@ -227,17 +218,6 @@
         .toolbar_group_more {
           order: 3;
         }
-      }
-    }
-
-    // No "more": full-width tools row + no undo gutter when stacked
-    @container rte-toolbar (max-width: 40rem) {
-      &:not(:has(.toolbar_group_more)) .toolbar_inner {
-        padding-right: $space_sm;
-      }
-
-      .toolbar_controls:not(:has(.toolbar_group_more)) .toolbar_group_tools {
-        flex: 1 1 100%;
       }
     }
 

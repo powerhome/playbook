@@ -103,6 +103,49 @@ function runToolbarAction(editor, action, { alignment, prompt = window.prompt, n
   if (chainMethod && typeof chain[chainMethod] === "function") chain[chainMethod]().run();
 }
 
+const TOOLBAR_STACK_HYSTERESIS_PX = 32;
+
+function syncToolbarToolsStacked(toolbar, state = { stacked: false, stackedAtWidth: 0 }) {
+  if (!toolbar) return state;
+
+  const format = toolbar.querySelector(".toolbar_group_format");
+  const tools = toolbar.querySelector(".toolbar_group_tools");
+  if (!format || !tools) return state;
+
+  const wrapped = tools.offsetTop > format.offsetTop + 1;
+  const width = toolbar.clientWidth;
+  let { stacked, stackedAtWidth } = state;
+
+  if (!stacked && wrapped) {
+    stacked = true;
+    stackedAtWidth = width;
+  } else if (stacked && !wrapped && width > stackedAtWidth + TOOLBAR_STACK_HYSTERESIS_PX) {
+    stacked = false;
+  } else if (stacked && wrapped) {
+    stackedAtWidth = Math.min(stackedAtWidth, width);
+  }
+
+  toolbar.classList.toggle("toolbar_tools_stacked", stacked);
+  return { stacked, stackedAtWidth };
+}
+
+function watchToolbarToolsStacked(toolbar) {
+  if (!toolbar) return;
+
+  let state = { stacked: false, stackedAtWidth: 0 };
+  const update = () => {
+    state = syncToolbarToolsStacked(toolbar, state);
+  };
+
+  update();
+  requestAnimationFrame(update);
+
+  if (typeof ResizeObserver === "undefined") return;
+
+  const observer = new ResizeObserver(update);
+  observer.observe(toolbar);
+}
+
 async function initPlaybookRichTextEditorRails(container) {
   if (!container || container.dataset.pbRteInitialized || container.dataset.pbRtePending) return;
   container.dataset.pbRtePending = "true";
@@ -403,6 +446,7 @@ async function initPlaybookRichTextEditorRails(container) {
     editor.on("selectionUpdate", updateActiveStates);
     editor.on("transaction", updateActiveStates);
     updateActiveStates();
+    watchToolbarToolsStacked(toolbar);
 
     container.dataset.pbRteInitialized = "true";
   } finally {
