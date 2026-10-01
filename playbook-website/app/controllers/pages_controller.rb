@@ -9,16 +9,6 @@ class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
   rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
-  # Staging responses must not be stored. A cached 404 for this host is reused
-  # after the VPN reconnects (the same URL works in a fresh cache).
-  before_action :disable_staging_http_caching, only: :application
-
-  def playground_reachable
-    response.headers["Access-Control-Allow-Origin"] = "https://playbook.powerapp.cloud"
-    response.headers["Cache-Control"] = "private, no-store"
-    head :ok
-  end
-
   def application
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
@@ -220,7 +210,6 @@ class PagesController < ApplicationController
     if on_playground && request.format.json?
       # Production must not expose Playground builder payloads (VPN / staging only).
       if playbook_production_host?
-        response.headers["Cache-Control"] = "private, no-store"
         head :not_found
         return
       end
@@ -618,13 +607,6 @@ private
   # Deployed production website host only (not review apps / localhost / staging).
   def playbook_production_host?
     request.host == "playbook.powerapp.cloud"
-  end
-
-  def disable_staging_http_caching
-    return unless request.host == "staging.playbook.powerapp.cloud"
-
-    response.headers["Cache-Control"] = "private, no-store"
-    response.headers["Pragma"] = "no-cache"
   end
 
   # JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects

@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs } from "react-router-dom";
-import { isProductionHost, isStagingHost } from "../utils/siteNavigation";
+import { isProductionHost } from "../utils/siteNavigation";
 
 interface ComponentTypes {
   name: string;
@@ -12,11 +12,6 @@ interface CategoryTypes {
   description: string;
   components: ComponentTypes[];
 }
-
-// Staging is VPN-only. Skip the HTTP cache there so a stored 404 is not reused
-// after reconnect. Other hosts keep default browser caching.
-const fetchJson = (url: string) =>
-  fetch(url, isStagingHost() ? { cache: "no-store" } : undefined);
 
 const sortByName = (a: ComponentTypes, b: ComponentTypes): number => {
   return a.name.localeCompare(b.name);
@@ -31,7 +26,7 @@ let kitsCache: any = null;
 
 async function fetchKits() {
   if (kitsCache) return kitsCache;
-  const response = await fetchJson("/kits.json");
+  const response = await fetch("/kits.json");
   const data = await response.json();
   data.kits.forEach(sortComponentsByName);
   kitsCache = data;
@@ -76,7 +71,7 @@ export const ComponentShowLoader = async ({
     url = `${url}${requestUrl.search}`;
   }
 
-  const response = await fetchJson(url);
+  const response = await fetch(url);
   const data = await response.json();
   return data;
 };
@@ -105,7 +100,7 @@ export const GuidePageLoader = async ({ params, request }: LoaderFunctionArgs) =
   const guidePath = params.page;
   const { pathname } = new URL(request.url);
   const guideType = pathname.includes('getting_started') ? 'getting_started' : 'design_guidelines';
-  const response = await fetchJson(`/guides/${guideType}/${guidePath}.json`);
+  const response = await fetch(`/guides/${guideType}/${guidePath}.json`);
   const data = await response.json();
   return data;
 };
@@ -114,7 +109,7 @@ let iconsCache: any = null;
 
 export const IconsLoader = async () => {
   if (iconsCache) return iconsCache;
-  const response = await fetchJson("/icons.json");
+  const response = await fetch("/icons.json");
   const data = await response.json();
   iconsCache = data;
   return data;
@@ -133,7 +128,7 @@ export const PlaygroundLoader = async () => {
   }
 
   if (playgroundCache) return playgroundCache;
-  const response = await fetchJson("/playground.json");
+  const response = await fetch("/playground.json");
   if (!response.ok) {
     return {
       playground_kits: [],

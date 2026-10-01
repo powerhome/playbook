@@ -2,9 +2,6 @@ export const PROD_ORIGIN = "https://playbook.powerapp.cloud"
 export const STAGING_ORIGIN = "https://staging.playbook.powerapp.cloud"
 const PROD_HOST = "playbook.powerapp.cloud"
 const STAGING_HOST = "staging.playbook.powerapp.cloud"
-/** Query param so a staging navigation does not reuse a cached off-VPN 404. */
-export const STAGING_CACHE_BUST_PARAM = "_pb"
-export const STAGING_REACHABLE_PATH = "/playground_reachable"
 
 const normalizePath = (path: string) => (path.startsWith("/") ? path : `/${path}`)
 
@@ -13,67 +10,12 @@ const isPlaygroundPath = (path: string) => {
   return normalized === "/playground" || normalized.startsWith("/playground?")
 }
 
-/**
- * New cache key for a first hop onto staging. A browser stores a 404 against
- * the exact URL; this param is a different key. In-app navigations must keep
- * the same value (see `appendSessionCacheBust`) so they do not fall back to
- * the bare path.
- */
-export const withStagingCacheBust = (url: string) => {
-  const parsed = new URL(
-    url,
-    typeof window !== "undefined" ? window.location.origin : PROD_ORIGIN
-  )
-  parsed.searchParams.set(STAGING_CACHE_BUST_PARAM, String(Date.now()))
-  return parsed.toString()
-}
-
 export const isStagingHost = () =>
   typeof window !== "undefined" && window.location.hostname === STAGING_HOST
-
-/**
- * True when staging answers. `cache: "no-store"` skips a stored 404, and a
- * network failure (VPN off) rejects instead of navigating into a cacheable error.
- */
-export const stagingIsReachable = async () => {
-  const url = isStagingHost()
-    ? STAGING_REACHABLE_PATH
-    : `${STAGING_ORIGIN}${STAGING_REACHABLE_PATH}`
-  const controller = new AbortController()
-  const timeoutId = window.setTimeout(() => controller.abort(), 5000)
-
-  try {
-    const response = await fetch(url, {
-      cache: "no-store",
-      credentials: "omit",
-      mode: "cors",
-      signal: controller.signal,
-    })
-    return response.ok
-  } catch {
-    return false
-  } finally {
-    window.clearTimeout(timeoutId)
-  }
-}
 
 /** True only on deployed prod — not localhost, review apps, or staging. */
 export const isProductionHost = () =>
   typeof window !== "undefined" && window.location.hostname === PROD_HOST
-
-/** Keep the session `_pb` on same-host staging paths so the address bar never returns to the cached bare URL. */
-const appendSessionCacheBust = (path: string) => {
-  if (typeof window === "undefined" || !isStagingHost()) return path
-
-  const current = new URLSearchParams(window.location.search).get(STAGING_CACHE_BUST_PARAM)
-  if (!current) return path
-
-  const parsed = new URL(path, window.location.origin)
-  if (!parsed.searchParams.has(STAGING_CACHE_BUST_PARAM)) {
-    parsed.searchParams.set(STAGING_CACHE_BUST_PARAM, current)
-  }
-  return `${parsed.pathname}${parsed.search}${parsed.hash}`
-}
 
 /** Absolute href when leaving the current host; otherwise the relative path. */
 export const siteHref = (path: string) => {
@@ -89,7 +31,7 @@ export const siteHref = (path: string) => {
     return `${PROD_ORIGIN}${normalized}`
   }
 
-  return appendSessionCacheBust(normalized)
+  return normalized
 }
 
 export const PLAYGROUND_VPN_WARNING_EVENT = "pb-playground-vpn-warning"
@@ -114,7 +56,7 @@ export const showPlaygroundVpnWarning = (destinationUrl: string) => {
  */
 export const goToStaging = (url: string) => {
   if (isStagingHost()) {
-    window.location.assign(withStagingCacheBust(url))
+    window.location.assign(url)
     return
   }
 
@@ -145,11 +87,6 @@ export const navigateSite = (navigate: (to: string) => void, path: string) => {
   if (href.startsWith("http")) {
     window.location.assign(href)
     return
-  }
-
-  if (typeof window !== "undefined") {
-    const current = `${window.location.pathname}${window.location.search}${window.location.hash}`
-    if (href === current) return
   }
 
   navigate(href)
