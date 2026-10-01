@@ -10,32 +10,6 @@ RSpec.describe PagesController, type: :controller do
       expect(response).to be_successful
     end
 
-    it "does not cache staging HTML or JSON" do
-      @request.host = "staging.playbook.powerapp.cloud"
-      get :application
-
-      expect(response.headers["Cache-Control"]).to include("no-store")
-      expect(response.headers["Pragma"]).to eq("no-cache")
-    end
-
-    it "answers the staging reachability probe without caching it" do
-      @request.host = "staging.playbook.powerapp.cloud"
-      get :playground_reachable
-
-      expect(response).to have_http_status(:ok)
-      expect(response.headers["Cache-Control"]).to include("no-store")
-      expect(response.headers["Access-Control-Allow-Origin"]).to eq("https://playbook.powerapp.cloud")
-    end
-
-    it "does not cache the production playground.json 404" do
-      @request.host = "playbook.powerapp.cloud"
-      @request.env["PATH_INFO"] = "/playground"
-      get :application, format: :json
-
-      expect(response).to have_http_status(:not_found)
-      expect(response.headers["Cache-Control"]).to include("no-store")
-    end
-
     it "assigns variables" do
       get :application
       expect(assigns(:kits)).to be_present
