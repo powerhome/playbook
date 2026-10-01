@@ -23,7 +23,7 @@ import {
   syncStoredPlatformFromLocation,
   writeStoredPlatform,
 } from "./src/helpers/platform";
-import { navigateSite } from "./src/utils/siteNavigation";
+import { isStagingHost, navigateSite, STAGING_CACHE_BUST_PARAM } from "./src/utils/siteNavigation";
 
 function WebsiteContent() {
   const {
@@ -105,15 +105,21 @@ function WebsiteContent() {
     syncStoredPlatformFromLocation(normalizedPath, location.search);
   }, [normalizedPath, location.search]);
 
-  // Legacy Swift kit platform / ?type=swift → Rails
+  // Legacy Swift kit platform / ?type=swift → Rails.
+  // On staging, also replace the history entry with a session `_pb` when the
+  // address bar does not have one, so a refresh does not request the bare URL.
   useEffect(() => {
     const rewrittenPath = rewriteLegacySwiftPath(normalizedPath);
     const params = new URLSearchParams(location.search);
     const hasSwiftType = params.get("type") === "swift";
+    const needsCacheBust = isStagingHost() && !params.has(STAGING_CACHE_BUST_PARAM);
 
-    if (!rewrittenPath && !hasSwiftType) return;
+    if (!rewrittenPath && !hasSwiftType && !needsCacheBust) return;
 
     if (hasSwiftType) params.set("type", DEFAULT_PLATFORM);
+    if (needsCacheBust) {
+      params.set(STAGING_CACHE_BUST_PARAM, String(Date.now()));
+    }
     const nextPath = rewrittenPath || normalizedPath;
     const search = params.toString();
     navigate(

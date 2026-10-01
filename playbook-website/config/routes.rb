@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # `as: nil` avoids clashing with the named routes defined below for prod/local.
   constraints(host: "staging.playbook.powerapp.cloud") do
     get "playground", to: "pages#application", as: nil
+    # Prod probes this before navigating. A failed document load is what the
+    # browser caches and keeps replaying as a 404 after the VPN reconnects.
+    get "playground_reachable", to: "pages#playground_reachable", as: nil
 
     # Kit show pages stay on staging when ?tab=playground (client redirects Docs/Props to prod).
     get "kits",                                to: "pages#application", as: nil
