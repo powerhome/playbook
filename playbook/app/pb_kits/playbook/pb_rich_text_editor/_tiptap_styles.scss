@@ -130,7 +130,7 @@
     position: relative;
 
     // Prefer one row; undo/redo stay top-right.
-    // `.toolbar_tools_stacked` is set in JS when format + tools no longer fit beside history.
+    // `.toolbar_tools_stacked` is set in JS when format + tools (+ more) no longer fit beside history.
     &_inner {
       box-sizing: border-box;
       min-height: $space_lg + $space_xxs + $space_xxs * 2; // 36px button + vertical padding

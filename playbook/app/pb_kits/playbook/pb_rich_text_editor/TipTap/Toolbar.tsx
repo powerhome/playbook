@@ -26,7 +26,7 @@ const childrenWidth = (element: HTMLElement): number =>
     0
   );
 
-// Stack when format + tools no longer fit beside undo/redo.
+// Stack when format + tools (+ more) no longer fit beside undo/redo.
 const toolsNeedStack = (root: HTMLElement | null): boolean => {
   if (!root) return false;
 
@@ -34,12 +34,18 @@ const toolsNeedStack = (root: HTMLElement | null): boolean => {
   const tools = root.querySelector<HTMLElement>(".toolbar_group_tools");
   if (!format || !tools) return false;
 
+  const more = root.querySelector<HTMLElement>(".toolbar_group_more");
   const history = root.querySelector<HTMLElement>(".toolbar_history");
   const { paddingLeft, paddingRight } = window.getComputedStyle(root);
   const rightReserve = Math.max(history?.offsetWidth ?? 0, parseFloat(paddingRight) || 0);
   const available = root.clientWidth - (parseFloat(paddingLeft) || 0) - rightReserve;
+  const needed =
+    childrenWidth(format) +
+    childrenWidth(tools) +
+    (more ? childrenWidth(more) : 0) +
+    STACK_FIT_BUFFER_PX;
 
-  return childrenWidth(format) + childrenWidth(tools) + STACK_FIT_BUFFER_PX > available;
+  return needed > available;
 };
 
 const nextStacked = (

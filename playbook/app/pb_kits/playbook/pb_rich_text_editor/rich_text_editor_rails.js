@@ -120,12 +120,18 @@ function toolsNeedStack(toolbarInner) {
   const tools = toolbarInner.querySelector(".toolbar_group_tools");
   if (!format || !tools) return false;
 
+  const more = toolbarInner.querySelector(".toolbar_group_more");
   const history = toolbarInner.querySelector(".toolbar_history");
   const { paddingLeft, paddingRight } = window.getComputedStyle(toolbarInner);
   const rightReserve = Math.max((history && history.offsetWidth) || 0, parseFloat(paddingRight) || 0);
   const available = toolbarInner.clientWidth - (parseFloat(paddingLeft) || 0) - rightReserve;
+  const needed =
+    childrenWidth(format) +
+    childrenWidth(tools) +
+    (more ? childrenWidth(more) : 0) +
+    TOOLBAR_STACK_FIT_BUFFER_PX;
 
-  return childrenWidth(format) + childrenWidth(tools) + TOOLBAR_STACK_FIT_BUFFER_PX > available;
+  return needed > available;
 }
 
 function nextStacked(stacked, stackedAtWidth, needsStack, width) {
