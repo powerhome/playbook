@@ -12,6 +12,7 @@ import ToolbarHistoryItems from "./ToolbarHistory";
 import MoreExtensionsDropdown from "./MoreExtensionsDropdown";
 
 const STACK_HYSTERESIS_PX = 32;
+const STACK_FIT_BUFFER_PX = 8;
 
 const ToolbarSeparator = (): React.ReactElement => (
   <div className="toolbar_separator">
@@ -19,14 +20,46 @@ const ToolbarSeparator = (): React.ReactElement => (
   </div>
 );
 
-const toolsAreWrapped = (root: HTMLElement | null): boolean => {
+const childrenWidth = (element: HTMLElement): number =>
+  Array.from(element.children).reduce(
+    (sum, child) => sum + (child as HTMLElement).offsetWidth,
+    0
+  );
+
+// Stack when format + tools no longer fit beside undo/redo.
+const toolsNeedStack = (root: HTMLElement | null): boolean => {
   if (!root) return false;
 
   const format = root.querySelector<HTMLElement>(".toolbar_group_format");
   const tools = root.querySelector<HTMLElement>(".toolbar_group_tools");
   if (!format || !tools) return false;
 
-  return tools.offsetTop > format.offsetTop + 1;
+  const history = root.querySelector<HTMLElement>(".toolbar_history");
+  const { paddingLeft, paddingRight } = window.getComputedStyle(root);
+  const rightReserve = Math.max(history?.offsetWidth ?? 0, parseFloat(paddingRight) || 0);
+  const available = root.clientWidth - (parseFloat(paddingLeft) || 0) - rightReserve;
+
+  return childrenWidth(format) + childrenWidth(tools) + STACK_FIT_BUFFER_PX > available;
+};
+
+const nextStacked = (
+  stacked: boolean,
+  stackedAtWidth: number,
+  needsStack: boolean,
+  width: number
+): { stacked: boolean, stackedAtWidth: number } => {
+  if (needsStack) {
+    return {
+      stacked: true,
+      stackedAtWidth: stacked ? Math.min(stackedAtWidth, width) : width,
+    };
+  }
+
+  if (stacked && width > stackedAtWidth + STACK_HYSTERESIS_PX) {
+    return { stacked: false, stackedAtWidth };
+  }
+
+  return { stacked, stackedAtWidth };
 };
 
 const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.ReactElement => {
@@ -42,38 +75,26 @@ const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.React
 
     const toolbar = root.closest(".toolbar");
 
-    const update = () => {
-      const wrapped = toolsAreWrapped(root);
+    const sync = () => {
       const width = toolbar?.clientWidth ?? root.clientWidth;
+      const needsStack = toolsNeedStack(root);
 
       setToolsStacked((stacked) => {
-        if (!stacked && wrapped) {
-          stackedAtWidthRef.current = width;
-          return true;
-        }
-
-        if (stacked && !wrapped && width > stackedAtWidthRef.current + STACK_HYSTERESIS_PX) {
-          return false;
-        }
-
-        if (stacked && wrapped) {
-          stackedAtWidthRef.current = Math.min(stackedAtWidthRef.current, width);
-        }
-
-        return stacked;
+        const next = nextStacked(stacked, stackedAtWidthRef.current, needsStack, width);
+        stackedAtWidthRef.current = next.stackedAtWidth;
+        return next.stacked;
       });
     };
 
-    update();
-    const rafId = requestAnimationFrame(update);
+    sync();
+    const rafId = requestAnimationFrame(sync);
 
     if (typeof ResizeObserver === "undefined") {
       return () => cancelAnimationFrame(rafId);
     }
 
-    const observer = new ResizeObserver(update);
-    observer.observe(root);
-    if (toolbar) observer.observe(toolbar);
+    const observer = new ResizeObserver(sync);
+    observer.observe(toolbar || root);
 
     return () => {
       cancelAnimationFrame(rafId);

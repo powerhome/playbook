@@ -104,45 +104,74 @@ function runToolbarAction(editor, action, { alignment, prompt = window.prompt, n
 }
 
 const TOOLBAR_STACK_HYSTERESIS_PX = 32;
+const TOOLBAR_STACK_FIT_BUFFER_PX = 8;
+
+function childrenWidth(element) {
+  return Array.from(element.children).reduce(
+    (sum, child) => sum + child.offsetWidth,
+    0
+  );
+}
+
+function toolsNeedStack(toolbarInner) {
+  if (!toolbarInner) return false;
+
+  const format = toolbarInner.querySelector(".toolbar_group_format");
+  const tools = toolbarInner.querySelector(".toolbar_group_tools");
+  if (!format || !tools) return false;
+
+  const history = toolbarInner.querySelector(".toolbar_history");
+  const { paddingLeft, paddingRight } = window.getComputedStyle(toolbarInner);
+  const rightReserve = Math.max((history && history.offsetWidth) || 0, parseFloat(paddingRight) || 0);
+  const available = toolbarInner.clientWidth - (parseFloat(paddingLeft) || 0) - rightReserve;
+
+  return childrenWidth(format) + childrenWidth(tools) + TOOLBAR_STACK_FIT_BUFFER_PX > available;
+}
+
+function nextStacked(stacked, stackedAtWidth, needsStack, width) {
+  if (needsStack) {
+    return {
+      stacked: true,
+      stackedAtWidth: stacked ? Math.min(stackedAtWidth, width) : width,
+    };
+  }
+
+  if (stacked && width > stackedAtWidth + TOOLBAR_STACK_HYSTERESIS_PX) {
+    return { stacked: false, stackedAtWidth };
+  }
+
+  return { stacked, stackedAtWidth };
+}
 
 function syncToolbarToolsStacked(toolbar, state = { stacked: false, stackedAtWidth: 0 }) {
   if (!toolbar) return state;
 
-  const format = toolbar.querySelector(".toolbar_group_format");
-  const tools = toolbar.querySelector(".toolbar_group_tools");
-  if (!format || !tools) return state;
+  const toolbarInner = toolbar.querySelector(".toolbar_inner") || toolbar;
+  const next = nextStacked(
+    state.stacked,
+    state.stackedAtWidth,
+    toolsNeedStack(toolbarInner),
+    toolbar.clientWidth
+  );
 
-  const wrapped = tools.offsetTop > format.offsetTop + 1;
-  const width = toolbar.clientWidth;
-  let { stacked, stackedAtWidth } = state;
-
-  if (!stacked && wrapped) {
-    stacked = true;
-    stackedAtWidth = width;
-  } else if (stacked && !wrapped && width > stackedAtWidth + TOOLBAR_STACK_HYSTERESIS_PX) {
-    stacked = false;
-  } else if (stacked && wrapped) {
-    stackedAtWidth = Math.min(stackedAtWidth, width);
-  }
-
-  toolbar.classList.toggle("toolbar_tools_stacked", stacked);
-  return { stacked, stackedAtWidth };
+  toolbar.classList.toggle("toolbar_tools_stacked", next.stacked);
+  return next;
 }
 
 function watchToolbarToolsStacked(toolbar) {
   if (!toolbar) return;
 
   let state = { stacked: false, stackedAtWidth: 0 };
-  const update = () => {
+  const sync = () => {
     state = syncToolbarToolsStacked(toolbar, state);
   };
 
-  update();
-  requestAnimationFrame(update);
+  sync();
+  requestAnimationFrame(sync);
 
   if (typeof ResizeObserver === "undefined") return;
 
-  const observer = new ResizeObserver(update);
+  const observer = new ResizeObserver(sync);
   observer.observe(toolbar);
 }
 

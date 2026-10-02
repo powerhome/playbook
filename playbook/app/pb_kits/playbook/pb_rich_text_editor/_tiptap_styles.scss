@@ -127,26 +127,16 @@
 
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $input_border_default;
-    container-name: rte-toolbar;
-    container-type: inline-size;
     position: relative;
 
     // Prefer one row; undo/redo stay top-right.
-    // `.toolbar_tools_stacked` is set in JS when tools wrap to a second row.
+    // `.toolbar_tools_stacked` is set in JS when format + tools no longer fit beside history.
     &_inner {
       box-sizing: border-box;
       min-height: $space_lg + $space_xxs + $space_xxs * 2; // 36px button + vertical padding
       padding: $space_xxs $space_sm;
       padding-right: $history-gutter;
       position: relative;
-    }
-
-    &.toolbar_tools_stacked .toolbar_inner {
-      padding-right: $space_sm;
-    }
-
-    &.toolbar_tools_stacked .toolbar_group_tools {
-      margin-left: -$space_xs; // pull second row flush with format|more
     }
 
     &_controls {
@@ -182,6 +172,7 @@
       &_tools {
         box-sizing: border-box;
         flex-grow: 1;
+        flex-shrink: 1;
         flex-wrap: nowrap;
         max-width: 100%;
         min-width: 0;
@@ -194,32 +185,27 @@
       }
     }
 
-    &.toolbar_tools_stacked .toolbar_group_tools > .toolbar_separator:first-child {
-      display: none;
-    }
-
-    // With "more": format|more on row 1, tools on row 2 until wide
-    &_controls:has(.toolbar_group_more) {
-      .toolbar_group_more {
-        order: 2;
+    &.toolbar_tools_stacked {
+      .toolbar_inner {
+        padding-right: $space_sm;
       }
 
       .toolbar_group_tools {
         flex-basis: 100%;
-        flex-grow: 1;
-        order: 3;
-      }
-    }
+        margin-left: -$space_xs;
 
-    @container rte-toolbar (min-width: 42rem) {
+        > .toolbar_separator:first-child {
+          display: none;
+        }
+      }
+
+      // With "more": format|more on row 1, tools on row 2
       .toolbar_controls:has(.toolbar_group_more) {
-        .toolbar_group_tools {
-          flex-basis: auto;
+        .toolbar_group_more {
           order: 2;
-          overflow-x: visible;
         }
 
-        .toolbar_group_more {
+        .toolbar_group_tools {
           order: 3;
         }
       }
