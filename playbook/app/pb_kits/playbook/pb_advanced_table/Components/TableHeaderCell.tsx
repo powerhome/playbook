@@ -103,16 +103,21 @@ export const TableHeaderCell = ({
     col.getIsVisible?.() ||
     (Array.isArray(col.columns) &&
       col.columns.some((child: any) => columnHasVisibleLeaf(child)));
-      
-   // Check on column position in stack + visibility to add the vertical border 
+
+   // Check on column position in stack + visibility to add the vertical border
   const isLastHeaderCell = (() => {
     if (!header) return false;
-  
+
     if (header.colSpan > 1 && header.column.parent !== undefined) return true;
     const parent = header.column.parent;
-  
+
     if (!parent) {
-      const topHeaders = table?.getHeaderGroups()[0].headers.filter((h: any) => columnHasVisibleLeaf(h.column));
+      const headerGroups = table?.getHeaderGroups() ?? [];
+      const isSubheader = (header.headerGroup?.depth ?? 0) > 0;
+      const isFirstColumn = header.index === 0 && !(selectableRows && !hasAnySubRows);
+      if (isSubheader && headerGroups.length > 1 && !isFirstColumn) return true;
+
+      const topHeaders = headerGroups[0]?.headers.filter((item: any) => columnHasVisibleLeaf(item.column));
       return topHeaders?.at(-1)?.id === header.id;
     }
     const visibleSiblings = parent.columns.filter(columnHasVisibleLeaf);

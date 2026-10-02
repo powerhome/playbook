@@ -1384,3 +1384,93 @@ test("cascadeCollapse=true with header toggle all: collapse all then expand all 
     expect(kit.querySelector(".depth-sub-row-1")).toBeInTheDocument()
   })
 })
+
+const groupedColumnDefinitions = [
+  {
+    accessor: "year",
+    label: "Year",
+  },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        accessor: "newEnrollments",
+        label: "New Enrollments",
+      },
+      {
+        accessor: "scheduledMeetings",
+        label: "Scheduled Meetings",
+      },
+    ],
+  },
+  {
+    accessor: "attendanceRate",
+    label: "Attendance Rate",
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        accessor: "completedClasses",
+        label: "Completed Classes",
+      },
+      {
+        accessor: "graduatedStudents",
+        label: "Graduated Students",
+      },
+    ],
+  },
+  {
+    accessor: "classCompletionRate",
+    label: "Difference",
+  },
+]
+
+const headerWithText = (row, text) => (
+  [...row.querySelectorAll("th")].find((cell) => cell.textContent.includes(text))
+)
+
+test("parentless subheaders get last-header-cell without a placeholder parent", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={groupedColumnDefinitions}
+        data={{ testid: testId }}
+        enableToggleExpansion="none"
+        tableData={MOCK_DATA_NO_SUBROWS}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const [topRow, subheaderRow] = kit.querySelectorAll("thead tr")
+  const topCells = topRow.querySelectorAll("th")
+
+  expect(headerWithText(subheaderRow, "Year")).not.toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "New Enrollments")).not.toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Scheduled Meetings")).toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Attendance Rate")).toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Completed Classes")).not.toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Graduated Students")).toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Difference")).toHaveClass("last-header-cell")
+  expect(headerWithText(topRow, "Enrollment Data")).not.toHaveClass("last-header-cell")
+  expect(topCells[topCells.length - 1]).toHaveClass("last-header-cell")
+})
+
+test("single header row does not mark every column as last-header-cell", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        enableToggleExpansion="none"
+        tableData={MOCK_DATA_NO_SUBROWS}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const headers = kit.querySelectorAll("thead th")
+  const groupEnds = [...headers].filter((cell) => cell.classList.contains("last-header-cell"))
+
+  expect(headers.length).toBeGreaterThan(1)
+  expect(headers[0]).not.toHaveClass("last-header-cell")
+  expect(groupEnds).toHaveLength(1)
+  expect(kit.querySelector("tbody td.last-cell")).not.toBeInTheDocument()
+})
