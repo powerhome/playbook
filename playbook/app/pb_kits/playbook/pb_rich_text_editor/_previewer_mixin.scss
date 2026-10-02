@@ -109,6 +109,12 @@
     border: 0;
 }
 
+@mixin preview_tiptap_img {
+    height: auto;
+    margin: 1rem 0 0 0;
+    max-width: 100%;
+}
+
 @mixin preview_tiptap_ol {
     margin: 1rem 0 0 0;
     padding-left: $space_md;
