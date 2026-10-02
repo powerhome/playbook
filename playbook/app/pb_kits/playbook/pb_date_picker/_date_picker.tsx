@@ -52,6 +52,7 @@ type DatePickerProps = {
   allowInput?: boolean,
   aria?: { [key: string]: string },
   className?: string,
+  closeOnSelect?: boolean,
   customQuickPickDates: { override: boolean, dates: any[] },
   dark?: boolean,
   data?: { [key: string]: string },
@@ -103,6 +104,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     allowInput = false,
     aria = {},
     className,
+    closeOnSelect = true,
     customQuickPickDates,
     dark = false,
     data = {},
@@ -180,6 +182,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   useEffect(() => {
     datePickerHelper({
       allowInput,
+      closeOnSelect,
       customQuickPickDates,
       defaultDate: normalizedDefaultDate,
       disableDate,
