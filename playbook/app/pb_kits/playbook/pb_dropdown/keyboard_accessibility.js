@@ -14,7 +14,9 @@ export class PbDropdownKeyboard {
     );
     // Store bound handlers for cleanup
     this.handleKeyDownBound = this.handleKeyDown.bind(this);
-    this.handleSearchInputBound = () => this.openDropdownIfClosed();
+    this.handleSearchInputBound = () => {
+      if (!this.dropdown.isAsync) this.openDropdownIfClosed();
+    };
     this.init();
   }
 
@@ -95,7 +97,7 @@ export class PbDropdownKeyboard {
       case "Tab":
         this.dropdown.hideElement(this.dropdown.target);
         this.dropdown.updateArrowDisplay(false);
-        this.resetFocus();
+        this.dropdown.resetFocus();
         break;
       case "Backspace":
         if (this.searchInput) {
@@ -149,7 +151,7 @@ moveFocus(direction) {
     if (optionEl.dataset.dropdownOptionDisabled === "true") return;
 
     this.dropdown.handleOptionClick({ target: optionEl });
-    this.dropdown.toggleElement(this.dropdown.target);
+    if (!this.dropdown.isAsync) this.dropdown.toggleElement(this.dropdown.target);
     this.dropdown.updateClearButton();
   }
 }

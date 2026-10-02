@@ -2,6 +2,8 @@ examples:
   rails:
   - dropdown_default_rails: Default
   - dropdown_with_autocomplete: Autocomplete
+  - dropdown_async_search: Async Search
+  - dropdown_async_custom_content: Async Search with Custom Content
   - dropdown_multi_select_rails: Multi Select
   - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
   - dropdown_multi_select_display_rails: Multi Select with Form Pill Props

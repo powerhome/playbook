@@ -1,0 +1,42 @@
+<%= pb_rails("dropdown", props: {
+  id: "async-user-dropdown",
+  label: "User",
+  name: "async_user",
+  placeholder: "Try Emily or Michael",
+  autocomplete: true,
+  async: true,
+  search_term_minimum_length: 3,
+  search_debounce_timeout: 250,
+  options: [],
+}) %>
+
+<script>
+  (() => {
+    const dropdown = document.getElementById("async-user-dropdown");
+    if (!dropdown || dropdown.dataset.asyncExampleBound) return;
+    dropdown.dataset.asyncExampleBound = "true";
+
+    dropdown.addEventListener("pb:dropdown:search", (event) => {
+      const { searchingFor, setResults, setError } = event.detail;
+      const params = new URLSearchParams({
+        q: searchingFor,
+        limit: "10",
+        select: "firstName,lastName",
+      });
+
+      fetch(`https://dummyjson.com/users/search?${params}`, { credentials: "omit" })
+        .then((response) => {
+          if (!response.ok) throw new Error("User search failed");
+          return response.json();
+        })
+        .then(({ users }) => {
+          setResults(users.map((user) => ({
+            id: user.id,
+            label: `${user.firstName} ${user.lastName}`,
+            value: user.id,
+          })));
+        })
+        .catch(() => setError());
+    });
+  })();
+</script>

@@ -56,6 +56,21 @@ export const KIT_USAGE_FAQS = {
     answer: 'Pass options_by_context keyed by the other field value together with context_selector naming that element id; the kit swaps options on its change event and clears the selection unless clear_on_context_change is false. To push options from JavaScript, dispatch pb:dropdown:updateOptions with detail { dropdownId, options } or list your own event names in options_event_type. No request is made for you; supply every context upfront or provide the options in the event.',
     contractPaths: ['form.rails.builder.methods'], props: ['optionsByContext', 'contextSelector', 'clearOnContextChange', 'optionsEventType'],
   }, {
+    id: 'dropdown.async-search', platforms: ['rails'],
+    questions: ['How do I load Rails Dropdown options as the user types?'],
+    answer: 'Enable async with autocomplete or searchbar. The bubbling pb:dropdown:search event exposes searchingFor, setResults(options), and setError(). The kit debounces searches (search_debounce_timeout defaults to 250ms), requires search_term_minimum_length characters (default 3), and manages loading, empty results, errors and stale callbacks. Consumers fetch and map standard option objects or rich { option, content } entries, where content is an Element or DocumentFragment cloned into the option wrapper and option retains serializable selection data. Results bypass local label filtering. The typed query is not submitted by the Dropdown selected-id input. Keep a separate application field when free text must be submitted.',
+    props: ['async', 'autocomplete', 'searchbar', 'searchTermMinimumLength', 'searchDebounceTimeout'],
+  }, {
+    id: 'dropdown.async-selection-data', platforms: ['rails'],
+    questions: ['Does async Dropdown preserve custom selection fields?', 'Can an async Dropdown have a default before options load?'],
+    answer: 'pb:dropdown:selected emits the complete serializable option object (an array for multi_select, null or [] when cleared), preserving custom fields and numeric IDs. Form input values are strings. Selected data is retained when remote results change; matching multi-select IDs remain hidden even if new result metadata differs. Pass an explicit default_value option object or array with id and label to initialize async selection with options: []. The builder cannot infer that payload from an unmatched model ID.',
+    props: ['async', 'defaultValue', 'multiSelect'],
+  }, {
+    id: 'dropdown.async-input-reset', platforms: ['rails'],
+    questions: ['How do I submit free text from an async Dropdown?', 'What happens when an async Dropdown is cleared or reset?'],
+    answer: 'Async Dropdown emits pb:dropdown:input immediately with { value, reason }, where reason is input, clear, or reset. Use input plus pb:dropdown:selected to synchronize application-owned text and ID fields. Emptying single-select autocomplete clears its selection; emptying a search bar or multi-select query preserves selection. Nonempty edits retain the selected value. Public clear and native form reset clear query, selection, remote results and pending callbacks, close the menu, and notify consumers. Native reset runs after browser controls reset and honors preventDefault; it clears rather than restores default_value. Synchronous Dropdowns retain their existing filtering, selection notifications and reset timing.',
+    props: ['async', 'clearable'],
+  }, {
     id: 'dropdown.react-form-libraries', platforms: ['react'],
     questions: ['Can I use Dropdown with react-hook-form?', 'Does the React Dropdown submit a value?'],
     answer: 'Spread register("country") onto Dropdown. It accepts name and onChange, and calls onChange with { target: { name, value } } in addition to any onSelect. value is the selected option object, an array for multiSelect and null or [] when cleared, so read value.value in form state. The ref from register resolves to the kit imperative handle, not an input, and no named input is rendered; the React kit has no native form submission.',

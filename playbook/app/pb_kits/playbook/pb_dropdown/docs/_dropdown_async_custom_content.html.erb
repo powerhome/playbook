@@ -1,0 +1,57 @@
+<%= pb_rails("dropdown", props: {
+  id: "async-rich-user-dropdown",
+  label: "User",
+  name: "async_rich_user",
+  placeholder: "Try Emily or Michael",
+  autocomplete: true,
+  async: true,
+  options: [],
+}) %>
+
+<template id="async-user-option-template">
+  <%= pb_rails("flex", props: { orientation: "column", align: "start" }) do %>
+    <%= pb_rails("body", props: { text: "Name", data: { async_user_name: true } }) %>
+    <%= pb_rails("detail", props: { text: "Title and Department", data: { async_user_detail: true } }) %>
+  <% end %>
+</template>
+
+<script>
+  (() => {
+    const dropdown = document.getElementById("async-rich-user-dropdown");
+    const template = document.getElementById("async-user-option-template");
+    if (!dropdown || !template || dropdown.dataset.asyncExampleBound) return;
+    dropdown.dataset.asyncExampleBound = "true";
+
+    dropdown.addEventListener("pb:dropdown:search", (event) => {
+      const { searchingFor, setResults, setError } = event.detail;
+      const params = new URLSearchParams({
+        q: searchingFor,
+        limit: "10",
+        select: "firstName,lastName,company",
+      });
+
+      fetch(`https://dummyjson.com/users/search?${params}`, { credentials: "omit" })
+        .then((response) => {
+          if (!response.ok) throw new Error("User search failed");
+          return response.json();
+        })
+        .then(({ users }) => {
+          setResults(users.map((user) => {
+            const option = {
+              id: user.id,
+              label: `${user.firstName} ${user.lastName}`,
+              value: user.id,
+              title: user.company?.title || "",
+              department: user.company?.department || "",
+            };
+            const content = template.content.cloneNode(true);
+            content.querySelector("[data-async-user-name]").textContent = option.label;
+            content.querySelector("[data-async-user-detail]").textContent =
+              [option.title, option.department].filter(Boolean).join(" · ");
+            return { option, content };
+          }));
+        })
+        .catch(() => setError());
+    });
+  })();
+</script>
