@@ -1453,6 +1453,10 @@ test("parentless subheaders get last-header-cell without a placeholder parent", 
   expect(headerWithText(subheaderRow, "Difference")).toHaveClass("last-header-cell")
   expect(headerWithText(topRow, "Enrollment Data")).not.toHaveClass("last-header-cell")
   expect(topCells[topCells.length - 1]).toHaveClass("last-header-cell")
+
+  const bodyCells = kit.querySelector("tbody tr").querySelectorAll("td")
+  const bodyGroupEnds = [...bodyCells].map((cell) => cell.classList.contains("last-cell"))
+  expect(bodyGroupEnds).toEqual([false, false, true, true, false, true, true])
 })
 
 test("single header row does not mark every column as last-header-cell", () => {

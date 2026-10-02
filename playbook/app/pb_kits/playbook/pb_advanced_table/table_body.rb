@@ -32,13 +32,13 @@ module Playbook
       prop :pinned_rows, type: Playbook::Props::HashProp,
                          default: {}
 
-      def flatten_columns(columns)
-        columns.flat_map do |col|
+      def flatten_columns(columns, root: true)
+        columns.each_with_index.flat_map do |col, index|
           if col[:columns]
-            flatten_columns(col[:columns])
+            flatten_columns(col[:columns], root: false)
           elsif col[:accessor].present?
             if has_grouped_headers?
-              col.merge(is_last_in_group: last_in_group?(columns, col))
+              col.merge(is_last_in_group: root ? index != 0 : last_in_group?(columns, col))
             else
               col
             end

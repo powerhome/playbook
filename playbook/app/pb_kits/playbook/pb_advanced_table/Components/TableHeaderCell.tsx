@@ -114,8 +114,7 @@ export const TableHeaderCell = ({
     if (!parent) {
       const headerGroups = table?.getHeaderGroups() ?? [];
       const isSubheader = (header.headerGroup?.depth ?? 0) > 0;
-      const isFirstColumn = header.index === 0 && !(selectableRows && !hasAnySubRows);
-      if (isSubheader && headerGroups.length > 1 && !isFirstColumn) return true;
+      if (isSubheader && headerGroups.length > 1 && header.index !== 0) return true;
 
       const topHeaders = headerGroups[0]?.headers.filter((item: any) => columnHasVisibleLeaf(item.column));
       return topHeaders?.at(-1)?.id === header.id;
