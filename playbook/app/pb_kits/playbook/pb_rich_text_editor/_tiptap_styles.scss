@@ -71,7 +71,7 @@
     // size="1x" is 1em; Playbook $font_base is 15.5px — lock to 16px so icons match FA 1x
     .pb_icon_kit,
     .pb_custom_icon {
-      font-size: 1rem;
+      font-size: 16px;
     }
     &.open {
       color: $primary;
