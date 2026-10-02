@@ -12,3 +12,4 @@ yarn-error.log
 playbook/stats.json
 *.dec.*
 .env
+spec/examples.txt
