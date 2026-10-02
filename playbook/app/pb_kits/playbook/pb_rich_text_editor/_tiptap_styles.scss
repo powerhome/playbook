@@ -63,6 +63,7 @@
     border-radius: $border_radius_md;
     color: $text_lt_light;
     cursor: pointer;
+    padding: 0; // override UA button padding (1px 6px)
     &_icon {
       // 36px hit area per approved toolbar design
       width: $space_lg + $space_xxs;
