@@ -145,6 +145,10 @@
       padding-right: $space_sm;
     }
 
+    &.toolbar_tools_stacked .toolbar_group_tools {
+      margin-left: -$space_xs; // pull second row flush with format|more
+    }
+
     &_controls {
       align-items: center;
       display: flex;
