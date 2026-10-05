@@ -21,7 +21,7 @@ const nextValue = (value: SortValue[], name: string): SortValue => {
 }
 
 const directionIcon = (dir: Direction) => (
-  dir == 'asc' ? 'arrow-up-short-wide' : 'arrow-down-wide-short'
+  dir == 'asc' ? 'arrow-up-wide-short' : 'arrow-down-short-wide'
 )
 
 const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (arg0: SortValue) => void) => (

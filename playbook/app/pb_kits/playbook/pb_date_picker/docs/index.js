@@ -31,3 +31,4 @@ export { default as DatePickerAndDropdownRange } from './_date_picker_and_dropdo
 export { default as DatePickerRequiredIndicator } from "./_date_picker_required_indicator.jsx";
 export { default as DatePickerDialogSubmission } from "./_date_picker_dialog_submission.jsx";
 export { default as DatePickerYearAsc } from './_date_picker_year_asc.jsx'
+export { default as DatePickerCloseOnSelect } from './_date_picker_close_on_select.jsx'

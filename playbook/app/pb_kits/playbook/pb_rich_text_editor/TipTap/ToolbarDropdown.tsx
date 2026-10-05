@@ -60,8 +60,7 @@ const toolbarDropdownItems = [
         onclick: () => {
           normalizeListSelection(editor)
           editor.chain().focus().toggleOrderedList().run()
-        }
-        ,
+        },
     },
     {
         node: "blockquote",
@@ -69,6 +68,13 @@ const toolbarDropdownItems = [
         isActive: editor.isActive("blockquote"),
         text: "Block Quote",
         onclick: () => editor.chain().focus().toggleBlockquote().run(),
+    },
+    {
+        node: "codeBlock",
+        icon: "code",
+        isActive: editor.isActive("codeBlock"),
+        text: "Code Block",
+        onclick: () => editor.chain().focus().toggleCodeBlock().run(),
     },
 ]
 
@@ -81,61 +87,36 @@ const toolbarDropdownItems = [
   }
 
 let activeCount = 0;
-const activeItems = [];
+const activeLabels = [];
 
-for (const { text, isActive, icon } of toolbarDropdownItems) {
+for (const { text, isActive } of toolbarDropdownItems) {
   if (isActive) {
-    activeCount ++
-    activeItems.push(
-      <Flex align="center"
-          gap="xs"
-          key={icon}
-      >
-        <Icon icon={icon}
-            size="lg"
-        />
-        <div>{text}</div>
-        <Icon
-            fixedWidth
-            flip={showPopover ? "vertical" : "none"}
-            icon="angle-down"
-            margin-left="xs"
-        />
-      </Flex>
-    );
+    activeCount++
+    activeLabels.push(text);
   }
 }
+
+const triggerLabel =
+  activeCount === 2 ? activeLabels[1] :
+  activeCount === 1 ? activeLabels[0] :
+  "Paragraph";
 
 const popoverReference = (
   <Button className="editor-dropdown-button"
       onClick={handleTogglePopover}
       variant="secondary"
   >
-    {
-       activeCount === 2 ? (
-        activeItems[1]
-       ) : (
-        activeCount === 1 ? (
-        activeItems[0] || null
-        ) : (
-          <Flex align="center"
-              gap="xs"
-              key="paragraph"
-          >
-            <Icon icon="paragraph"
-                size="lg"
-            />
-            <div>Paragraph</div>
-            <Icon
-                fixedWidth
-                flip={showPopover ? "vertical" : "none"}
-                icon="angle-down"
-                margin-left="xs"
-            />
-          </Flex>
-        )
-       )
-    }
+    <Flex
+        align="center"
+        gap="xs"
+    >
+      <div>{triggerLabel}</div>
+      <Icon
+          fixedWidth
+          flip={showPopover ? "vertical" : "none"}
+          icon="angle-down"
+      />
+    </Flex>
   </Button>
 );
 
@@ -154,11 +135,10 @@ const popoverReference = (
             paddingTop="xs" 
             variant="subtle"
         >
-          {toolbarDropdownItems.map(({ icon, text, onclick, isActive}: ToolbarTypes, index: number) => (
+          {toolbarDropdownItems.map(({ text, onclick, isActive}: ToolbarTypes, index: number) => (
             <NavItem
                 className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
                 cursor="pointer"
-                iconLeft={icon}
                 key={`${text}_${index}`}
                 margin='none'
                 onClick={()=> {onclick(); setShowPopover(false)}}

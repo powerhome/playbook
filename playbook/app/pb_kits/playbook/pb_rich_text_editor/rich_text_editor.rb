@@ -4,15 +4,24 @@ module Playbook
   module PbRichTextEditor
     # Rails rich text editor: TipTap (vanilla JS), no React. Content syncs to a hidden input for form submission.
     class RichTextEditor < Playbook::KitBase
+      EXTENSIONS = %w[underline text_align horizontal_rule image].freeze
+
       prop :value
       prop :placeholder
       prop :input_options, type: Playbook::Props::HashProp, default: {}
       prop :label
       prop :required_indicator, type: Playbook::Props::Boolean, default: false
       prop :markdown_support, type: Playbook::Props::Boolean, default: false
+      prop :extensions, type: Playbook::Props::Array, default: []
       # When true, TipTap toolbar matches React `simple`: Bold + Italic only (no block-style Popover).
       # Use in modals or narrow layouts where the block dropdown misbehaves.
       prop :simple, type: Playbook::Props::Boolean, default: false
+      prop :input_height, type: Playbook::Props::Enum,
+                          values: ["sm", "md", "lg", nil],
+                          default: nil
+      prop :input_min_height, type: Playbook::Props::Enum,
+                              values: ["sm", "md", "lg", nil],
+                              default: nil
 
       # Match React default (globalProps maxWidth "md").
       def max_width
@@ -22,6 +31,15 @@ module Playbook
 
       def classname
         generate_classname("pb_rich_text_editor_kit", "rte-container")
+      end
+
+      # Same classes as React TipTapEditor so scss can bev reused
+      def advanced_container_classname
+        classes = %w[pb_rich_text_editor_advanced_container toolbar-active]
+        classes << "pb_rich_text_editor_rte--simple" if simple
+        classes << "input_height_#{input_height}" if input_height.present?
+        classes << "input_min_height_#{input_min_height}" if input_min_height.present?
+        classes.join(" ")
       end
 
       def input_id
@@ -47,6 +65,23 @@ module Playbook
         raw.start_with?("<") ? raw : "<p>#{raw}</p>"
       end
 
+      def enabled_extensions
+        @enabled_extensions ||= begin
+          requested = extensions.map(&:to_s)
+          unknown = requested - EXTENSIONS
+          warn("RichTextEditor ignored unknown extensions: #{unknown.join(', ')}. Allowed values: #{EXTENSIONS.join(', ')}") if unknown.any?
+          requested.select { |extension| EXTENSIONS.include?(extension) }.uniq
+        end
+      end
+
+      def extension_enabled?(extension)
+        enabled_extensions.include?(extension)
+      end
+
+      def show_extensions_dropdown?
+        !simple && enabled_extensions.any?
+      end
+
       def container_id
         id.present? ? "rte-tiptap-#{id}" : "rte-tiptap-#{input_id.gsub(/[^a-z0-9_-]/i, '')}"
       end
@@ -66,6 +101,14 @@ module Playbook
 
       def rte_block_style_tooltip_id
         "#{toolbar_id}-block-tooltip"
+      end
+
+      def rte_extensions_trigger_id
+        "#{toolbar_id}-extensions-trigger"
+      end
+
+      def rte_extensions_tooltip_id
+        "#{toolbar_id}-extensions-tooltip"
       end
     end
   end
