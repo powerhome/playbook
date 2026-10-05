@@ -1885,3 +1885,122 @@ describe('Dropdown migration-only async contract', () => {
     expect(onInputChange).not.toHaveBeenCalled();
   });
 });
+
+describe('async Dropdown Typeahead parity', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  const people = [
+    { label: 'Ann Lee', value: 1 },
+    { label: 'Ann Lee', value: 2 },
+    { label: 'Bob Ray', value: 3 },
+  ];
+  const flush = async () => { await act(async () => { jest.advanceTimersByTime(0); }); };
+  const optionTexts = () => Array.from(document.querySelectorAll('.pb_dropdown_container .pb_body_kit'))
+    .map((element) => element.textContent);
+
+  test('restores preloaded defaultOptions when the query is emptied', async () => {
+    const loadOptions = jest.fn((term) => Promise.resolve(people.filter((person) => person.label.toLowerCase().includes(term))));
+    render(<Dropdown async
+        autocomplete
+        defaultOptions
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    await flush();
+    fireEvent.change(input, { target: { value: 'bob' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Bob Ray']);
+    fireEvent.change(input, { target: { value: '' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Ann Lee', 'Ann Lee', 'Bob Ray']);
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
+
+  test('restores a defaultOptions array after clearing and after selecting', async () => {
+    const loadOptions = jest.fn(() => Promise.resolve([people[2]]));
+    render(<Dropdown async
+        autocomplete
+        defaultOptions={people.slice(0, 1)}
+        loadOptions={loadOptions}
+        multiSelect
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'bob' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Bob Ray']);
+    fireEvent.click(screen.getByText('Bob Ray'));
+    fireEvent.click(input);
+    expect(optionTexts()).toEqual(['Ann Lee']);
+  });
+
+  test('focuses the first loaded result so Enter selects it', async () => {
+    const onSelect = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve(people)}
+        onSelect={onSelect}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.click(input);
+    fireEvent.change(input, { target: { value: 'a' } });
+    await flush();
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).toHaveBeenCalledWith(people[0]);
+  });
+
+  test('keys results without ids by value', async () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve(people)}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.click(input);
+    fireEvent.change(input, { target: { value: 'a' } });
+    await flush();
+    expect(consoleError.mock.calls.some(([message]) => String(message).includes('unique "key"'))).toBe(false);
+    consoleError.mockRestore();
+  });
+
+  test('identifies results by value so same-label options stay distinct', async () => {
+    const onSelect = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve(people)}
+        multiSelect
+        onSelect={onSelect}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'ann' } });
+    await flush();
+    fireEvent.click(screen.getAllByText('Ann Lee')[0]);
+    expect(onSelect).toHaveBeenLastCalledWith([people[0]]);
+    fireEvent.change(input, { target: { value: 'ann lee' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Ann Lee', 'Bob Ray']);
+    fireEvent.click(screen.getByText('Ann Lee', { selector: '.pb_dropdown_container .pb_body_kit' }));
+    expect(onSelect).toHaveBeenLastCalledWith([people[0], people[1]]);
+  });
+
+  test.each([false, true])('single autocomplete shows the selected label in the input (controlled: %s)', async (controlled) => {
+    const Example = () => {
+      const [selected, setSelected] = useState(null);
+      return (
+        <Dropdown async
+            autocomplete
+            loadOptions={() => Promise.resolve(people)}
+            onSelect={setSelected}
+            {...(controlled ? { value: selected } : {})}
+        />
+      );
+    };
+    render(<Example />);
+    const input = screen.getByRole('textbox');
+    fireEvent.click(input);
+    fireEvent.change(input, { target: { value: 'bob' } });
+    await flush();
+    fireEvent.click(screen.getByText('Bob Ray'));
+    expect(input).toHaveValue('Bob Ray');
+  });
+});

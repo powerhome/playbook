@@ -82,6 +82,9 @@ function serializeDropdownFilterResetDefault(
     return undefined;
 }
 
+// Async results are server records, so identify them by value like Typeahead rather than by label.
+const asyncOptionValue = (option: GenericObject) => option.value ?? option.id ?? option.label;
+
 type CustomQuickPickDate = {
     label: string;
     value: string[] | { timePeriod: string; amount: number };
@@ -161,7 +164,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         onInputChange,
         renderOption,
         value,
-        getOptionValue,
+        getOptionValue: getOptionValueProp,
         getOptionLabel,
         renderValue,
         autocomplete = false,
@@ -214,6 +217,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     );
 
     const asyncEnabled = async && variant !== "quickpick";
+    const getOptionValue = getOptionValueProp ?? (asyncEnabled ? asyncOptionValue : undefined);
     const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, defaultOptions, cacheOptions);
 
     // ------------- Quick Pick ---------------------------------
@@ -267,6 +271,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       if (!getOptionLabel) return option?.label;
       return option && !Array.isArray(option) && Object.keys(option).length ? getOptionLabel(option) : "";
     }, [getOptionLabel]);
+
+    const optionKey = (option: GenericObject) => String(
+      getOptionValue ? getOptionValue(option) : option.id ?? option.value ?? optionLabel(option)
+    );
 
     const isControlled = value !== undefined;
     const selected = isControlled ? (value ?? (multiSelect ? [] : {})) : internalSelected;
@@ -421,6 +429,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           );
         }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, optionLabel]);
 
+    // Focus the first loaded result so typing then Enter selects it, as in Typeahead
+    useEffect(() => {
+        if (asyncEnabled && loadOptions && !isDropDownClosed) {
+            setFocusedOptionIndex(filteredOptions.length ? 0 : -1);
+        }
+    }, [loadedOptions]);
+
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
         if (!isDropDownClosed) {
@@ -514,7 +529,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
       const handleOptionClick = (clickedItem: GenericObject) => {
                 if (disabled) return;
-                if (asyncEnabled) cancelAsync();
+                if (asyncEnabled) clearAsync();
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
                 if (multiSelect) {
@@ -544,7 +559,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    }
                } else {
                    setSelected(clickedItem);
-                   setFilterItem(isControlled && !multiSelect ? optionLabel(selected as GenericObject) || "" : "");
+                   // Async autocomplete shows the selection in the input, as controlled mode and Rails do
+                   setFilterItem(isControlled
+                     ? optionLabel(selected as GenericObject) || ""
+                     : asyncEnabled && autocomplete ? optionLabel(clickedItem) || "" : "");
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
@@ -700,6 +718,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     renderOption,
                     renderValue,
                     optionLabel,
+                    optionKey,
                     isControlled,
                     onInputChange,
                     isSameOption,
@@ -801,7 +820,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                             <DropdownContainer constrainHeight={constrainHeight}>
                                 {optionsWithBlankSelection &&
                                     optionsWithBlankSelection?.map((option: GenericObject) => (
-                                        <DropdownOption key={getOptionValue ? getOptionValue(option) : option.id}
+                                        <DropdownOption key={optionKey(option)}
                                             option={option}
                                         />
                                     ))}

@@ -14,6 +14,10 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
   clear: () => void;
 } {
   const [options, setOptions] = useState<GenericObject[]>(Array.isArray(defaultOptions) ? defaultOptions : []);
+  // Results shown for an empty query: the defaultOptions array, or what the defaultOptions preload returned.
+  const preloaded = useRef<GenericObject[]>([]);
+  const initialOptions = useRef<GenericObject[]>([]);
+  initialOptions.current = Array.isArray(defaultOptions) ? defaultOptions : defaultOptions ? preloaded.current : [];
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "empty" | "error">("idle");
   const cache = useRef(new Map<string, GenericObject[]>());
   const sequence = useRef(0);
@@ -35,7 +39,7 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
 
   const clear = useCallback(() => {
     cancel();
-    setOptions([]);
+    setOptions(initialOptions.current);
   }, [cancel]);
 
   useEffect(() => invalidate, [enabled, invalidate]);
@@ -47,9 +51,12 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
 
   const search = useCallback((term: string, initial = false) => {
     invalidate();
-    setOptions([]);
     setStatus("idle");
-    if (!enabled || (!initial && !term)) return;
+    if (!enabled || (!initial && !term)) {
+      setOptions(initialOptions.current);
+      return;
+    }
+    setOptions([]);
     const cached = cacheOptions ? cache.current.get(term) : undefined;
     if (cached) {
       setOptions(cached);
@@ -72,6 +79,7 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
           if (cache.current.size >= 100) cache.current.delete(cache.current.keys().next().value);
           cache.current.set(term, results);
         }
+        if (initial && !failed) preloaded.current = results;
         setOptions(results);
         setStatus(failed ? "error" : results.length ? "success" : "empty");
       };

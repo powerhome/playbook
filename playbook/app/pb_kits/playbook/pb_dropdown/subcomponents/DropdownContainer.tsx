@@ -47,7 +47,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
 
   const {
     asyncEnabled,
-    getOptionValue,
+    optionKey,
     asyncStatus,
     dropdownContainerRef,
     error,
@@ -123,7 +123,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
           </ListItem>
         ): (
           children || (asyncEnabled && filteredOptions.map((option: GenericObject) => (
-            <DropdownOption key={getOptionValue ? getOptionValue(option) : option.id}
+            <DropdownOption key={optionKey(option)}
                 option={option}
             />
           )))
