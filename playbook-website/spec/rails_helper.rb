@@ -11,19 +11,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 
-# rspec-rails 3.9 still calls fixture_path=; Rails 7.1+ only has fixture_paths=.
-if defined?(ActiveRecord::TestFixtures::ClassMethods)
-  ActiveRecord::TestFixtures::ClassMethods.module_eval do
-    def fixture_path=(path)
-      self.fixture_paths = Array(path)
-    end
-
-    def fixture_path
-      fixture_paths&.first
-    end
-  end
-end
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

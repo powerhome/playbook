@@ -10,10 +10,4 @@ class ApplicationController < ActionController::Base
   def set_app_js
     @application_js = %w[application]
   end
-
-private
-
-  def rails_playground_enabled?
-    Rails.application.config.x.rails_playground_enabled
-  end
 end
