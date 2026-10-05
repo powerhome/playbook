@@ -69,6 +69,10 @@ export const useRailsPlaygroundPreview = ({
 
         const data = await response.json();
 
+        // Fetch may already have completed when a newer request aborts this
+        // one — ignore stale JSON so it cannot overwrite a newer preview.
+        if (controller.signal.aborted) return;
+
         if (!response.ok) {
           setHtml(null);
           setError(data.error || "Failed to render Rails preview");
@@ -78,7 +82,7 @@ export const useRailsPlaygroundPreview = ({
         setHtml(data.html ?? null);
         setError(data.error ?? null);
       } catch (fetchError) {
-        if ((fetchError as Error).name === "AbortError") {
+        if ((fetchError as Error).name === "AbortError" || controller.signal.aborted) {
           return;
         }
 
