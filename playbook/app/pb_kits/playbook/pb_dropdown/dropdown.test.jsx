@@ -1199,3 +1199,178 @@ test('autocomplete selection still fires onSelect', () => {
 
   expect(onSelect).toHaveBeenCalledWith(options[1])
 })
+
+describe('async Dropdown', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test('debounces callback loaders and does not locally filter remote matches', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'ab' } });
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+    fireEvent.change(input, { target: { value: 'abc' } });
+    act(() => jest.advanceTimersByTime(200));
+    fireEvent.change(input, { target: { value: 'abcd' } });
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+    act(() => loadOptions.mock.calls[0][1]([{ id: '1', label: 'Remote match', value: '1' }]));
+    expect(screen.getByText('Remote match')).toBeInTheDocument();
+  });
+
+  test('ignores stale callbacks and cancels pending search on Escape', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'first' } });
+    act(() => jest.advanceTimersByTime(250));
+    fireEvent.change(input, { target: { value: 'second' } });
+    act(() => loadOptions.mock.calls[0][1]([{ id: '1', label: 'Stale' }]));
+    expect(screen.queryByText('Stale')).not.toBeInTheDocument();
+    fireEvent.keyDown(input, { key: 'Escape', code: 'Escape' });
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+  });
+
+  test('supports promise results and rejected requests', async () => {
+    const loadOptions = jest.fn().mockResolvedValueOnce([]).mockRejectedValueOnce(new Error('Failed'));
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'empty' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    expect(screen.getByRole('status')).toHaveTextContent('No results found');
+    fireEvent.change(input, { target: { value: 'error' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    expect(screen.getByRole('status')).toHaveTextContent('Unable to load options');
+  });
+});
+
+describe('async Dropdown lifecycle', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test.each(['Tab', 'Escape'])('dismissal with %s invalidates in-flight responses', (key) => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'query' } });
+    act(() => jest.advanceTimersByTime(250));
+    fireEvent.keyDown(input, { key });
+    act(() => loadOptions.mock.calls[0][1]([{ id: 'late', label: 'Late result' }]));
+    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
+  });
+
+  test('searchbar stays open below the minimum and clears stale results', () => {
+    const loadOptions = jest.fn();
+    const { container } = render(
+      <Dropdown async
+          loadOptions={loadOptions}
+      >
+        <Dropdown.Trigger />
+        <Dropdown.Container searchbar />
+      </Dropdown>
+    );
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'a' } });
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+    fireEvent.change(input, { target: { value: 'query' } });
+    act(() => jest.advanceTimersByTime(250));
+    act(() => loadOptions.mock.calls[0][1]([{ id: '1', label: 'Searchbar result', value: '1' }]));
+    expect(screen.getByText('Searchbar result')).toBeInTheDocument();
+    fireEvent.change(input, { target: { value: 'q' } });
+    expect(screen.queryByText('Searchbar result')).not.toBeInTheDocument();
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
+  });
+
+  test('times out callback loaders and ignores their late results', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+        searchDebounceTimeout={0}
+        searchTermMinimumLength={1}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'a' } });
+    act(() => jest.advanceTimersByTime(15000));
+    expect(screen.getByRole('status')).toHaveTextContent('Unable to load options');
+    act(() => loadOptions.mock.calls[0][1]([{ id: 'late', label: 'Late result' }]));
+    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
+  });
+
+  test('unmount cancels debounced work', () => {
+    const loadOptions = jest.fn();
+    const { unmount } = render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+                               />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    unmount();
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+  });
+});
+
+describe('async Dropdown cancellation', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test('outside click cancels a pending debounce', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    fireEvent.click(document.body);
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+  });
+
+  test('disabling invalidates an in-flight response', () => {
+    const loadOptions = jest.fn();
+    const { rerender } = render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+                                />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    act(() => jest.advanceTimersByTime(250));
+    rerender(<Dropdown async
+        autocomplete
+        disabled
+        loadOptions={loadOptions}
+             />);
+    act(() => loadOptions.mock.calls[0][1]([{ id: 'late', label: 'Late result' }]));
+    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
+  });
+
+  test('clear does not request an empty query with a zero minimum', () => {
+    const loadOptions = jest.fn();
+    const ref = React.createRef();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+        ref={ref}
+        searchTermMinimumLength={0}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    act(() => ref.current.clearSelected());
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+  });
+});

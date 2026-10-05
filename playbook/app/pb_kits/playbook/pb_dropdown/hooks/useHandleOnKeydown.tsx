@@ -5,6 +5,7 @@ import DropdownContext from "../context";
 export const useHandleOnKeyDown = () => {
 
 const {
+  asyncEnabled,
   autocomplete,
   filterItem,
   filteredOptions,
@@ -41,7 +42,7 @@ const {
 
   return (e: React.KeyboardEvent) => {
 
-    if (e.key !== "Tab" && autocomplete && selected && selected.label) {
+    if (!asyncEnabled && e.key !== "Tab" && autocomplete && selected && selected.label) {
       // Only when the input is showing the selected label (e.g. seeded defaultValue)
       const replacingSelectedLabel = filterItem === selected.label;
       handleBackspace();
@@ -61,6 +62,12 @@ const {
     }
 
     switch (e.key) {
+    case "Escape":
+      if (asyncEnabled) {
+        setIsDropDownClosed(true);
+        setFocusedOptionIndex(-1);
+      }
+      break;
     case "ArrowDown": {
       e.preventDefault();
       setIsDropDownClosed(false);
@@ -75,7 +82,7 @@ const {
       break;
     }
     case "Enter":
-      if (focusedOptionIndex !== -1 && !filteredOptions[focusedOptionIndex]?.disabled) {
+      if (focusedOptionIndex !== -1 && filteredOptions[focusedOptionIndex] && !filteredOptions[focusedOptionIndex].disabled) {
         e.preventDefault();
         handleOptionClick(filteredOptions[focusedOptionIndex]);
         setFocusedOptionIndex(-1)

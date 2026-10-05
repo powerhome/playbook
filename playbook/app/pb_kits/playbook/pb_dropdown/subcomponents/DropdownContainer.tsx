@@ -10,6 +10,9 @@ import {
 import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
+import DropdownOption from "./DropdownOption";
+import { GenericObject } from "../../types";
+import { useHandleOnKeyDown } from "../hooks/useHandleOnKeydown";
 import { setFloatingOwnerAttribute } from "../../utilities/floatingPortalHosts";
 
 import List from "../../pb_list/_list";
@@ -43,6 +46,8 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   } = props;
 
   const {
+    asyncEnabled,
+    asyncStatus,
     dropdownContainerRef,
     error,
     filteredOptions,
@@ -56,12 +61,14 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     setFocusedOptionIndex,
   } = useContext(DropdownContext);
 
+  const handleKeyDown = useHandleOnKeyDown();
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
+  const menuClosed = isDropDownClosed || (asyncEnabled && !searchbar && !asyncStatus && filteredOptions.length === 0);
   const classes = classnames(
     buildCss("pb_dropdown_container"),
-    `${isDropDownClosed ? "close" : "open"}`,
+    `${menuClosed ? "close" : "open"}`,
     constrainHeight && "constrain_height",
     globalProps(props),
     className
@@ -85,6 +92,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         >
             <input
                 onChange={handleChange}
+                onKeyDown={asyncEnabled ? handleKeyDown : undefined}
                 placeholder="Select..."
                 ref={inputRef}
                 value={filterItem}
@@ -93,7 +101,13 @@ const DropdownContainer = (props: DropdownContainerProps) => {
       )}
       <List dark={dark}>
         {
-        filteredOptions?.length === 0 ? (
+        asyncStatus ? (
+          <ListItem htmlOptions={{ role: "status" }}>
+            <Body padding="xs"
+                text={asyncStatus}
+            />
+          </ListItem>
+        ) : asyncEnabled && filteredOptions?.length === 0 ? null : filteredOptions?.length === 0 ? (
           <ListItem dark={dark}
               display="flex"
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -107,7 +121,11 @@ const DropdownContainer = (props: DropdownContainerProps) => {
             />
           </ListItem>
         ): (
-          children
+          children || (asyncEnabled && filteredOptions.map((option: GenericObject) => (
+            <DropdownOption key={option.id}
+                option={option}
+            />
+          )))
         )
         }
         </List>
@@ -115,7 +133,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   );
 
   if (portalHost) {
-    if (isDropDownClosed) {
+    if (menuClosed) {
       return null;
     }
     return createPortal(

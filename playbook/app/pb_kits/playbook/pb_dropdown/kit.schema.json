@@ -7,6 +7,36 @@
     "rails"
   ],
   "props": {
+    "async": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "loadOptions": {
+      "type": "LoadOptions",
+      "platforms": [
+        "react"
+      ]
+    },
+    "searchDebounceTimeout": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 250
+    },
+    "searchTermMinimumLength": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 3
+    },
     "autocomplete": {
       "type": "boolean",
       "platforms": [
@@ -219,25 +249,6 @@
       ],
       "type": "boolean",
       "default": false
-    },
-    "async": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "boolean",
-      "default": false
-    },
-    "searchTermMinimumLength": {
-      "platforms": [
-        "rails"
-      ],
-      "default": 3
-    },
-    "searchDebounceTimeout": {
-      "platforms": [
-        "rails"
-      ],
-      "default": 250
     },
     "searchbar": {
       "platforms": [

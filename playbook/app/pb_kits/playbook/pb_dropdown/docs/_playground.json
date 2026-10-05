@@ -2,6 +2,9 @@
   "template": "<Dropdown{{props}} />",
   "propTargets": {},
   "defaults": {
+    "async": false,
+    "searchDebounceTimeout": 250,
+    "searchTermMinimumLength": 3,
     "autocomplete": false,
     "blankSelection": "",
     "clearable": true,

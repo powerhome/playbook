@@ -41,6 +41,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
   } = props;
 
   const {
+    asyncEnabled,
     activeStyle,
     disabled,
     filteredOptions,
@@ -52,6 +53,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject | undefined) => {
+    if (asyncEnabled) return true;
     // When the input is only showing the selected label (e.g. seeded defaultValue), do not filter
     const selectedLabel =
       !multiSelect &&

@@ -13,6 +13,7 @@ import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import useDropdown from "./hooks/useDropdown";
+import useAsyncOptions, { LoadOptions } from "./hooks/useAsyncOptions";
 import getQuickPickOptions from "./quickpick";
 
 import {
@@ -93,6 +94,10 @@ type CustomQuickPickDates = {
 
 type DropdownProps = {
     aria?: { [key: string]: string };
+    async?: boolean;
+    loadOptions?: LoadOptions;
+    searchDebounceTimeout?: number;
+    searchTermMinimumLength?: number;
     autocomplete?: boolean;
     blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
@@ -139,6 +144,10 @@ interface DropdownComponent
 let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const {
         aria = {},
+        async = false,
+        loadOptions,
+        searchDebounceTimeout = 250,
+        searchTermMinimumLength = 3,
         autocomplete = false,
         blankSelection = '',
         children,
@@ -188,14 +197,21 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         [classes],
     );
 
+    const asyncEnabled = async && variant !== "quickpick";
+    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !disabled, loadOptions, searchTermMinimumLength, searchDebounceTimeout);
+
     // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
     const dropdownOptions = variant === "quickpick" 
         ? getQuickPickOptions(rangeEndsToday, customQuickPickDates) 
-        : (options || []);
+        : (asyncEnabled ? loadedOptions : options || []);
     // ----------------------------------------------------------
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(disabled ? true : isClosed);
+
+    useEffect(() => {
+      if (asyncEnabled && (isDropDownClosed || disabled)) cancelAsync();
+    }, [asyncEnabled, isDropDownClosed, disabled, cancelAsync]);
 
     // Use a suffix for the trigger ID to avoid conflict with the outer div's id
     const sanitizeForId = (str: string) =>
@@ -330,6 +346,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     }, [optionsWithBlankSelection, selectedArray, multiSelect]);
     
     const filteredOptions = useMemo(() => {
+          if (asyncEnabled) return availableOptions;
           // When the input shows the selected label, do not filter the list down to that one option
           const selectedLabel =
             !multiSelect &&
@@ -340,7 +357,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           return availableOptions.filter((opt: GenericObject) =>
             String(opt.label).toLowerCase().includes(filterText.toLowerCase())
           );
-        }, [availableOptions, filterItem, multiSelect, selected]);
+        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled]);
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
@@ -414,6 +431,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (disabled) return;
+        if (asyncEnabled) {
+          searchAsync(e.target.value);
+          setFocusedOptionIndex(-1);
+        }
         setFilterItem(e.target.value);
         setIsDropDownClosed(false);
     };
@@ -425,6 +446,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
       const handleOptionClick = (clickedItem: GenericObject) => {
                 if (disabled) return;
+                if (asyncEnabled) cancelAsync();
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
                 if (multiSelect) {
@@ -474,6 +496,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const handleBackspace = () => {
       if (disabled) return;
+      if (asyncEnabled) clearAsync();
       if (multiSelect) {
         setSelected([]);
         handleSelectionChange([]);
@@ -511,6 +534,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // Create an internal ref object that holds the imperative handle methods
     const imperativeRef = useRef({
       clearSelected: () => {
+          if (asyncEnabled) clearAsync();
         if (multiSelect) {
           setSelected([]);
           handleSelectionChange([]);
@@ -528,6 +552,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     useEffect(() => {
       imperativeRef.current = {
         clearSelected: () => {
+          if (asyncEnabled) clearAsync();
           if (multiSelect) {
             setSelected([]);
             handleSelectionChange([]);
@@ -539,7 +564,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setIsDropDownClosed(true);
         },
       };
-    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed]);
+    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed, asyncEnabled, clearAsync]);
 
     useImperativeHandle(ref, () => imperativeRef.current);
 
@@ -579,6 +604,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             {...dataProps}
             {...htmlProps}
             {...(filterResetDefaultSerialized ? { "data-default-value": filterResetDefaultSerialized } : {})}
+            aria-busy={asyncEnabled ? asyncStatus === "Loading…" : undefined}
             className={classes}
             id={id}
             ref={outerDivRef}
@@ -586,6 +612,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         >
             <DropdownContext.Provider
                 value={{
+                    asyncEnabled,
+                    asyncStatus,
                     activeStyle,
                     autocomplete,
                     blankSelection,
