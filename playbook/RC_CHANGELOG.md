@@ -1,3 +1,26 @@
+# ✨ 18.1.0.pre.rc.5
+
+##### October 05, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.1.0-rc.5](https://github.com/powerhome/playbook/tree/18.1.0-rc.5) full list of changes:
+
+**Kit Enhancements:**
+
+- Playbook Website: Cached Playground 404s After Vpn Reconnect [\#6706](https://github.com/powerhome/playbook/pull/6706) ([nickamantia](https://github.com/nickamantia))
+- Datepicker: Closeonselect Kit Prop [\#6691](https://github.com/powerhome/playbook/pull/6691) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Improvements:**
+
+- Rich Text Editor: Toolbar/markdown Styling and Extensions - React and Rails [\#6688](https://github.com/powerhome/playbook/pull/6688) ([kangaree](https://github.com/kangaree))
+- Github Actions: Updated Label Check Action to Account for Changelog Labels [\#6713](https://github.com/powerhome/playbook/pull/6713) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Spooky Season Is Upon Us [\#6712](https://github.com/powerhome/playbook/pull/6712) ([nidaqg](https://github.com/nidaqg))
+- Filter Kit: Standardize Sort Icons [\#6692](https://github.com/powerhome/playbook/pull/6692) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Expand and Prioritize Playbook Website Search [\#6650](https://github.com/powerhome/playbook/pull/6650) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.1.0-rc.4...18.1.0-rc.5)
+
 # ✨ 18.1.0.pre.rc.3
 
 ##### September 29, 2026
