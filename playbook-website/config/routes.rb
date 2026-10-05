@@ -20,9 +20,7 @@ Rails.application.routes.draw do
     }, as: nil
   end
 
-  # Production host only: HTML shell for /playground so the SPA can show a VPN
-  # message / redirect to staging. Playground JSON is NOT served on production
-  # (see PagesController#application) — localhost / review apps serve both.
+  # HTML /playground always (prod shows the VPN/staging message). JSON is gated in PagesController.
   get "playground", to: "pages#application"
 
   root to: "pages#application"
