@@ -1576,7 +1576,8 @@ describe('Dropdown input and reset opt-ins', () => {
     expect(screen.getByText('Canada')).toBeInTheDocument();
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
     fireEvent.click(screen.getByText('Canada'));
-    expect(onInputChange).toHaveBeenLastCalledWith('', { reason: 'select' });
+    expect(onInputChange).toHaveBeenCalledTimes(1);
+    expect(onInputChange).toHaveBeenLastCalledWith('remote query', { reason: 'input' });
   });
 
   test.each([false, true])('native form reset is gated by resetOnFormReset=%s', async (resetOnFormReset) => {
@@ -1999,4 +2000,53 @@ test('rich removal Enter does not bubble into option selection', () => {
   fireEvent.click(remove);
   expect(onSelect).toHaveBeenCalledTimes(1);
   expect(onSelect).toHaveBeenCalledWith([]);
+});
+
+describe('Dropdown Rails input parity', () => {
+  test.each([false, true])('empty autocomplete clears selection without a listener only in async mode: %s', (async) => {
+    const onSelect = jest.fn();
+    const ref = React.createRef();
+    render(<Dropdown async={async}
+        autocomplete
+        defaultValue={options[0]}
+        onSelect={onSelect}
+        options={options}
+        ref={ref}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    expect(onSelect).not.toHaveBeenCalled();
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: '' } });
+    if (async) expect(onSelect).toHaveBeenCalledWith(null);
+    else expect(onSelect).not.toHaveBeenCalled();
+  });
+
+  test('empty async multi-select query preserves selection without an input listener', () => {
+    const onSelect = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        defaultValue={[options[0]]}
+        multiSelect
+        onSelect={onSelect}
+        options={options}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: '' } });
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(screen.getByText('United States', { selector: '.pb_form_pill_tag' })).toBeInTheDocument();
+  });
+
+  test('empty async searchbar query preserves selection', () => {
+    const onSelect = jest.fn();
+    render(<Dropdown async
+        defaultValue={options[0]}
+        onSelect={onSelect}
+        options={options}
+           >
+      <Dropdown.Trigger />
+      <Dropdown.Container searchbar />
+    </Dropdown>);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: '' } });
+    expect(onSelect).not.toHaveBeenCalled();
+  });
 });

@@ -42,7 +42,7 @@ const DropdownExternalSearch = () => {
           label="User"
           loading={loading}
           onInputChange={(text, { reason }) => setQuery(reason === 'input' ? text : '')}
-          onSelect={setSelected}
+          onSelect={(option) => { setSelected(option); setQuery('') }}
           options={options}
           placeholder="Try Emily or Michael"
           resetOnFormReset

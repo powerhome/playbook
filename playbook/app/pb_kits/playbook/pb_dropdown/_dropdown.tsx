@@ -92,7 +92,7 @@ type CustomQuickPickDates = {
     dates: CustomQuickPickDate[];
 };
 
-type InputChangeReason = "input" | "select" | "clear" | "reset";
+type InputChangeReason = "input" | "clear" | "reset";
 
 type DropdownProps = {
     aria?: { [key: string]: string };
@@ -516,7 +516,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           searchAsync(e.target.value);
           setFocusedOptionIndex(-1);
         }
-        if (onInputChange && !e.target.value && autocomplete && !multiSelect && selectedArray.length) {
+        if ((asyncEnabled || onInputChange) && !e.target.value && autocomplete && !multiSelect && selectedArray.length) {
           setSelected({});
           handleSelectionChange(null);
         }
@@ -529,7 +529,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       const handleOptionClick = (clickedItem: GenericObject) => {
                 if (disabled) return;
                 if (asyncEnabled) cancelAsync();
-                onInputChange?.("", { reason: "select" });
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
                 if (multiSelect) {
