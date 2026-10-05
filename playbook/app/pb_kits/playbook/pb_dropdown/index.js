@@ -683,7 +683,7 @@ export default class PbDropdown extends PbEnhancedElement {
         const parent = this.getOptionsParent();
         parent.replaceChildren();
         options.forEach((result) => parent.appendChild(this.buildAsyncOptionElement(result)));
-        if (failed) this.showAsyncStatus("Unable to load options. Try again.");
+        if (failed) this.showAsyncStatus("Unable to load options");
         else if (!options.length) this.showNoOptionsMessage("No results found");
         this.adjustDropdownHeight();
         this.applyPortalPosition();

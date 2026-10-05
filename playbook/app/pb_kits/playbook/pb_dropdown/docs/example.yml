@@ -25,6 +25,7 @@ examples:
   - dropdown_default_value_with_autocomplete: Default Value with Autocomplete
   - dropdown_blank_selection: Blank Selection
   - dropdown_with_placeholder: Placeholder
+  - dropdown_no_options_text: No Options Text
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_with_clearable: Clearable
   - dropdown_with_constrain_height_rails: Constrain Height
@@ -72,6 +73,7 @@ examples:
   - dropdown_default_value_with_autocomplete: Default Value with Autocomplete
   - dropdown_blank_selection: Blank Selection
   - dropdown_with_placeholder: Placeholder
+  - dropdown_no_options_text: No Options Text
   - dropdown_clear_selection: Clear Selection
   - dropdown_with_clearable: Clearable
   - dropdown_with_constrain_height: Constrain Height

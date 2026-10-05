@@ -18,7 +18,6 @@ const DropdownAsyncLoading = () => (
       autocomplete
       label="User"
       loadOptions={loadUsers}
-      noOptionsText="No users found"
       placeholder="Try Emily or Michael"
   />
 )
