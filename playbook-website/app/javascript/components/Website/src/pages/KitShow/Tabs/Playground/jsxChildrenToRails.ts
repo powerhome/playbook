@@ -44,9 +44,15 @@ function parseJsxAttrs(attrString: string): Record<string, unknown> {
     return "";
   });
 
+  // Strip name="..." / name={...} so words inside values (e.g. text="A dark caption")
+  // are not treated as bare boolean props.
+  const remainder = attrString
+    .replace(/\w+="[^"]*"/g, " ")
+    .replace(/\w+=\{[^}]*\}/g, " ");
+
   ["dark", "grow", "shrink", "displayFlex"].forEach((name) => {
     const snake = formatRailsPropName(name);
-    if (!attrString.includes(`${name}=`) && new RegExp(`\\b${name}\\b`).test(attrString)) {
+    if (new RegExp(`(?:^|\\s)${name}(?:\\s|$)`).test(remainder)) {
       props[snake] = true;
     }
   });

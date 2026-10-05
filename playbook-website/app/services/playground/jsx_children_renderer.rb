@@ -159,8 +159,14 @@ module Playground
     end
 
     def boolean_shorthand_attrs(attr_string)
+      # Strip name="..." / name={...} so words inside values (e.g. text="A dark caption")
+      # are not treated as bare boolean props.
+      remainder = attr_string.to_s
+                             .gsub(/\w+="[^"]*"/, " ")
+                             .gsub(/\w+=\{[^}]*\}/, " ")
+
       %w[dark grow shrink displayFlex].select do |name|
-        !attr_string.include?("#{name}=") && attr_string.match?(/\b#{name}\b/)
+        remainder.match?(/(?:^|\s)#{Regexp.escape(name)}(?:\s|$)/)
       end
     end
 
