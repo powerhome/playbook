@@ -357,6 +357,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     ? [selected]
     : [];
 
+    const selectedOptionIds = useMemo(() => (
+      multiSelect && getOptionValue
+        ? new Set(selectedArray.map((option) => String(getOptionValue(option))))
+        : null
+    ), [multiSelect, getOptionValue, selectedArray]);
+
     const { trigger, container, otherChildren } =
         separateChildComponents(children);
 
@@ -392,8 +398,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const availableOptions = useMemo(()=> {
         if (!multiSelect) return optionsWithBlankSelection;
+        if (selectedOptionIds) {
+          return optionsWithBlankSelection.filter((option: GenericObject) => !selectedOptionIds.has(String(getOptionValue(option))));
+        }
         return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => isSameOption(sel, option)));
-    }, [optionsWithBlankSelection, selectedArray, multiSelect, isSameOption]);
+    }, [optionsWithBlankSelection, selectedArray, multiSelect, isSameOption, selectedOptionIds, getOptionValue]);
     
     const filteredOptions = useMemo(() => {
           if (asyncEnabled) return availableOptions;
@@ -508,7 +517,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 
                 if (multiSelect) {
                   if (isControlled || getOptionValue) {
-                    const exists = selectedArray.some((option) => isSameOption(option, clickedItem, "value"));
+                    const exists = selectedOptionIds
+                      ? selectedOptionIds.has(String(getOptionValue(clickedItem)))
+                      : selectedArray.some((option) => isSameOption(option, clickedItem, "value"));
                     const next = exists
                       ? selectedArray.filter((option) => !isSameOption(option, clickedItem, "value"))
                       : [...selectedArray, clickedItem];
@@ -706,6 +717,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     isControlled,
                     onInputChange,
                     isSameOption,
+                    selectedOptionIds,
                     getOptionValue,
                     activeStyle,
                     autocomplete,

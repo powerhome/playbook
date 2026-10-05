@@ -1846,3 +1846,28 @@ describe('Dropdown equivalent controlled values', () => {
     expect(onSelect).not.toHaveBeenCalled();
   });
 });
+
+test('custom multi-select identity avoids scanning selections for every option', () => {
+  const manyOptions = Array.from({ length: 120 }, (_, id) => ({ id, label: `Option ${id}`, value: id }));
+  const getOptionValue = jest.fn((option) => option.id);
+  const { container, rerender } = render(
+    <Dropdown defaultValue={manyOptions.slice(0, 60)}
+        getOptionValue={getOptionValue}
+        multiSelect
+        options={manyOptions}
+    />
+  );
+  expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(60);
+  // Allow normal render passes while rejecting the quadratic pairwise scan.
+  expect(getOptionValue.mock.calls.length).toBeLessThan(2000);
+  getOptionValue.mockClear();
+  rerender(
+    <Dropdown defaultValue={manyOptions.slice(0, 60)}
+        getOptionValue={getOptionValue}
+        multiSelect
+        options={manyOptions.map((option) => ({ ...option, id: String(option.id) }))}
+    />
+  );
+  expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(60);
+  expect(getOptionValue.mock.calls.length).toBeLessThan(2000);
+});

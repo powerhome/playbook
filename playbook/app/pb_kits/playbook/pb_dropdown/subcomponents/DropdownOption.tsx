@@ -52,6 +52,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
     selected,
     renderOption,
     isSameOption,
+    selectedOptionIds,
+    getOptionValue,
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject | undefined) => {
@@ -68,7 +70,9 @@ const DropdownOption = (props: DropdownOptionProps) => {
   }
 
   // When multiSelect, then if an option is selected, remove from dropdown
-  const isSelected = Array.isArray(selected)
+  const isSelected = selectedOptionIds && option
+   ? selectedOptionIds.has(String(getOptionValue(option)))
+   : Array.isArray(selected)
    ? selected.some((item) => isSameOption(item, option))
    : isSameOption(selected, option);
 
