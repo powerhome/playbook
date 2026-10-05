@@ -47,7 +47,7 @@ examples:
 
   react:
   - dropdown_async_initial_options: Async Initial Results and Caching
-  - dropdown_external_search: External Search and Form Reset
+  - dropdown_external_search: External Search
   - dropdown_controlled_selection: Controlled Selection and Option Identity
   - dropdown_async_loading: Async Search
   - dropdown_async_rich_results: Async Search with Custom Content

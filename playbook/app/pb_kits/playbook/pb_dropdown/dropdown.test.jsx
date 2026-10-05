@@ -1204,24 +1204,6 @@ describe('async Dropdown', () => {
   beforeEach(() => jest.useFakeTimers());
   afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
 
-  test('debounces callback loaders and does not locally filter remote matches', () => {
-    const loadOptions = jest.fn();
-    render(<Dropdown async
-        autocomplete
-        loadOptions={loadOptions}
-           />);
-    const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'ab' } });
-    act(() => jest.advanceTimersByTime(250));
-    expect(loadOptions).not.toHaveBeenCalled();
-    fireEvent.change(input, { target: { value: 'abc' } });
-    act(() => jest.advanceTimersByTime(200));
-    fireEvent.change(input, { target: { value: 'abcd' } });
-    act(() => jest.advanceTimersByTime(250));
-    expect(loadOptions).toHaveBeenCalledTimes(1);
-    act(() => loadOptions.mock.calls[0][1]([{ id: '1', label: 'Remote match', value: '1' }]));
-    expect(screen.getByText('Remote match')).toBeInTheDocument();
-  });
 
   test('ignores stale callbacks and cancels pending search on Escape', () => {
     const loadOptions = jest.fn();
@@ -1274,37 +1256,12 @@ describe('async Dropdown lifecycle', () => {
     expect(screen.queryByText('Late result')).not.toBeInTheDocument();
   });
 
-  test('searchbar stays open below the minimum and clears stale results', () => {
-    const loadOptions = jest.fn();
-    const { container } = render(
-      <Dropdown async
-          loadOptions={loadOptions}
-      >
-        <Dropdown.Trigger />
-        <Dropdown.Container searchbar />
-      </Dropdown>
-    );
-    const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'a' } });
-    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
-    act(() => jest.advanceTimersByTime(250));
-    expect(loadOptions).not.toHaveBeenCalled();
-    fireEvent.change(input, { target: { value: 'query' } });
-    act(() => jest.advanceTimersByTime(250));
-    act(() => loadOptions.mock.calls[0][1]([{ id: '1', label: 'Searchbar result', value: '1' }]));
-    expect(screen.getByText('Searchbar result')).toBeInTheDocument();
-    fireEvent.change(input, { target: { value: 'q' } });
-    expect(screen.queryByText('Searchbar result')).not.toBeInTheDocument();
-    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
-  });
 
   test('times out callback loaders and ignores their late results', () => {
     const loadOptions = jest.fn();
     render(<Dropdown async
         autocomplete
         loadOptions={loadOptions}
-        searchDebounceTimeout={0}
-        searchTermMinimumLength={1}
            />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'a' } });
     act(() => jest.advanceTimersByTime(15000));
@@ -1359,14 +1316,13 @@ describe('async Dropdown cancellation', () => {
     expect(screen.queryByText('Late result')).not.toBeInTheDocument();
   });
 
-  test('clear does not request an empty query with a zero minimum', () => {
+  test('clear does not request an empty query', () => {
     const loadOptions = jest.fn();
     const ref = React.createRef();
     render(<Dropdown async
         autocomplete
         loadOptions={loadOptions}
         ref={ref}
-        searchTermMinimumLength={0}
            />);
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
     act(() => ref.current.clearSelected());
@@ -1386,7 +1342,6 @@ describe('Dropdown rich option rendering', () => {
           loadOptions={loadOptions}
           onSelect={onSelect}
           renderOption={(user) => <span>{user.company.title}</span>}
-          searchDebounceTimeout={0}
       >
         {searchbar ? [<Dropdown.Trigger key="trigger" />, <Dropdown.Container key="container"
             searchbar
@@ -1434,8 +1389,6 @@ describe('Dropdown new-prop compatibility gates', () => {
           onChange={onChange}
           onSelect={onSelect}
           options={options}
-          searchDebounceTimeout={0}
-          searchTermMinimumLength={0}
       />
     );
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
@@ -1541,7 +1494,7 @@ describe('Dropdown controlled selection and identity', () => {
   });
 });
 
-describe('Dropdown input and reset opt-ins', () => {
+describe('Dropdown input notifications', () => {
   test('reports typing and clears single selection only when the input becomes empty', () => {
     const onInputChange = jest.fn();
     const onSelect = jest.fn();
@@ -1580,48 +1533,7 @@ describe('Dropdown input and reset opt-ins', () => {
     expect(onInputChange).toHaveBeenLastCalledWith('remote query', { reason: 'input' });
   });
 
-  test.each([false, true])('native form reset is gated by resetOnFormReset=%s', async (resetOnFormReset) => {
-    const onInputChange = jest.fn();
-    const onSelect = jest.fn();
-    const { container } = render(
-      <form>
-        <Dropdown autocomplete
-            defaultValue={options[0]}
-            onInputChange={onInputChange}
-            onSelect={onSelect}
-            options={options}
-            resetOnFormReset={resetOnFormReset}
-        />
-      </form>
-    );
-    await act(async () => { fireEvent.reset(container.querySelector('form')); });
-    if (resetOnFormReset) {
-      expect(onSelect).toHaveBeenCalledWith(null);
-      expect(onInputChange).toHaveBeenCalledWith('', { reason: 'reset' });
-      expect(screen.getByRole('textbox')).toHaveValue('');
-    } else {
-      expect(onSelect).not.toHaveBeenCalled();
-      expect(onInputChange).not.toHaveBeenCalled();
-      expect(screen.getByRole('textbox')).toHaveValue('United States');
-    }
-  });
 
-  test('prevented form resets preserve the selection', async () => {
-    const onSelect = jest.fn();
-    const { container } = render(
-      <form onReset={(event) => event.preventDefault()}>
-        <Dropdown autocomplete
-            defaultValue={options[0]}
-            onSelect={onSelect}
-            options={options}
-            resetOnFormReset
-        />
-      </form>
-    );
-    await act(async () => { fireEvent.reset(container.querySelector('form')); });
-    expect(onSelect).not.toHaveBeenCalled();
-    expect(screen.getByRole('textbox')).toHaveValue('United States');
-  });
 });
 
 describe('Dropdown input lifecycle', () => {
@@ -1657,24 +1569,6 @@ describe('Dropdown input lifecycle', () => {
     expect(screen.getByText('United States', { selector: '.pb_form_pill_tag' })).toBeInTheDocument();
   });
 
-  test('form reset invalidates pending results', async () => {
-    jest.useFakeTimers();
-    const loadOptions = jest.fn();
-    const { container, unmount } = render(<form><Dropdown async
-        autocomplete
-        loadOptions={loadOptions}
-        resetOnFormReset
-                                                /></form>);
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
-    act(() => jest.advanceTimersByTime(250));
-    await act(async () => { fireEvent.reset(container.querySelector('form')); });
-    act(() => loadOptions.mock.calls[0][1]([{ id: 'late', label: 'Late result' }]));
-    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toHaveValue('');
-    unmount();
-    jest.clearAllTimers();
-    jest.useRealTimers();
-  });
 });
 
 describe('Dropdown initial options and caching', () => {
@@ -1724,25 +1618,6 @@ describe('Dropdown initial options and caching', () => {
     expect(loadOptions).toHaveBeenCalledTimes(cacheOptions ? 1 : 2);
   });
 
-  test('changing cacheKey invalidates pending responses and cached results', () => {
-    const loadOptions = jest.fn();
-    const props = { async: true, autocomplete: true, cacheOptions: true, loadOptions };
-    const { rerender } = render(<Dropdown {...props}
-        cacheKey="first"
-                                />);
-    const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'can' } });
-    act(() => jest.advanceTimersByTime(250));
-    rerender(<Dropdown {...props}
-        cacheKey="second"
-             />);
-    act(() => loadOptions.mock.calls[0][1](options));
-    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
-    fireEvent.change(input, { target: { value: '' } });
-    fireEvent.change(input, { target: { value: 'can' } });
-    act(() => jest.advanceTimersByTime(250));
-    expect(loadOptions).toHaveBeenCalledTimes(2);
-  });
 });
 
 describe('Dropdown cache isolation and opt-in', () => {
@@ -1778,25 +1653,6 @@ describe('Dropdown cache isolation and opt-in', () => {
     expect(loadOptions).toHaveBeenCalledTimes(2);
   });
 
-  test('changing scope discards successfully cached and displayed results', () => {
-    const loadOptions = jest.fn();
-    const props = { async: true, autocomplete: true, cacheOptions: true, loadOptions };
-    const { rerender } = render(<Dropdown {...props}
-        cacheKey="first"
-                                />);
-    const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'can' } });
-    act(() => jest.advanceTimersByTime(250));
-    act(() => loadOptions.mock.calls[0][1](options));
-    rerender(<Dropdown {...props}
-        cacheKey="second"
-             />);
-    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
-    fireEvent.change(input, { target: { value: '' } });
-    fireEvent.change(input, { target: { value: 'can' } });
-    act(() => jest.advanceTimersByTime(250));
-    expect(loadOptions).toHaveBeenCalledTimes(2);
-  });
 });
 
 describe('Dropdown equivalent controlled values', () => {
@@ -1874,50 +1730,7 @@ test('custom multi-select identity avoids scanning selections for every option',
 });
 
 describe('Dropdown reusable async and display APIs', () => {
-  test('passes an abort signal and aborts superseded and unmounted requests', () => {
-    jest.useFakeTimers();
-    const loadOptions = jest.fn();
-    const { unmount } = render(<Dropdown async
-        autocomplete
-        loadOptions={loadOptions}
-                               />);
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'first' } });
-    act(() => jest.advanceTimersByTime(250));
-    const first = loadOptions.mock.calls[0][2].signal;
-    expect(first.aborted).toBe(false);
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'second' } });
-    expect(first.aborted).toBe(true);
-    act(() => jest.advanceTimersByTime(250));
-    const second = loadOptions.mock.calls[1][2].signal;
-    unmount();
-    expect(second.aborted).toBe(true);
-    jest.clearAllTimers();
-    jest.useRealTimers();
-  });
 
-  test('custom messages do not affect loading state or error handling', async () => {
-    jest.useFakeTimers();
-    const loadOptions = jest.fn().mockResolvedValueOnce([]).mockRejectedValueOnce(new Error('Failed'));
-    const { container, unmount } = render(<Dropdown async
-        autocomplete
-        errorMessage="Try again"
-        loadOptions={loadOptions}
-        loadingMessage="Searching users"
-        noOptionsMessage="Nobody found"
-                                          />);
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'first' } });
-    expect(screen.getByRole('status')).toHaveTextContent('Searching users');
-    expect(container.querySelector('[aria-busy="true"]')).not.toBeNull();
-    await act(async () => { jest.advanceTimersByTime(250); });
-    expect(screen.getByRole('status')).toHaveTextContent('Nobody found');
-    expect(container.querySelector('[aria-busy="true"]')).toBeNull();
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'second' } });
-    await act(async () => { jest.advanceTimersByTime(250); });
-    expect(screen.getByRole('status')).toHaveTextContent('Try again');
-    unmount();
-    jest.clearAllTimers();
-    jest.useRealTimers();
-  });
 
   test('custom labels filter and select original objects without normalization', () => {
     const user = { recordId: 0, name: 'Ada Lovelace', title: 'Engineer' };
@@ -1966,24 +1779,6 @@ describe('Dropdown reusable async and display APIs', () => {
   });
 });
 
-test('timeout aborts the request while preserving its error state', () => {
-  jest.useFakeTimers();
-  const loadOptions = jest.fn();
-  const { unmount } = render(<Dropdown async
-      autocomplete
-      loadOptions={loadOptions}
-      searchDebounceTimeout={0}
-                             />);
-  fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
-  act(() => jest.advanceTimersByTime(15000));
-  expect(loadOptions.mock.calls[0][2].signal.aborted).toBe(true);
-  expect(screen.getByRole('status')).toHaveTextContent('Unable to load options');
-  act(() => loadOptions.mock.calls[0][1](options));
-  expect(screen.getByRole('status')).toHaveTextContent('Unable to load options');
-  unmount();
-  jest.clearAllTimers();
-  jest.useRealTimers();
-});
 
 test('rich removal Enter does not bubble into option selection', () => {
   const onSelect = jest.fn();
@@ -2048,5 +1843,45 @@ describe('Dropdown Rails input parity', () => {
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
     fireEvent.change(screen.getByRole('textbox'), { target: { value: '' } });
     expect(onSelect).not.toHaveBeenCalled();
+  });
+});
+
+describe('Dropdown migration-only async contract', () => {
+  test('passes short queries to the application loader and keeps full result data', () => {
+    jest.useFakeTimers();
+    const loadOptions = jest.fn();
+    const onSelect = jest.fn();
+    const { unmount } = render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+        onSelect={onSelect}
+                               />);
+    expect(loadOptions).not.toHaveBeenCalled();
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'a' } });
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+    expect(loadOptions.mock.calls[0][0]).toBe('a');
+    expect(loadOptions.mock.calls[0]).toHaveLength(2);
+    act(() => loadOptions.mock.calls[0][1]([options[0]]));
+    fireEvent.click(screen.getByText('United States'));
+    expect(onSelect).toHaveBeenCalledWith(options[0]);
+    unmount();
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
+  test('native form reset does not introduce React selection callbacks', () => {
+    const onSelect = jest.fn();
+    const onInputChange = jest.fn();
+    const { container } = render(<form><Dropdown async
+        autocomplete
+        defaultValue={options[0]}
+        onInputChange={onInputChange}
+        onSelect={onSelect}
+        options={options}
+                                       /></form>);
+    fireEvent.reset(container.querySelector('form'));
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(onInputChange).not.toHaveBeenCalled();
   });
 });

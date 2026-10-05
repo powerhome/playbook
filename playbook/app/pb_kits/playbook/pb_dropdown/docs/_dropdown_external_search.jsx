@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Dropdown from '../_dropdown'
-import Button from '../../pb_button/_button'
 
 const DropdownExternalSearch = () => {
   const [query, setQuery] = useState('')
@@ -45,12 +44,9 @@ const DropdownExternalSearch = () => {
           onSelect={(option) => { setSelected(option); setQuery('') }}
           options={options}
           placeholder="Try Emily or Michael"
-          resetOnFormReset
           value={selected}
       />
-      <Button htmlType="reset"
-          text="Reset"
-      />
+
     </form>
   )
 }

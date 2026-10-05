@@ -92,7 +92,7 @@ type CustomQuickPickDates = {
     dates: CustomQuickPickDate[];
 };
 
-type InputChangeReason = "input" | "clear" | "reset";
+type InputChangeReason = "input" | "clear";
 
 type DropdownProps = {
     aria?: { [key: string]: string };
@@ -100,20 +100,13 @@ type DropdownProps = {
     loadOptions?: LoadOptions;
     defaultOptions?: boolean | GenericObject[];
     cacheOptions?: boolean;
-    cacheKey?: string | number;
     loading?: boolean;
     onInputChange?: (input: string, detail: { reason: InputChangeReason }) => void;
-    resetOnFormReset?: boolean;
     value?: GenericObject | GenericObject[] | null;
     getOptionLabel?: (option: GenericObject) => string;
     renderValue?: (option: GenericObject) => React.ReactNode;
-    loadingMessage?: string;
-    noOptionsMessage?: string;
-    errorMessage?: string;
     getOptionValue?: (option: GenericObject) => string | number;
     renderOption?: (option: GenericObject) => React.ReactNode;
-    searchDebounceTimeout?: number;
-    searchTermMinimumLength?: number;
     autocomplete?: boolean;
     blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
@@ -164,20 +157,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         loadOptions,
         defaultOptions = false,
         cacheOptions = false,
-        cacheKey,
         loading = false,
         onInputChange,
-        resetOnFormReset = false,
         renderOption,
         value,
         getOptionValue,
         getOptionLabel,
         renderValue,
-        loadingMessage = "Loading…",
-        noOptionsMessage = "No results found",
-        errorMessage = "Unable to load options",
-        searchDebounceTimeout = 250,
-        searchTermMinimumLength = 3,
         autocomplete = false,
         blankSelection = '',
         children,
@@ -228,7 +214,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     );
 
     const asyncEnabled = async && variant !== "quickpick";
-    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, searchTermMinimumLength, searchDebounceTimeout, defaultOptions, cacheOptions, cacheKey);
+    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, defaultOptions, cacheOptions);
 
     // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
@@ -628,9 +614,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     // Create an internal ref object that holds the imperative handle methods
     const imperativeRef = useRef({
-      clearSelected: (reason: "clear" | "reset" = "clear") => {
+      clearSelected: () => {
           if (asyncEnabled) clearAsync();
-          onInputChange?.("", { reason });
+          onInputChange?.("", { reason: "clear" });
         if (multiSelect) {
           setSelected([]);
           handleSelectionChange([]);
@@ -647,9 +633,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // (needed for external clearing of normal Dropdown + DatePicker-synced QuickPick Dropdown)
     useEffect(() => {
       imperativeRef.current = {
-        clearSelected: (reason: "clear" | "reset" = "clear") => {
+        clearSelected: () => {
           if (asyncEnabled) clearAsync();
-          onInputChange?.("", { reason });
+          onInputChange?.("", { reason: "clear" });
           if (multiSelect) {
             setSelected([]);
             handleSelectionChange([]);
@@ -664,24 +650,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed, asyncEnabled, clearAsync, onInputChange]);
 
     useImperativeHandle(ref, () => imperativeRef.current);
-
-    useEffect(() => {
-      if (!resetOnFormReset) return;
-      const form = outerDivRef.current?.closest("form");
-      if (!form) return;
-      let mounted = true;
-      const handleReset = (event: Event) => {
-        Promise.resolve().then(() => {
-          if (mounted && !event.defaultPrevented) imperativeRef.current.clearSelected("reset");
-        });
-      };
-      form.addEventListener("reset", handleReset);
-      return () => {
-        mounted = false;
-        form.removeEventListener("reset", handleReset);
-      };
-    }, [resetOnFormReset]);
-
 
     useEffect(() => {
       // Attach the ref to the DOM element so DatePicker can access it
@@ -728,7 +696,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? loadingMessage : asyncStatus === "error" ? errorMessage : asyncStatus === "empty" ? noOptionsMessage : "") : "",
+                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : asyncStatus === "empty" ? "No results found" : "") : "",
                     renderOption,
                     renderValue,
                     optionLabel,

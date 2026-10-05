@@ -72,9 +72,9 @@ export const KIT_USAGE_FAQS = {
     props: ['async', 'clearable'],
   }, {
     id: 'dropdown.react-input-reset', platforms: ['react'],
-    questions: ['How do I observe React Dropdown input changes?', 'Does a native form reset clear React Dropdown?'],
-    answer: 'Opt into onInputChange(text, { reason }) for immediate input notifications; reasons are input, clear and reset. Selection itself does not emit an input notification; use onSelect for selection changes. In async mode, emptying single-select autocomplete proposes an empty selection even without onInputChange; emptying a multi-select or search-bar query preserves selection. resetOnFormReset defaults to false. When true, an unprevented native form reset clears selection and query, closes the menu, invalidates kit-managed searches and emits selection and reset input callbacks after the browser reset. It does not restore defaultValue. Controlled parents must accept the proposed empty value. For application-managed fetching, use async with options and loading without loadOptions; the application owns debounce, errors and stale-response protection.',
-    props: ['onInputChange', 'resetOnFormReset', 'async', 'options', 'loading', 'loadOptions', 'value'],
+    questions: ['How do I observe React Dropdown input changes?', 'How do I reset React Dropdown?'],
+    answer: 'Use onInputChange(text, { reason }) for input and clear notifications. Selection itself does not emit an input notification; use onSelect. In async mode, emptying single-select autocomplete proposes an empty selection even without onInputChange; emptying a multi-select or search-bar query preserves selection. Reset controlled value through the application or form library, or call ref.clearSelected() for an uncontrolled selection. React Dropdown does not add native form-reset handling. For application-managed fetching, use async with options and loading without loadOptions; the application owns debounce, query thresholds, errors and stale-response protection.',
+    props: ['onInputChange', 'async', 'options', 'loading', 'loadOptions', 'value'],
   }, {
     id: 'dropdown.react-form-libraries', platforms: ['react'],
     questions: ['Can I use Dropdown with react-hook-form?', 'Does the React Dropdown submit a value?'],

@@ -33,12 +33,6 @@
         "react"
       ]
     },
-    "cacheKey": {
-      "type": "string | number",
-      "platforms": [
-        "react"
-      ]
-    },
     "loading": {
       "type": "boolean",
       "platforms": [
@@ -47,12 +41,6 @@
     },
     "onInputChange": {
       "type": "function",
-      "platforms": [
-        "react"
-      ]
-    },
-    "resetOnFormReset": {
-      "type": "boolean",
       "platforms": [
         "react"
       ]
@@ -75,24 +63,6 @@
         "react"
       ]
     },
-    "loadingMessage": {
-      "type": "string",
-      "platforms": [
-        "react"
-      ]
-    },
-    "noOptionsMessage": {
-      "type": "string",
-      "platforms": [
-        "react"
-      ]
-    },
-    "errorMessage": {
-      "type": "string",
-      "platforms": [
-        "react"
-      ]
-    },
     "getOptionValue": {
       "type": "(option: GenericObject) => string | number",
       "platforms": [
@@ -104,22 +74,6 @@
       "platforms": [
         "react"
       ]
-    },
-    "searchDebounceTimeout": {
-      "type": "number",
-      "platforms": [
-        "react",
-        "rails"
-      ],
-      "default": 250
-    },
-    "searchTermMinimumLength": {
-      "type": "number",
-      "platforms": [
-        "react",
-        "rails"
-      ],
-      "default": 3
     },
     "autocomplete": {
       "type": "boolean",
@@ -333,6 +287,18 @@
       ],
       "type": "boolean",
       "default": false
+    },
+    "searchTermMinimumLength": {
+      "platforms": [
+        "rails"
+      ],
+      "default": 3
+    },
+    "searchDebounceTimeout": {
+      "platforms": [
+        "rails"
+      ],
+      "default": 250
     },
     "searchbar": {
       "platforms": [

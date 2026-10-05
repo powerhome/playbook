@@ -4,10 +4,9 @@ import { GenericObject } from "../../types";
 export type LoadOptions = (
   term: string,
   callback: (options: GenericObject[]) => void,
-  context: { signal: AbortSignal },
 ) => void | Promise<GenericObject[]>;
 
-export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptions | undefined, minimum: number, debounce: number, defaultOptions: boolean | GenericObject[] = false, cacheOptions = false, cacheKey?: string | number): {
+export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptions | undefined, defaultOptions: boolean | GenericObject[] = false, cacheOptions = false): {
   options: GenericObject[];
   status: "idle" | "loading" | "success" | "empty" | "error";
   search: (term: string) => void;
@@ -16,7 +15,6 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
 } {
   const [options, setOptions] = useState<GenericObject[]>(Array.isArray(defaultOptions) ? defaultOptions : []);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "empty" | "error">("idle");
-  const controller = useRef<AbortController>();
   const cache = useRef(new Map<string, GenericObject[]>());
   const sequence = useRef(0);
   const timer = useRef<ReturnType<typeof setTimeout>>();
@@ -26,8 +24,6 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
 
   const invalidate = useCallback(() => {
     sequence.current += 1;
-    controller.current?.abort();
-    controller.current = undefined;
     clearTimeout(timer.current);
     clearTimeout(watchdog.current);
   }, []);
@@ -44,19 +40,16 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
 
   useEffect(() => invalidate, [enabled, invalidate]);
 
-  const previousCacheKey = useRef(cacheKey);
   useEffect(() => {
     cache.current.clear();
-    if (previousCacheKey.current !== cacheKey) clear();
-    else cancel();
-    previousCacheKey.current = cacheKey;
-  }, [cacheOptions, cacheKey, cancel, clear]);
+    cancel();
+  }, [cacheOptions, cancel]);
 
   const search = useCallback((term: string, initial = false) => {
     invalidate();
     setOptions([]);
     setStatus("idle");
-    if (!enabled || (!initial && term.length < minimum)) return;
+    if (!enabled || (!initial && !term)) return;
     const cached = cacheOptions ? cache.current.get(term) : undefined;
     if (cached) {
       setOptions(cached);
@@ -67,14 +60,11 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
     setStatus("loading");
     timer.current = setTimeout(() => {
       let settled = false;
-      const requestController = new AbortController();
-      controller.current = requestController;
       const finish = (results: GenericObject[], failed = false) => {
         if (settled || request !== sequence.current) return;
         failed = failed || !Array.isArray(results);
         if (failed) results = [];
         settled = true;
-        controller.current = undefined;
         clearTimeout(watchdog.current);
         if (cacheOptions && !failed) {
           // Bound per-instance memory, including empty successful searches.
@@ -85,28 +75,25 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
         setOptions(results);
         setStatus(failed ? "error" : results.length ? "success" : "empty");
       };
-      watchdog.current = setTimeout(() => {
-        finish([], true);
-        requestController.abort();
-      }, 15000);
+      watchdog.current = setTimeout(() => finish([], true), 15000);
       try {
         if (!loader.current) return finish([], true);
-        const result = loader.current(term, (results) => finish(results), { signal: requestController.signal });
+        const result = loader.current(term, (results) => finish(results));
         if (result && typeof result.then === "function") {
           result.then((results) => finish(results), () => finish([], true));
         }
       } catch {
         finish([], true);
       }
-    }, initial ? 0 : Math.max(0, debounce));
-  }, [enabled, minimum, debounce, cacheOptions, invalidate]);
+    }, 0);
+  }, [enabled, cacheOptions, invalidate]);
 
   const preload = defaultOptions === true;
   const latestSearch = useRef(search);
   latestSearch.current = search;
   useEffect(() => {
     if (enabled && preload) latestSearch.current("", true);
-  }, [enabled, preload, cacheKey, cacheOptions]);
+  }, [enabled, preload, cacheOptions]);
 
   return { options, status, search, cancel, clear };
 }
