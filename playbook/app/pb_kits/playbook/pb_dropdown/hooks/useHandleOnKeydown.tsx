@@ -82,7 +82,7 @@ const {
       break;
     }
     case "Enter":
-      if (focusedOptionIndex !== -1 && filteredOptions[focusedOptionIndex] && !filteredOptions[focusedOptionIndex].disabled) {
+      if (focusedOptionIndex !== -1 && (!asyncEnabled || filteredOptions[focusedOptionIndex]) && !filteredOptions[focusedOptionIndex]?.disabled) {
         e.preventDefault();
         handleOptionClick(filteredOptions[focusedOptionIndex]);
         setFocusedOptionIndex(-1)

@@ -96,6 +96,7 @@ type DropdownProps = {
     aria?: { [key: string]: string };
     async?: boolean;
     loadOptions?: LoadOptions;
+    renderOption?: (option: GenericObject) => React.ReactNode;
     searchDebounceTimeout?: number;
     searchTermMinimumLength?: number;
     autocomplete?: boolean;
@@ -146,6 +147,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         aria = {},
         async = false,
         loadOptions,
+        renderOption,
         searchDebounceTimeout = 250,
         searchTermMinimumLength = 3,
         autocomplete = false,
@@ -613,7 +615,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus,
+                    asyncStatus: asyncEnabled ? asyncStatus : "",
+                    renderOption,
                     activeStyle,
                     autocomplete,
                     blankSelection,

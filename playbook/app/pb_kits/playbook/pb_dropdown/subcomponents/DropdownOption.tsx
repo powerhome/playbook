@@ -50,6 +50,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     handleOptionClick,
     multiSelect,
     selected,
+    renderOption,
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject | undefined) => {
@@ -112,6 +113,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
     isDisabled && "disabled"
   );
 
+  const content = children || (renderOption && option ? renderOption(option) : null);
+
   return (
     <div
         {...ariaProps}
@@ -130,8 +133,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
           key={option?.label}
           padding="none"
       >
-          {children ? 
-          <div className={optionWrapperClass}>{children}</div> :
+          {content != null ?
+          <div className={optionWrapperClass}>{content}</div> :
               <Body dark={dark} 
                   text={option?.label} 
               />

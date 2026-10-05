@@ -47,6 +47,7 @@ examples:
 
   react:
   - dropdown_async_loading: Async Search
+  - dropdown_async_rich_results: Async Search with Custom Content
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select

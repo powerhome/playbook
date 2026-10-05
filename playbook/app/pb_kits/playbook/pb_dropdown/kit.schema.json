@@ -21,6 +21,12 @@
         "react"
       ]
     },
+    "renderOption": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
     "searchDebounceTimeout": {
       "type": "number",
       "platforms": [

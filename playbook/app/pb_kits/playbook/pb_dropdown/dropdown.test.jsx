@@ -1374,3 +1374,94 @@ describe('async Dropdown cancellation', () => {
     expect(loadOptions).not.toHaveBeenCalled();
   });
 });
+
+describe('Dropdown rich option rendering', () => {
+  test.each([false, true])('renders remote content and preserves selection data (searchbar: %s)', async (searchbar) => {
+    const option = { id: 'user', value: 'user', label: 'Ada', company: { title: 'Engineer' } };
+    const onSelect = jest.fn();
+    const loadOptions = jest.fn().mockResolvedValue([option]);
+    render(
+      <Dropdown async
+          autocomplete={!searchbar}
+          loadOptions={loadOptions}
+          onSelect={onSelect}
+          renderOption={(user) => <span>{user.company.title}</span>}
+          searchDebounceTimeout={0}
+      >
+        {searchbar ? [<Dropdown.Trigger key="trigger" />, <Dropdown.Container key="container"
+            searchbar
+                                                          />] : undefined}
+      </Dropdown>
+    );
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'ada' } });
+    const result = await screen.findByText('Engineer');
+    if (searchbar) {
+      fireEvent.keyDown(screen.getByRole('textbox'), { key: 'ArrowDown' });
+      fireEvent.keyDown(screen.getByRole('textbox'), { key: 'Enter' });
+    } else {
+      fireEvent.click(result);
+    }
+    expect(onSelect).toHaveBeenCalledWith(option);
+  });
+
+  test('explicit children override the renderer and null falls back to the label', () => {
+    const renderOption = jest.fn(() => null);
+    render(
+      <Dropdown options={options}
+          renderOption={renderOption}
+      >
+        <Dropdown.Option option={options[0]}><span>{'Explicit content'}</span></Dropdown.Option>
+        <Dropdown.Option option={options[1]} />
+      </Dropdown>
+    );
+    expect(screen.getByText('Explicit content')).toBeInTheDocument();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+    expect(renderOption).not.toHaveBeenCalledWith(options[0]);
+    expect(renderOption).toHaveBeenCalledWith(options[1]);
+  });
+});
+
+describe('Dropdown new-prop compatibility gates', () => {
+  test.each([undefined, false])('keeps local filtering and callbacks when async is %s', (async) => {
+    const loadOptions = jest.fn();
+    const onChange = jest.fn();
+    const onSelect = jest.fn();
+    const { container } = render(
+      <Dropdown async={async}
+          autocomplete
+          loadOptions={loadOptions}
+          name="country"
+          onChange={onChange}
+          onSelect={onSelect}
+          options={options}
+          searchDebounceTimeout={0}
+          searchTermMinimumLength={0}
+      />
+    );
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
+    expect(screen.queryByText('Pakistan')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText('Canada'));
+    expect(loadOptions).not.toHaveBeenCalled();
+    expect(onSelect).toHaveBeenCalledWith(options[1]);
+    expect(onChange).toHaveBeenCalledWith({ target: { name: 'country', value: options[1] } });
+    expect(container.querySelector('[aria-busy]')).toBeNull();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
+  test('removing async mode restores local results without an async status', () => {
+    const loadOptions = jest.fn();
+    const { rerender } = render(
+      <Dropdown async
+          autocomplete
+          loadOptions={loadOptions}
+      />
+    );
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
+    expect(screen.getByRole('status')).toHaveTextContent('Loading');
+    rerender(<Dropdown autocomplete
+        options={options}
+             />);
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+});
