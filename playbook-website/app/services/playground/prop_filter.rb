@@ -162,7 +162,27 @@ module Playground
     end
 
     def kit_prop_definitions
-      @kit_prop_definitions ||= (kit_schema || {}).fetch("props", {})
+      @kit_prop_definitions ||= begin
+        schema_props = kit_schema&.fetch("props", nil)
+        if schema_props.present?
+          schema_props
+        else
+          # Compound kits (flex/flex_item, card/card_header, …) have no
+          # kit.schema.json under pb_#{path}/ — fall back to the Ruby kit class.
+          kit_class_prop_definitions
+        end
+      end
+    end
+
+    def kit_class_prop_definitions
+      klass = Playbook::KitResolver.resolve(@kit_name)
+      return {} unless klass.respond_to?(:props)
+
+      klass.props.each_with_object({}) do |(name, _definition), definitions|
+        # Schema-shaped stub so definition_for / prop_for_rails? keep working.
+        # KitBase already includes global props on the class.
+        definitions[snake_to_camel(name.to_s)] = { "platforms" => %w[rails react] }
+      end
     end
 
     def global_prop_definitions
@@ -170,11 +190,18 @@ module Playground
     end
 
     def kit_uses_global_props?
-      kit_schema.present? && kit_schema["globalProps"] == true
+      # Class-prop fallback already includes KitBase globals — don't double-merge.
+      return false if kit_schema.blank?
+
+      kit_schema["globalProps"] == true
     end
 
     def kit_schema
-      @kit_schema ||= load_json(::Playbook.kit_path(@kit_name, "", "kit.schema.json"))
+      return @kit_schema if defined?(@kit_schema)
+
+      # Root kits: pb_flex/kit.schema.json. Compound paths like flex/flex_item
+      # resolve to a non-existent pb_flex/flex_item/kit.schema.json.
+      @kit_schema = load_json(::Playbook.kit_path(@kit_name, "", "kit.schema.json"))
     end
 
     def global_props_schema
