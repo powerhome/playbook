@@ -1465,3 +1465,78 @@ describe('Dropdown new-prop compatibility gates', () => {
     expect(screen.getByText('Canada')).toBeInTheDocument();
   });
 });
+
+describe('Dropdown controlled selection and identity', () => {
+  test('controlled selection waits for the parent and retains full data', () => {
+    const onSelect = jest.fn();
+    const ref = React.createRef();
+    const { rerender } = render(
+      <Dropdown autocomplete
+          onSelect={onSelect}
+          options={options}
+          ref={ref}
+          value={options[0]}
+      />
+    );
+    fireEvent.click(screen.getByText('Canada'));
+    expect(onSelect).toHaveBeenCalledWith(options[1]);
+    expect(screen.getByRole('textbox')).toHaveValue('United States');
+    rerender(<Dropdown autocomplete
+        onSelect={onSelect}
+        options={[]}
+        ref={ref}
+        value={options[1]}
+             />);
+    expect(screen.getByRole('textbox')).toHaveValue('Canada');
+    act(() => ref.current.clearSelected());
+    expect(onSelect).toHaveBeenLastCalledWith(null);
+    expect(screen.getByRole('textbox')).toHaveValue('Canada');
+    rerender(<Dropdown autocomplete
+        onSelect={onSelect}
+        options={[]}
+        value={null}
+             />);
+    expect(screen.getByRole('textbox')).toHaveValue('');
+    expect(onSelect).toHaveBeenCalledTimes(2);
+  });
+
+  test('custom identity distinguishes duplicate labels and zero IDs in multi-select', () => {
+    const first = { id: 0, label: 'Same name', value: 'same', metadata: { role: 'first' } };
+    const second = { id: 2, label: 'Same name', value: 'same', metadata: { role: 'second' } };
+    const onSelect = jest.fn();
+    const { container } = render(
+      <Dropdown defaultValue={[first]}
+          getOptionValue={(option) => option.id}
+          multiSelect
+          onSelect={onSelect}
+          options={[first, second]}
+      />
+    );
+    const row = container.querySelector('.pb_dropdown_option_list');
+    expect(row).not.toBeNull();
+    fireEvent.click(row);
+    expect(onSelect).toHaveBeenLastCalledWith([first, second]);
+    expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(0);
+    fireEvent.click(container.querySelector('.pb_form_pill_close'));
+    expect(onSelect).toHaveBeenLastCalledWith([second]);
+    expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(1);
+  });
+
+  test('controlled multi-select emits once without updating until the parent accepts', () => {
+    const onSelect = jest.fn();
+    const { container } = render(
+      <React.StrictMode>
+        <Dropdown getOptionValue={(option) => option.id}
+            multiSelect
+            onSelect={onSelect}
+            options={options}
+            value={[]}
+        />
+      </React.StrictMode>
+    );
+    fireEvent.click(screen.getByText('Canada'));
+    expect(onSelect).toHaveBeenCalledTimes(1);
+    expect(onSelect).toHaveBeenCalledWith([options[1]]);
+    expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(3);
+  });
+});

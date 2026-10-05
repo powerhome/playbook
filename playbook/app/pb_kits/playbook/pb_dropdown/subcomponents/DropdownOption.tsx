@@ -51,6 +51,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     multiSelect,
     selected,
     renderOption,
+    isSameOption,
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject | undefined) => {
@@ -68,8 +69,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
 
   // When multiSelect, then if an option is selected, remove from dropdown
   const isSelected = Array.isArray(selected)
-   ? selected.some((item) => item.label === option?.label)
-   : (selected as GenericObject)?.label === option?.label;
+   ? selected.some((item) => isSameOption(item, option))
+   : isSameOption(selected, option);
 
 
   const isOptionDisabled = option?.disabled === true;
@@ -80,7 +81,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
   }
   const isFocused =
     focusedOptionIndex >= 0 &&
-    filteredOptions[focusedOptionIndex].label === option?.label;
+    isSameOption(filteredOptions[focusedOptionIndex], option);
   const focusedClass = isFocused ? "focused" : "";
 
   const selectedClass = isSelected ? "selected" : "list";

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect, forwardRef, useImperativeHandle, useMemo, useContext } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect, forwardRef, useImperativeHandle, useMemo, useContext, useCallback } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -96,6 +96,8 @@ type DropdownProps = {
     aria?: { [key: string]: string };
     async?: boolean;
     loadOptions?: LoadOptions;
+    value?: GenericObject | GenericObject[] | null;
+    getOptionValue?: (option: GenericObject) => string | number;
     renderOption?: (option: GenericObject) => React.ReactNode;
     searchDebounceTimeout?: number;
     searchTermMinimumLength?: number;
@@ -148,6 +150,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         async = false,
         loadOptions,
         renderOption,
+        value,
+        getOptionValue,
         searchDebounceTimeout = 250,
         searchTermMinimumLength = 3,
         autocomplete = false,
@@ -243,16 +247,33 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       return defaultValue || {};
     }, [multiSelect, defaultValue, variant, dropdownOptions]);
 
-    const [selected, setSelected] = useState<GenericObject | GenericObject[]>(
+    const [internalSelected, setInternalSelected] = useState<GenericObject | GenericObject[]>(
       initialSelected
     );
+
+    const isControlled = value !== undefined;
+    const selected = isControlled ? (value ?? (multiSelect ? [] : {})) : internalSelected;
+    const setSelected: React.Dispatch<React.SetStateAction<GenericObject | GenericObject[]>> = (next) => {
+      if (!isControlled) setInternalSelected(next);
+    };
+    const isSameOption = useCallback((left: GenericObject, right: GenericObject, legacyKey = "label") => {
+      if (!getOptionValue) return left?.[legacyKey] === right?.[legacyKey];
+      if (!left || !right || !Object.keys(left).length || !Object.keys(right).length) return false;
+      return String(getOptionValue(left)) === String(getOptionValue(right));
+    }, [getOptionValue]);
 
     // Autocomplete displays the selection in the input; seed from defaultValue
     const [filterItem, setFilterItem] = useState(() => {
       if (!autocomplete || multiSelect) return "";
-      if (Array.isArray(initialSelected)) return "";
-      return (initialSelected as GenericObject)?.label || "";
+      if (Array.isArray(selected)) return "";
+      return (selected as GenericObject)?.label || "";
     });
+
+    useEffect(() => {
+      if (isControlled && autocomplete) {
+        setFilterItem(!multiSelect && value && !Array.isArray(value) ? value.label || "" : "");
+      }
+    }, [isControlled, value, autocomplete, multiSelect]);
 
     const filterResetDefaultSerialized = useMemo(
         () => serializeDropdownFilterResetDefault(variant, multiSelect, defaultValue, dropdownOptions),
@@ -344,8 +365,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const availableOptions = useMemo(()=> {
         if (!multiSelect) return optionsWithBlankSelection;
-        return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => sel.label === option.label));
-    }, [optionsWithBlankSelection, selectedArray, multiSelect]);
+        return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => isSameOption(sel, option)));
+    }, [optionsWithBlankSelection, selectedArray, multiSelect, isSameOption]);
     
     const filteredOptions = useMemo(() => {
           if (asyncEnabled) return availableOptions;
@@ -366,7 +387,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         if (!isDropDownClosed) {
             let newIndex = 0;
             if (selected && !Array.isArray(selected) && selected.label) {
-                const selectedIndex = filteredOptions.findIndex((option: GenericObject) => option.label === selected.label);
+                const selectedIndex = filteredOptions.findIndex((option: GenericObject) => isSameOption(option, selected));
                 if (selectedIndex >= 0) {
                     newIndex = selectedIndex;
                 }
@@ -452,22 +473,31 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
                 if (multiSelect) {
+                  if (isControlled || getOptionValue) {
+                    const exists = selectedArray.some((option) => isSameOption(option, clickedItem, "value"));
+                    const next = exists
+                      ? selectedArray.filter((option) => !isSameOption(option, clickedItem, "value"))
+                      : [...selectedArray, clickedItem];
+                    setSelected(next);
+                    handleSelectionChange(next);
+                  } else {
                     setSelected((prev) => {
                        const list = prev as GenericObject[];
-                       const exists = list.find((option) => option.value === clickedItem.value);
+                       const exists = list.find((option) => isSameOption(option, clickedItem, "value"));
                        const next = exists
-                       ? list.filter((option) => option.value !== clickedItem.value)
+                       ? list.filter((option) => !isSameOption(option, clickedItem, "value"))
                            : [...list, clickedItem];
                    handleSelectionChange(next);
                        return next;
                    });
-                   setFilterItem("");
+                  }
+                   setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
                } else {
                    setSelected(clickedItem);
-                   setFilterItem("");
+                   setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
@@ -506,7 +536,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setSelected({});
         handleSelectionChange(null);
         setFocusedOptionIndex(-1);
-        setFilterItem("");
+        setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
         
         // Clear linked DatePickers as well if this is a quickpick variant with controls
         if (variant === "quickpick") {
@@ -544,7 +574,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setSelected({});
           handleSelectionChange(null);
         }
-        setFilterItem("");
+        setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
         setIsDropDownClosed(true);
       },
     });
@@ -562,7 +592,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             setSelected({});
             handleSelectionChange(null);
           }
-          setFilterItem("");
+          setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
           setIsDropDownClosed(true);
         },
       };
@@ -617,6 +647,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     asyncEnabled,
                     asyncStatus: asyncEnabled ? asyncStatus : "",
                     renderOption,
+                    isControlled,
+                    isSameOption,
+                    getOptionValue,
                     activeStyle,
                     autocomplete,
                     blankSelection,
@@ -713,7 +746,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                             <DropdownContainer constrainHeight={constrainHeight}>
                                 {optionsWithBlankSelection &&
                                     optionsWithBlankSelection?.map((option: GenericObject) => (
-                                        <DropdownOption key={option.id}
+                                        <DropdownOption key={getOptionValue ? getOptionValue(option) : option.id}
                                             option={option}
                                         />
                                     ))}

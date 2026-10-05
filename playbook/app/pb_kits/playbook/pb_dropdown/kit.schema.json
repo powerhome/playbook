@@ -21,6 +21,18 @@
         "react"
       ]
     },
+    "value": {
+      "type": "GenericObject | GenericObject[] | null",
+      "platforms": [
+        "react"
+      ]
+    },
+    "getOptionValue": {
+      "type": "(option: GenericObject) => string | number",
+      "platforms": [
+        "react"
+      ]
+    },
     "renderOption": {
       "type": "function",
       "platforms": [
