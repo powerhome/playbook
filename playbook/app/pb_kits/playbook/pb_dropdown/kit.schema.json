@@ -21,6 +21,24 @@
         "react"
       ]
     },
+    "loading": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onInputChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "resetOnFormReset": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "value": {
       "type": "GenericObject | GenericObject[] | null",
       "platforms": [

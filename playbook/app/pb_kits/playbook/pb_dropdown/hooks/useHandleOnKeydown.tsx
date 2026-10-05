@@ -7,6 +7,7 @@ export const useHandleOnKeyDown = () => {
 const {
   asyncEnabled,
   isControlled,
+  onInputChange,
   autocomplete,
   filterItem,
   filteredOptions,
@@ -43,7 +44,7 @@ const {
 
   return (e: React.KeyboardEvent) => {
 
-    if (!asyncEnabled && !isControlled && e.key !== "Tab" && autocomplete && selected && selected.label) {
+    if (!asyncEnabled && !isControlled && !onInputChange && e.key !== "Tab" && autocomplete && selected && selected.label) {
       // Only when the input is showing the selected label (e.g. seeded defaultValue)
       const replacingSelectedLabel = filterItem === selected.label;
       handleBackspace();

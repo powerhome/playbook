@@ -92,10 +92,15 @@ type CustomQuickPickDates = {
     dates: CustomQuickPickDate[];
 };
 
+type InputChangeReason = "input" | "select" | "clear" | "reset";
+
 type DropdownProps = {
     aria?: { [key: string]: string };
     async?: boolean;
     loadOptions?: LoadOptions;
+    loading?: boolean;
+    onInputChange?: (input: string, detail: { reason: InputChangeReason }) => void;
+    resetOnFormReset?: boolean;
     value?: GenericObject | GenericObject[] | null;
     getOptionValue?: (option: GenericObject) => string | number;
     renderOption?: (option: GenericObject) => React.ReactNode;
@@ -149,6 +154,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         aria = {},
         async = false,
         loadOptions,
+        loading = false,
+        onInputChange,
+        resetOnFormReset = false,
         renderOption,
         value,
         getOptionValue,
@@ -204,13 +212,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     );
 
     const asyncEnabled = async && variant !== "quickpick";
-    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !disabled, loadOptions, searchTermMinimumLength, searchDebounceTimeout);
+    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, searchTermMinimumLength, searchDebounceTimeout);
 
     // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
     const dropdownOptions = variant === "quickpick" 
         ? getQuickPickOptions(rangeEndsToday, customQuickPickDates) 
-        : (asyncEnabled ? loadedOptions : options || []);
+        : (asyncEnabled && loadOptions ? loadedOptions : options || []);
     // ----------------------------------------------------------
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(disabled ? true : isClosed);
@@ -452,24 +460,31 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     ]);
 
 
+    const handleSelectionChange = (value: any) => {
+        onSelect && onSelect(value);
+        onChange && onChange({ target: { name, value } });
+    };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (disabled) return;
         if (asyncEnabled) {
           searchAsync(e.target.value);
           setFocusedOptionIndex(-1);
         }
+        if (onInputChange && !e.target.value && autocomplete && !multiSelect && selectedArray.length) {
+          setSelected({});
+          handleSelectionChange(null);
+        }
         setFilterItem(e.target.value);
+        onInputChange?.(e.target.value, { reason: "input" });
         setIsDropDownClosed(false);
     };
 
-    const handleSelectionChange = (value: any) => {
-        onSelect && onSelect(value);
-        onChange && onChange({ target: { name, value } });
-    };
 
       const handleOptionClick = (clickedItem: GenericObject) => {
                 if (disabled) return;
                 if (asyncEnabled) cancelAsync();
+                onInputChange?.("", { reason: "select" });
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
                 if (multiSelect) {
@@ -529,6 +544,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const handleBackspace = () => {
       if (disabled) return;
       if (asyncEnabled) clearAsync();
+      onInputChange?.("", { reason: "clear" });
+      if ((onInputChange || asyncEnabled) && multiSelect) setFilterItem("");
       if (multiSelect) {
         setSelected([]);
         handleSelectionChange([]);
@@ -565,8 +582,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     // Create an internal ref object that holds the imperative handle methods
     const imperativeRef = useRef({
-      clearSelected: () => {
+      clearSelected: (reason: "clear" | "reset" = "clear") => {
           if (asyncEnabled) clearAsync();
+          onInputChange?.("", { reason });
         if (multiSelect) {
           setSelected([]);
           handleSelectionChange([]);
@@ -583,8 +601,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // (needed for external clearing of normal Dropdown + DatePicker-synced QuickPick Dropdown)
     useEffect(() => {
       imperativeRef.current = {
-        clearSelected: () => {
+        clearSelected: (reason: "clear" | "reset" = "clear") => {
           if (asyncEnabled) clearAsync();
+          onInputChange?.("", { reason });
           if (multiSelect) {
             setSelected([]);
             handleSelectionChange([]);
@@ -596,9 +615,27 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setIsDropDownClosed(true);
         },
       };
-    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed, asyncEnabled, clearAsync]);
+    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed, asyncEnabled, clearAsync, onInputChange]);
 
     useImperativeHandle(ref, () => imperativeRef.current);
+
+    useEffect(() => {
+      if (!resetOnFormReset) return;
+      const form = outerDivRef.current?.closest("form");
+      if (!form) return;
+      let mounted = true;
+      const handleReset = (event: Event) => {
+        Promise.resolve().then(() => {
+          if (mounted && !event.defaultPrevented) imperativeRef.current.clearSelected("reset");
+        });
+      };
+      form.addEventListener("reset", handleReset);
+      return () => {
+        mounted = false;
+        form.removeEventListener("reset", handleReset);
+      };
+    }, [resetOnFormReset]);
+
 
     useEffect(() => {
       // Attach the ref to the DOM element so DatePicker can access it
@@ -636,7 +673,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             {...dataProps}
             {...htmlProps}
             {...(filterResetDefaultSerialized ? { "data-default-value": filterResetDefaultSerialized } : {})}
-            aria-busy={asyncEnabled ? asyncStatus === "Loading…" : undefined}
+            aria-busy={asyncEnabled ? (loading || asyncStatus === "Loading…") : undefined}
             className={classes}
             id={id}
             ref={outerDivRef}
@@ -645,9 +682,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus: asyncEnabled ? asyncStatus : "",
+                    asyncStatus: asyncEnabled ? (loading ? "Loading…" : asyncStatus) : "",
                     renderOption,
                     isControlled,
+                    onInputChange,
                     isSameOption,
                     getOptionValue,
                     activeStyle,

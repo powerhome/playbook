@@ -44,6 +44,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
+    asyncEnabled,
+    onInputChange,
     blankSelection,
     clearable,
     disabled,
@@ -259,7 +261,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   >
                     {(!blankSelection || selected?.value !== optionsWithBlankSelection?.[0]?.value) &&
                     clearable !== false &&
-                    selectedArray.length > 0 ? (
+                    (selectedArray.length > 0 || ((asyncEnabled || onInputChange) && filterItem)) ? (
                           <div onClick={(e)=>{e.stopPropagation(); !disabled && handleBackspace()}}>
                             <Icon
                                 cursor={disabled ? "default" : "pointer"}
