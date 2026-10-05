@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Dropdown from '../_dropdown'
 import Body from '../../pb_body/_body'
 import Detail from '../../pb_detail/_detail'
@@ -10,31 +10,37 @@ const loadUsers = (term) => fetch(`https://dummyjson.com/users/search?${new URLS
   })
   .then(({ users }) => users.map((user) => ({
     ...user,
+    label: `${user.firstName} ${user.lastName}`,
     value: user.id,
   })))
 
-const userLabel = (user) => `${user.firstName} ${user.lastName}`
-const userId = (user) => user.id
+const companyDetail = (user) => [user.company?.title, user.company?.department].filter(Boolean).join(' · ')
 
 const renderUser = (user) => (
   <div>
-    <Body text={userLabel(user)} />
-    <Detail text={[user.company?.title, user.company?.department].filter(Boolean).join(' · ')} />
+    <Body text={user.label} />
+    <Detail text={companyDetail(user)} />
   </div>
 )
 
-const DropdownAsyncRichResults = () => (
-  <Dropdown
-      async
-      autocomplete
-      getOptionLabel={userLabel}
-      getOptionValue={userId}
-      label="User"
-      loadOptions={loadUsers}
-      placeholder="Try Emily or Michael"
-      renderOption={renderUser}
-      renderValue={renderUser}
-  />
-)
+const DropdownAsyncRichResults = () => {
+  const [selected, setSelected] = useState(null)
+
+  return (
+    <Dropdown
+        async
+        autocomplete
+        label="User"
+        loadOptions={loadUsers}
+        onSelect={setSelected}
+        placeholder="Try Emily or Michael"
+        renderOption={renderUser}
+        value={selected}
+    >
+      <Dropdown.Trigger customDisplay={selected && <Detail text={companyDetail(selected)} />} />
+      <Dropdown.Container />
+    </Dropdown>
+  )
+}
 
 export default DropdownAsyncRichResults

@@ -44,8 +44,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
-    optionLabel,
-    renderValue,
     asyncEnabled,
     onInputChange,
     blankSelection,
@@ -95,9 +93,9 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const joinedLabels = multiSelect
     ? ""
-    : selectedArray.map((option) => optionLabel(option)).join(", ");
+    : selectedArray.map((option) => option.label).join(", ");
 
-  const customDisplayPlaceholder = optionLabel(selected) ? (
+  const customDisplayPlaceholder = selected?.label ? (
     ""
   ) : autocomplete ? (
     ""
@@ -218,8 +216,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                           />
                         )}
                         </>
-                      ) : renderValue && selectedArray.length && (!autocomplete || !isInputFocused) ? (
-                        renderValue(selectedArray[0]) ?? <Body text={joinedLabels} />
                       ) : (
                         <Body
                             color={!joinedLabels && !autocomplete ? "lighter" : undefined}
@@ -248,8 +244,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                               : "Select..."
                           }
                           ref={inputRef}
-                          style={renderValue && !customDisplay && selectedArray.length && !isInputFocused ? { width: 0, minWidth: 0, flexGrow: 1 } : undefined}
-                          value={renderValue && !customDisplay && selectedArray.length && !isInputFocused ? "" : filterItem}
+                          value={filterItem}
                       />
                     )}
                   </Flex>

@@ -51,7 +51,6 @@ const DropdownOption = (props: DropdownOptionProps) => {
     multiSelect,
     selected,
     renderOption,
-    optionLabel,
     isSameOption,
     selectedOptionIds,
     getOptionValue,
@@ -63,10 +62,10 @@ const DropdownOption = (props: DropdownOptionProps) => {
     const selectedLabel =
       !multiSelect &&
       !Array.isArray(selected) &&
-      optionLabel(selected as GenericObject);
+      (selected as GenericObject)?.label;
     const filterText =
       selectedLabel && filterItem === selectedLabel ? "" : filterItem;
-    const label = optionLabel(option);
+    const label = typeof option?.label === 'string' ? option.label.toLowerCase() : option?.label;
     return String(label).toLowerCase().includes(filterText.toLowerCase());
   }
 
@@ -136,13 +135,13 @@ const DropdownOption = (props: DropdownOptionProps) => {
           cursor={disabled ? "default" : "pointer"}
           dark={dark}
           data-name={option?.value}
-          key={optionLabel(option)}
+          key={option?.label}
           padding="none"
       >
           {content != null ?
           <div className={optionWrapperClass}>{content}</div> :
               <Body dark={dark} 
-                  text={optionLabel(option)}
+                  text={option?.label} 
               />
           }
       </ListItem>

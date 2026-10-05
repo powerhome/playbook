@@ -1453,34 +1453,11 @@ describe('Dropdown controlled selection and identity', () => {
     expect(onSelect).toHaveBeenCalledTimes(2);
   });
 
-  test('custom identity distinguishes duplicate labels and zero IDs in multi-select', () => {
-    const first = { id: 0, label: 'Same name', value: 'same', metadata: { role: 'first' } };
-    const second = { id: 2, label: 'Same name', value: 'same', metadata: { role: 'second' } };
-    const onSelect = jest.fn();
-    const { container } = render(
-      <Dropdown defaultValue={[first]}
-          getOptionValue={(option) => option.id}
-          multiSelect
-          onSelect={onSelect}
-          options={[first, second]}
-      />
-    );
-    const row = container.querySelector('.pb_dropdown_option_list');
-    expect(row).not.toBeNull();
-    fireEvent.click(row);
-    expect(onSelect).toHaveBeenLastCalledWith([first, second]);
-    expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(0);
-    fireEvent.click(container.querySelector('.pb_form_pill_close'));
-    expect(onSelect).toHaveBeenLastCalledWith([second]);
-    expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(1);
-  });
-
   test('controlled multi-select emits once without updating until the parent accepts', () => {
     const onSelect = jest.fn();
     const { container } = render(
       <React.StrictMode>
-        <Dropdown getOptionValue={(option) => option.id}
-            multiSelect
+        <Dropdown multiSelect
             onSelect={onSelect}
             options={options}
             value={[]}
@@ -1656,12 +1633,11 @@ describe('Dropdown cache isolation and opt-in', () => {
 });
 
 describe('Dropdown equivalent controlled values', () => {
-  test.each([[false, false], [false, true], [true, false], [true, true]])('parent rerenders preserve the query (multiSelect: %s, custom identity: %s)', (multiSelect, customIdentity) => {
+  test.each([false, true])('parent rerenders preserve the query (multiSelect: %s)', (multiSelect) => {
     const Example = () => {
       const [, setQuery] = useState('');
       return (
         <Dropdown autocomplete
-            getOptionValue={customIdentity ? (option) => option.id : undefined}
             multiSelect={multiSelect}
             onInputChange={setQuery}
             options={options}
@@ -1678,7 +1654,7 @@ describe('Dropdown equivalent controlled values', () => {
 
   test('real identity, label and empty-selection changes still synchronize the input', () => {
     const onSelect = jest.fn();
-    const props = { autocomplete: true, options, onSelect, getOptionValue: (option) => option.id };
+    const props = { autocomplete: true, options, onSelect };
     const { rerender } = render(<Dropdown {...props}
         value={options[0]}
                                 />);
@@ -1704,97 +1680,24 @@ describe('Dropdown equivalent controlled values', () => {
   });
 });
 
-test('custom multi-select identity avoids scanning selections for every option', () => {
-  const manyOptions = Array.from({ length: 120 }, (_, id) => ({ id, label: `Option ${id}`, value: id }));
-  const getOptionValue = jest.fn((option) => option.id);
-  const { container, rerender } = render(
-    <Dropdown defaultValue={manyOptions.slice(0, 60)}
-        getOptionValue={getOptionValue}
+test('async multi-select identity avoids scanning selections for every option', () => {
+  let reads = 0;
+  const manyOptions = Array.from({ length: 120 }, (_, id) => {
+    const option = { id, label: `Option ${id}` };
+    Object.defineProperty(option, 'value', { enumerable: true, get: () => { reads += 1; return id; } });
+    return option;
+  });
+  const { container } = render(
+    <Dropdown async
+        defaultValue={manyOptions.slice(0, 60)}
+        isClosed={false}
         multiSelect
         options={manyOptions}
     />
   );
-  expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(60);
+  expect(container.querySelectorAll('.pb_dropdown_container li')).toHaveLength(60);
   // Allow normal render passes while rejecting the quadratic pairwise scan.
-  expect(getOptionValue.mock.calls.length).toBeLessThan(2000);
-  getOptionValue.mockClear();
-  rerender(
-    <Dropdown defaultValue={manyOptions.slice(0, 60)}
-        getOptionValue={getOptionValue}
-        multiSelect
-        options={manyOptions.map((option) => ({ ...option, id: String(option.id) }))}
-    />
-  );
-  expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(60);
-  expect(getOptionValue.mock.calls.length).toBeLessThan(2000);
-});
-
-describe('Dropdown reusable async and display APIs', () => {
-
-
-  test('custom labels filter and select original objects without normalization', () => {
-    const user = { recordId: 0, name: 'Ada Lovelace', title: 'Engineer' };
-    const onSelect = jest.fn();
-    render(<Dropdown autocomplete
-        getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.recordId}
-        onSelect={onSelect}
-        options={[user]}
-           />);
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'ada' } });
-    fireEvent.click(screen.getByText('Ada Lovelace'));
-    expect(onSelect).toHaveBeenCalledWith(user);
-  });
-
-  test('rich selected values retain keyboard-accessible removal and original data', () => {
-    const first = { id: 0, name: 'Ada', title: 'Engineer' };
-    const second = { id: 1, name: 'Ada', title: 'Manager' };
-    const onSelect = jest.fn();
-    render(<Dropdown defaultValue={[first, second]}
-        getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.id}
-        multiSelect
-        onSelect={onSelect}
-        options={[]}
-        renderValue={(option) => <span>{option.title}</span>}
-           />);
-    expect(screen.getByText('Engineer')).toBeInTheDocument();
-    fireEvent.click(screen.getAllByRole('button', { name: 'Remove Ada' })[0]);
-    expect(onSelect).toHaveBeenLastCalledWith([second]);
-    expect(screen.queryByText('Engineer')).not.toBeInTheDocument();
-    expect(screen.getByText('Manager')).toBeInTheDocument();
-  });
-
-  test('single rich selection yields to the editable input on focus', () => {
-    render(<Dropdown autocomplete
-        getOptionLabel={(option) => option.name}
-        options={[]}
-        renderValue={(option) => <span>{option.title}</span>}
-        value={{ id: 0, name: 'Ada', title: 'Engineer' }}
-           />);
-    expect(screen.getByText('Engineer')).toBeInTheDocument();
-    fireEvent.focus(screen.getByRole('textbox'));
-    expect(screen.queryByText('Engineer')).not.toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toHaveValue('Ada');
-  });
-});
-
-
-test('rich removal Enter does not bubble into option selection', () => {
-  const onSelect = jest.fn();
-  render(<Dropdown defaultValue={[options[0]]}
-      getOptionValue={(option) => option.id}
-      multiSelect
-      onSelect={onSelect}
-      options={options}
-      renderValue={(option) => <span>{option.label}</span>}
-         />);
-  const remove = screen.getByRole('button', { name: 'Remove United States' });
-  fireEvent.keyDown(remove, { key: 'Enter' });
-  expect(onSelect).not.toHaveBeenCalled();
-  fireEvent.click(remove);
-  expect(onSelect).toHaveBeenCalledTimes(1);
-  expect(onSelect).toHaveBeenCalledWith([]);
+  expect(reads).toBeLessThan(2000);
 });
 
 describe('Dropdown Rails input parity', () => {
@@ -2003,4 +1906,30 @@ describe('async Dropdown Typeahead parity', () => {
     fireEvent.click(screen.getByText('Bob Ray'));
     expect(input).toHaveValue('Bob Ray');
   });
+});
+
+test('async results render through Dropdown.Container with a custom trigger display', async () => {
+  jest.useFakeTimers();
+  const Example = () => {
+    const [selected, setSelected] = useState(null);
+    return (
+      <Dropdown async
+          autocomplete
+          loadOptions={() => Promise.resolve([{ label: 'Ada Lovelace', value: 7, title: 'Engineer' }])}
+          onSelect={setSelected}
+          value={selected}
+      >
+        <Dropdown.Trigger customDisplay={selected && <span>{selected.title}</span>} />
+        <Dropdown.Container />
+      </Dropdown>
+    );
+  };
+  render(<Example />);
+  const input = screen.getByRole('textbox');
+  fireEvent.click(input);
+  fireEvent.change(input, { target: { value: 'ada' } });
+  await act(async () => { jest.advanceTimersByTime(0); });
+  fireEvent.click(screen.getByText('Ada Lovelace'));
+  expect(screen.getByText('Engineer')).toBeInTheDocument();
+  jest.useRealTimers();
 });

@@ -9,7 +9,6 @@ const {
   isControlled,
   onInputChange,
   autocomplete,
-  optionLabel,
   filterItem,
   filteredOptions,
   focusedOptionIndex,
@@ -45,9 +44,9 @@ const {
 
   return (e: React.KeyboardEvent) => {
 
-    if (!asyncEnabled && !isControlled && !onInputChange && e.key !== "Tab" && autocomplete && selected && optionLabel(selected)) {
+    if (!asyncEnabled && !isControlled && !onInputChange && e.key !== "Tab" && autocomplete && selected && selected.label) {
       // Only when the input is showing the selected label (e.g. seeded defaultValue)
-      const replacingSelectedLabel = filterItem === optionLabel(selected);
+      const replacingSelectedLabel = filterItem === selected.label;
       handleBackspace();
 
       if (replacingSelectedLabel && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {

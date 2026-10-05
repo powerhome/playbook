@@ -2,8 +2,6 @@ examples:
   rails:
   - dropdown_default_rails: Default
   - dropdown_with_autocomplete: Autocomplete
-  - dropdown_async_search: Async Search
-  - dropdown_async_custom_content: Async Search with Custom Content
   - dropdown_multi_select_rails: Multi Select
   - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
   - dropdown_multi_select_display_rails: Multi Select with Form Pill Props
@@ -44,13 +42,10 @@ examples:
   - dropdown_dynamic_options: Dynamic Options
   - dropdown_dynamic_options_with_autocomplete: Dynamic Options with Autocomplete
   - dropdown_dynamic_options_with_multi_select: Dynamic Options with Multi Select
+  - dropdown_async_search: Async Search
+  - dropdown_async_custom_content: Async Search with Custom Content
 
   react:
-  - dropdown_async_initial_options: Async Initial Results and Caching
-  - dropdown_external_search: External Search
-  - dropdown_controlled_selection: Controlled Selection and Option Identity
-  - dropdown_async_loading: Async Search
-  - dropdown_async_rich_results: Async Search with Custom Content
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select
@@ -93,4 +88,9 @@ examples:
   - dropdown_grouped_options: Grouped Options
   - dropdown_react_hook: React Hook
   - dropdown_multi_select_react_hook: React Hook Multi Select
+  - dropdown_controlled_selection: Controlled Selection
+  - dropdown_async_loading: Async Search
+  - dropdown_async_rich_results: Async Search with Custom Content
+  - dropdown_async_initial_options: Async Initial Results and Caching
+  - dropdown_external_search: External Search
 

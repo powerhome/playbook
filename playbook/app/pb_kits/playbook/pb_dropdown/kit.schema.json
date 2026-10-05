@@ -51,24 +51,6 @@
         "react"
       ]
     },
-    "getOptionLabel": {
-      "type": "function",
-      "platforms": [
-        "react"
-      ]
-    },
-    "renderValue": {
-      "type": "function",
-      "platforms": [
-        "react"
-      ]
-    },
-    "getOptionValue": {
-      "type": "(option: GenericObject) => string | number",
-      "platforms": [
-        "react"
-      ]
-    },
     "renderOption": {
       "type": "function",
       "platforms": [
