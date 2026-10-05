@@ -48,6 +48,8 @@ spec:
               value: "true"
             - name: RAILS_LOG_TO_STDOUT
               value: "true"
+            - name: PLAYBOOK_RAILS_PLAYGROUND_ENABLED
+              value: "<%= appConfig["railsPlaygroundEnabled"] || "0" %>"
             - name: SENTRY_DSN
               valueFrom:
                 secretKeyRef:
