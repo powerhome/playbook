@@ -2,9 +2,8 @@
 
 class PlaygroundController < ApplicationController
   def preview
-    # Kit Playground (incl. Rails preview) runs on staging / local / review only —
-    # same production restriction as PagesController playground JSON.
-    if playbook_production_host?
+    # Same deploy-time flag as PagesController playground JSON (never request.host).
+    unless rails_playground_enabled?
       head :not_found
       return
     end
@@ -94,10 +93,5 @@ private
 
   def log_preview_error(error)
     Rails.logger.error("Rails Playground preview error: #{error.class}: #{error.message}")
-  end
-
-  # Deployed production website host only (not review apps / localhost / staging).
-  def playbook_production_host?
-    request.host == "playbook.powerapp.cloud"
   end
 end

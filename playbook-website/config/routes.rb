@@ -25,9 +25,12 @@ Rails.application.routes.draw do
 
   root to: "pages#application"
 
-  post "kits/:name/rails/playground/preview",
-       to: "playground#preview",
-       defaults: { format: :json }
+  # Preview endpoint only exists when deploy-time flag is on (staging/PRs/local).
+  if Rails.application.config.x.rails_playground_enabled
+    post "kits/:name/rails/playground/preview",
+         to: "playground#preview",
+         defaults: { format: :json }
+  end
 
   # Legacy /beta/* redirects (301)
   get "beta",       to: redirect("/")
