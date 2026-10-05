@@ -638,7 +638,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.target.querySelector("[data-dropdown-async-status]")?.remove();
     const status = document.createElement("div");
     status.dataset.dropdownAsyncStatus = "true";
-    status.className = "pb_body_kit_light p_xs";
+    status.className = "pb_body_kit_light pb_item_kit p_xs display_flex justify_content_center";
     status.setAttribute("role", "status");
     status.textContent = message;
     this.target.appendChild(status);

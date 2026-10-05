@@ -67,10 +67,9 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-  const menuClosed = isDropDownClosed || (asyncEnabled && !searchbar && !asyncStatus && filteredOptions.length === 0);
   const classes = classnames(
     buildCss("pb_dropdown_container"),
-    `${menuClosed ? "close" : "open"}`,
+    `${isDropDownClosed ? "close" : "open"}`,
     constrainHeight && "constrain_height",
     globalProps(props),
     className
@@ -103,15 +102,10 @@ const DropdownContainer = (props: DropdownContainerProps) => {
       )}
       <List dark={dark}>
         {
-        asyncStatus ? (
-          <ListItem htmlOptions={{ role: "status" }}>
-            <Body padding="xs"
-                text={asyncStatus}
-            />
-          </ListItem>
-        ) : asyncEnabled && filteredOptions?.length === 0 ? null : filteredOptions?.length === 0 ? (
+        asyncStatus || (!asyncEnabled && filteredOptions?.length === 0) ? (
           <ListItem dark={dark}
               display="flex"
+              htmlOptions={asyncStatus ? { role: "status" } : undefined}
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               justifyContent="center"
@@ -119,7 +113,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
           >
             <Body color="light" 
                 dark={dark}
-                text={noOptionsText || "no option"}
+                text={asyncStatus || noOptionsText || "no option"}
             />
           </ListItem>
         ): (
@@ -135,7 +129,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   );
 
   if (portalHost) {
-    if (menuClosed) {
+    if (isDropDownClosed) {
       return null;
     }
     return createPortal(

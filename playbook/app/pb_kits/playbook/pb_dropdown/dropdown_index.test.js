@@ -496,6 +496,7 @@ describe("PbDropdown async search", () => {
     jest.advanceTimersByTime(250);
     search.mock.calls[1][0].detail.setError();
     expect(instance.target).toHaveTextContent("Unable to load options");
+    expect(instance.target.querySelector("[data-dropdown-async-status]")).toHaveClass("pb_item_kit", "display_flex", "justify_content_center");
     expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
     expect(root).toHaveAttribute("aria-busy", "false");
   });

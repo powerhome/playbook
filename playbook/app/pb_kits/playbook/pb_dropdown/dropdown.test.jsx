@@ -1957,3 +1957,42 @@ describe('Dropdown noOptionsText', () => {
     jest.useRealTimers();
   });
 });
+
+describe('async Dropdown empty menu', () => {
+  test.each([
+    ['loadOptions', { loadOptions: jest.fn() }],
+    ['external options', { options: [] }],
+  ])('opens with the no results message before searching (%s)', (_mode, props) => {
+    const { container } = render(<Dropdown async
+        autocomplete
+        {...props}
+                                  />);
+    fireEvent.click(screen.getByRole('textbox'));
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
+    expect(screen.getByRole('status')).toHaveTextContent('No results found');
+  });
+
+  test('uses noOptionsText for the empty menu', () => {
+    render(<Dropdown async
+        autocomplete
+        loadOptions={jest.fn()}
+        noOptionsText="Type to search users"
+           />);
+    fireEvent.click(screen.getByRole('textbox'));
+    expect(screen.getByRole('status')).toHaveTextContent('Type to search users');
+  });
+
+  test('shows preloaded defaultOptions instead of the message', async () => {
+    jest.useFakeTimers();
+    render(<Dropdown async
+        autocomplete
+        defaultOptions
+        loadOptions={() => Promise.resolve([{ label: 'Ada Lovelace', value: 1 }])}
+           />);
+    await act(async () => { jest.advanceTimersByTime(0); });
+    fireEvent.click(screen.getByRole('textbox'));
+    expect(screen.getByText('Ada Lovelace')).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    jest.useRealTimers();
+  });
+});

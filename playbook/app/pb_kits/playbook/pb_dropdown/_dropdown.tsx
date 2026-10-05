@@ -703,7 +703,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : asyncStatus === "empty" ? noOptionsText || "No results found" : "") : "",
+                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : filteredOptions.length === 0 ? noOptionsText || "No results found" : "") : "",
                     renderOption,
                     optionKey,
                     isControlled,
