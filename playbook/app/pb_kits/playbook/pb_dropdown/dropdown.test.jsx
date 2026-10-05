@@ -1797,3 +1797,52 @@ describe('Dropdown cache isolation and opt-in', () => {
     expect(loadOptions).toHaveBeenCalledTimes(2);
   });
 });
+
+describe('Dropdown equivalent controlled values', () => {
+  test.each([[false, false], [false, true], [true, false], [true, true]])('parent rerenders preserve the query (multiSelect: %s, custom identity: %s)', (multiSelect, customIdentity) => {
+    const Example = () => {
+      const [, setQuery] = useState('');
+      return (
+        <Dropdown autocomplete
+            getOptionValue={customIdentity ? (option) => option.id : undefined}
+            multiSelect={multiSelect}
+            onInputChange={setQuery}
+            options={options}
+            value={multiSelect ? [{ ...options[0] }] : { ...options[0] }}
+        />
+      );
+    };
+    render(<Example />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
+    expect(screen.getByRole('textbox')).toHaveValue('Can');
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Cana' } });
+    expect(screen.getByRole('textbox')).toHaveValue('Cana');
+  });
+
+  test('real identity, label and empty-selection changes still synchronize the input', () => {
+    const onSelect = jest.fn();
+    const props = { autocomplete: true, options, onSelect, getOptionValue: (option) => option.id };
+    const { rerender } = render(<Dropdown {...props}
+        value={options[0]}
+                                />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'query' } });
+    rerender(<Dropdown {...props}
+        value={{ ...options[0], extraMetadata: true }}
+             />);
+    expect(input).toHaveValue('query');
+    rerender(<Dropdown {...props}
+        value={{ ...options[0], id: 'different' }}
+             />);
+    expect(input).toHaveValue('United States');
+    rerender(<Dropdown {...props}
+        value={{ ...options[0], id: 'different', label: 'Updated label' }}
+             />);
+    expect(input).toHaveValue('Updated label');
+    rerender(<Dropdown {...props}
+        value={null}
+             />);
+    expect(input).toHaveValue('');
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+});

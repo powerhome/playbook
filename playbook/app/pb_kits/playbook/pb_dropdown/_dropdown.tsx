@@ -285,11 +285,22 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       return (selected as GenericObject)?.label || "";
     });
 
+    // Form adapters may recreate equivalent option objects on every render.
+    // Synchronize the query only when selection identity or display text changes.
+    const controlledSelectionKey = isControlled ? JSON.stringify(
+      (Array.isArray(value) ? value : value && Object.keys(value).length ? [value] : [])
+        .map((option) => [
+          String(getOptionValue ? getOptionValue(option) : option.id ?? option.value ?? option.label),
+          option.label,
+        ])
+    ) : undefined;
+    const controlledLabel = !multiSelect && value && !Array.isArray(value) ? value.label || "" : "";
+
     useEffect(() => {
       if (isControlled && autocomplete) {
-        setFilterItem(!multiSelect && value && !Array.isArray(value) ? value.label || "" : "");
+        setFilterItem(controlledLabel);
       }
-    }, [isControlled, value, autocomplete, multiSelect]);
+    }, [isControlled, controlledSelectionKey, controlledLabel, autocomplete, multiSelect]);
 
     const filterResetDefaultSerialized = useMemo(
         () => serializeDropdownFilterResetDefault(variant, multiSelect, defaultValue, dropdownOptions),
