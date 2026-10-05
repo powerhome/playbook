@@ -14,7 +14,6 @@
 **Improvements:**
 
 - Rich Text Editor: Toolbar/markdown Styling and Extensions - React and Rails [\#6688](https://github.com/powerhome/playbook/pull/6688) ([kangaree](https://github.com/kangaree))
-- Github Actions: Updated Label Check Action to Account for Changelog Labels [\#6713](https://github.com/powerhome/playbook/pull/6713) 
 - Filter Kit: Standardize Sort Icons [\#6692](https://github.com/powerhome/playbook/pull/6692) ([nickamantia](https://github.com/nickamantia))
 - Playbook Website: Expand and Prioritize Playbook Website Search [\#6650](https://github.com/powerhome/playbook/pull/6650) ([nidaqg](https://github.com/nidaqg))
 
