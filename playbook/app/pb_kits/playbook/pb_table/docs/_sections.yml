@@ -5,7 +5,6 @@ sections:
       - table_md
       - table_lg
       - table_multiline
-      - table_single_line
       - table_outer_padding
 
   - title: "Layout & Structure"

@@ -6,8 +6,6 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[sm md lg],
                   default: "md"
-      prop :single_line, type: Playbook::Props::Boolean,
-                         default: false
       prop :disable_hover, type: Playbook::Props::Boolean,
                            default: false
       prop :data_table, type: Playbook::Props::Boolean,
@@ -66,7 +64,7 @@ module Playbook
 
       def classname
         generate_classname(
-          "pb_table", "table-#{size_class}", single_line_class, dark_class,
+          "pb_table", "table-#{size_class}", dark_class,
           disable_hover_class, container_class, data_table_class, sticky_class, sticky_left_column_class,
           sticky_right_column_class, collapse_class, vertical_border_class, contrast_border_class, striped_class, outer_padding_class,
           "table-responsive-#{responsive}", header_style_class, separator: " "
@@ -89,10 +87,6 @@ module Playbook
 
       def data_table_class
         data_table ? "data_table" : nil
-      end
-
-      def single_line_class
-        single_line ? "single-line" : nil
       end
 
       def disable_hover_class
