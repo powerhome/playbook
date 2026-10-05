@@ -1,6 +1,6 @@
 Use `async` with `autocomplete` or `Dropdown.Container searchbar` to search remote options. This example queries DummyJSON's public sample users API; the consuming application owns the request and result mapping.
 
-`loadOptions(term, callback)` may call `callback(options)` or return a promise resolving to options. Map results to the existing Dropdown shape: `id`, `label`, and `value`, plus any custom fields. Remote matches are displayed without additional local label filtering.
+`loadOptions(term, callback)` may call `callback(options)` or return a promise resolving to options. Map results to the existing Dropdown shape: `id`, `label`, and `value`, plus any custom fields. Remote matches are displayed without additional local label filtering. Results are matched by `value`, falling back to `id` and then `label`, so results with the same label stay distinct.
 
 Dropdown calls the loader for nonempty queries. Keep debounce and minimum query length in the application's loader or input handler, as Nitro's existing Typeahead adapters do. No request runs on mount unless `defaultOptions={true}` is supplied.
 
