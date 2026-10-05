@@ -48,8 +48,8 @@ const DropdownExternalSearch = () => {
           resetOnFormReset
           value={selected}
       />
-      <Button text="Reset"
-          type="reset"
+      <Button htmlType="reset"
+          text="Reset"
       />
     </form>
   )

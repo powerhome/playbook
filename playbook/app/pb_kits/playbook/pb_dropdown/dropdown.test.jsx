@@ -1871,3 +1871,132 @@ test('custom multi-select identity avoids scanning selections for every option',
   expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(60);
   expect(getOptionValue.mock.calls.length).toBeLessThan(2000);
 });
+
+describe('Dropdown reusable async and display APIs', () => {
+  test('passes an abort signal and aborts superseded and unmounted requests', () => {
+    jest.useFakeTimers();
+    const loadOptions = jest.fn();
+    const { unmount } = render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+                               />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'first' } });
+    act(() => jest.advanceTimersByTime(250));
+    const first = loadOptions.mock.calls[0][2].signal;
+    expect(first.aborted).toBe(false);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'second' } });
+    expect(first.aborted).toBe(true);
+    act(() => jest.advanceTimersByTime(250));
+    const second = loadOptions.mock.calls[1][2].signal;
+    unmount();
+    expect(second.aborted).toBe(true);
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
+  test('custom messages do not affect loading state or error handling', async () => {
+    jest.useFakeTimers();
+    const loadOptions = jest.fn().mockResolvedValueOnce([]).mockRejectedValueOnce(new Error('Failed'));
+    const { container, unmount } = render(<Dropdown async
+        autocomplete
+        errorMessage="Try again"
+        loadOptions={loadOptions}
+        loadingMessage="Searching users"
+        noOptionsMessage="Nobody found"
+                                          />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'first' } });
+    expect(screen.getByRole('status')).toHaveTextContent('Searching users');
+    expect(container.querySelector('[aria-busy="true"]')).not.toBeNull();
+    await act(async () => { jest.advanceTimersByTime(250); });
+    expect(screen.getByRole('status')).toHaveTextContent('Nobody found');
+    expect(container.querySelector('[aria-busy="true"]')).toBeNull();
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'second' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    expect(screen.getByRole('status')).toHaveTextContent('Try again');
+    unmount();
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
+  test('custom labels filter and select original objects without normalization', () => {
+    const user = { recordId: 0, name: 'Ada Lovelace', title: 'Engineer' };
+    const onSelect = jest.fn();
+    render(<Dropdown autocomplete
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.recordId}
+        onSelect={onSelect}
+        options={[user]}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'ada' } });
+    fireEvent.click(screen.getByText('Ada Lovelace'));
+    expect(onSelect).toHaveBeenCalledWith(user);
+  });
+
+  test('rich selected values retain keyboard-accessible removal and original data', () => {
+    const first = { id: 0, name: 'Ada', title: 'Engineer' };
+    const second = { id: 1, name: 'Ada', title: 'Manager' };
+    const onSelect = jest.fn();
+    render(<Dropdown defaultValue={[first, second]}
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.id}
+        multiSelect
+        onSelect={onSelect}
+        options={[]}
+        renderValue={(option) => <span>{option.title}</span>}
+           />);
+    expect(screen.getByText('Engineer')).toBeInTheDocument();
+    fireEvent.click(screen.getAllByRole('button', { name: 'Remove Ada' })[0]);
+    expect(onSelect).toHaveBeenLastCalledWith([second]);
+    expect(screen.queryByText('Engineer')).not.toBeInTheDocument();
+    expect(screen.getByText('Manager')).toBeInTheDocument();
+  });
+
+  test('single rich selection yields to the editable input on focus', () => {
+    render(<Dropdown autocomplete
+        getOptionLabel={(option) => option.name}
+        options={[]}
+        renderValue={(option) => <span>{option.title}</span>}
+        value={{ id: 0, name: 'Ada', title: 'Engineer' }}
+           />);
+    expect(screen.getByText('Engineer')).toBeInTheDocument();
+    fireEvent.focus(screen.getByRole('textbox'));
+    expect(screen.queryByText('Engineer')).not.toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toHaveValue('Ada');
+  });
+});
+
+test('timeout aborts the request while preserving its error state', () => {
+  jest.useFakeTimers();
+  const loadOptions = jest.fn();
+  const { unmount } = render(<Dropdown async
+      autocomplete
+      loadOptions={loadOptions}
+      searchDebounceTimeout={0}
+                             />);
+  fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+  act(() => jest.advanceTimersByTime(15000));
+  expect(loadOptions.mock.calls[0][2].signal.aborted).toBe(true);
+  expect(screen.getByRole('status')).toHaveTextContent('Unable to load options');
+  act(() => loadOptions.mock.calls[0][1](options));
+  expect(screen.getByRole('status')).toHaveTextContent('Unable to load options');
+  unmount();
+  jest.clearAllTimers();
+  jest.useRealTimers();
+});
+
+test('rich removal Enter does not bubble into option selection', () => {
+  const onSelect = jest.fn();
+  render(<Dropdown defaultValue={[options[0]]}
+      getOptionValue={(option) => option.id}
+      multiSelect
+      onSelect={onSelect}
+      options={options}
+      renderValue={(option) => <span>{option.label}</span>}
+         />);
+  const remove = screen.getByRole('button', { name: 'Remove United States' });
+  fireEvent.keyDown(remove, { key: 'Enter' });
+  expect(onSelect).not.toHaveBeenCalled();
+  fireEvent.click(remove);
+  expect(onSelect).toHaveBeenCalledTimes(1);
+  expect(onSelect).toHaveBeenCalledWith([]);
+});

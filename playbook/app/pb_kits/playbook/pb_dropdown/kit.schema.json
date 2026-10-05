@@ -63,6 +63,36 @@
         "react"
       ]
     },
+    "getOptionLabel": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "renderValue": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "loadingMessage": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "noOptionsMessage": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "errorMessage": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
     "getOptionValue": {
       "type": "(option: GenericObject) => string | number",
       "platforms": [

@@ -1,7 +1,7 @@
 import React from 'react'
 import Dropdown from '../_dropdown'
 
-const loadUsers = (term) => fetch(`https://dummyjson.com/users/search?${new URLSearchParams({ q: term, limit: '10', select: 'firstName,lastName' })}`, { credentials: 'omit' })
+const loadUsers = (term, _callback, { signal }) => fetch(`https://dummyjson.com/users/search?${new URLSearchParams({ q: term, limit: '10', select: 'firstName,lastName' })}`, { credentials: 'omit', signal })
   .then((response) => {
     if (!response.ok) throw new Error('Search failed')
     return response.json()

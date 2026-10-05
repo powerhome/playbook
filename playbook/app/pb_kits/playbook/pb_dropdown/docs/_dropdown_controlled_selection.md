@@ -2,6 +2,6 @@ Pass `value` to control selection from React state. Use an option object or `nul
 
 Selected objects retain their custom and nested data, even when absent from the current options or remote results. `value` takes precedence over `defaultValue`. Omit `value` to retain the existing uncontrolled behavior; use `null` or `[]`, rather than `undefined`, to clear a controlled selection.
 
-Pass `getOptionValue` to opt into stable option identity for matching, selected-row visibility, keyboard focus, and pill removal. Return a unique, stable string or number, including zero. Numeric and string versions of the same key match. Keep `label` as plain text for display. Without `getOptionValue`, existing label/value matching remains unchanged.
+Pass `getOptionValue` to opt into stable option identity for matching, selected-row visibility, keyboard focus, and pill removal. Return a unique, stable string or number, including zero. Numeric and string versions of the same key match. Keep `label` as plain text for display, or supply `getOptionLabel` to read the label from another field without changing the original option object. Without `getOptionValue`, existing label/value matching remains unchanged.
 
 This example distinguishes two people with the same name using their IDs. These props also work with async loading and rich option rendering; they do not change the existing callback shapes.

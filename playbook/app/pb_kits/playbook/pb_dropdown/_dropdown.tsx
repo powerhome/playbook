@@ -105,6 +105,11 @@ type DropdownProps = {
     onInputChange?: (input: string, detail: { reason: InputChangeReason }) => void;
     resetOnFormReset?: boolean;
     value?: GenericObject | GenericObject[] | null;
+    getOptionLabel?: (option: GenericObject) => string;
+    renderValue?: (option: GenericObject) => React.ReactNode;
+    loadingMessage?: string;
+    noOptionsMessage?: string;
+    errorMessage?: string;
     getOptionValue?: (option: GenericObject) => string | number;
     renderOption?: (option: GenericObject) => React.ReactNode;
     searchDebounceTimeout?: number;
@@ -166,6 +171,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         renderOption,
         value,
         getOptionValue,
+        getOptionLabel,
+        renderValue,
+        loadingMessage = "Loading…",
+        noOptionsMessage = "No results found",
+        errorMessage = "Unable to load options",
         searchDebounceTimeout = 250,
         searchTermMinimumLength = 3,
         autocomplete = false,
@@ -267,22 +277,29 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       initialSelected
     );
 
+    const optionLabel = useCallback((option: GenericObject) => {
+      if (!getOptionLabel) return option?.label;
+      return option && !Array.isArray(option) && Object.keys(option).length ? getOptionLabel(option) : "";
+    }, [getOptionLabel]);
+
     const isControlled = value !== undefined;
     const selected = isControlled ? (value ?? (multiSelect ? [] : {})) : internalSelected;
     const setSelected: React.Dispatch<React.SetStateAction<GenericObject | GenericObject[]>> = (next) => {
       if (!isControlled) setInternalSelected(next);
     };
     const isSameOption = useCallback((left: GenericObject, right: GenericObject, legacyKey = "label") => {
-      if (!getOptionValue) return left?.[legacyKey] === right?.[legacyKey];
+      if (!getOptionValue) return getOptionLabel && legacyKey === "label"
+        ? optionLabel(left) === optionLabel(right)
+        : left?.[legacyKey] === right?.[legacyKey];
       if (!left || !right || !Object.keys(left).length || !Object.keys(right).length) return false;
       return String(getOptionValue(left)) === String(getOptionValue(right));
-    }, [getOptionValue]);
+    }, [getOptionValue, getOptionLabel, optionLabel]);
 
     // Autocomplete displays the selection in the input; seed from defaultValue
     const [filterItem, setFilterItem] = useState(() => {
       if (!autocomplete || multiSelect) return "";
       if (Array.isArray(selected)) return "";
-      return (selected as GenericObject)?.label || "";
+      return optionLabel(selected as GenericObject) || "";
     });
 
     // Form adapters may recreate equivalent option objects on every render.
@@ -291,10 +308,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       (Array.isArray(value) ? value : value && Object.keys(value).length ? [value] : [])
         .map((option) => [
           String(getOptionValue ? getOptionValue(option) : option.id ?? option.value ?? option.label),
-          option.label,
+          optionLabel(option),
         ])
     ) : undefined;
-    const controlledLabel = !multiSelect && value && !Array.isArray(value) ? value.label || "" : "";
+    const controlledLabel = !multiSelect && value && !Array.isArray(value) ? optionLabel(value) || "" : "";
 
     useEffect(() => {
       if (isControlled && autocomplete) {
@@ -410,19 +427,19 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           const selectedLabel =
             !multiSelect &&
             !Array.isArray(selected) &&
-            (selected as GenericObject)?.label;
+            optionLabel(selected as GenericObject);
           const filterText =
             selectedLabel && filterItem === selectedLabel ? "" : filterItem;
           return availableOptions.filter((opt: GenericObject) =>
-            String(opt.label).toLowerCase().includes(filterText.toLowerCase())
+            String(optionLabel(opt)).toLowerCase().includes(filterText.toLowerCase())
           );
-        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled]);
+        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, optionLabel]);
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
         if (!isDropDownClosed) {
             let newIndex = 0;
-            if (selected && !Array.isArray(selected) && selected.label) {
+            if (selected && !Array.isArray(selected) && optionLabel(selected)) {
                 const selectedIndex = filteredOptions.findIndex((option: GenericObject) => isSameOption(option, selected));
                 if (selectedIndex >= 0) {
                     newIndex = selectedIndex;
@@ -536,13 +553,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                        return next;
                    });
                   }
-                   setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
+                   setFilterItem(isControlled && !multiSelect ? optionLabel(selected as GenericObject) || "" : "");
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
                } else {
                    setSelected(clickedItem);
-                   setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
+                   setFilterItem(isControlled && !multiSelect ? optionLabel(selected as GenericObject) || "" : "");
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
@@ -583,7 +600,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setSelected({});
         handleSelectionChange(null);
         setFocusedOptionIndex(-1);
-        setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
+        setFilterItem(isControlled && !multiSelect ? optionLabel(selected as GenericObject) || "" : "");
         
         // Clear linked DatePickers as well if this is a quickpick variant with controls
         if (variant === "quickpick") {
@@ -622,7 +639,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setSelected({});
           handleSelectionChange(null);
         }
-        setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
+        setFilterItem(isControlled && !multiSelect ? optionLabel(selected as GenericObject) || "" : "");
         setIsDropDownClosed(true);
       },
     });
@@ -641,7 +658,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             setSelected({});
             handleSelectionChange(null);
           }
-          setFilterItem(isControlled && !multiSelect ? (selected as GenericObject).label || "" : "");
+          setFilterItem(isControlled && !multiSelect ? optionLabel(selected as GenericObject) || "" : "");
           setIsDropDownClosed(true);
         },
       };
@@ -703,7 +720,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             {...dataProps}
             {...htmlProps}
             {...(filterResetDefaultSerialized ? { "data-default-value": filterResetDefaultSerialized } : {})}
-            aria-busy={asyncEnabled ? (loading || asyncStatus === "Loading…") : undefined}
+            aria-busy={asyncEnabled ? (loading || asyncStatus === "loading") : undefined}
             className={classes}
             id={id}
             ref={outerDivRef}
@@ -712,8 +729,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus: asyncEnabled ? (loading ? "Loading…" : asyncStatus) : "",
+                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? loadingMessage : asyncStatus === "error" ? errorMessage : asyncStatus === "empty" ? noOptionsMessage : "") : "",
                     renderOption,
+                    renderValue,
+                    optionLabel,
                     isControlled,
                     onInputChange,
                     isSameOption,
