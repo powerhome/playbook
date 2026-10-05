@@ -33,6 +33,7 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
   it { is_expected.to define_prop(:selection_type).of_type(Playbook::Props::Enum).with_default("none") }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
   it { is_expected.to define_prop(:year_range).of_type(Playbook::Props::Array).with_default([1900, 2100]) }
+  it { is_expected.to define_boolean_prop(:close_on_select).with_default(true) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

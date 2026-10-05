@@ -1,5 +1,6 @@
 
 import React from 'react'
+import classnames from 'classnames'
 
 import { buildCss, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps } from '../utilities/globalProps'
@@ -11,6 +12,7 @@ import TimeStacked from '../pb_time_stacked/_time_stacked'
 import DateStacked from '../pb_date_stacked/_date_stacked'
 
 type DateTimeStackedProps = {
+  className?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   date: Date,
@@ -27,20 +29,25 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
     date,
     datetime,
     dark,
+    className,
     htmlOptions = {},
     timeZone = 'America/New_York',
     showCurrentYear = false,
   } = props
 
-  const classes = buildCss('pb_date_time_stacked_kit', globalProps(props))
-  const htmlProps = buildHtmlProps(htmlOptions)
+  const classes = classnames(
+    buildCss('pb_date_time_stacked_kit'),
+    globalProps(props),
+    className
+  )
 
   return (
     <Flex
+        htmlOptions={htmlOptions}
         inline={false}
         vertical="stretch"
-        {...htmlProps}
         {...props}
+        className={classes}
     >
       <FlexItem>
         <DateStacked
@@ -58,7 +65,6 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
       />
       <FlexItem>
         <TimeStacked
-            className={classes}
             dark={dark}
             date={date || datetime}
             timeZone={timeZone}

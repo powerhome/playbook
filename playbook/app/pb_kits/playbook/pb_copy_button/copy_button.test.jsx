@@ -86,3 +86,15 @@ test('passes text and tooltip props to button', () => {
   const tooltip = kit.querySelector('.pb_tooltip_kit')
   expect(tooltip).toBeInTheDocument()
 })
+
+test('applies htmlOptions to the root element', () => {
+  render(
+      <CopyButton
+          data={{ testid: 'html-options-test' }}
+          htmlOptions={{ title: 'copy title' }}
+          value="copy"
+      />
+  )
+
+  expect(screen.getByTestId('html-options-test')).toHaveAttribute('title', 'copy title')
+})

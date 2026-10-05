@@ -108,6 +108,22 @@ test('should render the children elements', () => {
   expect(step3Kit).toHaveClass('pb_progress_step_item_inactive')
 })
 
+test('should apply global props to ProgressStepItem', () => {
+  render(
+      <ProgressStep>
+        <ProgressStepItem
+            data={{ testid: step1Id }}
+            margin="md"
+            status="complete"
+        >
+            {'Step 1'}
+        </ProgressStepItem>
+      </ProgressStep>
+  )
+
+  expect(screen.getByTestId(step1Id)).toHaveClass('m_md')
+})
+
 test('should render info color', () => {
 render( 
         <ProgressStep

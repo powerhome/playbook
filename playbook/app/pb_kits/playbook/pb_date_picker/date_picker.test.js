@@ -510,4 +510,18 @@ describe('DatePicker Kit', () => {
       )
     })
   })
+
+  test('passes closeOnSelect to flatpickr', async () => {
+    render(
+      <DatePicker
+          closeOnSelect={false}
+          pickerId="date-picker-close-on-select"
+      />
+    )
+
+    await waitFor(() => {
+      const input = document.getElementById('date-picker-close-on-select')
+      expect(input._flatpickr.config.closeOnSelect).toBe(false)
+    })
+  })
 })

@@ -20,9 +20,25 @@ module Playbook
       prop :popover_props, type: Playbook::Props::HashProp,
                            default: {}
       prop :interactive_filters, type: Playbook::Props::HashArray, default: []
+      prop :responsive, type: Playbook::Props::Enum,
+                        values: [nil, "stacked"],
+                        default: nil
 
       def classname
-        generate_classname("pb_filter_kit").rstrip
+        generate_classname("pb_filter_kit", responsive_classname, separator: " ").rstrip
+      end
+
+      def data
+        base = Hash(values[:data])
+        return base unless responsive_stacked?
+
+        base.merge(pb_filter_responsive: "stacked")
+      end
+
+      # Wide = one-row layout; narrow (≤767px) = two-row layout.
+      # Only applies when template is default or single.
+      def responsive_stacked?
+        responsive == "stacked" && %w[default single].include?(template)
       end
 
       def interactive_config_for(filter_name)
@@ -99,15 +115,19 @@ module Playbook
       def sort_icon(direction)
         case direction
         when "asc"
-          "arrow-up-short-wide"
+          "arrow-up-wide-short"
         when "desc"
-          "arrow-down-wide-short"
+          "arrow-down-short-wide"
         else
           ""
         end
       end
 
     private
+
+      def responsive_classname
+        "pb_filter_responsive" if responsive_stacked?
+      end
 
       def interactive_filters_index
         @interactive_filters_index ||= Array(interactive_filters).each_with_object({}) do |entry, acc|

@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildDataProps, buildAriaProps, buildHtmlProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
 import { titleize } from '../utilities/text'
 
 import Avatar, { AvatarProps } from '../pb_avatar/_avatar'
@@ -22,23 +23,25 @@ type SourceProps = {
   user: AvatarProps,
 }
 
-const Source = ({
-  aria = {},
-  className,
-  data = {},
-  hideIcon = false,
-  htmlOptions = {},
-  id,
-  source,
-  type = 'inbound',
-  user = {},
-}: SourceProps): React.ReactElement => {
+const Source = (props: SourceProps): React.ReactElement => {
+  const {
+    aria = {},
+    className,
+    data = {},
+    hideIcon = false,
+    htmlOptions = {},
+    id,
+    source,
+    type = 'inbound',
+    user = {},
+  } = props
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const ariaProps = buildAriaProps(aria)
 
   const css = classnames([
     'pb_source_kit',
+    globalProps(props),
     className,
   ])
 

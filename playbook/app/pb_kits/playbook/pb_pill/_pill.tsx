@@ -8,6 +8,7 @@ import { GlobalProps, globalProps } from '../utilities/globalProps'
 type PillProps = {
   aria?: {[key: string]: string},
   className?: string,
+  children?: React.ReactNode,
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -22,6 +23,7 @@ const Pill = (props: PillProps) => {
   const {
     aria = {},
     className,
+    children,
     data = {},
     htmlOptions = {},
     id,
@@ -46,12 +48,16 @@ const Pill = (props: PillProps) => {
         className={classes}
         id={id}
     >
-      <Title
-          className="pb_pill_text"
-          size={4}
-          tag="div"
-          text={text}
-      />
+      {
+        text ?
+          <Title
+              className="pb_pill_text"
+              size={4}
+              tag="div"
+              text={text}
+          />
+        : children
+      }
     </div>
   )
 }
