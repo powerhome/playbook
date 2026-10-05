@@ -53,3 +53,5 @@ Explicit clear and native form reset clear query text, selection, remote results
 After clear, clicking an async autocomplete does not open an empty menu. The menu opens when a search starts or results/status content is available. An async search-bar menu can still open so its input remains accessible.
 
 The clear control is also available for an unselected async query unless `clearable: false`. No async input notifications, remote-result cleanup, or changed reset timing are applied to synchronous Dropdowns.
+
+Use `no_options_text` to replace the empty results message. It applies to synchronous Dropdowns as well.

@@ -48,6 +48,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   const {
     asyncEnabled,
     optionKey,
+    noOptionsText,
     asyncStatus,
     dropdownContainerRef,
     error,
@@ -118,7 +119,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
           >
             <Body color="light" 
                 dark={dark}
-                text="no option"
+                text={noOptionsText || "no option"}
             />
           </ListItem>
         ): (

@@ -127,6 +127,7 @@ type DropdownProps = {
     label?: string;
     multiSelect?: boolean;
     name?: string;
+    noOptionsText?: string;
     onChange?: (event: { target: { name?: string; value: any } }) => void;
     onSelect?: (arg: GenericObject) => null;
     options?: GenericObject;
@@ -181,6 +182,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         multiSelect = false,
         formPillProps,
         name,
+        noOptionsText,
         onChange,
         onSelect,
         options,
@@ -701,7 +703,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : asyncStatus === "empty" ? "No results found" : "") : "",
+                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : asyncStatus === "empty" ? noOptionsText || "No results found" : "") : "",
                     renderOption,
                     optionKey,
                     isControlled,
@@ -736,6 +738,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     portalHost,
                     selectId,
                     multiSelect,
+                    noOptionsText,
                     onSelect,
                     optionsWithBlankSelection,
                     selected,

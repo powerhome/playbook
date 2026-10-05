@@ -175,6 +175,13 @@
         "rails"
       ]
     },
+    "noOptionsText": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
     "onChange": {
       "type": "function",
       "platforms": [

@@ -56,6 +56,7 @@ module Playbook
       prop :end_date_name, type: Playbook::Props::String,
                            default: "end_date_name"
       prop :placeholder, type: Playbook::Props::String
+      prop :no_options_text, type: Playbook::Props::String
       prop :constrain_height, type: Playbook::Props::Boolean,
                               default: false
       prop :required_indicator, type: Playbook::Props::Boolean,
@@ -81,6 +82,7 @@ module Playbook
           pb_dropdown_multi_select: multi_select,
           pb_dropdown_disabled: disabled,
           pb_dropdown_variant: variant,
+          pb_dropdown_no_options_text: no_options_text.presence,
           pb_dropdown_clearable: clearable,
           pb_dropdown_close_on_click: close_on_click,
           form_pill_props: form_pill_props.to_json,

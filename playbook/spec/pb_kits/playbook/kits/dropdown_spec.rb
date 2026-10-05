@@ -8,6 +8,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_array_prop(:options).with_default([]) }
   it { is_expected.to define_string_prop(:label) }
   it { is_expected.to define_string_prop(:name) }
+  it { is_expected.to define_string_prop(:no_options_text) }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
   it { is_expected.to define_string_prop(:blank_selection).with_default("") }
   it { is_expected.to define_string_prop(:placeholder) }
@@ -542,6 +543,24 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     it "omits options_event_type from data when blank" do
       dropdown = subject.new(options_event_type: "")
       expect(dropdown.data).not_to have_key(:options_event_type)
+    end
+  end
+
+  describe "no_options_text" do
+    it "includes no_options_text in data when present" do
+      dropdown = subject.new(no_options_text: "No agents available")
+      expect(dropdown.data).to include(pb_dropdown_no_options_text: "No agents available")
+    end
+
+    it "omits no_options_text from data when not passed" do
+      dropdown = subject.new({})
+      expect(dropdown.data).not_to have_key(:pb_dropdown_no_options_text)
+    end
+
+    it "is accepted by dropdown_container" do
+      require_relative "../../../../app/pb_kits/playbook/pb_dropdown/dropdown_container"
+      container = Playbook::PbDropdown::DropdownContainer.new(no_options_text: "No agents available")
+      expect(container.no_options_text).to eq("No agents available")
     end
   end
 

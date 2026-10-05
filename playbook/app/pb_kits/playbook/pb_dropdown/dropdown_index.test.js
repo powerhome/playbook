@@ -500,6 +500,16 @@ describe("PbDropdown async search", () => {
     expect(root).toHaveAttribute("aria-busy", "false");
   });
 
+  test("no_options_text replaces the empty results message", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownNoOptionsText = "No agents available";
+    instance.connect();
+    type("abc");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([]);
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No agents available");
+  });
+
   test("unfinished requests time out", () => {
     type("abc");
     jest.advanceTimersByTime(15250);
@@ -945,7 +955,7 @@ describe("PbDropdown async search", () => {
     jest.advanceTimersByTime(0);
     input.click();
     expect(instance.target).toHaveClass("open");
-    expect(instance.target).toHaveTextContent(status === "empty" ? "no option" : "Unable to load options");
+    expect(instance.target).toHaveTextContent(status === "empty" ? "No results found" : "Unable to load options");
   });
 
   test.each(["Escape", "Tab", "outside click"])("%s cancels debounce even before the menu opens", (action) => {

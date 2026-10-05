@@ -684,7 +684,7 @@ export default class PbDropdown extends PbEnhancedElement {
         parent.replaceChildren();
         options.forEach((result) => parent.appendChild(this.buildAsyncOptionElement(result)));
         if (failed) this.showAsyncStatus("Unable to load options. Try again.");
-        else if (!options.length) this.showNoOptionsMessage();
+        else if (!options.length) this.showNoOptionsMessage("No results found");
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       };
@@ -726,13 +726,13 @@ export default class PbDropdown extends PbEnhancedElement {
     }
   }
 
-  showNoOptionsMessage() {
+  showNoOptionsMessage(fallbackText = "no option") {
     if (this.target?.querySelector(".dropdown_no_options")) return;
 
     const noOptionElement = document.createElement("div");
     noOptionElement.className =
       "pb_body_kit_light dropdown_no_options pb_item_kit p_xs display_flex justify_content_center";
-    noOptionElement.textContent = "no option";
+    noOptionElement.textContent = this.element.dataset.pbDropdownNoOptionsText || fallbackText;
 
     this.target.appendChild(noOptionElement);
   }

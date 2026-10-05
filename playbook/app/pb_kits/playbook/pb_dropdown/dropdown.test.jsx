@@ -1933,3 +1933,27 @@ test('async results render through Dropdown.Container with a custom trigger disp
   expect(screen.getByText('Engineer')).toBeInTheDocument();
   jest.useRealTimers();
 });
+
+describe('Dropdown noOptionsText', () => {
+  test('replaces the empty message for filtered options', () => {
+    render(<Dropdown autocomplete
+        noOptionsText="No countries match"
+        options={options}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'zzz' } });
+    expect(screen.getByText('No countries match')).toBeInTheDocument();
+  });
+
+  test('replaces the empty message for async results', async () => {
+    jest.useFakeTimers();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve([])}
+        noOptionsText="No agents available"
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'zzz' } });
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(screen.getByRole('status')).toHaveTextContent('No agents available');
+    jest.useRealTimers();
+  });
+});
