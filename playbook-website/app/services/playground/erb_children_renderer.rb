@@ -2,15 +2,14 @@
 
 module Playground
   class ErbChildrenRenderer
-    PB_RAILS_BLOCK = /
+    # Opening tag only — body is taken with a do/end depth counter so nested
+    # block-form children are not truncated at the first <% end %>.
+    PB_RAILS_BLOCK_OPEN = /
       \A
       <%=\s*pb_rails\(\s*
       "([^"]+)"
       (?:\s*,\s*props:\s*(\{.*?\}))?
       \s*\)\s*do\s*%>
-      \s*
-      (.*?)
-      \s*<%\s*end\s*%>
     /mx
 
     PB_RAILS_TAG = /
@@ -21,6 +20,15 @@ module Playground
       \s*\)\s*%
       >
     /mx
+
+    PB_RAILS_BLOCK_OPEN_ANYWHERE = /
+      <%=\s*pb_rails\(\s*
+      "[^"]+"
+      (?:\s*,\s*props:\s*\{.*?\})?
+      \s*\)\s*do\s*%>
+    /mx
+
+    PB_RAILS_END = /<%\s*end\s*%>/
 
     def initialize(view_context:, depth: 0)
       @view_context = view_context
@@ -52,13 +60,9 @@ module Playground
       until remaining.blank?
         remaining = remaining.lstrip
 
-        if (match = remaining.match(PB_RAILS_BLOCK))
-          segments << {
-            kit: match[1],
-            props: parse_ruby_props_hash(match[2].to_s),
-            content: match[3],
-          }
-          remaining = remaining[match[0].length..]
+        if (block = match_balanced_block(remaining))
+          segments << block[:segment]
+          remaining = remaining[block[:consumed]..]
           next
         end
 
@@ -76,6 +80,45 @@ module Playground
       end
 
       segments
+    end
+
+    def match_balanced_block(source)
+      open = source.match(PB_RAILS_BLOCK_OPEN)
+      return nil unless open
+
+      cursor = open[0].length
+      depth = 1
+      last_end_length = nil
+
+      while depth.positive? && cursor < source.length
+        rest = source[cursor..]
+        nested_open = rest.match(PB_RAILS_BLOCK_OPEN_ANYWHERE)
+        block_end = rest.match(PB_RAILS_END)
+        return nil unless block_end
+
+        open_at = nested_open&.begin(0)
+        end_at = block_end.begin(0)
+
+        if open_at && open_at < end_at
+          cursor += open_at + nested_open[0].length
+          depth += 1
+        else
+          cursor += end_at + block_end[0].length
+          last_end_length = block_end[0].length
+          depth -= 1
+        end
+      end
+
+      return nil unless depth.zero? && last_end_length
+
+      {
+        segment: {
+          kit: open[1],
+          props: parse_ruby_props_hash(open[2].to_s),
+          content: source[open[0].length...(cursor - last_end_length)],
+        },
+        consumed: cursor,
+      }
     end
 
     def render_segment(segment)
