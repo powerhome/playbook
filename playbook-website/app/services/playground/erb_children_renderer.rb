@@ -76,7 +76,28 @@ module Playground
           next
         end
 
-        break
+        # Non-tag leftover: keep escaped text and resume at the next pb_rails
+        # so siblings after plain text still render (preview matches the ERB panel).
+        next_kit = remaining.index(/<%=\s*pb_rails\(/)
+        if next_kit.nil?
+          text = remaining.strip
+          segments << { text: text } if text.present?
+          break
+        end
+
+        if next_kit.positive?
+          text = remaining[0...next_kit].strip
+          segments << { text: text } if text.present?
+          remaining = remaining[next_kit..]
+          next
+        end
+
+        # Looks like pb_rails at index 0 but didn't match BLOCK/TAG — skip the
+        # ERB tag so we cannot loop forever on malformed markup.
+        erb_close = remaining.index("%>")
+        break unless erb_close
+
+        remaining = remaining[(erb_close + 2)..]
       end
 
       segments
@@ -122,6 +143,8 @@ module Playground
     end
 
     def render_segment(segment)
+      return TrustedHtml.plain_text(segment[:text]) if segment.key?(:text)
+
       kit = segment[:kit]
       props = segment[:props]
       content = segment[:content]

@@ -47,4 +47,30 @@ RSpec.describe Playground::ErbChildrenRenderer do
       expect(caption[:inner]).to include("Nested")
     end
   end
+
+  describe "sibling parsing" do
+    it "renders kits after plain text instead of stopping at the leftover" do
+      children = <<~ERB
+        <%= pb_rails("caption", props: { text: "A" }) %>
+        between
+        <%= pb_rails("caption", props: { text: "B" }) %>
+      ERB
+
+      html = described_class.new(view_context: view_context).render(children)
+
+      expect(rendered.map { |call| call[:kit] }).to eq(%w[caption caption])
+      expect(rendered.map { |call| call[:props][:text] }).to eq(%w[A B])
+      expect(html.to_s).to include("between")
+      expect(html.to_s).not_to include("<between>")
+    end
+
+    it "escapes leading text and still renders the following kit" do
+      children = 'NOTE <%= pb_rails("caption", props: { text: "Hi" }) %>'
+      html = described_class.new(view_context: view_context).render(children)
+
+      expect(html.to_s).to include("NOTE")
+      expect(html.to_s).to include("ok:caption")
+      expect(rendered.map { |call| call[:kit] }).to eq(%w[caption])
+    end
+  end
 end

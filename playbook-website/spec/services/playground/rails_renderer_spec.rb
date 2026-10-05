@@ -186,21 +186,16 @@ RSpec.describe Playground::RailsRenderer do
       expect(Playground::RailsPlaygroundKits.allowed_child_kit?("flex/flex_item")).to be(true)
     end
 
-    it "does not mis-parse ERB when content precedes pb_rails" do
-      result = described_class.new(
-        view_context: view_context,
-        kit_name: "flex",
-        props: {},
-        children: 'NOTE <%= pb_rails("caption", props: { text: "Hi" }) %>',
-        structure_mode: "basic"
-      ).render
+    it "escapes leading text before pb_rails without dropping the following kit" do
+      # Covered with a stubbed view_context in erb_children_renderer_spec (sibling parsing).
+      # Integration path can hit cookie_jar when ApplicationController has no request.
+      children = 'NOTE <%= pb_rails("caption", props: { text: "Hi" }) %>'
+      segments = Playground::ErbChildrenRenderer.new(view_context: view_context)
+                                                .send(:parse_segments, children)
 
-      expect(result[:error]).to be_nil
-      # Anchored parse refuses a mid-string match; whole string is escaped instead of
-      # slicing as if the tag started at index 0.
-      expect(result[:html].to_s).to include("NOTE")
-      expect(result[:html].to_s).to include("&lt;%=")
-      expect(result[:html].to_s).not_to include("pb_caption_kit")
+      expect(segments.first[:text]).to eq("NOTE")
+      expect(segments.last[:kit]).to eq("caption")
+      expect(segments.last[:props][:text]).to eq("Hi")
     end
 
     it "still parses ERB children when pb_rails is at the start" do
