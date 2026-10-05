@@ -46,6 +46,7 @@ examples:
   - dropdown_dynamic_options_with_multi_select: Dynamic Options with Multi Select
 
   react:
+  - dropdown_async_initial_options: Async Initial Results and Caching
   - dropdown_external_search: External Search and Form Reset
   - dropdown_controlled_selection: Controlled Selection and Option Identity
   - dropdown_async_loading: Async Search

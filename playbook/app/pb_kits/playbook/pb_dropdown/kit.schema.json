@@ -21,6 +21,24 @@
         "react"
       ]
     },
+    "defaultOptions": {
+      "type": "boolean | GenericObject[]",
+      "platforms": [
+        "react"
+      ]
+    },
+    "cacheOptions": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "cacheKey": {
+      "type": "string | number",
+      "platforms": [
+        "react"
+      ]
+    },
     "loading": {
       "type": "boolean",
       "platforms": [

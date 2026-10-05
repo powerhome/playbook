@@ -1675,3 +1675,125 @@ describe('Dropdown input lifecycle', () => {
     jest.useRealTimers();
   });
 });
+
+describe('Dropdown initial options and caching', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test('defaultOptions true preloads without opening the menu', () => {
+    const loadOptions = jest.fn();
+    const { container } = render(<Dropdown async
+        autocomplete
+        defaultOptions
+        loadOptions={loadOptions}
+                                 />);
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions.mock.calls[0][0]).toBe('');
+    act(() => loadOptions.mock.calls[0][1](options));
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('close');
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+
+  test('an initial array needs no request', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        defaultOptions={options}
+        loadOptions={loadOptions}
+           />);
+    act(() => jest.advanceTimersByTime(1000));
+    expect(loadOptions).not.toHaveBeenCalled();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+
+  test.each([false, true])('search reuse is gated by cacheOptions=%s', (cacheOptions) => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        cacheOptions={cacheOptions}
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'can' } });
+    act(() => jest.advanceTimersByTime(250));
+    act(() => loadOptions.mock.calls[0][1](options));
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.change(input, { target: { value: 'can' } });
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).toHaveBeenCalledTimes(cacheOptions ? 1 : 2);
+  });
+
+  test('changing cacheKey invalidates pending responses and cached results', () => {
+    const loadOptions = jest.fn();
+    const props = { async: true, autocomplete: true, cacheOptions: true, loadOptions };
+    const { rerender } = render(<Dropdown {...props}
+        cacheKey="first"
+                                />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'can' } });
+    act(() => jest.advanceTimersByTime(250));
+    rerender(<Dropdown {...props}
+        cacheKey="second"
+             />);
+    act(() => loadOptions.mock.calls[0][1](options));
+    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.change(input, { target: { value: 'can' } });
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('Dropdown cache isolation and opt-in', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test('initial loading and caching do nothing without async', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown autocomplete
+        cacheOptions
+        defaultOptions
+        loadOptions={loadOptions}
+        options={options}
+           />);
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+
+  test('errors are retried rather than cached', async () => {
+    const loadOptions = jest.fn().mockRejectedValue(new Error('Failed'));
+    render(<Dropdown async
+        autocomplete
+        cacheOptions
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'can' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.change(input, { target: { value: 'can' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
+
+  test('changing scope discards successfully cached and displayed results', () => {
+    const loadOptions = jest.fn();
+    const props = { async: true, autocomplete: true, cacheOptions: true, loadOptions };
+    const { rerender } = render(<Dropdown {...props}
+        cacheKey="first"
+                                />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'can' } });
+    act(() => jest.advanceTimersByTime(250));
+    act(() => loadOptions.mock.calls[0][1](options));
+    rerender(<Dropdown {...props}
+        cacheKey="second"
+             />);
+    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.change(input, { target: { value: 'can' } });
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
+});

@@ -98,6 +98,9 @@ type DropdownProps = {
     aria?: { [key: string]: string };
     async?: boolean;
     loadOptions?: LoadOptions;
+    defaultOptions?: boolean | GenericObject[];
+    cacheOptions?: boolean;
+    cacheKey?: string | number;
     loading?: boolean;
     onInputChange?: (input: string, detail: { reason: InputChangeReason }) => void;
     resetOnFormReset?: boolean;
@@ -154,6 +157,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         aria = {},
         async = false,
         loadOptions,
+        defaultOptions = false,
+        cacheOptions = false,
+        cacheKey,
         loading = false,
         onInputChange,
         resetOnFormReset = false,
@@ -212,7 +218,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     );
 
     const asyncEnabled = async && variant !== "quickpick";
-    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, searchTermMinimumLength, searchDebounceTimeout);
+    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, searchTermMinimumLength, searchDebounceTimeout, defaultOptions, cacheOptions, cacheKey);
 
     // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
@@ -223,8 +229,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(disabled ? true : isClosed);
 
+    const previouslyClosed = useRef(isDropDownClosed);
     useEffect(() => {
-      if (asyncEnabled && (isDropDownClosed || disabled)) cancelAsync();
+      if (asyncEnabled && (disabled || (!previouslyClosed.current && isDropDownClosed))) cancelAsync();
+      previouslyClosed.current = isDropDownClosed;
     }, [asyncEnabled, isDropDownClosed, disabled, cancelAsync]);
 
     // Use a suffix for the trigger ID to avoid conflict with the outer div's id
