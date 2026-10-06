@@ -53,7 +53,7 @@
     },
     {
       "name": "Appearance",
-      "props": ["striped", "verticalBorder", "contrastBorder", "singleLine", "disableHover", "headerStyle", "dark", "dataTable"]
+      "props": ["striped", "verticalBorder", "contrastBorder", "disableHover", "headerStyle", "dark", "dataTable"]
     },
     {
       "name": "Sticky Columns",
