@@ -2233,6 +2233,71 @@ describe('async Dropdown empty menu', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Type to search users');
   });
 
+  test('does not show an empty message when every result is already selected', async () => {
+    jest.useFakeTimers();
+    const selected = [{ label: 'Ann Lee', value: 1 }];
+    render(<Dropdown async
+        autocomplete
+        defaultValue={selected}
+        loadOptions={() => Promise.resolve([selected[0]])}
+        multiSelect
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'ann' } });
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+    jest.useRealTimers();
+  });
+
+  test('selecting the last remaining option does not show an empty message', () => {
+    const people = [
+      { label: 'Ann Lee', value: 1 },
+      { label: 'Bob Ray', value: 2 },
+    ];
+    const { container } = render(<Dropdown async
+        autocomplete
+        closeOnClick="outside"
+        multiSelect
+        options={people}
+                                  />);
+    fireEvent.click(screen.getByRole('textbox'));
+    fireEvent.click(screen.getByText('Ann Lee'));
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
+    fireEvent.click(screen.getByText('Bob Ray'));
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+  });
+
+  test('an empty async search shows the empty message instead of blankSelection', async () => {
+    jest.useFakeTimers();
+    render(<Dropdown async
+        autocomplete
+        blankSelection="Select one..."
+        loadOptions={() => Promise.resolve([])}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'zzz' } });
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(screen.getByRole('status')).toHaveTextContent('No results found');
+    expect(screen.queryByText('Select one...')).not.toBeInTheDocument();
+    jest.useRealTimers();
+  });
+
+  test('blankSelection stays available when an async search has results', async () => {
+    jest.useFakeTimers();
+    render(<Dropdown async
+        autocomplete
+        blankSelection="Select one..."
+        loadOptions={() => Promise.resolve([{ label: 'Ann Lee', value: 1 }])}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'ann' } });
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(screen.getByText('Select one...')).toBeInTheDocument();
+    expect(screen.getByText('Ann Lee')).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    jest.useRealTimers();
+  });
+
   test('shows preloaded defaultOptions instead of the message', async () => {
     jest.useFakeTimers();
     render(<Dropdown async

@@ -49,7 +49,7 @@
       "lib/playbook/forms/builder/date_picker_field.rb": "68b9594dcb727fd072c460671a11ab9712160c640d864ecd7d677342c2d04030"
     },
     "dropdown": {
-      "app/pb_kits/playbook/pb_dropdown/_dropdown.tsx": "77e73380b03dad6f00602d161f9c30d46a7a65910dc6310dabb7a82244fc324b",
+      "app/pb_kits/playbook/pb_dropdown/_dropdown.tsx": "87fb01a7c88e1835c3a19acbec3ccfd53b39171328ab6b47adeb4ee2eeaf7bb2",
       "app/pb_kits/playbook/pb_dropdown/context/index.tsx": "13cee0ffc277d256602283792e26727b83e56184ac72eb05684105b4ccfed639",
       "app/pb_kits/playbook/pb_dropdown/dropdown.html.erb": "6de23399b6f3dbce391d2a466ca3680f0a2c67f43ef679e52372fd70edc83192",
       "app/pb_kits/playbook/pb_dropdown/dropdown.rb": "0d90a9873950af5b6232e5e74094d265edda5c6579c68b1253eb4162c8712401",

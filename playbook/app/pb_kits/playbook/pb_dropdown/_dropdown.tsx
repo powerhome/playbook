@@ -400,7 +400,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setIsDropDownClosed(disabled ? true : isClosed)
     }, [disabled, isClosed])
 
-    const blankSelectionOption: GenericObject = blankSelection ? [{ label: blankSelection, value: "" }] : [];
+    // blankSelection is a clear action, not a search result, so it cannot stand in for an empty async list.
+    const blankSelectionOption: GenericObject = blankSelection && (!asyncEnabled || dropdownOptions.length > 0)
+        ? [{ label: blankSelection, value: "" }]
+        : [];
     const optionsWithBlankSelection = blankSelectionOption.concat(dropdownOptions);
 
     const availableOptions = useMemo(()=> {
@@ -424,6 +427,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             String(opt.label).toLowerCase().includes(filterText.toLowerCase())
           );
         }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled]);
+
+    // Empty copy follows the settled search. Hiding already-selected rows must not turn a
+    // successful result list into "No results found", including the last pick while the menu stays open.
+    const asyncEmptyCopy = asyncEnabled && (asyncStatus === "empty" || (asyncStatus === "idle" && dropdownOptions.length === 0))
+        ? noOptionsText || "No results found"
+        : "";
 
     // A keystroke clears the highlight. Focus the first result once the next list arrives,
     // including options the application loads itself.
@@ -717,7 +726,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : filteredOptions.length === 0 ? noOptionsText || "No results found" : "") : "",
+                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : asyncEmptyCopy) : "",
                     renderOption,
                     optionKey,
                     isControlled,
