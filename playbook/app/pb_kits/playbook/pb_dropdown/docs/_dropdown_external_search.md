@@ -2,7 +2,7 @@
 
 Async mode or opting into `onInputChange` keeps the selected option while typing a nonempty query. Emptying a single-select autocomplete proposes an empty selection through the existing selection callbacks. Emptying a search-bar query or multi-select query preserves the selection. Controlled `value` remains owned by the parent.
 
-For externally managed fetching, pass `async`, `options`, and optionally `loading`, without `loadOptions`. Dropdown displays these results without local label filtering. The application owns debounce, minimum query length, errors, cancellation, and stale-response protection. This example uses an abortable DummyJSON request. When `loadOptions` is supplied, Dropdown owns the result list instead.
+For externally managed fetching, pass `async`, `options`, and optionally `loading`, without `loadOptions`. Dropdown displays these results without local label filtering. The application owns debounce, minimum query length, errors, cancellation, and stale-response protection. When the menu is open, a new result list focuses the first match, so Enter selects it; ArrowDown and ArrowUp still move through the list. This example uses an abortable DummyJSON request. When `loadOptions` is supplied, Dropdown owns the result list instead and focuses the first match the same way.
 
 Form libraries reset selection by updating controlled `value`. The existing `ref.clearSelected()` clears an uncontrolled selection and emits the `clear` input reason. React Dropdown does not add native form-reset handling.
 

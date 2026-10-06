@@ -46,12 +46,11 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
   }, []);
 
   const cancel = useCallback(() => {
-    if (pendingSearch.current || cleared.current) {
-      interrupted.current = true;
-      if (pendingSearch.current) interruptedSearch.current = pendingSearch.current;
-    }
+    // A settled error or empty result stays as it is. Only an unfinished search is rolled back.
+    if (!pendingSearch.current && !cleared.current) return;
+    interrupted.current = true;
+    if (pendingSearch.current) interruptedSearch.current = pendingSearch.current;
     invalidate();
-    // The in-flight search already wiped the list. Put the last settled options back.
     if (cleared.current) {
       cleared.current = false;
       setOptions(settledOptions.current);
@@ -66,6 +65,7 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
     interrupted.current = false;
     cleared.current = false;
     remember(initialOptions.current);
+    setStatus("idle");
   }, [cancel, remember]);
 
   useEffect(() => invalidate, [enabled, invalidate]);

@@ -144,6 +144,11 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   asyncRequestId = 0;
+  asyncResultsCleared = false;
+  asyncSearchInterrupted = false;
+  asyncSettledOptions = [];
+  asyncSettledEmpty = null;
+  asyncSettledStatus = null;
   selectedOptionJson = null;
   selectedOptions = new Set();
   clearBtn = null;
@@ -622,7 +627,36 @@ export default class PbDropdown extends PbEnhancedElement {
     this.target?.querySelector("[data-dropdown-async-status]")?.remove();
   }
 
+  rememberSettledAsyncResults() {
+    const parent = this.getOptionsParent();
+    this.asyncSettledOptions = parent ? Array.from(parent.children).map((node) => node.cloneNode(true)) : [];
+    const empty = this.target?.querySelector(".dropdown_no_options");
+    const status = this.target?.querySelector("[data-dropdown-async-status]");
+    this.asyncSettledEmpty = empty ? empty.cloneNode(true) : null;
+    this.asyncSettledStatus = status ? status.cloneNode(true) : null;
+  }
+
+  restoreSettledAsyncResults() {
+    const parent = this.getOptionsParent();
+    if (!parent) return;
+    parent.replaceChildren(...this.asyncSettledOptions.map((node) => node.cloneNode(true)));
+    this.removeNoOptionsMessage();
+    this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+    if (this.asyncSettledEmpty && this.target) this.target.appendChild(this.asyncSettledEmpty.cloneNode(true));
+    if (this.asyncSettledStatus && this.target) this.target.appendChild(this.asyncSettledStatus.cloneNode(true));
+    this.asyncResultsCleared = false;
+  }
+
+  forgetSettledAsyncResults() {
+    this.asyncResultsCleared = false;
+    this.asyncSearchInterrupted = false;
+    this.asyncSettledOptions = [];
+    this.asyncSettledEmpty = null;
+    this.asyncSettledStatus = null;
+  }
+
   clearAsyncResults() {
+    this.forgetSettledAsyncResults();
     this.cancelAsyncSearch();
     this.getOptionsParent()?.replaceChildren();
     this.removeNoOptionsMessage();
@@ -648,15 +682,18 @@ export default class PbDropdown extends PbEnhancedElement {
 
   searchAsync(term) {
     this.cancelAsyncSearch();
-    this.getOptionsParent()?.replaceChildren();
-    this.removeNoOptionsMessage();
-    this.resetFocus();
+    this.asyncSearchInterrupted = false;
 
     const minimumLength = Number(this.element.dataset.pbDropdownSearchTermMinimumLength ?? 3);
     if (term.length < minimumLength) {
       if (!this.searchBar) {
         this.clearAsyncResults();
       } else {
+        this.forgetSettledAsyncResults();
+        this.getOptionsParent()?.replaceChildren();
+        this.removeNoOptionsMessage();
+        this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+        this.resetFocus();
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       }
@@ -667,6 +704,13 @@ export default class PbDropdown extends PbEnhancedElement {
     const delay = Number(this.element.dataset.pbDropdownSearchDebounceTimeout ?? 250);
     this.asyncSearchTimer = setTimeout(() => {
       this.asyncSearchTimer = null;
+      // Snapshot the list that stayed visible during debounce so a cancelled request can restore it.
+      if (!this.asyncResultsCleared) this.rememberSettledAsyncResults();
+      this.asyncResultsCleared = true;
+      this.getOptionsParent()?.replaceChildren();
+      this.removeNoOptionsMessage();
+      this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+      this.resetFocus();
       this.element.setAttribute("aria-busy", "true");
       this.showAsyncStatus("Loading…");
       this.showElement(this.target);
@@ -685,6 +729,8 @@ export default class PbDropdown extends PbEnhancedElement {
         options.forEach((result) => parent.appendChild(this.buildAsyncOptionElement(result)));
         if (failed) this.showAsyncStatus("Unable to load options");
         else if (!options.length) this.showNoOptionsMessage("No results found");
+        this.asyncResultsCleared = false;
+        this.rememberSettledAsyncResults();
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       };
@@ -928,6 +974,12 @@ export default class PbDropdown extends PbEnhancedElement {
       this.clearSelection("clear", { preserveOptions: true });
     } else {
       this.reconcileSelectionWithOptions();
+    }
+
+    if (this.isAsync) {
+      this.asyncSearchInterrupted = false;
+      this.asyncResultsCleared = false;
+      this.rememberSettledAsyncResults();
     }
 
     if (this.target?.classList.contains("open")) {
@@ -1333,7 +1385,17 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   showElement(elem) {
-    if (this.isDisabled || !this.canOpenMenu) return;
+    if (this.isDisabled) return;
+    let retryTerm = null;
+    if (this.isAsync && this.asyncSearchInterrupted) {
+      this.asyncSearchInterrupted = false;
+      retryTerm = this.searchInput?.value || this.searchBar?.value || "";
+    }
+    if (!this.canOpenMenu && retryTerm == null) return;
+    if (!this.canOpenMenu) {
+      this.searchAsync(retryTerm);
+      return;
+    }
 
     // When autocomplete is showing the selected label (not an active search), show all options
     this.resetOptionFilterForSelectedLabel();
@@ -1373,12 +1435,19 @@ export default class PbDropdown extends PbEnhancedElement {
     } else {
       this.adjustDropdownPosition(elem);
     }
+    if (retryTerm != null) this.searchAsync(retryTerm);
   }
 
   hideElement(elem) {
     if (this.isAsync) {
-      if (this.asyncSearchTimer != null || this.element.getAttribute("aria-busy") === "true") {
+      const pending = this.asyncSearchTimer != null || this.element.getAttribute("aria-busy") === "true";
+      if (pending) {
+        const restore = this.asyncResultsCleared;
         this.cancelAsyncSearch();
+        if (restore) this.restoreSettledAsyncResults();
+        this.asyncResultsCleared = false;
+        const query = this.searchInput?.value || this.searchBar?.value || "";
+        this.asyncSearchInterrupted = query.length > 0;
       }
       this.updateArrowDisplay(false);
     }

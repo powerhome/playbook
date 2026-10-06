@@ -974,6 +974,69 @@ describe("PbDropdown async search", () => {
     expect(instance.target).toHaveClass("open");
   });
 
+  test.each(["Escape", "Tab", "outside click"])("%s during debounce keeps loaded results and reopening retries the query", (action) => {
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "42", label: "Ada" }]);
+    type("adal");
+    expect(instance.queryAllOptions()).toHaveLength(1);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("Ada");
+    if (action === "outside click") document.body.click();
+    else input.dispatchEvent(new KeyboardEvent("keydown", { key: action, bubbles: true }));
+    jest.advanceTimersByTime(0);
+    expect(search).toHaveBeenCalledTimes(1);
+    expect(instance.target).toHaveClass("close");
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("Ada");
+
+    input.click();
+    expect(instance.target).toHaveClass("open");
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("Ada");
+    jest.advanceTimersByTime(250);
+    expect(search).toHaveBeenCalledTimes(2);
+    expect(search.mock.calls[1][0].detail.searchingFor).toBe("adal");
+    expect(instance.target).toHaveTextContent("Loading");
+  });
+
+  test.each(["Escape", "Tab", "outside click"])("%s during an in-flight search restores loaded results and reopening retries", (action) => {
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "42", label: "Ada" }]);
+    type("adal");
+    jest.advanceTimersByTime(250);
+    const pending = search.mock.calls[1][0].detail;
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    if (action === "outside click") document.body.click();
+    else input.dispatchEvent(new KeyboardEvent("keydown", { key: action, bubbles: true }));
+    pending.setResults([{ id: "late", label: "Late" }]);
+    jest.advanceTimersByTime(0);
+    expect(instance.target).toHaveClass("close");
+    expect(instance.queryAllOptions()).toHaveLength(1);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("Ada");
+    expect(instance.target).not.toHaveTextContent("Late");
+
+    input.click();
+    jest.advanceTimersByTime(250);
+    expect(search).toHaveBeenCalledTimes(3);
+    expect(search.mock.calls[2][0].detail.searchingFor).toBe("adal");
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target).toHaveTextContent("Loading");
+  });
+
+  test("reopening after a dismissed debounce retries a nonempty autocomplete query", () => {
+    type("ada");
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    jest.advanceTimersByTime(250);
+    expect(search).not.toHaveBeenCalled();
+    expect(instance.target).not.toHaveClass("open");
+
+    input.click();
+    jest.advanceTimersByTime(250);
+    expect(search).toHaveBeenCalledTimes(1);
+    expect(search.mock.calls[0][0].detail.searchingFor).toBe("ada");
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target).toHaveTextContent("Loading");
+  });
+
   test.each(["Escape", "Tab", "outside click"])("%s invalidates in-flight callbacks and their timeout", (action) => {
     type("ada");
     jest.advanceTimersByTime(250);

@@ -1365,6 +1365,28 @@ describe('async Dropdown cancellation', () => {
     expect(screen.queryByText('Late result')).not.toBeInTheDocument();
   });
 
+  test.each(['error', 'empty'])('closing a settled %s search keeps that outcome', (outcome) => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        defaultOptions={options}
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Can' } });
+    act(() => jest.advanceTimersByTime(0));
+    act(() => loadOptions.mock.calls[0][1](outcome === 'empty' ? [] : null));
+    expect(screen.getByRole('status')).toHaveTextContent(outcome === 'empty' ? 'No results found' : 'Unable to load options');
+    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
+
+    fireEvent.keyDown(input, { key: 'Escape' });
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole('status')).toHaveTextContent(outcome === 'empty' ? 'No results found' : 'Unable to load options');
+    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
+  });
+
   test('clearing a cancelled search prevents retry on reopen', () => {
     const loadOptions = jest.fn();
     const ref = React.createRef();
@@ -2039,6 +2061,46 @@ describe('async Dropdown Typeahead parity', () => {
     await flush();
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onSelect).toHaveBeenCalledWith(people[0]);
+  });
+
+  test('focuses externally loaded options when they arrive after the last keystroke', () => {
+    const onSelect = jest.fn();
+    const { rerender } = render(<Dropdown async
+        autocomplete
+        onSelect={onSelect}
+        options={[]}
+                                  />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'an' } });
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).not.toHaveBeenCalled();
+
+    rerender(<Dropdown async
+        autocomplete
+        onSelect={onSelect}
+        options={people}
+             />);
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).toHaveBeenCalledWith(people[0]);
+  });
+
+  test('ArrowDown still moves past the first externally loaded result', () => {
+    const onSelect = jest.fn();
+    const { rerender } = render(<Dropdown async
+        autocomplete
+        onSelect={onSelect}
+        options={[]}
+                                  />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'an' } });
+    rerender(<Dropdown async
+        autocomplete
+        onSelect={onSelect}
+        options={people}
+             />);
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).toHaveBeenCalledWith(people[1]);
   });
 
   test('keys results without ids by value', async () => {

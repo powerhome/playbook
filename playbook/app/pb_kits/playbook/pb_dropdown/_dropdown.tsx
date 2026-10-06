@@ -425,12 +425,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           );
         }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled]);
 
-    // Focus the first loaded result so typing then Enter selects it, as in Typeahead
+    // A keystroke clears the highlight. Focus the first result once the next list arrives,
+    // including options the application loads itself.
+    const asyncResultOptions = loadOptions ? loadedOptions : options;
     useEffect(() => {
-        if (asyncEnabled && loadOptions && !isDropDownClosed) {
+        if (asyncEnabled && !isDropDownClosed) {
             setFocusedOptionIndex(filteredOptions.length ? 0 : -1);
         }
-    }, [loadedOptions]);
+    }, [asyncResultOptions]);
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
