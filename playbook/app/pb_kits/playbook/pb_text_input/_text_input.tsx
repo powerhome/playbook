@@ -97,7 +97,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     <Icon
         className="add-on-icon"
         dark={dark}
-        fixedWidth={false}
+        fixedWidth
         icon={icon}
     />
   )
