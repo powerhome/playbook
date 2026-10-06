@@ -63,7 +63,7 @@ export const KIT_USAGE_FAQS = {
   }, {
     id: 'dropdown.async-selection-data', platforms: ['rails'],
     questions: ['Does async Dropdown preserve custom selection fields?', 'Can an async Dropdown have a default before options load?'],
-    answer: 'pb:dropdown:selected emits the complete serializable option object (an array for multi_select, null or [] when cleared), preserving custom fields and numeric IDs. Form input values are strings. Selected data is retained when remote results change; matching multi-select IDs remain hidden even if new result metadata differs. Pass an explicit default_value option object or array with id and label to initialize async selection with options: []. The builder cannot infer that payload from an unmatched model ID.',
+    answer: 'pb:dropdown:selected emits the complete serializable option object (an array for multi_select, null or [] when cleared), preserving custom fields and numeric IDs. Form input values are strings. Selected data is retained when remote results change; matching multi-select options remain hidden even if new result metadata differs. Options match on id, then value. Options with neither match the full payload, so two choices that only have a label stay distinct. Pass an explicit default_value option object or array with id and label to initialize async selection with options: []. The builder cannot infer that payload from an unmatched model ID.',
     props: ['async', 'defaultValue', 'multiSelect'],
   }, {
     id: 'dropdown.async-input-reset', platforms: ['rails'],

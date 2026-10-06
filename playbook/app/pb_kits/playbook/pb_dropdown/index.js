@@ -801,7 +801,7 @@ export default class PbDropdown extends PbEnhancedElement {
       const value = option.dataset.dropdownOptionLabel;
       if (this.isMultiSelect) {
         const selected = Array.from(this.selectedOptions).find((raw) =>
-          String(JSON.parse(raw).id) === String(JSON.parse(value).id),
+          this.sameOption(raw, value),
         );
         if (selected) {
           this.selectedOptions.delete(selected);
@@ -897,6 +897,19 @@ export default class PbDropdown extends PbEnhancedElement {
     return normalized;
   }
 
+  // Synchronous options keep their rendered hash. Async results copy value onto id.
+  sameOption(left, right) {
+    const leftPayload = typeof left === "string" ? left : JSON.stringify(left);
+    const rightPayload = typeof right === "string" ? right : JSON.stringify(right);
+    const leftOption = typeof left === "string" ? JSON.parse(left) : left;
+    const rightOption = typeof right === "string" ? JSON.parse(right) : right;
+    const leftKey = leftOption?.id ?? leftOption?.value;
+    const rightKey = rightOption?.id ?? rightOption?.value;
+    if (leftKey == null && rightKey == null) return leftPayload === rightPayload;
+    if (leftKey == null || rightKey == null) return false;
+    return String(leftKey) === String(rightKey);
+  }
+
   getOptionsParent() {
     const container = this.target;
     if (!container) return null;
@@ -907,8 +920,7 @@ export default class PbDropdown extends PbEnhancedElement {
   buildAsyncOptionElement(result) {
     const richContent = result.option && (result.content instanceof Element || result.content instanceof DocumentFragment);
     const option = this.buildOptionElement(richContent ? result.option : result, richContent ? result.content : null);
-    const id = JSON.parse(option.dataset.dropdownOptionLabel).id;
-    if (this.isMultiSelect && Array.from(this.selectedOptions).some((raw) => String(JSON.parse(raw).id) === String(id))) {
+    if (this.isMultiSelect && Array.from(this.selectedOptions).some((raw) => this.sameOption(raw, option.dataset.dropdownOptionLabel))) {
       option.style.display = "none";
     }
     return option;
@@ -1361,10 +1373,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.isMultiSelect) {
       if (!this.isAsync) this.emitSelectionChange();
       Array.from(this.selectedOptions).map((option) => {
-        if (
-          JSON.parse(option).id ===
-          JSON.parse(selectedOption.dataset.dropdownOptionLabel).id
-        ) {
+        if (this.sameOption(option, selectedOption.dataset.dropdownOptionLabel)) {
           selectedOption.style.display = "none";
           this.adjustDropdownHeight();
         }
@@ -1768,11 +1777,10 @@ export default class PbDropdown extends PbEnhancedElement {
 
       closeIcon.addEventListener("click", (e) => {
         e.stopPropagation();
-        const id = pill.dataset.pillId;
         this.selectedOptions.delete(option);
 
         const optEl = Array.from(this.queryAllOptions()).find((opt) =>
-          String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === id,
+          this.sameOption(opt.dataset.dropdownOptionLabel, option),
         );
         if (optEl) {
           optEl.style.display = "";
@@ -1943,7 +1951,7 @@ export default class PbDropdown extends PbEnhancedElement {
         if (
           this.selectedOptions.size > 0 &&
           Array.from(this.selectedOptions).some((raw) =>
-            String(JSON.parse(raw).id) === String(JSON.parse(optValue).id),
+            this.sameOption(raw, optValue),
           )
         ) {
           opt.style.display = "none";

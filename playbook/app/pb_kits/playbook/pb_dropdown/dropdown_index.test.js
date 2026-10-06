@@ -1217,3 +1217,111 @@ describe("PbDropdown synchronous compatibility", () => {
     expect(changed).not.toHaveBeenCalled();
   });
 });
+
+describe("PbDropdown multi-select identity", () => {
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  const mount = (options, { asyncSearch = false } = {}) => {
+    const root = document.createElement("div");
+    root.setAttribute("data-pb-dropdown", "true");
+    root.id = "multi-identity";
+    root.dataset.pbDropdownDisabled = "false";
+    root.dataset.pbDropdownMultiSelect = "true";
+    root.dataset.pbDropdownClearable = "true";
+    if (asyncSearch) root.dataset.pbDropdownAsync = "true";
+    root.innerHTML = `
+      <div class="dropdown_wrapper">
+        <input data-dropdown-selected-option name="country[]" style="display: none" />
+        <div class="pb_dropdown_trigger">
+          <input data-dropdown-autocomplete type="text" />
+          <div data-dropdown-pills-wrapper></div>
+        </div>
+        <div class="pb_dropdown_container close" data-dropdown-container="true">
+          <div class="pb_list_kit"></div>
+        </div>
+      </div>
+    `;
+    const list = root.querySelector(".pb_list_kit");
+    options.forEach((option) => {
+      const el = document.createElement("div");
+      el.className = "pb_dropdown_option_list";
+      el.dataset.dropdownOptionLabel = JSON.stringify(option);
+      el.innerHTML = `<div class="pb_body_kit_light">${option.label}</div>`;
+      list.appendChild(el);
+    });
+    document.body.appendChild(root);
+    const instance = new PbDropdown(root);
+    instance.connect();
+    return { root, instance };
+  };
+
+  test("value-only options stay distinct when clicked, filtered, and removed", () => {
+    const { root, instance } = mount([
+      { label: "Canada", value: "ca" },
+      { label: "Mexico", value: "mx" },
+    ]);
+    const rows = () => instance.queryAllOptions();
+    rows()[0].click();
+    expect(rows()[0].style.display).toBe("none");
+    expect(rows()[1].style.display).toBe("");
+    rows()[1].click();
+    expect(Array.from(instance.selectedOptions).map(JSON.parse)).toEqual([
+      { label: "Canada", value: "ca" },
+      { label: "Mexico", value: "mx" },
+    ]);
+    expect(rows()[0].style.display).toBe("none");
+    expect(rows()[1].style.display).toBe("none");
+    expect(Array.from(root.querySelectorAll("input[data-generated]")).map((input) => input.value).sort()).toEqual(["ca", "mx"]);
+
+    root.querySelector(".pb_form_pill_close").click();
+    expect(Array.from(instance.selectedOptions).map(JSON.parse)).toEqual([{ label: "Mexico", value: "mx" }]);
+    expect(rows()[0].style.display).toBe("");
+    expect(rows()[1].style.display).toBe("none");
+    instance.disconnect();
+  });
+
+  test("options with neither id nor value match the full payload", () => {
+    const { instance } = mount([
+      { label: "Red" },
+      { label: "Blue" },
+    ]);
+    const rows = () => instance.queryAllOptions();
+    rows()[0].click();
+    rows()[1].click();
+    expect(instance.selectedOptions.size).toBe(2);
+    expect(rows()[0].style.display).toBe("none");
+    expect(rows()[1].style.display).toBe("none");
+    rows()[0].click();
+    expect(Array.from(instance.selectedOptions).map(JSON.parse)).toEqual([{ label: "Blue" }]);
+    expect(rows()[0].style.display).toBe("");
+    expect(rows()[1].style.display).toBe("none");
+    instance.disconnect();
+  });
+
+  test("async results hide only the selected value-only option", () => {
+    jest.useFakeTimers();
+    const { root, instance } = mount([
+      { label: "Canada", value: "ca" },
+      { label: "Mexico", value: "mx" },
+    ], { asyncSearch: true });
+    const search = jest.fn();
+    root.addEventListener("pb:dropdown:search", search);
+    instance.queryAllOptions()[0].click();
+    const input = root.querySelector("[data-dropdown-autocomplete]");
+    input.value = "mex";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { label: "Canada", value: "ca" },
+      { label: "Mexico", value: "mx" },
+    ]);
+    const rows = instance.queryAllOptions();
+    expect(rows[0].style.display).toBe("none");
+    expect(rows[1].style.display).toBe("");
+    expect(JSON.parse(rows[0].dataset.dropdownOptionLabel).id).toBe("ca");
+    instance.disconnect();
+    jest.useRealTimers();
+  });
+});
