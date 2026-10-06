@@ -49,7 +49,7 @@
       "lib/playbook/forms/builder/date_picker_field.rb": "68b9594dcb727fd072c460671a11ab9712160c640d864ecd7d677342c2d04030"
     },
     "dropdown": {
-      "app/pb_kits/playbook/pb_dropdown/_dropdown.tsx": "54a889caa780173cc4dd7792c2965898df5c9e529e3fe053ee7dcfa4d7bec370",
+      "app/pb_kits/playbook/pb_dropdown/_dropdown.tsx": "4f32c1741d3cd9497c02c9b9a301886088bc0b72f7114a67f7499ed0ae262f67",
       "app/pb_kits/playbook/pb_dropdown/context/index.tsx": "13cee0ffc277d256602283792e26727b83e56184ac72eb05684105b4ccfed639",
       "app/pb_kits/playbook/pb_dropdown/dropdown.html.erb": "6de23399b6f3dbce391d2a466ca3680f0a2c67f43ef679e52372fd70edc83192",
       "app/pb_kits/playbook/pb_dropdown/dropdown.rb": "0d90a9873950af5b6232e5e74094d265edda5c6579c68b1253eb4162c8712401",
@@ -59,9 +59,9 @@
       "app/pb_kits/playbook/pb_dropdown/dropdown_option.rb": "776c17cb69e9b0a2f98ee17a0b8fb2b6e87b9bdca747e300c36603d6bc3d3683",
       "app/pb_kits/playbook/pb_dropdown/dropdown_trigger.html.erb": "25e00168a5ee262b68c99a9cfebfa885f92fe61ffa524ed09b51604fc82cd18c",
       "app/pb_kits/playbook/pb_dropdown/dropdown_trigger.rb": "9b564a77f4ac55fc7bf27db02a740fe1eba571557f6a6a61fccf0473a0240ee5",
-      "app/pb_kits/playbook/pb_dropdown/hooks/useAsyncOptions.ts": "abf2477a9b6bc67f60fa20a290a5ef041691f9de020a9ebc23a0b23dc39c1a8b",
+      "app/pb_kits/playbook/pb_dropdown/hooks/useAsyncOptions.ts": "4fc11c6a592854ced52cebfd7e1dc596560b420d63aa265512978bd350df899e",
       "app/pb_kits/playbook/pb_dropdown/hooks/useDropdown.tsx": "07dbfecf6289e39d753f165d96ba106a39d9a6df2af4e145cba6072126fd2cc7",
-      "app/pb_kits/playbook/pb_dropdown/hooks/useHandleOnKeydown.tsx": "1fd550fb8b80ec615a8b178516c308b10b45b1152b8668f78d5974e0a5d76c11",
+      "app/pb_kits/playbook/pb_dropdown/hooks/useHandleOnKeydown.tsx": "f58f1c792ab7924dca522cd50c3a81219919e3840d904dd18d807864177c00d8",
       "app/pb_kits/playbook/pb_dropdown/index.js": "82aee86bf08990981a7e697468cc2c3bb14a66828e854cb74d4c8d1d7b34e794",
       "app/pb_kits/playbook/pb_dropdown/keyboard_accessibility.js": "e0b59887c0877b3053dd1a75520b87c743c63a0eefedd218aaf861e9ee8cf1a2",
       "app/pb_kits/playbook/pb_dropdown/quickpick/index.ts": "707c522b79bb287c8e10ac68cbd5fa5587b981c7321d22ab3fc6b128d2ca193e",

@@ -12,10 +12,10 @@ const {
   filterItem,
   filteredOptions,
   focusedOptionIndex,
-  handleBackspace,
+  handleChange,
   handleOptionClick,
+  multiSelect,
   selected,
-  setFilterItem,
   setFocusedOptionIndex,
   setIsDropDownClosed,
 }= useContext(DropdownContext)
@@ -43,24 +43,19 @@ const {
   };
 
   return (e: React.KeyboardEvent) => {
+    if (e.defaultPrevented) return;
 
-    if (!asyncEnabled && !isControlled && !onInputChange && e.key !== "Tab" && autocomplete && selected && selected.label) {
-      // Only when the input is showing the selected label (e.g. seeded defaultValue)
-      const replacingSelectedLabel = filterItem === selected.label;
-      handleBackspace();
+    const printableKey = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
+    const deletionKey = e.key === "Backspace" || e.key === "Delete";
+    const replacingSelectedLabel = filterItem === selected?.label;
+    const legacyAutocomplete = !asyncEnabled && !isControlled && !onInputChange;
 
-      if (replacingSelectedLabel && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-        e.preventDefault();
-        setFilterItem?.(e.key);
-        setIsDropDownClosed(false);
-        return;
-      }
-
-      if (replacingSelectedLabel && (e.key === "Backspace" || e.key === "Delete")) {
-        e.preventDefault();
-        setFilterItem?.("");
-        return;
-      }
+    if (autocomplete && !multiSelect && selected?.label &&
+        (replacingSelectedLabel || legacyAutocomplete) &&
+        (printableKey || deletionKey) && !e.nativeEvent.isComposing) {
+      e.preventDefault();
+      handleChange({ target: { value: printableKey ? e.key : "" } }, true);
+      return;
     }
 
     switch (e.key) {

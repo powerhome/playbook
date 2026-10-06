@@ -214,7 +214,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const asyncEnabled = async && variant !== "quickpick";
     const getOptionValue = asyncEnabled ? asyncOptionValue : undefined;
-    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, defaultOptions, cacheOptions);
+    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, resume: resumeAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, defaultOptions, cacheOptions);
 
     // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
@@ -226,10 +226,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(disabled ? true : isClosed);
 
     const previouslyClosed = useRef(isDropDownClosed);
-    useEffect(() => {
+    const queryRef = useRef("");
+    useLayoutEffect(() => {
       if (asyncEnabled && (disabled || (!previouslyClosed.current && isDropDownClosed))) cancelAsync();
+      if (asyncEnabled && !disabled && previouslyClosed.current && !isDropDownClosed) resumeAsync(queryRef.current);
       previouslyClosed.current = isDropDownClosed;
-    }, [asyncEnabled, isDropDownClosed, disabled, cancelAsync]);
+    }, [asyncEnabled, isDropDownClosed, disabled, cancelAsync, resumeAsync]);
 
     // Use a suffix for the trigger ID to avoid conflict with the outer div's id
     const sanitizeForId = (str: string) =>
@@ -284,6 +286,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       if (Array.isArray(selected)) return "";
       return (selected as GenericObject)?.label || "";
     });
+    queryRef.current = filterItem;
+
+    const preserveQueryOnControlledClear = useRef(false);
 
     // Form adapters may recreate equivalent option objects on every render.
     // Synchronize the query only when selection identity or display text changes.
@@ -298,7 +303,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     useEffect(() => {
       if (isControlled && autocomplete) {
-        setFilterItem(controlledLabel);
+        // Accepting a selection clear must not erase the character that started a new search.
+        if (controlledLabel || !preserveQueryOnControlledClear.current) setFilterItem(controlledLabel);
+        preserveQueryOnControlledClear.current = false;
       }
     }, [isControlled, controlledSelectionKey, controlledLabel, autocomplete, multiSelect]);
 
@@ -500,13 +507,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         onChange && onChange({ target: { name, value } });
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, replaceSelection = false) => {
         if (disabled) return;
         if (asyncEnabled) {
           searchAsync(e.target.value);
           setFocusedOptionIndex(-1);
         }
-        if ((asyncEnabled || onInputChange) && !e.target.value && autocomplete && !multiSelect && selectedArray.length) {
+        if ((replaceSelection || ((asyncEnabled || onInputChange) && !e.target.value)) && autocomplete && !multiSelect && selectedArray.length) {
+          preserveQueryOnControlledClear.current = isControlled && !!e.target.value;
           setSelected({});
           handleSelectionChange(null);
         }
@@ -518,6 +526,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
       const handleOptionClick = (clickedItem: GenericObject) => {
                 if (disabled) return;
+                preserveQueryOnControlledClear.current = false;
                 if (asyncEnabled) clearAsync();
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
@@ -542,14 +551,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                        return next;
                    });
                   }
-                   setFilterItem(isControlled && !multiSelect ? (selected as GenericObject)?.label || "" : "");
+                   setFilterItem("");
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
                } else {
                    setSelected(clickedItem);
                    // Async autocomplete shows the selection in the input, as controlled mode and Rails do
-                   setFilterItem(isControlled
+                   setFilterItem(isControlled && autocomplete
                      ? (selected as GenericObject)?.label || ""
                      : asyncEnabled && autocomplete ? clickedItem.label || "" : "");
                    if (shouldCloseOnClick) {
@@ -582,6 +591,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const handleBackspace = () => {
       if (disabled) return;
+      preserveQueryOnControlledClear.current = false;
       if (asyncEnabled) clearAsync();
       onInputChange?.("", { reason: "clear" });
       if ((onInputChange || asyncEnabled) && multiSelect) setFilterItem("");
@@ -592,7 +602,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setSelected({});
         handleSelectionChange(null);
         setFocusedOptionIndex(-1);
-        setFilterItem(isControlled && !multiSelect ? (selected as GenericObject)?.label || "" : "");
+        setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
         
         // Clear linked DatePickers as well if this is a quickpick variant with controls
         if (variant === "quickpick") {
@@ -622,6 +632,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // Create an internal ref object that holds the imperative handle methods
     const imperativeRef = useRef({
       clearSelected: () => {
+          preserveQueryOnControlledClear.current = false;
           if (asyncEnabled) clearAsync();
           onInputChange?.("", { reason: "clear" });
         if (multiSelect) {
@@ -631,7 +642,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setSelected({});
           handleSelectionChange(null);
         }
-        setFilterItem(isControlled && !multiSelect ? (selected as GenericObject)?.label || "" : "");
+        setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
         setIsDropDownClosed(true);
       },
     });
@@ -641,6 +652,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     useEffect(() => {
       imperativeRef.current = {
         clearSelected: () => {
+          preserveQueryOnControlledClear.current = false;
           if (asyncEnabled) clearAsync();
           onInputChange?.("", { reason: "clear" });
           if (multiSelect) {
@@ -650,7 +662,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             setSelected({});
             handleSelectionChange(null);
           }
-          setFilterItem(isControlled && !multiSelect ? (selected as GenericObject)?.label || "" : "");
+          setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
           setIsDropDownClosed(true);
         },
       };
