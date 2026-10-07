@@ -180,6 +180,12 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     };
 
+    this.activeStyleClass = this.activeStyleClasses();
+    if (this.activeStyleClass) {
+      this.queryAllOptions().forEach((opt) => {
+        opt.classList.add(...this.activeStyleClass.split(" "));
+      });
+    }
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isDisabled = this.element.dataset.pbDropdownDisabled === "true";
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
@@ -758,9 +764,10 @@ export default class PbDropdown extends PbEnhancedElement {
     }, delay);
   }
 
-  // Keep the selected label in the autocomplete input, but do not treat it as a search filter
+  // Synchronous autocomplete shows every option when the input is the selected label.
+  // Async autocomplete narrows to labels that contain that text.
   resetOptionFilterForSelectedLabel() {
-    if (this.isAsync || this.isMultiSelect || !this.searchInput) return;
+    if (this.isMultiSelect || !this.searchInput) return;
 
     const selectedOption = Array.from(this.queryAllOptions()).find((opt) =>
       opt.classList.contains("pb_dropdown_option_selected"),
@@ -773,10 +780,31 @@ export default class PbDropdown extends PbEnhancedElement {
       ).label;
       if (this.searchInput.value !== selectedLabel) return;
 
+      if (!this.isAsync) {
+        this.queryAllOptions().forEach((opt) => {
+          opt.style.display = "";
+        });
+        this.removeNoOptionsMessage();
+        return;
+      }
+
+      const query = String(selectedLabel).toLowerCase();
+      let hasMatch = false;
       this.queryAllOptions().forEach((opt) => {
-        opt.style.display = "";
+        let label = "";
+        try {
+          label = String(JSON.parse(opt.dataset.dropdownOptionLabel).label);
+        } catch {
+          opt.style.display = "none";
+          return;
+        }
+        const match = label.toLowerCase().includes(query);
+        opt.style.display = match ? "" : "none";
+        if (match) hasMatch = true;
       });
-      this.removeNoOptionsMessage();
+      if (hasMatch) this.removeNoOptionsMessage();
+      else this.showNoOptionsMessage("No results found");
+      this.adjustDropdownHeight();
     } catch {
       // ignore invalid option payloads
     }
@@ -907,6 +935,19 @@ export default class PbDropdown extends PbEnhancedElement {
     return normalized;
   }
 
+  activeStyleClasses() {
+    const raw = this.element.dataset.pbDropdownActiveStyle;
+    if (!raw) return "";
+    try {
+      const style = JSON.parse(raw);
+      const background = style.background_color || style.backgroundColor;
+      const font = style.font_color || style.fontColor;
+      return [background && `bg-${background}`, font && `font-${font}`].filter(Boolean).join(" ");
+    } catch {
+      return "";
+    }
+  }
+
   // Synchronous options keep their rendered hash. Async results copy value onto id.
   sameOption(left, right) {
     const leftPayload = typeof left === "string" ? left : JSON.stringify(left);
@@ -940,7 +981,7 @@ export default class PbDropdown extends PbEnhancedElement {
     const normalized = this.normalizeOption(option);
     const disabled = normalized.disabled === true;
     const optionEl = document.createElement("div");
-    optionEl.className = `pb_dropdown_option_list${disabled ? " disabled" : ""}`;
+    optionEl.className = `pb_dropdown_option_list${disabled ? " disabled" : ""}${this.activeStyleClass ? ` ${this.activeStyleClass}` : ""}`;
     if (normalized.id != null && normalized.id !== "") {
       optionEl.id = String(normalized.id);
     }
@@ -1398,6 +1439,7 @@ export default class PbDropdown extends PbEnhancedElement {
         option.classList.remove("pb_dropdown_option_selected");
       });
       selectedOption.classList.add("pb_dropdown_option_selected");
+      if (this.isAsync) this.resetOptionFilterForSelectedLabel();
     }
     this.updateClearButton();
     if (this.isAsync) this.emitSelectionChange();
@@ -1417,7 +1459,7 @@ export default class PbDropdown extends PbEnhancedElement {
       return;
     }
 
-    // When autocomplete is showing the selected label (not an active search), show all options
+    // When autocomplete is showing the selected label, sync which options stay visible.
     this.resetOptionFilterForSelectedLabel();
     
     this.ensureFloatingPortalConfig();
@@ -1428,6 +1470,8 @@ export default class PbDropdown extends PbEnhancedElement {
     elem.classList.remove("close");
     elem.classList.add("open");
 
+    // Drop a previous explicit height so hidden results do not leave empty space.
+    elem.style.height = "auto";
     const shouldConstrain = elem.classList.contains("constrain_height");
     if (shouldConstrain) {
       // Calculate height respecting max-height constraint (18em)

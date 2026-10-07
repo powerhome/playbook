@@ -936,6 +936,52 @@ describe("PbDropdown async search", () => {
     expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
   });
 
+  test("active_style classes are applied to async results", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownActiveStyle = JSON.stringify({
+      background_color: "bg_light",
+      font_color: "text_lt_default",
+    });
+    instance.connect();
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([{ id: "1", label: "Ada Lovelace" }]);
+    const option = instance.queryAllOptions()[0];
+    expect(option).toHaveClass("bg-bg_light", "font-text_lt_default");
+  });
+
+  test("reopening after a selection shows only the option matching the input", () => {
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { id: "1", label: "Ada Lovelace" },
+      { id: "2", label: "Adam Smith" },
+    ]);
+    instance.queryAllOptions()[0].click();
+    jest.advanceTimersByTime(0);
+    expect(input.value).toBe("Ada Lovelace");
+    expect(instance.target).toHaveClass("close");
+    input.click();
+    const visible = () => Array.from(instance.queryAllOptions()).filter((opt) => opt.style.display !== "none");
+    expect(instance.target).toHaveClass("open");
+    expect(visible()).toHaveLength(1);
+    expect(visible()[0]).toHaveTextContent("Ada Lovelace");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+    expect(search).toHaveBeenCalledTimes(1);
+
+    instance.target.style.height = "400px";
+    Object.defineProperty(instance.target, "scrollHeight", {
+      configurable: true,
+      get() {
+        return this.style.height === "auto" ? 48 : parseFloat(this.style.height) || 0;
+      },
+    });
+    instance.hideElement(instance.target);
+    jest.advanceTimersByTime(0);
+    input.click();
+    expect(instance.target.style.height).toBe("48px");
+  });
+
   test("clicking an empty async dropdown shows the empty message until a search starts", () => {
     input.click();
     expect(instance.target).toHaveClass("open");

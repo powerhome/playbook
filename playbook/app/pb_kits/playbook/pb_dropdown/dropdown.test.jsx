@@ -2156,6 +2156,26 @@ describe('async Dropdown Typeahead parity', () => {
     await flush();
     fireEvent.click(screen.getByText('Bob Ray'));
     expect(input).toHaveValue('Bob Ray');
+    fireEvent.click(input);
+    expect(optionTexts()).toEqual(['Bob Ray']);
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+  });
+
+  test('reopening after selection shows only labels matching the input', async () => {
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve([
+          { label: 'Ada Lovelace', value: 1 },
+          { label: 'Adam Smith', value: 2 },
+        ])}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'ad' } });
+    await flush();
+    fireEvent.click(screen.getByText('Ada Lovelace'));
+    fireEvent.click(input);
+    expect(optionTexts()).toEqual(['Ada Lovelace']);
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
   });
 });
 

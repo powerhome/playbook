@@ -36,6 +36,10 @@ const DropdownExternalSearch = () => {
   return (
     <form>
       <Dropdown
+          activeStyle={{
+            backgroundColor: "bg_light",
+            fontColor: "text_lt_default",
+          }}
           async
           autocomplete
           label="User"

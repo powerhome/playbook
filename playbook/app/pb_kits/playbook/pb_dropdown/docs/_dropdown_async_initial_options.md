@@ -1,4 +1,4 @@
-Initial results and caching apply only to `async` Dropdowns with `loadOptions`.
+Initial results and caching apply only to `async` Dropdowns with `loadOptions`. `activeStyle={{ backgroundColor: "bg_light", fontColor: "text_lt_default" }}` is recommended so the selected row uses a light background and default text color.
 
 - `defaultOptions={true}` calls `loadOptions("")` when enabled without opening the menu.
 - `defaultOptions={options}` supplies an initial result list without making a request. Use `options` without `loadOptions` for externally managed results.

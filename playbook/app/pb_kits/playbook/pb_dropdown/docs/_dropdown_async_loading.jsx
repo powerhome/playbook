@@ -14,6 +14,10 @@ const loadUsers = (term) => fetch(`https://dummyjson.com/users/search?${new URLS
 
 const DropdownAsyncLoading = () => (
   <Dropdown
+      activeStyle={{
+        backgroundColor: "bg_light",
+        fontColor: "text_lt_default",
+      }}
       async
       autocomplete
       label="User"

@@ -415,18 +415,24 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     }, [optionsWithBlankSelection, selectedArray, multiSelect, isSameOption, selectedOptionIds, getOptionValue]);
     
     const filteredOptions = useMemo(() => {
-          if (asyncEnabled) return availableOptions;
-          // When the input shows the selected label, do not filter the list down to that one option
           const selectedLabel =
             !multiSelect &&
             !Array.isArray(selected) &&
             (selected as GenericObject)?.label;
+          // Async searches stay unfiltered until the input is showing the selected label.
+          // Reopening then shows only results that match that text.
+          if (asyncEnabled) {
+            if (!(autocomplete && selectedLabel && filterItem === selectedLabel)) return availableOptions;
+            const query = String(selectedLabel).toLowerCase();
+            return availableOptions.filter((opt: GenericObject) => String(opt.label).toLowerCase().includes(query));
+          }
+          // When the input shows the selected label, do not filter the list down to that one option
           const filterText =
             selectedLabel && filterItem === selectedLabel ? "" : filterItem;
           return availableOptions.filter((opt: GenericObject) =>
             String(opt.label).toLowerCase().includes(filterText.toLowerCase())
           );
-        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled]);
+        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, autocomplete]);
 
     // Empty copy follows the settled search. Hiding already-selected rows must not turn a
     // successful result list into "No results found", including the last pick while the menu stays open.
@@ -538,7 +544,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       const handleOptionClick = (clickedItem: GenericObject) => {
                 if (disabled) return;
                 preserveQueryOnControlledClear.current = false;
-                if (asyncEnabled) clearAsync();
+                // Single autocomplete keeps the search results so reopening can match the selected label.
+                // Other selections still drop back to the initial list.
+                if (asyncEnabled) {
+                  if (!multiSelect && autocomplete) cancelAsync();
+                  else clearAsync();
+                }
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
                 if (multiSelect) {

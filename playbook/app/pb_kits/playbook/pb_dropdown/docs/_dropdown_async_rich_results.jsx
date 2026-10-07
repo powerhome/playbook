@@ -28,6 +28,10 @@ const DropdownAsyncRichResults = () => {
 
   return (
     <Dropdown
+        activeStyle={{
+          backgroundColor: "bg_light",
+          fontColor: "text_lt_default",
+        }}
         async
         autocomplete
         label="User"

@@ -546,6 +546,19 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     end
   end
 
+  describe "active_style" do
+    it "includes active_style in data when present" do
+      dropdown = subject.new(active_style: { background_color: "bg_light", font_color: "text_lt_default" })
+      expect(dropdown.data).to include(
+        pb_dropdown_active_style: { background_color: "bg_light", font_color: "text_lt_default" }.to_json
+      )
+    end
+
+    it "omits active_style from data when not passed" do
+      expect(subject.new({}).data).not_to have_key(:pb_dropdown_active_style)
+    end
+  end
+
   describe "no_options_text" do
     it "includes no_options_text in data when present" do
       dropdown = subject.new(no_options_text: "No agents available")

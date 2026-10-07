@@ -42,6 +42,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
 
   const {
     asyncEnabled,
+    autocomplete,
     activeStyle,
     disabled,
     filteredOptions,
@@ -57,12 +58,15 @@ const DropdownOption = (props: DropdownOptionProps) => {
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject | undefined) => {
-    if (asyncEnabled) return true;
-    // When the input is only showing the selected label (e.g. seeded defaultValue), do not filter
     const selectedLabel =
       !multiSelect &&
       !Array.isArray(selected) &&
       (selected as GenericObject)?.label;
+    if (asyncEnabled) {
+      if (!(autocomplete && selectedLabel && filterItem === selectedLabel)) return true;
+      return String(option?.label).toLowerCase().includes(String(selectedLabel).toLowerCase());
+    }
+    // When the input is only showing the selected label (e.g. seeded defaultValue), do not filter
     const filterText =
       selectedLabel && filterItem === selectedLabel ? "" : filterItem;
     const label = typeof option?.label === 'string' ? option.label.toLowerCase() : option?.label;

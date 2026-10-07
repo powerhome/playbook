@@ -259,7 +259,8 @@
     "activeStyle": {
       "type": "GenericObject",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "requiredIndicator": {

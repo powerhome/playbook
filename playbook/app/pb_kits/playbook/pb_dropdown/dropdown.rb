@@ -28,6 +28,8 @@ module Playbook
       prop :autocomplete, type: Playbook::Props::Boolean,
                           default: false
       prop :async, type: Playbook::Props::Boolean, default: false
+      prop :active_style, type: Playbook::Props::HashProp,
+                          default: {}
       prop :search_term_minimum_length, default: 3
       prop :search_debounce_timeout, default: 250
       prop :searchbar, type: Playbook::Props::Boolean,
@@ -76,6 +78,7 @@ module Playbook
         Hash(prop(:data)).merge(
           pb_dropdown: true,
           pb_dropdown_async: async ? true : nil,
+          pb_dropdown_active_style: active_style.present? ? active_style.to_json : nil,
           pb_dropdown_default_value: async && default_value.present? ? default_value.to_json : nil,
           pb_dropdown_search_term_minimum_length: async ? search_term_minimum_length : nil,
           pb_dropdown_search_debounce_timeout: async ? search_debounce_timeout : nil,

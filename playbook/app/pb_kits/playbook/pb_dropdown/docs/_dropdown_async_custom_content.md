@@ -1,4 +1,4 @@
-For custom Rails result rows, pass `{ option, content }` entries to the async search event's `setResults` callback. Plain option objects and rich entries can appear in the same result array.
+For custom Rails result rows, pass `{ option, content }` entries to the async search event's `setResults` callback. `active_style: { background_color: "bg_light", font_color: "text_lt_default" }` is recommended so the selected row uses a light background and default text color. Plain option objects and rich entries can appear in the same result array.
 
 - `option` is the ordinary serializable Dropdown option object: `id`, `label`, `value`, and any custom data. `disabled: true` prevents selection.
 - `content` is an `Element` or `DocumentFragment`, usually cloned from a Rails-rendered `<template>`. Dropdown clones it into its standard option wrapper; it does not consume or move your original nodes. Populate API text with `textContent`. HTML strings are not a rich-content input.
