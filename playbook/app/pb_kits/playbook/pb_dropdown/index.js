@@ -156,6 +156,7 @@ export default class PbDropdown extends PbEnhancedElement {
   asyncResultsCleared = false;
   asyncSearchInterrupted = false;
   asyncSettledOptions = [];
+  asyncHasSettledSearch = false;
   asyncSettledEmpty = null;
   asyncSettledStatus = null;
   selectedOptionJson = null;
@@ -642,6 +643,20 @@ export default class PbDropdown extends PbEnhancedElement {
     this.target?.querySelector("[data-dropdown-async-status]")?.remove();
   }
 
+  // "Emily S" can miss after "Emily Smith" was already loaded. Keep labels that contain the query.
+  settledOptionsMatchingQuery(term) {
+    const query = String(term).trim().toLowerCase().replace(/\s+/g, " ");
+    if (!query || !this.asyncHasSettledSearch) return [];
+    return this.asyncSettledOptions.filter((node) => {
+      try {
+        const label = String(JSON.parse(node.dataset.dropdownOptionLabel).label);
+        return label.trim().toLowerCase().replace(/\s+/g, " ").includes(query);
+      } catch {
+        return false;
+      }
+    });
+  }
+
   rememberSettledAsyncResults() {
     const parent = this.getOptionsParent();
     this.asyncSettledOptions = parent ? Array.from(parent.children).map((node) => node.cloneNode(true)) : [];
@@ -666,6 +681,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.asyncResultsCleared = false;
     this.asyncSearchInterrupted = false;
     this.asyncSettledOptions = [];
+    this.asyncHasSettledSearch = false;
     this.asyncSettledEmpty = null;
     this.asyncSettledStatus = null;
   }
@@ -742,9 +758,15 @@ export default class PbDropdown extends PbEnhancedElement {
         this.target.querySelector("[data-dropdown-async-status]")?.remove();
         const parent = this.getOptionsParent();
         parent.replaceChildren();
-        options.forEach((result) => parent.appendChild(this.buildAsyncOptionElement(result)));
+        const visibleOptions = !failed && !options.length ? this.settledOptionsMatchingQuery(term) : options;
+        visibleOptions.forEach((result) => parent.appendChild(
+          result instanceof Node ? result.cloneNode(true) : this.buildAsyncOptionElement(result),
+        ));
         if (failed) this.showAsyncStatus("Unable to load options");
-        else if (!options.length) this.showNoOptionsMessage("No results found");
+        else {
+          this.asyncHasSettledSearch = true;
+          if (!visibleOptions.length) this.showNoOptionsMessage("No results found");
+        }
         this.asyncResultsCleared = false;
         this.rememberSettledAsyncResults();
         this.adjustDropdownHeight();

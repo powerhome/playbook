@@ -2177,6 +2177,33 @@ describe('async Dropdown Typeahead parity', () => {
     expect(optionTexts()).toEqual(['Ada Lovelace']);
     expect(screen.queryByText('No results found')).not.toBeInTheDocument();
   });
+
+  test('keeps earlier label matches when a query after a space returns nothing', async () => {
+    const people = [
+      { label: 'Emily Smith', value: 1 },
+      { label: 'Emily Jones', value: 2 },
+    ];
+    const loadOptions = (term) => Promise.resolve(
+      term.trim().includes(' ') && !term.endsWith(' ') ? [] : people
+    );
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Emily' } });
+    await flush();
+    fireEvent.change(input, { target: { value: 'Emily ' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Emily Smith', 'Emily Jones']);
+    fireEvent.change(input, { target: { value: 'Emily S' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Emily Smith']);
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+    fireEvent.change(input, { target: { value: 'Emily Z' } });
+    await flush();
+    expect(screen.getByText('No results found')).toBeInTheDocument();
+  });
 });
 
 test('async results render through Dropdown.Container with a custom trigger display', async () => {

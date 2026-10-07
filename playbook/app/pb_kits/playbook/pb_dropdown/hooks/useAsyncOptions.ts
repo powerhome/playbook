@@ -1,6 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { GenericObject } from "../../types";
 
+const normalizedText = (value: unknown) => String(value ?? "").trim().toLowerCase().replace(/\s+/g, " ");
+
+// A server can miss "Emily S" after it returned "Emily Smith". Keep those earlier rows.
+const resultsMatchingQuery = (results: GenericObject[], previous: GenericObject[], term: string) => {
+  if (results.length) return results;
+  const query = normalizedText(term);
+  if (!query) return results;
+  const kept = previous.filter((option) => normalizedText(option?.label).includes(query));
+  return kept.length ? kept : results;
+};
+
 export type LoadOptions = (
   term: string,
   callback: (options: GenericObject[]) => void,
@@ -21,6 +32,7 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
   initialOptions.current = Array.isArray(defaultOptions) ? defaultOptions : defaultOptions ? preloaded.current : [];
   // Last list a search actually settled (or the defaultOptions list). A new search clears the visible list first.
   const settledOptions = useRef<GenericObject[]>(Array.isArray(defaultOptions) ? defaultOptions : []);
+  const priorSearchResults = useRef<GenericObject[]>([]);
   const cleared = useRef(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "empty" | "error">("idle");
   const cache = useRef(new Map<string, GenericObject[]>());
@@ -64,6 +76,7 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
     interruptedSearch.current = null;
     interrupted.current = false;
     cleared.current = false;
+    priorSearchResults.current = [];
     remember(initialOptions.current);
     setStatus("idle");
   }, [cancel, remember]);
@@ -82,6 +95,7 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
     interrupted.current = false;
     setStatus("idle");
     if (!enabled || (!initial && !term)) {
+      priorSearchResults.current = [];
       remember(initialOptions.current);
       return;
     }
@@ -89,8 +103,10 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
     setOptions([]);
     const cached = cacheOptions ? cache.current.get(term) : undefined;
     if (cached) {
-      remember(cached);
-      setStatus(cached.length ? "success" : "empty");
+      const next = initial ? cached : resultsMatchingQuery(cached, priorSearchResults.current, term);
+      if (!initial) priorSearchResults.current = next;
+      remember(next);
+      setStatus(next.length ? "success" : "empty");
       return;
     }
     pendingSearch.current = { term, initial };
@@ -105,6 +121,10 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
         settled = true;
         pendingSearch.current = null;
         clearTimeout(watchdog.current);
+        if (!failed && !initial) {
+          results = resultsMatchingQuery(results, priorSearchResults.current, term);
+          priorSearchResults.current = results;
+        }
         if (cacheOptions && !failed) {
           // Bound per-instance memory, including empty successful searches.
           cache.current.delete(term);

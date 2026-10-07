@@ -936,6 +936,27 @@ describe("PbDropdown async search", () => {
     expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
   });
 
+  test("a query after a space keeps earlier results whose labels match", () => {
+    type("Emily");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { id: "1", label: "Emily Smith" },
+      { id: "2", label: "Emily Jones" },
+    ]);
+    type("Emily S");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[1][0].detail.setResults([]);
+    const labels = () => Array.from(instance.queryAllOptions()).map((opt) => opt.textContent);
+    expect(labels()).toEqual(["Emily Smith"]);
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+
+    type("Emily Z");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[2][0].detail.setResults([]);
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No results found");
+  });
+
   test("active_style classes are applied to async results", () => {
     instance.disconnect();
     root.dataset.pbDropdownActiveStyle = JSON.stringify({
