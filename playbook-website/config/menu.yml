@@ -35,7 +35,7 @@ kits:
   - name: pagination_&_data_states
     description: Paged or infinite data plus loading and empty states.
     parent: advanced_table
-    kit_section: ["Pagination", "Pagination Props", "Loading State", "Inline Row Loading", "Infinite Scroll"]
+    kit_section: ["Pagination", "Pagination Props", "Pagination Section Separator", "Loading State", "Inline Row Loading", "Infinite Scroll"]
     platforms: *1
     status: stable
     icons_used: true

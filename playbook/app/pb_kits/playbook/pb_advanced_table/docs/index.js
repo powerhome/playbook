@@ -13,6 +13,7 @@ export { default as AdvancedTableCustomCell } from './_advanced_table_custom_cel
 export { default as AdvancedTableFullWidthCell } from './_advanced_table_full_width_cell.jsx'
 export { default as AdvancedTablePagination } from './_advanced_table_pagination.jsx'
 export { default as AdvancedTablePaginationWithProps } from './_advanced_table_pagination_with_props.jsx'
+export { default as AdvancedTablePaginationSectionSeparator } from './_advanced_table_pagination_section_separator.jsx'
 export { default as AdvancedTableColumnHeaders } from './_advanced_table_column_headers.jsx'
 export { default as AdvancedTableColumnHeadersMultiple } from './_advanced_table_column_headers_multiple.jsx'
 export { default as AdvancedTableSelectableRows } from './_advanced_table_selectable_rows.jsx'
