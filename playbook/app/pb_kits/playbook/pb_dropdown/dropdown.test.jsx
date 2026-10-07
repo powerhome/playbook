@@ -2399,6 +2399,33 @@ describe('autocomplete selection replacement', () => {
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
+  test('the first character still replaces an unchanged selected label', () => {
+    const onSelect = jest.fn();
+    render(<Dropdown autocomplete
+        defaultValue={options[1]}
+        onSelect={onSelect}
+        options={options}
+           />);
+    const input = screen.getByRole('textbox');
+    expect(fireEvent.keyDown(input, { key: 'P' })).toBe(false);
+    expect(input).toHaveValue('P');
+    expect(onSelect).toHaveBeenCalledWith(null);
+  });
+
+  test('a character after backspace edits the query instead of replacing it', () => {
+    render(<Dropdown autocomplete
+        defaultValue={options[1]}
+        options={options}
+           />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('Canada');
+    expect(fireEvent.keyDown(input, { key: 'Backspace' })).toBe(true);
+    fireEvent.change(input, { target: { value: 'Canad' } });
+    expect(fireEvent.keyDown(input, { key: 'a' })).toBe(true);
+    fireEvent.change(input, { target: { value: 'Canada' } });
+    expect(input).toHaveValue('Canada');
+  });
+
   test.each(['Backspace', 'Delete'])('%s removes one character and keeps the selection until the query is empty', (key) => {
     const onSelect = jest.fn();
     const onInputChange = jest.fn();

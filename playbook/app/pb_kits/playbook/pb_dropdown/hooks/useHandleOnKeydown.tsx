@@ -6,8 +6,6 @@ export const useHandleOnKeyDown = () => {
 
 const {
   asyncEnabled,
-  isControlled,
-  onInputChange,
   autocomplete,
   filterItem,
   filteredOptions,
@@ -47,11 +45,11 @@ const {
 
     const printableKey = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
     const replacingSelectedLabel = filterItem === selected?.label;
-    const legacyAutocomplete = !asyncEnabled && !isControlled && !onInputChange;
 
-    // A typed character replaces the selected label. Backspace and Delete edit it one character at a time.
+    // Replace the label only while the input still shows it. After the text diverges,
+    // the input inserts the character so the rest of the query stays.
     if (autocomplete && !multiSelect && selected?.label &&
-        (replacingSelectedLabel || legacyAutocomplete) &&
+        replacingSelectedLabel &&
         printableKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       handleChange({ target: { value: e.key } }, true);
