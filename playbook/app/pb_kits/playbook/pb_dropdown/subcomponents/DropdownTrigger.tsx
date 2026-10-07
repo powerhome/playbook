@@ -105,7 +105,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     "Select..."
   );
 
-  const hideJoinedLabelInBody = Boolean(autocomplete && filterItem === joinedLabels);
+  // While the input holds text (the label or an edit of it), it is the only display of the selection.
+  const hideJoinedLabelInBody = Boolean(autocomplete && (filterItem === joinedLabels || filterItem));
   const defaultDisplayPlaceholder = joinedLabels
     ? (hideJoinedLabelInBody ? "" : joinedLabels)
     : autocomplete

@@ -2372,7 +2372,7 @@ describe('autocomplete selection replacement', () => {
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
-  test.each(['Backspace', 'Delete'])('%s clears the displayed controlled selection', (key) => {
+  test.each(['Backspace', 'Delete'])('%s removes one character and keeps the selection until the query is empty', (key) => {
     const onSelect = jest.fn();
     const onInputChange = jest.fn();
     const Example = () => {
@@ -2388,12 +2388,31 @@ describe('autocomplete selection replacement', () => {
     };
     render(<Example />);
     const input = screen.getByRole('textbox');
-    expect(fireEvent.keyDown(input, { key })).toBe(false);
-    expect(input).toHaveValue('');
-    expect(onSelect).toHaveBeenCalledTimes(1);
+    expect(fireEvent.keyDown(input, { key })).toBe(true);
+    fireEvent.change(input, { target: { value: 'Canad' } });
+    expect(input).toHaveValue('Canad');
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(onInputChange).toHaveBeenCalledWith('Canad', { reason: 'input' });
+    fireEvent.change(input, { target: { value: '' } });
     expect(onSelect).toHaveBeenCalledWith(null);
-    expect(onInputChange).toHaveBeenCalledTimes(1);
-    expect(onInputChange).toHaveBeenCalledWith('', { reason: 'input' });
+    expect(input).toHaveValue('');
+  });
+
+  test('async backspace removes one character and searches with the remainder', async () => {
+    const loadOptions = jest.fn(() => Promise.resolve(options));
+    render(<Dropdown async
+        autocomplete
+        defaultValue={options[1]}
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('Canada');
+    expect(fireEvent.keyDown(input, { key: 'Backspace' })).toBe(true);
+    fireEvent.change(input, { target: { value: 'Canad' } });
+    expect(input).toHaveValue('Canad');
+    expect(screen.queryByText('Canada', { selector: '.pb_dropdown_trigger .pb_body_kit' })).not.toBeInTheDocument();
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(loadOptions).toHaveBeenCalledWith('Canad', expect.any(Function));
   });
 
   test('a delayed controlled clear preserves the ongoing query', () => {

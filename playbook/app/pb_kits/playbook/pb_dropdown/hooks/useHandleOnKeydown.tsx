@@ -46,15 +46,15 @@ const {
     if (e.defaultPrevented) return;
 
     const printableKey = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
-    const deletionKey = e.key === "Backspace" || e.key === "Delete";
     const replacingSelectedLabel = filterItem === selected?.label;
     const legacyAutocomplete = !asyncEnabled && !isControlled && !onInputChange;
 
+    // A typed character replaces the selected label. Backspace and Delete edit it one character at a time.
     if (autocomplete && !multiSelect && selected?.label &&
         (replacingSelectedLabel || legacyAutocomplete) &&
-        (printableKey || deletionKey) && !e.nativeEvent.isComposing) {
+        printableKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
-      handleChange({ target: { value: printableKey ? e.key : "" } }, true);
+      handleChange({ target: { value: e.key } }, true);
       return;
     }
 
