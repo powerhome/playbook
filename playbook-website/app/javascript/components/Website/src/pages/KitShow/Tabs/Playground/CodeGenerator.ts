@@ -279,6 +279,9 @@ const formatPropValue = (
   }
 
   if (propType === "enum" || definition.values?.length) {
+    if (typeof value === "number" && Number.isFinite(value)) {
+      return `${name}={${value}}`;
+    }
     if (typeof value === "string" && value.trim()) {
       return `${name}={${JSON.stringify(value)}}`;
     }
