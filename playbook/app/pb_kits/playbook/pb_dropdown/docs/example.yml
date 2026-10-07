@@ -44,6 +44,7 @@ examples:
   - dropdown_dynamic_options_with_autocomplete: Dynamic Options with Autocomplete
   - dropdown_dynamic_options_with_multi_select: Dynamic Options with Multi Select
   - dropdown_async_search: Async Search
+  - dropdown_async_multi_select_rails: Async Multi Select
   - dropdown_async_custom_content: Async Search with Custom Content
 
   react:
@@ -92,6 +93,7 @@ examples:
   - dropdown_multi_select_react_hook: React Hook Multi Select
   - dropdown_controlled_selection: Controlled Selection
   - dropdown_async_loading: Async Search
+  - dropdown_async_multi_select: Async Multi Select
   - dropdown_async_rich_results: Async Search with Custom Content
   - dropdown_async_initial_options: Async Initial Results and Caching
   - dropdown_external_search: External Search

@@ -43,6 +43,7 @@ export { default as DropdownDefaultValueWithAutocomplete } from './_dropdown_def
 export { default as DropdownNoOptionsText } from './_dropdown_no_options_text.jsx'
 export { default as DropdownControlledSelection } from './_dropdown_controlled_selection.jsx'
 export { default as DropdownAsyncLoading } from './_dropdown_async_loading.jsx'
+export { default as DropdownAsyncMultiSelect } from './_dropdown_async_multi_select.jsx'
 export { default as DropdownAsyncRichResults } from './_dropdown_async_rich_results.jsx'
 export { default as DropdownAsyncInitialOptions } from './_dropdown_async_initial_options.jsx'
 export { default as DropdownExternalSearch } from './_dropdown_external_search.jsx'

@@ -717,11 +717,11 @@ describe("PbDropdown async search", () => {
     instance.queryAllOptions()[1].click();
     expect(selected.mock.calls[selected.mock.calls.length - 1][0].detail).toEqual([first, second]);
     expect(pills.querySelectorAll("[data-pill-id]")).toHaveLength(2);
-    expect(instance.queryAllOptions()[0].style.display).toBe("none");
+    expect(instance.queryAllOptions()).toHaveLength(0);
 
     pills.querySelector(".pb_form_pill_close").click();
     expect(selected.mock.calls[selected.mock.calls.length - 1][0].detail).toEqual([second]);
-    expect(instance.queryAllOptions()[0].style.display).toBe("");
+    expect(instance.queryAllOptions()).toHaveLength(0);
   });
 
   test("input events are immediate, including below the search threshold", () => {
@@ -969,6 +969,60 @@ describe("PbDropdown async search", () => {
     search.mock.calls[0][0].detail.setResults([{ id: "1", label: "Ada Lovelace" }]);
     const option = instance.queryAllOptions()[0];
     expect(option).toHaveClass("bg-bg_light", "font-text_lt_default");
+  });
+
+  test("reopening a multi-select after a pick shows the empty message", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownMultiSelect = "true";
+    const pills = document.createElement("div");
+    pills.setAttribute("data-dropdown-pills-wrapper", "");
+    root.appendChild(pills);
+    instance = new PbDropdown(root);
+    instance.connect();
+
+    type("Emily");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { id: "1", label: "Emily Smith" },
+      { id: "2", label: "Emily Jones" },
+    ]);
+    instance.queryAllOptions()[0].click();
+    jest.advanceTimersByTime(0);
+    expect(instance.queryAllOptions()).toHaveLength(0);
+    input.click();
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No results found");
+  });
+
+  test("removing the last multi-select pill drops the earlier search results", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownMultiSelect = "true";
+    const pills = document.createElement("div");
+    pills.setAttribute("data-dropdown-pills-wrapper", "");
+    root.appendChild(pills);
+    instance = new PbDropdown(root);
+    instance.connect();
+
+    type("Emily");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { id: "1", label: "Emily Smith" },
+      { id: "2", label: "Emily Jones" },
+    ]);
+    instance.queryAllOptions()[0].click();
+    jest.advanceTimersByTime(0);
+    type("Michael");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[1][0].detail.setResults([{ id: "3", label: "Michael Scott" }]);
+    expect(instance.queryAllOptions()).toHaveLength(1);
+    input.value = "";
+
+    pills.querySelector(".pb_form_pill_close").click();
+    expect(instance.queryAllOptions()).toHaveLength(0);
+
+    input.click();
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No results found");
   });
 
   test("reopening after a selection shows only the option matching the input", () => {

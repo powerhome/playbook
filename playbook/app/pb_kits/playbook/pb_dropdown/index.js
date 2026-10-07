@@ -152,6 +152,17 @@ export default class PbDropdown extends PbEnhancedElement {
     this.showNoOptionsMessage("No results found");
   }
 
+  // Selected multi-select rows stay in the list with display:none. An open menu of only
+  // those rows collapses to its border, so show the empty message instead.
+  showAsyncMultiSelectMenu() {
+    if (!this.isAsync || !this.isMultiSelect) return;
+    const options = Array.from(this.queryAllOptions());
+    if (!options.length) return;
+    const hasVisibleOption = options.some((opt) => opt.style.display !== "none");
+    if (hasVisibleOption) this.removeNoOptionsMessage();
+    else this.showNoOptionsMessage("No results found");
+  }
+
   asyncRequestId = 0;
   asyncResultsCleared = false;
   asyncSearchInterrupted = false;
@@ -447,6 +458,8 @@ export default class PbDropdown extends PbEnhancedElement {
       const shouldConstrain = el.classList.contains("constrain_height");
       el.style.height = "auto";
       requestAnimationFrame(() => {
+        // Closing sets display:none before this frame. Measuring then stores a 0 height.
+        if (!el.classList.contains("open")) return;
         if (shouldConstrain) {
           // Calculate 18em in pixels (matches SCSS max-height: 18em)
           const fontSize = parseFloat(getComputedStyle(el).fontSize) || 16;
@@ -686,6 +699,16 @@ export default class PbDropdown extends PbEnhancedElement {
     this.asyncSettledStatus = null;
   }
 
+  // A multi-select pick ends the search. The next open shows the empty message until a new query.
+  dropAsyncSearchResults() {
+    this.forgetSettledAsyncResults();
+    this.cancelAsyncSearch();
+    this.getOptionsParent()?.replaceChildren();
+    this.removeNoOptionsMessage();
+    this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+    this.resetFocus();
+  }
+
   clearAsyncResults() {
     this.forgetSettledAsyncResults();
     this.cancelAsyncSearch();
@@ -870,8 +893,15 @@ export default class PbDropdown extends PbEnhancedElement {
         }
         this.updatePills();
         this.syncHiddenInputs();
-        if (this.searchInput && this.isMultiSelect) {
-          this.searchInput.value = "";
+        if (this.isMultiSelect && this.searchInput) this.searchInput.value = "";
+        if (this.isAsync && this.isMultiSelect) {
+          if (this.searchBar) this.searchBar.value = "";
+          this.dropAsyncSearchResults();
+          if (this.target.classList.contains("open")) {
+            this.showAsyncEmptyState();
+            this.adjustDropdownHeight();
+          }
+        } else if (this.searchInput && this.isMultiSelect) {
           this.handleBackspaceClear();
         }
       } else {
@@ -1448,9 +1478,10 @@ export default class PbDropdown extends PbEnhancedElement {
       Array.from(this.selectedOptions).map((option) => {
         if (this.sameOption(option, selectedOption.dataset.dropdownOptionLabel)) {
           selectedOption.style.display = "none";
-          this.adjustDropdownHeight();
         }
       });
+      if (this.isAsync) this.showAsyncMultiSelectMenu();
+      this.adjustDropdownHeight();
       this.baseInput.value = Array.from(
         this.selectedOptions,
       )
@@ -1475,6 +1506,7 @@ export default class PbDropdown extends PbEnhancedElement {
       retryTerm = this.searchInput?.value || this.searchBar?.value || "";
     }
     this.showAsyncEmptyState();
+    this.showAsyncMultiSelectMenu();
     if (!this.canOpenMenu && retryTerm == null) return;
     if (!this.canOpenMenu) {
       this.searchAsync(retryTerm);
@@ -1494,6 +1526,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     // Drop a previous explicit height so hidden results do not leave empty space.
     elem.style.height = "auto";
+    elem.offsetHeight;
     const shouldConstrain = elem.classList.contains("constrain_height");
     if (shouldConstrain) {
       // Calculate height respecting max-height constraint (18em)
@@ -1859,7 +1892,19 @@ export default class PbDropdown extends PbEnhancedElement {
         const optEl = Array.from(this.queryAllOptions()).find((opt) =>
           this.sameOption(opt.dataset.dropdownOptionLabel, option),
         );
-        if (optEl) {
+        if (this.isAsync && this.selectedOptions.size === 0 && !this.searchInput?.value && !this.searchBar?.value) {
+          // Removing the last pill drops the earlier search, as React does.
+          const wasOpen = this.target.classList.contains("open");
+          this.forgetSettledAsyncResults();
+          this.cancelAsyncSearch();
+          this.getOptionsParent()?.replaceChildren();
+          this.removeNoOptionsMessage();
+          this.resetFocus();
+          if (wasOpen) {
+            this.showAsyncEmptyState();
+            this.adjustDropdownHeight();
+          }
+        } else if (optEl) {
           optEl.style.display = "";
           if (this.target.classList.contains("open")) {
             this.showElement(this.target);
