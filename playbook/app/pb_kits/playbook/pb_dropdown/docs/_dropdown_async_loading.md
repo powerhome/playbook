@@ -2,7 +2,7 @@ Use `async` with `autocomplete` or `Dropdown.Container searchbar` to search remo
 
 `loadOptions(term, callback)` may call `callback(options)` or return a promise resolving to options. Map results to the existing Dropdown shape: `id`, `label`, and `value`, plus any custom fields. Remote matches are displayed without additional local label filtering. When a search returns nothing, earlier results whose labels contain the query stay visible, including text typed after a space. After a single-select autocomplete selection, opening the menu again shows only results whose labels contain the selected label now in the input. Results are matched by `value`, falling back to `id` and then `label`, so results with the same label stay distinct.
 
-Dropdown calls the loader for nonempty queries. Keep debounce and minimum query length in the application's loader or input handler, as Nitro's existing Typeahead adapters do. No request runs on mount unless `defaultOptions={true}` is supplied.
+Dropdown calls the loader for nonempty queries. This example waits 250ms after the last keystroke and aborts the previous request, the same pause Rails uses and the external search example uses. Keep debounce and minimum query length in the application's loader or input handler, as Nitro's existing Typeahead adapters do. No request runs on mount unless `defaultOptions={true}` is supplied.
 
 Loading, empty, and error states are built in. Opening the Dropdown before any results are available shows the empty message. Thrown errors, rejected promises, invalid results, and requests exceeding 15 seconds show the error state. Callback loaders should invoke their callback once when complete.
 
