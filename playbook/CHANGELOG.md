@@ -1,3 +1,61 @@
+# 18.1.0
+
+##### October 07, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Your feature description goes here.
+
+[18.1.0](https://github.com/powerhome/playbook/tree/18.1.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Pill Kit: Accepts Children [\#6698](https://github.com/powerhome/playbook/pull/6698) ([nidaqg](https://github.com/nidaqg))
+- Datepicker Kit: Closeonselect Kit Prop [\#6691](https://github.com/powerhome/playbook/pull/6691) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Filter Kit: Responsive - Rails and React [\#6680](https://github.com/powerhome/playbook/pull/6680) ([kangaree](https://github.com/kangaree))
+- Form Builder Kits: Pass Input_options to All Kits Properly [\#6676](https://github.com/powerhome/playbook/pull/6676) ([nidaqg](https://github.com/nidaqg))
+- Pill Kit: Notification Variant Style Matching to Badge [\#6646](https://github.com/powerhome/playbook/pull/6646) ([nickamantia](https://github.com/nickamantia))
+- Global Event Props: Onclick Prop (react-only) [\#6642](https://github.com/powerhome/playbook/pull/6642) ([kangaree](https://github.com/kangaree))
+- Pagination Kit: Align React and Rails Styling [\#6641](https://github.com/powerhome/playbook/pull/6641) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Rails Dynamic Options and Event Integration + React Hook Form Support for React [\#6609](https://github.com/powerhome/playbook/pull/6609) ([nickamantia](https://github.com/nickamantia))
+- Form Kit: Auto-bind Model Values and Errors In Fields [\#6608](https://github.com/powerhome/playbook/pull/6608) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Bump Lodash from 4.17.21 to 4.18.1 [\#6733](https://github.com/powerhome/playbook/pull/6733) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Follow-redirects from 1.15.2 to 1.16.1 [\#6731](https://github.com/powerhome/playbook/pull/6731) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Playbook Website: Changelog 18.1.0.pre.rc.5 [\#6724](https://github.com/powerhome/playbook/pull/6724) ([nickamantia](https://github.com/nickamantia))
+- Bump Brace-expansion from 1.1.11 to 1.1.21 [\#6718](https://github.com/powerhome/playbook/pull/6718) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Github Actions: Updated Label Check Action to Account for Changelog Labels [\#6713](https://github.com/powerhome/playbook/pull/6713) ([nidaqg](https://github.com/nidaqg))
+- Upgrades Playbook Icons [\#6702](https://github.com/powerhome/playbook/pull/6702) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Update Rc_changelog.md With Image [\#6700](https://github.com/powerhome/playbook/pull/6700) ([nidaqg](https://github.com/nidaqg))
+- Filter Kit: Standardize Sort Icons [\#6692](https://github.com/powerhome/playbook/pull/6692) ([nickamantia](https://github.com/nickamantia))
+- Rich Text Editor Kit: Toolbar/markdown Styling and Extensions - React and Rails [\#6688](https://github.com/powerhome/playbook/pull/6688) ([kangaree](https://github.com/kangaree))
+- Github Actions: Add Cache Mode to Actions [\#6684](https://github.com/powerhome/playbook/pull/6684) ([nidaqg](https://github.com/nidaqg))
+- Metadata: Forms, Rules, Configs [\#6681](https://github.com/powerhome/playbook/pull/6681) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Expand and Prioritize Playbook Website Search [\#6650](https://github.com/powerhome/playbook/pull/6650) ([nidaqg](https://github.com/nidaqg))
+- Bump Shell-quote from 1.8.4 to 1.10.0 [\#6625](https://github.com/powerhome/playbook/pull/6625) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Update Dependency Puma to V7 [security] [\#6560](https://github.com/powerhome/playbook/pull/6560) ([renovate[bot]](https://github.com/renovate[bot]))
+- Changelog for Rc 18.1.0-rc.3 [\#6708](https://github.com/powerhome/playbook/pull/6708) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Changelog for Rc 18.1.0-rc.1 [\#6701](https://github.com/powerhome/playbook/pull/6701) ([nidaqg](https://github.com/nidaqg))
+- Changelog for Rc 18.1.0-rc.0 [\#6697](https://github.com/powerhome/playbook/pull/6697) ([nidaqg](https://github.com/nidaqg))
+- Bump Activestorage from 7.2.3 to 7.2.3.2 In /playbook [\#6696](https://github.com/powerhome/playbook/pull/6696) ([dependabot[bot]](https://github.com/dependabot[bot]))
+
+**Fixed Bugs:**
+
+- Playbook Website: Stop Gating Playground Json on Request.host [\#6721](https://github.com/powerhome/playbook/pull/6721) ([kangaree](https://github.com/kangaree))
+- Global Props Not Working As Expected With Several Kits [\#6686](https://github.com/powerhome/playbook/pull/6686) ([nickamantia](https://github.com/nickamantia))
+- Table Kit: Fix Responsive Scroll, Remove Collapse Styles, and Column Sorting- React and Rails [\#6671](https://github.com/powerhome/playbook/pull/6671) ([kangaree](https://github.com/kangaree))
+- Border Radius Global Prop: Fix Conflict With Background_light [\#6655](https://github.com/powerhome/playbook/pull/6655) ([kangaree](https://github.com/kangaree))
+- Passphrase Kit: Disable Eye Icon When Disabled: React & Rails [\#6635](https://github.com/powerhome/playbook/pull/6635) ([kangaree](https://github.com/kangaree))
+
+**Deprecated:**
+
+- Table Kit: Remove Unused Singleline/single_line Prop - React and Rails [\#6723](https://github.com/powerhome/playbook/pull/6723) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v18.1.0-rc.5...18.1.0)
+
+
 # ⚡ ViewComponent 4.3.0 Clears the Way for Rails 8!
 ##### September 23, 2026
 
