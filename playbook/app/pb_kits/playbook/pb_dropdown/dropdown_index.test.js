@@ -1025,6 +1025,35 @@ describe("PbDropdown async search", () => {
     expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No results found");
   });
 
+  test("a default selection marks the matching search row so reopening narrows to that label", () => {
+    instance.disconnect();
+    const option = { id: 42, label: "Ada Lovelace", value: 42 };
+    root.dataset.pbDropdownDefaultValue = JSON.stringify(option);
+    root.querySelector("[data-dropdown-selected-option]").dataset.defaultValue = "42";
+    instance = new PbDropdown(root);
+    instance.connect();
+    expect(input.value).toBe("Ada Lovelace");
+
+    type("ada");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { id: 42, label: "Ada Lovelace" },
+      { id: 7, label: "Ada Lovelace Jr" },
+      { id: 8, label: "Canada" },
+    ]);
+    const rows = () => Array.from(instance.queryAllOptions());
+    const visible = () => rows().filter((opt) => opt.style.display !== "none");
+    expect(rows()[0]).toHaveClass("pb_dropdown_option_selected");
+    expect(visible()).toHaveLength(3);
+
+    input.value = "Ada Lovelace";
+    instance.hideElement(instance.target);
+    jest.advanceTimersByTime(0);
+    input.click();
+    expect(instance.target).toHaveClass("open");
+    expect(visible().map((opt) => opt.textContent)).toEqual(["Ada Lovelace", "Ada Lovelace Jr"]);
+  });
+
   test("reopening after a selection shows only the option matching the input", () => {
     type("ada");
     jest.advanceTimersByTime(250);

@@ -785,6 +785,8 @@ export default class PbDropdown extends PbEnhancedElement {
         visibleOptions.forEach((result) => parent.appendChild(
           result instanceof Node ? result.cloneNode(true) : this.buildAsyncOptionElement(result),
         ));
+        // The default option lives outside the menu, so mark the mounted row that shares its id.
+        this.markSelectedAsyncResult();
         if (failed) this.showAsyncStatus("Unable to load options");
         else {
           this.asyncHasSettledSearch = true;
@@ -792,6 +794,7 @@ export default class PbDropdown extends PbEnhancedElement {
         }
         this.asyncResultsCleared = false;
         this.rememberSettledAsyncResults();
+        this.resetOptionFilterForSelectedLabel();
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       };
@@ -807,6 +810,35 @@ export default class PbDropdown extends PbEnhancedElement {
         },
       }));
     }, delay);
+  }
+
+  // A default_value selection is not in the menu until a search renders that id.
+  markSelectedAsyncResult() {
+    if (!this.isAsync || this.isMultiSelect) return;
+    const selectedId = this.baseInput?.value || this.selectedOptionId();
+    if (!selectedId) return;
+
+    let matched = null;
+    this.queryAllOptions().forEach((opt) => {
+      opt.classList.remove("pb_dropdown_option_selected");
+      try {
+        const payload = JSON.parse(opt.dataset.dropdownOptionLabel);
+        if (String(payload.id) === String(selectedId)) matched = opt;
+      } catch {
+        // ignore invalid option payloads
+      }
+    });
+    if (matched) matched.classList.add("pb_dropdown_option_selected");
+  }
+
+  selectedOptionId() {
+    if (!this.selectedOptionJson) return "";
+    try {
+      const id = JSON.parse(this.selectedOptionJson).id;
+      return id == null ? "" : String(id);
+    } catch {
+      return "";
+    }
   }
 
   // Synchronous autocomplete shows every option when the input is the selected label.
