@@ -911,7 +911,7 @@ describe("PbDropdown async search", () => {
     expect(instance.target).toHaveClass("close");
   });
 
-  test.each(["click", "ArrowDown", "Enter"])("%s after selection and clear does not open an empty menu", (action) => {
+  test.each(["click", "ArrowDown", "Enter"])("%s opens an empty async menu with the empty message", (action) => {
     const down = document.createElement("span");
     down.setAttribute("data-dropdown-open-icon", "");
     const up = document.createElement("span");
@@ -925,14 +925,39 @@ describe("PbDropdown async search", () => {
     jest.advanceTimersByTime(0);
     if (action === "click") input.click();
     else input.dispatchEvent(new KeyboardEvent("keydown", { key: action, bubbles: true }));
-    expect(instance.target).toHaveClass("close");
-    expect(instance.target).not.toHaveClass("open");
-    expect(down.style.display).not.toBe("none");
-    expect(up.style.display).toBe("none");
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No results found");
+    expect(down.style.display).toBe("none");
+    expect(up.style.display).not.toBe("none");
     type("new");
     jest.advanceTimersByTime(250);
     expect(instance.target).toHaveClass("open");
     expect(instance.target).toHaveTextContent("Loading");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+  });
+
+  test("clicking an empty async dropdown shows the empty message until a search starts", () => {
+    input.click();
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No results found");
+
+    type("abc");
+    expect(instance.target).toHaveClass("open");
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No results found");
+    jest.advanceTimersByTime(250);
+    expect(instance.target).toHaveTextContent("Loading");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+    search.mock.calls[0][0].detail.setResults([{ id: "1", label: "Result" }]);
+    expect(instance.queryAllOptions()[0]).toHaveTextContent("Result");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+  });
+
+  test("no_options_text is the empty message shown before an async search", () => {
+    instance.disconnect();
+    root.dataset.pbDropdownNoOptionsText = "No agents available";
+    instance.connect();
+    input.click();
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No agents available");
   });
 
   test("an empty async search-bar menu can still open so the user can type", () => {
@@ -944,6 +969,7 @@ describe("PbDropdown async search", () => {
     instance.clearSelection();
     root.querySelector(".pb_dropdown_trigger").click();
     expect(instance.target).toHaveClass("open");
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("No results found");
   });
 
   test.each(["empty", "error"])("async %s status can be reopened", (status) => {

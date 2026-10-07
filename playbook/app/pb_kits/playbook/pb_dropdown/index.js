@@ -136,11 +136,20 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   get canOpenMenu() {
-    return !this.isAsync || Boolean(
-      this.searchBar || this.target?.querySelector(
-        `${OPTION_SELECTOR}, [data-dropdown-async-status], .dropdown_no_options`,
-      ),
-    );
+    return !this.isAsync || Boolean(this.searchBar || this.hasAsyncMenuContent());
+  }
+
+  hasAsyncMenuContent() {
+    return Boolean(this.target?.querySelector(
+      `${OPTION_SELECTOR}, [data-dropdown-async-status], .dropdown_no_options`,
+    ));
+  }
+
+  // An empty async menu opens with the empty message until a search replaces it.
+  showAsyncEmptyState() {
+    if (!this.isAsync || this.hasAsyncMenuContent()) return;
+    this.getOptionsParent()?.replaceChildren();
+    this.showNoOptionsMessage("No results found");
   }
 
   asyncRequestId = 0;
@@ -694,6 +703,7 @@ export default class PbDropdown extends PbEnhancedElement {
         this.removeNoOptionsMessage();
         this.target?.querySelector("[data-dropdown-async-status]")?.remove();
         this.resetFocus();
+        if (this.target?.classList.contains("open")) this.showAsyncEmptyState();
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       }
@@ -1400,6 +1410,7 @@ export default class PbDropdown extends PbEnhancedElement {
       this.asyncSearchInterrupted = false;
       retryTerm = this.searchInput?.value || this.searchBar?.value || "";
     }
+    this.showAsyncEmptyState();
     if (!this.canOpenMenu && retryTerm == null) return;
     if (!this.canOpenMenu) {
       this.searchAsync(retryTerm);

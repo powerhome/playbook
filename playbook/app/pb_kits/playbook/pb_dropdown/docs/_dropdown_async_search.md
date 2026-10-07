@@ -50,6 +50,6 @@ Editing nonempty text retains the Dropdown's selected value until it is changed 
 
 Explicit clear and native form reset clear query text, selection, remote results, loading/error messages, and pending callbacks, and close the menu. They emit the normal cleared selection payload (`null` or `[]`) and the input notification. Native reset completes after the browser resets form controls; a canceled reset leaves kit state intact. Reset clears the selection rather than restoring `default_value`, matching the kit's existing reset convention.
 
-After clear, clicking an async autocomplete does not open an empty menu. The menu opens when a search starts or results/status content is available. An async search-bar menu can still open so its input remains accessible.
+Clicking inside an async Dropdown opens the menu. When no results are available yet, it shows the empty message until the debounced search starts and replaces it with loading, results, or an error. An async search-bar menu stays open so its input remains accessible.
 
 The clear control is also available for an unselected async query unless `clearable: false`. No async input notifications, remote-result cleanup, or changed reset timing are applied to synchronous Dropdowns.
