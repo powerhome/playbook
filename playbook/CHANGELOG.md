@@ -1,10 +1,10 @@
-# 18.1.0
+# 🎛️ RichTextEditor: More Editing, Less Toolbar
 
 ##### October 07, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
-Your feature description goes here.
+We tightened up the RichTextEditor editor with smaller controls, a cleaner toolbar layout, and more breathing room where it counts. Lists, indenting, and outdenting are now front and center, while the toolbar adapts to smaller screens. Rails users can also opt into additional editor extensions without changing the default experience.
 
 [18.1.0](https://github.com/powerhome/playbook/tree/18.1.0) full list of changes:
 
