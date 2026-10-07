@@ -121,15 +121,16 @@ export default function useAsyncOptions(enabled: boolean, loadOptions: LoadOptio
         settled = true;
         pendingSearch.current = null;
         clearTimeout(watchdog.current);
-        if (!failed && !initial) {
-          results = resultsMatchingQuery(results, priorSearchResults.current, term);
-          priorSearchResults.current = results;
-        }
         if (cacheOptions && !failed) {
-          // Bound per-instance memory, including empty successful searches.
+          // Store the server payload, including an empty success. Rows kept from
+          // an earlier query are only for the list on screen.
           cache.current.delete(term);
           if (cache.current.size >= 100) cache.current.delete(cache.current.keys().next().value);
           cache.current.set(term, results);
+        }
+        if (!failed && !initial) {
+          results = resultsMatchingQuery(results, priorSearchResults.current, term);
+          priorSearchResults.current = results;
         }
         if (initial && !failed) preloaded.current = results;
         if (failed) {

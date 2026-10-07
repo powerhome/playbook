@@ -2204,6 +2204,32 @@ describe('async Dropdown Typeahead parity', () => {
     await flush();
     expect(screen.getByText('No results found')).toBeInTheDocument();
   });
+
+  test('cacheOptions stores the empty server response, not locally kept rows', async () => {
+    const people = [
+      { label: 'Emily Smith', value: 1 },
+      { label: 'Emily Jones', value: 2 },
+    ];
+    const loadOptions = jest.fn((term) => Promise.resolve(
+      term.trim().includes(' ') && !term.endsWith(' ') ? [] : people
+    ));
+    render(<Dropdown async
+        autocomplete
+        cacheOptions
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Emily' } });
+    await flush();
+    fireEvent.change(input, { target: { value: 'Emily S' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Emily Smith']);
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.change(input, { target: { value: 'Emily S' } });
+    await flush();
+    expect(screen.getByText('No results found')).toBeInTheDocument();
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
 });
 
 test('async results render through Dropdown.Container with a custom trigger display', async () => {
