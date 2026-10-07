@@ -936,6 +936,28 @@ describe("PbDropdown async search", () => {
     expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
   });
 
+  test("a shorter query after a selection shows sibling matches the selected label had hidden", () => {
+    type("Emily");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[0][0].detail.setResults([
+      { id: "1", label: "Emily Smith" },
+      { id: "2", label: "Emily Sanders" },
+      { id: "3", label: "Emily Jones" },
+    ]);
+    instance.queryAllOptions()[0].click();
+    jest.advanceTimersByTime(0);
+
+    type("Emily S");
+    jest.advanceTimersByTime(250);
+    search.mock.calls[1][0].detail.setResults([]);
+
+    const rows = () => Array.from(instance.queryAllOptions());
+    const visible = () => rows().filter((opt) => opt.style.display !== "none");
+    expect(rows().map((opt) => opt.textContent)).toEqual(["Emily Smith", "Emily Sanders"]);
+    expect(visible().map((opt) => opt.textContent)).toEqual(["Emily Smith", "Emily Sanders"]);
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+  });
+
   test("a query after a space keeps earlier results whose labels match", () => {
     type("Emily");
     jest.advanceTimersByTime(250);

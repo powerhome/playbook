@@ -670,6 +670,17 @@ export default class PbDropdown extends PbEnhancedElement {
     });
   }
 
+  // The selected-label filter hides siblings before the next search snapshots them.
+  // A shorter query can match those rows, so the clone must not keep display:none.
+  cloneSettledAsyncOption(node) {
+    const option = node.cloneNode(true);
+    const selected = this.isMultiSelect && Array.from(this.selectedOptions).some((raw) =>
+      this.sameOption(raw, option.dataset.dropdownOptionLabel),
+    );
+    option.style.display = selected ? "none" : "";
+    return option;
+  }
+
   rememberSettledAsyncResults() {
     const parent = this.getOptionsParent();
     this.asyncSettledOptions = parent ? Array.from(parent.children).map((node) => node.cloneNode(true)) : [];
@@ -783,7 +794,7 @@ export default class PbDropdown extends PbEnhancedElement {
         parent.replaceChildren();
         const visibleOptions = !failed && !options.length ? this.settledOptionsMatchingQuery(term) : options;
         visibleOptions.forEach((result) => parent.appendChild(
-          result instanceof Node ? result.cloneNode(true) : this.buildAsyncOptionElement(result),
+          result instanceof Node ? this.cloneSettledAsyncOption(result) : this.buildAsyncOptionElement(result),
         ));
         // The default option lives outside the menu, so mark the mounted row that shares its id.
         this.markSelectedAsyncResult();
