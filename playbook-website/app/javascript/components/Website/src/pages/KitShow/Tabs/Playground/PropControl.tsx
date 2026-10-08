@@ -457,6 +457,7 @@ const EnumControl: React.FC<ExtendedPropControlProps> = ({
     >
       <Dropdown
         className={panelDropdownClassName("props-panel", isDropdownFilled)}
+        constrainHeight
         defaultValue={activeOption}
         id={`prop-${name}-enum-dropdown`}
         key={`${value?.enabled}-${String(displayValue ?? "")}`}
@@ -601,6 +602,7 @@ const FunctionControl: React.FC<ExtendedPropControlProps> = ({
           isFilledDisplayValue(currentValue),
         )}
         clearable={false}
+        constrainHeight
         defaultValue={activeOption}
         id={`prop-${name}-function-dropdown`}
         key={currentValue}
