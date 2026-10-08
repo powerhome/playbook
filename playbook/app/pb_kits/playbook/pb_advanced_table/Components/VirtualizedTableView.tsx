@@ -46,6 +46,9 @@ export const VirtualizedTableView = ({
   } = useContext(AdvancedTableContext)
 
   const columnPinning = table.getState().columnPinning || { left: [] };
+  const isMultiHeaderColumn = (table.options.meta?.columnDefinitions || []).some(
+    (column: Record<string, unknown>) => "columns" in column
+  );
   const sortingState = JSON.stringify(table.getState().sorting || []);
 
   // Store column widths extracted from header
@@ -212,7 +215,9 @@ export const VirtualizedTableView = ({
 
               {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
                 const isPinnedLeft = columnPinning.left.includes(cell.column.id);
-                const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
+                const isLastCell = cell.column.parent
+                  ? cell.column.parent.columns.at(-1)?.id === cell.column.id
+                  : isMultiHeaderColumn && i !== 0;
                 const cellWidth = columnWidths[cell.column.id] || 'auto';
 
                 return (
