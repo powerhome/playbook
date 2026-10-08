@@ -13,7 +13,6 @@
 **Improvements:**
 
 - Playground: Fix Icon Kit + Playground Dropdown Issues [\#6739](https://github.com/powerhome/playbook/pull/6739) ([ElisaShapiro](https://github.com/ElisaShapiro))
-- Version Bump 18.1.0 [\#6738](https://github.com/powerhome/playbook/pull/6738) ([ElisaShapiro](https://github.com/ElisaShapiro))
 - Text Input Kit: Fix "add On" Icon Size [\#6732](https://github.com/powerhome/playbook/pull/6732) ([ElisaShapiro](https://github.com/ElisaShapiro))
 
 **Fixed Bugs:**
