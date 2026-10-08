@@ -831,9 +831,10 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.searchInput?.setCustomValidity("")
 
     const errorLabelElement = this.target
-    if (errorLabelElement) {
-      errorLabelElement.remove()
-      this.element.classList.remove("error")
-    }
+    if (errorLabelElement) errorLabelElement.remove()
+
+    // Always clear the kit error class — the label may already have been removed by
+    // observeRogueErrorInsideInnerContainer after a submit blur.
+    this.element.classList.remove("error")
   }
 }
