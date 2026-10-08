@@ -18,10 +18,7 @@ export default class PbStarRating extends PbEnhancedElement {
   addEventListeners() {
     this.element.querySelectorAll(STAR_RATING_SELECTOR).forEach(star => {
       star.addEventListener("click", (event) => {
-        const clickedStarId = event.currentTarget.id
-        this.updateStarColors(clickedStarId)
-        this.updateHiddenInputValue(clickedStarId)
-        this.clearFormValidation()
+        this.handleStarClick(event.currentTarget.id)
       })
 
       star.addEventListener("mouseenter", (event) => {
@@ -45,6 +42,7 @@ export default class PbStarRating extends PbEnhancedElement {
   handleStarClick(starId) {
     this.updateStarColors(starId)
     this.updateHiddenInputValue(starId)
+    this.clearFormValidation()
   }
 
   updateStarColors(clickedStarId) {

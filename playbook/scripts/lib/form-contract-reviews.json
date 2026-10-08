@@ -137,7 +137,7 @@
     },
     "star_rating": {
       "app/pb_kits/playbook/pb_star_rating/_star_rating.tsx": "9ac320f7d6c633c33cc76d3581fd04e86044ce0b9f8e67de8e375143271f4e7b",
-      "app/pb_kits/playbook/pb_star_rating/index.js": "45365eb91efd9d1410a27921f3a550f78a85bfbccd17d9dc42911d5b4c7f067a",
+      "app/pb_kits/playbook/pb_star_rating/index.js": "aecb4796c52a4981ae1f6e05bb5693c8e7839c683e5630f3e2e580fa7dddc16d",
       "app/pb_kits/playbook/pb_star_rating/star_rating.html.erb": "977c0d39d6874855ba2faded253c3c33deeba74121870d1187371587be239ae2",
       "app/pb_kits/playbook/pb_star_rating/star_rating.rb": "86ef421223df8a84fb65680cbe6648bd684ccb1d54e32a7c72ccf52ad4f45102",
       "app/pb_kits/playbook/pb_star_rating/stars/utils.tsx": "06b5ac5b40e32b7c7bd60644a1d9ad8d7c7f79b4d255e46b79b385d012ca96bf",
