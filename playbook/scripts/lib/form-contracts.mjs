@@ -117,7 +117,7 @@ export const FORM_METHODS = [
   directMethod('multi_level_select', {
     binding: { ...directBinding, modelValue: true, value: 'Unless props.selected_ids is set, the builder sets selected_ids from Array(model attribute).map(&:to_s) when present so string and numeric tree ids match.' },
     submission: { submits: true, value: 'JavaScript renders one hidden input per selected item id, named name[]. This also applies to variant: single.', multi: 'Pass user[regions], without [], to submit user[regions][] entries.' },
-    validation: { required: 'props.required is used by the kit; hidden selected-value inputs also receive required. Do not infer native validation from hidden inputs.', indicator: 'props.required_indicator is visual only.', error: messageError, client: 'props.validation_message becomes data-message on the search input.' },
+    validation: { required: 'props.required is used by the kit. The search input is required when empty; kit JS removes required from the search input once currentSelected() is non-empty. Hidden selected-value inputs also receive required, but type=hidden is not constraint-validated.', indicator: 'props.required_indicator is visual only.', error: messageError, client: 'props.validation_message becomes data-message on the search input. Kit JS clears custom validity when the selection changes.' },
     example: formExample('f.multi_level_select :regions, props: { label: "Regions", tree_data: @regions, required: true, validation_message: "Please select a region" }'),
   }),
   directMethod('star_rating_field', {
