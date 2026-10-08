@@ -2,7 +2,10 @@ import PbEnhancedElement from '../pb_enhanced_element'
 import { debounce } from '../utilities/object'
 
 // Kit selectors
-const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"]'
+// Most kits use *_kit classnames. Dropdown and multi-level select do not; they
+// expose data-pb-* markers on the root instead — include those so bare
+// pb_form_with fields still get custom validation messages.
+const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"], [data-pb-dropdown], [data-pb-multi-level-select]'
 const ERROR_MESSAGE_SELECTOR   = '.pb_body_kit_negative'
 const MESSAGE_CONTAINER_SELECTOR = '[data-pb-validation-container="true"]'
 

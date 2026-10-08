@@ -177,7 +177,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const htmlProps = buildHtmlProps(htmlOptions);
     const separatorsClass = separators ? '' : 'separators_hidden'
     const classes = classnames(
-        "pb_dropdown_kit",
         buildCss("pb_dropdown", variant, separatorsClass),
         disabled && "disabled",
         globalProps(props),
