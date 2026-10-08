@@ -118,6 +118,14 @@
       ],
       "default": false
     },
+    "validationMessage": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
     "value": {
       "type": "string",
       "platforms": [

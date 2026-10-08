@@ -30,6 +30,9 @@
           aria-describedby="<%= object.error_id %>"
           aria-invalid="true"
           <% end %>
+          <% if object.validation_message.present? %>
+          data-message="<%= object.validation_message %>"
+          <% end %>
           data-pb-mls-search
           <%= "disabled" if object.disabled %>
           id="<%= object.input_id %>"

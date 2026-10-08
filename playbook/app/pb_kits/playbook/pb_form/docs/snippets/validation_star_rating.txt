@@ -1,2 +1,7 @@
 <%= form.star_rating_field "validation[rating]",
-      props: { variant: "interactive", label: "Rating", required: true } %>
+      props: {
+        variant: "interactive",
+        label: "Rating",
+        required: true,
+        validation_message: "Please provide a rating",
+      } %>

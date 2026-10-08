@@ -1,1 +1,5 @@
-  <%= form.text_area :bio, props: { label: "Bio", required: true } %>
+  <%= form.text_area :bio, props: {
+        label: "Bio",
+        required: true,
+        validation: { message: "Bio is required" },
+      } %>

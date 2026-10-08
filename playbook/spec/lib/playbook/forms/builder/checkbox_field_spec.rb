@@ -37,6 +37,19 @@ RSpec.describe Playbook::Forms::Builder, "#check_box", type: :helper do
     expect(rendered).to have_tag("input[type=checkbox][name='example[terms]'][required]")
   end
 
+  it "passes validation_message as data-message on the checkbox input" do
+    rendered = render_form do |builder|
+      concat builder.check_box(
+        :terms,
+        props: { required: true, validation_message: "Please accept the terms" }
+      )
+    end
+
+    expect(rendered).to have_tag(
+      "input[type=checkbox][name='example[terms]'][required][data-message='Please accept the terms']"
+    )
+  end
+
   it "passes checked and unchecked values through to the Rails checkbox helper" do
     rendered = render_form do |builder|
       concat builder.check_box(:terms, checked_value: "yes", unchecked_value: "no")

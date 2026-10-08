@@ -1,4 +1,5 @@
   <%= form.phone_number_field "validation[phone]", props: {
         label: "Phone Number",
         required: true,
+        validation_message: "Phone number is required",
       } %>
