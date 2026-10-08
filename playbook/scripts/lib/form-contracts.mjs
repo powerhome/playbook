@@ -5,7 +5,7 @@ export const FORM_BUILDER = {
   platforms: ['rails'],
   setup: '<%= pb_form_with model: @user do |f| %>\n  <%= f.text_field :email, props: { label: "Email", required: true } %>\n<% end %>',
   formWith: '<%= form_with model: @user, builder: Playbook::Forms::Builder do |f| %>\n  <%= f.text_field :email, props: { label: "Email" } %>\n<% end %>',
-  validation: 'pb_form_with defaults validate to false. validate: true sets data-pb-form-validation for Playbook client validation. PbFormValidation finds the field kit via a *_kit classname, or via data-pb-dropdown / data-pb-multi-level-select for those kits. Server/model validation remains the host application responsibility. Most builder fields also map record.errors into props.error unless the caller sets error explicitly (including nil).',
+  validation: 'pb_form_with defaults validate to false. validate: true sets data-pb-form-validation for Playbook client validation. PbFormValidation finds the field kit via a *_kit classname, or via data-pb-dropdown / data-pb-multi-level-select for those kits. It binds invalid in capture on the form (not a one-time [required] snapshot) so controls that toggle required after mount still get data-message. Server/model validation remains the host application responsibility. Most builder fields also map record.errors into props.error unless the caller sets error explicitly (including nil).',
   lifecycle: 'pb_form_with invokes formHelper when available. PbFormValidation is registered with PbKitRegistry; its MutationObserver handles dynamically added forms, including Turbo navigation. Load the Playbook Rails bundle in the host.',
   simpleForm: 'No Simple Form adapter is declared by this contract. These methods belong to Playbook::Forms::Builder.',
   sources: [

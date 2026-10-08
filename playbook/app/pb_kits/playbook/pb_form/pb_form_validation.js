@@ -14,32 +14,28 @@ const FORM_SELECTOR            = 'form[data-pb-form-validation="true"]'
 const REQUIRED_FIELDS_SELECTOR = 'input[required],textarea[required],select[required]'
 const PHONE_NUMBER_VALIDATION_ERROR_SELECTOR = '[data-pb-phone-validation-error="true"]'
 
-const FIELD_EVENTS = [
-  'change',
-  'valid',
-  'invalid',
-]
 class PbFormValidation extends PbEnhancedElement {
   static get selector() {
     return FORM_SELECTOR
   }
 
   connect() {
-    this.formValidationFields.forEach((field) => {
-      // Skip phone number inputs - they handle their own validation
-      const isPhoneNumberInput = field.closest('.pb_phone_number_input')
-      if (isPhoneNumberInput) return
+    // `invalid` does not bubble — listen in capture so we still see it.
+    // Do not snapshot [required] at connect: dropdown / multi-level select may
+    // remove required during their own connect (they register earlier) when a
+    // default selection is present, then put it back when cleared.
+    this.handleInvalid = (event) => {
+      if (!this.isFormValidationField(event.target)) return
+      this.validateFormField(event)
+    }
+    this.element.addEventListener('invalid', this.handleInvalid, true)
 
-      // Skip TimePicker inputs - they handle their own validation
-      const isTimePickerInput = field.closest('.pb_time_picker')
-      if (isTimePickerInput) return
-
-      FIELD_EVENTS.forEach((e) => {
-        field.addEventListener(e, debounce((event) => {
-          this.validateFormField(event)
-        }, 250), false)
-      })
-    })
+    this.handleFieldEvent = debounce((event) => {
+      if (!this.isFormValidationField(event.target)) return
+      this.validateFormField(event)
+    }, 250)
+    this.element.addEventListener('change', this.handleFieldEvent)
+    this.element.addEventListener('valid', this.handleFieldEvent)
 
     // Add event listener to check for phone number validation errors
     this.element.addEventListener('submit', (event) => {
@@ -51,6 +47,13 @@ class PbFormValidation extends PbEnhancedElement {
         }
       }, 0)
     })
+  }
+
+  isFormValidationField(field) {
+    if (!field?.matches?.(REQUIRED_FIELDS_SELECTOR)) return false
+    if (field.closest('.pb_phone_number_input')) return false
+    if (field.closest('.pb_time_picker')) return false
+    return true
   }
 
   validateFormField(event) {
@@ -122,10 +125,6 @@ class PbFormValidation extends PbEnhancedElement {
     const kitClassName = ERROR_MESSAGE_SELECTOR.replace(/\./, '')
     errorContainer.classList.add(kitClassName)
     return errorContainer
-  }
-  get formValidationFields() {
-    return this._formValidationFields =
-      this._formValidationFields || this.element.querySelectorAll(REQUIRED_FIELDS_SELECTOR)
   }
 }
 
