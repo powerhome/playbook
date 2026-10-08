@@ -33,6 +33,31 @@ RSpec.describe Playbook::Forms::Builder, "#select", type: :helper do
     expect(rendered).to have_tag("option", text: "Choose one")
   end
 
+  it "renders an empty prompt by default" do
+    rendered = render_form { |builder| concat builder.select(:status, choices) }
+
+    expect(rendered).to have_tag("option[value='']", text: "")
+  end
+
+  it "does not render a prompt when prompt is false" do
+    rendered = render_form do |builder|
+      concat builder.select(:status, choices, { prompt: false }, props: { blank_selection: "Choose one" })
+    end
+
+    expect(rendered).not_to have_tag("option[value='']")
+    expect(rendered).not_to have_tag("option", text: "Choose one")
+    expect(rendered).to have_tag("option", count: 2)
+  end
+
+  it "prefers an explicit prompt option over blank_selection" do
+    rendered = render_form do |builder|
+      concat builder.select(:status, choices, { prompt: "Pick a status" }, props: { blank_selection: "Choose one" })
+    end
+
+    expect(rendered).to have_tag("option[value='']", text: "Pick a status")
+    expect(rendered).not_to have_tag("option", text: "Choose one")
+  end
+
   it "passes class and data from input_options" do
     rendered = render_form do |builder|
       concat builder.select(

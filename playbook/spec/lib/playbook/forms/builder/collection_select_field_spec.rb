@@ -45,6 +45,47 @@ RSpec.describe Playbook::Forms::Builder, "#collection_select", type: :helper do
     expect(rendered).to have_tag("option", text: "Choose one")
   end
 
+  it "renders an empty prompt by default" do
+    rendered = render_form do |builder|
+      concat builder.collection_select(:category_id, collection, :id, :name)
+    end
+
+    expect(rendered).to have_tag("option[value='']", text: "")
+  end
+
+  it "does not render a prompt when prompt is false" do
+    rendered = render_form do |builder|
+      concat builder.collection_select(
+        :category_id,
+        collection,
+        :id,
+        :name,
+        { prompt: false },
+        props: { blank_selection: "Choose one" }
+      )
+    end
+
+    expect(rendered).not_to have_tag("option[value='']")
+    expect(rendered).not_to have_tag("option", text: "Choose one")
+    expect(rendered).to have_tag("option", count: 2)
+  end
+
+  it "prefers an explicit prompt option over blank_selection" do
+    rendered = render_form do |builder|
+      concat builder.collection_select(
+        :category_id,
+        collection,
+        :id,
+        :name,
+        { prompt: "Pick a category" },
+        props: { blank_selection: "Choose one" }
+      )
+    end
+
+    expect(rendered).to have_tag("option[value='']", text: "Pick a category")
+    expect(rendered).not_to have_tag("option", text: "Choose one")
+  end
+
   it "uses a custom input id from input_options" do
     rendered = render_form do |builder|
       concat builder.collection_select(
