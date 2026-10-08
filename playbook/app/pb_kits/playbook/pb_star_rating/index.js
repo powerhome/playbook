@@ -147,6 +147,12 @@ export default class PbStarRating extends PbEnhancedElement {
 
   clearFormValidation() {
     const hiddenInput = this.element.querySelector(STAR_RATING_INPUT_DATA_SELECTOR)
+    if (!hiddenInput) return
+
+    // PbFormValidation may have setCustomValidity from data-message; clear it
+    // before checkValidity so a chosen rating can pass constraint validation.
+    hiddenInput.setCustomValidity("")
+
     if (hiddenInput.checkValidity()) {
       const errorLabelElement = this.element.querySelector(".pb_body_kit_negative")
       if (errorLabelElement) {
