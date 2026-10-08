@@ -42,7 +42,8 @@ module Playbook
                                    default: true
 
       def classname
-        generate_classname("pb_multi_level_select") + error_class
+        # pb_multi_level_select_kit satisfies PbFormValidation's [class^="pb_"][class*="_kit"] lookup.
+        "pb_multi_level_select_kit #{generate_classname('pb_multi_level_select')}#{error_class}"
       end
 
       def data

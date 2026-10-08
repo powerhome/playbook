@@ -92,7 +92,8 @@ module Playbook
       end
 
       def classname
-        classes = generate_classname("pb_dropdown", variant, separators_class)
+        # pb_dropdown_kit satisfies PbFormValidation's [class^="pb_"][class*="_kit"] lookup.
+        classes = "pb_dropdown_kit #{generate_classname('pb_dropdown', variant, separators_class)}"
         classes << " disabled" if disabled
         classes
       end

@@ -138,6 +138,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     const dataProps = buildDataProps(data);
     const htmlProps = buildHtmlProps(htmlOptions);
     const classes = classnames(
+      "pb_multi_level_select_kit",
       buildCss("pb_multi_level_select"),
       error && "error",
       globalProps(props),
