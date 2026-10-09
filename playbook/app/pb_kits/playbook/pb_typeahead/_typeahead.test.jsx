@@ -400,12 +400,18 @@ test('keyboard reorder moves pill position when enablePillReorder is true', () =
   const pills = kit.querySelectorAll('.pb_form_pill_kit.pb_form_pill_primary')
 
   pills[1].focus()
-  fireEvent.keyDown(pills[1], { key: 'ArrowLeft', ctrlKey: true, shiftKey: true })
+  fireEvent.keyDown(pills[1], { key: 'ArrowLeft' })
 
   expect(handleChange).toHaveBeenCalled()
   const reorderedValue = handleChange.mock.calls[0][0]
   expect(reorderedValue[0].label).toBe('Red')
   expect(reorderedValue[1].label).toBe('Orange')
+
+  fireEvent.keyDown(pills[1], { key: 'ArrowRight' })
+
+  const movedRightValue = handleChange.mock.calls[1][0]
+  expect(movedRightValue[1].label).toBe('Green')
+  expect(movedRightValue[2].label).toBe('Red')
 })
 
 test('remove still works when enablePillReorder is true', () => {
@@ -453,8 +459,25 @@ test('pillDragHandle false hides grip and enables whole-pill pointer drag', () =
   })
 })
 
-test('pill reorder commit dispatches custom event on drop', () => {
+test('pillDragHandle false shows a grip icon inside each pill', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'pill-icon-test' }}
+        enablePillReorder
+        isMulti
+        options={options}
+        pillDragHandle={false}
+        value={[options[0], options[1]]}
+    />
+  )
+
+  const kit = screen.getByTestId('pill-icon-test')
+  expect(kit.querySelectorAll('.pb_form_pill_kit_icon .pb_form_pill_icon').length).toBe(2)
+})
+
+test('dragging a pill shows a ghost and drop line, then commits on drop', () => {
   const reorderHandler = jest.fn()
+  const originalElementFromPoint = document.elementFromPoint
 
   render(
     <Typeahead
@@ -463,6 +486,7 @@ test('pill reorder commit dispatches custom event on drop', () => {
         id="reorder-event-typeahead"
         isMulti
         options={options}
+        pillDragHandle={false}
         value={[options[0], options[1], options[2]]}
     />
   )
@@ -474,13 +498,39 @@ test('pill reorder commit dispatches custom event on drop', () => {
 
   const kit = screen.getByTestId('reorder-event-test')
   const draggableItems = kit.querySelectorAll('.pb_draggable_item')
+  draggableItems.forEach((item, index) => {
+    item.getBoundingClientRect = () => ({ left: index * 100, right: index * 100 + 100, width: 100, top: 0, bottom: 30, height: 30 })
+  })
+  document.elementFromPoint = (x) => draggableItems[Math.floor(x / 100)]
 
-  fireEvent.dragStart(draggableItems[2])
-  fireEvent.dragEnter(draggableItems[0])
-  fireEvent.dragEnd(draggableItems[2])
+  fireEvent.mouseDown(draggableItems[0], { button: 0, clientX: 10, clientY: 10 })
+  fireEvent.mouseMove(document, { clientX: 30, clientY: 10 })
+  fireEvent.mouseMove(document, { clientX: 120, clientY: 10 })
 
+  expect(document.querySelector('.pb_typeahead_pill_drag_preview')).toBeInTheDocument()
+  expect(kit.querySelector('.pb_typeahead_draggable_pills')).toHaveClass('active')
+  expect(kit.querySelector('.pb_typeahead_drop_before, .pb_typeahead_drop_after')).not.toBeInTheDocument()
+
+  // Slightly below the pill row still targets a middle position; far below targets nothing
+  fireEvent.mouseMove(document, { clientX: 220, clientY: 40 })
+  expect(draggableItems[2]).toHaveClass('pb_typeahead_drop_before')
+  fireEvent.mouseMove(document, { clientX: 220, clientY: 1000 })
+  expect(kit.querySelector('.pb_typeahead_drop_before, .pb_typeahead_drop_after')).not.toBeInTheDocument()
+
+  fireEvent.mouseMove(document, { clientX: 280, clientY: 10 })
+  expect(draggableItems[2]).toHaveClass('pb_typeahead_drop_after')
+
+  // Past the last pill (e.g. over the input) still targets the end
+  fireEvent.mouseMove(document, { clientX: 450, clientY: 20 })
+  expect(draggableItems[2]).toHaveClass('pb_typeahead_drop_after')
+
+  fireEvent.mouseUp(document, { clientX: 450, clientY: 20 })
+
+  expect(document.querySelector('.pb_typeahead_pill_drag_preview')).not.toBeInTheDocument()
   expect(reorderHandler).toHaveBeenCalled()
+  expect(reorderHandler.mock.calls[0][0].detail.map((item) => item.label)).toEqual(['Red', 'Green', 'Orange'])
 
+  document.elementFromPoint = originalElementFromPoint
   document.removeEventListener(
     'pb-typeahead-kit-reorder-event-typeahead-result-option-reorder',
     reorderHandler,
