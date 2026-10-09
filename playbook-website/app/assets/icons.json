@@ -8,6 +8,10 @@
     "category": "Alert"
   },
   {
+    "name": "bell-slash",
+    "category": "Alert"
+  },
+  {
     "name": "bell",
     "category": "Alert"
   },
@@ -936,7 +940,27 @@
     "category": "Files"
   },
   {
+    "name": "file-circle-ban",
+    "category": "Files"
+  },
+  {
     "name": "file-circle-check",
+    "category": "Files"
+  },
+  {
+    "name": "file-circle-info",
+    "category": "Files"
+  },
+  {
+    "name": "file-circle-minus",
+    "category": "Files"
+  },
+  {
+    "name": "file-circle-plus",
+    "category": "Files"
+  },
+  {
+    "name": "file-circle-question",
     "category": "Files"
   },
   {
@@ -997,6 +1021,10 @@
   },
   {
     "name": "file-pen",
+    "category": "Files"
+  },
+  {
+    "name": "file-plus",
     "category": "Files"
   },
   {
@@ -1688,6 +1716,10 @@
     "category": "Media"
   },
   {
+    "name": "gif",
+    "category": "Media"
+  },
+  {
     "name": "headphones",
     "category": "Media"
   },
@@ -1785,6 +1817,10 @@
   },
   {
     "name": "frown",
+    "category": "People"
+  },
+  {
+    "name": "ghost",
     "category": "People"
   },
   {
