@@ -40,6 +40,13 @@ export const COMMON_FORM_FAQS = [
 ];
 
 export const KIT_USAGE_FAQS = {
+  select: [{
+    id: 'select.builder-prompt', platforms: ['rails'],
+    questions: ['How do I omit the prompt in a select builder field?', 'Does blank_selection override options.prompt?'],
+    answer: 'For f.select and f.collection_select, pass prompt: false in the positional options hash to omit the prompt. An explicit prompt is preserved; otherwise the builder uses props.blank_selection.to_s (default empty). time_zone_select_field still sets the prompt from props.blank_selection (default empty), overriding an explicit prompt.',
+    example: '<%= f.select :country, [["Canada", "ca"]], { prompt: false }, {}, props: { label: true } %>',
+    contractPaths: ['form.rails.builder.methods'], props: ['blankSelection'],
+  }],
   dropdown: [{
     id: 'dropdown.builder-name', platforms: ['rails'],
     questions: ['Does dropdown_field scope country to user[country]?', 'Does multi_select submit separate array values?'],

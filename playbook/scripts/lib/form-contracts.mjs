@@ -71,7 +71,7 @@ const selectMethods = [
   name,
   binding: railsBinding,
   submission: { submits: true, value: 'Selected option value(s) from the Rails select helper.', multi: 'For multiple selection, set html_options.multiple. Rails controls array naming and auxiliary hidden inputs.' },
-  htmlOptions: { argument: 'html_options', description: 'Pass input attributes in the positional html_options hash. props.input_options forwards only id, class and data. props.blank_selection sets options.prompt (default empty).' },
+  htmlOptions: { argument: 'html_options', description: `Pass input attributes in the positional html_options hash. props.input_options forwards only id, class and data. ${name === 'time_zone_select_field' ? 'props.blank_selection sets options.prompt (default empty), overriding any explicit prompt.' : 'An explicit options.prompt is preserved, including false to omit the prompt. Otherwise props.blank_selection.to_s sets options.prompt (default empty).'}` },
   validation: { required: 'props.required sets html_options.required.', indicator: 'props.required_indicator is visual only.', error: messageError, client: 'props.validation_message becomes data-message.' },
   block: { supported: name === 'select', description: name === 'select' ? 'Passed to Rails select to construct option tags.' : 'Caller blocks are not forwarded.' },
   example: formExample(example),
@@ -140,4 +140,3 @@ export const FORM_ACTIONS = {
   description: 'Yields an ActionArea inside ol.pb-form-actions. submit defaults props.type to submit and props.text to the supplied value or Rails submit_default_value. button renders supplied props in an li.',
   example: '<%= f.actions do |action| %>\n  <%= action.submit "Save" %>\n<% end %>',
 };
-
