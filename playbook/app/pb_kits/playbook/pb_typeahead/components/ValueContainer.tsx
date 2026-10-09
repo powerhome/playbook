@@ -4,8 +4,10 @@ import { components } from 'react-select'
 import Body from '../../pb_body/_body'
 import Draggable from '../../pb_draggable/_draggable'
 import { DraggableContext, DraggableProvider } from '../../pb_draggable/context'
+import { noop } from '../../utilities/object'
 import { SelectValueType } from '../_typeahead'
 import PillRenderer from './PillRenderer'
+import usePillDropIndicator from './usePillDropIndicator'
 
 type ValueContainerProps = {
   children: React.ReactNode | React.ReactNode[]
@@ -23,17 +25,9 @@ const isPillReorderActive = (selectProps: Record<string, unknown> | undefined): 
   )
 }
 
-const mapDraggableItemsToValue = (
-  items: Array<{ id: string }>,
-  value: SelectValueType[],
-): SelectValueType[] => {
-  return items
-    .map((item) => value.find((entry) => entry.value === item.id))
-    .filter((entry): entry is SelectValueType => Boolean(entry))
-}
-
 type DraggablePillListProps = {
   onRemove: (item: SelectValueType) => void
+  pendingReorderRef: React.MutableRefObject<SelectValueType[] | null>
   selectProps: Record<string, unknown>
   setValue: (value: SelectValueType[], action: string) => void
   value: SelectValueType[]
@@ -64,20 +58,25 @@ const shouldBlockPillMouseDown = (
 
 const DraggablePillList = ({
   onRemove,
+  pendingReorderRef,
   selectProps,
   setValue,
   value,
 }: DraggablePillListProps) => {
-  const { items, isDragging } = DraggableContext()
-  const orderedValues = isDragging
-    ? mapDraggableItemsToValue(items, value)
-    : value
+  const { isDragging } = DraggableContext()
+  // Pills hold their place while dragging; the drop line previews the new position.
+  const dropTarget = usePillDropIndicator(isDragging, value, pendingReorderRef)
+
+  const getDropLineClassName = (index: number): string | undefined => {
+    if (dropTarget?.index !== index) return undefined
+    return dropTarget.after ? 'pb_typeahead_drop_after' : 'pb_typeahead_drop_before'
+  }
 
   const handleKeyboardReorder = (index: number, direction: 'left' | 'right') => {
     const newIndex = direction === 'left' ? index - 1 : index + 1
-    if (newIndex < 0 || newIndex >= orderedValues.length) return
+    if (newIndex < 0 || newIndex >= value.length) return
 
-    const reordered = [...orderedValues]
+    const reordered = [...value]
     const [movedItem] = reordered.splice(index, 1)
     reordered.splice(newIndex, 0, movedItem)
     setValue(reordered, 'set-value')
@@ -89,8 +88,9 @@ const DraggablePillList = ({
         container="typeahead-pills"
         tag="div"
     >
-      {orderedValues.map((item, index) => (
+      {value.map((item, index) => (
         <Draggable.Item
+            className={getDropLineClassName(index)}
             container="typeahead-pills"
             dragId={item.value}
             handlePointerDrag={Boolean((selectProps as any)?.pillDragHandle)}
@@ -108,8 +108,9 @@ const DraggablePillList = ({
               pillColor={(selectProps as any)?.pillColor}
               pillDragHandle={(selectProps as any)?.pillDragHandle}
               selectProps={selectProps}
+              showDragIcon={!selectProps.pillDragHandle}
               showPillIndex={(selectProps as any)?.showPillIndex}
-              totalCount={orderedValues.length}
+              totalCount={value.length}
               truncate={(selectProps as any)?.truncate}
               wrapped={(selectProps as any)?.wrapped}
           />
@@ -169,20 +170,17 @@ const DraggablePillsStrip = React.memo(function DraggablePillsStrip({
     pendingReorderRef.current = null
   }, [setValue])
 
-  const handleReorder = useCallback((items: Array<{ id: string }>) => {
-    pendingReorderRef.current = mapDraggableItemsToValue(items, getValueRef.current())
-  }, [])
-
   return (
     <DraggableProvider
         dropZone={{ type: 'ghost' }}
         initialItems={initialItems}
         onDragEnd={commitReorder}
         onDrop={commitReorder}
-        onReorder={handleReorder}
+        onReorder={noop}
     >
       <DraggablePillList
           onRemove={onRemove}
+          pendingReorderRef={pendingReorderRef}
           selectProps={selectProps}
           setValue={setValue}
           value={value}
