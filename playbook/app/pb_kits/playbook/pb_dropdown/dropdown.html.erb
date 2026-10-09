@@ -15,6 +15,9 @@
             <% if input_default_value.present? %>
             data-default-value="<%= input_default_value %>"
             <% end %>
+            <% if object.validation_message.present? %>
+            data-message="<%= object.validation_message %>"
+            <% end %>
             data-dropdown-selected-option
             name="<%= object.name %><%= '[]' if object.multi_select %>"
             style="display: none"

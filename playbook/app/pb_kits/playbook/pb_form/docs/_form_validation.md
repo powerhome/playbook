@@ -4,21 +4,21 @@ For `typeahead`, `phone_number_field`, and `dropdown_field`, pass a scoped strin
 
 ### Custom validation messages
 
-Not every form builder field accepts a custom validation message. Where supported, there are two props:
+All form builder fields support a custom required-field message when `validate: true` is set on the form. There are two props, depending on the field:
 
-**Text-based inputs** (`text_field`, `email_field`, `number_field`, `search_field`, `password_field`, `url_field`, and `typeahead`) use `validation` with a `message` key (optional `pattern` for format checks):
+**Text-based inputs** (`text_field`, `email_field`, `number_field`, `search_field`, `password_field`, `url_field`, `telephone_field`, `text_area`, and `typeahead`) use `validation` with a `message` key (optional `pattern` for format checks):
 
 ```ruby
 validation: { message: "Please enter a valid email address." }
 ```
 
-**Selection-based inputs** (`select`, `collection_select`, `date_picker`, `time_picker`, and `time_zone_select_field`) use `validation_message`:
+**Selection-based and other inputs** (`select`, `collection_select`, `date_picker`, `time_picker`, `time_zone_select_field`, `dropdown_field`, `check_box`, `phone_number_field`, `intl_telephone`, `star_rating_field`, and `multi_level_select`) use `validation_message`:
 
 ```ruby
 validation_message: "Please select an option."
 ```
 
-Other builder fields (for example `dropdown_field`, `check_box`, `phone_number_field`, `text_area`, `star_rating_field`, and `multi_level_select`) can still use `required: true` with `validate: true` on the form, but they do not take these custom message props.
+`phone_number_field` and `intl_telephone` own their validation UI. `validation_message` replaces the default required empty-field copy (`"Missing phone number"`); format errors remain kit-owned.
 
 ### Required indicator
 

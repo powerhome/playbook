@@ -8,4 +8,5 @@
         options: dropdown_options,
         multi_select: true,
         required: true,
+        validation_message: "Please select at least one country",
       } %>

@@ -220,6 +220,13 @@
       "type": "boolean",
       "default": false
     },
+    "validationMessage": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
     "searchbar": {
       "platforms": [
         "rails"

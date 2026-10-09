@@ -22,13 +22,16 @@
     </label>
   <% end %>
 
-  <div class="wrapper" data-pb-mls-wrapper>
+  <div class="wrapper" data-pb-mls-wrapper data-pb-validation-container="true">
     <div class="input_wrapper" data-pb-mls-input-wrapper>
       <div class="input_inner_container" data-pb-mls-inner>
         <input
           <% if object.error_id.present? %>
           aria-describedby="<%= object.error_id %>"
           aria-invalid="true"
+          <% end %>
+          <% if object.validation_message.present? %>
+          data-message="<%= object.validation_message %>"
           <% end %>
           data-pb-mls-search
           <%= "disabled" if object.disabled %>

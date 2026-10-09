@@ -187,6 +187,13 @@
         "accessories"
       ],
       "default": "primary"
+    },
+    "validationMessage": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
     }
   },
   "globalProps": true,

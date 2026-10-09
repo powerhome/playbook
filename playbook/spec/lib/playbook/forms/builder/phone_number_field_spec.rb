@@ -23,4 +23,16 @@ RSpec.describe Playbook::Forms::Builder, "#phone_number_field", type: :helper do
 
     expect(rendered).to have_tag("input#custom-phone[name='phone']")
   end
+
+  it "passes validation_message into the phone number input config" do
+    rendered = render_form do |builder|
+      concat builder.phone_number_field(
+        :phone,
+        props: { required: true, validation_message: "Phone number is required" }
+      )
+    end
+
+    expect(rendered).to include("Phone number is required")
+    expect(rendered).to include("validationMessage")
+  end
 end

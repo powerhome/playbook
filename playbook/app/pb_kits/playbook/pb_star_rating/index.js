@@ -18,10 +18,7 @@ export default class PbStarRating extends PbEnhancedElement {
   addEventListeners() {
     this.element.querySelectorAll(STAR_RATING_SELECTOR).forEach(star => {
       star.addEventListener("click", (event) => {
-        const clickedStarId = event.currentTarget.id
-        this.updateStarColors(clickedStarId)
-        this.updateHiddenInputValue(clickedStarId)
-        this.clearFormValidation()
+        this.handleStarClick(event.currentTarget.id)
       })
 
       star.addEventListener("mouseenter", (event) => {
@@ -45,6 +42,7 @@ export default class PbStarRating extends PbEnhancedElement {
   handleStarClick(starId) {
     this.updateStarColors(starId)
     this.updateHiddenInputValue(starId)
+    this.clearFormValidation()
   }
 
   updateStarColors(clickedStarId) {
@@ -147,6 +145,12 @@ export default class PbStarRating extends PbEnhancedElement {
 
   clearFormValidation() {
     const hiddenInput = this.element.querySelector(STAR_RATING_INPUT_DATA_SELECTOR)
+    if (!hiddenInput) return
+
+    // PbFormValidation may have setCustomValidity from data-message; clear it
+    // before checkValidity so a chosen rating can pass constraint validation.
+    hiddenInput.setCustomValidity("")
+
     if (hiddenInput.checkValidity()) {
       const errorLabelElement = this.element.querySelector(".pb_body_kit_negative")
       if (errorLabelElement) {

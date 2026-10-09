@@ -153,5 +153,26 @@ RSpec.describe Playbook::Forms::Builder::FormFieldBuilder, type: :helper do
 
       expect(rendered).to have_tag("label", text: "Your name")
     end
+
+    it "passes validation message as data-message on text_area" do
+      rendered = render_form do |builder|
+        concat builder.text_area(:bio, props: { required: true, validation: { message: "Bio is required" } })
+      end
+
+      expect(rendered).to have_tag("textarea[name='example[bio]'][required][data-message='Bio is required']")
+    end
+
+    it "passes validation message as data-message on telephone_field" do
+      rendered = render_form do |builder|
+        concat builder.telephone_field(
+          :phone,
+          props: { required: true, validation: { message: "Phone is required" } }
+        )
+      end
+
+      expect(rendered).to have_tag(
+        "input[type=tel][name='example[phone]'][required][data-message='Phone is required']"
+      )
+    end
   end
 end
