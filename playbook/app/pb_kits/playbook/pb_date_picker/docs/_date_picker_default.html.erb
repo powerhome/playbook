@@ -1,1 +1,57 @@
-<%= pb_rails("date_picker", props: { picker_id: "date-picker-default"}) %>
+<%= pb_rails("title", props: { text: "Regular Date Picker in 'Squished' Configuration", margin_bottom: "xs" }) %>
+<%= pb_rails("flex", props: { direction: "row", gap: "none", max_width: "xs" }) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("date_picker", props: { label: "hellohellohello default", picker_id: "date-picker-default"}) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("date_picker", props: { label: "hellohellohello default", picker_id: "date-picker-default-2"}) %>
+  <% end %>
+<% end %>
+<%= pb_rails("flex", props: { direction: "row", gap: "none", max_width: "xs" }) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("date_picker", props: { label: "hellohellohello hideicon", picker_id: "date-picker-default-3", hide_icon: true}) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("date_picker", props: { label: "hellohellohello hideicon", picker_id: "date-picker-default-4", hide_icon: true}) %>
+  <% end %>
+<% end %>
+<%= pb_rails("flex", props: { direction: "row", gap: "none", max_width: "xs" }) do %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("date_picker", props: { label: "hellohellohello inlineinline", picker_id: "date-picker-default-5", inline: true}) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item") do %>
+    <%= pb_rails("date_picker", props: { label: "hellohellohello inlineinline", picker_id: "date-picker-default-6", inline: true}) %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("title", props: { text: "Form Builder Date Picker 'Squished' in Form Context", margin_bottom: "xs" }) %>
+<%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
+  <%= pb_rails("flex", props: { direction: "row", gap: "none", max_width: "xs" }) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= form.date_picker :example_date_picker, props: { label: "hellohellohello default", picker_id: "date-picker-default-7"} %>
+    <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= form.date_picker :example_date_picker_2, props: { label: "hellohellohello default", picker_id: "date-picker-default-8"} %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("flex", props: { direction: "row", gap: "none", max_width: "xs" }) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= form.date_picker :example_date_picker_3, props: { label: "hellohellohello hideicon", picker_id: "date-picker-default-9", hide_icon: true} %>
+    <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= form.date_picker :example_date_picker_4, props: { label: "hellohellohello hideicon", picker_id: "date-picker-default-10", hide_icon: true} %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("flex", props: { direction: "row", gap: "none", max_width: "xs" }) do %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= form.date_picker :example_date_picker_5, props: { label: "hellohellohello inlineinline", picker_id: "date-picker-default-11", inline: true} %>
+    <% end %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= form.date_picker :example_date_picker_6, props: { label: "hellohellohello inlineinline", picker_id: "date-picker-default-12", inline: true} %>
+    <% end %>
+  <% end %>
+<%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>
