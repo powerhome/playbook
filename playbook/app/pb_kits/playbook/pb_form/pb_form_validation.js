@@ -30,10 +30,20 @@ class PbFormValidation extends PbEnhancedElement {
     }
     this.element.addEventListener('invalid', this.handleInvalid, true)
 
-    this.handleFieldEvent = debounce((event) => {
-      if (!this.isFormValidationField(event.target)) return
-      this.validateFormField(event)
-    }, 250)
+    // Debounce per field so a later change on another control cannot cancel
+    // clearing setCustomValidity for a field the user already corrected.
+    const debouncedByField = new WeakMap()
+    this.handleFieldEvent = (event) => {
+      const field = event.target
+      if (!this.isFormValidationField(field)) return
+
+      let run = debouncedByField.get(field)
+      if (!run) {
+        run = debounce((evt) => this.validateFormField(evt), 250)
+        debouncedByField.set(field, run)
+      }
+      run(event)
+    }
     this.element.addEventListener('change', this.handleFieldEvent)
     this.element.addEventListener('valid', this.handleFieldEvent)
 
