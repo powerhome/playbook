@@ -17,36 +17,48 @@ test('generated scaffold test - update me', () => {
     expect(screen.getByTestId('default')).toBeInTheDocument()
 })
 
-test('stickyHeader is true by default', () => {
+test('stickyHeader defaults to true and applies sticky header/content classes', () => {
   render(
     <FullScreen
         data={{ testid: 'default' }}
         headerText="Fullscreen"
-        trigger={({ onClick }) => <button onClick={onClick}>Open</button>}
+        isFullscreen
     >
       <div>Content</div>
     </FullScreen>
   )
-
-  fireEvent.click(screen.getByText('Open'))
 
   expect(document.querySelector('.fullscreen-header')).toHaveClass('fullscreen-header-sticky')
   expect(document.querySelector('.fullscreen-content')).toHaveClass('fullscreen-content-sticky')
 })
 
-test('stickyHeader can be disabled', () => {
+test('stickyHeader true keeps sticky header/content classes', () => {
   render(
     <FullScreen
         data={{ testid: 'default' }}
         headerText="Fullscreen"
-        stickyHeader={false}
-        trigger={({ onClick }) => <button onClick={onClick}>Open</button>}
+        isFullscreen
+        stickyHeader
     >
       <div>Content</div>
     </FullScreen>
   )
 
-  fireEvent.click(screen.getByText('Open'))
+  expect(document.querySelector('.fullscreen-header')).toHaveClass('fullscreen-header-sticky')
+  expect(document.querySelector('.fullscreen-content')).toHaveClass('fullscreen-content-sticky')
+})
+
+test('stickyHeader false removes sticky header/content classes', () => {
+  render(
+    <FullScreen
+        data={{ testid: 'default' }}
+        headerText="Fullscreen"
+        isFullscreen
+        stickyHeader={false}
+    >
+      <div>Content</div>
+    </FullScreen>
+  )
 
   expect(document.querySelector('.fullscreen-header')).not.toHaveClass('fullscreen-header-sticky')
   expect(document.querySelector('.fullscreen-content')).not.toHaveClass('fullscreen-content-sticky')
