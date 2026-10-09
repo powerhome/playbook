@@ -1,0 +1,50 @@
+---
+description: Maintainer conventions when changing the playbook-mcp render server
+globs: playbook-mcp/**
+alwaysApply: false
+---
+
+# Playbook MCP (maintainers)
+
+`playbook-mcp/` is the hosted MCP-UI **Rails render server**, not kit source and not the consumer codegen skill in `docs/ai/consumer/`.
+
+## Package
+
+- Own Gemfile / Rails app. Work from `playbook-mcp/` (`bin/setup`, `bundle exec rspec`, `bundle exec ruby bin/smoke`, `bundle exec puma`).
+- Consumes `playbook/dist/ai` via the `playbook_ui` gem path. **Do not hand-edit** `dist/ai` or `kit.schema.json`; change kits, then `yarn generate:docs-metadata` from repo root.
+- MCP-only Ruby changes do **not** need docs-metadata regenerate or playground overrides.
+
+## Agent-facing copy (clients)
+
+LibreChat and other MCP hosts read **server instructions + tool descriptions**, not Cursor rules/skills:
+
+- `lib/playbook_mcp/server.rb` (`instructions:`)
+- `lib/playbook_mcp/tools/*.rb` (`description`)
+
+If client behavior should change (props, types, which tool to call), update those strings.
+
+## Schema / validation
+
+- Kit ids: **snake_case**. Incoming props: **camelCase** (schemas); convert with `PlaybookMcp::Props` for `pb_rails`.
+- Prop `type` and `default` may be a string **or** `{ "react", "rails" }` when platforms differ. This server renders Rails — resolve **`rails`** (then `react`) before type checks.
+
+```ruby
+# Bad — Hash never matches "number" / "enum"
+type = definition["type"]
+
+# Good
+type = definition["type"]
+type = type["rails"] || type["react"] if type.is_a?(Hash)
+```
+
+- Reject React-only props (`platforms` without `"rails"`). Do not invent a parallel schema.
+- Chart `uiAction` is a sibling of props (`prompt` / `tool` / `intent` / `none`), never Highcharts `events` or inline JS. Update server instructions + tool descriptions when client click behavior changes.
+- Chart kits are detected from `dist/ai` metadata (`playbook-ui/charts` imports, `charts_import` hint, highcharts peers), not a hardcoded kit-id list. Mixed `render_layout` documents must keep the chart IIFE’s React registry private from `playbook-rails.js`.
+
+## Safety
+
+Do not weaken sanitization, size caps, allowlist, rate limit, or shared-secret checks. HTML `children` only for composition kits (`HtmlSanitizer::CHILDREN_ALLOWED_KITS`); scrub chart `options`. `RenderStore` is process-local — keep **replicas: 1** until a shared store exists. See `SECURITY.md`.
+
+## Tests / docs
+
+Add RSpec for validator, tools, and sanitizer changes. Human docs: `playbook-mcp/README.md`.

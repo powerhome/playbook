@@ -3,3 +3,15 @@ services:
     build:
       target: prod
     volumes: []
+  mcp:
+    image: image-registry.powerapp.cloud/playbook/playbook-mcp:test
+    build:
+      context: .
+      dockerfile: playbook-mcp/Dockerfile
+      target: test
+    working_dir: /home/app/src/playbook-mcp
+    environment:
+      RAILS_ENV: test
+      RACK_ENV: test
+    volumes: []
+    command: ["./test.sh"]

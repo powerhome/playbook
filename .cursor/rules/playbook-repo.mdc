@@ -11,6 +11,7 @@ This is the design-system monorepo, not a Playbook consumer app. Kit and shared 
 
 - `playbook/` — kits (React + Rails), tokens, AI schema scripts
 - `playbook-website/` — docs site, `config/menu.yml`, playground UI
+- `playbook-mcp/` — hosted MCP-UI render server (`pb_rails` + `dist/ai`); see [`playbook-mcp.mdc`](playbook-mcp.mdc)
 - Repo root — `yarn generate:docs-metadata`, setup/run scripts
 
 ## Generated files (do not hand-edit)
