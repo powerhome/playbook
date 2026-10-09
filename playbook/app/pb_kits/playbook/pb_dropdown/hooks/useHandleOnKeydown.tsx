@@ -5,14 +5,15 @@ import DropdownContext from "../context";
 export const useHandleOnKeyDown = () => {
 
 const {
+  asyncEnabled,
   autocomplete,
   filterItem,
   filteredOptions,
   focusedOptionIndex,
-  handleBackspace,
+  handleChange,
   handleOptionClick,
+  multiSelect,
   selected,
-  setFilterItem,
   setFocusedOptionIndex,
   setIsDropDownClosed,
 }= useContext(DropdownContext)
@@ -40,27 +41,28 @@ const {
   };
 
   return (e: React.KeyboardEvent) => {
+    if (e.defaultPrevented) return;
 
-    if (e.key !== "Tab" && autocomplete && selected && selected.label) {
-      // Only when the input is showing the selected label (e.g. seeded defaultValue)
-      const replacingSelectedLabel = filterItem === selected.label;
-      handleBackspace();
+    const printableKey = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
+    const replacingSelectedLabel = filterItem === selected?.label;
 
-      if (replacingSelectedLabel && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-        e.preventDefault();
-        setFilterItem?.(e.key);
-        setIsDropDownClosed(false);
-        return;
-      }
-
-      if (replacingSelectedLabel && (e.key === "Backspace" || e.key === "Delete")) {
-        e.preventDefault();
-        setFilterItem?.("");
-        return;
-      }
+    // Replace the label only while the input still shows it. After the text diverges,
+    // the input inserts the character so the rest of the query stays.
+    if (autocomplete && !multiSelect && selected?.label &&
+        replacingSelectedLabel &&
+        printableKey && !e.nativeEvent.isComposing) {
+      e.preventDefault();
+      handleChange({ target: { value: e.key } }, true);
+      return;
     }
 
     switch (e.key) {
+    case "Escape":
+      if (asyncEnabled) {
+        setIsDropDownClosed(true);
+        setFocusedOptionIndex(-1);
+      }
+      break;
     case "ArrowDown": {
       e.preventDefault();
       setIsDropDownClosed(false);
@@ -75,7 +77,7 @@ const {
       break;
     }
     case "Enter":
-      if (focusedOptionIndex !== -1 && !filteredOptions[focusedOptionIndex]?.disabled) {
+      if (focusedOptionIndex !== -1 && (!asyncEnabled || filteredOptions[focusedOptionIndex]) && !filteredOptions[focusedOptionIndex]?.disabled) {
         e.preventDefault();
         handleOptionClick(filteredOptions[focusedOptionIndex]);
         setFocusedOptionIndex(-1)

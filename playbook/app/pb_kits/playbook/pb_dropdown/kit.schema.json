@@ -7,6 +7,56 @@
     "rails"
   ],
   "props": {
+    "async": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "loadOptions": {
+      "type": "LoadOptions",
+      "platforms": [
+        "react"
+      ]
+    },
+    "defaultOptions": {
+      "type": "boolean | GenericObject[]",
+      "platforms": [
+        "react"
+      ]
+    },
+    "cacheOptions": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "loading": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onInputChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "value": {
+      "type": "GenericObject | GenericObject[] | null",
+      "platforms": [
+        "react"
+      ]
+    },
+    "renderOption": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
     "autocomplete": {
       "type": "boolean",
       "platforms": [
@@ -125,6 +175,13 @@
         "rails"
       ]
     },
+    "noOptionsText": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
     "onChange": {
       "type": "function",
       "platforms": [
@@ -202,7 +259,8 @@
     "activeStyle": {
       "type": "GenericObject",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "requiredIndicator": {
@@ -219,6 +277,18 @@
       ],
       "type": "boolean",
       "default": false
+    },
+    "searchTermMinimumLength": {
+      "platforms": [
+        "rails"
+      ],
+      "default": 3
+    },
+    "searchDebounceTimeout": {
+      "platforms": [
+        "rails"
+      ],
+      "default": 250
     },
     "searchbar": {
       "platforms": [

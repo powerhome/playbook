@@ -19,7 +19,7 @@
                     justify_content: "center",
                     padding:"xs",
                     }) do %>
-                        <%= pb_rails("body", props: {text: "No option"}) %>
+                        <%= pb_rails("body", props: {text: object.no_options_text.presence || "no option"}) %>
                 <% end %>
             <% end %>
     <% end %>

@@ -8,6 +8,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_array_prop(:options).with_default([]) }
   it { is_expected.to define_string_prop(:label) }
   it { is_expected.to define_string_prop(:name) }
+  it { is_expected.to define_string_prop(:no_options_text) }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
   it { is_expected.to define_string_prop(:blank_selection).with_default("") }
   it { is_expected.to define_string_prop(:placeholder) }
@@ -36,6 +37,38 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:context_selector).with_default("") }
   it { is_expected.to define_boolean_prop(:clear_on_context_change).with_default(true) }
   it { is_expected.to define_string_prop(:options_event_type).with_default("") }
+
+  it { is_expected.to define_boolean_prop(:async).with_default(false) }
+
+  describe "async search configuration" do
+    it "exports the Typeahead-compatible defaults when enabled" do
+      expect(subject.new(async: true).data).to include(
+        pb_dropdown_async: true,
+        pb_dropdown_search_term_minimum_length: 3,
+        pb_dropdown_search_debounce_timeout: 250
+      )
+    end
+
+    it "exports the full async default option" do
+      option = { id: 42, label: "Ada", department_id: 7 }
+      expect(subject.new(async: true, default_value: option).data[:pb_dropdown_default_value]).to eq(option.to_json)
+      expect(subject.new(async: true, multi_select: true, default_value: [option]).data[:pb_dropdown_default_value]).to eq([option].to_json)
+      expect(subject.new(default_value: option).data).not_to have_key(:pb_dropdown_default_value)
+    end
+
+    it "exports custom search timing" do
+      expect(subject.new(async: true, search_term_minimum_length: 1, search_debounce_timeout: 100).data).to include(
+        pb_dropdown_search_term_minimum_length: 1,
+        pb_dropdown_search_debounce_timeout: 100
+      )
+    end
+
+    it "omits async attributes when disabled" do
+      expect(subject.new.data).not_to have_key(:pb_dropdown_async)
+      expect(subject.new.data).not_to have_key(:pb_dropdown_search_debounce_timeout)
+      expect(subject.new.data).not_to have_key(:pb_dropdown_search_term_minimum_length)
+    end
+  end
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -510,6 +543,37 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     it "omits options_event_type from data when blank" do
       dropdown = subject.new(options_event_type: "")
       expect(dropdown.data).not_to have_key(:options_event_type)
+    end
+  end
+
+  describe "active_style" do
+    it "includes active_style in data when present" do
+      dropdown = subject.new(active_style: { background_color: "bg_light", font_color: "text_lt_default" })
+      expect(dropdown.data).to include(
+        pb_dropdown_active_style: { background_color: "bg_light", font_color: "text_lt_default" }.to_json
+      )
+    end
+
+    it "omits active_style from data when not passed" do
+      expect(subject.new({}).data).not_to have_key(:pb_dropdown_active_style)
+    end
+  end
+
+  describe "no_options_text" do
+    it "includes no_options_text in data when present" do
+      dropdown = subject.new(no_options_text: "No agents available")
+      expect(dropdown.data).to include(pb_dropdown_no_options_text: "No agents available")
+    end
+
+    it "omits no_options_text from data when not passed" do
+      dropdown = subject.new({})
+      expect(dropdown.data).not_to have_key(:pb_dropdown_no_options_text)
+    end
+
+    it "is accepted by dropdown_container" do
+      require_relative "../../../../app/pb_kits/playbook/pb_dropdown/dropdown_container"
+      container = Playbook::PbDropdown::DropdownContainer.new(no_options_text: "No agents available")
+      expect(container.no_options_text).to eq("No agents available")
     end
   end
 
