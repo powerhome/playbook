@@ -27,6 +27,11 @@ module Playbook
                         default: true
       prop :autocomplete, type: Playbook::Props::Boolean,
                           default: false
+      prop :async, type: Playbook::Props::Boolean, default: false
+      prop :active_style, type: Playbook::Props::HashProp,
+                          default: {}
+      prop :search_term_minimum_length, default: 3
+      prop :search_debounce_timeout, default: 250
       prop :searchbar, type: Playbook::Props::Boolean,
                        default: false
       prop :multi_select, type: Playbook::Props::Boolean,
@@ -53,6 +58,7 @@ module Playbook
       prop :end_date_name, type: Playbook::Props::String,
                            default: "end_date_name"
       prop :placeholder, type: Playbook::Props::String
+      prop :no_options_text, type: Playbook::Props::String
       prop :constrain_height, type: Playbook::Props::Boolean,
                               default: false
       prop :required_indicator, type: Playbook::Props::Boolean,
@@ -71,9 +77,15 @@ module Playbook
       def data
         Hash(prop(:data)).merge(
           pb_dropdown: true,
+          pb_dropdown_async: async ? true : nil,
+          pb_dropdown_active_style: active_style.present? ? active_style.to_json : nil,
+          pb_dropdown_default_value: async && default_value.present? ? default_value.to_json : nil,
+          pb_dropdown_search_term_minimum_length: async ? search_term_minimum_length : nil,
+          pb_dropdown_search_debounce_timeout: async ? search_debounce_timeout : nil,
           pb_dropdown_multi_select: multi_select,
           pb_dropdown_disabled: disabled,
           pb_dropdown_variant: variant,
+          pb_dropdown_no_options_text: no_options_text.presence,
           pb_dropdown_clearable: clearable,
           pb_dropdown_close_on_click: close_on_click,
           form_pill_props: form_pill_props.to_json,

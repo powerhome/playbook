@@ -9,6 +9,7 @@ module Playbook
                               default: false
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
+      prop :no_options_text, type: Playbook::Props::String
 
       def classname
         classes = %w[pb_dropdown_container close]
