@@ -1,3 +1,27 @@
+# ✨ 18.2.0.pre.rc.0
+
+##### October 08, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.2.0-rc.0](https://github.com/powerhome/playbook/tree/18.2.0-rc.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Lightbox Kit: Close Button Accessibility [\#6722](https://github.com/powerhome/playbook/pull/6722) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Improvements:**
+
+- Playground: Fix Icon Kit + Playground Dropdown Issues [\#6739](https://github.com/powerhome/playbook/pull/6739) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Text Input Kit: Fix "add On" Icon Size [\#6732](https://github.com/powerhome/playbook/pull/6732) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Fixed Bugs:**
+
+- Select Kit: Validation Error Styling Within Wrapper [\#6726](https://github.com/powerhome/playbook/pull/6726) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: Apply Last-header-cell Styling to Parentless Subheaders [\#6717](https://github.com/powerhome/playbook/pull/6717) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.1.0...18.2.0-rc.0)
+
 # ✨ 18.1.0.pre.rc.5
 
 ##### October 05, 2026

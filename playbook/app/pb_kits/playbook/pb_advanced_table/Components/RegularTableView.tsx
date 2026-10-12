@@ -53,10 +53,7 @@ const TableCellRenderer = ({
           }
 
           const parent = cell.column.parent;
-          if (!parent) {
-            const last = row.getVisibleCells().at(-1);
-            return last?.column.id === cell.column.id;
-          }
+          if (!parent) return i !== 0;
 
           const visibleSiblings = parent.columns.filter(col => col.getIsVisible());
           return visibleSiblings.at(-1)?.id === cell.column.id;

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Card,
   Caption,
@@ -9,6 +9,7 @@ import {
   Title,
   spacing,
 } from "playbook-ui";
+import { DialogContext } from "../../../../../../../../../../../playbook/app/pb_kits/playbook/pb_dialog/_dialog_context";
 import {
   PropControlRow,
   type PropListSharedProps,
@@ -53,7 +54,17 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
 }) => {
   const globalPropCount = Object.keys(globalProps).length;
   const panelRef = useRef<HTMLDivElement>(null);
+  const [menuPortalTarget, setMenuPortalTarget] = useState<HTMLElement | null>(null);
   useStickyPanelMaxHeight(panelRef);
+
+  useEffect(() => {
+    setMenuPortalTarget(document.body);
+  }, []);
+
+  const menuPortalContext = useMemo(
+    () => ({ selectMenuPortalTarget: menuPortalTarget }),
+    [menuPortalTarget],
+  );
   const { width: panelWidth, resizeHandleProps } = usePanelResize({
     defaultWidth: PROPS_PANEL_DEFAULT_WIDTH,
     minWidth: PROPS_PANEL_MIN_WIDTH,
@@ -71,76 +82,78 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   };
 
   return (
-    <Card
-      className="props-panel"
-      flexDirection="column"
-      htmlOptions={{ ref: panelRef, style: { width: `${panelWidth}px` } }}
-      padding="none"
-      marginBottom="sm"
-    >
-      <div
-        className="props-panel__resize-handle"
-        role="presentation"
-        {...resizeHandleProps}
+    <DialogContext.Provider value={menuPortalContext}>
+      <Card
+        className="props-panel"
+        flexDirection="column"
+        htmlOptions={{ ref: panelRef, style: { width: `${panelWidth}px` } }}
+        padding="none"
+        marginBottom="sm"
       >
-        <Icon icon="grip-lines-vertical" size="xs" />
-      </div>
-      <Card.Header className="props-panel__header" headerColor="neutral_subtle">
-        <Flex justify="between" align="center">
-          <Title text="Props" size={4} />
-          <Caption text={`${totalProps} available`} size="xs" color="light" />
-        </Flex>
-      </Card.Header>
-      <Card.Body className="props-panel__body" padding="none">
-        <div style={{ padding: spacing.space_sm }}>
-          {showChildren && (
+        <div
+          className="props-panel__resize-handle"
+          role="presentation"
+          {...resizeHandleProps}
+        >
+          <Icon icon="grip-lines-vertical" size="xs" />
+        </div>
+        <Card.Header className="props-panel__header" headerColor="neutral_subtle">
+          <Flex justify="between" align="center">
+            <Title text="Props" size={4} />
+            <Caption text={`${totalProps} available`} size="xs" color="light" />
+          </Flex>
+        </Card.Header>
+        <Card.Body className="props-panel__body" padding="none">
+          <div style={{ padding: spacing.space_sm }}>
+            {showChildren && (
+              <>
+                <PropControlRow
+                  alignItems="start"
+                  filled={children.trim().length > 0}
+                  label={<Detail text="Children" truncate={1} width="100%" />}
+                >
+                  <PropsPanelTextarea
+                    dialogTitle="Children"
+                    placeholder="Enter children content..."
+                    value={children}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                      onChildrenChange(e.target.value)
+                    }
+                  />
+                </PropControlRow>
+                <SectionSeparator marginY="sm" />
+              </>
+            )}
+
+            <PropGroupList
+              {...propListShared}
+              groups={groupedProps}
+              noKitProps={totalProps === 0}
+            />
+          </div>
+          {showGlobalProps && globalPropCount > 0 && (
             <>
-              <PropControlRow
-                alignItems="start"
-                filled={children.trim().length > 0}
-                label={<Detail text="Children" truncate={1} width="100%" />}
-              >
-                <PropsPanelTextarea
-                  dialogTitle="Children"
-                  placeholder="Enter children content..."
-                  value={children}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    onChildrenChange(e.target.value)
-                  }
+              <SectionSeparator marginY="none" />
+              <Card.Header headerColor="neutral_subtle">
+                <Title text="Global Props" size={4} paddingY="xs" />
+                <Caption
+                  text="Global props are available on all Playbook components for consistent spacing, layout, and styling."
+                  size="xs"
+                  color="light"
                 />
-              </PropControlRow>
-              <SectionSeparator marginY="sm" />
+              </Card.Header>
+              <div style={{ padding: spacing.space_sm }}>
+                <PropGroupList
+                  {...propListShared}
+                  groups={groupedGlobalProps}
+                  emptyMessage="No global props in this group."
+                  collapsedInitial={true}
+                />
+              </div>
             </>
           )}
-
-          <PropGroupList
-            {...propListShared}
-            groups={groupedProps}
-            noKitProps={totalProps === 0}
-          />
-        </div>
-        {showGlobalProps && globalPropCount > 0 && (
-          <>
-            <SectionSeparator marginY="none" />
-            <Card.Header headerColor="neutral_subtle">
-              <Title text="Global Props" size={4} paddingY="xs" />
-              <Caption
-                text="Global props are available on all Playbook components for consistent spacing, layout, and styling."
-                size="xs"
-                color="light"
-              />
-            </Card.Header>
-            <div style={{ padding: spacing.space_sm }}>
-              <PropGroupList
-                {...propListShared}
-                groups={groupedGlobalProps}
-                emptyMessage="No global props in this group."
-                collapsedInitial={true}
-              />
-            </div>
-          </>
-        )}
-      </Card.Body>
-    </Card>
+        </Card.Body>
+      </Card>
+    </DialogContext.Provider>
   );
 };
