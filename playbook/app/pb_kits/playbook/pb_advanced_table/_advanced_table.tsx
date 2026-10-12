@@ -293,6 +293,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             onChange={onPageChange}
             position="top"
             range={paginationProps?.range}
+            sectionSeparator={paginationProps?.sectionSeparator}
             table={table}
         />
       )}
@@ -375,6 +376,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             onChange={onPageChange}
             position="bottom"
             range={paginationProps?.range}
+            sectionSeparator={paginationProps?.sectionSeparator}
             table={table}
         />
       )}

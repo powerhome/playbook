@@ -3203,15 +3203,15 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
-"@powerhome/playbook-icons-react@2.9.0":
-  version "2.9.0"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/d14fa9f240e3d176308ac5623beb84a05bd44c03#d14fa9f240e3d176308ac5623beb84a05bd44c03"
-  integrity sha512-7XUmeQUIcpuYZNCxIZb3z/4HkkatwASPZ3jjaeH4wRpKnWrLN4aWLoppVf19pFkxvgq8+wdIvXT1zNuzd8r6tA==
+"@powerhome/playbook-icons-react@2.10.0":
+  version "2.10.0"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/163696fb93dde6356db8954aa5357de7e95fdb7a#163696fb93dde6356db8954aa5357de7e95fdb7a"
+  integrity sha512-pG9MmjK5B4aIa5a4KBiys+HReMii51vAqW4T5c6LqOtyd89QYeDBxBTRkliT7RW7Sw1R4ZrP46W1ICOQt3wGVg==
 
-"@powerhome/playbook-icons@2.9.0":
-  version "2.9.0"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/87471caba655534b188c1698bf0ca0a6d7db8c10#87471caba655534b188c1698bf0ca0a6d7db8c10"
-  integrity sha512-05d3olejU5DG2zMCvKcehf1HvoolQJis2OX1gq/BMorO25wjaw+jr+4EGpYyBYwmCL4Z7f/bKlZuD3I4SBN/TA==
+"@powerhome/playbook-icons@2.10.0":
+  version "2.10.0"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/a6c2d3fb88e73bcc1ac56fc554622f0dc7742f07#a6c2d3fb88e73bcc1ac56fc554622f0dc7742f07"
+  integrity sha512-zuKY4BR7QNH8eHxxM0Qna+nMSMBGZytgwaJeX5UxcLrxIetOtzA6qbyGni/HEOBQiGJZQs1rNeWGYyA3IHSraw==
 
 "@powerhome/power-fonts@0.0.1":
   version "0.0.1"
@@ -7284,14 +7284,14 @@ ignore@^5.2.0:
   integrity sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==
 
 immutable@^4.0.0:
-  version "4.3.6"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.3.6.tgz#6a05f7858213238e587fb83586ffa3b4b27f0447"
-  integrity sha512-Ju0+lEMyzMVZarkTn/gqRpdqd5dOPaz1mCZ0SH3JV6iFw81PldE/PEB1hWVEA288HPt4WXW8O7AWxB10M+03QQ==
+  version "4.3.9"
+  resolved "https://npm.powerapp.cloud/immutable/-/immutable-4.3.9.tgz#c98349e05e9c6e2a4d8fe88ac0b363e0d536b544"
+  integrity sha512-ObHy4YN7ycwZOUCLI1/6svfyAFu7vL8RhAvVu/bh/RZW9EPlOyDaQ9jDQWCtdqzaXUjgXZCW1migtHE7YI7UGQ==
 
 immutable@^5.0.2:
-  version "5.0.3"
-  resolved "https://npm.powerapp.cloud/immutable/-/immutable-5.0.3.tgz#aa037e2313ea7b5d400cd9298fa14e404c933db1"
-  integrity sha512-P8IdPQHq3lA1xVeBRi5VPqUm5HDgKnx0Ru51wZz5mjxHr5n3RWhjIpOFU7ybkUxfB+5IToy+OLaHYDBIWsv+uw==
+  version "5.1.9"
+  resolved "https://npm.powerapp.cloud/immutable/-/immutable-5.1.9.tgz#ac23c3a01992ab665e14ac9ffff298f28cd74a0c"
+  integrity sha512-m8nVez3rwrgmWxtLMt1ZYXB2Lv7OKYn/disyxAlSDYAlKSlFoPPfIAmAM/M5xqL4m4C/wAPw7S2/CNaUii1Hxg==
 
 import-fresh@^3.0.0, import-fresh@^3.2.1:
   version "3.3.0"
