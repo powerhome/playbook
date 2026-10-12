@@ -41,6 +41,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
   } = props;
 
   const {
+    asyncEnabled,
+    autocomplete,
     activeStyle,
     disabled,
     filteredOptions,
@@ -49,14 +51,22 @@ const DropdownOption = (props: DropdownOptionProps) => {
     handleOptionClick,
     multiSelect,
     selected,
+    renderOption,
+    isSameOption,
+    selectedOptionIds,
+    getOptionValue,
   } = useContext(DropdownContext);
 
   const isItemMatchingFilter = (option: GenericObject | undefined) => {
-    // When the input is only showing the selected label (e.g. seeded defaultValue), do not filter
     const selectedLabel =
       !multiSelect &&
       !Array.isArray(selected) &&
       (selected as GenericObject)?.label;
+    if (asyncEnabled) {
+      if (!(autocomplete && selectedLabel && filterItem === selectedLabel)) return true;
+      return String(option?.label).toLowerCase().includes(String(selectedLabel).toLowerCase());
+    }
+    // When the input is only showing the selected label (e.g. seeded defaultValue), do not filter
     const filterText =
       selectedLabel && filterItem === selectedLabel ? "" : filterItem;
     const label = typeof option?.label === 'string' ? option.label.toLowerCase() : option?.label;
@@ -64,9 +74,11 @@ const DropdownOption = (props: DropdownOptionProps) => {
   }
 
   // When multiSelect, then if an option is selected, remove from dropdown
-  const isSelected = Array.isArray(selected)
-   ? selected.some((item) => item.label === option?.label)
-   : (selected as GenericObject)?.label === option?.label;
+  const isSelected = selectedOptionIds && option
+   ? selectedOptionIds.has(String(getOptionValue(option)))
+   : Array.isArray(selected)
+   ? selected.some((item) => isSameOption(item, option))
+   : isSameOption(selected, option);
 
 
   const isOptionDisabled = option?.disabled === true;
@@ -77,7 +89,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
   }
   const isFocused =
     focusedOptionIndex >= 0 &&
-    filteredOptions[focusedOptionIndex].label === option?.label;
+    isSameOption(filteredOptions[focusedOptionIndex], option);
   const focusedClass = isFocused ? "focused" : "";
 
   const selectedClass = isSelected ? "selected" : "list";
@@ -110,6 +122,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
     isDisabled && "disabled"
   );
 
+  const content = children || (renderOption && option ? renderOption(option) : null);
+
   return (
     <div
         {...ariaProps}
@@ -128,8 +142,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
           key={option?.label}
           padding="none"
       >
-          {children ? 
-          <div className={optionWrapperClass}>{children}</div> :
+          {content != null ?
+          <div className={optionWrapperClass}>{content}</div> :
               <Body dark={dark} 
                   text={option?.label} 
               />
