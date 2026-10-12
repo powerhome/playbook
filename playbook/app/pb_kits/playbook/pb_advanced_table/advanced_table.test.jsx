@@ -1385,6 +1385,47 @@ test("cascadeCollapse=true with header toggle all: collapse all then expand all 
   })
 })
 
+test("pagination does not render section separators by default", () => {
+  const { container } = render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        pagination
+        paginationProps={{ pageSize: 1 }}
+        tableData={MOCK_DATA}
+    />
+  )
+
+  expect(container.querySelectorAll(".pb_paginate")).toHaveLength(2)
+  expect(container.querySelectorAll(".pb_section_separator_kit")).toHaveLength(0)
+})
+
+test("paginationProps.sectionSeparator renders separators for top and bottom pagination", () => {
+  const { container } = render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        pagination
+        paginationProps={{ pageSize: 1, sectionSeparator: true }}
+        tableData={MOCK_DATA}
+        tableProps={{ container: false }}
+    />
+  )
+
+  const paginations = container.querySelectorAll(".pb_paginate")
+  const separators = container.querySelectorAll(".pb_section_separator_kit")
+
+  expect(paginations).toHaveLength(2)
+  expect(separators).toHaveLength(3)
+  expect(paginations[0]).toHaveClass("ml_lg")
+  expect(paginations[0]).toHaveClass("py_xs")
+  expect(paginations[1]).toHaveClass("ml_lg")
+  expect(paginations[1]).toHaveClass("py_xs")
+  expect(separators[0].nextElementSibling).toBe(paginations[0])
+  expect(paginations[0].nextElementSibling).toBe(separators[1])
+  expect(separators[2].nextElementSibling).toBe(paginations[1])
+})
+
 const groupedColumnDefinitions = [
   {
     accessor: "year",
@@ -1478,3 +1519,4 @@ test("single header row does not mark every column as last-header-cell", () => {
   expect(groupEnds).toHaveLength(1)
   expect(kit.querySelector("tbody td.last-cell")).not.toBeInTheDocument()
 })
+
