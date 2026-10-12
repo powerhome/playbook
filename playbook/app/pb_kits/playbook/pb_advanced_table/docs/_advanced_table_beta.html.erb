@@ -1,33 +1,190 @@
-<% column_definitions = [
-    {
-      accessor: "year",
-      label: "Year",
-      cellAccessors: ["quarter", "month", "day"],
-    },
-    {
-      accessor: "newEnrollments",
-      label: "New Enrollments",
-    },
-    {
-      accessor: "scheduledMeetings",
-      label: "Scheduled Meetings",
-    },
-    {
-      accessor: "attendanceRate",
-      label: "Attendance Rate",
-    },
-    {
-      accessor: "completedClasses",
-      label: "Completed Classes",
-    },
-    {
-      accessor: "classCompletionRate",
-      label: "Class Completion Rate",
-    },
-    {
-      accessor: "graduatedStudents",
-      label: "Graduated Students",
-    }
-] %>
+<%
+column_definitions = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        label: "Enrollment Stats",
+        columns: [
+          { accessor: "newEnrollments", label: "New Enrollments" },
+          { accessor: "scheduledMeetings", label: "Scheduled Meetings" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        label: "Completion Metrics",
+        columns: [
+          { accessor: "completedClasses", label: "Completed Classes" },
+          { accessor: "classCompletionRate", label: "Class Completion Rate" },
+        ],
+      },
+      {
+        label: "Attendance",
+        columns: [
+          { accessor: "attendanceRate", label: "Attendance Rate" },
+          { accessor: "graduatedStudents", label: "Graduated Students" },
+        ],
+      },
+    ],
+  },
+]
 
-<%= pb_rails("advanced_table", props: { id: "beta_table", table_data: @table_data, column_definitions: column_definitions }) %>
+subrow_headers = ["Quarter", "Month", "Day"]
+
+build_table_data = ->(table_id) do
+  5.times.map do |index|
+    year = 2020 + index
+
+    {
+      id: "#{table_id}-#{year}",
+      year: year.to_s,
+      quarter: "Q#{(index % 4) + 1}",
+      month: ["January", "April", "July", "October", "December"][index],
+      day: (index + 1).to_s,
+      newEnrollments: (20 + index).to_s,
+      scheduledMeetings: (10 + index).to_s,
+      attendanceRate: "#{50 + index}%",
+      completedClasses: (3 + index).to_s,
+      classCompletionRate: "#{30 + index}%",
+      graduatedStudents: (19 + index).to_s,
+    }
+  end
+end
+
+build_table_data_subrows = ->(table_id) do
+  5.times.map do |index|
+    year = 2020 + index
+
+    {
+      id: "#{table_id}-#{year}",
+      year: year.to_s,
+      quarter: "Q#{(index % 4) + 1}",
+      month: ["January", "April", "July", "October", "December"][index],
+      day: (index + 1).to_s,
+      newEnrollments: (20 + index).to_s,
+      scheduledMeetings: (10 + index).to_s,
+      attendanceRate: "#{50 + index}%",
+      completedClasses: (3 + index).to_s,
+      classCompletionRate: "#{30 + index}%",
+      graduatedStudents: (19 + index).to_s,
+      children: [
+        {
+          id: "#{table_id}-#{year}-q#{(index % 4) + 1}",
+          quarter: "Q#{(index % 4) + 1}",
+          month: ["January", "April", "July", "October", "December"][index],
+          day: (index + 1).to_s,
+        },
+      ],
+    }
+  end
+end
+
+standard_all_data = build_table_data_subrows.call("standard_multi_column_all")
+standard_none_data = build_table_data.call("standard_multi_column_none")
+segmented_all_data = build_table_data.call("segmented_multi_column_all")
+segmented_none_data = build_table_data.call("segmented_multi_column_none")
+%>
+
+<%= pb_rails("title", props: {
+  margin_bottom: "sm",
+  size: 4,
+  tag: "h4",
+  text: "Standard AdvancedTable",
+}) %>
+
+<%= pb_rails("caption", props: {
+  text: "Multi-column headers with selectable rows and expandable subrows — Standard / Enable Toggle Expansion All",
+}) %>
+
+<%= pb_rails("advanced_table", props: {
+  id: "standard_multi_column_all",
+  table_data: standard_all_data,
+  column_definitions: column_definitions,
+  selectable_rows: true,
+  subrow_headers: subrow_headers,
+  enable_toggle_expansion: "all",
+}) %>
+
+<%= pb_rails("caption", props: {
+  text: "Multi-column headers with selectable rows — Standard / Enable Toggle Expansion None",
+}) %>
+
+<%= pb_rails("advanced_table", props: {
+  id: "standard_multi_column_none",
+  table_data: standard_none_data,
+  column_definitions: column_definitions,
+  selectable_rows: true,
+  enable_toggle_expansion: "none",
+}) %>
+
+<%= pb_rails("title", props: {
+  margin_bottom: "sm",
+  margin_top: "xl",
+  size: 4,
+  tag: "h4",
+  text: "Segmented AdvancedTable",
+}) %>
+
+<%= pb_rails("caption", props: {
+  text: "Multi-column headers with selectable rows and expandable subrows — Subcomponent / Enable Toggle Expansion All",
+}) %>
+
+<%= pb_rails("advanced_table", props: {
+  id: "segmented_multi_column_all",
+  table_data: segmented_all_data,
+  column_definitions: column_definitions,
+  selectable_rows: true,
+  enable_toggle_expansion: "all",
+}) do %>
+  <%= pb_rails("advanced_table/table_header", props: {
+    table_id: "segmented_multi_column_all",
+    column_definitions: column_definitions,
+    selectable_rows: true,
+  }) %>
+
+  <%= pb_rails("advanced_table/table_body", props: {
+    table_id: "segmented_multi_column_all",
+    table_data: segmented_all_data,
+    column_definitions: column_definitions,
+    subrow_headers: subrow_headers,
+    enable_toggle_expansion: "all",
+    selectable_rows: true,
+  }) %>
+<% end %>
+
+<%= pb_rails("caption", props: {
+  text: "Multi-column headers with selectable rows — Subcomponent / Enable Toggle Expansion None",
+}) %>
+
+<%= pb_rails("advanced_table", props: {
+  id: "segmented_multi_column_none",
+  table_data: segmented_none_data,
+  column_definitions: column_definitions,
+  selectable_rows: true,
+  enable_toggle_expansion: "none",
+}) do %>
+  <%= pb_rails("advanced_table/table_header", props: {
+    table_id: "segmented_multi_column_none",
+    column_definitions: column_definitions,
+    selectable_rows: true,
+    enable_toggle_expansion: "none",
+  }) %>
+
+  <%= pb_rails("advanced_table/table_body", props: {
+    table_id: "segmented_multi_column_none",
+    table_data: segmented_none_data,
+    column_definitions: column_definitions,
+    subrow_headers: subrow_headers,
+    enable_toggle_expansion: "none",
+    selectable_rows: true,
+  }) %>
+<% end %>
