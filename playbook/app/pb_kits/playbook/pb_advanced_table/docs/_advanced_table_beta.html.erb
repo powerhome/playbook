@@ -90,7 +90,7 @@ end
 
 standard_all_data = build_table_data_subrows.call("standard_multi_column_all")
 standard_none_data = build_table_data.call("standard_multi_column_none")
-segmented_all_data = build_table_data.call("segmented_multi_column_all")
+segmented_all_data = build_table_data_subrows.call("segmented_multi_column_all")
 segmented_none_data = build_table_data.call("segmented_multi_column_none")
 %>
 
@@ -110,7 +110,6 @@ segmented_none_data = build_table_data.call("segmented_multi_column_none")
   table_data: standard_all_data,
   column_definitions: column_definitions,
   selectable_rows: true,
-  subrow_headers: subrow_headers,
   enable_toggle_expansion: "all",
 }) %>
 
@@ -148,7 +147,9 @@ segmented_none_data = build_table_data.call("segmented_multi_column_none")
   <%= pb_rails("advanced_table/table_header", props: {
     table_id: "segmented_multi_column_all",
     column_definitions: column_definitions,
+    enable_toggle_expansion: "all",
     selectable_rows: true,
+    table_data: segmented_all_data,
   }) %>
 
   <%= pb_rails("advanced_table/table_body", props: {

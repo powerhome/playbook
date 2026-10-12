@@ -491,7 +491,7 @@
     }
   }
 
-  // First data column separator/border (Year). Exclude the checkbox column when present.
+  // First data column separator/border (Year when no separate checkbox column)
   .table-header-cells:first-child,
   td:first-child:not(.checkbox-cell),
   .pb_table_td:first-child:not(.checkbox-cell) {
@@ -502,14 +502,12 @@
     box-shadow: inset 1px 0px 0px 0px var(--column-border-color) !important;
   }
 
-  // Separate checkbox column: put the separator after the first data column, not after the checkbox
-  .selectable-rows-enabled {
-    .table-header-cells:nth-child(2),
-    th:nth-child(2),
-    td:nth-child(2),
-    .pb_table_td:nth-child(2) {
-      box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
-    }
+  // Separate checkbox column (Rails + React): separator on the first data column
+  .table-header-cells-custom + th,
+  .table-header-cells-custom + .table-header-cells,
+  td.checkbox-cell + td,
+  td.checkbox-cell + .pb_table_td {
+    box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
   }
 
   // Color for collapsible trail
@@ -723,6 +721,12 @@
         box-shadow: 0 0 0 0 !important;
       }
 
+      // Re-apply after the nth-child(2) clear above (checkbox column layouts)
+      td.checkbox-cell + td,
+      td.checkbox-cell + .pb_table_td {
+        box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
+      }
+
       .pb_advanced_table_header,
       .pb_advanced_table_body {
         th.sticky-left,
@@ -826,6 +830,13 @@
     .table-header-cells:first-child,
     td:first-child:not(.checkbox-cell),
     .pb_table_td:first-child:not(.checkbox-cell) {
+      box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
+    }
+
+    .table-header-cells-custom + th,
+    .table-header-cells-custom + .table-header-cells,
+    td.checkbox-cell + td,
+    td.checkbox-cell + .pb_table_td {
       box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
     }
 
