@@ -92,7 +92,7 @@
   "hints": {
     "maplibre_setup": {
       "when": {},
-      "message": "Map uses MapLibre: import maplibregl from 'maplibre-gl', include the MapLibre CSS, use mapTheme, and give .pb_map a relative container with explicit height and width.",
+      "message": "Map uses MapLibre: import * as maplibregl from 'maplibre-gl', include the MapLibre CSS, use mapTheme, and give .pb_map a relative container with explicit height and width.",
       "type": "info"
     },
     "zoom_controls": {
@@ -143,7 +143,7 @@
         ],
         "externalImports": [
           "import React, { useEffect, useRef, useState } from 'react'",
-          "import maplibregl from 'maplibre-gl'"
+          "import * as maplibregl from 'maplibre-gl'"
         ],
         "wrapper": "const defaultPosition = [-75.379143, 39.831200]\nconst mapContainerStyle = {\n  position: 'absolute',\n  left: 0,\n  right: 0,\n  top: 0,\n  bottom: 0,\n}\n\nconst MapPlaygroundExample = () => {\n  const [mapInstance, setMapInstance] = useState(null)\n  const mapContainerRef = useRef(null)\n\n  const handleZoomIn = (map) => map?.zoomIn({ ...mapTheme.zoomConfig })\n  const handleZoomOut = (map) => map?.zoomOut({ ...mapTheme.zoomConfig })\n  const handleFlyTo = (map) => map?.flyTo({\n    center: defaultPosition,\n    ...mapTheme.flyToConfig,\n  })\n\n  useEffect(() => {\n    if (!mapContainerRef.current) return undefined\n\n    const map = new maplibregl.Map({\n      container: mapContainerRef.current,\n      center: defaultPosition,\n      ...mapTheme.mapConfig,\n    })\n\n    map.on('load', ({ target }) => {\n      new maplibregl.Marker({ color: mapTheme.marker })\n        .setLngLat(defaultPosition)\n        .setPopup(\n          new maplibregl.Popup({ closeButton: false }).setHTML(\n            '<h4 class=\"pb_title_kit pb_title_4\">Hello World!</h4>'\n          )\n        )\n        .addTo(target)\n\n      target.scrollZoom.disable()\n      target.addControl(new maplibregl.AttributionControl({ compact: true }))\n      setMapInstance(target)\n    })\n\n    return () => map.remove()\n  }, [])\n\n  return {{component}}\n}\n\n<MapPlaygroundExample />"
       },
@@ -176,7 +176,7 @@
         ],
         "externalImports": [
           "import React, { useEffect, useRef, useState } from 'react'",
-          "import maplibregl from 'maplibre-gl'"
+          "import * as maplibregl from 'maplibre-gl'"
         ],
         "wrapper": "const defaultPosition = [-75.379143, 39.831200]\nconst mapContainerStyle = {\n  position: 'absolute',\n  left: 0,\n  right: 0,\n  top: 0,\n  bottom: 0,\n}\n\nconst MapPlaygroundExample = () => {\n  const [mapInstance, setMapInstance] = useState(null)\n  const mapContainerRef = useRef(null)\n\n  const handleZoomIn = (map) => map?.zoomIn({ ...mapTheme.zoomConfig })\n  const handleZoomOut = (map) => map?.zoomOut({ ...mapTheme.zoomConfig })\n  const handleFlyTo = (map) => map?.flyTo({\n    center: defaultPosition,\n    ...mapTheme.flyToConfig,\n  })\n\n  useEffect(() => {\n    if (!mapContainerRef.current) return undefined\n\n    const map = new maplibregl.Map({\n      container: mapContainerRef.current,\n      center: defaultPosition,\n      ...mapTheme.mapConfig,\n    })\n\n    map.on('load', ({ target }) => {\n      new maplibregl.Marker({ color: mapTheme.marker })\n        .setLngLat(defaultPosition)\n        .setPopup(\n          new maplibregl.Popup({ closeButton: false }).setHTML(\n            '<h4 class=\"pb_title_kit pb_title_4\">Hello World!</h4>'\n          )\n        )\n        .addTo(target)\n\n      target.scrollZoom.disable()\n      target.addControl(new maplibregl.AttributionControl({ compact: true }))\n      setMapInstance(target)\n    })\n\n    return () => map.remove()\n  }, [])\n\n  return {{component}}\n}\n\n<MapPlaygroundExample />"
       }
