@@ -32,7 +32,7 @@
             <% end %>
         <% else %>
             <%= pb_rails("dropdown/dropdown_trigger", props: { autocomplete: object.autocomplete, disabled: object.disabled, multi_select: object.multi_select, placeholder: object.placeholder, select_id: object.select_id, label: object.label, error_id: object.error_id, error: object.error }) %>
-            <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar, constrain_height: object.constrain_height, disabled: object.disabled }) do %>
+            <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar, constrain_height: object.constrain_height, disabled: object.disabled, no_options_text: object.no_options_text }) do %>
                 <% if options_with_blank.present? %>
                     <% options_with_blank.each do |option| %>
                         <%= pb_rails("dropdown/dropdown_option", props: {option: option}) %>
