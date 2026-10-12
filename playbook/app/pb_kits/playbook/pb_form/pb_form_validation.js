@@ -67,23 +67,28 @@ class PbFormValidation extends PbEnhancedElement {
   }
 
   validateFormField(event) {
-    event.preventDefault()
     const { target } = event
+    const messageContainer = this.messageContainerFor(target)
+    const kitElement = messageContainer?.closest(KIT_SELECTOR)
+
+    // Mixed forms may include non-Playbook required controls. Do not suppress the
+    // browser's native invalid UI unless we can attach a Playbook message to a kit.
+    if (!kitElement) return
+
+    event.preventDefault()
     target.setCustomValidity('')
-    const isValid = event.target.validity.valid
+    const isValid = target.validity.valid
 
     if (isValid) {
       this.clearError(target)
     } else {
-      this.showValidationMessage(target)
+      this.showValidationMessage(target, messageContainer, kitElement)
     }
   }
 
-  showValidationMessage(target) {
-    const messageContainer = this.messageContainerFor(target)
-    const kitElement = messageContainer.closest(KIT_SELECTOR)
-
-    // FIX: Add null check for kitElement
+  showValidationMessage(target, messageContainer, kitElement) {
+    messageContainer = messageContainer || this.messageContainerFor(target)
+    kitElement = kitElement || messageContainer?.closest(KIT_SELECTOR)
     if (!kitElement) return
 
     // Check if this is a phone number input
