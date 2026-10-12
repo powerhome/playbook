@@ -413,11 +413,14 @@ const EnumControl: React.FC<ExtendedPropControlProps> = ({
   info,
 }) => {
   const values = definition.values || [];
-  const enumOptions = values.map((val) => ({
-    id: val,
-    label: val,
-    value: val,
-  }));
+  const enumOptions = values.map((val) => {
+    const optionValue = String(val);
+    return {
+      id: optionValue,
+      label: optionValue,
+      value: optionValue,
+    };
+  });
   const schemaDefault = resolveSchemaDefault(definition);
   const schemaDefaultValue =
     typeof schemaDefault === "string" && values.includes(schemaDefault)
@@ -454,12 +457,19 @@ const EnumControl: React.FC<ExtendedPropControlProps> = ({
     >
       <Dropdown
         className={panelDropdownClassName("props-panel", isDropdownFilled)}
+        constrainHeight
         defaultValue={activeOption}
         id={`prop-${name}-enum-dropdown`}
         key={`${value?.enabled}-${String(displayValue ?? "")}`}
         onSelect={(option: { value: string } | null): null => {
           if (option?.value) {
-            onChange(name, { value: option.value, enabled: true });
+            const matched = values.find(
+              (enumValue) => String(enumValue) === option.value
+            );
+            onChange(name, {
+              value: matched !== undefined ? matched : option.value,
+              enabled: true,
+            });
           } else {
             onChange(name, propValueOnDropdownClear(definition, values));
           }
@@ -592,6 +602,7 @@ const FunctionControl: React.FC<ExtendedPropControlProps> = ({
           isFilledDisplayValue(currentValue),
         )}
         clearable={false}
+        constrainHeight
         defaultValue={activeOption}
         id={`prop-${name}-function-dropdown`}
         key={currentValue}

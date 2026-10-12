@@ -88,7 +88,7 @@
       > .pb_body_kit_negative {
         margin-top: $space_xs / 2;
       }
-      > select:first-child {
+      select {
         border-color: $input_border_error;
       }
       .pb_select_kit_caret {
@@ -235,7 +235,7 @@
   }
   .pb_select_kit_wrapper {
     &.error {
-      > select {
+      select {
         border-color: $input_border_error_dark;
       }
     }
