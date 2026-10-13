@@ -6,7 +6,7 @@ import StarterKit from "@tiptap/starter-kit"
 
 const RichTextEditorAdvancedFocus = (props) => {
     const editor = useEditor({
-        extensions: [StarterKit],
+        extensions: [StarterKit.configure({ trailingNode: false })],
         content:"Click inside to see the toolbar. Click outside to hide it."
     })
 

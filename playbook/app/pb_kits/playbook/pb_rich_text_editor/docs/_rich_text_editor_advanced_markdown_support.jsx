@@ -7,7 +7,7 @@ import { DOMSerializer } from 'prosemirror-model'
 
 const RichTextEditorAdvancedMarkdownSupport = (props) => {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit.configure({ trailingNode: false })],
     content: 'Paste Markdown here to preserve headings, emphasis, links, lists, quotes, and code blocks.',
   })
 

@@ -7,12 +7,12 @@ import StarterKit from "@tiptap/starter-kit"
 const RichTextEditorAdvancedLabel = (props) => {
 
     const editor = useEditor({
-      extensions: [StarterKit],
+      extensions: [StarterKit.configure({ trailingNode: false })],
       content: "Add your text here. You can format your text, add links, quotes, and bullets.",
     })
 
     const editorNoLabel = useEditor({
-      extensions: [StarterKit],
+      extensions: [StarterKit.configure({ trailingNode: false })],
       content: "Add your text here. You can format your text, add links, quotes, and bullets.",
     })
 

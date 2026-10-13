@@ -9,7 +9,7 @@ import StarterKit from "@tiptap/starter-kit"
 const RichTextEditorAdvancedPreview = (props) => {
 
   const editor = useEditor({
-      extensions: [StarterKit],
+      extensions: [StarterKit.configure({ trailingNode: false })],
       content: "Add text here, format it, and press \"Preview Output\" to see what your stylized output will look like on the page."
   })
 

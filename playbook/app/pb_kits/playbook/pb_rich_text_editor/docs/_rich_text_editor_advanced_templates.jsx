@@ -100,7 +100,7 @@ const handleChange = (event) => {
   ]
 
     const editor = useEditor({
-        extensions: [StarterKit],
+        extensions: [StarterKit.configure({ trailingNode: false })],
         content: editorContent
     })
 

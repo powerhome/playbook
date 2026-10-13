@@ -9,7 +9,7 @@ const RichTextEditorMoreExtensions = (props) => {
 
     const editor = useEditor({
         extensions: [
-            StarterKit,
+            StarterKit.configure({ trailingNode: false }),
             Highlight.configure({ multicolor: true })
         ],
         content:"Add your text here. You can format your text, add links, quotes, and bullets."

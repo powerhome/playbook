@@ -7,7 +7,7 @@ import StarterKit from "@tiptap/starter-kit"
 const RichTextEditorAdvancedInline = (props) => {
 
     const editor = useEditor({
-        extensions: [StarterKit],
+        extensions: [StarterKit.configure({ trailingNode: false })],
         content:"Add your text here. You can format your text, add links, quotes, and bullets."
     })
       if (!editor) {

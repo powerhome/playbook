@@ -257,6 +257,9 @@ async function initPlaybookRichTextEditorRails(container) {
             openOnClick: false,
             HTMLAttributes: { target: "_blank", rel: "noopener" },
           },
+          // TipTap v3 enables TrailingNode by default; disable so getHTML() stays
+          // free of a synthetic trailing <p></p> that would dirty/persist blank lines.
+          trailingNode: false,
           underline: false,
         }),
         ...optionalExtensions,

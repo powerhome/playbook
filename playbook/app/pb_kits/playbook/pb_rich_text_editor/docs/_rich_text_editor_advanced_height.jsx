@@ -8,17 +8,17 @@ import { Caption } from "playbook-ui"
 const RichTextEditorAdvancedHeight = (props) => {
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit.configure({ trailingNode: false })],
     content: "Add your text here. You can format your text, add links, quotes, and bullets."
   })
 
   const editor2 = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit.configure({ trailingNode: false })],
     content: "Add your text here. You can format your text, add links, quotes, and bullets."
   })
 
   const editor3 = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit.configure({ trailingNode: false })],
     content: "Add your text here. You can format your text, add links, quotes, and bullets."
   })
 
