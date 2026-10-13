@@ -67,6 +67,7 @@ examples:
   - advanced_table_with_custom_header_multi_header: Custom Header with Multiple Headers
   - advanced_table_pagination: Pagination
   - advanced_table_pagination_with_props: Pagination Props
+  - advanced_table_pagination_section_separator: Pagination Section Separator
   - advanced_table_loading: Loading State
   - advanced_table_inline_row_loading: Inline Row Loading
   - advanced_table_column_headers: Multi-Header Columns

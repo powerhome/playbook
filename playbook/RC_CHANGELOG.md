@@ -1,3 +1,48 @@
+# ✨ 18.2.0.pre.rc.0
+
+##### October 08, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.2.0-rc.0](https://github.com/powerhome/playbook/tree/18.2.0-rc.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Lightbox Kit: Close Button Accessibility [\#6722](https://github.com/powerhome/playbook/pull/6722) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Improvements:**
+
+- Playground: Fix Icon Kit + Playground Dropdown Issues [\#6739](https://github.com/powerhome/playbook/pull/6739) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Text Input Kit: Fix "add On" Icon Size [\#6732](https://github.com/powerhome/playbook/pull/6732) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Fixed Bugs:**
+
+- Select Kit: Validation Error Styling Within Wrapper [\#6726](https://github.com/powerhome/playbook/pull/6726) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: Apply Last-header-cell Styling to Parentless Subheaders [\#6717](https://github.com/powerhome/playbook/pull/6717) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.1.0...18.2.0-rc.0)
+
+# ✨ 18.1.0.pre.rc.5
+
+##### October 05, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.1.0-rc.5](https://github.com/powerhome/playbook/tree/18.1.0-rc.5) full list of changes:
+
+**Kit Enhancements:**
+
+- Playbook Website: Cached Playground 404s After Vpn Reconnect [\#6706](https://github.com/powerhome/playbook/pull/6706) ([nickamantia](https://github.com/nickamantia))
+- Datepicker: Closeonselect Kit Prop [\#6691](https://github.com/powerhome/playbook/pull/6691) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Improvements:**
+
+- Rich Text Editor: Toolbar/markdown Styling and Extensions - React and Rails [\#6688](https://github.com/powerhome/playbook/pull/6688) ([kangaree](https://github.com/kangaree))
+- Filter Kit: Standardize Sort Icons [\#6692](https://github.com/powerhome/playbook/pull/6692) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Expand and Prioritize Playbook Website Search [\#6650](https://github.com/powerhome/playbook/pull/6650) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.1.0-rc.4...18.1.0-rc.5)
+
 # ✨ 18.1.0.pre.rc.3
 
 ##### September 29, 2026

@@ -1384,3 +1384,139 @@ test("cascadeCollapse=true with header toggle all: collapse all then expand all 
     expect(kit.querySelector(".depth-sub-row-1")).toBeInTheDocument()
   })
 })
+
+test("pagination does not render section separators by default", () => {
+  const { container } = render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        pagination
+        paginationProps={{ pageSize: 1 }}
+        tableData={MOCK_DATA}
+    />
+  )
+
+  expect(container.querySelectorAll(".pb_paginate")).toHaveLength(2)
+  expect(container.querySelectorAll(".pb_section_separator_kit")).toHaveLength(0)
+})
+
+test("paginationProps.sectionSeparator renders separators for top and bottom pagination", () => {
+  const { container } = render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        pagination
+        paginationProps={{ pageSize: 1, sectionSeparator: true }}
+        tableData={MOCK_DATA}
+        tableProps={{ container: false }}
+    />
+  )
+
+  const paginations = container.querySelectorAll(".pb_paginate")
+  const separators = container.querySelectorAll(".pb_section_separator_kit")
+
+  expect(paginations).toHaveLength(2)
+  expect(separators).toHaveLength(3)
+  expect(paginations[0]).toHaveClass("ml_lg")
+  expect(paginations[0]).toHaveClass("py_xs")
+  expect(paginations[1]).toHaveClass("ml_lg")
+  expect(paginations[1]).toHaveClass("py_xs")
+  expect(separators[0].nextElementSibling).toBe(paginations[0])
+  expect(paginations[0].nextElementSibling).toBe(separators[1])
+  expect(separators[2].nextElementSibling).toBe(paginations[1])
+})
+
+const groupedColumnDefinitions = [
+  {
+    accessor: "year",
+    label: "Year",
+  },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        accessor: "newEnrollments",
+        label: "New Enrollments",
+      },
+      {
+        accessor: "scheduledMeetings",
+        label: "Scheduled Meetings",
+      },
+    ],
+  },
+  {
+    accessor: "attendanceRate",
+    label: "Attendance Rate",
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        accessor: "completedClasses",
+        label: "Completed Classes",
+      },
+      {
+        accessor: "graduatedStudents",
+        label: "Graduated Students",
+      },
+    ],
+  },
+  {
+    accessor: "classCompletionRate",
+    label: "Difference",
+  },
+]
+
+const headerWithText = (row, text) => (
+  [...row.querySelectorAll("th")].find((cell) => cell.textContent.includes(text))
+)
+
+test("parentless subheaders get last-header-cell without a placeholder parent", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={groupedColumnDefinitions}
+        data={{ testid: testId }}
+        enableToggleExpansion="none"
+        tableData={MOCK_DATA_NO_SUBROWS}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const [topRow, subheaderRow] = kit.querySelectorAll("thead tr")
+  const topCells = topRow.querySelectorAll("th")
+
+  expect(headerWithText(subheaderRow, "Year")).not.toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "New Enrollments")).not.toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Scheduled Meetings")).toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Attendance Rate")).toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Completed Classes")).not.toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Graduated Students")).toHaveClass("last-header-cell")
+  expect(headerWithText(subheaderRow, "Difference")).toHaveClass("last-header-cell")
+  expect(headerWithText(topRow, "Enrollment Data")).not.toHaveClass("last-header-cell")
+  expect(topCells[topCells.length - 1]).toHaveClass("last-header-cell")
+
+  const bodyCells = kit.querySelector("tbody tr").querySelectorAll("td")
+  const bodyGroupEnds = [...bodyCells].map((cell) => cell.classList.contains("last-cell"))
+  expect(bodyGroupEnds).toEqual([false, false, true, true, false, true, true])
+})
+
+test("single header row does not mark every column as last-header-cell", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        enableToggleExpansion="none"
+        tableData={MOCK_DATA_NO_SUBROWS}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const headers = kit.querySelectorAll("thead th")
+  const groupEnds = [...headers].filter((cell) => cell.classList.contains("last-header-cell"))
+
+  expect(headers.length).toBeGreaterThan(1)
+  expect(headers[0]).not.toHaveClass("last-header-cell")
+  expect(groupEnds).toHaveLength(1)
+  expect(kit.querySelector("tbody td.last-cell")).not.toBeInTheDocument()
+})
+
