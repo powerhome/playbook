@@ -68,7 +68,7 @@ export const TopLevelNavItem = ({
   const TopLevelLink = (link) => {
     if (link === "/kits") {
       const kitsLink = `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
-      return withoutCacheBust(currentURL) === kitsLink ? "" : kitsLink;
+      return currentURL === kitsLink ? "" : kitsLink;
     } else {
       return currentURL === link ? "" : link;
     }
