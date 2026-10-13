@@ -14,8 +14,7 @@ export const maplibreLoader: ThirdPartyLoader = {
   id: "maplibre-gl",
   detect: (_raw, _defaults, sources) => sources.includes("maplibre-gl"),
   load: async (_raw, defaults) => {
-    const mod: any = await import("maplibre-gl")
-    const maplibregl = mod.default || mod
+    const { default: maplibregl } = await import("../../../utils/maplibre")
     ensureMapLibreCSS() // remove this if you bundle the CSS elsewhere
 
     const alias = defaults.find((d) => d.source === "maplibre-gl")?.local

@@ -4,16 +4,11 @@ import { Card, colors, Flex } from "playbook-ui";
 import * as PB from "playbook-ui";
 import * as PBAdvancedTable from "playbook-ui/advanced-table";
 import * as PBCharts from "playbook-ui/charts";
-import * as maplibregl from "maplibre-gl";
-import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
+import maplibregl from "../../../../utils/maplibre";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TipTapLink from "@tiptap/extension-link";
 import "./PlaygroundPreview.scss";
-
-// MapLibre 6 looks up its worker via import.meta.url. Vite does not rewrite that,
-// so point it at a worker chunk before any map is created.
-maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
 interface PlaygroundPreviewProps {
   bare?: boolean;
