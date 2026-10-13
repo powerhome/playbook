@@ -4,16 +4,12 @@ import Button from '../../pb_button/_button'
 import Card from '../../pb_card/_card'
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
-import Link from '@tiptap/extension-link'
 
 
 const RichTextEditorAdvancedPreview = (props) => {
 
   const editor = useEditor({
-      extensions: [
-          StarterKit,
-          Link
-      ],
+      extensions: [StarterKit],
       content: "Add text here, format it, and press \"Preview Output\" to see what your stylized output will look like on the page."
   })
 

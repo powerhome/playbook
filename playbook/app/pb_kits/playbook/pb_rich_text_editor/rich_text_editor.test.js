@@ -70,6 +70,7 @@ const TestAdvancedEditor = ({ toolbarOnFocus = false, ...props }) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: '<p>Test content</p>',
+    shouldRerenderOnTransaction: true,
   })
 
   if (!editor) return null

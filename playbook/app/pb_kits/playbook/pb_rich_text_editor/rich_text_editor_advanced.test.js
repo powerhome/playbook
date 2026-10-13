@@ -3,7 +3,6 @@ import { fireEvent, render, waitFor } from "../utilities/test-utils";
 import { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Link from "@tiptap/extension-link";
 import { defaultMarkdownParser } from "prosemirror-markdown";
 import { DOMSerializer } from "prosemirror-model";
 
@@ -16,8 +15,10 @@ const markdownToHTML = createMarkdownToHTML(defaultMarkdownParser, DOMSerializer
 
 const EditorTest = (props) => {
   const editor = useEditor({
-    extensions: [StarterKit, Link],
+    extensions: [StarterKit],
     content: "",
+    // TipTap v3: keep toolbar/tests in sync with editor state without host-app config.
+    shouldRerenderOnTransaction: true,
   });
 
   return (
@@ -105,8 +106,9 @@ describe("TipTap list selection", () => {
     normalizeListSelection(editor);
     editor.chain().toggleBulletList().run();
 
+    // TipTap v3 StarterKit includes TrailingNode, which keeps an empty paragraph after lists.
     expect(editor.getHTML()).toBe(
-      "<p><strong>How should it work?</strong></p><ul><li><p>Keep React and Rails visible.</p></li></ul>"
+      "<p><strong>How should it work?</strong></p><ul><li><p>Keep React and Rails visible.</p></li></ul><p></p>"
     );
 
     editor.destroy();
