@@ -21,13 +21,13 @@ const RichTextEditorMoreExtensions = (props) => {
   const ExtensionsList = [
     {
         icon: "horizontal-rule",
-        isActive: editor.isActive("horizontalRule"),
+        isActive: () => editor.isActive("horizontalRule"),
         text: "Horizontal Rule",
         onclick: () => editor.chain().focus().setHorizontalRule().run(),
     },
     {
       icon: "highlighter",
-      isActive: editor.isActive("highlight"),
+      isActive: () => editor.isActive("highlight"),
       text: "Highlighter",
       onclick: () => editor.chain().focus().toggleHighlight().run(),
     }
