@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import Map from '../../pb_map/_map'
 import mapTheme from '../../pb_map/pbMapTheme'
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 
 // MapLibre 3+ uses maplibregl-* classes; mapbox-gl-draw still defaults to mapboxgl-*. These overrides allow Plugin to work with MapLibre 4.7.1.

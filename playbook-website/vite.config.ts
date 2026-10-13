@@ -3,6 +3,11 @@ import Buffer from 'buffer';
 import RubyPlugin from 'vite-plugin-ruby';
 
 const config = {
+  optimizeDeps: {
+    // MapLibre 6 loads maplibre-gl-worker.mjs beside the module at runtime.
+    // Pre-bundling points that URL at .vite/deps, where the worker is missing.
+    exclude: ['maplibre-gl'],
+  },
   define: {
     'process.env': process.env,
     'Buffer': Buffer,

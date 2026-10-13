@@ -4,7 +4,7 @@ import Map from '../../pb_map/_map'
 import mapTheme from '../../pb_map/pbMapTheme'
 import MapCustomButton from '../../pb_map/_map_custom_button'
 
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
 
 const MapWithCustomButton = (props) => {
 
