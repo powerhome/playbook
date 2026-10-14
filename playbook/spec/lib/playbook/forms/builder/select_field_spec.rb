@@ -33,6 +33,51 @@ RSpec.describe Playbook::Forms::Builder, "#select", type: :helper do
     expect(rendered).to have_tag("option", text: "Choose one")
   end
 
+  it "renders an empty prompt by default" do
+    rendered = render_form { |builder| concat builder.select(:status, choices) }
+
+    expect(rendered).to have_tag("option[value='']", text: "")
+  end
+
+  [false, nil].each do |prompt|
+    it "does not render a prompt when prompt is #{prompt.inspect} and blank_selection is omitted" do
+      rendered = render_form do |builder|
+        concat builder.select(:status, choices, { prompt: prompt })
+      end
+
+      expect(rendered).not_to have_tag("option[value='']")
+      expect(rendered).to have_tag("option", count: 2)
+    end
+  end
+
+  it "preserves an explicit prompt when blank_selection is omitted" do
+    rendered = render_form do |builder|
+      concat builder.select(:status, choices, { prompt: "Pick one" })
+    end
+
+    expect(rendered).to have_tag("option[value='']", text: "Pick one")
+  end
+
+  [false, nil, "Pick one"].each do |prompt|
+    it "prefers blank_selection over prompt: #{prompt.inspect}" do
+      rendered = render_form do |builder|
+        concat builder.select(:status, choices, { prompt: prompt }, props: { blank_selection: "All" })
+      end
+
+      expect(rendered).to have_tag("option[value='']", text: "All")
+      expect(rendered).not_to have_tag("option", text: "Pick one")
+      expect(rendered).to have_tag("option", count: 3)
+    end
+  end
+
+  it "renders an empty prompt when blank_selection is explicitly nil" do
+    rendered = render_form do |builder|
+      concat builder.select(:status, choices, { prompt: false }, props: { blank_selection: nil })
+    end
+
+    expect(rendered).to have_tag("option[value='']", text: "")
+  end
+
   it "passes class and data from input_options" do
     rendered = render_form do |builder|
       concat builder.select(
