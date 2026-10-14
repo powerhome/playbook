@@ -1,4 +1,9 @@
   <%= form.check_box :newsletter,
-        props: { text: "Subscribe to newsletter", label: "Checkbox", required: true },
+        props: {
+          text: "Subscribe to newsletter",
+          label: "Checkbox",
+          required: true,
+          validation_message: "Please subscribe to continue",
+        },
         checked_value: "yes",
         unchecked_value: "no" %>

@@ -4,4 +4,5 @@
         label: "Time Zone",
         blank_selection: "Select a Time Zone...",
         required: true,
+        validation_message: "Please select a time zone",
       } %>

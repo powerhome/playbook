@@ -4,4 +4,9 @@
      { label: "Pakistan", value: "Pakistan", id: "pk" },
    ] %>
 <%= form.dropdown_field "validation[country]",
-      props: { label: "Country", options: dropdown_options, required: true } %>
+      props: {
+        label: "Country",
+        options: dropdown_options,
+        required: true,
+        validation_message: "Please select a country",
+      } %>

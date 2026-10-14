@@ -8,8 +8,8 @@ export const COMMON_FORM_FAQS = [
   },
   {
     id: 'forms.validation', platforms: ['rails'],
-    questions: ['How do I show ActiveRecord errors?', 'Does required_indicator validate?', 'How do I enable client validation?'],
-    answer: 'Most builder fields auto-map record.errors.full_messages_for(attribute) into props.error unless error is set explicitly (including nil to opt out). Checkbox still needs an explicit boolean error flag, and StarRating has no error prop. A required indicator is visual only. pb_form_with validate: true enables Playbook client validation; it does not run model validations.',
+    questions: ['How do I show ActiveRecord errors?', 'Does required_indicator validate?', 'How do I enable client validation?', 'How do I set a custom required-field message?'],
+    answer: 'Most builder fields auto-map record.errors.full_messages_for(attribute) into props.error unless error is set explicitly (including nil to opt out). Checkbox still needs an explicit boolean error flag, and StarRating has no error prop. A required indicator is visual only. pb_form_with validate: true enables Playbook client validation; it does not run model validations. Custom required messages use props.validation.message on text-style fields (including text_area and telephone_field) and props.validation_message on selection-style fields (select, dropdown_field, check_box, phone_number_field, star_rating_field, multi_level_select, and similar). Phone kits own their UI and use validation_message for the empty required copy only.',
     contractPaths: ['form.rails.builder.validation', 'form.rails.builder.methods'],
     props: ['error', 'required', 'requiredIndicator', 'validation', 'validationMessage'],
   },

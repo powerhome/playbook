@@ -13,6 +13,8 @@ module Playbook
       prop :id, type: Playbook::Props::String
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :validation_message, type: Playbook::Props::String,
+                                default: ""
       prop :default_value
       prop :blank_selection, type: Playbook::Props::String,
                              default: ""

@@ -24,4 +24,17 @@ RSpec.describe Playbook::Forms::Builder, "#multi_level_select", type: :helper do
 
     expect(rendered).to have_tag(".pb_multi_level_select[data-testid='regions'][data-multi-level-select-form='true']")
   end
+
+  it "passes required and validation_message to the search input" do
+    rendered = render_form do |builder|
+      concat builder.multi_level_select(
+        :region,
+        props: { required: true, validation_message: "Please select a region" }
+      )
+    end
+
+    expect(rendered).to have_tag(
+      "input[data-pb-mls-search][required][data-message='Please select a region']"
+    )
+  end
 end
