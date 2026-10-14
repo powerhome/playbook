@@ -8774,10 +8774,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-maplibre-gl@^6.4.1:
-  version "6.13.0"
-  resolved "https://npm.powerapp.cloud/maplibre-gl/-/maplibre-gl-6.13.0.tgz#ad47efaf0e9838f6ba581a4f0f88745d9772fe55"
-  integrity sha512-ELXk4h+xl0URFQEnVbAN6MGn61P6jq4amUWHiskLVsvHCaKdf1Zq6G8UNOD0AQ3UaXoL5ECc8ovz8yqYEBGPKw==
+maplibre-gl@^6.14.0:
+  version "6.14.0"
+  resolved "https://npm.powerapp.cloud/maplibre-gl/-/maplibre-gl-6.14.0.tgz#ee35e9db1d0214d423d432bfda4ffc519674e176"
+  integrity sha512-L7U9y9TyPJ3P/JJbW+eH+A3FzdPq+3fnZFqqeCwf/S6cRGganHwVI5b/C8/zOYzreUzsloDPZVVaMQA94wOt4A==
   dependencies:
     "@mapbox/point-geometry" "^1.1.0"
     "@mapbox/tiny-sdf" "^2.2.0"
