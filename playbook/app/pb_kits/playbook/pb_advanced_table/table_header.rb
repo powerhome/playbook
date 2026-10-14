@@ -58,13 +58,8 @@ module Playbook
       # Selectable Rows No Subrows - checkboxes in their own first cell
       def render_select_all_header
         if selectable_rows
-          additional_classes = []
-          additional_classes << "table-header-cells-custom"
-          additional_classes << "header-cells-with-actions" if show_actions_bar
-          additional_classes << "checkbox-cell-header"
-          additional_classes << "pinned-left" if responsive == "scroll"
           pb_rails("table/table_header", props: {
-                     classname: additional_classes.join(" "),
+                     classname: select_all_header_classname,
                    }) do
             pb_rails("checkbox", props: {
                        id: "#{table_id ? "#{table_id}-" : ''}select-all-rows",
@@ -73,6 +68,15 @@ module Playbook
                        name: "#{table_id ? "#{table_id}-" : ''}select-all-rows",
                      })
           end
+        end
+      end
+
+      # Empty checkbox-column cell for upper multi-header rows so columns stay aligned
+      def render_select_all_header_spacer
+        if selectable_rows
+          pb_rails("table/table_header", props: {
+                     classname: select_all_header_classname,
+                   })
         end
       end
 
@@ -211,6 +215,15 @@ module Playbook
       end
 
     private
+
+      def select_all_header_classname
+        additional_classes = []
+        additional_classes << "table-header-cells-custom"
+        additional_classes << "header-cells-with-actions" if show_actions_bar
+        additional_classes << "checkbox-cell-header"
+        additional_classes << "pinned-left" if responsive == "scroll"
+        additional_classes.join(" ")
+      end
 
       def header_layout_styles(cell)
         original_def = find_original_column_def_for_cell(cell)
