@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, globalInlineProps } from '../utilities/globalProps'
@@ -106,10 +106,13 @@ const Table = (props: TableProps): React.ReactElement => {
     const outerPaddingCss = outerPadding ? `outer_padding_${spaceCssName}${outerPadding}` : ''
     const isTableTag = tag === 'table'
     const dynamicInlineProps = globalInlineProps(props)
-    const tableRef = useRef<HTMLElement | null>(null)
-    const setTableRef = (node: HTMLTableElement | HTMLDivElement | null) => {
-        tableRef.current = node
-    }
+    const [tableNode, setTableNode] = useState<HTMLElement | null>(null)
+    const setTableRef = useCallback(
+        (node: HTMLTableElement | HTMLDivElement | null) => {
+            setTableNode((current) => (current === node ? current : node))
+        },
+        []
+    )
 
     const isFilterVariant = variant === 'withFilter'
     const effectiveContainer = isFilterVariant ? false : container
@@ -139,16 +142,15 @@ const Table = (props: TableProps): React.ReactElement => {
     )
 
     useEffect(() => {
-        const table = tableRef.current
-        if (!table) return
+        if (!tableNode) return
         if (!stickyLeftColumn.length && !stickyRightColumn.length) return
 
         const applyStickyOffsets = () => {
             if (stickyLeftColumn.length) {
-                applyStickyColumns(table, stickyLeftColumn, 'left')
+                applyStickyColumns(tableNode, stickyLeftColumn, 'left')
             }
             if (stickyRightColumn.length) {
-                applyStickyColumns(table, stickyRightColumn, 'right')
+                applyStickyColumns(tableNode, stickyRightColumn, 'right')
             }
         }
 
@@ -158,7 +160,7 @@ const Table = (props: TableProps): React.ReactElement => {
         let resizeObserver: ResizeObserver | undefined
         if (typeof ResizeObserver !== 'undefined') {
             resizeObserver = new ResizeObserver(applyStickyOffsets)
-            resizeObserver.observe(table)
+            resizeObserver.observe(tableNode)
         }
 
         return () => {
@@ -166,7 +168,7 @@ const Table = (props: TableProps): React.ReactElement => {
             window.removeEventListener('resize', applyStickyOffsets)
             resizeObserver?.disconnect()
         }
-    }, [stickyLeftColumn, stickyRightColumn])
+    }, [tableNode, stickyLeftColumn, stickyRightColumn])
 
     useEffect(() => {
         addDataTitle()

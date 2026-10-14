@@ -3,10 +3,14 @@
 [class^="pb_table"] {
     // Collapsed borders + sticky columns leave subpixel seams at some zoom/sizes.
     // Separate borders keep sticky offsets aligned with painted cell edges.
-    &.sticky-left-column,
-    &.sticky-right-column {
-        border-collapse: separate;
-        border-spacing: 0;
+    &.table-sm,
+    &.table-md,
+    &.table-lg {
+        &.sticky-left-column,
+        &.sticky-right-column {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
     }
 
     .sticky {
