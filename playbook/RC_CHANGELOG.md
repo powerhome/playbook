@@ -1,3 +1,27 @@
+# ✨ 18.2.0.pre.rc.1
+
+##### October 12, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.2.0-rc.1](https://github.com/powerhome/playbook/tree/18.2.0-rc.1) full list of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table: Add Sectionseparator Option to Paginationprops - React [\#6737](https://github.com/powerhome/playbook/pull/6737) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Async Search Api (react and Rails) [\#6707](https://github.com/powerhome/playbook/pull/6707) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Upgrades Playbook Icons [\#6751](https://github.com/powerhome/playbook/pull/6751) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Changelog 18.2.0.pre.rc.0 [\#6744](https://github.com/powerhome/playbook/pull/6744) ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Full Screen Kit: Fix `stickyheader` Prop So Header Scrolls Away [\#6752](https://github.com/powerhome/playbook/pull/6752) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.2.0-rc.0...18.2.0-rc.1)
+
 # ✨ 18.2.0.pre.rc.0
 
 ##### October 08, 2026
