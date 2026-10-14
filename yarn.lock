@@ -2931,14 +2931,14 @@
     "@types/geojson" "^7946.0.16"
     pbf "^5.0.0"
 
-"@maplibre/geojson-vt@^6.1.2":
-  version "6.1.2"
-  resolved "https://npm.powerapp.cloud/@maplibre/geojson-vt/-/geojson-vt-6.1.2.tgz#ef0b8ea383b7ca7ca9b92ba18d121e084c0f0679"
-  integrity sha512-2ZYhobdAY+y4/P/z1xe0698165LywD0yDdWugdu3NRUrajgVWut+tLkcz7i/RJguMTURwK7gxwmwYMFJbgbQFw==
+"@maplibre/geojson-vt@^6.1.1":
+  version "6.2.0"
+  resolved "https://npm.powerapp.cloud/@maplibre/geojson-vt/-/geojson-vt-6.2.0.tgz#97125e3444b61a448509c792c70bf8517bb7dd11"
+  integrity sha512-r24Cj+32JFQG4tscFoXpVreNJRqMmP2PxDNRaU89SyDJKKC3SWTEuEUgf76JhGdR7uRv6LAr7bcOE4GWWUfmGw==
   dependencies:
     kdbush "^4.1.0"
 
-"@maplibre/maplibre-gl-style-spec@^26.4.4":
+"@maplibre/maplibre-gl-style-spec@^26.2.1":
   version "26.4.4"
   resolved "https://npm.powerapp.cloud/@maplibre/maplibre-gl-style-spec/-/maplibre-gl-style-spec-26.4.4.tgz#e103d50f9eed8a44f1fde1c4970c5d2a47b19b78"
   integrity sha512-hG4RZR4PBd/+6A3ODdZ3AnQRF106ZQk1y3bhwDg8bH/A4Oz2tnRUJVVWs9BZa6gXZ1d3UKe89C+Mm+olGBELvA==
@@ -2950,7 +2950,7 @@
     quickselect "^3.0.0"
     tinyqueue "^3.0.0"
 
-"@maplibre/mlt@^1.3.0":
+"@maplibre/mlt@^1.1.12":
   version "1.3.0"
   resolved "https://npm.powerapp.cloud/@maplibre/mlt/-/mlt-1.3.0.tgz#3a9467d12a0b6edfcdba429dd3a260ca48f11129"
   integrity sha512-7M2O7ABM80Oi8XPkfkrjKB8mOBIxGoVgkA52Mu4RMWoBvvMdagQ522+WxVYujZsMpqIr3BpzrTbXrm4k8lCzCQ==
@@ -4680,13 +4680,6 @@ before-after-hook@^2.2.0:
   resolved "https://npm.powerapp.cloud/before-after-hook/-/before-after-hook-2.2.3.tgz#c51e809c81a4e354084422b9b26bad88249c517c"
   integrity sha512-NzUnlZexiaH/46WDhANlyR2bXRopNg4F/zuSA3OpZnllCUgRaOF2znDioDWrmbNVsuZk6l9pMquQB38cfBZwkQ==
 
-bidi-js@^1.1.0:
-  version "1.1.0"
-  resolved "https://npm.powerapp.cloud/bidi-js/-/bidi-js-1.1.0.tgz#c92efafe3fce3b9fdd30ba67bdddf0dd4d424af7"
-  integrity sha512-fX1Onk0tdVPC7obPWB5EbJ1z7NVhLq4m2xZLq2YXBkxzMXIGRpNMU88n0EPgWseKl12J7zXs7qrDxPK4sRs2fg==
-  dependencies:
-    require-from-string "^2.0.2"
-
 binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://npm.powerapp.cloud/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
@@ -5640,7 +5633,7 @@ dunder-proto@^1.0.1:
     es-errors "^1.3.0"
     gopd "^1.2.0"
 
-earcut@^3.2.4:
+earcut@^3.2.3:
   version "3.2.4"
   resolved "https://npm.powerapp.cloud/earcut/-/earcut-3.2.4.tgz#a030635fbb9a639984ce0e319b0f16e17e6e15ad"
   integrity sha512-FHc6yNpnTORB0tM5kmZ03iD2mDuNakDE2lvf4Hw1XkfxtEHIGVi01B/GqUSwx+NcC1WGjidAfpTXzeALtPtfpg==
@@ -8774,22 +8767,21 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-maplibre-gl@^6.4.1:
-  version "6.13.0"
-  resolved "https://npm.powerapp.cloud/maplibre-gl/-/maplibre-gl-6.13.0.tgz#ad47efaf0e9838f6ba581a4f0f88745d9772fe55"
-  integrity sha512-ELXk4h+xl0URFQEnVbAN6MGn61P6jq4amUWHiskLVsvHCaKdf1Zq6G8UNOD0AQ3UaXoL5ECc8ovz8yqYEBGPKw==
+maplibre-gl@6.4.1:
+  version "6.4.1"
+  resolved "https://npm.powerapp.cloud/maplibre-gl/-/maplibre-gl-6.4.1.tgz#34ae00dbbdef965f6519948ff131758f544d3696"
+  integrity sha512-KzxQKtfBu/pSz1C+yW1hNS9eyj2h2lC7ufdAi6/SEt177n3oAfDfmUmslRfJdXY7ReAFBcnvwsqmiyoDhtA9GQ==
   dependencies:
     "@mapbox/point-geometry" "^1.1.0"
     "@mapbox/tiny-sdf" "^2.2.0"
     "@mapbox/unitbezier" "^1.0.0"
     "@mapbox/vector-tile" "^3.0.0"
-    "@maplibre/geojson-vt" "^6.1.2"
-    "@maplibre/maplibre-gl-style-spec" "^26.4.4"
-    "@maplibre/mlt" "^1.3.0"
+    "@maplibre/geojson-vt" "^6.1.1"
+    "@maplibre/maplibre-gl-style-spec" "^26.2.1"
+    "@maplibre/mlt" "^1.1.12"
     "@maplibre/vt-pbf" "^4.3.2"
     "@types/geojson" "^7946.0.16"
-    bidi-js "^1.1.0"
-    earcut "^3.2.4"
+    earcut "^3.2.3"
     gl-matrix "^3.4.4"
     kdbush "^4.1.0"
     murmurhash-js "^1.0.0"
@@ -10863,11 +10855,6 @@ require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://npm.powerapp.cloud/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==
-
-require-from-string@^2.0.2:
-  version "2.0.2"
-  resolved "https://npm.powerapp.cloud/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
-  integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
 
 require-main-filename@^2.0.0:
   version "2.0.0"
