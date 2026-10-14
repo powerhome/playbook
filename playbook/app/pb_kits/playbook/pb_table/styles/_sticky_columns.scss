@@ -1,31 +1,36 @@
 @import "../../tokens/colors";
 
 [class^="pb_table"] {
+    // Collapsed borders + sticky columns leave subpixel seams at some zoom/sizes.
+    // Separate borders keep sticky offsets aligned with painted cell edges.
+    &.sticky-left-column,
+    &.sticky-right-column {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
     .sticky {
         position: sticky !important;
         z-index: 1;
         background-color: white;
+        background-clip: padding-box;
     }
 
     // For use with sticky left columns
     .sticky-left-shadow {
         box-shadow: 4px 0 10px rgba(60, 106, 172, 0.16) !important;
-        left: 0;
     }
 
     .with-border-right {
         border-right: 1px solid var(--table-border-color, #{$border_light}) !important;
-        left: 0;
     }
 
     // For use with sticky right columns
     .sticky-right-shadow {
         box-shadow: -4px 0 10px rgba(60, 106, 172, 0.16) !important;
-        right: 0;
     }
 
     .with-border-left {
         border-left: 1px solid var(--table-border-color, #{$border_light}) !important;
-        right: 0;
     }
 }

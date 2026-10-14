@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, globalInlineProps } from '../utilities/globalProps'
@@ -10,6 +10,10 @@ import {
     TableCell,
 } from "./subcomponents";
 import { addDataTitle } from './utilities/addDataTitle'
+import {
+    applyStickyColumns,
+    scheduleStickyColumns,
+} from './utilities/stickyColumns'
 import Card from '../pb_card/_card'
 import Flex from '../pb_flex/_flex'
 import Title from '../pb_title/_title'
@@ -102,7 +106,10 @@ const Table = (props: TableProps): React.ReactElement => {
     const outerPaddingCss = outerPadding ? `outer_padding_${spaceCssName}${outerPadding}` : ''
     const isTableTag = tag === 'table'
     const dynamicInlineProps = globalInlineProps(props)
-    const stickyRightColumnReversed = stickyRightColumn.reverse()
+    const tableRef = useRef<HTMLElement | null>(null)
+    const setTableRef = (node: HTMLTableElement | HTMLDivElement | null) => {
+        tableRef.current = node
+    }
 
     const isFilterVariant = variant === 'withFilter'
     const effectiveContainer = isFilterVariant ? false : container
@@ -132,224 +139,88 @@ const Table = (props: TableProps): React.ReactElement => {
     )
 
     useEffect(() => {
-        const handleStickyLeftColumns = () => {
-            if (!stickyLeftColumn.length) return;
-            let accumulatedWidth = 0;
+        const table = tableRef.current
+        if (!table) return
+        if (!stickyLeftColumn.length && !stickyRightColumn.length) return
 
-            stickyLeftColumn.forEach((colId, index) => {
-                const isLastColumn = index === stickyLeftColumn.length - 1;
-                const header = document.querySelector(`th[data-sticky-id="${colId}"]`);
-                const cells = document.querySelectorAll(`td[data-sticky-id="${colId}"]`);
+        const applyStickyOffsets = () => {
+            if (stickyLeftColumn.length) {
+                applyStickyColumns(table, stickyLeftColumn, 'left')
+            }
+            if (stickyRightColumn.length) {
+                applyStickyColumns(table, stickyRightColumn, 'right')
+            }
+        }
 
-                if (header) {
-                    header.classList.add('sticky');
-                    (header as HTMLElement).style.left = `${accumulatedWidth}px`;
+        const cancelSchedule = scheduleStickyColumns(applyStickyOffsets)
+        window.addEventListener('resize', applyStickyOffsets)
 
-                    if (!isLastColumn) {
-                        header.classList.add('with-border-right');
-                        header.classList.remove('sticky-left-shadow');
-                    } else {
-                        header.classList.remove('with-border-right');
-                        header.classList.add('sticky-left-shadow');
-                    }
-
-                    const headerWidth = (header as HTMLElement).offsetWidth;
-                    accumulatedWidth += headerWidth;
-
-                    cells.forEach((cell) => {
-                        cell.classList.add('sticky');
-                        (cell as HTMLElement).style.left = `${accumulatedWidth - headerWidth}px`;
-
-                        if (!isLastColumn) {
-                            cell.classList.add('with-border-right');
-                            cell.classList.remove('sticky-left-shadow');
-                        } else {
-                            cell.classList.remove('with-border-right');
-                            cell.classList.add('sticky-left-shadow');
-                        }
-                    });
-                }
-            });
-        };
-
-        setTimeout(() => {
-            handleStickyLeftColumns();
-        }, 10);
-
-        window.addEventListener('resize', handleStickyLeftColumns);
+        let resizeObserver: ResizeObserver | undefined
+        if (typeof ResizeObserver !== 'undefined') {
+            resizeObserver = new ResizeObserver(applyStickyOffsets)
+            resizeObserver.observe(table)
+        }
 
         return () => {
-            window.removeEventListener('resize', handleStickyLeftColumns);
-        };
-    }, [stickyLeftColumn]);
-
-    useEffect(() => {
-        const handleStickyRightColumns = () => {
-            if (!stickyRightColumn.length) return;
-            let accumulatedWidth = 0;
-
-            stickyRightColumnReversed.forEach((colId, index) => {
-                const isLastColumn = index === stickyRightColumn.length - 1;
-                const header = document.querySelector(`th[data-sticky-id="${colId}"]`);
-                const cells = document.querySelectorAll(`td[data-sticky-id="${colId}"]`);
-
-                if (header) {
-                    header.classList.add('sticky');
-                    (header as HTMLElement).style.right = `${accumulatedWidth}px`;
-
-                    if (!isLastColumn) {
-                        header.classList.add('with-border-left');
-                        header.classList.remove('sticky-right-shadow');
-                    } else {
-                        header.classList.remove('with-border-left');
-                        header.classList.add('sticky-right-shadow');
-                    }
-
-                    const headerWidth = (header as HTMLElement).offsetWidth;
-                    accumulatedWidth += headerWidth;
-
-                    cells.forEach((cell) => {
-                        cell.classList.add('sticky');
-                        (cell as HTMLElement).style.right = `${accumulatedWidth - headerWidth}px`;
-
-                        if (!isLastColumn) {
-                            cell.classList.add('with-border-left');
-                            cell.classList.remove('sticky-right-shadow');
-                        } else {
-                            cell.classList.remove('with-border-left');
-                            cell.classList.add('sticky-right-shadow');
-                        }
-                    });
-                }
-            });
-        };
-
-        setTimeout(() => {
-            handleStickyRightColumns();
-        }, 10);
-
-        window.addEventListener('resize', handleStickyRightColumns);
-
-        return () => {
-            window.removeEventListener('resize', handleStickyRightColumns);
-        };
-    }, [stickyRightColumn]);
+            cancelSchedule()
+            window.removeEventListener('resize', applyStickyOffsets)
+            resizeObserver?.disconnect()
+        }
+    }, [stickyLeftColumn, stickyRightColumn])
 
     useEffect(() => {
         addDataTitle()
     }, [])
 
+    const tableElementProps = {
+        ...ariaProps,
+        ...dataProps,
+        ...htmlProps,
+        className: classNames,
+        id,
+        style: dynamicInlineProps,
+    }
+
+    const renderTableElement = () => (
+        isTableTag ? (
+            <table
+                {...tableElementProps}
+                ref={setTableRef}
+            >
+                {children}
+            </table>
+        ) : (
+            <div
+                {...tableElementProps}
+                ref={setTableRef}
+            >
+                {children}
+            </div>
+        )
+    )
+
 // ------------ Default Table (non-filter variant rendering) ------------
     const renderTable = () => {
-        const tableElement = responsive === 'scroll' ? (
-            <div className='table-responsive-scroll'>
-                {isTableTag ? (
-                    <table
-                        {...ariaProps}
-                        {...dataProps}
-                        {...htmlProps}
-                        className={classNames}
-                        id={id}
-                        style={dynamicInlineProps}
-                    >
-                        {children}
-                    </table>
-                ) : (
-                    <div
-                        {...ariaProps}
-                        {...dataProps}
-                        {...htmlProps}
-                        className={classNames}
-                        id={id}
-                        style={dynamicInlineProps}
-                    >
-                        {children}
-                    </div>
-                )}
-            </div>
-        ) : (
-            isTableTag ? (
-                <table
-                    {...ariaProps}
-                    {...dataProps}
-                    {...htmlProps}
-                    className={classNames}
-                    id={id}
-                    style={dynamicInlineProps}
-                >
-                    {children}
-                </table>
-            ) : (
-                <div
-                    {...ariaProps}
-                    {...dataProps}
-                    {...htmlProps}
-                    className={classNames}
-                    id={id}
-                    style={dynamicInlineProps}
-                >
-                    {children}
+        if (responsive === 'scroll') {
+            return (
+                <div className='table-responsive-scroll'>
+                    {renderTableElement()}
                 </div>
             )
-        )
+        }
 
-        return tableElement
+        return renderTableElement()
     }
 // ------------ End Default Table (non-filter variant rendering) ------------
 
 // ------------ variant = 'withFilter' rendering  ------------
     const renderCardVariant = () => {
-        // Render table element
         const tableElement = responsive === 'scroll' ? (
             <div className='table-responsive-scroll'>
-                {isTableTag ? (
-                    <table
-                        {...ariaProps}
-                        {...dataProps}
-                        {...htmlProps}
-                        className={classNames}
-                        id={id}
-                        style={dynamicInlineProps}
-                    >
-                        {children}
-                    </table>
-                ) : (
-                    <div
-                        {...ariaProps}
-                        {...dataProps}
-                        {...htmlProps}
-                        className={classNames}
-                        id={id}
-                        style={dynamicInlineProps}
-                    >
-                        {children}
-                    </div>
-                )}
+                {renderTableElement()}
             </div>
         ) : (
-            isTableTag ? (
-                <table
-                    {...ariaProps}
-                    {...dataProps}
-                    {...htmlProps}
-                    className={classNames}
-                    id={id}
-                    style={dynamicInlineProps}
-                >
-                    {children}
-                </table>
-            ) : (
-                <div
-                    {...ariaProps}
-                    {...dataProps}
-                    {...htmlProps}
-                    className={classNames}
-                    id={id}
-                    style={dynamicInlineProps}
-                >
-                    {children}
-                </div>
-            )
+            renderTableElement()
         )
 
         // Default filter props that CAN be overridden (All props from Filter kit CAN be used, but these are the ones we set as defaults)
