@@ -20,6 +20,7 @@ import {
     separateChildComponents,
     prepareSubcomponents,
     handleClickOutside,
+    setQuickPickDateOnPicker,
 } from "./utilities";
 
 import { DialogContext } from "../pb_dialog/_dialog_context";
@@ -594,12 +595,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                        
                        if (controlsStartId) {
                            const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-                           startPicker?.setDate(start, true);
+                           setQuickPickDateOnPicker(startPicker, start, "start");
                        }
                        
                        if (controlsEndId) {
                            const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-                           endPicker?.setDate(end, true);
+                           setQuickPickDateOnPicker(endPicker, end, "end");
                        }
                    }
             }
@@ -711,12 +712,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setTimeout(() => {
             if (controlsStartId) {
               const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-              startPicker?.setDate(start, true);
+              setQuickPickDateOnPicker(startPicker, start, "start");
             }
             
             if (controlsEndId) {
               const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-              endPicker?.setDate(end, true);
+              setQuickPickDateOnPicker(endPicker, end, "end");
             }
           }, 0);
         }
