@@ -723,7 +723,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   rememberSettledAsyncResults() {
     const parent = this.getOptionsParent();
-    this.asyncSettledOptions = parent ? Array.from(parent.children).filter((node) => !node.hasAttribute("data-dropdown-create-option")).map((node) => node.cloneNode(true)) : [];
+    this.asyncSettledOptions = parent ? Array.from(parent.children).filter((node) => !this.allowOptionCreation || !node.hasAttribute("data-dropdown-create-option")).map((node) => node.cloneNode(true)) : [];
     const empty = this.target?.querySelector(".dropdown_no_options");
     const status = this.target?.querySelector("[data-dropdown-async-status]");
     this.asyncSettledEmpty = empty ? empty.cloneNode(true) : null;

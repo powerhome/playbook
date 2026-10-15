@@ -1,6 +1,5 @@
 examples:
   rails:
-  - dropdown_option_creation: Allow Option Creation
   - dropdown_default_rails: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select_rails: Multi Select
@@ -47,10 +46,9 @@ examples:
   - dropdown_async_search: Async Search
   - dropdown_async_multi_select_rails: Async Multi Select
   - dropdown_async_custom_content: Async Search with Custom Content
+  - dropdown_option_creation: Allow Option Creation
 
   react:
-  - dropdown_option_creation: Allow Option Creation
-  - dropdown_form: Form Submission and Validation
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select
@@ -100,4 +98,6 @@ examples:
   - dropdown_async_rich_results: Async Search with Custom Content
   - dropdown_async_initial_options: Async Initial Results and Caching
   - dropdown_external_search: External Search
+  - dropdown_option_creation: Allow Option Creation
+  - dropdown_form: Enable Form Support
 

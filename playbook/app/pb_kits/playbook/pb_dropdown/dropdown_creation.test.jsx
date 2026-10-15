@@ -12,6 +12,7 @@ test("creation enables autocomplete and Enter selects a trimmed value without su
   const onSelect = jest.fn()
   const submit = jest.fn(event => event.preventDefault())
   const { container } = render(<form onSubmit={submit}><Dropdown allowOptionCreation
+      enableFormSupport
       name="tag"
       onSelect={onSelect}
       options={options}
@@ -43,6 +44,7 @@ test("controlled multi-select creation, removal, and clear emit normal selection
   const Controlled = () => {
     const [value, setValue] = useState([])
     return (<Dropdown allowOptionCreation
+        enableFormSupport
         multiSelect
         name="tags[]"
         onChange={event => { changes(event); setValue(event.target.value) }}
@@ -107,4 +109,35 @@ test("composition does not create an option and quickpick ignores creation", () 
       variant="quickpick"
            />)
   expect(container.querySelector(".dropdown_input")).toBeNull()
+})
+
+test.each([undefined, false])("creation %s leaves autocomplete and options unchanged", allowOptionCreation => {
+  const { container } = render(<Dropdown allowOptionCreation={allowOptionCreation}
+      options={options}
+                               />)
+  expect(container.querySelector(".dropdown_input")).toBeNull()
+  expect(screen.queryByText(/^Create "/)).toBeNull()
+  expect(screen.getByText("Existing")).toBeInTheDocument()
+})
+
+test("option creation alone does not opt into native form submission", () => {
+  const { container } = render(<form><Dropdown allowOptionCreation
+      name="tag"
+      options={[]}
+                                     /></form>)
+  type(container, "New")
+  fireEvent.click(screen.getByText('Create "New"'))
+  expect(new FormData(container.querySelector("form")).has("tag")).toBe(false)
+})
+
+test("composition preserves legacy selection behavior when creation is disabled", () => {
+  const onSelect = jest.fn()
+  const { container } = render(<Dropdown autocomplete
+      onSelect={onSelect}
+      options={options}
+                               />)
+  const input = container.querySelector(".dropdown_input")
+  fireEvent.keyDown(input, { key: "ArrowDown" })
+  fireEvent.keyDown(input, { key: "Enter", isComposing: true })
+  expect(onSelect).toHaveBeenCalledWith(options[0])
 })

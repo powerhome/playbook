@@ -121,7 +121,10 @@ module Playbook
       end
 
       def input_name
-        multi_select && name.present? && !name.end_with?("[]") ? "#{name}[]" : name
+        return name unless multi_select
+        return name if name.present? && name.end_with?("[]")
+
+        "#{name}[]"
       end
 
       def error_id

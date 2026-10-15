@@ -7,6 +7,7 @@ const formValues = (form, name) => new FormData(form).getAll(name)
 
 test("submits ids with a value fallback and normalizes array field names", () => {
   const { container } = render(<form><Dropdown defaultValue={options}
+      enableFormSupport
       multiSelect
       name="tags[]"
       options={options}
@@ -16,18 +17,21 @@ test("submits ids with a value fallback and normalizes array field names", () =>
 })
 
 test("controlled selections and disabled fields are reflected in FormData", () => {
-  const { container, rerender } = render(<form><Dropdown name="tag"
+  const { container, rerender } = render(<form><Dropdown enableFormSupport
+      name="tag"
       options={options}
       value={options[0]}
                                                /></form>)
   const form = container.querySelector("form")
   expect(formValues(form, "tag")).toEqual(["one"])
-  rerender(<form><Dropdown name="tag"
+  rerender(<form><Dropdown enableFormSupport
+      name="tag"
       options={options}
       value={options[1]}
                  /></form>)
   expect(formValues(form, "tag")).toEqual(["second"])
   rerender(<form><Dropdown disabled
+      enableFormSupport
       name="tag"
       options={options}
       value={options[1]}
@@ -37,6 +41,7 @@ test("controlled selections and disabled fields are reflected in FormData", () =
 
 test("required validation shows the message and clears after selecting", () => {
   const { container, getByText } = render(<form><Dropdown autocomplete
+      enableFormSupport
       name="tag"
       options={options}
       required
@@ -54,6 +59,7 @@ test("required validation shows the message and clears after selecting", () => {
 
 test("native reset restores defaults and canceled reset preserves the selection", async () => {
   const { container, getByText } = render(<form><Dropdown defaultValue={options[0]}
+      enableFormSupport
       name="tag"
       options={options}
                                                 /></form>)
@@ -69,13 +75,15 @@ test("native reset restores defaults and canceled reset preserves the selection"
 })
 
 test("controlled empty values and blank selections remain invalid", () => {
-  const { container, rerender } = render(<form><Dropdown name="tag"
+  const { container, rerender } = render(<form><Dropdown enableFormSupport
+      name="tag"
       required
       value={null}
                                                /></form>)
   act(() => { expect(container.querySelector("form").checkValidity()).toBe(false) })
   expect(container.querySelector('[role="alert"]')).toHaveTextContent("Please fill out this field.")
-  rerender(<form><Dropdown name="tag"
+  rerender(<form><Dropdown enableFormSupport
+      name="tag"
       required
       value={{ label: "None", value: "" }}
                  /></form>)
@@ -84,11 +92,37 @@ test("controlled empty values and blank selections remain invalid", () => {
 
 test("reset without a default reports a null single selection", async () => {
   const onSelect = jest.fn()
-  const { container } = render(<form><Dropdown name="tag"
+  const { container } = render(<form><Dropdown enableFormSupport
+      name="tag"
       onSelect={onSelect}
       options={options}
       value={options[0]}
                                      /></form>)
   await act(async () => { container.querySelector("form").reset() })
   expect(onSelect).toHaveBeenLastCalledWith(null)
+})
+
+test.each([undefined, false])("form support %s preserves existing named-field and reset behavior", async enableFormSupport => {
+  const onSelect = jest.fn()
+  const { container, getByText } = render(
+    <form>
+      <Dropdown defaultValue={options[0]}
+          enableFormSupport={enableFormSupport}
+          name="tag"
+          onSelect={onSelect}
+          options={options}
+          required
+      />
+    </form>
+  )
+  const form = container.querySelector("form")
+  expect(container.querySelector('input[type="hidden"]')).toBeNull()
+  expect(container.querySelector('input[required]')).toBeNull()
+  expect(new FormData(form).has("tag")).toBe(false)
+  expect(form.checkValidity()).toBe(true)
+  fireEvent.click(getByText("Second"))
+  onSelect.mockClear()
+  await act(async () => { form.reset() })
+  expect(onSelect).not.toHaveBeenCalled()
+  expect(container.querySelector(".pb_dropdown_trigger")).toHaveTextContent("Second")
 })

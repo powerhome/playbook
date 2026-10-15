@@ -65,7 +65,7 @@ export class PbDropdownKeyboard {
   }
 
   handleKeyDown(event) {
-    if (this.dropdown.isDisabled || event.isComposing || event.keyCode === 229) return;
+    if (this.dropdown.isDisabled || (this.dropdown.allowOptionCreation && (event.isComposing || event.keyCode === 229))) return;
 
     switch (event.key) {
       case "ArrowDown":

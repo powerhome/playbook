@@ -77,6 +77,30 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     className
   );
 
+  const menuContent = (
+    asyncStatus || (!asyncEnabled && filteredOptions?.length === 0) ? (
+      <ListItem dark={dark}
+          display="flex"
+          htmlOptions={asyncStatus ? { role: "status" } : undefined}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          justifyContent="center"
+          padding="xs"
+      >
+        <Body color="light"
+            dark={dark}
+            text={asyncStatus || noOptionsText || "no option"}
+        />
+      </ListItem>
+    ) : (
+      children || (asyncEnabled && (creationOption ? filteredOptions.filter((option: GenericObject) => option !== creationOption) : filteredOptions).map((option: GenericObject) => (
+        <DropdownOption key={optionKey(option)}
+            option={option}
+        />
+      )))
+    )
+  );
+
   const inner = (
     <div {...ariaProps} 
         {...dataProps} 
@@ -103,35 +127,15 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         </TextInput>
       )}
       <List dark={dark}>
-        <>
-        {
-        asyncStatus || (!asyncEnabled && filteredOptions?.length === 0) ? (
-          <ListItem dark={dark}
-              display="flex"
-              htmlOptions={asyncStatus ? { role: "status" } : undefined}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              justifyContent="center"
-              padding="xs"
-          >
-            <Body color="light" 
-                dark={dark}
-                text={asyncStatus || noOptionsText || "no option"}
-            />
-          </ListItem>
-        ): (
-          children || (asyncEnabled && filteredOptions.filter((option: GenericObject) => option !== creationOption).map((option: GenericObject) => (
-            <DropdownOption key={optionKey(option)}
-                option={option}
-            />
-          )))
-        )
-        }
-        {creationOption && <DropdownOption dark={dark}
-            option={creationOption}
-        />}
-        </>
-        </List>
+        {creationEnabled ? (
+          <>
+            {menuContent}
+            {creationOption && <DropdownOption dark={dark}
+                option={creationOption}
+            />}
+          </>
+        ) : menuContent}
+      </List>
     </div>
   );
 

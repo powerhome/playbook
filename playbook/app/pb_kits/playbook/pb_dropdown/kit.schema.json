@@ -155,6 +155,12 @@
         "rails"
       ]
     },
+    "enableFormSupport": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "isClosed": {
       "type": "boolean",
       "platforms": [

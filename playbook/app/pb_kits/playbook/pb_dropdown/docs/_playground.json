@@ -127,6 +127,7 @@
         "closeOnClick",
         "constrainHeight",
         "isClosed",
+        "enableFormSupport",
         "requiredIndicator",
         "required",
         "validationMessage",

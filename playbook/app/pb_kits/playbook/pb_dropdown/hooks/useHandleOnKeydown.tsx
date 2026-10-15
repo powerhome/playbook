@@ -7,6 +7,7 @@ export const useHandleOnKeyDown = () => {
 const {
   asyncEnabled,
   autocomplete,
+  creationEnabled,
   filterItem,
   filteredOptions,
   focusedOptionIndex,
@@ -41,7 +42,7 @@ const {
   };
 
   return (e: React.KeyboardEvent) => {
-    if (e.defaultPrevented || e.nativeEvent.isComposing || e.keyCode === 229) return;
+    if (e.defaultPrevented || (creationEnabled && (e.nativeEvent.isComposing || e.keyCode === 229))) return;
 
     const printableKey = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
     const replacingSelectedLabel = filterItem === selected?.label;

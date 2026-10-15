@@ -1529,9 +1529,9 @@ describe("PbDropdown option creation", () => {
   let instance;
   let input;
 
-  const mount = ({ multi = false, async = false } = {}) => {
+  const mount = ({ multi = false, async = false, creation = true } = {}) => {
     root = buildDropdownElement({ options: [{ id: "existing", label: "Existing", value: "existing" }] });
-    root.dataset.pbDropdownAllowOptionCreation = "true";
+    root.dataset.pbDropdownAllowOptionCreation = String(creation);
     root.dataset.pbDropdownMultiSelect = String(multi);
     if (async) root.dataset.pbDropdownAsync = "true";
     root.dataset.pbDropdownSearchTermMinimumLength = "1";
@@ -1632,6 +1632,21 @@ describe("PbDropdown option creation", () => {
     type("New");
     jest.runOnlyPendingTimers();
     search.setError();
+    expect(creationRow()).toBeNull();
+  });
+
+  test.each([undefined, false])("creation %s submits individual multi-select values in selection order", (creation) => {
+    const form = mount({ multi: true, creation });
+    if (creation === undefined) delete root.dataset.pbDropdownAllowOptionCreation;
+    instance.replaceOptions([
+      { id: "first", label: "First", value: "first" },
+      { id: "second", label: "Second", value: "second" },
+    ]);
+    const rows = Array.from(instance.queryAllOptions());
+    rows.forEach((row) => instance.handleOptionClick({ target: row }));
+    expect(instance.baseInput.value).toBe("");
+    expect(new FormData(form).getAll("tags[]").filter(Boolean)).toEqual(["first", "second"]);
+    type("New");
     expect(creationRow()).toBeNull();
   });
 

@@ -603,8 +603,13 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     expect(dropdown.data).not_to have_key(:pb_dropdown_allow_option_creation)
   end
 
-  it "does not append array brackets twice" do
+  it "does not append array brackets twice when creation is disabled" do
     expect(described_class.new(name: "home_ids[]", multi_select: true).input_name).to eq("home_ids[]")
+    expect(described_class.new(name: "home_ids[]", multi_select: true, allow_option_creation: false).input_name).to eq("home_ids[]")
+  end
+
+  it "does not append array brackets twice" do
+    expect(described_class.new(name: "home_ids[]", multi_select: true, allow_option_creation: true).input_name).to eq("home_ids[]")
     expect(described_class.new(name: "home_ids", multi_select: true).input_name).to eq("home_ids[]")
     expect(described_class.new(name: "home_id").input_name).to eq("home_id")
   end

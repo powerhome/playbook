@@ -124,6 +124,7 @@ type DropdownProps = {
     data?: { [key: string]: string };
     defaultValue?: GenericObject;
     error?: string;
+    enableFormSupport?: boolean;
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string;
     isClosed?: boolean;
@@ -181,6 +182,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         defaultValue = {},
         disabled = false,
         error: errorProp,
+        enableFormSupport = false,
         htmlOptions = {},
         id,
         isClosed = true,
@@ -208,7 +210,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const autocomplete = autocompleteProp || creationEnabled;
 
     const [formInvalid, setFormInvalid] = useState(false);
-    const error = errorProp || (formInvalid ? validationMessage : "");
+    const error = enableFormSupport ? errorProp || (formInvalid ? validationMessage : "") : errorProp;
 
     const ariaProps = buildAriaProps(aria);
     const dataProps = buildDataProps(data);
@@ -378,10 +380,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     ? [selected]
     : [];
 
-    const hasFormSelection = selectedArray.some((option) => String(option.id ?? option.value ?? "") !== "");
+    const hasFormSelection = enableFormSupport && selectedArray.some((option) => String(option.id ?? option.value ?? "") !== "");
     useEffect(() => {
-        if (hasFormSelection || !required) setFormInvalid(false);
-    }, [hasFormSelection, required]);
+        if (!enableFormSupport || hasFormSelection || !required) setFormInvalid(false);
+    }, [enableFormSupport, hasFormSelection, required]);
 
     const selectedOptionIds = useMemo(() => (
       multiSelect && getOptionValue
@@ -816,7 +818,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     toggleDropdown
                 }}
             >
-                {(name || required) && (
+                {enableFormSupport && (
                     <DropdownFormFields
                         disabled={disabled}
                         multiSelect={multiSelect}
