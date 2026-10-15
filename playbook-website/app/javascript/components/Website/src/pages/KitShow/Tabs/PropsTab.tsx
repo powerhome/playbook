@@ -40,7 +40,8 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
     props,
     globalPropsNames,
     globalEventPropsNames,
-    platform
+    platform,
+    showGlobalEventPropsTab
   );
 
   const kitProps: Record<string, any> = {};

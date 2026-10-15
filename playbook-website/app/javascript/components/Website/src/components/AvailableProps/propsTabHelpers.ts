@@ -16,14 +16,16 @@ export const filterKitPropsForPropsTab = (
   props: Record<string, PropEntry>,
   globalPropNames: string[],
   globalEventPropNames: string[],
-  platform: string
+  platform: string,
+  optedIntoGlobalEventProps = false
 ): Record<string, PropEntry> => {
   const kitProps: Record<string, PropEntry> = {}
 
   for (const propName in props) {
     const prop = props[propName]
     const isGlobalProp = globalPropNames.includes(propName)
-    const isGlobalEventProp = globalEventPropNames.includes(propName)
+    const isGlobalEventProp =
+      optedIntoGlobalEventProps && globalEventPropNames.includes(propName)
     const platforms = prop.platforms || []
     const isForPlatform =
       platforms.length === 0 || platforms.includes(platform)

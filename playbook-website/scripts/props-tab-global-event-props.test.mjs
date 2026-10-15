@@ -63,12 +63,11 @@ test('shouldShowGlobalEventPropsTab is react-only and opt-in', () => {
   assert.equal(shouldShowGlobalEventPropsTab(readKitSchema('badge'), 'react'), false)
 })
 
-test('filterKitPropsForPropsTab excludes global and global event prop names', () => {
+test('filterKitPropsForPropsTab excludes global props always', () => {
   const filtered = filterKitPropsForPropsTab(
     {
       text: { platforms: ['react', 'rails'] },
       margin: { platforms: ['react', 'rails'] },
-      onClick: { platforms: ['react'] },
       color: { platforms: ['react'] },
     },
     ['margin'],
@@ -77,6 +76,32 @@ test('filterKitPropsForPropsTab excludes global and global event prop names', ()
   )
 
   assert.deepEqual(Object.keys(filtered).sort(), ['color', 'text'])
+})
+
+test('filterKitPropsForPropsTab excludes global event props only when opted in', () => {
+  const props = {
+    text: { platforms: ['react'] },
+    onClick: { platforms: ['react'] },
+    color: { platforms: ['react'] },
+  }
+
+  const withoutOptIn = filterKitPropsForPropsTab(
+    props,
+    [],
+    ['onClick'],
+    'react',
+    false
+  )
+  assert.deepEqual(Object.keys(withoutOptIn).sort(), ['color', 'onClick', 'text'])
+
+  const withOptIn = filterKitPropsForPropsTab(
+    props,
+    [],
+    ['onClick'],
+    'react',
+    true
+  )
+  assert.deepEqual(Object.keys(withOptIn).sort(), ['color', 'text'])
 })
 
 test('globalEventPropsValues.ts matches global-event-props.schema.json', () => {
