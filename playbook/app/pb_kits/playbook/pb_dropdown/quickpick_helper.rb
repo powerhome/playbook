@@ -158,11 +158,12 @@ module Playbook
         end
 
         # Date-only → m/d/Y (SOD/EOD applied at sync when enableTime).
-        # Time/DateTime (explicit custom times, including intentional midnight) → ISO-8601
-        # so JS can parse to Date before Flatpickr setDate (picker format cannot parse raw ISO).
+        # Time/DateTime (explicit custom times, including intentional midnight) →
+        # offset-less wall-clock (YYYY-MM-DDTHH:MM:SS). Customs are authored as local
+        # wall-clock labels, not absolute instants — do not emit zone offsets.
         def format_date(date)
           if time_like?(date)
-            date.iso8601
+            date.strftime("%Y-%m-%dT%H:%M:%S")
           else
             date.strftime("%m/%d/%Y")
           end
@@ -170,7 +171,7 @@ module Playbook
 
         def format_value(date)
           if time_like?(date)
-            date.iso8601
+            date.strftime("%Y-%m-%dT%H:%M:%S")
           else
             date.to_s
           end

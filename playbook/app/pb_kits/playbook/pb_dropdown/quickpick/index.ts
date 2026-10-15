@@ -5,6 +5,7 @@ import DateTime from '../../pb_kit/dateTime';
 import {
   endOfDay,
   parseQuickPickDateOnly,
+  parseQuickPickDateTime,
   startOfDay,
   stringHasExplicitTime,
 } from '../utilities/quickpickDateSync';
@@ -70,7 +71,7 @@ const formatDate = (date: Date) => {
 
 const parseCustomDateString = (dateStr: string): Date => {
   if (stringHasExplicitTime(dateStr)) {
-    return new Date(dateStr);
+    return parseQuickPickDateTime(dateStr) ?? new Date(dateStr);
   }
   return parseQuickPickDateOnly(dateStr) ?? new Date(dateStr);
 };
