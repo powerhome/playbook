@@ -12,12 +12,24 @@ type DropdownFormFieldsProps = {
   validationMessage: string;
 };
 
-const DropdownFormFields = ({ disabled, multiSelect, name, onInvalid, onReset, required, selected, validationMessage }: DropdownFormFieldsProps) => {
+const DropdownFormFields = ({
+  disabled,
+  multiSelect,
+  name,
+  onInvalid,
+  onReset,
+  required,
+  selected,
+  validationMessage,
+}: DropdownFormFieldsProps): React.ReactElement => {
   const validationRef = useRef<HTMLInputElement>(null);
-  const resetRef = useRef(onReset);
-  resetRef.current = onReset;
+  const onResetRef = useRef(onReset);
+  onResetRef.current = onReset;
+
   const hasSelection = selected.some((option) => String(option.id ?? option.value ?? "") !== "");
-  const fieldName = multiSelect && name && !name.endsWith("[]") ? `${name}[]` : name;
+  const needsArraySuffix = multiSelect && name && !name.endsWith("[]");
+  const fieldName = needsArraySuffix ? `${name}[]` : name;
+  const submittedOptions = hasSelection ? selected : [{}];
 
   useEffect(() => {
     validationRef.current?.setCustomValidity(required && !hasSelection ? validationMessage : "");
@@ -25,18 +37,19 @@ const DropdownFormFields = ({ disabled, multiSelect, name, onInvalid, onReset, r
 
   useEffect(() => {
     const form = validationRef.current?.form;
-    const reset = (event: Event) => {
+    const handleReset = (event: Event) => {
+      // Let native controls reset first, and honor listeners that cancel the reset.
       Promise.resolve().then(() => {
-        if (!event.defaultPrevented) resetRef.current();
+        if (!event.defaultPrevented) onResetRef.current();
       });
     };
-    form?.addEventListener("reset", reset);
-    return () => form?.removeEventListener("reset", reset);
+    form?.addEventListener("reset", handleReset);
+    return () => form?.removeEventListener("reset", handleReset);
   }, []);
 
   return (
     <>
-      {name && (hasSelection ? selected : [{}]).map((option, index) => (
+      {name && submittedOptions.map((option, index) => (
         <input disabled={disabled}
             key={index}
             name={fieldName}
@@ -53,7 +66,13 @@ const DropdownFormFields = ({ disabled, multiSelect, name, onInvalid, onReset, r
           }}
           ref={validationRef}
           required={required && !hasSelection}
-          style={{ position: "absolute", opacity: 0, width: 1, height: 1, pointerEvents: "none" }}
+          style={{
+            position: "absolute",
+            opacity: 0,
+            width: 1,
+            height: 1,
+            pointerEvents: "none",
+          }}
           tabIndex={-1}
           value={hasSelection ? "selected" : ""}
       />

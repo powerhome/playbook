@@ -5,36 +5,47 @@ import Dropdown from "./_dropdown"
 beforeEach(() => jest.useRealTimers())
 
 const options = [{ id: "existing", label: "Existing", value: "existing" }]
-const type = (container, value) => fireEvent.change(container.querySelector(".dropdown_input"), { target: { value } })
-const created = text => ({ id: text, label: text, value: text, __isNew__: true })
+const typeQuery = (container, value) => {
+  const input = container.querySelector(".dropdown_input")
+  fireEvent.change(input, { target: { value } })
+}
+const createdOption = text => ({ id: text, label: text, value: text, __isNew__: true })
 
 test("creation enables autocomplete and Enter selects a trimmed value without submitting", () => {
   const onSelect = jest.fn()
   const submit = jest.fn(event => event.preventDefault())
-  const { container } = render(<form onSubmit={submit}><Dropdown allowOptionCreation
-      enableFormSupport
-      name="tag"
-      onSelect={onSelect}
-      options={options}
-      required
-                                                       /></form>)
-  type(container, "  New tag  ")
+  const { container } = render(
+    <form onSubmit={submit}>
+      <Dropdown
+          allowOptionCreation
+          enableFormSupport
+          name="tag"
+          onSelect={onSelect}
+          options={options}
+          required
+      />
+    </form>
+  )
+  typeQuery(container, "  New tag  ")
   expect(screen.getByText('Create "New tag"')).toBeInTheDocument()
   fireEvent.keyDown(container.querySelector(".dropdown_input"), { key: "Enter" })
-  expect(onSelect).toHaveBeenCalledWith(created("New tag"))
+  expect(onSelect).toHaveBeenCalledWith(createdOption("New tag"))
   expect(new FormData(container.querySelector("form")).get("tag")).toBe("New tag")
   expect(container.querySelector("form").checkValidity()).toBe(true)
   expect(submit).not.toHaveBeenCalled()
 })
 
 test("does not offer whitespace, case-insensitive duplicates, or selected values", () => {
-  const { container } = render(<Dropdown allowOptionCreation
-      defaultValue={[created("Selected")]}
-      multiSelect
-      options={options}
-                               />)
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation
+        defaultValue={[createdOption("Selected")]}
+        multiSelect
+        options={options}
+    />
+  )
   for (const value of ["   ", " EXISTING ", "selected"]) {
-    type(container, value)
+    typeQuery(container, value)
     expect(screen.queryByText(/^Create "/)).toBeNull()
   }
 })
@@ -43,21 +54,32 @@ test("controlled multi-select creation, removal, and clear emit normal selection
   const changes = jest.fn()
   const Controlled = () => {
     const [value, setValue] = useState([])
-    return (<Dropdown allowOptionCreation
-        enableFormSupport
-        multiSelect
-        name="tags[]"
-        onChange={event => { changes(event); setValue(event.target.value) }}
-        options={[]}
-        value={value}
-            />)
+    return (
+      <Dropdown
+          allowOptionCreation
+          enableFormSupport
+          multiSelect
+          name="tags[]"
+          onChange={event => {
+            changes(event)
+            setValue(event.target.value)
+          }}
+          options={[]}
+          value={value}
+      />
+    )
   }
   const { container } = render(<form><Controlled /></form>)
-  type(container, "First")
+  typeQuery(container, "First")
   fireEvent.click(screen.getByText('Create "First"'))
-  type(container, "Second")
+  typeQuery(container, "Second")
   fireEvent.click(screen.getByText('Create "Second"'))
-  expect(changes).toHaveBeenLastCalledWith({ target: { name: "tags[]", value: [created("First"), created("Second")] } })
+  expect(changes).toHaveBeenLastCalledWith({
+    target: {
+      name: "tags[]",
+      value: [createdOption("First"), createdOption("Second")],
+    },
+  })
   expect(new FormData(container.querySelector("form")).getAll("tags[]")).toEqual(["First", "Second"])
   fireEvent.click(container.querySelector(".pb_form_pill_kit .pb_custom_icon"))
   expect(new FormData(container.querySelector("form")).getAll("tags[]")).toEqual(["Second"])
@@ -65,13 +87,22 @@ test("controlled multi-select creation, removal, and clear emit normal selection
 
 test.each(["promise", "callback"])("async %s loader settles before creation is offered", async mode => {
   let finish
-  const loadOptions = mode === "promise" ? jest.fn(() => new Promise(resolve => { finish = resolve })) : jest.fn((query, callback) => { finish = callback })
-  const { container } = render(<Dropdown allowOptionCreation
-      async
-      loadOptions={loadOptions}
-      options={[]}
-                               />)
-  type(container, "New")
+  const promiseLoader = () => new Promise(resolve => {
+    finish = resolve
+  })
+  const callbackLoader = (_query, callback) => {
+    finish = callback
+  }
+  const loadOptions = jest.fn(mode === "promise" ? promiseLoader : callbackLoader)
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation
+        async
+        loadOptions={loadOptions}
+        options={[]}
+    />
+  )
+  typeQuery(container, "New")
   expect(screen.queryByText('Create "New"')).toBeNull()
   await waitFor(() => expect(loadOptions).toHaveBeenCalled())
   act(() => finish([]))
@@ -80,15 +111,20 @@ test.each(["promise", "callback"])("async %s loader settles before creation is o
 
 test("remote duplicates suppress creation and stale results cannot replace a newer query", async () => {
   const callbacks = {}
-  const loadOptions = jest.fn((query, callback) => { callbacks[query] = callback })
-  const { container } = render(<Dropdown allowOptionCreation
-      async
-      loadOptions={loadOptions}
-      options={[]}
-                               />)
-  type(container, "Old")
+  const loadOptions = jest.fn((query, callback) => {
+    callbacks[query] = callback
+  })
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation
+        async
+        loadOptions={loadOptions}
+        options={[]}
+    />
+  )
+  typeQuery(container, "Old")
   await waitFor(() => expect(callbacks.Old).toBeDefined())
-  type(container, "New")
+  typeQuery(container, "New")
   await waitFor(() => expect(callbacks.New).toBeDefined())
   act(() => callbacks.New([{ id: "server", label: "New", value: "server" }]))
   act(() => callbacks.Old([]))
@@ -98,44 +134,61 @@ test("remote duplicates suppress creation and stale results cannot replace a new
 
 test("composition does not create an option and quickpick ignores creation", () => {
   const onSelect = jest.fn()
-  const { container, rerender } = render(<Dropdown allowOptionCreation
-      onSelect={onSelect}
-      options={[]}
-                                         />)
-  type(container, "New")
+  const { container, rerender } = render(
+    <Dropdown
+        allowOptionCreation
+        onSelect={onSelect}
+        options={[]}
+    />
+  )
+  typeQuery(container, "New")
   fireEvent.keyDown(container.querySelector(".dropdown_input"), { key: "Enter", isComposing: true })
   expect(onSelect).not.toHaveBeenCalled()
-  rerender(<Dropdown allowOptionCreation
-      variant="quickpick"
-           />)
+  rerender(
+    <Dropdown
+        allowOptionCreation
+        variant="quickpick"
+    />
+  )
   expect(container.querySelector(".dropdown_input")).toBeNull()
 })
 
 test.each([undefined, false])("creation %s leaves autocomplete and options unchanged", allowOptionCreation => {
-  const { container } = render(<Dropdown allowOptionCreation={allowOptionCreation}
-      options={options}
-                               />)
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation={allowOptionCreation}
+        options={options}
+    />
+  )
   expect(container.querySelector(".dropdown_input")).toBeNull()
   expect(screen.queryByText(/^Create "/)).toBeNull()
   expect(screen.getByText("Existing")).toBeInTheDocument()
 })
 
 test("option creation alone does not opt into native form submission", () => {
-  const { container } = render(<form><Dropdown allowOptionCreation
-      name="tag"
-      options={[]}
-                                     /></form>)
-  type(container, "New")
+  const { container } = render(
+    <form>
+      <Dropdown
+          allowOptionCreation
+          name="tag"
+          options={[]}
+      />
+    </form>
+  )
+  typeQuery(container, "New")
   fireEvent.click(screen.getByText('Create "New"'))
   expect(new FormData(container.querySelector("form")).has("tag")).toBe(false)
 })
 
 test("composition preserves legacy selection behavior when creation is disabled", () => {
   const onSelect = jest.fn()
-  const { container } = render(<Dropdown autocomplete
-      onSelect={onSelect}
-      options={options}
-                               />)
+  const { container } = render(
+    <Dropdown
+        autocomplete
+        onSelect={onSelect}
+        options={options}
+    />
+  )
   const input = container.querySelector(".dropdown_input")
   fireEvent.keyDown(input, { key: "ArrowDown" })
   fireEvent.keyDown(input, { key: "Enter", isComposing: true })
@@ -156,10 +209,10 @@ test.each([undefined, "outside"])("a second Enter preserves a created selection 
     </form>
   )
   const input = container.querySelector(".dropdown_input")
-  type(container, "New tag")
+  typeQuery(container, "New tag")
   expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(false)
   expect(onSelect).toHaveBeenCalledTimes(1)
-  expect(onSelect).toHaveBeenLastCalledWith(created("New tag"))
+  expect(onSelect).toHaveBeenLastCalledWith(createdOption("New tag"))
   expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
   expect(onSelect).toHaveBeenCalledTimes(1)
   expect(new FormData(container.querySelector("form")).get("tag")).toBe("New tag")
@@ -167,36 +220,45 @@ test.each([undefined, "outside"])("a second Enter preserves a created selection 
 
 test("Enter on mount or a whitespace query does not select a static option", () => {
   const onSelect = jest.fn()
-  const { container } = render(<Dropdown allowOptionCreation
-      onSelect={onSelect}
-      options={options}
-                               />)
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation
+        onSelect={onSelect}
+        options={options}
+    />
+  )
   const input = container.querySelector(".dropdown_input")
   expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
   expect(container.querySelector(".pb_dropdown_container")).toHaveClass("close")
-  type(container, "   ")
+  typeQuery(container, "   ")
   expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
   expect(onSelect).not.toHaveBeenCalled()
 })
 
 test("Enter confirms the Create row ahead of a partial static match", () => {
   const onSelect = jest.fn()
-  const { container } = render(<Dropdown allowOptionCreation
-      onSelect={onSelect}
-      options={options}
-                               />)
-  type(container, "Ex")
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+  typeQuery(container, "Ex")
   fireEvent.keyDown(container.querySelector(".dropdown_input"), { key: "Enter" })
-  expect(onSelect).toHaveBeenCalledWith(created("Ex"))
+  expect(onSelect).toHaveBeenCalledWith(createdOption("Ex"))
 })
 
 test("closing the menu with a pending query makes Enter available to the form", () => {
   const onSelect = jest.fn()
-  const { container } = render(<Dropdown allowOptionCreation
-      onSelect={onSelect}
-      options={options}
-                               />)
-  type(container, "New")
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+  typeQuery(container, "New")
   const input = container.querySelector(".dropdown_input")
   fireEvent.keyDown(input, { key: "Escape" })
   expect(container.querySelector(".pb_dropdown_container")).toHaveClass("close")
@@ -207,17 +269,20 @@ test("closing the menu with a pending query makes Enter available to the form", 
 test("async creation leaves the following Enter available for submission", async () => {
   const onSelect = jest.fn()
   const loadOptions = jest.fn(() => Promise.resolve([]))
-  const { container } = render(<Dropdown allowOptionCreation
-      async
-      loadOptions={loadOptions}
-      onSelect={onSelect}
-      options={options}
-                               />)
-  type(container, "New tag")
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation
+        async
+        loadOptions={loadOptions}
+        onSelect={onSelect}
+        options={options}
+    />
+  )
+  typeQuery(container, "New tag")
   await waitFor(() => expect(screen.getByText('Create "New tag"')).toBeInTheDocument())
   const input = container.querySelector(".dropdown_input")
   expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(false)
-  expect(onSelect).toHaveBeenLastCalledWith(created("New tag"))
+  expect(onSelect).toHaveBeenLastCalledWith(createdOption("New tag"))
   expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
   expect(onSelect).toHaveBeenCalledTimes(1)
 })

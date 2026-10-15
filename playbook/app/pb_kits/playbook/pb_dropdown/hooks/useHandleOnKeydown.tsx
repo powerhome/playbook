@@ -43,7 +43,9 @@ const {
   };
 
   return (e: React.KeyboardEvent) => {
-    if (e.defaultPrevented || (creationEnabled && (e.nativeEvent.isComposing || e.keyCode === 229))) return;
+    if (e.defaultPrevented) return;
+    const isComposing = e.nativeEvent.isComposing || e.keyCode === 229;
+    if (creationEnabled && isComposing) return;
 
     const printableKey = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
     const replacingSelectedLabel = filterItem === selected?.label;

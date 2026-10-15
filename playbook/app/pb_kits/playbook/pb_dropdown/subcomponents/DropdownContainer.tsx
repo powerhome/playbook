@@ -77,6 +77,10 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     className
   );
 
+  const regularOptions = creationOption
+    ? filteredOptions.filter((option: GenericObject) => option !== creationOption)
+    : filteredOptions;
+
   const menuContent = (
     asyncStatus || (!asyncEnabled && filteredOptions?.length === 0) ? (
       <ListItem dark={dark}
@@ -93,7 +97,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         />
       </ListItem>
     ) : (
-      children || (asyncEnabled && (creationOption ? filteredOptions.filter((option: GenericObject) => option !== creationOption) : filteredOptions).map((option: GenericObject) => (
+      children || (asyncEnabled && regularOptions.map((option: GenericObject) => (
         <DropdownOption key={optionKey(option)}
             option={option}
         />
@@ -130,9 +134,12 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         {creationEnabled ? (
           <>
             {menuContent}
-            {creationOption && <DropdownOption dark={dark}
-                option={creationOption}
-            />}
+            {creationOption && (
+              <DropdownOption
+                  dark={dark}
+                  option={creationOption}
+              />
+            )}
           </>
         ) : menuContent}
       </List>

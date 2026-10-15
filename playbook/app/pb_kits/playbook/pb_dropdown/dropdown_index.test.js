@@ -1548,11 +1548,11 @@ describe("PbDropdown option creation", () => {
     return form;
   };
 
-  const type = value => {
+  const typeQuery = value => {
     input.value = value;
     input.dispatchEvent(new Event("input", { bubbles: true }));
   };
-  const creationRow = () => root.querySelector("[data-dropdown-create-option]");
+  const getCreationRow = () => root.querySelector("[data-dropdown-create-option]");
 
   afterEach(() => {
     instance?.disconnect();
@@ -1563,14 +1563,23 @@ describe("PbDropdown option creation", () => {
   test("Enter creates a trimmed value through the selection event and form input", () => {
     jest.useFakeTimers();
     const form = mount();
-    const selected = jest.fn();
-    root.addEventListener("pb:dropdown:selected", event => selected(event.detail));
-    type("  New tag  ");
-    expect(creationRow().textContent).toBe('Create "New tag"');
-    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true }));
-    expect(selected).toHaveBeenCalledWith({ id: "New tag", label: "New tag", value: "New tag", __isNew__: true });
+    const onSelect = jest.fn();
+    root.addEventListener("pb:dropdown:selected", event => onSelect(event.detail));
+    typeQuery("  New tag  ");
+    expect(getCreationRow().textContent).toBe('Create "New tag"');
+    input.dispatchEvent(new KeyboardEvent("keydown", {
+      key: "Enter",
+      bubbles: true,
+      cancelable: true,
+    }));
+    expect(onSelect).toHaveBeenCalledWith({
+      id: "New tag",
+      label: "New tag",
+      value: "New tag",
+      __isNew__: true,
+    });
     expect(new FormData(form).get("country")).toBe("New tag");
-    expect(creationRow()).toBeNull();
+    expect(getCreationRow()).toBeNull();
     jest.runOnlyPendingTimers();
     expect(instance.target).toHaveClass("close");
   });
@@ -1578,30 +1587,30 @@ describe("PbDropdown option creation", () => {
   test("multi-select submits separate values and suppresses selected duplicates", () => {
     const form = mount({ multi: true });
     for (const value of ["First", "Second"]) {
-      type(value);
-      instance.handleOptionClick({ target: creationRow() });
+      typeQuery(value);
+      instance.handleOptionClick({ target: getCreationRow() });
     }
     expect(new FormData(form).getAll("tags[]").filter(Boolean)).toEqual(["First", "Second"]);
-    type(" first ");
-    expect(creationRow()).toBeNull();
+    typeQuery(" first ");
+    expect(getCreationRow()).toBeNull();
   });
 
   test("whitespace, existing labels and values cannot be created", () => {
     mount();
     for (const value of ["  ", " EXISTING ", "existing"]) {
-      type(value);
-      expect(creationRow()).toBeNull();
+      typeQuery(value);
+      expect(getCreationRow()).toBeNull();
     }
   });
 
   test("clear and reset remove the creation row", () => {
     mount();
-    type("New");
+    typeQuery("New");
     instance.clearSelection();
-    expect(creationRow()).toBeNull();
-    type("Another");
+    expect(getCreationRow()).toBeNull();
+    typeQuery("Another");
     instance.resetDropdownValue();
-    expect(creationRow()).toBeNull();
+    expect(getCreationRow()).toBeNull();
   });
 
   test("async results resolve before creation and stale callbacks are ignored", () => {
@@ -1609,15 +1618,15 @@ describe("PbDropdown option creation", () => {
     mount({ async: true });
     const searches = [];
     root.addEventListener("pb:dropdown:search", event => searches.push(event.detail));
-    type("Old");
+    typeQuery("Old");
     jest.runOnlyPendingTimers();
-    expect(creationRow()).toBeNull();
-    type("New");
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
     jest.runOnlyPendingTimers();
     searches[1].setResults([]);
-    expect(creationRow().textContent).toBe('Create "New"');
+    expect(getCreationRow().textContent).toBe('Create "New"');
     searches[0].setResults([{ id: "old", label: "Old" }]);
-    expect(creationRow().textContent).toBe('Create "New"');
+    expect(getCreationRow().textContent).toBe('Create "New"');
   });
 
   test("async existing results and errors do not offer creation", () => {
@@ -1625,14 +1634,14 @@ describe("PbDropdown option creation", () => {
     mount({ async: true });
     let search;
     root.addEventListener("pb:dropdown:search", event => { search = event.detail });
-    type("Existing");
+    typeQuery("Existing");
     jest.runOnlyPendingTimers();
     search.setResults([{ id: "server", label: "Existing" }]);
-    expect(creationRow()).toBeNull();
-    type("New");
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
     jest.runOnlyPendingTimers();
     search.setError();
-    expect(creationRow()).toBeNull();
+    expect(getCreationRow()).toBeNull();
   });
 
   test.each([undefined, false])("creation %s submits individual multi-select values in selection order", (creation) => {
@@ -1646,17 +1655,17 @@ describe("PbDropdown option creation", () => {
     rows.forEach((row) => instance.handleOptionClick({ target: row }));
     expect(instance.baseInput.value).toBe("");
     expect(new FormData(form).getAll("tags[]").filter(Boolean)).toEqual(["first", "second"]);
-    type("New");
-    expect(creationRow()).toBeNull();
+    typeQuery("New");
+    expect(getCreationRow()).toBeNull();
   });
 
   test("composition and disabled controls do not create", () => {
     mount();
-    type("New");
+    typeQuery("New");
     input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", isComposing: true, bubbles: true }));
     expect(instance.baseInput.value).toBe("");
     instance.isDisabled = true;
     instance.updateCreationOption("Another");
-    expect(creationRow()).toBeNull();
+    expect(getCreationRow()).toBeNull();
   });
 });

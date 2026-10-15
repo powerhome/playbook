@@ -123,7 +123,12 @@ const DropdownOption = (props: DropdownOptionProps) => {
     isDisabled && "disabled"
   );
 
-  const content = isCreationOption ? `Create "${option.label}"` : children || (renderOption && option ? renderOption(option) : null);
+  let content = children || null;
+  if (isCreationOption) {
+    content = `Create "${option.label}"`;
+  } else if (!content && renderOption && option) {
+    content = renderOption(option);
+  }
 
   return (
     <div

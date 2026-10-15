@@ -151,11 +151,23 @@ export default class PbDropdown extends PbEnhancedElement {
   updateCreationOption(term) {
     if (!this.allowOptionCreation) return;
     this.removeCreationOption();
-    if (this.isDisabled || this.asyncSearchTimer != null || this.element.getAttribute("aria-busy") === "true" || this.asyncCreationFailed) return;
-    const options = Array.from(this.queryAllOptions()).map((node) => JSON.parse(node.dataset.dropdownOptionLabel));
-    const selected = this.isMultiSelect ? Array.from(this.selectedOptions).map(JSON.parse) : this.selectedOptionJson ? [JSON.parse(this.selectedOptionJson)] : [];
+
+    const searchIsPending = this.asyncSearchTimer != null || this.element.getAttribute("aria-busy") === "true";
+    if (this.isDisabled || searchIsPending || this.asyncCreationFailed) return;
+
+    const options = Array.from(this.queryAllOptions()).map((node) => (
+      JSON.parse(node.dataset.dropdownOptionLabel)
+    ));
+    let selected = [];
+    if (this.isMultiSelect) {
+      selected = Array.from(this.selectedOptions).map(JSON.parse);
+    } else if (this.selectedOptionJson) {
+      selected = [JSON.parse(this.selectedOptionJson)];
+    }
+
     const option = getCreationOption(term, [...options, ...selected]);
     if (!option) return;
+
     const row = this.buildOptionElement(option);
     row.removeAttribute("id");
     row.dataset.dropdownCreateOption = "true";
@@ -165,10 +177,10 @@ export default class PbDropdown extends PbEnhancedElement {
     this.showElement(this.target);
     this.updateArrowDisplay(true);
     this.resetFocus();
-    const first = this.keyboardHandler.getVisibleOptions()[0];
-    if (first) {
-      first.classList.add("pb_dropdown_option_focused");
-      this.keyboardHandler.focusedOptionIndex = Array.from(this.queryAllOptions()).indexOf(first);
+    const firstVisibleOption = this.keyboardHandler.getVisibleOptions()[0];
+    if (firstVisibleOption) {
+      firstVisibleOption.classList.add("pb_dropdown_option_focused");
+      this.keyboardHandler.focusedOptionIndex = Array.from(this.queryAllOptions()).indexOf(firstVisibleOption);
     }
     this.adjustDropdownHeight();
   }
@@ -723,7 +735,10 @@ export default class PbDropdown extends PbEnhancedElement {
 
   rememberSettledAsyncResults() {
     const parent = this.getOptionsParent();
-    this.asyncSettledOptions = parent ? Array.from(parent.children).filter((node) => !this.allowOptionCreation || !node.hasAttribute("data-dropdown-create-option")).map((node) => node.cloneNode(true)) : [];
+    const optionNodes = parent ? Array.from(parent.children) : [];
+    this.asyncSettledOptions = optionNodes
+      .filter((node) => !this.allowOptionCreation || !node.hasAttribute("data-dropdown-create-option"))
+      .map((node) => node.cloneNode(true));
     const empty = this.target?.querySelector(".dropdown_no_options");
     const status = this.target?.querySelector("[data-dropdown-async-status]");
     this.asyncSettledEmpty = empty ? empty.cloneNode(true) : null;
