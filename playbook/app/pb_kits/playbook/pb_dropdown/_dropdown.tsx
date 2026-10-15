@@ -12,6 +12,7 @@ import DropdownContainer from "./subcomponents/DropdownContainer";
 import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
+import DropdownFormFields from "./subcomponents/DropdownFormFields";
 import useDropdown from "./hooks/useDropdown";
 import useAsyncOptions, { LoadOptions } from "./hooks/useAsyncOptions";
 import getQuickPickOptions from "./quickpick";
@@ -142,6 +143,8 @@ type DropdownProps = {
       fontColor?: string;
     };
     requiredIndicator?: boolean;
+    required?: boolean;
+    validationMessage?: string;
 };
 
 interface DropdownComponent
@@ -174,7 +177,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         data = {},
         defaultValue = {},
         disabled = false,
-        error,
+        error: errorProp,
         htmlOptions = {},
         id,
         isClosed = true,
@@ -193,8 +196,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         separators = true,
         variant = "default",
         activeStyle,
-        requiredIndicator = false
+        requiredIndicator = false,
+        required = false,
+        validationMessage = "Please fill out this field."
     } = props;
+
+    const [formInvalid, setFormInvalid] = useState(false);
+    const error = errorProp || (formInvalid ? validationMessage : "");
 
     const ariaProps = buildAriaProps(aria);
     const dataProps = buildDataProps(data);
@@ -363,6 +371,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     : selected && Object.keys(selected).length
     ? [selected]
     : [];
+
+    const hasFormSelection = selectedArray.some((option) => String(option.id ?? option.value ?? "") !== "");
+    useEffect(() => {
+        if (hasFormSelection || !required) setFormInvalid(false);
+    }, [hasFormSelection, required]);
 
     const selectedOptionIds = useMemo(() => (
       multiSelect && getOptionValue
@@ -784,6 +797,28 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     toggleDropdown
                 }}
             >
+                {(name || required) && (
+                    <DropdownFormFields
+                        disabled={disabled}
+                        multiSelect={multiSelect}
+                        name={name}
+                        onInvalid={() => {
+                            setFormInvalid(true);
+                            (inputRef.current || inputWrapperRef.current)?.focus();
+                        }}
+                        onReset={() => {
+                            setSelected(initialSelected);
+                            handleSelectionChange(multiSelect || Object.keys(initialSelected).length ? initialSelected : null);
+                            setFilterItem(autocomplete && !multiSelect ? (initialSelected as GenericObject).label || "" : "");
+                            setFormInvalid(false);
+                            setIsDropDownClosed(true);
+                            if (asyncEnabled) clearAsync();
+                        }}
+                        required={required}
+                        selected={selectedArray}
+                        validationMessage={validationMessage}
+                    />
+                )}
                 {label && (
                   <label
                       data-dropdown="pb-dropdown-label"

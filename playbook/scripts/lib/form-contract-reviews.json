@@ -49,7 +49,7 @@
       "lib/playbook/forms/builder/date_picker_field.rb": "68b9594dcb727fd072c460671a11ab9712160c640d864ecd7d677342c2d04030"
     },
     "dropdown": {
-      "app/pb_kits/playbook/pb_dropdown/_dropdown.tsx": "190f3c05e35f536d7c6d7e526e6465515effb1f7133d8a023c4518a7905c66b1",
+      "app/pb_kits/playbook/pb_dropdown/_dropdown.tsx": "afe686981fc459bc7c20931f927879bcec7b8dc468f99e1d39ba50b683d2a0c5",
       "app/pb_kits/playbook/pb_dropdown/context/index.tsx": "13cee0ffc277d256602283792e26727b83e56184ac72eb05684105b4ccfed639",
       "app/pb_kits/playbook/pb_dropdown/dropdown.html.erb": "7a249b54d5fe5811a53665f32f86562c2e2fa9f11cbc93f94211a32a0b6051ff",
       "app/pb_kits/playbook/pb_dropdown/dropdown.rb": "61060c1f64270659b26693ecb8f71de18aad42e8ee84200a0de376b5a138a766",
@@ -67,6 +67,7 @@
       "app/pb_kits/playbook/pb_dropdown/quickpick/index.ts": "707c522b79bb287c8e10ac68cbd5fa5587b981c7321d22ab3fc6b128d2ca193e",
       "app/pb_kits/playbook/pb_dropdown/quickpick_helper.rb": "8d7e607888cbb194b1fbf88701546ed2951a552d6a82686185929839f545feeb",
       "app/pb_kits/playbook/pb_dropdown/subcomponents/DropdownContainer.tsx": "c4aa85f3ecf9b394943ae96f760ada7566019bdb13c5bf2439fc371c840fa87c",
+      "app/pb_kits/playbook/pb_dropdown/subcomponents/DropdownFormFields.tsx": "34a51b4089a35f1e1faaed20ba75cc23f235361e6082176c83acfe6e1ce875f6",
       "app/pb_kits/playbook/pb_dropdown/subcomponents/DropdownOption.tsx": "fe0c175e65b7e5b34d4780be32a2e6a589fb102e6e2fec6fdfc42169c36a0571",
       "app/pb_kits/playbook/pb_dropdown/subcomponents/DropdownTrigger.tsx": "c7593fa7b9f0a075a01a784f67a349510a229b373e20d3a6e066b57ad39c8c2e",
       "app/pb_kits/playbook/pb_dropdown/subcomponents/MultiSelectTriggerDisplay.tsx": "127e9ec1f00015f2a12635ad269291332c934e694a5ad73440781b368cbc20d0",

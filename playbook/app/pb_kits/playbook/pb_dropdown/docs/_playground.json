@@ -19,6 +19,8 @@
     "controlsStartId": "",
     "controlsEndId": "",
     "requiredIndicator": false,
+    "required": false,
+    "validationMessage": "",
     "dark": false,
     "label": "Select a Country",
     "options": [
@@ -124,7 +126,9 @@
         "closeOnClick",
         "constrainHeight",
         "isClosed",
-        "requiredIndicator"
+        "requiredIndicator",
+        "required",
+        "validationMessage"
       ]
     },
     {

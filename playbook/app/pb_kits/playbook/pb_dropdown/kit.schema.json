@@ -272,17 +272,19 @@
       "default": false
     },
     "required": {
+      "type": "boolean",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "boolean",
       "default": false
     },
     "validationMessage": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "string",
       "default": ""
     },
     "searchTermMinimumLength": {

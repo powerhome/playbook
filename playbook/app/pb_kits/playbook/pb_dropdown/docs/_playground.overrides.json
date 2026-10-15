@@ -198,7 +198,9 @@
         "closeOnClick",
         "constrainHeight",
         "isClosed",
-        "requiredIndicator"
+        "requiredIndicator",
+        "required",
+        "validationMessage"
       ]
     },
     {
