@@ -88,7 +88,7 @@ const asyncOptionValue = (option: GenericObject) => option.value ?? option.id ??
 
 type CustomQuickPickDate = {
     label: string;
-    value: string[] | { timePeriod: string; amount: number };
+    value: Array<Date | string> | { timePeriod: string; amount: number };
 };
 
 type CustomQuickPickDates = {

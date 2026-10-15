@@ -20,7 +20,7 @@ type QuickPickOption = {
 
 type CustomQuickPickDate = {
   label: string;
-  value: string[] | { timePeriod: string; amount: number };
+  value: Array<Date | string> | { timePeriod: string; amount: number };
 };
 
 type CustomQuickPickDates = {
@@ -69,22 +69,28 @@ const formatDate = (date: Date) => {
   return `${month}/${day}/${year}`;
 };
 
-const parseCustomDateString = (dateStr: string): Date => {
-  if (stringHasExplicitTime(dateStr)) {
-    return parseQuickPickDateTime(dateStr) ?? new Date(dateStr);
+// Date objects keep their authored time (including midnight / 23:59:59).
+// Date-only strings get SOD/EOD; timed strings keep their parsed time.
+const parseCustomDateBoundary = (value: Date | string): Date => {
+  if (value instanceof Date) return value;
+  if (stringHasExplicitTime(value)) {
+    return parseQuickPickDateTime(value) ?? new Date(value);
   }
-  return parseQuickPickDateOnly(dateStr) ?? new Date(dateStr);
+  return parseQuickPickDateOnly(value) ?? new Date(value);
 };
+
+const boundaryHasExplicitTime = (value: Date | string): boolean =>
+  value instanceof Date || stringHasExplicitTime(value);
 
 // Helper to create a QuickPickOption from a custom date
 const createOptionFromCustomDate = (customDate: CustomQuickPickDate): QuickPickOption => {
   let dateRange: Date[];
 
   if (Array.isArray(customDate.value)) {
-    const startRaw = parseCustomDateString(customDate.value[0]);
-    const endRaw = parseCustomDateString(customDate.value[1]);
-    const startHasTime = stringHasExplicitTime(customDate.value[0]);
-    const endHasTime = stringHasExplicitTime(customDate.value[1]);
+    const startRaw = parseCustomDateBoundary(customDate.value[0]);
+    const endRaw = parseCustomDateBoundary(customDate.value[1]);
+    const startHasTime = boundaryHasExplicitTime(customDate.value[0]);
+    const endHasTime = boundaryHasExplicitTime(customDate.value[1]);
     dateRange = [
       startHasTime ? startRaw : startOfDay(startRaw),
       endHasTime ? endRaw : endOfDay(endRaw),
