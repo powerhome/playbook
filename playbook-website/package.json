@@ -5,7 +5,9 @@
   "scripts": {
     "lint": "eslint app/ --ext .js,.jsx",
     "release": "bin/vite build",
-    "generate:global-props-values": "node scripts/generate-global-props-values.mjs"
+    "generate:global-props-values": "node scripts/generate-global-props-values.mjs",
+    "generate:global-event-props-values": "node scripts/generate-global-event-props-values.mjs",
+    "test:global-event-props-tab": "node --experimental-strip-types --test scripts/props-tab-global-event-props.test.mjs"
   },
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.4.1",

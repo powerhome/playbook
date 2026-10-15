@@ -211,6 +211,14 @@ Parses `utilities/globalEventProps.ts` into `utilities/global-event-props.schema
 - Opt-in: kit schemas set `globalEventProps: true` when props include `& GlobalEventProps`
 - Separate from class-based `GlobalProps` / `global-props.schema.json`
 
+Website props tables read `globalEventPropsValues.ts`, generated from that schema by:
+
+```bash
+cd playbook-website && yarn generate:global-event-props-values
+```
+
+(`yarn generate:docs-metadata` from the repo root includes this step.)
+
 ### Build Distribution (`build-ai-dist.mjs`)
 
 1. Loads kit catalog from `playbook-website/config/menu.yml` (descriptions, categories)
@@ -337,6 +345,7 @@ Generated files were updated. Please stage them and commit again:
   git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json
   git add playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json
   git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts
+  git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalEventPropsValues.ts
 ```
 
 **Hook files:**

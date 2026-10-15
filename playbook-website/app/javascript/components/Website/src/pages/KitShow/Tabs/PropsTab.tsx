@@ -1,19 +1,27 @@
-import { Body, Card, Flex } from "playbook-ui";
+import { useState } from "react";
+import { Body, Card, Flex, Nav, NavItem, SectionSeparator } from "playbook-ui";
 import KitProps from "../../../components/AvailableProps/kitProps";
 import GlobalProps from "../../../components/AvailableProps/globalProps";
-import { useState } from "react";
-import { Nav, NavItem, SectionSeparator } from "playbook-ui";
+import GlobalEventProps from "../../../components/AvailableProps/globalEventProps";
 import globalPropsValues from "../../../components/AvailableProps/globalPropsValues";
+import globalEventPropsValues from "../../../components/AvailableProps/globalEventPropsValues";
+import {
+  filterKitPropsForPropsTab,
+  PropsTabId,
+  shouldShowGlobalEventPropsTab,
+} from "../../../components/AvailableProps/propsTabHelpers";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 import { formatPropNameForPlatform } from "../../../helpers/platform";
+
 interface PropsTabProps {
   availableProps?: string;
   platform?: string;
 }
 
 export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) => {
-  const [showKitTab, setShowKitTab] = useState(true);
+  const [activeTab, setActiveTab] = useState<PropsTabId>("kit");
   const { darkMode } = useDarkMode();
+
   if (!availableProps) {
     return (
       <Card padding="md">
@@ -22,28 +30,26 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
     );
   }
 
-  // Parse the schema JSON
   const schema = JSON.parse(availableProps);
+  const props = schema.props && typeof schema.props === "object" ? schema.props : schema;
+  const globalPropsNames = globalPropsValues.map((prop) => prop.prop);
+  const globalEventPropsNames = globalEventPropsValues.map((prop) => prop.prop);
+  const showGlobalEventPropsTab = shouldShowGlobalEventPropsTab(schema, platform);
 
-  // Extract props from our kit.schema.json format
-  // Schema structure: { $schema, name, description, platforms, props: {...}, globalProps, usage }
-  const props = schema.props && typeof schema.props === 'object' ? schema.props : schema;
-  
-  // Get global prop names to filter them out
-  const globalPropsNames = globalPropsValues.map((prop: { prop: string }) => prop.prop);
+  const filteredKitProps = filterKitPropsForPropsTab(
+    props,
+    globalPropsNames,
+    globalEventPropsNames,
+    platform
+  );
 
-  // Filter out global props and filter by platform
   const kitProps: Record<string, any> = {};
-  for (const propName in props) {
-    const prop = props[propName];
-    const isGlobalProp = globalPropsNames.includes(propName);
-    const platforms = prop.platforms || [];
-    const isForPlatform = platforms.length === 0 || platforms.includes(platform);
-    
-    if (!isGlobalProp && isForPlatform) {
-      kitProps[formatPropNameForPlatform(propName, platform)] = prop;
-    }
+  for (const propName in filteredKitProps) {
+    kitProps[formatPropNameForPlatform(propName, platform)] = filteredKitProps[propName];
   }
+
+  const resolvedTab =
+    activeTab === "globalEvent" && !showGlobalEventPropsTab ? "kit" : activeTab;
 
   return (
     <Flex width="100%">
@@ -52,23 +58,39 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
           <Nav orientation="horizontal" variant="subtle" dark={darkMode}>
             <NavItem
               text="Kit Props"
-              active={showKitTab}
-              onClick={() => setShowKitTab(true)}
+              active={resolvedTab === "kit"}
+              onClick={() => setActiveTab("kit")}
               cursor="pointer"
               dark={darkMode}
             />
             <NavItem
               text="Global Props"
-              active={!showKitTab}
-              onClick={() => setShowKitTab(false)}
+              active={resolvedTab === "global"}
+              onClick={() => setActiveTab("global")}
               cursor="pointer"
               dark={darkMode}
             />
+            {showGlobalEventPropsTab && (
+              <NavItem
+                text="Global Event Props"
+                active={resolvedTab === "globalEvent"}
+                onClick={() => setActiveTab("globalEvent")}
+                cursor="pointer"
+                dark={darkMode}
+              />
+            )}
           </Nav>
         </Card.Body>
         <SectionSeparator dark={darkMode} />
-        {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={darkMode} platform={platform} />}
-        {!showKitTab && <GlobalProps darkMode={darkMode} platform={platform} />}
+        {resolvedTab === "kit" && (
+          <KitProps kitPropsValues={kitProps} darkMode={darkMode} platform={platform} />
+        )}
+        {resolvedTab === "global" && (
+          <GlobalProps darkMode={darkMode} platform={platform} />
+        )}
+        {resolvedTab === "globalEvent" && showGlobalEventPropsTab && (
+          <GlobalEventProps darkMode={darkMode} platform={platform} />
+        )}
       </Card>
     </Flex>
   );

@@ -10,20 +10,21 @@ Consumer-facing rule/skill drafts (for apps that import `playbook-ui`) live in [
 |------|------|
 | `playbook/` | Kit source (React + Rails gem), schemas, playground overrides |
 | `playbook-website/` | Docs site, menu.yml, playground UI |
-| `docs/` | Contributor docs (AI metadata, playground, global props) |
+| `docs/` | Contributor docs (AI metadata, playground, global props, global event props) |
 | `.cursor/rules/` | Cursor project rules (also useful as reference for other agents) |
 | `.cursor/skills/` | Cursor project skills for common maintainer workflows |
 
 ## Non-negotiables
 
 1. **Know which package you are in** — `playbook/` vs `playbook-website/` vs repo root.
-2. **Prefer** `yarn generate:docs-metadata` **from the repo root** after changing kit props, global props, tokens, or playground overrides.
+2. **Prefer** `yarn generate:docs-metadata` **from the repo root** after changing kit props, global props, global event props, tokens, or playground overrides.
 3. **Never hand-edit generated files** — they are overwritten by generate/build and pre-commit:
    - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json`
    - `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json`
    - `playbook/app/pb_kits/playbook/utilities/global-props.schema.json`
    - `playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json`
    - `playbook-website/.../AvailableProps/globalPropsValues.ts`
+   - `playbook-website/.../AvailableProps/globalEventPropsValues.ts`
    - `playbook/dist/ai/**`
 4. **Playground source of truth** is `docs/_playground.overrides.json` per kit — edit that, then regenerate.
 5. **Do not install packages** into consuming apps from this repo’s AI guidance; that rule is for consumers. Here, follow normal workspace yarn flows when adding deps intentionally.
@@ -48,6 +49,7 @@ Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PUL
 | Regenerate metadata | Skill [`.cursor/skills/docs-metadata/`](.cursor/skills/docs-metadata/) · [`docs/AI_METADATA.md`](docs/AI_METADATA.md) |
 | Playground overrides | Skill [`.cursor/skills/kit-playground/`](.cursor/skills/kit-playground/) · [`docs/PLAYGROUND_CONFIG.md`](docs/PLAYGROUND_CONFIG.md) |
 | New global prop | Skill [`.cursor/skills/add-global-prop/`](.cursor/skills/add-global-prop/) · [`docs/ADDING_GLOBAL_PROPS.md`](docs/ADDING_GLOBAL_PROPS.md) |
+| New global event prop | Skill [`.cursor/skills/add-global-event-prop/`](.cursor/skills/add-global-event-prop/) · [`docs/ADDING_GLOBAL_EVENT_PROPS.md`](docs/ADDING_GLOBAL_EVENT_PROPS.md) |
 | Advanced Table docs | [`docs/ADVANCED_TABLE_DOCS.md`](docs/ADVANCED_TABLE_DOCS.md) |
 | Deprecation warnings | [`docs/DEPRECATION_WARNINGS.md`](docs/DEPRECATION_WARNINGS.md) |
 | Kit status in menu | [`docs/PLATFORM_SPECIFIC_STATUS.md`](docs/PLATFORM_SPECIFIC_STATUS.md) |
