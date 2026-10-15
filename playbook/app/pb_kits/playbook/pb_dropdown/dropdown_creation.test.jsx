@@ -141,3 +141,83 @@ test("composition preserves legacy selection behavior when creation is disabled"
   fireEvent.keyDown(input, { key: "Enter", isComposing: true })
   expect(onSelect).toHaveBeenCalledWith(options[0])
 })
+
+test.each([undefined, "outside"])("a second Enter preserves a created selection and permits submission with closeOnClick %s", closeOnClick => {
+  const onSelect = jest.fn()
+  const { container } = render(
+    <form>
+      <Dropdown allowOptionCreation
+          closeOnClick={closeOnClick}
+          enableFormSupport
+          name="tag"
+          onSelect={onSelect}
+          options={options}
+      />
+    </form>
+  )
+  const input = container.querySelector(".dropdown_input")
+  type(container, "New tag")
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(false)
+  expect(onSelect).toHaveBeenCalledTimes(1)
+  expect(onSelect).toHaveBeenLastCalledWith(created("New tag"))
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
+  expect(onSelect).toHaveBeenCalledTimes(1)
+  expect(new FormData(container.querySelector("form")).get("tag")).toBe("New tag")
+})
+
+test("Enter on mount or a whitespace query does not select a static option", () => {
+  const onSelect = jest.fn()
+  const { container } = render(<Dropdown allowOptionCreation
+      onSelect={onSelect}
+      options={options}
+                               />)
+  const input = container.querySelector(".dropdown_input")
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
+  expect(container.querySelector(".pb_dropdown_container")).toHaveClass("close")
+  type(container, "   ")
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
+  expect(onSelect).not.toHaveBeenCalled()
+})
+
+test("Enter confirms the Create row ahead of a partial static match", () => {
+  const onSelect = jest.fn()
+  const { container } = render(<Dropdown allowOptionCreation
+      onSelect={onSelect}
+      options={options}
+                               />)
+  type(container, "Ex")
+  fireEvent.keyDown(container.querySelector(".dropdown_input"), { key: "Enter" })
+  expect(onSelect).toHaveBeenCalledWith(created("Ex"))
+})
+
+test("closing the menu with a pending query makes Enter available to the form", () => {
+  const onSelect = jest.fn()
+  const { container } = render(<Dropdown allowOptionCreation
+      onSelect={onSelect}
+      options={options}
+                               />)
+  type(container, "New")
+  const input = container.querySelector(".dropdown_input")
+  fireEvent.keyDown(input, { key: "Escape" })
+  expect(container.querySelector(".pb_dropdown_container")).toHaveClass("close")
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
+  expect(onSelect).not.toHaveBeenCalled()
+})
+
+test("async creation leaves the following Enter available for submission", async () => {
+  const onSelect = jest.fn()
+  const loadOptions = jest.fn(() => Promise.resolve([]))
+  const { container } = render(<Dropdown allowOptionCreation
+      async
+      loadOptions={loadOptions}
+      onSelect={onSelect}
+      options={options}
+                               />)
+  type(container, "New tag")
+  await waitFor(() => expect(screen.getByText('Create "New tag"')).toBeInTheDocument())
+  const input = container.querySelector(".dropdown_input")
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(false)
+  expect(onSelect).toHaveBeenLastCalledWith(created("New tag"))
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
+  expect(onSelect).toHaveBeenCalledTimes(1)
+})

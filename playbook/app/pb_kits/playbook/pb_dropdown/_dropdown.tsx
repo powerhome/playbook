@@ -460,11 +460,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, autocomplete]);
 
     const filteredOptions = creationOption ? [...matchingOptions, creationOption] : matchingOptions;
-    const firstSelectableIndex = creationEnabled ? filteredOptions.findIndex((option: GenericObject) => !option.disabled) : -1;
+    const creationFocusIndex = creationEnabled
+        ? creationOption ? matchingOptions.length : matchingOptions.findIndex((option: GenericObject) => !option.disabled)
+        : -1;
 
     useEffect(() => {
-        if (creationEnabled) setFocusedOptionIndex(firstSelectableIndex);
-    }, [creationEnabled, filterItem, firstSelectableIndex]);
+        if (creationEnabled) setFocusedOptionIndex(!isDropDownClosed && filterItem.trim() ? creationFocusIndex : -1);
+    }, [creationEnabled, isDropDownClosed, filterItem, creationFocusIndex]);
 
     // Empty copy follows the settled search. Hiding already-selected rows must not turn a
     // successful result list into "No results found", including the last pick while the menu stays open.
@@ -476,14 +478,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // including options the application loads itself.
     const asyncResultOptions = loadOptions ? loadedOptions : options;
     useEffect(() => {
-        if (asyncEnabled && !isDropDownClosed) {
+        if (!creationEnabled && asyncEnabled && !isDropDownClosed) {
             setFocusedOptionIndex(filteredOptions.length ? 0 : -1);
         }
-    }, [asyncResultOptions]);
+    }, [asyncResultOptions, creationEnabled]);
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
-        if (!isDropDownClosed) {
+        if (!creationEnabled && !isDropDownClosed) {
             let newIndex = 0;
             if (selected && !Array.isArray(selected) && selected.label) {
                 const selectedIndex = filteredOptions.findIndex((option: GenericObject) => isSameOption(option, selected));
@@ -493,7 +495,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             }
             setFocusedOptionIndex(newIndex);
         }
-    }, [isDropDownClosed]);
+    }, [isDropDownClosed, creationEnabled]);
 
     // Auto-position dropdown above/below based on available space or fixed/absolute when portaled to body / floating root
     useLayoutEffect(() => {

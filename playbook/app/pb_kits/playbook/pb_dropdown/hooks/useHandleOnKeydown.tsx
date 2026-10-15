@@ -13,6 +13,7 @@ const {
   focusedOptionIndex,
   handleChange,
   handleOptionClick,
+  isDropDownClosed,
   multiSelect,
   selected,
   setFocusedOptionIndex,
@@ -59,7 +60,7 @@ const {
 
     switch (e.key) {
     case "Escape":
-      if (asyncEnabled) {
+      if (asyncEnabled || creationEnabled) {
         setIsDropDownClosed(true);
         setFocusedOptionIndex(-1);
       }
@@ -78,6 +79,7 @@ const {
       break;
     }
     case "Enter":
+      if (creationEnabled && (isDropDownClosed || !filterItem.trim())) return;
       if (focusedOptionIndex !== -1 && (!asyncEnabled || filteredOptions[focusedOptionIndex]) && !filteredOptions[focusedOptionIndex]?.disabled) {
         e.preventDefault();
         handleOptionClick(filteredOptions[focusedOptionIndex]);

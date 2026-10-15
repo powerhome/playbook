@@ -7,3 +7,5 @@ React native form submission additionally requires `enableFormSupport`; option c
 React uses the existing `onSelect(optionOrArray)` and `onChange({ target: { name, value } })` callbacks. Rails emits its normal `pb:dropdown:selected` event. Multiple selections produce an array of option objects.
 
 For async React usage, combine `allowOptionCreation` with `async` and your existing `loadOptions`; both Promise and callback loaders are supported. Rails uses `async: true` with the existing `pb:dropdown:search` event and `setResults`/`setError` callbacks. Creation is hidden during pending searches and errors, then offered when settled results have no exact match. Rails can offer creation below `search_term_minimum_length`, when no remote search runs. Applications that manage React fetching themselves must pass `loading` while the request is pending.
+
+In React, a non-empty search focuses the Create row when it is available; arrow keys can choose another option. Closing the menu or clearing the query removes automatic option focus. Enter with a closed menu or blank query remains available for normal form submission and does not change the selection.
