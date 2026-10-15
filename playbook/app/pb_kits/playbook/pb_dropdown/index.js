@@ -2,6 +2,7 @@ import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
 import { subscribeFloatingKitReposition, positionDropdownPortalToWrapper } from "../utilities/floatingPortalHosts";
+import { getCreationOption } from "./utilities/optionCreation";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -133,6 +134,43 @@ export default class PbDropdown extends PbEnhancedElement {
 
   get isAsync() {
     return this.element.dataset.pbDropdownAsync === "true";
+  }
+
+  get allowOptionCreation() {
+    return this.element.dataset.pbDropdownAllowOptionCreation === "true";
+  }
+
+  removeCreationOption() {
+    const row = this.target?.querySelector("[data-dropdown-create-option]");
+    if (row) {
+      this.resetFocus();
+      row.remove();
+    }
+  }
+
+  updateCreationOption(term) {
+    if (!this.allowOptionCreation) return;
+    this.removeCreationOption();
+    if (this.isDisabled || this.asyncSearchTimer != null || this.element.getAttribute("aria-busy") === "true" || this.asyncCreationFailed) return;
+    const options = Array.from(this.queryAllOptions()).map((node) => JSON.parse(node.dataset.dropdownOptionLabel));
+    const selected = this.isMultiSelect ? Array.from(this.selectedOptions).map(JSON.parse) : this.selectedOptionJson ? [JSON.parse(this.selectedOptionJson)] : [];
+    const option = getCreationOption(term, [...options, ...selected]);
+    if (!option) return;
+    const row = this.buildOptionElement(option);
+    row.removeAttribute("id");
+    row.dataset.dropdownCreateOption = "true";
+    row.querySelector(".pb_body_kit_light").textContent = `Create "${option.label}"`;
+    this.getOptionsParent()?.appendChild(row);
+    this.removeNoOptionsMessage();
+    this.showElement(this.target);
+    this.updateArrowDisplay(true);
+    this.resetFocus();
+    const first = this.keyboardHandler.getVisibleOptions()[0];
+    if (first) {
+      first.classList.add("pb_dropdown_option_focused");
+      this.keyboardHandler.focusedOptionIndex = Array.from(this.queryAllOptions()).indexOf(first);
+    }
+    this.adjustDropdownHeight();
   }
 
   get canOpenMenu() {
@@ -614,6 +652,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleSearch(term = "") {
     if (this.isDisabled) return;
+    if (this.allowOptionCreation) this.removeCreationOption();
     if (this.isAsync) {
       this.searchAsync(term);
       return;
@@ -645,6 +684,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (!hasMatch) {
       this.showNoOptionsMessage();
     }
+    this.updateCreationOption(term);
   }
 
   cancelAsyncSearch() {
@@ -683,7 +723,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   rememberSettledAsyncResults() {
     const parent = this.getOptionsParent();
-    this.asyncSettledOptions = parent ? Array.from(parent.children).map((node) => node.cloneNode(true)) : [];
+    this.asyncSettledOptions = parent ? Array.from(parent.children).filter((node) => !node.hasAttribute("data-dropdown-create-option")).map((node) => node.cloneNode(true)) : [];
     const empty = this.target?.querySelector(".dropdown_no_options");
     const status = this.target?.querySelector("[data-dropdown-async-status]");
     this.asyncSettledEmpty = empty ? empty.cloneNode(true) : null;
@@ -748,6 +788,7 @@ export default class PbDropdown extends PbEnhancedElement {
   searchAsync(term) {
     this.cancelAsyncSearch();
     this.asyncSearchInterrupted = false;
+    this.asyncCreationFailed = false;
 
     const minimumLength = Number(this.element.dataset.pbDropdownSearchTermMinimumLength ?? 3);
     if (term.length < minimumLength) {
@@ -763,6 +804,7 @@ export default class PbDropdown extends PbEnhancedElement {
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       }
+      this.updateCreationOption(term);
       return;
     }
 
@@ -806,6 +848,8 @@ export default class PbDropdown extends PbEnhancedElement {
         this.asyncResultsCleared = false;
         this.rememberSettledAsyncResults();
         this.resetOptionFilterForSelectedLabel();
+        this.asyncCreationFailed = failed;
+        this.updateCreationOption(term);
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       };
@@ -953,6 +997,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
       this.clearFormValidation(hiddenInput);
       this.onOptionSelected(value, option);
+      if (this.allowOptionCreation) this.removeCreationOption();
       this.updateClearButton();
     }
   }
@@ -1146,6 +1191,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   resetInteractiveOptionState() {
+    if (this.allowOptionCreation) this.removeCreationOption();
     this.resetFocus();
 
     if (this.searchBar) {
@@ -1525,11 +1571,7 @@ export default class PbDropdown extends PbEnhancedElement {
       });
       if (this.isAsync) this.showAsyncMultiSelectMenu();
       this.adjustDropdownHeight();
-      this.baseInput.value = Array.from(
-        this.selectedOptions,
-      )
-        .map((opt) => JSON.parse(opt).id)
-        .join(",");
+      this.syncHiddenInputs();
     } else {
       options.forEach((option) => {
         option.classList.remove("pb_dropdown_option_selected");
@@ -1842,6 +1884,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   resetDropdownValue({ preserveOptions = false } = {}) {
+    if (this.allowOptionCreation) this.removeCreationOption();
     this.selectedOptionJson = null;
     if (this.isAsync) {
       if (!preserveOptions) this.clearAsyncResults();
@@ -1969,6 +2012,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   clearSelection(reason = "clear", { preserveOptions = false } = {}) {
     if (this.isDisabled && reason !== "reset") return;
+    if (this.allowOptionCreation) this.removeCreationOption();
     if (this.isMultiSelect) {
       this.selectedOptions.clear();
       this.queryAllOptions().forEach((opt) => {
@@ -2070,6 +2114,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (!baseInput) return;
     // for multi_select, for each selectedOption, create a hidden input
     const name = baseInput.getAttribute("name");
+    let previousInput = baseInput;
     this.selectedOptions.forEach((raw) => {
       const optionData = JSON.parse(raw);
       // Use id if available, otherwise fall back to value
@@ -2079,7 +2124,8 @@ export default class PbDropdown extends PbEnhancedElement {
       inp.name = name;
       inp.value = id;
       inp.dataset.generated = "true";
-      baseInput.insertAdjacentElement("afterend", inp);
+      previousInput.insertAdjacentElement("afterend", inp);
+      previousInput = inp;
     });
 
     // For multi-select, remove required from base input when there are selections

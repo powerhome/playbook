@@ -65,7 +65,7 @@ export class PbDropdownKeyboard {
   }
 
   handleKeyDown(event) {
-    if (this.dropdown.isDisabled) return;
+    if (this.dropdown.isDisabled || event.isComposing || event.keyCode === 229) return;
 
     switch (event.key) {
       case "ArrowDown":
@@ -151,7 +151,7 @@ moveFocus(direction) {
     if (optionEl.dataset.dropdownOptionDisabled === "true") return;
 
     this.dropdown.handleOptionClick({ target: optionEl });
-    if (!this.dropdown.isAsync) this.dropdown.toggleElement(this.dropdown.target);
+    if (!this.dropdown.isAsync && !this.dropdown.allowOptionCreation) this.dropdown.toggleElement(this.dropdown.target);
     this.dropdown.updateClearButton();
   }
 }

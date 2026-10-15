@@ -5,6 +5,7 @@
     "options": "Options.data"
   },
   "defaults": {
+    "allowOptionCreation": false,
     "async": false,
     "autocomplete": false,
     "blankSelection": "",

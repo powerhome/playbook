@@ -1,5 +1,6 @@
 examples:
   rails:
+  - dropdown_option_creation: Allow Option Creation
   - dropdown_default_rails: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select_rails: Multi Select

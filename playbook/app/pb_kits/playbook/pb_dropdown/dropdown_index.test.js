@@ -1523,3 +1523,125 @@ describe("PbDropdown multi-select identity", () => {
     jest.useRealTimers();
   });
 });
+
+describe("PbDropdown option creation", () => {
+  let root;
+  let instance;
+  let input;
+
+  const mount = ({ multi = false, async = false } = {}) => {
+    root = buildDropdownElement({ options: [{ id: "existing", label: "Existing", value: "existing" }] });
+    root.dataset.pbDropdownAllowOptionCreation = "true";
+    root.dataset.pbDropdownMultiSelect = String(multi);
+    if (async) root.dataset.pbDropdownAsync = "true";
+    root.dataset.pbDropdownSearchTermMinimumLength = "1";
+    root.dataset.pbDropdownSearchDebounceTimeout = "0";
+    input = document.createElement("input");
+    input.dataset.dropdownAutocomplete = "true";
+    root.querySelector(".pb_dropdown_trigger").appendChild(input);
+    if (multi) root.querySelector("[data-dropdown-selected-option]").name = "tags[]";
+    const form = document.createElement("form");
+    root.replaceWith(form);
+    form.appendChild(root);
+    instance = new PbDropdown(root);
+    instance.connect();
+    return form;
+  };
+
+  const type = value => {
+    input.value = value;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+  const creationRow = () => root.querySelector("[data-dropdown-create-option]");
+
+  afterEach(() => {
+    instance?.disconnect();
+    document.body.innerHTML = "";
+    jest.useRealTimers();
+  });
+
+  test("Enter creates a trimmed value through the selection event and form input", () => {
+    jest.useFakeTimers();
+    const form = mount();
+    const selected = jest.fn();
+    root.addEventListener("pb:dropdown:selected", event => selected(event.detail));
+    type("  New tag  ");
+    expect(creationRow().textContent).toBe('Create "New tag"');
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true }));
+    expect(selected).toHaveBeenCalledWith({ id: "New tag", label: "New tag", value: "New tag", __isNew__: true });
+    expect(new FormData(form).get("country")).toBe("New tag");
+    expect(creationRow()).toBeNull();
+    jest.runOnlyPendingTimers();
+    expect(instance.target).toHaveClass("close");
+  });
+
+  test("multi-select submits separate values and suppresses selected duplicates", () => {
+    const form = mount({ multi: true });
+    for (const value of ["First", "Second"]) {
+      type(value);
+      instance.handleOptionClick({ target: creationRow() });
+    }
+    expect(new FormData(form).getAll("tags[]").filter(Boolean)).toEqual(["First", "Second"]);
+    type(" first ");
+    expect(creationRow()).toBeNull();
+  });
+
+  test("whitespace, existing labels and values cannot be created", () => {
+    mount();
+    for (const value of ["  ", " EXISTING ", "existing"]) {
+      type(value);
+      expect(creationRow()).toBeNull();
+    }
+  });
+
+  test("clear and reset remove the creation row", () => {
+    mount();
+    type("New");
+    instance.clearSelection();
+    expect(creationRow()).toBeNull();
+    type("Another");
+    instance.resetDropdownValue();
+    expect(creationRow()).toBeNull();
+  });
+
+  test("async results resolve before creation and stale callbacks are ignored", () => {
+    jest.useFakeTimers();
+    mount({ async: true });
+    const searches = [];
+    root.addEventListener("pb:dropdown:search", event => searches.push(event.detail));
+    type("Old");
+    jest.runOnlyPendingTimers();
+    expect(creationRow()).toBeNull();
+    type("New");
+    jest.runOnlyPendingTimers();
+    searches[1].setResults([]);
+    expect(creationRow().textContent).toBe('Create "New"');
+    searches[0].setResults([{ id: "old", label: "Old" }]);
+    expect(creationRow().textContent).toBe('Create "New"');
+  });
+
+  test("async existing results and errors do not offer creation", () => {
+    jest.useFakeTimers();
+    mount({ async: true });
+    let search;
+    root.addEventListener("pb:dropdown:search", event => { search = event.detail });
+    type("Existing");
+    jest.runOnlyPendingTimers();
+    search.setResults([{ id: "server", label: "Existing" }]);
+    expect(creationRow()).toBeNull();
+    type("New");
+    jest.runOnlyPendingTimers();
+    search.setError();
+    expect(creationRow()).toBeNull();
+  });
+
+  test("composition and disabled controls do not create", () => {
+    mount();
+    type("New");
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", isComposing: true, bubbles: true }));
+    expect(instance.baseInput.value).toBe("");
+    instance.isDisabled = true;
+    instance.updateCreationOption("Another");
+    expect(creationRow()).toBeNull();
+  });
+});

@@ -10,8 +10,10 @@
     "allowOptionCreation": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "async": {
       "type": "boolean",
