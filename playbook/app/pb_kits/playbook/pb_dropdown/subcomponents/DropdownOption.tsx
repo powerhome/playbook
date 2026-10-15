@@ -36,12 +36,12 @@ const DropdownOption = (props: DropdownOptionProps) => {
     data = {},
     htmlOptions = {},
     id,
-    key,
     option,
   } = props;
 
   const {
     asyncEnabled,
+    creationOption,
     autocomplete,
     activeStyle,
     disabled,
@@ -84,7 +84,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
   const isOptionDisabled = option?.disabled === true;
   const isDisabled = disabled || isOptionDisabled;
 
-  if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
+  const isCreationOption = option === creationOption;
+  if ((!isCreationOption && !isItemMatchingFilter(option)) || (multiSelect && isSelected)) {
     return null;
   }
   const isFocused =
@@ -122,7 +123,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     isDisabled && "disabled"
   );
 
-  const content = children || (renderOption && option ? renderOption(option) : null);
+  const content = isCreationOption ? `Create "${option.label}"` : children || (renderOption && option ? renderOption(option) : null);
 
   return (
     <div
@@ -132,7 +133,6 @@ const DropdownOption = (props: DropdownOptionProps) => {
         aria-disabled={isDisabled}
         className={classes}
         id={id}
-        key={key}
         onClick={isDisabled ? undefined : () => handleOptionClick(option)}
     >
       <ListItem

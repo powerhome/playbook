@@ -49,3 +49,4 @@ export { default as DropdownAsyncInitialOptions } from './_dropdown_async_initia
 export { default as DropdownExternalSearch } from './_dropdown_external_search.jsx'
 
 export { default as DropdownForm } from "./_dropdown_form.jsx"
+export { default as DropdownOptionCreation } from "./_dropdown_option_creation.jsx"

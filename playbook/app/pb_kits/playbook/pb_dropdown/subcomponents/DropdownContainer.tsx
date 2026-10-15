@@ -47,6 +47,8 @@ const DropdownContainer = (props: DropdownContainerProps) => {
 
   const {
     asyncEnabled,
+    creationEnabled,
+    creationOption,
     optionKey,
     noOptionsText,
     asyncStatus,
@@ -93,7 +95,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         >
             <input
                 onChange={handleChange}
-                onKeyDown={asyncEnabled ? handleKeyDown : undefined}
+                onKeyDown={asyncEnabled || creationEnabled ? handleKeyDown : undefined}
                 placeholder="Select..."
                 ref={inputRef}
                 value={filterItem}
@@ -101,6 +103,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         </TextInput>
       )}
       <List dark={dark}>
+        <>
         {
         asyncStatus || (!asyncEnabled && filteredOptions?.length === 0) ? (
           <ListItem dark={dark}
@@ -117,13 +120,17 @@ const DropdownContainer = (props: DropdownContainerProps) => {
             />
           </ListItem>
         ): (
-          children || (asyncEnabled && filteredOptions.map((option: GenericObject) => (
+          children || (asyncEnabled && filteredOptions.filter((option: GenericObject) => option !== creationOption).map((option: GenericObject) => (
             <DropdownOption key={optionKey(option)}
                 option={option}
             />
           )))
         )
         }
+        {creationOption && <DropdownOption dark={dark}
+            option={creationOption}
+        />}
+        </>
         </List>
     </div>
   );

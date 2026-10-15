@@ -48,6 +48,11 @@ export const KIT_USAGE_FAQS = {
     contractPaths: ['form.rails.builder.methods'], props: ['blankSelection'],
   }],
   dropdown: [{
+    id: 'dropdown.option-creation', platforms: ['react'],
+    questions: ['How do I create new Dropdown options?'],
+    answer: 'Enable allowOptionCreation. The default trigger enables autocomplete. Creation supports single and multiple selections, including async, and is ignored for quickpick. A selectable Create row yields { id: text, label: text, value: text, __isNew__: true } through normal selection callbacks and native form submission. Text is trimmed and blank or case-insensitive existing/selected labels, values and IDs are rejected. Pending async searches and errors suppress creation. Creation only selects local text; the application owns persistence.',
+    props: ['allowOptionCreation'],
+  }, {
     id: 'dropdown.builder-name', platforms: ['rails'],
     questions: ['Does dropdown_field scope country to user[country]?', 'Does multi_select submit separate array values?'],
     answer: 'Pass the attribute (e.g. :country) so the builder can auto-bind default_value and errors from the model; pass user[country] explicitly when you need that nested parameter name instead. multi_select appends [] to the CSS-hidden input name. Comma-joining is only for default-value encoding. After kit JS runs, Playbook emits one type="hidden" input per selected id (all named name[]), clears the original CSS-hidden input, and Rails receives separate array entries.',

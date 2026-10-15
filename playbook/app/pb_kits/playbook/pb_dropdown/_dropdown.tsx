@@ -15,6 +15,7 @@ import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import DropdownFormFields from "./subcomponents/DropdownFormFields";
 import useDropdown from "./hooks/useDropdown";
 import useAsyncOptions, { LoadOptions } from "./hooks/useAsyncOptions";
+import { getCreationOption } from "./utilities/optionCreation";
 import getQuickPickOptions from "./quickpick";
 
 import {
@@ -99,6 +100,7 @@ type CustomQuickPickDates = {
 type InputChangeReason = "input" | "clear";
 
 type DropdownProps = {
+    allowOptionCreation?: boolean;
     aria?: { [key: string]: string };
     async?: boolean;
     loadOptions?: LoadOptions;
@@ -156,6 +158,7 @@ interface DropdownComponent
 
 let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const {
+        allowOptionCreation = false,
         aria = {},
         async = false,
         loadOptions,
@@ -165,7 +168,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         onInputChange,
         renderOption,
         value,
-        autocomplete = false,
+        autocomplete: autocompleteProp = false,
         blankSelection = '',
         children,
         className,
@@ -200,6 +203,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         required = false,
         validationMessage = "Please fill out this field."
     } = props;
+
+    const creationEnabled = allowOptionCreation && variant !== "quickpick";
+    const autocomplete = autocompleteProp || creationEnabled;
 
     const [formInvalid, setFormInvalid] = useState(false);
     const error = errorProp || (formInvalid ? validationMessage : "");
@@ -427,7 +433,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => isSameOption(sel, option)));
     }, [optionsWithBlankSelection, selectedArray, multiSelect, isSameOption, selectedOptionIds, getOptionValue]);
     
-    const filteredOptions = useMemo(() => {
+    const creationOption = creationEnabled && !disabled && !loading && (!asyncEnabled || (asyncStatus !== "loading" && asyncStatus !== "error"))
+        ? getCreationOption(filterItem, [...(Array.isArray(dropdownOptions) ? dropdownOptions : []), ...selectedArray])
+        : null;
+
+    const matchingOptions = useMemo(() => {
           const selectedLabel =
             !multiSelect &&
             !Array.isArray(selected) &&
@@ -446,6 +456,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             String(opt.label).toLowerCase().includes(filterText.toLowerCase())
           );
         }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, autocomplete]);
+
+    const filteredOptions = creationOption ? [...matchingOptions, creationOption] : matchingOptions;
+    const firstSelectableIndex = creationEnabled ? filteredOptions.findIndex((option: GenericObject) => !option.disabled) : -1;
+
+    useEffect(() => {
+        if (creationEnabled) setFocusedOptionIndex(firstSelectableIndex);
+    }, [creationEnabled, filterItem, firstSelectableIndex]);
 
     // Empty copy follows the settled search. Hiding already-selected rows must not turn a
     // successful result list into "No results found", including the last pick while the menu stays open.
@@ -750,7 +767,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : asyncEmptyCopy) : "",
+                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : creationOption ? "" : asyncEmptyCopy) : "",
+                    creationEnabled,
+                    creationOption,
                     renderOption,
                     optionKey,
                     isControlled,

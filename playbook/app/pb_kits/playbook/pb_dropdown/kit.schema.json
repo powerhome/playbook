@@ -7,6 +7,12 @@
     "rails"
   ],
   "props": {
+    "allowOptionCreation": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "async": {
       "type": "boolean",
       "platforms": [
