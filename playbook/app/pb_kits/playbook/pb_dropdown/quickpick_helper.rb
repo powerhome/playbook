@@ -77,7 +77,7 @@ module Playbook
           {
             id: "quickpick-#{label.downcase.gsub(/\s+/, '-')}",
             label: label,
-            value: [start_date.to_s, end_date.to_s],
+            value: [format_value(start_date), format_value(end_date)],
             formatted_start_date: format_date(start_date),
             formatted_end_date: format_date(end_date),
           }
@@ -86,7 +86,7 @@ module Playbook
         def calculate_date_range(value)
           # Parse date strings if value is an array
           if value.is_a?(Array)
-            [parse_date_string(value[0]), parse_date_string(value[1])]
+            [parse_boundary(value[0]), parse_boundary(value[1])]
           else
             # Calculate date range from time_period and amount
             time_period = value[:time_period] || value["time_period"] || value[:timePeriod] || value["timePeriod"]
@@ -99,12 +99,44 @@ module Playbook
           end
         end
 
+        def parse_boundary(date_str)
+          date_str = date_str.to_s
+          if string_has_explicit_time?(date_str)
+            parse_datetime_string(date_str)
+          else
+            parse_date_string(date_str)
+          end
+        end
+
+        def string_has_explicit_time?(value)
+          value.match?(/[T\s]\d{1,2}:\d{2}/) || value.match?(/\d{1,2}:\d{2}\s*(AM|PM)/i)
+        end
+
         def parse_date_string(date_str)
           # Handle US date format (MM/DD/YYYY) because Ruby's Date.parse defaults to European format (DD/MM/YYYY)
           if date_str.include?("/")
             Date.strptime(date_str, "%m/%d/%Y")
           else
             Date.parse(date_str)
+          end
+        end
+
+        # Parses timed custom boundaries. US m/d/Y with optional time is handled explicitly
+        # so Ruby does not treat the slash form as d/m/Y.
+        def parse_datetime_string(date_str)
+          if (match = date_str.match(%r{\A(\d{1,2})/(\d{1,2})/(\d{4})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?\z}i))
+            month, day, year, hour, min, sec, meridiem = match.captures
+            hour = hour.to_i
+            min = min.to_i
+            sec = (sec || 0).to_i
+            if meridiem
+              meridiem = meridiem.upcase
+              hour = 0 if meridiem == "AM" && hour == 12
+              hour += 12 if meridiem == "PM" && hour != 12
+            end
+            Time.local(year.to_i, month.to_i, day.to_i, hour, min, sec)
+          else
+            Time.parse(date_str)
           end
         end
 
@@ -125,8 +157,27 @@ module Playbook
           end
         end
 
+        # Date-only → m/d/Y (SOD/EOD applied at sync when enableTime).
+        # Time/DateTime (explicit custom times, including intentional midnight) → ISO-8601
+        # so JS can parse to Date before Flatpickr setDate (picker format cannot parse raw ISO).
         def format_date(date)
-          date.strftime("%m/%d/%Y")
+          if time_like?(date)
+            date.iso8601
+          else
+            date.strftime("%m/%d/%Y")
+          end
+        end
+
+        def format_value(date)
+          if time_like?(date)
+            date.iso8601
+          else
+            date.to_s
+          end
+        end
+
+        def time_like?(date)
+          date.is_a?(Time) || date.is_a?(DateTime) || defined?(ActiveSupport::TimeWithZone) && date.is_a?(ActiveSupport::TimeWithZone)
         end
 
         def format_date_range(start_date, end_date)

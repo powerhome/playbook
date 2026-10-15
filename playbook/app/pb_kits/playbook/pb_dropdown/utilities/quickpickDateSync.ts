@@ -1,5 +1,11 @@
 // QuickPick → DatePicker sync helpers.
 // End-of-day uses 23:59:59 to match pb_kit/dateTime period-end helpers.
+//
+// Contract when the target Flatpickr has enableTime:
+// - Date-only strings (e.g. m/d/Y) → start of day / end of day by bound
+// - Timed strings → parse to Date and pass through unchanged
+// - Date objects → pass through unchanged (presets already SOD/EOD via toQuickPickRange;
+//   custom values may intentionally use midnight or 23:59:59)
 
 type FlatpickrLike = {
   setDate: (date: Date | string, triggerChange?: boolean, format?: string) => void
@@ -26,17 +32,6 @@ export const stringHasExplicitTime = (value: string): boolean => {
   return /[T\s]\d{1,2}:\d{2}/.test(value) || /\d{1,2}:\d{2}\s*(AM|PM)/i.test(value)
 }
 
-/** True when the Date carries a time other than midnight or end-of-day (23:59:59). */
-export const dateHasExplicitTime = (date: Date): boolean => {
-  const hours = date.getHours()
-  const minutes = date.getMinutes()
-  const seconds = date.getSeconds()
-  const ms = date.getMilliseconds()
-  const isMidnight = hours === 0 && minutes === 0 && seconds === 0 && ms === 0
-  const isEndOfDay = hours === 23 && minutes === 59 && seconds === 59
-  return !isMidnight && !isEndOfDay
-}
-
 export const parseQuickPickDateOnly = (value: string): Date | null => {
   const match = value.trim().match(DATE_ONLY_MDY)
   if (!match) return null
@@ -48,8 +43,9 @@ export const parseQuickPickDateOnly = (value: string): Date | null => {
 
 /**
  * Apply a QuickPick date to a Flatpickr instance.
- * With enableTime and no explicit time: start → 00:00:00, end → 23:59:59.
- * Date-only pickers keep the existing m/d/Y string path.
+ * With enableTime and a date-only string: start → 00:00:00, end → 23:59:59.
+ * Timed strings and Date values are passed through unchanged.
+ * Date-only pickers keep the existing m/d/Y string path for date-only values.
  */
 export const setQuickPickDateOnPicker = (
   picker: FlatpickrLike | null | undefined,
@@ -62,6 +58,13 @@ export const setQuickPickDateOnPicker = (
 
   if (!enableTime) {
     if (typeof value === "string") {
+      // Timed payloads (ISO / datetime) are not valid for Flatpickr's m/d/Y format.
+      if (stringHasExplicitTime(value)) {
+        const parsed = new Date(value)
+        if (Number.isNaN(parsed.getTime())) return
+        picker.setDate(parsed, true)
+        return
+      }
       picker.setDate(value, true, "m/d/Y")
     } else {
       picker.setDate(value, true)
@@ -69,23 +72,20 @@ export const setQuickPickDateOnPicker = (
     return
   }
 
-  let date: Date
-
   if (typeof value === "string") {
     if (stringHasExplicitTime(value)) {
-      picker.setDate(value, true)
+      const parsed = new Date(value)
+      if (Number.isNaN(parsed.getTime())) return
+      picker.setDate(parsed, true)
       return
     }
-    date = parseQuickPickDateOnly(value) ?? new Date(value)
-  } else {
-    date = new Date(value.getTime())
-  }
 
-  if (Number.isNaN(date.getTime())) return
-
-  if (!dateHasExplicitTime(date)) {
+    let date = parseQuickPickDateOnly(value) ?? new Date(value)
+    if (Number.isNaN(date.getTime())) return
     date = bound === "start" ? startOfDay(date) : endOfDay(date)
+    picker.setDate(date, true)
+    return
   }
 
-  picker.setDate(date, true)
+  picker.setDate(value, true)
 }

@@ -1,8 +1,8 @@
 export { separateChildComponents, prepareSubcomponents } from './subComponentHelper';
 export { handleClickOutside } from './clickOutsideHelper';
 export {
-  dateHasExplicitTime,
   endOfDay,
+  parseQuickPickDateOnly,
   setQuickPickDateOnPicker,
   startOfDay,
   stringHasExplicitTime,
