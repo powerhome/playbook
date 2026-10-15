@@ -1,6 +1,7 @@
 @import "playbook-tokens/colors";
 @import "playbook-tokens/typography";
 @import "playbook-tokens/spacing";
+@import "playbook-tokens/border_radius";
 
 
 // Rails & REACT
@@ -539,5 +540,23 @@
   }
   .codeSnippetGuidelines {
     overflow-x: auto;
+  }
+
+  &.pb--codeCopy_compact {
+    border-radius: $border_rad_heavier;
+    // Clip the card corners; scrolling happens on the pre so long lines stay reachable.
+    overflow: hidden;
+
+    .highlight {
+      margin: 0;
+    }
+
+    pre.highlight {
+      margin: 0;
+      max-width: 100%;
+      overflow-x: auto;
+      padding: 16px;
+      white-space: pre;
+    }
   }
 }

@@ -4,8 +4,16 @@ module Playbook
   module Forms
     class Builder
       def phone_number_field(name, props: {})
+        props = props.dup
         props[:name] = name.to_s
         props[:id] ||= "#{@object_name}_#{name}"
+
+        apply_form_error!(props, name)
+
+        unless props.key?(:value)
+          value = form_attribute_value(name)
+          props[:value] = value.to_s if value.present?
+        end
 
         if props[:label] == true
           props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)

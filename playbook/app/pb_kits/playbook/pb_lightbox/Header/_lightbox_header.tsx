@@ -67,7 +67,7 @@ const LightboxHeader = (props: LightboxHeaderProps): React.ReactElement => {
             dark
             icon={icon}
             onClick={handleOnLightboxClose}
-            variant="link"
+            variant="secondary"
         />
       </FlexItem>
       {title && text && (

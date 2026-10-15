@@ -6,13 +6,16 @@ module Playbook
       def check_box(name, props: {}, **options)
         label_text = @template.label(@object_name, name) if props[:label] == true
         options[:required] = true if props[:required]
-        props[:margin_bottom] = "sm"
+        options[:data] = (options[:data] || {}).merge(message: props[:validation_message]) if props[:validation_message].present?
+        props[:margin_bottom] ||= "sm"
         props[:form_spacing] = true
 
         checked_value = options[:checked_value]
         unchecked_value = options[:unchecked_value]
         options.delete(:checked_value)
         options.delete(:unchecked_value)
+
+        options = merge_input_options(options, props[:input_options])
 
         input = super(name, options, checked_value, unchecked_value)
 

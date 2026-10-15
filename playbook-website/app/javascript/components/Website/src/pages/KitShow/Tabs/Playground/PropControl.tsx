@@ -24,6 +24,7 @@ import {
   getPlaygroundPropExampleValue,
   playgroundObjectToEditableLiteral,
   resolveSchemaDefault,
+  resolveSchemaType,
 } from "./utils";
 import { PropsPanelTextarea } from "./components/PropsPanelTextarea";
 
@@ -412,11 +413,14 @@ const EnumControl: React.FC<ExtendedPropControlProps> = ({
   info,
 }) => {
   const values = definition.values || [];
-  const enumOptions = values.map((val) => ({
-    id: val,
-    label: val,
-    value: val,
-  }));
+  const enumOptions = values.map((val) => {
+    const optionValue = String(val);
+    return {
+      id: optionValue,
+      label: optionValue,
+      value: optionValue,
+    };
+  });
   const schemaDefault = resolveSchemaDefault(definition);
   const schemaDefaultValue =
     typeof schemaDefault === "string" && values.includes(schemaDefault)
@@ -453,12 +457,19 @@ const EnumControl: React.FC<ExtendedPropControlProps> = ({
     >
       <Dropdown
         className={panelDropdownClassName("props-panel", isDropdownFilled)}
+        constrainHeight
         defaultValue={activeOption}
         id={`prop-${name}-enum-dropdown`}
         key={`${value?.enabled}-${String(displayValue ?? "")}`}
         onSelect={(option: { value: string } | null): null => {
           if (option?.value) {
-            onChange(name, { value: option.value, enabled: true });
+            const matched = values.find(
+              (enumValue) => String(enumValue) === option.value
+            );
+            onChange(name, {
+              value: matched !== undefined ? matched : option.value,
+              enabled: true,
+            });
           } else {
             onChange(name, propValueOnDropdownClear(definition, values));
           }
@@ -536,9 +547,37 @@ const FunctionControl: React.FC<ExtendedPropControlProps> = ({
   onChange,
   definition,
   info,
+  playgroundConfig,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, "");
   const currentValue = String(displayValue ?? "");
+
+  if (playgroundConfig?.editableFunctionProps?.includes(name)) {
+    const exampleFunction = playgroundConfig.presets?.find(
+      (preset) => preset.props?.[name],
+    )?.props?.[name];
+
+    return (
+      <PropControlRow
+        alignItems="start"
+        filled={isFilledDisplayValue(currentValue)}
+        info={info}
+        label={<PropControlLabel name={name} />}
+      >
+        <PropsPanelTextarea
+          dialogTitle={formatPropName(name)}
+          exampleFormat={String(exampleFunction ?? currentValue)}
+          exampleLanguage="jsx"
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            onChange(name, { value: e.target.value, enabled: true });
+          }}
+          placeholder={`Enter ${name} function...`}
+          value={currentValue}
+        />
+      </PropControlRow>
+    );
+  }
+
   const functionOptions = FUNCTION_PRESETS.map((preset) => ({
     id: preset.value || "none",
     label: preset.label,
@@ -563,6 +602,7 @@ const FunctionControl: React.FC<ExtendedPropControlProps> = ({
           isFilledDisplayValue(currentValue),
         )}
         clearable={false}
+        constrainHeight
         defaultValue={activeOption}
         id={`prop-${name}-function-dropdown`}
         key={currentValue}
@@ -917,7 +957,7 @@ const getControlForType = (
   isRequired?: boolean,
 ) => {
   const { definition } = props;
-  const rawType = definition.type || "";
+  const rawType = resolveSchemaType(definition) || "";
   /** Lowercase so `GenericObject` matches object controls (schema uses PascalCase). */
   const propType = normalizeType(rawType);
 

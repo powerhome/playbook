@@ -1,0 +1,2 @@
+<%= form.star_rating_field "defaults[rating]",
+      props: { variant: "interactive", label: "Rating" } %>

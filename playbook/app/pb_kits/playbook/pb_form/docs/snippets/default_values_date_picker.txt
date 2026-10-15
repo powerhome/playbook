@@ -1,0 +1,5 @@
+  <%= form.date_picker :start_date, props: {
+        label: "Start Date",
+        allow_input: true,
+        default_date: "06/15/2026",
+      } %>

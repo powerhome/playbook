@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "accept": {},
+    "customMessage": "",
     "dark": false
   },
   "groups": [

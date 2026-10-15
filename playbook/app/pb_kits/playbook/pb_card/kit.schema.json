@@ -8,7 +8,10 @@
   ],
   "props": {
     "background": {
-      "type": "enum",
+      "type": {
+        "react": "BackgroundColors | ProductColors | \"none\"",
+        "rails": "enum"
+      },
       "platforms": [
         "react",
         "rails"
@@ -183,6 +186,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Card } from 'playbook-ui'",

@@ -10,9 +10,10 @@ export type PlaygroundPreviewStageProps = {
   draggingInstanceId: string | null;
   globalProps?: Record<string, PropDefinition>;
   instances: BuilderInstance[];
+  isSelectMode: boolean;
   kitsByName: Record<string, PlaygroundKit>;
   minHeight?: string;
-  selectedId: string | null;
+  selectedIds: string[];
   canDropIntoTarget: (targetId: string) => boolean;
   onCanvasClick: () => void;
   onCanvasDragLeave: (event: React.DragEvent<HTMLElement>) => void;
@@ -34,7 +35,7 @@ export type PlaygroundPreviewStageProps = {
   ) => void;
   onLeaveDragTarget: (targetId: string) => void;
   onMoveInstance: (instanceId: string, targetId: string) => void;
-  onSelect: (id: string) => void;
+  onSelect: (id: string, multi?: boolean) => void;
 };
 
 export const PlaygroundPreviewStage = ({
@@ -43,9 +44,10 @@ export const PlaygroundPreviewStage = ({
   draggingInstanceId,
   globalProps,
   instances,
+  isSelectMode,
   kitsByName,
   minHeight = "360px",
-  selectedId,
+  selectedIds,
   onCanvasClick,
   onCanvasDragLeave,
   onCanvasDragOver,
@@ -106,7 +108,8 @@ export const PlaygroundPreviewStage = ({
             draggingInstanceId={draggingInstanceId}
             globalProps={globalProps}
             instance={instance}
-            isSelected={instance.id === selectedId}
+            isSelectMode={isSelectMode}
+            isSelected={selectedIds.includes(instance.id)}
             key={instance.id}
             kitsByName={kitsByName}
             onDragEndDrag={onDragEndDrag}
@@ -124,7 +127,7 @@ export const PlaygroundPreviewStage = ({
             onMoveInstance(instanceId, targetId);
           }}
             onSelect={onSelect}
-            selectedId={selectedId}
+            selectedIds={selectedIds}
         />
       ))
     )}

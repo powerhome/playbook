@@ -1,0 +1,19 @@
+<% tree_data = [{
+     label: "Power Home Remodeling",
+     value: "Power Home Remodeling",
+     id: "100",
+     expanded: true,
+     children: [
+       {
+         label: "People",
+         value: "People",
+         id: "101",
+         children: [
+           { label: "Talent Acquisition", value: "Talent Acquisition", id: "102" },
+           { label: "People Experience", value: "People Experience", id: "103" },
+         ],
+       },
+     ],
+   }] %>
+  <%= form.multi_level_select "defaults[department]",
+        props: { id: "mls-defaults", tree_data: tree_data, margin_bottom: "sm", label: "Department" } %>

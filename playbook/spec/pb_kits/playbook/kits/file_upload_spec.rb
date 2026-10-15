@@ -6,6 +6,7 @@ RSpec.describe Playbook::PbFileUpload::FileUpload do
   subject { Playbook::PbFileUpload::FileUpload }
 
   it { is_expected.to define_prop(:accept).of_type(Playbook::Props::String).with_default("") }
+  it { is_expected.to define_prop(:custom_message).of_type(Playbook::Props::String).with_default("") }
   it { is_expected.to define_prop(:files).of_type(Playbook::Props::Array).with_default([]) }
   it { is_expected.to define_prop(:label).of_type(Playbook::Props::String).with_default("Upload File") }
   it { is_expected.to define_prop(:placeholder).of_type(Playbook::Props::String).with_default("No file") }
@@ -40,6 +41,19 @@ RSpec.describe Playbook::PbFileUpload::FileUpload do
 
     it "returns '' if error prop is nil", :aggregate_failures do
       expect(subject.new(error: nil).error_class).to eq ""
+    end
+  end
+
+  describe "#custom_message" do
+    it "returns a file upload with a custom message displayed", :aggregate_failures do
+      kit = subject.new(
+        custom_message: "Choose a file. The accepted file types are Adobe (.pdf) and Microsoft (.xlsx)"
+      )
+
+      expect(kit.custom_message).to eq(
+        "Choose a file. The accepted file types are Adobe (.pdf) and Microsoft (.xlsx)"
+      )
+      expect(subject.new.custom_message).to eq ""
     end
   end
 end

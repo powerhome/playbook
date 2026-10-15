@@ -384,7 +384,46 @@ describe('MultiLevelSelect single variant', () => {
 
     expect(input.value).toBe('Power Home Remodeling')
   })
+
+  test('should format the selected input display with hierarchy context', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          formatSelectedDisplay={(item, { path }) =>
+            path.map(({ label }) => label).join(' / ')
+          }
+          treeData={treeData}
+          variant="single"
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    const input = kit.querySelector('#multiselect_input')
+    fireEvent.click(input)
+    fireEvent.click(kit.querySelector('#people1'))
+
+    expect(input.value).toBe('Power Home Remodeling / People')
+  })
+
+  test('should format the selected input display from selectedIds', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          formatSelectedDisplay={(item, { ancestors }) => {
+            const parent = ancestors[ancestors.length - 1]
+            return `${parent.label}: ${item.label}`
+          }}
+          selectedIds={['talent1']}
+          treeData={treeData}
+          variant="single"
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    const input = kit.querySelector('#multiselect_input')
+
+    expect(input.value).toBe('People: Talent Acquisition')
+  })
 })
+
 
 describe('MultiLevelSelect disabled parent behavior', () => {
   test('children of disabled parent should also be disabled in single variant', () => {
@@ -505,6 +544,32 @@ describe('MultiLevelSelect tree_helpers', () => {
       expect(formatted[0].children[0].parent_id).toBe('parent')
       expect(formatted[0].children[0].checked).toBe(true)
       expect(formatted[0].children[1].checked).toBe(false)
+    })
+
+    test('matches selected ids when selected_ids are numbers and tree ids are strings', () => {
+      const numericTree = [
+        {
+          id: '101',
+          label: 'Parent',
+          children: [{ id: '102', label: 'Child' }],
+        },
+      ]
+      const formatted = addCheckedAndParentProperty(cloneTree(numericTree), [102])
+      expect(formatted[0].children[0].checked).toBe(true)
+      expect(formatted[0].checked).toBe(false)
+    })
+
+    test('matches selected ids when selected_ids are strings and tree ids are numbers', () => {
+      const numericTree = [
+        {
+          id: 101,
+          label: 'Parent',
+          children: [{ id: 102, label: 'Child' }],
+        },
+      ]
+      const formatted = addCheckedAndParentProperty(cloneTree(numericTree), ['102'])
+      expect(formatted[0].children[0].checked).toBe(true)
+      expect(formatted[0].checked).toBe(false)
     })
 
     test('cascades checked state to children in default multi mode', () => {
@@ -833,4 +898,3 @@ describe('PbMultiLevelSelect Rails enhanced element', () => {
     expect(element.querySelectorAll('.dropdown_item').length).toBeGreaterThan(0)
   })
 })
-

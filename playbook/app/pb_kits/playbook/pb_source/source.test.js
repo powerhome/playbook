@@ -80,3 +80,9 @@ test('should pass user prop', () => {
     kit = screen.getByText(user.userId)
     expect(kit).toBeInTheDocument()
 })
+
+test('should apply global props to the root element', () => {
+    render(<SourceDefault margin="md" />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('m_md')
+})

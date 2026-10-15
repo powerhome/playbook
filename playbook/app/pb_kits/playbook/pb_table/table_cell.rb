@@ -8,6 +8,7 @@ module Playbook
                  default: "table"
       prop :text, type: Playbook::Props::String,
                   default: ""
+      prop :colspan, type: Playbook::Props::Number
 
       def classname
         generate_classname("pb_table_td")

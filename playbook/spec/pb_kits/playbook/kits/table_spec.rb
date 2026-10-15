@@ -10,7 +10,6 @@ RSpec.describe Playbook::PbTable::Table do
       .with_default("md")
       .with_values("sm", "md", "lg")
   }
-  it { is_expected.to define_boolean_prop(:single_line).with_default(false) }
   it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:data_table).with_default(false) }
   it { is_expected.to define_boolean_prop(:disable_hover).with_default(false) }
@@ -42,10 +41,9 @@ RSpec.describe Playbook::PbTable::Table do
       expect(subject.new(dark: true).classname).to eq "pb_table table-md table-dark table-card table-collapse-sm table-responsive-collapse dark"
       expect(subject.new(data_table: true).classname).to eq "pb_table table-md table-card data_table table-collapse-sm table-responsive-collapse"
       expect(subject.new(size: "sm").classname).to eq "pb_table table-sm table-card table-collapse-sm table-responsive-collapse"
-      expect(subject.new(single_line: true).classname).to eq "pb_table table-md single-line table-card table-collapse-sm table-responsive-collapse"
       expect(subject.new(container: false).classname).to eq "pb_table table-md table-collapse-sm table-responsive-collapse"
       expect(subject.new(disable_hover: true).classname).to eq "pb_table table-md no-hover table-card table-collapse-sm table-responsive-collapse"
-      expect(subject.new(disable_hover: true, dark: true, size: "lg", single_line: true).classname).to eq "pb_table table-lg single-line table-dark no-hover table-card table-collapse-sm table-responsive-collapse dark"
+      expect(subject.new(disable_hover: true, dark: true, size: "lg").classname).to eq "pb_table table-lg table-dark no-hover table-card table-collapse-sm table-responsive-collapse dark"
       expect(subject.new(sticky: true).classname).to eq "pb_table table-md table-card sticky-header table-collapse-sm table-responsive-collapse"
       expect(subject.new(outer_padding: "sm").classname).to eq "pb_table table-md table-card table-collapse-sm outer_padding_space_sm table-responsive-collapse"
       expect(subject.new(sticky_left_column: %w[1 2 3]).classname).to eq "pb_table table-md table-card sticky-left-column sticky-left-columns-ids-1-2-3 table-collapse-sm table-responsive-collapse"
@@ -53,6 +51,17 @@ RSpec.describe Playbook::PbTable::Table do
       expect(subject.new(header_style: "floating").classname).to eq "pb_table table-md table-card table-collapse-sm table-responsive-collapse header-floating"
       expect(subject.new(contrast_border: true).classname).to include "contrast-border"
       expect(subject.new(vertical_border: true).classname).to include "vertical-border"
+    end
+
+    it "adds table-collapse class only when responsive is collapse", :aggregate_failures do
+      expect(subject.new(responsive: "collapse").classname).to include "table-collapse-sm"
+      expect(subject.new(responsive: "collapse").classname).to include "table-responsive-collapse"
+
+      expect(subject.new(responsive: "scroll").classname).to include "table-responsive-scroll"
+      expect(subject.new(responsive: "scroll").classname).not_to include "table-collapse-sm"
+
+      expect(subject.new(responsive: "none").classname).to include "table-responsive-none"
+      expect(subject.new(responsive: "none").classname).not_to include "table-collapse-sm"
     end
   end
 
@@ -79,6 +88,12 @@ RSpec.describe Playbook::PbTable::Table do
     it "uses md collapse by default for with_filter variant" do
       table = subject.new(variant: "with_filter")
       expect(table.classname).to include("table-collapse-md")
+    end
+
+    it "does not add table-collapse when with_filter uses responsive scroll" do
+      table = subject.new(variant: "with_filter", responsive: "scroll")
+      expect(table.classname).to include("table-responsive-scroll")
+      expect(table.classname).not_to match(/table-collapse-/)
     end
 
     it "accepts filter prop for pre-rendered external filter" do

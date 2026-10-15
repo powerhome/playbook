@@ -19,7 +19,7 @@ const MultiSelectTriggerDisplay = ({
   dark = false,
 }: MultiSelectTriggerDisplayProps) => {
 
-  const { setSelected, onSelect, formPillProps } = useContext(DropdownContext);
+  const { setSelected, handleSelectionChange, formPillProps, isControlled, isSameOption, getOptionValue } = useContext(DropdownContext);
 
   if (selected.length === 0) {
     if (autocomplete) return null;
@@ -33,9 +33,15 @@ const MultiSelectTriggerDisplay = ({
   }
 
  const handleRemoveIconClick = (option: GenericObject) => {
+  if (isControlled || getOptionValue) {
+    const next = selected.filter((item) => !isSameOption(item, option));
+    setSelected(next);
+    handleSelectionChange(next);
+    return;
+  }
   setSelected((prev: GenericObject[]) => {
-      const next = prev.filter((item) => item.label !== option.label);
-      onSelect && onSelect(next);
+      const next = prev.filter((item) => !isSameOption(item, option));
+      handleSelectionChange && handleSelectionChange(next);
       return next;
     });
  } 
@@ -45,7 +51,7 @@ const MultiSelectTriggerDisplay = ({
       {selected.map((option, i) => (
           <FormPill
               dark={dark}
-              key={i}
+              key={getOptionValue ? getOptionValue(option) : i}
               marginRight="xs"
               onClick={(e)=>{e.stopPropagation();handleRemoveIconClick(option)}}
               tabIndex={0}

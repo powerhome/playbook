@@ -26,6 +26,7 @@ import {
   prepareExampleCode,
   shouldApplyPropSyncOnEnable,
   groupPropDefinitions,
+  resolveSchemaType,
 } from "../utils";
 import { EXCLUDED_PROPS, GLOBAL_PROP_GROUPS } from "../constants";
 
@@ -105,6 +106,11 @@ export const usePlaygroundState = ({
     [playgroundConfig?.hiddenProps]
   );
 
+  const emitEmptyStringPropNames = useMemo(
+    () => new Set(playgroundConfig?.emitEmptyStringProps ?? []),
+    [playgroundConfig?.emitEmptyStringProps]
+  );
+
   const reactProps = useMemo(() => {
     if (!kitSchema?.props) return {};
 
@@ -116,11 +122,16 @@ export const usePlaygroundState = ({
         EXCLUDED_PROPS.includes(name) || EXCLUDED_PROPS.includes(name.toLowerCase());
 
       if (isReactProp && !isExcluded && !hiddenPropNames.has(name)) {
-        filtered[name] = def;
+        const reactType = resolveSchemaType(def, "react");
+        filtered[name] = {
+          ...def,
+          ...(reactType ? { type: reactType } : {}),
+          ...(emitEmptyStringPropNames.has(name) ? { emitEmptyString: true } : {}),
+        };
       }
     });
     return filtered;
-  }, [kitSchema, hiddenPropNames]);
+  }, [kitSchema, hiddenPropNames, emitEmptyStringPropNames]);
 
   const globalProps = useMemo(() => {
     if (!globalPropsSchema?.props || !kitSchema?.globalProps) return {};

@@ -2,7 +2,7 @@
 import React from "react"
 import ReactDOMServer from "react-dom/server"
 import classnames from "classnames"
-import { buildAriaProps, buildCss, buildDataProps } from "../utilities/props"
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props"
 import { globalProps } from "../utilities/globalProps"
 import Title from "../pb_title/_title"
 import Body from "../pb_body/_body"
@@ -22,6 +22,7 @@ type EmptyStateProps = {
   data?: { [key: string]: string },
   description?: string,
   header?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   image?: string,
   linkButton?: string,
@@ -40,6 +41,7 @@ const EmptyState = (props: EmptyStateProps) => {
     data = {},
     description,
     header = "",
+    htmlOptions = {},
     id,
     image,
     linkButton,
@@ -52,6 +54,7 @@ const EmptyState = (props: EmptyStateProps) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss("pb_empty_state_kit"), globalProps(props), className)
 
   const renderContent = () => {
@@ -137,6 +140,7 @@ const EmptyState = (props: EmptyStateProps) => {
     const layout = (
       <div {...ariaProps}
           {...dataProps}
+          {...htmlProps}
           className={classes}
           id={id}
       >

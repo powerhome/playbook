@@ -34,7 +34,10 @@
       ]
     },
     "value": {
-      "type": "string | number",
+      "type": {
+        "react": "string | number",
+        "rails": "number"
+      },
       "platforms": [
         "react",
         "rails"

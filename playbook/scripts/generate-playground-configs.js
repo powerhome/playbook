@@ -101,11 +101,18 @@ function generateBaseConfig(schema, kitName) {
     ? `<${componentName}{{props}}>{{children}}</${componentName}>`
     : `<${componentName}{{props}} />`;
   
-  // Extract defaults from schema
+  // Extract defaults from schema (use React side when `{ react, rails }` split)
   const defaults = {};
   for (const [name, prop] of Object.entries(reactProps)) {
     if (prop.default !== undefined && prop.default !== null) {
-      defaults[name] = prop.default;
+      const schemaDefault = prop.default;
+      defaults[name] =
+        schemaDefault !== null &&
+        typeof schemaDefault === 'object' &&
+        !Array.isArray(schemaDefault) &&
+        Object.prototype.hasOwnProperty.call(schemaDefault, 'react')
+          ? schemaDefault.react
+          : schemaDefault;
     }
   }
   

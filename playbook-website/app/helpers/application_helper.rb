@@ -82,6 +82,7 @@ module ApplicationHelper
             end
     {
       label: label,
+      props: kit_search_props(kit),
       value: if @type == "react"
                "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' ? '?type=react' : '/react'}"
              else
@@ -95,6 +96,24 @@ module ApplicationHelper
   end
 
 private
+
+  def kit_search_props(kit)
+    schema_path = ::Playbook.kit_path(kit, "", "kit.schema.json")
+    return [] unless schema_path.exist?
+
+    Rails.cache.fetch(["kit_search_props", kit, schema_path.mtime.to_i]) do
+      schema = JSON.parse(schema_path.read)
+      schema.fetch("props", {}).map do |name, definition|
+        {
+          name: name,
+          platforms: Array(definition["platforms"]),
+        }
+      end
+    end
+  rescue JSON::ParserError => e
+    Rails.logger.error("Error reading kit search props for #{kit}: #{e.message}")
+    []
+  end
 
   def dark_mode_props(props)
     if props[:dark].nil?

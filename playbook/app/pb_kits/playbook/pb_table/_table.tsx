@@ -35,7 +35,6 @@ type TableProps = {
     outerPadding?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
     pagination?: React.ReactElement,
     responsive?: "collapse" | "scroll" | "none",
-    singleLine?: boolean,
     size?: "sm" | "md" | "lg",
     sticky?: boolean,
     stickyLeftColumn?: string[],
@@ -48,6 +47,15 @@ type TableProps = {
     contrastBorder?: boolean,
     verticalBorder?: boolean,
 } & GlobalProps
+
+/**
+ * Subcomponent props (Table.Header / Table.Cell). Must be a plain `type NameProps = { ... }` block—
+ * `yarn generate-ai-metadata` only parses that shape in this file (not Omit<> / intersection).
+ * Not used on the root component; playground routes these via propTargets.
+ */
+type _TableSubkitSchemaProps = {
+    colSpan?: number
+}
 
 type AllSizes = "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"
 
@@ -73,7 +81,6 @@ const Table = (props: TableProps): React.ReactElement => {
         outerPadding = '',
         pagination,
         responsive = 'collapse',
-        singleLine = false,
         size = 'sm',
         sticky = false,
         stickyLeftColumn = [],
@@ -88,7 +95,7 @@ const Table = (props: TableProps): React.ReactElement => {
     const ariaProps = buildAriaProps(aria)
     const dataProps = buildDataProps(data)
     const htmlProps = buildHtmlProps(htmlOptions)
-    const tableCollapseCss = responsive !== 'none' ? `table-collapse-${collapse}` : ''
+    const tableCollapseCss = responsive === 'collapse' ? `table-collapse-${collapse}` : ''
     const contrastBorderCss = contrastBorder ? 'contrast-border' : ''
     const verticalBorderCss = verticalBorder ? 'vertical-border' : ''
     const spaceCssName = outerPadding !== 'none' ? 'space_' : ''
@@ -108,7 +115,6 @@ const Table = (props: TableProps): React.ReactElement => {
             'table-card': effectiveContainer,
             'table-dark': dark,
             'data_table': dataTable,
-            'single-line': singleLine,
             'no-hover': disableHover,
             'sticky-header': sticky,
             'sticky-left-column': stickyLeftColumn.length,

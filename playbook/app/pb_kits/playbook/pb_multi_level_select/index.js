@@ -524,6 +524,17 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     }
 
     const count = selected.length
+    // Drive HTML5 required from selection state. Multi keeps the search input
+    // empty after a pick, so leaving required on it would keep the form invalid.
+    if (this.required) {
+      if (count > 0) {
+        this.searchInput.removeAttribute("required")
+        this.searchInput.setCustomValidity("")
+      } else {
+        this.searchInput.setAttribute("required", "")
+      }
+    }
+
     this.searchInput.placeholder =
       this.inputDisplay === "none" && count
         ? `${count} ${count === 1 ? "item" : "items"} selected`
@@ -816,10 +827,14 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   }
 
   clearError() {
+    // PbFormValidation may have setCustomValidity from data-message on the search input.
+    this.searchInput?.setCustomValidity("")
+
     const errorLabelElement = this.target
-    if (errorLabelElement) {
-      errorLabelElement.remove()
-      this.element.classList.remove("error")
-    }
+    if (errorLabelElement) errorLabelElement.remove()
+
+    // Always clear the kit error class — the label may already have been removed by
+    // observeRogueErrorInsideInnerContainer after a submit blur.
+    this.element.classList.remove("error")
   }
 }

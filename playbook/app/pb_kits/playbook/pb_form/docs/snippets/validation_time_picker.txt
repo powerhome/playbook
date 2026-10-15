@@ -1,0 +1,5 @@
+<%= form.time_picker :start_time, props: {
+      label: "Start Time",
+      required: true,
+      validation_message: "Start time is required",
+    } %>

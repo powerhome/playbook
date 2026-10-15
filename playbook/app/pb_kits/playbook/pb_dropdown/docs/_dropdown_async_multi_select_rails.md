@@ -1,0 +1,5 @@
+`multi_select: true` works with `async: true` and either `autocomplete: true` or `searchbar: true`.
+
+Search still waits for `search_term_minimum_length` characters and `search_debounce_timeout` before emitting `pb:dropdown:search`. This example searches [DummyJSON’s public sample users API](https://dummyjson.com/docs/users). Try `Emily`, select a match, then search for `Michael`.
+
+Each selection is added as a Form Pill, the query is cleared, and the loaded results are dropped. Opening the menu again shows the empty message until the next search. `pb:dropdown:selected` emits the full array of selected options. A previously selected id stays hidden when that person appears in a later result list. Removing a pill or clearing the Dropdown removes that selection and emits the remaining array, or `[]` when nothing remains. Removing the last pill with an empty query also drops a later search, so the menu shows the empty message until the next search. The pills hold the selection, and the input stays empty for the next search.

@@ -1,4 +1,5 @@
-import { ensureAccessible, renderKit } from '../utilities/test-utils'
+import React from 'react'
+import { ensureAccessible, render, renderKit } from '../utilities/test-utils'
 
 import Background from './_background'
 
@@ -18,6 +19,27 @@ test('backgroundColor = success', () => {
 test('backgroundColor = category_1', () => {
   const kit = renderKit(Background, props, { backgroundColor: 'category_1' })
   expect(kit).toHaveClass('pb_background_kit pb_background_color_category_1')
+})
+
+test('updates backgroundColor class when the prop changes', () => {
+  const { getByTestId, rerender } = render(
+    <Background
+        backgroundColor="info_subtle"
+        data={{ testid: 'background' }}
+    />
+  )
+
+  expect(getByTestId('background')).toHaveClass('pb_background_color_info_subtle')
+
+  rerender(
+    <Background
+        backgroundColor="card_light"
+        data={{ testid: 'background' }}
+    />
+  )
+
+  expect(getByTestId('background')).toHaveClass('pb_background_color_card_light')
+  expect(getByTestId('background')).not.toHaveClass('pb_background_color_info_subtle')
 })
 
 test('customColor prop styles background color with a hex value', () => {

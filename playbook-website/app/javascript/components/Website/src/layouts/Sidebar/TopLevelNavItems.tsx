@@ -5,6 +5,7 @@ import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 import { OtherNavItems } from "./NavComponents/OtherNavComponent";
 import { CollapsedHoverNav } from "./CollapsedHoverNav";
+import { navigateSite } from "../../utils/siteNavigation";
 
 export const TopLevelNavItem = ({
   dark,
@@ -77,7 +78,7 @@ export const TopLevelNavItem = ({
   const handleComponentsClick = (item, index) => {
     const linkPath = TopLevelLink(SideBarNavItems[index].link);
     if (linkPath && navigate) {
-      navigate(linkPath);
+      navigateSite(navigate, linkPath);
     }
     
     topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {
@@ -110,6 +111,9 @@ export const TopLevelNavItem = ({
       if (link === "/global_props") {
         return currentURL === "/global_props" || currentURL === "/global_props?";
       }
+      if (link === "/global_event_props") {
+        return currentURL === "/global_event_props" || currentURL === "/global_event_props?";
+      }
       if (link === "/tokens") {
         return currentURL === "/tokens" || currentURL === "/tokens?";
       }
@@ -138,6 +142,9 @@ export const TopLevelNavItem = ({
     }
     if (link === "/global_props") {
       return currentURL.startsWith("/global_props");
+    }
+    if (link === "/global_event_props") {
+      return currentURL.startsWith("/global_event_props");
     }
     if (link === "/tokens") {
       return currentURL.startsWith("/tokens");

@@ -1,0 +1,115 @@
+/** Curated usage questions, resolved into each kit so lookup needs no extra files. */
+export const COMMON_FORM_FAQS = [
+  {
+    id: 'forms.setup', platforms: ['rails'],
+    questions: ['Can I use this kit in a Rails form?', 'How do I use pb_form_with or form_with?'],
+    answer: 'Use Playbook-owned pb_form_with, or form_with with builder: Playbook::Forms::Builder. See the listed methods and examples for this kit. Builder arguments are a separate API from standalone kit props.',
+    contractPaths: ['form.rails.builder.setup', 'form.rails.builder.formWith'],
+  },
+  {
+    id: 'forms.validation', platforms: ['rails'],
+    questions: ['How do I show ActiveRecord errors?', 'Does required_indicator validate?', 'How do I enable client validation?', 'How do I set a custom required-field message?'],
+    answer: 'Most builder fields auto-map record.errors.full_messages_for(attribute) into props.error unless error is set explicitly (including nil to opt out). Checkbox still needs an explicit boolean error flag, and StarRating has no error prop. A required indicator is visual only. pb_form_with validate: true enables Playbook client validation; it does not run model validations. Custom required messages use props.validation.message on text-style fields (including text_area and telephone_field) and props.validation_message on selection-style fields (select, dropdown_field, check_box, phone_number_field, star_rating_field, multi_level_select, and similar). Phone kits own their UI and use validation_message for the empty required copy only.',
+    contractPaths: ['form.rails.builder.validation', 'form.rails.builder.methods'],
+    props: ['error', 'required', 'requiredIndicator', 'validation', 'validationMessage'],
+  },
+  {
+    id: 'forms.binding', platforms: ['rails'],
+    questions: ['How does the value POST?', 'Are names model scoped?', 'Does the builder read the model value?'],
+    answer: 'Check the method binding and submission fields. With a bound model, most fields auto-populate values (default_date, default_value, selected_ids, default_options, etc.) unless those props are set. Rails-helper wrappers use model-scoped names; direct kit wrappers assign the name argument to props.name verbatim—pass the attribute for auto-bind, or a nested string like user[country] when you need that parameter shape.',
+    contractPaths: ['form.rails.builder.methods'], props: ['name', 'value', 'defaultValue'],
+  },
+  {
+    id: 'forms.html-options', platforms: ['rails'],
+    questions: ['Where do name id required maxlength min step autocomplete and data attributes go?', 'What can I put in input_options?'],
+    answer: 'Use the method htmlOptions contract. Text field wrappers accept HTML keyword arguments outside props; select wrappers accept positional html_options. Direct wrappers generally accept only props. Text field wrappers and check_box also merge props.input_options into the Rails-generated field; other methods do not.',
+    contractPaths: ['form.rails.builder.methods'], props: ['inputOptions', 'required', 'name', 'id'],
+  },
+  {
+    id: 'forms.turbo', platforms: ['rails'],
+    questions: ['Does pb_form_with initialize after Turbo navigation?', 'Do I need a Stimulus controller to initialize the form?'],
+    answer: 'pb_form_with invokes formHelper when available, and Playbook registers PbFormValidation with PbKitRegistry for dynamically added forms. This requires the Playbook Rails bundle. No host-specific Stimulus controller is part of this contract.',
+    contractPaths: ['form.rails.builder.lifecycle'],
+  },
+  {
+    id: 'forms.simple-form', platforms: ['rails'],
+    questions: ['Can I use these methods with Simple Form?'],
+    answer: 'The documented methods belong to Playbook::Forms::Builder. This metadata does not declare a Simple Form adapter; host integrations must be documented separately.',
+    contractPaths: ['form.rails.builder.simpleForm'],
+  },
+];
+
+export const KIT_USAGE_FAQS = {
+  select: [{
+    id: 'select.builder-prompt', platforms: ['rails'],
+    questions: ['How do I omit the prompt in a select builder field?', 'Does blank_selection override options.prompt?'],
+    answer: 'For f.select and f.collection_select, pass prompt: false in the positional options hash and omit props.blank_selection to omit the prompt. An explicitly supplied props.blank_selection overrides options.prompt, including false or nil; a nil blank_selection becomes an empty prompt. Otherwise an explicit prompt is preserved, and when neither is supplied the prompt defaults to empty. time_zone_select_field still sets the prompt from props.blank_selection (default empty), overriding an explicit prompt.',
+    example: '<%= f.select :country, [["Canada", "ca"]], { prompt: false }, {}, props: { label: true } %>',
+    contractPaths: ['form.rails.builder.methods'], props: ['blankSelection'],
+  }],
+  dropdown: [{
+    id: 'dropdown.builder-name', platforms: ['rails'],
+    questions: ['Does dropdown_field scope country to user[country]?', 'Does multi_select submit separate array values?'],
+    answer: 'Pass the attribute (e.g. :country) so the builder can auto-bind default_value and errors from the model; pass user[country] explicitly when you need that nested parameter name instead. multi_select appends [] to the CSS-hidden input name. Comma-joining is only for default-value encoding. After kit JS runs, Playbook emits one type="hidden" input per selected id (all named name[]), clears the original CSS-hidden input, and Rails receives separate array entries.',
+    contractPaths: ['form.rails.builder.methods'], props: ['name', 'multiSelect', 'options'],
+  }, {
+    id: 'dropdown.builder-block', platforms: ['rails'],
+    questions: ['Can dropdown_field yield a custom trigger?', 'Can I pass a block to the dropdown builder?'],
+    answer: 'dropdown_field does not forward a block. The standalone pb_rails("dropdown") API accepts content in place of its default trigger and container; it is a separate composition API.',
+    contractPaths: ['form.rails.builder.methods'],
+  }, {
+    id: 'dropdown.dynamic-options', platforms: ['rails'],
+    questions: ['How do I change dropdown options based on another field?', 'How do I replace dropdown options from a Turbo or custom event?'],
+    answer: 'Pass options_by_context keyed by the other field value together with context_selector naming that element id; the kit swaps options on its change event and clears the selection unless clear_on_context_change is false. To push options from JavaScript, dispatch pb:dropdown:updateOptions with detail { dropdownId, options } or list your own event names in options_event_type. No request is made for you; supply every context upfront or provide the options in the event.',
+    contractPaths: ['form.rails.builder.methods'], props: ['optionsByContext', 'contextSelector', 'clearOnContextChange', 'optionsEventType'],
+  }, {
+    id: 'dropdown.async-search', platforms: ['rails'],
+    questions: ['How do I load Rails Dropdown options as the user types?'],
+    answer: 'Enable async with autocomplete or searchbar. Clicking inside an async Dropdown opens the menu. With no results yet, it shows the empty message (no_options_text, default "No results found") until the debounced search starts and replaces it with loading, results, or an error. The bubbling pb:dropdown:search event exposes searchingFor, setResults(options), and setError(). The kit debounces searches (search_debounce_timeout defaults to 250ms), requires search_term_minimum_length characters (default 3), and manages loading, empty results, errors and stale callbacks. Loaded results stay in place until that debounced search starts. Escape, Tab, or an outside click during the debounce keeps those results; dismissing an in-flight request restores them and ignores the late response. Opening the menu again searches for the query still in the input. Consumers fetch and map standard option objects or rich { option, content } entries, where content is an Element or DocumentFragment cloned into the option wrapper and option retains serializable selection data. Results bypass local label filtering while a search is in progress. When a search returns nothing, earlier results whose labels contain the query stay visible, including text typed after a space. After a single-select autocomplete selection, the input shows the selected label, and opening the menu again shows only retained results whose labels contain that text. A default_value is marked on a later result row with the same id, so opening the menu again narrows to labels that contain that default label. A multi-select selection clears the query and the loaded results, so opening the menu again shows the empty message until the next search. The typed query is not submitted by the Dropdown selected-id input. Keep a separate application field when free text must be submitted.',
+    props: ['async', 'autocomplete', 'searchbar', 'searchTermMinimumLength', 'searchDebounceTimeout'],
+  }, {
+    id: 'dropdown.async-selection-data', platforms: ['rails'],
+    questions: ['Does async Dropdown preserve custom selection fields?', 'Can an async Dropdown have a default before options load?'],
+    answer: 'pb:dropdown:selected emits the complete serializable option object (an array for multi_select, null or [] when cleared), preserving custom fields and numeric IDs. Form input values are strings. Selected data is retained when remote results change; matching multi-select options remain hidden even if new result metadata differs. Options match on id, then value. Options with neither match the full payload, so two choices that only have a label stay distinct. Pass an explicit default_value option object or array with id and label to initialize async selection with options: []. The builder cannot infer that payload from an unmatched model ID.',
+    props: ['async', 'defaultValue', 'multiSelect'],
+  }, {
+    id: 'dropdown.async-input-reset', platforms: ['rails'],
+    questions: ['How do I submit free text from an async Dropdown?', 'What happens when an async Dropdown is cleared or reset?'],
+    answer: 'Async Dropdown emits pb:dropdown:input immediately with { value, reason }, where reason is input, clear, or reset. Use input plus pb:dropdown:selected to synchronize application-owned text and ID fields. Emptying single-select autocomplete clears its selection; emptying a search bar or multi-select query preserves selection. Nonempty edits retain the selected value. Public clear and native form reset clear query, selection, remote results and pending callbacks, close the menu, and notify consumers. Native reset runs after browser controls reset and honors preventDefault; it clears rather than restores default_value. Synchronous Dropdowns retain their existing filtering, selection notifications and reset timing.',
+    props: ['async', 'clearable'],
+  }, {
+    id: 'dropdown.react-input-reset', platforms: ['react'],
+    questions: ['How do I observe React Dropdown input changes?', 'How do I reset React Dropdown?', 'Does cacheOptions remember an empty search?'],
+    answer: 'Use onInputChange(text, { reason }) for input and clear notifications. Selection itself does not emit an input notification; use onSelect. In async mode, emptying single-select autocomplete proposes an empty selection even without onInputChange; emptying a multi-select or search-bar query preserves selection. With loadOptions, an empty query and a multi-select selection restore the defaultOptions results. A single-select autocomplete selection keeps that search result list and shows the selected label in the input; opening the menu again shows only results whose labels contain that text. Typing a character replaces the query only while the input still shows that label, including when a controlled value later arrives as null. Once the text has changed, further characters edit the query in place. Backspace and Delete remove one character and keep the selection until the query is empty. Escape, an outside click, or disabling the kit cancels an in-flight loadOptions request and ignores its late response. If that search had cleared the list, the last settled options return, or defaultOptions when nothing has settled yet. Opening the menu again searches for the query still in the input; ref.clearSelected() drops that retry. A search that already settled as an error or with no results keeps that message when the menu closes, and opening it again does not search again. Opening an async Dropdown with no source options, or a search that settles empty and has no earlier label matches, shows the empty message (noOptionsText, default "No results found"). When a search returns nothing, earlier results whose labels contain the query stay visible, including text typed after a space. cacheOptions stores the server response for that exact query, including an empty array. Each Dropdown keeps at most 100 queries. Errors are not cached. Repeating the query after a clear shows that cached response, so an empty search stays empty. Already-selected rows are hidden and do not count as an empty search, so a successful result list or an idle list that still contains options does not show that message when every remaining row is selected. blankSelection is not a search result: an empty async list shows the empty message instead of the blank row, and the blank row is included when results are present. Async options are identified by value, then id, then label. Reset controlled value through the application or form library, or call ref.clearSelected() for an uncontrolled selection. React Dropdown does not add native form-reset handling. For application-managed fetching, use async with options and loading without loadOptions; the application owns debounce, query thresholds, errors and stale-response protection. When the menu is open, a new result list focuses the first match so Enter selects it, for both loadOptions and application-managed options. ArrowDown and ArrowUp still move through that list.',
+    props: ['onInputChange', 'async', 'options', 'loading', 'loadOptions', 'value', 'defaultOptions', 'cacheOptions', 'noOptionsText', 'blankSelection'],
+  }, {
+    id: 'dropdown.react-form-libraries', platforms: ['react'],
+    questions: ['Can I use Dropdown with react-hook-form?', 'Does the React Dropdown submit a value?'],
+    answer: 'Spread register("country") onto Dropdown. It accepts name and onChange, and calls onChange with { target: { name, value } } in addition to any onSelect. value is the selected option object, an array for multiSelect and null or [] when cleared, so read value.value in form state. The ref from register resolves to the kit imperative handle, not an input, and no named input is rendered; the React kit has no native form submission.',
+    props: ['name', 'onChange', 'onSelect', 'multiSelect'],
+  }],
+  text_input: [{
+    id: 'text-input.builder-options', platforms: ['rails'],
+    questions: ['How do I add maxlength to f.text_field?', 'Do builder input_options override the input?'],
+    answer: 'Pass maxlength: 255 as a builder keyword outside props, or in props.input_options. The builder merges input_options into the Rails helper input last, so it overrides the keyword and props-derived options; classname is appended to class and data is merged key by key.',
+    example: '<%= f.text_field :email, maxlength: 255, autocomplete: "email", props: { label: "Email", required: true } %>',
+    contractPaths: ['form.rails.builder.methods'], props: ['inputOptions'],
+  }],
+  textarea: [{
+    id: 'textarea.builder-required', platforms: ['rails'],
+    questions: ['Can a Rails textarea be required?', 'Why is required missing from the Rails kit prop list?'],
+    answer: 'f.text_area accepts required: true as an HTML keyword and forwards props.required to the Rails helper. This builder behavior is separate from the standalone Textarea Rails kit prop list.',
+    contractPaths: ['form.rails.builder.methods'], props: ['required'],
+  }],
+  typeahead: [{
+    id: 'typeahead.builder-rendering', platforms: ['rails'],
+    questions: ['Why do errors or input_options behave differently in Typeahead?', 'Does the Typeahead builder accept html_options?'],
+    answer: 'The builder ignores its positional _options and _html_options. The kit uses React rendering for pills, is_multi: false, wrapped, input_display: "none", or createable; otherwise it renders the native Rails search field. The native template does not forward error to its nested text_input.',
+    contractPaths: ['form.rails.builder.methods'], props: ['error', 'inputOptions', 'isMulti'],
+  }],
+};
+
+export function usageFaqsForKit(kit, form) {
+  const common = form ? COMMON_FORM_FAQS.filter((faq) => kit !== 'button' || ['forms.setup', 'forms.turbo', 'forms.simple-form'].includes(faq.id)) : [];
+  return [...common, ...(KIT_USAGE_FAQS[kit] || [])];
+}

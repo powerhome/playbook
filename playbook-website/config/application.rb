@@ -49,6 +49,11 @@ module PlaybookWebsite
 
     config.generators.system_tests = nil
 
+    # Deploy-time only (never request.host). Staging/PRs set ENV=1; production leaves it unset.
+    # Local/test default on so playground works without extra env.
+    config.x.rails_playground_enabled =
+      ENV.fetch("PLAYBOOK_RAILS_PLAYGROUND_ENABLED", Rails.env.production? ? "0" : "1") == "1"
+
     openai_api_key = ENV["OPENAI_API_KEY"]
     Rails.application.config.openai_api_key = openai_api_key
   end

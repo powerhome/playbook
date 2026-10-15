@@ -44,6 +44,8 @@ spec:
   owner: ghost-crew
   lifecycle: production
   system: playbook
+  dependsOn:
+    - resource:playbook-mysql
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -62,4 +64,19 @@ spec:
   type: library
   owner: ghost-crew
   lifecycle: production
+  system: playbook
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: playbook-mysql
+  description: Playbook's Percona XtraDB Cluster
+  tags:
+    - relational
+    - mysql
+    - pxc
+    - percona
+spec:
+  type: database
+  owner: ghost-crew
   system: playbook

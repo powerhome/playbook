@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "allowInput": false,
+    "closeOnSelect": true,
     "dark": false,
     "defaultDate": "",
     "disableInput": false,

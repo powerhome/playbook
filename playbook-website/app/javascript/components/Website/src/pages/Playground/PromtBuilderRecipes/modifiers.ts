@@ -5,7 +5,12 @@ import {
   getAllPropDefinitionsWithGlobals,
 } from "../kitUtils";
 import type { BuilderInstance, PlaygroundKit, PropDefinition } from "../types";
-import { normalizePrompt, promptIncludesAny } from "./utils";
+import {
+  escapeRegExp,
+  normalizePrompt,
+  promptHasTerm,
+  promptIncludesAny,
+} from "./utils";
 
 type PromptModificationResult = {
   diagnostics: string[];
@@ -39,9 +44,21 @@ const KIT_ALIASES: KitAlias[] = [
   { kitName: "pb_gauge_chart", aliases: ["gauge chart"] },
   { kitName: "section_separator", aliases: ["section separator", "separator"] },
   { kitName: "text_input", aliases: ["text input", "input", "field"] },
+  { kitName: "textarea", aliases: ["textarea", "text area", "notes"] },
   { kitName: "table", aliases: ["table"] },
   { kitName: "filter", aliases: ["filter"] },
   { kitName: "card", aliases: ["card", "car", "panel"] },
+  // Kept in sync with aliases.ts's KIT_ALIASES so a kit recognized when
+  // adding to an empty canvas is also recognized when swapping it in place.
+  { kitName: "badge", aliases: ["badge", "status badge"] },
+  { kitName: "button", aliases: ["button", "cta"] },
+  { kitName: "checkbox", aliases: ["checkbox", "check box"] },
+  { kitName: "date_picker", aliases: ["date picker", "date field"] },
+  { kitName: "dropdown", aliases: ["dropdown"] },
+  { kitName: "list", aliases: ["list"] },
+  { kitName: "message", aliases: ["message", "alert", "notice"] },
+  { kitName: "select", aliases: ["select", "picklist"] },
+  { kitName: "toggle", aliases: ["toggle", "switch"] },
 ];
 
 const PROP_ALIASES: Record<string, string[]> = {
@@ -70,6 +87,15 @@ const VALUE_ALIASES: Array<{ aliases: string[]; value: unknown }> = [
 
 const REPLACE_WORDS = ["replace", "swap", "change"];
 const PROP_EDIT_WORDS = ["set", "make", "making", "update", "change"];
+// "for" covers idiomatic phrasing like "change X input for Y input" or
+// "swap the bar chart for a line chart", not just "replace X with Y".
+const REPLACE_SEPARATORS = [" with ", " to ", " for "];
+
+// Kits identified as a single labeled "field" — a rename request between two
+// of these (e.g. "change email input for phone input") should relabel the
+// matching instance in place rather than swap it for a blank default one.
+const FIELD_KIT_NAMES = new Set(["text_input", "textarea"]);
+const FIELD_ALIAS_WORDS = ["text input", "text area", "input", "field", "textarea"];
 
 const normalizeKitKey = (kitName: string) =>
   kitName
@@ -79,20 +105,6 @@ const normalizeKitKey = (kitName: string) =>
     .replace(/[\s-]+/g, "_")
     .replace(/^_+/, "")
     .replace(/^(pb_)+/, "");
-
-const escapeRegExp = (value: string) =>
-  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-const promptHasAlias = (text: string, alias: string) => {
-  const normalizedAlias = normalizePrompt(alias);
-  if (!normalizedAlias) return false;
-
-  if (normalizedAlias.length <= 3 && !normalizedAlias.includes(" ")) {
-    return new RegExp(`(^|\\s)${escapeRegExp(normalizedAlias)}(?=\\s|$)`).test(text);
-  }
-
-  return text.includes(normalizedAlias);
-};
 
 const kitNamesMatch = (candidate: string, target: string) => {
   if (candidate === target) return true;
@@ -120,7 +132,7 @@ const instanceMatchesKitName = (
 const findKitAliasInText = (text: string, allowedKits?: Set<string>) =>
   KIT_ALIASES.find(({ aliases, kitName }) => {
     if (allowedKits && !allowedKits.has(kitName)) return false;
-    return aliases.some((alias) => promptHasAlias(text, alias));
+    return aliases.some((alias) => promptHasTerm(text, alias));
   })?.kitName ?? null;
 
 const getTextAfterAny = (prompt: string, separators: string[]) => {
@@ -256,12 +268,12 @@ const coercePropValue = (
 
 const parsePropEdit = (prompt: string): PropEdit | null => {
   const propName = Object.entries(PROP_ALIASES).find(([, aliases]) =>
-    aliases.some((alias) => promptHasAlias(prompt, alias))
+    aliases.some((alias) => promptHasTerm(prompt, alias))
   )?.[0];
   if (!propName) return null;
 
   const value = VALUE_ALIASES.find(({ aliases }) =>
-    aliases.some((alias) => promptHasAlias(prompt, alias))
+    aliases.some((alias) => promptHasTerm(prompt, alias))
   )?.value;
   if (value === undefined) return null;
 
@@ -339,6 +351,118 @@ const updateFirstMatchingProp = (
   return { changed, diagnostics, instances: nextInstances };
 };
 
+const toTitleCase = (text: string) =>
+  text.replace(/\b\w/g, (character) => character.toUpperCase());
+
+// Strips leading replace verbs/articles and the trailing field-alias word
+// itself, leaving just the label: "change x input" -> "x", "y field" -> "y".
+const extractFieldLabel = (text: string): string | null => {
+  let cleaned = text.trim();
+
+  REPLACE_WORDS.forEach((word) => {
+    cleaned = cleaned.replace(new RegExp(`^${escapeRegExp(word)}\\s+`), "");
+  });
+  cleaned = cleaned.replace(/^(the|this|that|a|an)\s+/, "");
+
+  const aliasPattern = new RegExp(
+    `\\s*(${FIELD_ALIAS_WORDS.map(escapeRegExp).join("|")})\\s*$`
+  );
+  cleaned = cleaned.replace(aliasPattern, "").trim();
+
+  return cleaned.length > 0 ? cleaned : null;
+};
+
+const findFieldInstanceByLabel = (
+  instances: BuilderInstance[],
+  label: string
+): BuilderInstance | null => {
+  for (const instance of instances) {
+    const currentLabel = normalizePrompt(String(instance.props.label ?? ""));
+    if (FIELD_KIT_NAMES.has(instance.kitName) && currentLabel === label) {
+      return instance;
+    }
+
+    const match = findFieldInstanceByLabel(instance.children, label);
+    if (match) return match;
+  }
+
+  return null;
+};
+
+const renameFieldInstance = (
+  instances: BuilderInstance[],
+  targetId: string,
+  destinationLabel: string
+): BuilderInstance[] =>
+  instances.map((instance) => {
+    if (instance.id === targetId) {
+      return {
+        ...instance,
+        props: {
+          ...instance.props,
+          label: destinationLabel,
+          name: destinationLabel.toLowerCase().replace(/\s+/g, "_"),
+          placeholder: destinationLabel,
+        },
+        enabledProps: {
+          ...instance.enabledProps,
+          label: true,
+          name: true,
+          placeholder: true,
+        },
+      };
+    }
+
+    return {
+      ...instance,
+      children: renameFieldInstance(instance.children, targetId, destinationLabel),
+    };
+  });
+
+const applyFieldRenamePrompt = (
+  prompt: string,
+  instances: BuilderInstance[]
+): PromptModificationResult | null => {
+  if (!promptIncludesAny(prompt, REPLACE_WORDS)) return null;
+
+  const destinationText = getTextAfterAny(prompt, REPLACE_SEPARATORS);
+  const sourceText = getTextBeforeAny(prompt, REPLACE_SEPARATORS);
+  if (!destinationText || sourceText === prompt) return null;
+
+  // Only take over when both sides name a "field" — a true kit-type swap
+  // (e.g. "swap the table for a data grid") falls through to
+  // applyReplacementPrompt instead.
+  const sourceIsField = FIELD_ALIAS_WORDS.some((alias) =>
+    promptHasTerm(sourceText, alias)
+  );
+  const destinationIsField = FIELD_ALIAS_WORDS.some((alias) =>
+    promptHasTerm(destinationText, alias)
+  );
+  if (!sourceIsField || !destinationIsField) return null;
+
+  const sourceLabel = extractFieldLabel(sourceText);
+  const destinationLabel = extractFieldLabel(destinationText);
+  if (!sourceLabel || !destinationLabel) return null;
+
+  const targetInstance = findFieldInstanceByLabel(instances, sourceLabel);
+  if (!targetInstance) {
+    return {
+      diagnostics: [`Could not find a field labeled "${sourceLabel}" to rename.`],
+      handled: true,
+      instances,
+    };
+  }
+
+  const destinationLabelText = toTitleCase(destinationLabel);
+
+  return {
+    diagnostics: [],
+    handled: true,
+    instances: renameFieldInstance(instances, targetInstance.id, destinationLabelText),
+    summary: `Renamed "${toTitleCase(sourceLabel)}" field to "${destinationLabelText}".`,
+  };
+};
+
 const applyReplacementPrompt = (
   prompt: string,
   instances: BuilderInstance[],
@@ -347,8 +471,8 @@ const applyReplacementPrompt = (
 ): PromptModificationResult | null => {
   if (!promptIncludesAny(prompt, REPLACE_WORDS)) return null;
 
-  const destinationText = getTextAfterAny(prompt, [" with ", " to "]);
-  const sourceText = getTextBeforeAny(prompt, [" with ", " to "]);
+  const destinationText = getTextAfterAny(prompt, REPLACE_SEPARATORS);
+  const sourceText = getTextBeforeAny(prompt, REPLACE_SEPARATORS);
   const destinationKitName = findKitAliasInText(
     destinationText,
     new Set(Object.keys(kitsByName))
@@ -434,6 +558,7 @@ export const applyPromptModification = (
 ): PromptModificationResult => {
   const prompt = normalizePrompt(rawPrompt);
   const modification =
+    applyFieldRenamePrompt(prompt, instances) ??
     applyReplacementPrompt(prompt, instances, kitsByName, globalProps) ??
     applyPropEditPrompt(prompt, instances, kitsByName, globalProps);
 

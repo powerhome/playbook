@@ -32,6 +32,7 @@ import {
   getDefaultCheckedItems,
   recursiveCheckParent,
   getExpandedItems,
+  selectedIdsInclude,
 } from "./_helper_functions";
 
 import { DialogContext } from "../pb_dialog/_dialog_context";
@@ -49,12 +50,19 @@ interface MultiLevelSelectComponent extends React.ForwardRefExoticComponent<
   Options: typeof MultiLevelSelectOptions;
 }
 
+type MultiLevelSelectItem = { [key: string]: any };
+type SelectedDisplayContext = {
+  ancestors: MultiLevelSelectItem[];
+  path: MultiLevelSelectItem[];
+};
+
 type MultiLevelSelectProps = {
   aria?: { [key: string]: string };
   className?: string;
   data?: { [key: string]: string };
   disabled?: boolean;
   error?: string;
+  formatSelectedDisplay?: (item: MultiLevelSelectItem, context: SelectedDisplayContext) => string;
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   inputDisplay?: "pills" | "none";
@@ -105,6 +113,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       data = {},
       disabled = false,
       error,
+      formatSelectedDisplay,
       htmlOptions = {},
       id,
       inputDisplay = "pills",
@@ -175,6 +184,26 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       item: [],
     });
 
+    const getSelectedDisplay = (
+      item: MultiLevelSelectItem,
+      data: MultiLevelSelectItem[],
+    ) => {
+      const ancestors: MultiLevelSelectItem[] = [];
+      let parentId = item.parent_id;
+
+      while (parentId) {
+        const parent = filterFormattedDataById(data, parentId)[0];
+        if (!parent) break;
+
+        ancestors.unshift(parent);
+        parentId = parent.parent_id;
+      }
+
+      return formatSelectedDisplay
+        ? formatSelectedDisplay(item, { ancestors, path: [...ancestors, item] })
+        : item.label;
+    };
+
     const arrowDownElementId = `arrow_down_${id}`;
     const arrowUpElementId = `arrow_up_${id}`;
     // Control id for label htmlFor: use suffix to avoid conflict with outer div's id
@@ -220,9 +249,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         const isDisabled =
           item.disabled || (parentDisabled && !returnAllSelected);
 
-          const explicitlySelected = Boolean(
-            selectedIds && selectedIds?.length && selectedIds.includes(item.id)
-          );
+          const explicitlySelected = selectedIdsInclude(selectedIds, item.id);
 
           const checked =
           !isDisabled &&
@@ -662,6 +689,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           }}
         >
           <div className="wrapper"
+              data-pb-validation-container="true"
               ref={dropdownRef}
           >
             <div className="input_wrapper"
@@ -771,7 +799,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                       : placeholderText
                   }
                     required={required}
-                    value={singleSelectedItem.value || filterItem}
+                    value={singleSelectedItem.item.length
+                      ? getSelectedDisplay(singleSelectedItem.item[0], formattedData)
+                      : singleSelectedItem.value || filterItem}
                 />
               </div>
 

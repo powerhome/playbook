@@ -1,2 +1,5 @@
+appConfig:
+  railsPlaygroundEnabled: "1"
+
 ingress:
   issueCert: true

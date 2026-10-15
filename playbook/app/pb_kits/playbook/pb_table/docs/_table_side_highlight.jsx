@@ -9,57 +9,57 @@ const TableSideHighlight = (props) => {
           size="sm"
           {...props}
       >
-        <thead>
-          <tr>
-            <th>{'Product colors'}</th>
-            <th>{'Column 2'}</th>
-            <th>{'Column 3'}</th>
-            <th>{'Column 4'}</th>
-            <th>{'Column 5'}</th>
-          </tr>
-        </thead>
-        <tbody>
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>{'Product colors'}</Table.Header>
+            <Table.Header>{'Column 2'}</Table.Header>
+            <Table.Header>{'Column 3'}</Table.Header>
+            <Table.Header>{'Column 4'}</Table.Header>
+            <Table.Header>{'Column 5'}</Table.Header>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           <Table.Row
               sideHighlightColor="product_1_highlight"
               {...props}
           >
-            <td>{'Product 1'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Product 1'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="product_2_highlight"
               {...props}
           >
-            <td>{'Product 2'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Product 2'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="product_3_highlight"
               {...props}
           >
-            <td>{'Product 3'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Product 3'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="none"
               {...props}
           >
-            <td>{'None'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'None'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
-        </tbody>
+        </Table.Body>
       </Table>
 
       <br />
@@ -68,57 +68,57 @@ const TableSideHighlight = (props) => {
           size="sm"
           {...props}
       >
-        <thead>
-          <tr>
-            <th>{'Status colors'}</th>
-            <th>{'Column 2'}</th>
-            <th>{'Column 3'}</th>
-            <th>{'Column 4'}</th>
-            <th>{'Column 5'}</th>
-          </tr>
-        </thead>
-        <tbody>
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>{'Status colors'}</Table.Header>
+            <Table.Header>{'Column 2'}</Table.Header>
+            <Table.Header>{'Column 3'}</Table.Header>
+            <Table.Header>{'Column 4'}</Table.Header>
+            <Table.Header>{'Column 5'}</Table.Header>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           <Table.Row
               sideHighlightColor="success"
               {...props}
           >
-            <td>{'Success'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Success'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="warning"
               {...props}
           >
-            <td>{'Warning'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Warning'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="error"
               {...props}
           >
-            <td>{'Error'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Error'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="none"
               {...props}
           >
-            <td>{'None'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'None'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
-        </tbody>
+        </Table.Body>
       </Table>
 
       <br />
@@ -127,57 +127,57 @@ const TableSideHighlight = (props) => {
           size="sm"
           {...props}
       >
-        <thead>
-          <tr>
-            <th>{'Category Colors'}</th>
-            <th>{'Column 2'}</th>
-            <th>{'Column 3'}</th>
-            <th>{'Column 4'}</th>
-            <th>{'Column 5'}</th>
-          </tr>
-        </thead>
-        <tbody>
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>{'Category Colors'}</Table.Header>
+            <Table.Header>{'Column 2'}</Table.Header>
+            <Table.Header>{'Column 3'}</Table.Header>
+            <Table.Header>{'Column 4'}</Table.Header>
+            <Table.Header>{'Column 5'}</Table.Header>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           <Table.Row
               sideHighlightColor="category_1"
               {...props}
           >
-            <td>{'Category Color 1'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Category Color 1'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="category_2"
               {...props}
           >
-            <td>{'Category Color 2'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Category Color 2'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="category_3"
               {...props}
           >
-            <td>{'Category Color 3'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'Category Color 3'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
           <Table.Row
               sideHighlightColor="none"
               {...props}
           >
-            <td>{'None'}</td>
-            <td>{'Value 2'}</td>
-            <td>{'Value 3'}</td>
-            <td>{'Value 4'}</td>
-            <td>{'Value 5'}</td>
+            <Table.Cell>{'None'}</Table.Cell>
+            <Table.Cell>{'Value 2'}</Table.Cell>
+            <Table.Cell>{'Value 3'}</Table.Cell>
+            <Table.Cell>{'Value 4'}</Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
           </Table.Row>
-        </tbody>
+        </Table.Body>
       </Table>
     </div>
   )

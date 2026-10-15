@@ -1,8 +1,12 @@
 import React from 'react'
 import { Body, Card, Table, Title } from 'playbook-ui'
 
+type SchemaPlatform = 'react' | 'rails'
+type SplitType = { react?: string, rails?: string }
+type SchemaType = string | SplitType
+
 type PropValue = {
-  type: string
+  type: SchemaType
   values?: string[]
   default?: any
   platforms?: string[]
@@ -10,15 +14,31 @@ type PropValue = {
 
 type KitPropsType = {
   kitPropsValues: {[key: string]: PropValue},
-  darkMode: boolean
+  darkMode: boolean,
+  platform?: SchemaPlatform,
 }
 
-const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
+const isSplitType = (type: SchemaType): type is SplitType =>
+  typeof type === 'object' && type !== null
+
+const KitProps = ({ kitPropsValues, darkMode, platform }: KitPropsType) => {
   // Clean up type string (remove trailing semicolons from schema)
-  const cleanType = (type: string) => type?.replace(/;$/, '') || 'string'
+  const cleanType = (type?: string) => type?.replace(/;$/, '') || 'string'
+
+  const typeForDisplay = (prop: PropValue) => {
+    const type = prop.type
+    if (isSplitType(type)) {
+      if (platform && type[platform]) return cleanType(type[platform])
+      const parts: string[] = []
+      if (type.react) parts.push(`react: ${cleanType(type.react)}`)
+      if (type.rails) parts.push(`rails: ${cleanType(type.rails)}`)
+      return parts.join(' · ') || 'string'
+    }
+    return cleanType(type)
+  }
 
   const getTypeName = (prop: PropValue) => {
-    const type = cleanType(prop.type)
+    const type = typeForDisplay(prop)
     if (type.includes('|')) return 'union'
     if (type === 'enum') return 'union'
     if (type === 'function') return 'function'
@@ -29,7 +49,7 @@ const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
     if (prop.values && prop.values.length > 0) {
       return prop.values.join(' | ')
     }
-    const type = cleanType(prop.type)
+    const type = typeForDisplay(prop)
     if (type === 'boolean') {
       return 'true | false'
     }

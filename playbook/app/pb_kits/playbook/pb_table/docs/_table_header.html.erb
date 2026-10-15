@@ -24,8 +24,8 @@
 <% end %>
 
 <%= pb_rails("table", props: { data_table: true, vertical_border: true, id: "table-header" } ) do %>
-  <thead>
-    <tr>
+  <%= pb_rails("table/table_head") do %>
+    <%= pb_rails("table/table_row") do %>
       <%= pb_rails("table/table_header", props: {
         text: "Territory",
         id: "territory",
@@ -54,11 +54,11 @@
         ],
       }) %>
       <%= pb_rails("table/table_header", props: { text: "Job Title" }) %>
-    </tr>
-  </thead>
-  <tbody>
+    <% end %>
+  <% end %>
+  <%= pb_rails("table/table_body") do %>
     <% data_rows.each do |row| %>
-      <tr>
+      <%= pb_rails("table/table_row") do %>
         <% row.each do |key, value| %>
           <%= pb_rails("background", props: {
               background_color: (params["sort"] && params["sort"].start_with?(key) ? "info_subtle" : "card_light"),
@@ -68,7 +68,7 @@
             <%= value %>
           <% end %>
         <% end %>
-      </tr>
+      <% end %>
     <% end %>
-  </tbody>
+  <% end %>
 <% end %>

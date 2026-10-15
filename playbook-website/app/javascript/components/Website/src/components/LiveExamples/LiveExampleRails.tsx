@@ -150,7 +150,7 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     const wrapper = event.currentTarget;
     setTimeout(() => {
       const hasOpenPopup = wrapper.querySelector(
-        ".pb_dropdown_container.open, .pb_multi_level_select .dropdown_menu.open, .pb_time_picker .pb_time_picker_container",
+        ".pb_dropdown_container.open, .pb_multi_level_select .dropdown_menu.open, .pb_time_picker .pb_time_picker_container, .flatpickr-calendar.open",
       );
       if (hasOpenPopup) return;
       resetExampleOverflow(wrapper);

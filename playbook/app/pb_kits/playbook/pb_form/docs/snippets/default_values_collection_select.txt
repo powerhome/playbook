@@ -1,0 +1,8 @@
+<% collection = [
+     OpenStruct.new(name: "Alabama", value: 1),
+     OpenStruct.new(name: "Alaska", value: 2),
+     OpenStruct.new(name: "Arizona", value: 3),
+   ] %>
+<%= form.collection_select :state, collection, :value, :name,
+      { selected: 2 },
+      props: { label: "State", blank_selection: "Select one..." } %>

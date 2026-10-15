@@ -1,0 +1,1 @@
+  <%= form.text_area :bio, props: { label: "Bio", value: "Loves building with Playbook." } %>

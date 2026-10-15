@@ -491,17 +491,23 @@
     }
   }
 
-  // First column separator/border
+  // First data column separator/border (Year when no separate checkbox column)
   .table-header-cells:first-child,
-  .table-header-cells-custom:first-child,
-  td:first-child,
-  .pb_table_td:first-child,
-  .checkbox-cell.checkbox-cell-header:first-child {
+  td:first-child:not(.checkbox-cell),
+  .pb_table_td:first-child:not(.checkbox-cell) {
     box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
   }
 
   .pb_table_td:nth-child(2) {
     box-shadow: inset 1px 0px 0px 0px var(--column-border-color) !important;
+  }
+
+  // Separate checkbox column (Rails + React): separator on the first data column
+  .table-header-cells-custom + th[colspan="1"],
+  .table-header-cells-custom + .table-header-cells[colspan="1"],
+  td.checkbox-cell + td,
+  td.checkbox-cell + .pb_table_td {
+    box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
   }
 
   // Color for collapsible trail
@@ -715,6 +721,12 @@
         box-shadow: 0 0 0 0 !important;
       }
 
+      // Re-apply after the nth-child(2) clear above (checkbox column layouts)
+      td.checkbox-cell + td,
+      td.checkbox-cell + .pb_table_td {
+        box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
+      }
+
       .pb_advanced_table_header,
       .pb_advanced_table_body {
         th.sticky-left,
@@ -816,10 +828,15 @@
     }
 
     .table-header-cells:first-child,
-    .table-header-cells-custom:first-child,
-    td:first-child,
-    .pb_table_td:first-child,
-    .checkbox-cell.checkbox-cell-header:first-child {
+    td:first-child:not(.checkbox-cell),
+    .pb_table_td:first-child:not(.checkbox-cell) {
+      box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
+    }
+
+    .table-header-cells-custom + th[colspan="1"],
+    .table-header-cells-custom + .table-header-cells[colspan="1"],
+    td.checkbox-cell + td,
+    td.checkbox-cell + .pb_table_td {
       box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
     }
 
@@ -1076,6 +1093,30 @@
       }
     }
 
+    // Firefox-specific fix for vertical borders disappearing upon row hover
+    .pb_table.vertical-border .pb_advanced_table_body {
+      tr:not(.virtualized-table-row) td:not(:last-child):not(.last-cell),
+      .pb_table_tr:not(.virtualized-table-row) .pb_table_td:not(:last-child):not(.last-cell) {
+        position: relative;
+        border-right-color: transparent !important;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -1px;
+          bottom: -1px;
+          width: 1px;
+          background-color: var(--table-border-color);
+        }
+
+        // The base kit gives the first column's divider the column group color
+        &:first-child::before {
+          background-color: var(--column-border-color);
+        }
+      }
+    }
+
     &[class*="column-group-border-"] {
       .pb_advanced_table_header {
         th[colspan]:not([colspan="1"]):not(:last-child),
@@ -1119,6 +1160,14 @@
         .pb_table_td.last-cell:not(:last-child) {
           border-right: none !important;
           box-shadow: 1px 0 0 0 $border_dark !important;
+        }
+      }
+
+      // --table-border-color stays light in dark mode, matches token of base kit's dark vertical border
+      .pb_table.vertical-border .pb_advanced_table_body {
+        tr:not(.virtualized-table-row) td:not(:last-child):not(.last-cell)::before,
+        .pb_table_tr:not(.virtualized-table-row) .pb_table_td:not(:last-child):not(.last-cell)::before {
+          background-color: $border_dark;
         }
       }
 

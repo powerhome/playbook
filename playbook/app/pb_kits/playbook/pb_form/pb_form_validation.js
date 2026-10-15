@@ -2,7 +2,10 @@ import PbEnhancedElement from '../pb_enhanced_element'
 import { debounce } from '../utilities/object'
 
 // Kit selectors
-const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"]'
+// Most kits use *_kit classnames. Dropdown and multi-level select do not; they
+// expose data-pb-* markers on the root instead — include those so bare
+// pb_form_with fields still get custom validation messages.
+const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"], [data-pb-dropdown], [data-pb-multi-level-select]'
 const ERROR_MESSAGE_SELECTOR   = '.pb_body_kit_negative'
 const MESSAGE_CONTAINER_SELECTOR = '[data-pb-validation-container="true"]'
 
@@ -11,32 +14,38 @@ const FORM_SELECTOR            = 'form[data-pb-form-validation="true"]'
 const REQUIRED_FIELDS_SELECTOR = 'input[required],textarea[required],select[required]'
 const PHONE_NUMBER_VALIDATION_ERROR_SELECTOR = '[data-pb-phone-validation-error="true"]'
 
-const FIELD_EVENTS = [
-  'change',
-  'valid',
-  'invalid',
-]
 class PbFormValidation extends PbEnhancedElement {
   static get selector() {
     return FORM_SELECTOR
   }
 
   connect() {
-    this.formValidationFields.forEach((field) => {
-      // Skip phone number inputs - they handle their own validation
-      const isPhoneNumberInput = field.closest('.pb_phone_number_input')
-      if (isPhoneNumberInput) return
+    // `invalid` does not bubble — listen in capture so we still see it.
+    // Do not snapshot [required] at connect: dropdown / multi-level select may
+    // remove required during their own connect (they register earlier) when a
+    // default selection is present, then put it back when cleared.
+    this.handleInvalid = (event) => {
+      if (!this.isFormValidationField(event.target)) return
+      this.validateFormField(event)
+    }
+    this.element.addEventListener('invalid', this.handleInvalid, true)
 
-      // Skip TimePicker inputs - they handle their own validation
-      const isTimePickerInput = field.closest('.pb_time_picker')
-      if (isTimePickerInput) return
+    // Debounce per field so a later change on another control cannot cancel
+    // clearing setCustomValidity for a field the user already corrected.
+    const debouncedByField = new WeakMap()
+    this.handleFieldEvent = (event) => {
+      const field = event.target
+      if (!this.isFormValidationField(field)) return
 
-      FIELD_EVENTS.forEach((e) => {
-        field.addEventListener(e, debounce((event) => {
-          this.validateFormField(event)
-        }, 250), false)
-      })
-    })
+      let run = debouncedByField.get(field)
+      if (!run) {
+        run = debounce((evt) => this.validateFormField(evt), 250)
+        debouncedByField.set(field, run)
+      }
+      run(event)
+    }
+    this.element.addEventListener('change', this.handleFieldEvent)
+    this.element.addEventListener('valid', this.handleFieldEvent)
 
     // Add event listener to check for phone number validation errors
     this.element.addEventListener('submit', (event) => {
@@ -50,24 +59,36 @@ class PbFormValidation extends PbEnhancedElement {
     })
   }
 
+  isFormValidationField(field) {
+    if (!field?.matches?.(REQUIRED_FIELDS_SELECTOR)) return false
+    if (field.closest('.pb_phone_number_input')) return false
+    if (field.closest('.pb_time_picker')) return false
+    return true
+  }
+
   validateFormField(event) {
-    event.preventDefault()
     const { target } = event
+    const messageContainer = this.messageContainerFor(target)
+    const kitElement = messageContainer?.closest(KIT_SELECTOR)
+
+    // Mixed forms may include non-Playbook required controls. Do not suppress the
+    // browser's native invalid UI unless we can attach a Playbook message to a kit.
+    if (!kitElement) return
+
+    event.preventDefault()
     target.setCustomValidity('')
-    const isValid = event.target.validity.valid
+    const isValid = target.validity.valid
 
     if (isValid) {
       this.clearError(target)
     } else {
-      this.showValidationMessage(target)
+      this.showValidationMessage(target, messageContainer, kitElement)
     }
   }
 
-  showValidationMessage(target) {
-    const messageContainer = this.messageContainerFor(target)
-    const kitElement = messageContainer.closest(KIT_SELECTOR)
-
-    // FIX: Add null check for kitElement
+  showValidationMessage(target, messageContainer, kitElement) {
+    messageContainer = messageContainer || this.messageContainerFor(target)
+    kitElement = kitElement || messageContainer?.closest(KIT_SELECTOR)
     if (!kitElement) return
 
     // Check if this is a phone number input
@@ -119,10 +140,6 @@ class PbFormValidation extends PbEnhancedElement {
     const kitClassName = ERROR_MESSAGE_SELECTOR.replace(/\./, '')
     errorContainer.classList.add(kitClassName)
     return errorContainer
-  }
-  get formValidationFields() {
-    return this._formValidationFields =
-      this._formValidationFields || this.element.querySelectorAll(REQUIRED_FIELDS_SELECTOR)
   }
 }
 

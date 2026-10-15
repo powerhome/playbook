@@ -1,4 +1,5 @@
 import { Background } from "playbook-ui";
+import NotFound from "../../../pages/NotFound";
 import HtmlOptions from "./Examples/HtmlOptions";
 import Margin from "./Examples/Margin";
 import Cursor from "./Examples/Cursor";
@@ -89,7 +90,7 @@ const GlobalPropsExamples = ({ routeParamName }: GlobalPropsExamplesProps = {}) 
 
   return (
     <Background backgroundColor="white">
-      {ExampleComponent ? <ExampleComponent /> : null}
+      {ExampleComponent ? <ExampleComponent /> : <NotFound />}
     </Background>
   );
 };

@@ -1,0 +1,2 @@
+  <%= form.select :favorite_color, [["Red", "red"], ["Blue", "blue"], ["Green", "green"]],
+        props: { label: "Favorite Color", blank_selection: "Select one..." } %>

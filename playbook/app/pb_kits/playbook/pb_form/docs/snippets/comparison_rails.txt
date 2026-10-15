@@ -1,0 +1,5 @@
+<%= form_with scope: :example, url: example_path do |form| %>
+  <%= form.label :full_name, "Full Name" %>
+  <%= form.text_field :full_name %>
+  <%= form.submit "Submit" %>
+<% end %>

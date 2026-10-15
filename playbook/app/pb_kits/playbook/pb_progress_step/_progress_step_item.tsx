@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon'
 
@@ -32,7 +33,7 @@ const ProgressStepItem = (props: ProgressStepItemProps): React.ReactElement => {
     <li 
         {...dataProps}
         {...htmlProps}
-        className={classnames(progressStepItem, className)}
+        className={classnames(progressStepItem, globalProps(props), className)}
     >
       <div className="box">
         <div className="circle">

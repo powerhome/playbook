@@ -1,0 +1,183 @@
+<%
+  load Playbook.kit_path("form", "docs", "_sample_data.ruby").to_s
+  demo_id = "default_values"
+  input_types = PlaybookFormDocsSampleData.input_types
+  default_key = PlaybookFormDocsSampleData.default_input_key
+  select_choices = PlaybookFormDocsSampleData.select_choices
+  dropdown_options = PlaybookFormDocsSampleData.dropdown_options("-dv")
+  typeahead_options = PlaybookFormDocsSampleData.typeahead_options
+  collection = PlaybookFormDocsSampleData.collection
+  tree_data = PlaybookFormDocsSampleData.tree_data("default-values")
+  form_open_source = PlaybookFormDocsSampleData.form_open(scope: demo_id)
+  form_close_source = PlaybookFormDocsSampleData.form_close
+%>
+
+<div data-form-docs-demo="<%= demo_id %>">
+  <div hidden data-form-docs-open><%= raw render_code(form_open_source, "erb") %></div>
+  <div hidden data-form-docs-close><%= raw render_code(form_close_source, "erb") %></div>
+  <%= pb_rails("body", props: {
+        text: "Select one or more inputs to add them to the form.",
+        color: "light",
+        margin_bottom: "xs",
+      }) %>
+  <%= pb_rails("flex", props: { gap: "xs", wrap: true, margin_bottom: "md" }) do %>
+    <% input_types.each do |input_type| %>
+      <div data-form-docs-pill="<%= input_type[:key] %>"
+           role="button"
+           tabindex="0"
+           style="cursor: pointer">
+        <%= pb_rails("pill", props: {
+              text: input_type[:label],
+              text_transform: "none",
+              variant: input_type[:key] == default_key ? "primary" : "neutral",
+            }) %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("flex", props: PlaybookFormDocsSampleData.demo_panel_flex_props) do %>
+    <div style="<%= PlaybookFormDocsSampleData.demo_form_column_style %>">
+      <%= pb_rails("card", props: PlaybookFormDocsSampleData.demo_form_card_props) do %>
+      <%= pb_form_with(scope: :default_values, url: "", method: :get, html: { onsubmit: "return false;" }) do |form| %>
+        <% input_types.each do |input_type| %>
+          <div data-form-docs-panel="<%= input_type[:key] %>"
+               style="<%= input_type[:key] == default_key ? "" : "display: none;" %>">
+            <div data-form-docs-snippet hidden><%= raw render_code(
+              PlaybookFormDocsSampleData.form_body_snippet(
+                File.read(Playbook.kit_path("form", "docs", "snippets", "default_values_#{input_type[:key]}.txt"))
+              ),
+              "erb"
+            ) %></div>
+            <% case input_type[:key]
+               when "text_field" %>
+              <%= form.text_field :full_name, props: { label: "Full Name", value: "John Doe" } %>
+            <% when "email_field" %>
+              <%= form.email_field :email, props: { label: "Email", value: "jane@example.com" } %>
+            <% when "number_field" %>
+              <%= form.number_field :quantity, props: { label: "Quantity", value: 3 } %>
+            <% when "search_field" %>
+              <%= form.search_field :project_number, props: { label: "Project Number", value: "33-12345" } %>
+            <% when "password_field" %>
+              <%= form.password_field :password, props: { label: "Password", value: "secret" } %>
+            <% when "url_field" %>
+              <%= form.url_field :website, props: { label: "Website", value: "https://example.com" } %>
+            <% when "textarea" %>
+              <%= form.text_area :bio, props: { label: "Bio", value: "Loves building with Playbook." } %>
+            <% when "select" %>
+              <%= form.select :favorite_color, select_choices,
+                    { selected: "blue" },
+                    props: { label: "Favorite Color", blank_selection: "Select one..." } %>
+            <% when "collection_select" %>
+              <%= form.collection_select :state, collection, :value, :name,
+                    { selected: 2 },
+                    props: { label: "State", blank_selection: "Select one..." } %>
+            <% when "dropdown" %>
+              <%= form.dropdown_field "default_values[country]",
+                    props: {
+                      label: "Country",
+                      options: dropdown_options,
+                      default_value: { label: "Canada", value: "Canada", id: "ca-dv" },
+                    } %>
+            <% when "multi_select" %>
+              <%= form.dropdown_field "default_values[countries]",
+                    props: {
+                      label: "Countries",
+                      options: dropdown_options,
+                      multi_select: true,
+                      default_value: [{ label: "Canada", value: "Canada", id: "ca-dv" }],
+                    } %>
+            <% when "checkbox" %>
+              <%= form.check_box :newsletter,
+                    props: { text: "Subscribe to newsletter", label: "Checkbox" },
+                    checked: true,
+                    checked_value: "yes",
+                    unchecked_value: "no" %>
+            <% when "date_picker" %>
+              <%= form.date_picker :start_date, props: {
+                    label: "Start Date",
+                    allow_input: true,
+                    default_date: "06/15/2026",
+                  } %>
+            <% when "time_picker" %>
+              <%= form.time_picker :start_time, props: { label: "Start Time", default_time: "09:30" } %>
+            <% when "time_zone_select" %>
+              <%= form.time_zone_select_field :time_zone, ActiveSupport::TimeZone.us_zones,
+                    { default: "Pacific Time (US & Canada)" },
+                    props: { label: "Time Zone" } %>
+            <% when "typeahead_default" %>
+              <%= form.typeahead "default_values[color_search_single]",
+                    props: {
+                      options: typeahead_options,
+                      is_multi: false,
+                      label: "Favorite Color",
+                      placeholder: "Search for a color",
+                      default_options: [{ label: "Blue", value: "#0000FF" }],
+                    } %>
+            <% when "typeahead" %>
+              <%= form.typeahead "default_values[color_search]",
+                    props: {
+                      options: typeahead_options,
+                      pills: true,
+                      label: "Favorite Color",
+                      placeholder: "Search for a color",
+                      default_options: [{ label: "Blue", value: "#0000FF" }],
+                    } %>
+            <% when "phone_number" %>
+              <%= form.phone_number_field "default_values[phone]", props: {
+                    label: "Phone Number",
+                    value: "5551234567",
+                  } %>
+            <% when "star_rating" %>
+              <%= form.star_rating_field "default_values[rating]",
+                    props: { variant: "interactive", label: "Rating", rating: 4 } %>
+            <% when "multi_level_select" %>
+              <%= form.multi_level_select "default_values[department]",
+                    props: {
+                      id: "mls-default-values",
+                      tree_data: tree_data,
+                      margin_bottom: "sm",
+                      label: "Department",
+                      selected_ids: ["default-values-102"],
+                    } %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%= form.actions do |action| %>
+          <%= action.submit %>
+          <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+        <% end %>
+      <% end %>
+      <% end %>
+    </div>
+
+    <div style="<%= PlaybookFormDocsSampleData.demo_data_column_style %>">
+      <%= pb_rails("caption", props: { text: "Submitted Form Data", margin_bottom: "xs" }) %>
+      <%= pb_rails("card", props: { background: "light", padding: "md" }) do %>
+        <div data-form-docs-empty>
+          <%= pb_rails("body", props: { text: "No data submitted yet.", color: "light" }) %>
+        </div>
+        <pre data-form-docs-output
+             style="display: none; margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre-wrap;"></pre>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= pb_rails("body", props: {
+        text: "Submit the form to see the data on the right.",
+        color: "light",
+        margin_top: "sm",
+        margin_bottom: "sm",
+      }) %>
+
+  <%= pb_rails("card", props: { background: "dark", dark: true, padding: "none" }) do %>
+    <div class="pb--codeCopy pb--codeCopy_compact">
+      <pre class="highlight" data-form-docs-code style="margin: 0; overflow: auto; font-size: 12px; line-height: 1.5; white-space: pre;"></pre>
+    </div>
+  <% end %>
+</div>
+
+<script>
+<%= raw File.read(Playbook.kit_path("form", "docs", "_form_docs_demo.js")) %>
+PbFormDocsDemo("<%= demo_id %>")
+</script>

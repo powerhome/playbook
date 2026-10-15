@@ -5,6 +5,7 @@ examples:
   - pill_variants: Variants
   - pill_size: Size
   - pill_notification: Notification
+  - pill_children: Children
   - pill_example: Example
  
   
@@ -14,6 +15,7 @@ examples:
   - pill_variants: Variants
   - pill_size: Size
   - pill_notification: Notification
+  - pill_children: Children
   - pill_example: Example
 
   swift:

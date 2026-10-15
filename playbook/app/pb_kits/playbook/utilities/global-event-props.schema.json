@@ -1,0 +1,22 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/global-event-props-schema.json",
+  "name": "GlobalEventProps",
+  "description": "React-only event handler props for kits that opt into GlobalEventProps. Separate from class-based GlobalProps. Not available on Rails kits.",
+  "platforms": [
+    "react"
+  ],
+  "props": {
+    "onClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ],
+      "description": "Mouse click handler attached to the kit root element. React only; not available on Rails kits.",
+      "example": "onClick={() => console.log(\"clicked\")}"
+    }
+  },
+  "optIn": {
+    "description": "Only kits whose React props include GlobalEventProps support these handlers. Look for globalEventProps: true on kit.schema.json.",
+    "example": "} & GlobalProps & GlobalEventProps"
+  }
+}

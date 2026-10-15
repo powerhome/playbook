@@ -3,8 +3,10 @@ examples:
   rails:
   - file_upload_default: File Upload
   - file_upload_custom: Custom
+  - file_upload_custom_message: Add a custom message
   - file_upload_error: Error
   - file_upload_remove_replace: Remove and Replace
+  - file_upload_input_options: Input Options
 
   react:
   - file_upload_default: Default List of files to upload

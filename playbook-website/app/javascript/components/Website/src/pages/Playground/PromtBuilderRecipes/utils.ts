@@ -15,8 +15,27 @@ export const normalizePrompt = (prompt: string) =>
     .replace(/\s+/g, " ")
     .trim();
 
+export const escapeRegExp = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+// Single-word terms match on word boundaries so "form" doesn't fire inside
+// "performance" or "platform"; multi-word phrases stay a plain substring
+// check since they're already specific enough to rarely false-positive.
+export const promptHasTerm = (prompt: string, term: string) => {
+  const normalizedTerm = normalizePrompt(term);
+  if (!normalizedTerm) return false;
+
+  if (!normalizedTerm.includes(" ")) {
+    return new RegExp(`(^|\\s)${escapeRegExp(normalizedTerm)}(?=\\s|$)`).test(
+      prompt,
+    );
+  }
+
+  return prompt.includes(normalizedTerm);
+};
+
 export const promptIncludesAny = (prompt: string, terms: string[]) =>
-  terms.some((term) => prompt.includes(term));
+  terms.some((term) => promptHasTerm(prompt, term));
 
 export const createKit = (
   kitName: string,
@@ -104,11 +123,11 @@ export const getFieldLabelsFromPrompt = (prompt: string) => {
 export const getScreenTitleFromPrompt = (prompt: string) => {
   const quoted = prompt.match(/"([^"]+)"/)?.[1];
   if (quoted) return quoted;
-  if (prompt.includes("settings")) return "Settings";
-  if (prompt.includes("dashboard")) return "Dashboard";
-  if (prompt.includes("billing")) return "Billing";
-  if (prompt.includes("profile")) return "Profile";
-  if (prompt.includes("table")) return "Records";
-  if (prompt.includes("form")) return "New Record";
+  if (promptHasTerm(prompt, "settings")) return "Settings";
+  if (promptHasTerm(prompt, "dashboard")) return "Dashboard";
+  if (promptHasTerm(prompt, "billing")) return "Billing";
+  if (promptHasTerm(prompt, "profile")) return "Profile";
+  if (promptHasTerm(prompt, "table")) return "Records";
+  if (promptHasTerm(prompt, "form")) return "New Record";
   return "Generated Screen";
 };

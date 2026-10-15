@@ -13,6 +13,12 @@ Gem::Specification.new do |s|
   s.summary     = "Playbook Design System"
   s.description = "Playbook UI is built out in Ruby View Components and React Components. Playbook takes a modern design approach and applies it in a way that makes it easy to support bleeding edge or legacy systems."
   s.license     = "ISC"
+  s.metadata    = {
+    "source_code_uri" => "https://github.com/powerhome/playbook",
+    "changelog_uri" => "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md",
+    "bug_tracker_uri" => "https://github.com/powerhome/playbook/issues",
+    "documentation_uri" => "https://playbook.powerapp.cloud/",
+  }
 
   s.files = Dir[
     "app/pb_kits/playbook/pb_*/**/*",
@@ -23,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/*.rb",
     "lib/playbook/**/*",
     "dist/chunks/*",
+    "dist/ai/**/*",
     "dist/playbook.css",
     "dist/reset.css",
     "dist/playbook-rails.js",
@@ -32,15 +39,15 @@ Gem::Specification.new do |s|
 
   s.files.reject! { |file| file == "dist/chunks/lib.js" }
 
-  s.add_dependency "actionpack", ">= 5.2.4.5"
-  s.add_dependency "actionview", ">= 5.2.4.5"
-  s.add_dependency "activesupport", ">= 5.2.4.5"
-  s.add_dependency "view_component", "2.83.0"
+  s.add_dependency "actionpack", ">= 7.1.0"
+  s.add_dependency "actionview", ">= 7.1.0"
+  s.add_dependency "activesupport", ">= 7.1.0"
+  s.add_dependency "view_component", "4.3.0"
   s.add_dependency "vite_rails"
 
   s.add_development_dependency "brakeman", "7.0.0"
   s.add_development_dependency "byebug", ">= 11.0.0"
-  s.add_development_dependency "rails", ">= 5.2.4.5"
+  s.add_development_dependency "rails", ">= 7.1.0"
   s.add_development_dependency "rspec-html-matchers", "0.9.1"
   s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
   s.add_development_dependency "rubocop"

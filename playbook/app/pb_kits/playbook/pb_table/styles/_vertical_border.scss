@@ -11,12 +11,26 @@
     // **Advanced Table** specific rules to eliminate double borders when vertical-border is active
     .pb_advanced_table &,
     &[data-vertical-border="true"] {
-      // Remove first column box-shadow (preserve border-right in Chrome and use CSS var to respect column group border colors)
+      // First data column when there is no separate checkbox column; remove first column box-shadow (preserve border-right in Chrome and use CSS var to respect column group border colors)
       .table-header-cells:first-child,
+      td:first-child:not(.checkbox-cell),
+      .pb_table_td:first-child:not(.checkbox-cell) {
+        box-shadow: none !important;
+        border-right: 1px solid var(--column-border-color, var(--table-border-color, #{$border_light})) !important;
+      }
+
+      // Separate checkbox column: clear checkbox shadow only (no special first-child border)
       .table-header-cells-custom:first-child,
-      td:first-child,
-      .pb_table_td:first-child,
-      .checkbox-cell.checkbox-cell-header:first-child {
+      .checkbox-cell.checkbox-cell-header:first-child,
+      td.checkbox-cell:first-child {
+        box-shadow: none !important;
+      }
+
+      // Move special border to the first data column after the checkbox
+      .table-header-cells-custom + th[colspan="1"],
+      .table-header-cells-custom + .table-header-cells[colspan="1"],
+      td.checkbox-cell + td,
+      td.checkbox-cell + .pb_table_td {
         box-shadow: none !important;
         border-right: 1px solid var(--column-border-color, var(--table-border-color, #{$border_light})) !important;
       }
@@ -95,10 +109,15 @@
 
       &[data-vertical-border="true"] {
         .table-header-cells:first-child,
-        .table-header-cells-custom:first-child,
-        td:first-child,
-        .pb_table_td:first-child,
-        .checkbox-cell.checkbox-cell-header:first-child {
+        td:first-child:not(.checkbox-cell),
+        .pb_table_td:first-child:not(.checkbox-cell) {
+          border-right: 1px solid var(--column-border-color, #{$border_dark}) !important;
+        }
+
+        .table-header-cells-custom + th[colspan="1"],
+        .table-header-cells-custom + .table-header-cells[colspan="1"],
+        td.checkbox-cell + td,
+        td.checkbox-cell + .pb_table_td {
           border-right: 1px solid var(--column-border-color, #{$border_dark}) !important;
         }
       }

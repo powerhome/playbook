@@ -1,0 +1,12 @@
+<% %w[sm md lg].each do |size| %>
+  <%= pb_rails("caption", props: { text: size }) %>
+  <%= pb_rails("rich_text_editor", props: {
+    input_min_height: size,
+    input_options: {
+      id: "rails_rte_min_height_#{size}",
+      name: "content_min_height_#{size}",
+    },
+    margin_bottom: "md",
+    value: "Add your text here. You can format your text, add links, quotes, and bullets.",
+  }) %>
+<% end %>

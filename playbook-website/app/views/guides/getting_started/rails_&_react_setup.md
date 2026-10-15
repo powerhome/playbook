@@ -4,41 +4,89 @@ icon: object-intersect
 description: The most flexibility with the fusion of RoR and React and the power of 100+ highly customizable View Components. Build design driven UI in Rails with View Components.
 ---
 
-Integrate Playbook's design system seamlessly into your Rails and React app with the Playbook Ruby Gem and React components. Get started today with our easy-to-follow tutorial.
+Use the Playbook Ruby gem for `pb_rails` kits and the `playbook-ui` npm package for styles, icons, and kit JavaScript.
 
-## Javascript Enabled Rails Kits
-To use kits with interactivity, and our graphs you need to bring in the NPM package.
+## 1. Add the Ruby gem
 
-#### Add the Playbook NPM Package
-```sh
-yarn add "playbook-ui@stable"
+```ruby
+# Gemfile
+gem "playbook_ui"
 ```
-
-This will allow you to choose what version you want.
 
 ```sh
-yarn install
+bundle install
 ```
 
-Now that you have the package installed you could import styles via JS
+Enable kit helpers (either approach works):
 
-```jsx
-@import "playbook-ui/dist/tokens/screen_sizes.scss";
+```ruby
+# app/helpers/application_helper.rb
+include Playbook::PbKitHelper
 ```
 
-#### Import all the Javascript Needed for Rails Kits
+```ruby
+# or in app/controllers/application_controller.rb
+helper Playbook::PbKitHelper
+```
 
-This will add all the javascript to use the popovers, & graphs for example.
+## 2. Add the npm package
+
+Interactive kits (popovers, date picker, typeahead, and more) need the JavaScript bundle from npm:
+
+```sh
+yarn add playbook-ui
+```
+
+Import styles and Rails kit JavaScript in your pack/entrypoint:
 
 ```js
-import 'playbook-ui/dist/playbook-rails.js';
+import 'playbook-ui/dist/reset.css'
+import 'playbook-ui/dist/playbook.css'
+import 'playbook-ui/dist/playbook-rails.js'
 ```
 
-#### Add Font Awesome
+### Chart kits (optional)
 
-Playbook ships with font awesome but you’ll need to include it in your application
+Chart kits need Highcharts and a separate bindings import **after** `playbook-rails.js`:
 
+```sh
+yarn add highcharts highcharts-react-official
 ```
-//= require regular-min.js
-//= require fontawesome-min.js
+
+```js
+import 'playbook-ui/dist/playbook-rails.js'
+import 'playbook-ui/dist/playbook-rails-charts-bindings.js'
 ```
+
+See [Dependencies](/guides/getting_started/dependencies) for chart and Advanced Table details.
+
+## 3. Add Playbook Icons
+
+Icon kits use [Playbook Icons](/icons). Font Awesome is not required.
+
+```sh
+yarn add @powerhome/playbook-icons @powerhome/playbook-icons-react
+```
+
+```js
+import '@powerhome/playbook-icons/css/pb-icons.css'
+```
+
+See [Dependencies](/guides/getting_started/dependencies) for React icon registration (`window.PB_ICONS`) and full setup.
+
+## 4. Use kits in Rails views
+
+```erb
+<%= pb_rails("button", props: { text: "Hello" }) %>
+```
+
+### Optional: Sass token imports
+
+If you write custom SCSS and need token `$variables`, import individual token partials (this does **not** replace `playbook.css`):
+
+```scss
+@import "playbook-ui/dist/tokens/colors";
+@import "playbook-ui/dist/tokens/spacing";
+```
+
+For theming and token exports, see [How to Theme](/guides/getting_started/how_to_theme) and [Using Tokens](/tokens/using_tokens).

@@ -8,7 +8,10 @@
   ],
   "props": {
     "accept": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "string"
+      },
       "platforms": [
         "react",
         "rails"
@@ -18,8 +21,10 @@
     "customMessage": {
       "type": "string",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": ""
     },
     "dark": {
       "type": "boolean",

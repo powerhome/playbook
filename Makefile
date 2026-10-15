@@ -45,6 +45,9 @@ clean:
 changelog:
 	ruby -Iplaybook/lib -rplaybook/changelog_generator -e 'Playbook::ChangelogGenerator.run!'
 
+changelog-rc:
+	ruby -Iplaybook/lib -rplaybook/changelog_generator -e 'Playbook::ChangelogGenerator.run!(mode: :rc)'
+
 connect:
 	ruby -Iplaybook/lib -rplaybook/connect_message_generator -e 'Playbook::ConnectMessageGenerator.run!'
 

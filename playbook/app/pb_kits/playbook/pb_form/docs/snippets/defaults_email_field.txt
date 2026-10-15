@@ -1,0 +1,1 @@
+<%= form.email_field :email, props: { label: "Email" } %>

@@ -30,8 +30,9 @@ const popoverReference = (
         className="toolbar_button_icon"
         justify="center"
     >
-      <Icon icon="ellipsis"
-          size="lg"
+      <Icon
+          icon="ellipsis"
+          size="1x"
       />
     </Flex>
   </button>
@@ -40,6 +41,7 @@ const popoverReference = (
 
   return (
       <PbReactPopover
+          className='pb_tiptap_toolbar_dropdown_popover'
           closeOnClick='outside'
           padding='none'
           placement="bottom"

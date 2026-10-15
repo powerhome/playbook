@@ -14,6 +14,7 @@
     "onCollapse": "() => {}",
     "onSortChange": "() => {}",
     "popoverProps": {},
+    "responsive": "",
     "results": 546,
     "sortOptions": {
       "popularity": "Popularity",
@@ -32,6 +33,7 @@
       "name": "Layout",
       "props": [
         "double",
+        "responsive",
         "variant",
         "background",
         "results"

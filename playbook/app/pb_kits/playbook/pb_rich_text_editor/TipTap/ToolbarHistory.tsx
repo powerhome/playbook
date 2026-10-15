@@ -1,5 +1,4 @@
 import React from "react";
-import FlexItem from "../../pb_flex/_flex_item";
 import EditorButton from "./EditorButton";
 import { ToolbarTypes } from "./EditorTypes";
 
@@ -24,7 +23,6 @@ const toolbarHistoryItems = [
 
     return (
     <>
-    <FlexItem displayFlex>
           {toolbarHistoryItems.map(
             ({ onclick, classname, disable, icon, text }: ToolbarTypes, index: number) => (
               <EditorButton
@@ -37,7 +35,6 @@ const toolbarHistoryItems = [
               />
             )
           )}
-        </FlexItem>
     </>
     )
 }

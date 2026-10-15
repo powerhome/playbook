@@ -4,9 +4,9 @@ Rails: Pass `sticky: true` to props.
 
 The live example uses a scroll container so sticky behavior is visible in the docs. Scroll inside the preview to see it.
 
-If the table header is not sticking in the right place you will need to pass an inline `top` style to the `thead`. This is often needed when a parent adds padding above the table.
-React Example: `<thead style={{ top: "-16px" }}>`
-Rails Example: `<thead style="top: -16px">`
+If the table header is not sticking in the right place you will need to pass an inline `top` style to the Table Head. This is often needed when a parent adds padding above the table.
+React Examples: `<Table.Head htmlOptions={{ style: { top: "-16px" } }}>` or `<thead style={{ top: "-16px" }}>`
+Rails Examples: `<%= pb_rails("table/table_head", props: { html_options: { style: "top: -16px" } }) do %>` or `<thead style="top: -16px">`
 
 ### Troubleshooting CSS Problems
 Sticky may not work if any parent/ancestor of the sticky element has any of the `overflow` properties set. Additionally, specifying a height on the overflowing container provides measurement for this feature to work properly. In some cases, it may be necessary to set the same parent/ancestor container to `position: static` as well.

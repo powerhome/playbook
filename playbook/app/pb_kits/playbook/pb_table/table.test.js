@@ -68,6 +68,24 @@ test("when sticky is true", () => {
   expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card sticky-header table-collapse-sm")
 })
 
+test("when responsive is scroll", () => {
+  const kit = renderKit(Table, props, { responsive: "scroll" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-scroll table-card")
+  expect(kit).not.toHaveClass("table-collapse-sm")
+  expect(kit.parentElement).toHaveClass("table-responsive-scroll")
+})
+
+test("when responsive is none", () => {
+  const kit = renderKit(Table, props, { responsive: "none" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-none table-card")
+  expect(kit).not.toHaveClass("table-collapse-sm")
+})
+
+test("when responsive is collapse", () => {
+  const kit = renderKit(Table, props, { responsive: "collapse" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card table-collapse-sm")
+})
+
 test("when striped is true", () => {
   const kit = renderKit(Table, props, { striped: true })
   expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card striped table-collapse-sm")
@@ -364,4 +382,181 @@ test("renders withFilter variant with cardProps and titleProps", () => {
   const title = container.querySelector('.pb_title_kit')
   expect(title).toBeInTheDocument()
   expect(title).toHaveClass("pl_lg")
+})
+
+test("Table.Cell renders colSpan as HTML colspan attribute", () => {
+  const { container } = render(
+    <Table data={{ testid: "table-colspan-cell" }}>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell colSpan={2}>{"Spans two columns"}</Table.Cell>
+          <Table.Cell>{"Value 2"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  const cells = container.querySelectorAll(".pb_table_td")
+  expect(cells[0]).toHaveAttribute("colspan", "2")
+  expect(cells[1]).not.toHaveAttribute("colspan")
+})
+
+test("Table.Cell keeps htmlOptions.colspan when the dedicated prop is omitted", () => {
+  const { container } = render(
+    <Table>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell htmlOptions={{ colspan: 3 }}>{"Spans three columns"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_table_td")).toHaveAttribute("colspan", "3")
+})
+
+test("Table.Header renders colSpan as HTML colspan attribute", () => {
+  const { container } = render(
+    <Table data={{ testid: "table-colspan-header" }}>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header colSpan={2}>{"Spans two columns"}</Table.Header>
+          <Table.Header>{"Column 3"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  const headers = container.querySelectorAll(".pb_table_th")
+  expect(headers[0]).toHaveAttribute("colspan", "2")
+  expect(headers[1]).not.toHaveAttribute("colspan")
+})
+
+test("Table.Header keeps htmlOptions.colspan when the dedicated prop is omitted", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header htmlOptions={{ colspan: 3 }}>{"Spans three columns"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_table_th")).toHaveAttribute("colspan", "3")
+})
+test("Table.Header renders sort link and icon when sortMenu is provided", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              sortMenu={[
+                { item: "Territory", link: "?sort=territory_asc", active: false, direction: "asc" },
+                { item: "Territory", link: "?sort=territory_desc", active: false, direction: "desc" },
+              ]}
+              text="Territory"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector("a")).toHaveAttribute("href", "?sort=territory_asc")
+  expect(container.querySelector(".pb_th_link")).toBeInTheDocument()
+})
+
+test("Table.Header cycles next sort link when an item is active", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              sortMenu={[
+                { item: "Territory", link: "?sort=territory_asc", active: true, direction: "asc" },
+                { item: "Territory", link: "?sort=territory_desc", active: false, direction: "desc" },
+              ]}
+              text="Territory"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector("a")).toHaveAttribute("href", "?sort=territory_desc")
+  expect(container.querySelector(".pb_th_active")).toBeInTheDocument()
+})
+
+test("Table.Header opens sort dropdown when colSpan is greater than 1", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              colSpan={2}
+              id="name"
+              sortMenu={[
+                { item: "First Name", link: "?sort=firstname_desc", active: false, direction: "desc" },
+                { item: "First Name", link: "?sort=firstname_asc", active: false, direction: "asc" },
+                { item: "Last Name", link: "?sort=lastname_desc", active: false, direction: "desc" },
+                { item: "Last Name", link: "?sort=lastname_asc", active: false, direction: "asc" },
+              ]}
+              text="Full Name"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_popover_reference_wrapper")).toBeInTheDocument()
+  expect(container.querySelector("a")).toHaveAttribute("href", "#")
+})
+
+test("Table.Header enables sort dropdown when sortDropdown is true", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              id="age"
+              sortDropdown
+              sortMenu={[
+                { item: "Age Descending", link: "?sort=age_desc", active: false, direction: "desc" },
+                { item: "Age Ascending", link: "?sort=age_asc", active: false, direction: "asc" },
+              ]}
+              text="Age"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_popover_reference_wrapper")).toBeInTheDocument()
+  expect(container.querySelector("a")).toHaveAttribute("href", "#")
+})
+
+test("Table.Header keeps click-to-cycle sorting when colSpan > 1 and sortDropdown is false", () => {
+  const { container } = render(
+    <Table>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header
+              colSpan={2}
+              id="name"
+              sortDropdown={false}
+              sortMenu={[
+                { item: "First Name", link: "?sort=firstname_desc", active: false, direction: "desc" },
+                { item: "First Name", link: "?sort=firstname_asc", active: false, direction: "asc" },
+                { item: "Last Name", link: "?sort=lastname_desc", active: false, direction: "desc" },
+                { item: "Last Name", link: "?sort=lastname_asc", active: false, direction: "asc" },
+              ]}
+              text="Full Name"
+          />
+        </Table.Row>
+      </Table.Head>
+    </Table>
+  )
+
+  expect(container.querySelector(".pb_popover_reference_wrapper")).not.toBeInTheDocument()
+  expect(container.querySelector("a")).toHaveAttribute("href", "?sort=firstname_desc")
 })

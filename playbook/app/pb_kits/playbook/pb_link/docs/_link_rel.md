@@ -1,0 +1,3 @@
+By default, `Link` sets `rel="noreferrer"` on any `target` other than `'child'`. This is a secure default — `noreferrer` implies `noopener`, which blocks the opened page from accessing `window.opener` — but it also prevents the browser from reusing a previously opened named tab: a browsing context opened with `noopener` isn't discoverable by name on later clicks, so every click opens a brand-new tab instead of navigating the existing one.
+
+Pass `rel=""` to opt out of the default and get a reusable named tab, the same way `target="child"` already behaves. Only do this for targets you control and trust (e.g. another view within the same app) — for links to third-party or untrusted destinations, leave `rel` unset and keep the secure default.
