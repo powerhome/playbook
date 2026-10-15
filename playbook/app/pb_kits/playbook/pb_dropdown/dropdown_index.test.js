@@ -1529,9 +1529,13 @@ describe("PbDropdown option creation", () => {
   let instance;
   let input;
 
-  const mount = ({ multi = false, async = false, creation = true } = {}) => {
+  const mount = ({ multi = false, async = false, creation = true, required = false, disabled = false, defaultValue = "" } = {}) => {
     root = buildDropdownElement({ options: [{ id: "existing", label: "Existing", value: "existing" }] });
     root.dataset.pbDropdownAllowOptionCreation = String(creation);
+    root.dataset.pbDropdownDisabled = String(disabled);
+    const baseInput = root.querySelector("[data-dropdown-selected-option]");
+    baseInput.required = required;
+    baseInput.dataset.defaultValue = defaultValue;
     root.dataset.pbDropdownMultiSelect = String(multi);
     if (async) root.dataset.pbDropdownAsync = "true";
     root.dataset.pbDropdownSearchTermMinimumLength = "1";
@@ -1590,7 +1594,7 @@ describe("PbDropdown option creation", () => {
       typeQuery(value);
       instance.handleOptionClick({ target: getCreationRow() });
     }
-    expect(new FormData(form).getAll("tags[]").filter(Boolean)).toEqual(["First", "Second"]);
+    expect(new FormData(form).getAll("tags[]")).toEqual(["First", "Second"]);
     typeQuery(" first ");
     expect(getCreationRow()).toBeNull();
   });
@@ -1654,9 +1658,72 @@ describe("PbDropdown option creation", () => {
     const rows = Array.from(instance.queryAllOptions());
     rows.forEach((row) => instance.handleOptionClick({ target: row }));
     expect(instance.baseInput.value).toBe("");
-    expect(new FormData(form).getAll("tags[]").filter(Boolean)).toEqual(["first", "second"]);
+    expect(new FormData(form).getAll("tags[]")).toEqual(["first", "second"]);
     typeQuery("New");
     expect(getCreationRow()).toBeNull();
+  });
+
+  test.each(["ny", " NY ", "empire"])("keeps the existing option selectable for query %s", (query) => {
+    mount();
+    const newYork = { id: "ny", label: "New York", value: "empire" };
+    instance.replaceOptions([newYork]);
+    typeQuery(query);
+
+    const optionRow = instance.queryAllOptions()[0];
+    expect(optionRow.style.display).toBe("");
+    expect(getCreationRow()).toBeNull();
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(instance.baseInput.value).toBe("ny");
+    expect(JSON.parse(instance.selectedOptionJson)).toEqual(newYork);
+  });
+
+  test("static filtering stays label-only when option creation is disabled", () => {
+    mount({ creation: false });
+    instance.replaceOptions([{ id: "ny", label: "New York", value: "empire" }]);
+    typeQuery("ny");
+    expect(instance.queryAllOptions()[0].style.display).toBe("none");
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
+    expect(instance.queryAllOptions()[0].style.display).toBe("");
+  });
+
+  test.each([false, true])("clearing selections restores required validation with creation=%s", (creation) => {
+    const form = mount({ multi: true, creation, required: true });
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(form.checkValidity()).toBe(false);
+
+    instance.handleOptionClick({ target: instance.queryAllOptions()[0] });
+    expect(instance.baseInput.disabled).toBe(true);
+    expect(new FormData(form).getAll("tags[]")).toEqual(["existing"]);
+    expect(form.checkValidity()).toBe(true);
+
+    instance.clearSelection();
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(instance.baseInput.required).toBe(true);
+    expect(root.querySelectorAll("input[data-generated]")).toHaveLength(0);
+    expect(form.checkValidity()).toBe(false);
+  });
+
+  test("default selections submit without a blank entry and reset restores validation", () => {
+    const form = mount({ multi: true, required: true, defaultValue: "existing" });
+    expect(instance.baseInput.disabled).toBe(true);
+    expect(new FormData(form).getAll("tags[]")).toEqual(["existing"]);
+
+    form.reset();
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(instance.baseInput.required).toBe(true);
+    expect(form.checkValidity()).toBe(false);
+  });
+
+  test("disabled multi-select defaults remain excluded from submission after reset", () => {
+    const form = mount({ multi: true, disabled: true, defaultValue: "existing" });
+    expect(new FormData(form).getAll("tags[]")).toEqual([]);
+    form.reset();
+    expect(instance.baseInput.disabled).toBe(true);
+    expect(new FormData(form).getAll("tags[]")).toEqual([]);
   });
 
   test("composition and disabled controls do not create", () => {

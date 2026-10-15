@@ -9,6 +9,7 @@ import {
 import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
+import { matchesOptionExactly } from "../utilities/optionCreation";
 
 import Body from "../../pb_body/_body";
 import ListItem from "../../pb_list/_list_item";
@@ -42,6 +43,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
   const {
     asyncEnabled,
     creationOption,
+    creationEnabled,
     autocomplete,
     activeStyle,
     disabled,
@@ -70,7 +72,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
     const filterText =
       selectedLabel && filterItem === selectedLabel ? "" : filterItem;
     const label = typeof option?.label === 'string' ? option.label.toLowerCase() : option?.label;
-    return String(label).toLowerCase().includes(filterText.toLowerCase());
+    return String(label).toLowerCase().includes(filterText.toLowerCase()) ||
+      (creationEnabled && matchesOptionExactly(option, filterText));
   }
 
   // When multiSelect, then if an option is selected, remove from dropdown

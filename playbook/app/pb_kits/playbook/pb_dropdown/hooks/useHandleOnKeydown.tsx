@@ -8,6 +8,7 @@ const {
   asyncEnabled,
   autocomplete,
   creationEnabled,
+  creationOption,
   filterItem,
   filteredOptions,
   focusedOptionIndex,
@@ -87,7 +88,12 @@ const {
         handleOptionClick(filteredOptions[focusedOptionIndex]);
         setFocusedOptionIndex(-1)
       } else if (focusedOptionIndex === -1) {
-        setIsDropDownClosed(false)
+        if (creationEnabled && creationOption) {
+          e.preventDefault();
+          handleOptionClick(creationOption);
+        } else {
+          setIsDropDownClosed(false)
+        }
       }
       break;
       case "Tab":

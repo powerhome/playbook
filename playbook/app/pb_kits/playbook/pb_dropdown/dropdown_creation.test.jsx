@@ -286,3 +286,78 @@ test("async creation leaves the following Enter available for submission", async
   expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
   expect(onSelect).toHaveBeenCalledTimes(1)
 })
+
+test.each([
+  { async: false, multiSelect: false },
+  { async: false, multiSelect: true },
+  { async: true, multiSelect: false },
+  { async: true, multiSelect: true },
+])("hovering the menu still permits Enter creation with %j", async settings => {
+  const onSelect = jest.fn()
+  const loadOptions = jest.fn(() => Promise.resolve(options))
+  const { container } = render(
+    <form>
+      <Dropdown
+          allowOptionCreation
+          async={settings.async}
+          closeOnClick="outside"
+          enableFormSupport
+          loadOptions={settings.async ? loadOptions : undefined}
+          multiSelect={settings.multiSelect}
+          name="tag"
+          onSelect={onSelect}
+          options={options}
+      />
+    </form>
+  )
+  typeQuery(container, "Ex")
+  await waitFor(() => expect(screen.getByText('Create "Ex"')).toBeInTheDocument())
+  fireEvent.mouseEnter(container.querySelector(".pb_dropdown_container"))
+  expect(container.querySelector(".pb_dropdown_option_list_focused")).toBeNull()
+
+  const input = container.querySelector(".dropdown_input")
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(false)
+  const expectedSelection = settings.multiSelect ? [createdOption("Ex")] : createdOption("Ex")
+  expect(onSelect).toHaveBeenCalledTimes(1)
+  expect(onSelect).toHaveBeenLastCalledWith(expectedSelection)
+
+  const fieldName = settings.multiSelect ? "tag[]" : "tag"
+  expect(new FormData(container.querySelector("form")).getAll(fieldName)).toEqual(["Ex"])
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(true)
+  expect(onSelect).toHaveBeenCalledTimes(1)
+})
+
+describe.each([false, true])("exact option matching with multiSelect=%s", multiSelect => {
+  test.each(["ny", " NY ", "empire"])("keeps the existing option selectable for query %s", query => {
+    const onSelect = jest.fn()
+    const newYork = { id: "ny", label: "New York", value: "empire" }
+    const { container } = render(
+      <Dropdown
+          allowOptionCreation
+          multiSelect={multiSelect}
+          onSelect={onSelect}
+          options={[newYork]}
+      />
+    )
+    typeQuery(container, query)
+    expect(screen.getByText("New York")).toBeInTheDocument()
+    expect(screen.queryByText(/^Create "/)).toBeNull()
+    expect(fireEvent.keyDown(container.querySelector(".dropdown_input"), { key: "Enter" })).toBe(false)
+    expect(onSelect).toHaveBeenCalledWith(multiSelect ? [newYork] : newYork)
+  })
+})
+
+test("static filtering stays label-only when option creation is disabled", () => {
+  const { container } = render(
+    <Dropdown
+        allowOptionCreation={false}
+        autocomplete
+        options={[{ id: "ny", label: "New York", value: "empire" }]}
+    />
+  )
+  typeQuery(container, "ny")
+  expect(screen.queryByText("New York")).toBeNull()
+  expect(screen.queryByText(/^Create "/)).toBeNull()
+  typeQuery(container, "New")
+  expect(screen.getByText("New York")).toBeInTheDocument()
+})

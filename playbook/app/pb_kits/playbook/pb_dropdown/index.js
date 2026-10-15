@@ -2,7 +2,7 @@ import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
 import { subscribeFloatingKitReposition, positionDropdownPortalToWrapper } from "../utilities/floatingPortalHosts";
-import { getCreationOption } from "./utilities/optionCreation";
+import { getCreationOption, matchesOptionExactly } from "./utilities/optionCreation";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -680,12 +680,12 @@ export default class PbDropdown extends PbEnhancedElement {
         opt.style.display = "none";
         return;
       }
-      const label = JSON.parse(opt.dataset.dropdownOptionLabel)
-        .label.toString()
-        .toLowerCase();
+      const option = JSON.parse(opt.dataset.dropdownOptionLabel);
+      const label = option.label.toString().toLowerCase();
 
       // hide or show option
-      const match = label.includes(lcTerm);
+      const match = label.includes(lcTerm) ||
+        (this.allowOptionCreation && matchesOptionExactly(option, term));
       opt.style.display = match ? "" : "none";
       if (match) hasMatch = true;
     });
@@ -2138,23 +2138,22 @@ export default class PbDropdown extends PbEnhancedElement {
       inp.type = "hidden";
       inp.name = name;
       inp.value = id;
+      inp.disabled = this.isDisabled;
       inp.dataset.generated = "true";
       previousInput.insertAdjacentElement("afterend", inp);
       previousInput = inp;
     });
 
-    // For multi-select, remove required from base input when there are selections
-    // The generated inputs handle the form submission with actual values
-    // Restore required attribute when there are no selections (if it was originally required)
-    if (this.selectedOptions.size > 0) {
-      baseInput.value = "";
+    // Only the per-selection inputs should submit while selections exist.
+    // The empty base input remains available for required validation after clearing.
+    const hasSelections = this.selectedOptions.size > 0;
+    baseInput.disabled = this.isDisabled || hasSelections;
+    baseInput.value = "";
+    if (hasSelections) {
       baseInput.removeAttribute("required");
       baseInput.setCustomValidity("");
-    } else {
-      baseInput.value = "";
-      if (this.wasOriginallyRequired) {
-        baseInput.setAttribute("required", "");
-      }
+    } else if (this.wasOriginallyRequired) {
+      baseInput.setAttribute("required", "");
     }
   }
 

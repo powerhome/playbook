@@ -15,7 +15,7 @@ import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import DropdownFormFields from "./subcomponents/DropdownFormFields";
 import useDropdown from "./hooks/useDropdown";
 import useAsyncOptions, { LoadOptions } from "./hooks/useAsyncOptions";
-import { getCreationOption } from "./utilities/optionCreation";
+import { getCreationOption, matchesOptionExactly } from "./utilities/optionCreation";
 import getQuickPickOptions from "./quickpick";
 
 import {
@@ -461,11 +461,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           const filterText =
             selectedLabel && filterItem === selectedLabel ? "" : filterItem;
           return availableOptions.filter((opt: GenericObject) =>
-            String(opt.label).toLowerCase().includes(filterText.toLowerCase())
+            String(opt.label).toLowerCase().includes(filterText.toLowerCase()) ||
+            (creationEnabled && matchesOptionExactly(opt, filterText))
           );
-        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, autocomplete]);
+        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, autocomplete, creationEnabled]);
 
     const filteredOptions = creationOption ? [...matchingOptions, creationOption] : matchingOptions;
+    const inputShowsSelection = !multiSelect && !Array.isArray(selected) && filterItem === selected?.label;
     let creationFocusIndex = -1;
     if (creationEnabled && creationOption) {
         creationFocusIndex = matchingOptions.length;
@@ -475,13 +477,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     useEffect(() => {
         if (!creationEnabled) return;
-        if (isDropDownClosed || !filterItem.trim()) {
+        if (isDropDownClosed || !filterItem.trim() || inputShowsSelection) {
             setFocusedOptionIndex(-1);
             return;
         }
 
         setFocusedOptionIndex(creationFocusIndex);
-    }, [creationEnabled, isDropDownClosed, filterItem, creationFocusIndex]);
+    }, [creationEnabled, isDropDownClosed, filterItem, inputShowsSelection, creationFocusIndex]);
 
     // Empty copy follows the settled search. Hiding already-selected rows must not turn a
     // successful result list into "No results found", including the last pick while the menu stays open.
