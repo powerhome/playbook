@@ -2,6 +2,12 @@
 // This provides date range options similar to the DatePicker QuickPick functionality
 
 import DateTime from '../../pb_kit/dateTime';
+import {
+  endOfDay,
+  parseQuickPickDateOnly,
+  startOfDay,
+  stringHasExplicitTime,
+} from '../utilities/quickpickDateSync';
 
 type QuickPickOption = {
   label: string;
@@ -20,6 +26,11 @@ type CustomQuickPickDates = {
   override?: boolean;
   dates: CustomQuickPickDate[];
 };
+
+const toQuickPickRange = (start: Date, end: Date): Date[] => [
+  startOfDay(start),
+  endOfDay(end),
+];
 
 // Helper function to calculate date range from timePeriod and amount
 const calculateDateRange = (timePeriod: string, amount: number): Date[] => {
@@ -45,7 +56,7 @@ const calculateDateRange = (timePeriod: string, amount: number): Date[] => {
     default:
       throw new Error('Invalid time period');
   }
-  return [startDate, endDate];
+  return toQuickPickRange(startDate, endDate);
 };
 
 // Helper to format date for display
@@ -57,13 +68,26 @@ const formatDate = (date: Date) => {
   return `${month}/${day}/${year}`;
 };
 
+const parseCustomDateString = (dateStr: string): Date => {
+  if (stringHasExplicitTime(dateStr)) {
+    return new Date(dateStr);
+  }
+  return parseQuickPickDateOnly(dateStr) ?? new Date(dateStr);
+};
+
 // Helper to create a QuickPickOption from a custom date
 const createOptionFromCustomDate = (customDate: CustomQuickPickDate): QuickPickOption => {
   let dateRange: Date[];
-  
+
   if (Array.isArray(customDate.value)) {
-    // Explicit date range as string array
-    dateRange = customDate.value.map((dateStr: string) => new Date(dateStr));
+    const startRaw = parseCustomDateString(customDate.value[0]);
+    const endRaw = parseCustomDateString(customDate.value[1]);
+    const startHasTime = stringHasExplicitTime(customDate.value[0]);
+    const endHasTime = stringHasExplicitTime(customDate.value[1]);
+    dateRange = [
+      startHasTime ? startRaw : startOfDay(startRaw),
+      endHasTime ? endRaw : endOfDay(endRaw),
+    ];
   } else {
     // Calculate from timePeriod and amount
     dateRange = calculateDateRange(
@@ -78,6 +102,17 @@ const createOptionFromCustomDate = (customDate: CustomQuickPickDate): QuickPickO
     formattedStartDate: formatDate(dateRange[0]),
     formattedEndDate: formatDate(dateRange[1]),
     id: `quickpick-${customDate.label.toLowerCase().replace(/\s+/g, '-')}`,
+  };
+};
+
+const option = (label: string, start: Date, end: Date, id: string): QuickPickOption => {
+  const value = toQuickPickRange(start, end);
+  return {
+    label,
+    value,
+    formattedStartDate: formatDate(value[0]),
+    formattedEndDate: formatDate(value[1]),
+    id,
   };
 };
 
@@ -107,26 +142,26 @@ const getQuickPickOptions = (rangeEndsToday = false, customQuickPickDates?: Cust
   const lastYearEndDate = DateTime.getPreviousYearEndDate(new Date());
 
   const defaultOptions: QuickPickOption[] = [
-    { label: 'Today', value: [today, today], id: 'quickpick-today' },
-    { label: 'Yesterday', value: [yesterday, yesterday], formattedStartDate: `${formatDate(yesterday)}`, formattedEndDate: `${formatDate(yesterday)}`, id: 'quickpick-yesterday' },
-    { label: 'This Week', value: [thisWeekStartDate, thisWeekEndDate], formattedStartDate: `${formatDate(thisWeekStartDate)}`, formattedEndDate: `${formatDate(thisWeekEndDate)}`, id: 'quickpick-this-week' },
-    { label: 'This Month', value: [thisMonthStartDate, thisMonthEndDate], formattedStartDate: `${formatDate(thisMonthStartDate)}`, formattedEndDate: `${formatDate(thisMonthEndDate)}`, id: 'quickpick-this-month' },
-    { label: 'This Quarter', value: [thisQuarterStartDate, thisQuarterEndDate], formattedStartDate: `${formatDate(thisQuarterStartDate)}`, formattedEndDate: `${formatDate(thisQuarterEndDate)}`, id: 'quickpick-this-quarter' },
-    { label: 'This Year', value: [thisYearStartDate, thisYearEndDate], formattedStartDate: `${formatDate(thisYearStartDate)}`, formattedEndDate: `${formatDate(thisYearEndDate)}`, id: 'quickpick-this-year' },
-    { label: 'Last Week', value: [lastWeekStartDate, lastWeekEndDate], formattedStartDate: `${formatDate(lastWeekStartDate)}`, formattedEndDate: `${formatDate(lastWeekEndDate)}`, id: 'quickpick-last-week' },
-    { label: 'Last Month', value: [lastMonthStartDate, lastMonthEndDate], formattedStartDate: `${formatDate(lastMonthStartDate)}`, formattedEndDate: `${formatDate(lastMonthEndDate)}`, id: 'quickpick-last-month' },
-    { label: 'Last Quarter', value: [lastQuarterStartDate, lastQuarterEndDate], formattedStartDate: `${formatDate(lastQuarterStartDate)}`, formattedEndDate: `${formatDate(lastQuarterEndDate)}`, id: 'quickpick-last-quarter' },
-    { label: 'Last Year', value: [lastYearStartDate, lastYearEndDate], formattedStartDate: `${formatDate(lastYearStartDate)}`, formattedEndDate: `${formatDate(lastYearEndDate)}`, id: 'quickpick-last-year' },
+    option('Today', today, today, 'quickpick-today'),
+    option('Yesterday', yesterday, yesterday, 'quickpick-yesterday'),
+    option('This Week', thisWeekStartDate, thisWeekEndDate, 'quickpick-this-week'),
+    option('This Month', thisMonthStartDate, thisMonthEndDate, 'quickpick-this-month'),
+    option('This Quarter', thisQuarterStartDate, thisQuarterEndDate, 'quickpick-this-quarter'),
+    option('This Year', thisYearStartDate, thisYearEndDate, 'quickpick-this-year'),
+    option('Last Week', lastWeekStartDate, lastWeekEndDate, 'quickpick-last-week'),
+    option('Last Month', lastMonthStartDate, lastMonthEndDate, 'quickpick-last-month'),
+    option('Last Quarter', lastQuarterStartDate, lastQuarterEndDate, 'quickpick-last-quarter'),
+    option('Last Year', lastYearStartDate, lastYearEndDate, 'quickpick-last-year'),
   ];
 
   // Handle customQuickPickDates and override logic
   if (customQuickPickDates && customQuickPickDates.dates && customQuickPickDates.dates.length > 0) {
     const customOptions = customQuickPickDates.dates.map(createOptionFromCustomDate);
-    
+
     if (customQuickPickDates.override === false) {
       return [...defaultOptions, ...customOptions];
     }
-    
+
     return customOptions;
   }
 

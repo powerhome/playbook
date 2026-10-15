@@ -1,0 +1,31 @@
+<%= pb_rails("dropdown", props: {
+  id: "dropdown-quickpick-enable-time",
+  label: "Date Range",
+  name: "date_range",
+  margin_bottom: "sm",
+  variant: "quickpick",
+  controls_start_id: "start-date-picker-enable-time",
+  controls_end_id: "end-date-picker-enable-time",
+  start_date_id: "quickpick_enable_time_start_date",
+  start_date_name: "start_date",
+  end_date_id: "quickpick_enable_time_end_date",
+  end_date_name: "end_date"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  picker_id: "start-date-picker-enable-time",
+  label: "Start Date",
+  name: "start_date_picker",
+  placeholder: "Select Start Date",
+  enable_time: true,
+  sync_start_with: "dropdown-quickpick-enable-time"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  picker_id: "end-date-picker-enable-time",
+  label: "End Date",
+  name: "end_date_picker",
+  placeholder: "Select End Date",
+  enable_time: true,
+  sync_end_with: "dropdown-quickpick-enable-time"
+}) %>
