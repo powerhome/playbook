@@ -1,3 +1,33 @@
+# ✨ 18.2.0.pre.rc.2
+
+##### October 14, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.2.0-rc.2](https://github.com/powerhome/playbook/tree/18.2.0-rc.2) full list of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table Kit: Update Rails Selectable Rows + Multi-column Header Layout [\#6754](https://github.com/powerhome/playbook/pull/6754) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Form Kit: Add Custom Validation Messages to Remaining Pb_form_with Fields [\#6743](https://github.com/powerhome/playbook/pull/6743) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Bump Shell-quote from 1.10.0 to 1.12.0 [\#6766](https://github.com/powerhome/playbook/pull/6766) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Nanoid from 3.3.11 to 3.3.20 [\#6764](https://github.com/powerhome/playbook/pull/6764) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- 18.2.0.pre.rc.1 Changelog [\#6763](https://github.com/powerhome/playbook/pull/6763) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Resolve Active Storage Security Vulnerability [\#6762](https://github.com/powerhome/playbook/pull/6762) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Bump Ws from 7.5.9 to 7.5.13 [\#6760](https://github.com/powerhome/playbook/pull/6760) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Playbook Website: Update Maplibre on Playbook Website to Address Critical Security Alert [\#6755](https://github.com/powerhome/playbook/pull/6755) ([nickamantia](https://github.com/nickamantia))
+- Bump Immutable from 4.3.6 to 4.3.9 [\#6753](https://github.com/powerhome/playbook/pull/6753) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Form Kit: Allow Select Fields Without a Prompt [\#6745](https://github.com/powerhome/playbook/pull/6745) ([xjunior](https://github.com/xjunior))
+
+**Fixed Bugs:**
+
+- Date Picker Kit: Label Wrapping Bumps Calendar Within Input [\#6746](https://github.com/powerhome/playbook/pull/6746) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.2.0-rc.1...18.2.0-rc.2)
+
 # ✨ 18.2.0.pre.rc.1
 
 ##### October 12, 2026
