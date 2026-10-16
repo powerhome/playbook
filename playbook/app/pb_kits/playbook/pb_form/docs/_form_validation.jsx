@@ -123,6 +123,8 @@ const CODE_SNIPPETS = {
     <DatePicker
         allowInput
         error={fieldState.error?.message}
+        initializeOnce
+        key={resetKey}
         label="Start Date"
         onChange={(dateStr) => field.onChange(dateStr)}
         pickerId="form-validation-start-date"
@@ -310,6 +312,7 @@ const CODE_SNIPPETS = {
   render={({ field, fieldState }) => (
     <TimePicker
         error={fieldState.error?.message}
+        key={resetKey}
         label="Start Time"
         onChange={(time) => field.onChange(time)}
         required
@@ -321,17 +324,17 @@ const CODE_SNIPPETS = {
   typeahead: `<Controller
   control={control}
   name="favoriteColors"
-  render={({ field, fieldState }) => (
+  render={({ field: { onChange: handleChange, value }, fieldState }) => (
     <Typeahead
         error={fieldState.error?.message}
         isMulti
         label="Favorite Color"
-        onChange={field.onChange}
+        onChange={handleChange}
         options={typeaheadColorOptions}
         pills
         placeholder="Search for a color"
         requiredIndicator
-        value={field.value}
+        value={value}
     />
   )}
   rules={requireSelection("Please select a color")}
@@ -339,15 +342,15 @@ const CODE_SNIPPETS = {
   typeahead_default: `<Controller
   control={control}
   name="favoriteColorSearch"
-  render={({ field, fieldState }) => (
+  render={({ field: { onChange: handleChange, value }, fieldState }) => (
     <Typeahead
         error={fieldState.error?.message}
         label="Favorite Color"
-        onChange={field.onChange}
+        onChange={handleChange}
         options={typeaheadColorOptions}
         placeholder="Search for a color"
         requiredIndicator
-        value={field.value}
+        value={value}
     />
   )}
   rules={requireSelection("Please select a color")}
@@ -380,6 +383,7 @@ const FORM_CLOSE = `  <Button htmlType="submit" text="Submit" />
 const FormValidation = () => {
   const [selectedKeys, setSelectedKeys] = useState([DEFAULT_SELECTED_KEY])
   const [submittedData, setSubmittedData] = useState(null)
+  const [resetKey, setResetKey] = useState(0)
   const phoneNumberRef = useRef(null)
   const {
     control,
@@ -421,6 +425,7 @@ const FormValidation = () => {
 
   const onReset = () => {
     reset()
+    setResetKey((current) => current + 1)
     setSubmittedData(null)
   }
 
@@ -500,6 +505,7 @@ const FormValidation = () => {
                           defaultDate={field.value}
                           error={fieldState.error?.message}
                           initializeOnce
+                          key={`date-${resetKey}`}
                           label="Start Date"
                           marginBottom="sm"
                           onChange={(dateStr) => field.onChange(dateStr)}
@@ -764,6 +770,7 @@ const FormValidation = () => {
                     render={({ field, fieldState }) => (
                       <TimePicker
                           error={fieldState.error?.message}
+                          key={`time-${resetKey}`}
                           label="Start Time"
                           marginBottom="sm"
                           onChange={(time) => field.onChange(time)}
@@ -790,31 +797,31 @@ const FormValidation = () => {
                           requiredIndicator
                           value={value}
                       />
-                )}
+                    )}
                     rules={requireSelection("Please select a color")}
-            />
+                />
               )}
 
               {isSelected("typeahead") && (
-              <Controller
-                  control={control}
-                  name="favoriteColors"
-                  render={({ field: { onChange: handleChange, value }, fieldState }) => (
-                    <Typeahead
-                        error={fieldState.error?.message}
-                        isMulti
-                        label="Favorite Color"
-                        marginBottom="sm"
-                        onChange={handleChange}
-                        options={TYPEAHEAD_COLOR_OPTIONS}
-                        pills
-                        placeholder="Search for a color"
-                        requiredIndicator
-                        value={value}
+                <Controller
+                    control={control}
+                    name="favoriteColors"
+                    render={({ field: { onChange: handleChange, value }, fieldState }) => (
+                      <Typeahead
+                          error={fieldState.error?.message}
+                          isMulti
+                          label="Favorite Color"
+                          marginBottom="sm"
+                          onChange={handleChange}
+                          options={TYPEAHEAD_COLOR_OPTIONS}
+                          pills
+                          placeholder="Search for a color"
+                          requiredIndicator
+                          value={value}
+                      />
+                    )}
+                    rules={requireSelection("Please select a color")}
                 />
-              )}
-                  rules={requireSelection("Please select a color")}
-              />
               )}
 
               <Flex gap="xs"

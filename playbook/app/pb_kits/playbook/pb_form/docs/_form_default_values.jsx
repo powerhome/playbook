@@ -94,6 +94,10 @@ const DEPARTMENT_TREE_DATA = [
   },
 ]
 
+// NOTE: `rating` is intentionally omitted. StarRating does not forward `rating`
+// into StarRatingInteractive (which keeps its own useState(0)), so a prefilled
+// rating would submit a value the control never displays. Re-add once the kit
+// forwards the initial rating.
 const DEFAULT_VALUES = {
   bio: "Loves building with Playbook.",
   countries: [CANADA],
@@ -109,7 +113,6 @@ const DEFAULT_VALUES = {
   phone: "5551234567",
   projectNumber: "33-12345",
   quantity: 3,
-  rating: 4,
   startDate: "06/15/2026",
   startTime: "09:30",
   website: "https://example.com",
@@ -144,6 +147,7 @@ const CODE_SNIPPETS = {
 />`,
   dropdown: `<Dropdown
     defaultValue={country}
+    key={resetKey}
     label="Country"
     options={countryOptions}
     {...register("country")}
@@ -175,6 +179,7 @@ const CODE_SNIPPETS = {
 />`,
   multi_select: `<Dropdown
     defaultValue={countries}
+    key={resetKey}
     label="Countries"
     multiSelect
     options={countryOptions}
@@ -209,6 +214,8 @@ const CODE_SNIPPETS = {
   name="phone"
   render={({ field }) => (
     <PhoneNumberInput
+        initialCountry="us"
+        key={resetKey}
         label="Phone Number"
         onChange={(data) => field.onChange(data?.number || "")}
         value={field.value}
@@ -229,6 +236,7 @@ const CODE_SNIPPETS = {
 />`,
   select: `<Select
     blankSelection="Select one..."
+    key={resetKey}
     label="Favorite Color"
     options={colorSelectOptions}
     {...register("favoriteColor")}
@@ -273,6 +281,7 @@ const CODE_SNIPPETS = {
   render={({ field }) => (
     <TimePicker
         defaultTime={field.value}
+        key={resetKey}
         label="Start Time"
         onChange={(time) => field.onChange(time)}
     />
@@ -281,6 +290,7 @@ const CODE_SNIPPETS = {
   typeahead: `<Typeahead
     defaultValue={favoriteColors}
     isMulti
+    key={resetKey}
     label="Favorite Color"
     options={typeaheadColorOptions}
     pills
@@ -289,6 +299,7 @@ const CODE_SNIPPETS = {
 />`,
   typeahead_default: `<Typeahead
     defaultValue={favoriteColor}
+    key={resetKey}
     label="Favorite Color"
     options={typeaheadColorOptions}
     placeholder="Search for a color"
@@ -437,6 +448,7 @@ const FormDefaultValues = () => {
               {isSelected("dropdown") && (
                 <Dropdown
                     defaultValue={CANADA}
+                    key={`dropdown-${resetKey}`}
                     label="Country"
                     marginBottom="sm"
                     options={COUNTRY_OPTIONS}
@@ -447,6 +459,7 @@ const FormDefaultValues = () => {
               {isSelected("multi_select") && (
                 <Dropdown
                     defaultValue={DEFAULT_VALUES.countries}
+                    key={`multi-select-${resetKey}`}
                     label="Countries"
                     marginBottom="sm"
                     multiSelect
@@ -478,6 +491,8 @@ const FormDefaultValues = () => {
                     name="phone"
                     render={({ field }) => (
                       <PhoneNumberInput
+                          initialCountry="us"
+                          key={`phone-${resetKey}`}
                           label="Phone Number"
                           onChange={(data) => field.onChange(data?.number || "")}
                           value={field.value}
@@ -489,6 +504,7 @@ const FormDefaultValues = () => {
               {isSelected("select") && (
                 <Select
                     blankSelection="Select one..."
+                    key={`select-${resetKey}`}
                     label="Favorite Color"
                     marginBottom="sm"
                     options={COLOR_SELECT_OPTIONS}
@@ -629,6 +645,7 @@ const FormDefaultValues = () => {
                     render={({ field }) => (
                       <TimePicker
                           defaultTime={field.value}
+                          key={`time-${resetKey}`}
                           label="Start Time"
                           marginBottom="sm"
                           onChange={(time) => field.onChange(time)}
@@ -640,6 +657,7 @@ const FormDefaultValues = () => {
               {isSelected("typeahead_default") && (
                 <Typeahead
                     defaultValue={BLUE}
+                    key={`typeahead-default-${resetKey}`}
                     label="Favorite Color"
                     marginBottom="sm"
                     options={TYPEAHEAD_COLOR_OPTIONS}
@@ -652,6 +670,7 @@ const FormDefaultValues = () => {
                 <Typeahead
                     defaultValue={[BLUE]}
                     isMulti
+                    key={`typeahead-multi-${resetKey}`}
                     label="Favorite Color"
                     marginBottom="sm"
                     options={TYPEAHEAD_COLOR_OPTIONS}
