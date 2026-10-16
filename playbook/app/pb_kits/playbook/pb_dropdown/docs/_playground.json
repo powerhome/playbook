@@ -5,6 +5,7 @@
     "options": "Options.data"
   },
   "defaults": {
+    "allowOptionCreation": false,
     "async": false,
     "autocomplete": false,
     "blankSelection": "",
@@ -19,6 +20,8 @@
     "controlsStartId": "",
     "controlsEndId": "",
     "requiredIndicator": false,
+    "required": false,
+    "validationMessage": "",
     "dark": false,
     "label": "Select a Country",
     "options": [
@@ -124,7 +127,11 @@
         "closeOnClick",
         "constrainHeight",
         "isClosed",
-        "requiredIndicator"
+        "enableFormSupport",
+        "requiredIndicator",
+        "required",
+        "validationMessage",
+        "allowOptionCreation"
       ]
     },
     {
@@ -155,6 +162,15 @@
     }
   ],
   "presets": [
+    {
+      "name": "Create tags",
+      "props": {
+        "allowOptionCreation": true,
+        "multiSelect": true,
+        "name": "tags[]",
+        "label": "Tags"
+      }
+    },
     {
       "name": "Async search",
       "structureMode": "async",

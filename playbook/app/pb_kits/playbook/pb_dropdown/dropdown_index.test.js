@@ -1523,3 +1523,216 @@ describe("PbDropdown multi-select identity", () => {
     jest.useRealTimers();
   });
 });
+
+describe("PbDropdown option creation", () => {
+  let root;
+  let instance;
+  let input;
+
+  const mount = ({ multi = false, async = false, creation = true, required = false, disabled = false, defaultValue = "" } = {}) => {
+    root = buildDropdownElement({ options: [{ id: "existing", label: "Existing", value: "existing" }] });
+    root.dataset.pbDropdownAllowOptionCreation = String(creation);
+    root.dataset.pbDropdownDisabled = String(disabled);
+    const baseInput = root.querySelector("[data-dropdown-selected-option]");
+    baseInput.required = required;
+    baseInput.dataset.defaultValue = defaultValue;
+    root.dataset.pbDropdownMultiSelect = String(multi);
+    if (async) root.dataset.pbDropdownAsync = "true";
+    root.dataset.pbDropdownSearchTermMinimumLength = "1";
+    root.dataset.pbDropdownSearchDebounceTimeout = "0";
+    input = document.createElement("input");
+    input.dataset.dropdownAutocomplete = "true";
+    root.querySelector(".pb_dropdown_trigger").appendChild(input);
+    if (multi) root.querySelector("[data-dropdown-selected-option]").name = "tags[]";
+    const form = document.createElement("form");
+    root.replaceWith(form);
+    form.appendChild(root);
+    instance = new PbDropdown(root);
+    instance.connect();
+    return form;
+  };
+
+  const typeQuery = value => {
+    input.value = value;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+  const getCreationRow = () => root.querySelector("[data-dropdown-create-option]");
+
+  afterEach(() => {
+    instance?.disconnect();
+    document.body.innerHTML = "";
+    jest.useRealTimers();
+  });
+
+  test("Enter creates a trimmed value through the selection event and form input", () => {
+    jest.useFakeTimers();
+    const form = mount();
+    const onSelect = jest.fn();
+    root.addEventListener("pb:dropdown:selected", event => onSelect(event.detail));
+    typeQuery("  New tag  ");
+    expect(getCreationRow().textContent).toBe('Create "New tag"');
+    input.dispatchEvent(new KeyboardEvent("keydown", {
+      key: "Enter",
+      bubbles: true,
+      cancelable: true,
+    }));
+    expect(onSelect).toHaveBeenCalledWith({
+      id: "New tag",
+      label: "New tag",
+      value: "New tag",
+      __isNew__: true,
+    });
+    expect(new FormData(form).get("country")).toBe("New tag");
+    expect(getCreationRow()).toBeNull();
+    jest.runOnlyPendingTimers();
+    expect(instance.target).toHaveClass("close");
+  });
+
+  test("multi-select submits separate values and suppresses selected duplicates", () => {
+    const form = mount({ multi: true });
+    for (const value of ["First", "Second"]) {
+      typeQuery(value);
+      instance.handleOptionClick({ target: getCreationRow() });
+    }
+    expect(new FormData(form).getAll("tags[]")).toEqual(["First", "Second"]);
+    typeQuery(" first ");
+    expect(getCreationRow()).toBeNull();
+  });
+
+  test("whitespace, existing labels and values cannot be created", () => {
+    mount();
+    for (const value of ["  ", " EXISTING ", "existing"]) {
+      typeQuery(value);
+      expect(getCreationRow()).toBeNull();
+    }
+  });
+
+  test("clear and reset remove the creation row", () => {
+    mount();
+    typeQuery("New");
+    instance.clearSelection();
+    expect(getCreationRow()).toBeNull();
+    typeQuery("Another");
+    instance.resetDropdownValue();
+    expect(getCreationRow()).toBeNull();
+  });
+
+  test("async results resolve before creation and stale callbacks are ignored", () => {
+    jest.useFakeTimers();
+    mount({ async: true });
+    const searches = [];
+    root.addEventListener("pb:dropdown:search", event => searches.push(event.detail));
+    typeQuery("Old");
+    jest.runOnlyPendingTimers();
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
+    jest.runOnlyPendingTimers();
+    searches[1].setResults([]);
+    expect(getCreationRow().textContent).toBe('Create "New"');
+    searches[0].setResults([{ id: "old", label: "Old" }]);
+    expect(getCreationRow().textContent).toBe('Create "New"');
+  });
+
+  test("async existing results and errors do not offer creation", () => {
+    jest.useFakeTimers();
+    mount({ async: true });
+    let search;
+    root.addEventListener("pb:dropdown:search", event => { search = event.detail });
+    typeQuery("Existing");
+    jest.runOnlyPendingTimers();
+    search.setResults([{ id: "server", label: "Existing" }]);
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
+    jest.runOnlyPendingTimers();
+    search.setError();
+    expect(getCreationRow()).toBeNull();
+  });
+
+  test.each([undefined, false])("creation %s submits individual multi-select values in selection order", (creation) => {
+    const form = mount({ multi: true, creation });
+    if (creation === undefined) delete root.dataset.pbDropdownAllowOptionCreation;
+    instance.replaceOptions([
+      { id: "first", label: "First", value: "first" },
+      { id: "second", label: "Second", value: "second" },
+    ]);
+    const rows = Array.from(instance.queryAllOptions());
+    rows.forEach((row) => instance.handleOptionClick({ target: row }));
+    expect(instance.baseInput.value).toBe("");
+    expect(new FormData(form).getAll("tags[]")).toEqual(["first", "second"]);
+    typeQuery("New");
+    expect(getCreationRow()).toBeNull();
+  });
+
+  test.each(["ny", " NY ", "empire"])("keeps the existing option selectable for query %s", (query) => {
+    mount();
+    const newYork = { id: "ny", label: "New York", value: "empire" };
+    instance.replaceOptions([newYork]);
+    typeQuery(query);
+
+    const optionRow = instance.queryAllOptions()[0];
+    expect(optionRow.style.display).toBe("");
+    expect(getCreationRow()).toBeNull();
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(instance.baseInput.value).toBe("ny");
+    expect(JSON.parse(instance.selectedOptionJson)).toEqual(newYork);
+  });
+
+  test("static filtering stays label-only when option creation is disabled", () => {
+    mount({ creation: false });
+    instance.replaceOptions([{ id: "ny", label: "New York", value: "empire" }]);
+    typeQuery("ny");
+    expect(instance.queryAllOptions()[0].style.display).toBe("none");
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
+    expect(instance.queryAllOptions()[0].style.display).toBe("");
+  });
+
+  test.each([false, true])("clearing selections restores required validation with creation=%s", (creation) => {
+    const form = mount({ multi: true, creation, required: true });
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(form.checkValidity()).toBe(false);
+
+    instance.handleOptionClick({ target: instance.queryAllOptions()[0] });
+    expect(instance.baseInput.disabled).toBe(true);
+    expect(new FormData(form).getAll("tags[]")).toEqual(["existing"]);
+    expect(form.checkValidity()).toBe(true);
+
+    instance.clearSelection();
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(instance.baseInput.required).toBe(true);
+    expect(root.querySelectorAll("input[data-generated]")).toHaveLength(0);
+    expect(form.checkValidity()).toBe(false);
+  });
+
+  test("default selections submit without a blank entry and reset restores validation", () => {
+    const form = mount({ multi: true, required: true, defaultValue: "existing" });
+    expect(instance.baseInput.disabled).toBe(true);
+    expect(new FormData(form).getAll("tags[]")).toEqual(["existing"]);
+
+    form.reset();
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(instance.baseInput.required).toBe(true);
+    expect(form.checkValidity()).toBe(false);
+  });
+
+  test("disabled multi-select defaults remain excluded from submission after reset", () => {
+    const form = mount({ multi: true, disabled: true, defaultValue: "existing" });
+    expect(new FormData(form).getAll("tags[]")).toEqual([]);
+    form.reset();
+    expect(instance.baseInput.disabled).toBe(true);
+    expect(new FormData(form).getAll("tags[]")).toEqual([]);
+  });
+
+  test("composition and disabled controls do not create", () => {
+    mount();
+    typeQuery("New");
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", isComposing: true, bubbles: true }));
+    expect(instance.baseInput.value).toBe("");
+    instance.isDisabled = true;
+    instance.updateCreationOption("Another");
+    expect(getCreationRow()).toBeNull();
+  });
+});
