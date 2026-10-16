@@ -161,4 +161,25 @@ describe('usageFromPreset rails children', () => {
     assert.match(usage.rails.example, /"Full Name" => "John Wick"/);
     assert.doesNotMatch(usage.rails.example, /do %>/);
   });
+
+  it('keeps Highcharts options keys camelCase in rails examples', () => {
+    const usage = usageFromPreset('pb_bar_graph', 'PbBarGraph', {
+      presets: [
+        {
+          name: 'Default',
+          props: {
+            options: {
+              series: [{ data: [1] }],
+              xAxis: { categories: ['Q1'] },
+              yAxis: { title: { text: 'USD' } },
+            },
+          },
+        },
+      ],
+    });
+    assert.match(usage.rails.example, /xAxis:/);
+    assert.match(usage.rails.example, /yAxis:/);
+    assert.doesNotMatch(usage.rails.example, /x_axis/);
+    assert.doesNotMatch(usage.rails.example, /y_axis/);
+  });
 });
