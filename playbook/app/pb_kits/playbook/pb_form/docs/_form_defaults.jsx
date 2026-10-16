@@ -110,6 +110,9 @@ const CODE_SNIPPETS = {
   name="startDate"
   render={({ field }) => (
     <DatePicker
+        defaultDate={field.value}
+        initializeOnce
+        key={\`date-\${resetKey}\`}
         label="Start Date"
         onChange={(dateStr) => field.onChange(dateStr)}
         pickerId="form-defaults-start-date"
@@ -117,33 +120,46 @@ const CODE_SNIPPETS = {
   )}
 />`,
   dropdown: `<Dropdown
+    key={\`dropdown-\${resetKey}\`}
     label="Country"
     options={countryOptions}
     {...register("country")}
 />`,
   multi_select: `<Dropdown
+    key={\`multi-select-\${resetKey}\`}
     label="Countries"
     multiSelect
     options={countryOptions}
     {...register("countries")}
 />`,
-  multi_level_select: `<MultiLevelSelect
-    id="mls-form-defaults"
-    label="Department"
-    treeData={departmentTreeData}
-    {...register("department")}
+  multi_level_select: `<Controller
+  control={control}
+  name="department"
+  render={({ field }) => (
+    <MultiLevelSelect
+        id="mls-form-defaults"
+        label="Department"
+        onChange={(event) =>
+          field.onChange(event.target.value.map((item) => item.id))
+        }
+        selectedIds={field.value}
+        treeData={departmentTreeData}
+    />
+  )}
 />`,
   phone_number: `<Controller
   control={control}
   name="phone"
   render={({ field }) => (
     <PhoneNumberInput
+        key={\`phone-\${resetKey}\`}
         label="Phone Number"
         onChange={(data) => field.onChange(data.number)}
     />
   )}
 />`,
   select: `<Select
+    key={\`select-\${resetKey}\`}
     label="Favorite Color"
     options={colorSelectOptions}
     {...register("favoriteColor")}
@@ -153,6 +169,7 @@ const CODE_SNIPPETS = {
   name="rating"
   render={({ field }) => (
     <StarRating
+        key={\`rating-\${resetKey}\`}
         label="Rating"
         onClick={(value) => field.onChange(value)}
         rating={field.value || 0}
@@ -231,18 +248,30 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  textarea: '<Textarea label="Bio" {...register("bio")} />',
+  textarea: `<Controller
+  control={control}
+  name="bio"
+  render={({ field }) => (
+    <Textarea
+        label="Bio"
+        onChange={(event) => field.onChange(event.target.value)}
+        value={field.value}
+    />
+  )}
+/>`,
   time_picker: `<Controller
   control={control}
   name="startTime"
   render={({ field }) => (
     <TimePicker
+        key={\`time-\${resetKey}\`}
         label="Start Time"
         onChange={(time) => field.onChange(time)}
     />
   )}
 />`,
   typeahead_default: `<Typeahead
+    key={\`typeahead-default-\${resetKey}\`}
     label="Favorite Color"
     options={typeaheadColorOptions}
     placeholder="Search for a color"
@@ -250,6 +279,7 @@ const CODE_SNIPPETS = {
 />`,
   typeahead: `<Typeahead
     isMulti
+    key={\`typeahead-multi-\${resetKey}\`}
     label="Favorite Color"
     options={typeaheadColorOptions}
     pills
@@ -268,9 +298,12 @@ const FORM_CLOSE = `  <Button htmlType="submit" text="Submit" />
 const FormDefaults = () => {
   const [selectedKeys, setSelectedKeys] = useState([DEFAULT_SELECTED_KEY])
   const [submittedData, setSubmittedData] = useState(null)
+  const [resetKey, setResetKey] = useState(0)
 
   const { register, control, handleSubmit, reset } = useForm({
     defaultValues: {
+      bio: "",
+      department: null,
       email: "",
       fullName: "",
       password: "",
@@ -301,6 +334,7 @@ const FormDefaults = () => {
 
   const onReset = () => {
     reset()
+    setResetKey((current) => current + 1)
     setSubmittedData(null)
   }
 
@@ -373,6 +407,7 @@ const FormDefaults = () => {
                       <DatePicker
                           defaultDate={field.value}
                           initializeOnce
+                          key={`date-${resetKey}`}
                           label="Start Date"
                           marginBottom="sm"
                           onChange={(dateStr) => field.onChange(dateStr)}
@@ -384,6 +419,7 @@ const FormDefaults = () => {
 
               {isSelected("dropdown") && (
                 <Dropdown
+                    key={`dropdown-${resetKey}`}
                     label="Country"
                     marginBottom="sm"
                     options={COUNTRY_OPTIONS}
@@ -393,6 +429,7 @@ const FormDefaults = () => {
 
               {isSelected("multi_select") && (
                 <Dropdown
+                    key={`multi-select-${resetKey}`}
                     label="Countries"
                     marginBottom="sm"
                     multiSelect
@@ -402,12 +439,21 @@ const FormDefaults = () => {
               )}
 
               {isSelected("multi_level_select") && (
-                <MultiLevelSelect
-                    id="mls-form-defaults"
-                    label="Department"
-                    marginBottom="sm"
-                    treeData={DEPARTMENT_TREE_DATA}
-                    {...register("department")}
+                <Controller
+                    control={control}
+                    name="department"
+                    render={({ field }) => (
+                      <MultiLevelSelect
+                          id="mls-form-defaults"
+                          label="Department"
+                          marginBottom="sm"
+                          onChange={(event) =>
+                            field.onChange(event.target.value.map((item) => item.id))
+                          }
+                          selectedIds={field.value}
+                          treeData={DEPARTMENT_TREE_DATA}
+                      />
+                    )}
                 />
               )}
 
@@ -417,6 +463,7 @@ const FormDefaults = () => {
                     name="phone"
                     render={({ field }) => (
                       <PhoneNumberInput
+                          key={`phone-${resetKey}`}
                           label="Phone Number"
                           onChange={(data) => field.onChange(data.number)}
                       />
@@ -426,6 +473,7 @@ const FormDefaults = () => {
 
               {isSelected("select") && (
                 <Select
+                    key={`select-${resetKey}`}
                     label="Favorite Color"
                     marginBottom="sm"
                     options={COLOR_SELECT_OPTIONS}
@@ -439,6 +487,7 @@ const FormDefaults = () => {
                     name="rating"
                     render={({ field }) => (
                       <StarRating
+                          key={`rating-${resetKey}`}
                           label="Rating"
                           marginBottom="sm"
                           onClick={(value) => field.onChange(value)}
@@ -545,9 +594,17 @@ const FormDefaults = () => {
               )}
 
               {isSelected("textarea") && (
-                <Textarea label="Bio"
-                    marginBottom="sm"
-                    {...register("bio")}
+                <Controller
+                    control={control}
+                    name="bio"
+                    render={({ field }) => (
+                      <Textarea
+                          label="Bio"
+                          marginBottom="sm"
+                          onChange={(event) => field.onChange(event.target.value)}
+                          value={field.value}
+                      />
+                    )}
                 />
               )}
 
@@ -557,6 +614,7 @@ const FormDefaults = () => {
                     name="startTime"
                     render={({ field }) => (
                       <TimePicker
+                          key={`time-${resetKey}`}
                           label="Start Time"
                           marginBottom="sm"
                           onChange={(time) => field.onChange(time)}
@@ -567,6 +625,7 @@ const FormDefaults = () => {
 
               {isSelected("typeahead_default") && (
                 <Typeahead
+                    key={`typeahead-default-${resetKey}`}
                     label="Favorite Color"
                     marginBottom="sm"
                     options={TYPEAHEAD_COLOR_OPTIONS}
@@ -578,6 +637,7 @@ const FormDefaults = () => {
               {isSelected("typeahead") && (
                 <Typeahead
                     isMulti
+                    key={`typeahead-multi-${resetKey}`}
                     label="Favorite Color"
                     marginBottom="sm"
                     options={TYPEAHEAD_COLOR_OPTIONS}

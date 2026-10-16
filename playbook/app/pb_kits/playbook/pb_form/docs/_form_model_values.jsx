@@ -101,6 +101,7 @@ const FormModelValues = () => {
         />
         <Dropdown
             defaultValue={OPEN_STATUS}
+            key={`status-${resetKey}`}
             label="Status"
             options={STATUS_OPTIONS}
             {...register("status")}

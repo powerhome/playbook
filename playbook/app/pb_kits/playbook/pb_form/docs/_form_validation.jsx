@@ -124,7 +124,7 @@ const CODE_SNIPPETS = {
         allowInput
         error={fieldState.error?.message}
         initializeOnce
-        key={resetKey}
+        key={\`date-\${resetKey}\`}
         label="Start Date"
         onChange={(dateStr) => field.onChange(dateStr)}
         pickerId="form-validation-start-date"
@@ -135,6 +135,7 @@ const CODE_SNIPPETS = {
 />`,
   dropdown: `<Dropdown
     error={errors.country?.message}
+    key={\`dropdown-\${resetKey}\`}
     label="Country"
     options={countryOptions}
     requiredIndicator
@@ -176,6 +177,7 @@ const CODE_SNIPPETS = {
 />`,
   multi_select: `<Dropdown
     error={errors.countries?.message}
+    key={\`multi-select-\${resetKey}\`}
     label="Countries"
     multiSelect
     options={countryOptions}
@@ -220,6 +222,7 @@ const CODE_SNIPPETS = {
   render={({ field, fieldState }) => (
     <PhoneNumberInput
         error={fieldState.error?.message}
+        key={\`phone-\${resetKey}\`}
         label="Phone Number"
         onChange={(data) => field.onChange(data?.number || "")}
         ref={phoneNumberRef}
@@ -266,6 +269,7 @@ const CODE_SNIPPETS = {
   render={({ field, fieldState }) => (
     <>
       <StarRating
+          key={\`rating-\${resetKey}\`}
           label="Rating"
           onClick={(value) => field.onChange(value)}
           rating={field.value || 0}
@@ -312,7 +316,7 @@ const CODE_SNIPPETS = {
   render={({ field, fieldState }) => (
     <TimePicker
         error={fieldState.error?.message}
-        key={resetKey}
+        key={\`time-\${resetKey}\`}
         label="Start Time"
         onChange={(time) => field.onChange(time)}
         required
@@ -520,6 +524,7 @@ const FormValidation = () => {
               {isSelected("dropdown") && (
                 <Dropdown
                     error={errors.country?.message}
+                    key={`dropdown-${resetKey}`}
                     label="Country"
                     marginBottom="sm"
                     options={COUNTRY_OPTIONS}
@@ -531,6 +536,7 @@ const FormValidation = () => {
               {isSelected("multi_select") && (
                 <Dropdown
                     error={errors.countries?.message}
+                    key={`multi-select-${resetKey}`}
                     label="Countries"
                     marginBottom="sm"
                     multiSelect
@@ -569,6 +575,7 @@ const FormValidation = () => {
                     render={({ field, fieldState }) => (
                       <PhoneNumberInput
                           error={fieldState.error?.message}
+                          key={`phone-${resetKey}`}
                           label="Phone Number"
                           onChange={(data) => field.onChange(data?.number || "")}
                           ref={phoneNumberRef}
@@ -600,6 +607,7 @@ const FormValidation = () => {
                     render={({ field, fieldState }) => (
                       <>
                         <StarRating
+                            key={`rating-${resetKey}`}
                             label="Rating"
                             marginBottom="sm"
                             onClick={(value) => field.onChange(value)}
