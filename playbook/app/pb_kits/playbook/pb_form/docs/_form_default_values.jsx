@@ -134,6 +134,8 @@ const CODE_SNIPPETS = {
     <DatePicker
         allowInput
         defaultDate={field.value}
+        initializeOnce
+        key={resetKey}
         label="Start Date"
         onChange={(dateStr) => field.onChange(dateStr)}
         pickerId="form-default-values-start-date"
@@ -348,7 +350,6 @@ const FormDefaultValues = () => {
 
   const onReset = () => {
     reset()
-    // These kits only read their default/value props on mount, so remount them to show the restored defaults
     setResetKey((current) => current + 1)
     setSubmittedData(null)
   }
@@ -422,6 +423,8 @@ const FormDefaultValues = () => {
                       <DatePicker
                           allowInput
                           defaultDate={field.value}
+                          initializeOnce
+                          key={resetKey}
                           label="Start Date"
                           marginBottom="sm"
                           onChange={(dateStr) => field.onChange(dateStr)}
@@ -434,7 +437,6 @@ const FormDefaultValues = () => {
               {isSelected("dropdown") && (
                 <Dropdown
                     defaultValue={CANADA}
-                    key={resetKey}
                     label="Country"
                     marginBottom="sm"
                     options={COUNTRY_OPTIONS}
@@ -445,7 +447,6 @@ const FormDefaultValues = () => {
               {isSelected("multi_select") && (
                 <Dropdown
                     defaultValue={DEFAULT_VALUES.countries}
-                    key={resetKey}
                     label="Countries"
                     marginBottom="sm"
                     multiSelect
@@ -477,7 +478,6 @@ const FormDefaultValues = () => {
                     name="phone"
                     render={({ field }) => (
                       <PhoneNumberInput
-                          key={resetKey}
                           label="Phone Number"
                           onChange={(data) => field.onChange(data?.number || "")}
                           value={field.value}
@@ -629,7 +629,6 @@ const FormDefaultValues = () => {
                     render={({ field }) => (
                       <TimePicker
                           defaultTime={field.value}
-                          key={resetKey}
                           label="Start Time"
                           marginBottom="sm"
                           onChange={(time) => field.onChange(time)}
@@ -641,7 +640,6 @@ const FormDefaultValues = () => {
               {isSelected("typeahead_default") && (
                 <Typeahead
                     defaultValue={BLUE}
-                    key={resetKey}
                     label="Favorite Color"
                     marginBottom="sm"
                     options={TYPEAHEAD_COLOR_OPTIONS}
@@ -654,7 +652,6 @@ const FormDefaultValues = () => {
                 <Typeahead
                     defaultValue={[BLUE]}
                     isMulti
-                    key={resetKey}
                     label="Favorite Color"
                     marginBottom="sm"
                     options={TYPEAHEAD_COLOR_OPTIONS}

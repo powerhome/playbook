@@ -154,13 +154,23 @@ const CODE_SNIPPETS = {
   )}
   rules={{ required: "Email is required" }}
 />`,
-  multi_level_select: `<MultiLevelSelect
-    error={errors.department?.message}
-    id="mls-validation"
-    label="Department"
-    requiredIndicator
-    treeData={departmentTreeData}
-    {...register("department", requireSelection("${REQUIRED_MESSAGE}"))}
+  multi_level_select: `<Controller
+  control={control}
+  name="department"
+  render={({ field, fieldState }) => (
+    <MultiLevelSelect
+        error={fieldState.error?.message}
+        id="mls-validation"
+        label="Department"
+        onChange={(event) =>
+          field.onChange(event.target.value.map((item) => item.id))
+        }
+        requiredIndicator
+        selectedIds={field.value}
+        treeData={departmentTreeData}
+    />
+  )}
+  rules={requireSelection("${REQUIRED_MESSAGE}")}
 />`,
   multi_select: `<Dropdown
     error={errors.countries?.message}
@@ -279,12 +289,20 @@ const CODE_SNIPPETS = {
   )}
   rules={{ required: "Full name is required" }}
 />`,
-  textarea: `<Textarea
-    error={errors.bio?.message}
-    label="Bio"
-    required
-    requiredIndicator
-    {...register("bio", { required: "${REQUIRED_MESSAGE}" })}
+  textarea: `<Controller
+  control={control}
+  name="bio"
+  render={({ field, fieldState }) => (
+    <Textarea
+        error={fieldState.error?.message}
+        label="Bio"
+        onChange={(event) => field.onChange(event.target.value)}
+        required
+        requiredIndicator
+        value={field.value}
+    />
+  )}
+  rules={{ required: "${REQUIRED_MESSAGE}" }}
 />`,
   time_picker: `<Controller
   control={control}
@@ -300,23 +318,39 @@ const CODE_SNIPPETS = {
   )}
   rules={{ required: "Start time is required" }}
 />`,
-  typeahead: `<Typeahead
-    error={errors.favoriteColors?.message}
-    isMulti
-    label="Favorite Color"
-    options={typeaheadColorOptions}
-    pills
-    placeholder="Search for a color"
-    requiredIndicator
-    {...register("favoriteColors", requireSelection("Please select a color"))}
+  typeahead: `<Controller
+  control={control}
+  name="favoriteColors"
+  render={({ field, fieldState }) => (
+    <Typeahead
+        error={fieldState.error?.message}
+        isMulti
+        label="Favorite Color"
+        onChange={field.onChange}
+        options={typeaheadColorOptions}
+        pills
+        placeholder="Search for a color"
+        requiredIndicator
+        value={field.value}
+    />
+  )}
+  rules={requireSelection("Please select a color")}
 />`,
-  typeahead_default: `<Typeahead
-    error={errors.favoriteColorSearch?.message}
-    label="Favorite Color"
-    options={typeaheadColorOptions}
-    placeholder="Search for a color"
-    requiredIndicator
-    {...register("favoriteColorSearch", requireSelection("Please select a color"))}
+  typeahead_default: `<Controller
+  control={control}
+  name="favoriteColorSearch"
+  render={({ field, fieldState }) => (
+    <Typeahead
+        error={fieldState.error?.message}
+        label="Favorite Color"
+        onChange={field.onChange}
+        options={typeaheadColorOptions}
+        placeholder="Search for a color"
+        requiredIndicator
+        value={field.value}
+    />
+  )}
+  rules={requireSelection("Please select a color")}
 />`,
   url_field: `<Controller
   control={control}
@@ -356,8 +390,11 @@ const FormValidation = () => {
   } = useForm({
     defaultValues: {
       bio: "",
+      department: null,
       email: "",
       favoriteColor: "",
+      favoriteColors: [],
+      favoriteColorSearch: null,
       fullName: "",
       password: "",
       projectNumber: "",
@@ -460,7 +497,7 @@ const FormValidation = () => {
                     render={({ field, fieldState }) => (
                       <DatePicker
                           allowInput
-                          defaultDate={field.value} 
+                          defaultDate={field.value}
                           error={fieldState.error?.message}
                           initializeOnce
                           label="Start Date"
@@ -498,14 +535,24 @@ const FormValidation = () => {
               )}
 
               {isSelected("multi_level_select") && (
-                <MultiLevelSelect
-                    error={errors.department?.message}
-                    id="mls-validation"
-                    label="Department"
-                    marginBottom="sm"
-                    requiredIndicator
-                    treeData={DEPARTMENT_TREE_DATA}
-                    {...register("department", requireSelection(REQUIRED_MESSAGE))}
+                <Controller
+                    control={control}
+                    name="department"
+                    render={({ field, fieldState }) => (
+                      <MultiLevelSelect
+                          error={fieldState.error?.message}
+                          id="mls-validation"
+                          label="Department"
+                          marginBottom="sm"
+                          onChange={(event) =>
+                            field.onChange(event.target.value.map((item) => item.id))
+                          }
+                          requiredIndicator
+                          selectedIds={field.value}
+                          treeData={DEPARTMENT_TREE_DATA}
+                      />
+                    )}
+                    rules={requireSelection(REQUIRED_MESSAGE)}
                 />
               )}
 
@@ -692,13 +739,21 @@ const FormValidation = () => {
               )}
 
               {isSelected("textarea") && (
-                <Textarea
-                    error={errors.bio?.message}
-                    label="Bio"
-                    marginBottom="sm"
-                    required
-                    requiredIndicator
-                    {...register("bio", { required: REQUIRED_MESSAGE })}
+                <Controller
+                    control={control}
+                    name="bio"
+                    render={({ field, fieldState }) => (
+                      <Textarea
+                          error={fieldState.error?.message}
+                          label="Bio"
+                          marginBottom="sm"
+                          onChange={(event) => field.onChange(event.target.value)}
+                          required
+                          requiredIndicator
+                          value={field.value}
+                      />
+                    )}
+                    rules={{ required: REQUIRED_MESSAGE }}
                 />
               )}
 
@@ -721,29 +776,45 @@ const FormValidation = () => {
               )}
 
               {isSelected("typeahead_default") && (
-                <Typeahead
-                    error={errors.favoriteColorSearch?.message}
-                    label="Favorite Color"
-                    marginBottom="sm"
-                    options={TYPEAHEAD_COLOR_OPTIONS}
-                    placeholder="Search for a color"
-                    requiredIndicator
-                    {...register("favoriteColorSearch", requireSelection("Please select a color"))}
-                />
+                <Controller
+                    control={control}
+                    name="favoriteColorSearch"
+                    render={({ field: { onChange: handleChange, value }, fieldState }) => (
+                      <Typeahead
+                          error={fieldState.error?.message}
+                          label="Favorite Color"
+                          marginBottom="sm"
+                          onChange={handleChange}
+                          options={TYPEAHEAD_COLOR_OPTIONS}
+                          placeholder="Search for a color"
+                          requiredIndicator
+                          value={value}
+                      />
+                )}
+                    rules={requireSelection("Please select a color")}
+            />
               )}
 
               {isSelected("typeahead") && (
-                <Typeahead
-                    error={errors.favoriteColors?.message}
-                    isMulti
-                    label="Favorite Color"
-                    marginBottom="sm"
-                    options={TYPEAHEAD_COLOR_OPTIONS}
-                    pills
-                    placeholder="Search for a color"
-                    requiredIndicator
-                    {...register("favoriteColors", requireSelection("Please select a color"))}
+              <Controller
+                  control={control}
+                  name="favoriteColors"
+                  render={({ field: { onChange: handleChange, value }, fieldState }) => (
+                    <Typeahead
+                        error={fieldState.error?.message}
+                        isMulti
+                        label="Favorite Color"
+                        marginBottom="sm"
+                        onChange={handleChange}
+                        options={TYPEAHEAD_COLOR_OPTIONS}
+                        pills
+                        placeholder="Search for a color"
+                        requiredIndicator
+                        value={value}
                 />
+              )}
+                  rules={requireSelection("Please select a color")}
+              />
               )}
 
               <Flex gap="xs"

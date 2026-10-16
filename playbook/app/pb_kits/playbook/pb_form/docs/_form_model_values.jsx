@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 
 import Button from "../../pb_button/_button"
@@ -23,16 +23,22 @@ const SERVER_ERRORS = {
 }
 
 const FormModelValues = () => {
+  const [resetKey, setResetKey] = useState(0)
   const { control, handleSubmit, register, reset } = useForm({
     defaultValues: {
       endsAt: "08/20/2026",
       name: "Gary 🎉",
-      phone: "+15551234567",
+      phone: "5551234567",
       spots: 42,
       startsAt: "08/22/2026",
       status: OPEN_STATUS,
     },
   })
+
+  const onReset = () => {
+    reset()
+    setResetKey((current) => current + 1)
+  }
 
   return (
     <Card padding="md"
@@ -71,6 +77,8 @@ const FormModelValues = () => {
               <DatePicker
                   defaultDate={field.value}
                   error={SERVER_ERRORS.startsAt}
+                  initializeOnce
+                  key={`starts-at-${resetKey}`}
                   label="Starts at"
                   onChange={(dateStr) => field.onChange(dateStr)}
                   pickerId="form-model-starts-at"
@@ -83,6 +91,8 @@ const FormModelValues = () => {
             render={({ field }) => (
               <DatePicker
                   defaultDate={field.value}
+                  initializeOnce
+                  key={`ends-at-${resetKey}`}
                   label="Ends at"
                   onChange={(dateStr) => field.onChange(dateStr)}
                   pickerId="form-model-ends-at"
@@ -100,6 +110,8 @@ const FormModelValues = () => {
             name="phone"
             render={({ field }) => (
               <PhoneNumberInput
+                  initialCountry="us"
+                  key={`phone-${resetKey}`}
                   label="Phone"
                   onChange={(data) => field.onChange(data?.number || "")}
                   value={field.value}
@@ -114,7 +126,7 @@ const FormModelValues = () => {
           />
           <Button
               htmlType="button"
-              onClick={() => reset()}
+              onClick={onReset}
               text="Cancel"
               variant="secondary"
           />
