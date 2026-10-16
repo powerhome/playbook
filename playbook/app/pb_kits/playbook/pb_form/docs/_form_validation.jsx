@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 
 import Body from "../../pb_body/_body"
@@ -210,11 +210,12 @@ const CODE_SNIPPETS = {
         error={fieldState.error?.message}
         label="Phone Number"
         onChange={(data) => field.onChange(data?.number || "")}
+        ref={phoneNumberRef}
         required
         requiredIndicator
     />
   )}
-  rules={{ required: "Missing phone number" }}
+  rules={{ validate: () => phoneNumberRef.current?.validate() ?? true }}
 />`,
   search_field: `<Controller
   control={control}
@@ -345,6 +346,7 @@ const FORM_CLOSE = `  <Button htmlType="submit" text="Submit" />
 const FormValidation = () => {
   const [selectedKeys, setSelectedKeys] = useState([DEFAULT_SELECTED_KEY])
   const [submittedData, setSubmittedData] = useState(null)
+  const phoneNumberRef = useRef(null)
   const {
     control,
     formState: { errors },
@@ -458,7 +460,9 @@ const FormValidation = () => {
                     render={({ field, fieldState }) => (
                       <DatePicker
                           allowInput
+                          defaultDate={field.value} 
                           error={fieldState.error?.message}
+                          initializeOnce
                           label="Start Date"
                           marginBottom="sm"
                           onChange={(dateStr) => field.onChange(dateStr)}
@@ -514,11 +518,12 @@ const FormValidation = () => {
                           error={fieldState.error?.message}
                           label="Phone Number"
                           onChange={(data) => field.onChange(data?.number || "")}
+                          ref={phoneNumberRef}
                           required
                           requiredIndicator
                       />
                     )}
-                    rules={{ required: "Missing phone number" }}
+                    rules={{ validate: () => phoneNumberRef.current?.validate() ?? true }}
                 />
               )}
 

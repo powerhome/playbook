@@ -371,6 +371,8 @@ const FormDefaults = () => {
                     name="startDate"
                     render={({ field }) => (
                       <DatePicker
+                          defaultDate={field.value}
+                          initializeOnce
                           label="Start Date"
                           marginBottom="sm"
                           onChange={(dateStr) => field.onChange(dateStr)}
