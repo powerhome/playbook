@@ -69,7 +69,7 @@ const formatDate = (date: Date) => {
   return `${month}/${day}/${year}`;
 };
 
-// Date objects keep their authored time (including midnight / 23:59:59).
+// Date objects keep their authored time (including midnight / 23:59:00).
 // Date-only strings get SOD/EOD; timed strings keep their parsed time.
 const parseCustomDateBoundary = (value: Date | string): Date => {
   if (value instanceof Date) return value;

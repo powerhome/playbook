@@ -1,11 +1,12 @@
 // QuickPick → DatePicker sync helpers.
-// End-of-day uses 23:59:59 to match pb_kit/dateTime period-end helpers.
+// End-of-day uses 23:59:00 to match DatePicker enableTime minute precision
+// (default timeFormat has no seconds).
 //
 // Contract when the target Flatpickr has enableTime:
 // - Date-only strings (e.g. m/d/Y) → start of day / end of day by bound
 // - Timed strings → parse to Date and pass through unchanged
 // - Date objects → pass through unchanged (presets already SOD/EOD via toQuickPickRange;
-//   custom values may intentionally use midnight or 23:59:59)
+//   custom values may intentionally use midnight or 23:59:00)
 
 type FlatpickrLike = {
   setDate: (date: Date | string, triggerChange?: boolean, format?: string) => void
@@ -30,7 +31,7 @@ export const startOfDay = (date: Date): Date => {
 
 export const endOfDay = (date: Date): Date => {
   const next = new Date(date.getTime())
-  next.setHours(23, 59, 59, 0)
+  next.setHours(23, 59, 0, 0)
   return next
 }
 
@@ -88,7 +89,7 @@ export const parseQuickPickDateTime = (value: string): Date | null => {
 
 /**
  * Apply a QuickPick date to a Flatpickr instance.
- * With enableTime and a date-only string: start → 00:00:00, end → 23:59:59.
+ * With enableTime and a date-only string: start → 00:00:00, end → 23:59:00.
  * Timed strings and Date values are passed through unchanged.
  * Date-only pickers keep the existing m/d/Y string path for date-only values.
  */

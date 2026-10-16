@@ -123,6 +123,8 @@ module Playbook
 
         # Parses timed custom boundaries. US m/d/Y with optional time is handled explicitly
         # so Ruby does not treat the slash form as d/m/Y.
+        # Use DateTime.civil (not Time.local): customs are wall-clock labels; Time.local
+        # applies process TZ / DST (e.g. spring-forward gap rewrites 2:30 → 3:30).
         def parse_datetime_string(date_str)
           if (match = date_str.match(%r{\A(\d{1,2})/(\d{1,2})/(\d{4})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?\z}i))
             month, day, year, hour, min, sec, meridiem = match.captures
@@ -134,7 +136,7 @@ module Playbook
               hour = 0 if meridiem == "AM" && hour == 12
               hour += 12 if meridiem == "PM" && hour != 12
             end
-            Time.local(year.to_i, month.to_i, day.to_i, hour, min, sec)
+            DateTime.civil(year.to_i, month.to_i, day.to_i, hour, min, sec)
           else
             Time.parse(date_str)
           end
