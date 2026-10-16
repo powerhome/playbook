@@ -121,12 +121,16 @@ module Playbook
           end
         end
 
-        # Parses timed custom boundaries. US m/d/Y with optional time is handled explicitly
-        # so Ruby does not treat the slash form as d/m/Y.
-        # Use DateTime.civil (not Time.local): customs are wall-clock labels; Time.local
-        # applies process TZ / DST (e.g. spring-forward gap rewrites 2:30 → 3:30).
+        # Parses timed custom boundaries. Mirrors React parseQuickPickDateTime:
+        # 1) US m/d/Y + time (optional :SS / AM|PM) → DateTime.civil (wall-clock)
+        # 2) Offset-less YYYY-MM-DDTHH:MM:SS → DateTime.civil (wall-clock; not Time.parse)
+        # 3) ISO with Z / ± offset → DateTime.iso8601 (absolute); emit uses civil fields
+        # Unsupported timed strings raise — no process-TZ Time.parse fallback.
+        # Date-only boundaries stay on parse_date_string (unchanged).
         def parse_datetime_string(date_str)
-          if (match = date_str.match(%r{\A(\d{1,2})/(\d{1,2})/(\d{4})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?\z}i))
+          trimmed = date_str.to_s.strip
+
+          if (match = trimmed.match(%r{\A(\d{1,2})/(\d{1,2})/(\d{4})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?\z}i))
             month, day, year, hour, min, sec, meridiem = match.captures
             hour = hour.to_i
             min = min.to_i
@@ -136,10 +140,19 @@ module Playbook
               hour = 0 if meridiem == "AM" && hour == 12
               hour += 12 if meridiem == "PM" && hour != 12
             end
-            DateTime.civil(year.to_i, month.to_i, day.to_i, hour, min, sec)
-          else
-            Time.parse(date_str)
+            return DateTime.civil(year.to_i, month.to_i, day.to_i, hour, min, sec)
           end
+
+          # Offset-less wall-clock ISO (same shape as WALL_CLOCK_ISO in quickpickDateSync.ts).
+          if (match = trimmed.match(/\A(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?(?:\.\d+)?\z/))
+            year, month, day, hour, min, sec = match.captures
+            return DateTime.civil(year.to_i, month.to_i, day.to_i, hour.to_i, min.to_i, (sec || 0).to_i)
+          end
+
+          # Absolute ISO with Z or numeric offset (React: new Date(iso)).
+          return DateTime.iso8601(trimmed) if trimmed.match?(/\A\d{4}-\d{2}-\d{2}T/) && trimmed.match?(/[Zz]|[+-]\d{2}:?\d{2}\z/)
+
+          raise ArgumentError, "Unsupported QuickPick timed value: #{date_str.inspect}"
         end
 
         def calculate_start_date(time_period, amount, end_date)
