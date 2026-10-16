@@ -5,7 +5,7 @@ __NOTE__: In order to leverage this prop, you __must__ install the extension you
 In order to add the extension to the editor toolbar, create an array of objects (as shown in the ExtensionsList array in the example below). Each object in this array should include:
 
 `icon`: the icon to display within the toolbar dropdown (any Fontawesome icons can be used)
-`isActive`: sets the extension to active within the dropdown, when applicable
+`isActive`: sets the extension to active within the dropdown, when applicable. Prefer a function (`() => editor.isActive(...)`) so TipTap v3 selection changes refresh the highlight (TipTap no longer re-renders `useEditor` hosts on every transaction by default)
 `text`: the label within the toolbar dropdown
 `onclick`: initializes the extension when it’s clicked within the dropdown (snytax varies with extension, see Tiptap's docs for more information)
 

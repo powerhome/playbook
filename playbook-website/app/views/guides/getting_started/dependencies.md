@@ -58,7 +58,7 @@ Add them with `yarn add`, `npm install`, or by updating your `package.json`.
 | [PB Circle Chart](/kits/pb_circle_chart/react) | [highcharts](https://www.npmjs.com/package/highcharts), [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) |
 | [PB Gauge Chart](/kits/pb_gauge_chart/react) | [highcharts](https://www.npmjs.com/package/highcharts), [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) |
 | [PB Line Graph](/kits/pb_line_graph/react) | [highcharts](https://www.npmjs.com/package/highcharts), [highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) |
-| [Rich Text Editor](/kits/rich_text_editor/react) (TipTap) | [@tiptap/react](https://www.npmjs.com/package/@tiptap/react), [@tiptap/starter-kit](https://www.npmjs.com/package/@tiptap/starter-kit), [@tiptap/extension-link](https://www.npmjs.com/package/@tiptap/extension-link) |
+| [Rich Text Editor](/kits/rich_text_editor/react) (TipTap) | [@tiptap/react](https://www.npmjs.com/package/@tiptap/react) `3.0.7`, [@tiptap/starter-kit](https://www.npmjs.com/package/@tiptap/starter-kit) `3.0.7` (Link is included in StarterKit; add [@tiptap/extension-link](https://www.npmjs.com/package/@tiptap/extension-link) only if you configure Link separately with `StarterKit.configure({ link: false })`) |
 | [Rich Text Editor](/kits/rich_text_editor/react) (Trix / legacy) | [trix](https://www.npmjs.com/package/trix), [react-trix](https://www.npmjs.com/package/react-trix) |
 
 **Chart kits (React)**: PbBarGraph, PbCircleChart, PbGaugeChart, and PbLineGraph are available through a separate entrypoint so Highcharts stays optional:
@@ -104,5 +104,5 @@ These kits use dependencies that ship with Playbook; no additional installation 
 
 **Rich Text Editor**: This kit supports two editors:
 
-- **TipTap** (advanced): Install `@tiptap/react`, `@tiptap/starter-kit`, and `@tiptap/extension-link`. Add other [@tiptap](https://tiptap.dev/extensions) extensions as needed for your project.
+- **TipTap** (advanced): Install `@tiptap/react` and `@tiptap/starter-kit` at `3.0.7` (aligned with Nitro RTE). TipTap v3 StarterKit includes Link and Underline—avoid registering those extensions twice. Add other [@tiptap](https://tiptap.dev/extensions) extensions as needed for your project.
 - **Trix** (legacy default): Install `trix` and `react-trix` in your project. These are not bundled with Playbook.
