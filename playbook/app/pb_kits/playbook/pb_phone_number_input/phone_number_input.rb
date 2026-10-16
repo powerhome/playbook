@@ -25,6 +25,8 @@ module Playbook
                                  default: []
       prop :error, type: Playbook::Props::String,
                    default: ""
+      prop :validation_message, type: Playbook::Props::String,
+                                default: ""
       prop :value, type: Playbook::Props::String,
                    default: ""
       prop :format_as_you_type, type: Playbook::Props::Boolean,
@@ -71,7 +73,9 @@ module Playbook
           required: required,
           showPlaceholder: show_placeholder,
           strictMode: strict_mode,
-        }
+        }.tap do |config|
+          config[:validationMessage] = validation_message if validation_message.present?
+        end
       end
     end
   end

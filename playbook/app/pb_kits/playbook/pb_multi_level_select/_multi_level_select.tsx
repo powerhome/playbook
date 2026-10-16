@@ -689,6 +689,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           }}
         >
           <div className="wrapper"
+              data-pb-validation-container="true"
               ref={dropdownRef}
           >
             <div className="input_wrapper"

@@ -1670,6 +1670,10 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   clearFormValidation(input) {
+    // PbFormValidation may have setCustomValidity from data-message; clear it
+    // before checkValidity so a filled value can pass constraint validation.
+    input.setCustomValidity("");
+
     if (this.isMultiSelect) {
       if (this.selectedOptions.size > 0) {
         const dropdownWrapperElement = input.closest(".dropdown_wrapper");
@@ -2084,6 +2088,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.selectedOptions.size > 0) {
       baseInput.value = "";
       baseInput.removeAttribute("required");
+      baseInput.setCustomValidity("");
     } else {
       baseInput.value = "";
       if (this.wasOriginallyRequired) {

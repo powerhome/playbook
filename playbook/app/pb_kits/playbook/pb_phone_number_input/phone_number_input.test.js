@@ -516,6 +516,18 @@ describe("PbPhoneNumberInput enhanced element", () => {
     expect(element.querySelector(".pb_text_input_kit")).toHaveClass("error")
   })
 
+  test("uses validationMessage for the required empty-field error", () => {
+    const { element, input } = mountKit(
+      { required: true, name: "phone", validationMessage: "Phone number is required" },
+      "required"
+    )
+
+    input.dispatchEvent(new Event("invalid", { bubbles: true }))
+
+    expect(element.querySelector(".pb_body_kit_negative").textContent).toBe("Phone number is required")
+    expect(element.querySelector(".pb_text_input_kit")).toHaveClass("error")
+  })
+
   test("hides example placeholder on focus and restores it on blur when empty", () => {
     const { input } = mountKit({ showPlaceholder: true })
 

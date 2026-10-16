@@ -29,6 +29,7 @@ type PhoneNumberInputConfig = {
   required?: boolean,
   showPlaceholder?: boolean,
   strictMode?: boolean,
+  validationMessage?: string,
 }
 
 type IntlTelInputInstance = {
@@ -343,9 +344,13 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
     this.setError("")
   }
 
+  private requiredFieldMessage() {
+    return this.config.validationMessage || "Missing phone number"
+  }
+
   private validateRequiredField() {
     if (this.config.required && (!this.inputValue() || this.inputValue().trim() === "")) {
-      this.setError("Missing phone number")
+      this.setError(this.requiredFieldMessage())
       return true
     }
     return false
@@ -390,7 +395,7 @@ export default class PbPhoneNumberInput extends PbEnhancedElement {
       return this.showFormattedError("too short")
     }
     if (this.inputValue().length === 0) {
-      this.setError("Missing phone number")
+      this.setError(this.requiredFieldMessage())
       return true
     }
     return this.showFormattedError()
