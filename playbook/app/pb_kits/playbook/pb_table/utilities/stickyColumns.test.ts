@@ -172,4 +172,52 @@ describe("applyStickyColumns", () => {
 
     expect(ids).toEqual(["1", "2", "3"])
   })
+
+  test("pins every header row cell that shares a sticky id", () => {
+    document.body.innerHTML = `
+      <table class="pb_table">
+        <thead>
+          <tr>
+            <th data-sticky-id="1"></th>
+            <th colspan="2">Group</th>
+          </tr>
+          <tr>
+            <th data-sticky-id="1">Territory</th>
+            <th>Shadow</th>
+            <th>Delta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-sticky-id="1">East</td>
+            <td>1</td>
+            <td>2</td>
+          </tr>
+        </tbody>
+      </table>
+    `
+
+    const table = document.querySelector("table") as HTMLTableElement
+    const headers = table.querySelectorAll(
+      "th[data-sticky-id='1']"
+    ) as NodeListOf<HTMLElement>
+    const cell = table.querySelector(
+      "td[data-sticky-id='1']"
+    ) as HTMLElement
+
+    // First header row cell is empty/narrow; second row is wider — use max width
+    stubWidth(headers[0], 40)
+    stubWidth(headers[1], 120)
+    stubWidth(cell, 120)
+
+    applyStickyColumns(table, ["1"], "left")
+
+    expect(headers[0].classList.contains("sticky")).toBe(true)
+    expect(headers[0].style.left).toBe("0px")
+    expect(headers[0].classList.contains("sticky-left-shadow")).toBe(true)
+    expect(headers[1].classList.contains("sticky")).toBe(true)
+    expect(headers[1].style.left).toBe("0px")
+    expect(headers[1].classList.contains("sticky-left-shadow")).toBe(true)
+    expect(cell.style.left).toBe("0px")
+  })
 })

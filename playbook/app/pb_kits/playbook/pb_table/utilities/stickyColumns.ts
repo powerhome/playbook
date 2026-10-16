@@ -28,6 +28,12 @@ const applyStickySideClasses = (
   }
 }
 
+const stickyHeaderSelector = (colId: string): string =>
+  `th[data-sticky-id="${colId}"], .pb_table_th[data-sticky-id="${colId}"]`
+
+const stickyCellSelector = (colId: string): string =>
+  `td[data-sticky-id="${colId}"], .pb_table_td[data-sticky-id="${colId}"]`
+
 export const applyStickyColumns = (
   table: Element,
   columnIds: string[],
@@ -43,26 +49,26 @@ export const applyStickyColumns = (
 
   orderedIds.forEach((colId, index) => {
     const isLastColumn = index === orderedIds.length - 1
-    const header = table.querySelector(
-      `th[data-sticky-id="${colId}"], .pb_table_th[data-sticky-id="${colId}"]`
-    ) as HTMLElement | null
-    const cells = table.querySelectorAll(
-      `td[data-sticky-id="${colId}"], .pb_table_td[data-sticky-id="${colId}"]`
-    )
+    // Multi-row theads can repeat the same data-sticky-id on each header row —
+    // pin every matching th, not only the first.
+    const headers = table.querySelectorAll(stickyHeaderSelector(colId))
+    const cells = table.querySelectorAll(stickyCellSelector(colId))
 
-    if (!header) return
+    if (!headers.length) return
 
     const offset = accumulatedWidth
-
     const offsetValue = formatStickyOffset(offset)
+    let columnWidth = 0
 
-    header.classList.add("sticky")
-    header.style[side] = offsetValue
-    applyStickySideClasses(header, isLastColumn, borderClass, shadowClass)
+    headers.forEach((header) => {
+      const headerElement = header as HTMLElement
+      headerElement.classList.add("sticky")
+      headerElement.style[side] = offsetValue
+      applyStickySideClasses(headerElement, isLastColumn, borderClass, shadowClass)
+      columnWidth = Math.max(columnWidth, measureStickyWidth(headerElement))
+    })
 
-    // Re-measure after sticky/border classes so the next offset matches paint
-    const headerWidth = measureStickyWidth(header)
-    accumulatedWidth = offset + headerWidth
+    accumulatedWidth = offset + columnWidth
 
     cells.forEach((cell) => {
       const cellElement = cell as HTMLElement

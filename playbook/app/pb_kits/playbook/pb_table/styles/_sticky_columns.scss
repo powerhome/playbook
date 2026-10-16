@@ -20,6 +20,15 @@
         background-clip: padding-box;
     }
 
+    // Corner cells (sticky header + sticky column) must sit above scrolling
+    // header siblings in multi-row theads.
+    &.sticky-header {
+        thead .sticky,
+        .pb_table_thead .sticky {
+            z-index: 2;
+        }
+    }
+
     // For use with sticky left columns
     .sticky-left-shadow {
         box-shadow: 4px 0 10px rgba(60, 106, 172, 0.16) !important;
