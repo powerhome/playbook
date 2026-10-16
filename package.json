@@ -34,7 +34,7 @@
     "eslint-plugin-react": "^7.33.2"
   },
   "resolutions": {
-    "@tiptap/core": "3.0.7",
+    "@tiptap/core": "3.30.4",
     "@tiptap/extension-blockquote": "3.0.7",
     "@tiptap/extension-bold": "3.0.7",
     "@tiptap/extension-bubble-menu": "3.0.7",
