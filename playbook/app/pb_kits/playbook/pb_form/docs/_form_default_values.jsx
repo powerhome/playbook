@@ -135,7 +135,7 @@ const CODE_SNIPPETS = {
         allowInput
         defaultDate={field.value}
         label="Start Date"
-        onChange={(_dates, dateStr) => field.onChange(dateStr)}
+        onChange={(dateStr) => field.onChange(dateStr)}
         pickerId="form-default-values-start-date"
     />
   )}
@@ -165,7 +165,7 @@ const CODE_SNIPPETS = {
     <MultiLevelSelect
         id="mls-default-values"
         label="Department"
-        onChange={(event) => field.onChange(event.target.value)}
+        onChange={(event) => field.onChange(event.target.value.map((item) => item.id))}
         selectedIds={field.value}
         treeData={departmentTreeData}
     />
@@ -421,7 +421,7 @@ const FormDefaultValues = () => {
                           defaultDate={field.value}
                           label="Start Date"
                           marginBottom="sm"
-                          onChange={(_dates, dateStr) => field.onChange(dateStr)}
+                          onChange={(dateStr) => field.onChange(dateStr)}
                           pickerId="form-default-values-start-date"
                       />
                     )}
@@ -458,7 +458,7 @@ const FormDefaultValues = () => {
                           id="mls-default-values"
                           label="Department"
                           marginBottom="sm"
-                          onChange={(event) => field.onChange(event.target.value)}
+                          onChange={(event) => field.onChange(event.target.value.map((item) => item.id))}
                           selectedIds={field.value}
                           treeData={DEPARTMENT_TREE_DATA}
                       />

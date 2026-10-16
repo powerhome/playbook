@@ -111,7 +111,7 @@ const CODE_SNIPPETS = {
   render={({ field }) => (
     <DatePicker
         label="Start Date"
-        onChange={(_dates, dateStr) => field.onChange(dateStr)}
+        onChange={(dateStr) => field.onChange(dateStr)}
         pickerId="form-defaults-start-date"
     />
   )}
@@ -373,7 +373,7 @@ const FormDefaults = () => {
                       <DatePicker
                           label="Start Date"
                           marginBottom="sm"
-                          onChange={(_dates, dateStr) => field.onChange(dateStr)}
+                          onChange={(dateStr) => field.onChange(dateStr)}
                           pickerId="form-defaults-start-date"
                       />
                     )}

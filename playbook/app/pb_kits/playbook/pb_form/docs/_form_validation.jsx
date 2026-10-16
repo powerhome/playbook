@@ -124,7 +124,7 @@ const CODE_SNIPPETS = {
         allowInput
         error={fieldState.error?.message}
         label="Start Date"
-        onChange={(_dates, dateStr) => field.onChange(dateStr)}
+        onChange={(dateStr) => field.onChange(dateStr)}
         pickerId="form-validation-start-date"
         requiredIndicator
     />
@@ -337,7 +337,7 @@ const CODE_SNIPPETS = {
 
 const FORM_OPEN = `const { register, control, handleSubmit, formState: { errors } } = useForm({ shouldUnregister: true })
 
-<form onSubmit={handleSubmit(onSubmit)}>`
+<form noValidate onSubmit={handleSubmit(onSubmit)}>`
 const FORM_CLOSE = `  <Button htmlType="submit" text="Submit" />
   <Button htmlType="button" onClick={onReset} text="Cancel" variant="secondary" />
 </form>`
@@ -430,7 +430,9 @@ const FormValidation = () => {
               padding="md"
               shadow="deep"
           >
-            <form onSubmit={handleSubmit(setSubmittedData)}>
+            <form noValidate
+                onSubmit={handleSubmit(setSubmittedData)}
+            >
               {isSelected("checkbox") && (
                 <Controller
                     control={control}
@@ -459,7 +461,7 @@ const FormValidation = () => {
                           error={fieldState.error?.message}
                           label="Start Date"
                           marginBottom="sm"
-                          onChange={(_dates, dateStr) => field.onChange(dateStr)}
+                          onChange={(dateStr) => field.onChange(dateStr)}
                           pickerId="form-validation-start-date"
                           requiredIndicator
                       />

@@ -72,7 +72,7 @@ const FormModelValues = () => {
                   defaultDate={field.value}
                   error={SERVER_ERRORS.startsAt}
                   label="Starts at"
-                  onChange={(_dates, dateStr) => field.onChange(dateStr)}
+                  onChange={(dateStr) => field.onChange(dateStr)}
                   pickerId="form-model-starts-at"
               />
             )}
@@ -84,7 +84,7 @@ const FormModelValues = () => {
               <DatePicker
                   defaultDate={field.value}
                   label="Ends at"
-                  onChange={(_dates, dateStr) => field.onChange(dateStr)}
+                  onChange={(dateStr) => field.onChange(dateStr)}
                   pickerId="form-model-ends-at"
               />
             )}
