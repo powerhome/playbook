@@ -34,6 +34,33 @@ const stickyHeaderSelector = (colId: string): string =>
 const stickyCellSelector = (colId: string): string =>
   `td[data-sticky-id="${colId}"], .pb_table_td[data-sticky-id="${colId}"]`
 
+/**
+ * Vertical offset within thead so sticky column header cells keep sticking
+ * with sticky-header on multi-row theads (row 2+ need top: row1Height, etc.).
+ */
+const stickyHeaderRowTop = (header: HTMLElement): number => {
+  const row = header.closest("tr, .pb_table_tr") as HTMLElement | null
+  if (!row) return 0
+
+  let top = 0
+  let previous = row.previousElementSibling as HTMLElement | null
+  while (previous) {
+    if (previous instanceof HTMLElement) {
+      top += previous.offsetHeight
+    }
+    previous = previous.previousElementSibling as HTMLElement | null
+  }
+  return top
+}
+
+const applyStickyHeaderTop = (
+  table: Element,
+  headerElement: HTMLElement
+): void => {
+  if (!table.classList.contains("sticky-header")) return
+  headerElement.style.top = formatStickyOffset(stickyHeaderRowTop(headerElement))
+}
+
 export const applyStickyColumns = (
   table: Element,
   columnIds: string[],
@@ -64,6 +91,7 @@ export const applyStickyColumns = (
       const headerElement = header as HTMLElement
       headerElement.classList.add("sticky")
       headerElement.style[side] = offsetValue
+      applyStickyHeaderTop(table, headerElement)
       applyStickySideClasses(headerElement, isLastColumn, borderClass, shadowClass)
       columnWidth = Math.max(columnWidth, measureStickyWidth(headerElement))
     })
@@ -77,6 +105,16 @@ export const applyStickyColumns = (
       applyStickySideClasses(cellElement, isLastColumn, borderClass, shadowClass)
     })
   })
+
+  // Corner cells may use .sticky without data-sticky-id (e.g. colspan spanning
+  // multiple sticky columns). Still need top when sticky-header is on.
+  if (table.classList.contains("sticky-header")) {
+    table
+      .querySelectorAll("thead .sticky, .pb_table_thead .sticky")
+      .forEach((header) => {
+        applyStickyHeaderTop(table, header as HTMLElement)
+      })
+  }
 }
 
 /** Double rAF + fonts.ready so offsets are measured after layout settles. */

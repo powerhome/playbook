@@ -220,4 +220,47 @@ describe("applyStickyColumns", () => {
     expect(headers[1].classList.contains("sticky-left-shadow")).toBe(true)
     expect(cell.style.left).toBe("0px")
   })
+
+  test("sets top on sticky header cells when sticky-header is enabled", () => {
+    document.body.innerHTML = `
+      <table class="pb_table sticky-header sticky-left-column">
+        <thead>
+          <tr>
+            <th data-sticky-id="1">Group</th>
+            <th>Other</th>
+          </tr>
+          <tr>
+            <th data-sticky-id="1">Sub</th>
+            <th>Col</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-sticky-id="1">A</td>
+            <td>B</td>
+          </tr>
+        </tbody>
+      </table>
+    `
+
+    const table = document.querySelector("table") as HTMLTableElement
+    const headers = table.querySelectorAll(
+      "th[data-sticky-id='1']"
+    ) as NodeListOf<HTMLElement>
+    const firstRow = table.querySelector("thead tr") as HTMLElement
+
+    Object.defineProperty(firstRow, "offsetHeight", {
+      configurable: true,
+      get: () => 48,
+    })
+    stubWidth(headers[0], 100)
+    stubWidth(headers[1], 100)
+
+    applyStickyColumns(table, ["1"], "left")
+
+    expect(headers[0].style.top).toBe("0px")
+    expect(headers[1].style.top).toBe("48px")
+    expect(headers[0].style.left).toBe("0px")
+    expect(headers[1].style.left).toBe("0px")
+  })
 })

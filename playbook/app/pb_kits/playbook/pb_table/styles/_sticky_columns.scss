@@ -29,9 +29,13 @@
         }
     }
 
-    // For use with sticky left columns
+    // For use with sticky left columns.
+    // Default left/right keep single sticky edge (and Nitro colspan corner cells
+    // that use these classes without data-sticky-id) pinned. Multi-column JS
+    // offsets override via inline style.
     .sticky-left-shadow {
         box-shadow: 4px 0 10px rgba(60, 106, 172, 0.16) !important;
+        left: 0;
     }
 
     .with-border-right {
@@ -41,6 +45,7 @@
     // For use with sticky right columns
     .sticky-right-shadow {
         box-shadow: -4px 0 10px rgba(60, 106, 172, 0.16) !important;
+        right: 0;
     }
 
     .with-border-left {
