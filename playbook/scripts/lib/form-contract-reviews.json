@@ -65,7 +65,7 @@
       "app/pb_kits/playbook/pb_dropdown/index.js": "080be2849dd3d0c3ab2f797986e426c20218ec7484885498749d82e5646e2a19",
       "app/pb_kits/playbook/pb_dropdown/keyboard_accessibility.js": "e0b59887c0877b3053dd1a75520b87c743c63a0eefedd218aaf861e9ee8cf1a2",
       "app/pb_kits/playbook/pb_dropdown/quickpick/index.ts": "ad3368e25870a03460c89923989f24d527e709508edbfe233abd126f97496d2c",
-      "app/pb_kits/playbook/pb_dropdown/quickpick_helper.rb": "8a67d70d303cbe0ff66acdb3a4e2460304a8e57a7b17aeef225aeef1ffbc738e",
+      "app/pb_kits/playbook/pb_dropdown/quickpick_helper.rb": "cb41de2218a78d927ad510f44c66c18a7db060a4c7aa2ffba517eb2a18257606",
       "app/pb_kits/playbook/pb_dropdown/subcomponents/DropdownContainer.tsx": "c4aa85f3ecf9b394943ae96f760ada7566019bdb13c5bf2439fc371c840fa87c",
       "app/pb_kits/playbook/pb_dropdown/subcomponents/DropdownOption.tsx": "fe0c175e65b7e5b34d4780be32a2e6a589fb102e6e2fec6fdfc42169c36a0571",
       "app/pb_kits/playbook/pb_dropdown/subcomponents/DropdownTrigger.tsx": "c7593fa7b9f0a075a01a784f67a349510a229b373e20d3a6e066b57ad39c8c2e",

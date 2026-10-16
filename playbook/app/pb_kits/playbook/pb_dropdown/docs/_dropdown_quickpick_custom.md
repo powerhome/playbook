@@ -4,9 +4,9 @@ The `customQuickPickDates` prop allows for defining custom quick pick date optio
 - An array of two date strings (or `Date` objects) representing a specific range (e.g., `["06/01/2022", "06/07/2022"]`).
   - **Date-only** strings get start-of-day / end-of-day when synced to `enableTime` DatePickers.
   - **Timed** strings use the same formats as Rails QuickPick customs:
-    - US `m/d/Y` + time (optional `:SS`, optional `AM`/`PM`) — wall-clock
-    - Offset-less `YYYY-MM-DDTHH:MM:SS` — wall-clock
-    - ISO-8601 with `Z` or numeric offset — absolute instant
+    - US `m/d/Y` + time (optional `:SS`, optional `AM`/`PM`) — wall-clock; emit offset-less `YYYY-MM-DDTHH:MM:SS`
+    - Offset-less `YYYY-MM-DDTHH:MM:SS` — wall-clock; emit offset-less
+    - ISO-8601 with `Z` or numeric offset — absolute instant; emit keeps offset/`Z` so `new Date(iso)` preserves the instant
   - `Date` objects keep their authored time (including intentional midnight / `23:59:00`).
 - An object with `timePeriod` and `amount` properties for dynamic date calculations:
   - The `timePeriod` property accepts `"days"`, `"weeks"`, `"months"`, `"quarters"`, or `"years"`, representing past time periods calculated from today.

@@ -3,6 +3,16 @@
 module Playbook
   module PbDropdown
     module QuickpickHelper
+      # Marker for absolute ISO boundaries (Z / numeric offset). Wall-clock
+      # DateTime.civil also has offset 0, so offset alone cannot distinguish —
+      # format_date / format_value use this flag to preserve Z/±HH:MM on emit.
+      module AbsoluteInstant
+        def absolute_instant?
+          true
+        end
+      end
+      private_constant :AbsoluteInstant
+
       class << self
         def get_quickpick_options(range_ends_today: false, custom_quick_pick_dates: {})
           default_options = build_default_options(range_ends_today)
@@ -124,7 +134,7 @@ module Playbook
         # Parses timed custom boundaries. Mirrors React parseQuickPickDateTime:
         # 1) US m/d/Y + time (optional :SS / AM|PM) → DateTime.civil (wall-clock)
         # 2) Offset-less YYYY-MM-DDTHH:MM:SS → DateTime.civil (wall-clock; not Time.parse)
-        # 3) ISO with Z / ± offset → DateTime.iso8601 (absolute); emit uses civil fields
+        # 3) ISO with Z / numeric offset → DateTime.iso8601 (absolute; emit keeps offset)
         # Unsupported timed strings raise — no process-TZ Time.parse fallback.
         # Date-only boundaries stay on parse_date_string (unchanged).
         def parse_datetime_string(date_str)
@@ -150,7 +160,7 @@ module Playbook
           end
 
           # Absolute ISO with Z or numeric offset (React: new Date(iso)).
-          return DateTime.iso8601(trimmed) if trimmed.match?(/\A\d{4}-\d{2}-\d{2}T/) && trimmed.match?(/[Zz]|[+-]\d{2}:?\d{2}\z/)
+          return DateTime.iso8601(trimmed).extend(AbsoluteInstant) if trimmed.match?(/\A\d{4}-\d{2}-\d{2}T/) && trimmed.match?(/[Zz]|[+-]\d{2}:?\d{2}\z/)
 
           raise ArgumentError, "Unsupported QuickPick timed value: #{date_str.inspect}"
         end
@@ -173,12 +183,12 @@ module Playbook
         end
 
         # Date-only → m/d/Y (SOD/EOD applied at sync when enableTime).
-        # Time/DateTime (explicit custom times, including intentional midnight) →
-        # offset-less wall-clock (YYYY-MM-DDTHH:MM:SS). Customs are authored as local
-        # wall-clock labels, not absolute instants — do not emit zone offsets.
+        # Wall-clock Time/DateTime → offset-less YYYY-MM-DDTHH:MM:SS (local clock face).
+        # Absolute ISO (AbsoluteInstant) → iso8601 with Z/±HH:MM so JS new Date keeps
+        # the same instant (React parseQuickPickDateTime already handles both).
         def format_date(date)
           if time_like?(date)
-            date.strftime("%Y-%m-%dT%H:%M:%S")
+            format_timed(date)
           else
             date.strftime("%m/%d/%Y")
           end
@@ -186,10 +196,22 @@ module Playbook
 
         def format_value(date)
           if time_like?(date)
-            date.strftime("%Y-%m-%dT%H:%M:%S")
+            format_timed(date)
           else
             date.to_s
           end
+        end
+
+        def format_timed(date)
+          if absolute_instant?(date)
+            date.iso8601
+          else
+            date.strftime("%Y-%m-%dT%H:%M:%S")
+          end
+        end
+
+        def absolute_instant?(date)
+          date.respond_to?(:absolute_instant?) && date.absolute_instant?
         end
 
         def time_like?(date)

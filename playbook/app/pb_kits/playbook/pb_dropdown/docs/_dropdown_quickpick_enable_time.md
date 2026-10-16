@@ -8,10 +8,17 @@ When linked DatePickers use `enable_time` / `enableTime`, QuickPick presets that
 | Offset-less ISO datetime (`T` separator) | `"2026-03-08T02:30:00"` | Wall-clock — same as above (not server-TZ) |
 | ISO-8601 with `Z` or numeric offset | `"2026-03-08T07:30:00Z"`, `"2026-03-08T02:30:00-05:00"` | Absolute instant |
 
-Wall-clock inputs keep the authored clock face through parse and emit. Offset/`Z` inputs are parsed as absolute; Rails then emits offset-less `YYYY-MM-DDTHH:MM:SS` from that `DateTime`’s civil fields (the clock face in the offset’s local components). React also accepts `Date` objects (times kept as authored, including intentional midnight / `23:59:00`).
+**Emit (Rails and React — same contract):**
+
+| Input kind | Emit |
+|------------|------|
+| Wall-clock (US `m/d/Y` + time, or offset-less `YYYY-MM-DDTHH:MM:SS`) | Offset-less `YYYY-MM-DDTHH:MM:SS` — authored clock face |
+| Absolute (`Z` or numeric offset) | Keeps offset / `Z` (e.g. `…Z` or `…±HH:MM`) so `parseQuickPickDateTime` / `new Date(iso)` preserve the same instant |
+
+React also accepts `Date` objects (times kept as authored, including intentional midnight / `23:59:00`).
 
 Date-only custom strings (e.g. `"06/01/2022"`) still get SOD/EOD at sync when `enableTime` is on. Other free-text / undocumented timed strings are not supported.
 
-On Rails, the option payload and linked hidden inputs carry offset-less wall-clock datetimes (`YYYY-MM-DDTHH:MM:SS`) so sync can set Flatpickr without re-applying day bounds or shifting by process TZ.
+On Rails, wall-clock customs go to the option payload as offset-less datetimes; absolute customs keep their offset so linked `enableTime` DatePickers sync to the correct instant (not a misread local wall-clock).
 
 Alternate configuration: QuickPick + Time can also be handled by a Date-only QuickPick (Dropdown QuickPick + two DatePickers without time selection) paired with two TimePickers for start + end time selection in the same form.
