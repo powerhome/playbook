@@ -3352,22 +3352,22 @@
   dependencies:
     "@tanstack/table-core" "8.20.5"
 
-"@tanstack/react-virtual@^3.12.0":
-  version "3.13.0"
-  resolved "https://npm.powerapp.cloud/@tanstack/react-virtual/-/react-virtual-3.13.0.tgz#f50bccdfbb792cb11fdc0342fd3ec6945c730389"
-  integrity sha512-CchF0NlLIowiM2GxtsoKBkXA4uqSnY2KvnXo+kyUFD4a4ll6+J0qzoRsUPMwXV/H26lRsxgJIr/YmjYum2oEjg==
+"@tanstack/react-virtual@^3.14.21":
+  version "3.14.21"
+  resolved "https://npm.powerapp.cloud/@tanstack/react-virtual/-/react-virtual-3.14.21.tgz#b58905399d8f057608ade70bf56dc4ee98a79dc6"
+  integrity sha512-wWE/ZJDNNDp18JHWy7n5PQooqerHePVkEEu6Op0twKQ2InF9DPhYMQptQY0syDEviMd3/r8D0OUvKJibDGm9HQ==
   dependencies:
-    "@tanstack/virtual-core" "3.13.0"
+    "@tanstack/virtual-core" "3.19.6"
 
 "@tanstack/table-core@8.20.5":
   version "8.20.5"
   resolved "https://npm.powerapp.cloud/@tanstack/table-core/-/table-core-8.20.5.tgz#3974f0b090bed11243d4107283824167a395cf1d"
   integrity sha512-P9dF7XbibHph2PFRz8gfBKEXEY/HJPOhym8CHmjF8y3q5mWpKx9xtZapXQUWCgkqvsK0R46Azuz+VaxD4Xl+Tg==
 
-"@tanstack/virtual-core@3.13.0":
-  version "3.13.0"
-  resolved "https://npm.powerapp.cloud/@tanstack/virtual-core/-/virtual-core-3.13.0.tgz#8db0ccc9d6c32b6393551a6d19c87dbb259a8828"
-  integrity sha512-NBKJP3OIdmZY3COJdWkSonr50FMVIi+aj5ZJ7hI/DTpEKg2RMfo/KvP8A3B/zOSpMgIe52B5E2yn7rryULzA6g==
+"@tanstack/virtual-core@3.19.6":
+  version "3.19.6"
+  resolved "https://npm.powerapp.cloud/@tanstack/virtual-core/-/virtual-core-3.19.6.tgz#1a185556d5cd3f65a6db3c5a372feb4fde7cbafc"
+  integrity sha512-CsTW892z23gy7IyxYTTorVu1uZWB+0N349rSMgKz4rFLPpLza7F7TpcCKeI5iUAwYQCt8QUlOU67J+KXCxtpGw==
 
 "@testing-library/dom@^7.28.1":
   version "7.31.2"
