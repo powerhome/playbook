@@ -288,23 +288,35 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  typeahead: `<Typeahead
-    defaultValue={favoriteColors}
-    isMulti
-    key={resetKey}
-    label="Favorite Color"
-    options={typeaheadColorOptions}
-    pills
-    placeholder="Search for a color"
-    {...register("favoriteColors")}
+  typeahead: `<Controller
+  control={control}
+  name="favoriteColors"
+  render={({ field: { onChange: handleChange, value } }) => (
+    <Typeahead
+        isMulti
+        key={resetKey}
+        label="Favorite Color"
+        onChange={handleChange}
+        options={typeaheadColorOptions}
+        pills
+        placeholder="Search for a color"
+        value={value}
+    />
+  )}
 />`,
-  typeahead_default: `<Typeahead
-    defaultValue={favoriteColor}
-    key={resetKey}
-    label="Favorite Color"
-    options={typeaheadColorOptions}
-    placeholder="Search for a color"
-    {...register("favoriteColorSearch")}
+  typeahead_default: `<Controller
+  control={control}
+  name="favoriteColorSearch"
+  render={({ field: { onChange: handleChange, value } }) => (
+    <Typeahead
+        key={resetKey}
+        label="Favorite Color"
+        onChange={handleChange}
+        options={typeaheadColorOptions}
+        placeholder="Search for a color"
+        value={value}
+    />
+  )}
 />`,
   url_field: `<Controller
   control={control}
@@ -657,28 +669,40 @@ const FormDefaultValues = () => {
               )}
 
               {isSelected("typeahead_default") && (
-                <Typeahead
-                    defaultValue={BLUE}
-                    key={`typeahead-default-${resetKey}`}
-                    label="Favorite Color"
-                    marginBottom="sm"
-                    options={TYPEAHEAD_COLOR_OPTIONS}
-                    placeholder="Search for a color"
-                    {...register("favoriteColorSearch")}
+                <Controller
+                    control={control}
+                    name="favoriteColorSearch"
+                    render={({ field: { onChange: handleChange, value } }) => (
+                      <Typeahead
+                          key={`typeahead-default-${resetKey}`}
+                          label="Favorite Color"
+                          marginBottom="sm"
+                          onChange={handleChange}
+                          options={TYPEAHEAD_COLOR_OPTIONS}
+                          placeholder="Search for a color"
+                          value={value}
+                      />
+                    )}
                 />
               )}
 
               {isSelected("typeahead") && (
-                <Typeahead
-                    defaultValue={[BLUE]}
-                    isMulti
-                    key={`typeahead-multi-${resetKey}`}
-                    label="Favorite Color"
-                    marginBottom="sm"
-                    options={TYPEAHEAD_COLOR_OPTIONS}
-                    pills
-                    placeholder="Search for a color"
-                    {...register("favoriteColors")}
+                <Controller
+                    control={control}
+                    name="favoriteColors"
+                    render={({ field: { onChange: handleChange, value } }) => (
+                      <Typeahead
+                          isMulti
+                          key={`typeahead-multi-${resetKey}`}
+                          label="Favorite Color"
+                          marginBottom="sm"
+                          onChange={handleChange}
+                          options={TYPEAHEAD_COLOR_OPTIONS}
+                          pills
+                          placeholder="Search for a color"
+                          value={value}
+                      />
+                    )}
                 />
               )}
 
