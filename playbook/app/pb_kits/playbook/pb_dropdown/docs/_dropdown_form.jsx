@@ -30,12 +30,12 @@ const DropdownForm = () => {
           requiredIndicator
           validationMessage="Select at least one tag."
       />
-      <Button text="Submit"
-          type="submit"
+      <Button htmlType="submit"
+          text="Submit"
       />
-      <Button marginLeft="xs"
+      <Button htmlType="reset"
+          marginLeft="xs"
           text="Reset"
-          type="reset"
           variant="secondary"
       />
       {submittedTags && (
