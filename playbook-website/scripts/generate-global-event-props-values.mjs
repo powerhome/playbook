@@ -33,9 +33,8 @@ function getTypeFromSchema(prop) {
 }
 
 function formatValues(prop) {
-  if (prop.example) {
-    return `'${String(prop.example).replace(/'/g, "\\'")}'`;
-  }
+  // Keep Values blank for function handlers (same as Kit Props). Schema
+  // `example` stays for AI/docs consumers — do not surface it in this table.
   if (!prop.values || prop.values.length === 0) {
     return '[]';
   }

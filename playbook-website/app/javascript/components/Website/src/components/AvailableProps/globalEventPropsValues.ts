@@ -9,7 +9,7 @@ const globalEventPropsValues = [
   {
     prop: "onClick",
     type: "function",
-    values: 'onClick={() => console.log("clicked")}',
+    values: [],
     platforms: ["react"]
   }
 ];

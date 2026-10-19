@@ -59,22 +59,24 @@ const GlobalEventProps = ({ darkMode, platform = 'react' }: GlobalEventPropsType
                 </Card>
               </td>
               <td>
-                <Card
-                    background={darkMode ? 'dark' : 'light'}
-                    borderNone
-                    borderRadius="sm"
-                    display="inline_block"
-                    flexDirection="row"
-                    margin="xxs"
-                    padding="xxs"
-                >
-                  <Body
-                      className="kearning"
-                      dark={darkMode}
+                {Array.isArray(prop.values) && prop.values.length > 0 && (
+                  <Card
+                      background={darkMode ? 'dark' : 'light'}
+                      borderNone
+                      borderRadius="sm"
+                      display="inline_block"
+                      flexDirection="row"
+                      margin="xxs"
+                      padding="xxs"
                   >
-                    {prop.values}
-                  </Body>
-                </Card>
+                    <Body
+                        className="kearning"
+                        dark={darkMode}
+                    >
+                      {prop.values.join(' | ')}
+                    </Body>
+                  </Card>
+                )}
               </td>
             </tr>
           ))}
