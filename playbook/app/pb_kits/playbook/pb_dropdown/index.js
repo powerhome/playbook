@@ -177,11 +177,8 @@ export default class PbDropdown extends PbEnhancedElement {
     this.showElement(this.target);
     this.updateArrowDisplay(true);
     this.resetFocus();
-    const firstVisibleOption = this.keyboardHandler.getVisibleOptions()[0];
-    if (firstVisibleOption) {
-      firstVisibleOption.classList.add("pb_dropdown_option_focused");
-      this.keyboardHandler.focusedOptionIndex = Array.from(this.queryAllOptions()).indexOf(firstVisibleOption);
-    }
+    row.classList.add("pb_dropdown_option_focused");
+    this.keyboardHandler.focusedOptionIndex = Array.from(this.queryAllOptions()).indexOf(row);
     this.adjustDropdownHeight();
   }
 

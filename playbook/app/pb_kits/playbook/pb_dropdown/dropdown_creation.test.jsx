@@ -218,6 +218,28 @@ test.each([undefined, "outside"])("a second Enter preserves a created selection 
   expect(new FormData(container.querySelector("form")).get("tag")).toBe("New tag")
 })
 
+test("Enter selects a highlighted option when the query is blank", () => {
+  const onSelect = jest.fn()
+  const submit = jest.fn(event => event.preventDefault())
+  const { container } = render(
+    <form onSubmit={submit}>
+      <Dropdown
+          allowOptionCreation
+          name="tag"
+          onSelect={onSelect}
+          options={options}
+      />
+    </form>
+  )
+  const input = container.querySelector(".dropdown_input")
+  fireEvent.click(input)
+  expect(container.querySelector(".pb_dropdown_container")).toHaveClass("open")
+  fireEvent.keyDown(input, { key: "ArrowDown" })
+  expect(fireEvent.keyDown(input, { key: "Enter" })).toBe(false)
+  expect(onSelect).toHaveBeenCalledWith(options[0])
+  expect(submit).not.toHaveBeenCalled()
+})
+
 test("Enter on mount or a whitespace query does not select a static option", () => {
   const onSelect = jest.fn()
   const { container } = render(

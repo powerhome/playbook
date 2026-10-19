@@ -81,11 +81,16 @@ const {
       setFocusedOptionIndex(nextIndexUp);
       break;
     }
-    case "Enter":
-      if (creationEnabled && (isDropDownClosed || !filterItem.trim())) return;
-      if (focusedOptionIndex !== -1 && (!asyncEnabled || filteredOptions[focusedOptionIndex]) && !filteredOptions[focusedOptionIndex]?.disabled) {
+    case "Enter": {
+      const focusedOption = filteredOptions[focusedOptionIndex];
+      const canSelectFocused = focusedOptionIndex !== -1 &&
+        (!asyncEnabled || focusedOption) &&
+        !focusedOption?.disabled;
+      // A closed menu or blank query stays available for form submission unless an option is highlighted.
+      if (creationEnabled && (isDropDownClosed || (!filterItem.trim() && !canSelectFocused))) return;
+      if (canSelectFocused) {
         e.preventDefault();
-        handleOptionClick(filteredOptions[focusedOptionIndex]);
+        handleOptionClick(focusedOption);
         setFocusedOptionIndex(-1)
       } else if (focusedOptionIndex === -1) {
         if (creationEnabled && creationOption) {
@@ -96,6 +101,7 @@ const {
         }
       }
       break;
+    }
       case "Tab":
         setIsDropDownClosed(true);
         setFocusedOptionIndex(-1)

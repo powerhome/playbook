@@ -6,4 +6,4 @@ Created selections use the normal `onSelect(optionOrArray)` and `onChange({ targ
 
 For async usage, combine `allowOptionCreation` with `async` and your existing `loadOptions`; both Promise and callback loaders are supported. Creation is hidden during pending searches and errors, then offered when settled results have no exact match. Applications that manage fetching themselves must pass `loading` while the request is pending.
 
-A non-empty search focuses the Create row when it is available; arrow keys can choose another option. Closing the menu or clearing the query removes automatic option focus. Enter with a closed menu or blank query remains available for normal form submission and does not change the selection.
+A non-empty search focuses the Create row when it is available; arrow keys can choose another option. Closing the menu or clearing the query removes automatic option focus. Enter selects a highlighted option, including when the query is blank. Enter with a closed menu, or a blank query and no highlighted option, remains available for normal form submission and does not change the selection.

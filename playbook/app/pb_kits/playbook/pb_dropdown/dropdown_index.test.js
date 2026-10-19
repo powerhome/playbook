@@ -1564,6 +1564,25 @@ describe("PbDropdown option creation", () => {
     jest.useRealTimers();
   });
 
+  test("Enter on a partial query creates the value instead of selecting the first match", () => {
+    mount();
+    const onSelect = jest.fn();
+    root.addEventListener("pb:dropdown:selected", event => onSelect(event.detail));
+    typeQuery("Ex");
+
+    const createRow = getCreationRow();
+    expect(createRow).toHaveClass("pb_dropdown_option_focused");
+    expect(instance.queryAllOptions()[0]).not.toHaveClass("pb_dropdown_option_focused");
+
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true }));
+    expect(onSelect).toHaveBeenCalledWith({ id: "Ex", label: "Ex", value: "Ex", __isNew__: true });
+
+    typeQuery("Ex");
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(JSON.parse(instance.selectedOptionJson)).toEqual({ id: "existing", label: "Existing", value: "existing" });
+  });
+
   test("Enter creates a trimmed value through the selection event and form input", () => {
     jest.useFakeTimers();
     const form = mount();
