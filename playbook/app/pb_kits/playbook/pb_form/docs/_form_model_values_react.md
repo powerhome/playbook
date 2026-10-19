@@ -9,7 +9,7 @@ This example is an edit form after a failed server validation. React kits do not
 | Multi Level Select | `selectedIds` | `error` |
 | Phone Number Input | `value` | `error` |
 | Typeahead | `defaultValue` (an option object or array) | `error` |
-| Star Rating | `rating` | n/a |
+| Star Rating | n/a — interactive rating is set only via `onClick`; a prefilled value is not displayed | n/a |
 
 **Notes**
 - Dropdown and Typeahead need the full option object (`{ label, value }`), not a bare id. Look up the option in `options` before passing it.

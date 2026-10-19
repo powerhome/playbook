@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { Controller, useForm } from "react-hook-form"
 
 import Body from "../../pb_body/_body"
 import Button from "../../pb_button/_button"
@@ -8,6 +7,8 @@ import Card from "../../pb_card/_card"
 import Flex from "../../pb_flex/_flex"
 import FlexItem from "../../pb_flex/_flex_item"
 import TextInput from "../../pb_text_input/_text_input"
+
+import { Controller, useForm } from "react-hook-form"
 
 const CODE_PREVIEW = `const { control, handleSubmit } = useForm({
   defaultValues: { firstName: "", lastName: "" },

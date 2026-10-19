@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import { Controller, useForm } from "react-hook-form"
 
 import Button from "../../pb_button/_button"
 import Flex from "../../pb_flex/_flex"
 import TextInput from "../../pb_text_input/_text_input"
+
+import { Controller, useForm } from "react-hook-form"
 
 const LOADING_MS = 5000
 

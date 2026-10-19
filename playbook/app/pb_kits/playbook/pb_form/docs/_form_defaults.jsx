@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { useForm, Controller } from "react-hook-form"
 
 import Body from "../../pb_body/_body"
 import Button from "../../pb_button/_button"
@@ -18,6 +17,8 @@ import Textarea from "../../pb_textarea/_textarea"
 import TextInput from "../../pb_text_input/_text_input"
 import TimePicker from "../../pb_time_picker/_time_picker"
 import Typeahead from "../../pb_typeahead/_typeahead"
+
+import { useForm, Controller } from "react-hook-form"
 
 const INPUT_TYPES = [
   { key: "checkbox", label: "Checkbox" },
