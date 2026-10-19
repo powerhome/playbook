@@ -204,13 +204,13 @@ export default class PbDropdown extends PbEnhancedElement {
 
   // Selected multi-select rows stay in the list with display:none. An open menu of only
   // those rows collapses to its border, so show the empty message instead.
-  showAsyncMultiSelectMenu() {
-    if (!this.isAsync || !this.isMultiSelect) return;
+  showMultiSelectEmptyMenu() {
+    if (!this.isMultiSelect) return;
     const options = Array.from(this.queryAllOptions());
     if (!options.length) return;
     const hasVisibleOption = options.some((opt) => opt.style.display !== "none");
     if (hasVisibleOption) this.removeNoOptionsMessage();
-    else this.showNoOptionsMessage("No results found");
+    else this.showNoOptionsMessage(this.isAsync ? "No results found" : undefined);
   }
 
   asyncRequestId = 0;
@@ -690,13 +690,12 @@ export default class PbDropdown extends PbEnhancedElement {
       if (match) hasMatch = true;
     });
 
-    this.adjustDropdownHeight();
-
     this.removeNoOptionsMessage();
     if (!hasMatch) {
       this.showNoOptionsMessage();
     }
     this.updateCreationOption(term);
+    this.adjustDropdownHeight();
   }
 
   cancelAsyncSearch() {
@@ -1584,7 +1583,7 @@ export default class PbDropdown extends PbEnhancedElement {
           selectedOption.style.display = "none";
         }
       });
-      if (this.isAsync) this.showAsyncMultiSelectMenu();
+      this.showMultiSelectEmptyMenu();
       this.adjustDropdownHeight();
       this.syncHiddenInputs();
     } else {
@@ -1606,7 +1605,7 @@ export default class PbDropdown extends PbEnhancedElement {
       retryTerm = this.searchInput?.value || this.searchBar?.value || "";
     }
     this.showAsyncEmptyState();
-    this.showAsyncMultiSelectMenu();
+    this.showMultiSelectEmptyMenu();
     if (!this.canOpenMenu && retryTerm == null) return;
     if (!this.canOpenMenu) {
       this.searchAsync(retryTerm);

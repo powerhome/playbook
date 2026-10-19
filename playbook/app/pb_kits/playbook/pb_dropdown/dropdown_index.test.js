@@ -1680,6 +1680,45 @@ describe("PbDropdown option creation", () => {
     expect(JSON.parse(instance.selectedOptionJson)).toEqual(newYork);
   });
 
+  const reopen = () => {
+    if (!instance.target.classList.contains("open")) instance.showElement(instance.target);
+  };
+
+  test("reopening a single-select after choosing an existing option keeps that option", () => {
+    mount();
+    const option = instance.queryAllOptions()[0];
+    option.click();
+    reopen();
+    expect(instance.target).toHaveClass("open");
+    expect(option.style.display).not.toBe("none");
+    expect(input.value).toBe("Existing");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+  });
+
+  test("reopening a multi-select after its only option is chosen shows the empty message", () => {
+    mount({ multi: true });
+    const option = instance.queryAllOptions()[0];
+    option.click();
+    reopen();
+    expect(instance.target).toHaveClass("open");
+    expect(option.style.display).toBe("none");
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("no option");
+  });
+
+  test("reopening a multi-select keeps the options that are still available", () => {
+    mount({ multi: true });
+    instance.replaceOptions([
+      { id: "existing", label: "Existing", value: "existing" },
+      { id: "other", label: "Other", value: "other" },
+    ]);
+    const [selected, remaining] = instance.queryAllOptions();
+    selected.click();
+    reopen();
+    expect(selected.style.display).toBe("none");
+    expect(remaining.style.display).toBe("");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+  });
+
   test("static filtering stays label-only when option creation is disabled", () => {
     mount({ creation: false });
     instance.replaceOptions([{ id: "ny", label: "New York", value: "empire" }]);
