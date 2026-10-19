@@ -1,7 +1,8 @@
 // Rails TipTap: dynamic import() from esm.sh (no import map — avoids 2nd map ignored by Firefox vs Vite/host).
 // Idempotent: data-pb-rte-initialized / data-pb-rte-pending.
 
-const RTE_TIPTAP_VERSION = "2.8.0";
+// Keep in sync with TipTap versions used by Playbook docs / Nitro RTE alignment (TipTap v3).
+const RTE_TIPTAP_VERSION = "3.0.7";
 const RTE_TIPTAP_ESM = (pkg) => `https://esm.sh/${pkg}@${RTE_TIPTAP_VERSION}`;
 const RTE_EXTENSIONS = new Set(["underline", "text_align", "horizontal_rule", "image"]);
 
@@ -211,7 +212,6 @@ async function initPlaybookRichTextEditorRails(container) {
   try {
     const { Editor } = await import(RTE_TIPTAP_ESM("@tiptap/core"));
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
-    const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
     const optionalExtensions = await loadOptionalExtensions(extensionNames);
     const neutralClipboardTags = new Set(["html", "head", "body", "meta", "div", "span", "p"]);
     const markdownSourceTags = new Set([...neutralClipboardTags, "pre", "code"]);
@@ -246,11 +246,22 @@ async function initPlaybookRichTextEditorRails(container) {
       }
     }
 
+    // TipTap v3 StarterKit includes Link + Underline. Keep underline opt-in via extensions prop;
+    // configure Link here so we do not load a second @tiptap/extension-link instance.
     const editor = new Editor({
       element: editorNode,
       extensions: [
-        StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
-        Link.configure({ openOnClick: false, HTMLAttributes: { target: "_blank", rel: "noopener" } }),
+        StarterKit.configure({
+          heading: { levels: [1, 2, 3] },
+          link: {
+            openOnClick: false,
+            HTMLAttributes: { target: "_blank", rel: "noopener" },
+          },
+          // TipTap v3 enables TrailingNode by default; disable so getHTML() stays
+          // free of a synthetic trailing <p></p> that would dirty/persist blank lines.
+          trailingNode: false,
+          underline: false,
+        }),
         ...optionalExtensions,
       ],
       content: initialHtml,

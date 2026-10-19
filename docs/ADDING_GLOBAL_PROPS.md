@@ -2,6 +2,8 @@
 
 Global props are styling and layout props that should work consistently across Playbook kits in Rails and React. Add them only when the API can be represented by a closed set of design-system values or an already-approved dynamic pattern. Do not introduce open-ended raw CSS values unless the global prop system already supports that pattern.
 
+For React event handlers on opted-in kits, see [Adding Global Event Props](ADDING_GLOBAL_EVENT_PROPS.md) instead.
+
 ## 1. Define the Rails Prop
 
 Add a Ruby module in `playbook/lib/playbook/<prop_name>.rb`.

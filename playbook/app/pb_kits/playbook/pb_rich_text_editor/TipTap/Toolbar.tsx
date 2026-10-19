@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Background from "../../pb_background/_background";
 import Flex from "../../pb_flex/_flex";
 import SectionSeparator from "../../pb_section_separator/_section_separator";
@@ -72,6 +72,21 @@ const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.React
   const toolbarInnerRef = useRef<HTMLDivElement>(null);
   const stackedAtWidthRef = useRef(0);
   const [toolsStacked, setToolsStacked] = useState(false);
+  // TipTap v3 defaults shouldRerenderOnTransaction to false; re-render active states locally.
+  const [, setEditorRenderTick] = useState(0);
+
+  useEffect(() => {
+    if (!editor) return;
+
+    const rerenderToolbar = () => setEditorRenderTick((tick) => tick + 1);
+    editor.on("selectionUpdate", rerenderToolbar);
+    editor.on("transaction", rerenderToolbar);
+
+    return () => {
+      editor.off("selectionUpdate", rerenderToolbar);
+      editor.off("transaction", rerenderToolbar);
+    };
+  }, [editor]);
 
   useLayoutEffect(() => {
     if (simple) return;
