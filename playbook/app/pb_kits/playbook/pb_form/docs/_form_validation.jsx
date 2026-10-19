@@ -106,13 +106,16 @@ const CODE_SNIPPETS = {
   control={control}
   name="newsletter"
   render={({ field, fieldState }) => (
-    <Checkbox
-        checked={!!field.value}
-        error={!!fieldState.error}
-        onChange={(event) => field.onChange(event.target.checked)}
-        requiredIndicator
-        text="Subscribe to newsletter"
-    />
+    <>
+      <Checkbox
+          checked={!!field.value}
+          error={!!fieldState.error}
+          onChange={(event) => field.onChange(event.target.checked)}
+          requiredIndicator
+          text="Subscribe to newsletter"
+      />
+      {fieldState.error && <Body status="negative" text={fieldState.error.message} />}
+    </>
   )}
   rules={{ validate: (value) => value === true || "${REQUIRED_MESSAGE}" }}
 />`,
@@ -486,14 +489,23 @@ const FormValidation = () => {
                     control={control}
                     name="newsletter"
                     render={({ field, fieldState }) => (
-                      <Checkbox
-                          checked={!!field.value}
-                          error={!!fieldState.error}
-                          marginBottom="sm"
-                          onChange={(event) => field.onChange(event.target.checked)}
-                          requiredIndicator
-                          text="Subscribe to newsletter"
-                      />
+                      <>
+                        <Checkbox
+                            checked={!!field.value}
+                            error={!!fieldState.error}
+                            marginBottom="sm"
+                            onChange={(event) => field.onChange(event.target.checked)}
+                            requiredIndicator
+                            text="Subscribe to newsletter"
+                        />
+                        {fieldState.error && (
+                          <Body
+                              marginBottom="sm"
+                              status="negative"
+                              text={fieldState.error.message}
+                          />
+                        )}
+                      </>
                     )}
                     rules={{ validate: (value) => value === true || REQUIRED_MESSAGE }}
                 />

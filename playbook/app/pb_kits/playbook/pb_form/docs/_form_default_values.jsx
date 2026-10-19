@@ -246,6 +246,7 @@ const CODE_SNIPPETS = {
   name="rating"
   render={({ field }) => (
     <StarRating
+        key={resetKey}
         label="Rating"
         onClick={(value) => field.onChange(value)}
         rating={field.value || 0}
@@ -518,6 +519,7 @@ const FormDefaultValues = () => {
                     name="rating"
                     render={({ field }) => (
                       <StarRating
+                          key={`rating-${resetKey}`}
                           label="Rating"
                           marginBottom="sm"
                           onClick={(value) => field.onChange(value)}
