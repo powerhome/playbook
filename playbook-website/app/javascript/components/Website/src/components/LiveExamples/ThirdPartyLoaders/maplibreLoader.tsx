@@ -5,7 +5,7 @@ function ensureMapLibreCSS() {
   if (document.querySelector('link[data-maplibre-css="1"]')) return
   const link = document.createElement("link")
   link.rel = "stylesheet"
-  link.href = "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+  link.href = "https://unpkg.com/maplibre-gl@6.4.1/dist/maplibre-gl.css"
   link.setAttribute("data-maplibre-css", "1")
   document.head.appendChild(link)
 }
@@ -14,8 +14,7 @@ export const maplibreLoader: ThirdPartyLoader = {
   id: "maplibre-gl",
   detect: (_raw, _defaults, sources) => sources.includes("maplibre-gl"),
   load: async (_raw, defaults) => {
-    const mod: any = await import("maplibre-gl")
-    const maplibregl = mod.default || mod
+    const { default: maplibregl } = await import("../../../utils/maplibre")
     ensureMapLibreCSS() // remove this if you bundle the CSS elsewhere
 
     const alias = defaults.find((d) => d.source === "maplibre-gl")?.local

@@ -1199,3 +1199,1347 @@ test('autocomplete selection still fires onSelect', () => {
 
   expect(onSelect).toHaveBeenCalledWith(options[1])
 })
+
+describe('async Dropdown', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+
+  test('ignores stale callbacks and cancels pending search on Escape', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'first' } });
+    act(() => jest.advanceTimersByTime(250));
+    fireEvent.change(input, { target: { value: 'second' } });
+    act(() => loadOptions.mock.calls[0][1]([{ id: '1', label: 'Stale' }]));
+    expect(screen.queryByText('Stale')).not.toBeInTheDocument();
+    fireEvent.keyDown(input, { key: 'Escape', code: 'Escape' });
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+  });
+
+  test('supports promise results and rejected requests', async () => {
+    const loadOptions = jest.fn().mockResolvedValueOnce([]).mockRejectedValueOnce(new Error('Failed'));
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'empty' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    expect(screen.getByRole('status')).toHaveTextContent('No results found');
+    fireEvent.change(input, { target: { value: 'error' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    expect(screen.getByRole('status')).toHaveTextContent('Unable to load options');
+  });
+});
+
+describe('async Dropdown lifecycle', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test.each(['Tab', 'Escape'])('dismissal with %s invalidates in-flight responses', (key) => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'query' } });
+    act(() => jest.advanceTimersByTime(250));
+    fireEvent.keyDown(input, { key });
+    act(() => loadOptions.mock.calls[0][1]([{ id: 'late', label: 'Late result' }]));
+    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
+  });
+
+
+  test('times out callback loaders and ignores their late results', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'a' } });
+    act(() => jest.advanceTimersByTime(15000));
+    expect(screen.getByRole('status')).toHaveTextContent('Unable to load options');
+    act(() => loadOptions.mock.calls[0][1]([{ id: 'late', label: 'Late result' }]));
+    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
+  });
+
+  test('unmount cancels debounced work', () => {
+    const loadOptions = jest.fn();
+    const { unmount } = render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+                               />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    unmount();
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+  });
+});
+
+describe('async Dropdown cancellation', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test.each(['Escape', 'outside', 'disable'])('reopening retries an interrupted search after %s', (dismissal) => {
+    const loadOptions = jest.fn();
+    const example = (disabled = false) => (
+      <Dropdown async
+          autocomplete
+          disabled={disabled}
+          loadOptions={loadOptions}
+      />
+    );
+    const { rerender } = render(example());
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Canada' } });
+    act(() => jest.advanceTimersByTime(0));
+    const staleCallback = loadOptions.mock.calls[0][1];
+    if (dismissal === 'disable') rerender(example(true));
+    else if (dismissal === 'outside') fireEvent.click(document.body);
+    else fireEvent.keyDown(input, { key: 'Escape' });
+    act(() => staleCallback([{ id: 'stale', label: 'Stale result' }]));
+    if (dismissal === 'disable') rerender(example());
+    expect(input).toHaveValue('Canada');
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    expect(screen.getByRole('status')).toHaveTextContent('Loading');
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+    expect(loadOptions.mock.calls[1][0]).toBe('Canada');
+    act(() => loadOptions.mock.calls[1][1]([options[1]]));
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+    expect(screen.queryByText('Stale result')).not.toBeInTheDocument();
+    fireEvent.keyDown(input, { key: 'Escape' });
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
+
+  test.each(['Escape', 'outside', 'disable'])('cancelled search restores settled options and retries the query on reopen after %s', (dismissal) => {
+    const loadOptions = jest.fn();
+    const example = (disabled = false) => (
+      <Dropdown async
+          autocomplete
+          defaultOptions={options}
+          disabled={disabled}
+          loadOptions={loadOptions}
+      />
+    );
+    const { rerender } = render(example());
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Can' } });
+    act(() => jest.advanceTimersByTime(0));
+    act(() => loadOptions.mock.calls[0][1]([options[1]]));
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+    expect(screen.queryByText('United States')).not.toBeInTheDocument();
+
+    fireEvent.change(input, { target: { value: 'Pak' } });
+    act(() => jest.advanceTimersByTime(0));
+    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent('Loading');
+
+    if (dismissal === 'disable') rerender(example(true));
+    else if (dismissal === 'outside') fireEvent.click(document.body);
+    else fireEvent.keyDown(input, { key: 'Escape' });
+
+    act(() => loadOptions.mock.calls[1][1]([{ id: 'late', label: 'Late result' }]));
+    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(input).toHaveValue('Pak');
+
+    if (dismissal === 'disable') rerender(example());
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    expect(screen.getByRole('status')).toHaveTextContent('Loading');
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(3);
+    expect(loadOptions.mock.calls[2][0]).toBe('Pak');
+    act(() => loadOptions.mock.calls[2][1]([options[2]]));
+    expect(screen.getByText('Pakistan')).toBeInTheDocument();
+    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
+  });
+
+  test.each(['error', 'empty'])('closing a settled %s search keeps that outcome', (outcome) => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        defaultOptions={options}
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Can' } });
+    act(() => jest.advanceTimersByTime(0));
+    act(() => loadOptions.mock.calls[0][1](outcome === 'empty' ? [] : null));
+    expect(screen.getByRole('status')).toHaveTextContent(outcome === 'empty' ? 'No results found' : 'Unable to load options');
+    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
+
+    fireEvent.keyDown(input, { key: 'Escape' });
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole('status')).toHaveTextContent(outcome === 'empty' ? 'No results found' : 'Unable to load options');
+    expect(screen.queryByText('Canada')).not.toBeInTheDocument();
+  });
+
+  test('clearing a cancelled search prevents retry on reopen', () => {
+    const loadOptions = jest.fn();
+    const ref = React.createRef();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+        ref={ref}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Canada' } });
+    act(() => jest.advanceTimersByTime(0));
+    fireEvent.keyDown(input, { key: 'Escape' });
+    act(() => ref.current.clearSelected());
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+    expect(input).toHaveValue('');
+  });
+
+
+  test('outside click cancels a pending debounce', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    fireEvent.click(document.body);
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+    fireEvent.keyDown(screen.getByRole('textbox'), { key: 'ArrowDown' });
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+    expect(loadOptions.mock.calls[0][0]).toBe('query');
+  });
+
+  test('disabling invalidates an in-flight response', () => {
+    const loadOptions = jest.fn();
+    const { rerender } = render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+                                />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    act(() => jest.advanceTimersByTime(250));
+    rerender(<Dropdown async
+        autocomplete
+        disabled
+        loadOptions={loadOptions}
+             />);
+    act(() => loadOptions.mock.calls[0][1]([{ id: 'late', label: 'Late result' }]));
+    expect(screen.queryByText('Late result')).not.toBeInTheDocument();
+  });
+
+  test('re-enabling a preloaded dropdown retries the interrupted query instead of preloading', () => {
+    const loadOptions = jest.fn();
+    const example = (disabled = false) => (
+      <Dropdown async
+          autocomplete
+          defaultOptions
+          disabled={disabled}
+          loadOptions={loadOptions}
+      />
+    );
+    const { rerender } = render(example());
+    act(() => jest.advanceTimersByTime(0));
+    act(() => loadOptions.mock.calls[0][1](options));
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Canada' } });
+    act(() => jest.advanceTimersByTime(0));
+    rerender(example(true));
+    rerender(example());
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(3);
+    expect(loadOptions.mock.calls[2][0]).toBe('Canada');
+    act(() => loadOptions.mock.calls[2][1]([options[1]]));
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+
+  test('clear does not request an empty query', () => {
+    const loadOptions = jest.fn();
+    const ref = React.createRef();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+        ref={ref}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    act(() => ref.current.clearSelected());
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+  });
+});
+
+describe('Dropdown rich option rendering', () => {
+  test.each([false, true])('renders remote content and preserves selection data (searchbar: %s)', async (searchbar) => {
+    const option = { id: 'user', value: 'user', label: 'Ada', company: { title: 'Engineer' } };
+    const onSelect = jest.fn();
+    const loadOptions = jest.fn().mockResolvedValue([option]);
+    render(
+      <Dropdown async
+          autocomplete={!searchbar}
+          loadOptions={loadOptions}
+          onSelect={onSelect}
+          renderOption={(user) => <span>{user.company.title}</span>}
+      >
+        {searchbar ? [<Dropdown.Trigger key="trigger" />, <Dropdown.Container key="container"
+            searchbar
+                                                          />] : undefined}
+      </Dropdown>
+    );
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'ada' } });
+    const result = await screen.findByText('Engineer');
+    if (searchbar) {
+      fireEvent.keyDown(screen.getByRole('textbox'), { key: 'ArrowDown' });
+      fireEvent.keyDown(screen.getByRole('textbox'), { key: 'Enter' });
+    } else {
+      fireEvent.click(result);
+    }
+    expect(onSelect).toHaveBeenCalledWith(option);
+  });
+
+  test('explicit children override the renderer and null falls back to the label', () => {
+    const renderOption = jest.fn(() => null);
+    render(
+      <Dropdown options={options}
+          renderOption={renderOption}
+      >
+        <Dropdown.Option option={options[0]}><span>{'Explicit content'}</span></Dropdown.Option>
+        <Dropdown.Option option={options[1]} />
+      </Dropdown>
+    );
+    expect(screen.getByText('Explicit content')).toBeInTheDocument();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+    expect(renderOption).not.toHaveBeenCalledWith(options[0]);
+    expect(renderOption).toHaveBeenCalledWith(options[1]);
+  });
+});
+
+describe('Dropdown new-prop compatibility gates', () => {
+  test.each([undefined, false])('keeps local filtering and callbacks when async is %s', (async) => {
+    const loadOptions = jest.fn();
+    const onChange = jest.fn();
+    const onSelect = jest.fn();
+    const { container } = render(
+      <Dropdown async={async}
+          autocomplete
+          loadOptions={loadOptions}
+          name="country"
+          onChange={onChange}
+          onSelect={onSelect}
+          options={options}
+      />
+    );
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
+    expect(screen.queryByText('Pakistan')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText('Canada'));
+    expect(loadOptions).not.toHaveBeenCalled();
+    expect(onSelect).toHaveBeenCalledWith(options[1]);
+    expect(onChange).toHaveBeenCalledWith({ target: { name: 'country', value: options[1] } });
+    expect(container.querySelector('[aria-busy]')).toBeNull();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
+  test('removing async mode restores local results without an async status', () => {
+    const loadOptions = jest.fn();
+    const { rerender } = render(
+      <Dropdown async
+          autocomplete
+          loadOptions={loadOptions}
+      />
+    );
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
+    expect(screen.getByRole('status')).toHaveTextContent('Loading');
+    rerender(<Dropdown autocomplete
+        options={options}
+             />);
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+});
+
+describe('Dropdown controlled selection and identity', () => {
+  test.each([false, true])('controlled single-select keeps all options after selection (searchbar: %s)', (searchbar) => {
+    const Example = () => {
+      const [selected, setSelected] = useState(options[0]);
+      return (
+        <Dropdown onSelect={setSelected}
+            options={options}
+            value={selected}
+        >
+          <Dropdown.Trigger />
+          <Dropdown.Container searchbar={searchbar}>
+            {options.map((option) => (
+              <Dropdown.Option key={option.id}
+                  option={option}
+              />
+            ))}
+          </Dropdown.Container>
+        </Dropdown>
+      );
+    };
+    const { container } = render(<Example />);
+    fireEvent.click(screen.getByText('Canada'));
+    expect(Array.from(container.querySelectorAll('[class*="pb_dropdown_option_"]')).map((option) => option.textContent)).toEqual(options.map((option) => option.label));
+    if (searchbar) expect(screen.getByRole('textbox')).toHaveValue('');
+  });
+
+  test.each([
+    [false, 'icon'], [true, 'icon'],
+    [false, 'ref'], [true, 'ref'],
+  ])('controlled single-select clears its search (searchbar: %s, clear: %s)', (searchbar, method) => {
+    const ref = React.createRef();
+    const onSelect = jest.fn();
+    const Example = () => {
+      const [selected, setSelected] = useState(options[0]);
+      return (
+        <Dropdown onSelect={(option) => { onSelect(option); setSelected(option) }}
+            options={options}
+            ref={ref}
+            value={selected}
+        >
+          <Dropdown.Trigger />
+          <Dropdown.Container searchbar={searchbar}>
+            {options.map((option) => (
+              <Dropdown.Option key={option.id}
+                  option={option}
+              />
+            ))}
+          </Dropdown.Container>
+        </Dropdown>
+      );
+    };
+    const { container } = render(<Example />);
+    if (searchbar) fireEvent.change(screen.getByRole('textbox'), { target: { value: 'United' } });
+    if (method === 'ref') act(() => ref.current.clearSelected());
+    else fireEvent.click(container.querySelector('[aria-label="times icon"]').closest('div'));
+    expect(onSelect).toHaveBeenLastCalledWith(null);
+    expect(container.querySelectorAll('[class*="pb_dropdown_option_"]')).toHaveLength(options.length);
+    if (searchbar) expect(screen.getByRole('textbox')).toHaveValue('');
+  });
+
+  test('controlled selection waits for the parent and retains full data', () => {
+    const onSelect = jest.fn();
+    const ref = React.createRef();
+    const { rerender } = render(
+      <Dropdown autocomplete
+          onSelect={onSelect}
+          options={options}
+          ref={ref}
+          value={options[0]}
+      />
+    );
+    fireEvent.click(screen.getByText('Canada'));
+    expect(onSelect).toHaveBeenCalledWith(options[1]);
+    expect(screen.getByRole('textbox')).toHaveValue('United States');
+    rerender(<Dropdown autocomplete
+        onSelect={onSelect}
+        options={[]}
+        ref={ref}
+        value={options[1]}
+             />);
+    expect(screen.getByRole('textbox')).toHaveValue('Canada');
+    act(() => ref.current.clearSelected());
+    expect(onSelect).toHaveBeenLastCalledWith(null);
+    expect(screen.getByRole('textbox')).toHaveValue('Canada');
+    rerender(<Dropdown autocomplete
+        onSelect={onSelect}
+        options={[]}
+        value={null}
+             />);
+    expect(screen.getByRole('textbox')).toHaveValue('');
+    expect(onSelect).toHaveBeenCalledTimes(2);
+  });
+
+  test('controlled multi-select emits once without updating until the parent accepts', () => {
+    const onSelect = jest.fn();
+    const { container } = render(
+      <React.StrictMode>
+        <Dropdown multiSelect
+            onSelect={onSelect}
+            options={options}
+            value={[]}
+        />
+      </React.StrictMode>
+    );
+    fireEvent.click(screen.getByText('Canada'));
+    expect(onSelect).toHaveBeenCalledTimes(1);
+    expect(onSelect).toHaveBeenCalledWith([options[1]]);
+    expect(container.querySelectorAll('.pb_dropdown_option_list')).toHaveLength(3);
+  });
+});
+
+describe('Dropdown input notifications', () => {
+  test('reports typing and clears single selection only when the input becomes empty', () => {
+    const onInputChange = jest.fn();
+    const onSelect = jest.fn();
+    render(<Dropdown autocomplete
+        defaultValue={options[0]}
+        onInputChange={onInputChange}
+        onSelect={onSelect}
+        options={options}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Can' } });
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(onInputChange).toHaveBeenLastCalledWith('Can', { reason: 'input' });
+    fireEvent.change(input, { target: { value: '' } });
+    expect(onSelect).toHaveBeenCalledWith(null);
+    expect(onInputChange).toHaveBeenLastCalledWith('', { reason: 'input' });
+  });
+
+  test('accepts externally loaded options without a loader or local filtering', () => {
+    const onInputChange = jest.fn();
+    const { rerender } = render(<Dropdown async
+        autocomplete
+        onInputChange={onInputChange}
+        options={[]}
+                                />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'remote query' } });
+    rerender(<Dropdown async
+        autocomplete
+        onInputChange={onInputChange}
+        options={options}
+             />);
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText('Canada'));
+    expect(onInputChange).toHaveBeenCalledTimes(1);
+    expect(onInputChange).toHaveBeenLastCalledWith('remote query', { reason: 'input' });
+  });
+
+
+});
+
+describe('Dropdown input lifecycle', () => {
+  test('query-only clear is opt-in and reports one clear notification', () => {
+    const onInputChange = jest.fn();
+    const { container, rerender } = render(<Dropdown autocomplete
+        options={options}
+                                           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
+    expect(container.querySelector('[aria-label="times icon"]')).toBeNull();
+    rerender(<Dropdown autocomplete
+        onInputChange={onInputChange}
+        options={options}
+             />);
+    fireEvent.click(container.querySelector('[aria-label="times icon"]').closest('div'));
+    expect(onInputChange).toHaveBeenCalledTimes(1);
+    expect(onInputChange).toHaveBeenCalledWith('', { reason: 'clear' });
+    expect(screen.getByRole('textbox')).toHaveValue('');
+  });
+
+  test('empty multi-select query preserves selected pills', () => {
+    const onSelect = jest.fn();
+    render(<Dropdown autocomplete
+        defaultValue={[options[0]]}
+        multiSelect
+        onInputChange={jest.fn()}
+        onSelect={onSelect}
+        options={options}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: '' } });
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(screen.getByText('United States', { selector: '.pb_form_pill_tag' })).toBeInTheDocument();
+  });
+
+});
+
+describe('Dropdown initial options and caching', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test('defaultOptions true preloads without opening the menu', () => {
+    const loadOptions = jest.fn();
+    const { container } = render(<Dropdown async
+        autocomplete
+        defaultOptions
+        loadOptions={loadOptions}
+                                 />);
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions.mock.calls[0][0]).toBe('');
+    act(() => loadOptions.mock.calls[0][1](options));
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('close');
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+
+  test('an initial array needs no request', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        defaultOptions={options}
+        loadOptions={loadOptions}
+           />);
+    act(() => jest.advanceTimersByTime(1000));
+    expect(loadOptions).not.toHaveBeenCalled();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+
+  test.each([false, true])('search reuse is gated by cacheOptions=%s', (cacheOptions) => {
+    const loadOptions = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        cacheOptions={cacheOptions}
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'can' } });
+    act(() => jest.advanceTimersByTime(250));
+    act(() => loadOptions.mock.calls[0][1](options));
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.change(input, { target: { value: 'can' } });
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).toHaveBeenCalledTimes(cacheOptions ? 1 : 2);
+  });
+
+});
+
+describe('Dropdown cache isolation and opt-in', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test('initial loading and caching do nothing without async', () => {
+    const loadOptions = jest.fn();
+    render(<Dropdown autocomplete
+        cacheOptions
+        defaultOptions
+        loadOptions={loadOptions}
+        options={options}
+           />);
+    act(() => jest.advanceTimersByTime(250));
+    expect(loadOptions).not.toHaveBeenCalled();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+
+  test('errors are retried rather than cached', async () => {
+    const loadOptions = jest.fn().mockRejectedValue(new Error('Failed'));
+    render(<Dropdown async
+        autocomplete
+        cacheOptions
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'can' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.change(input, { target: { value: 'can' } });
+    await act(async () => { jest.advanceTimersByTime(250); });
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
+
+});
+
+describe('Dropdown equivalent controlled values', () => {
+  test.each([false, true])('parent rerenders preserve the query (multiSelect: %s)', (multiSelect) => {
+    const Example = () => {
+      const [, setQuery] = useState('');
+      return (
+        <Dropdown autocomplete
+            multiSelect={multiSelect}
+            onInputChange={setQuery}
+            options={options}
+            value={multiSelect ? [{ ...options[0] }] : { ...options[0] }}
+        />
+      );
+    };
+    render(<Example />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Can' } });
+    expect(screen.getByRole('textbox')).toHaveValue('Can');
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Cana' } });
+    expect(screen.getByRole('textbox')).toHaveValue('Cana');
+  });
+
+  test('real identity, label and empty-selection changes still synchronize the input', () => {
+    const onSelect = jest.fn();
+    const props = { autocomplete: true, options, onSelect };
+    const { rerender } = render(<Dropdown {...props}
+        value={options[0]}
+                                />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'query' } });
+    rerender(<Dropdown {...props}
+        value={{ ...options[0], extraMetadata: true }}
+             />);
+    expect(input).toHaveValue('query');
+    rerender(<Dropdown {...props}
+        value={{ ...options[0], id: 'different' }}
+             />);
+    expect(input).toHaveValue('United States');
+    rerender(<Dropdown {...props}
+        value={{ ...options[0], id: 'different', label: 'Updated label' }}
+             />);
+    expect(input).toHaveValue('Updated label');
+    rerender(<Dropdown {...props}
+        value={null}
+             />);
+    expect(input).toHaveValue('');
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+});
+
+test('async multi-select identity avoids scanning selections for every option', () => {
+  let reads = 0;
+  const manyOptions = Array.from({ length: 120 }, (_, id) => {
+    const option = { id, label: `Option ${id}` };
+    Object.defineProperty(option, 'value', { enumerable: true, get: () => { reads += 1; return id; } });
+    return option;
+  });
+  const { container } = render(
+    <Dropdown async
+        defaultValue={manyOptions.slice(0, 60)}
+        isClosed={false}
+        multiSelect
+        options={manyOptions}
+    />
+  );
+  expect(container.querySelectorAll('.pb_dropdown_container li')).toHaveLength(60);
+  // Allow normal render passes while rejecting the quadratic pairwise scan.
+  expect(reads).toBeLessThan(2000);
+});
+
+describe('Dropdown Rails input parity', () => {
+  test.each([false, true])('empty autocomplete clears selection without a listener only in async mode: %s', (async) => {
+    const onSelect = jest.fn();
+    const ref = React.createRef();
+    render(<Dropdown async={async}
+        autocomplete
+        defaultValue={options[0]}
+        onSelect={onSelect}
+        options={options}
+        ref={ref}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    expect(onSelect).not.toHaveBeenCalled();
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: '' } });
+    if (async) expect(onSelect).toHaveBeenCalledWith(null);
+    else expect(onSelect).not.toHaveBeenCalled();
+  });
+
+  test('empty async multi-select query preserves selection without an input listener', () => {
+    const onSelect = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        defaultValue={[options[0]]}
+        multiSelect
+        onSelect={onSelect}
+        options={options}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: '' } });
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(screen.getByText('United States', { selector: '.pb_form_pill_tag' })).toBeInTheDocument();
+  });
+
+  test('empty async searchbar query preserves selection', () => {
+    const onSelect = jest.fn();
+    render(<Dropdown async
+        defaultValue={options[0]}
+        onSelect={onSelect}
+        options={options}
+           >
+      <Dropdown.Trigger />
+      <Dropdown.Container searchbar />
+    </Dropdown>);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'query' } });
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: '' } });
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+});
+
+describe('Dropdown migration-only async contract', () => {
+  test('passes short queries to the application loader and keeps full result data', () => {
+    jest.useFakeTimers();
+    const loadOptions = jest.fn();
+    const onSelect = jest.fn();
+    const { unmount } = render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+        onSelect={onSelect}
+                               />);
+    expect(loadOptions).not.toHaveBeenCalled();
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'a' } });
+    act(() => jest.advanceTimersByTime(0));
+    expect(loadOptions).toHaveBeenCalledTimes(1);
+    expect(loadOptions.mock.calls[0][0]).toBe('a');
+    expect(loadOptions.mock.calls[0]).toHaveLength(2);
+    act(() => loadOptions.mock.calls[0][1]([options[0]]));
+    fireEvent.click(screen.getByText('United States'));
+    expect(onSelect).toHaveBeenCalledWith(options[0]);
+    unmount();
+    jest.clearAllTimers();
+    jest.useRealTimers();
+  });
+
+  test('native form reset does not introduce React selection callbacks', () => {
+    const onSelect = jest.fn();
+    const onInputChange = jest.fn();
+    const { container } = render(<form><Dropdown async
+        autocomplete
+        defaultValue={options[0]}
+        onInputChange={onInputChange}
+        onSelect={onSelect}
+        options={options}
+                                       /></form>);
+    fireEvent.reset(container.querySelector('form'));
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(onInputChange).not.toHaveBeenCalled();
+  });
+});
+
+describe('async Dropdown Typeahead parity', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  const people = [
+    { label: 'Ann Lee', value: 1 },
+    { label: 'Ann Lee', value: 2 },
+    { label: 'Bob Ray', value: 3 },
+  ];
+  const flush = async () => { await act(async () => { jest.advanceTimersByTime(0); }); };
+  const optionTexts = () => Array.from(document.querySelectorAll('.pb_dropdown_container .pb_body_kit'))
+    .map((element) => element.textContent);
+
+  test('restores preloaded defaultOptions when the query is emptied', async () => {
+    const loadOptions = jest.fn((term) => Promise.resolve(people.filter((person) => person.label.toLowerCase().includes(term))));
+    render(<Dropdown async
+        autocomplete
+        defaultOptions
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    await flush();
+    fireEvent.change(input, { target: { value: 'bob' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Bob Ray']);
+    fireEvent.change(input, { target: { value: '' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Ann Lee', 'Ann Lee', 'Bob Ray']);
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
+
+  test('restores a defaultOptions array after clearing and after selecting', async () => {
+    const loadOptions = jest.fn(() => Promise.resolve([people[2]]));
+    render(<Dropdown async
+        autocomplete
+        defaultOptions={people.slice(0, 1)}
+        loadOptions={loadOptions}
+        multiSelect
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'bob' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Bob Ray']);
+    fireEvent.click(screen.getByText('Bob Ray'));
+    fireEvent.click(input);
+    expect(optionTexts()).toEqual(['Ann Lee']);
+  });
+
+  test('focuses the first loaded result so Enter selects it', async () => {
+    const onSelect = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve(people)}
+        onSelect={onSelect}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.click(input);
+    fireEvent.change(input, { target: { value: 'a' } });
+    await flush();
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).toHaveBeenCalledWith(people[0]);
+  });
+
+  test('focuses externally loaded options when they arrive after the last keystroke', () => {
+    const onSelect = jest.fn();
+    const { rerender } = render(<Dropdown async
+        autocomplete
+        onSelect={onSelect}
+        options={[]}
+                                  />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'an' } });
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).not.toHaveBeenCalled();
+
+    rerender(<Dropdown async
+        autocomplete
+        onSelect={onSelect}
+        options={people}
+             />);
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).toHaveBeenCalledWith(people[0]);
+  });
+
+  test('ArrowDown still moves past the first externally loaded result', () => {
+    const onSelect = jest.fn();
+    const { rerender } = render(<Dropdown async
+        autocomplete
+        onSelect={onSelect}
+        options={[]}
+                                  />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'an' } });
+    rerender(<Dropdown async
+        autocomplete
+        onSelect={onSelect}
+        options={people}
+             />);
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).toHaveBeenCalledWith(people[1]);
+  });
+
+  test('keys results without ids by value', async () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve(people)}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.click(input);
+    fireEvent.change(input, { target: { value: 'a' } });
+    await flush();
+    expect(consoleError.mock.calls.some(([message]) => String(message).includes('unique "key"'))).toBe(false);
+    consoleError.mockRestore();
+  });
+
+  test('identifies results by value so same-label options stay distinct', async () => {
+    const onSelect = jest.fn();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve(people)}
+        multiSelect
+        onSelect={onSelect}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'ann' } });
+    await flush();
+    fireEvent.click(screen.getAllByText('Ann Lee')[0]);
+    expect(onSelect).toHaveBeenLastCalledWith([people[0]]);
+    fireEvent.change(input, { target: { value: 'ann lee' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Ann Lee', 'Bob Ray']);
+    fireEvent.click(screen.getByText('Ann Lee', { selector: '.pb_dropdown_container .pb_body_kit' }));
+    expect(onSelect).toHaveBeenLastCalledWith([people[0], people[1]]);
+  });
+
+  test.each([false, true])('single autocomplete shows the selected label in the input (controlled: %s)', async (controlled) => {
+    const Example = () => {
+      const [selected, setSelected] = useState(null);
+      return (
+        <Dropdown async
+            autocomplete
+            loadOptions={() => Promise.resolve(people)}
+            onSelect={setSelected}
+            {...(controlled ? { value: selected } : {})}
+        />
+      );
+    };
+    render(<Example />);
+    const input = screen.getByRole('textbox');
+    fireEvent.click(input);
+    fireEvent.change(input, { target: { value: 'bob' } });
+    await flush();
+    fireEvent.click(screen.getByText('Bob Ray'));
+    expect(input).toHaveValue('Bob Ray');
+    fireEvent.click(input);
+    expect(optionTexts()).toEqual(['Bob Ray']);
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+  });
+
+  test('reopening after selection shows only labels matching the input', async () => {
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve([
+          { label: 'Ada Lovelace', value: 1 },
+          { label: 'Adam Smith', value: 2 },
+        ])}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'ad' } });
+    await flush();
+    fireEvent.click(screen.getByText('Ada Lovelace'));
+    fireEvent.click(input);
+    expect(optionTexts()).toEqual(['Ada Lovelace']);
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+  });
+
+  test('keeps earlier label matches when a query after a space returns nothing', async () => {
+    const people = [
+      { label: 'Emily Smith', value: 1 },
+      { label: 'Emily Jones', value: 2 },
+    ];
+    const loadOptions = (term) => Promise.resolve(
+      term.trim().includes(' ') && !term.endsWith(' ') ? [] : people
+    );
+    render(<Dropdown async
+        autocomplete
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Emily' } });
+    await flush();
+    fireEvent.change(input, { target: { value: 'Emily ' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Emily Smith', 'Emily Jones']);
+    fireEvent.change(input, { target: { value: 'Emily S' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Emily Smith']);
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+    fireEvent.change(input, { target: { value: 'Emily Z' } });
+    await flush();
+    expect(screen.getByText('No results found')).toBeInTheDocument();
+  });
+
+  test('cacheOptions stores the empty server response, not locally kept rows', async () => {
+    const people = [
+      { label: 'Emily Smith', value: 1 },
+      { label: 'Emily Jones', value: 2 },
+    ];
+    const loadOptions = jest.fn((term) => Promise.resolve(
+      term.trim().includes(' ') && !term.endsWith(' ') ? [] : people
+    ));
+    render(<Dropdown async
+        autocomplete
+        cacheOptions
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Emily' } });
+    await flush();
+    fireEvent.change(input, { target: { value: 'Emily S' } });
+    await flush();
+    expect(optionTexts()).toEqual(['Emily Smith']);
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.change(input, { target: { value: 'Emily S' } });
+    await flush();
+    expect(screen.getByText('No results found')).toBeInTheDocument();
+    expect(loadOptions).toHaveBeenCalledTimes(2);
+  });
+});
+
+test('async results render through Dropdown.Container with a custom trigger display', async () => {
+  jest.useFakeTimers();
+  const Example = () => {
+    const [selected, setSelected] = useState(null);
+    return (
+      <Dropdown async
+          autocomplete
+          loadOptions={() => Promise.resolve([{ label: 'Ada Lovelace', value: 7, title: 'Engineer' }])}
+          onSelect={setSelected}
+          value={selected}
+      >
+        <Dropdown.Trigger customDisplay={selected && <span>{selected.title}</span>} />
+        <Dropdown.Container />
+      </Dropdown>
+    );
+  };
+  render(<Example />);
+  const input = screen.getByRole('textbox');
+  fireEvent.click(input);
+  fireEvent.change(input, { target: { value: 'ada' } });
+  await act(async () => { jest.advanceTimersByTime(0); });
+  fireEvent.click(screen.getByText('Ada Lovelace'));
+  expect(screen.getByText('Engineer')).toBeInTheDocument();
+  jest.useRealTimers();
+});
+
+describe('Dropdown noOptionsText', () => {
+  test('replaces the empty message for filtered options', () => {
+    render(<Dropdown autocomplete
+        noOptionsText="No countries match"
+        options={options}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'zzz' } });
+    expect(screen.getByText('No countries match')).toBeInTheDocument();
+  });
+
+  test('replaces the empty message for async results', async () => {
+    jest.useFakeTimers();
+    render(<Dropdown async
+        autocomplete
+        loadOptions={() => Promise.resolve([])}
+        noOptionsText="No agents available"
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'zzz' } });
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(screen.getByRole('status')).toHaveTextContent('No agents available');
+    jest.useRealTimers();
+  });
+});
+
+describe('async Dropdown empty menu', () => {
+  test.each([
+    ['loadOptions', { loadOptions: jest.fn() }],
+    ['external options', { options: [] }],
+  ])('opens with the no results message before searching (%s)', (_mode, props) => {
+    const { container } = render(<Dropdown async
+        autocomplete
+        {...props}
+                                  />);
+    fireEvent.click(screen.getByRole('textbox'));
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
+    expect(screen.getByRole('status')).toHaveTextContent('No results found');
+  });
+
+  test('uses noOptionsText for the empty menu', () => {
+    render(<Dropdown async
+        autocomplete
+        loadOptions={jest.fn()}
+        noOptionsText="Type to search users"
+           />);
+    fireEvent.click(screen.getByRole('textbox'));
+    expect(screen.getByRole('status')).toHaveTextContent('Type to search users');
+  });
+
+  test('does not show an empty message when every result is already selected', async () => {
+    jest.useFakeTimers();
+    const selected = [{ label: 'Ann Lee', value: 1 }];
+    render(<Dropdown async
+        autocomplete
+        defaultValue={selected}
+        loadOptions={() => Promise.resolve([selected[0]])}
+        multiSelect
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'ann' } });
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+    jest.useRealTimers();
+  });
+
+  test('selecting the last remaining option does not show an empty message', () => {
+    const people = [
+      { label: 'Ann Lee', value: 1 },
+      { label: 'Bob Ray', value: 2 },
+    ];
+    const { container } = render(<Dropdown async
+        autocomplete
+        closeOnClick="outside"
+        multiSelect
+        options={people}
+                                  />);
+    fireEvent.click(screen.getByRole('textbox'));
+    fireEvent.click(screen.getByText('Ann Lee'));
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
+    fireEvent.click(screen.getByText('Bob Ray'));
+    expect(container.querySelector('.pb_dropdown_container')).toHaveClass('open');
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByText('No results found')).not.toBeInTheDocument();
+  });
+
+  test('an empty async search shows the empty message instead of blankSelection', async () => {
+    jest.useFakeTimers();
+    render(<Dropdown async
+        autocomplete
+        blankSelection="Select one..."
+        loadOptions={() => Promise.resolve([])}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'zzz' } });
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(screen.getByRole('status')).toHaveTextContent('No results found');
+    expect(screen.queryByText('Select one...')).not.toBeInTheDocument();
+    jest.useRealTimers();
+  });
+
+  test('blankSelection stays available when an async search has results', async () => {
+    jest.useFakeTimers();
+    render(<Dropdown async
+        autocomplete
+        blankSelection="Select one..."
+        loadOptions={() => Promise.resolve([{ label: 'Ann Lee', value: 1 }])}
+           />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'ann' } });
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(screen.getByText('Select one...')).toBeInTheDocument();
+    expect(screen.getByText('Ann Lee')).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    jest.useRealTimers();
+  });
+
+  test('shows preloaded defaultOptions instead of the message', async () => {
+    jest.useFakeTimers();
+    render(<Dropdown async
+        autocomplete
+        defaultOptions
+        loadOptions={() => Promise.resolve([{ label: 'Ada Lovelace', value: 1 }])}
+           />);
+    await act(async () => { jest.advanceTimersByTime(0); });
+    fireEvent.click(screen.getByRole('textbox'));
+    expect(screen.getByText('Ada Lovelace')).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    jest.useRealTimers();
+  });
+});
+
+
+describe('autocomplete selection replacement', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+
+  test.each(['async', 'controlled', 'input callback'])('%s replaces the selected label and searches with the first character', async (mode) => {
+    const onInputChange = jest.fn();
+    const onSelect = jest.fn();
+    const loadOptions = jest.fn(() => Promise.resolve(options));
+    const Example = () => {
+      const [selected, setSelected] = useState(options[1]);
+      return (
+        <Dropdown async={mode === 'async'}
+            autocomplete
+            defaultValue={options[1]}
+            loadOptions={loadOptions}
+            onInputChange={onInputChange}
+            onSelect={(option) => { onSelect(option); setSelected(option) }}
+            options={options}
+            {...(mode === 'controlled' ? { value: selected } : {})}
+        />
+      );
+    };
+    render(<Example />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('Canada');
+    expect(fireEvent.keyDown(input, { key: 'P' })).toBe(false);
+    expect(input).toHaveValue('P');
+    expect(onSelect).toHaveBeenCalledTimes(1);
+    expect(onSelect).toHaveBeenCalledWith(null);
+    expect(onInputChange).toHaveBeenCalledTimes(1);
+    expect(onInputChange).toHaveBeenCalledWith('P', { reason: 'input' });
+    await act(async () => { jest.runOnlyPendingTimers(); });
+    if (mode === 'async') expect(loadOptions).toHaveBeenCalledWith('P', expect.any(Function));
+    fireEvent.change(input, { target: { value: 'Pa' } });
+    expect(input).toHaveValue('Pa');
+    expect(onSelect).toHaveBeenCalledTimes(1);
+  });
+
+  test('the first character still replaces an unchanged selected label', () => {
+    const onSelect = jest.fn();
+    render(<Dropdown autocomplete
+        defaultValue={options[1]}
+        onSelect={onSelect}
+        options={options}
+           />);
+    const input = screen.getByRole('textbox');
+    expect(fireEvent.keyDown(input, { key: 'P' })).toBe(false);
+    expect(input).toHaveValue('P');
+    expect(onSelect).toHaveBeenCalledWith(null);
+  });
+
+  test('a character after backspace edits the query instead of replacing it', () => {
+    render(<Dropdown autocomplete
+        defaultValue={options[1]}
+        options={options}
+           />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('Canada');
+    expect(fireEvent.keyDown(input, { key: 'Backspace' })).toBe(true);
+    fireEvent.change(input, { target: { value: 'Canad' } });
+    expect(fireEvent.keyDown(input, { key: 'a' })).toBe(true);
+    fireEvent.change(input, { target: { value: 'Canada' } });
+    expect(input).toHaveValue('Canada');
+  });
+
+  test.each(['Backspace', 'Delete'])('%s removes one character and keeps the selection until the query is empty', (key) => {
+    const onSelect = jest.fn();
+    const onInputChange = jest.fn();
+    const Example = () => {
+      const [selected, setSelected] = useState(options[1]);
+      return (
+        <Dropdown autocomplete
+            onInputChange={onInputChange}
+            onSelect={(option) => { onSelect(option); setSelected(option) }}
+            options={options}
+            value={selected}
+        />
+      );
+    };
+    render(<Example />);
+    const input = screen.getByRole('textbox');
+    expect(fireEvent.keyDown(input, { key })).toBe(true);
+    fireEvent.change(input, { target: { value: 'Canad' } });
+    expect(input).toHaveValue('Canad');
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(onInputChange).toHaveBeenCalledWith('Canad', { reason: 'input' });
+    fireEvent.change(input, { target: { value: '' } });
+    expect(onSelect).toHaveBeenCalledWith(null);
+    expect(input).toHaveValue('');
+  });
+
+  test('async backspace removes one character and searches with the remainder', async () => {
+    const loadOptions = jest.fn(() => Promise.resolve(options));
+    render(<Dropdown async
+        autocomplete
+        defaultValue={options[1]}
+        loadOptions={loadOptions}
+           />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('Canada');
+    expect(fireEvent.keyDown(input, { key: 'Backspace' })).toBe(true);
+    fireEvent.change(input, { target: { value: 'Canad' } });
+    expect(input).toHaveValue('Canad');
+    expect(screen.queryByText('Canada', { selector: '.pb_dropdown_trigger .pb_body_kit' })).not.toBeInTheDocument();
+    await act(async () => { jest.advanceTimersByTime(0); });
+    expect(loadOptions).toHaveBeenCalledWith('Canad', expect.any(Function));
+  });
+
+  test('a delayed controlled clear preserves the ongoing query', () => {
+    const onSelect = jest.fn();
+    const { rerender } = render(<Dropdown autocomplete
+        onSelect={onSelect}
+        options={options}
+        value={options[1]}
+                                />);
+    const input = screen.getByRole('textbox');
+    fireEvent.keyDown(input, { key: 'P' });
+    fireEvent.change(input, { target: { value: 'Pa' } });
+    expect(onSelect).toHaveBeenCalledWith(null);
+    rerender(<Dropdown autocomplete
+        onSelect={onSelect}
+        options={options}
+        value={null}
+             />);
+    expect(input).toHaveValue('Pa');
+  });
+
+  test.each([
+    { key: 'a', ctrlKey: true },
+    { key: 'a', metaKey: true },
+    { key: 'a', altKey: true },
+    { key: 'a', isComposing: true },
+  ])('does not replace the selection for shortcut/composition events: %j', (event) => {
+    const onSelect = jest.fn();
+    render(<Dropdown autocomplete
+        onSelect={onSelect}
+        options={options}
+        value={options[1]}
+           />);
+    fireEvent.keyDown(screen.getByRole('textbox'), event);
+    expect(screen.getByRole('textbox')).toHaveValue('Canada');
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+
+  test.each(['ArrowUp', 'ArrowDown', 'Tab', 'Escape', 'Home', 'End'])('%s preserves the selected label', (key) => {
+    const onSelect = jest.fn();
+    render(<Dropdown autocomplete
+        onSelect={onSelect}
+        options={options}
+        value={options[1]}
+           />);
+    fireEvent.keyDown(screen.getByRole('textbox'), { key });
+    expect(screen.getByRole('textbox')).toHaveValue('Canada');
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+});

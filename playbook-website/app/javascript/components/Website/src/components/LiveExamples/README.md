@@ -21,7 +21,7 @@ A loader is required when a doc example imports from a package that is **not** p
 
 ```jsx
 // This example needs loaders for maplibre-gl and @mapbox/mapbox-gl-draw
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 ```
 

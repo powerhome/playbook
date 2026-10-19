@@ -1,3 +1,81 @@
+# ✨ 18.2.0.pre.rc.2
+
+##### October 14, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.2.0-rc.2](https://github.com/powerhome/playbook/tree/18.2.0-rc.2) full list of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table Kit: Update Rails Selectable Rows + Multi-column Header Layout [\#6754](https://github.com/powerhome/playbook/pull/6754) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Form Kit: Add Custom Validation Messages to Remaining Pb_form_with Fields [\#6743](https://github.com/powerhome/playbook/pull/6743) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Bump Shell-quote from 1.10.0 to 1.12.0 [\#6766](https://github.com/powerhome/playbook/pull/6766) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Nanoid from 3.3.11 to 3.3.20 [\#6764](https://github.com/powerhome/playbook/pull/6764) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- 18.2.0.pre.rc.1 Changelog [\#6763](https://github.com/powerhome/playbook/pull/6763) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Resolve Active Storage Security Vulnerability [\#6762](https://github.com/powerhome/playbook/pull/6762) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Bump Ws from 7.5.9 to 7.5.13 [\#6760](https://github.com/powerhome/playbook/pull/6760) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Playbook Website: Update Maplibre on Playbook Website to Address Critical Security Alert [\#6755](https://github.com/powerhome/playbook/pull/6755) ([nickamantia](https://github.com/nickamantia))
+- Bump Immutable from 4.3.6 to 4.3.9 [\#6753](https://github.com/powerhome/playbook/pull/6753) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Form Kit: Allow Select Fields Without a Prompt [\#6745](https://github.com/powerhome/playbook/pull/6745) ([xjunior](https://github.com/xjunior))
+
+**Fixed Bugs:**
+
+- Date Picker Kit: Label Wrapping Bumps Calendar Within Input [\#6746](https://github.com/powerhome/playbook/pull/6746) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.2.0-rc.1...18.2.0-rc.2)
+
+# ✨ 18.2.0.pre.rc.1
+
+##### October 12, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.2.0-rc.1](https://github.com/powerhome/playbook/tree/18.2.0-rc.1) full list of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table: Add Sectionseparator Option to Paginationprops - React [\#6737](https://github.com/powerhome/playbook/pull/6737) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Async Search Api (react and Rails) [\#6707](https://github.com/powerhome/playbook/pull/6707) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Upgrades Playbook Icons [\#6751](https://github.com/powerhome/playbook/pull/6751) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Changelog 18.2.0.pre.rc.0 [\#6744](https://github.com/powerhome/playbook/pull/6744) ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Full Screen Kit: Fix `stickyheader` Prop So Header Scrolls Away [\#6752](https://github.com/powerhome/playbook/pull/6752) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.2.0-rc.0...18.2.0-rc.1)
+
+# ✨ 18.2.0.pre.rc.0
+
+##### October 08, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.2.0-rc.0](https://github.com/powerhome/playbook/tree/18.2.0-rc.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Lightbox Kit: Close Button Accessibility [\#6722](https://github.com/powerhome/playbook/pull/6722) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Improvements:**
+
+- Playground: Fix Icon Kit + Playground Dropdown Issues [\#6739](https://github.com/powerhome/playbook/pull/6739) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Text Input Kit: Fix "add On" Icon Size [\#6732](https://github.com/powerhome/playbook/pull/6732) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Fixed Bugs:**
+
+- Select Kit: Validation Error Styling Within Wrapper [\#6726](https://github.com/powerhome/playbook/pull/6726) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: Apply Last-header-cell Styling to Parentless Subheaders [\#6717](https://github.com/powerhome/playbook/pull/6717) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.1.0...18.2.0-rc.0)
+
 # ✨ 18.1.0.pre.rc.5
 
 ##### October 05, 2026

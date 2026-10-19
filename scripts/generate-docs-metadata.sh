@@ -13,6 +13,9 @@ echo "Generating kit schemas + global props schemas..."
 echo "Generating global props values..."
 (cd playbook-website && yarn generate:global-props-values)
 
+echo "Generating global event props values..."
+(cd playbook-website && yarn generate:global-event-props-values)
+
 echo "Generating playground configs..."
 (cd playbook && yarn generate:playground-configs --overwrite)
 

@@ -1,9 +1,9 @@
 This kit provides a wrapping class to place around the MapLibre library. Complete docs for using the library can be found [here](https://maplibre.org/maplibre-gl-js-docs/api/).
 
 Basic setup to start using MapLibre:
-- Install the npm package using `yarn add maplibre-gl`
-- To include the maplibre css, include a link to the CSS file as a CDN in your stylesheet using the following syntax: `@import url("https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css");`
- OR include it as a link in the <head> tag `<link href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css' rel='stylesheet' />`
+- Install the npm package using `yarn add maplibre-gl@6.4.1`
+- To include the maplibre css, include a link to the CSS file as a CDN in your stylesheet using the following syntax: `@import url("https://unpkg.com/maplibre-gl@6.4.1/dist/maplibre-gl.css");`
+ OR include it as a link in the <head> tag `<link href='https://unpkg.com/maplibre-gl@6.4.1/dist/maplibre-gl.css' rel='stylesheet' />`
 - You can now use MapLibre within the Map Kit as shown in this example.
 
 __Notes__ : 

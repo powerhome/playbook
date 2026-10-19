@@ -28,6 +28,8 @@ module Playbook
                       default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :validation_message, type: Playbook::Props::String,
+                                default: ""
       prop :error, type: Playbook::Props::String,
                    default: ""
       prop :label, type: Playbook::Props::String,
@@ -44,7 +46,7 @@ module Playbook
       end
 
       def data
-        Hash(prop(:data)).merge(
+        attrs = {
           pb_multi_level_select: true,
           tree_data: tree_data.to_json,
           selected_ids: selected_ids.to_json,
@@ -58,8 +60,10 @@ module Playbook
           required: bool_attr(required),
           name: name,
           placeholder: placeholder,
-          show_checked_children: bool_attr(show_checked_children)
-        )
+          show_checked_children: bool_attr(show_checked_children),
+        }
+        attrs[:message] = validation_message if validation_message.present?
+        Hash(prop(:data)).merge(attrs)
       end
 
       def input_id

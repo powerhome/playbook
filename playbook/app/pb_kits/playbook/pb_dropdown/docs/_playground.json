@@ -1,7 +1,11 @@
 {
   "template": "<Dropdown{{props}} />",
-  "propTargets": {},
+  "propTargets": {
+    "searchbar": "Container.props",
+    "options": "Options.data"
+  },
   "defaults": {
+    "async": false,
     "autocomplete": false,
     "blankSelection": "",
     "clearable": true,
@@ -85,6 +89,20 @@
   },
   "groups": [
     {
+      "name": "async search",
+      "props": [
+        "async",
+        "loadOptions",
+        "defaultOptions",
+        "cacheOptions",
+        "loading",
+        "onInputChange",
+        "renderOption",
+        "value",
+        "searchbar"
+      ]
+    },
+    {
       "name": "Content",
       "props": [
         "label",
@@ -137,6 +155,26 @@
     }
   ],
   "presets": [
+    {
+      "name": "Async search",
+      "structureMode": "async",
+      "props": {}
+    },
+    {
+      "name": "Rich results and selection",
+      "structureMode": "rich",
+      "props": {}
+    },
+    {
+      "name": "Controlled selection",
+      "structureMode": "controlled",
+      "props": {}
+    },
+    {
+      "name": "External search",
+      "structureMode": "external",
+      "props": {}
+    },
     {
       "name": "Default trigger",
       "props": {
@@ -280,6 +318,21 @@
     }
   ],
   "conditionals": {
+    "loadOptions": {
+      "requires": "async"
+    },
+    "defaultOptions": {
+      "requires": "async"
+    },
+    "cacheOptions": {
+      "requires": "async"
+    },
+    "loading": {
+      "requires": "async"
+    },
+    "searchbar": {
+      "structureMode": "async"
+    },
     "requiredIndicator": {
       "requires": "label"
     },
@@ -308,6 +361,23 @@
     }
   },
   "hints": {
+    "async_search_info": {
+      "when": {
+        "async": true
+      },
+      "message": "Async examples search the public DummyJSON sample-user API. Try Emily or Michael, or an unmatched term for the empty state. defaultOptions preloads results; cacheOptions reuses successful searches. Use the Async search structure with autocomplete off and searchbar on to search inside the menu.",
+      "type": "info"
+    },
+    "external_search_info": {
+      "presetName": "External search",
+      "message": "The wrapper owns a 250ms debounce, a three-character minimum, request cancellation, options, and loading. onInputChange reports input/clear; onSelect receives the complete option. Inspect the generated code for the integration.",
+      "type": "info"
+    },
+    "rich_results_info": {
+      "presetName": "Rich results and selection",
+      "message": "renderOption customizes results; the existing Trigger customDisplay renders selected company details. The selected option shown below retains custom company data.",
+      "type": "info"
+    },
     "quickpick_scope": {
       "when": {
         "variant": "quickpick"
@@ -324,7 +394,8 @@
     },
     "autocomplete_info": {
       "when": {
-        "autocomplete": true
+        "autocomplete": true,
+        "async": false
       },
       "message": "Autocomplete filters the provided options list in place. It works especially well with longer option sets.",
       "type": "info"
@@ -362,14 +433,114 @@
         "template": "<Dropdown options={options}{{props}} />",
         "children": ""
       },
+      "async": {
+        "label": "Async search",
+        "template": "<Dropdown options={options}{{props}}>\n  <Dropdown.Trigger />\n  <Dropdown.Container{{Container.props}} />\n</Dropdown>",
+        "children": "",
+        "props": {
+          "async": true,
+          "autocomplete": true,
+          "options": [],
+          "label": "User",
+          "placeholder": "Try Emily or Michael",
+          "loadOptions": "loadUsers",
+          "defaultOptions": true,
+          "cacheOptions": true
+        },
+        "wrapper": "const loadUsers = (term) => fetch(`https://dummyjson.com/users/search?${new URLSearchParams({ q: term, limit: '10', select: 'firstName,lastName,company' })}`, { credentials: 'omit' })\n  .then((response) => {\n    if (!response.ok) throw new Error('Search failed')\n    return response.json()\n  })\n  .then(({ users }) => users.map((user) => ({\n    ...user,\n    label: `${user.firstName} ${user.lastName}`,\n    value: user.id,\n  })));\n\n{{component}}"
+      },
+      "rich": {
+        "label": "Rich async results",
+        "template": "<Dropdown options={options}{{props}}>\n  <Dropdown.Trigger customDisplay={selected && <Detail text={companyDetail(selected)} />} />\n  <Dropdown.Container{{Container.props}} />\n</Dropdown>",
+        "children": "",
+        "props": {
+          "async": true,
+          "autocomplete": true,
+          "options": [],
+          "label": "User",
+          "placeholder": "Try Emily or Michael",
+          "loadOptions": "loadUsers",
+          "renderOption": "renderUser",
+          "onSelect": "setSelected",
+          "value": {
+            "__playgroundCode": "selected"
+          }
+        },
+        "externalImports": [
+          "import React, { useState } from 'react'"
+        ],
+        "wrapper": "const loadUsers = (term) => fetch(`https://dummyjson.com/users/search?${new URLSearchParams({ q: term, limit: '10', select: 'firstName,lastName,company' })}`, { credentials: 'omit' })\n  .then((response) => {\n    if (!response.ok) throw new Error('Search failed')\n    return response.json()\n  })\n  .then(({ users }) => users.map((user) => ({\n    ...user,\n    label: `${user.firstName} ${user.lastName}`,\n    value: user.id,\n  })))\n\nconst companyDetail = (user) => [user.company?.title, user.company?.department].filter(Boolean).join(' · ')\n\nconst renderUser = (user) => (\n  <div>\n    <Body text={user.label} />\n    <Detail text={companyDetail(user)} />\n  </div>\n)\n\nconst RichDropdownPlayground = () => {\n  const [selected, setSelected] = useState(null)\n  return (\n    <>\n      {{component}}\n      <Detail text={selected ? JSON.stringify(selected) : \"Select a user to inspect the complete option object.\"} />\n    </>\n  )\n};\n\n<RichDropdownPlayground />"
+      },
+      "controlled": {
+        "label": "Controlled selection",
+        "template": "<Dropdown options={options}{{props}} />",
+        "children": "",
+        "props": {
+          "multiSelect": true,
+          "label": "Countries",
+          "value": {
+            "__playgroundCode": "selected"
+          },
+          "onSelect": "setSelected"
+        },
+        "externalImports": [
+          "import React, { useState } from 'react'"
+        ],
+        "wrapper": "const ControlledDropdownPlayground = () => {\n  const [selected, setSelected] = useState([])\n  return (\n    <>\n      {{component}}\n      <Flex gap=\"xs\" marginTop=\"sm\">\n        <Button text=\"Select all enabled\" onClick={() => setSelected(options.filter((option) => !option.disabled))} />\n        <Button text=\"Clear\" variant=\"secondary\" onClick={() => setSelected([])} />\n      </Flex>\n    </>\n  )\n};\n\n<ControlledDropdownPlayground />"
+      },
+      "external": {
+        "label": "External async search",
+        "template": "<Dropdown options={options}{{props}}>\n  <Dropdown.Trigger />\n  <Dropdown.Container{{Container.props}} />\n</Dropdown>",
+        "children": "",
+        "props": {
+          "async": true,
+          "autocomplete": true,
+          "options": [],
+          "label": "User",
+          "placeholder": "Type at least 3 characters",
+          "loading": {
+            "__playgroundCode": "loading"
+          },
+          "value": {
+            "__playgroundCode": "selected"
+          },
+          "onInputChange": "(text, { reason }) => setQuery(reason === 'input' ? text : '')",
+          "onSelect": "(option) => { setSelected(option); setQuery('') }"
+        },
+        "externalImports": [
+          "import React, { useEffect, useState } from 'react'"
+        ],
+        "wrapper": "const ExternalDropdownPlayground = () => {\n  const [query, setQuery] = useState('')\n  const [options, setOptions] = useState([])\n  const [loading, setLoading] = useState(false)\n  const [selected, setSelected] = useState(null)\n\n  useEffect(() => {\n    const controller = new AbortController()\n    setOptions([])\n    setLoading(false)\n    if (query.length < 3) return () => controller.abort()\n    setLoading(true)\n    const timer = setTimeout(() => {\n      const params = new URLSearchParams({ q: query, limit: '10', select: 'firstName,lastName' })\n      fetch(`https://dummyjson.com/users/search?${params}`, { signal: controller.signal, credentials: 'omit' })\n        .then((response) => {\n          if (!response.ok) throw new Error('Search failed')\n          return response.json()\n        })\n        .then(({ users }) => {\n          if (!controller.signal.aborted) setOptions(users.map((user) => ({\n            ...user,\n            label: `${user.firstName} ${user.lastName}`,\n            value: user.id,\n          })))\n        })\n        .catch(() => { if (!controller.signal.aborted) setOptions([]) })\n        .finally(() => { if (!controller.signal.aborted) setLoading(false) })\n    }, 250)\n    return () => { clearTimeout(timer); controller.abort() }\n  }, [query])\n\n  return ({{component}})\n};\n\n<ExternalDropdownPlayground />"
+      },
       "subcomponents": {
         "label": "With Subcomponents",
-        "template": "<Dropdown options={options}{{props}}>\n  <Dropdown.Trigger />\n  <Dropdown.Container>\n    {options.map((option) => (\n      <Dropdown.Option key={option.id} option={option} />\n    ))}\n  </Dropdown.Container>\n</Dropdown>",
+        "template": "<Dropdown options={options}{{props}}>\n  <Dropdown.Trigger />\n  <Dropdown.Container{{Container.props}}>\n    {options.map((option) => (\n      <Dropdown.Option key={option.id} option={option} />\n    ))}\n  </Dropdown.Container>\n</Dropdown>",
         "children": ""
       }
     }
   },
+  "editableFunctionProps": [
+    "loadOptions",
+    "renderOption",
+    "onInputChange",
+    "onSelect"
+  ],
   "customProps": {
+    "loadOptions": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ],
+      "description": "Promise or callback loader. Receives the search term; return options with id, label, and value plus any custom data."
+    },
+    "searchbar": {
+      "type": "boolean",
+      "default": false,
+      "platforms": [
+        "react"
+      ],
+      "description": "Show a search input inside Dropdown.Container. Turn autocomplete off to try this mode."
+    },
     "options": {
       "type": "array",
       "platforms": [

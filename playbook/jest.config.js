@@ -93,6 +93,15 @@ module.exports = {
     'playbook-ui/advanced-table': '<rootDir>/app/entrypoints/playbook-advanced-table.js',
     'playbook-ui/charts': '<rootDir>/app/entrypoints/playbook-charts.js',
     'playbook-ui': '<rootDir>/app/entrypoints/playbook.js',
+    // TipTap v3 uses package "exports" + ships src/; Jest 26 prefers .ts and misses exports.
+    '^@tiptap/core/jsx-runtime$': '<rootDir>/../node_modules/@tiptap/core/dist/jsx-runtime/jsx-runtime.cjs',
+    '^@tiptap/core/jsx-dev-runtime$': '<rootDir>/../node_modules/@tiptap/core/dist/jsx-runtime/jsx-runtime.cjs',
+    '^@tiptap/core$': '<rootDir>/../node_modules/@tiptap/core/dist/index.cjs',
+    '^@tiptap/react$': '<rootDir>/../node_modules/@tiptap/react/dist/index.cjs',
+    '^@tiptap/starter-kit$': '<rootDir>/../node_modules/@tiptap/starter-kit/dist/index.cjs',
+    '^@tiptap/extensions$': '<rootDir>/../node_modules/@tiptap/extensions/dist/index.cjs',
+    '^@tiptap/extension-(.*)$': '<rootDir>/../node_modules/@tiptap/extension-$1/dist/index.cjs',
+    '^@tiptap/pm/(.*)$': '<rootDir>/../node_modules/@tiptap/pm/dist/$1/index.cjs',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

@@ -41,4 +41,33 @@ RSpec.describe Playbook::Forms::Builder, "#dropdown_field", type: :helper do
 
     expect(rendered).to have_tag("form .pb_dropdown_default", text: /Office location/)
   end
+
+  it "passes required and validation_message to the hidden dropdown input" do
+    rendered = render_form do |builder|
+      concat builder.dropdown_field(
+        :status,
+        props: { options: options, required: true, validation_message: "Status is required" }
+      )
+    end
+
+    expect(rendered).to have_tag("input[name='status'][required][data-message='Status is required']")
+  end
+
+  it "passes required and validation_message for multi-select dropdowns" do
+    rendered = render_form do |builder|
+      concat builder.dropdown_field(
+        :status,
+        props: {
+          options: options,
+          multi_select: true,
+          required: true,
+          validation_message: "Select at least one status",
+        }
+      )
+    end
+
+    expect(rendered).to have_tag(
+      "input[name='status[]'][required][data-message='Select at least one status']"
+    )
+  end
 end

@@ -32,6 +32,8 @@ module Playbook
       prop :name, type: Playbook::Props::String
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :validation_message, type: Playbook::Props::String,
+                                default: ""
       prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
       prop :default_value
@@ -117,8 +119,11 @@ module Playbook
       end
 
       def all_input_options
+        data = { "pb-star-rating-input": true }
+        data[:message] = validation_message if validation_message.present?
+
         input_options.merge(
-          data: { "pb-star-rating-input": true },
+          data: data,
           name: name,
           required: required,
           style: "display: none",

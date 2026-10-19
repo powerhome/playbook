@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect, forwardRef, useImperativeHandle, useMemo, useContext } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect, forwardRef, useImperativeHandle, useMemo, useContext, useCallback } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -13,6 +13,7 @@ import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import useDropdown from "./hooks/useDropdown";
+import useAsyncOptions, { LoadOptions } from "./hooks/useAsyncOptions";
 import getQuickPickOptions from "./quickpick";
 
 import {
@@ -81,6 +82,9 @@ function serializeDropdownFilterResetDefault(
     return undefined;
 }
 
+// Async results are server records, so identify them by value like Typeahead rather than by label.
+const asyncOptionValue = (option: GenericObject) => option.value ?? option.id ?? option.label;
+
 type CustomQuickPickDate = {
     label: string;
     value: string[] | { timePeriod: string; amount: number };
@@ -91,8 +95,18 @@ type CustomQuickPickDates = {
     dates: CustomQuickPickDate[];
 };
 
+type InputChangeReason = "input" | "clear";
+
 type DropdownProps = {
     aria?: { [key: string]: string };
+    async?: boolean;
+    loadOptions?: LoadOptions;
+    defaultOptions?: boolean | GenericObject[];
+    cacheOptions?: boolean;
+    loading?: boolean;
+    onInputChange?: (input: string, detail: { reason: InputChangeReason }) => void;
+    value?: GenericObject | GenericObject[] | null;
+    renderOption?: (option: GenericObject) => React.ReactNode;
     autocomplete?: boolean;
     blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
@@ -113,6 +127,7 @@ type DropdownProps = {
     label?: string;
     multiSelect?: boolean;
     name?: string;
+    noOptionsText?: string;
     onChange?: (event: { target: { name?: string; value: any } }) => void;
     onSelect?: (arg: GenericObject) => null;
     options?: GenericObject;
@@ -139,6 +154,14 @@ interface DropdownComponent
 let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const {
         aria = {},
+        async = false,
+        loadOptions,
+        defaultOptions = false,
+        cacheOptions = false,
+        loading = false,
+        onInputChange,
+        renderOption,
+        value,
         autocomplete = false,
         blankSelection = '',
         children,
@@ -159,6 +182,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         multiSelect = false,
         formPillProps,
         name,
+        noOptionsText,
         onChange,
         onSelect,
         options,
@@ -188,14 +212,26 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         [classes],
     );
 
+    const asyncEnabled = async && variant !== "quickpick";
+    const getOptionValue = asyncEnabled ? asyncOptionValue : undefined;
+    const { options: loadedOptions, status: asyncStatus, search: searchAsync, cancel: cancelAsync, resume: resumeAsync, clear: clearAsync } = useAsyncOptions(asyncEnabled && !!loadOptions && !disabled, loadOptions, defaultOptions, cacheOptions);
+
     // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
     const dropdownOptions = variant === "quickpick" 
         ? getQuickPickOptions(rangeEndsToday, customQuickPickDates) 
-        : (options || []);
+        : (asyncEnabled && loadOptions ? loadedOptions : options || []);
     // ----------------------------------------------------------
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(disabled ? true : isClosed);
+
+    const previouslyClosed = useRef(isDropDownClosed);
+    const queryRef = useRef("");
+    useLayoutEffect(() => {
+      if (asyncEnabled && (disabled || (!previouslyClosed.current && isDropDownClosed))) cancelAsync();
+      if (asyncEnabled && !disabled && previouslyClosed.current && !isDropDownClosed) resumeAsync(queryRef.current);
+      previouslyClosed.current = isDropDownClosed;
+    }, [asyncEnabled, isDropDownClosed, disabled, cancelAsync, resumeAsync]);
 
     // Use a suffix for the trigger ID to avoid conflict with the outer div's id
     const sanitizeForId = (str: string) =>
@@ -225,16 +261,53 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       return defaultValue || {};
     }, [multiSelect, defaultValue, variant, dropdownOptions]);
 
-    const [selected, setSelected] = useState<GenericObject | GenericObject[]>(
+    const [internalSelected, setInternalSelected] = useState<GenericObject | GenericObject[]>(
       initialSelected
     );
+
+    const optionKey = (option: GenericObject) => String(
+      getOptionValue ? getOptionValue(option) : option.id ?? option.value ?? option.label
+    );
+
+    const isControlled = value !== undefined;
+    const selected = isControlled ? (value ?? (multiSelect ? [] : {})) : internalSelected;
+    const setSelected: React.Dispatch<React.SetStateAction<GenericObject | GenericObject[]>> = (next) => {
+      if (!isControlled) setInternalSelected(next);
+    };
+    const isSameOption = useCallback((left: GenericObject, right: GenericObject, legacyKey = "label") => {
+      if (!getOptionValue) return left?.[legacyKey] === right?.[legacyKey];
+      if (!left || !right || !Object.keys(left).length || !Object.keys(right).length) return false;
+      return String(getOptionValue(left)) === String(getOptionValue(right));
+    }, [getOptionValue]);
 
     // Autocomplete displays the selection in the input; seed from defaultValue
     const [filterItem, setFilterItem] = useState(() => {
       if (!autocomplete || multiSelect) return "";
-      if (Array.isArray(initialSelected)) return "";
-      return (initialSelected as GenericObject)?.label || "";
+      if (Array.isArray(selected)) return "";
+      return (selected as GenericObject)?.label || "";
     });
+    queryRef.current = filterItem;
+
+    const preserveQueryOnControlledClear = useRef(false);
+
+    // Form adapters may recreate equivalent option objects on every render.
+    // Synchronize the query only when selection identity or display text changes.
+    const controlledSelectionKey = isControlled ? JSON.stringify(
+      (Array.isArray(value) ? value : value && Object.keys(value).length ? [value] : [])
+        .map((option) => [
+          String(getOptionValue ? getOptionValue(option) : option.id ?? option.value ?? option.label),
+          option.label,
+        ])
+    ) : undefined;
+    const controlledLabel = !multiSelect && value && !Array.isArray(value) ? value?.label || "" : "";
+
+    useEffect(() => {
+      if (isControlled && autocomplete) {
+        // Accepting a selection clear must not erase the character that started a new search.
+        if (controlledLabel || !preserveQueryOnControlledClear.current) setFilterItem(controlledLabel);
+        preserveQueryOnControlledClear.current = false;
+      }
+    }, [isControlled, controlledSelectionKey, controlledLabel, autocomplete, multiSelect]);
 
     const filterResetDefaultSerialized = useMemo(
         () => serializeDropdownFilterResetDefault(variant, multiSelect, defaultValue, dropdownOptions),
@@ -291,6 +364,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     ? [selected]
     : [];
 
+    const selectedOptionIds = useMemo(() => (
+      multiSelect && getOptionValue
+        ? new Set(selectedArray.map((option) => String(getOptionValue(option))))
+        : null
+    ), [multiSelect, getOptionValue, selectedArray]);
+
     const { trigger, container, otherChildren } =
         separateChildComponents(children);
 
@@ -321,33 +400,61 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setIsDropDownClosed(disabled ? true : isClosed)
     }, [disabled, isClosed])
 
-    const blankSelectionOption: GenericObject = blankSelection ? [{ label: blankSelection, value: "" }] : [];
+    // blankSelection is a clear action, not a search result, so it cannot stand in for an empty async list.
+    const blankSelectionOption: GenericObject = blankSelection && (!asyncEnabled || dropdownOptions.length > 0)
+        ? [{ label: blankSelection, value: "" }]
+        : [];
     const optionsWithBlankSelection = blankSelectionOption.concat(dropdownOptions);
 
     const availableOptions = useMemo(()=> {
         if (!multiSelect) return optionsWithBlankSelection;
-        return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => sel.label === option.label));
-    }, [optionsWithBlankSelection, selectedArray, multiSelect]);
+        if (selectedOptionIds) {
+          return optionsWithBlankSelection.filter((option: GenericObject) => !selectedOptionIds.has(String(getOptionValue(option))));
+        }
+        return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => isSameOption(sel, option)));
+    }, [optionsWithBlankSelection, selectedArray, multiSelect, isSameOption, selectedOptionIds, getOptionValue]);
     
     const filteredOptions = useMemo(() => {
-          // When the input shows the selected label, do not filter the list down to that one option
           const selectedLabel =
             !multiSelect &&
             !Array.isArray(selected) &&
             (selected as GenericObject)?.label;
+          // Async searches stay unfiltered until the input is showing the selected label.
+          // Reopening then shows only results that match that text.
+          if (asyncEnabled) {
+            if (!(autocomplete && selectedLabel && filterItem === selectedLabel)) return availableOptions;
+            const query = String(selectedLabel).toLowerCase();
+            return availableOptions.filter((opt: GenericObject) => String(opt.label).toLowerCase().includes(query));
+          }
+          // When the input shows the selected label, do not filter the list down to that one option
           const filterText =
             selectedLabel && filterItem === selectedLabel ? "" : filterItem;
           return availableOptions.filter((opt: GenericObject) =>
             String(opt.label).toLowerCase().includes(filterText.toLowerCase())
           );
-        }, [availableOptions, filterItem, multiSelect, selected]);
+        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, autocomplete]);
+
+    // Empty copy follows the settled search. Hiding already-selected rows must not turn a
+    // successful result list into "No results found", including the last pick while the menu stays open.
+    const asyncEmptyCopy = asyncEnabled && (asyncStatus === "empty" || (asyncStatus === "idle" && dropdownOptions.length === 0))
+        ? noOptionsText || "No results found"
+        : "";
+
+    // A keystroke clears the highlight. Focus the first result once the next list arrives,
+    // including options the application loads itself.
+    const asyncResultOptions = loadOptions ? loadedOptions : options;
+    useEffect(() => {
+        if (asyncEnabled && !isDropDownClosed) {
+            setFocusedOptionIndex(filteredOptions.length ? 0 : -1);
+        }
+    }, [asyncResultOptions]);
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
         if (!isDropDownClosed) {
             let newIndex = 0;
             if (selected && !Array.isArray(selected) && selected.label) {
-                const selectedIndex = filteredOptions.findIndex((option: GenericObject) => option.label === selected.label);
+                const selectedIndex = filteredOptions.findIndex((option: GenericObject) => isSameOption(option, selected));
                 if (selectedIndex >= 0) {
                     newIndex = selectedIndex;
                 }
@@ -412,38 +519,70 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     ]);
 
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (disabled) return;
-        setFilterItem(e.target.value);
-        setIsDropDownClosed(false);
-    };
-
     const handleSelectionChange = (value: any) => {
         onSelect && onSelect(value);
         onChange && onChange({ target: { name, value } });
     };
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, replaceSelection = false) => {
+        if (disabled) return;
+        if (asyncEnabled) {
+          searchAsync(e.target.value);
+          setFocusedOptionIndex(-1);
+        }
+        if ((replaceSelection || ((asyncEnabled || onInputChange) && !e.target.value)) && autocomplete && !multiSelect && selectedArray.length) {
+          preserveQueryOnControlledClear.current = isControlled && !!e.target.value;
+          setSelected({});
+          handleSelectionChange(null);
+        }
+        setFilterItem(e.target.value);
+        onInputChange?.(e.target.value, { reason: "input" });
+        setIsDropDownClosed(false);
+    };
+
+
       const handleOptionClick = (clickedItem: GenericObject) => {
                 if (disabled) return;
+                preserveQueryOnControlledClear.current = false;
+                // Single autocomplete keeps the search results so reopening can match the selected label.
+                // Other selections still drop back to the initial list.
+                if (asyncEnabled) {
+                  if (!multiSelect && autocomplete) cancelAsync();
+                  else clearAsync();
+                }
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
                 if (multiSelect) {
+                  if (isControlled || getOptionValue) {
+                    const exists = selectedOptionIds
+                      ? selectedOptionIds.has(String(getOptionValue(clickedItem)))
+                      : selectedArray.some((option) => isSameOption(option, clickedItem, "value"));
+                    const next = exists
+                      ? selectedArray.filter((option) => !isSameOption(option, clickedItem, "value"))
+                      : [...selectedArray, clickedItem];
+                    setSelected(next);
+                    handleSelectionChange(next);
+                  } else {
                     setSelected((prev) => {
                        const list = prev as GenericObject[];
-                       const exists = list.find((option) => option.value === clickedItem.value);
+                       const exists = list.find((option) => isSameOption(option, clickedItem, "value"));
                        const next = exists
-                       ? list.filter((option) => option.value !== clickedItem.value)
+                       ? list.filter((option) => !isSameOption(option, clickedItem, "value"))
                            : [...list, clickedItem];
                    handleSelectionChange(next);
                        return next;
                    });
+                  }
                    setFilterItem("");
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
                } else {
                    setSelected(clickedItem);
-                   setFilterItem("");
+                   // Async autocomplete shows the selection in the input, as controlled mode and Rails do
+                   setFilterItem(isControlled && autocomplete
+                     ? (selected as GenericObject)?.label || ""
+                     : asyncEnabled && autocomplete ? clickedItem.label || "" : "");
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
@@ -474,6 +613,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const handleBackspace = () => {
       if (disabled) return;
+      preserveQueryOnControlledClear.current = false;
+      if (asyncEnabled) clearAsync();
+      onInputChange?.("", { reason: "clear" });
+      if ((onInputChange || asyncEnabled) && multiSelect) setFilterItem("");
       if (multiSelect) {
         setSelected([]);
         handleSelectionChange([]);
@@ -481,7 +624,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setSelected({});
         handleSelectionChange(null);
         setFocusedOptionIndex(-1);
-        setFilterItem("");
+        setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
         
         // Clear linked DatePickers as well if this is a quickpick variant with controls
         if (variant === "quickpick") {
@@ -511,6 +654,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // Create an internal ref object that holds the imperative handle methods
     const imperativeRef = useRef({
       clearSelected: () => {
+          preserveQueryOnControlledClear.current = false;
+          if (asyncEnabled) clearAsync();
+          onInputChange?.("", { reason: "clear" });
         if (multiSelect) {
           setSelected([]);
           handleSelectionChange([]);
@@ -518,7 +664,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           setSelected({});
           handleSelectionChange(null);
         }
-        setFilterItem("");
+        setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
         setIsDropDownClosed(true);
       },
     });
@@ -528,6 +674,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     useEffect(() => {
       imperativeRef.current = {
         clearSelected: () => {
+          preserveQueryOnControlledClear.current = false;
+          if (asyncEnabled) clearAsync();
+          onInputChange?.("", { reason: "clear" });
           if (multiSelect) {
             setSelected([]);
             handleSelectionChange([]);
@@ -535,11 +684,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             setSelected({});
             handleSelectionChange(null);
           }
-          setFilterItem("");
+          setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
           setIsDropDownClosed(true);
         },
       };
-    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed]);
+    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed, asyncEnabled, clearAsync, onInputChange]);
 
     useImperativeHandle(ref, () => imperativeRef.current);
 
@@ -579,6 +728,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             {...dataProps}
             {...htmlProps}
             {...(filterResetDefaultSerialized ? { "data-default-value": filterResetDefaultSerialized } : {})}
+            aria-busy={asyncEnabled ? (loading || asyncStatus === "loading") : undefined}
             className={classes}
             id={id}
             ref={outerDivRef}
@@ -586,6 +736,15 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         >
             <DropdownContext.Provider
                 value={{
+                    asyncEnabled,
+                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : asyncEmptyCopy) : "",
+                    renderOption,
+                    optionKey,
+                    isControlled,
+                    onInputChange,
+                    isSameOption,
+                    selectedOptionIds,
+                    getOptionValue,
                     activeStyle,
                     autocomplete,
                     blankSelection,
@@ -613,6 +772,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     portalHost,
                     selectId,
                     multiSelect,
+                    noOptionsText,
                     onSelect,
                     optionsWithBlankSelection,
                     selected,
@@ -682,7 +842,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                             <DropdownContainer constrainHeight={constrainHeight}>
                                 {optionsWithBlankSelection &&
                                     optionsWithBlankSelection?.map((option: GenericObject) => (
-                                        <DropdownOption key={option.id}
+                                        <DropdownOption key={optionKey(option)}
                                             option={option}
                                         />
                                     ))}

@@ -51,11 +51,16 @@
 
 .fullscreen-content {
   box-sizing: border-box;
-  overflow: auto;
+  flex-shrink: 0;
 }
 
+// Keep scroll on content (not the overlay) so the header stays put when sticky.
+// Without this, flex + overflow:auto on content pinned the header even when
+// stickyHeader was false.
 .fullscreen-content-sticky {
+  flex-shrink: 1;
   height: calc(100vh - 44px);
+  overflow: auto;
 }
 
 .pb_fullscreen_floating_root {

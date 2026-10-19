@@ -132,6 +132,13 @@
       "type": "boolean",
       "default": false
     },
+    "validationMessage": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
     "inputOptions": {
       "platforms": [
         "rails"

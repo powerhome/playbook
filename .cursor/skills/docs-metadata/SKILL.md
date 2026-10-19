@@ -24,12 +24,12 @@ From **repo root**:
 yarn generate:docs-metadata
 ```
 
-This runs schemas → global props values → playground configs → `playbook/dist/ai`.
+This runs schemas → global props values → global event props values → playground configs → `playbook/dist/ai`.
 
 ## Do not hand-edit
 
 - `kit.schema.json`, `_playground.json`, `global-props.schema.json`, `global-event-props.schema.json`
-- `globalPropsValues.ts`
+- `globalPropsValues.ts`, `globalEventPropsValues.ts`
 - Anything under `playbook/dist/ai/`
 
 ## Pre-commit failure
@@ -42,6 +42,7 @@ git add playbook/app/pb_kits/playbook/*/docs/_playground.json
 git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json
 git add playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json
 git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts
+git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalEventPropsValues.ts
 ```
 
 (Also stage any other regenerated files the script touched, then commit again.)

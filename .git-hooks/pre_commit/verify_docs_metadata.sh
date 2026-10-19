@@ -39,6 +39,7 @@ list_generated_files() {
     echo 'playbook/app/pb_kits/playbook/utilities/global-props.schema.json'
     echo 'playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json'
     echo 'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts'
+    echo 'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalEventPropsValues.ts'
   } | sort -u
 }
 
@@ -84,6 +85,7 @@ if [ "$BEFORE" != "$AFTER" ]; then
     'playbook/app/pb_kits/playbook/utilities/global-props.schema.json' \
     'playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json' \
     'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts' \
+    'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalEventPropsValues.ts' \
     2>/dev/null || true)"
 
   if [ -n "$CHANGED" ]; then
@@ -96,6 +98,7 @@ if [ "$BEFORE" != "$AFTER" ]; then
   echo "  git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json"
   echo "  git add playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json"
   echo "  git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts"
+  echo "  git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalEventPropsValues.ts"
   echo ""
   echo "Or regenerate first with: yarn generate:docs-metadata"
   echo ""

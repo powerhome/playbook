@@ -16,6 +16,10 @@
       display: block;
     }
 
+    .date_picker_input_container {
+      position: relative;
+    }
+    
     @import "./sass_partials/calendar_input_icon";
   }
 
