@@ -3488,12 +3488,12 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-italic/-/extension-italic-3.0.7.tgz#37899906aa5b36ea992e3f1fc268542228007562"
   integrity sha512-L05cehSOd7iZWI/igPb90TgQ6RKk2UuuYdatmXff3QUJpYPYct6abcrMb+CeFKJqE9vaXy46dCQkOuPW+bFwkA==
 
-"@tiptap/extension-link@3.0.7", "@tiptap/extension-link@^3.0.7":
-  version "3.0.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-link/-/extension-link-3.0.7.tgz#b0c77d8790786b136a0b7e5ae2e9a222780f96cf"
-  integrity sha512-e53MddBSVKpxxQ2JmHfyZQ2VBLwqlZxqwn0DQHFMXyCKTzpdUC0DOtkvrY7OVz6HA3yz29qR+qquQxIxcDPrfg==
+"@tiptap/extension-link@3.32.0", "@tiptap/extension-link@^3.0.7":
+  version "3.32.0"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-link/-/extension-link-3.32.0.tgz#1b19e95ce4fbfaf186c5af8bae4ea4165f83c710"
+  integrity sha512-DRdQSgWPSEjrDg5EDBB5yxRygHtUVLhceVGzAsTz8RziiFyvcwAvzBHCO9hd9jutjCXQ2DLIuZB8P+aHhFWnpg==
   dependencies:
-    linkifyjs "^4.2.0"
+    linkifyjs "^4.3.3"
 
 "@tiptap/extension-list-item@3.0.7", "@tiptap/extension-list-item@^3.0.7":
   version "3.0.7"
@@ -8530,7 +8530,7 @@ linkify-it@^5.0.0:
   dependencies:
     uc.micro "^2.0.0"
 
-linkifyjs@^4.2.0:
+linkifyjs@^4.3.3:
   version "4.3.3"
   resolved "https://npm.powerapp.cloud/linkifyjs/-/linkifyjs-4.3.3.tgz#da08f0eeb4d89a24541d09591fbdcc211eb8fef0"
   integrity sha512-P8aEP5U/D1/IlTY2OeYsErdwh9bGuLE30NcXtKEjgdHcahveQoQwM2yZNsioQHsWFz0P7KKudisbrzCgR0sDHg==
