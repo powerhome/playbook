@@ -637,10 +637,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    }
                } else {
                    setSelected(clickedItem);
-                   // Async autocomplete shows the selection in the input, as controlled mode and Rails do
-                   setFilterItem(isControlled && autocomplete
-                     ? (selected as GenericObject)?.label || ""
-                     : asyncEnabled && autocomplete ? clickedItem.label || "" : "");
+                   // Uncontrolled autocomplete keeps the clicked label in the input so the next
+                   // character replaces that selection. Controlled mode follows the incoming value.
+                   const nextQuery = autocomplete
+                     ? (isControlled ? (selected as GenericObject)?.label : clickedItem.label) || ""
+                     : "";
+                   setFilterItem(nextQuery);
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }

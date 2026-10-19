@@ -347,6 +347,35 @@ describe.each([false, true])("exact option matching with multiSelect=%s", multiS
   })
 })
 
+test.each([
+  ["Create row", "New tag", 'Create "New tag"', "New tag", "New tag"],
+  ["existing option", "Ex", "Existing", "Existing", "existing"],
+])("uncontrolled single-select keeps the %s label and replaces it on the next character", (_kind, query, optionText, label, submitted) => {
+  const onSelect = jest.fn()
+  const { container } = render(
+    <form>
+      <Dropdown
+          allowOptionCreation
+          enableFormSupport
+          name="tag"
+          onSelect={onSelect}
+          options={options}
+      />
+    </form>
+  )
+  const input = container.querySelector(".dropdown_input")
+  const form = container.querySelector("form")
+  typeQuery(container, query)
+  fireEvent.click(screen.getByText(optionText))
+  expect(input).toHaveValue(label)
+  expect(new FormData(form).get("tag")).toBe(submitted)
+
+  expect(fireEvent.keyDown(input, { key: "x" })).toBe(false)
+  expect(input).toHaveValue("x")
+  expect(onSelect).toHaveBeenLastCalledWith(null)
+  expect(new FormData(form).get("tag")).toBe("")
+})
+
 test("static filtering stays label-only when option creation is disabled", () => {
   const { container } = render(
     <Dropdown
