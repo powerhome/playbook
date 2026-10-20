@@ -7,6 +7,7 @@ import Caption from '../../../pb_caption/_caption'
 import Card from '../../../pb_card/_card'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
+import Highlight from '../../../pb_highlight/_highlight'
 import StarRating from '../../../pb_star_rating/_star_rating'
 import Title from '../../../pb_title/_title'
 import { globalProps } from '../../globalProps'
@@ -17,6 +18,7 @@ const optedInKits = [
   { Kit: Caption, name: 'Caption', extraProps: { text: 'Test' } },
   { Kit: Card, name: 'Card', extraProps: { children: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
+  { Kit: Highlight, name: 'Highlight', extraProps: { text: 'Test' } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
 ]
 

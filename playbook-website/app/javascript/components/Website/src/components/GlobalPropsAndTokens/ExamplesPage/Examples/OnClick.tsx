@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Button, Caption, Card, Flex, Title, Table } from "playbook-ui";
+import { Body, Button, Caption, Card, Flex, Highlight, Title, Table } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -39,6 +39,7 @@ const OnClick = () => {
     const [captionClicks, setCaptionClicks] = useState(0);
     const [cardClicks, setCardClicks] = useState(0);
     const [flexClicks, setFlexClicks] = useState(0);
+    const [highlightClicks, setHighlightClicks] = useState(0);
     const [titleClicks, setTitleClicks] = useState(0);
     const [buttonClicks, setButtonClicks] = useState(0);
 
@@ -118,6 +119,26 @@ const OnClick = () => {
             >
               <Body text="Click this Flex example" />
             </Flex>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Highlight" />
+          <InteractiveExample
+              count={highlightClicks}
+              label="Highlight"
+              reset={() => setHighlightClicks(0)}
+          >
+            <Highlight
+                cursor="pointer"
+                highlightedText={["Highlight"]}
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setHighlightClicks((prev: number) => prev + 1)}
+                text="Click this Highlight example"
+            />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -220,6 +241,15 @@ const OnClick = () => {
               text={`<Flex onClick={() => alert("clicked")} cursor="pointer">...</Flex>`}
             />,
             "Attached to the root Flex div.",
+          ],
+          [
+            "Highlight",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-highlight-react"
+              text={`<Highlight onClick={() => alert("clicked")} text="Clickable highlight" />`}
+            />,
+            "Attached to the root Highlight element.",
           ],
           [
             "Title",
