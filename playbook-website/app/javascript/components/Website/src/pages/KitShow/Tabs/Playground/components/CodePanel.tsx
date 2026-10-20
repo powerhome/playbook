@@ -4,10 +4,9 @@ import { SyntaxHighlightedCode } from "../../../../../components/SyntaxHighlight
 
 interface CodePanelProps {
   code: string;
-  language?: "tsx" | "erb";
 }
 
-export const CodePanel: React.FC<CodePanelProps> = ({ code, language = "tsx" }) => {
+export const CodePanel: React.FC<CodePanelProps> = ({ code }) => {
   const [copyState, setCopyState] = useState(false);
 
   const copyCode = async () => {
@@ -33,7 +32,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({ code, language = "tsx" }) 
           />
       </Flex>
       <Card borderNone background="light">
-        <SyntaxHighlightedCode code={code} language={language} />
+        <SyntaxHighlightedCode code={code} language="tsx" />
       </Card>
     </Card>
   );
