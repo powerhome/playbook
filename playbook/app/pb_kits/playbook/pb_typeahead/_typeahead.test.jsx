@@ -555,6 +555,52 @@ test('dragging a pill shows a ghost and drop line, then commits on drop', () => 
   )
 })
 
+test('a single move that starts the drag still seeds the ghost and commits on drop', () => {
+  const reorderHandler = jest.fn()
+  const originalElementFromPoint = document.elementFromPoint
+
+  render(
+    <Typeahead
+        data={{ testid: 'single-move-reorder-test' }}
+        enablePillReorder
+        id="single-move-reorder-typeahead"
+        isMulti
+        options={options}
+        value={[options[0], options[1], options[2]]}
+    />
+  )
+
+  document.addEventListener(
+    'pb-typeahead-kit-single-move-reorder-typeahead-result-option-reorder',
+    reorderHandler,
+  )
+
+  const kit = screen.getByTestId('single-move-reorder-test')
+  const draggableItems = kit.querySelectorAll('.pb_draggable_item')
+  draggableItems.forEach((item, index) => {
+    item.getBoundingClientRect = () => ({ left: index * 100, right: index * 100 + 100, width: 100, top: 0, bottom: 30, height: 30 })
+  })
+  document.elementFromPoint = (x) => draggableItems[Math.min(Math.floor(x / 100), draggableItems.length - 1)] || null
+
+  // One move both starts the drag and is the only pointer sample before drop
+  fireEvent.mouseDown(draggableItems[0], { button: 0, buttons: 1, clientX: 10, clientY: 10 })
+  fireEvent.mouseMove(document, { buttons: 1, clientX: 280, clientY: 10 })
+
+  expect(document.querySelector('.pb_typeahead_pill_drag_preview')).toBeInTheDocument()
+  expect(draggableItems[2]).toHaveClass('pb_typeahead_drop_after')
+
+  fireEvent.mouseUp(document, { clientX: 280, clientY: 10 })
+
+  expect(reorderHandler).toHaveBeenCalled()
+  expect(reorderHandler.mock.calls[0][0].detail.map((item) => item.label)).toEqual(['Red', 'Green', 'Orange'])
+
+  document.elementFromPoint = originalElementFromPoint
+  document.removeEventListener(
+    'pb-typeahead-kit-single-move-reorder-typeahead-result-option-reorder',
+    reorderHandler,
+  )
+})
+
 test('dragging from an external handle shows a ghost and drop line, then commits on drop', () => {
   const reorderHandler = jest.fn()
   const originalElementFromPoint = document.elementFromPoint

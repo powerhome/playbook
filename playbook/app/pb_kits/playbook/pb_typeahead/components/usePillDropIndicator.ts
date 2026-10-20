@@ -11,6 +11,26 @@ export type PillDropTarget = {
 // Use Infinity to target the nearest row from anywhere on the page.
 const ROW_TOLERANCE = 80
 
+// Pointer position while a button is down / touch is active. The drop-indicator effect mounts
+// after React commits dragId, so the threshold-crossing move is already gone — seed from this.
+let lastPointer: { x: number, y: number } | null = null
+let pointerTrackingInstalled = false
+
+const ensurePointerTracking = () => {
+  if (pointerTrackingInstalled || typeof document === 'undefined') return
+  pointerTrackingInstalled = true
+
+  document.addEventListener('mousemove', (event: MouseEvent) => {
+    if (event.buttons === 0) return
+    lastPointer = { x: event.clientX, y: event.clientY }
+  }, true)
+
+  document.addEventListener('touchmove', (event: TouchEvent) => {
+    const touch = event.touches[0]
+    if (touch) lastPointer = { x: touch.clientX, y: touch.clientY }
+  }, { capture: true, passive: true })
+}
+
 const getVerticalDistance = (rect: DOMRect, y: number): number => (
   Math.max(rect.top - y, y - rect.bottom, 0)
 )
@@ -48,6 +68,10 @@ const usePillDropIndicator = (
   pendingReorderRef: React.MutableRefObject<SelectValueType[] | null>,
 ): PillDropTarget | null => {
   const [dropTarget, setDropTarget] = useState<PillDropTarget | null>(null)
+
+  useEffect(() => {
+    ensurePointerTracking()
+  }, [])
 
   useEffect(() => {
     // Only one pill can be dragged at a time, so the dragging item is unique on the page
@@ -111,6 +135,11 @@ const usePillDropIndicator = (
 
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('touchmove', handleTouchMove, { passive: true })
+
+    // Apply the pointer position from the move that started the drag (already fired).
+    if (lastPointer) {
+      handlePointerMove(lastPointer.x, lastPointer.y)
+    }
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove)

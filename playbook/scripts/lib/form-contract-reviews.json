@@ -208,7 +208,7 @@
       "app/pb_kits/playbook/pb_typeahead/components/Placeholder.tsx": "6dee3b8513405b95356a019121d124a01ab3c7fa20b1920a0427ab80d61078b3",
       "app/pb_kits/playbook/pb_typeahead/components/ValueContainer.tsx": "9563d7fb8e56c143217477b777cf045813b89f2c25f009a8b827e58a73e7dd12",
       "app/pb_kits/playbook/pb_typeahead/components/index.tsx": "60e51b9b04cf3aa9033ddc79ccc7903add1a34a2db0f775f3913b9f7daff5e3b",
-      "app/pb_kits/playbook/pb_typeahead/components/usePillDropIndicator.ts": "6ca438cdde04bdc4dc5e34a186e89534d61e449b4de0d2549f220bdab2066fbb",
+      "app/pb_kits/playbook/pb_typeahead/components/usePillDropIndicator.ts": "9fb0e6340ab5846712ad56f020d090b0b1ce1f4d76e6635bf7ef01a5c5b393da",
       "app/pb_kits/playbook/pb_typeahead/index.ts": "13001c84c92c5edb30b46d53444eed4c0c3a128643279ee8fc89c285fbc38dec",
       "app/pb_kits/playbook/pb_typeahead/typeahead.html.erb": "5f13f86994c9392fe21cc3928831057a07f53f3d5800abcc1b9907b9f2f58b02",
       "app/pb_kits/playbook/pb_typeahead/typeahead.rb": "5bb28fcfc6b158d57a9377e90a7c1cf574676e88e36161835864858ddf18ce11",
