@@ -65,6 +65,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Detail } from 'playbook-ui'",

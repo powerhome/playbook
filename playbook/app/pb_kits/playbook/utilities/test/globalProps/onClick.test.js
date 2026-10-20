@@ -3,9 +3,12 @@ import { fireEvent, render, screen } from '../../test-utils'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
 import ButtonToolbar from '../../../pb_button_toolbar/_button_toolbar'
+import Caption from '../../../pb_caption/_caption'
 import Card from '../../../pb_card/_card'
+import Detail from '../../../pb_detail/_detail'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
+import Highlight from '../../../pb_highlight/_highlight'
 import StarRating from '../../../pb_star_rating/_star_rating'
 import Title from '../../../pb_title/_title'
 import { globalProps } from '../../globalProps'
@@ -13,8 +16,11 @@ import { globalEventProps } from '../../globalEventProps'
 
 const optedInKits = [
   { Kit: Body, name: 'Body', extraProps: { text: 'Test' } },
+  { Kit: Caption, name: 'Caption', extraProps: { text: 'Test' } },
   { Kit: Card, name: 'Card', extraProps: { children: 'Test' } },
+  { Kit: Detail, name: 'Detail', extraProps: { text: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
+  { Kit: Highlight, name: 'Highlight', extraProps: { text: 'Test' } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
 ]
 
