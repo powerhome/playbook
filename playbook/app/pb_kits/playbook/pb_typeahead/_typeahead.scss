@@ -274,6 +274,28 @@
     }
   }
 
+  // Badge has no in-kit icon slot, so the grip sits beside it (matches Form Pill grip tone)
+  .pb_typeahead_badge_with_grip {
+    display: inline-flex;
+    align-items: center;
+    gap: $space_xxs;
+    margin-right: $space_xs;
+  }
+
+  .pb_typeahead_badge_drag_grip {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: $text_lighter;
+    cursor: grab;
+    user-select: none;
+    scale: 0.9;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
   &.inline {
     &:not(:hover) {
       .text_input {
@@ -442,6 +464,9 @@
   .pb_form_pill_kit_icon.dark .pb_form_pill_icon {
     color: $text_lighter_dark !important;
   }
+  .pb_typeahead_badge_drag_grip {
+    color: $text_lighter;
+  }
 }
 
 // Ghost that follows the pointer while a pill is dragged
@@ -454,7 +479,8 @@
   pointer-events: none;
 
   .pb_form_pill_kit,
-  .pb_form_pill_kit_icon {
+  .pb_form_pill_kit_icon,
+  .pb_typeahead_badge_with_grip {
     box-shadow: $shadow_deep;
   }
 }

@@ -1,0 +1,39 @@
+<%
+  options = [
+    { label: 'Year', value: 'year' },
+    { label: 'Territory', value: 'territory' },
+    { label: 'Branch', value: 'branch' },
+    { label: 'Product', value: 'product' },
+  ]
+%>
+
+<%= pb_rails("body", props: { text: "Badge multi_kit with enable_pill_reorder — each badge shows a grip and can be dragged to reorder.", margin_bottom: "xs" }) %>
+
+<%= pb_rails("typeahead", props: {
+  id: "typeahead-draggable-badges-example",
+  default_options: [options[0], options[1], options[2]],
+  enable_pill_reorder: true,
+  show_pill_index: true,
+  is_multi: true,
+  multi_kit: "badge",
+  label: "Services",
+  name: :badge_services,
+  options: options,
+  pills: true,
+  placeholder: "Add services...",
+}) %>
+
+<%= pb_rails("body", props: {
+  id: "typeahead-draggable-badges-order",
+  color: "lighter",
+  margin_top: "xs",
+  text: "Current order: Year -> Territory -> Branch",
+}) %>
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener('pb-typeahead-kit-typeahead-draggable-badges-example-result-option-reorder', function(event) {
+    const orderText = event.detail.map((item) => item.label).join(' -> ');
+    const orderElement = document.querySelector('#typeahead-draggable-badges-order');
+    if (orderElement) orderElement.textContent = `Current order: ${orderText}`;
+  });
+<% end %>

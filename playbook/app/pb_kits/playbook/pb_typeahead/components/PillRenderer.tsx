@@ -105,6 +105,20 @@ const PillRenderer = ({
 
   const closeProps = removeProps || { onClick: handleRemove }
 
+  const badge = (
+    <Badge
+        aria={{ label: positionLabel }}
+        className={pillClassName}
+        closeProps={closeProps}
+        htmlOptions={{ onKeyDown: handleKeyDown }}
+        marginRight={showDragIcon ? "none" : "xs"}
+        removeIcon
+        tabIndex={0}
+        text={label}
+        variant="primary"
+    />
+  )
+
   const pillContent = (
     <>
       {pillDragHandle && (
@@ -125,17 +139,20 @@ const PillRenderer = ({
       )}
 
       {multiKit === 'badge' && (
-        <Badge
-            aria={{ label: positionLabel }}
-            className={pillClassName}
-            closeProps={closeProps}
-            htmlOptions={{ onKeyDown: handleKeyDown }}
-            marginRight="xs"
-            removeIcon
-            tabIndex={0}
-            text={label}
-            variant="primary"
-        />
+        showDragIcon ? (
+          <span className="pb_typeahead_badge_with_grip">
+            <span
+                aria-hidden="true"
+                className="pb_typeahead_badge_drag_grip"
+            >
+              <Icon
+                  icon="grip-dots-vertical"
+                  verticalAlign="middle"
+              />
+            </span>
+            {badge}
+          </span>
+        ) : badge
       )}
 
       {multiKit !== 'badge' && imageUrl && (
