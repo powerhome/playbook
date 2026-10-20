@@ -69,7 +69,7 @@ module Playbook
       prop :show_pill_index, type: Playbook::Props::Boolean,
                              default: false
       prop :pill_drag_handle, type: Playbook::Props::Boolean,
-                              default: true
+                              default: false
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
         generate_classname("pb_typeahead_kit") + default_margin_bottom

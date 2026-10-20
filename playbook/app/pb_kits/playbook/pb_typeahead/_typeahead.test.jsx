@@ -358,7 +358,7 @@ test('enablePillReorder false does not render drag handles', () => {
   expect(kit.querySelector('.pb_typeahead_pill_drag_handle')).not.toBeInTheDocument()
 })
 
-test('enablePillReorder renders drag handles and numbered pills', () => {
+test('enablePillReorder renders in-pill grip icons and numbered pills by default', () => {
   render(
     <Typeahead
         data={{ testid: 'reorder-test' }}
@@ -371,10 +371,11 @@ test('enablePillReorder renders drag handles and numbered pills', () => {
   )
 
   const kit = screen.getByTestId('reorder-test')
-  const handles = kit.querySelectorAll('.pb_typeahead_pill_drag_handle')
-  const pills = kit.querySelectorAll('.pb_form_pill_kit.pb_form_pill_primary')
+  // FormPill uses pb_form_pill_kit_icon when the in-pill grip is present
+  const pills = kit.querySelectorAll('.pb_form_pill_kit_icon.pb_form_pill_primary')
 
-  expect(handles.length).toBe(3)
+  expect(kit.querySelector('.pb_typeahead_pill_drag_handle')).not.toBeInTheDocument()
+  expect(kit.querySelectorAll('.pb_form_pill_kit_icon .pb_form_pill_icon').length).toBe(3)
   expect(pills.length).toBe(3)
   expect(pills[0]).toHaveTextContent('1. Orange')
   expect(pills[1]).toHaveTextContent('2. Red')
@@ -397,7 +398,7 @@ test('keyboard reorder moves pill position when enablePillReorder is true', () =
   )
 
   const kit = screen.getByTestId('keyboard-reorder-test')
-  const pills = kit.querySelectorAll('.pb_form_pill_kit.pb_form_pill_primary')
+  const pills = kit.querySelectorAll('.pb_form_pill_kit_icon.pb_form_pill_primary')
 
   pills[1].focus()
   fireEvent.keyDown(pills[1], { key: 'ArrowLeft' })
@@ -438,14 +439,13 @@ test('remove still works when enablePillReorder is true', () => {
   expect(updatedValue.length).toBe(1)
 })
 
-test('pillDragHandle false hides grip and enables whole-pill pointer drag', () => {
+test('default whole-pill drag hides external handle and disables HTML5 draggable', () => {
   render(
     <Typeahead
         data={{ testid: 'no-handle-reorder-test' }}
         enablePillReorder
         isMulti
         options={options}
-        pillDragHandle={false}
         value={[options[0], options[1], options[2]]}
     />
   )
@@ -459,20 +459,21 @@ test('pillDragHandle false hides grip and enables whole-pill pointer drag', () =
   })
 })
 
-test('pillDragHandle false shows a grip icon inside each pill', () => {
+test('pillDragHandle true renders external grip handles', () => {
   render(
     <Typeahead
-        data={{ testid: 'pill-icon-test' }}
+        data={{ testid: 'external-handle-test' }}
         enablePillReorder
         isMulti
         options={options}
-        pillDragHandle={false}
+        pillDragHandle
         value={[options[0], options[1]]}
     />
   )
 
-  const kit = screen.getByTestId('pill-icon-test')
-  expect(kit.querySelectorAll('.pb_form_pill_kit_icon .pb_form_pill_icon').length).toBe(2)
+  const kit = screen.getByTestId('external-handle-test')
+  expect(kit.querySelectorAll('.pb_typeahead_pill_drag_handle').length).toBe(2)
+  expect(kit.querySelectorAll('.pb_form_pill_kit_icon .pb_form_pill_icon').length).toBe(0)
 })
 
 test('dragging a pill shows a ghost and drop line, then commits on drop', () => {
@@ -486,7 +487,6 @@ test('dragging a pill shows a ghost and drop line, then commits on drop', () => 
         id="reorder-event-typeahead"
         isMulti
         options={options}
-        pillDragHandle={false}
         value={[options[0], options[1], options[2]]}
     />
   )
@@ -501,7 +501,8 @@ test('dragging a pill shows a ghost and drop line, then commits on drop', () => 
   draggableItems.forEach((item, index) => {
     item.getBoundingClientRect = () => ({ left: index * 100, right: index * 100 + 100, width: 100, top: 0, bottom: 30, height: 30 })
   })
-  document.elementFromPoint = (x) => draggableItems[Math.floor(x / 100)]
+  // pb_draggable hit-testing (via axe polyfill) needs elementFromPoint in jsdom
+  document.elementFromPoint = (x) => draggableItems[Math.min(Math.floor(x / 100), draggableItems.length - 1)] || null
 
   fireEvent.mouseDown(draggableItems[0], { button: 0, clientX: 10, clientY: 10 })
   fireEvent.mouseMove(document, { clientX: 30, clientY: 10 })
@@ -533,6 +534,55 @@ test('dragging a pill shows a ghost and drop line, then commits on drop', () => 
   document.elementFromPoint = originalElementFromPoint
   document.removeEventListener(
     'pb-typeahead-kit-reorder-event-typeahead-result-option-reorder',
+    reorderHandler,
+  )
+})
+
+test('dragging from an external handle shows a ghost and drop line, then commits on drop', () => {
+  const reorderHandler = jest.fn()
+  const originalElementFromPoint = document.elementFromPoint
+
+  render(
+    <Typeahead
+        data={{ testid: 'external-handle-drag-test' }}
+        enablePillReorder
+        id="external-handle-drag-typeahead"
+        isMulti
+        options={options}
+        pillDragHandle
+        value={[options[0], options[1], options[2]]}
+    />
+  )
+
+  document.addEventListener(
+    'pb-typeahead-kit-external-handle-drag-typeahead-result-option-reorder',
+    reorderHandler,
+  )
+
+  const kit = screen.getByTestId('external-handle-drag-test')
+  const draggableItems = kit.querySelectorAll('.pb_draggable_item')
+  const handles = kit.querySelectorAll('.pb_typeahead_pill_drag_handle')
+  draggableItems.forEach((item, index) => {
+    item.getBoundingClientRect = () => ({ left: index * 100, right: index * 100 + 100, width: 100, top: 0, bottom: 30, height: 30 })
+  })
+  document.elementFromPoint = (x) => draggableItems[Math.min(Math.floor(x / 100), draggableItems.length - 1)] || null
+
+  fireEvent.mouseDown(handles[0], { button: 0, clientX: 10, clientY: 10 })
+  // First move starts the drag and mounts the drop-indicator effect; later moves hit its listeners
+  fireEvent.mouseMove(document, { clientX: 30, clientY: 10 })
+  fireEvent.mouseMove(document, { clientX: 280, clientY: 10 })
+  expect(document.querySelector('.pb_typeahead_pill_drag_preview')).toBeInTheDocument()
+  expect(draggableItems[2]).toHaveClass('pb_typeahead_drop_after')
+
+  fireEvent.mouseUp(document, { clientX: 280, clientY: 10 })
+
+  expect(document.querySelector('.pb_typeahead_pill_drag_preview')).not.toBeInTheDocument()
+  expect(reorderHandler).toHaveBeenCalled()
+  expect(reorderHandler.mock.calls[0][0].detail.map((item) => item.label)).toEqual(['Red', 'Green', 'Orange'])
+
+  document.elementFromPoint = originalElementFromPoint
+  document.removeEventListener(
+    'pb-typeahead-kit-external-handle-drag-typeahead-result-option-reorder',
     reorderHandler,
   )
 })

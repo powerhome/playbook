@@ -236,7 +236,7 @@
         "react",
         "rails"
       ],
-      "default": true
+      "default": false
     },
     "styles": {
       "type": "TypeaheadStylesConfig",

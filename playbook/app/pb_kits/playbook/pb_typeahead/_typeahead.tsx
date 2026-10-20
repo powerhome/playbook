@@ -146,7 +146,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     preserveSearchInput = false, // Default to false to maintain backward compatibility
     enablePillReorder = false,
     showPillIndex = false,
-    pillDragHandle = true,
+    pillDragHandle = false,
     styles: stylesProp,
     ...props
   }: TypeaheadProps) => {

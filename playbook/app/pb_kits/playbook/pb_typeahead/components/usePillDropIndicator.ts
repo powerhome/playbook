@@ -19,6 +19,8 @@ const getVerticalDistance = (rect: DOMRect, y: number): number => (
 // then the gap in that row. Left of a row targets its first pill; right of it (e.g. over
 // the input) targets after its last pill.
 const getDropTarget = (pills: Element[], x: number, y: number): PillDropTarget | null => {
+  if (pills.length === 0) return null
+
   const rects = pills.map((pill) => pill.getBoundingClientRect())
   const nearestRect = rects.reduce((nearest, rect) => (
     getVerticalDistance(rect, y) < getVerticalDistance(nearest, y) ? rect : nearest
@@ -50,10 +52,12 @@ const usePillDropIndicator = (
   useEffect(() => {
     // Only one pill can be dragged at a time, so the dragging item is unique on the page
     const source = document.querySelector<HTMLElement>('.pb_typeahead_draggable_pills .is_dragging')
-    if (!dragId || !source) return undefined
+    if (!dragId || !source?.parentElement) return undefined
 
     const pills = Array.from(source.parentElement.children)
     const sourceIndex = value.findIndex((item) => item.value === dragId)
+    if (sourceIndex < 0 || pills.length === 0) return undefined
+
     const sourceRect = source.getBoundingClientRect()
 
     const ghost = source.cloneNode(true) as HTMLElement

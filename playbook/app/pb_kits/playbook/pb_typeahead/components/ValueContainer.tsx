@@ -63,9 +63,10 @@ const DraggablePillList = ({
   setValue,
   value,
 }: DraggablePillListProps) => {
-  const { isDragging } = DraggableContext()
+  // Context `isDragging` is the active dragId string (empty when idle).
+  const { isDragging: dragId } = DraggableContext()
   // Pills hold their place while dragging; the drop line previews the new position.
-  const dropTarget = usePillDropIndicator(isDragging, value, pendingReorderRef)
+  const dropTarget = usePillDropIndicator(dragId, value, pendingReorderRef)
 
   const getDropLineClassName = (index: number): string | undefined => {
     if (dropTarget?.index !== index) return undefined
