@@ -1523,3 +1523,84 @@ describe("PbDropdown multi-select identity", () => {
     jest.useRealTimers();
   });
 });
+
+describe("PbDropdown multi-select form submission", () => {
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  const mountRequiredMultiSelect = () => {
+    const root = document.createElement("div");
+    root.setAttribute("data-pb-dropdown", "true");
+    root.id = "multi-submit";
+    root.dataset.pbDropdownDisabled = "false";
+    root.dataset.pbDropdownMultiSelect = "true";
+    root.dataset.pbDropdownClearable = "true";
+    root.innerHTML = `
+      <div class="dropdown_wrapper">
+        <input data-dropdown-selected-option name="countries[]" required style="display: none" />
+        <div class="pb_dropdown_trigger">
+          <div data-dropdown-pills-wrapper></div>
+          <span data-dropdown-trigger-display-multi-select>Choose one</span>
+        </div>
+        <div class="pb_dropdown_container close" data-dropdown-container="true">
+          <div class="pb_list_kit"></div>
+        </div>
+      </div>
+    `;
+    const list = root.querySelector(".pb_list_kit");
+    [
+      { id: "us", label: "United States", value: "us" },
+      { id: "ca", label: "Canada", value: "ca" },
+      { id: "pk", label: "Pakistan", value: "pk" },
+    ].forEach((option) => {
+      const el = document.createElement("div");
+      el.className = "pb_dropdown_option_list";
+      el.dataset.dropdownOptionLabel = JSON.stringify(option);
+      el.innerHTML = `<div class="pb_body_kit_light">${option.label}</div>`;
+      list.appendChild(el);
+    });
+    document.body.appendChild(root);
+    const instance = new PbDropdown(root);
+    instance.connect();
+    return { root, instance, baseInput: root.querySelector("[data-dropdown-selected-option]") };
+  };
+
+  const submittedValues = (root) => {
+    const form = document.createElement("form");
+    form.appendChild(root);
+    document.body.appendChild(form);
+    return new FormData(form).getAll("countries[]");
+  };
+
+  test("submits each selected value once without a comma-separated base value", () => {
+    const { root, instance, baseInput } = mountRequiredMultiSelect();
+    const options = instance.queryAllOptions();
+    options[0].click();
+    options[1].click();
+    options[2].click();
+
+    expect(baseInput.value).toBe("");
+    expect(baseInput.hasAttribute("name")).toBe(false);
+    expect(baseInput.hasAttribute("required")).toBe(false);
+    expect(
+      Array.from(root.querySelectorAll("input[data-generated]")).map((input) => input.value).sort(),
+    ).toEqual(["ca", "pk", "us"]);
+    expect(submittedValues(root).sort()).toEqual(["ca", "pk", "us"]);
+    instance.disconnect();
+  });
+
+  test("restores required and name on the base input when all selections are cleared", () => {
+    const { root, instance, baseInput } = mountRequiredMultiSelect();
+    instance.queryAllOptions()[0].click();
+    expect(baseInput.hasAttribute("required")).toBe(false);
+    expect(baseInput.hasAttribute("name")).toBe(false);
+
+    root.querySelector(".pb_form_pill_close").click();
+    expect(baseInput.value).toBe("");
+    expect(baseInput.getAttribute("name")).toBe("countries[]");
+    expect(baseInput.hasAttribute("required")).toBe(true);
+    expect(root.querySelectorAll("input[data-generated]")).toHaveLength(0);
+    instance.disconnect();
+  });
+});

@@ -209,6 +209,9 @@ export default class PbDropdown extends PbEnhancedElement {
     const baseInput = this.baseInput;
     this.wasOriginallyRequired =
       baseInput && baseInput.hasAttribute("required");
+    // Multi-select submits via generated inputs; keep the original name so we can
+    // strip it from the base input while selections exist (avoids empty/duplicate values).
+    this.baseInputName = baseInput?.getAttribute("name") || "";
     // Apply context options before default value so SSR/default selection matches current context
     this.bindContextSelector();
     this.setDefaultValue();
@@ -1530,11 +1533,6 @@ export default class PbDropdown extends PbEnhancedElement {
       });
       if (this.isAsync) this.showAsyncMultiSelectMenu();
       this.adjustDropdownHeight();
-      this.baseInput.value = Array.from(
-        this.selectedOptions,
-      )
-        .map((opt) => JSON.parse(opt).id)
-        .join(",");
     } else {
       options.forEach((option) => {
         option.classList.remove("pb_dropdown_option_selected");
@@ -2078,7 +2076,7 @@ export default class PbDropdown extends PbEnhancedElement {
     const baseInput = this.baseInput;
     if (!baseInput) return;
     // for multi_select, for each selectedOption, create a hidden input
-    const name = baseInput.getAttribute("name");
+    const name = this.baseInputName || baseInput.getAttribute("name");
     this.selectedOptions.forEach((raw) => {
       const optionData = JSON.parse(raw);
       // Use id if available, otherwise fall back to value
@@ -2091,15 +2089,18 @@ export default class PbDropdown extends PbEnhancedElement {
       baseInput.insertAdjacentElement("afterend", inp);
     });
 
-    // For multi-select, remove required from base input when there are selections
-    // The generated inputs handle the form submission with actual values
-    // Restore required attribute when there are no selections (if it was originally required)
+    // For multi-select, remove required/name from base input when there are selections.
+    // Generated inputs own form submission; the base input is only for required validation.
+    // Restore both when there are no selections (if originally required / named).
+    baseInput.value = "";
     if (this.selectedOptions.size > 0) {
-      baseInput.value = "";
       baseInput.removeAttribute("required");
+      baseInput.removeAttribute("name");
       baseInput.setCustomValidity("");
     } else {
-      baseInput.value = "";
+      if (this.baseInputName) {
+        baseInput.setAttribute("name", this.baseInputName);
+      }
       if (this.wasOriginallyRequired) {
         baseInput.setAttribute("required", "");
       }
