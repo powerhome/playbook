@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Button, Caption, Card, Flex, Highlight, Title, Table } from "playbook-ui";
+import { Body, Button, Caption, Card, Detail, Flex, Highlight, Title, Table } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -38,6 +38,7 @@ const OnClick = () => {
     const [bodyClicks, setBodyClicks] = useState(0);
     const [captionClicks, setCaptionClicks] = useState(0);
     const [cardClicks, setCardClicks] = useState(0);
+    const [detailClicks, setDetailClicks] = useState(0);
     const [flexClicks, setFlexClicks] = useState(0);
     const [highlightClicks, setHighlightClicks] = useState(0);
     const [titleClicks, setTitleClicks] = useState(0);
@@ -98,6 +99,25 @@ const OnClick = () => {
             >
               {"Click this Card example"}
             </Card>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Detail" />
+          <InteractiveExample
+              count={detailClicks}
+              label="Detail"
+              reset={() => setDetailClicks(0)}
+          >
+            <Detail
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setDetailClicks((prev: number) => prev + 1)}
+                text="Click this Detail example"
+            />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -232,6 +252,15 @@ const OnClick = () => {
               text={`<Card onClick={() => alert("clicked")} cursor="pointer">Content</Card>`}
             />,
             "Attached to the root Card tag.",
+          ],
+          [
+            "Detail",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-detail-react"
+              text={`<Detail onClick={() => alert("clicked")} text="Clickable detail" />`}
+            />,
+            "Attached to the root Detail element.",
           ],
           [
             "Flex",
