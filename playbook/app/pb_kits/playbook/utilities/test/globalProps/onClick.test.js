@@ -1,10 +1,12 @@
 import React from 'react'
 import { fireEvent, render, screen } from '../../test-utils'
+import Background from '../../../pb_background/_background'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
 import ButtonToolbar from '../../../pb_button_toolbar/_button_toolbar'
 import Caption from '../../../pb_caption/_caption'
 import Card from '../../../pb_card/_card'
+import Container from '../../../pb_container/_container'
 import Detail from '../../../pb_detail/_detail'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
@@ -15,9 +17,11 @@ import { globalProps } from '../../globalProps'
 import { globalEventProps } from '../../globalEventProps'
 
 const optedInKits = [
+  { Kit: Background, name: 'Background', extraProps: { children: 'Test' } },
   { Kit: Body, name: 'Body', extraProps: { text: 'Test' } },
   { Kit: Caption, name: 'Caption', extraProps: { text: 'Test' } },
   { Kit: Card, name: 'Card', extraProps: { children: 'Test' } },
+  { Kit: Container, name: 'Container', extraProps: { children: 'Test' } },
   { Kit: Detail, name: 'Detail', extraProps: { text: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
   { Kit: Highlight, name: 'Highlight', extraProps: { text: 'Test' } },

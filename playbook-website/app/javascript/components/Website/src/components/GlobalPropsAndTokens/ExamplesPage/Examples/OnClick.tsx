@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Button, Caption, Card, Detail, Flex, Highlight, Title, Table } from "playbook-ui";
+import { Background, Body, Button, Caption, Card, Container, Detail, Flex, Highlight, Title, Table } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -35,9 +35,11 @@ const OnClick = () => {
   };
 
   const VisualGuideCard = () => {
+    const [backgroundClicks, setBackgroundClicks] = useState(0);
     const [bodyClicks, setBodyClicks] = useState(0);
     const [captionClicks, setCaptionClicks] = useState(0);
     const [cardClicks, setCardClicks] = useState(0);
+    const [containerClicks, setContainerClicks] = useState(0);
     const [detailClicks, setDetailClicks] = useState(0);
     const [flexClicks, setFlexClicks] = useState(0);
     const [highlightClicks, setHighlightClicks] = useState(0);
@@ -46,6 +48,27 @@ const OnClick = () => {
 
     return (
       <Flex gap="sm" wrap width="100%">
+        <Card padding="md" width="sm">
+          <Title size={4} text="Background" />
+          <InteractiveExample
+              count={backgroundClicks}
+              label="Background"
+              reset={() => setBackgroundClicks(0)}
+          >
+            <Background
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setBackgroundClicks((prev: number) => prev + 1)}
+                padding="sm"
+            >
+              <Body text="Click this Background example" />
+            </Background>
+          </InteractiveExample>
+        </Card>
         <Card padding="md" width="sm">
           <Title size={4} text="Body" />
           <InteractiveExample
@@ -99,6 +122,26 @@ const OnClick = () => {
             >
               {"Click this Card example"}
             </Card>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Container" />
+          <InteractiveExample
+              count={containerClicks}
+              label="Container"
+              reset={() => setContainerClicks(0)}
+          >
+            <Container
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setContainerClicks((prev: number) => prev + 1)}
+            >
+              <Body text="Click this Container example" />
+            </Container>
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
