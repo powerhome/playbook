@@ -73,7 +73,8 @@ const FormMultiColumn = () => {
           wrap
       >
         <Flex
-            htmlOptions={{ style: { flex: "2 1 280px", minWidth: 0 } }}
+            align="stretch"
+            htmlOptions={{ style: { flex: "2 1" } }}
             orientation="column"
         >
           <Card
@@ -118,7 +119,8 @@ const FormMultiColumn = () => {
         </Flex>
 
         <Flex
-            htmlOptions={{ style: { flex: "1 1 200px", minWidth: 0 } }}
+            align="stretch"
+            htmlOptions={{ style: { flex: "1 1" } }}
             orientation="column"
         >
           <Caption marginBottom="xs"
