@@ -68,12 +68,17 @@ const usePillDropIndicator = (
     ghost.style.width = `${sourceRect.width}px`
     document.body.appendChild(ghost)
 
-    let dragStart: { x: number, y: number } | null = null
+    // Anchor to the pill center — not the first mousemove we hear. The effect mounts
+    // after React commits the drag, so a late first-move origin leaves the ghost
+    // permanently offset when the pointer moved quickly before listeners attached.
+    const pointerOrigin = {
+      x: sourceRect.left + sourceRect.width / 2,
+      y: sourceRect.top + sourceRect.height / 2,
+    }
     pendingReorderRef.current = null
 
     const handlePointerMove = (x: number, y: number) => {
-      if (!dragStart) dragStart = { x, y }
-      ghost.style.translate = `${x - dragStart.x}px ${y - dragStart.y}px`
+      ghost.style.translate = `${x - pointerOrigin.x}px ${y - pointerOrigin.y}px`
 
       const target = getDropTarget(pills, x, y)
       const targetSlot = target ? target.index + Number(target.after) : -1
