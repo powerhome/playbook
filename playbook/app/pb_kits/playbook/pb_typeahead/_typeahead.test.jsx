@@ -476,23 +476,6 @@ test('pillDragHandle true renders external grip handles', () => {
   expect(kit.querySelectorAll('.pb_form_pill_kit_icon .pb_form_pill_icon').length).toBe(0)
 })
 
-test('badge multiKit shows a grip when enablePillReorder uses the default in-pill affordance', () => {
-  render(
-    <Typeahead
-        data={{ testid: 'badge-grip-test' }}
-        enablePillReorder
-        isMulti
-        multiKit="badge"
-        options={options}
-        value={[options[0], options[1]]}
-    />
-  )
-
-  const kit = screen.getByTestId('badge-grip-test')
-  expect(kit.querySelectorAll('.pb_typeahead_badge_drag_grip').length).toBe(2)
-  expect(kit.querySelector('.pb_typeahead_pill_drag_handle')).not.toBeInTheDocument()
-})
-
 test('dragging a pill shows a ghost and drop line, then commits on drop', () => {
   const reorderHandler = jest.fn()
   const originalElementFromPoint = document.elementFromPoint

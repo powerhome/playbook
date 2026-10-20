@@ -21,4 +21,3 @@ export {default as TypeaheadCustomOptions} from "./_typeahead_custom_options.jsx
 export {default as TypeaheadInputDisplay} from "./_typeahead_input_display.jsx"
 export {default as TypeaheadRequiredIndicator} from "./_typeahead_required_indicator.jsx"
 export {default as TypeaheadDraggablePills} from "./_typeahead_draggable_pills.jsx"
-export {default as TypeaheadDraggableBadges} from "./_typeahead_draggable_badges.jsx"

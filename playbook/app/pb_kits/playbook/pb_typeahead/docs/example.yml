@@ -22,7 +22,6 @@ examples:
     - typeahead_preserve_input: Preserve Search Input
     - typeahead_required_indicator: Required Indicator
     - typeahead_draggable_pills: Draggable Pills
-    - typeahead_draggable_badges: Draggable Badges
 
   react:
     - typeahead_default: Default
@@ -48,4 +47,3 @@ examples:
     - typeahead_preserve_input: Preserve Search Input
     - typeahead_required_indicator: Required Indicator
     - typeahead_draggable_pills: Draggable Pills
-    - typeahead_draggable_badges: Draggable Badges
