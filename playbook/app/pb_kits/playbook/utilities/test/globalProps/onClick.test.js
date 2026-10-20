@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '../../test-utils'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
 import ButtonToolbar from '../../../pb_button_toolbar/_button_toolbar'
+import Caption from '../../../pb_caption/_caption'
 import Card from '../../../pb_card/_card'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
@@ -13,6 +14,7 @@ import { globalEventProps } from '../../globalEventProps'
 
 const optedInKits = [
   { Kit: Body, name: 'Body', extraProps: { text: 'Test' } },
+  { Kit: Caption, name: 'Caption', extraProps: { text: 'Test' } },
   { Kit: Card, name: 'Card', extraProps: { children: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },

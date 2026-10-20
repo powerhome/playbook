@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Button, Card, Flex, Title, Table } from "playbook-ui";
+import { Body, Button, Caption, Card, Flex, Title, Table } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -36,6 +36,7 @@ const OnClick = () => {
 
   const VisualGuideCard = () => {
     const [bodyClicks, setBodyClicks] = useState(0);
+    const [captionClicks, setCaptionClicks] = useState(0);
     const [cardClicks, setCardClicks] = useState(0);
     const [flexClicks, setFlexClicks] = useState(0);
     const [titleClicks, setTitleClicks] = useState(0);
@@ -59,6 +60,25 @@ const OnClick = () => {
                 }}
                 onClick={() => setBodyClicks((prev: number) => prev + 1)}
                 text="Click this Body example"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Caption" />
+          <InteractiveExample
+              count={captionClicks}
+              label="Caption"
+              reset={() => setCaptionClicks(0)}
+          >
+            <Caption
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setCaptionClicks((prev: number) => prev + 1)}
+                text="Click this Caption example"
             />
           </InteractiveExample>
         </Card>
@@ -173,6 +193,15 @@ const OnClick = () => {
               text={`<Body onClick={() => alert("clicked")} text="Clickable body" />`}
             />,
             "Attached to the root Body element.",
+          ],
+          [
+            "Caption",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-caption-react"
+              text={`<Caption onClick={() => alert("clicked")} text="Clickable caption" />`}
+            />,
+            "Attached to the root Caption element.",
           ],
           [
             "Card",
