@@ -39,11 +39,11 @@ const isPillCloseTarget = (target: EventTarget | null): boolean => {
 
 const shouldBlockPillMouseDown = (
   target: EventTarget | null,
-  pillDragHandle: boolean,
+  externalDragHandle: boolean,
 ): boolean => {
   if (isPillCloseTarget(target)) return false
 
-  if (pillDragHandle) {
+  if (externalDragHandle) {
     return Boolean(
       (target as HTMLElement | null)?.closest(
         '.pb_typeahead_pill_drag_handle, .pb_draggable_handle',
@@ -94,22 +94,22 @@ const DraggablePillList = ({
             className={getDropLineClassName(index)}
             container="typeahead-pills"
             dragId={item.value}
-            handlePointerDrag={Boolean((selectProps as any)?.pillDragHandle)}
+            handlePointerDrag={Boolean((selectProps as any)?.externalDragHandle)}
             key={item.value}
-            pointerDrag={!(selectProps as any)?.pillDragHandle}
+            pointerDrag={!(selectProps as any)?.externalDragHandle}
             tag="span"
         >
           <PillRenderer
               dark={(selectProps as any)?.dark}
               data={item}
+              externalDragHandle={(selectProps as any)?.externalDragHandle}
               index={index}
               multiKit={(selectProps as any)?.multiKit}
               onKeyboardReorder={(direction) => handleKeyboardReorder(index, direction)}
               onRemove={() => onRemove(item)}
               pillColor={(selectProps as any)?.pillColor}
-              pillDragHandle={(selectProps as any)?.pillDragHandle}
               selectProps={selectProps}
-              showDragIcon={!selectProps.pillDragHandle}
+              showDragIcon={!selectProps.externalDragHandle}
               showPillIndex={(selectProps as any)?.showPillIndex}
               totalCount={value.length}
               truncate={(selectProps as any)?.truncate}
@@ -203,20 +203,20 @@ const ValueContainer = (props: ValueContainerProps | any): React.ReactElement =>
     setValue(newValue, 'remove-value')
   }, [getValue, setValue])
 
-  const pillDragHandle = Boolean((selectProps as any)?.pillDragHandle)
+  const externalDragHandle = Boolean((selectProps as any)?.externalDragHandle)
 
   const valueContainerInnerProps = useMemo(() => ({
     ...innerProps,
     // Bubble phase only — capture-phase stopPropagation blocks mousedown from
     // reaching pill drag listeners.
     onMouseDown: (event: React.MouseEvent) => {
-      if (shouldBlockPillMouseDown(event.target, pillDragHandle)) {
+      if (shouldBlockPillMouseDown(event.target, externalDragHandle)) {
         event.stopPropagation()
         return
       }
       innerProps?.onMouseDown?.(event)
     },
-  }), [innerProps, pillDragHandle])
+  }), [innerProps, externalDragHandle])
 
   if (isPillReorderActive(selectProps) && hasValue) {
     return (

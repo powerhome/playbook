@@ -14,8 +14,8 @@
     "clearOnContextChange": true,
     "preserveSearchInput": false,
     "enablePillReorder": false,
-    "showPillIndex": false,
-    "pillDragHandle": false
+    "externalDragHandle": false,
+    "showPillIndex": false
   },
   "groups": [
     {
@@ -65,8 +65,8 @@
         "dark",
         "marginBottom",
         "enablePillReorder",
-        "showPillIndex",
-        "pillDragHandle"
+        "externalDragHandle",
+        "showPillIndex"
       ]
     }
   ],
@@ -264,7 +264,7 @@
     "showPillIndex": {
       "requires": "isMulti"
     },
-    "pillDragHandle": {
+    "externalDragHandle": {
       "requires": "isMulti"
     }
   },

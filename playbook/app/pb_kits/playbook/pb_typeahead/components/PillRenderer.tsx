@@ -33,13 +33,13 @@ type PillColorType =
 type PillRendererProps = {
   data: SelectValueType
   dark?: boolean
+  externalDragHandle?: boolean
   index?: number
   isFocused?: boolean
   multiKit?: string
   onKeyboardReorder?: (direction: 'left' | 'right') => void
   onRemove?: (event: React.MouseEvent | React.KeyboardEvent) => void
   pillColor?: PillColorType
-  pillDragHandle?: boolean
   removeProps?: { onClick?: (event: React.MouseEvent | React.KeyboardEvent) => void }
   selectProps?: Record<string, unknown>
   showDragIcon?: boolean
@@ -52,13 +52,13 @@ type PillRendererProps = {
 const PillRenderer = ({
   data,
   dark,
+  externalDragHandle = false,
   index = 0,
   isFocused = false,
   multiKit = '',
   onKeyboardReorder,
   onRemove,
   pillColor,
-  pillDragHandle = false,
   removeProps,
   showDragIcon = false,
   showPillIndex = false,
@@ -107,7 +107,7 @@ const PillRenderer = ({
 
   const pillContent = (
     <>
-      {pillDragHandle && (
+      {externalDragHandle && (
         <span
             aria-hidden="true"
             className="pb_draggable_handle pb_typeahead_pill_drag_handle"
@@ -177,7 +177,7 @@ const PillRenderer = ({
     </>
   )
 
-  if (pillDragHandle) {
+  if (externalDragHandle) {
     return (
       <span className="pb_typeahead_pill_with_handle">
         {pillContent}

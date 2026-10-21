@@ -66,10 +66,10 @@ module Playbook
                         default: false
       prop :enable_pill_reorder, type: Playbook::Props::Boolean,
                                  default: false
+      prop :external_drag_handle, type: Playbook::Props::Boolean,
+                                  default: false
       prop :show_pill_index, type: Playbook::Props::Boolean,
                              default: false
-      prop :pill_drag_handle, type: Playbook::Props::Boolean,
-                              default: false
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
         generate_classname("pb_typeahead_kit") + default_margin_bottom
@@ -125,8 +125,8 @@ module Playbook
           preserveSearchInput: preserve_search_input,
           createable: createable,
           enablePillReorder: enable_pill_reorder,
+          externalDragHandle: external_drag_handle,
           showPillIndex: show_pill_index,
-          pillDragHandle: pill_drag_handle,
         }
 
         base_options[:getOptionLabel] = get_option_label if get_option_label.present?

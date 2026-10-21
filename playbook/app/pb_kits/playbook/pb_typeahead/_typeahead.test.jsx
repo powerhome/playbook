@@ -459,14 +459,14 @@ test('default whole-pill drag hides external handle and disables HTML5 draggable
   })
 })
 
-test('pillDragHandle true renders external grip handles', () => {
+test('externalDragHandle true renders external grip handles', () => {
   render(
     <Typeahead
         data={{ testid: 'external-handle-test' }}
         enablePillReorder
+        externalDragHandle
         isMulti
         options={options}
-        pillDragHandle
         value={[options[0], options[1]]}
     />
   )
@@ -592,10 +592,10 @@ test('dragging from an external handle shows a ghost and drop line, then commits
     <Typeahead
         data={{ testid: 'external-handle-drag-test' }}
         enablePillReorder
+        externalDragHandle
         id="external-handle-drag-typeahead"
         isMulti
         options={options}
-        pillDragHandle
         value={[options[0], options[1], options[2]]}
     />
   )
