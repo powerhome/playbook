@@ -43,7 +43,6 @@
     "@vitejs/plugin-react": "^4.3.1",
     "axe-core": "4.10.2",
     "copy-to-clipboard": "^3.3.3",
-    "eslint": "6.8.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.1.0",
     "postcss-preset-env": "^7.0.1",
@@ -59,8 +58,5 @@
     "vite": "6.4.3",
     "vite-plugin-ruby": "^5.0.0",
     "zxcvbn": "^4.4.2"
-  },
-  "resolutions": {
-    "@typescript-eslint/eslint-plugin": "^5.0.0"
   }
 }

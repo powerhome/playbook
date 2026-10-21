@@ -17,7 +17,7 @@ PreCommit:
     problem_on_unmodified_line: ignore
     command: ['yarn', 'lint', '-f', 'compact']
     include:
-      - '.eslintrc'
+      - 'eslint.config.mjs'
       - 'app/pb_kits/playbook/**/*.js'
       - 'app/pb_kits/playbook/**/*.jsx'
   VerifyTokens:
