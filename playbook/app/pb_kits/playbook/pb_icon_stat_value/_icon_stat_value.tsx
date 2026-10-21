@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -33,7 +34,7 @@ type IconStatValueProps = {
     | "yellow"
     | "orange"
     | "green"
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
   const {
@@ -94,6 +95,7 @@ const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

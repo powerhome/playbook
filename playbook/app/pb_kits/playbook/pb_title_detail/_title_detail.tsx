@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Body from '../pb_body/_body'
@@ -16,7 +17,7 @@ type TitleDetailProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   title: string,
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const TitleDetail = (props: TitleDetailProps): React.ReactElement => {
   const {
@@ -40,6 +41,7 @@ const TitleDetail = (props: TitleDetailProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classnames(pbCss, globalProps(props), className)}
         id={id}
     >

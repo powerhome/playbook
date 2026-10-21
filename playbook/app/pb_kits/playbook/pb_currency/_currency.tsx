@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Body from '../pb_body/_body'
@@ -28,7 +29,7 @@ type CurrencyProps = {
   unit?: string,
   unstyled?: boolean,
   commaSeparator?: boolean,
-}
+} & GlobalEventProps
 
 const sizes: {lg: 1, md: 3, sm: 4} = {
   lg: 1,
@@ -132,6 +133,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

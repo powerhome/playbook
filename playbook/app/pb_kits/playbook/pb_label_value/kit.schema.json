@@ -77,6 +77,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { LabelValue } from 'playbook-ui'",

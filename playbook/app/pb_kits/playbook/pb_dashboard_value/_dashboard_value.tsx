@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Body from '../pb_body/_body'
 import StatChange from '../pb_stat_change/_stat_change'
@@ -23,7 +24,7 @@ type DashboardValueProps = {
     unit?: string,
     value?: string | number
   }
-}
+} & GlobalEventProps
 
 const DashboardValue = (props: DashboardValueProps): React.ReactElement => {
   const {
@@ -52,6 +53,7 @@ const DashboardValue = (props: DashboardValueProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >
