@@ -90,6 +90,42 @@ const DEPARTMENT_TREE_DATA = [
   },
 ]
 
+// Recursively locate a node by its `id` so onSubmit can translate stored ids
+// back into the human-readable `value`s a consumer of this form expects.
+const findNodeById = (nodes, id) => {
+  for (const node of nodes) {
+    if (node.id === id) return node
+    if (node.children) {
+      const found = findNodeById(node.children, id)
+      if (found) return found
+    }
+  }
+  return null
+}
+
+// Map each field name to its toggle key so onSubmit can filter out fields
+// whose pill has been deselected.
+const FIELD_TO_INPUT_KEY = {
+  newsletter: "checkbox",
+  startDate: "date_picker",
+  country: "dropdown",
+  countries: "multi_select",
+  department: "multi_level_select",
+  phone: "phone_number",
+  favoriteColor: "select",
+  rating: "star_rating",
+  fullName: "text_field",
+  email: "email_field",
+  quantity: "number_field",
+  password: "password_field",
+  projectNumber: "search_field",
+  website: "url_field",
+  bio: "textarea",
+  startTime: "time_picker",
+  favoriteColorSearch: "typeahead_default",
+  favoriteColors: "typeahead",
+}
+
 // Static copies of the JSX rendered below, kept in sync by hand so the code
 // preview can show only the fields currently selected (mirrors the Rails
 // Defaults demo, which reads similarly static per-field snippet files).
@@ -119,18 +155,32 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  dropdown: `<Dropdown
-    key={\`dropdown-\${resetKey}\`}
-    label="Country"
-    options={countryOptions}
-    {...register("country")}
+  dropdown: `<Controller
+  control={control}
+  name="country"
+  render={({ field }) => (
+    <Dropdown
+        key={\`dropdown-\${resetKey}\`}
+        label="Country"
+        onChange={(value) => field.onChange(value)}
+        options={countryOptions}
+        value={field.value}
+    />
+  )}
 />`,
-  multi_select: `<Dropdown
-    key={\`multi-select-\${resetKey}\`}
-    label="Countries"
-    multiSelect
-    options={countryOptions}
-    {...register("countries")}
+  multi_select: `<Controller
+  control={control}
+  name="countries"
+  render={({ field }) => (
+    <Dropdown
+        key={\`multi-select-\${resetKey}\`}
+        label="Countries"
+        multiSelect
+        onChange={(value) => field.onChange(value)}
+        options={countryOptions}
+        value={field.value}
+    />
+  )}
 />`,
   multi_level_select: `<Controller
   control={control}
@@ -155,14 +205,22 @@ const CODE_SNIPPETS = {
         key={\`phone-\${resetKey}\`}
         label="Phone Number"
         onChange={(data) => field.onChange(data.number)}
+        value={field.value}
     />
   )}
 />`,
-  select: `<Select
-    key={\`select-\${resetKey}\`}
-    label="Favorite Color"
-    options={colorSelectOptions}
-    {...register("favoriteColor")}
+  select: `<Controller
+  control={control}
+  name="favoriteColor"
+  render={({ field }) => (
+    <Select
+        key={\`select-\${resetKey}\`}
+        label="Favorite Color"
+        onChange={(value) => field.onChange(value)}
+        options={colorSelectOptions}
+        value={field.value}
+    />
+  )}
 />`,
   star_rating: `<Controller
   control={control}
@@ -171,7 +229,7 @@ const CODE_SNIPPETS = {
     <StarRating
         key={\`rating-\${resetKey}\`}
         label="Rating"
-        onClick={(value) => field.onChange(value)}
+        onChange={(value) => field.onChange(value)}
         rating={field.value || 0}
         variant="interactive"
     />
@@ -184,7 +242,7 @@ const CODE_SNIPPETS = {
     <TextInput
         label="Full Name"
         onChange={(event) => field.onChange(event.target.value)}
-        value={field.value}
+        value={field.value ?? ""}
     />
   )}
 />`,
@@ -196,7 +254,7 @@ const CODE_SNIPPETS = {
         label="Email"
         onChange={(event) => field.onChange(event.target.value)}
         type="email"
-        value={field.value}
+        value={field.value ?? ""}
     />
   )}
 />`,
@@ -208,7 +266,7 @@ const CODE_SNIPPETS = {
         label="Quantity"
         onChange={(event) => field.onChange(event.target.value)}
         type="number"
-        value={field.value}
+        value={field.value ?? ""}
     />
   )}
 />`,
@@ -220,7 +278,7 @@ const CODE_SNIPPETS = {
         label="Password"
         onChange={(event) => field.onChange(event.target.value)}
         type="password"
-        value={field.value}
+        value={field.value ?? ""}
     />
   )}
 />`,
@@ -232,7 +290,7 @@ const CODE_SNIPPETS = {
         label="Project Number"
         onChange={(event) => field.onChange(event.target.value)}
         type="search"
-        value={field.value}
+        value={field.value ?? ""}
     />
   )}
 />`,
@@ -244,7 +302,7 @@ const CODE_SNIPPETS = {
         label="Website"
         onChange={(event) => field.onChange(event.target.value)}
         type="url"
-        value={field.value}
+        value={field.value ?? ""}
     />
   )}
 />`,
@@ -255,7 +313,7 @@ const CODE_SNIPPETS = {
     <Textarea
         label="Bio"
         onChange={(event) => field.onChange(event.target.value)}
-        value={field.value}
+        value={field.value ?? ""}
     />
   )}
 />`,
@@ -302,7 +360,7 @@ const CODE_SNIPPETS = {
 />`,
 }
 
-const FORM_OPEN = `const { register, control, handleSubmit } = useForm({ shouldUnregister: true })
+const FORM_OPEN = `const { register, control, handleSubmit } = useForm()
 
 <form onSubmit={handleSubmit(onSubmit)}>`
 const FORM_CLOSE = `  <Button htmlType="submit" text="Submit" />
@@ -314,18 +372,20 @@ const FormDefaults = () => {
   const [submittedData, setSubmittedData] = useState(null)
   const [resetKey, setResetKey] = useState(0)
 
-  const { register, control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       bio: "",
-      department: null,
+      department: [],
       email: "",
+      favoriteColor: "",
+      favoriteColors: [],
+      favoriteColorSearch: "",
       fullName: "",
       password: "",
       projectNumber: "",
       quantity: "",
       website: "",
     },
-    shouldUnregister: true,
   })
 
   const isSelected = (key) => selectedKeys.includes(key)
@@ -344,7 +404,27 @@ const FormDefaults = () => {
     toggleKey(key)
   }
 
-  const onSubmit = (data) => setSubmittedData(data)
+  const onSubmit = (data) => {
+    // MultiLevelSelect stores selected node ids. Translate those into the
+    // human-readable `value`s for the submitted payload, matching the Rails
+    // demo's output. (Everything else is stored in its final shape already.)
+    const normalized = {
+      ...data,
+      department: Array.isArray(data.department)
+        ? data.department.map((id) => findNodeById(DEPARTMENT_TREE_DATA, id)?.value ?? id)
+        : data.department,
+    }
+
+    // Fields that are deselected stay mounted (we removed shouldUnregister)
+    // so we filter them out here rather than letting RHF drop their values.
+    const filtered = Object.fromEntries(
+      Object.entries(normalized).filter(([fieldName]) => {
+        const inputKey = FIELD_TO_INPUT_KEY[fieldName]
+        return inputKey ? isSelected(inputKey) : true
+      })
+    )
+    setSubmittedData(filtered)
+  }
 
   const onReset = () => {
     reset()
@@ -433,23 +513,37 @@ const FormDefaults = () => {
               )}
 
               {isSelected("dropdown") && (
-                <Dropdown
-                    key={`dropdown-${resetKey}`}
-                    label="Country"
-                    marginBottom="sm"
-                    options={COUNTRY_OPTIONS}
-                    {...register("country")}
+                <Controller
+                    control={control}
+                    name="country"
+                    render={({ field }) => (
+                      <Dropdown
+                          key={`dropdown-${resetKey}`}
+                          label="Country"
+                          marginBottom="sm"
+                          onChange={(value) => field.onChange(value)}
+                          options={COUNTRY_OPTIONS}
+                          value={field.value}
+                      />
+                    )}
                 />
               )}
 
               {isSelected("multi_select") && (
-                <Dropdown
-                    key={`multi-select-${resetKey}`}
-                    label="Countries"
-                    marginBottom="sm"
-                    multiSelect
-                    options={COUNTRY_OPTIONS}
-                    {...register("countries")}
+                <Controller
+                    control={control}
+                    name="countries"
+                    render={({ field }) => (
+                      <Dropdown
+                          key={`multi-select-${resetKey}`}
+                          label="Countries"
+                          marginBottom="sm"
+                          multiSelect
+                          onChange={(value) => field.onChange(value)}
+                          options={COUNTRY_OPTIONS}
+                          value={field.value}
+                      />
+                    )}
                 />
               )}
 
@@ -480,19 +574,28 @@ const FormDefaults = () => {
                       <PhoneNumberInput
                           key={`phone-${resetKey}`}
                           label="Phone Number"
+                          marginBottom="sm"
                           onChange={(data) => field.onChange(data.number)}
+                          value={field.value}
                       />
                     )}
                 />
               )}
 
               {isSelected("select") && (
-                <Select
-                    key={`select-${resetKey}`}
-                    label="Favorite Color"
-                    marginBottom="sm"
-                    options={COLOR_SELECT_OPTIONS}
-                    {...register("favoriteColor")}
+                <Controller
+                    control={control}
+                    name="favoriteColor"
+                    render={({ field }) => (
+                      <Select
+                          key={`select-${resetKey}`}
+                          label="Favorite Color"
+                          marginBottom="sm"
+                          onChange={(value) => field.onChange(value)}
+                          options={COLOR_SELECT_OPTIONS}
+                          value={field.value}
+                      />
+                    )}
                 />
               )}
 
@@ -505,7 +608,7 @@ const FormDefaults = () => {
                           key={`rating-${resetKey}`}
                           label="Rating"
                           marginBottom="sm"
-                          onClick={(value) => field.onChange(value)}
+                          onChange={(value) => field.onChange(value)}
                           rating={field.value || 0}
                           variant="interactive"
                       />
@@ -522,7 +625,7 @@ const FormDefaults = () => {
                           label="Full Name"
                           marginBottom="sm"
                           onChange={(event) => field.onChange(event.target.value)}
-                          value={field.value}
+                          value={field.value ?? ""}
                       />
                     )}
                 />
@@ -538,7 +641,7 @@ const FormDefaults = () => {
                           marginBottom="sm"
                           onChange={(event) => field.onChange(event.target.value)}
                           type="email"
-                          value={field.value}
+                          value={field.value ?? ""}
                       />
                     )}
                 />
@@ -554,7 +657,7 @@ const FormDefaults = () => {
                           marginBottom="sm"
                           onChange={(event) => field.onChange(event.target.value)}
                           type="number"
-                          value={field.value}
+                          value={field.value ?? ""}
                       />
                     )}
                 />
@@ -570,7 +673,7 @@ const FormDefaults = () => {
                           marginBottom="sm"
                           onChange={(event) => field.onChange(event.target.value)}
                           type="password"
-                          value={field.value}
+                          value={field.value ?? ""}
                       />
                     )}
                 />
@@ -586,7 +689,7 @@ const FormDefaults = () => {
                           marginBottom="sm"
                           onChange={(event) => field.onChange(event.target.value)}
                           type="search"
-                          value={field.value}
+                          value={field.value ?? ""}
                       />
                     )}
                 />
@@ -602,7 +705,7 @@ const FormDefaults = () => {
                           marginBottom="sm"
                           onChange={(event) => field.onChange(event.target.value)}
                           type="url"
-                          value={field.value}
+                          value={field.value ?? ""}
                       />
                     )}
                 />
@@ -617,7 +720,7 @@ const FormDefaults = () => {
                           label="Bio"
                           marginBottom="sm"
                           onChange={(event) => field.onChange(event.target.value)}
-                          value={field.value}
+                          value={field.value ?? ""}
                       />
                     )}
                 />
