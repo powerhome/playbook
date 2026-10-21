@@ -3,6 +3,7 @@ import { PbDropdownKeyboard } from "./keyboard_accessibility";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
 import { subscribeFloatingKitReposition, positionDropdownPortalToWrapper } from "../utilities/floatingPortalHosts";
 import { getCreationOption, matchesOptionExactly } from "./utilities/optionCreation";
+import { setQuickPickDateOnPicker } from "./utilities/quickpickDateSync";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -1379,11 +1380,11 @@ export default class PbDropdown extends PbEnhancedElement {
       const syncDatePickers = () => {
         if (controlsStartId) {
           const startPicker = document.querySelector(`#${CSS.escape(controlsStartId)}`)?._flatpickr;
-          if (startPicker) startPicker.setDate(optionData.formatted_start_date, true, "m/d/Y");
+          setQuickPickDateOnPicker(startPicker, optionData.formatted_start_date, "start");
         }
         if (controlsEndId) {
           const endPicker = document.querySelector(`#${CSS.escape(controlsEndId)}`)?._flatpickr;
-          if (endPicker) endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+          setQuickPickDateOnPicker(endPicker, optionData.formatted_end_date, "end");
         }
       };
       syncDatePickers();
@@ -1513,10 +1514,10 @@ export default class PbDropdown extends PbEnhancedElement {
               `#${controlsStartId}`,
             )?._flatpickr;
             if (startPicker) {
-              startPicker.setDate(
+              setQuickPickDateOnPicker(
+                startPicker,
                 optionData.formatted_start_date,
-                true,
-                "m/d/Y",
+                "start",
               );
             }
           }
@@ -1526,7 +1527,11 @@ export default class PbDropdown extends PbEnhancedElement {
               `#${controlsEndId}`,
             )?._flatpickr;
             if (endPicker) {
-              endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+              setQuickPickDateOnPicker(
+                endPicker,
+                optionData.formatted_end_date,
+                "end",
+              );
             }
           }
         } else if (startDateId || endDateId) {
@@ -1855,10 +1860,10 @@ export default class PbDropdown extends PbEnhancedElement {
               `#${controlsStartId}`,
             )?._flatpickr;
             if (startPicker) {
-              startPicker.setDate(
+              setQuickPickDateOnPicker(
+                startPicker,
                 optionData.formatted_start_date,
-                true,
-                "m/d/Y",
+                "start",
               );
             }
           }
@@ -1868,7 +1873,11 @@ export default class PbDropdown extends PbEnhancedElement {
               `#${controlsEndId}`,
             )?._flatpickr;
             if (endPicker) {
-              endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+              setQuickPickDateOnPicker(
+                endPicker,
+                optionData.formatted_end_date,
+                "end",
+              );
             }
           }
         };

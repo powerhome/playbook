@@ -221,6 +221,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Background } from 'playbook-ui'",

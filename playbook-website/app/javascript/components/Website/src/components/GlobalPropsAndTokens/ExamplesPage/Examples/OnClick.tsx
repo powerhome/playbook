@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Button, Card, Flex, Title, Table } from "playbook-ui";
+import { Background, Body, Button, Caption, Card, Container, Detail, Flex, Highlight, Title, Table } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -35,14 +35,40 @@ const OnClick = () => {
   };
 
   const VisualGuideCard = () => {
+    const [backgroundClicks, setBackgroundClicks] = useState(0);
     const [bodyClicks, setBodyClicks] = useState(0);
+    const [captionClicks, setCaptionClicks] = useState(0);
     const [cardClicks, setCardClicks] = useState(0);
+    const [containerClicks, setContainerClicks] = useState(0);
+    const [detailClicks, setDetailClicks] = useState(0);
     const [flexClicks, setFlexClicks] = useState(0);
+    const [highlightClicks, setHighlightClicks] = useState(0);
     const [titleClicks, setTitleClicks] = useState(0);
     const [buttonClicks, setButtonClicks] = useState(0);
 
     return (
       <Flex gap="sm" wrap width="100%">
+        <Card padding="md" width="sm">
+          <Title size={4} text="Background" />
+          <InteractiveExample
+              count={backgroundClicks}
+              label="Background"
+              reset={() => setBackgroundClicks(0)}
+          >
+            <Background
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setBackgroundClicks((prev: number) => prev + 1)}
+                padding="sm"
+            >
+              <Body text="Click this Background example" />
+            </Background>
+          </InteractiveExample>
+        </Card>
         <Card padding="md" width="sm">
           <Title size={4} text="Body" />
           <InteractiveExample
@@ -59,6 +85,25 @@ const OnClick = () => {
                 }}
                 onClick={() => setBodyClicks((prev: number) => prev + 1)}
                 text="Click this Body example"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Caption" />
+          <InteractiveExample
+              count={captionClicks}
+              label="Caption"
+              reset={() => setCaptionClicks(0)}
+          >
+            <Caption
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setCaptionClicks((prev: number) => prev + 1)}
+                text="Click this Caption example"
             />
           </InteractiveExample>
         </Card>
@@ -80,6 +125,45 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Container" />
+          <InteractiveExample
+              count={containerClicks}
+              label="Container"
+              reset={() => setContainerClicks(0)}
+          >
+            <Container
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setContainerClicks((prev: number) => prev + 1)}
+            >
+              <Body text="Click this Container example" />
+            </Container>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Detail" />
+          <InteractiveExample
+              count={detailClicks}
+              label="Detail"
+              reset={() => setDetailClicks(0)}
+          >
+            <Detail
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setDetailClicks((prev: number) => prev + 1)}
+                text="Click this Detail example"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Flex" />
           <InteractiveExample
               count={flexClicks}
@@ -98,6 +182,26 @@ const OnClick = () => {
             >
               <Body text="Click this Flex example" />
             </Flex>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Highlight" />
+          <InteractiveExample
+              count={highlightClicks}
+              label="Highlight"
+              reset={() => setHighlightClicks(0)}
+          >
+            <Highlight
+                cursor="pointer"
+                highlightedText={["Highlight"]}
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setHighlightClicks((prev: number) => prev + 1)}
+                text="Click this Highlight example"
+            />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -175,6 +279,15 @@ const OnClick = () => {
             "Attached to the root Body element.",
           ],
           [
+            "Caption",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-caption-react"
+              text={`<Caption onClick={() => alert("clicked")} text="Clickable caption" />`}
+            />,
+            "Attached to the root Caption element.",
+          ],
+          [
             "Card",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -184,6 +297,15 @@ const OnClick = () => {
             "Attached to the root Card tag.",
           ],
           [
+            "Detail",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-detail-react"
+              text={`<Detail onClick={() => alert("clicked")} text="Clickable detail" />`}
+            />,
+            "Attached to the root Detail element.",
+          ],
+          [
             "Flex",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -191,6 +313,15 @@ const OnClick = () => {
               text={`<Flex onClick={() => alert("clicked")} cursor="pointer">...</Flex>`}
             />,
             "Attached to the root Flex div.",
+          ],
+          [
+            "Highlight",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-highlight-react"
+              text={`<Highlight onClick={() => alert("clicked")} text="Clickable highlight" />`}
+            />,
+            "Attached to the root Highlight element.",
           ],
           [
             "Title",

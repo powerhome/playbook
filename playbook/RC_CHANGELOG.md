@@ -1,3 +1,40 @@
+# ✨ 18.2.0.pre.rc.3
+
+##### October 20, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.2.0-rc.3](https://github.com/powerhome/playbook/tree/18.2.0-rc.3) full list of changes:
+
+**Kit Enhancements:**
+
+- Global Onclick Prop: Background, Container [\#6801](https://github.com/powerhome/playbook/pull/6801) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Global Onclick Prop: Caption, Highlight, Detail [\#6793](https://github.com/powerhome/playbook/pull/6793) ([nidaqg](https://github.com/nidaqg))
+- Dropdown Kit: Quickpick Timeselection Defaults [\#6781](https://github.com/powerhome/playbook/pull/6781) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Improvements:**
+
+- Bump Picomatch from 2.3.1 to 2.3.2 [\#6799](https://github.com/powerhome/playbook/pull/6799) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Rexml from 3.3.6 to 3.4.2 In /playbook-website [\#6798](https://github.com/powerhome/playbook/pull/6798) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Update Dependency Trix to V2.1.19 [\#6797](https://github.com/powerhome/playbook/pull/6797) ([renovate[bot]](https://github.com/renovate[bot]))
+- Bump Markdown-it from 14.1.0 to 14.3.3 [\#6791](https://github.com/powerhome/playbook/pull/6791) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump React-simple-code-editor from 0.13.1 to 0.14.1 [\#6785](https://github.com/powerhome/playbook/pull/6785) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Playbook Website: Document Global Event Props and Show Supported Props on Kit Pages [\#6783](https://github.com/powerhome/playbook/pull/6783) ([kangaree](https://github.com/kangaree))
+- Bump React-syntax-highlighter from 15.6.6 to 16.1.2 [\#6779](https://github.com/powerhome/playbook/pull/6779) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Dompurify from 3.3.1 to 3.4.17 [\#6776](https://github.com/powerhome/playbook/pull/6776) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Changelog for Rc 18.2.0-rc.2 [\#6774](https://github.com/powerhome/playbook/pull/6774) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Pin `maplibre-gl` to 6.4.1 to Match Nitro-web (remove ^) [\#6773](https://github.com/powerhome/playbook/pull/6773) ([kangaree](https://github.com/kangaree))
+- Bump Minimatch from 3.1.2 to 3.1.5 [\#6771](https://github.com/powerhome/playbook/pull/6771) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Playbook Website: Align Tiptap With Nitro on 3.0.7 [\#6761](https://github.com/powerhome/playbook/pull/6761) ([kangaree](https://github.com/kangaree))
+- Update Dependency Trix to V2.1.18 [security] [\#6558](https://github.com/powerhome/playbook/pull/6558) ([renovate[bot]](https://github.com/renovate[bot]))
+- Playbook Website: Rails Playgrounds [\#6359](https://github.com/powerhome/playbook/pull/6359) ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Table Kit: Sticky Column Gaps on Smaller Screens [\#6772](https://github.com/powerhome/playbook/pull/6772) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.2.0-rc.2...18.2.0-rc.3)
+
 # ✨ 18.2.0.pre.rc.2
 
 ##### October 14, 2026
