@@ -229,8 +229,8 @@ const CODE_SNIPPETS = {
     <StarRating
         key={\`rating-\${resetKey}\`}
         label="Rating"
-        onChange={(value) => field.onChange(value)}
-        rating={field.value || 0}
+        onClick={(value) => field.onChange(value)}
+        rating={field.value ?? 0}
         variant="interactive"
     />
   )}
@@ -384,6 +384,7 @@ const FormDefaults = () => {
       password: "",
       projectNumber: "",
       quantity: "",
+      rating: 0,
       website: "",
     },
   })
@@ -608,8 +609,8 @@ const FormDefaults = () => {
                           key={`rating-${resetKey}`}
                           label="Rating"
                           marginBottom="sm"
-                          onChange={(value) => field.onChange(value)}
-                          rating={field.value || 0}
+                          onClick={(value) => field.onChange(value)}
+                          rating={field.value ?? 0}
                           variant="interactive"
                       />
                     )}

@@ -102,6 +102,42 @@ const requireSelection = (message) => ({
   },
 })
 
+// Recursively locate a node by its `id` so onSubmit can translate stored ids
+// back into the human-readable `value`s (matches FormDefaults behavior).
+const findNodeById = (nodes, id) => {
+  for (const node of nodes) {
+    if (node.id === id) return node
+    if (node.children) {
+      const found = findNodeById(node.children, id)
+      if (found) return found
+    }
+  }
+  return null
+}
+
+// Map each field name to its toggle key so onSubmit can filter out fields
+// whose pill has been deselected.
+const FIELD_TO_INPUT_KEY = {
+  newsletter: "checkbox",
+  startDate: "date_picker",
+  country: "dropdown",
+  countries: "multi_select",
+  department: "multi_level_select",
+  phone: "phone_number",
+  favoriteColor: "select",
+  rating: "star_rating",
+  fullName: "text_field",
+  email: "email_field",
+  quantity: "number_field",
+  password: "password_field",
+  projectNumber: "search_field",
+  website: "url_field",
+  bio: "textarea",
+  startTime: "time_picker",
+  favoriteColorSearch: "typeahead_default",
+  favoriteColors: "typeahead",
+}
+
 const CODE_SNIPPETS = {
   checkbox: `<Controller
   control={control}
@@ -137,13 +173,21 @@ const CODE_SNIPPETS = {
   )}
   rules={{ required: "Start date is required" }}
 />`,
-  dropdown: `<Dropdown
-    error={errors.country?.message}
-    key={\`dropdown-\${resetKey}\`}
-    label="Country"
-    options={countryOptions}
-    requiredIndicator
-    {...register("country", requireSelection("${REQUIRED_MESSAGE}"))}
+  dropdown: `<Controller
+  control={control}
+  name="country"
+  render={({ field, fieldState }) => (
+    <Dropdown
+        error={fieldState.error?.message}
+        key={\`dropdown-\${resetKey}\`}
+        label="Country"
+        onChange={(value) => field.onChange(value)}
+        options={countryOptions}
+        requiredIndicator
+        value={field.value}
+    />
+  )}
+  rules={requireSelection("${REQUIRED_MESSAGE}")}
 />`,
   email_field: `<Controller
   control={control}
@@ -179,14 +223,22 @@ const CODE_SNIPPETS = {
   )}
   rules={requireSelection("${REQUIRED_MESSAGE}")}
 />`,
-  multi_select: `<Dropdown
-    error={errors.countries?.message}
-    key={\`multi-select-\${resetKey}\`}
-    label="Countries"
-    multiSelect
-    options={countryOptions}
-    requiredIndicator
-    {...register("countries", requireSelection("${REQUIRED_MESSAGE}"))}
+  multi_select: `<Controller
+  control={control}
+  name="countries"
+  render={({ field, fieldState }) => (
+    <Dropdown
+        error={fieldState.error?.message}
+        key={\`multi-select-\${resetKey}\`}
+        label="Countries"
+        multiSelect
+        onChange={(value) => field.onChange(value)}
+        options={countryOptions}
+        requiredIndicator
+        value={field.value}
+    />
+  )}
+  rules={requireSelection("${REQUIRED_MESSAGE}")}
 />`,
   number_field: `<Controller
   control={control}
@@ -258,14 +310,23 @@ const CODE_SNIPPETS = {
     },
   }}
 />`,
-  select: `<Select
-    blankSelection="Select one..."
-    error={errors.favoriteColor?.message}
-    label="Favorite Color"
-    options={colorSelectOptions}
-    required
-    requiredIndicator
-    {...register("favoriteColor", { required: "Please select a color" })}
+  select: `<Controller
+  control={control}
+  name="favoriteColor"
+  render={({ field, fieldState }) => (
+    <Select
+        blankSelection="Select one..."
+        error={fieldState.error?.message}
+        key={\`select-\${resetKey}\`}
+        label="Favorite Color"
+        onChange={(value) => field.onChange(value)}
+        options={colorSelectOptions}
+        required
+        requiredIndicator
+        value={field.value}
+    />
+  )}
+  rules={{ required: "Please select a color" }}
 />`,
   star_rating: `<Controller
   control={control}
@@ -381,7 +442,7 @@ const CODE_SNIPPETS = {
 />`,
 }
 
-const FORM_OPEN = `const { register, control, handleSubmit, formState: { errors } } = useForm({ shouldUnregister: true })
+const FORM_OPEN = `const { control, handleSubmit, formState: { errors } } = useForm()
 
 <form noValidate onSubmit={handleSubmit(onSubmit)}>`
 const FORM_CLOSE = `  <Button htmlType="submit" text="Submit" />
@@ -395,14 +456,12 @@ const FormValidation = () => {
   const phoneNumberRef = useRef(null)
   const {
     control,
-    formState: { errors },
     handleSubmit,
-    register,
     reset,
   } = useForm({
     defaultValues: {
       bio: "",
-      department: null,
+      department: [],
       email: "",
       favoriteColor: "",
       favoriteColors: [],
@@ -411,9 +470,9 @@ const FormValidation = () => {
       password: "",
       projectNumber: "",
       quantity: "",
+      rating: 0,
       website: "",
     },
-    shouldUnregister: true,
   })
 
   const isSelected = (key) => selectedKeys.includes(key)
@@ -429,6 +488,27 @@ const FormValidation = () => {
     if (event.key !== "Enter" && event.key !== " ") return
     event.preventDefault()
     toggleKey(key)
+  }
+
+  const onSubmit = (data) => {
+    // MultiLevelSelect stores selected node ids. Translate those into the
+    // human-readable `value`s so the submitted payload matches FormDefaults.
+    const normalized = {
+      ...data,
+      department: Array.isArray(data.department)
+        ? data.department.map((id) => findNodeById(DEPARTMENT_TREE_DATA, id)?.value ?? id)
+        : data.department,
+    }
+
+    // Fields that are deselected stay mounted (we removed shouldUnregister)
+    // so we filter them out here rather than letting RHF drop their values.
+    const filtered = Object.fromEntries(
+      Object.entries(normalized).filter(([fieldName]) => {
+        const inputKey = FIELD_TO_INPUT_KEY[fieldName]
+        return inputKey ? isSelected(inputKey) : true
+      })
+    )
+    setSubmittedData(filtered)
   }
 
   const onReset = () => {
@@ -484,7 +564,7 @@ const FormValidation = () => {
               shadow="deep"
           >
             <form noValidate
-                onSubmit={handleSubmit(setSubmittedData)}
+                onSubmit={handleSubmit(onSubmit)}
             >
               {isSelected("checkbox") && (
                 <Controller
@@ -536,27 +616,43 @@ const FormValidation = () => {
               )}
 
               {isSelected("dropdown") && (
-                <Dropdown
-                    error={errors.country?.message}
-                    key={`dropdown-${resetKey}`}
-                    label="Country"
-                    marginBottom="sm"
-                    options={COUNTRY_OPTIONS}
-                    requiredIndicator
-                    {...register("country", requireSelection(REQUIRED_MESSAGE))}
+                <Controller
+                    control={control}
+                    name="country"
+                    render={({ field, fieldState }) => (
+                      <Dropdown
+                          error={fieldState.error?.message}
+                          key={`dropdown-${resetKey}`}
+                          label="Country"
+                          marginBottom="sm"
+                          onChange={(value) => field.onChange(value)}
+                          options={COUNTRY_OPTIONS}
+                          requiredIndicator
+                          value={field.value}
+                      />
+                    )}
+                    rules={requireSelection(REQUIRED_MESSAGE)}
                 />
               )}
 
               {isSelected("multi_select") && (
-                <Dropdown
-                    error={errors.countries?.message}
-                    key={`multi-select-${resetKey}`}
-                    label="Countries"
-                    marginBottom="sm"
-                    multiSelect
-                    options={COUNTRY_OPTIONS}
-                    requiredIndicator
-                    {...register("countries", requireSelection(REQUIRED_MESSAGE))}
+                <Controller
+                    control={control}
+                    name="countries"
+                    render={({ field, fieldState }) => (
+                      <Dropdown
+                          error={fieldState.error?.message}
+                          key={`multi-select-${resetKey}`}
+                          label="Countries"
+                          marginBottom="sm"
+                          multiSelect
+                          onChange={(value) => field.onChange(value)}
+                          options={COUNTRY_OPTIONS}
+                          requiredIndicator
+                          value={field.value}
+                      />
+                    )}
+                    rules={requireSelection(REQUIRED_MESSAGE)}
                 />
               )}
 
@@ -602,15 +698,24 @@ const FormValidation = () => {
               )}
 
               {isSelected("select") && (
-                <Select
-                    blankSelection="Select one..."
-                    error={errors.favoriteColor?.message}
-                    label="Favorite Color"
-                    marginBottom="sm"
-                    options={COLOR_SELECT_OPTIONS}
-                    required
-                    requiredIndicator
-                    {...register("favoriteColor", { required: "Please select a color" })}
+                <Controller
+                    control={control}
+                    name="favoriteColor"
+                    render={({ field, fieldState }) => (
+                      <Select
+                          blankSelection="Select one..."
+                          error={fieldState.error?.message}
+                          key={`select-${resetKey}`}
+                          label="Favorite Color"
+                          marginBottom="sm"
+                          onChange={(value) => field.onChange(value)}
+                          options={COLOR_SELECT_OPTIONS}
+                          required
+                          requiredIndicator
+                          value={field.value}
+                      />
+                    )}
+                    rules={{ required: "Please select a color" }}
                 />
               )}
 

@@ -95,6 +95,19 @@ const DEPARTMENT_TREE_DATA = [
   },
 ]
 
+// Recursively locate a node by its `id` so onSubmit can translate stored ids
+// back into the human-readable `value`s (matches FormDefaults behavior).
+const findNodeById = (nodes, id) => {
+  for (const node of nodes) {
+    if (node.id === id) return node
+    if (node.children) {
+      const found = findNodeById(node.children, id)
+      if (found) return found
+    }
+  }
+  return null
+}
+
 // NOTE: `rating` is intentionally omitted. StarRating does not forward `rating`
 // into StarRatingInteractive (which keeps its own useState(0)), so a prefilled
 // rating would submit a value the control never displays. Re-add once the kit
@@ -117,6 +130,29 @@ const DEFAULT_VALUES = {
   startDate: "06/15/2026",
   startTime: "09:30",
   website: "https://example.com",
+}
+
+// Map each field name to its toggle key so onSubmit can filter out fields
+// whose pill has been deselected.
+const FIELD_TO_INPUT_KEY = {
+  newsletter: "checkbox",
+  startDate: "date_picker",
+  country: "dropdown",
+  countries: "multi_select",
+  department: "multi_level_select",
+  phone: "phone_number",
+  favoriteColor: "select",
+  rating: "star_rating",
+  fullName: "text_field",
+  email: "email_field",
+  quantity: "number_field",
+  password: "password_field",
+  projectNumber: "search_field",
+  website: "url_field",
+  bio: "textarea",
+  startTime: "time_picker",
+  favoriteColorSearch: "typeahead_default",
+  favoriteColors: "typeahead",
 }
 
 const CODE_SNIPPETS = {
@@ -146,12 +182,18 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  dropdown: `<Dropdown
-    defaultValue={country}
-    key={resetKey}
-    label="Country"
-    options={countryOptions}
-    {...register("country")}
+  dropdown: `<Controller
+  control={control}
+  name="country"
+  render={({ field }) => (
+    <Dropdown
+        key={resetKey}
+        label="Country"
+        onChange={(value) => field.onChange(value)}
+        options={countryOptions}
+        value={field.value}
+    />
+  )}
 />`,
   email_field: `<Controller
   control={control}
@@ -178,13 +220,19 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  multi_select: `<Dropdown
-    defaultValue={countries}
-    key={resetKey}
-    label="Countries"
-    multiSelect
-    options={countryOptions}
-    {...register("countries")}
+  multi_select: `<Controller
+  control={control}
+  name="countries"
+  render={({ field }) => (
+    <Dropdown
+        key={resetKey}
+        label="Countries"
+        multiSelect
+        onChange={(value) => field.onChange(value)}
+        options={countryOptions}
+        value={field.value}
+    />
+  )}
 />`,
   number_field: `<Controller
   control={control}
@@ -235,12 +283,19 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  select: `<Select
-    blankSelection="Select one..."
-    key={resetKey}
-    label="Favorite Color"
-    options={colorSelectOptions}
-    {...register("favoriteColor")}
+  select: `<Controller
+  control={control}
+  name="favoriteColor"
+  render={({ field }) => (
+    <Select
+        blankSelection="Select one..."
+        key={resetKey}
+        label="Favorite Color"
+        onChange={(value) => field.onChange(value)}
+        options={colorSelectOptions}
+        value={field.value}
+    />
+  )}
 />`,
   star_rating: `<Controller
   control={control}
@@ -333,7 +388,7 @@ const CODE_SNIPPETS = {
 />`,
 }
 
-const FORM_OPEN = `const { register, control, handleSubmit } = useForm({
+const FORM_OPEN = `const { control, handleSubmit } = useForm({
   defaultValues: {
     fullName: "John Doe",
     email: "jane@example.com",
@@ -341,7 +396,6 @@ const FORM_OPEN = `const { register, control, handleSubmit } = useForm({
     newsletter: true,
     startDate: "06/15/2026",
   },
-  shouldUnregister: true,
 })
 
 <form onSubmit={handleSubmit(onSubmit)}>`
@@ -353,9 +407,8 @@ const FormDefaultValues = () => {
   const [selectedKeys, setSelectedKeys] = useState([DEFAULT_SELECTED_KEY])
   const [submittedData, setSubmittedData] = useState(null)
   const [resetKey, setResetKey] = useState(0)
-  const { control, handleSubmit, register, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: DEFAULT_VALUES,
-    shouldUnregister: true,
   })
 
   const isSelected = (key) => selectedKeys.includes(key)
@@ -371,6 +424,27 @@ const FormDefaultValues = () => {
     if (event.key !== "Enter" && event.key !== " ") return
     event.preventDefault()
     toggleKey(key)
+  }
+
+  const onSubmit = (data) => {
+    // MultiLevelSelect stores selected node ids. Translate those into the
+    // human-readable `value`s so the submitted payload matches FormDefaults.
+    const normalized = {
+      ...data,
+      department: Array.isArray(data.department)
+        ? data.department.map((id) => findNodeById(DEPARTMENT_TREE_DATA, id)?.value ?? id)
+        : data.department,
+    }
+
+    // Fields that are deselected stay mounted (we removed shouldUnregister)
+    // so we filter them out here rather than letting RHF drop their values.
+    const filtered = Object.fromEntries(
+      Object.entries(normalized).filter(([fieldName]) => {
+        const inputKey = FIELD_TO_INPUT_KEY[fieldName]
+        return inputKey ? isSelected(inputKey) : true
+      })
+    )
+    setSubmittedData(filtered)
   }
 
   const onReset = () => {
@@ -425,7 +499,7 @@ const FormDefaultValues = () => {
               padding="md"
               shadow="deep"
           >
-            <form onSubmit={handleSubmit(setSubmittedData)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               {isSelected("checkbox") && (
                 <Controller
                     control={control}
@@ -461,25 +535,37 @@ const FormDefaultValues = () => {
               )}
 
               {isSelected("dropdown") && (
-                <Dropdown
-                    defaultValue={CANADA}
-                    key={`dropdown-${resetKey}`}
-                    label="Country"
-                    marginBottom="sm"
-                    options={COUNTRY_OPTIONS}
-                    {...register("country")}
+                <Controller
+                    control={control}
+                    name="country"
+                    render={({ field }) => (
+                      <Dropdown
+                          key={`dropdown-${resetKey}`}
+                          label="Country"
+                          marginBottom="sm"
+                          onChange={(value) => field.onChange(value)}
+                          options={COUNTRY_OPTIONS}
+                          value={field.value}
+                      />
+                    )}
                 />
               )}
 
               {isSelected("multi_select") && (
-                <Dropdown
-                    defaultValue={DEFAULT_VALUES.countries}
-                    key={`multi-select-${resetKey}`}
-                    label="Countries"
-                    marginBottom="sm"
-                    multiSelect
-                    options={COUNTRY_OPTIONS}
-                    {...register("countries")}
+                <Controller
+                    control={control}
+                    name="countries"
+                    render={({ field }) => (
+                      <Dropdown
+                          key={`multi-select-${resetKey}`}
+                          label="Countries"
+                          marginBottom="sm"
+                          multiSelect
+                          onChange={(value) => field.onChange(value)}
+                          options={COUNTRY_OPTIONS}
+                          value={field.value}
+                      />
+                    )}
                 />
               )}
 
@@ -509,6 +595,7 @@ const FormDefaultValues = () => {
                           initialCountry="us"
                           key={`phone-${resetKey}`}
                           label="Phone Number"
+                          marginBottom="sm"
                           onChange={(data) => field.onChange(data?.number || "")}
                           value={field.value}
                       />
@@ -517,13 +604,20 @@ const FormDefaultValues = () => {
               )}
 
               {isSelected("select") && (
-                <Select
-                    blankSelection="Select one..."
-                    key={`select-${resetKey}`}
-                    label="Favorite Color"
-                    marginBottom="sm"
-                    options={COLOR_SELECT_OPTIONS}
-                    {...register("favoriteColor")}
+                <Controller
+                    control={control}
+                    name="favoriteColor"
+                    render={({ field }) => (
+                      <Select
+                          blankSelection="Select one..."
+                          key={`select-${resetKey}`}
+                          label="Favorite Color"
+                          marginBottom="sm"
+                          onChange={(value) => field.onChange(value)}
+                          options={COLOR_SELECT_OPTIONS}
+                          value={field.value}
+                      />
+                    )}
                 />
               )}
 
