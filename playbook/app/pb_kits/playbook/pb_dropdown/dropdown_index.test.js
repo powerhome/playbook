@@ -1754,7 +1754,8 @@ describe("PbDropdown option creation", () => {
     expect(form.checkValidity()).toBe(false);
 
     instance.handleOptionClick({ target: instance.queryAllOptions()[0] });
-    expect(instance.baseInput.disabled).toBe(true);
+    expect(instance.baseInput.hasAttribute("name")).toBe(false);
+    expect(instance.baseInput.disabled).toBe(false);
     expect(new FormData(form).getAll("tags[]")).toEqual(["existing"]);
     expect(form.checkValidity()).toBe(true);
 
@@ -1767,7 +1768,8 @@ describe("PbDropdown option creation", () => {
 
   test("default selections submit without a blank entry and reset restores validation", () => {
     const form = mount({ multi: true, required: true, defaultValue: "existing" });
-    expect(instance.baseInput.disabled).toBe(true);
+    expect(instance.baseInput.hasAttribute("name")).toBe(false);
+    expect(instance.baseInput.disabled).toBe(false);
     expect(new FormData(form).getAll("tags[]")).toEqual(["existing"]);
 
     form.reset();
@@ -1782,6 +1784,24 @@ describe("PbDropdown option creation", () => {
     form.reset();
     expect(instance.baseInput.disabled).toBe(true);
     expect(new FormData(form).getAll("tags[]")).toEqual([]);
+  });
+
+  test("Turbo reconnect preserves submission order and restores required validation", () => {
+    const form = mount({ multi: true, required: true, defaultValue: "existing" });
+    instance.disconnect();
+    instance = new PbDropdown(root);
+    instance.connect();
+
+    typeQuery("Second");
+    instance.handleOptionClick({ target: getCreationRow() });
+    expect(new FormData(form).getAll("tags[]")).toEqual(["existing", "Second"]);
+    expect(instance.baseInput.hasAttribute("name")).toBe(false);
+    expect(form.checkValidity()).toBe(true);
+
+    instance.clearSelection();
+    expect(instance.baseInput.name).toBe("tags[]");
+    expect(instance.baseInput.required).toBe(true);
+    expect(form.checkValidity()).toBe(false);
   });
 
   test("composition and disabled controls do not create", () => {

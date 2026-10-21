@@ -253,8 +253,17 @@ export default class PbDropdown extends PbEnhancedElement {
       ? JSON.parse(this.element.dataset.formPillProps)
       : {};
     const baseInput = this.baseInput;
-    this.wasOriginallyRequired =
-      baseInput && baseInput.hasAttribute("required");
+    // Preserve original attributes when Turbo reconnects to the mutated DOM.
+    if (this.isMultiSelect && baseInput) {
+      if (baseInput.dataset.pbDropdownInputName == null) {
+        baseInput.dataset.pbDropdownInputName = baseInput.getAttribute("name") || "";
+        baseInput.dataset.pbDropdownOriginallyRequired = String(baseInput.required);
+      }
+      this.baseInputName = baseInput.dataset.pbDropdownInputName;
+      this.wasOriginallyRequired = baseInput.dataset.pbDropdownOriginallyRequired === "true";
+    } else {
+      this.wasOriginallyRequired = Boolean(baseInput && baseInput.required);
+    }
     // Apply context options before default value so SSR/default selection matches current context
     this.bindContextSelector();
     this.setDefaultValue();
@@ -2124,7 +2133,7 @@ export default class PbDropdown extends PbEnhancedElement {
     const baseInput = this.baseInput;
     if (!baseInput) return;
     // for multi_select, for each selectedOption, create a hidden input
-    const name = baseInput.getAttribute("name");
+    const name = this.baseInputName;
     let previousInput = baseInput;
     this.selectedOptions.forEach((raw) => {
       const optionData = JSON.parse(raw);
@@ -2132,7 +2141,7 @@ export default class PbDropdown extends PbEnhancedElement {
       const id = optionData.id ?? optionData.value;
       const inp = document.createElement("input");
       inp.type = "hidden";
-      inp.name = name;
+      if (name) inp.name = name;
       inp.value = id;
       inp.disabled = this.isDisabled;
       inp.dataset.generated = "true";
@@ -2140,16 +2149,15 @@ export default class PbDropdown extends PbEnhancedElement {
       previousInput = inp;
     });
 
-    // Only the per-selection inputs should submit while selections exist.
-    // The empty base input remains available for required validation after clearing.
-    const hasSelections = this.selectedOptions.size > 0;
-    baseInput.disabled = this.isDisabled || hasSelections;
+    // Generated inputs own submission; the base input validates empty selections.
     baseInput.value = "";
-    if (hasSelections) {
+    if (this.selectedOptions.size > 0) {
+      baseInput.removeAttribute("name");
       baseInput.removeAttribute("required");
       baseInput.setCustomValidity("");
-    } else if (this.wasOriginallyRequired) {
-      baseInput.setAttribute("required", "");
+    } else {
+      if (name) baseInput.setAttribute("name", name);
+      if (this.wasOriginallyRequired) baseInput.setAttribute("required", "");
     }
   }
 

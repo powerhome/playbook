@@ -55,7 +55,7 @@ export const KIT_USAGE_FAQS = {
   }, {
     id: 'dropdown.builder-name', platforms: ['rails'],
     questions: ['Does dropdown_field scope country to user[country]?', 'Does multi_select submit separate array values?'],
-    answer: 'Pass the attribute (e.g. :country) so the builder can auto-bind default_value and errors from the model; pass user[country] explicitly when you need that nested parameter name instead. multi_select adds [] only if absent, preserves selection order and disables the original CSS-hidden input while per-selection hidden inputs submit. When selection is empty, the base input is re-enabled for required validation unless the Dropdown itself is disabled. These submission fixes apply whether or not allow_option_creation is enabled.',
+    answer: 'Pass the attribute (e.g. :country) so the builder can auto-bind default_value and errors from the model; pass user[country] explicitly when you need that nested parameter name instead. multi_select adds [] only if absent, preserves selection order and removes the original CSS-hidden input name while per-selection hidden inputs submit. When selection is empty, the original name and required state are restored, including after Turbo reconnects. These submission fixes apply whether or not allow_option_creation is enabled.',
     contractPaths: ['form.rails.builder.methods'], props: ['name', 'multiSelect', 'options'],
   }, {
     id: 'dropdown.builder-block', platforms: ['rails'],
