@@ -223,6 +223,7 @@ const CODE_SNIPPETS = {
   name="favoriteColor"
   render={({ field }) => (
     <Select
+        blankSelection="Select one..."
         key={\`select-\${resetKey}\`}
         label="Favorite Color"
         onChange={(value) => field.onChange(value)}
@@ -613,6 +614,7 @@ const FormDefaults = () => {
                     name="favoriteColor"
                     render={({ field }) => (
                       <Select
+                          blankSelection="Select one..."
                           key={`select-${resetKey}`}
                           label="Favorite Color"
                           marginBottom="sm"
