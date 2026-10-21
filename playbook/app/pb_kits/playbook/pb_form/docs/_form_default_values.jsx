@@ -197,7 +197,7 @@ const CODE_SNIPPETS = {
     <Dropdown
         key={resetKey}
         label="Country"
-        onChange={(value) => field.onChange(value)}
+        onChange={(event) => field.onChange(event.target.value)}
         options={countryOptions}
         value={field.value}
     />
@@ -236,7 +236,7 @@ const CODE_SNIPPETS = {
         key={resetKey}
         label="Countries"
         multiSelect
-        onChange={(value) => field.onChange(value)}
+        onChange={(event) => field.onChange(event.target.value)}
         options={countryOptions}
         value={field.value}
     />
@@ -299,7 +299,7 @@ const CODE_SNIPPETS = {
         blankSelection="Select one..."
         key={resetKey}
         label="Favorite Color"
-        onChange={(value) => field.onChange(value)}
+        onChange={(event) => field.onChange(event.target.value)}
         options={colorSelectOptions}
         value={field.value}
     />
@@ -450,10 +450,21 @@ const FormDefaultValues = () => {
   }
 
   const onSubmit = (data) => {
-    // MultiLevelSelect stores selected node ids. Translate those into the
-    // human-readable `value`s so the submitted payload matches FormDefaults.
+    // Dropdown stores the selected option node (or array of nodes for multi),
+    // and MultiLevelSelect stores selected ids. Translate each back into the
+    // human-readable `value`s so the submitted payload is primitives, not
+    // kit-internal shapes.
     const normalized = {
       ...data,
+      country:
+        data.country && typeof data.country === "object"
+          ? data.country.value ?? data.country.label
+          : data.country,
+      countries: Array.isArray(data.countries)
+        ? data.countries.map((node) =>
+            node && typeof node === "object" ? node.value ?? node.label : node
+          )
+        : data.countries,
       department: Array.isArray(data.department)
         ? data.department.map((id) => findNodeById(DEPARTMENT_TREE_DATA, id)?.value ?? id)
         : data.department,
@@ -566,7 +577,7 @@ const FormDefaultValues = () => {
                           key={`dropdown-${resetKey}`}
                           label="Country"
                           marginBottom="sm"
-                          onChange={(value) => field.onChange(value)}
+                          onChange={(event) => field.onChange(event.target.value)}
                           options={COUNTRY_OPTIONS}
                           value={field.value}
                       />
@@ -584,7 +595,7 @@ const FormDefaultValues = () => {
                           label="Countries"
                           marginBottom="sm"
                           multiSelect
-                          onChange={(value) => field.onChange(value)}
+                          onChange={(event) => field.onChange(event.target.value)}
                           options={COUNTRY_OPTIONS}
                           value={field.value}
                       />
@@ -636,7 +647,7 @@ const FormDefaultValues = () => {
                           key={`select-${resetKey}`}
                           label="Favorite Color"
                           marginBottom="sm"
-                          onChange={(value) => field.onChange(value)}
+                          onChange={(event) => field.onChange(event.target.value)}
                           options={COLOR_SELECT_OPTIONS}
                           value={field.value}
                       />
