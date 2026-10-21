@@ -207,11 +207,23 @@ export default class PbDropdown extends PbEnhancedElement {
       ? JSON.parse(this.element.dataset.formPillProps)
       : {};
     const baseInput = this.baseInput;
-    this.wasOriginallyRequired =
-      baseInput && baseInput.hasAttribute("required");
-    // Multi-select submits via generated inputs; keep the original name so we can
-    // strip it from the base input while selections exist (avoids empty/duplicate values).
-    this.baseInputName = baseInput?.getAttribute("name") || "";
+    // Multi-select strips name/required from the base input while selections exist.
+    // Persist the originals on the input so a later connect (e.g. Turbo cache restore)
+    // can rebuild generated inputs and required validation after the instance is gone.
+    if (this.isMultiSelect && baseInput) {
+      if (baseInput.dataset.pbDropdownInputName == null) {
+        baseInput.dataset.pbDropdownInputName = baseInput.getAttribute("name") || "";
+        baseInput.dataset.pbDropdownOriginallyRequired =
+          baseInput.hasAttribute("required") ? "true" : "false";
+      }
+      this.baseInputName = baseInput.dataset.pbDropdownInputName;
+      this.wasOriginallyRequired =
+        baseInput.dataset.pbDropdownOriginallyRequired === "true";
+    } else {
+      this.baseInputName = baseInput?.getAttribute("name") || "";
+      this.wasOriginallyRequired =
+        Boolean(baseInput && baseInput.hasAttribute("required"));
+    }
     // Apply context options before default value so SSR/default selection matches current context
     this.bindContextSelector();
     this.setDefaultValue();
@@ -2076,18 +2088,20 @@ export default class PbDropdown extends PbEnhancedElement {
     const baseInput = this.baseInput;
     if (!baseInput) return;
     // for multi_select, for each selectedOption, create a hidden input
-    const name = this.baseInputName || baseInput.getAttribute("name");
-    this.selectedOptions.forEach((raw) => {
-      const optionData = JSON.parse(raw);
-      // Use id if available, otherwise fall back to value
-      const id = optionData.id ?? optionData.value;
-      const inp = document.createElement("input");
-      inp.type = "hidden";
-      inp.name = name;
-      inp.value = id;
-      inp.dataset.generated = "true";
-      baseInput.insertAdjacentElement("afterend", inp);
-    });
+    const name = this.baseInputName;
+    if (name) {
+      this.selectedOptions.forEach((raw) => {
+        const optionData = JSON.parse(raw);
+        // Use id if available, otherwise fall back to value
+        const id = optionData.id ?? optionData.value;
+        const inp = document.createElement("input");
+        inp.type = "hidden";
+        inp.name = name;
+        inp.value = id;
+        inp.dataset.generated = "true";
+        baseInput.insertAdjacentElement("afterend", inp);
+      });
+    }
 
     // For multi-select, remove required/name from base input when there are selections.
     // Generated inputs own form submission; the base input is only for required validation.

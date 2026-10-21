@@ -1603,4 +1603,38 @@ describe("PbDropdown multi-select form submission", () => {
     expect(root.querySelectorAll("input[data-generated]")).toHaveLength(0);
     instance.disconnect();
   });
+
+  test("reconnect after selections keeps the real name and can restore required", () => {
+    const { root, instance, baseInput } = mountRequiredMultiSelect();
+    baseInput.dataset.defaultValue = "us,ca";
+    instance.queryAllOptions()[0].click();
+    instance.queryAllOptions()[1].click();
+    expect(baseInput.hasAttribute("name")).toBe(false);
+    expect(baseInput.hasAttribute("required")).toBe(false);
+    instance.disconnect();
+
+    // Turbo cache restore: same mutated DOM, new kit instance.
+    const reconnected = new PbDropdown(root);
+    reconnected.connect();
+
+    expect(reconnected.baseInputName).toBe("countries[]");
+    expect(reconnected.wasOriginallyRequired).toBe(true);
+    expect(
+      Array.from(root.querySelectorAll("input[data-generated]")).map((input) => ({
+        name: input.name,
+        value: input.value,
+      })).sort((a, b) => a.value.localeCompare(b.value)),
+    ).toEqual([
+      { name: "countries[]", value: "ca" },
+      { name: "countries[]", value: "us" },
+    ]);
+    expect(submittedValues(root).sort()).toEqual(["ca", "us"]);
+
+    while (root.querySelector(".pb_form_pill_close")) {
+      root.querySelector(".pb_form_pill_close").click();
+    }
+    expect(baseInput.getAttribute("name")).toBe("countries[]");
+    expect(baseInput.hasAttribute("required")).toBe(true);
+    reconnected.disconnect();
+  });
 });
