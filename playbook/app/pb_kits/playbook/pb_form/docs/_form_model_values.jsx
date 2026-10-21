@@ -10,7 +10,6 @@ import TextInput from "../../pb_text_input/_text_input"
 
 import { Controller, useForm } from "react-hook-form"
 
-
 const STATUS_OPTIONS = [
   { id: "status-open", label: "Open", value: "open" },
   { id: "status-closed", label: "Closed", value: "closed" },
@@ -26,7 +25,7 @@ const SERVER_ERRORS = {
 
 const FormModelValues = () => {
   const [resetKey, setResetKey] = useState(0)
-  const { control, handleSubmit, register, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       endsAt: "08/20/2026",
       name: "Gary 🎉",
@@ -101,12 +100,18 @@ const FormModelValues = () => {
               />
             )}
         />
-        <Dropdown
-            defaultValue={OPEN_STATUS}
-            key={`status-${resetKey}`}
-            label="Status"
-            options={STATUS_OPTIONS}
-            {...register("status")}
+        <Controller
+            control={control}
+            name="status"
+            render={({ field }) => (
+              <Dropdown
+                  key={`status-${resetKey}`}
+                  label="Status"
+                  onChange={(event) => field.onChange(event.target.value)}
+                  options={STATUS_OPTIONS}
+                  value={field.value}
+              />
+            )}
         />
         <Controller
             control={control}
