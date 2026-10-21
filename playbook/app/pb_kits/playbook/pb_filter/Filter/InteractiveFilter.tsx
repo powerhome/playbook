@@ -28,7 +28,7 @@ export type DropdownInteractiveConfig = {
     override?: boolean,
     dates: {
       label: string,
-      value: string[] | { timePeriod: string, amount: number },
+      value: Array<Date | string> | { timePeriod: string, amount: number },
     }[],
   },
   value?: string,

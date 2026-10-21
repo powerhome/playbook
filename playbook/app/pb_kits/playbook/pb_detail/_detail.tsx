@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { globalEventProps, GlobalEventProps } from '../utilities/globalEventProps'
 
 type DetailProps = {
   aria?: { [key: string]: string },
@@ -15,7 +16,7 @@ type DetailProps = {
   id?: string,
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div',
   text?: string,
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const Detail = (props: DetailProps): React.ReactElement => {
   const {
@@ -48,6 +49,7 @@ const Detail = (props: DetailProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

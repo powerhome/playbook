@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { globalEventProps, GlobalEventProps } from '../utilities/globalEventProps'
 import { buildDataProps, buildHtmlProps } from '../utilities/props'
 import { findHighlightChunks } from './_highlightChunks'
 
@@ -12,7 +13,7 @@ type HighlightProps = {
   children?: React.ReactChild[] | React.ReactChild | string,
   text?: string,
   highlightedText?: string[],
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const Highlight = (props: HighlightProps): React.ReactElement => {
   const {
@@ -35,6 +36,7 @@ const Highlight = (props: HighlightProps): React.ReactElement => {
     <span
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         id={id}
     >
       {chunks.map((chunk, index) => {

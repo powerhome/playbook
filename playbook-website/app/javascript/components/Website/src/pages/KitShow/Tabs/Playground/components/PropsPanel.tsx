@@ -30,6 +30,7 @@ interface PropsPanelProps extends PropListSharedProps {
   showChildren: boolean;
   children: string;
   onChildrenChange: (value: string) => void;
+  childrenPlaceholder?: string;
   groupedProps: Array<{ name: string; props: Array<[string, PropDefinition]> }>;
   groupedGlobalProps: Array<{ name: string; props: Array<[string, PropDefinition]> }>;
   globalProps: Record<string, PropDefinition>;
@@ -41,6 +42,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   showChildren,
   children,
   onChildrenChange,
+  childrenPlaceholder = "Enter children content...",
   groupedProps,
   groupedGlobalProps,
   propValues,
@@ -114,7 +116,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
                 >
                   <PropsPanelTextarea
                     dialogTitle="Children"
-                    placeholder="Enter children content..."
+                    placeholder={childrenPlaceholder}
                     value={children}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                       onChildrenChange(e.target.value)
