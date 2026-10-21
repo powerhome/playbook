@@ -2387,6 +2387,45 @@ describe('async Dropdown empty menu', () => {
 });
 
 
+describe('autocomplete query after selection', () => {
+  test.each([undefined, false])('plain uncontrolled autocomplete clears with allowOptionCreation=%s', (allowOptionCreation) => {
+    const onSelect = jest.fn();
+    render(<Dropdown allowOptionCreation={allowOptionCreation}
+        autocomplete
+        onSelect={onSelect}
+        options={options}
+           />);
+    const input = screen.getByRole('textbox');
+    fireEvent.click(input);
+    fireEvent.change(input, { target: { value: 'Can' } });
+    fireEvent.click(screen.getByText('Canada'));
+
+    expect(input).toHaveValue('');
+    expect(onSelect).toHaveBeenCalledWith(options[1]);
+  });
+
+  test.each(['creation', 'async', 'controlled'])('%s autocomplete retains the selected label', (mode) => {
+    const Example = () => {
+      const [value, setValue] = useState(null);
+      return (
+        <Dropdown allowOptionCreation={mode === 'creation'}
+            async={mode === 'async'}
+            autocomplete
+            onSelect={setValue}
+            options={options}
+            {...(mode === 'controlled' ? { value } : {})}
+        />
+      );
+    };
+    render(<Example />);
+    const input = screen.getByRole('textbox');
+    fireEvent.click(input);
+    fireEvent.change(input, { target: { value: 'Can' } });
+    fireEvent.click(screen.getByText('Canada'));
+    expect(input).toHaveValue('Canada');
+  });
+});
+
 describe('autocomplete selection replacement', () => {
   beforeEach(() => jest.useFakeTimers());
   afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });

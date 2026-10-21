@@ -638,9 +638,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    }
                } else {
                    setSelected(clickedItem);
-                   // Uncontrolled autocomplete keeps the clicked label in the input so the next
-                   // character replaces that selection. Controlled mode follows the incoming value.
-                   const nextQuery = autocomplete
+                   // Plain uncontrolled autocomplete clears its query after selection.
+                   const keepSelectedLabel = autocomplete && (creationEnabled || asyncEnabled || isControlled);
+                   const nextQuery = keepSelectedLabel
                      ? (isControlled ? (selected as GenericObject)?.label : clickedItem.label) || ""
                      : "";
                    setFilterItem(nextQuery);
