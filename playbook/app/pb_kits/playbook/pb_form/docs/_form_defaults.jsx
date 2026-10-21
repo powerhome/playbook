@@ -376,7 +376,7 @@ const CODE_SNIPPETS = {
 />`,
 }
 
-const FORM_OPEN = `const { register, control, handleSubmit } = useForm()
+const FORM_OPEN = `const { control, handleSubmit } = useForm()
 
 <form onSubmit={handleSubmit(onSubmit)}>`
 const FORM_CLOSE = `  <Button htmlType="submit" text="Submit" />

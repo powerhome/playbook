@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import Button from "../../pb_button/_button"
 import Flex from "../../pb_flex/_flex"
@@ -10,13 +10,32 @@ const LOADING_MS = 5000
 
 const FormLoading = () => {
   const [loading, setLoading] = useState(false)
+  const timeoutRef = useRef(null)
   const { control, handleSubmit, reset } = useForm({
     defaultValues: { exampleTextField: "" },
   })
 
+  // Clear any pending timeout on unmount so switching to another playground
+  // example mid-loading doesn't call setState on an unmounted component
+  // (React 17 logs a warning for that).
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+    }
+  }, [])
+
   const onSubmit = () => {
     setLoading(true)
-    window.setTimeout(() => setLoading(false), LOADING_MS)
+    // If the user submits again before the previous timeout fires, drop the
+    // old one so only the latest submit controls when `loading` flips back.
+    if (timeoutRef.current) window.clearTimeout(timeoutRef.current)
+    timeoutRef.current = window.setTimeout(() => {
+      setLoading(false)
+      timeoutRef.current = null
+    }, LOADING_MS)
   }
 
   return (
