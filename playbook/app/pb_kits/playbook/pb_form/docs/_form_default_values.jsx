@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 import Body from "../../pb_body/_body"
 import Button from "../../pb_button/_button"
@@ -17,8 +18,6 @@ import Textarea from "../../pb_textarea/_textarea"
 import TextInput from "../../pb_text_input/_text_input"
 import TimePicker from "../../pb_time_picker/_time_picker"
 import Typeahead from "../../pb_typeahead/_typeahead"
-
-import { Controller, useForm } from "react-hook-form"
 
 const INPUT_TYPES = [
   { key: "checkbox", label: "Checkbox" },
@@ -153,6 +152,15 @@ const FIELD_TO_INPUT_KEY = {
   startTime: "time_picker",
   favoriteColorSearch: "typeahead_default",
   favoriteColors: "typeahead",
+}
+
+// Fields whose control cannot rehydrate from a stored value on remount.
+// StarRating (interactive) keeps its own useState and ignores `rating`;
+// TimePicker only reads `defaultTime` on mount. When their pill is turned
+// off we clear the stored value so the next mount and the payload agree.
+const RESET_ON_DESELECT = {
+  star_rating: "rating",
+  time_picker: "startTime",
 }
 
 const CODE_SNIPPETS = {
@@ -297,7 +305,10 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  star_rating: `<Controller
+  star_rating: `// NOTE: resetField("rating") is called from toggleKey when this pill is
+// deselected, because interactive StarRating keeps its own state and
+// ignores the rating prop on remount.
+<Controller
   control={control}
   name="rating"
   render={({ field }) => (
@@ -332,7 +343,9 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  time_picker: `<Controller
+  time_picker: `// NOTE: resetField("startTime") is called from toggleKey when this pill is
+// deselected so the stored value matches what the picker will paint on remount.
+<Controller
   control={control}
   name="startTime"
   render={({ field }) => (
@@ -407,11 +420,21 @@ const FormDefaultValues = () => {
   const [selectedKeys, setSelectedKeys] = useState([DEFAULT_SELECTED_KEY])
   const [submittedData, setSubmittedData] = useState(null)
   const [resetKey, setResetKey] = useState(0)
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset, resetField, getValues } = useForm({
     defaultValues: DEFAULT_VALUES,
   })
 
   const isSelected = (key) => selectedKeys.includes(key)
+
+  // When a pill is turned off for a control that can't rehydrate on remount,
+  // clear its stored value so the next mount and the submitted payload agree.
+  useEffect(() => {
+    Object.entries(RESET_ON_DESELECT).forEach(([inputKey, fieldName]) => {
+      const stillSelected = selectedKeys.includes(inputKey)
+      const hasValue = getValues(fieldName) !== undefined && getValues(fieldName) !== null
+      if (!stillSelected && hasValue) resetField(fieldName)
+    })
+  }, [selectedKeys, getValues, resetField])
 
   const toggleKey = (key) => {
     setSelectedKeys((current) => {
