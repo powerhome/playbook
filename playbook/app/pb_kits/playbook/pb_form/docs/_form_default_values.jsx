@@ -401,7 +401,9 @@ const CODE_SNIPPETS = {
 />`,
 }
 
-const FORM_OPEN = `const { control, handleSubmit } = useForm({
+const FORM_OPEN = `import { useForm, Controller } from "react-hook-form";
+
+const { control, handleSubmit } = useForm({
   defaultValues: {
     fullName: "John Doe",
     email: "jane@example.com",

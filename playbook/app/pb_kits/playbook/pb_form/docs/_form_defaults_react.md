@@ -13,6 +13,8 @@ The React form examples bind kits through `Controller` so that controlled compon
 - **`Dropdown`** calls `onChange({ target: { name, value } })`. For a single-select Dropdown, `event.target.value` is the selected option **node** (`{ id, label, value }`). For a multi-select Dropdown, it's an **array of nodes**. Store that node (or array) in form state so `value={field.value}` feeds the same shape back to the component — the Dropdown compares by `id` / `value` / `label` to determine which option is selected.
 
   ```jsx
+  import { Controller } from "react-hook-form"
+
   <Controller
     control={control}
     name="country"

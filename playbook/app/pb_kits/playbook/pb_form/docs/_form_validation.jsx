@@ -171,6 +171,7 @@ const CODE_SNIPPETS = {
   render={({ field, fieldState }) => (
     <DatePicker
         allowInput
+        defaultDate={field.value}
         error={fieldState.error?.message}
         initializeOnce
         key={\`date-\${resetKey}\`}

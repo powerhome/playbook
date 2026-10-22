@@ -7,6 +7,9 @@ Toggle pills to compose a validated form. Submit an empty form to see error stat
 Attach react-hook-form rules (`required`, `pattern`, or `validate`) to the field, and pass the message to the kit's `error` prop from `fieldState`:
 
 ```jsx
+import { Controller, useForm } from "react-hook-form"
+
+
 <Controller
   control={control}
   name="email"
