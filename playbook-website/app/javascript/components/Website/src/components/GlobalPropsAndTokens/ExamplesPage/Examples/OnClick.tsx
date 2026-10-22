@@ -425,11 +425,11 @@ const OnClick = () => {
                   htmlOptions={{
                     ...clickableDemoHtmlOptions,
                     role: "button",
-                    tabIndex: 0,
                   }}
                   onClick={() =>
                     setListItemClicks((prev) => ({ ...prev, one: prev.one + 1 }))
                   }
+                  tabIndex={0}
               >
                 {"Item 1"}
               </ListItem>
@@ -438,11 +438,11 @@ const OnClick = () => {
                   htmlOptions={{
                     ...clickableDemoHtmlOptions,
                     role: "button",
-                    tabIndex: 0,
                   }}
                   onClick={() =>
                     setListItemClicks((prev) => ({ ...prev, two: prev.two + 1 }))
                   }
+                  tabIndex={0}
               >
                 {"Item 2"}
               </ListItem>
@@ -451,11 +451,11 @@ const OnClick = () => {
                   htmlOptions={{
                     ...clickableDemoHtmlOptions,
                     role: "button",
-                    tabIndex: 0,
                   }}
                   onClick={() =>
                     setListItemClicks((prev) => ({ ...prev, three: prev.three + 1 }))
                   }
+                  tabIndex={0}
               >
                 {"Item 3"}
               </ListItem>

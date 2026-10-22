@@ -490,6 +490,39 @@ describe('onClick GlobalEventProps', () => {
       expect(currentTarget).toBe(firstItem)
     })
 
+    test('ListItem keeps htmlOptions.tabIndex when first-class tabIndex is omitted', () => {
+      render(
+        <ListItem
+            data={{ testid: 'onclick-list-item-html-tabindex' }}
+            htmlOptions={{ tabIndex: 0 }}
+        >
+          {'Focusable via htmlOptions'}
+        </ListItem>
+      )
+
+      expect(screen.getByTestId('onclick-list-item-html-tabindex')).toHaveAttribute(
+        'tabindex',
+        '0'
+      )
+    })
+
+    test('ListItem first-class tabIndex wins over htmlOptions.tabIndex', () => {
+      render(
+        <ListItem
+            data={{ testid: 'onclick-list-item-first-class-tabindex' }}
+            htmlOptions={{ tabIndex: 1 }}
+            tabIndex={0}
+        >
+          {'Focusable via first-class tabIndex'}
+        </ListItem>
+      )
+
+      expect(screen.getByTestId('onclick-list-item-first-class-tabindex')).toHaveAttribute(
+        'tabindex',
+        '0'
+      )
+    })
+
     test('ListItem draggable branch still attaches onClick to the li root', () => {
       let currentTarget = null
       const onClick = jest.fn((event) => {

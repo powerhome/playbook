@@ -56,7 +56,7 @@ const ListItem = (props: ListItemProps) => {
             {...globalEventProps(props)}
             className={classes}
             id={id}
-            tabIndex={tabIndex}
+            {...(tabIndex != null ? { tabIndex } : {})}
         >
           {
             dragHandle && (
@@ -84,7 +84,7 @@ const ListItem = (props: ListItemProps) => {
             {...globalEventProps(props)}
             className={classes}
             id={id}
-            tabIndex={tabIndex}
+            {...(tabIndex != null ? { tabIndex } : {})}
         >
           {children}
         </li>
