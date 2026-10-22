@@ -23,4 +23,16 @@ RSpec.describe Playbook::Forms::Builder, "#intl_telephone", type: :helper do
 
     expect(rendered).to have_tag("input#custom-mobile[name='mobile']")
   end
+
+  it "passes validation_message into the phone number input config" do
+    rendered = render_form do |builder|
+      concat builder.intl_telephone(
+        :mobile,
+        props: { required: true, validation_message: "Mobile number is required" }
+      )
+    end
+
+    expect(rendered).to include("Mobile number is required")
+    expect(rendered).to include("validationMessage")
+  end
 end

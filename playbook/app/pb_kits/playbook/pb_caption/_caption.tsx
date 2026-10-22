@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 type CaptionProps = {
   aria?: {[key: string]: string},
@@ -15,7 +16,7 @@ type CaptionProps = {
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
   text?: string,
   variant?: null | "link",
-} & GlobalProps;
+} & GlobalProps & GlobalEventProps;
 
 const Caption = (props: CaptionProps): React.ReactElement => {
   if (props.variant) deprecatedProps() //variant prop is deprecated, use color instead
@@ -62,6 +63,7 @@ const Caption = (props: CaptionProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={css}
         id={id}
     >

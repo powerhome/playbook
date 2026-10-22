@@ -22,4 +22,5 @@
           margin_bottom: "sm",
           label: "Department",
           required: true,
+          validation_message: "Please select a department",
         } %>

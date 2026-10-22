@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { buildHtmlProps } from '../utilities/props'
 import Title from '../pb_title/_title'
 
@@ -11,7 +12,7 @@ type StatValueProps = {
   id?: string,
   unit?: string,
   value: string | number,
-}
+} & GlobalEventProps
 
 const StatValue = (props: StatValueProps): React.ReactElement => {
   const {
@@ -53,6 +54,7 @@ const StatValue = (props: StatValueProps): React.ReactElement => {
         className={classnames('pb_stat_value_kit', globalProps(props), className)}
         id={id}
         {...htmlProps}
+        {...globalEventProps(props)}
     >
       <div className="pb_stat_value_wrapper">
         {displayValue(value)}

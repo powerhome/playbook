@@ -6,6 +6,7 @@ module Playbook
       def check_box(name, props: {}, **options)
         label_text = @template.label(@object_name, name) if props[:label] == true
         options[:required] = true if props[:required]
+        options[:data] = (options[:data] || {}).merge(message: props[:validation_message]) if props[:validation_message].present?
         props[:margin_bottom] ||= "sm"
         props[:form_spacing] = true
 

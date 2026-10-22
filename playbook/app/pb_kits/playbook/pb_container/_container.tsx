@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 type ContainerProps = {
   aria?: { [key: string]: string },
@@ -11,7 +12,7 @@ type ContainerProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) | ((event: any) => void) | any },
   tag?: "div" | "span" | "a" | "button" | "option" | "table" | "tbody" | "thead" | "tfoot" | "tr" | "td" | "th" | "img" | "section" | "article" | "main" | "header" | "footer" | "nav" | "aside"
   id?: string,
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const Container = (props: ContainerProps): React.ReactElement => {
   const {
@@ -36,6 +37,7 @@ const Container = (props: ContainerProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

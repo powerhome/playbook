@@ -8,8 +8,8 @@ export const COMMON_FORM_FAQS = [
   },
   {
     id: 'forms.validation', platforms: ['rails'],
-    questions: ['How do I show ActiveRecord errors?', 'Does required_indicator validate?', 'How do I enable client validation?'],
-    answer: 'Most builder fields auto-map record.errors.full_messages_for(attribute) into props.error unless error is set explicitly (including nil to opt out). Checkbox still needs an explicit boolean error flag, and StarRating has no error prop. A required indicator is visual only. pb_form_with validate: true enables Playbook client validation; it does not run model validations.',
+    questions: ['How do I show ActiveRecord errors?', 'Does required_indicator validate?', 'How do I enable client validation?', 'How do I set a custom required-field message?'],
+    answer: 'Most builder fields auto-map record.errors.full_messages_for(attribute) into props.error unless error is set explicitly (including nil to opt out). Checkbox still needs an explicit boolean error flag, and StarRating has no error prop. A required indicator is visual only. pb_form_with validate: true enables Playbook client validation; it does not run model validations. Custom required messages use props.validation.message on text-style fields (including text_area and telephone_field) and props.validation_message on selection-style fields (select, dropdown_field, check_box, phone_number_field, star_rating_field, multi_level_select, and similar). Phone kits own their UI and use validation_message for the empty required copy only.',
     contractPaths: ['form.rails.builder.validation', 'form.rails.builder.methods'],
     props: ['error', 'required', 'requiredIndicator', 'validation', 'validationMessage'],
   },
@@ -40,6 +40,13 @@ export const COMMON_FORM_FAQS = [
 ];
 
 export const KIT_USAGE_FAQS = {
+  select: [{
+    id: 'select.builder-prompt', platforms: ['rails'],
+    questions: ['How do I omit the prompt in a select builder field?', 'Does blank_selection override options.prompt?'],
+    answer: 'For f.select and f.collection_select, pass prompt: false in the positional options hash and omit props.blank_selection to omit the prompt. An explicitly supplied props.blank_selection overrides options.prompt, including false or nil; a nil blank_selection becomes an empty prompt. Otherwise an explicit prompt is preserved, and when neither is supplied the prompt defaults to empty. time_zone_select_field still sets the prompt from props.blank_selection (default empty), overriding an explicit prompt.',
+    example: '<%= f.select :country, [["Canada", "ca"]], { prompt: false }, {}, props: { label: true } %>',
+    contractPaths: ['form.rails.builder.methods'], props: ['blankSelection'],
+  }],
   dropdown: [{
     id: 'dropdown.builder-name', platforms: ['rails'],
     questions: ['Does dropdown_field scope country to user[country]?', 'Does multi_select submit separate array values?'],

@@ -189,7 +189,7 @@ module Playbook
 
           pb_rails("checkbox", props: {
                      id: "#{prefix}select-row-#{row_id || row.object_id}",
-                     indeterminate_main: !last_row,
+                     indeterminate_main: row_children.present?,
                      indeterminate_main_labels: ["", ""],
                      indeterminate_parent: indeterminate_parent,
                      name: "#{prefix}select-row-#{row_id || row.object_id}",

@@ -36,6 +36,7 @@ examples:
   - dropdown_quickpick_custom_rails: Quick Pick Variant (Custom Quick Pick Dates)
   - dropdown_quickpick_with_date_pickers_rails: Quick Pick with Date Pickers
   - dropdown_quickpick_with_date_pickers_default_rails: Quick Pick with Date Pickers (Default Value)
+  - dropdown_quickpick_enable_time: Quick Pick with Date Pickers (Enable Time)
   - dropdown_required_indicator: Required Indicator
   - dropdown_disabled: Disabled Input
   - dropdown_grouped_options: Grouped Options
@@ -50,6 +51,7 @@ examples:
   react:
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
+  - dropdown_with_highlight: With Highlight
   - dropdown_multi_select: Multi Select
   - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
   - dropdown_multi_select_display: Multi Select with Form Pill Props
@@ -86,6 +88,7 @@ examples:
   - dropdown_quickpick_default_dates: Quick Pick Variant (Default Dates)
   - dropdown_quickpick_custom: Quick Pick Variant (Custom Quick Pick Dates)
   - dropdown_quickpick_with_date_pickers: Quick Pick Variant with Date Pickers
+  - dropdown_quickpick_enable_time: Quick Pick with Date Pickers (Enable Time)
   - dropdown_required_indicator: Required Indicator
   - dropdown_disabled: Disabled Input
   - dropdown_grouped_options: Grouped Options

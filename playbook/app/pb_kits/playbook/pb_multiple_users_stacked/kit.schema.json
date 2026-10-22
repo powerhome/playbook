@@ -48,6 +48,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { MultipleUsersStacked } from 'playbook-ui'",

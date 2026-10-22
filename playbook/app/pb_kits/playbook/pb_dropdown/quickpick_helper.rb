@@ -3,6 +3,16 @@
 module Playbook
   module PbDropdown
     module QuickpickHelper
+      # Marker for absolute ISO boundaries (Z / numeric offset). Wall-clock
+      # DateTime.civil also has offset 0, so offset alone cannot distinguish —
+      # format_date / format_value use this flag to preserve Z/±HH:MM on emit.
+      module AbsoluteInstant
+        def absolute_instant?
+          true
+        end
+      end
+      private_constant :AbsoluteInstant
+
       class << self
         def get_quickpick_options(range_ends_today: false, custom_quick_pick_dates: {})
           default_options = build_default_options(range_ends_today)
@@ -77,7 +87,7 @@ module Playbook
           {
             id: "quickpick-#{label.downcase.gsub(/\s+/, '-')}",
             label: label,
-            value: [start_date.to_s, end_date.to_s],
+            value: [format_value(start_date), format_value(end_date)],
             formatted_start_date: format_date(start_date),
             formatted_end_date: format_date(end_date),
           }
@@ -86,7 +96,7 @@ module Playbook
         def calculate_date_range(value)
           # Parse date strings if value is an array
           if value.is_a?(Array)
-            [parse_date_string(value[0]), parse_date_string(value[1])]
+            [parse_boundary(value[0]), parse_boundary(value[1])]
           else
             # Calculate date range from time_period and amount
             time_period = value[:time_period] || value["time_period"] || value[:timePeriod] || value["timePeriod"]
@@ -99,6 +109,19 @@ module Playbook
           end
         end
 
+        def parse_boundary(date_str)
+          date_str = date_str.to_s
+          if string_has_explicit_time?(date_str)
+            parse_datetime_string(date_str)
+          else
+            parse_date_string(date_str)
+          end
+        end
+
+        def string_has_explicit_time?(value)
+          value.match?(/[T\s]\d{1,2}:\d{2}/) || value.match?(/\d{1,2}:\d{2}\s*(AM|PM)/i)
+        end
+
         def parse_date_string(date_str)
           # Handle US date format (MM/DD/YYYY) because Ruby's Date.parse defaults to European format (DD/MM/YYYY)
           if date_str.include?("/")
@@ -106,6 +129,40 @@ module Playbook
           else
             Date.parse(date_str)
           end
+        end
+
+        # Parses timed custom boundaries. Mirrors React parseQuickPickDateTime:
+        # 1) US m/d/Y + time (optional :SS / AM|PM) → DateTime.civil (wall-clock)
+        # 2) Offset-less YYYY-MM-DDTHH:MM:SS → DateTime.civil (wall-clock; not Time.parse)
+        # 3) ISO with Z / numeric offset → DateTime.iso8601 (absolute; emit keeps offset)
+        # Unsupported timed strings raise — no process-TZ Time.parse fallback.
+        # Date-only boundaries stay on parse_date_string (unchanged).
+        def parse_datetime_string(date_str)
+          trimmed = date_str.to_s.strip
+
+          if (match = trimmed.match(%r{\A(\d{1,2})/(\d{1,2})/(\d{4})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?\z}i))
+            month, day, year, hour, min, sec, meridiem = match.captures
+            hour = hour.to_i
+            min = min.to_i
+            sec = (sec || 0).to_i
+            if meridiem
+              meridiem = meridiem.upcase
+              hour = 0 if meridiem == "AM" && hour == 12
+              hour += 12 if meridiem == "PM" && hour != 12
+            end
+            return DateTime.civil(year.to_i, month.to_i, day.to_i, hour, min, sec)
+          end
+
+          # Offset-less wall-clock ISO (same shape as WALL_CLOCK_ISO in quickpickDateSync.ts).
+          if (match = trimmed.match(/\A(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?(?:\.\d+)?\z/))
+            year, month, day, hour, min, sec = match.captures
+            return DateTime.civil(year.to_i, month.to_i, day.to_i, hour.to_i, min.to_i, (sec || 0).to_i)
+          end
+
+          # Absolute ISO with Z or numeric offset (React: new Date(iso)).
+          return DateTime.iso8601(trimmed).extend(AbsoluteInstant) if trimmed.match?(/\A\d{4}-\d{2}-\d{2}T/) && trimmed.match?(/[Zz]|[+-]\d{2}:?\d{2}\z/)
+
+          raise ArgumentError, "Unsupported QuickPick timed value: #{date_str.inspect}"
         end
 
         def calculate_start_date(time_period, amount, end_date)
@@ -125,8 +182,40 @@ module Playbook
           end
         end
 
+        # Date-only → m/d/Y (SOD/EOD applied at sync when enableTime).
+        # Wall-clock Time/DateTime → offset-less YYYY-MM-DDTHH:MM:SS (local clock face).
+        # Absolute ISO (AbsoluteInstant) → iso8601 with Z/±HH:MM so JS new Date keeps
+        # the same instant (React parseQuickPickDateTime already handles both).
         def format_date(date)
-          date.strftime("%m/%d/%Y")
+          if time_like?(date)
+            format_timed(date)
+          else
+            date.strftime("%m/%d/%Y")
+          end
+        end
+
+        def format_value(date)
+          if time_like?(date)
+            format_timed(date)
+          else
+            date.to_s
+          end
+        end
+
+        def format_timed(date)
+          if absolute_instant?(date)
+            date.iso8601
+          else
+            date.strftime("%Y-%m-%dT%H:%M:%S")
+          end
+        end
+
+        def absolute_instant?(date)
+          date.respond_to?(:absolute_instant?) && date.absolute_instant?
+        end
+
+        def time_like?(date)
+          date.is_a?(Time) || date.is_a?(DateTime) || defined?(ActiveSupport::TimeWithZone) && date.is_a?(ActiveSupport::TimeWithZone)
         end
 
         def format_date_range(start_date, end_date)

@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
@@ -19,7 +20,7 @@ type TitleCountProps = {
   id?: string,
   title?: string,
   size?: "lg" | "sm",
-};
+} & GlobalEventProps;
 
 const TitleCount = (props: TitleCountProps): React.ReactElement => {
   const {
@@ -50,6 +51,7 @@ const TitleCount = (props: TitleCountProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={css}
         id={id}
     >

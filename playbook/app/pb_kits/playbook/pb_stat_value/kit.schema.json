@@ -32,6 +32,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { StatValue } from 'playbook-ui'",
