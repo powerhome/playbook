@@ -14,11 +14,17 @@ import {
   IconStatValue,
   IconValue,
   LabelValue,
+  Legend,
+  List,
+  ListItem,
   Message,
   MultipleUsers,
   MultipleUsersStacked,
+  ProgressStep,
+  ProgressStepItem,
   StatValue,
   Table,
+  Timeline,
   Title,
   TitleCount,
   TitleDetail,
@@ -37,16 +43,22 @@ const OnClick = () => {
     count,
     label,
     reset,
+    statusText,
   }: {
     children: React.ReactNode,
-    count: number,
-    label: string,
+    count?: number,
+    label?: string,
     reset: () => void,
+    statusText?: string,
   }) => {
+    const summary =
+      statusText ||
+      `${label}: ${count} click${count === 1 ? "" : "s"}`;
+
     return (
       <Flex flexDirection="column" gap="xs" width="100%">
         {children}
-        <Body color="light" text={`${label}: ${count} click${count === 1 ? "" : "s"}`} />
+        <Body color="light" text={summary} />
         <Button
             onClick={reset}
             size="sm"
@@ -71,10 +83,22 @@ const OnClick = () => {
     const [iconStatValueClicks, setIconStatValueClicks] = useState(0);
     const [iconValueClicks, setIconValueClicks] = useState(0);
     const [labelValueClicks, setLabelValueClicks] = useState(0);
+    const [legendClicks, setLegendClicks] = useState({ windows: 0, doors: 0, roofing: 0 });
+    const [listItemClicks, setListItemClicks] = useState({ one: 0, two: 0, three: 0 });
     const [messageClicks, setMessageClicks] = useState(0);
     const [multipleUsersClicks, setMultipleUsersClicks] = useState(0);
     const [multipleUsersStackedClicks, setMultipleUsersStackedClicks] = useState(0);
+    const [progressStepItemClicks, setProgressStepItemClicks] = useState({
+      ordered: 0,
+      shipped: 0,
+      delivered: 0,
+    });
     const [statValueClicks, setStatValueClicks] = useState(0);
+    const [timelineItemClicks, setTimelineItemClicks] = useState({
+      started: 0,
+      trip: 0,
+      resolved: 0,
+    });
     const [titleClicks, setTitleClicks] = useState(0);
     const [titleCountClicks, setTitleCountClicks] = useState(0);
     const [titleDetailClicks, setTitleDetailClicks] = useState(0);
@@ -340,6 +364,104 @@ const OnClick = () => {
             />
           </InteractiveExample>
         </Card>
+        <Card padding="md" width="md">
+          <Title size={4} text="Legend" />
+          <InteractiveExample
+              reset={() => setLegendClicks({ windows: 0, doors: 0, roofing: 0 })}
+              statusText={`Windows: ${legendClicks.windows} · Doors: ${legendClicks.doors} · Roofing: ${legendClicks.roofing}`}
+          >
+            <Flex flexDirection="column" gap="xs">
+              <Legend
+                  color="data_1"
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setLegendClicks((prev) => ({ ...prev, windows: prev.windows + 1 }))
+                  }
+                  text="Windows"
+              />
+              <Legend
+                  color="data_2"
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setLegendClicks((prev) => ({ ...prev, doors: prev.doors + 1 }))
+                  }
+                  text="Doors"
+              />
+              <Legend
+                  color="data_3"
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setLegendClicks((prev) => ({ ...prev, roofing: prev.roofing + 1 }))
+                  }
+                  text="Roofing"
+              />
+            </Flex>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="md">
+          <Title size={4} text="ListItem" />
+          <InteractiveExample
+              reset={() => setListItemClicks({ one: 0, two: 0, three: 0 })}
+              statusText={`Item 1: ${listItemClicks.one} · Item 2: ${listItemClicks.two} · Item 3: ${listItemClicks.three}`}
+          >
+            <List>
+              <ListItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setListItemClicks((prev) => ({ ...prev, one: prev.one + 1 }))
+                  }
+              >
+                {"Item 1"}
+              </ListItem>
+              <ListItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setListItemClicks((prev) => ({ ...prev, two: prev.two + 1 }))
+                  }
+              >
+                {"Item 2"}
+              </ListItem>
+              <ListItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setListItemClicks((prev) => ({ ...prev, three: prev.three + 1 }))
+                  }
+              >
+                {"Item 3"}
+              </ListItem>
+            </List>
+          </InteractiveExample>
+        </Card>
         <Card padding="md" width="sm">
           <Title size={4} text="Message" />
           <InteractiveExample
@@ -415,6 +537,69 @@ const OnClick = () => {
             <Body text="Click the above Multiple Users Stacked example" />
           </InteractiveExample>
         </Card>
+        <Card padding="md" width="md">
+          <Title size={4} text="ProgressStepItem" />
+          <InteractiveExample
+              reset={() =>
+                setProgressStepItemClicks({ ordered: 0, shipped: 0, delivered: 0 })
+              }
+              statusText={`Ordered: ${progressStepItemClicks.ordered} · Shipped: ${progressStepItemClicks.shipped} · Delivered: ${progressStepItemClicks.delivered}`}
+          >
+            <ProgressStep icon orientation="vertical">
+              <ProgressStepItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setProgressStepItemClicks((prev) => ({
+                      ...prev,
+                      ordered: prev.ordered + 1,
+                    }))
+                  }
+                  status="complete"
+              >
+                {"Ordered"}
+              </ProgressStepItem>
+              <ProgressStepItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setProgressStepItemClicks((prev) => ({
+                      ...prev,
+                      shipped: prev.shipped + 1,
+                    }))
+                  }
+                  status="active"
+              >
+                {"Shipped"}
+              </ProgressStepItem>
+              <ProgressStepItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setProgressStepItemClicks((prev) => ({
+                      ...prev,
+                      delivered: prev.delivered + 1,
+                    }))
+                  }
+                  status="inactive"
+              >
+                {"Delivered"}
+              </ProgressStepItem>
+            </ProgressStep>
+          </InteractiveExample>
+        </Card>
         <Card padding="md" width="sm">
           <Title size={4} text="Stat Value" />
           <InteractiveExample
@@ -433,6 +618,72 @@ const OnClick = () => {
                 unit="mg"
                 value={104}
             />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="md">
+          <Title size={4} text="Timeline.Item" />
+          <InteractiveExample
+              reset={() =>
+                setTimelineItemClicks({ started: 0, trip: 0, resolved: 0 })
+              }
+              statusText={`Started: ${timelineItemClicks.started} · Trip: ${timelineItemClicks.trip} · Resolved: ${timelineItemClicks.resolved}`}
+          >
+            <Timeline orientation="vertical">
+              <Timeline.Item
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  icon="user"
+                  iconColor="royal"
+                  onClick={() =>
+                    setTimelineItemClicks((prev) => ({
+                      ...prev,
+                      started: prev.started + 1,
+                    }))
+                  }
+              >
+                <Body color="light" text="Conversation started" />
+              </Timeline.Item>
+              <Timeline.Item
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  icon="check"
+                  iconColor="teal"
+                  onClick={() =>
+                    setTimelineItemClicks((prev) => ({
+                      ...prev,
+                      trip: prev.trip + 1,
+                    }))
+                  }
+              >
+                <Body color="light" text="Trip #12422" />
+              </Timeline.Item>
+              <Timeline.Item
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  icon="smile"
+                  iconColor="green"
+                  onClick={() =>
+                    setTimelineItemClicks((prev) => ({
+                      ...prev,
+                      resolved: prev.resolved + 1,
+                    }))
+                  }
+              >
+                <Body color="light" text="Conversation resolved" />
+              </Timeline.Item>
+            </Timeline>
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -536,7 +787,10 @@ const OnClick = () => {
           <code>role</code>, <code>tabIndex</code>, and an accessible name.
           Adding a role and tab stop does not add keyboard activation; use an
           appropriate native interactive element when possible, or implement
-          equivalent keyboard behavior.
+          equivalent keyboard behavior. For repeated content (ListItem,
+          Timeline.Item, ProgressStepItem), attach <code>onClick</code> on
+          each item — sibling items do not share a handler. Legend attaches to
+          its outer root (one Legend instance = one series entry).
         </>
       }
       VisualGuideCard={VisualGuideCard()}
@@ -644,6 +898,24 @@ const OnClick = () => {
             "Attached once to the root Label Value element for default and details variants.",
           ],
           [
+            "Legend",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-legend-react"
+              text={`<Legend text="Series A" onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached to the outer Legend root. Per-entry callbacks across many Legend instances stay consumer-owned.",
+          ],
+          [
+            "ListItem",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-list-item-react"
+              text={`<ListItem onClick={() => alert("clicked")} cursor="pointer">Row</ListItem>`}
+            />,
+            "Attached to each ListItem root (ordinary and draggable). Sibling items keep separate handlers.",
+          ],
+          [
             "Message",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -671,6 +943,15 @@ const OnClick = () => {
             "Attached once to the root Multiple Users Stacked element. Avatar and overflow badge clicks bubble to the whole-kit handler; this is not a per-user callback.",
           ],
           [
+            "ProgressStepItem",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-progress-step-item-react"
+              text={`<ProgressStepItem status="active" onClick={() => alert("clicked")} cursor="pointer">Step</ProgressStepItem>`}
+            />,
+            "Attached to each ProgressStepItem root. Sibling steps do not share a handler.",
+          ],
+          [
             "Stat Value",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -678,6 +959,15 @@ const OnClick = () => {
               text={`<StatValue value={104} unit="mg" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
             "Attached once to the root Stat Value element.",
+          ],
+          [
+            "Timeline.Item",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-timeline-item-react"
+              text={`<Timeline.Item onClick={() => alert("clicked")} cursor="pointer">Event</Timeline.Item>`}
+            />,
+            "Attached to each Timeline.Item root. Sibling items keep separate handlers.",
           ],
           [
             "Title",
@@ -784,6 +1074,11 @@ const OnClick = () => {
             "Nested clickable kits",
             "Both can fire",
             "Normal React event bubbling applies unless stopped.",
+          ],
+          [
+            "Sibling ListItem / Timeline.Item / ProgressStepItem",
+            "Only the clicked item fires",
+            "Each item owns its own onClick on its root.",
           ],
         ]}
       />

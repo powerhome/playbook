@@ -16,14 +16,21 @@ import Highlight from '../../../pb_highlight/_highlight'
 import IconStatValue from '../../../pb_icon_stat_value/_icon_stat_value'
 import IconValue from '../../../pb_icon_value/_icon_value'
 import LabelValue from '../../../pb_label_value/_label_value'
+import Legend from '../../../pb_legend/_legend'
+import List from '../../../pb_list/_list'
+import ListItem from '../../../pb_list/_list_item'
 import Message from '../../../pb_message/_message'
 import MultipleUsers from '../../../pb_multiple_users/_multiple_users'
 import MultipleUsersStacked from '../../../pb_multiple_users_stacked/_multiple_users_stacked'
+import ProgressStep from '../../../pb_progress_step/_progress_step'
+import ProgressStepItem from '../../../pb_progress_step/_progress_step_item'
 import StarRating from '../../../pb_star_rating/_star_rating'
 import StatValue from '../../../pb_stat_value/_stat_value'
+import Timeline from '../../../pb_timeline/_timeline'
 import Title from '../../../pb_title/_title'
 import TitleCount from '../../../pb_title_count/_title_count'
 import TitleDetail from '../../../pb_title_detail/_title_detail'
+import { DraggableProvider } from '../../../pb_draggable/context'
 import { globalProps } from '../../globalProps'
 import { globalEventProps } from '../../globalEventProps'
 
@@ -41,10 +48,14 @@ const optedInKits = [
   { Kit: IconStatValue, name: 'IconStatValue', extraProps: { icon: 'heart', text: 'Likes', value: 42 } },
   { Kit: IconValue, name: 'IconValue', extraProps: { icon: 'heart', text: 'Favorites' } },
   { Kit: LabelValue, name: 'LabelValue', extraProps: { label: 'Label', value: 'Value' } },
+  { Kit: Legend, name: 'Legend', extraProps: { text: 'Series A' } },
+  { Kit: ListItem, name: 'ListItem', extraProps: { children: 'Test' } },
   { Kit: Message, name: 'Message', extraProps: { label: 'Sender', message: 'Test' } },
   { Kit: MultipleUsers, name: 'MultipleUsers', extraProps: { users: [{ name: 'Pat' }] } },
   { Kit: MultipleUsersStacked, name: 'MultipleUsersStacked', extraProps: { users: [{ name: 'Pat' }] } },
+  { Kit: ProgressStepItem, name: 'ProgressStepItem', extraProps: { children: 'Step', status: 'active' } },
   { Kit: StatValue, name: 'StatValue', extraProps: { unit: 'mg', value: 100 } },
+  { Kit: Timeline.Item, name: 'TimelineItem', extraProps: { children: 'Event' } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
   { Kit: TitleCount, name: 'TitleCount', extraProps: { count: 12, title: 'Items' } },
   { Kit: TitleDetail, name: 'TitleDetail', extraProps: { detail: 'Detail', title: 'Title' } },
@@ -444,6 +455,150 @@ describe('onClick GlobalEventProps', () => {
         screen.getByTestId('onclick-multiple-users-stacked'),
         screen.getByTestId('onclick-multiple-users-stacked'),
       ])
+    })
+  })
+
+  describe('item kits isolate siblings and identify currentTarget', () => {
+    test('ListItem click fires only that item and sets currentTarget to its root', () => {
+      let currentTarget = null
+      const firstOnClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      const secondOnClick = jest.fn()
+      render(
+        <List>
+          <ListItem
+              data={{ testid: 'onclick-list-item-1' }}
+              onClick={firstOnClick}
+          >
+            {'First'}
+          </ListItem>
+          <ListItem
+              data={{ testid: 'onclick-list-item-2' }}
+              onClick={secondOnClick}
+          >
+            {'Second'}
+          </ListItem>
+        </List>
+      )
+
+      const firstItem = screen.getByTestId('onclick-list-item-1')
+      fireEvent.click(firstItem)
+
+      expect(firstOnClick).toHaveBeenCalledTimes(1)
+      expect(secondOnClick).not.toHaveBeenCalled()
+      expect(currentTarget).toBe(firstItem)
+    })
+
+    test('ListItem draggable branch still attaches onClick to the li root', () => {
+      let currentTarget = null
+      const onClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      const items = [{ id: '1', text: 'Draggable row' }]
+      render(
+        <DraggableProvider
+            initialItems={items}
+            onReorder={jest.fn()}
+        >
+          <List enableDrag>
+            <ListItem
+                data={{ testid: 'onclick-list-item-drag' }}
+                dragId="1"
+                onClick={onClick}
+            >
+              {'Draggable row'}
+            </ListItem>
+          </List>
+        </DraggableProvider>
+      )
+
+      const item = screen.getByTestId('onclick-list-item-drag')
+      fireEvent.click(item)
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(currentTarget).toBe(item)
+      expect(item.querySelector('.pb_draggable_handle')).not.toBeNull()
+    })
+
+    test('Timeline.Item siblings stay isolated', () => {
+      let currentTarget = null
+      const firstOnClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      const secondOnClick = jest.fn()
+      render(
+        <Timeline>
+          <Timeline.Item
+              htmlOptions={{ 'data-testid': 'onclick-timeline-item-1' }}
+              onClick={firstOnClick}
+          >
+            {'Alpha'}
+          </Timeline.Item>
+          <Timeline.Item
+              htmlOptions={{ 'data-testid': 'onclick-timeline-item-2' }}
+              onClick={secondOnClick}
+          >
+            {'Beta'}
+          </Timeline.Item>
+        </Timeline>
+      )
+
+      const firstItem = screen.getByTestId('onclick-timeline-item-1')
+      fireEvent.click(firstItem)
+      expect(firstOnClick).toHaveBeenCalledTimes(1)
+      expect(secondOnClick).not.toHaveBeenCalled()
+      expect(currentTarget).toBe(firstItem)
+    })
+
+    test('ProgressStepItem siblings stay isolated', () => {
+      let currentTarget = null
+      const firstOnClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      const secondOnClick = jest.fn()
+      render(
+        <ProgressStep>
+          <ProgressStepItem
+              data={{ testid: 'onclick-progress-step-1' }}
+              onClick={firstOnClick}
+              status="complete"
+          >
+            {'Ordered'}
+          </ProgressStepItem>
+          <ProgressStepItem
+              data={{ testid: 'onclick-progress-step-2' }}
+              onClick={secondOnClick}
+              status="active"
+          >
+            {'Shipped'}
+          </ProgressStepItem>
+        </ProgressStep>
+      )
+
+      const firstItem = screen.getByTestId('onclick-progress-step-1')
+      fireEvent.click(firstItem)
+      expect(firstOnClick).toHaveBeenCalledTimes(1)
+      expect(secondOnClick).not.toHaveBeenCalled()
+      expect(currentTarget).toBe(firstItem)
+    })
+
+    test('Legend attaches once on its outer root', () => {
+      let currentTarget = null
+      const onClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      render(
+        <Legend
+            data={{ testid: 'onclick-legend' }}
+            onClick={onClick}
+            text="Series A"
+        />
+      )
+
+      const legend = screen.getByTestId('onclick-legend')
+      fireEvent.click(screen.getByText('Series A'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(currentTarget).toBe(legend)
     })
   })
 })
