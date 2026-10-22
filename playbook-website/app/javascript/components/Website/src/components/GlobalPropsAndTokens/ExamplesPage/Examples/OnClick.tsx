@@ -207,7 +207,7 @@ const OnClick = () => {
                   tabIndex: 0,
                 }}
                 onClick={() => setDashboardValueClicks((prev: number) => prev + 1)}
-                statChange={{ change: "increase", value: "12%" }}
+                statChange={{ change: "increase", value: 12 }}
                 statLabel="Click this Dashboard Value"
                 statValue={{ unit: "USD", value: "98.2" }}
             />
