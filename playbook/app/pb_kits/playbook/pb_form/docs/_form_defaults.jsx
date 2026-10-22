@@ -388,19 +388,25 @@ const FormDefaults = () => {
   const [submittedData, setSubmittedData] = useState(null)
   const [resetKey, setResetKey] = useState(0)
   const { control, handleSubmit, reset, resetField, getValues } = useForm({
-    defaultValues: {
-      bio: "",
-      department: [],
-      email: "",
-      favoriteColor: "",
-      favoriteColors: [],
-      favoriteColorSearch: "",
-      fullName: "",
-      password: "",
-      projectNumber: "",
-      quantity: "",
-      rating: 0,
-      website: "",
+  defaultValues: {
+  bio: "Loves building with Playbook.",
+  country: COUNTRY_OPTIONS[1],                          // Canada
+  countries: [COUNTRY_OPTIONS[0], COUNTRY_OPTIONS[2]],  // United States + Pakistan
+  department: ["form-defaults-102"],                    // Talent Acquisition (leaf id)
+  email: "jane@example.com",
+  favoriteColor: "blue",
+  favoriteColorSearch: TYPEAHEAD_COLOR_OPTIONS[3],      // Blue
+  favoriteColors: [TYPEAHEAD_COLOR_OPTIONS[3]],         // Blue
+  fullName: "John Doe",
+  newsletter: true,
+  password: "secret",
+  phone: "5551234567",
+  projectNumber: "33-12345",
+  quantity: 3,
+  rating: 0,                                            // StarRating can't be prefilled — see note
+  startDate: "06/15/2026",
+  startTime: "09:30",
+  website: "https://example.com",
     },
   })
 
