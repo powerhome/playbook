@@ -30,8 +30,8 @@
   },
   "scripts": {
     "flow": "flow",
-    "lint": "eslint . --ext .js,.jsx",
-    "lint-fix": "eslint . --ext .js,.jsx --fix",
+    "lint": "eslint '**/*.{js,jsx}'",
+    "lint-fix": "eslint '**/*.{js,jsx}' --fix",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-coverage": "jest --collectCoverage",

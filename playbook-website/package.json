@@ -3,7 +3,7 @@
   "name": "playbook-website",
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint app/ --ext .js,.jsx",
+    "lint": "eslint app/",
     "release": "bin/vite build",
     "generate:global-props-values": "node scripts/generate-global-props-values.mjs",
     "generate:global-event-props-values": "node scripts/generate-global-event-props-values.mjs",
