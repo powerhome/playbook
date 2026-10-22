@@ -7,6 +7,14 @@
     "rails"
   ],
   "props": {
+    "allowOptionCreation": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "async": {
       "type": "boolean",
       "platforms": [
@@ -147,6 +155,12 @@
         "rails"
       ]
     },
+    "enableFormSupport": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "isClosed": {
       "type": "boolean",
       "platforms": [
@@ -272,17 +286,19 @@
       "default": false
     },
     "required": {
+      "type": "boolean",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "boolean",
       "default": false
     },
     "validationMessage": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "string",
       "default": ""
     },
     "searchTermMinimumLength": {

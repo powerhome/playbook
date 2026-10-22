@@ -584,3 +584,33 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     end
   end
 end
+
+RSpec.describe Playbook::PbDropdown::Dropdown do
+  subject { described_class }
+
+  it { is_expected.to define_boolean_prop(:allow_option_creation).with_default(false) }
+
+  it "enables autocomplete and exports creation only when requested" do
+    dropdown = described_class.new(allow_option_creation: true)
+    expect(dropdown.autocomplete_enabled?).to be(true)
+    expect(dropdown.data[:pb_dropdown_allow_option_creation]).to be(true)
+    expect(described_class.new.data).not_to have_key(:pb_dropdown_allow_option_creation)
+  end
+
+  it "does not enable creation for quickpick" do
+    dropdown = described_class.new(allow_option_creation: true, variant: "quickpick")
+    expect(dropdown.autocomplete_enabled?).to be(false)
+    expect(dropdown.data).not_to have_key(:pb_dropdown_allow_option_creation)
+  end
+
+  it "does not append array brackets twice when creation is disabled" do
+    expect(described_class.new(name: "home_ids[]", multi_select: true).input_name).to eq("home_ids[]")
+    expect(described_class.new(name: "home_ids[]", multi_select: true, allow_option_creation: false).input_name).to eq("home_ids[]")
+  end
+
+  it "does not append array brackets twice" do
+    expect(described_class.new(name: "home_ids[]", multi_select: true, allow_option_creation: true).input_name).to eq("home_ids[]")
+    expect(described_class.new(name: "home_ids", multi_select: true).input_name).to eq("home_ids[]")
+    expect(described_class.new(name: "home_id").input_name).to eq("home_id")
+  end
+end

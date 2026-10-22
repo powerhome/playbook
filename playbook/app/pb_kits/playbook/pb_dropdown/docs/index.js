@@ -47,4 +47,6 @@ export { default as DropdownAsyncMultiSelect } from './_dropdown_async_multi_sel
 export { default as DropdownAsyncRichResults } from './_dropdown_async_rich_results.jsx'
 export { default as DropdownAsyncInitialOptions } from './_dropdown_async_initial_options.jsx'
 export { default as DropdownExternalSearch } from './_dropdown_external_search.jsx'
+export { default as DropdownForm } from "./_dropdown_form.jsx"
+export { default as DropdownOptionCreation } from "./_dropdown_option_creation.jsx"
 export { default as DropdownQuickpickEnableTime } from './_dropdown_quickpick_enable_time.jsx'
