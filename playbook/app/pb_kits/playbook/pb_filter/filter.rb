@@ -123,6 +123,19 @@ module Playbook
         end
       end
 
+      def single_sort_option?
+        available_sort_options.one?
+      end
+
+      def sort_button_props
+        {
+          variant: "link",
+          id: "sort-button#{id}",
+          padding_right: "none",
+          link: single_sort_link,
+        }.compact
+      end
+
     private
 
       def responsive_classname
@@ -141,6 +154,21 @@ module Playbook
 
       def interactive_quickpick?(config)
         config[:type].to_s == "dropdown" && config[:variant].to_s == "quickpick"
+      end
+
+      def available_sort_options
+        Array(sort_menu).filter_map do |item|
+          next unless item.is_a?(Hash)
+
+          option = item.with_indifferent_access
+          option if option[:item].present? || option[:link].present?
+        end
+      end
+
+      def single_sort_link
+        return unless single_sort_option?
+
+        available_sort_options.first[:link].presence
       end
     end
   end

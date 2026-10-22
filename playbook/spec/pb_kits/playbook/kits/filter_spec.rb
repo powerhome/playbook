@@ -108,4 +108,43 @@ RSpec.describe Playbook::PbFilter::Filter do
       expect(filter.interactive_option_value(config, option)).to eq "option-id"
     end
   end
+
+  describe "single sort option", type: :kit do
+    before { helper.extend Playbook::PbKitHelper }
+
+    let(:single_sort_menu) do
+      [
+        { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      ]
+    end
+
+    it "is true only when one sort option is available", :aggregate_failures do
+      expect(subject.new({}).single_sort_option?).to be false
+      expect(subject.new(sort_menu: single_sort_menu).single_sort_option?).to be true
+      expect(subject.new(sort_menu: single_sort_menu + [{ item: "Name", link: "?q[sorts]=name+asc" }]).single_sort_option?).to be false
+    end
+
+    it "links the sort button and skips the popover" do
+      html = helper.pb_rails("filter", props: {
+                               id: "one",
+                               sort_menu: single_sort_menu,
+                               template: "sort_only",
+                             })
+
+      expect(html).to have_tag("a#sort-buttonone[href='?q[sorts]=managers_popularity+asc']", text: /Popularity/)
+      expect(html).not_to have_tag("#sort-filter-btn-tooltipone")
+    end
+
+    it "keeps the sort popover when multiple options are available" do
+      html = helper.pb_rails("filter", props: {
+                               id: "many",
+                               sort_menu: single_sort_menu + [{ item: "Name", link: "?q[sorts]=name+asc", active: false }],
+                               template: "sort_only",
+                             })
+
+      expect(html).to have_tag("button#sort-buttonmany", text: /Popularity/)
+      expect(html).to have_tag("#sort-filter-btn-tooltipmany")
+      expect(html).to have_tag("a[href='?q[sorts]=name+asc']", text: /Name/)
+    end
+  end
 end
