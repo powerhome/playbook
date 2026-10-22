@@ -14,6 +14,9 @@ import {
   IconStatValue,
   IconValue,
   LabelValue,
+  Message,
+  MultipleUsers,
+  MultipleUsersStacked,
   StatValue,
   Table,
   Title,
@@ -68,6 +71,9 @@ const OnClick = () => {
     const [iconStatValueClicks, setIconStatValueClicks] = useState(0);
     const [iconValueClicks, setIconValueClicks] = useState(0);
     const [labelValueClicks, setLabelValueClicks] = useState(0);
+    const [messageClicks, setMessageClicks] = useState(0);
+    const [multipleUsersClicks, setMultipleUsersClicks] = useState(0);
+    const [multipleUsersStackedClicks, setMultipleUsersStackedClicks] = useState(0);
     const [statValueClicks, setStatValueClicks] = useState(0);
     const [titleClicks, setTitleClicks] = useState(0);
     const [titleCountClicks, setTitleCountClicks] = useState(0);
@@ -335,6 +341,81 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Message" />
+          <InteractiveExample
+              count={messageClicks}
+              label="Message"
+              reset={() => setMessageClicks(0)}
+          >
+            <Message
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                label="Clyde"
+                message="Click this Message example"
+                onClick={() => setMessageClicks((prev: number) => prev + 1)}
+                timestamp="Now"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Multiple Users" />
+          <InteractiveExample
+              count={multipleUsersClicks}
+              label="Multiple Users"
+              reset={() => setMultipleUsersClicks(0)}
+          >
+            <MultipleUsers
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  "aria-label": "Open team members",
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                maxDisplayedUsers={3}
+                onClick={() => setMultipleUsersClicks((prev: number) => prev + 1)}
+                users={[
+                  { name: "Jalen", tooltip: "Jalen" },
+                  { name: "Karl-Anthony", tooltip: "Karl-Anthony" },
+                  { name: "Josh", tooltip: "Josh" },
+                  { name: "Mikal", tooltip: "Mikal" },
+                  { name: "OG", tooltip: "OG"}
+                ]}
+                withTooltip
+            />
+            <Body text="Click the above Multiple Users example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Multiple Users Stacked" />
+          <InteractiveExample
+              count={multipleUsersStackedClicks}
+              label="Multiple Users Stacked"
+              reset={() => setMultipleUsersStackedClicks(0)}
+          >
+            <MultipleUsersStacked
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  "aria-label": "Open stacked team members",
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                onClick={() => setMultipleUsersStackedClicks((prev: number) => prev + 1)}
+                users={[
+                  { name: "Breanna" },
+                  { name: "Sabrina" },
+                  { name: "Jonquel" },
+                ]}
+            />
+            <Body text="Click the above Multiple Users Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Stat Value" />
           <InteractiveExample
               count={statValueClicks}
@@ -452,7 +533,10 @@ const OnClick = () => {
           kit-specific API and behavior. Use{" "}
           <code>cursor=&quot;pointer&quot;</code> and, when needed,{" "}
           <code>htmlOptions</code> for accessibility attributes like{" "}
-          <code>role</code> and <code>tabIndex</code>.
+          <code>role</code>, <code>tabIndex</code>, and an accessible name.
+          Adding a role and tab stop does not add keyboard activation; use an
+          appropriate native interactive element when possible, or implement
+          equivalent keyboard behavior.
         </>
       }
       VisualGuideCard={VisualGuideCard()}
@@ -558,6 +642,33 @@ const OnClick = () => {
               text={`<LabelValue label="Status" value="Open" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
             "Attached once to the root Label Value element for default and details variants.",
+          ],
+          [
+            "Message",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-message-react"
+              text={`<Message label="Pat" message="Hello" onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached once to the root Message element. Clicks from message content and children bubble to the whole-kit handler.",
+          ],
+          [
+            "Multiple Users",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-multiple-users-react"
+              text={`<MultipleUsers users={users} withTooltip onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached once to the root Multiple Users element. Avatar, tooltip trigger, and overflow count clicks bubble to the whole-kit handler; this is not a per-user callback.",
+          ],
+          [
+            "Multiple Users Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-multiple-users-stacked-react"
+              text={`<MultipleUsersStacked users={users} onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached once to the root Multiple Users Stacked element. Avatar and overflow badge clicks bubble to the whole-kit handler; this is not a per-user callback.",
           ],
           [
             "Stat Value",
