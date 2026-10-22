@@ -89,6 +89,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { IconStatValue } from 'playbook-ui'",
