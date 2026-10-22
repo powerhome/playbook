@@ -16,6 +16,9 @@ import Highlight from '../../../pb_highlight/_highlight'
 import IconStatValue from '../../../pb_icon_stat_value/_icon_stat_value'
 import IconValue from '../../../pb_icon_value/_icon_value'
 import LabelValue from '../../../pb_label_value/_label_value'
+import Message from '../../../pb_message/_message'
+import MultipleUsers from '../../../pb_multiple_users/_multiple_users'
+import MultipleUsersStacked from '../../../pb_multiple_users_stacked/_multiple_users_stacked'
 import StarRating from '../../../pb_star_rating/_star_rating'
 import StatValue from '../../../pb_stat_value/_stat_value'
 import Title from '../../../pb_title/_title'
@@ -38,6 +41,9 @@ const optedInKits = [
   { Kit: IconStatValue, name: 'IconStatValue', extraProps: { icon: 'heart', text: 'Likes', value: 42 } },
   { Kit: IconValue, name: 'IconValue', extraProps: { icon: 'heart', text: 'Favorites' } },
   { Kit: LabelValue, name: 'LabelValue', extraProps: { label: 'Label', value: 'Value' } },
+  { Kit: Message, name: 'Message', extraProps: { label: 'Sender', message: 'Test' } },
+  { Kit: MultipleUsers, name: 'MultipleUsers', extraProps: { users: [{ name: 'Pat' }] } },
+  { Kit: MultipleUsersStacked, name: 'MultipleUsersStacked', extraProps: { users: [{ name: 'Pat' }] } },
   { Kit: StatValue, name: 'StatValue', extraProps: { unit: 'mg', value: 100 } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
   { Kit: TitleCount, name: 'TitleCount', extraProps: { count: 12, title: 'Items' } },
@@ -334,6 +340,110 @@ describe('onClick GlobalEventProps', () => {
       fireEvent.click(screen.getByText('Revenue'))
       fireEvent.click(screen.getByText('99'))
       expect(onClick).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  describe('whole-kit handlers preserve nested content behavior', () => {
+    test('Message nested content fires once with the Message root as currentTarget', () => {
+      const currentTargets = []
+      const onClick = jest.fn((event) => currentTargets.push(event.currentTarget))
+      render(
+        <Message
+            data={{ testid: 'onclick-message' }}
+            label="Sender"
+            message="Click this message"
+            onClick={onClick}
+        />
+      )
+
+      fireEvent.click(screen.getByText('Click this message'))
+
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(currentTargets[0]).toBe(screen.getByTestId('onclick-message'))
+    })
+
+    test('Message child handlers still fire and bubble once to the Message root', () => {
+      const messageOnClick = jest.fn()
+      const buttonOnClick = jest.fn()
+      render(
+        <Message
+            label="Sender"
+            message="Message"
+            onClick={messageOnClick}
+        >
+          <Button
+              onClick={buttonOnClick}
+              text="Reply"
+          />
+        </Message>
+      )
+
+      fireEvent.click(screen.getByRole('button', { name: 'Reply' }))
+
+      expect(buttonOnClick).toHaveBeenCalledTimes(1)
+      expect(messageOnClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('MultipleUsers tooltip avatar fires once with the kit root as currentTarget', () => {
+      const currentTargets = []
+      const onClick = jest.fn((event) => currentTargets.push(event.currentTarget))
+      render(
+        <MultipleUsers
+            data={{ testid: 'onclick-multiple-users' }}
+            onClick={onClick}
+            users={[{ imageUrl: 'pat.jpg', name: 'Pat', tooltip: 'Pat tooltip' }]}
+            withTooltip
+        />
+      )
+
+      fireEvent.click(screen.getByAltText('Pat'))
+
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(currentTargets[0]).toBe(screen.getByTestId('onclick-multiple-users'))
+    })
+
+    test('MultipleUsers overflow count fires the whole-kit handler once', () => {
+      const onClick = jest.fn()
+      render(
+        <MultipleUsers
+            maxDisplayedUsers={2}
+            onClick={onClick}
+            users={[
+              { imageUrl: 'pat.jpg', name: 'Pat' },
+              { name: 'Sam' },
+              { name: 'Alex' },
+            ]}
+        />
+      )
+
+      fireEvent.click(screen.getByText('+2'))
+
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('MultipleUsersStacked avatar and overflow badge each fire once from the root', () => {
+      const currentTargets = []
+      const onClick = jest.fn((event) => currentTargets.push(event.currentTarget))
+      render(
+        <MultipleUsersStacked
+            data={{ testid: 'onclick-multiple-users-stacked' }}
+            onClick={onClick}
+            users={[
+              { imageUrl: 'pat.jpg', name: 'Pat' },
+              { name: 'Sam' },
+              { name: 'Alex' },
+            ]}
+        />
+      )
+
+      fireEvent.click(screen.getByAltText('Pat'))
+      fireEvent.click(screen.getByText('+2'))
+
+      expect(onClick).toHaveBeenCalledTimes(2)
+      expect(currentTargets).toEqual([
+        screen.getByTestId('onclick-multiple-users-stacked'),
+        screen.getByTestId('onclick-multiple-users-stacked'),
+      ])
     })
   })
 })
