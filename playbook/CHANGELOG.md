@@ -1,7 +1,9 @@
-# 18.2.0
+# ✍️ Your Forms, Your Rules, Your Messages!
 ##### October 22, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Say goodbye to generic browser validation messages! All Rails pb_form_with kits now support custom required-field messaging, giving you control over the copy your users see.
 
 [18.2.0](https://github.com/powerhome/playbook/tree/18.2.0) full list of changes:
 
