@@ -137,14 +137,13 @@ const FIELD_TO_INPUT_KEY = {
   favoriteColors: "typeahead",
 }
 
-// Fields whose control cannot rehydrate from a stored value on remount.
-// StarRating (interactive) keeps its own useState and ignores `rating`;
-// TimePicker only reads `defaultTime` on mount. When their pill is turned
-// off we clear the stored value so the next mount and the payload agree,
-// and so the required rules can't pass for a control that looks blank.
+// Only interactive StarRating needs the reset: it keeps its own useState and
+// ignores `rating`, so a stored rating would submit while the control looks
+// empty after remount — and the required rule would then pass for a blank-
+// looking control. Other toggle-remounted kits (TimePicker, DatePicker,
+// Dropdown, Typeahead) rehydrate from their `defaultX` / `value` props.
 const RESET_ON_DESELECT = {
   star_rating: "rating",
-  time_picker: "startTime",
 }
 
 const CODE_SNIPPETS = {
@@ -288,6 +287,7 @@ const CODE_SNIPPETS = {
   render={({ field, fieldState }) => (
     <PhoneNumberInput
         error={fieldState.error?.message}
+        initialCountry="us"
         key={\`phone-\${resetKey}\`}
         label="Phone Number"
         onChange={(data) => field.onChange(data?.number || "")}
@@ -338,10 +338,10 @@ const CODE_SNIPPETS = {
   )}
   rules={{ required: "Please select a color" }}
 />`,
-  star_rating: `// NOTE: resetField("rating") is called from toggleKey when this pill is
-// deselected, because interactive StarRating keeps its own state and
-// ignores the rating prop on remount. Without it, the required rule can pass
-// for a control that looks blank.
+  star_rating: `// NOTE: resetField("rating") runs from an effect when this pill is
+// deselected, because interactive StarRating keeps its own state and ignores
+// the rating prop on remount. Without it, the required rule can pass for a
+// control that looks blank.
 <Controller
   control={control}
   name="rating"
@@ -389,9 +389,8 @@ const CODE_SNIPPETS = {
   )}
   rules={{ required: "${REQUIRED_MESSAGE}" }}
 />`,
-  time_picker: `// NOTE: resetField("startTime") is called from toggleKey when this pill is
-// deselected so the stored value matches what the picker will paint on remount.
-// defaultTime is required for the remount to show the stored value at all.
+  time_picker: `// NOTE: TimePicker rehydrates from defaultTime={field.value} on remount, so
+// no reset is needed when the pill is turned off and back on.
 <Controller
   control={control}
   name="startTime"
@@ -727,6 +726,7 @@ const FormValidation = () => {
                     render={({ field, fieldState }) => (
                       <PhoneNumberInput
                           error={fieldState.error?.message}
+                          initialCountry="us"
                           key={`phone-${resetKey}`}
                           label="Phone Number"
                           onChange={(data) => field.onChange(data?.number || "")}

@@ -154,13 +154,12 @@ const FIELD_TO_INPUT_KEY = {
   favoriteColors: "typeahead",
 }
 
-// Fields whose control cannot rehydrate from a stored value on remount.
-// StarRating (interactive) keeps its own useState and ignores `rating`;
-// TimePicker only reads `defaultTime` on mount. When their pill is turned
-// off we clear the stored value so the next mount and the payload agree.
+// Only interactive StarRating needs the reset: it keeps its own useState and
+// ignores `rating`, so a stored rating would submit while the control looks
+// empty after remount. Other toggle-remounted kits (TimePicker, DatePicker,
+// Dropdown, Typeahead) rehydrate from their `defaultX` / `value` props.
 const RESET_ON_DESELECT = {
   star_rating: "rating",
-  time_picker: "startTime",
 }
 
 const CODE_SNIPPETS = {
@@ -305,9 +304,9 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  star_rating: `// NOTE: resetField("rating") is called from toggleKey when this pill is
-// deselected, because interactive StarRating keeps its own state and
-// ignores the rating prop on remount.
+  star_rating: `// NOTE: resetField("rating") runs from an effect when this pill is
+// deselected, because interactive StarRating keeps its own state and ignores
+// the rating prop on remount.
 <Controller
   control={control}
   name="rating"
@@ -343,8 +342,8 @@ const CODE_SNIPPETS = {
     />
   )}
 />`,
-  time_picker: `// NOTE: resetField("startTime") is called from toggleKey when this pill is
-// deselected so the stored value matches what the picker will paint on remount.
+  time_picker: `// NOTE: TimePicker rehydrates from defaultTime={field.value} on remount, so
+// no reset is needed when the pill is turned off and back on.
 <Controller
   control={control}
   name="startTime"
@@ -401,9 +400,7 @@ const CODE_SNIPPETS = {
 />`,
 }
 
-const FORM_OPEN = `import { useForm, Controller } from "react-hook-form";
-
-const { control, handleSubmit } = useForm({
+const FORM_OPEN = `const { control, handleSubmit } = useForm({
   defaultValues: {
     fullName: "John Doe",
     email: "jane@example.com",
