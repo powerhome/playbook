@@ -49,7 +49,7 @@
     },
     {
       "name": "Appearance",
-      "props": ["components", "dark", "marginBottom", "enablePillReorder", "showPillIndex", "pillDragHandle"]
+      "props": ["components", "dark", "marginBottom", "enablePillReorder", "externalDragHandle", "showPillIndex"]
     }
   ],
   "presets": [
@@ -162,7 +162,7 @@
     "clearOnContextChange": { "requires": "searchContextSelector" },
     "enablePillReorder": { "requires": "isMulti" },
     "showPillIndex": { "requires": "isMulti" },
-    "pillDragHandle": { "requires": "isMulti" }
+    "externalDragHandle": { "requires": "isMulti" }
   },
   "hints": {
     "default": {
