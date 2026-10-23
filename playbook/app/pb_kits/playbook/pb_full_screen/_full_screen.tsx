@@ -57,9 +57,16 @@ const FullScreenView = (props: FullScreenViewProps) => {
   const headerClasses = classnames("fullscreen-header", {
     "fullscreen-header-sticky": stickyHeader,
   })
-  const contentClasses = classnames("fullscreen-content", `p_${contentPadding}`, {
+  // Padding lives on an inner wrapper so sticky children (e.g. Advanced Table
+  // header) can pin flush to the top of the scrollport under the FS header.
+  // Padding on the overflow scroller itself leaves a gap equal to padding-top.
+  const contentClasses = classnames("fullscreen-content", {
     "fullscreen-content-sticky": stickyHeader,
   })
+  const contentInnerClasses = classnames(
+    "fullscreen-content-inner",
+    `p_${contentPadding}`,
+  )
   const isControlled = typeof controlledIsFullscreen === "boolean"
 
   const [internalIsFullscreen, setInternalIsFullscreen, toggleInternalFullscreen] = useFullscreen(false)
@@ -163,7 +170,9 @@ const FullScreenView = (props: FullScreenViewProps) => {
           >
             {defaultHeader}
             <div className={contentClasses}>
-              {children}
+              <div className={contentInnerClasses}>
+                {children}
+              </div>
             </div>
             <div
                 aria-hidden="true"
