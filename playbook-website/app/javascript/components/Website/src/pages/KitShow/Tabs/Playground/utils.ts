@@ -28,18 +28,10 @@ export function resolvePlatformSplit<T>(
   return (resolved as T);
 }
 
-/** Resolve platform-specific default from kit schema (handles `{ react, rails }` merge shape). */
-export function resolveSchemaDefaultForPlatform(
-  def?: PropDefinition,
-  platform: SchemaPlatform = "react",
-): unknown {
-  if (!def || def.default === undefined) return undefined;
-  return resolvePlatformSplit(def.default, platform);
-}
-
 /** Resolve React default from kit schema (handles `{ react, rails }` merge shape). */
 export function resolveSchemaDefault(def?: PropDefinition): unknown {
-  return resolveSchemaDefaultForPlatform(def, "react");
+  if (!def || def.default === undefined) return undefined;
+  return resolvePlatformSplit(def.default);
 }
 
 /** Resolve kit schema `type` for one platform (handles `{ react, rails }` merge shape). */

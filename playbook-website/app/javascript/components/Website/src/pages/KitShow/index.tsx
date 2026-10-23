@@ -9,10 +9,8 @@ import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
-import { RailsPlaygroundTab } from "./Tabs/RailsPlaygroundTab";
 import NotFound from "../NotFound";
 import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
-import { RAILS_PLAYGROUND_POC_KITS } from "./railsPlaygroundEnabledKits";
 import {
   goToStaging,
   isProductionHost,
@@ -102,10 +100,7 @@ const KitShow = () => {
     };
   }, [currentKit, loaderData]);
 
-  const showPlayground =
-    PLAYGROUND_ENABLED_KITS.includes(currentKit) &&
-    (platform !== "rails" ||
-      (RAILS_PLAYGROUND_POC_KITS as readonly string[]).includes(currentKit));
+  const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);
   const tabFromUrl = new URLSearchParams(location.search).get("tab");
   const [activeTab, setActiveTab] = useState<string>(
     tabFromUrl === "playground" && showPlayground
@@ -314,17 +309,8 @@ const KitShow = () => {
 
       <div className="kit-show-wrapper">
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">
-          {showPlayground && displayTab === "playground" && platform === "rails" && (
-            <RailsPlaygroundTab
-              kitSchema={kit_schema}
-              globalPropsSchema={global_props_schema}
-              kitName={currentKit}
-              defaultExample={examples?.[0]}
-              playgroundConfig={playground_config}
-            />
-          )}
-
-          {showPlayground && displayTab === "playground" && platform !== "rails" && (
+          {/* Playground Tab Content (React-only for now; hidden on Rails) */}
+           {showPlayground && displayTab === "playground" && (
             <PlaygroundTab
               kitSchema={kit_schema}
               globalPropsSchema={global_props_schema}
