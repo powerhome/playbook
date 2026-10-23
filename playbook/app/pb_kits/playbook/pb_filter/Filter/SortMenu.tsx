@@ -48,18 +48,23 @@ export type SortMenuProps = {
 }
 const SortMenu = ({ dark, options, value, onChange }: SortMenuProps): React.ReactElement => {
   const [hide, updateHide] = useState(true)
+  const optionNames = options ? Object.keys(options) : []
+  const singleOptionName = optionNames.length === 1 ? optionNames[0] : undefined
   const toggle = () => updateHide(!hide)
   const handleChange = (value: SortValue) => {
     updateHide(true)
     onChange([value])
   }
+  const handleClick = singleOptionName
+    ? () => onChange([nextValue(value || [], singleOptionName)])
+    : toggle
 
   const sortButton = (
     <Button
         dark={dark}
         htmlType={undefined}
         id="sort-button"
-        onClick={toggle}
+        onClick={handleClick}
         paddingRight="none"
         variant="link"
     >
@@ -74,6 +79,8 @@ const SortMenu = ({ dark, options, value, onChange }: SortMenuProps): React.Reac
       ))}
     </Button>
   )
+
+  if (singleOptionName) return sortButton
 
   return (
     <PbReactPopover
