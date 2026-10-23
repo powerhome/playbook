@@ -5,6 +5,12 @@
 
 module.exports = {
   preset: 'ts-jest',
+  globals: {
+    'ts-jest': {
+      // Keep kit tests on its compiler instead of the root's lint-only TypeScript.
+      compiler: require.resolve('typescript'),
+    },
+  },
   testEnvironment: 'jest-environment-jsdom',
   transform: {
     '^.+\\.ts?$': 'ts-jest',

@@ -76,7 +76,7 @@ RUN --mount=type=cache,id=playbook-bundler-gem-cache,uid=9999,gid=9999,target=/h
 
 FROM base as jsdeps
 
-COPY --link package.json .rubocop.yml .eslintrc.json .yarnrc.yml yarn.lock ./
+COPY --link package.json .rubocop.yml eslint.config.mjs .yarnrc.yml yarn.lock ./
 COPY --link .yarn ./.yarn
 COPY --link --chown=9999:9999 --from=jspackages /home/app/src /home/app/src
 COPY --link --chown=9999:9999 playbook-website/scripts/generate-icon-list.mjs /home/app/src/playbook-website/scripts/generate-icon-list.mjs
