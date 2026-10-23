@@ -414,7 +414,7 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="md">
-          <Title size={4} text="ListItem" />
+          <Title size={4} text="ListItem (subcomponent of List)" />
           <InteractiveExample
               reset={() => setListItemClicks({ one: 0, two: 0, three: 0 })}
               statusText={`Item 1: ${listItemClicks.one} · Item 2: ${listItemClicks.two} · Item 3: ${listItemClicks.three}`}
@@ -538,7 +538,7 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="md">
-          <Title size={4} text="ProgressStepItem" />
+          <Title size={4} text="ProgressStepItem (subcomponent of Progress Step)" />
           <InteractiveExample
               reset={() =>
                 setProgressStepItemClicks({ ordered: 0, shipped: 0, delivered: 0 })
@@ -621,7 +621,7 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="md">
-          <Title size={4} text="Timeline.Item" />
+          <Title size={4} text="Timeline.Item (subcomponent of Timeline)" />
           <InteractiveExample
               reset={() =>
                 setTimelineItemClicks({ started: 0, trip: 0, resolved: 0 })
@@ -789,8 +789,10 @@ const OnClick = () => {
           appropriate native interactive element when possible, or implement
           equivalent keyboard behavior. For repeated content (ListItem,
           Timeline.Item, ProgressStepItem), attach <code>onClick</code> on
-          each item — sibling items do not share a handler. Legend attaches to
-          its outer root (one Legend instance = one series entry).
+          each item — sibling items do not share a handler. These are
+          subcomponents, so they do not add a Global Event Props tab on their
+          parent kit show pages (List, Progress Step, Timeline). Legend
+          attaches to its outer root (one Legend instance = one series entry).
         </>
       }
       VisualGuideCard={VisualGuideCard()}
@@ -907,13 +909,13 @@ const OnClick = () => {
             "Attached to the outer Legend root. Per-entry callbacks across many Legend instances stay consumer-owned.",
           ],
           [
-            "ListItem",
+            "ListItem (subcomponent of List)",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
               id="onclick-list-item-react"
               text={`<ListItem onClick={() => alert("clicked")} cursor="pointer">Row</ListItem>`}
             />,
-            "Attached to each ListItem root (ordinary and draggable). Sibling items keep separate handlers.",
+            "Attached to each ListItem root (ordinary and draggable). Sibling items keep separate handlers. Not shown on the List kit Global Event Props tab.",
           ],
           [
             "Message",
@@ -943,13 +945,13 @@ const OnClick = () => {
             "Attached once to the root Multiple Users Stacked element. Avatar and overflow badge clicks bubble to the whole-kit handler; this is not a per-user callback.",
           ],
           [
-            "ProgressStepItem",
+            "ProgressStepItem (subcomponent of Progress Step)",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
               id="onclick-progress-step-item-react"
               text={`<ProgressStepItem status="active" onClick={() => alert("clicked")} cursor="pointer">Step</ProgressStepItem>`}
             />,
-            "Attached to each ProgressStepItem root. Sibling steps do not share a handler.",
+            "Attached to each ProgressStepItem root. Sibling steps do not share a handler. Not shown on the Progress Step kit Global Event Props tab.",
           ],
           [
             "Stat Value",
@@ -961,13 +963,13 @@ const OnClick = () => {
             "Attached once to the root Stat Value element.",
           ],
           [
-            "Timeline.Item",
+            "Timeline.Item (subcomponent of Timeline)",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
               id="onclick-timeline-item-react"
               text={`<Timeline.Item onClick={() => alert("clicked")} cursor="pointer">Event</Timeline.Item>`}
             />,
-            "Attached to each Timeline.Item root. Sibling items keep separate handlers.",
+            "Attached to each Timeline.Item root. Sibling items keep separate handlers. Not shown on the Timeline kit Global Event Props tab.",
           ],
           [
             "Title",
