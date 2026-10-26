@@ -1,0 +1,155 @@
+import React, { useEffect, useState } from 'react'
+
+import { SelectValueType } from '../_typeahead'
+
+export type PillDropTarget = {
+  after: boolean
+  index: number
+}
+
+// Vertical reach (px) above/below a pill row that still targets a drop position in that row.
+// Use Infinity to target the nearest row from anywhere on the page.
+const ROW_TOLERANCE = 80
+
+// Pointer position while a button is down / touch is active. The drop-indicator effect mounts
+// after React commits dragId, so the threshold-crossing move is already gone — seed from this.
+let lastPointer: { x: number, y: number } | null = null
+let pointerTrackingInstalled = false
+
+const ensurePointerTracking = () => {
+  if (pointerTrackingInstalled || typeof document === 'undefined') return
+  pointerTrackingInstalled = true
+
+  document.addEventListener('mousemove', (event: MouseEvent) => {
+    if (event.buttons === 0) return
+    lastPointer = { x: event.clientX, y: event.clientY }
+  }, true)
+
+  document.addEventListener('touchmove', (event: TouchEvent) => {
+    const touch = event.touches[0]
+    if (touch) lastPointer = { x: touch.clientX, y: touch.clientY }
+  }, { capture: true, passive: true })
+}
+
+const getVerticalDistance = (rect: DOMRect, y: number): number => (
+  Math.max(rect.top - y, y - rect.bottom, 0)
+)
+
+// Finds the drop position from the pointer: the nearest pill row (within ROW_TOLERANCE),
+// then the gap in that row. Left of a row targets its first pill; right of it (e.g. over
+// the input) targets after its last pill.
+const getDropTarget = (pills: Element[], x: number, y: number): PillDropTarget | null => {
+  if (pills.length === 0) return null
+
+  const rects = pills.map((pill) => pill.getBoundingClientRect())
+  const nearestRect = rects.reduce((nearest, rect) => (
+    getVerticalDistance(rect, y) < getVerticalDistance(nearest, y) ? rect : nearest
+  ))
+  if (getVerticalDistance(nearestRect, y) > ROW_TOLERANCE) return null
+
+  const rowIndexes = rects
+    .map((rect, index) => ({ index, rect }))
+    .filter(({ rect }) => rect.top < nearestRect.bottom && rect.bottom > nearestRect.top)
+    .map(({ index }) => index)
+
+  const pillAfterPointer = rowIndexes.find((index) => x < rects[index].left + rects[index].width / 2)
+  if (pillAfterPointer !== undefined) {
+    return { after: false, index: pillAfterPointer }
+  }
+
+  return { after: true, index: rowIndexes[rowIndexes.length - 1] }
+}
+
+// While a pill is dragged, a ghost copy follows the pointer and the targeted pill gets a
+// before/after drop line. Targeting the pill's current spot shows no line and commits nothing.
+const usePillDropIndicator = (
+  dragId: string,
+  value: SelectValueType[],
+  pendingReorderRef: React.MutableRefObject<SelectValueType[] | null>,
+): PillDropTarget | null => {
+  const [dropTarget, setDropTarget] = useState<PillDropTarget | null>(null)
+
+  useEffect(() => {
+    ensurePointerTracking()
+  }, [])
+
+  useEffect(() => {
+    // Only one pill can be dragged at a time, so the dragging item is unique on the page
+    const source = document.querySelector<HTMLElement>('.pb_typeahead_draggable_pills .is_dragging')
+    if (!dragId || !source?.parentElement) return undefined
+
+    const pills = Array.from(source.parentElement.children)
+    const sourceIndex = value.findIndex((item) => item.value === dragId)
+    if (sourceIndex < 0 || pills.length === 0) return undefined
+
+    const sourceRect = source.getBoundingClientRect()
+
+    const ghost = source.cloneNode(true) as HTMLElement
+    ghost.className = 'pb_typeahead_pill_drag_preview'
+    ghost.setAttribute('inert', '')
+    ghost.style.left = `${sourceRect.left}px`
+    ghost.style.top = `${sourceRect.top}px`
+    ghost.style.width = `${sourceRect.width}px`
+    document.body.appendChild(ghost)
+
+    // Anchor to the pill center — not the first mousemove we hear. The effect mounts
+    // after React commits the drag, so a late first-move origin leaves the ghost
+    // permanently offset when the pointer moved quickly before listeners attached.
+    const pointerOrigin = {
+      x: sourceRect.left + sourceRect.width / 2,
+      y: sourceRect.top + sourceRect.height / 2,
+    }
+    pendingReorderRef.current = null
+
+    const handlePointerMove = (x: number, y: number) => {
+      ghost.style.translate = `${x - pointerOrigin.x}px ${y - pointerOrigin.y}px`
+
+      const target = getDropTarget(pills, x, y)
+      const targetSlot = target ? target.index + Number(target.after) : -1
+      const isCurrentPosition = targetSlot === sourceIndex || targetSlot === sourceIndex + 1
+
+      if (!target || isCurrentPosition) {
+        pendingReorderRef.current = null
+        setDropTarget(null)
+        return
+      }
+
+      const reordered = value.filter((item) => item.value !== dragId)
+      reordered.splice(targetSlot > sourceIndex ? targetSlot - 1 : targetSlot, 0, value[sourceIndex])
+      pendingReorderRef.current = reordered
+
+      setDropTarget((current) => {
+        const isSameTarget = current?.index === target.index && current.after === target.after
+        return isSameTarget ? current : target
+      })
+    }
+
+    const handleMouseMove = (event: MouseEvent) => {
+      handlePointerMove(event.clientX, event.clientY)
+    }
+
+    const handleTouchMove = (event: TouchEvent) => {
+      const touch = event.touches[0]
+      if (touch) handlePointerMove(touch.clientX, touch.clientY)
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('touchmove', handleTouchMove, { passive: true })
+
+    // Apply the pointer position from the move that started the drag (already fired).
+    if (lastPointer) {
+      handlePointerMove(lastPointer.x, lastPointer.y)
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('touchmove', handleTouchMove)
+      ghost.remove()
+      setDropTarget(null)
+    }
+  }, [dragId, pendingReorderRef, value])
+
+  return dropTarget
+}
+
+export default usePillDropIndicator

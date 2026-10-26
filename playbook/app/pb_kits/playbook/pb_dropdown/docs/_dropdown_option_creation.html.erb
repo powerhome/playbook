@@ -1,0 +1,16 @@
+<%= pb_rails("dropdown", props: {
+  allow_option_creation: true,
+  label: "Grid Alignment Group",
+  margin_bottom: "md",
+  name: "grid_alignment_group",
+  options: [{ id: "existing", label: "Existing group", value: "existing" }],
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  allow_option_creation: true,
+  label: "Home IDs",
+  multi_select: true,
+  name: "home_ids[]",
+  options: [{ id: "existing", label: "Existing group", value: "existing" }],
+  placeholder: "Type a home ID and press Enter",
+}) %>
