@@ -76,7 +76,8 @@ test('contentPadding is lg by default', () => {
 
   fireEvent.click(screen.getByText('Open'))
 
-  expect(document.querySelector('.fullscreen-content')).toHaveClass('p_lg')
+  expect(document.querySelector('.fullscreen-content-inner')).toHaveClass('p_lg')
+  expect(document.querySelector('.fullscreen-content')).not.toHaveClass('p_lg')
 })
 
 test('contentPadding can be customized', () => {
@@ -92,7 +93,8 @@ test('contentPadding can be customized', () => {
 
   fireEvent.click(screen.getByText('Open'))
 
-  expect(document.querySelector('.fullscreen-content')).toHaveClass('p_sm')
+  expect(document.querySelector('.fullscreen-content-inner')).toHaveClass('p_sm')
+  expect(document.querySelector('.fullscreen-content')).not.toHaveClass('p_sm')
 })
 
 test('headerText renders with title styling by default', () => {

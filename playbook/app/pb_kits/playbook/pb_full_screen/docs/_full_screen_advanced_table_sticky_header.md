@@ -1,0 +1,1 @@
+Pair Fullscreen `stickyHeader` with Advanced Table `tableProps.sticky` so the fullscreen title bar and table column headers both stay visible while scrolling. Use `responsive="none"` on the table so sticky headers are not broken by a nested horizontal scroll container.
