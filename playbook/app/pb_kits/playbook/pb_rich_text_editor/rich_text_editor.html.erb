@@ -4,7 +4,9 @@
   <% if object.label.present? %>
     <label for="<%= object.input_id %>">
       <% if object.required_indicator %>
-        <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) %><span style="color: #DA0014;"> *</span>
+        <%= pb_rails("caption", props: { color: "lighter", dark: object.dark }) do %>
+          <%= object.label %><span style="color: #DA0014;"> *</span>
+        <% end %>
       <% else %>
         <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) %>
       <% end %>
