@@ -630,3 +630,129 @@ test(':set calls onChange but does not dispatch result-option-select', async () 
     selectHandler,
   )
 })
+
+test('required Typeahead in validated form shows its own error and stays mounted after selection', async () => {
+  render(
+    <form data-pb-form-validation="true">
+      <Typeahead
+          data={{ testid: 'required-validated-typeahead' }}
+          isMulti={false}
+          name="favorite_color"
+          options={options}
+          required
+          validation={{ message: 'Please select a color' }}
+      />
+    </form>
+  )
+
+  const kit = screen.getByTestId('required-validated-typeahead')
+  const requiredInput = kit.querySelector('input[required]')
+  expect(requiredInput).toBeInTheDocument()
+
+  act(() => {
+    requiredInput.dispatchEvent(new Event('invalid', { bubbles: false, cancelable: true }))
+  })
+
+  await waitFor(() => {
+    expect(kit.querySelector('.pb_body_kit_negative')).toHaveTextContent('Please select a color')
+  })
+
+  // PbFormValidation must not own this input — no injected sibling error on the
+  // react-select RequiredInput parent (that path caused removeChild crashes).
+  const injectedSibling = Array.from(requiredInput.parentElement.children).find(
+    (child) => child.classList?.contains('pb_body_kit_negative')
+  )
+  expect(injectedSibling).toBeUndefined()
+
+  const control = kit.querySelector('.typeahead-kit-select__control')
+  fireEvent.mouseDown(control)
+
+  await waitFor(() => {
+    expect(document.querySelector('.typeahead-kit-select__option')).toBeInTheDocument()
+  })
+
+  fireEvent.click(screen.getByText('Orange'))
+
+  await waitFor(() => {
+    expect(screen.getByTestId('required-validated-typeahead')).toBeInTheDocument()
+    expect(
+      screen.getByTestId('required-validated-typeahead').querySelector('.pb_body_kit_negative')
+    ).not.toBeInTheDocument()
+  })
+})
+
+test('required Typeahead restores validation error after clear and resubmit', async () => {
+  render(
+    <form data-pb-form-validation="true">
+      <Typeahead
+          data={{ testid: 'required-clear-resubmit-typeahead' }}
+          defaultValue={options[0]}
+          isMulti={false}
+          name="favorite_color"
+          options={options}
+          required
+          validation={{ message: 'Please select a color' }}
+      />
+    </form>
+  )
+
+  const kit = screen.getByTestId('required-clear-resubmit-typeahead')
+  const clearIndicator = kit.querySelector('.typeahead-kit-select__clear-indicator')
+  expect(clearIndicator).toBeInTheDocument()
+  fireEvent.mouseDown(clearIndicator)
+
+  await waitFor(() => {
+    expect(kit.querySelector('input[required]')).toBeInTheDocument()
+  })
+
+  const requiredInput = kit.querySelector('input[required]')
+  act(() => {
+    requiredInput.dispatchEvent(new Event('invalid', { bubbles: false, cancelable: true }))
+  })
+
+  await waitFor(() => {
+    expect(kit.querySelector('.pb_body_kit_negative')).toHaveTextContent('Please select a color')
+  })
+})
+
+test('required Typeahead suppresses native invalid UI only inside validated Playbook forms', () => {
+  const { unmount } = render(
+    <form data-pb-form-validation="true">
+      <Typeahead
+          data={{ testid: 'native-invalid-validated' }}
+          isMulti={false}
+          name="color"
+          options={options}
+          required
+      />
+    </form>
+  )
+
+  let requiredInput = screen.getByTestId('native-invalid-validated').querySelector('input[required]')
+  const validatedEvent = new Event('invalid', { bubbles: false, cancelable: true })
+  act(() => {
+    requiredInput.dispatchEvent(validatedEvent)
+  })
+  expect(validatedEvent.defaultPrevented).toBe(true)
+
+  unmount()
+
+  render(
+    <form>
+      <Typeahead
+          data={{ testid: 'native-invalid-unvalidated' }}
+          isMulti={false}
+          name="color"
+          options={options}
+          required
+      />
+    </form>
+  )
+
+  requiredInput = screen.getByTestId('native-invalid-unvalidated').querySelector('input[required]')
+  const unvalidatedEvent = new Event('invalid', { bubbles: false, cancelable: true })
+  act(() => {
+    requiredInput.dispatchEvent(unvalidatedEvent)
+  })
+  expect(unvalidatedEvent.defaultPrevented).toBe(false)
+})
