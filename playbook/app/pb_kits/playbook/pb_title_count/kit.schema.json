@@ -54,6 +54,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { TitleCount } from 'playbook-ui'",

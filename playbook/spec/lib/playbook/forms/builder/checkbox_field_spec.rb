@@ -37,6 +37,19 @@ RSpec.describe Playbook::Forms::Builder, "#check_box", type: :helper do
     expect(rendered).to have_tag("input[type=checkbox][name='example[terms]'][required]")
   end
 
+  it "passes validation_message as data-message on the checkbox input" do
+    rendered = render_form do |builder|
+      concat builder.check_box(
+        :terms,
+        props: { required: true, validation_message: "Please accept the terms" }
+      )
+    end
+
+    expect(rendered).to have_tag(
+      "input[type=checkbox][name='example[terms]'][required][data-message='Please accept the terms']"
+    )
+  end
+
   it "passes checked and unchecked values through to the Rails checkbox helper" do
     rendered = render_form do |builder|
       concat builder.check_box(:terms, checked_value: "yes", unchecked_value: "no")
@@ -44,5 +57,40 @@ RSpec.describe Playbook::Forms::Builder, "#check_box", type: :helper do
 
     expect(rendered).to have_tag("input[type=hidden][name='example[terms]'][value='no']")
     expect(rendered).to have_tag("input[type=checkbox][name='example[terms]'][value='yes']")
+  end
+
+  describe "input_options" do
+    it "passes data" do
+      rendered = render_form do |builder|
+        concat builder.check_box(:terms, props: { input_options: { data: { something: true } } })
+      end
+
+      expect(rendered).to have_tag("input[type=checkbox][name='example[terms]'][data-something='true']")
+    end
+
+    it "appends classname" do
+      rendered = render_form do |builder|
+        concat builder.check_box(:terms, props: { input_options: { classname: "custom" } })
+      end
+
+      expect(rendered).to have_tag("input.custom[type=checkbox][name='example[terms]']")
+    end
+
+    it "passes extra attributes" do
+      rendered = render_form do |builder|
+        concat builder.check_box(:terms, props: { input_options: { id: "terms-input", tabindex: 0 } })
+      end
+
+      expect(rendered).to have_tag("input#terms-input[type=checkbox][name='example[terms]'][tabindex='0']")
+    end
+
+    it "uses classname and ignores class" do
+      rendered = render_form do |builder|
+        concat builder.check_box(:terms, props: { input_options: { class: "ignored", classname: "custom" } })
+      end
+
+      expect(rendered).to have_tag("input.custom[type=checkbox][name='example[terms]']")
+      expect(rendered).not_to have_tag("input.ignored")
+    end
   end
 end

@@ -37,6 +37,7 @@ type PhoneNumberInputProps = {
   preferredCountries?: string[],
   required?: boolean,
   requiredIndicator?: boolean,
+  validationMessage?: string,
   value?: string,
   formatAsYouType?: boolean,
   strictMode?: boolean,
@@ -95,12 +96,15 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     required = false,
     requiredIndicator = false,
     preferredCountries = [],
+    validationMessage = "",
     value = "",
     formatAsYouType = false,
     strictMode = false,
     countrySearch = false,
     showPlaceholder = false,
   } = props
+
+  const requiredFieldMessage = validationMessage || 'Missing phone number'
 
   const showPlaceholderRef = useRef(showPlaceholder)
   showPlaceholderRef.current = showPlaceholder
@@ -272,7 +276,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       if (inputValue.length === 1) {
         return showFormattedError('too short')
       } else if (inputValue.length === 0) {
-        setError('Missing phone number')
+        setError(requiredFieldMessage)
         return true
       } else {
         return showFormattedError()
@@ -298,7 +302,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   // Validation for required empty fields
   const validateRequiredField = () => {
     if (required && (!inputValue || inputValue.trim() === '')) {
-      setError('Missing phone number')
+      setError(requiredFieldMessage)
       return true
     }
     return false
@@ -388,19 +392,18 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         const isEmpty = !inputValue || inputValue.trim() === ''
 
         if (required && isEmpty) {
-          setError('Missing phone number')
+          setError(requiredFieldMessage)
           formSubmittedRef.current = true
           setFormSubmitted(true)
-          return 'Missing phone number'
+          return requiredFieldMessage
         }
 
         if (isEmpty) {
           // Show missing phone number error
-          const errorMessage = 'Missing phone number'
-          setError(errorMessage)
+          setError(requiredFieldMessage)
           setHasTyped(true)
           // Only return error for React Hook Form if field is required
-          return required ? errorMessage : true
+          return required ? requiredFieldMessage : true
         }
 
         if (!itiRef.current) {

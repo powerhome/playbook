@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "date"
+require "English"
 require "json"
 require "net/http"
 require "shellwords"
@@ -22,6 +23,7 @@ module Playbook
 
     OTHER_HEADER = "**Other:**"
     RELEASE_IMAGE = "![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)"
+    RC_RELEASE_IMAGE = "![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)"
 
     SECTIONS = [
       { header: "**New Kits:**", labels: ["new kit"] },
@@ -59,6 +61,8 @@ module Playbook
       abort "CHANGELOG.md already has a section for #{version}. Aborting." if existing.match?(version_link)
 
       ensure_github_auth!
+      # Stable notes list every PR merged after the previous semver tag.
+      # RC tags are not a boundary, and pr_numbers_in_tag must not be applied here.
       since_time = tag_time(previous_version)
       pulls = fetch_merged_pulls(since_time, existing_pr_numbers(existing))
       section = build_release_section(
@@ -158,10 +162,19 @@ module Playbook
     end
 
     def select_pulls_for_rc(pulls, rc_version, last_documented: nil)
-      start_time = tag_time(since_for_rc(rc_version, last_documented: last_documented))
+      since_version = since_for_rc(rc_version, last_documented: last_documented)
+      start_time = tag_time(since_version)
       end_time = tag_time_if_present(rc_version)
+      released_numbers = pr_numbers_in_tag(since_version)
+      # GitHub merged_at can be a second after the tagged commit, which drops
+      # the PR the RC tag itself points at. Trust the tag history for those.
+      shipped_numbers = pr_numbers_in_tag(rc_version) - released_numbers
 
       pulls.select do |pull_request|
+        number = pull_request["number"]
+        next false if released_numbers.include?(number)
+        next true if shipped_numbers.include?(number)
+
         merged_at = pull_request["merged_at"]
         next false if merged_at <= start_time
         next false if end_time && merged_at > end_time
@@ -251,6 +264,20 @@ module Playbook
       end
 
       nil
+    end
+
+    # RC only. GitHub merge times can land a second after the tagged commit,
+    # so a timestamp window alone can pull already-released PRs into the next RC.
+    # Stable changelog generation must not use this; it includes PRs that shipped in RCs.
+    def pr_numbers_in_tag(version)
+      [version, "v#{version}"].each do |tag|
+        subjects = `git -C #{Shellwords.escape(git_root)} log --format=%s #{Shellwords.escape(tag)} -- 2>/dev/null`
+        next unless $CHILD_STATUS.success?
+
+        return subjects.scan(/\(#(\d+)\)$|^Merge pull request #(\d+)/).flatten.compact.map(&:to_i).to_set
+      end
+
+      Set.new
     end
 
     def tag_time(version)
@@ -364,12 +391,15 @@ module Playbook
       lines << "##### #{formatted_date}"
       lines << ""
 
-      unless mode == :rc
+      if mode == :rc
+        lines << RC_RELEASE_IMAGE
+      else
         lines << RELEASE_IMAGE
         lines << ""
         lines << "Your feature description goes here."
-        lines << ""
       end
+
+      lines << ""
 
       lines << "[#{version}](https://github.com/#{REPO}/tree/#{version}) full list of changes:"
       lines << ""

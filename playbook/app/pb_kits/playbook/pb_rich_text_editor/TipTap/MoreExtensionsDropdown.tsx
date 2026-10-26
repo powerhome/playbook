@@ -30,8 +30,9 @@ const popoverReference = (
         className="toolbar_button_icon"
         justify="center"
     >
-      <Icon icon="ellipsis"
-          size="lg"
+      <Icon
+          icon="ellipsis"
+          size="1x"
       />
     </Flex>
   </button>
@@ -40,6 +41,7 @@ const popoverReference = (
 
   return (
       <PbReactPopover
+          className='pb_tiptap_toolbar_dropdown_popover'
           closeOnClick='outside'
           padding='none'
           placement="bottom"
@@ -52,9 +54,15 @@ const popoverReference = (
             paddingTop={extensions.length > 1 ? "xs" : "none"} 
             variant="subtle"
         >
-          {extensions && extensions.map(({ icon, text, onclick, isActive}: any, index: number) => ( 
+          {extensions && extensions.map(({ icon, text, onclick, isActive}: any, index: number) => {
+            // TipTap v3: host useEditor no longer re-renders on selection by default.
+            // Prefer isActive as a function so EditorToolbar's transaction subscription
+            // can refresh custom extension highlights without shouldRerenderOnTransaction.
+            const active = typeof isActive === "function" ? isActive() : !!isActive
+
+            return (
             <NavItem
-                className={`pb_tiptap_toolbar_dropdown_list_item ${isActive ? "is-active" : ""}`}
+                className={`pb_tiptap_toolbar_dropdown_list_item ${active ? "is-active" : ""}`}
                 cursor="pointer"
                 iconLeft={icon}
                 key={`${text}_${index}`}
@@ -64,7 +72,8 @@ const popoverReference = (
                 paddingTop='xxs'
                 text={text}
             />
-          ))}
+            )
+          })}
         </Nav>
       </PbReactPopover>
   )

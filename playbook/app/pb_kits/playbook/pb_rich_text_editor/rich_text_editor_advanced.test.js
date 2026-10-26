@@ -3,7 +3,6 @@ import { fireEvent, render, waitFor } from "../utilities/test-utils";
 import { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Link from "@tiptap/extension-link";
 import { defaultMarkdownParser } from "prosemirror-markdown";
 import { DOMSerializer } from "prosemirror-model";
 
@@ -13,11 +12,14 @@ import { createMarkdownToHTML, handleMarkdownPaste } from "./TipTap/markdownPast
 
 const kitClass = "pb_rich_text_editor_advanced_container";
 const markdownToHTML = createMarkdownToHTML(defaultMarkdownParser, DOMSerializer);
+const starterKit = StarterKit.configure({ trailingNode: false });
 
 const EditorTest = (props) => {
   const editor = useEditor({
-    extensions: [StarterKit, Link],
+    extensions: [starterKit],
     content: "",
+    // TipTap v3: keep toolbar/tests in sync with editor state without host-app config.
+    shouldRerenderOnTransaction: true,
   });
 
   return (
@@ -59,7 +61,7 @@ describe("TipTap list selection", () => {
     ["bulletList", "ul"],
     ["orderedList", "ol"],
   ])("excludes a heading touched only at its end boundary from a %s", (listType, tag) => {
-    const editor = new Editor({ extensions: [StarterKit], content });
+    const editor = new Editor({ extensions: [starterKit], content });
     const headingEnd = editor.state.doc.child(0).nodeSize - 1;
     const paragraphEnd = headingEnd + editor.state.doc.child(1).nodeSize;
 
@@ -76,7 +78,7 @@ describe("TipTap list selection", () => {
   });
 
   test("excludes a paragraph touched only at its start boundary", () => {
-    const editor = new Editor({ extensions: [StarterKit], content });
+    const editor = new Editor({ extensions: [starterKit], content });
     const firstParagraphStart = editor.state.doc.child(0).nodeSize + 1;
     const secondParagraphStart =
       editor.state.doc.child(0).nodeSize + editor.state.doc.child(1).nodeSize + 1;
@@ -94,7 +96,7 @@ describe("TipTap list selection", () => {
 
   test("separates a pasted heading and body joined by a hard break", () => {
     const editor = new Editor({
-      extensions: [StarterKit],
+      extensions: [starterKit],
       content: "<p><strong>How should it work?</strong><br>Keep React and Rails visible.</p>",
     });
     const hardBreakEnd = editor.state.doc.child(0).child(1).nodeSize +

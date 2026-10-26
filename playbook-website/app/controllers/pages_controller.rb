@@ -87,11 +87,9 @@ class PagesController < ApplicationController
       Rails.logger.error("Error reading kit schema: #{e.message}")
     end
 
-    # Get kit schema and global props schema for playground.
-    # On production, omit playground_config — kit Playground tabs run on staging only.
     kit_schema = read_kit_schema(@kit)
     global_props_schema = read_global_props_schema
-    playground_config = playbook_production_host? ? nil : read_playground_config(@kit)
+    playground_config = rails_playground_enabled? ? read_playground_config(@kit) : nil
 
     # first example from each kit
     examples = @examples.map do |example|
@@ -208,8 +206,7 @@ class PagesController < ApplicationController
     end
 
     if on_playground && request.format.json?
-      # Production must not expose Playground builder payloads (VPN / staging only).
-      if playbook_production_host?
+      unless rails_playground_enabled?
         head :not_found
         return
       end
@@ -602,11 +599,6 @@ private
         end
       end
     end
-  end
-
-  # Deployed production website host only (not review apps / localhost / staging).
-  def playbook_production_host?
-    request.host == "playbook.powerapp.cloud"
   end
 
   # JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects

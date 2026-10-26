@@ -2,6 +2,7 @@ import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
 import { subscribeFloatingKitReposition, positionDropdownPortalToWrapper } from "../utilities/floatingPortalHosts";
+import { setQuickPickDateOnPicker } from "./utilities/quickpickDateSync";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -131,6 +132,46 @@ export default class PbDropdown extends PbEnhancedElement {
     return root.querySelectorAll(OPTION_SELECTOR);
   }
 
+  get isAsync() {
+    return this.element.dataset.pbDropdownAsync === "true";
+  }
+
+  get canOpenMenu() {
+    return !this.isAsync || Boolean(this.searchBar || this.hasAsyncMenuContent());
+  }
+
+  hasAsyncMenuContent() {
+    return Boolean(this.target?.querySelector(
+      `${OPTION_SELECTOR}, [data-dropdown-async-status], .dropdown_no_options`,
+    ));
+  }
+
+  // An empty async menu opens with the empty message until a search replaces it.
+  showAsyncEmptyState() {
+    if (!this.isAsync || this.hasAsyncMenuContent()) return;
+    this.getOptionsParent()?.replaceChildren();
+    this.showNoOptionsMessage("No results found");
+  }
+
+  // Selected multi-select rows stay in the list with display:none. An open menu of only
+  // those rows collapses to its border, so show the empty message instead.
+  showAsyncMultiSelectMenu() {
+    if (!this.isAsync || !this.isMultiSelect) return;
+    const options = Array.from(this.queryAllOptions());
+    if (!options.length) return;
+    const hasVisibleOption = options.some((opt) => opt.style.display !== "none");
+    if (hasVisibleOption) this.removeNoOptionsMessage();
+    else this.showNoOptionsMessage("No results found");
+  }
+
+  asyncRequestId = 0;
+  asyncResultsCleared = false;
+  asyncSearchInterrupted = false;
+  asyncSettledOptions = [];
+  asyncHasSettledSearch = false;
+  asyncSettledEmpty = null;
+  asyncSettledStatus = null;
+  selectedOptionJson = null;
   selectedOptions = new Set();
   clearBtn = null;
 
@@ -152,6 +193,12 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     };
 
+    this.activeStyleClass = this.activeStyleClasses();
+    if (this.activeStyleClass) {
+      this.queryAllOptions().forEach((opt) => {
+        opt.classList.add(...this.activeStyleClass.split(" "));
+      });
+    }
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isDisabled = this.element.dataset.pbDropdownDisabled === "true";
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
@@ -162,6 +209,8 @@ export default class PbDropdown extends PbEnhancedElement {
     const baseInput = this.baseInput;
     this.wasOriginallyRequired =
       baseInput && baseInput.hasAttribute("required");
+    // Apply context options before default value so SSR/default selection matches current context
+    this.bindContextSelector();
     this.setDefaultValue();
     this.bindEventListeners();
     this.bindSearchInput();
@@ -184,11 +233,13 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updateClearButton();
     this.applyDisabledState();
 
-    // Listen for clear and select events from external source
+    // Listen for clear, select, and updateOptions events from external source
     this.handleClearEventBound = this.handleClearEvent.bind(this);
     document.addEventListener("pb:dropdown:clear", this.handleClearEventBound);
     this.handleSelectEventBound = this.handleSelectEvent.bind(this);
     document.addEventListener("pb:dropdown:select", this.handleSelectEventBound);
+    this.handleUpdateOptionsEventBound = this.handleUpdateOptionsEvent.bind(this);
+    document.addEventListener("pb:dropdown:updateOptions", this.handleUpdateOptionsEventBound);
 
     // Listen for custom_event_type to clear on custom events
     const customEventTypeString = this.element.dataset.customEventType;
@@ -202,9 +253,27 @@ export default class PbDropdown extends PbEnhancedElement {
         document.addEventListener(eventType, this.handleCustomClearBound);
       });
     }
+
+    // Listen for options_event_type to replace options on custom/Turbo events
+    const optionsEventTypeString = this.element.dataset.optionsEventType;
+    if (optionsEventTypeString) {
+      this.optionsEventTypes = optionsEventTypeString
+        .split(",")
+        .map((e) => e.trim())
+        .filter(Boolean);
+      this.handleOptionsEventTypeBound = this.handleOptionsEventType.bind(this);
+      this.optionsEventTypes.forEach((eventType) => {
+        document.addEventListener(eventType, this.handleOptionsEventTypeBound);
+      });
+    }
   }
 
   disconnect() {
+    if (this.isAsync) this.cancelAsyncSearch();
+    if (this.formElement && this.formResetHandler) {
+      this.formElement.removeEventListener("reset", this.formResetHandler);
+      this.formResetHandler = null;
+    }
     this.unmountPortalMenu();
 
     // Clean up stored instance reference
@@ -263,10 +332,21 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.handleSelectEventBound) {
       document.removeEventListener("pb:dropdown:select", this.handleSelectEventBound)
     }
+    if (this.handleUpdateOptionsEventBound) {
+      document.removeEventListener("pb:dropdown:updateOptions", this.handleUpdateOptionsEventBound)
+    }
     if (this.customClearEventTypes && this.handleCustomClearBound) {
       this.customClearEventTypes.forEach((eventType) => {
         document.removeEventListener(eventType, this.handleCustomClearBound)
       })
+    }
+    if (this.optionsEventTypes && this.handleOptionsEventTypeBound) {
+      this.optionsEventTypes.forEach((eventType) => {
+        document.removeEventListener(eventType, this.handleOptionsEventTypeBound)
+      })
+    }
+    if (this.contextElement && this.handleContextChangeBound) {
+      this.contextElement.removeEventListener("change", this.handleContextChangeBound)
     }
   }
 
@@ -280,7 +360,8 @@ export default class PbDropdown extends PbEnhancedElement {
       ? this.selectedOptions.size > 0
       : Boolean(this.baseInput?.value);
 
-    this.clearBtn.style.display = hasSelection ? "" : "none";
+    const hasQuery = this.isAsync && Boolean(this.searchInput?.value || this.searchBar?.value);
+    this.clearBtn.style.display = hasSelection || hasQuery ? "" : "none";
   }
 
   applyDisabledState() {
@@ -355,7 +436,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.searchBar = this.element.querySelector(SEARCH_BAR_SELECTOR);
     if (!this.searchBar) return;
 
-    this.searchBarHandler = (e) => this.handleSearch(e.target.value)
+    this.searchBarHandler = (e) => this.handleSearchInput(e.target.value, e.target)
     this.searchBar.addEventListener('input', this.searchBarHandler);
   }
 
@@ -368,7 +449,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.trigger?.addEventListener('click', this.searchInputFocusHandler);
 
     // Live filter
-    this.searchInputHandler = (e) => this.handleSearch(e.target.value)
+    this.searchInputHandler = (e) => this.handleSearchInput(e.target.value, e.target)
     this.searchInput.addEventListener('input', this.searchInputHandler);
   }
 
@@ -378,6 +459,8 @@ export default class PbDropdown extends PbEnhancedElement {
       const shouldConstrain = el.classList.contains("constrain_height");
       el.style.height = "auto";
       requestAnimationFrame(() => {
+        // Closing sets display:none before this frame. Measuring then stores a 0 height.
+        if (!el.classList.contains("open")) return;
         if (shouldConstrain) {
           // Calculate 18em in pixels (matches SCSS max-height: 18em)
           const fontSize = parseFloat(getComputedStyle(el).fontSize) || 16;
@@ -510,8 +593,32 @@ export default class PbDropdown extends PbEnhancedElement {
     });
   }
 
+  emitInputChange(value, reason) {
+    this.element.dispatchEvent(new CustomEvent("pb:dropdown:input", {
+      bubbles: true,
+      detail: { value, reason },
+    }));
+  }
+
+  handleSearchInput(term, source) {
+    if (this.isDisabled) return;
+    this.handleSearch(term);
+    if (!this.isAsync) return;
+    if (!this.isMultiSelect && source === this.searchInput && term === "" && this.baseInput.value) {
+      this.selectedOptionJson = null;
+      this.baseInput.value = "";
+      this.emitSelectionChange();
+    }
+    this.updateClearButton();
+    this.emitInputChange(term, "input");
+  }
+
   handleSearch(term = "") {
     if (this.isDisabled) return;
+    if (this.isAsync) {
+      this.searchAsync(term);
+      return;
+    }
     const lcTerm = term.toLowerCase();
     let hasMatch = false;
     this.queryAllOptions().forEach((opt) => {
@@ -541,7 +648,213 @@ export default class PbDropdown extends PbEnhancedElement {
     }
   }
 
-  // Keep the selected label in the autocomplete input, but do not treat it as a search filter
+  cancelAsyncSearch() {
+    this.asyncRequestId += 1;
+    clearTimeout(this.asyncSearchTimer);
+    this.asyncSearchTimer = null;
+    clearTimeout(this.asyncLoadingTimer);
+    this.element.setAttribute("aria-busy", "false");
+    this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+  }
+
+  // "Emily S" can miss after "Emily Smith" was already loaded. Keep labels that contain the query.
+  settledOptionsMatchingQuery(term) {
+    const query = String(term).trim().toLowerCase().replace(/\s+/g, " ");
+    if (!query || !this.asyncHasSettledSearch) return [];
+    return this.asyncSettledOptions.filter((node) => {
+      try {
+        const label = String(JSON.parse(node.dataset.dropdownOptionLabel).label);
+        return label.trim().toLowerCase().replace(/\s+/g, " ").includes(query);
+      } catch {
+        return false;
+      }
+    });
+  }
+
+  // The selected-label filter hides siblings before the next search snapshots them.
+  // A shorter query can match those rows, so the clone must not keep display:none.
+  cloneSettledAsyncOption(node) {
+    const option = node.cloneNode(true);
+    const selected = this.isMultiSelect && Array.from(this.selectedOptions).some((raw) =>
+      this.sameOption(raw, option.dataset.dropdownOptionLabel),
+    );
+    option.style.display = selected ? "none" : "";
+    return option;
+  }
+
+  rememberSettledAsyncResults() {
+    const parent = this.getOptionsParent();
+    this.asyncSettledOptions = parent ? Array.from(parent.children).map((node) => node.cloneNode(true)) : [];
+    const empty = this.target?.querySelector(".dropdown_no_options");
+    const status = this.target?.querySelector("[data-dropdown-async-status]");
+    this.asyncSettledEmpty = empty ? empty.cloneNode(true) : null;
+    this.asyncSettledStatus = status ? status.cloneNode(true) : null;
+  }
+
+  restoreSettledAsyncResults() {
+    const parent = this.getOptionsParent();
+    if (!parent) return;
+    parent.replaceChildren(...this.asyncSettledOptions.map((node) => node.cloneNode(true)));
+    this.removeNoOptionsMessage();
+    this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+    if (this.asyncSettledEmpty && this.target) this.target.appendChild(this.asyncSettledEmpty.cloneNode(true));
+    if (this.asyncSettledStatus && this.target) this.target.appendChild(this.asyncSettledStatus.cloneNode(true));
+    this.asyncResultsCleared = false;
+  }
+
+  forgetSettledAsyncResults() {
+    this.asyncResultsCleared = false;
+    this.asyncSearchInterrupted = false;
+    this.asyncSettledOptions = [];
+    this.asyncHasSettledSearch = false;
+    this.asyncSettledEmpty = null;
+    this.asyncSettledStatus = null;
+  }
+
+  // A multi-select pick ends the search. The next open shows the empty message until a new query.
+  dropAsyncSearchResults() {
+    this.forgetSettledAsyncResults();
+    this.cancelAsyncSearch();
+    this.getOptionsParent()?.replaceChildren();
+    this.removeNoOptionsMessage();
+    this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+    this.resetFocus();
+  }
+
+  clearAsyncResults() {
+    this.forgetSettledAsyncResults();
+    this.cancelAsyncSearch();
+    this.getOptionsParent()?.replaceChildren();
+    this.removeNoOptionsMessage();
+    this.resetFocus();
+    this.unmountPortalMenu();
+    this.target.classList.remove("open");
+    this.target.classList.add("close");
+    this.target.style.height = "0px";
+    this.updateArrowDisplay(false);
+  }
+
+  showAsyncStatus(message) {
+    this.target.querySelector("[data-dropdown-async-status]")?.remove();
+    const status = document.createElement("div");
+    status.dataset.dropdownAsyncStatus = "true";
+    status.className = "pb_body_kit_light pb_item_kit p_xs display_flex justify_content_center";
+    status.setAttribute("role", "status");
+    status.textContent = message;
+    this.target.appendChild(status);
+    this.adjustDropdownHeight();
+    this.applyPortalPosition();
+  }
+
+  searchAsync(term) {
+    this.cancelAsyncSearch();
+    this.asyncSearchInterrupted = false;
+
+    const minimumLength = Number(this.element.dataset.pbDropdownSearchTermMinimumLength ?? 3);
+    if (term.length < minimumLength) {
+      if (!this.searchBar) {
+        this.clearAsyncResults();
+      } else {
+        this.forgetSettledAsyncResults();
+        this.getOptionsParent()?.replaceChildren();
+        this.removeNoOptionsMessage();
+        this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+        this.resetFocus();
+        if (this.target?.classList.contains("open")) this.showAsyncEmptyState();
+        this.adjustDropdownHeight();
+        this.applyPortalPosition();
+      }
+      return;
+    }
+
+    const requestId = this.asyncRequestId;
+    const delay = Number(this.element.dataset.pbDropdownSearchDebounceTimeout ?? 250);
+    this.asyncSearchTimer = setTimeout(() => {
+      this.asyncSearchTimer = null;
+      // Snapshot the list that stayed visible during debounce so a cancelled request can restore it.
+      if (!this.asyncResultsCleared) this.rememberSettledAsyncResults();
+      this.asyncResultsCleared = true;
+      this.getOptionsParent()?.replaceChildren();
+      this.removeNoOptionsMessage();
+      this.target?.querySelector("[data-dropdown-async-status]")?.remove();
+      this.resetFocus();
+      this.element.setAttribute("aria-busy", "true");
+      this.showAsyncStatus("Loading…");
+      this.showElement(this.target);
+      this.updateArrowDisplay(true);
+
+      let settled = false;
+      const finish = (options, failed = false) => {
+        if (settled || requestId !== this.asyncRequestId || this.isDisabled) return;
+        if (!failed && !Array.isArray(options)) return;
+        settled = true;
+        clearTimeout(this.asyncLoadingTimer);
+        this.element.setAttribute("aria-busy", "false");
+        this.target.querySelector("[data-dropdown-async-status]")?.remove();
+        const parent = this.getOptionsParent();
+        parent.replaceChildren();
+        const visibleOptions = !failed && !options.length ? this.settledOptionsMatchingQuery(term) : options;
+        visibleOptions.forEach((result) => parent.appendChild(
+          result instanceof Node ? this.cloneSettledAsyncOption(result) : this.buildAsyncOptionElement(result),
+        ));
+        // The default option lives outside the menu, so mark the mounted row that shares its id.
+        this.markSelectedAsyncResult();
+        if (failed) this.showAsyncStatus("Unable to load options");
+        else {
+          this.asyncHasSettledSearch = true;
+          if (!visibleOptions.length) this.showNoOptionsMessage("No results found");
+        }
+        this.asyncResultsCleared = false;
+        this.rememberSettledAsyncResults();
+        this.resetOptionFilterForSelectedLabel();
+        this.adjustDropdownHeight();
+        this.applyPortalPosition();
+      };
+
+      // A missing handler or unfinished request must not leave the kit loading forever.
+      this.asyncLoadingTimer = setTimeout(() => finish([], true), 15000);
+      this.element.dispatchEvent(new CustomEvent("pb:dropdown:search", {
+        bubbles: true,
+        detail: {
+          searchingFor: term,
+          setResults: (options) => finish(options),
+          setError: () => finish([], true),
+        },
+      }));
+    }, delay);
+  }
+
+  // A default_value selection is not in the menu until a search renders that id.
+  markSelectedAsyncResult() {
+    if (!this.isAsync || this.isMultiSelect) return;
+    const selectedId = this.baseInput?.value || this.selectedOptionId();
+    if (!selectedId) return;
+
+    let matched = null;
+    this.queryAllOptions().forEach((opt) => {
+      opt.classList.remove("pb_dropdown_option_selected");
+      try {
+        const payload = JSON.parse(opt.dataset.dropdownOptionLabel);
+        if (String(payload.id) === String(selectedId)) matched = opt;
+      } catch {
+        // ignore invalid option payloads
+      }
+    });
+    if (matched) matched.classList.add("pb_dropdown_option_selected");
+  }
+
+  selectedOptionId() {
+    if (!this.selectedOptionJson) return "";
+    try {
+      const id = JSON.parse(this.selectedOptionJson).id;
+      return id == null ? "" : String(id);
+    } catch {
+      return "";
+    }
+  }
+
+  // Synchronous autocomplete shows every option when the input is the selected label.
+  // Async autocomplete narrows to labels that contain that text.
   resetOptionFilterForSelectedLabel() {
     if (this.isMultiSelect || !this.searchInput) return;
 
@@ -556,22 +869,43 @@ export default class PbDropdown extends PbEnhancedElement {
       ).label;
       if (this.searchInput.value !== selectedLabel) return;
 
+      if (!this.isAsync) {
+        this.queryAllOptions().forEach((opt) => {
+          opt.style.display = "";
+        });
+        this.removeNoOptionsMessage();
+        return;
+      }
+
+      const query = String(selectedLabel).toLowerCase();
+      let hasMatch = false;
       this.queryAllOptions().forEach((opt) => {
-        opt.style.display = "";
+        let label = "";
+        try {
+          label = String(JSON.parse(opt.dataset.dropdownOptionLabel).label);
+        } catch {
+          opt.style.display = "none";
+          return;
+        }
+        const match = label.toLowerCase().includes(query);
+        opt.style.display = match ? "" : "none";
+        if (match) hasMatch = true;
       });
-      this.removeNoOptionsMessage();
+      if (hasMatch) this.removeNoOptionsMessage();
+      else this.showNoOptionsMessage("No results found");
+      this.adjustDropdownHeight();
     } catch {
       // ignore invalid option payloads
     }
   }
 
-  showNoOptionsMessage() {
+  showNoOptionsMessage(fallbackText = "no option") {
     if (this.target?.querySelector(".dropdown_no_options")) return;
 
     const noOptionElement = document.createElement("div");
     noOptionElement.className =
       "pb_body_kit_light dropdown_no_options pb_item_kit p_xs display_flex justify_content_center";
-    noOptionElement.textContent = "no option";
+    noOptionElement.textContent = this.element.dataset.pbDropdownNoOptionsText || fallbackText;
 
     this.target.appendChild(noOptionElement);
   }
@@ -593,16 +927,25 @@ export default class PbDropdown extends PbEnhancedElement {
 
       const value = option.dataset.dropdownOptionLabel;
       if (this.isMultiSelect) {
-        const alreadySelected = this.selectedOptions.has(value);
-        if (alreadySelected) {
-          this.selectedOptions.delete(value);
+        const selected = Array.from(this.selectedOptions).find((raw) =>
+          this.sameOption(raw, value),
+        );
+        if (selected) {
+          this.selectedOptions.delete(selected);
         } else {
           this.selectedOptions.add(value);
         }
         this.updatePills();
         this.syncHiddenInputs();
-        if (this.searchInput && this.isMultiSelect) {
-          this.searchInput.value = "";
+        if (this.isMultiSelect && this.searchInput) this.searchInput.value = "";
+        if (this.isAsync && this.isMultiSelect) {
+          if (this.searchBar) this.searchBar.value = "";
+          this.dropAsyncSearchResults();
+          if (this.target.classList.contains("open")) {
+            this.showAsyncEmptyState();
+            this.adjustDropdownHeight();
+          }
+        } else if (this.searchInput && this.isMultiSelect) {
           this.handleBackspaceClear();
         }
       } else {
@@ -616,13 +959,13 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleDocumentClick(event) {
-    if (event.target.closest(SEARCH_BAR_SELECTOR)) return;
+    if (event.target.closest(SEARCH_BAR_SELECTOR) && (!this.isAsync || this.target.contains(event.target))) return;
     const shouldCloseOnOutsideClick =
       this.closeOnClick === "outside" || this.closeOnClick === "any";
     if (
       shouldCloseOnOutsideClick &&
       this.isClickOutside(event) &&
-      this.target.classList.contains("open")
+      (this.target.classList.contains("open") || (this.isAsync && this.asyncSearchTimer != null))
     ) {
       this.hideElement(this.target);
       this.updateArrowDisplay(false);
@@ -630,6 +973,263 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   // ----- External events handling section -----
+
+  get optionsByContext() {
+    return this.element.dataset.pbDropdownOptionsByContext
+      ? JSON.parse(this.element.dataset.pbDropdownOptionsByContext)
+      : null;
+  }
+
+  get contextElement() {
+    const selector = this.element.dataset.pbDropdownContextSelector;
+    if (!selector) return null;
+
+    return (
+      this.element.parentNode?.querySelector(`#${CSS.escape(selector)}`) ||
+      this.element.closest(`#${CSS.escape(selector)}`) ||
+      document.getElementById(selector)
+    );
+  }
+
+  get clearOnContextChange() {
+    return this.element.dataset.pbDropdownClearOnContextChange !== "false";
+  }
+
+  bindContextSelector() {
+    const contextEl = this.contextElement;
+    if (!contextEl || !this.optionsByContext) return;
+
+    this.handleContextChangeBound = this.handleContextChange.bind(this);
+    contextEl.addEventListener("change", this.handleContextChangeBound);
+
+    // Sync to the current context value on connect (default/restored select), without clearing
+    this.applyOptionsForCurrentContext({ clearSelection: false });
+  }
+
+  applyOptionsForCurrentContext({ clearSelection } = {}) {
+    if (this.isDisabled || !this.optionsByContext) return;
+
+    const options = this.optionsByContext[this.contextElement?.value] || [];
+    this.replaceOptions(options, {
+      clearSelection:
+        clearSelection != null ? clearSelection : this.clearOnContextChange,
+    });
+  }
+
+  handleContextChange() {
+    this.applyOptionsForCurrentContext();
+  }
+
+  normalizeOption(option) {
+    const normalized = { ...option };
+    if (normalized.id == null && normalized.value != null) {
+      normalized.id = normalized.value;
+    }
+    if (normalized.value == null && normalized.id != null) {
+      normalized.value = normalized.id;
+    }
+    return normalized;
+  }
+
+  activeStyleClasses() {
+    const raw = this.element.dataset.pbDropdownActiveStyle;
+    if (!raw) return "";
+    try {
+      const style = JSON.parse(raw);
+      const background = style.background_color || style.backgroundColor;
+      const font = style.font_color || style.fontColor;
+      return [background && `bg-${background}`, font && `font-${font}`].filter(Boolean).join(" ");
+    } catch {
+      return "";
+    }
+  }
+
+  // Synchronous options keep their rendered hash. Async results copy value onto id.
+  sameOption(left, right) {
+    const leftPayload = typeof left === "string" ? left : JSON.stringify(left);
+    const rightPayload = typeof right === "string" ? right : JSON.stringify(right);
+    const leftOption = typeof left === "string" ? JSON.parse(left) : left;
+    const rightOption = typeof right === "string" ? JSON.parse(right) : right;
+    const leftKey = leftOption?.id ?? leftOption?.value;
+    const rightKey = rightOption?.id ?? rightOption?.value;
+    if (leftKey == null && rightKey == null) return leftPayload === rightPayload;
+    if (leftKey == null || rightKey == null) return false;
+    return String(leftKey) === String(rightKey);
+  }
+
+  getOptionsParent() {
+    const container = this.target;
+    if (!container) return null;
+
+    return container.querySelector(".pb_list_kit") || container;
+  }
+
+  buildAsyncOptionElement(result) {
+    const richContent = result.option && (result.content instanceof Element || result.content instanceof DocumentFragment);
+    const option = this.buildOptionElement(richContent ? result.option : result, richContent ? result.content : null);
+    if (this.isMultiSelect && Array.from(this.selectedOptions).some((raw) => this.sameOption(raw, option.dataset.dropdownOptionLabel))) {
+      option.style.display = "none";
+    }
+    return option;
+  }
+
+  buildOptionElement(option, content) {
+    const normalized = this.normalizeOption(option);
+    const disabled = normalized.disabled === true;
+    const optionEl = document.createElement("div");
+    optionEl.className = `pb_dropdown_option_list${disabled ? " disabled" : ""}${this.activeStyleClass ? ` ${this.activeStyleClass}` : ""}`;
+    if (normalized.id != null && normalized.id !== "") {
+      optionEl.id = String(normalized.id);
+    }
+    optionEl.setAttribute("aria-disabled", disabled ? "true" : "false");
+    optionEl.dataset.dropdownOptionLabel = JSON.stringify(normalized);
+    optionEl.dataset.dropdownOptionDisabled = disabled ? "true" : "false";
+
+    const listItem = document.createElement("div");
+    listItem.className =
+      "pb_list_item_kit display_flex justify_content_center p_none cursor_pointer";
+
+    const wrapper = document.createElement("div");
+    wrapper.className = disabled
+      ? "dropdown_option_wrapper disabled"
+      : "dropdown_option_wrapper";
+
+    if (content) {
+      wrapper.appendChild(content.cloneNode(true));
+    } else {
+      const body = document.createElement("div");
+      body.className = "pb_body_kit_light";
+      body.textContent =
+        normalized.label != null ? String(normalized.label) : "";
+      wrapper.appendChild(body);
+    }
+    listItem.appendChild(wrapper);
+    optionEl.appendChild(listItem);
+
+    return optionEl;
+  }
+
+  replaceOptions(options, { clearSelection = true } = {}) {
+    if (this.isDisabled || !Array.isArray(options)) return;
+
+    const parent = this.getOptionsParent();
+    if (!parent) return;
+
+    if (this.isAsync) this.cancelAsyncSearch();
+
+    // Clear option nodes and any SSR empty-state ("No option") placeholder
+    parent.replaceChildren();
+    this.removeNoOptionsMessage();
+
+    options.forEach((option) => {
+      parent.appendChild(this.buildOptionElement(option));
+    });
+
+    // Clear typed filters and keyboard focus so new options aren't left unfiltered /
+    // focused against stale indexes from the previous list
+    this.resetInteractiveOptionState();
+
+    if (clearSelection) {
+      this.clearSelection("clear", { preserveOptions: true });
+    } else {
+      this.reconcileSelectionWithOptions();
+    }
+
+    if (this.isAsync) {
+      this.asyncSearchInterrupted = false;
+      this.asyncResultsCleared = false;
+      this.rememberSettledAsyncResults();
+    }
+
+    if (this.target?.classList.contains("open")) {
+      this.adjustDropdownHeight();
+    }
+  }
+
+  resetInteractiveOptionState() {
+    this.resetFocus();
+
+    if (this.searchBar) {
+      this.searchBar.value = "";
+    }
+
+    if (this.searchInput) {
+      this.searchInput.value = "";
+    }
+  }
+
+  reconcileSelectionWithOptions() {
+    const optionEls = Array.from(this.queryAllOptions());
+    const optionsById = new Map();
+    optionEls.forEach((opt) => {
+      try {
+        const optionData = JSON.parse(opt.dataset.dropdownOptionLabel);
+        if (optionData?.id != null) {
+          optionsById.set(String(optionData.id), opt);
+        }
+      } catch {
+        // ignore invalid option payloads
+      }
+    });
+
+    if (this.isMultiSelect) {
+      const keptIds = Array.from(this.selectedOptions)
+        .map((raw) => {
+          try {
+            return JSON.parse(raw).id;
+          } catch {
+            return null;
+          }
+        })
+        .filter((id) => id != null && optionsById.has(String(id)));
+
+      if (keptIds.length === 0) {
+        this.clearSelection("clear", { preserveOptions: true });
+        return;
+      }
+
+      // Rebuild from current option payloads so labels/values stay in sync
+      this.setSelectionByOptionIds(keptIds);
+      return;
+    }
+
+    const currentId = this.baseInput?.value;
+    if (!currentId || !optionsById.has(currentId)) {
+      this.clearSelection("clear", { preserveOptions: true });
+      return;
+    }
+
+    // Re-apply selection so trigger/autocomplete use the updated option payload
+    this.setSelectionByOptionId(currentId);
+  }
+
+  // Handles pb:dropdown:updateOptions - replace options when event.detail.dropdownId matches.
+  // detail: { dropdownId, options: [{ id, label, value }], clearSelection?: boolean }
+  handleUpdateOptionsEvent(event) {
+    if (this.isDisabled) return;
+    const targetId = event.detail?.dropdownId;
+    if (!targetId || this.element.id !== targetId) return;
+
+    const options = event.detail?.options;
+    if (!Array.isArray(options)) return;
+
+    const clearSelection = event.detail?.clearSelection !== false;
+    this.replaceOptions(options, { clearSelection });
+  }
+
+  // Handles options_event_type events - replace options when detail.options is present.
+  handleOptionsEventType(event) {
+    if (this.isDisabled) return;
+    const targetId = event.detail?.dropdownId;
+    if (targetId != null && this.element.id !== targetId) return;
+
+    const options = event.detail?.options;
+    if (!Array.isArray(options)) return;
+
+    const clearSelection = event.detail?.clearSelection !== false;
+    this.replaceOptions(options, { clearSelection });
+  }
+
   // Handles pb:dropdown:clear - clear this dropdown when event.detail.dropdownId matches.
   handleClearEvent(event) {
     if (this.isDisabled) return;
@@ -671,7 +1271,7 @@ export default class PbDropdown extends PbEnhancedElement {
     const optionEls = Array.from(this.queryAllOptions());
     const selectedOption = optionEls.find((opt) => {
       try {
-        return JSON.parse(opt.dataset.dropdownOptionLabel).id === optionId;
+        return String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === String(optionId);
       } catch {
         return false;
       }
@@ -682,7 +1282,8 @@ export default class PbDropdown extends PbEnhancedElement {
     optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
     selectedOption.classList.add("pb_dropdown_option_selected");
     if (hiddenInput) hiddenInput.value = optionId;
-    const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
+    this.selectedOptionJson = selectedOption.dataset.dropdownOptionLabel;
+    const optionData = JSON.parse(this.selectedOptionJson);
     const customDisplayElement = this.element.querySelector(
       '[data-dropdown-trigger-custom-display]',
     );
@@ -713,11 +1314,11 @@ export default class PbDropdown extends PbEnhancedElement {
       const syncDatePickers = () => {
         if (controlsStartId) {
           const startPicker = document.querySelector(`#${CSS.escape(controlsStartId)}`)?._flatpickr;
-          if (startPicker) startPicker.setDate(optionData.formatted_start_date, true, "m/d/Y");
+          setQuickPickDateOnPicker(startPicker, optionData.formatted_start_date, "start");
         }
         if (controlsEndId) {
           const endPicker = document.querySelector(`#${CSS.escape(controlsEndId)}`)?._flatpickr;
-          if (endPicker) endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+          setQuickPickDateOnPicker(endPicker, optionData.formatted_end_date, "end");
         }
       };
       syncDatePickers();
@@ -742,7 +1343,7 @@ export default class PbDropdown extends PbEnhancedElement {
     optionIds.forEach((id) => {
       const opt = optionEls.find((o) => {
         try {
-          return JSON.parse(o.dataset.dropdownOptionLabel).id === id;
+          return String(JSON.parse(o.dataset.dropdownOptionLabel).id) === String(id);
         } catch {
           return false;
         }
@@ -793,14 +1394,8 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.isMultiSelect) {
       detail = Array.from(this.selectedOptions).map(JSON.parse);
     } else {
-      const hiddenInput = this.baseInput;
-      detail = hiddenInput.value
-        ? JSON.parse(
-            (this.target || this.element).querySelector(
-              OPTION_SELECTOR +
-                `[data-dropdown-option-label*='"id":"${hiddenInput.value}"']`,
-            ).dataset.dropdownOptionLabel,
-          )
+      detail = this.baseInput.value && this.selectedOptionJson
+        ? JSON.parse(this.selectedOptionJson)
         : null;
     }
     this.element.setAttribute("data-option-selected", JSON.stringify(detail));
@@ -813,6 +1408,8 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   onOptionSelected(value, selectedOption) {
+    if (!this.isMultiSelect) this.selectedOptionJson = value;
+    if (this.isAsync) this.cancelAsyncSearch();
     const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
     const customDisplayElement = this.element.querySelector(
       '[data-dropdown-trigger-custom-display]',
@@ -822,7 +1419,7 @@ export default class PbDropdown extends PbEnhancedElement {
       if (!this.isMultiSelect) {
         const selectedLabel = JSON.parse(value).label;
         triggerElement.textContent = selectedLabel;
-        this.emitSelectionChange();
+        if (!this.isAsync) this.emitSelectionChange();
 
         // Handle quickpick variant: populate start/end date hidden inputs
         const optionData = JSON.parse(value);
@@ -851,10 +1448,10 @@ export default class PbDropdown extends PbEnhancedElement {
               `#${controlsStartId}`,
             )?._flatpickr;
             if (startPicker) {
-              startPicker.setDate(
+              setQuickPickDateOnPicker(
+                startPicker,
                 optionData.formatted_start_date,
-                true,
-                "m/d/Y",
+                "start",
               );
             }
           }
@@ -864,7 +1461,11 @@ export default class PbDropdown extends PbEnhancedElement {
               `#${controlsEndId}`,
             )?._flatpickr;
             if (endPicker) {
-              endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+              setQuickPickDateOnPicker(
+                endPicker,
+                optionData.formatted_end_date,
+                "end",
+              );
             }
           }
         } else if (startDateId || endDateId) {
@@ -909,7 +1510,7 @@ export default class PbDropdown extends PbEnhancedElement {
     const autocompleteInput = this.element.querySelector(SEARCH_INPUT_SELECTOR);
     if (autocompleteInput && !this.isMultiSelect) {
       autocompleteInput.value = JSON.parse(value).label;
-      this.emitSelectionChange();
+      if (!this.isAsync) this.emitSelectionChange();
     }
 
     const shouldCloseOnOptionSelect =
@@ -921,16 +1522,14 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const options = this.queryAllOptions();
     if (this.isMultiSelect) {
-      this.emitSelectionChange();
+      if (!this.isAsync) this.emitSelectionChange();
       Array.from(this.selectedOptions).map((option) => {
-        if (
-          JSON.parse(option).id ===
-          JSON.parse(selectedOption.dataset.dropdownOptionLabel).id
-        ) {
+        if (this.sameOption(option, selectedOption.dataset.dropdownOptionLabel)) {
           selectedOption.style.display = "none";
-          this.adjustDropdownHeight();
         }
       });
+      if (this.isAsync) this.showAsyncMultiSelectMenu();
+      this.adjustDropdownHeight();
       this.baseInput.value = Array.from(
         this.selectedOptions,
       )
@@ -941,14 +1540,28 @@ export default class PbDropdown extends PbEnhancedElement {
         option.classList.remove("pb_dropdown_option_selected");
       });
       selectedOption.classList.add("pb_dropdown_option_selected");
+      if (this.isAsync) this.resetOptionFilterForSelectedLabel();
     }
     this.updateClearButton();
+    if (this.isAsync) this.emitSelectionChange();
   }
 
   showElement(elem) {
     if (this.isDisabled) return;
+    let retryTerm = null;
+    if (this.isAsync && this.asyncSearchInterrupted) {
+      this.asyncSearchInterrupted = false;
+      retryTerm = this.searchInput?.value || this.searchBar?.value || "";
+    }
+    this.showAsyncEmptyState();
+    this.showAsyncMultiSelectMenu();
+    if (!this.canOpenMenu && retryTerm == null) return;
+    if (!this.canOpenMenu) {
+      this.searchAsync(retryTerm);
+      return;
+    }
 
-    // When autocomplete is showing the selected label (not an active search), show all options
+    // When autocomplete is showing the selected label, sync which options stay visible.
     this.resetOptionFilterForSelectedLabel();
     
     this.ensureFloatingPortalConfig();
@@ -959,6 +1572,9 @@ export default class PbDropdown extends PbEnhancedElement {
     elem.classList.remove("close");
     elem.classList.add("open");
 
+    // Drop a previous explicit height so hidden results do not leave empty space.
+    elem.style.height = "auto";
+    elem.offsetHeight;
     const shouldConstrain = elem.classList.contains("constrain_height");
     if (shouldConstrain) {
       // Calculate height respecting max-height constraint (18em)
@@ -986,9 +1602,22 @@ export default class PbDropdown extends PbEnhancedElement {
     } else {
       this.adjustDropdownPosition(elem);
     }
+    if (retryTerm != null) this.searchAsync(retryTerm);
   }
 
   hideElement(elem) {
+    if (this.isAsync) {
+      const pending = this.asyncSearchTimer != null || this.element.getAttribute("aria-busy") === "true";
+      if (pending) {
+        const restore = this.asyncResultsCleared;
+        this.cancelAsyncSearch();
+        if (restore) this.restoreSettledAsyncResults();
+        this.asyncResultsCleared = false;
+        const query = this.searchInput?.value || this.searchBar?.value || "";
+        this.asyncSearchInterrupted = query.length > 0;
+      }
+      this.updateArrowDisplay(false);
+    }
     elem.style.height = elem.scrollHeight + "px";
     window.setTimeout(() => {
       if (this.useMenuPortal) {
@@ -1026,7 +1655,7 @@ export default class PbDropdown extends PbEnhancedElement {
       rootElement: this.element,
       downSelector: DOWN_ARROW_SELECTOR,
       upSelector: UP_ARROW_SELECTOR,
-      showDownArrow: !isOpen,
+      showDownArrow: !(isOpen && this.canOpenMenu),
     });
   }
 
@@ -1046,6 +1675,10 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   clearFormValidation(input) {
+    // PbFormValidation may have setCustomValidity from data-message; clear it
+    // before checkValidity so a filled value can pass constraint validation.
+    input.setCustomValidity("");
+
     if (this.isMultiSelect) {
       if (this.selectedOptions.size > 0) {
         const dropdownWrapperElement = input.closest(".dropdown_wrapper");
@@ -1078,6 +1711,15 @@ export default class PbDropdown extends PbEnhancedElement {
     const optionEls = Array.from(
       this.queryAllOptions(),
     );
+    // Async defaults may not appear in the first remote result page.
+    if (this.isAsync && this.element.dataset.pbDropdownDefaultValue) {
+      const defaults = JSON.parse(this.element.dataset.pbDropdownDefaultValue);
+      (this.isMultiSelect ? defaults : [defaults]).forEach((option) => {
+        if (!optionEls.some((opt) => String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === String(option.id))) {
+          optionEls.push(this.buildOptionElement(option));
+        }
+      });
+    }
     const defaultValue = hiddenInput.dataset.defaultValue || "";
     if (!defaultValue) return;
 
@@ -1086,7 +1728,7 @@ export default class PbDropdown extends PbEnhancedElement {
       ids.forEach((id) => {
         const selectedOption = optionEls.find((opt) => {
           try {
-            return JSON.parse(opt.dataset.dropdownOptionLabel).id === id;
+            return String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === String(id);
           } catch {
             return false;
           }
@@ -1111,7 +1753,7 @@ export default class PbDropdown extends PbEnhancedElement {
       const selectedOption = optionEls.find((opt) => {
         try {
           return (
-            JSON.parse(opt.dataset.dropdownOptionLabel).id === defaultValue
+            String(JSON.parse(opt.dataset.dropdownOptionLabel).id) === defaultValue
           );
         } catch {
           return false;
@@ -1120,7 +1762,8 @@ export default class PbDropdown extends PbEnhancedElement {
       if (!selectedOption) return;
 
       selectedOption.classList.add("pb_dropdown_option_selected");
-      const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
+      this.selectedOptionJson = selectedOption.dataset.dropdownOptionLabel;
+      const optionData = JSON.parse(this.selectedOptionJson);
       this.setTriggerElementText(optionData.label);
 
       // Autocomplete trigger has no [data-dropdown-trigger-display]; set the input value instead
@@ -1155,10 +1798,10 @@ export default class PbDropdown extends PbEnhancedElement {
               `#${controlsStartId}`,
             )?._flatpickr;
             if (startPicker) {
-              startPicker.setDate(
+              setQuickPickDateOnPicker(
+                startPicker,
                 optionData.formatted_start_date,
-                true,
-                "m/d/Y",
+                "start",
               );
             }
           }
@@ -1168,7 +1811,11 @@ export default class PbDropdown extends PbEnhancedElement {
               `#${controlsEndId}`,
             )?._flatpickr;
             if (endPicker) {
-              endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+              setQuickPickDateOnPicker(
+                endPicker,
+                optionData.formatted_end_date,
+                "end",
+              );
             }
           }
         };
@@ -1184,16 +1831,31 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleFormReset() {
-    const form = this.element.closest("form");
+    this.formElement = this.element.closest("form");
+    if (!this.formElement) return;
 
-    if (form) {
-      form.addEventListener("reset", () => {
+    this.formResetHandler = (event) => {
+      if (!this.isAsync) {
         this.resetDropdownValue();
+        return;
+      }
+      const handler = this.formResetHandler;
+      // Run after native inputs reset, and honor canceled resets or disconnects.
+      Promise.resolve().then(() => {
+        if (!event.defaultPrevented && this.formResetHandler === handler) {
+          this.clearSelection("reset");
+        }
       });
-    }
+    };
+    this.formElement.addEventListener("reset", this.formResetHandler);
   }
 
-  resetDropdownValue() {
+  resetDropdownValue({ preserveOptions = false } = {}) {
+    this.selectedOptionJson = null;
+    if (this.isAsync) {
+      if (!preserveOptions) this.clearAsyncResults();
+      if (this.searchBar) this.searchBar.value = "";
+    }
     const hiddenInput = this.baseInput;
     const options = this.queryAllOptions();
     options.forEach((option) => {
@@ -1204,7 +1866,7 @@ export default class PbDropdown extends PbEnhancedElement {
     hiddenInput.value = "";
 
     const defaultPlaceholder = this.placeholder;
-    this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);
+    this.setTriggerElementText(defaultPlaceholder?.dataset.dropdownPlaceholder || "");
 
     if (this.searchInput) {
       this.searchInput.value = "";
@@ -1281,15 +1943,24 @@ export default class PbDropdown extends PbEnhancedElement {
 
       closeIcon.addEventListener("click", (e) => {
         e.stopPropagation();
-        const id = pill.dataset.pillId;
         this.selectedOptions.delete(option);
 
-        const optEl = (this.target || this.element).querySelector(
-          `${OPTION_SELECTOR}[data-dropdown-option-label*='"id":${JSON.stringify(
-            id,
-          )}']`,
+        const optEl = Array.from(this.queryAllOptions()).find((opt) =>
+          this.sameOption(opt.dataset.dropdownOptionLabel, option),
         );
-        if (optEl) {
+        if (this.isAsync && this.selectedOptions.size === 0 && !this.searchInput?.value && !this.searchBar?.value) {
+          // Removing the last pill drops the earlier search, as React does.
+          const wasOpen = this.target.classList.contains("open");
+          this.forgetSettledAsyncResults();
+          this.cancelAsyncSearch();
+          this.getOptionsParent()?.replaceChildren();
+          this.removeNoOptionsMessage();
+          this.resetFocus();
+          if (wasOpen) {
+            this.showAsyncEmptyState();
+            this.adjustDropdownHeight();
+          }
+        } else if (optEl) {
           optEl.style.display = "";
           if (this.target.classList.contains("open")) {
             this.showElement(this.target);
@@ -1305,8 +1976,8 @@ export default class PbDropdown extends PbEnhancedElement {
     });
   }
 
-  clearSelection() {
-    if (this.isDisabled) return;
+  clearSelection(reason = "clear", { preserveOptions = false } = {}) {
+    if (this.isDisabled && reason !== "reset") return;
     if (this.isMultiSelect) {
       this.selectedOptions.clear();
       this.queryAllOptions().forEach((opt) => {
@@ -1355,11 +2026,12 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     }
 
-    this.resetDropdownValue();
+    this.resetDropdownValue({ preserveOptions });
     this.updatePills();
     this.updateClearButton();
     this.syncHiddenInputs();
     this.emitSelectionChange();
+    if (this.isAsync) this.emitInputChange("", reason);
   }
 
   // Method for DatePicker sync - only clears the dropdown, not the DatePickers
@@ -1410,7 +2082,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.selectedOptions.forEach((raw) => {
       const optionData = JSON.parse(raw);
       // Use id if available, otherwise fall back to value
-      const id = optionData.id || optionData.value;
+      const id = optionData.id ?? optionData.value;
       const inp = document.createElement("input");
       inp.type = "hidden";
       inp.name = name;
@@ -1425,6 +2097,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.selectedOptions.size > 0) {
       baseInput.value = "";
       baseInput.removeAttribute("required");
+      baseInput.setCustomValidity("");
     } else {
       baseInput.value = "";
       if (this.wasOriginallyRequired) {
@@ -1434,7 +2107,10 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleBackspaceClear() {
+    // Async input handling clears a single selection synchronously for all edit methods.
+    if (this.isAsync && !this.isMultiSelect) return;
     if (!this.isMultiSelect) {
+      this.selectedOptionJson = null;
       this.queryAllOptions().forEach((opt) => {
         opt.classList.remove("pb_dropdown_option_selected");
         opt.style.display = "";
@@ -1453,7 +2129,9 @@ export default class PbDropdown extends PbEnhancedElement {
         const optValue = opt.dataset.dropdownOptionLabel;
         if (
           this.selectedOptions.size > 0 &&
-          this.selectedOptions.has(optValue)
+          Array.from(this.selectedOptions).some((raw) =>
+            this.sameOption(raw, optValue),
+          )
         ) {
           opt.style.display = "none";
         } else {

@@ -63,9 +63,13 @@
       "default": false
     },
     "extensions": {
-      "type": "GenericObject",
+      "type": {
+        "react": "GenericObject",
+        "rails": "array"
+      },
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "name": {
@@ -90,24 +94,28 @@
     "inputHeight": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "sm",
         "md",
         "lg"
-      ]
+      ],
+      "default": null
     },
     "inputMinHeight": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "sm",
         "md",
         "lg"
-      ]
+      ],
+      "default": null
     },
     "requiredIndicator": {
       "type": "boolean",

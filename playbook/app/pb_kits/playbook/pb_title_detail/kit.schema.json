@@ -36,6 +36,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { TitleDetail } from 'playbook-ui'",

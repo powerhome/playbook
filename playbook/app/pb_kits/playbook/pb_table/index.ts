@@ -1,4 +1,8 @@
 import PbEnhancedElement from '../pb_enhanced_element'
+import {
+  applyStickyColumns,
+  scheduleStickyColumns,
+} from './utilities/stickyColumns'
 
 const TABLE_WRAPPER_SELECTOR = "[data-pb-table-wrapper]";
 const TABLE_COLLAPSIBLE_WRAPPER_SELECTOR = "[data-pb-table-collapsible-wrapper]";
@@ -7,7 +11,10 @@ const TABLE_COLLAPSIBLE_CELL_SELECTOR = "[data-pb-table-collapsible-cell-id]";
 export default class PbTable extends PbEnhancedElement {
   stickyLeftColumns: string[] = [];
   stickyRightColumns: string[] = [];
-  stickyRightColumnsReversed: string[] = [];
+  private stickyTable: Element | null = null;
+  private cancelStickySchedule: (() => void) | null = null;
+  private stickyResizeObserver: ResizeObserver | null = null;
+  private boundApplyStickyOffsets = () => this.applyStickyOffsets();
 
   static get selector(): string {
     return TABLE_WRAPPER_SELECTOR;
@@ -31,133 +38,59 @@ export default class PbTable extends PbEnhancedElement {
       })
     }
 
-    this.initStickyLeftColumns();
-    this.initStickyRightColumns();
+    this.initStickyColumns();
     this.handleCollapsibleClick();
     this.handleCollapsibleRow();
   }
 
-  initStickyLeftColumns() {
-    const table = this.element.querySelector('.sticky-left-column');
+  initStickyColumns() {
+    const table =
+      this.element.querySelector('.sticky-left-column, .sticky-right-column') ||
+      (this.element.classList.contains('sticky-left-column') ||
+      this.element.classList.contains('sticky-right-column')
+        ? this.element
+        : null);
 
-    if (table) {
-      const classList = Array.from(table.classList);
-      const stickyColumnClass = classList.find(cls => cls.startsWith('sticky-left-columns-ids-'));
+    if (!table) return;
 
-      if (stickyColumnClass) {
-        this.stickyLeftColumns = stickyColumnClass
-          .replace('sticky-left-columns-ids-', '')
-          .split('-');
+    this.stickyTable = table;
+    const classList = Array.from(table.classList);
+    const stickyLeftClass = classList.find(cls => cls.startsWith('sticky-left-columns-ids-'));
+    const stickyRightClass = classList.find(cls => cls.startsWith('sticky-right-columns-ids-'));
 
-        if (this.stickyLeftColumns.length > 0) {
-          setTimeout(() => {
-            this.handleStickyLeftColumns();
-            window.addEventListener('resize', () => this.handleStickyLeftColumns());
-          }, 10);
-        }
-      }
+    if (stickyLeftClass) {
+      this.stickyLeftColumns = stickyLeftClass
+        .replace('sticky-left-columns-ids-', '')
+        .split('-');
+    }
+
+    if (stickyRightClass) {
+      this.stickyRightColumns = stickyRightClass
+        .replace('sticky-right-columns-ids-', '')
+        .split('-');
+    }
+
+    if (!this.stickyLeftColumns.length && !this.stickyRightColumns.length) return;
+
+    this.cancelStickySchedule = scheduleStickyColumns(this.boundApplyStickyOffsets);
+    window.addEventListener('resize', this.boundApplyStickyOffsets);
+
+    if (typeof ResizeObserver !== 'undefined') {
+      this.stickyResizeObserver = new ResizeObserver(this.boundApplyStickyOffsets);
+      this.stickyResizeObserver.observe(table);
     }
   }
 
-  handleStickyLeftColumns() {
-    let accumulatedWidth = 0;
+  applyStickyOffsets() {
+    if (!this.stickyTable) return;
 
-    this.stickyLeftColumns.forEach((colId, index) => {
-      const isLastColumn = index === this.stickyLeftColumns.length - 1;
-      const header = this.element.querySelector(`th[data-sticky-id="${colId}"]`);
-      const cells = this.element.querySelectorAll(`td[data-sticky-id="${colId}"]`);
-
-      if (header) {
-        header.classList.add('sticky');
-        (header as HTMLElement).style.left = `${accumulatedWidth}px`;
-
-        if (!isLastColumn) {
-          header.classList.add('with-border-right');
-          header.classList.remove('sticky-left-shadow');
-        } else {
-          header.classList.remove('with-border-right');
-          header.classList.add('sticky-left-shadow');
-        }
-
-        const headerWidth = (header as HTMLElement).offsetWidth;
-        accumulatedWidth += headerWidth;
-
-        cells.forEach((cell) => {
-          cell.classList.add('sticky');
-          (cell as HTMLElement).style.left = `${accumulatedWidth - headerWidth}px`;
-
-          if (!isLastColumn) {
-            cell.classList.add('with-border-right');
-            cell.classList.remove('sticky-left-shadow');
-          } else {
-            cell.classList.remove('with-border-right');
-            cell.classList.add('sticky-left-shadow');
-          }
-        });
-      }
-    });
-  }
-
-  initStickyRightColumns() {
-    const table = this.element.querySelector('.sticky-right-column');
-
-    if (table) {
-      const classList = Array.from(table.classList);
-      const stickyColumnClass = classList.find(cls => cls.startsWith('sticky-right-columns-ids-'));
-
-      if (stickyColumnClass) {
-        this.stickyRightColumns = stickyColumnClass
-          .replace('sticky-right-columns-ids-', '')
-          .split('-');
-        this.stickyRightColumnsReversed = this.stickyRightColumns.reverse();
-
-        if (this.stickyRightColumns.length > 0) {
-          setTimeout(() => {
-            this.handleStickyRightColumns();
-            window.addEventListener('resize', () => this.handleStickyRightColumns());
-          }, 10);
-        }
-      }
+    if (this.stickyLeftColumns.length) {
+      applyStickyColumns(this.stickyTable, this.stickyLeftColumns, 'left');
     }
-  }
 
-  handleStickyRightColumns() {
-    let accumulatedWidth = 0;
-
-    this.stickyRightColumnsReversed.forEach((colId, index) => {
-      const isLastColumn = index === this.stickyRightColumns.length - 1;
-      const header = this.element.querySelector(`th[data-sticky-id="${colId}"]`);
-      const cells = this.element.querySelectorAll(`td[data-sticky-id="${colId}"]`);
-
-      if (header) {
-        header.classList.add('sticky');
-        (header as HTMLElement).style.right = `${accumulatedWidth}px`;
-
-        if (!isLastColumn) {
-          header.classList.add('with-border-left');
-          header.classList.remove('sticky-right-shadow');
-        } else {
-          header.classList.remove('with-border-right');
-          header.classList.add('sticky-right-shadow');
-        }
-
-        const headerWidth = (header as HTMLElement).offsetWidth;
-        accumulatedWidth += headerWidth;
-
-        cells.forEach((cell) => {
-          cell.classList.add('sticky');
-          (cell as HTMLElement).style.right = `${accumulatedWidth - headerWidth}px`;
-
-          if (!isLastColumn) {
-            cell.classList.add('with-border-left');
-            cell.classList.remove('sticky-right-shadow');
-          } else {
-            cell.classList.remove('with-border-left');
-            cell.classList.add('sticky-right-shadow');
-          }
-        });
-      }
-    });
+    if (this.stickyRightColumns.length) {
+      applyStickyColumns(this.stickyTable, this.stickyRightColumns, 'right');
+    }
   }
 
   handleCollapsibleClick() {
@@ -228,14 +161,12 @@ export default class PbTable extends PbEnhancedElement {
     }
   }
 
-  // Cleanup method to remove event listener
   disconnect() {
-    if (this.stickyLeftColumns.length > 0) {
-      window.removeEventListener('resize', () => this.handleStickyLeftColumns());
-    }
-
-    if (this.stickyRightColumns.length > 0) {
-      window.removeEventListener('resize', () => this.handleStickyRightColumns());
-    }
+    this.cancelStickySchedule?.();
+    this.cancelStickySchedule = null;
+    window.removeEventListener('resize', this.boundApplyStickyOffsets);
+    this.stickyResizeObserver?.disconnect();
+    this.stickyResizeObserver = null;
+    this.stickyTable = null;
   }
 }

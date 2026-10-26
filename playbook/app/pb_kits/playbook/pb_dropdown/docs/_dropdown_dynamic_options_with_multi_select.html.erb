@@ -1,0 +1,35 @@
+<%= pb_rails("select", props: {
+  id: "color_context_dropdown_multi",
+  label: "Choose a Color",
+  name: "color_name_multi",
+  options: [
+    { value: "red", value_text: "Red" },
+    { value: "blue", value_text: "Blue" },
+    { value: "green", value_text: "Green" },
+  ],
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  id: "dropdown-dynamic-options-multi",
+  label: "Pick Shades",
+  name: "shade_names",
+  multi_select: true,
+  context_selector: "color_context_dropdown_multi",
+  options_by_context: {
+    "red" => [
+      { id: "scarlet", label: "Scarlet", value: "scarlet" },
+      { id: "mahogany", label: "Mahogany", value: "mahogany" },
+      { id: "crimson", label: "Crimson", value: "crimson" },
+    ],
+    "blue" => [
+      { id: "sky", label: "Sky Blue", value: "sky" },
+      { id: "cerulean", label: "Cerulean", value: "cerulean" },
+      { id: "navy", label: "Navy", value: "navy" },
+    ],
+    "green" => [
+      { id: "emerald", label: "Emerald", value: "emerald" },
+      { id: "mint", label: "Mint", value: "mint" },
+      { id: "olive", label: "Olive", value: "olive" },
+    ],
+  },
+}) %>

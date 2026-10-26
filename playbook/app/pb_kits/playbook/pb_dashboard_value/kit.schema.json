@@ -43,6 +43,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { DashboardValue } from 'playbook-ui'",

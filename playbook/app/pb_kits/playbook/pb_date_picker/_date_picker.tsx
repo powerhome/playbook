@@ -52,6 +52,7 @@ type DatePickerProps = {
   allowInput?: boolean,
   aria?: { [key: string]: string },
   className?: string,
+  closeOnSelect?: boolean,
   customQuickPickDates: { override: boolean, dates: any[] },
   dark?: boolean,
   data?: { [key: string]: string },
@@ -103,6 +104,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     allowInput = false,
     aria = {},
     className,
+    closeOnSelect = true,
     customQuickPickDates,
     dark = false,
     data = {},
@@ -180,6 +182,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   useEffect(() => {
     datePickerHelper({
       allowInput,
+      closeOnSelect,
       customQuickPickDates,
       defaultDate: normalizedDefaultDate,
       disableDate,
@@ -294,19 +297,57 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
         )}
           <>
             <div className="date_picker_input_wrapper">
-              <input
-                  aria-describedby={errorId}
-                  aria-invalid={!!error}
-                  autoComplete="off"
-                  className="date_picker_input"
-                  disabled={disableInput}
-                  id={pickerId}
-                  name={name}
-                  onChange={inputOnChange}
-                  placeholder={placeholder}
-                  style={{ cursor: getCursorStyle(filteredProps.cursor) }}
-                  value={inputValue}
-              />
+              <div className="date_picker_input_container">
+                <input
+                    aria-describedby={errorId}
+                    aria-invalid={!!error}
+                    autoComplete="off"
+                    className="date_picker_input"
+                    disabled={disableInput}
+                    id={pickerId}
+                    name={name}
+                    onChange={inputOnChange}
+                    placeholder={placeholder}
+                    style={{ cursor: getCursorStyle(filteredProps.cursor) }}
+                    value={inputValue}
+                />
+
+                {!hideIcon && !inLine &&
+                  <div
+                      className={iconWrapperClass()}
+                      id={`cal-icon-${pickerId}`}
+                  >
+                    <Icon
+                        className="cal_icon"
+                        icon="calendar-alt"
+                    />
+                  </div>
+                }
+
+                {inLine ?
+                  <div>
+                    <div
+                        className={`${iconWrapperClass()} date-picker-inline-icon-plus`}
+                        id={`${pickerId}-icon-plus`}
+                    >
+                      <Icon
+                          className="date-picker-plus-icon"
+                          icon="plus"
+                      />
+                    </div>
+                    <div
+                        className={`${iconWrapperClass()} date-picker-inline-angle-down`}
+                        id={`${pickerId}-angle-down`}
+                    >
+                      <Icon
+                          className="angle_down_icon svg-inline--fa"
+                          customIcon={angleDown}
+                      />
+                    </div>
+                  </div>
+                  : null
+                }
+              </div>
 
               {error &&
                   <Body
@@ -319,42 +360,6 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
                   />
               }
             </div>
-
-            {!hideIcon && !inLine &&
-              <div
-                  className={iconWrapperClass()}
-                  id={`cal-icon-${pickerId}`}
-              >
-                <Icon
-                    className="cal_icon"
-                    icon="calendar-alt"
-                />
-              </div>
-            }
-
-            {inLine ?
-              <div>
-                <div
-                    className={`${iconWrapperClass()} date-picker-inline-icon-plus`}
-                    id={`${pickerId}-icon-plus`}
-                >
-                  <Icon
-                      className="date-picker-plus-icon"
-                      icon="plus"
-                  />
-                </div>
-                <div
-                    className={`${iconWrapperClass()} date-picker-inline-angle-down`}
-                    id={`${pickerId}-angle-down`}
-                >
-                  <Icon
-                      className="angle_down_icon svg-inline--fa"
-                      customIcon={angleDown}
-                  />
-                </div>
-              </div>
-              : null
-            }
           </>
       </div>
     </div>

@@ -4,6 +4,16 @@ module Playbook
   module Forms
     class Builder
       def multi_level_select(name, props: {})
+        props = props.dup
+
+        apply_form_error!(props, name)
+
+        unless props.key?(:selected_ids)
+          value = form_attribute_value(name)
+          # Kit compares ids as strings, so either string or numeric tree ids match.
+          props[:selected_ids] = Array(value).map(&:to_s) if value.present?
+        end
+
         if props[:label] == true
           props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)
                             @object.class.human_attribute_name(name)

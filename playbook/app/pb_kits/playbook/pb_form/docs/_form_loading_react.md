@@ -1,0 +1,1 @@
+Keep a `loading` flag in state. On submit, pass `loading` to the submit button so it shows a spinner, and set `disabled` on the submit and cancel buttons. Press Submit in the example to see that state for a few seconds. In a real form, clear `loading` when your request finishes.

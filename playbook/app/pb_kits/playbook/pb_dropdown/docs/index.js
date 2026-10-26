@@ -1,4 +1,6 @@
 export { default as DropdownDefault } from './_dropdown_default.jsx'
+export { default as DropdownReactHook } from './_dropdown_react_hook.jsx'
+export { default as DropdownMultiSelectReactHook } from './_dropdown_multi_select_react_hook.jsx'
 export { default as DropdownWithCustomDisplay } from './_dropdown_with_custom_display.jsx'
 export { default as DropdownWithCustomOptions } from './_dropdown_with_custom_options.jsx'
 export { default as DropdownWithCustomTrigger } from './_dropdown_with_custom_trigger.jsx'
@@ -38,3 +40,12 @@ export { default as DropdownCustomDisplayDisabledOption } from "./_dropdown_cust
 export { default as DropdownDisabled } from "./_dropdown_disabled.jsx";
 export { default as DropdownGroupedOptions } from "./_dropdown_grouped_options.jsx";
 export { default as DropdownDefaultValueWithAutocomplete } from './_dropdown_default_value_with_autocomplete.jsx'
+export { default as DropdownNoOptionsText } from './_dropdown_no_options_text.jsx'
+export { default as DropdownControlledSelection } from './_dropdown_controlled_selection.jsx'
+export { default as DropdownAsyncLoading } from './_dropdown_async_loading.jsx'
+export { default as DropdownAsyncMultiSelect } from './_dropdown_async_multi_select.jsx'
+export { default as DropdownAsyncRichResults } from './_dropdown_async_rich_results.jsx'
+export { default as DropdownAsyncInitialOptions } from './_dropdown_async_initial_options.jsx'
+export { default as DropdownExternalSearch } from './_dropdown_external_search.jsx'
+export { default as DropdownQuickpickEnableTime } from './_dropdown_quickpick_enable_time.jsx'
+export { default as DropdownWithHighlight } from './_dropdown_with_highlight.jsx'

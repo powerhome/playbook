@@ -21,7 +21,9 @@ Edit sources, then regenerate. Never patch these by hand:
 - `**/kit.schema.json`
 - `**/docs/_playground.json`
 - `**/utilities/global-props.schema.json`
+- `**/utilities/global-event-props.schema.json`
 - `**/AvailableProps/globalPropsValues.ts`
+- `**/AvailableProps/globalEventPropsValues.ts`
 - `playbook/dist/ai/**`
 
 Playground authoring source: `**/docs/_playground.overrides.json`
@@ -34,7 +36,7 @@ From repo root:
 yarn generate:docs-metadata
 ```
 
-Triggers for regenerate: kit `.tsx`/`.ts`/`.rb` props, `globalProps.ts`, `types/*.ts`, spacing/breakpoint tokens, `_playground.overrides.json`.
+Triggers for regenerate: kit `.tsx`/`.ts`/`.rb` props, `globalProps.ts`, `globalEventProps.ts`, `types/*.ts`, spacing/breakpoint tokens, `_playground.overrides.json`.
 
 Pre-commit also regenerates and fails if generated output is dirty — stage the regenerated files and commit again.
 
@@ -43,4 +45,5 @@ Pre-commit also regenerates and fails if generated output is dirty — stage the
 - AI / `dist/ai`: `docs/AI_METADATA.md`
 - Playground: `docs/PLAYGROUND_CONFIG.md`
 - Global props: `docs/ADDING_GLOBAL_PROPS.md`
+- Global event props: `docs/ADDING_GLOBAL_EVENT_PROPS.md`
 - Cross-agent entry: `AGENTS.md`

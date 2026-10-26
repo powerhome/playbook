@@ -60,12 +60,19 @@
     align-items: center;
     background: $transparent;
     border: none;
-    border-radius: $border_rad_heaviest;
+    border-radius: $border_radius_md;
     color: $text_lt_light;
     cursor: pointer;
+    padding: 0; // override UA button padding (1px 6px)
     &_icon {
-      width: $space_xl + 2;
-      height: $space_xl + 2;
+      // 36px hit area per approved toolbar design
+      width: $space_lg + $space_xxs;
+      height: $space_lg + $space_xxs;
+    }
+    // size="1x" is 1em; Playbook $font_base is 15.5px — lock to 16px so icons match FA 1x
+    .pb_icon_kit,
+    .pb_custom_icon {
+      font-size: 16px;
     }
     &.open {
       color: $primary;
@@ -79,8 +86,12 @@
       background-color: $neutral_subtle;
     }
     &:disabled {
-      .pb_icon_kit {
-        color: $border_light;
+      color: $text_lt_lighter;
+      cursor: default;
+
+      .pb_icon_kit,
+      .pb_custom_icon {
+        color: $text_lt_lighter;
       }
     }
     &:focus-visible {
@@ -94,7 +105,8 @@
     background-color: $bg_light;
   }
 
-  .pb_rich_text_editor_tiptap_toolbar_sticky {
+  // Must beat `.toolbar { position: relative }` (same node gets both classes when sticky).
+  .toolbar.pb_rich_text_editor_tiptap_toolbar_sticky {
     position: sticky;
     top: 0;
     z-index: 10;
@@ -112,63 +124,148 @@
   }
 
   .toolbar {
+    $history-gutter: $space_sm + (($space_lg + $space_xxs) * 2);
+
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $input_border_default;
-    overflow-x: auto;
-    // Single horizontal row + scroll in narrow modals/sidebars (wrap used to stack controls vertically).
-    &_block {
+    position: relative;
+
+    // Prefer one row; undo/redo stay top-right.
+    // `.toolbar_tools_stacked` is set in JS when format + tools (+ more) no longer fit beside history.
+    &_inner {
+      box-sizing: border-box;
+      min-height: $space_lg + $space_xxs + $space_xxs * 2; // 36px button + vertical padding
+      padding: $space_xxs $space_sm;
+      padding-right: $history-gutter;
+      position: relative;
+    }
+
+    &_controls {
       align-items: center;
       display: flex;
-      flex-wrap: nowrap;
-      gap: $space_xs;
+      flex-wrap: wrap;
+      gap: 0;
       min-width: 0;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      row-gap: $space_xxs;
     }
 
-    // React: full-width row with history on the far right; horizontal scroll stays on .toolbar.
-    &:not(.rte-rails-toolbar-layout) {
-      > .pb_flex_kit.pb_flex_kit_justify_content_between {
-        box-sizing: border-box;
-        column-gap: $space_sm;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        min-width: 100%;
-        width: max-content;
-      }
-
-      > .pb_flex_kit > .pb_flex_item_kit.toolbar_block {
-        flex: 0 0 auto;
-        min-width: 0;
-        overflow-x: visible;
-      }
-
-      > .pb_flex_kit > .pb_flex_item_kit:last-child {
-        flex: 0 0 auto;
-      }
+    &_history {
+      align-items: center;
+      display: flex;
+      position: absolute;
+      right: $space_sm;
+      top: $space_xxs;
     }
 
-    // Vertical section separators use ::before/::after with height: 100%. With
-    // align-items: center on .toolbar_block the kit’s cross size was 0, so the
-    // lines disappeared (master only had gap on .toolbar_block, default stretch).
-    .pb_section_separator_kit.pb_section_separator_vertical {
-      align-self: center;
+    &_group {
+      align-items: center;
+      display: flex;
       flex-shrink: 0;
-      height: $space_xl;
+      flex-wrap: wrap;
+      gap: 0;
+      min-width: 0;
+      row-gap: $space_xxs;
+
+      &_format {
+        order: 1;
+      }
+
+      &_tools {
+        box-sizing: border-box;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-wrap: nowrap;
+        max-width: 100%;
+        min-width: 0;
+        order: 2;
+        overflow-x: auto;
+      }
+
+      &_more {
+        order: 3;
+      }
     }
 
-    // React ToolbarDropdown — match master (fixed width trigger; prod playbook.cloud).
+    &.toolbar_tools_stacked {
+      .toolbar_inner {
+        padding-right: $space_sm;
+      }
+
+      .toolbar_group_tools {
+        flex-basis: 100%;
+        margin-left: -$space_xs;
+
+        > .toolbar_separator:first-child {
+          display: none;
+        }
+      }
+
+      // With "more": format|more on row 1, tools on row 2
+      .toolbar_controls:has(.toolbar_group_more) {
+        .toolbar_group_more {
+          order: 2;
+        }
+
+        .toolbar_group_tools {
+          order: 3;
+        }
+      }
+    }
+
+    // Separators: slightly inset from button height; xxs gap left/right
+    &_separator {
+      align-items: stretch;
+      align-self: center;
+      box-sizing: border-box;
+      display: flex;
+      flex-shrink: 0;
+      height: $space_lg + $space_xxs;
+      padding: $space_xxs;
+
+      .pb_section_separator_kit.pb_section_separator_vertical {
+        align-self: stretch;
+        flex-shrink: 0;
+        height: auto;
+        margin-left: 0;
+        margin-right: 0;
+        min-height: 0;
+        width: 1px;
+
+        &::before,
+        &::after {
+          width: 1px;
+        }
+      }
+    }
+
+    // React ToolbarDropdown — match icon-button hover; width hugs label + chevron
     .editor-dropdown-button {
-      background: transparent;
-      border: none;
-      color: $text_lt_light;
+      align-items: center;
+      background: transparent !important;
+      border: none !important;
+      border-radius: $border_radius_md;
+      box-shadow: none !important;
+      box-sizing: border-box;
+      color: $text_lt_light !important;
       cursor: pointer;
+      display: inline-flex;
       font-weight: $light;
-      padding: ($space_xs - 1) 0px;
-      width: $space_xl * 3;
+      height: $space_lg + $space_xxs;
+      justify-content: flex-start;
+      min-height: $space_lg + $space_xxs;
+      // Pull left so toolbar $space_sm + button pad don't double-inset; keep xs pad for hover
+      margin-left: -$space_xs;
+      padding: 0 $space_xs;
+      width: auto;
+
+      &:hover:not([disabled]),
+      &:active:not([disabled]) {
+        background-color: $neutral_subtle !important;
+        color: $text_lt_light !important;
+      }
 
       &:focus-visible {
-        box-shadow: unset;
+        box-shadow: unset !important;
       }
     }
 
@@ -176,49 +273,39 @@
       max-width: 100%;
       min-width: 0;
 
-      .rte-rails-toolbar-row {
-        align-items: center;
-        box-sizing: border-box;
-        column-gap: $space_sm;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        min-width: 100%;
-        padding: $space_xxs $space_sm;
-        width: max-content;
-      }
-
-      .rte-toolbar-left {
+      .rte-toolbar-left,
+      .toolbar_controls {
         align-items: center;
         display: flex;
-        flex: 0 0 auto;
-        flex-wrap: nowrap;
-        gap: $space_xs;
+        flex-wrap: wrap;
+        gap: 0;
         min-width: 0;
-        overflow-x: visible;
+        row-gap: $space_xxs;
       }
 
-      .rte-toolbar-right {
+      .rte-toolbar-right,
+      .toolbar_history {
         align-items: center;
         display: flex;
-        flex: 0 0 auto;
-        gap: $space_xs;
+        position: absolute;
+        right: $space_sm;
+        top: $space_xxs;
       }
 
-      // Align dropdown trigger with icon row (React wraps Popover + SectionSeparator in one flex line).
       .pb_popover_reference_wrapper {
         align-items: center;
         display: inline-flex;
       }
 
-      // Override master’s fixed-width React trigger: Rails block-style label + icons needs flexible width.
+      // Rails block-style label needs flexible width.
       .editor-dropdown-button {
-        justify-content: flex-start;
+        height: $space_lg + $space_xxs;
         letter-spacing: normal;
         line-height: 1;
         max-width: 100%;
-        min-height: unset;
-        padding: ($space_xs - 1) $space_xs;
+        min-height: $space_lg + $space_xxs;
+        margin-left: -$space_xs;
+        padding: 0 $space_xs;
         text-align: left;
         width: auto;
 
@@ -236,7 +323,6 @@
           align-items: center;
         }
 
-        .rte-block-style-trigger-icon,
         .rte-block-style-chevron {
           display: inline-flex;
           flex-shrink: 0;
@@ -266,24 +352,30 @@
     }
   }
 
-  // TipTap content — match master (prod playbook React tab).
+  // TipTap content — compact spacing via container padding; blocks are flush (margin: 0).
   .ProseMirror {
     background: $white;
     border: 1px solid $input_border_default;
     border-radius: $border_rad_heaviest;
     height: 100%;
-    line-height: $lh_loose;
+    line-height: $lh_normal;
     padding: 1rem 1.5rem 1.5rem 1.5rem;
     @include transition_default;
 
+    h1,
+    h2,
+    h3,
     h4,
     h5,
     h6,
     ul,
     ol,
-    blockquote,
     p {
-      margin: 1rem 0 0 0;
+      margin: 0;
+    }
+
+    p {
+      @include preview_tiptap_p;
     }
 
     code {
@@ -320,16 +412,14 @@
     hr {
       @include preview_tiptap_hr;
     }
+    img {
+      @include preview_tiptap_img;
+    }
     ol {
       @include preview_tiptap_ol;
     }
     ul {
       @include preview_tiptap_ul;
-    }
-
-    // After heading mixins: first block should not pick up extra top margin (wins over `p { margin-top: 1rem }`).
-    > :first-child {
-      margin-top: 0;
     }
   }
 
@@ -373,6 +463,20 @@
     }
     .pb_nav_list_item_link {
       background-color: unset !important;
+    }
+  }
+}
+
+// Toolbar format/more menus (portaled): tighter inset so labels match the flush trigger
+.pb_tiptap_toolbar_dropdown_popover {
+  .pb_nav_list_kit_item {
+    margin-left: 0;
+    margin-right: 0;
+
+    &[class*="_link"],
+    .pb_nav_list_item_link {
+      padding-left: $space_xs;
+      padding-right: $space_xs;
     }
   }
 }
@@ -478,7 +582,17 @@
 
 
 .tiptap-content {
-  @include preview_tiptap_first_child;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  p {
+    margin: 0;
+  }
   a {
     @include preview_tiptap_a;
   }
@@ -501,6 +615,9 @@
   }
   hr {
     @include preview_tiptap_hr;
+  }
+  img {
+    @include preview_tiptap_img;
   }
   ol {
     @include preview_tiptap_ol;

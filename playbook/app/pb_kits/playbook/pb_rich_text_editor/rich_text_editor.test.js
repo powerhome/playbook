@@ -68,8 +68,9 @@ test('returns "Dark" class name', () => {
 // TipTap testing
 const TestAdvancedEditor = ({ toolbarOnFocus = false, ...props }) => {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit.configure({ trailingNode: false })],
     content: '<p>Test content</p>',
+    shouldRerenderOnTransaction: true,
   })
 
   if (!editor) return null

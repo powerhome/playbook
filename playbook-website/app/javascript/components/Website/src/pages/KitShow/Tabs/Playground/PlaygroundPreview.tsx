@@ -4,7 +4,7 @@ import { Card, colors, Flex } from "playbook-ui";
 import * as PB from "playbook-ui";
 import * as PBAdvancedTable from "playbook-ui/advanced-table";
 import * as PBCharts from "playbook-ui/charts";
-import maplibreglModule from "maplibre-gl";
+import maplibregl from "../../../../utils/maplibre";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TipTapLink from "@tiptap/extension-link";
@@ -40,7 +40,7 @@ const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({
     StarterKit,
     TipTapLink,
     useEditor,
-    maplibregl: (maplibreglModule as any).default || maplibreglModule,
+    maplibregl,
     ...extraScope,
   }), [extraScope, PBrest, FormattedDate]);
 

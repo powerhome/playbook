@@ -10,6 +10,9 @@ import {
 import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
+import DropdownOption from "./DropdownOption";
+import { GenericObject } from "../../types";
+import { useHandleOnKeyDown } from "../hooks/useHandleOnKeydown";
 import { setFloatingOwnerAttribute } from "../../utilities/floatingPortalHosts";
 
 import List from "../../pb_list/_list";
@@ -43,6 +46,10 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   } = props;
 
   const {
+    asyncEnabled,
+    optionKey,
+    noOptionsText,
+    asyncStatus,
     dropdownContainerRef,
     error,
     filteredOptions,
@@ -56,6 +63,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     setFocusedOptionIndex,
   } = useContext(DropdownContext);
 
+  const handleKeyDown = useHandleOnKeyDown();
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
@@ -85,6 +93,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         >
             <input
                 onChange={handleChange}
+                onKeyDown={asyncEnabled ? handleKeyDown : undefined}
                 placeholder="Select..."
                 ref={inputRef}
                 value={filterItem}
@@ -93,9 +102,10 @@ const DropdownContainer = (props: DropdownContainerProps) => {
       )}
       <List dark={dark}>
         {
-        filteredOptions?.length === 0 ? (
+        asyncStatus || (!asyncEnabled && filteredOptions?.length === 0) ? (
           <ListItem dark={dark}
               display="flex"
+              htmlOptions={asyncStatus ? { role: "status" } : undefined}
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               justifyContent="center"
@@ -103,11 +113,15 @@ const DropdownContainer = (props: DropdownContainerProps) => {
           >
             <Body color="light" 
                 dark={dark}
-                text="no option"
+                text={asyncStatus || noOptionsText || "no option"}
             />
           </ListItem>
         ): (
-          children
+          children || (asyncEnabled && filteredOptions.map((option: GenericObject) => (
+            <DropdownOption key={optionKey(option)}
+                option={option}
+            />
+          )))
         )
         }
         </List>

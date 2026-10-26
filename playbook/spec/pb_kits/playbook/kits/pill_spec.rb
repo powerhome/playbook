@@ -31,4 +31,26 @@ RSpec.describe Playbook::PbPill::Pill do
       expect(subject.new(notification: true, size: "sm", text_transform: "none", variant: "error").classname).to eq "pb_pill_kit_error_none_notification_sm"
     end
   end
+
+  describe "rendered content" do
+    let(:controller) { Class.new(ApplicationController) { helper Playbook::PbKitHelper } }
+
+    def render_pill(template)
+      controller.render(inline: template)
+    end
+
+    it "renders children when text is omitted" do
+      html = render_pill('<%= pb_rails("pill") do %><span>child content</span><% end %>')
+
+      expect(html).to include "<span>child content</span>"
+      expect(html).not_to include "pb_pill_text"
+    end
+
+    it "renders text instead of children when both are passed" do
+      html = render_pill('<%= pb_rails("pill", props: { text: "label" }) do %><span>child content</span><% end %>')
+
+      expect(html).to include "label"
+      expect(html).not_to include "child content"
+    end
+  end
 end

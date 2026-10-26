@@ -2,6 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
+import { GlobalEventProps, globalEventProps } from "../utilities/globalEventProps";
 import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
@@ -25,7 +26,7 @@ type LabelValueProps = {
   icon?: string;
   description?: string;
   title?: string;
-};
+} & GlobalEventProps;
 
 const dateString = (value: Date) => {
   const month = DateTime.toMonthNum(value);
@@ -67,6 +68,7 @@ const LabelValue = (props: LabelValueProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
         title={title}

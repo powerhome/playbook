@@ -17,7 +17,7 @@ if [ -z "$STAGED_FILES" ]; then
 fi
 
 if ! echo "$STAGED_FILES" | grep -Eq \
-  'playbook/app/pb_kits/playbook/(pb_[^/]+/.+\.(tsx|ts|rb)|utilities/globalProps\.ts|types/[^/]+\.ts|tokens/_(spacing|screen_sizes)\.scss|pb_[^/]+/kit\.schema\.json|pb_[^/]+/docs/_playground\.overrides\.json)'; then
+  'playbook/app/pb_kits/playbook/(pb_[^/]+/.+\.(tsx|ts|jsx|js|rb|erb)|utilities/globalProps\.ts|utilities/globalEventProps\.ts|types/[^/]+\.ts|tokens/_(spacing|screen_sizes)\.scss|pb_[^/]+/kit\.schema\.json|pb_[^/]+/docs/_playground\.overrides\.json)|playbook/lib/playbook/(forms/|pb_forms[^/]*\.rb|kit_base\.rb)|playbook/scripts/(build-ai-dist\.mjs|review-form-metadata\.mjs|lib/(.*form.*|usage-faqs\.mjs))'; then
   exit 0
 fi
 
@@ -37,7 +37,9 @@ list_generated_files() {
     find playbook/app/pb_kits/playbook -name 'kit.schema.json' 2>/dev/null
     find playbook/app/pb_kits/playbook -path '*/docs/_playground.json' 2>/dev/null
     echo 'playbook/app/pb_kits/playbook/utilities/global-props.schema.json'
+    echo 'playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json'
     echo 'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts'
+    echo 'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalEventPropsValues.ts'
   } | sort -u
 }
 
@@ -81,7 +83,9 @@ if [ "$BEFORE" != "$AFTER" ]; then
     'playbook/app/pb_kits/playbook/*/kit.schema.json' \
     'playbook/app/pb_kits/playbook/*/docs/_playground.json' \
     'playbook/app/pb_kits/playbook/utilities/global-props.schema.json' \
+    'playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json' \
     'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts' \
+    'playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalEventPropsValues.ts' \
     2>/dev/null || true)"
 
   if [ -n "$CHANGED" ]; then
@@ -92,7 +96,9 @@ if [ "$BEFORE" != "$AFTER" ]; then
   echo "  git add playbook/app/pb_kits/playbook/*/kit.schema.json"
   echo "  git add playbook/app/pb_kits/playbook/*/docs/_playground.json"
   echo "  git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json"
+  echo "  git add playbook/app/pb_kits/playbook/utilities/global-event-props.schema.json"
   echo "  git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts"
+  echo "  git add playbook-website/app/javascript/components/Website/src/components/AvailableProps/globalEventPropsValues.ts"
   echo ""
   echo "Or regenerate first with: yarn generate:docs-metadata"
   echo ""

@@ -89,7 +89,11 @@
                     validation: { message: "Website is required" },
                   } %>
             <% when "textarea" %>
-              <%= form.text_area :bio, props: { label: "Bio", required: true } %>
+              <%= form.text_area :bio, props: {
+                    label: "Bio",
+                    required: true,
+                    validation: { message: "Bio is required" },
+                  } %>
             <% when "select" %>
               <%= form.select :favorite_color, select_choices,
                     props: {
@@ -108,7 +112,12 @@
                     } %>
             <% when "dropdown" %>
               <%= form.dropdown_field "validation[country]",
-                    props: { label: "Country", options: dropdown_options, required: true } %>
+                    props: {
+                      label: "Country",
+                      options: dropdown_options,
+                      required: true,
+                      validation_message: "Please select a country",
+                    } %>
             <% when "multi_select" %>
               <%= form.dropdown_field "validation[countries]",
                     props: {
@@ -116,10 +125,16 @@
                       options: dropdown_options,
                       multi_select: true,
                       required: true,
+                      validation_message: "Please select at least one country",
                     } %>
             <% when "checkbox" %>
               <%= form.check_box :newsletter,
-                    props: { text: "Subscribe to newsletter", label: "Checkbox", required: true },
+                    props: {
+                      text: "Subscribe to newsletter",
+                      label: "Checkbox",
+                      required: true,
+                      validation_message: "Please subscribe to continue",
+                    },
                     checked_value: "yes",
                     unchecked_value: "no" %>
             <% when "date_picker" %>
@@ -142,6 +157,7 @@
                       label: "Time Zone",
                       blank_selection: "Select a Time Zone...",
                       required: true,
+                      validation_message: "Please select a time zone",
                     } %>
             <% when "typeahead_default" %>
               <%= form.typeahead "validation[color_search_single]",
@@ -167,10 +183,16 @@
               <%= form.phone_number_field "validation[phone]", props: {
                     label: "Phone Number",
                     required: true,
+                    validation_message: "Phone number is required",
                   } %>
             <% when "star_rating" %>
               <%= form.star_rating_field "validation[rating]",
-                    props: { variant: "interactive", label: "Rating", required: true } %>
+                    props: {
+                      variant: "interactive",
+                      label: "Rating",
+                      required: true,
+                      validation_message: "Please provide a rating",
+                    } %>
             <% when "multi_level_select" %>
               <%= form.multi_level_select "validation[department]",
                     props: {
@@ -179,6 +201,7 @@
                       margin_bottom: "sm",
                       label: "Department",
                       required: true,
+                      validation_message: "Please select a department",
                     } %>
             <% end %>
           </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 type BackgroundColors = 'gradient' |
   'dark' |'light' | 'white' | 'success' | 'warning' | 'error' | 'info' | 'neutral' | 'primary' | 'shadow' |
@@ -35,7 +36,7 @@ type BackgroundProps = {
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col',
   transition?: 'fade' | 'blur' | 'scale',
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 type ResponsiveProp<T> = T | {
   xs?: T,
@@ -98,7 +99,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     imageUrl: getResponsiveValue(imageUrl),
   });
 
-  // Update responsive values on window resize.
+  // Keep responsive values in sync when props change, and on window resize.
   useEffect(() => {
     const updateResponsiveProps = () => {
       setResponsiveProps({
@@ -109,6 +110,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         imageUrl: getResponsiveValue(imageUrl),
       });
     };
+    updateResponsiveProps();
     window.addEventListener('resize', updateResponsiveProps);
     return () => window.removeEventListener('resize', updateResponsiveProps);
   }, [backgroundSize, backgroundPosition, backgroundRepeat, backgroundColor, imageUrl]);
@@ -153,6 +155,8 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     ...dynamicInlineProps
   };
 
+  // Dynamic HTML tag from props; matches other kits (Title, Collapsible, etc.).
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Tag: React.ReactElement | any = `${tag}`;
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -163,6 +167,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         alt={alt}
         className={classes}
         id={id}

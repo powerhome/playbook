@@ -20,12 +20,17 @@ Rails.application.routes.draw do
     }, as: nil
   end
 
-  # Production host only: HTML shell for /playground so the SPA can show a VPN
-  # message / redirect to staging. Playground JSON is NOT served on production
-  # (see PagesController#application) — localhost / review apps serve both.
+  # HTML /playground always (prod shows the VPN/staging message). JSON is gated in PagesController.
   get "playground", to: "pages#application"
 
   root to: "pages#application"
+
+  # Preview endpoint only exists when deploy-time flag is on (staging/PRs/local).
+  if Rails.application.config.x.rails_playground_enabled
+    post "kits/:name/rails/playground/preview",
+         to: "playground#preview",
+         defaults: { format: :json }
+  end
 
   # Legacy /beta/* redirects (301)
   get "beta",       to: redirect("/")
@@ -51,6 +56,8 @@ Rails.application.routes.draw do
   get "guides/design_guidelines",            to: "pages#application"
   get "global_props/:name",                  to: "pages#application"
   get "global_props",                        to: "pages#application"
+  get "global_event_props/:name",            to: "pages#application"
+  get "global_event_props",                  to: "pages#application"
   get "tokens/:name",                        to: "pages#application"
   get "tokens",                              to: "pages#application"
 

@@ -1,14 +1,19 @@
 <%= pb_content_tag(:thead) do %>
   <% object.header_rows.each_with_index do |header_row, row_index| %>
+    <% is_lowest_header_row = row_index == header_rows.size - 1 %>
     <%= pb_rails("table/table_row") do %>
-      <% if row_index == 0 && object.selectable_rows && object.enable_toggle_expansion == "none" %>
-        <%= object.render_select_all_header %>
+      <% if object.selectable_rows && object.enable_toggle_expansion == "none" %>
+        <% if is_lowest_header_row %>
+          <%= object.render_select_all_header %>
+        <% else %>
+          <%= object.render_select_all_header_spacer %>
+        <% end %>
       <% end %>
       <% header_row.each_with_index do |cell, cell_index| %>
         <% header_component = object.header_component_info(cell, cell_index, row_index) %>
         <%= pb_rails(header_component[:name], props: header_component[:props]) do %>
           <%= pb_rails("flex", props: { align: "center", justify: object.header_flex_justify(cell, cell_index, row_index), text_align: object.header_flex_text_align(cell) }) do %>
-            <% if cell_index.zero? && row_index === header_rows.size - 1 %>
+            <% if cell_index.zero? && is_lowest_header_row %>
               <% if object.selectable_rows && object.enable_toggle_expansion != "none" %>
                 <%= pb_rails("flex/flex_item", props: { padding_right: "xs" }) do %>
                   <%= object.render_select_all_checkbox %>

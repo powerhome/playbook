@@ -29,4 +29,21 @@ RSpec.describe Playbook::Forms::Builder, "#star_rating_field", type: :helper do
 
     expect(rendered).to have_tag("form .pb_star_rating_kit", text: /Score/)
   end
+
+  it "passes required and validation_message to the hidden rating input" do
+    rendered = render_form do |builder|
+      concat builder.star_rating_field(
+        :score,
+        props: {
+          variant: "interactive",
+          required: true,
+          validation_message: "Please provide a rating",
+        }
+      )
+    end
+
+    expect(rendered).to have_tag(
+      "input[data-pb-star-rating-input][required][data-message='Please provide a rating']"
+    )
+  end
 end

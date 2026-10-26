@@ -1,8 +1,186 @@
 // Rails TipTap: dynamic import() from esm.sh (no import map — avoids 2nd map ignored by Firefox vs Vite/host).
 // Idempotent: data-pb-rte-initialized / data-pb-rte-pending.
 
-const RTE_TIPTAP_VERSION = "2.8.0";
+// Keep in sync with TipTap versions used by Playbook docs / Nitro RTE alignment (TipTap v3).
+const RTE_TIPTAP_VERSION = "3.0.7";
 const RTE_TIPTAP_ESM = (pkg) => `https://esm.sh/${pkg}@${RTE_TIPTAP_VERSION}`;
+const RTE_EXTENSIONS = new Set(["underline", "text_align", "horizontal_rule", "image"]);
+
+function parseExtensions(value) {
+  try {
+    const parsed = JSON.parse(value || "[]");
+    if (!Array.isArray(parsed)) return [];
+
+    return [...new Set(parsed.filter((extension) => RTE_EXTENSIONS.has(extension)))];
+  } catch (_error) {
+    return [];
+  }
+}
+
+function extensionActionFromHref(href) {
+  const value = href?.startsWith("#") ? href.slice(1) : "";
+  if (value.startsWith("textAlign-")) {
+    return { action: "textAlign", alignment: value.replace("textAlign-", "") };
+  }
+  if (["horizontalRule", "image", "underline"].includes(value)) return { action: value };
+
+  return null;
+}
+
+async function loadOptionalExtensions(extensionNames, importer = (pkg) => import(RTE_TIPTAP_ESM(pkg))) {
+  const extensions = [];
+
+  if (extensionNames.includes("underline")) {
+    const { default: Underline } = await importer("@tiptap/extension-underline");
+    extensions.push(Underline);
+  }
+  if (extensionNames.includes("text_align")) {
+    const { default: TextAlign } = await importer("@tiptap/extension-text-align");
+    extensions.push(TextAlign.configure({ types: ["heading", "paragraph"] }));
+  }
+  if (extensionNames.includes("image")) {
+    const { default: Image } = await importer("@tiptap/extension-image");
+    extensions.push(Image);
+  }
+
+  return extensions;
+}
+
+function syncToHiddenInput(editor, hiddenInput) {
+  if (editor && hiddenInput) hiddenInput.value = editor.getHTML();
+}
+
+function runToolbarAction(editor, action, { alignment, prompt = window.prompt, normalizeListSelection } = {}) {
+  if (action === "undo" || action === "redo") {
+    editor.chain().focus()[action]().run();
+    return;
+  }
+  if (action === "link") {
+    const previousUrl = editor.getAttributes("link").href || "";
+    const url = prompt("URL", previousUrl);
+    if (url === null) return;
+    const chain = editor.chain().focus().extendMarkRange("link");
+    if (url === "") chain.unsetLink().run();
+    else chain.setLink({ href: url }).run();
+    return;
+  }
+  if (action === "image") {
+    const url = prompt("Image URL");
+    if (url) editor.chain().focus().setImage({ src: url }).run();
+    return;
+  }
+  if (action === "textAlign" && alignment) {
+    editor.chain().focus().setTextAlign(alignment).run();
+    return;
+  }
+  if (action === "bulletList") {
+    normalizeListSelection?.();
+    editor.chain().focus().toggleBulletList().run();
+    return;
+  }
+  if (action === "orderedList") {
+    normalizeListSelection?.();
+    editor.chain().focus().toggleOrderedList().run();
+    return;
+  }
+  if (action === "dedent") {
+    editor.chain().focus().liftListItem("listItem").run();
+    return;
+  }
+  if (action === "indent") {
+    editor.chain().focus().sinkListItem("listItem").run();
+    return;
+  }
+
+  const actionToChain = {
+    bold: "toggleBold",
+    italic: "toggleItalic",
+    strike: "toggleStrike",
+    horizontalRule: "setHorizontalRule",
+    underline: "toggleUnderline",
+  };
+  const chainMethod = actionToChain[action];
+  const chain = editor.chain().focus();
+  if (chainMethod && typeof chain[chainMethod] === "function") chain[chainMethod]().run();
+}
+
+const TOOLBAR_STACK_HYSTERESIS_PX = 32;
+const TOOLBAR_STACK_FIT_BUFFER_PX = 8;
+
+function childrenWidth(element) {
+  return Array.from(element.children).reduce(
+    (sum, child) => sum + child.offsetWidth,
+    0
+  );
+}
+
+function toolsNeedStack(toolbarInner) {
+  if (!toolbarInner) return false;
+
+  const format = toolbarInner.querySelector(".toolbar_group_format");
+  const tools = toolbarInner.querySelector(".toolbar_group_tools");
+  if (!format || !tools) return false;
+
+  const more = toolbarInner.querySelector(".toolbar_group_more");
+  const history = toolbarInner.querySelector(".toolbar_history");
+  const { paddingLeft, paddingRight } = window.getComputedStyle(toolbarInner);
+  const rightReserve = Math.max((history && history.offsetWidth) || 0, parseFloat(paddingRight) || 0);
+  const available = toolbarInner.clientWidth - (parseFloat(paddingLeft) || 0) - rightReserve;
+  const needed =
+    childrenWidth(format) +
+    childrenWidth(tools) +
+    (more ? childrenWidth(more) : 0) +
+    TOOLBAR_STACK_FIT_BUFFER_PX;
+
+  return needed > available;
+}
+
+function nextStacked(stacked, stackedAtWidth, needsStack, width) {
+  if (needsStack) {
+    return {
+      stacked: true,
+      stackedAtWidth: stacked ? Math.min(stackedAtWidth, width) : width,
+    };
+  }
+
+  if (stacked && width > stackedAtWidth + TOOLBAR_STACK_HYSTERESIS_PX) {
+    return { stacked: false, stackedAtWidth };
+  }
+
+  return { stacked, stackedAtWidth };
+}
+
+function syncToolbarToolsStacked(toolbar, state = { stacked: false, stackedAtWidth: 0 }) {
+  if (!toolbar) return state;
+
+  const toolbarInner = toolbar.querySelector(".toolbar_inner") || toolbar;
+  const next = nextStacked(
+    state.stacked,
+    state.stackedAtWidth,
+    toolsNeedStack(toolbarInner),
+    toolbar.clientWidth
+  );
+
+  toolbar.classList.toggle("toolbar_tools_stacked", next.stacked);
+  return next;
+}
+
+function watchToolbarToolsStacked(toolbar) {
+  if (!toolbar) return;
+
+  let state = { stacked: false, stackedAtWidth: 0 };
+  const sync = () => {
+    state = syncToolbarToolsStacked(toolbar, state);
+  };
+
+  sync();
+  requestAnimationFrame(sync);
+
+  if (typeof ResizeObserver === "undefined") return;
+
+  const observer = new ResizeObserver(sync);
+  observer.observe(toolbar);
+}
 
 async function initPlaybookRichTextEditorRails(container) {
   if (!container || container.dataset.pbRteInitialized || container.dataset.pbRtePending) return;
@@ -18,8 +196,10 @@ async function initPlaybookRichTextEditorRails(container) {
   const editorNode = document.getElementById(`${containerId}-editor`);
   const toolbar = document.getElementById(`${containerId}-toolbar`);
   const rteSimple = container.dataset.rteSimple === "true";
+  const extensionNames = parseExtensions(container.dataset.rteExtensions);
   const markdownSupport = container.dataset.markdownSupport === "true";
   const blockTooltipId = `${containerId}-toolbar-block-tooltip`;
+  const extensionsTooltipId = `${containerId}-toolbar-extensions-tooltip`;
   const iconTemplatesRoot = rteSimple
     ? null
     : document.getElementById(`${containerId}-block-icon-templates`);
@@ -29,16 +209,10 @@ async function initPlaybookRichTextEditorRails(container) {
     return;
   }
 
-  function syncToHiddenInput(editor) {
-    if (editor && hiddenInput) {
-      hiddenInput.value = editor.getHTML();
-    }
-  }
-
   try {
     const { Editor } = await import(RTE_TIPTAP_ESM("@tiptap/core"));
     const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
-    const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
+    const optionalExtensions = await loadOptionalExtensions(extensionNames);
     const neutralClipboardTags = new Set(["html", "head", "body", "meta", "div", "span", "p"]);
     const markdownSourceTags = new Set([...neutralClipboardTags, "pre", "code"]);
     let markdownToHtml;
@@ -72,15 +246,27 @@ async function initPlaybookRichTextEditorRails(container) {
       }
     }
 
+    // TipTap v3 StarterKit includes Link + Underline. Keep underline opt-in via extensions prop;
+    // configure Link here so we do not load a second @tiptap/extension-link instance.
     const editor = new Editor({
       element: editorNode,
       extensions: [
-        StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
-        Link.configure({ openOnClick: false, HTMLAttributes: { target: "_blank", rel: "noopener" } }),
+        StarterKit.configure({
+          heading: { levels: [1, 2, 3] },
+          link: {
+            openOnClick: false,
+            HTMLAttributes: { target: "_blank", rel: "noopener" },
+          },
+          // TipTap v3 enables TrailingNode by default; disable so getHTML() stays
+          // free of a synthetic trailing <p></p> that would dirty/persist blank lines.
+          trailingNode: false,
+          underline: false,
+        }),
+        ...optionalExtensions,
       ],
       content: initialHtml,
       editable: true,
-      onUpdate: ({ editor: ed }) => syncToHiddenInput(ed),
+      onUpdate: ({ editor: ed }) => syncToHiddenInput(ed, hiddenInput),
     });
 
     if (markdownSupport && markdownToHtml) {
@@ -115,13 +301,51 @@ async function initPlaybookRichTextEditorRails(container) {
       }, true);
     }
 
-    syncToHiddenInput(editor);
+    syncToHiddenInput(editor, hiddenInput);
 
-    const actionToChain = {
-      bold: "toggleBold",
-      italic: "toggleItalic",
-      strike: "toggleStrike",
-      codeBlock: "toggleCodeBlock",
+    const normalizeListSelection = () => {
+      let { selection } = editor.state;
+      if (selection.empty) return;
+
+      if (selection.$from.nodeBefore?.type.name === "hardBreak") {
+        const selectedSize = selection.to - selection.from;
+        const breakPosition = selection.from - 1;
+
+        editor.chain()
+          .deleteRange({ from: breakPosition, to: selection.from })
+          .setTextSelection(breakPosition)
+          .splitBlock()
+          .run();
+
+        const from = editor.state.selection.from;
+        editor.commands.setTextSelection({ from, to: from + selectedSize });
+        selection = editor.state.selection;
+      }
+
+      const { $from, $to } = selection;
+      let { from, to } = selection;
+
+      if (
+        $from.depth > 0 &&
+        $from.parent.isTextblock &&
+        $from.parentOffset === $from.parent.content.size
+      ) {
+        const nextBlockStart = $from.after($from.depth) + 1;
+        if (nextBlockStart < to) from = nextBlockStart;
+      }
+
+      if (
+        $to.depth > 0 &&
+        $to.parent.isTextblock &&
+        $to.parentOffset === 0
+      ) {
+        const previousBlockEnd = $to.before($to.depth) - 1;
+        if (previousBlockEnd > from) to = previousBlockEnd;
+      }
+
+      if (from !== selection.from || to !== selection.to) {
+        editor.commands.setTextSelection({ from, to });
+      }
     };
 
     const getCurrentBlockValue = () => {
@@ -132,6 +356,7 @@ async function initPlaybookRichTextEditorRails(container) {
       else if (editor.isActive("bulletList")) value = "bulletList";
       else if (editor.isActive("orderedList")) value = "orderedList";
       else if (editor.isActive("blockquote")) value = "blockquote";
+      else if (editor.isActive("codeBlock")) value = "codeBlock";
       return value;
     };
 
@@ -150,9 +375,7 @@ async function initPlaybookRichTextEditorRails(container) {
         );
       }
       if (triggerRoot && tpl) {
-        const iconWrap = triggerRoot.querySelector(".rte-block-style-trigger-icon");
         const labelEl = triggerRoot.querySelector(".rte-block-style-trigger-label");
-        if (iconWrap) iconWrap.innerHTML = tpl.innerHTML;
         if (labelEl) labelEl.textContent = tpl.getAttribute("data-label") || "";
       }
       const tooltip = document.getElementById(blockTooltipId);
@@ -166,48 +389,8 @@ async function initPlaybookRichTextEditorRails(container) {
     };
 
     const applyBlockType = (value) => {
-      let { selection } = editor.state;
-
-      if ((value === "bulletList" || value === "orderedList") && !selection.empty) {
-        if (selection.$from.nodeBefore?.type.name === "hardBreak") {
-          const selectedSize = selection.to - selection.from;
-          const breakPosition = selection.from - 1;
-
-          editor.chain()
-            .deleteRange({ from: breakPosition, to: selection.from })
-            .setTextSelection(breakPosition)
-            .splitBlock()
-            .run();
-
-          const from = editor.state.selection.from;
-          editor.commands.setTextSelection({ from, to: from + selectedSize });
-          selection = editor.state.selection;
-        }
-
-        const { $from, $to } = selection;
-        let { from, to } = selection;
-
-        if (
-          $from.depth > 0 &&
-          $from.parent.isTextblock &&
-          $from.parentOffset === $from.parent.content.size
-        ) {
-          const nextBlockStart = $from.after($from.depth) + 1;
-          if (nextBlockStart < to) from = nextBlockStart;
-        }
-
-        if (
-          $to.depth > 0 &&
-          $to.parent.isTextblock &&
-          $to.parentOffset === 0
-        ) {
-          const previousBlockEnd = $to.before($to.depth) - 1;
-          if (previousBlockEnd > from) to = previousBlockEnd;
-        }
-
-        if (from !== selection.from || to !== selection.to) {
-          editor.commands.setTextSelection({ from, to });
-        }
+      if (value === "bulletList" || value === "orderedList") {
+        normalizeListSelection();
       }
 
       const chain = editor.chain().focus();
@@ -218,25 +401,49 @@ async function initPlaybookRichTextEditorRails(container) {
       else if (value === "bulletList") chain.toggleBulletList().run();
       else if (value === "orderedList") chain.toggleOrderedList().run();
       else if (value === "blockquote") chain.toggleBlockquote().run();
+      else if (value === "codeBlock") chain.toggleCodeBlock().run();
+    };
+
+    const isToolbarActionActive = (action, alignment) => {
+      if (action === "bold") return editor.isActive("bold");
+      if (action === "italic") return editor.isActive("italic");
+      if (action === "strike") return editor.isActive("strike");
+      if (action === "link") return editor.isActive("link");
+      if (action === "bulletList") return editor.isActive("bulletList");
+      if (action === "orderedList") return editor.isActive("orderedList");
+      if (action === "underline") return editor.isActive("underline");
+      if (action === "image") return editor.isActive("image");
+      if (action === "horizontalRule") return editor.isActive("horizontalRule");
+      if (action === "textAlign") return editor.isActive({ textAlign: alignment });
+
+      return false;
     };
 
     const updateActiveStates = () => {
       syncBlockTrigger();
       toolbar.querySelectorAll("button[data-action]").forEach((btn) => {
         const action = btn.dataset.action;
-        let active = false;
-        if (action === "bold") active = editor.isActive("bold");
-        else if (action === "italic") active = editor.isActive("italic");
-        else if (action === "strike") active = editor.isActive("strike");
-        else if (action === "codeBlock") active = editor.isActive("codeBlock");
-        else if (action === "link") active = editor.isActive("link");
-        btn.classList.toggle("is-active", active);
+        btn.classList.toggle("is-active", isToolbarActionActive(action, btn.dataset.alignment));
+      });
+      const extensionsTooltip = document.getElementById(extensionsTooltipId);
+      extensionsTooltip?.querySelectorAll("a.pb_nav_list_item_link").forEach((link) => {
+        const extensionAction = extensionActionFromHref(link.getAttribute("href"));
+        const active = extensionAction
+          ? isToolbarActionActive(extensionAction.action, extensionAction.alignment)
+          : false;
+        link.classList.toggle("is-active", active);
       });
       toolbar.querySelectorAll("button[data-action='undo']").forEach((btn) => {
         btn.disabled = !editor.can().undo();
       });
       toolbar.querySelectorAll("button[data-action='redo']").forEach((btn) => {
         btn.disabled = !editor.can().redo();
+      });
+      toolbar.querySelectorAll("button[data-action='dedent']").forEach((btn) => {
+        btn.disabled = !editor.can().liftListItem("listItem");
+      });
+      toolbar.querySelectorAll("button[data-action='indent']").forEach((btn) => {
+        btn.disabled = !editor.can().sinkListItem("listItem");
       });
     };
 
@@ -256,37 +463,36 @@ async function initPlaybookRichTextEditorRails(container) {
       }
     }
 
+    const extensionsTooltip = document.getElementById(extensionsTooltipId);
+    if (extensionsTooltip) {
+      extensionsTooltip.addEventListener("click", (event) => {
+        const link = event.target.closest("a[href^='#']");
+        if (!link || !extensionsTooltip.contains(link)) return;
+        const extensionAction = extensionActionFromHref(link.getAttribute("href"));
+        if (!extensionAction) return;
+
+        event.preventDefault();
+        runToolbarAction(editor, extensionAction.action, { alignment: extensionAction.alignment });
+        updateActiveStates();
+      });
+    }
+
     toolbar.addEventListener("click", (e) => {
       const btn = e.target.closest("button[data-action]");
       if (!btn) return;
       e.preventDefault();
       const action = btn.dataset.action;
-
-      if (action === "undo") {
-        editor.chain().focus().undo().run();
-      } else if (action === "redo") {
-        editor.chain().focus().redo().run();
-      } else if (action === "link") {
-        const previousUrl = editor.getAttributes("link").href || "";
-        const url = window.prompt("URL", previousUrl);
-        if (url === null) return;
-        if (url === "") {
-          editor.chain().focus().extendMarkRange("link").unsetLink().run();
-        } else {
-          editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
-        }
-      } else {
-        const chainMethod = actionToChain[action];
-        if (chainMethod && typeof editor.chain().focus()[chainMethod] === "function") {
-          editor.chain().focus()[chainMethod]().run();
-        }
-      }
+      runToolbarAction(editor, action, {
+        alignment: btn.dataset.alignment,
+        normalizeListSelection,
+      });
       updateActiveStates();
     });
 
     editor.on("selectionUpdate", updateActiveStates);
     editor.on("transaction", updateActiveStates);
     updateActiveStates();
+    watchToolbarToolsStacked(toolbar);
 
     container.dataset.pbRteInitialized = "true";
   } finally {
@@ -308,4 +514,12 @@ if (document.readyState === "loading") {
 
 document.addEventListener("turbo:load", mountAllPlaybookRichTextEditorRails);
 
-export { initPlaybookRichTextEditorRails, mountAllPlaybookRichTextEditorRails };
+export {
+  extensionActionFromHref,
+  initPlaybookRichTextEditorRails,
+  loadOptionalExtensions,
+  mountAllPlaybookRichTextEditorRails,
+  parseExtensions,
+  runToolbarAction,
+  syncToHiddenInput,
+};

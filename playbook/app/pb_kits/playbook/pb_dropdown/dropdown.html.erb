@@ -15,6 +15,9 @@
             <% if input_default_value.present? %>
             data-default-value="<%= input_default_value %>"
             <% end %>
+            <% if object.validation_message.present? %>
+            data-message="<%= object.validation_message %>"
+            <% end %>
             data-dropdown-selected-option
             name="<%= object.name %><%= '[]' if object.multi_select %>"
             style="display: none"
@@ -32,7 +35,7 @@
             <% end %>
         <% else %>
             <%= pb_rails("dropdown/dropdown_trigger", props: { autocomplete: object.autocomplete, disabled: object.disabled, multi_select: object.multi_select, placeholder: object.placeholder, select_id: object.select_id, label: object.label, error_id: object.error_id, error: object.error }) %>
-            <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar, constrain_height: object.constrain_height, disabled: object.disabled }) do %>
+            <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar, constrain_height: object.constrain_height, disabled: object.disabled, no_options_text: object.no_options_text }) do %>
                 <% if options_with_blank.present? %>
                     <% options_with_blank.each do |option| %>
                         <%= pb_rails("dropdown/dropdown_option", props: {option: option}) %>

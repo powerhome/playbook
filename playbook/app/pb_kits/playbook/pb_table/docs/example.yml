@@ -16,7 +16,6 @@ examples:
     - table_container: Table Container Off
     - table_disable_hover: Disable Hover
     - table_multiline: Multi-line
-    - table_single_line: Force Single Line
     - table_data_table: Data Table
     - table_responsive_table: Responsive Tables
     - table_one_action: Table with 1 Action
@@ -56,6 +55,7 @@ examples:
     - table_sticky_left_columns: Sticky Left Column
     - table_sticky_right_columns: Sticky Right Column
     - table_sticky_columns: Sticky Left and Right Columns
+    - table_header: Table Header
     - table_alignment_row: Row Alignment
     - table_alignment_column: Cell Alignment
     - table_alignment_shift_row: Row Shift
@@ -64,7 +64,6 @@ examples:
     - table_container: Table Container Off
     - table_disable_hover: Disable Hover
     - table_multiline: Multi-line
-    - table_single_line: Force Single Line
     - table_data_table: Data Table
     - table_responsive_table: Responsive Tables
     - table_one_action: Table with 1 Action
