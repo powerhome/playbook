@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Icon from '../pb_icon/_icon'
 
@@ -13,7 +14,7 @@ type ProgressStepItemProps = {
   children?: React.ReactNode | React.ReactNode[],
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   icon?: string,
-}
+} & GlobalEventProps
 
 const ProgressStepItem = (props: ProgressStepItemProps): React.ReactElement => {
   const {
@@ -33,6 +34,7 @@ const ProgressStepItem = (props: ProgressStepItemProps): React.ReactElement => {
     <li 
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classnames(progressStepItem, globalProps(props), className)}
     >
       <div className="box">

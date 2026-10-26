@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
@@ -17,7 +18,7 @@ type LegendProps = {
   id?: string,
   prefixText?: string,
   text: string,
-}
+} & GlobalEventProps
 
 const Legend = (props: LegendProps) => {
   const {
@@ -54,6 +55,7 @@ const Legend = (props: LegendProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={bodyCss}
         id={id}
     >

@@ -51,6 +51,7 @@ examples:
   react:
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
+  - dropdown_with_highlight: With Highlight
   - dropdown_multi_select: Multi Select
   - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
   - dropdown_multi_select_display: Multi Select with Form Pill Props

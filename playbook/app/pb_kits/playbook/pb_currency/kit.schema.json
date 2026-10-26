@@ -137,6 +137,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Currency } from 'playbook-ui'",
