@@ -62,7 +62,7 @@ jobs:
           fi
       - name: Leave PR comment
         if: success() || failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           CHECK_OUTCOME: ${{ steps.check-labels.outcome }}
           ERROR_MESSAGE: ${{ steps.check-labels.outputs.message }}

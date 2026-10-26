@@ -37,6 +37,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Legend } from 'playbook-ui'",
