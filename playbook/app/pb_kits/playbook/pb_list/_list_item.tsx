@@ -2,7 +2,6 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
-import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import Icon from '../pb_icon/_icon'
 import Body from '../pb_body/_body'
 import Draggable from '../pb_draggable/_draggable'
@@ -17,7 +16,7 @@ type ListItemProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   tabIndex?: number,
-} & GlobalProps & GlobalEventProps
+} & GlobalProps
 
 const ListItem = (props: ListItemProps) => {
   const {
@@ -53,10 +52,9 @@ const ListItem = (props: ListItemProps) => {
             {...ariaProps}
             {...dataProps}
             {...htmlProps}
-            {...globalEventProps(props)}
             className={classes}
             id={id}
-            {...(tabIndex != null ? { tabIndex } : {})}
+            tabIndex={tabIndex}
         >
           {
             dragHandle && (
@@ -81,10 +79,9 @@ const ListItem = (props: ListItemProps) => {
             {...ariaProps}
             {...dataProps}
             {...htmlProps}
-            {...globalEventProps(props)}
             className={classes}
             id={id}
-            {...(tabIndex != null ? { tabIndex } : {})}
+            tabIndex={tabIndex}
         >
           {children}
         </li>

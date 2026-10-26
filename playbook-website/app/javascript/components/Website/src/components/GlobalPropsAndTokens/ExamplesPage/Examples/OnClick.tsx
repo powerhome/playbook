@@ -15,8 +15,6 @@ import {
   IconValue,
   LabelValue,
   Legend,
-  List,
-  ListItem,
   Message,
   MultipleUsers,
   MultipleUsersStacked,
@@ -84,7 +82,6 @@ const OnClick = () => {
     const [iconValueClicks, setIconValueClicks] = useState(0);
     const [labelValueClicks, setLabelValueClicks] = useState(0);
     const [legendClicks, setLegendClicks] = useState({ windows: 0, doors: 0, roofing: 0 });
-    const [listItemClicks, setListItemClicks] = useState({ one: 0, two: 0, three: 0 });
     const [messageClicks, setMessageClicks] = useState(0);
     const [multipleUsersClicks, setMultipleUsersClicks] = useState(0);
     const [multipleUsersStackedClicks, setMultipleUsersStackedClicks] = useState(0);
@@ -413,55 +410,6 @@ const OnClick = () => {
             </Flex>
           </InteractiveExample>
         </Card>
-        <Card padding="md" width="md">
-          <Title size={4} text="ListItem (subcomponent of List)" />
-          <InteractiveExample
-              reset={() => setListItemClicks({ one: 0, two: 0, three: 0 })}
-              statusText={`Item 1: ${listItemClicks.one} · Item 2: ${listItemClicks.two} · Item 3: ${listItemClicks.three}`}
-          >
-            <List>
-              <ListItem
-                  cursor="pointer"
-                  htmlOptions={{
-                    ...clickableDemoHtmlOptions,
-                    role: "button",
-                  }}
-                  onClick={() =>
-                    setListItemClicks((prev) => ({ ...prev, one: prev.one + 1 }))
-                  }
-                  tabIndex={0}
-              >
-                {"Item 1"}
-              </ListItem>
-              <ListItem
-                  cursor="pointer"
-                  htmlOptions={{
-                    ...clickableDemoHtmlOptions,
-                    role: "button",
-                  }}
-                  onClick={() =>
-                    setListItemClicks((prev) => ({ ...prev, two: prev.two + 1 }))
-                  }
-                  tabIndex={0}
-              >
-                {"Item 2"}
-              </ListItem>
-              <ListItem
-                  cursor="pointer"
-                  htmlOptions={{
-                    ...clickableDemoHtmlOptions,
-                    role: "button",
-                  }}
-                  onClick={() =>
-                    setListItemClicks((prev) => ({ ...prev, three: prev.three + 1 }))
-                  }
-                  tabIndex={0}
-              >
-                {"Item 3"}
-              </ListItem>
-            </List>
-          </InteractiveExample>
-        </Card>
         <Card padding="md" width="sm">
           <Title size={4} text="Message" />
           <InteractiveExample
@@ -787,12 +735,12 @@ const OnClick = () => {
           <code>role</code>, <code>tabIndex</code>, and an accessible name.
           Adding a role and tab stop does not add keyboard activation; use an
           appropriate native interactive element when possible, or implement
-          equivalent keyboard behavior. For repeated content (ListItem,
-          Timeline.Item, ProgressStepItem), attach <code>onClick</code> on
-          each item — sibling items do not share a handler. These are
-          subcomponents, so they do not add a Global Event Props tab on their
-          parent kit show pages (List, Progress Step, Timeline). Legend
-          attaches to its outer root (one Legend instance = one series entry).
+          equivalent keyboard behavior. For repeated content (Timeline.Item,
+          ProgressStepItem), attach <code>onClick</code> on each item —
+          sibling items do not share a handler. These are subcomponents, so
+          they do not add a Global Event Props tab on their parent kit show
+          pages (Progress Step, Timeline). Legend attaches to its outer root
+          (one Legend instance = one series entry).
         </>
       }
       VisualGuideCard={VisualGuideCard()}
@@ -907,15 +855,6 @@ const OnClick = () => {
               text={`<Legend text="Series A" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
             "Attached to the outer Legend root. Per-entry callbacks across many Legend instances stay consumer-owned.",
-          ],
-          [
-            "ListItem (subcomponent of List)",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-list-item-react"
-              text={`<ListItem onClick={() => alert("clicked")} cursor="pointer">Row</ListItem>`}
-            />,
-            "Attached to each ListItem root (ordinary and draggable). Sibling items keep separate handlers. Not shown on the List kit Global Event Props tab.",
           ],
           [
             "Message",
@@ -1078,7 +1017,7 @@ const OnClick = () => {
             "Normal React event bubbling applies unless stopped.",
           ],
           [
-            "Sibling ListItem / Timeline.Item / ProgressStepItem",
+            "Sibling Timeline.Item / ProgressStepItem",
             "Only the clicked item fires",
             "Each item owns its own onClick on its root.",
           ],

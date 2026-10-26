@@ -17,8 +17,6 @@ import IconStatValue from '../../../pb_icon_stat_value/_icon_stat_value'
 import IconValue from '../../../pb_icon_value/_icon_value'
 import LabelValue from '../../../pb_label_value/_label_value'
 import Legend from '../../../pb_legend/_legend'
-import List from '../../../pb_list/_list'
-import ListItem from '../../../pb_list/_list_item'
 import Message from '../../../pb_message/_message'
 import MultipleUsers from '../../../pb_multiple_users/_multiple_users'
 import MultipleUsersStacked from '../../../pb_multiple_users_stacked/_multiple_users_stacked'
@@ -30,7 +28,6 @@ import Timeline from '../../../pb_timeline/_timeline'
 import Title from '../../../pb_title/_title'
 import TitleCount from '../../../pb_title_count/_title_count'
 import TitleDetail from '../../../pb_title_detail/_title_detail'
-import { DraggableProvider } from '../../../pb_draggable/context'
 import { globalProps } from '../../globalProps'
 import { globalEventProps } from '../../globalEventProps'
 
@@ -49,7 +46,6 @@ const optedInKits = [
   { Kit: IconValue, name: 'IconValue', extraProps: { icon: 'heart', text: 'Favorites' } },
   { Kit: LabelValue, name: 'LabelValue', extraProps: { label: 'Label', value: 'Value' } },
   { Kit: Legend, name: 'Legend', extraProps: { text: 'Series A' } },
-  { Kit: ListItem, name: 'ListItem', extraProps: { children: 'Test' } },
   { Kit: Message, name: 'Message', extraProps: { label: 'Sender', message: 'Test' } },
   { Kit: MultipleUsers, name: 'MultipleUsers', extraProps: { users: [{ name: 'Pat' }] } },
   { Kit: MultipleUsersStacked, name: 'MultipleUsersStacked', extraProps: { users: [{ name: 'Pat' }] } },
@@ -459,100 +455,6 @@ describe('onClick GlobalEventProps', () => {
   })
 
   describe('item kits isolate siblings and identify currentTarget', () => {
-    test('ListItem click fires only that item and sets currentTarget to its root', () => {
-      let currentTarget = null
-      const firstOnClick = jest.fn((event) => {
-        currentTarget = event.currentTarget
-      })
-      const secondOnClick = jest.fn()
-      render(
-        <List>
-          <ListItem
-              data={{ testid: 'onclick-list-item-1' }}
-              onClick={firstOnClick}
-          >
-            {'First'}
-          </ListItem>
-          <ListItem
-              data={{ testid: 'onclick-list-item-2' }}
-              onClick={secondOnClick}
-          >
-            {'Second'}
-          </ListItem>
-        </List>
-      )
-
-      const firstItem = screen.getByTestId('onclick-list-item-1')
-      fireEvent.click(firstItem)
-
-      expect(firstOnClick).toHaveBeenCalledTimes(1)
-      expect(secondOnClick).not.toHaveBeenCalled()
-      expect(currentTarget).toBe(firstItem)
-    })
-
-    test('ListItem keeps htmlOptions.tabIndex when first-class tabIndex is omitted', () => {
-      render(
-        <ListItem
-            data={{ testid: 'onclick-list-item-html-tabindex' }}
-            htmlOptions={{ tabIndex: 0 }}
-        >
-          {'Focusable via htmlOptions'}
-        </ListItem>
-      )
-
-      expect(screen.getByTestId('onclick-list-item-html-tabindex')).toHaveAttribute(
-        'tabindex',
-        '0'
-      )
-    })
-
-    test('ListItem first-class tabIndex wins over htmlOptions.tabIndex', () => {
-      render(
-        <ListItem
-            data={{ testid: 'onclick-list-item-first-class-tabindex' }}
-            htmlOptions={{ tabIndex: 1 }}
-            tabIndex={0}
-        >
-          {'Focusable via first-class tabIndex'}
-        </ListItem>
-      )
-
-      expect(screen.getByTestId('onclick-list-item-first-class-tabindex')).toHaveAttribute(
-        'tabindex',
-        '0'
-      )
-    })
-
-    test('ListItem draggable branch still attaches onClick to the li root', () => {
-      let currentTarget = null
-      const onClick = jest.fn((event) => {
-        currentTarget = event.currentTarget
-      })
-      const items = [{ id: '1', text: 'Draggable row' }]
-      render(
-        <DraggableProvider
-            initialItems={items}
-            onReorder={jest.fn()}
-        >
-          <List enableDrag>
-            <ListItem
-                data={{ testid: 'onclick-list-item-drag' }}
-                dragId="1"
-                onClick={onClick}
-            >
-              {'Draggable row'}
-            </ListItem>
-          </List>
-        </DraggableProvider>
-      )
-
-      const item = screen.getByTestId('onclick-list-item-drag')
-      fireEvent.click(item)
-      expect(onClick).toHaveBeenCalledTimes(1)
-      expect(currentTarget).toBe(item)
-      expect(item.querySelector('.pb_draggable_handle')).not.toBeNull()
-    })
-
     test('Timeline.Item siblings stay isolated', () => {
       let currentTarget = null
       const firstOnClick = jest.fn((event) => {
