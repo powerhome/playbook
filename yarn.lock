@@ -3406,10 +3406,10 @@
     "@babel/runtime" "^7.12.5"
     "@testing-library/dom" "^7.28.1"
 
-"@tiptap/core@3.0.7", "@tiptap/core@^3.0.7":
-  version "3.0.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/core/-/core-3.0.7.tgz#2ac4915525dbdbff259357b0ac4ef3f27f9908fe"
-  integrity sha512-/NC0BbekWzi5sC+s7gRrGIv33cUfuiZUG5DWx8TNedA6b6aTFPHUe+2wKRPaPQ0pfGdOWU0nsOkboUJ9dAjl4g==
+"@tiptap/core@3.32.0", "@tiptap/core@^3.0.7":
+  version "3.32.0"
+  resolved "https://npm.powerapp.cloud/@tiptap/core/-/core-3.32.0.tgz#b9d1172869fc23637445723878d7d8570d1a20c2"
+  integrity sha512-Ghh2h02GKSqzytQGcLV4espYOG4EHxjj0MsrUB2Vnr47xmlZYRf6r7k2J09H+JpBdaGrWwrTkyBEi5i3c3yy2Q==
 
 "@tiptap/extension-blockquote@3.0.7", "@tiptap/extension-blockquote@^3.0.7":
   version "3.0.7"
