@@ -55,7 +55,7 @@ Preserve existing kit-specific handlers on non-opted-in kits. Adding a global ev
 Add focused React coverage under `playbook/app/pb_kits/playbook/utilities/test/globalProps/` (or a dedicated `globalEventProps/` folder if the suite grows).
 
 - Helper: returns the handler when present; returns `{}` when absent.
-- Opted-in kits (for example Background, Body, Caption, Card, Container, Currency, DashboardValue, Detail, Flex, Highlight, IconStatValue, IconValue, Label Pill, LabelValue, Message, MultipleUsers, MultipleUsersStacked, Online Status, Pill, Source, Stat Change, StatValue, Title, TitleCount, TitleDetail): handler fires on the root element.
+- Opted-in kits (for example Background, Body, Caption, Card, Container, Currency, DashboardValue, Detail, Flex, Highlight, IconStatValue, IconValue, LabelPill,LabelValue, Message, MultipleUsers, MultipleUsersStacked, OnlineStatus, Pill, Source, StatChange, StatValue, Title, TitleCount, TitleDetail): handler fires on the root element.
 - Precedence: first-class handler wins over `htmlOptions` for the same event; `htmlOptions` still works when the first-class prop is omitted.
 - Non-opted-in kits with kit-specific handlers: behavior and signatures stay unchanged.
 - Confirm the handler does **not** produce CSS classes via `globalProps()`.
