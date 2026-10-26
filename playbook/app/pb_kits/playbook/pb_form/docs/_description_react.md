@@ -1,0 +1,3 @@
+Use `Controller` to build React forms with Playbook kits and [react-hook-form](https://react-hook-form.com/). It keeps every field's binding consistent, and it's required for kits that don't forward a ref to a native element or whose `onChange` sends a value instead of a DOM event.
+
+Pick an input below to see Defaults, Validation, Default Values, and Multi-Column layout patterns one field at a time.

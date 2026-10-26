@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
@@ -18,7 +19,7 @@ type IconValueProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text: string,
-}
+} & GlobalEventProps
 
 const IconValue = (props: IconValueProps): React.ReactElement => {
   const {
@@ -46,6 +47,7 @@ const IconValue = (props: IconValueProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

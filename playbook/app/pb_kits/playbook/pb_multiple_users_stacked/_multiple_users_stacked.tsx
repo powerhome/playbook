@@ -1,8 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import { globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Avatar from '../pb_avatar/_avatar'
 import Badge from '../pb_badge/_badge'
@@ -17,7 +18,7 @@ type MultipleUsersStackedProps = {
   size?: "md" | "lg" | "sm" | "xl" 
   users: Array<{ [key: string]: string }>,
   variant: "default" | "bubble",
-}
+} & GlobalEventProps
 
 const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
   const {
@@ -132,6 +133,7 @@ const MultipleUsersStacked = (props: MultipleUsersStackedProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

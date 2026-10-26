@@ -22,6 +22,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Highlight } from 'playbook-ui'",

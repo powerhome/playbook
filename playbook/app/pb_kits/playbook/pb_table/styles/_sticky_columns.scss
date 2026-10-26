@@ -1,13 +1,38 @@
 @import "../../tokens/colors";
 
 [class^="pb_table"] {
+    // Collapsed borders + sticky columns leave subpixel seams at some zoom/sizes.
+    // Separate borders keep sticky offsets aligned with painted cell edges.
+    &.table-sm,
+    &.table-md,
+    &.table-lg {
+        &.sticky-left-column,
+        &.sticky-right-column {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+    }
+
     .sticky {
         position: sticky !important;
         z-index: 1;
         background-color: white;
+        background-clip: padding-box;
     }
 
-    // For use with sticky left columns
+    // Corner cells (sticky header + sticky column) must sit above scrolling
+    // header siblings in multi-row theads.
+    &.sticky-header {
+        thead .sticky,
+        .pb_table_thead .sticky {
+            z-index: 2;
+        }
+    }
+
+    // For use with sticky left columns.
+    // Default left/right keep single sticky edge (and Nitro colspan corner cells
+    // that use these classes without data-sticky-id) pinned. Multi-column JS
+    // offsets override via inline style.
     .sticky-left-shadow {
         box-shadow: 4px 0 10px rgba(60, 106, 172, 0.16) !important;
         left: 0;
@@ -15,7 +40,6 @@
 
     .with-border-right {
         border-right: 1px solid var(--table-border-color, #{$border_light}) !important;
-        left: 0;
     }
 
     // For use with sticky right columns
@@ -26,6 +50,5 @@
 
     .with-border-left {
         border-left: 1px solid var(--table-border-color, #{$border_light}) !important;
-        right: 0;
     }
 }

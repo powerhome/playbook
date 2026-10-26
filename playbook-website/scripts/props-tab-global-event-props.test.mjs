@@ -35,7 +35,28 @@ function readKitSchema(kitName) {
 }
 
 test('supported kits set globalEventProps: true in kit.schema.json', () => {
-  for (const kit of ['body', 'card', 'flex', 'title']) {
+  for (const kit of [
+    'background',
+    'body',
+    'caption',
+    'card',
+    'container',
+    'currency',
+    'dashboard_value',
+    'detail',
+    'flex',
+    'highlight',
+    'icon_stat_value',
+    'icon_value',
+    'label_value',
+    'message',
+    'multiple_users',
+    'multiple_users_stacked',
+    'stat_value',
+    'title',
+    'title_count',
+    'title_detail',
+  ]) {
     assert.equal(
       readKitSchema(kit).globalEventProps,
       true,

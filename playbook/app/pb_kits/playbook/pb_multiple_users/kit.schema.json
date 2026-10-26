@@ -60,6 +60,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { MultipleUsers } from 'playbook-ui'",
