@@ -198,7 +198,11 @@
         "closeOnClick",
         "constrainHeight",
         "isClosed",
-        "requiredIndicator"
+        "enableFormSupport",
+        "requiredIndicator",
+        "required",
+        "validationMessage",
+        "allowOptionCreation"
       ]
     },
     {
@@ -226,6 +230,7 @@
     }
   ],
   "presets": [
+    { "name": "Create tags", "props": { "allowOptionCreation": true, "multiSelect": true, "name": "tags[]", "label": "Tags" } },
     {
       "name": "Async search",
       "structureMode": "async",
