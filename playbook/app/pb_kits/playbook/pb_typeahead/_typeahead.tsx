@@ -93,8 +93,8 @@ type TypeaheadProps = {
   clearOnContextChange?: boolean
   preserveSearchInput?: boolean
   enablePillReorder?: boolean
+  externalDragHandle?: boolean
   showPillIndex?: boolean
-  pillDragHandle?: boolean
   // Passed through to react-select; merged when menu is portaled to `document.body`.
   styles?: TypeaheadStylesConfig
 } & GlobalProps
@@ -145,8 +145,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     clearOnContextChange = false,
     preserveSearchInput = false, // Default to false to maintain backward compatibility
     enablePillReorder = false,
+    externalDragHandle = false,
     showPillIndex = false,
-    pillDragHandle = true,
     styles: stylesProp,
     ...props
   }: TypeaheadProps) => {
@@ -743,9 +743,9 @@ const resolvedLoadOptions =
           classNamePrefix="typeahead-kit-select"
           enablePillReorder={isPillReorderEnabled}
           error={errorDisplay}
+          externalDragHandle={externalDragHandle}
           isDisabled={disabled}
           onChange={handleOnChange}
-          pillDragHandle={pillDragHandle}
           ref={selectRef}
           showPillIndex={showPillIndex}
       />
