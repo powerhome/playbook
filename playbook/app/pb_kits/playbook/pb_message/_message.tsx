@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Avatar from '../pb_avatar/_avatar'
 import Body from '../pb_body/_body'
@@ -28,7 +29,7 @@ type MessageProps = {
   timestampObject?: Date,
   timezone?: string,
   alignTimestamp?: string,
-}
+} & GlobalEventProps
 
 const Message = (props: MessageProps) => {
   const {
@@ -68,6 +69,7 @@ const Message = (props: MessageProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

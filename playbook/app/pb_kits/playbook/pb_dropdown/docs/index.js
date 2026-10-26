@@ -50,3 +50,4 @@ export { default as DropdownExternalSearch } from './_dropdown_external_search.j
 export { default as DropdownForm } from "./_dropdown_form.jsx"
 export { default as DropdownOptionCreation } from "./_dropdown_option_creation.jsx"
 export { default as DropdownQuickpickEnableTime } from './_dropdown_quickpick_enable_time.jsx'
+export { default as DropdownWithHighlight } from './_dropdown_with_highlight.jsx'

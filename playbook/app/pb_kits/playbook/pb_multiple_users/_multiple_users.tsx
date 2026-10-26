@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Avatar from '../pb_avatar/_avatar'
 import Tooltip from '../pb_tooltip/_tooltip'
@@ -19,7 +20,7 @@ type MultipleUsersProps = {
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
   withTooltip?: boolean,
   users: Array<{ [key: string]: string }>,
-}
+} & GlobalEventProps
 
 const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
   const {
@@ -126,6 +127,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

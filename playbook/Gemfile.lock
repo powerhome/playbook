@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    playbook_ui (18.1.0)
+    playbook_ui (18.2.0)
       actionpack (>= 7.1.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
@@ -205,7 +205,7 @@ GEM
     regexp_parser (2.9.0)
     reline (0.6.3)
       io-console (~> 0.5)
-    rexml (3.2.6)
+    rexml (3.4.2)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
