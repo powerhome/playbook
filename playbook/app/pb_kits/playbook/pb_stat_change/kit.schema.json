@@ -45,6 +45,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { StatChange } from 'playbook-ui'",

@@ -6,7 +6,12 @@ import ButtonToolbar from '../../../pb_button_toolbar/_button_toolbar'
 import Card from '../../../pb_card/_card'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
+import LabelPill from '../../../pb_label_pill/_label_pill'
+import OnlineStatus from '../../../pb_online_status/_online_status'
+import Pill from '../../../pb_pill/_pill'
+import Source from '../../../pb_source/_source'
 import StarRating from '../../../pb_star_rating/_star_rating'
+import StatChange from '../../../pb_stat_change/_stat_change'
 import Title from '../../../pb_title/_title'
 import { globalProps } from '../../globalProps'
 import { globalEventProps } from '../../globalEventProps'
@@ -16,6 +21,16 @@ const optedInKits = [
   { Kit: Card, name: 'Card', extraProps: { children: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
+  { Kit: LabelPill, name: 'LabelPill', extraProps: { label: 'Label', pillValue: '1' } },
+  { Kit: Pill, name: 'Pill', extraProps: { text: 'Test' } },
+  { Kit: OnlineStatus, name: 'OnlineStatus', extraProps: {} },
+  { Kit: Source, name: 'Source', extraProps: { source: 'Test', type: 'retail' } },
+  {
+    Kit: StatChange,
+    name: 'StatChange',
+    extraProps: { value: 12 },
+    testIdViaHtmlOptions: true,
+  },
 ]
 
 describe('onClick GlobalEventProps', () => {
@@ -36,13 +51,16 @@ describe('onClick GlobalEventProps', () => {
   })
 
   describe('attaches to the kit root element', () => {
-    optedInKits.forEach(({ Kit, name, extraProps }) => {
+    optedInKits.forEach(({ Kit, name, extraProps, testIdViaHtmlOptions }) => {
       test(`fires on ${name}`, () => {
         const onClick = jest.fn()
         const testId = `onclick-${name.toLowerCase()}`
+        const testIdProps = testIdViaHtmlOptions
+          ? { htmlOptions: { 'data-testid': testId } }
+          : { data: { testid: testId } }
         render(
           <Kit
-              data={{ testid: testId }}
+              {...testIdProps}
               onClick={onClick}
               {...extraProps}
           />
@@ -85,6 +103,22 @@ describe('onClick GlobalEventProps', () => {
 
       fireEvent.click(screen.getByTestId('onclick-html-options'))
       expect(htmlOnClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('StatChange first-class onClick wins over htmlOptions.onClick', () => {
+      const htmlOnClick = jest.fn()
+      const firstClassOnClick = jest.fn()
+      render(
+        <StatChange
+            htmlOptions={{ 'data-testid': 'onclick-stat-change-precedence', onClick: htmlOnClick }}
+            onClick={firstClassOnClick}
+            value={12}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-stat-change-precedence'))
+      expect(firstClassOnClick).toHaveBeenCalledTimes(1)
+      expect(htmlOnClick).not.toHaveBeenCalled()
     })
   })
 
