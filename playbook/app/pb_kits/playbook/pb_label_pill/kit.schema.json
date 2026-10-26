@@ -39,6 +39,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { LabelPill } from 'playbook-ui'",

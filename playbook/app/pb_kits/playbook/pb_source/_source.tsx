@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildDataProps, buildAriaProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { titleize } from '../utilities/text'
 
 import Avatar, { AvatarProps } from '../pb_avatar/_avatar'
@@ -21,7 +22,7 @@ type SourceProps = {
   source?: string,
   type: "events" | "inbound" | "outbound" | "prospecting" | "referral" | "retail" | "user",
   user: AvatarProps,
-}
+} & GlobalEventProps
 
 const Source = (props: SourceProps): React.ReactElement => {
   const {
@@ -78,6 +79,7 @@ const Source = (props: SourceProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={css}
         id={id}
     >

@@ -12,6 +12,11 @@ import DashboardValue from '../../../pb_dashboard_value/_dashboard_value'
 import Detail from '../../../pb_detail/_detail'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
+import LabelPill from '../../../pb_label_pill/_label_pill'
+import OnlineStatus from '../../../pb_online_status/_online_status'
+import Pill from '../../../pb_pill/_pill'
+import Source from '../../../pb_source/_source'
+import StatChange from '../../../pb_stat_change/_stat_change'
 import Highlight from '../../../pb_highlight/_highlight'
 import IconStatValue from '../../../pb_icon_stat_value/_icon_stat_value'
 import IconValue from '../../../pb_icon_value/_icon_value'
@@ -53,6 +58,11 @@ const optedInKits = [
   { Kit: StatValue, name: 'StatValue', extraProps: { unit: 'mg', value: 100 } },
   { Kit: Timeline.Item, name: 'TimelineItem', extraProps: { children: 'Event' } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
+  { Kit: LabelPill, name: 'LabelPill', extraProps: { label: 'Label', pillValue: '1' } },
+  { Kit: Pill, name: 'Pill', extraProps: { text: 'Test' } },
+  { Kit: OnlineStatus, name: 'OnlineStatus', extraProps: {} },
+  { Kit: Source, name: 'Source', extraProps: { source: 'Test', type: 'retail' } },
+  { Kit: StatChange, name: 'StatChange', extraProps: { value: 12 } },
   { Kit: TitleCount, name: 'TitleCount', extraProps: { count: 12, title: 'Items' } },
   { Kit: TitleDetail, name: 'TitleDetail', extraProps: { detail: 'Detail', title: 'Title' } },
 ]
@@ -125,6 +135,22 @@ describe('onClick GlobalEventProps', () => {
 
       fireEvent.click(screen.getByTestId('onclick-html-options'))
       expect(htmlOnClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('StatChange first-class onClick wins over htmlOptions.onClick', () => {
+      const htmlOnClick = jest.fn()
+      const firstClassOnClick = jest.fn()
+      render(
+        <StatChange
+            htmlOptions={{ 'data-testid': 'onclick-stat-change-precedence', onClick: htmlOnClick }}
+            onClick={firstClassOnClick}
+            value={12}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-stat-change-precedence'))
+      expect(firstClassOnClick).toHaveBeenCalledTimes(1)
+      expect(htmlOnClick).not.toHaveBeenCalled()
     })
   })
 

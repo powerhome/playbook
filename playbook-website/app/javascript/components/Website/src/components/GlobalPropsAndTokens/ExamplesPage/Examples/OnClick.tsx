@@ -26,6 +26,11 @@ import {
   Title,
   TitleCount,
   TitleDetail,
+  LabelPill,
+  Pill,
+  OnlineStatus,
+  Source,
+  StatChange,
 } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -34,6 +39,10 @@ import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 const OnClick = () => {
   const clickableDemoHtmlOptions = {
     style: { userSelect: "none" as const },
+  };
+
+  const clickablePointerHtmlOptions = {
+    style: { cursor: "pointer" as const, userSelect: "none" as const },
   };
 
   const InteractiveExample = ({
@@ -97,6 +106,11 @@ const OnClick = () => {
       resolved: 0,
     });
     const [titleClicks, setTitleClicks] = useState(0);
+    const [labelPillClicks, setLabelPillClicks] = useState(0);
+    const [pillClicks, setPillClicks] = useState(0);
+    const [onlineStatusClicks, setOnlineStatusClicks] = useState(0);
+    const [sourceClicks, setSourceClicks] = useState(0);
+    const [statChangeClicks, setStatChangeClicks] = useState(0);
     const [titleCountClicks, setTitleCountClicks] = useState(0);
     const [titleDetailClicks, setTitleDetailClicks] = useState(0);
     const [buttonClicks, setButtonClicks] = useState(0);
@@ -696,6 +710,82 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Label Pill" />
+          <InteractiveExample
+              count={labelPillClicks}
+              label="Label Pill"
+              reset={() => setLabelPillClicks(0)}
+          >
+            <LabelPill
+                htmlOptions={clickablePointerHtmlOptions}
+                label="Queue"
+                onClick={() => setLabelPillClicks((prev: number) => prev + 1)}
+                pillValue="4"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Pill" />
+          <InteractiveExample
+              count={pillClicks}
+              label="Pill"
+              reset={() => setPillClicks(0)}
+          >
+            <Pill
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setPillClicks((prev: number) => prev + 1)}
+                text="Click this Pill example"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Online Status" />
+          <InteractiveExample
+              count={onlineStatusClicks}
+              label="Online Status"
+              reset={() => setOnlineStatusClicks(0)}
+          >
+            <OnlineStatus
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setOnlineStatusClicks((prev: number) => prev + 1)}
+                size="lg"
+                status="online"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Source" />
+          <InteractiveExample
+              count={sourceClicks}
+              label="Source"
+              reset={() => setSourceClicks(0)}
+          >
+            <Source
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setSourceClicks((prev: number) => prev + 1)}
+                source="Click this Source example"
+                type="retail"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Stat Change" />
+          <InteractiveExample
+              count={statChangeClicks}
+              label="Stat Change"
+              reset={() => setStatChangeClicks(0)}
+          >
+            <StatChange
+                change="increase"
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setStatChangeClicks((prev: number) => prev + 1)}
+                value="12.4"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Button (kit-specific)" />
           <InteractiveExample
               count={buttonClicks}
@@ -936,6 +1026,51 @@ const OnClick = () => {
               text={`<TitleDetail title="Name" detail="Role" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
             "Attached once to the root Title Detail element.",
+          ],
+          [
+            "Label Pill",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-label-pill-react"
+              text={`<LabelPill label="Queue" onClick={() => alert("clicked")} pillValue="4" />`}
+            />,
+            "Attached to the root Label Pill element.",
+          ],
+          [
+            "Pill",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-pill-react"
+              text={`<Pill cursor="pointer" onClick={() => alert("clicked")} text="Clickable pill" />`}
+            />,
+            "Attached to the root Pill element.",
+          ],
+          [
+            "Online Status",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-online-status-react"
+              text={`<OnlineStatus cursor="pointer" onClick={() => alert("clicked")} status="online" />`}
+            />,
+            "Attached to the root Online Status element.",
+          ],
+          [
+            "Source",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-source-react"
+              text={`<Source onClick={() => alert("clicked")} source="Retail" type="retail" />`}
+            />,
+            "Attached to the root Source element.",
+          ],
+          [
+            "Stat Change",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-stat-change-react"
+              text={`<StatChange change="increase" onClick={() => alert("clicked")} value="12.4" />`}
+            />,
+            "Attached to the root element when value is set.",
           ],
         ]}
       />
