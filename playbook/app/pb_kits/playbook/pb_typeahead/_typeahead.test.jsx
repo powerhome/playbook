@@ -818,13 +818,13 @@ test('required Typeahead in validated form shows its own error and stays mounted
     expect(document.querySelector('.typeahead-kit-select__option')).toBeInTheDocument()
   })
 
-  fireEvent.click(screen.getByText('Orange'))
+  const option = document.querySelector('.typeahead-kit-select__option')
+  fireEvent.click(option)
 
   await waitFor(() => {
-    expect(screen.getByTestId('required-validated-typeahead')).toBeInTheDocument()
-    expect(
-      screen.getByTestId('required-validated-typeahead').querySelector('.pb_body_kit_negative')
-    ).not.toBeInTheDocument()
+    const selectedKit = screen.getByTestId('required-validated-typeahead')
+    expect(selectedKit.querySelector('.typeahead-kit-select__single-value')).toHaveTextContent('Orange')
+    expect(selectedKit.querySelector('.pb_body_kit_negative')).not.toBeInTheDocument()
   })
 })
 
