@@ -74,8 +74,6 @@
     "intl-tel-input": "^24.7.0"
   },
   "devDependencies": {
-    "@actions/core": "1.10.0",
-    "@actions/github": "6.0.0",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.15.0",
