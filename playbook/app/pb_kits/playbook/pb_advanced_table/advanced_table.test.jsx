@@ -1520,3 +1520,182 @@ test("single header row does not mark every column as last-header-cell", () => {
   expect(kit.querySelector("tbody td.last-cell")).not.toBeInTheDocument()
 })
 
+const MOCK_DATA_GROUP_SEPARATORS = [
+  {
+    year: "2021",
+    newEnrollments: "20",
+    scheduledMeetings: "10",
+    children: [
+      {
+        year: "2021",
+        quarter: "Q1",
+        newEnrollments: "5",
+        scheduledMeetings: "2",
+        children: [
+          {
+            year: "2021",
+            quarter: "Q1",
+            month: "January",
+            newEnrollments: "2",
+            scheduledMeetings: "1",
+          },
+          {
+            year: "2021",
+            quarter: "Q1",
+            month: "February",
+            newEnrollments: "3",
+            scheduledMeetings: "1",
+          },
+        ],
+      },
+      {
+        year: "2021",
+        quarter: "Q2",
+        newEnrollments: "6",
+        scheduledMeetings: "3",
+        children: [
+          {
+            year: "2021",
+            quarter: "Q2",
+            month: "April",
+            newEnrollments: "3",
+            scheduledMeetings: "1",
+          },
+          {
+            year: "2021",
+            quarter: "Q2",
+            month: "May",
+            newEnrollments: "3",
+            scheduledMeetings: "2",
+          },
+        ],
+      },
+    ],
+  },
+]
+
+test("groupSeparators=false (default) does not add group-separator-row", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        expandedControl={{ value: { "0": true, "0.0": true }, onChange: () => {} }}
+        tableData={MOCK_DATA_GROUP_SEPARATORS}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit.querySelector(".group-separator-row")).not.toBeInTheDocument()
+})
+
+test("groupSeparators marks last visible child of each nested group", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        expandedControl={{ value: { "0": true, "0.0": true, "0.1": true }, onChange: () => {} }}
+        groupSeparators
+        tableData={MOCK_DATA_GROUP_SEPARATORS}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const separatorRows = kit.querySelectorAll("tbody tr.group-separator-row")
+  const separatorMonths = [...separatorRows].map((row) => row.textContent)
+
+  expect(separatorRows.length).toBe(2)
+  expect(separatorMonths.some((text) => text.includes("February"))).toBe(true)
+  expect(separatorMonths.some((text) => text.includes("May"))).toBe(true)
+  expect(kit.querySelector("tbody tr.group-separator-row")?.textContent).not.toContain("January")
+  expect(
+    [...kit.querySelectorAll("tbody tr")].find((row) => row.textContent.includes("2021") && !row.classList.contains("depth-sub-row-1") && !row.classList.contains("depth-sub-row-2"))
+  ).not.toHaveClass("group-separator-row")
+})
+
+test("groupSeparators defers separator to last descendant when last sibling is expanded", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        expandedControl={{ value: { "0": true, "0.0": true }, onChange: () => {} }}
+        groupSeparators
+        tableData={MOCK_DATA_GROUP_SEPARATORS}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const q1Row = [...kit.querySelectorAll("tbody tr")].find((row) =>
+    row.classList.contains("depth-sub-row-1") && row.textContent.includes("Q1")
+  )
+  const februaryRow = [...kit.querySelectorAll("tbody tr")].find((row) =>
+    row.textContent.includes("February")
+  )
+
+  expect(q1Row).not.toHaveClass("group-separator-row")
+  expect(februaryRow).toHaveClass("group-separator-row")
+})
+
+test("groupSeparators insets January’s last day to the January label", () => {
+  const data = [
+    {
+      year: "2022",
+      newEnrollments: "1",
+      scheduledMeetings: "1",
+      children: [
+        {
+          year: "2022",
+          quarter: "Q1",
+          newEnrollments: "1",
+          scheduledMeetings: "1",
+          children: [
+            {
+              year: "2022",
+              quarter: "Q1",
+              month: "January",
+              newEnrollments: "1",
+              scheduledMeetings: "1",
+              children: [
+                { year: "2022", quarter: "Q1", month: "January", day: "15", newEnrollments: "1", scheduledMeetings: "1" },
+                { year: "2022", quarter: "Q1", month: "January", day: "25", newEnrollments: "1", scheduledMeetings: "1" },
+              ],
+            },
+            {
+              year: "2022",
+              quarter: "Q1",
+              month: "May",
+              newEnrollments: "1",
+              scheduledMeetings: "1",
+              children: [
+                { year: "2022", quarter: "Q1", month: "May", day: "2", newEnrollments: "1", scheduledMeetings: "1" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ]
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        expandedControl={{
+          value: { "0": true, "0.0": true, "0.0.0": true, "0.0.1": true },
+          onChange: () => {},
+        }}
+        groupSeparators
+        tableData={data}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const day25 = [...kit.querySelectorAll("tbody tr")].find((row) => row.textContent.includes("25"))
+  const day2 = [...kit.querySelectorAll("tbody tr")].find((row) =>
+    row.textContent.includes("2") && !row.textContent.includes("25") && row.classList.contains("depth-sub-row-3")
+  )
+
+  // Both close their immediate parent month (depth 2) → 2.5em at the month label
+  expect(day25).toHaveStyle({ "--group-separator-inset": "2.5em" })
+  expect(day2).toHaveStyle({ "--group-separator-inset": "2.5em" })
+})
+

@@ -24,6 +24,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
   it { is_expected.to define_boolean_prop(:selectable_rows).with_default(false) }
   it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
   it { is_expected.to define_boolean_prop(:full_width_cell).with_default(false) }
+  it { is_expected.to define_boolean_prop(:group_separators).with_default(false) }
   it { is_expected.to define_hash_prop(:pinned_rows).with_default({}) }
 
   describe "#classname" do

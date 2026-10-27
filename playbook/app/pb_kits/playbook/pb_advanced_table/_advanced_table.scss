@@ -524,6 +524,39 @@
     border-bottom-color: $border_light !important;
   }
 
+  // Higher-contrast separator on the last visible row of each child group.
+  // All cells use the same background-line technique so the stroke stays level
+  // (mixing border-bottom + background caused a vertical step in the first column).
+  // First column is inset via --group-separator-inset; trails stop above the line.
+  tr.group-separator-row {
+    > td,
+    > .pb_table_td {
+      background-image: linear-gradient(
+        $input_border_default,
+        $input_border_default
+      );
+      background-position: left bottom;
+      background-repeat: no-repeat;
+      background-size: 100% 2px;
+      border-bottom-color: transparent !important;
+    }
+
+    > td:first-child,
+    > .pb_table_td:first-child {
+      background-image: linear-gradient(
+        to right,
+        transparent 0,
+        transparent var(--group-separator-inset, 0),
+        $input_border_default var(--group-separator-inset, 0),
+        $input_border_default 100%
+      );
+
+      .collapsible-trail {
+        bottom: 2px;
+      }
+    }
+  }
+
   // Apply border colors when columnGroupBorderColor is set
   &[class*="column-group-border-"] {
     // For top-level column groups
@@ -798,6 +831,28 @@
     // Make sure all horizontal borders use the default border color in dark mode
     tr, th, td {
       border-bottom-color: $border_dark !important;
+    }
+
+    tr.group-separator-row {
+      > td,
+      > .pb_table_td {
+        background-image: linear-gradient(
+          $input_border_default_dark,
+          $input_border_default_dark
+        );
+        border-bottom-color: transparent !important;
+      }
+
+      > td:first-child,
+      > .pb_table_td:first-child {
+        background-image: linear-gradient(
+          to right,
+          transparent 0,
+          transparent var(--group-separator-inset, 0),
+          $input_border_default_dark var(--group-separator-inset, 0),
+          $input_border_default_dark 100%
+        );
+      }
     }
 
     .pb-bg-row-white {

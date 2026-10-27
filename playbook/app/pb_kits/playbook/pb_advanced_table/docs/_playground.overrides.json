@@ -180,7 +180,7 @@
     },
     {
       "name": "Styling",
-      "props": ["rowStyling"]
+      "props": ["rowStyling", "groupSeparators"]
     },
     {
       "name": "Selection & Actions",
@@ -368,6 +368,13 @@
         "cascadeCollapse": true
       },
       "message": "When cascadeCollapse is true, collapsing any parent row itself or by using the toggle expansion buttons in any header or subheader row also collapses all descendants and clears their expansion state. Re-expanding then shows only direct children until the user expands deeper levels again.",
+      "type": "info"
+    },
+    "group_separators_info": {
+      "when": {
+        "groupSeparators": true
+      },
+      "message": "groupSeparators adds a 2px higher-contrast bottom border on the last visible row of each nested child group. Expand multi-level rows to see separators between sibling groups.",
       "type": "info"
     },
     "column_styling_info": {

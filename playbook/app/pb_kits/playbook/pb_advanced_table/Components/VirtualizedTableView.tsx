@@ -7,7 +7,7 @@ import { GenericObject } from "../../types"
 
 import { isChrome } from "../Utilities/BrowserCheck"
 import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
-import { getRowColorClass } from "../Utilities/RowUtils"
+import { getGroupSeparatorInsetEm, getRowColorClass, isGroupSeparatorRow } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -34,6 +34,7 @@ export const VirtualizedTableView = ({
 }: VirtualizedTableViewProps) => {
   const {
     enableToggleExpansion,
+    groupSeparators,
     handleExpandOrCollapse,
     inlineRowLoading,
     loading,
@@ -180,10 +181,16 @@ export const VirtualizedTableView = ({
 
           // Use the utility function to get consistent row color
           const rowColor = getRowColorClass(row, inlineRowLoading || false);
+          const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row);
 
           return (
             <tr
-                className={`virtualized-table-row ${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
+                className={classnames(
+                  "virtualized-table-row",
+                  rowColor,
+                  row.depth > 0 && `depth-sub-row-${row.depth}`,
+                  showGroupSeparator && "group-separator-row"
+                )}
                 data-index={virtualRow.index}
                 key={`row-${item.id}-sort-${sortingState}`}
                 ref={(node) => {
@@ -195,7 +202,12 @@ export const VirtualizedTableView = ({
                     }
                   }
                 }}
-                style={virtualItemStyle}
+                style={{
+                  ...virtualItemStyle,
+                  ...(showGroupSeparator && {
+                    ["--group-separator-inset" as string]: `${getGroupSeparatorInsetEm(row)}em`,
+                  }),
+                }}
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
               {selectableRows && !hasAnySubRows && (

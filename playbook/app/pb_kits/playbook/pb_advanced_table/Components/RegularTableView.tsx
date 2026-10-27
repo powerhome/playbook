@@ -6,7 +6,7 @@ import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
-import { getFontWeight, getRowColorClass, getRowStyle, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
+import { getFontWeight, getGroupSeparatorInsetEm, getRowColorClass, getRowStyle, isGroupSeparatorRow, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -125,6 +125,7 @@ export const RegularTableView = ({
 }: RegularTableViewProps) => {
   const {
     enableToggleExpansion,
+    groupSeparators,
     handleExpandOrCollapse,
     inlineRowLoading,
     loading,
@@ -219,6 +220,7 @@ export const RegularTableView = ({
         // Use functions from RowUtils for consistent cell coloring
         const rowColor = getRowColorClass(row, inlineRowLoading || false);
         const isDataLoading = shouldShowLoadingIndicator(row, inlineRowLoading || false, columnDefinitions[0]?.cellAccessors?.length || 0);
+        const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row);
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -234,13 +236,20 @@ export const RegularTableView = ({
             )}
 
             <tr
-                className={`${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
+                className={classnames(
+                  rowColor,
+                  row.depth > 0 && `depth-sub-row-${row.depth}`,
+                  showGroupSeparator && "group-separator-row"
+                )}
                 id={`${row.index}-${row.id}-${row.depth}-row`}
                 ref={isFirstRegularRow ? sampleRowRef : null}
                 style={{
                   backgroundColor: customRowStyle?.backgroundColor,
                   color: customRowStyle?.fontColor,
                   fontWeight: getFontWeight(customRowStyle),
+                  ...(showGroupSeparator && {
+                    ["--group-separator-inset" as string]: `${getGroupSeparatorInsetEm(row)}em`,
+                  }),
                 }}
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}

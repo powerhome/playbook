@@ -54,6 +54,34 @@ export const getFontWeight = (rowStyle?: GenericObject) => {
 }
 
 /**
+ * True when this row is the last sibling under its parent and should show a
+ * group separator (expanded parents defer the separator to their last visible descendant).
+ */
+export const isGroupSeparatorRow = (row: Row<GenericObject>): boolean => {
+  if (row.depth === 0) return false
+
+  const parent = row.getParentRow()
+  if (!parent) return false
+
+  const isLastSibling = row.index === parent.subRows.length - 1
+  if (!isLastSibling) return false
+
+  if (row.getIsExpanded() && row.subRows.length > 0) return false
+
+  return true
+}
+
+/**
+ * Left inset (em) for the group separator — aligned with the immediate
+ * parent group’s CustomCell label padding (`depth * 1.25em`), so the line
+ * starts at that group’s label/trail and does not run through parent gutters.
+ */
+export const getGroupSeparatorInsetEm = (row: Row<GenericObject>): number => {
+  const closedGroupDepth = Math.max(0, row.depth - 1)
+  return closedGroupDepth * 1.25
+}
+
+/**
  * Creates a virtual item style object for virtualized rows
  */
 export const createVirtualItemStyle = (startPosition: number): React.CSSProperties => {
