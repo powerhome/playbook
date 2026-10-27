@@ -528,7 +528,9 @@
   // All cells use the same background-line technique so the stroke stays level
   // (mixing border-bottom + background caused a vertical step in the first column).
   // First column is inset via --group-separator-inset; trails stop above the line.
-  tr.group-separator-row {
+  // Rails: expanded last-sibling parents get `.is-expanded` so the separator
+  // defers to the last visible descendant (matches React).
+  tr.group-separator-row:not(.is-expanded) {
     > td,
     > .pb_table_td {
       background-image: linear-gradient(
@@ -833,7 +835,7 @@
       border-bottom-color: $border_dark !important;
     }
 
-    tr.group-separator-row {
+    tr.group-separator-row:not(.is-expanded) {
       > td,
       > .pb_table_td {
         background-image: linear-gradient(

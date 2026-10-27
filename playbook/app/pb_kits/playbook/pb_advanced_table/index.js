@@ -298,10 +298,13 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       const isExpanded =
         toggleBtn.querySelector(UP_ARROW_SELECTOR).style.display ===
         "inline-block";
+      const parentRow = toggleBtn.closest("tr");
       if (!isExpanded) {
         PbAdvancedTable.expandedRows.add(toggleBtn.id);
+        parentRow?.classList.add("is-expanded");
       } else {
         PbAdvancedTable.expandedRows.delete(toggleBtn.id);
+        parentRow?.classList.remove("is-expanded");
       }
 
       // Find direct child rows
@@ -455,6 +458,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     elements.forEach((elem) => {
       elem.style.display = "none";
       elem.classList.remove("is-visible");
+      elem.classList.remove("is-expanded");
 
       // Remove the row ID from expandedRows when this row is hidden
       if (PbAdvancedTable.expandedRows.has(elem.id)) {
@@ -473,6 +477,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         childRows.forEach((childRow) => {
           childRow.style.display = "none";
           childRow.classList.remove("is-visible");
+          childRow.classList.remove("is-expanded");
         });
       }
     });

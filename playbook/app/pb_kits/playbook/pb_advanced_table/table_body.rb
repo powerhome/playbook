@@ -94,10 +94,9 @@ module Playbook
                                   end
 
         children = row_children_for(row)
-        has_nested_children = children.is_a?(::Array) && children.any?
-        # Last sibling without nested children (collapsed parents with children
-        # keep the separator on their leaves, which are hidden until expanded).
-        show_group_separator = group_separators && current_depth.positive? && is_last_sibling && !has_nested_children
+        # Match React: every last sibling gets a separator. When the row is expanded,
+        # JS adds `is-expanded` and CSS hides this row’s separator so the leaf keeps it.
+        show_group_separator = group_separators && current_depth.positive? && is_last_sibling
         row_classname = [additional_classes, ("group-separator-row" if show_group_separator)].compact.join(" ").strip
         separator_inset_style = show_group_separator ? "--group-separator-inset: #{group_separator_inset_em(current_depth)}em;" : nil
 
