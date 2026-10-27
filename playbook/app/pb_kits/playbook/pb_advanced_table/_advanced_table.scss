@@ -865,21 +865,22 @@
       background: $bg_dark;
     }
 
-    // Dark mode virtualized rows
+    // Dark mode virtualized rows — use background-color (not the background
+    // shorthand) so group-separator background-image is not cleared.
     .virtualized-table-row {
       &.pb-bg-row-white {
-        background: $bg_dark_card !important;
+        background-color: $bg_dark_card !important;
 
         td:first-child {
-          background: $bg_dark_card !important;
+          background-color: $bg_dark_card !important;
         }
       }
 
       &.bg-silver {
-        background: $bg_dark;
+        background-color: $bg_dark;
 
         td:first-child {
-          background: $bg_dark;
+          background-color: $bg_dark;
         }
       }
     }
