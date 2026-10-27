@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import Veteran from './badges/veteran'
 import MillionDollar from './badges/million-dollar';
 
@@ -13,7 +14,7 @@ type UserBadgeProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "sm" | "md" | "lg",
-}
+} & GlobalEventProps
 
 const UserBadge = (props: UserBadgeProps): React.ReactElement => {
   const {
@@ -41,6 +42,7 @@ const UserBadge = (props: UserBadgeProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

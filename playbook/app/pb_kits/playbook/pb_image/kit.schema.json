@@ -61,6 +61,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Image } from 'playbook-ui'",
