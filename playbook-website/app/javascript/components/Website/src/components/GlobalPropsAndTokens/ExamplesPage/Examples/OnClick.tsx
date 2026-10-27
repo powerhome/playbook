@@ -42,46 +42,46 @@ import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 
+const clickableDemoHtmlOptions = {
+  style: { userSelect: "none" as const },
+};
+
+const clickablePointerHtmlOptions = {
+  style: { cursor: "pointer" as const, userSelect: "none" as const },
+};
+
+const InteractiveExample = ({
+  children,
+  count,
+  label,
+  reset,
+  statusText,
+}: {
+  children: React.ReactNode,
+  count?: number,
+  label?: string,
+  reset: () => void,
+  statusText?: string,
+}) => {
+  const summary =
+    statusText ||
+    `${label}: ${count} click${count === 1 ? "" : "s"}`;
+
+  return (
+    <Flex flexDirection="column" gap="xs" width="100%">
+      {children}
+      <Body color="light" text={summary} />
+      <Button
+          onClick={reset}
+          size="sm"
+          text="Reset"
+          variant="secondary"
+      />
+    </Flex>
+  );
+};
+
 const OnClick = () => {
-  const clickableDemoHtmlOptions = {
-    style: { userSelect: "none" as const },
-  };
-
-  const clickablePointerHtmlOptions = {
-    style: { cursor: "pointer" as const, userSelect: "none" as const },
-  };
-
-  const InteractiveExample = ({
-    children,
-    count,
-    label,
-    reset,
-    statusText,
-  }: {
-    children: React.ReactNode,
-    count?: number,
-    label?: string,
-    reset: () => void,
-    statusText?: string,
-  }) => {
-    const summary =
-      statusText ||
-      `${label}: ${count} click${count === 1 ? "" : "s"}`;
-
-    return (
-      <Flex flexDirection="column" gap="xs" width="100%">
-        {children}
-        <Body color="light" text={summary} />
-        <Button
-            onClick={reset}
-            size="sm"
-            text="Reset"
-            variant="secondary"
-        />
-      </Flex>
-    );
-  };
-
   const VisualGuideCard = () => {
     const [avatarClicks, setAvatarClicks] = useState(0);
     const [backgroundClicks, setBackgroundClicks] = useState(0);
@@ -421,6 +421,21 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Label Pill" />
+          <InteractiveExample
+              count={labelPillClicks}
+              label="Label Pill"
+              reset={() => setLabelPillClicks(0)}
+          >
+            <LabelPill
+                htmlOptions={clickablePointerHtmlOptions}
+                label="Queue"
+                onClick={() => setLabelPillClicks((prev: number) => prev + 1)}
+                pillValue="4"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Label Value" />
           <InteractiveExample
               count={labelValueClicks}
@@ -565,6 +580,22 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Online Status" />
+          <InteractiveExample
+              count={onlineStatusClicks}
+              label="Online Status"
+              reset={() => setOnlineStatusClicks(0)}
+          >
+            <OnlineStatus
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setOnlineStatusClicks((prev: number) => prev + 1)}
+                size="lg"
+                status="online"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Person" />
           <InteractiveExample
               count={personClicks}
@@ -576,6 +607,21 @@ const OnClick = () => {
                 htmlOptions={clickablePointerHtmlOptions}
                 lastName="ThisPersonExample"
                 onClick={() => setPersonClicks((prev: number) => prev + 1)}
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Pill" />
+          <InteractiveExample
+              count={pillClicks}
+              label="Pill"
+              reset={() => setPillClicks(0)}
+          >
+            <Pill
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setPillClicks((prev: number) => prev + 1)}
+                text="Click this Pill example"
             />
           </InteractiveExample>
         </Card>
@@ -640,6 +686,36 @@ const OnClick = () => {
                 {"Delivered"}
               </ProgressStepItem>
             </ProgressStep>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Source" />
+          <InteractiveExample
+              count={sourceClicks}
+              label="Source"
+              reset={() => setSourceClicks(0)}
+          >
+            <Source
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setSourceClicks((prev: number) => prev + 1)}
+                source="Click this Source example"
+                type="retail"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Stat Change" />
+          <InteractiveExample
+              count={statChangeClicks}
+              label="Stat Change"
+              reset={() => setStatChangeClicks(0)}
+          >
+            <StatChange
+                change="increase"
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setStatChangeClicks((prev: number) => prev + 1)}
+                value="12.4"
+            />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -786,82 +862,6 @@ const OnClick = () => {
                 }}
                 onClick={() => setTitleDetailClicks((prev: number) => prev + 1)}
                 title="Title Detail"
-            />
-          </InteractiveExample>
-        </Card>
-        <Card padding="md" width="sm">
-          <Title size={4} text="Label Pill" />
-          <InteractiveExample
-              count={labelPillClicks}
-              label="Label Pill"
-              reset={() => setLabelPillClicks(0)}
-          >
-            <LabelPill
-                htmlOptions={clickablePointerHtmlOptions}
-                label="Queue"
-                onClick={() => setLabelPillClicks((prev: number) => prev + 1)}
-                pillValue="4"
-            />
-          </InteractiveExample>
-        </Card>
-        <Card padding="md" width="sm">
-          <Title size={4} text="Pill" />
-          <InteractiveExample
-              count={pillClicks}
-              label="Pill"
-              reset={() => setPillClicks(0)}
-          >
-            <Pill
-                cursor="pointer"
-                htmlOptions={clickableDemoHtmlOptions}
-                onClick={() => setPillClicks((prev: number) => prev + 1)}
-                text="Click this Pill example"
-            />
-          </InteractiveExample>
-        </Card>
-        <Card padding="md" width="sm">
-          <Title size={4} text="Online Status" />
-          <InteractiveExample
-              count={onlineStatusClicks}
-              label="Online Status"
-              reset={() => setOnlineStatusClicks(0)}
-          >
-            <OnlineStatus
-                cursor="pointer"
-                htmlOptions={clickableDemoHtmlOptions}
-                onClick={() => setOnlineStatusClicks((prev: number) => prev + 1)}
-                size="lg"
-                status="online"
-            />
-          </InteractiveExample>
-        </Card>
-        <Card padding="md" width="sm">
-          <Title size={4} text="Source" />
-          <InteractiveExample
-              count={sourceClicks}
-              label="Source"
-              reset={() => setSourceClicks(0)}
-          >
-            <Source
-                htmlOptions={clickablePointerHtmlOptions}
-                onClick={() => setSourceClicks((prev: number) => prev + 1)}
-                source="Click this Source example"
-                type="retail"
-            />
-          </InteractiveExample>
-        </Card>
-        <Card padding="md" width="sm">
-          <Title size={4} text="Stat Change" />
-          <InteractiveExample
-              count={statChangeClicks}
-              label="Stat Change"
-              reset={() => setStatChangeClicks(0)}
-          >
-            <StatChange
-                change="increase"
-                htmlOptions={clickablePointerHtmlOptions}
-                onClick={() => setStatChangeClicks((prev: number) => prev + 1)}
-                value="12.4"
             />
           </InteractiveExample>
         </Card>
@@ -1069,6 +1069,15 @@ const OnClick = () => {
             "Attached to the root Image element.",
           ],
           [
+            "Label Pill",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-label-pill-react"
+              text={`<LabelPill label="Queue" onClick={() => alert("clicked")} pillValue="4" />`}
+            />,
+            "Attached to the root Label Pill element.",
+          ],
+          [
             "Label Value",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -1114,6 +1123,15 @@ const OnClick = () => {
             "Attached once to the root Multiple Users Stacked element. Avatar and overflow badge clicks bubble to the whole-kit handler; this is not a per-user callback.",
           ],
           [
+            "Online Status",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-online-status-react"
+              text={`<OnlineStatus cursor="pointer" onClick={() => alert("clicked")} status="online" />`}
+            />,
+            "Attached to the root Online Status element.",
+          ],
+          [
             "Person",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -1123,6 +1141,15 @@ const OnClick = () => {
             "Attached to the root Person element.",
           ],
           [
+            "Pill",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-pill-react"
+              text={`<Pill cursor="pointer" onClick={() => alert("clicked")} text="Clickable pill" />`}
+            />,
+            "Attached to the root Pill element.",
+          ],
+          [
             "ProgressStepItem (subcomponent of Progress Step)",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -1130,6 +1157,24 @@ const OnClick = () => {
               text={`<ProgressStepItem status="active" onClick={() => alert("clicked")} cursor="pointer">Step</ProgressStepItem>`}
             />,
             "Attached to each ProgressStepItem root. Sibling steps do not share a handler. Not shown on the Progress Step kit Global Event Props tab.",
+          ],
+          [
+            "Source",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-source-react"
+              text={`<Source onClick={() => alert("clicked")} source="Retail" type="retail" />`}
+            />,
+            "Attached to the root Source element.",
+          ],
+          [
+            "Stat Change",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-stat-change-react"
+              text={`<StatChange change="increase" onClick={() => alert("clicked")} value="12.4" />`}
+            />,
+            "Attached to the root element when value is set.",
           ],
           [
             "Stat Value",
@@ -1175,51 +1220,6 @@ const OnClick = () => {
               text={`<TitleDetail title="Name" detail="Role" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
             "Attached once to the root Title Detail element.",
-          ],
-          [
-            "Label Pill",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-label-pill-react"
-              text={`<LabelPill label="Queue" onClick={() => alert("clicked")} pillValue="4" />`}
-            />,
-            "Attached to the root Label Pill element.",
-          ],
-          [
-            "Pill",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-pill-react"
-              text={`<Pill cursor="pointer" onClick={() => alert("clicked")} text="Clickable pill" />`}
-            />,
-            "Attached to the root Pill element.",
-          ],
-          [
-            "Online Status",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-online-status-react"
-              text={`<OnlineStatus cursor="pointer" onClick={() => alert("clicked")} status="online" />`}
-            />,
-            "Attached to the root Online Status element.",
-          ],
-          [
-            "Source",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-source-react"
-              text={`<Source onClick={() => alert("clicked")} source="Retail" type="retail" />`}
-            />,
-            "Attached to the root Source element.",
-          ],
-          [
-            "Stat Change",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-stat-change-react"
-              text={`<StatChange change="increase" onClick={() => alert("clicked")} value="12.4" />`}
-            />,
-            "Attached to the root element when value is set.",
           ],
           [
             "User",
