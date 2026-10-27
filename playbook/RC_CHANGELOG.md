@@ -1,3 +1,40 @@
+# ✨ 18.3.0.pre.rc.1
+
+##### October 26, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.3.0-rc.1](https://github.com/powerhome/playbook/tree/18.3.0-rc.1) full list of changes (includes 18.3.0-rc.0):
+
+**Kit Enhancements:**
+
+- Onclick Global Prop: Add Onclick Global Prop Support to Label Pill, Pill, Online Status, Source, and Stat Change [\#6826](https://github.com/powerhome/playbook/pull/6826) ([nickamantia](https://github.com/nickamantia))
+- Global Onclick Prop: Timeline.item, Progressstepitem, and Legend [\#6817](https://github.com/powerhome/playbook/pull/6817) ([kangaree](https://github.com/kangaree))
+- Filter Kit: One Click Sort [\#6814](https://github.com/powerhome/playbook/pull/6814) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dropdown Kit: Allowoptioncreation Prop + Native React Form Support [\#6782](https://github.com/powerhome/playbook/pull/6782) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Remove Unused Actions Dependencies and Vulnerable Transitive Packages [\#6835](https://github.com/powerhome/playbook/pull/6835) ([nidaqg](https://github.com/nidaqg))
+- Bump Msgpack from 1.7.2 to 1.8.2 In /playbook-website [\#6833](https://github.com/powerhome/playbook/pull/6833) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Cross-spawn from 6.0.5 to 6.0.6 [\#6832](https://github.com/powerhome/playbook/pull/6832) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Rexml from 3.2.6 to 3.4.2 In /playbook [\#6831](https://github.com/powerhome/playbook/pull/6831) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Form-data from 3.0.4 to 3.0.5 [\#6830](https://github.com/powerhome/playbook/pull/6830) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Js-yaml from 3.14.1 to 3.15.2 [\#6829](https://github.com/powerhome/playbook/pull/6829) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Fixes for Github Actions Re Ruby, Ubuntu and Python Versions [\#6827](https://github.com/powerhome/playbook/pull/6827) ([nidaqg](https://github.com/nidaqg))
+- Version Bump 18.2.0 [\#6818](https://github.com/powerhome/playbook/pull/6818) ([nidaqg](https://github.com/nidaqg))
+- Bump Vite from 6.4.3 to 6.4.4 [\#6811](https://github.com/powerhome/playbook/pull/6811) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Typeahead Kit - Draggable Pills: Improve Drag-and-drop Discoverability - React and Rails [\#6792](https://github.com/powerhome/playbook/pull/6792) ([kangaree](https://github.com/kangaree))
+- Playbook Website - Improve Form Documentation for React Hook Forms [\#6788](https://github.com/powerhome/playbook/pull/6788) ([nickamantia](https://github.com/nickamantia))
+- Bump Rollup from 4.42.0 to 4.64.6 [\#6767](https://github.com/powerhome/playbook/pull/6767) ([dependabot[bot]](https://github.com/dependabot[bot]))
+
+**Fixed Bugs:**
+
+- Richtexteditor Kit: Required_indicator Appears on Second Label Line - Rails [\#6828](https://github.com/powerhome/playbook/pull/6828) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Full Screen Kit: Advanced Table Flush Sticky Header - React [\#6821](https://github.com/powerhome/playbook/pull/6821) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.2.0...18.3.0-rc.1)
+
 # ✨ 18.2.0.pre.rc.3
 
 ##### October 20, 2026
