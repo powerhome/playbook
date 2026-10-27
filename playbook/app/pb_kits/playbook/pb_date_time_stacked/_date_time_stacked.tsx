@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 import { buildCss, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Flex from '../pb_flex/_flex'
 import FlexItem from '../pb_flex/_flex_item'
@@ -20,7 +21,7 @@ type DateTimeStackedProps = {
   dark: boolean,
   timeZone?: string,
   showCurrentYear?: boolean,
-}
+} & GlobalEventProps
 
 const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
   if (props.date) deprecatedProps()
@@ -47,6 +48,7 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
         inline={false}
         vertical="stretch"
         {...props}
+        {...globalEventProps(props)}
         className={classes}
     >
       <FlexItem>

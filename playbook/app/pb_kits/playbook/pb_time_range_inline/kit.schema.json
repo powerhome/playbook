@@ -72,6 +72,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { TimeRangeInline } from 'playbook-ui'",
