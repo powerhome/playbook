@@ -7,7 +7,7 @@ import { GenericObject } from "../../types"
 
 import { isChrome } from "../Utilities/BrowserCheck"
 import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
-import { getGroupSeparatorInsetEm, getRowColorClass, isGroupSeparatorRow } from "../Utilities/RowUtils"
+import { buildGroupSeparatorRowIds, getGroupSeparatorInsetEm, getRowColorClass, isGroupSeparatorRow } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -145,6 +145,9 @@ export const VirtualizedTableView = ({
 
   // Establish # of Parent Rows (so that Footer count does not include every single row)
   const topLevelRowCount = table.getRowModel().flatRows.filter((row: Row<GenericObject>) => row.depth === 0).length;
+  const groupSeparatorRowIds = groupSeparators
+    ? buildGroupSeparatorRowIds(table.getRowModel().rows)
+    : new Set<string>()
 
   return (
     <>
@@ -181,7 +184,7 @@ export const VirtualizedTableView = ({
 
           // Use the utility function to get consistent row color
           const rowColor = getRowColorClass(row, inlineRowLoading || false);
-          const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, table.getRowModel().rows);
+          const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
 
           return (
             <tr

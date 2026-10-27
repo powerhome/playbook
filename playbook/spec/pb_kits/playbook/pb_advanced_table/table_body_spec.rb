@@ -536,5 +536,24 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
         expect(style).to include("bottom: calc(2.5em * 0)")
       end
     end
+
+    describe "#last_sibling_of_parent?" do
+      let(:instance) { subject.new(table_id: "t1") }
+      let(:parent) do
+        {
+          id: "y1",
+          children: [
+            { id: "q1" },
+            { id: "q2" },
+          ],
+        }
+      end
+
+      it "is true for the last child under parent", :aggregate_failures do
+        expect(instance.last_sibling_of_parent?(parent[:children].last, parent)).to be true
+        expect(instance.last_sibling_of_parent?(parent[:children].first, parent)).to be false
+        expect(instance.last_sibling_of_parent?(parent[:children].last, nil)).to be false
+      end
+    end
   end
 end

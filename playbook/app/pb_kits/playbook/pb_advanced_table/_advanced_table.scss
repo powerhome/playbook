@@ -543,8 +543,12 @@
       border-bottom-color: transparent !important;
     }
 
-    > td:first-child,
-    > .pb_table_td:first-child {
+    // Inset on the hierarchy column — skip checkbox-cell when selectable_rows
+    // + enable_toggle_expansion none puts the checkbox first.
+    > td:first-child:not(.checkbox-cell),
+    > .pb_table_td:first-child:not(.checkbox-cell),
+    > td.checkbox-cell + td,
+    > td.checkbox-cell + .pb_table_td {
       background-image: linear-gradient(
         to right,
         transparent 0,
@@ -845,8 +849,10 @@
         border-bottom-color: transparent !important;
       }
 
-      > td:first-child,
-      > .pb_table_td:first-child {
+      > td:first-child:not(.checkbox-cell),
+      > .pb_table_td:first-child:not(.checkbox-cell),
+      > td.checkbox-cell + td,
+      > td.checkbox-cell + .pb_table_td {
         background-image: linear-gradient(
           to right,
           transparent 0,

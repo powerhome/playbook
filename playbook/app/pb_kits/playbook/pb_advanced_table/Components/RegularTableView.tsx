@@ -6,7 +6,7 @@ import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
-import { getFontWeight, getGroupSeparatorInsetEm, getRowColorClass, getRowStyle, isGroupSeparatorRow, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
+import { buildGroupSeparatorRowIds, getFontWeight, getGroupSeparatorInsetEm, getRowColorClass, getRowStyle, isGroupSeparatorRow, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -159,19 +159,19 @@ export const RegularTableView = ({
     (obj: Record<string, unknown>) => "columns" in obj
   );
 
-  // Row pinning — pass the section’s visible list so groupSeparators match sort/filter order
+  // Row pinning — pass the section’s precomputed separator ids (visible order)
   function PinnedRow({
+    groupSeparatorRowIds,
     position,
     row,
-    visibleRows,
   }: {
+    groupSeparatorRowIds: Set<string>
     position: 'top' | 'bottom'
     row: Row<any>
-    visibleRows: Row<GenericObject>[]
   }) {
     const customRowStyle = getRowStyle(rowStyling, row);
     const bottomRowsCount = table.getBottomRows().length;
-    const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, visibleRows);
+    const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
 
     return (
       <tr
@@ -215,14 +215,18 @@ export const RegularTableView = ({
   const totalRows = pinnedRows ? table.getCenterRows() : table.getRowModel().rows
   const topRows = pinnedRows ? table.getTopRows() : []
   const bottomRows = pinnedRows ? table.getBottomRows() : []
+  const emptySeparatorIds = new Set<string>()
+  const centerSeparatorIds = groupSeparators ? buildGroupSeparatorRowIds(totalRows) : emptySeparatorIds
+  const topSeparatorIds = groupSeparators ? buildGroupSeparatorRowIds(topRows) : emptySeparatorIds
+  const bottomSeparatorIds = groupSeparators ? buildGroupSeparatorRowIds(bottomRows) : emptySeparatorIds
 
   return (
     <>
       {topRows.map((row: Row<GenericObject>) => (
-        <PinnedRow key={row.id}
+        <PinnedRow groupSeparatorRowIds={topSeparatorIds}
+            key={row.id}
             position="top"
             row={row}
-            visibleRows={topRows}
         />
       ))}
       {totalRows.map((row: Row<GenericObject>, rowIndex: number) => {
@@ -236,7 +240,7 @@ export const RegularTableView = ({
         // Use functions from RowUtils for consistent cell coloring
         const rowColor = getRowColorClass(row, inlineRowLoading || false);
         const isDataLoading = shouldShowLoadingIndicator(row, inlineRowLoading || false, columnDefinitions[0]?.cellAccessors?.length || 0);
-        const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, totalRows);
+        const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, centerSeparatorIds);
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -306,10 +310,10 @@ export const RegularTableView = ({
         );
       })}
       {bottomRows.map((row: Row<GenericObject>) => (
-        <PinnedRow key={row.id}
+        <PinnedRow groupSeparatorRowIds={bottomSeparatorIds}
+            key={row.id}
             position="bottom"
             row={row}
-            visibleRows={bottomRows}
         />
       ))}
     </>

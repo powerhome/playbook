@@ -315,6 +315,17 @@ module Playbook
         parent_depth * 1.25
       end
 
+      # Used when a pinned entry is a nested row rendered as its own subtree root
+      # (is_last_sibling is otherwise only set while walking children).
+      def last_sibling_of_parent?(row, parent_row)
+        return false if parent_row.nil?
+
+        siblings = row_children_for(parent_row)
+        return false if siblings.blank?
+
+        row_id_for(siblings.last).to_s == row_id_for(row).to_s
+      end
+
     private
 
       def has_grouped_headers?

@@ -54,31 +54,34 @@ export const getFontWeight = (rowStyle?: GenericObject) => {
 }
 
 /**
- * True when this row is the last *visible* sibling under its parent and should
- * show a group separator (expanded parents defer to their last visible descendant).
+ * One O(n) pass over the current visible row model → Set of row ids that should
+ * show a group separator. Prefer this over scanning per row (esp. virtualized).
  *
- * Uses the current row model (`visibleRows`) so sort/filter order is respected —
- * `row.index` / `parent.subRows` stay in original data order.
+ * Uses visible order so sort/filter is respected; expanded parents with real
+ * subRows defer to their last visible descendant.
  */
+export const buildGroupSeparatorRowIds = (
+  visibleRows: Row<GenericObject>[]
+): Set<string> => {
+  const lastSiblingByKey = new Map<string, Row<GenericObject>>()
+
+  for (const row of visibleRows) {
+    if (row.depth === 0 || !row.getParentRow()) continue
+    lastSiblingByKey.set(`${row.depth}:${row.parentId}`, row)
+  }
+
+  const ids = new Set<string>()
+  for (const row of lastSiblingByKey.values()) {
+    if (row.getIsExpanded() && row.subRows.length > 0) continue
+    ids.add(row.id)
+  }
+  return ids
+}
+
 export const isGroupSeparatorRow = (
   row: Row<GenericObject>,
-  visibleRows: Row<GenericObject>[]
-): boolean => {
-  if (row.depth === 0) return false
-  if (!row.getParentRow()) return false
-
-  let lastSiblingId: string | undefined
-  for (const candidate of visibleRows) {
-    if (candidate.depth === row.depth && candidate.parentId === row.parentId) {
-      lastSiblingId = candidate.id
-    }
-  }
-  if (lastSiblingId !== row.id) return false
-
-  if (row.getIsExpanded() && row.subRows.length > 0) return false
-
-  return true
-}
+  groupSeparatorRowIds: Set<string>
+): boolean => groupSeparatorRowIds.has(row.id)
 
 /**
  * Left inset (em) for the group separator — aligned with the immediate
