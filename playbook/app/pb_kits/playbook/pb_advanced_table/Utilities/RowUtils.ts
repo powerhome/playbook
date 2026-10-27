@@ -54,17 +54,26 @@ export const getFontWeight = (rowStyle?: GenericObject) => {
 }
 
 /**
- * True when this row is the last sibling under its parent and should show a
- * group separator (expanded parents defer the separator to their last visible descendant).
+ * True when this row is the last *visible* sibling under its parent and should
+ * show a group separator (expanded parents defer to their last visible descendant).
+ *
+ * Uses the current row model (`visibleRows`) so sort/filter order is respected —
+ * `row.index` / `parent.subRows` stay in original data order.
  */
-export const isGroupSeparatorRow = (row: Row<GenericObject>): boolean => {
+export const isGroupSeparatorRow = (
+  row: Row<GenericObject>,
+  visibleRows: Row<GenericObject>[]
+): boolean => {
   if (row.depth === 0) return false
+  if (!row.getParentRow()) return false
 
-  const parent = row.getParentRow()
-  if (!parent) return false
-
-  const isLastSibling = row.index === parent.subRows.length - 1
-  if (!isLastSibling) return false
+  let lastSiblingId: string | undefined
+  for (const candidate of visibleRows) {
+    if (candidate.depth === row.depth && candidate.parentId === row.parentId) {
+      lastSiblingId = candidate.id
+    }
+  }
+  if (lastSiblingId !== row.id) return false
 
   if (row.getIsExpanded() && row.subRows.length > 0) return false
 

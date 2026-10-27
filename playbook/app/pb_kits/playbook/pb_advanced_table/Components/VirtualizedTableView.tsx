@@ -181,7 +181,7 @@ export const VirtualizedTableView = ({
 
           // Use the utility function to get consistent row color
           const rowColor = getRowColorClass(row, inlineRowLoading || false);
-          const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row);
+          const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, table.getRowModel().rows);
 
           return (
             <tr

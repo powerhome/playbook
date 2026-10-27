@@ -1699,3 +1699,75 @@ test("groupSeparators insets January’s last day to the January label", () => {
   expect(day2).toHaveStyle({ "--group-separator-inset": "2.5em" })
 })
 
+test("groupSeparators follows sorted visible sibling order", async () => {
+  const data = [
+    {
+      year: "2021",
+      newEnrollments: "10",
+      scheduledMeetings: "1",
+      children: [
+        {
+          year: "2021",
+          quarter: "Q1",
+          newEnrollments: "30",
+          scheduledMeetings: "1",
+        },
+        {
+          year: "2021",
+          quarter: "Q2",
+          newEnrollments: "10",
+          scheduledMeetings: "1",
+        },
+      ],
+    },
+  ]
+
+  const sortColumnDefinitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      enableSort: true,
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ]
+
+  render(
+    <AdvancedTable
+        columnDefinitions={sortColumnDefinitions}
+        data={{ testid: testId }}
+        expandedControl={{ value: { "0": true }, onChange: () => {} }}
+        groupSeparators
+        tableData={data}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  // Original data order: Q2 is last sibling → separator on Q2
+  expect(
+    [...kit.querySelectorAll("tbody tr.group-separator-row")].some((row) =>
+      row.textContent.includes("Q2")
+    )
+  ).toBe(true)
+
+  const sortButton = kit.querySelector(".header-sort-secondary-columns")
+  expect(sortButton).toBeInTheDocument()
+  // sortDescFirst: first click is desc (Q1=30, Q2=10) — Q2 still last.
+  // Second click is asc (Q2=10, Q1=30) — separator should move to Q1.
+  sortButton.click()
+  sortButton.click()
+
+  await waitFor(() => {
+    const separatorRows = [...kit.querySelectorAll("tbody tr.group-separator-row")]
+    expect(separatorRows.some((row) => row.textContent.includes("Q1"))).toBe(true)
+    expect(separatorRows.some((row) => row.textContent.includes("Q2"))).toBe(false)
+  })
+})
+

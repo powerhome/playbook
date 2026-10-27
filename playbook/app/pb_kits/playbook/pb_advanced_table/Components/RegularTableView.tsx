@@ -220,7 +220,7 @@ export const RegularTableView = ({
         // Use functions from RowUtils for consistent cell coloring
         const rowColor = getRowColorClass(row, inlineRowLoading || false);
         const isDataLoading = shouldShowLoadingIndicator(row, inlineRowLoading || false, columnDefinitions[0]?.cellAccessors?.length || 0);
-        const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row);
+        const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, totalRows);
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
