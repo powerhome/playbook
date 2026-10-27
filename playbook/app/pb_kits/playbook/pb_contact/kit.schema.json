@@ -52,6 +52,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Contact } from 'playbook-ui'",

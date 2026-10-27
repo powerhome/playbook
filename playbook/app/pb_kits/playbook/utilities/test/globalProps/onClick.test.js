@@ -1,19 +1,23 @@
 import React from 'react'
 import { fireEvent, render, screen } from '../../test-utils'
+import Avatar from '../../../pb_avatar/_avatar'
 import Background from '../../../pb_background/_background'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
 import ButtonToolbar from '../../../pb_button_toolbar/_button_toolbar'
 import Caption from '../../../pb_caption/_caption'
 import Card from '../../../pb_card/_card'
+import Contact from '../../../pb_contact/_contact'
 import Container from '../../../pb_container/_container'
 import Currency from '../../../pb_currency/_currency'
 import DashboardValue from '../../../pb_dashboard_value/_dashboard_value'
 import Detail from '../../../pb_detail/_detail'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
+import Image from '../../../pb_image/_image'
 import LabelPill from '../../../pb_label_pill/_label_pill'
 import OnlineStatus from '../../../pb_online_status/_online_status'
+import Person from '../../../pb_person/_person'
 import Pill from '../../../pb_pill/_pill'
 import Source from '../../../pb_source/_source'
 import StatChange from '../../../pb_stat_change/_stat_change'
@@ -33,14 +37,18 @@ import Timeline from '../../../pb_timeline/_timeline'
 import Title from '../../../pb_title/_title'
 import TitleCount from '../../../pb_title_count/_title_count'
 import TitleDetail from '../../../pb_title_detail/_title_detail'
+import User from '../../../pb_user/_user'
+import UserBadge from '../../../pb_user_badge/_user_badge'
 import { globalProps } from '../../globalProps'
 import { globalEventProps } from '../../globalEventProps'
 
 const optedInKits = [
+  { Kit: Avatar, name: 'Avatar', extraProps: { name: 'Pat' } },
   { Kit: Background, name: 'Background', extraProps: { children: 'Test' } },
   { Kit: Body, name: 'Body', extraProps: { text: 'Test' } },
   { Kit: Caption, name: 'Caption', extraProps: { text: 'Test' } },
   { Kit: Card, name: 'Card', extraProps: { children: 'Test' } },
+  { Kit: Contact, name: 'Contact', extraProps: { contactType: 'email', contactValue: 'pat@example.com' } },
   { Kit: Container, name: 'Container', extraProps: { children: 'Test' } },
   { Kit: Currency, name: 'Currency', extraProps: { amount: '100.00', label: 'Total' } },
   { Kit: DashboardValue, name: 'DashboardValue', extraProps: { statLabel: 'Sales', statValue: { value: 100 } } },
@@ -49,11 +57,13 @@ const optedInKits = [
   { Kit: Highlight, name: 'Highlight', extraProps: { text: 'Test' } },
   { Kit: IconStatValue, name: 'IconStatValue', extraProps: { icon: 'heart', text: 'Likes', value: 42 } },
   { Kit: IconValue, name: 'IconValue', extraProps: { icon: 'heart', text: 'Favorites' } },
+  { Kit: Image, name: 'Image', extraProps: { alt: 'Test', url: 'https://example.com/test.jpg' } },
   { Kit: LabelValue, name: 'LabelValue', extraProps: { label: 'Label', value: 'Value' } },
   { Kit: Legend, name: 'Legend', extraProps: { text: 'Series A' } },
   { Kit: Message, name: 'Message', extraProps: { label: 'Sender', message: 'Test' } },
   { Kit: MultipleUsers, name: 'MultipleUsers', extraProps: { users: [{ name: 'Pat' }] } },
   { Kit: MultipleUsersStacked, name: 'MultipleUsersStacked', extraProps: { users: [{ name: 'Pat' }] } },
+  { Kit: Person, name: 'Person', extraProps: { firstName: 'Pat', lastName: 'Example' } },
   { Kit: ProgressStepItem, name: 'ProgressStepItem', extraProps: { children: 'Step', status: 'active' } },
   { Kit: StatValue, name: 'StatValue', extraProps: { unit: 'mg', value: 100 } },
   { Kit: Timeline.Item, name: 'TimelineItem', extraProps: { children: 'Event' } },
@@ -65,6 +75,8 @@ const optedInKits = [
   { Kit: StatChange, name: 'StatChange', extraProps: { value: 12 } },
   { Kit: TitleCount, name: 'TitleCount', extraProps: { count: 12, title: 'Items' } },
   { Kit: TitleDetail, name: 'TitleDetail', extraProps: { detail: 'Detail', title: 'Title' } },
+  { Kit: User, name: 'User', extraProps: { name: 'Pat Example', title: 'Engineer' } },
+  { Kit: UserBadge, name: 'UserBadge', extraProps: { badge: 'veteran' } },
 ]
 
 describe('onClick GlobalEventProps', () => {
@@ -306,6 +318,22 @@ describe('onClick GlobalEventProps', () => {
       )
 
       fireEvent.click(screen.getByTestId('onclick-currency-unstyled'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('Contact unstyled branch still attaches root onClick', () => {
+      const onClick = jest.fn()
+      render(
+        <Contact
+            contactType="email"
+            contactValue="pat@example.com"
+            data={{ testid: 'onclick-contact-unstyled' }}
+            onClick={onClick}
+            unstyled
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-contact-unstyled'))
       expect(onClick).toHaveBeenCalledTimes(1)
     })
 

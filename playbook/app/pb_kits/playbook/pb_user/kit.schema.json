@@ -140,6 +140,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { User } from 'playbook-ui'",

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import {
+  Avatar,
   Background,
   Body,
   Button,
   Caption,
   Card,
+  Contact,
   Container,
   Currency,
   DashboardValue,
@@ -13,11 +15,13 @@ import {
   Highlight,
   IconStatValue,
   IconValue,
+  Image,
   LabelValue,
   Legend,
   Message,
   MultipleUsers,
   MultipleUsersStacked,
+  Person,
   ProgressStep,
   ProgressStepItem,
   StatValue,
@@ -31,56 +35,60 @@ import {
   OnlineStatus,
   Source,
   StatChange,
+  User,
+  UserBadge,
 } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 
+const clickableDemoHtmlOptions = {
+  style: { userSelect: "none" as const },
+};
+
+const clickablePointerHtmlOptions = {
+  style: { cursor: "pointer" as const, userSelect: "none" as const },
+};
+
+const InteractiveExample = ({
+  children,
+  count,
+  label,
+  reset,
+  statusText,
+}: {
+  children: React.ReactNode,
+  count?: number,
+  label?: string,
+  reset: () => void,
+  statusText?: string,
+}) => {
+  const summary =
+    statusText ||
+    `${label}: ${count} click${count === 1 ? "" : "s"}`;
+
+  return (
+    <Flex flexDirection="column" gap="xs" width="100%">
+      {children}
+      <Body color="light" text={summary} />
+      <Button
+          onClick={reset}
+          size="sm"
+          text="Reset"
+          variant="secondary"
+      />
+    </Flex>
+  );
+};
+
 const OnClick = () => {
-  const clickableDemoHtmlOptions = {
-    style: { userSelect: "none" as const },
-  };
-
-  const clickablePointerHtmlOptions = {
-    style: { cursor: "pointer" as const, userSelect: "none" as const },
-  };
-
-  const InteractiveExample = ({
-    children,
-    count,
-    label,
-    reset,
-    statusText,
-  }: {
-    children: React.ReactNode,
-    count?: number,
-    label?: string,
-    reset: () => void,
-    statusText?: string,
-  }) => {
-    const summary =
-      statusText ||
-      `${label}: ${count} click${count === 1 ? "" : "s"}`;
-
-    return (
-      <Flex flexDirection="column" gap="xs" width="100%">
-        {children}
-        <Body color="light" text={summary} />
-        <Button
-            onClick={reset}
-            size="sm"
-            text="Reset"
-            variant="secondary"
-        />
-      </Flex>
-    );
-  };
-
   const VisualGuideCard = () => {
+    const [avatarClicks, setAvatarClicks] = useState(0);
     const [backgroundClicks, setBackgroundClicks] = useState(0);
     const [bodyClicks, setBodyClicks] = useState(0);
     const [captionClicks, setCaptionClicks] = useState(0);
     const [cardClicks, setCardClicks] = useState(0);
+    const [contactClicks, setContactClicks] = useState(0);
     const [containerClicks, setContainerClicks] = useState(0);
     const [currencyClicks, setCurrencyClicks] = useState(0);
     const [dashboardValueClicks, setDashboardValueClicks] = useState(0);
@@ -89,6 +97,7 @@ const OnClick = () => {
     const [highlightClicks, setHighlightClicks] = useState(0);
     const [iconStatValueClicks, setIconStatValueClicks] = useState(0);
     const [iconValueClicks, setIconValueClicks] = useState(0);
+    const [imageClicks, setImageClicks] = useState(0);
     const [labelValueClicks, setLabelValueClicks] = useState(0);
     const [legendClicks, setLegendClicks] = useState({ windows: 0, doors: 0, roofing: 0 });
     const [messageClicks, setMessageClicks] = useState(0);
@@ -99,6 +108,7 @@ const OnClick = () => {
       shipped: 0,
       delivered: 0,
     });
+    const [personClicks, setPersonClicks] = useState(0);
     const [statValueClicks, setStatValueClicks] = useState(0);
     const [timelineItemClicks, setTimelineItemClicks] = useState({
       started: 0,
@@ -113,10 +123,30 @@ const OnClick = () => {
     const [statChangeClicks, setStatChangeClicks] = useState(0);
     const [titleCountClicks, setTitleCountClicks] = useState(0);
     const [titleDetailClicks, setTitleDetailClicks] = useState(0);
+    const [userClicks, setUserClicks] = useState(0);
+    const [userBadgeClicks, setUserBadgeClicks] = useState(0);
     const [buttonClicks, setButtonClicks] = useState(0);
 
     return (
       <Flex gap="sm" wrap width="100%">
+        <Card padding="md" width="sm">
+          <Title size={4} text="Avatar" />
+          <InteractiveExample
+              count={avatarClicks}
+              label="Avatar"
+              reset={() => setAvatarClicks(0)}
+          >
+            <Avatar
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                name="Avatar Example"
+                onClick={() => setAvatarClicks((prev: number) => prev + 1)}
+                size="md"
+            />
+            <Body text="Click the above Avatar example" />
+          </InteractiveExample>
+        </Card>
         <Card padding="md" width="sm">
           <Title size={4} text="Background" />
           <InteractiveExample
@@ -191,6 +221,21 @@ const OnClick = () => {
             >
               {"Click this Card example"}
             </Card>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Contact" />
+          <InteractiveExample
+              count={contactClicks}
+              label="Contact"
+              reset={() => setContactClicks(0)}
+          >
+            <Contact
+                contactType="email"
+                contactValue="clickthiscontact@example.com"
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setContactClicks((prev: number) => prev + 1)}
+            />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -356,6 +401,41 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Image" />
+          <InteractiveExample
+              count={imageClicks}
+              label="Image"
+              reset={() => setImageClicks(0)}
+          >
+            <Image
+                alt="Clickable demo"
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setImageClicks((prev: number) => prev + 1)}
+                rounded
+                size="sm"
+                url="https://unsplash.it/500/400/?image=634"
+            />
+            <Body text="Click the above Image example" />
+
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Label Pill" />
+          <InteractiveExample
+              count={labelPillClicks}
+              label="Label Pill"
+              reset={() => setLabelPillClicks(0)}
+          >
+            <LabelPill
+                htmlOptions={clickablePointerHtmlOptions}
+                label="Queue"
+                onClick={() => setLabelPillClicks((prev: number) => prev + 1)}
+                pillValue="4"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Label Value" />
           <InteractiveExample
               count={labelValueClicks}
@@ -499,6 +579,52 @@ const OnClick = () => {
             <Body text="Click the above Multiple Users Stacked example" />
           </InteractiveExample>
         </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Online Status" />
+          <InteractiveExample
+              count={onlineStatusClicks}
+              label="Online Status"
+              reset={() => setOnlineStatusClicks(0)}
+          >
+            <OnlineStatus
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setOnlineStatusClicks((prev: number) => prev + 1)}
+                size="lg"
+                status="online"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Person" />
+          <InteractiveExample
+              count={personClicks}
+              label="Person"
+              reset={() => setPersonClicks(0)}
+          >
+            <Person
+                firstName="Click"
+                htmlOptions={clickablePointerHtmlOptions}
+                lastName="ThisPersonExample"
+                onClick={() => setPersonClicks((prev: number) => prev + 1)}
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Pill" />
+          <InteractiveExample
+              count={pillClicks}
+              label="Pill"
+              reset={() => setPillClicks(0)}
+          >
+            <Pill
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setPillClicks((prev: number) => prev + 1)}
+                text="Click this Pill example"
+            />
+          </InteractiveExample>
+        </Card>
         <Card padding="md" width="md">
           <Title size={4} text="ProgressStepItem (subcomponent of Progress Step)" />
           <InteractiveExample
@@ -560,6 +686,36 @@ const OnClick = () => {
                 {"Delivered"}
               </ProgressStepItem>
             </ProgressStep>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Source" />
+          <InteractiveExample
+              count={sourceClicks}
+              label="Source"
+              reset={() => setSourceClicks(0)}
+          >
+            <Source
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setSourceClicks((prev: number) => prev + 1)}
+                source="Click this Source example"
+                type="retail"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Stat Change" />
+          <InteractiveExample
+              count={statChangeClicks}
+              label="Stat Change"
+              reset={() => setStatChangeClicks(0)}
+          >
+            <StatChange
+                change="increase"
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setStatChangeClicks((prev: number) => prev + 1)}
+                value="12.4"
+            />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -710,79 +866,36 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
-          <Title size={4} text="Label Pill" />
+          <Title size={4} text="User" />
           <InteractiveExample
-              count={labelPillClicks}
-              label="Label Pill"
-              reset={() => setLabelPillClicks(0)}
+              count={userClicks}
+              label="User"
+              reset={() => setUserClicks(0)}
           >
-            <LabelPill
-                htmlOptions={clickablePointerHtmlOptions}
-                label="Queue"
-                onClick={() => setLabelPillClicks((prev: number) => prev + 1)}
-                pillValue="4"
-            />
-          </InteractiveExample>
-        </Card>
-        <Card padding="md" width="sm">
-          <Title size={4} text="Pill" />
-          <InteractiveExample
-              count={pillClicks}
-              label="Pill"
-              reset={() => setPillClicks(0)}
-          >
-            <Pill
+            <User
+                avatar
                 cursor="pointer"
                 htmlOptions={clickableDemoHtmlOptions}
-                onClick={() => setPillClicks((prev: number) => prev + 1)}
-                text="Click this Pill example"
+                name="Click ThisUser"
+                onClick={() => setUserClicks((prev: number) => prev + 1)}
+                title="Example"
             />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
-          <Title size={4} text="Online Status" />
+          <Title size={4} text="User Badge" />
           <InteractiveExample
-              count={onlineStatusClicks}
-              label="Online Status"
-              reset={() => setOnlineStatusClicks(0)}
+              count={userBadgeClicks}
+              label="User Badge"
+              reset={() => setUserBadgeClicks(0)}
           >
-            <OnlineStatus
-                cursor="pointer"
-                htmlOptions={clickableDemoHtmlOptions}
-                onClick={() => setOnlineStatusClicks((prev: number) => prev + 1)}
-                size="lg"
-                status="online"
-            />
-          </InteractiveExample>
-        </Card>
-        <Card padding="md" width="sm">
-          <Title size={4} text="Source" />
-          <InteractiveExample
-              count={sourceClicks}
-              label="Source"
-              reset={() => setSourceClicks(0)}
-          >
-            <Source
+            <UserBadge
+                badge="veteran"
                 htmlOptions={clickablePointerHtmlOptions}
-                onClick={() => setSourceClicks((prev: number) => prev + 1)}
-                source="Click this Source example"
-                type="retail"
+                onClick={() => setUserBadgeClicks((prev: number) => prev + 1)}
+                size="md"
             />
-          </InteractiveExample>
-        </Card>
-        <Card padding="md" width="sm">
-          <Title size={4} text="Stat Change" />
-          <InteractiveExample
-              count={statChangeClicks}
-              label="Stat Change"
-              reset={() => setStatChangeClicks(0)}
-          >
-            <StatChange
-                change="increase"
-                htmlOptions={clickablePointerHtmlOptions}
-                onClick={() => setStatChangeClicks((prev: number) => prev + 1)}
-                value="12.4"
-            />
+            <Body text="Click the above User Badge example" />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -839,6 +952,15 @@ const OnClick = () => {
         headers={["Supported Kit", "Type", "React Example", "Notes"]}
         rows={[
           [
+            "Avatar",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-avatar-react"
+              text={`<Avatar name="Harvey Specter" onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached to the root Avatar element.",
+          ],
+          [
             "Body",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -864,6 +986,15 @@ const OnClick = () => {
               text={`<Card onClick={() => alert("clicked")} cursor="pointer">Content</Card>`}
             />,
             "Attached to the root Card tag.",
+          ],
+          [
+            "Contact",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-contact-react"
+              text={`<Contact contactType="email" contactValue="email@example.com" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Contact element for styled and unstyled variants.",
           ],
           [
             "Currency",
@@ -929,6 +1060,24 @@ const OnClick = () => {
             "Attached once to the root Icon Value element.",
           ],
           [
+            "Image",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-image-react"
+              text={`<Image alt="Demo" url="https://example.com/image.jpg" onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached to the root Image element.",
+          ],
+          [
+            "Label Pill",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-label-pill-react"
+              text={`<LabelPill label="Queue" onClick={() => alert("clicked")} pillValue="4" />`}
+            />,
+            "Attached to the root Label Pill element.",
+          ],
+          [
             "Label Value",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -974,6 +1123,33 @@ const OnClick = () => {
             "Attached once to the root Multiple Users Stacked element. Avatar and overflow badge clicks bubble to the whole-kit handler; this is not a per-user callback.",
           ],
           [
+            "Online Status",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-online-status-react"
+              text={`<OnlineStatus cursor="pointer" onClick={() => alert("clicked")} status="online" />`}
+            />,
+            "Attached to the root Online Status element.",
+          ],
+          [
+            "Person",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-person-react"
+              text={`<Person firstName="Harvey" lastName="Specter" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Person element.",
+          ],
+          [
+            "Pill",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-pill-react"
+              text={`<Pill cursor="pointer" onClick={() => alert("clicked")} text="Clickable pill" />`}
+            />,
+            "Attached to the root Pill element.",
+          ],
+          [
             "ProgressStepItem (subcomponent of Progress Step)",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -981,6 +1157,24 @@ const OnClick = () => {
               text={`<ProgressStepItem status="active" onClick={() => alert("clicked")} cursor="pointer">Step</ProgressStepItem>`}
             />,
             "Attached to each ProgressStepItem root. Sibling steps do not share a handler. Not shown on the Progress Step kit Global Event Props tab.",
+          ],
+          [
+            "Source",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-source-react"
+              text={`<Source onClick={() => alert("clicked")} source="Retail" type="retail" />`}
+            />,
+            "Attached to the root Source element.",
+          ],
+          [
+            "Stat Change",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-stat-change-react"
+              text={`<StatChange change="increase" onClick={() => alert("clicked")} value="12.4" />`}
+            />,
+            "Attached to the root element when value is set.",
           ],
           [
             "Stat Value",
@@ -1028,49 +1222,22 @@ const OnClick = () => {
             "Attached once to the root Title Detail element.",
           ],
           [
-            "Label Pill",
+            "User",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
-              id="onclick-label-pill-react"
-              text={`<LabelPill label="Queue" onClick={() => alert("clicked")} pillValue="4" />`}
+              id="onclick-user-react"
+              text={`<User name="Harvey Specter" title="Attorney" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
-            "Attached to the root Label Pill element.",
+            "Attached to the root User element.",
           ],
           [
-            "Pill",
+            "User Badge",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
-              id="onclick-pill-react"
-              text={`<Pill cursor="pointer" onClick={() => alert("clicked")} text="Clickable pill" />`}
+              id="onclick-user-badge-react"
+              text={`<UserBadge badge="veteran" onClick={() => alert("clicked")} />`}
             />,
-            "Attached to the root Pill element.",
-          ],
-          [
-            "Online Status",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-online-status-react"
-              text={`<OnlineStatus cursor="pointer" onClick={() => alert("clicked")} status="online" />`}
-            />,
-            "Attached to the root Online Status element.",
-          ],
-          [
-            "Source",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-source-react"
-              text={`<Source onClick={() => alert("clicked")} source="Retail" type="retail" />`}
-            />,
-            "Attached to the root Source element.",
-          ],
-          [
-            "Stat Change",
-            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
-            <ExampleCodeCard
-              id="onclick-stat-change-react"
-              text={`<StatChange change="increase" onClick={() => alert("clicked")} value="12.4" />`}
-            />,
-            "Attached to the root element when value is set.",
+            "Attached to the root User Badge element.",
           ],
         ]}
       />

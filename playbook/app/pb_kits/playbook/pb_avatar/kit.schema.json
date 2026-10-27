@@ -83,6 +83,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Avatar } from 'playbook-ui'",

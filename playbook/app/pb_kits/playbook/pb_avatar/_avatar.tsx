@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { getPlacementProps } from './Utilities/GetPlacementPropsHelper'
 
 import Image from "../pb_image/_image";
@@ -33,7 +34,7 @@ export type AvatarProps = {
   name?: string,
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
   status?: "away" | "offline" | "online",
-  } & GlobalProps
+  } & GlobalProps & GlobalEventProps
 
 const firstTwoInitials = (name: string) =>
   name.split(/\s/).map((name) => name[0])
@@ -94,6 +95,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >
