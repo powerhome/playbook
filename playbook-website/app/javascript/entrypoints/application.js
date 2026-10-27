@@ -1,6 +1,6 @@
 /* eslint no-console:0 */
 
-import '../utilities/mountComponent'
+import { mountComponents } from '../utilities/mountComponent'
 import ComponentRegistry from '../utilities/componentRegistry'
 
 import zxcvbn from 'zxcvbn'
@@ -14,7 +14,6 @@ import "@powerhome/playbook-icons/css/pb-icons.css"
 import '../site_styles/main.scss'
 
 import { Website } from 'website/src/app'
-import { Turbo } from "@hotwired/turbo-rails"
 
 // Icons from playbook-icons-react for testing
 import * as icons from "@powerhome/playbook-icons-react"
@@ -36,8 +35,9 @@ Object.entries(icons).forEach(([key, value]) => {
   window.PB_ICONS[iconName] = value
 })
 
-Turbo.session.drive = false
-
 ComponentRegistry.registerComponents({
   Website,
 })
+
+// The import above mounts immediately, before Website is registered.
+mountComponents()
