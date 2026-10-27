@@ -404,6 +404,10 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     elements.forEach((elem) => {
       elem.style.display = "table-row";
       elem.classList.add("is-visible");
+      const elemToggleId = elem.querySelector("[data-advanced-table]")?.id;
+      if (elemToggleId && PbAdvancedTable.expandedRows.has(elemToggleId)) {
+        elem.classList.add("is-expanded");
+      }
       const childRowsAll = this.table.querySelectorAll(
         `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
       );
@@ -446,6 +450,10 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         if (allAncestorsExpanded || checkIfParentIsExpanded()) {
           childRow.style.display = "table-row";
           childRow.classList.add("is-visible");
+          const toggleId = childRow.querySelector("[data-advanced-table]")?.id;
+          if (toggleId && PbAdvancedTable.expandedRows.has(toggleId)) {
+            childRow.classList.add("is-expanded");
+          }
         } else {
           childRow.style.display = "none";
           childRow.classList.remove("is-visible");
@@ -458,7 +466,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     elements.forEach((elem) => {
       elem.style.display = "none";
       elem.classList.remove("is-visible");
-      elem.classList.remove("is-expanded");
+      // Keep `is-expanded` while hidden so re-expanding an ancestor still defers
+      // the group separator to descendants (toggle click clears it when collapsing).
 
       // Remove the row ID from expandedRows when this row is hidden
       if (PbAdvancedTable.expandedRows.has(elem.id)) {
@@ -477,7 +486,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         childRows.forEach((childRow) => {
           childRow.style.display = "none";
           childRow.classList.remove("is-visible");
-          childRow.classList.remove("is-expanded");
         });
       }
     });
