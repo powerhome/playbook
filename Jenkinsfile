@@ -22,5 +22,9 @@ app.build(
     stage('Test') {
       shell "docker compose run --workdir /home/app/src/playbook web ./test.sh"
     }
+
+    stage('Website Test') {
+      shell "docker compose run --workdir /home/app/src/playbook-website web bin/test"
+    }
   }
 }
