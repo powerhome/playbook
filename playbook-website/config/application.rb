@@ -27,12 +27,12 @@ module PlaybookWebsite
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    config.icon_path = if Rails.env.development?
+    config.icon_path = if Rails.env.development? || Rails.env.test?
                          "../node_modules/@powerhome/playbook-icons/icons"
                        else
                          "app/javascript/images/"
                        end
-    config.icon_alias_path = if Rails.env.development?
+    config.icon_alias_path = if Rails.env.development? || Rails.env.test?
                                "../node_modules/@powerhome/playbook-icons/aliases.json"
                              else
                                "app/javascript/aliases.json"

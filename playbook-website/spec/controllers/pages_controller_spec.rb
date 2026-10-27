@@ -14,7 +14,7 @@ RSpec.describe PagesController, type: :controller do
       get :application
       expect(assigns(:kits)).to be_present
       expect(assigns(:dark)).to be_in([true, false])
-      expect(assigns(:type)).to eq("react")
+      expect(assigns(:type)).to eq("rails")
       expect(assigns(:examples)).to be_an(Array)
     end
 

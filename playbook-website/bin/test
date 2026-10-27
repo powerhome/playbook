@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo ">>> Installing dependencies"
+time bundle check || bundle install --quiet
+time yarn install --frozen-lockfile
+
+echo ">>> Testing"
+time bundle exec rspec --format progress spec
