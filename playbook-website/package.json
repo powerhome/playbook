@@ -25,7 +25,6 @@
     "trix": "2.1.19"
   },
   "devDependencies": {
-    "@hotwired/turbo-rails": "^7.3.0",
     "@tiptap/core": "3.0.7",
     "@tiptap/extension-document": "3.0.7",
     "@tiptap/extension-highlight": "3.0.7",
