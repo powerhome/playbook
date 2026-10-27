@@ -13,8 +13,6 @@ gem "turbo-rails", "~> 1.4.0"
 gem "puma", "~> 7.2.0"
 gem "vite_rails"
 gem "vite_ruby", "3.8.0"
-# Make Compatible with Ruby 3.1.0 Upgrade
-gem "psych", "< 4"
 gem "bootsnap", ">= 1.1.0", require: false
 
 # livenessProbe and readinessProbe. See: https://github.com/powerhome/playbook/blob/master/playbook/config/deploy/templates/deployment.yaml.erb
@@ -29,10 +27,7 @@ gem "sentry-ruby"
 gem "sentry-rails"
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: %i[mri mingw x64_mingw]
-  gem "rspec-rails", '3.9.1'
-  gem "diff-lcs", "1.4.4"
+  gem "rspec-rails", "~> 7.1"
   gem "rails-controller-testing"
 end
 
