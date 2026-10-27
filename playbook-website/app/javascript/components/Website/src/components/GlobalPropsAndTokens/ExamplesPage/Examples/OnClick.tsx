@@ -599,7 +599,7 @@ const OnClick = () => {
           <Title size={4} text="Person" />
           <InteractiveExample
               count={personClicks}
-              label="Click"
+              label="Person"
               reset={() => setPersonClicks(0)}
           >
             <Person
