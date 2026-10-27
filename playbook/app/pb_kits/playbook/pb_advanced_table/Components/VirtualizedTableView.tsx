@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState, useEffect, useRef } from "react"
+import React, { useContext, useEffect, useLayoutEffect, useMemo, useState } from "react"
 import classnames from "classnames"
 import { flexRender, Cell, Row } from "@tanstack/react-table"
 import { VirtualItem } from "@tanstack/react-virtual"
@@ -120,6 +120,13 @@ export const VirtualizedTableView = ({
     };
   }, [table, selectableRows, hasAnySubRows]);
 
+  // Memoize against scroll-driven re-renders; only rebuild when the row model changes.
+  const rowModelRows = table.getRowModel().rows
+  const groupSeparatorRowIds = useMemo(
+    () => (groupSeparators ? buildGroupSeparatorRowIds(rowModelRows) : new Set<string>()),
+    [groupSeparators, rowModelRows]
+  )
+
   // Safety check
   if (!virtualizer || !flattenedItems) {
     return (
@@ -145,9 +152,6 @@ export const VirtualizedTableView = ({
 
   // Establish # of Parent Rows (so that Footer count does not include every single row)
   const topLevelRowCount = table.getRowModel().flatRows.filter((row: Row<GenericObject>) => row.depth === 0).length;
-  const groupSeparatorRowIds = groupSeparators
-    ? buildGroupSeparatorRowIds(table.getRowModel().rows)
-    : new Set<string>()
 
   return (
     <>

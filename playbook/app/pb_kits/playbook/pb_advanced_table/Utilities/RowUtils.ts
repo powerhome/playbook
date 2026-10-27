@@ -54,8 +54,10 @@ export const getFontWeight = (rowStyle?: GenericObject) => {
 }
 
 /**
- * One O(n) pass over the current visible row model → Set of row ids that should
- * show a group separator. Prefer this over scanning per row (esp. virtualized).
+ * One O(n) pass over the full visible row model → Set of row ids that should
+ * show a group separator. Call once (and memoize) for the whole table — do not
+ * rebuild per pinned section, or a pinned non-last sibling can look like a
+ * last sibling and invent a second separator.
  *
  * Uses visible order so sort/filter is respected; expanded parents with real
  * subRows defer to their last visible descendant.

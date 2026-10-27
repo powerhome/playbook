@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useMemo } from "react"
 import classnames from "classnames"
 import { flexRender, Row, Cell } from "@tanstack/react-table"
 
@@ -159,13 +159,18 @@ export const RegularTableView = ({
     (obj: Record<string, unknown>) => "columns" in obj
   );
 
-  // Row pinning — pass the section’s precomputed separator ids (visible order)
+  // One set from the full row model so pinning a non-last sibling cannot
+  // invent a second separator just because that section only sees that row.
+  const rowModelRows = table.getRowModel().rows
+  const groupSeparatorRowIds = useMemo(
+    () => (groupSeparators ? buildGroupSeparatorRowIds(rowModelRows) : new Set<string>()),
+    [groupSeparators, rowModelRows]
+  )
+
   function PinnedRow({
-    groupSeparatorRowIds,
     position,
     row,
   }: {
-    groupSeparatorRowIds: Set<string>
     position: 'top' | 'bottom'
     row: Row<any>
   }) {
@@ -212,19 +217,14 @@ export const RegularTableView = ({
     )
   }
 
-  const totalRows = pinnedRows ? table.getCenterRows() : table.getRowModel().rows
+  const totalRows = pinnedRows ? table.getCenterRows() : rowModelRows
   const topRows = pinnedRows ? table.getTopRows() : []
   const bottomRows = pinnedRows ? table.getBottomRows() : []
-  const emptySeparatorIds = new Set<string>()
-  const centerSeparatorIds = groupSeparators ? buildGroupSeparatorRowIds(totalRows) : emptySeparatorIds
-  const topSeparatorIds = groupSeparators ? buildGroupSeparatorRowIds(topRows) : emptySeparatorIds
-  const bottomSeparatorIds = groupSeparators ? buildGroupSeparatorRowIds(bottomRows) : emptySeparatorIds
 
   return (
     <>
       {topRows.map((row: Row<GenericObject>) => (
-        <PinnedRow groupSeparatorRowIds={topSeparatorIds}
-            key={row.id}
+        <PinnedRow key={row.id}
             position="top"
             row={row}
         />
@@ -240,7 +240,7 @@ export const RegularTableView = ({
         // Use functions from RowUtils for consistent cell coloring
         const rowColor = getRowColorClass(row, inlineRowLoading || false);
         const isDataLoading = shouldShowLoadingIndicator(row, inlineRowLoading || false, columnDefinitions[0]?.cellAccessors?.length || 0);
-        const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, centerSeparatorIds);
+        const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -310,8 +310,7 @@ export const RegularTableView = ({
         );
       })}
       {bottomRows.map((row: Row<GenericObject>) => (
-        <PinnedRow groupSeparatorRowIds={bottomSeparatorIds}
-            key={row.id}
+        <PinnedRow key={row.id}
             position="bottom"
             row={row}
         />
