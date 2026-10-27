@@ -1699,6 +1699,139 @@ test("groupSeparators insets January’s last day to the January label", () => {
   expect(day2).toHaveStyle({ "--group-separator-inset": "2.5em" })
 })
 
+test("groupSeparators marks last siblings in pinned nested rows", async () => {
+  const data = [
+    {
+      id: "y1",
+      year: "2021",
+      newEnrollments: "20",
+      scheduledMeetings: "10",
+      children: [
+        {
+          id: "q1",
+          year: "2021",
+          quarter: "Q1",
+          newEnrollments: "5",
+          scheduledMeetings: "2",
+          children: [
+            {
+              id: "jan",
+              year: "2021",
+              quarter: "Q1",
+              month: "January",
+              newEnrollments: "2",
+              scheduledMeetings: "1",
+            },
+            {
+              id: "feb",
+              year: "2021",
+              quarter: "Q1",
+              month: "February",
+              newEnrollments: "3",
+              scheduledMeetings: "1",
+            },
+          ],
+        },
+        {
+          id: "q2",
+          year: "2021",
+          quarter: "Q2",
+          newEnrollments: "6",
+          scheduledMeetings: "3",
+          children: [
+            {
+              id: "apr",
+              year: "2021",
+              quarter: "Q2",
+              month: "April",
+              newEnrollments: "3",
+              scheduledMeetings: "1",
+            },
+            {
+              id: "may",
+              year: "2021",
+              quarter: "Q2",
+              month: "May",
+              newEnrollments: "3",
+              scheduledMeetings: "2",
+            },
+          ],
+        },
+      ],
+    },
+  ]
+
+  const PinnedGroupSeparators = () => {
+    const [pinned, setPinned] = useState({ top: ["y1"] })
+    return (
+      <AdvancedTable
+          columnDefinitions={columnDefinitions}
+          data={{ testid: testId }}
+          expandedControl={{ value: { y1: true, q1: true, q2: true }, onChange: () => {} }}
+          groupSeparators
+          pinnedRows={{ value: pinned, onChange: setPinned }}
+          tableData={data}
+      />
+    )
+  }
+
+  render(<PinnedGroupSeparators />)
+
+  const kit = screen.getByTestId(testId)
+  await waitFor(() => {
+    const separatorRows = [...kit.querySelectorAll("tbody tr.pinned-row.group-separator-row")]
+    const separatorText = separatorRows.map((row) => row.textContent)
+
+    expect(separatorRows.length).toBe(2)
+    expect(separatorText.some((text) => text.includes("February"))).toBe(true)
+    expect(separatorText.some((text) => text.includes("May"))).toBe(true)
+  })
+})
+
+test("groupSeparators keeps separator on expanded last sibling with empty children (inlineRowLoading)", () => {
+  const data = [
+    {
+      year: "2021",
+      newEnrollments: "10",
+      scheduledMeetings: "1",
+      children: [
+        {
+          year: "2021",
+          quarter: "Q1",
+          newEnrollments: "5",
+          scheduledMeetings: "1",
+          children: [],
+        },
+        {
+          year: "2021",
+          quarter: "Q2",
+          newEnrollments: "5",
+          scheduledMeetings: "1",
+          children: [],
+        },
+      ],
+    },
+  ]
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        expandedControl={{ value: { "0": true, "0.1": true }, onChange: () => {} }}
+        groupSeparators
+        inlineRowLoading
+        tableData={data}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const q2Row = [...kit.querySelectorAll("tbody tr")].find((row) =>
+    row.classList.contains("depth-sub-row-1") && row.textContent.includes("Q2")
+  )
+
+  expect(q2Row).toHaveClass("group-separator-row")
+})
+
 test("groupSeparators follows sorted visible sibling order", async () => {
   const data = [
     {

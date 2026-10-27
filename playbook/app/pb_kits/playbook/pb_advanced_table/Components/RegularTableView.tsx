@@ -159,14 +159,24 @@ export const RegularTableView = ({
     (obj: Record<string, unknown>) => "columns" in obj
   );
 
-  // Row pinning
-  function PinnedRow({ row, position }: { row: Row<any>; position: 'top' | 'bottom' }) {
+  // Row pinning — pass the section’s visible list so groupSeparators match sort/filter order
+  function PinnedRow({
+    position,
+    row,
+    visibleRows,
+  }: {
+    position: 'top' | 'bottom'
+    row: Row<any>
+    visibleRows: Row<GenericObject>[]
+  }) {
     const customRowStyle = getRowStyle(rowStyling, row);
     const bottomRowsCount = table.getBottomRows().length;
+    const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, visibleRows);
 
     return (
       <tr
           className={classnames('pinned-row', {
+            'group-separator-row': showGroupSeparator,
             'pinned-row-bottom': position === 'bottom',
           })}
           style={{
@@ -183,6 +193,9 @@ export const RegularTableView = ({
                   : undefined,
             zIndex: '3',
             fontWeight: getFontWeight(customRowStyle),
+            ...(showGroupSeparator && {
+              ["--group-separator-inset" as string]: `${getGroupSeparatorInsetEm(row)}em`,
+            }),
           }}
       >
         <TableCellRenderer
@@ -200,13 +213,16 @@ export const RegularTableView = ({
   }
 
   const totalRows = pinnedRows ? table.getCenterRows() : table.getRowModel().rows
+  const topRows = pinnedRows ? table.getTopRows() : []
+  const bottomRows = pinnedRows ? table.getBottomRows() : []
 
   return (
     <>
-      {pinnedRows && table.getTopRows().map((row: Row<GenericObject>) => (
+      {topRows.map((row: Row<GenericObject>) => (
         <PinnedRow key={row.id}
             position="top"
             row={row}
+            visibleRows={topRows}
         />
       ))}
       {totalRows.map((row: Row<GenericObject>, rowIndex: number) => {
@@ -289,10 +305,11 @@ export const RegularTableView = ({
           </React.Fragment>
         );
       })}
-      {pinnedRows && table.getBottomRows().map((row: Row<GenericObject>) => (
+      {bottomRows.map((row: Row<GenericObject>) => (
         <PinnedRow key={row.id}
             position="bottom"
             row={row}
+            visibleRows={bottomRows}
         />
       ))}
     </>
