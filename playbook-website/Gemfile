@@ -34,7 +34,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "listen"
-  gem "rubocop"
+  gem "rubocop", "~> 1.84.2"
   gem "rubocop-performance"
   gem "web-console"
 end

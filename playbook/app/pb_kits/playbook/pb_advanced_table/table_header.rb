@@ -157,7 +157,7 @@ module Playbook
 
       # Determines if the toggle-all button should be shown in the header based on inline row loading and persist toggle expansion button props
       def show_toggle_all_button?
-        return false unless enable_toggle_expansion == "header" || enable_toggle_expansion == "all"
+        return false unless %w[header all].include?(enable_toggle_expansion)
 
         has_any_sub_rows? || (inline_row_loading && persist_toggle_expansion_button)
       end
