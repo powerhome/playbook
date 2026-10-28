@@ -1814,3 +1814,170 @@ describe("PbDropdown option creation", () => {
     expect(getCreationRow()).toBeNull();
   });
 });
+
+describe("PbDropdown pill reorder", () => {
+  let root;
+  let instance;
+
+  const mountReorder = ({
+    externalDragHandle = false,
+    showPillIndex = true,
+  } = {}) => {
+    root = buildDropdownElement({
+      options: [
+        { id: "year", label: "Year", value: "year" },
+        { id: "territory", label: "Territory", value: "territory" },
+        { id: "branch", label: "Branch", value: "branch" },
+      ],
+    });
+    root.dataset.pbDropdownMultiSelect = "true";
+    root.dataset.pbDropdownEnablePillReorder = "true";
+    root.dataset.pbDropdownShowPillIndex = showPillIndex ? "true" : "false";
+    if (externalDragHandle) root.dataset.pbDropdownexternalDragHandle = "true";
+    root.innerHTML = `
+      <div class="dropdown_wrapper">
+        <input data-dropdown-selected-option name="services[]" style="display: none" />
+        <div class="pb_dropdown_trigger">
+          <div data-dropdown-pills-wrapper></div>
+          <span data-dropdown-trigger-display-multi-select>Choose one</span>
+        </div>
+        <div class="pb_dropdown_container close" data-dropdown-container="true">
+          <div class="pb_list_kit"></div>
+        </div>
+      </div>
+    `;
+    const list = root.querySelector(".pb_list_kit");
+    [
+      { id: "year", label: "Year", value: "year" },
+      { id: "territory", label: "Territory", value: "territory" },
+      { id: "branch", label: "Branch", value: "branch" },
+    ].forEach((option) => {
+      list.appendChild(new PbDropdown(root).buildOptionElement(option));
+    });
+    instance = new PbDropdown(root);
+    instance.connect();
+    instance.setSelectionByOptionIds(["year", "territory", "branch"]);
+  };
+
+  afterEach(() => {
+    instance?.disconnect();
+    document.body.innerHTML = "";
+  });
+
+  test("enable_pill_reorder renders numbered draggable pills", () => {
+    mountReorder();
+    const pills = root.querySelectorAll(".pb_form_pill_kit_icon");
+    expect(pills.length).toBe(3);
+    expect(pills[0]).toHaveTextContent("1. Year");
+    expect(pills[1]).toHaveTextContent("2. Territory");
+    expect(pills[2]).toHaveTextContent("3. Branch");
+    expect(root.querySelectorAll(".pb_draggable_item").length).toBe(3);
+    expect(root.querySelector(".pb_dropdown_external_drag_handle")).toBeNull();
+  });
+
+  test("keyboard reorder updates selection, form values, and reordered event", () => {
+    mountReorder();
+    const reordered = jest.fn();
+    root.addEventListener("pb:dropdown:reordered", reordered);
+    const pills = root.querySelectorAll(".pb_form_pill_kit_icon");
+
+    pills[1].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+
+    expect(Array.from(instance.selectedOptions).map((raw) => JSON.parse(raw).label)).toEqual([
+      "Territory",
+      "Year",
+      "Branch",
+    ]);
+    expect(Array.from(root.querySelectorAll("input[data-generated]")).map((input) => input.value)).toEqual([
+      "territory",
+      "year",
+      "branch",
+    ]);
+    expect(reordered).toHaveBeenCalled();
+    expect(reordered.mock.calls[0][0].detail.map((item) => item.label)).toEqual([
+      "Territory",
+      "Year",
+      "Branch",
+    ]);
+  });
+
+  test("external_drag_handle renders external handles", () => {
+    mountReorder({ externalDragHandle: true });
+    const handles = root.querySelectorAll(".pb_dropdown_external_drag_handle");
+    expect(handles.length).toBe(3);
+    expect(root.querySelectorAll(".pb_form_pill_kit_icon").length).toBe(0);
+    handles.forEach((handle) => {
+      expect(handle.querySelector(".pb_dropdown_pill_grip_icon")).not.toBeNull();
+    });
+  });
+
+  test("grip icon uses the playbook-icons grip-dots-vertical path", () => {
+    mountReorder();
+    const grip = root.querySelector(".pb_dropdown_pill_grip_icon");
+    expect(grip).not.toBeNull();
+    expect(grip).toHaveClass("pb_custom_icon");
+    expect(grip.getAttribute("viewBox")).toBe("0 0 31 25");
+    expect(grip.querySelector("path").getAttribute("d")).toContain("12.9043 6.35547");
+  });
+
+  test("dragging a pill commits order on drop", () => {
+    mountReorder();
+    const reordered = jest.fn();
+    root.addEventListener("pb:dropdown:reordered", reordered);
+
+    const draggableItems = root.querySelectorAll(".pb_draggable_item");
+    draggableItems.forEach((item, index) => {
+      item.getBoundingClientRect = () => ({
+        left: index * 100,
+        right: index * 100 + 100,
+        width: 100,
+        top: 0,
+        bottom: 30,
+        height: 30,
+      });
+    });
+
+    draggableItems[0].dispatchEvent(new MouseEvent("mousedown", {
+      button: 0,
+      clientX: 10,
+      clientY: 10,
+      bubbles: true,
+    }));
+    document.dispatchEvent(new MouseEvent("mousemove", {
+      clientX: 280,
+      clientY: 10,
+      bubbles: true,
+    }));
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).not.toBeNull();
+    expect(draggableItems[2].classList.contains("pb_dropdown_drop_after")).toBe(true);
+
+    document.dispatchEvent(new MouseEvent("mouseup", {
+      clientX: 280,
+      clientY: 10,
+      bubbles: true,
+    }));
+
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).toBeNull();
+    expect(reordered).toHaveBeenCalled();
+    expect(reordered.mock.calls[0][0].detail.map((item) => item.label)).toEqual([
+      "Territory",
+      "Branch",
+      "Year",
+    ]);
+    expect(Array.from(root.querySelectorAll("input[data-generated]")).map((input) => input.value)).toEqual([
+      "territory",
+      "branch",
+      "year",
+    ]);
+  });
+
+  test("removing a pill still works with reorder enabled", () => {
+    mountReorder();
+    root.querySelector(".pb_form_pill_close").click();
+    expect(Array.from(instance.selectedOptions).map((raw) => JSON.parse(raw).label)).toEqual([
+      "Territory",
+      "Branch",
+    ]);
+    expect(root.querySelectorAll(".pb_form_pill_kit_icon")[0]).toHaveTextContent("1. Territory");
+  });
+});
