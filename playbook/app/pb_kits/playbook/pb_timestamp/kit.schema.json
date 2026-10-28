@@ -121,6 +121,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Timestamp } from 'playbook-ui'",

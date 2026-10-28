@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { deprecatedProps, globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import DateTime from '../pb_kit/dateTime';
 
 import Body from '../pb_body/_body'
@@ -18,7 +19,7 @@ type TimeStackedProps = {
   id?: string,
   time?: number | Date,
   timeZone?: string,
-}
+} & GlobalEventProps
 
 const TimeStackedDefault = (props: TimeStackedProps): React.ReactElement => {
   if (props.date) deprecatedProps() //date prop is deprecated, use time instead
@@ -47,6 +48,7 @@ const TimeStackedDefault = (props: TimeStackedProps): React.ReactElement => {
         className={classes}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
     >
       <Body
           className={classnames('pb_time_stacked', 'time-spacing')}
