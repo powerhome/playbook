@@ -1980,4 +1980,91 @@ describe("PbDropdown pill reorder", () => {
     ]);
     expect(root.querySelectorAll(".pb_form_pill_kit_icon")[0]).toHaveTextContent("1. Territory");
   });
+
+  test("mousedown focuses a pill for keyboard reorder", () => {
+    mountReorder();
+    const pills = root.querySelectorAll(".pb_form_pill_kit_icon");
+    const draggableItems = root.querySelectorAll(".pb_draggable_item");
+
+    draggableItems[1].dispatchEvent(new MouseEvent("mousedown", {
+      button: 0,
+      clientX: 110,
+      clientY: 10,
+      bubbles: true,
+    }));
+    document.dispatchEvent(new MouseEvent("mouseup", {
+      clientX: 110,
+      clientY: 10,
+      bubbles: true,
+    }));
+
+    expect(document.activeElement).toBe(pills[1]);
+
+    const reordered = jest.fn();
+    root.addEventListener("pb:dropdown:reordered", reordered);
+    pills[1].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+    expect(reordered).toHaveBeenCalled();
+    expect(reordered.mock.calls[0][0].detail.map((item) => item.label)).toEqual([
+      "Territory",
+      "Year",
+      "Branch",
+    ]);
+  });
+
+  test("touch dragging a pill commits order on drop", () => {
+    mountReorder();
+    const reordered = jest.fn();
+    root.addEventListener("pb:dropdown:reordered", reordered);
+
+    const draggableItems = root.querySelectorAll(".pb_draggable_item");
+    draggableItems.forEach((item, index) => {
+      item.getBoundingClientRect = () => ({
+        left: index * 100,
+        right: index * 100 + 100,
+        width: 100,
+        top: 0,
+        bottom: 30,
+        height: 30,
+      });
+    });
+
+    const touch = (clientX, clientY, identifier = 1) => ({
+      identifier,
+      clientX,
+      clientY,
+      target: draggableItems[0],
+    });
+
+    draggableItems[0].dispatchEvent(new TouchEvent("touchstart", {
+      bubbles: true,
+      cancelable: true,
+      touches: [touch(10, 10)],
+      targetTouches: [touch(10, 10)],
+      changedTouches: [touch(10, 10)],
+    }));
+    document.dispatchEvent(new TouchEvent("touchmove", {
+      bubbles: true,
+      cancelable: true,
+      touches: [touch(280, 10)],
+      targetTouches: [touch(280, 10)],
+      changedTouches: [touch(280, 10)],
+    }));
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).not.toBeNull();
+
+    document.dispatchEvent(new TouchEvent("touchend", {
+      bubbles: true,
+      cancelable: true,
+      touches: [],
+      targetTouches: [],
+      changedTouches: [touch(280, 10)],
+    }));
+
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).toBeNull();
+    expect(reordered).toHaveBeenCalled();
+    expect(reordered.mock.calls[0][0].detail.map((item) => item.label)).toEqual([
+      "Territory",
+      "Branch",
+      "Year",
+    ]);
+  });
 });

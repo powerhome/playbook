@@ -370,6 +370,12 @@ export const bindMousePointerDrag = ({
     event.preventDefault();
     event.stopPropagation();
 
+    // Restore focus after preventDefault so keyboard reorder (ArrowLeft/Right) still works.
+    const pill = itemElement.querySelector<HTMLElement>(
+      '.pb_form_pill_kit, .pb_form_pill_kit_icon',
+    );
+    pill?.focus({ preventScroll: true });
+
     state.active = true;
     state.startX = event.clientX;
     state.startY = event.clientY;

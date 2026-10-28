@@ -2,6 +2,7 @@ const ROW_TOLERANCE = 80;
 const DRAG_THRESHOLD_PX = 5;
 const DRAG_HANDLE_SELECTOR = ".pb_draggable_handle, .pb_dropdown_external_drag_handle";
 const CLOSE_SELECTOR = ".pb_form_pill_close";
+const PILL_FOCUS_SELECTOR = ".pb_form_pill_kit, .pb_form_pill_kit_icon";
 
 let lastPointer = null;
 let pointerTrackingInstalled = false;
@@ -59,8 +60,25 @@ const applyDropLine = (pills, target) => {
   );
 };
 
+const focusPillInItem = (item) => {
+  const pill = item?.querySelector(PILL_FOCUS_SELECTOR);
+  if (pill instanceof HTMLElement) {
+    pill.focus({ preventScroll: true });
+  }
+};
+
+const getClientPoint = (event) => {
+  if (event.touches?.[0]) {
+    return { x: event.touches[0].clientX, y: event.touches[0].clientY };
+  }
+  if (event.changedTouches?.[0]) {
+    return { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+  }
+  return { x: event.clientX, y: event.clientY };
+};
+
 /**
- * Bind pointer-drag reordering for multi-select pills.
+ * Bind pointer-drag reordering for multi-select pills (mouse + touch).
  * @returns {() => void} cleanup
  */
 export const bindPillReorder = ({
@@ -155,18 +173,43 @@ export const bindPillReorder = ({
     if (lastPointer) updatePointer(lastPointer.x, lastPointer.y);
   };
 
-  const handleMouseMove = (event) => {
-    if (!activeItem) return;
+  const shouldIgnorePointerDown = (event) => {
+    const item = event.target.closest(".pb_draggable_item");
+    if (!item || !container.contains(item)) return true;
+    if (event.target.closest(CLOSE_SELECTOR)) return true;
+    if (externalDragHandle && !event.target.closest(DRAG_HANDLE_SELECTOR)) return true;
+    return false;
+  };
+
+  const beginPointerGesture = (item, clientX, clientY) => {
+    // Do not preventDefault here — that would block click-to-focus for keyboard reorder.
+    // stopPropagation still keeps the Dropdown trigger from toggling.
+    activeItem = item;
+    dragId = item.getAttribute("data-pb-drag-id");
+    startX = clientX;
+    startY = clientY;
+    dragging = false;
+    pendingReorder = null;
+    focusPillInItem(item);
+  };
+
+  const movePointerGesture = (clientX, clientY, event) => {
+    if (!activeItem) return false;
 
     if (!dragging) {
-      const deltaX = event.clientX - startX;
-      const deltaY = event.clientY - startY;
-      if (Math.hypot(deltaX, deltaY) < DRAG_THRESHOLD_PX) return;
-      startDrag(activeItem, event.clientX, event.clientY);
+      const deltaX = clientX - startX;
+      const deltaY = clientY - startY;
+      if (Math.hypot(deltaX, deltaY) < DRAG_THRESHOLD_PX) return false;
+      startDrag(activeItem, clientX, clientY);
     }
 
-    updatePointer(event.clientX, event.clientY);
+    updatePointer(clientX, clientY);
     event.preventDefault();
+    return true;
+  };
+
+  const handleMouseMove = (event) => {
+    movePointerGesture(event.clientX, event.clientY, event);
   };
 
   const handleMouseUp = () => {
@@ -177,33 +220,58 @@ export const bindPillReorder = ({
 
   const handleMouseDown = (event) => {
     if (event.button !== 0) return;
+    if (shouldIgnorePointerDown(event)) return;
+
     const item = event.target.closest(".pb_draggable_item");
-    if (!item || !container.contains(item)) return;
-    if (event.target.closest(CLOSE_SELECTOR)) return;
-
-    if (externalDragHandle) {
-      if (!event.target.closest(DRAG_HANDLE_SELECTOR)) return;
-    }
-
-    event.preventDefault();
     event.stopPropagation();
-
-    activeItem = item;
-    dragId = item.getAttribute("data-pb-drag-id");
-    startX = event.clientX;
-    startY = event.clientY;
-    dragging = false;
-    pendingReorder = null;
+    beginPointerGesture(item, event.clientX, event.clientY);
 
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
   };
 
+  const handleTouchMove = (event) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+    movePointerGesture(touch.clientX, touch.clientY, event);
+  };
+
+  const handleTouchEnd = (event) => {
+    document.removeEventListener("touchmove", handleTouchMove);
+    document.removeEventListener("touchend", handleTouchEnd);
+    document.removeEventListener("touchcancel", handleTouchEnd);
+
+    const point = getClientPoint(event);
+    if (dragging) updatePointer(point.x, point.y);
+    endDrag();
+  };
+
+  const handleTouchStart = (event) => {
+    if (shouldIgnorePointerDown(event)) return;
+
+    const touch = event.touches[0];
+    if (!touch) return;
+
+    const item = event.target.closest(".pb_draggable_item");
+    event.stopPropagation();
+    beginPointerGesture(item, touch.clientX, touch.clientY);
+
+    // Non-passive so we can prevent page scroll once the drag threshold is crossed
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
+    document.addEventListener("touchend", handleTouchEnd);
+    document.addEventListener("touchcancel", handleTouchEnd);
+  };
+
   container.addEventListener("mousedown", handleMouseDown);
+  container.addEventListener("touchstart", handleTouchStart, { passive: true });
   cleanups.push(() => {
     container.removeEventListener("mousedown", handleMouseDown);
+    container.removeEventListener("touchstart", handleTouchStart);
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
+    document.removeEventListener("touchmove", handleTouchMove);
+    document.removeEventListener("touchend", handleTouchEnd);
+    document.removeEventListener("touchcancel", handleTouchEnd);
     removeGhost();
   });
 

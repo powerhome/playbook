@@ -74,7 +74,7 @@
       "app/pb_kits/playbook/pb_dropdown/utilities/clickOutsideHelper.tsx": "cd98835a4ea7a899a8eaf1c8fecd0795ceafdb426bc7ccced546f17a32bae332",
       "app/pb_kits/playbook/pb_dropdown/utilities/index.ts": "a065e9b443226fe72a15e970e924f384487aa4f60417c6f1856fdd00fd2c51a7",
       "app/pb_kits/playbook/pb_dropdown/utilities/optionCreation.ts": "a7bf97ad7c7e47f8042f843c7f98b2f21f80b9345be42ddffca74d97558296fa",
-      "app/pb_kits/playbook/pb_dropdown/utilities/pillReorder.js": "fa7760ce57508db36079e0036af5f7a2191380607a8e869a70071c9eb94de5b4",
+      "app/pb_kits/playbook/pb_dropdown/utilities/pillReorder.js": "c32d9e6425a459040ae6d5c440f9438f2a05c4df9cc817aef2d92418542405b5",
       "app/pb_kits/playbook/pb_dropdown/utilities/quickpickDateSync.ts": "5f65638562a266d1eebd9f3af5bc5a259e2259a9aff169c06995f58966533b76",
       "app/pb_kits/playbook/pb_dropdown/utilities/subComponentHelper.tsx": "1dee9f85c0cd2cfda3692d0767488e8834a8c795f912bc0f7ae2bd5c315e3cfd",
       "app/pb_kits/playbook/pb_dropdown/utilities/usePillDropIndicator.ts": "3f583c64881d181b14c357059096e4e868766b504324203ec40411f4f28b0e70",
