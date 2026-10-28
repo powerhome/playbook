@@ -11,6 +11,8 @@ import Contact from '../../../pb_contact/_contact'
 import Container from '../../../pb_container/_container'
 import Currency from '../../../pb_currency/_currency'
 import DashboardValue from '../../../pb_dashboard_value/_dashboard_value'
+import DateTime from '../../../pb_date_time/_date_time'
+import DateTimeStacked from '../../../pb_date_time_stacked/_date_time_stacked'
 import Detail from '../../../pb_detail/_detail'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
@@ -36,6 +38,9 @@ import ProgressStepItem from '../../../pb_progress_step/_progress_step_item'
 import StarRating from '../../../pb_star_rating/_star_rating'
 import StatValue from '../../../pb_stat_value/_stat_value'
 import Timeline from '../../../pb_timeline/_timeline'
+import TimeRangeInline from '../../../pb_time_range_inline/_time_range_inline'
+import TimeStacked from '../../../pb_time_stacked/_time_stacked'
+import Timestamp from '../../../pb_timestamp/_timestamp'
 import Title from '../../../pb_title/_title'
 import TitleCount from '../../../pb_title_count/_title_count'
 import TitleDetail from '../../../pb_title_detail/_title_detail'
@@ -55,6 +60,8 @@ const optedInKits = [
   { Kit: Container, name: 'Container', extraProps: { children: 'Test' } },
   { Kit: Currency, name: 'Currency', extraProps: { amount: '100.00', label: 'Total' } },
   { Kit: DashboardValue, name: 'DashboardValue', extraProps: { statLabel: 'Sales', statValue: { value: 100 } } },
+  { Kit: DateTime, name: 'DateTime', extraProps: { datetime: new Date('2020-12-31T14:24:09'), showDayOfWeek: false } },
+  { Kit: DateTimeStacked, name: 'DateTimeStacked', extraProps: { dark: false, datetime: new Date('2020-12-31T14:24:09') } },
   { Kit: Detail, name: 'Detail', extraProps: { text: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
   { Kit: Highlight, name: 'Highlight', extraProps: { text: 'Test' } },
@@ -70,7 +77,10 @@ const optedInKits = [
   { Kit: Person, name: 'Person', extraProps: { firstName: 'Pat', lastName: 'Example' } },
   { Kit: ProgressStepItem, name: 'ProgressStepItem', extraProps: { children: 'Step', status: 'active' } },
   { Kit: StatValue, name: 'StatValue', extraProps: { unit: 'mg', value: 100 } },
+  { Kit: TimeRangeInline, name: 'TimeRangeInline', extraProps: { endTime: new Date('2012-08-02T17:49:29Z'), startTime: new Date('2012-08-02T15:49:29Z') } },
+  { Kit: TimeStacked, name: 'TimeStacked', extraProps: { time: new Date('2020-12-31T14:24:09'), timeZone: 'America/New_York' } },
   { Kit: Timeline.Item, name: 'TimelineItem', extraProps: { children: 'Event' } },
+  { Kit: Timestamp, name: 'Timestamp', extraProps: { timestamp: new Date('2020-12-31T14:24:09') } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
   { Kit: LabelPill, name: 'LabelPill', extraProps: { label: 'Label', pillValue: '1' } },
   { Kit: Pill, name: 'Pill', extraProps: { text: 'Test' } },
