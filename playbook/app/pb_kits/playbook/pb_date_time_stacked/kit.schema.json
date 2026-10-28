@@ -57,6 +57,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { DateTimeStacked } from 'playbook-ui'",

@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import DateTime from '../pb_kit/dateTime';
 
@@ -22,7 +23,7 @@ type TimeRangeInlineProps = {
   timezone?: boolean,
   startTime: Date,
   endTime: Date,
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const timezoneString = (dateValue: Date) => {
   return `${DateTime.toTimeZone(dateValue)}`
@@ -91,6 +92,7 @@ const TimeRangeInline = (props: TimeRangeInlineProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classnames('pb_time_range_inline_kit_' + alignment, globalProps(props), className)}
         id={id}
     >
