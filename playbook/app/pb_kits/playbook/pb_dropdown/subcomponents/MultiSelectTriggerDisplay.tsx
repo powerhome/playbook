@@ -199,8 +199,12 @@ type DraggablePillsStripProps = {
   showPillIndex: boolean;
 };
 
-const buildValueOrderKey = (value: GenericObject[], getItemId: (item: GenericObject) => string): string => (
-  value.map((item) => getItemId(item)).join("|")
+const buildSelectedPillsKey = (value: GenericObject[], getItemId: (item: GenericObject) => string): string => (
+  value.map((item) => `${getItemId(item)}:${item.label ?? ""}`).join("|")
+);
+
+const formPillPropsKey = (formPillProps?: GenericObject): string => (
+  JSON.stringify(formPillProps ?? {})
 );
 
 const DraggablePillsStrip = React.memo(function DraggablePillsStrip({
@@ -262,10 +266,12 @@ const DraggablePillsStrip = React.memo(function DraggablePillsStrip({
     </DraggableProvider>
   );
 }, (prevProps, nextProps) => (
-  prevProps.externalDragHandle === nextProps.externalDragHandle
+  prevProps.dark === nextProps.dark
+  && prevProps.externalDragHandle === nextProps.externalDragHandle
   && prevProps.showPillIndex === nextProps.showPillIndex
-  && buildValueOrderKey(prevProps.selected, prevProps.getItemId)
-    === buildValueOrderKey(nextProps.selected, nextProps.getItemId)
+  && formPillPropsKey(prevProps.formPillProps) === formPillPropsKey(nextProps.formPillProps)
+  && buildSelectedPillsKey(prevProps.selected, prevProps.getItemId)
+    === buildSelectedPillsKey(nextProps.selected, nextProps.getItemId)
 ));
 
 const MultiSelectTriggerDisplay = ({

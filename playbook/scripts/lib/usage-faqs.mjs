@@ -50,7 +50,7 @@ export const KIT_USAGE_FAQS = {
   dropdown: [{
     id: 'dropdown.pill-reorder', platforms: ['react', 'rails'],
     questions: ['Can multi-select Dropdown pills be reordered?', 'How do I enable draggable pills on Dropdown?', 'Does pill reorder preserve form submission order?'],
-    answer: 'Opt in with enablePillReorder (Rails: enable_pill_reorder) on multi-select or multi-select + autocomplete. showPillIndex / show_pill_index numbers the pills. By default the whole pill is draggable with an in-pill grip; pillDragHandle / pill_drag_handle requires an external grip. Focused pills reorder with ArrowLeft / ArrowRight. React onChange and Rails hidden inputs keep the new order; Rails also emits pb:dropdown:reordered (and pb:dropdown:selected) with the reordered array. Single-select is unaffected; reordering is off by default.',
+    answer: 'Opt in with enablePillReorder (Rails: enable_pill_reorder) on multi-select or multi-select + autocomplete. showPillIndex / show_pill_index numbers the pills. By default the whole pill is draggable with an in-pill grip; externalDragHandle / external_drag_handle requires an external grip. Focused pills reorder with ArrowLeft / ArrowRight. React onChange and Rails hidden inputs keep the new order; Rails also emits pb:dropdown:reordered (and pb:dropdown:selected) with the reordered array. Single-select is unaffected; reordering is off by default.',
   }, {
     id: 'dropdown.option-creation', platforms: ['react', 'rails'],
     questions: ['How do I create new Dropdown options?'],

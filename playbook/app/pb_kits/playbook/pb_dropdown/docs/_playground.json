@@ -152,7 +152,7 @@
         "separators",
         "formPillProps",
         "enablePillReorder",
-        "pillDragHandle",
+        "externalDragHandle",
         "showPillIndex",
         "activeStyle",
         "dark",
@@ -364,7 +364,7 @@
     "enablePillReorder": {
       "requires": "multiSelect"
     },
-    "pillDragHandle": {
+    "externalDragHandle": {
       "requires": "enablePillReorder"
     },
     "showPillIndex": {

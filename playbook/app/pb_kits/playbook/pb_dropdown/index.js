@@ -253,7 +253,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.enablePillReorder = this.isMultiSelect
       && this.element.dataset.pbDropdownEnablePillReorder === "true";
     this.externalDragHandle = this.enablePillReorder
-      && this.element.dataset.pbDropdownexternalDragHandle === "true";
+      && this.element.dataset.pbDropdownExternalDragHandle === "true";
     this.showPillIndex = this.isMultiSelect
       && this.element.dataset.pbDropdownShowPillIndex === "true";
     this.closeOnClick = this.element.dataset.pbDropdownCloseOnClick || "any";

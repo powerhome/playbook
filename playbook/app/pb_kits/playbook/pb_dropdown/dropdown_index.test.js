@@ -1833,7 +1833,7 @@ describe("PbDropdown pill reorder", () => {
     root.dataset.pbDropdownMultiSelect = "true";
     root.dataset.pbDropdownEnablePillReorder = "true";
     root.dataset.pbDropdownShowPillIndex = showPillIndex ? "true" : "false";
-    if (externalDragHandle) root.dataset.pbDropdownexternalDragHandle = "true";
+    if (externalDragHandle) root.dataset.pbDropdownExternalDragHandle = "true";
     root.innerHTML = `
       <div class="dropdown_wrapper">
         <input data-dropdown-selected-option name="services[]" style="display: none" />
