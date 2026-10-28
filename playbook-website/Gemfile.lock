@@ -111,6 +111,7 @@ GEM
     erubi (1.13.1)
     faker (3.4.2)
       i18n (>= 1.8.11, < 2)
+    ffi (1.17.0)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
@@ -376,7 +377,7 @@ DEPENDENCIES
   will_paginate
 
 RUBY VERSION
-   ruby 3.3.11p205
+  ruby 3.4.10
 
 BUNDLED WITH
-   4.0.22
+  4.0.22

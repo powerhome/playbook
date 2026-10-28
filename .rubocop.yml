@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 3.3
+  TargetRubyVersion: 3.4
 
 Gemspec/RequiredRubyVersion:
   Enabled: false
