@@ -7,12 +7,13 @@ ruby "3.4.10"
 
 gem "playbook_ui", path: "../playbook"
 
-gem "mysql2", "0.5.6"
+gem "mysql2", "~> 0.5.7"
+gem "ostruct"
 gem "rails", "~> 7.2.3.2"
 gem "puma", "~> 7.2.0"
 gem "vite_rails"
 gem "vite_ruby", "3.8.0"
-gem "bootsnap", ">= 1.1.0", require: false
+gem "bootsnap", "~> 1.26.1", require: false
 
 # livenessProbe and readinessProbe. See: https://github.com/powerhome/playbook/blob/master/playbook/config/deploy/templates/deployment.yaml.erb
 gem "health_check"
