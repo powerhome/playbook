@@ -86,13 +86,15 @@ export const isGroupSeparatorRow = (
 ): boolean => groupSeparatorRowIds.has(row.id)
 
 /**
- * Left inset (em) for the group separator — aligned with the immediate
- * parent group’s CustomCell label padding (`depth * 1.25em`), so the line
- * starts at that group’s label/trail and does not run through parent gutters.
+ * `--group-separator-inset` (SCSS paints the stroke). Year-level → 0 / full-bleed.
+ * Nested → this row’s deepest collapsible-trail (⌞ with the closed parent’s guide).
  */
 export const getGroupSeparatorInsetEm = (row: Row<GenericObject>): number => {
-  const closedGroupDepth = Math.max(0, row.depth - 1)
-  return closedGroupDepth * 1.25
+  const parentDepth = Math.max(0, row.depth - 1)
+  if (parentDepth <= 0) return 0
+  const trailIndex = row.depth
+  const additionalOffset = trailIndex > 1 ? (trailIndex - 1) * 0.25 : 0
+  return trailIndex * 1.0 + additionalOffset
 }
 
 /**

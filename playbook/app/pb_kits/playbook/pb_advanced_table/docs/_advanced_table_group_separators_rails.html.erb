@@ -30,4 +30,39 @@
     }
 ] %>
 
-<%= pb_rails("advanced_table", props: { id: "group_separators", table_data: @table_data, column_definitions: column_definitions, group_separators: true }) %>
+<%= pb_rails("advanced_table", props: { id: "group_separators", table_data: @table_data_group_separators, column_definitions: column_definitions, group_separators: true }) %>
+
+<%# Mirror React default expand: 2022 → Q1 → January; 2023 year open (quarters collapsed) %>
+<script>
+  (function () {
+    function clickToggle(root, depth, label) {
+      var row = Array.prototype.find.call(
+        root.querySelectorAll('tr[data-row-depth="' + depth + '"]'),
+        function (tr) {
+          if (tr.classList.contains("is-expanded")) return false;
+          var text = (tr.querySelector("td") && tr.querySelector("td").textContent) || "";
+          return text.indexOf(label) !== -1;
+        }
+      );
+      var toggle = row && row.querySelector("[data-advanced-table]");
+      if (toggle) toggle.click();
+    }
+
+    function expandGroupSeparatorsExample() {
+      var root = document.getElementById("group_separators");
+      if (!root) return;
+
+      clickToggle(root, 0, "2022");
+      clickToggle(root, 1, "Q1");
+      clickToggle(root, 2, "January");
+      clickToggle(root, 0, "2023");
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", expandGroupSeparatorsExample);
+    } else {
+      expandGroupSeparatorsExample();
+    }
+    setTimeout(expandGroupSeparatorsExample, 0);
+  })();
+</script>

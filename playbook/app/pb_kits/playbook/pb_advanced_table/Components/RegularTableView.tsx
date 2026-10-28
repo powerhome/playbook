@@ -177,6 +177,7 @@ export const RegularTableView = ({
     const customRowStyle = getRowStyle(rowStyling, row);
     const bottomRowsCount = table.getBottomRows().length;
     const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
+    const groupSeparatorInsetEm = showGroupSeparator ? getGroupSeparatorInsetEm(row) : undefined
 
     return (
       <tr
@@ -199,7 +200,7 @@ export const RegularTableView = ({
             zIndex: '3',
             fontWeight: getFontWeight(customRowStyle),
             ...(showGroupSeparator && {
-              ["--group-separator-inset" as string]: `${getGroupSeparatorInsetEm(row)}em`,
+              ["--group-separator-inset" as string]: `${groupSeparatorInsetEm}em`,
             }),
           }}
       >
@@ -241,6 +242,7 @@ export const RegularTableView = ({
         const rowColor = getRowColorClass(row, inlineRowLoading || false);
         const isDataLoading = shouldShowLoadingIndicator(row, inlineRowLoading || false, columnDefinitions[0]?.cellAccessors?.length || 0);
         const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
+        const groupSeparatorInsetEm = showGroupSeparator ? getGroupSeparatorInsetEm(row) : undefined
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -268,7 +270,7 @@ export const RegularTableView = ({
                   color: customRowStyle?.fontColor,
                   fontWeight: getFontWeight(customRowStyle),
                   ...(showGroupSeparator && {
-                    ["--group-separator-inset" as string]: `${getGroupSeparatorInsetEm(row)}em`,
+                    ["--group-separator-inset" as string]: `${groupSeparatorInsetEm}em`,
                   }),
                 }}
             >

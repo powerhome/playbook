@@ -189,6 +189,7 @@ export const VirtualizedTableView = ({
           // Use the utility function to get consistent row color
           const rowColor = getRowColorClass(row, inlineRowLoading || false);
           const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
+          const groupSeparatorInsetEm = showGroupSeparator ? getGroupSeparatorInsetEm(row) : undefined
 
           return (
             <tr
@@ -212,7 +213,7 @@ export const VirtualizedTableView = ({
                 style={{
                   ...virtualItemStyle,
                   ...(showGroupSeparator && {
-                    ["--group-separator-inset" as string]: `${getGroupSeparatorInsetEm(row)}em`,
+                    ["--group-separator-inset" as string]: `${groupSeparatorInsetEm}em`,
                   }),
                 }}
             >

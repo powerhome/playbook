@@ -309,10 +309,15 @@ module Playbook
         accessors&.length || 0
       end
 
-      # Left inset aligned with CustomCell label padding for the closed parent group.
+      # Mirrors React `getGroupSeparatorInsetEm`: year-level → 0; nested → this
+      # row’s deepest collapsible-trail (⌞ with the closed parent’s child guide).
       def group_separator_inset_em(depth)
         parent_depth = [depth.to_i - 1, 0].max
-        parent_depth * 1.25
+        return 0 if parent_depth <= 0
+
+        trail_index = depth.to_i
+        additional_offset = trail_index > 1 ? (trail_index - 1) * 0.25 : 0
+        trail_index * 1.0 + additional_offset
       end
 
       # Used when a pinned entry is a nested row rendered as its own subtree root
