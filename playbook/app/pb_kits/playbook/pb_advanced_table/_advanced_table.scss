@@ -16,6 +16,7 @@
   // Base vertical border color variable setup
   --column-border-color: #{$border_light};
   --group-separator-color: #{$input_border_default};
+  --group-separator-row-border-color: #{$border_light};
 
   // Define color tokens once
   $border_color_options: (
@@ -525,19 +526,22 @@
     border-bottom-color: $border_light !important;
   }
 
-  // 2px group separator on last sibling of each nested group. Default
-  // border-bottom stays (stacked). Hierarchy uses --group-separator-inset
-  // (0 = year-level full-bleed). Rails: .is-expanded defers to the leaf.
+  // 2px group separator on last sibling of each nested group. It replaces the
+  // default border-bottom: the border goes transparent and the stroke paints
+  // over its spot, with a 1px default line underneath for any part left of
+  // --group-separator-inset (0 = year-level full-bleed). Rails: .is-expanded
+  // defers to the leaf.
   tr.group-separator-row:not(.is-expanded) {
     > td,
     > .pb_table_td {
-      background-image: linear-gradient(
-        var(--group-separator-color),
-        var(--group-separator-color)
-      );
-      background-position: 0 100%;
+      border-bottom-color: transparent !important;
+      background-image:
+        linear-gradient(var(--group-separator-color), var(--group-separator-color)),
+        linear-gradient(var(--group-separator-row-border-color), var(--group-separator-row-border-color));
+      background-origin: border-box;
+      background-position: 0 100%, 0 100%;
       background-repeat: no-repeat;
-      background-size: 100% 2px;
+      background-size: 100% 2px, 100% 1px;
       // Table hover sets `transition: all` on cells, which slides the stroke in
       // from the top when a row becomes a separator. Keep only the hover border fade.
       transition-property: border-color !important;
@@ -547,13 +551,14 @@
     > .pb_table_td:first-child:not(.checkbox-cell),
     > td.checkbox-cell + td,
     > td.checkbox-cell + .pb_table_td {
-      background-position: var(--group-separator-inset, 0em) 100%;
-      background-size: calc(100% - var(--group-separator-inset, 0em)) 2px;
+      background-position: var(--group-separator-inset, 0em) 100%, 0 100%;
+      background-size: calc(100% - var(--group-separator-inset, 0em)) 2px, 100% 1px;
 
       // Trails left of the inset belong to groups that stay open, so they run
-      // through; trails at or past it stop on top of the stroke (0 or 2px).
+      // through; trails at or past it stop on top of the stroke, which rises
+      // 1px above the (now transparent) border (0 or 1px).
       .collapsible-trail {
-        bottom: clamp(0px, calc((var(--collapsible-trail-left, 0em) - var(--group-separator-inset, 0em)) * 1000 + 2px), 2px);
+        bottom: clamp(0px, calc((var(--collapsible-trail-left, 0em) - var(--group-separator-inset, 0em)) * 1000 + 1px), 1px);
       }
     }
   }
@@ -824,6 +829,7 @@
     // Override default border color for dark mode
     --column-border-color: #{$border_dark};
     --group-separator-color: #{$input_border_default_dark};
+    --group-separator-row-border-color: #{$border_dark};
 
     // Dark mode default border colors for trails and horizontal borders
     .collapsible-trail {

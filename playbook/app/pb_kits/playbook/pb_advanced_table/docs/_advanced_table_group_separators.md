@@ -1,4 +1,4 @@
-`groupSeparators` (default `false`) draws a higher-contrast `2px` stroke (`$input_border_default`) on the last visible row of each nested child group, stacked on the default row border.
+`groupSeparators` (default `false`) draws a higher-contrast `2px` stroke (`$input_border_default`) on the last visible row of each nested child group, replacing the default row border.
 
 - When one row closes several groups at once, a single stroke insets to the outermost group it closes (its collapsible-trail); closing a year is full-bleed left
 - Expanded parents defer the separator to their last visible descendant
