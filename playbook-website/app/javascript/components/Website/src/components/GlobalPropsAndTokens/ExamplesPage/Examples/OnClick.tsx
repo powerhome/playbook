@@ -10,6 +10,12 @@ import {
   Container,
   Currency,
   DashboardValue,
+  Date as FormattedDate,
+  DateRangeInline,
+  DateRangeStacked,
+  DateStacked,
+  DateYearStacked,
+  WeekdayStacked,
   DateTime,
   DateTimeStacked,
   Detail,
@@ -101,6 +107,12 @@ const OnClick = () => {
     const [containerClicks, setContainerClicks] = useState(0);
     const [currencyClicks, setCurrencyClicks] = useState(0);
     const [dashboardValueClicks, setDashboardValueClicks] = useState(0);
+    const [dateClicks, setDateClicks] = useState(0);
+    const [dateRangeInlineClicks, setDateRangeInlineClicks] = useState(0);
+    const [dateRangeStackedClicks, setDateRangeStackedClicks] = useState(0);
+    const [dateStackedClicks, setDateStackedClicks] = useState(0);
+    const [dateYearStackedClicks, setDateYearStackedClicks] = useState(0);
+    const [weekdayStackedClicks, setWeekdayStackedClicks] = useState(0);
     const [dateTimeClicks, setDateTimeClicks] = useState(0);
     const [dateTimeStackedClicks, setDateTimeStackedClicks] = useState(0);
     const [detailClicks, setDetailClicks] = useState(0);
@@ -311,6 +323,98 @@ const OnClick = () => {
                 statLabel="Click this Dashboard Value"
                 statValue={{ unit: "USD", value: "98.2" }}
             />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date" />
+          <InteractiveExample
+              count={dateClicks}
+              label="Date"
+              reset={() => setDateClicks(0)}
+          >
+            <FormattedDate
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateClicks((prev: number) => prev + 1)}
+                value={demoDateTime}
+            />
+            <Body text="Click the above Date example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Range Inline" />
+          <InteractiveExample
+              count={dateRangeInlineClicks}
+              label="Date Range Inline"
+              reset={() => setDateRangeInlineClicks(0)}
+          >
+            <DateRangeInline
+                endDate={demoRangeEnd}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateRangeInlineClicks((prev: number) => prev + 1)}
+                startDate={demoRangeStart}
+            />
+            <Body text="Click the above Date Range Inline example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Range Stacked" />
+          <InteractiveExample
+              count={dateRangeStackedClicks}
+              label="Date Range Stacked"
+              reset={() => setDateRangeStackedClicks(0)}
+          >
+            <DateRangeStacked
+                endDate={demoRangeEnd}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateRangeStackedClicks((prev: number) => prev + 1)}
+                startDate={demoRangeStart}
+            />
+            <Body text="Click the above Date Range Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Stacked" />
+          <InteractiveExample
+              count={dateStackedClicks}
+              label="Date Stacked"
+              reset={() => setDateStackedClicks(0)}
+          >
+            <DateStacked
+                date={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateStackedClicks((prev: number) => prev + 1)}
+            />
+            <Body text="Click the above Date Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Year Stacked" />
+          <InteractiveExample
+              count={dateYearStackedClicks}
+              label="Date Year Stacked"
+              reset={() => setDateYearStackedClicks(0)}
+          >
+            <DateYearStacked
+                date={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateYearStackedClicks((prev: number) => prev + 1)}
+            />
+            <Body text="Click the above Date Year Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Weekday Stacked" />
+          <InteractiveExample
+              count={weekdayStackedClicks}
+              label="Weekday Stacked"
+              reset={() => setWeekdayStackedClicks(0)}
+          >
+            <WeekdayStacked
+                date={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setWeekdayStackedClicks((prev: number) => prev + 1)}
+            />
+            <Body text="Click the above Weekday Stacked example" />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -1106,6 +1210,60 @@ const OnClick = () => {
               text={`<DashboardValue onClick={() => alert("clicked")} cursor="pointer" statLabel="Sales" statValue={{ value: 100 }} />`}
             />,
             "Attached once to the root Dashboard Value element.",
+          ],
+          [
+            "Date",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-react"
+              text={`<FormattedDate value={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date element for styled and unstyled variants.",
+          ],
+          [
+            "Date Range Inline",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-range-inline-react"
+              text={`<DateRangeInline startDate={startDate} endDate={endDate} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date Range Inline element.",
+          ],
+          [
+            "Date Range Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-range-stacked-react"
+              text={`<DateRangeStacked startDate={startDate} endDate={endDate} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date Range Stacked element.",
+          ],
+          [
+            "Date Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-stacked-react"
+              text={`<DateStacked date={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date Stacked element for both bold and default variants.",
+          ],
+          [
+            "Date Year Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-year-stacked-react"
+              text={`<DateYearStacked date={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date Year Stacked element.",
+          ],
+          [
+            "Weekday Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-weekday-stacked-react"
+              text={`<WeekdayStacked date={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Weekday Stacked element.",
           ],
           [
             "Date Time",
