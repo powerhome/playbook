@@ -1,0 +1,51 @@
+<%
+  options = [
+    { label: 'Year', value: 'year', id: 'year' },
+    { label: 'Territory', value: 'territory', id: 'territory' },
+    { label: 'Branch', value: 'branch', id: 'branch' },
+    { label: 'Product', value: 'product', id: 'product' },
+  ]
+%>
+
+<%= pb_rails("body", props: { text: "Select services, then drag the pills to reorder them.", margin_bottom: "xs" }) %>
+
+<%= pb_rails("dropdown", props: {
+  id: "dropdown-draggable-pills-example",
+  default_value: [options[0], options[1], options[2]],
+  enable_pill_reorder: true,
+  show_pill_index: true,
+  multi_select: true,
+  label: "Services",
+  name: :services,
+  options: options,
+  placeholder: "Add services...",
+}) %>
+
+<%= pb_rails("body", props: {
+  id: "dropdown-draggable-order",
+  color: "lighter",
+  margin_top: "xs",
+  text: "Current order: Year -> Territory -> Branch",
+}) %>
+
+<script>
+  (() => {
+    const dropdownId = "dropdown-draggable-pills-example";
+    const orderElement = document.getElementById("dropdown-draggable-order");
+
+    const updateOrderText = (detail) => {
+      if (!orderElement || !Array.isArray(detail)) return;
+      orderElement.textContent = `Current order: ${detail.map((item) => item.label).join(" -> ")}`;
+    };
+
+    document.addEventListener("pb:dropdown:reordered", (event) => {
+      if (event.target.id !== dropdownId) return;
+      updateOrderText(event.detail);
+    });
+
+    document.addEventListener("pb:dropdown:selected", (event) => {
+      if (event.target.id !== dropdownId) return;
+      updateOrderText(event.detail);
+    });
+  })();
+</script>

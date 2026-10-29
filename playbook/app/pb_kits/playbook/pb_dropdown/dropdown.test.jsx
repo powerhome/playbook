@@ -2582,3 +2582,197 @@ describe('autocomplete selection replacement', () => {
     expect(onSelect).not.toHaveBeenCalled();
   });
 });
+
+describe("enablePillReorder", () => {
+  test("false does not render drag handles or draggable items", () => {
+    render(
+      <Dropdown
+          data={{ testid: testId }}
+          defaultValue={[options[0], options[1]]}
+          enablePillReorder={false}
+          multiSelect
+          options={options}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelector(".pb_dropdown_external_drag_handle")).not.toBeInTheDocument()
+    expect(kit.querySelector(".pb_draggable_item")).not.toBeInTheDocument()
+  })
+
+  test("renders in-pill grip icons and numbered pills", () => {
+    render(
+      <Dropdown
+          data={{ testid: testId }}
+          defaultValue={[options[0], options[1], options[2]]}
+          enablePillReorder
+          multiSelect
+          options={options}
+          showPillIndex
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const pills = kit.querySelectorAll(".pb_form_pill_kit_icon.pb_form_pill_primary")
+
+    expect(kit.querySelector(".pb_dropdown_external_drag_handle")).not.toBeInTheDocument()
+    expect(kit.querySelectorAll(".pb_form_pill_kit_icon .pb_form_pill_icon").length).toBe(3)
+    expect(pills.length).toBe(3)
+    expect(pills[0]).toHaveTextContent("1. United States")
+    expect(pills[1]).toHaveTextContent("2. Canada")
+    expect(pills[2]).toHaveTextContent("3. Pakistan")
+  })
+
+  test("keyboard reorder moves pill position", () => {
+    const handleChange = jest.fn()
+
+    render(
+      <Dropdown
+          data={{ testid: testId }}
+          enablePillReorder
+          multiSelect
+          onChange={handleChange}
+          options={options}
+          showPillIndex
+          value={[options[0], options[1], options[2]]}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const pills = kit.querySelectorAll(".pb_form_pill_kit_icon.pb_form_pill_primary")
+
+    pills[1].focus()
+    fireEvent.keyDown(pills[1], { key: "ArrowLeft" })
+
+    expect(handleChange).toHaveBeenCalled()
+    const reorderedValue = handleChange.mock.calls[0][0].target.value
+    expect(reorderedValue[0].label).toBe("Canada")
+    expect(reorderedValue[1].label).toBe("United States")
+  })
+
+  test("remove still works when enablePillReorder is true", () => {
+    const handleChange = jest.fn()
+
+    render(
+      <Dropdown
+          data={{ testid: testId }}
+          enablePillReorder
+          multiSelect
+          onChange={handleChange}
+          options={options}
+          value={[options[0], options[1]]}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const removeButton = kit.querySelector(".pb_form_pill_close")
+
+    fireEvent.click(removeButton)
+
+    expect(handleChange).toHaveBeenCalled()
+    expect(handleChange.mock.calls[0][0].target.value.length).toBe(1)
+  })
+
+  test("externalDragHandle true renders external grip handles", () => {
+    render(
+      <Dropdown
+          data={{ testid: testId }}
+          enablePillReorder
+          externalDragHandle
+          multiSelect
+          options={options}
+          value={[options[0], options[1]]}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelectorAll(".pb_dropdown_external_drag_handle").length).toBe(2)
+    expect(kit.querySelectorAll(".pb_form_pill_kit_icon .pb_form_pill_icon").length).toBe(0)
+  })
+
+  test("dragging a pill shows a ghost and drop line, then commits on drop", () => {
+    const handleChange = jest.fn()
+    const originalElementFromPoint = document.elementFromPoint
+
+    render(
+      <Dropdown
+          data={{ testid: testId }}
+          enablePillReorder
+          multiSelect
+          onChange={handleChange}
+          options={options}
+          value={[options[0], options[1], options[2]]}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const draggableItems = kit.querySelectorAll(".pb_draggable_item")
+    draggableItems.forEach((item, index) => {
+      item.getBoundingClientRect = () => ({
+        left: index * 100,
+        right: index * 100 + 100,
+        width: 100,
+        top: 0,
+        bottom: 30,
+        height: 30,
+      })
+    })
+    document.elementFromPoint = (x) => (
+      draggableItems[Math.min(Math.floor(x / 100), draggableItems.length - 1)] || null
+    )
+
+    fireEvent.mouseDown(draggableItems[0], { button: 0, clientX: 10, clientY: 10 })
+    fireEvent.mouseMove(document, { clientX: 30, clientY: 10 })
+    fireEvent.mouseMove(document, { clientX: 280, clientY: 10 })
+
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).toBeInTheDocument()
+    expect(draggableItems[2]).toHaveClass("pb_dropdown_drop_after")
+
+    fireEvent.mouseUp(document, { clientX: 280, clientY: 10 })
+
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).not.toBeInTheDocument()
+    expect(handleChange).toHaveBeenCalled()
+    expect(handleChange.mock.calls[0][0].target.value.map((item) => item.label)).toEqual([
+      "Canada",
+      "Pakistan",
+      "United States",
+    ])
+
+    document.elementFromPoint = originalElementFromPoint
+  })
+
+  test("single-select is unaffected by enablePillReorder", () => {
+    render(
+      <Dropdown
+          data={{ testid: testId }}
+          defaultValue={options[0]}
+          enablePillReorder
+          options={options}
+          showPillIndex
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelector(".pb_draggable_item")).not.toBeInTheDocument()
+    expect(kit.querySelector(".pb_form_pill_kit")).not.toBeInTheDocument()
+  })
+
+  test("works with multiSelect and autocomplete", () => {
+    render(
+      <Dropdown
+          autocomplete
+          data={{ testid: testId }}
+          enablePillReorder
+          multiSelect
+          options={options}
+          showPillIndex
+          value={[options[0], options[1]]}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelector(".dropdown_input")).toBeInTheDocument()
+    expect(kit.querySelectorAll(".pb_draggable_item").length).toBe(2)
+    expect(kit.querySelectorAll(".pb_form_pill_kit_icon")[0]).toHaveTextContent("1. United States")
+  })
+})

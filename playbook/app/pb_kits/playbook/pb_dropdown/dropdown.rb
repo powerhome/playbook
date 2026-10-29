@@ -77,6 +77,12 @@ module Playbook
                                      default: true
       prop :options_event_type, type: Playbook::Props::String,
                                 default: ""
+      prop :enable_pill_reorder, type: Playbook::Props::Boolean,
+                                 default: false
+      prop :external_drag_handle, type: Playbook::Props::Boolean,
+                                  default: false
+      prop :show_pill_index, type: Playbook::Props::Boolean,
+                             default: false
 
       def data
         Hash(prop(:data)).merge(
@@ -102,7 +108,10 @@ module Playbook
           pb_dropdown_options_by_context: options_by_context.present? ? options_by_context.to_json : nil,
           pb_dropdown_context_selector: context_selector.presence,
           pb_dropdown_clear_on_context_change: clear_on_context_change,
-          options_event_type: options_event_type.presence
+          options_event_type: options_event_type.presence,
+          pb_dropdown_enable_pill_reorder: multi_select && enable_pill_reorder ? true : nil,
+          pb_dropdown_external_drag_handle: multi_select && enable_pill_reorder && external_drag_handle ? true : nil,
+          pb_dropdown_show_pill_index: multi_select && show_pill_index ? true : nil
         ).compact
       end
 

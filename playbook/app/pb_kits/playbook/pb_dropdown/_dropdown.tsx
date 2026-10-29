@@ -126,6 +126,8 @@ type DropdownProps = {
     defaultValue?: GenericObject;
     error?: string;
     enableFormSupport?: boolean;
+    enablePillReorder?: boolean;
+    externalDragHandle?: boolean;
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string;
     isClosed?: boolean;
@@ -138,6 +140,7 @@ type DropdownProps = {
     options?: GenericObject;
     placeholder?: string;
     separators?: boolean;
+    showPillIndex?: boolean;
     variant?: "default" | "subtle" | "quickpick";
     rangeEndsToday?: boolean;
     controlsStartId?: string;
@@ -184,6 +187,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         disabled = false,
         error: errorProp,
         enableFormSupport = false,
+        enablePillReorder = false,
+        externalDragHandle = false,
         htmlOptions = {},
         id,
         isClosed = true,
@@ -196,6 +201,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         onSelect,
         options,
         placeholder,
+        showPillIndex = false,
         rangeEndsToday = false,
         controlsStartId,
         controlsEndId,
@@ -206,6 +212,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         required = false,
         validationMessage = "Please fill out this field."
     } = props;
+
+    const isPillReorderEnabled = Boolean(enablePillReorder && multiSelect);
 
     const creationEnabled = allowOptionCreation && variant !== "quickpick";
     const autocomplete = autocompleteProp || creationEnabled;
@@ -837,6 +845,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     disabled,
                     error,
                     errorId,
+                    enablePillReorder: isPillReorderEnabled,
+                    externalDragHandle,
                     filterItem,
                     filteredOptions,
                     focusedOptionIndex,
@@ -865,6 +875,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     setIsDropDownClosed,
                     setIsInputFocused,
                     setSelected,
+                    showPillIndex,
                     toggleDropdown
                 }}
             >

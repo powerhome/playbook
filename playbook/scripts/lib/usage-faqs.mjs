@@ -48,6 +48,10 @@ export const KIT_USAGE_FAQS = {
     contractPaths: ['form.rails.builder.methods'], props: ['blankSelection'],
   }],
   dropdown: [{
+    id: 'dropdown.pill-reorder', platforms: ['react', 'rails'],
+    questions: ['Can multi-select Dropdown pills be reordered?', 'How do I enable draggable pills on Dropdown?', 'Does pill reorder preserve form submission order?'],
+    answer: 'Opt in with enablePillReorder (Rails: enable_pill_reorder) on multi-select or multi-select + autocomplete. showPillIndex / show_pill_index numbers the pills. By default the whole pill is draggable with an in-pill grip; externalDragHandle / external_drag_handle requires an external grip. Focused pills reorder with ArrowLeft / ArrowRight. React onChange and Rails hidden inputs keep the new order; Rails also emits pb:dropdown:reordered (and pb:dropdown:selected) with the reordered array. Single-select is unaffected; reordering is off by default.',
+  }, {
     id: 'dropdown.option-creation', platforms: ['react', 'rails'],
     questions: ['How do I create new Dropdown options?'],
     answer: 'Enable allowOptionCreation (Rails: allow_option_creation). The default trigger enables autocomplete. Custom Rails subcomponents must supply an autocomplete trigger or search bar. Creation supports single and multiple selections, including async, and is ignored for quickpick. A selectable Create row yields { id: text, label: text, value: text, __isNew__: true } through normal React selection callbacks, Rails pb:dropdown:selected events, and native form submission. Text is trimmed and blank or case-insensitive existing/selected labels, values and IDs are rejected. Exact ID or value matches keep the existing option selectable even if its label does not contain the query. Pending async searches and errors suppress creation. Creation only selects local text; the application owns persistence.',

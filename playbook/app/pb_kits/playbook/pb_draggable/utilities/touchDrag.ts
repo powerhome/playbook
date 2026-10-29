@@ -370,6 +370,16 @@ export const bindMousePointerDrag = ({
     event.preventDefault();
     event.stopPropagation();
 
+    // Dropdown: restore pill focus after preventDefault so ArrowLeft/Right work.
+    // Typeahead: leave focus on the search input — focusing the pill blurs it and
+    // react-select closes the menu / clears the query.
+    const pill = itemElement.querySelector<HTMLElement>(
+      '.pb_form_pill_kit, .pb_form_pill_kit_icon',
+    );
+    if (pill && !itemElement.closest('.pb_typeahead_kit')) {
+      pill.focus({ preventScroll: true });
+    }
+
     state.active = true;
     state.startX = event.clientX;
     state.startY = event.clientY;
