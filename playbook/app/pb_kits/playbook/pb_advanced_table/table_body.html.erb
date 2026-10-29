@@ -4,7 +4,7 @@
     <%= pb_content_tag(:tbody, class: "pinned-rows-tbody") do %>
       <% next_index = 0 %>
       <% object.pinned_top_root_rows.each do |root_info| %>
-        <% row_output, next_index = object.render_row_and_children(root_info[:row], object.column_definitions, root_info[:depth], root_info[:depth] > 0, root_info[:ancestor_ids] || [], root_info[:ancestor_ids]&.first, immediate_parent_row_id: object.row_id_for(root_info[:parent_row]), is_pinned_row: true, pinned_index: next_index, pinned_position: "top", is_last_sibling: object.last_sibling_of_parent?(root_info[:row], root_info[:parent_row]), initial_table_data_attributes: root_info[:depth].to_i > 0 ? object.pinned_root_initial_data_attributes(root_info) : nil) %>
+        <% row_output, next_index = object.render_row_and_children(root_info[:row], object.column_definitions, root_info[:depth], root_info[:depth] > 0, root_info[:ancestor_ids] || [], root_info[:ancestor_ids]&.first, immediate_parent_row_id: object.row_id_for(root_info[:parent_row]), is_pinned_row: true, pinned_index: next_index, pinned_position: "top", group_closes_from_depth: root_info[:group_closes_from_depth], initial_table_data_attributes: root_info[:depth].to_i > 0 ? object.pinned_root_initial_data_attributes(root_info) : nil) %>
         <%= row_output %>
       <% end %>
     <% end %>
@@ -20,7 +20,7 @@
       <% next_index = 0 %>
       <% bottom_total = object.pinned_bottom_row_count %>
       <% object.pinned_bottom_root_rows.each do |root_info| %>
-        <% row_output, next_index = object.render_row_and_children(root_info[:row], object.column_definitions, root_info[:depth], root_info[:depth] > 0, root_info[:ancestor_ids] || [], root_info[:ancestor_ids]&.first, immediate_parent_row_id: object.row_id_for(root_info[:parent_row]), is_pinned_row: true, pinned_index: next_index, pinned_position: "bottom", pinned_bottom_total: bottom_total, is_last_sibling: object.last_sibling_of_parent?(root_info[:row], root_info[:parent_row]), initial_table_data_attributes: root_info[:depth].to_i > 0 ? object.pinned_root_initial_data_attributes(root_info) : nil) %>
+        <% row_output, next_index = object.render_row_and_children(root_info[:row], object.column_definitions, root_info[:depth], root_info[:depth] > 0, root_info[:ancestor_ids] || [], root_info[:ancestor_ids]&.first, immediate_parent_row_id: object.row_id_for(root_info[:parent_row]), is_pinned_row: true, pinned_index: next_index, pinned_position: "bottom", pinned_bottom_total: bottom_total, group_closes_from_depth: root_info[:group_closes_from_depth], initial_table_data_attributes: root_info[:depth].to_i > 0 ? object.pinned_root_initial_data_attributes(root_info) : nil) %>
         <%= row_output %>
       <% end %>
     <% end %>

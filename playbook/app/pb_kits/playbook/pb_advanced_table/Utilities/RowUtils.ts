@@ -53,48 +53,33 @@ export const getFontWeight = (rowStyle?: GenericObject) => {
   if (rowStyle?.fontWeight === "regular") return 400
 }
 
+// Matches the `left` of the nth collapsible-trail (see CollapsibleTrail.tsx).
+const getCollapsibleTrailLeftEm = (trailIndex: number): number =>
+  trailIndex * 1.0 + (trailIndex > 1 ? (trailIndex - 1) * 0.25 : 0)
+
 /**
- * One O(n) pass over the full visible row model → Set of row ids that should
- * show a group separator. Call once (and memoize) for the whole table — do not
- * rebuild per pinned section, or a pinned non-last sibling can look like a
- * last sibling and invent a second separator.
+ * One O(n) pass over the full visible row model → Map of row id to its
+ * `--group-separator-inset` (em). Call once (and memoize) for the whole table —
+ * do not rebuild per pinned section, or a pinned non-last sibling can look like
+ * a last sibling and invent a second separator.
  *
- * Uses visible order so sort/filter is respected; expanded parents with real
- * subRows defer to their last visible descendant.
+ * A row closes every group between its depth and the next visible row's depth
+ * (so expanded parents defer to their last visible descendant, and sort/filter
+ * is respected). One stroke is drawn, inset to the outermost closed group:
+ * year-level → 0 / full-bleed, otherwise that group's collapsible-trail.
  */
-export const buildGroupSeparatorRowIds = (
+export const buildGroupSeparatorInsets = (
   visibleRows: Row<GenericObject>[]
-): Set<string> => {
-  const lastSiblingByKey = new Map<string, Row<GenericObject>>()
+): Map<string, number> => {
+  const insets = new Map<string, number>()
 
-  for (const row of visibleRows) {
-    if (row.depth === 0 || !row.getParentRow()) continue
-    lastSiblingByKey.set(`${row.depth}:${row.parentId}`, row)
-  }
-
-  const ids = new Set<string>()
-  for (const row of lastSiblingByKey.values()) {
-    if (row.getIsExpanded() && row.subRows.length > 0) continue
-    ids.add(row.id)
-  }
-  return ids
-}
-
-export const isGroupSeparatorRow = (
-  row: Row<GenericObject>,
-  groupSeparatorRowIds: Set<string>
-): boolean => groupSeparatorRowIds.has(row.id)
-
-/**
- * `--group-separator-inset` (SCSS paints the stroke). Year-level → 0 / full-bleed.
- * Nested → this row’s deepest collapsible-trail (⌞ with the closed parent’s guide).
- */
-export const getGroupSeparatorInsetEm = (row: Row<GenericObject>): number => {
-  const parentDepth = Math.max(0, row.depth - 1)
-  if (parentDepth <= 0) return 0
-  const trailIndex = row.depth
-  const additionalOffset = trailIndex > 1 ? (trailIndex - 1) * 0.25 : 0
-  return trailIndex * 1.0 + additionalOffset
+  visibleRows.forEach((row, index) => {
+    if (row.depth === 0) return
+    const nextDepth = visibleRows[index + 1]?.depth ?? 0
+    if (nextDepth >= row.depth) return
+    insets.set(row.id, nextDepth === 0 ? 0 : getCollapsibleTrailLeftEm(nextDepth + 1))
+  })
+  return insets
 }
 
 /**

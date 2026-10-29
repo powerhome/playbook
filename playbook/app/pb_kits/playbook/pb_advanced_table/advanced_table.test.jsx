@@ -1635,7 +1635,7 @@ test("groupSeparators defers separator to last descendant when last sibling is e
   expect(februaryRow).toHaveClass("group-separator-row")
 })
 
-test("groupSeparators insets January’s last day to the January label", () => {
+test("groupSeparators insets each closer to the outermost group it closes", () => {
   const data = [
     {
       year: "2022",
@@ -1671,6 +1671,24 @@ test("groupSeparators insets January’s last day to the January label", () => {
             },
           ],
         },
+        {
+          year: "2022",
+          quarter: "Q2",
+          newEnrollments: "1",
+          scheduledMeetings: "1",
+          children: [
+            {
+              year: "2022",
+              quarter: "Q2",
+              month: "June",
+              newEnrollments: "1",
+              scheduledMeetings: "1",
+              children: [
+                { year: "2022", quarter: "Q2", month: "June", day: "5", newEnrollments: "1", scheduledMeetings: "1" },
+              ],
+            },
+          ],
+        },
       ],
     },
   ]
@@ -1680,7 +1698,7 @@ test("groupSeparators insets January’s last day to the January label", () => {
         columnDefinitions={columnDefinitions}
         data={{ testid: testId }}
         expandedControl={{
-          value: { "0": true, "0.0": true, "0.0.0": true, "0.0.1": true },
+          value: { "0": true, "0.0": true, "0.0.0": true, "0.0.1": true, "0.1": true, "0.1.0": true },
           onChange: () => {},
         }}
         groupSeparators
@@ -1689,14 +1707,18 @@ test("groupSeparators insets January’s last day to the January label", () => {
   )
 
   const kit = screen.getByTestId(testId)
-  const day25 = [...kit.querySelectorAll("tbody tr")].find((row) => row.textContent.includes("25"))
-  const day2 = [...kit.querySelectorAll("tbody tr")].find((row) =>
-    row.textContent.includes("2") && !row.textContent.includes("25") && row.classList.contains("depth-sub-row-3")
+  const dayRow = (day) => [...kit.querySelectorAll("tbody tr.depth-sub-row-3")].find((row) =>
+    row.querySelector("td")?.textContent.trim() === day
   )
 
-  // Both close their month → deepest trail on depth-3 row = 3.5em
-  expect(day25).toHaveStyle({ "--group-separator-inset": "3.5em" })
-  expect(day2).toHaveStyle({ "--group-separator-inset": "3.5em" })
+  // One stroke per row, inset to the outermost group it closes
+  expect(dayRow("15")).not.toHaveClass("group-separator-row")
+  // Closes January → January's trail
+  expect(dayRow("25")).toHaveStyle({ "--group-separator-inset": "3.5em" })
+  // Closes May + Q1 → Q1's trail
+  expect(dayRow("2")).toHaveStyle({ "--group-separator-inset": "2.25em" })
+  // Closes June + Q2 + 2022 → full-bleed
+  expect(dayRow("5")).toHaveStyle({ "--group-separator-inset": "0em" })
 })
 
 test("groupSeparators insets Q1 closer to the Q1 label, not the year gutter", () => {

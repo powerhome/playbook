@@ -6,7 +6,7 @@ import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
-import { buildGroupSeparatorRowIds, getFontWeight, getGroupSeparatorInsetEm, getRowColorClass, getRowStyle, isGroupSeparatorRow, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
+import { buildGroupSeparatorInsets, getFontWeight, getRowColorClass, getRowStyle, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -159,11 +159,11 @@ export const RegularTableView = ({
     (obj: Record<string, unknown>) => "columns" in obj
   );
 
-  // One set from the full row model so pinning a non-last sibling cannot
+  // One map from the full row model so pinning a non-last sibling cannot
   // invent a second separator just because that section only sees that row.
   const rowModelRows = table.getRowModel().rows
-  const groupSeparatorRowIds = useMemo(
-    () => (groupSeparators ? buildGroupSeparatorRowIds(rowModelRows) : new Set<string>()),
+  const groupSeparatorInsets = useMemo(
+    () => (groupSeparators ? buildGroupSeparatorInsets(rowModelRows) : new Map<string, number>()),
     [groupSeparators, rowModelRows]
   )
 
@@ -176,8 +176,8 @@ export const RegularTableView = ({
   }) {
     const customRowStyle = getRowStyle(rowStyling, row);
     const bottomRowsCount = table.getBottomRows().length;
-    const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
-    const groupSeparatorInsetEm = showGroupSeparator ? getGroupSeparatorInsetEm(row) : undefined
+    const groupSeparatorInsetEm = groupSeparatorInsets.get(row.id)
+    const showGroupSeparator = groupSeparatorInsetEm !== undefined
 
     return (
       <tr
@@ -241,8 +241,8 @@ export const RegularTableView = ({
         // Use functions from RowUtils for consistent cell coloring
         const rowColor = getRowColorClass(row, inlineRowLoading || false);
         const isDataLoading = shouldShowLoadingIndicator(row, inlineRowLoading || false, columnDefinitions[0]?.cellAccessors?.length || 0);
-        const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
-        const groupSeparatorInsetEm = showGroupSeparator ? getGroupSeparatorInsetEm(row) : undefined
+        const groupSeparatorInsetEm = groupSeparatorInsets.get(row.id)
+        const showGroupSeparator = groupSeparatorInsetEm !== undefined
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>

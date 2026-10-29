@@ -48,7 +48,7 @@ module Playbook
         end.compact
       end
 
-      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil, additional_classes: "", table_data_attributes: {}, immediate_parent_row_id: nil, is_pinned_row: false, pinned_index: nil, skip_pinned_ids: nil, initial_table_data_attributes: nil, pinned_position: "top", pinned_bottom_total: nil, is_last_sibling: false)
+      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil, additional_classes: "", table_data_attributes: {}, immediate_parent_row_id: nil, is_pinned_row: false, pinned_index: nil, skip_pinned_ids: nil, initial_table_data_attributes: nil, pinned_position: "top", pinned_bottom_total: nil, group_closes_from_depth: nil)
         if skip_pinned_ids && row_id_for(row) && skip_pinned_ids.include?(row_id_for(row).to_s)
           return is_pinned_row ? [ActiveSupport::SafeBuffer.new, pinned_index] : ActiveSupport::SafeBuffer.new
         end
@@ -96,9 +96,10 @@ module Playbook
         children = row_children_for(row)
         # Match React: every last sibling gets a separator. When the row is expanded,
         # JS adds `is-expanded` and CSS hides this row’s separator so the leaf keeps it.
-        show_group_separator = group_separators && current_depth.positive? && is_last_sibling
+        # group_closes_from_depth is the depth of the outermost group this row closes (nil unless a last sibling).
+        show_group_separator = group_separators && current_depth.positive? && !group_closes_from_depth.nil?
         row_classname = [additional_classes, ("group-separator-row" if show_group_separator)].compact.join(" ").strip
-        separator_inset_style = show_group_separator ? "--group-separator-inset: #{group_separator_inset_em(current_depth)}em;" : nil
+        separator_inset_style = show_group_separator ? "--group-separator-inset: #{group_separator_inset_em(group_closes_from_depth)}em;" : nil
 
         # Additional class and data attributes needed for toggle logic
         row_props = { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: row_classname, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading, full_width_cell: full_width_cell }
@@ -133,6 +134,7 @@ module Playbook
           row[:children].each do |child_row|
             is_first_child = row[:children].first == child_row
             is_last_child = row[:children].last == child_row
+            child_closes_from_depth = is_last_child ? (group_closes_from_depth || current_depth) : nil
             immediate_parent_id = row.object_id
             data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
 
@@ -143,7 +145,7 @@ module Playbook
               advanced_table_content: data_content,
             }
 
-            child_opts = { additional_classes: "toggle-content", table_data_attributes: child_data_attributes, immediate_parent_row_id: row[:id], is_last_sibling: is_last_child }
+            child_opts = { additional_classes: "toggle-content", table_data_attributes: child_data_attributes, immediate_parent_row_id: row[:id], group_closes_from_depth: child_closes_from_depth }
             child_opts[:is_pinned_row] = is_pinned_row
             child_opts[:pinned_index] = next_pinned_index if is_pinned_row
             child_opts[:pinned_position] = pinned_position if is_pinned_row
@@ -222,12 +224,15 @@ module Playbook
         row_children_for(row)&.each { |child| collect_row_and_descendant_ids(child, set) }
       end
 
-      def find_row_by_id(data, id, depth: 0, ancestor_ids: [], parent_row: nil)
+      def find_row_by_id(data, id, depth: 0, ancestor_ids: [], parent_row: nil, parent_closes_from_depth: nil)
         id_str = id.to_s
-        Array(data).each do |row|
-          return { row: row, depth: depth, ancestor_ids: ancestor_ids, parent_row: parent_row } if row_id_for(row).to_s == id_str
+        rows = Array(data)
+        rows.each do |row|
+          # Same chain as render_row_and_children so a pinned nested root gets the right separator inset.
+          closes_from_depth = parent_row && row.equal?(rows.last) ? (parent_closes_from_depth || depth - 1) : nil
+          return { row: row, depth: depth, ancestor_ids: ancestor_ids, parent_row: parent_row, group_closes_from_depth: closes_from_depth } if row_id_for(row).to_s == id_str
 
-          found = find_row_by_id(row_children_for(row), id_str, depth: depth + 1, ancestor_ids: ancestor_ids + [row.object_id], parent_row: row)
+          found = find_row_by_id(row_children_for(row), id_str, depth: depth + 1, ancestor_ids: ancestor_ids + [row.object_id], parent_row: row, parent_closes_from_depth: closes_from_depth)
           return found if found
         end
         nil
@@ -309,26 +314,14 @@ module Playbook
         accessors&.length || 0
       end
 
-      # Mirrors React `getGroupSeparatorInsetEm`: year-level → 0; nested → this
-      # row’s deepest collapsible-trail (⌞ with the closed parent’s child guide).
-      def group_separator_inset_em(depth)
-        parent_depth = [depth.to_i - 1, 0].max
-        return 0 if parent_depth <= 0
+      # Mirrors React `buildGroupSeparatorInsets`: inset to the outermost closed
+      # group — year-level → 0 / full-bleed; nested → that group's collapsible-trail.
+      def group_separator_inset_em(closes_from_depth)
+        return 0 if closes_from_depth.to_i.zero?
 
-        trail_index = depth.to_i
+        trail_index = closes_from_depth.to_i + 1
         additional_offset = trail_index > 1 ? (trail_index - 1) * 0.25 : 0
         trail_index * 1.0 + additional_offset
-      end
-
-      # Used when a pinned entry is a nested row rendered as its own subtree root
-      # (is_last_sibling is otherwise only set while walking children).
-      def last_sibling_of_parent?(row, parent_row)
-        return false if parent_row.nil?
-
-        siblings = row_children_for(parent_row)
-        return false if siblings.blank?
-
-        row_id_for(siblings.last).to_s == row_id_for(row).to_s
       end
 
     private

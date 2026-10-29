@@ -537,22 +537,42 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
       end
     end
 
-    describe "#last_sibling_of_parent?" do
-      let(:instance) { subject.new(table_id: "t1") }
-      let(:parent) do
-        {
-          id: "y1",
-          children: [
-            { id: "q1" },
-            { id: "q2" },
-          ],
-        }
+    describe "group separator closes-from depth" do
+      let(:table_data) do
+        [
+          {
+            id: "2022",
+            children: [
+              {
+                id: "q1",
+                children: [
+                  { id: "jan", children: [{ id: "15" }, { id: "25" }] },
+                  { id: "may", children: [{ id: "2" }] },
+                ],
+              },
+              { id: "q2", children: [{ id: "june", children: [{ id: "5" }] }] },
+            ],
+          },
+        ]
+      end
+      let(:instance) { subject.new(table_data: table_data) }
+
+      def closes_from(id)
+        instance.find_row_by_id(table_data, id)[:group_closes_from_depth]
       end
 
-      it "is true for the last child under parent", :aggregate_failures do
-        expect(instance.last_sibling_of_parent?(parent[:children].last, parent)).to be true
-        expect(instance.last_sibling_of_parent?(parent[:children].first, parent)).to be false
-        expect(instance.last_sibling_of_parent?(parent[:children].last, nil)).to be false
+      it "is the depth of the outermost group a last sibling closes", :aggregate_failures do
+        expect(closes_from("2022")).to be_nil
+        expect(closes_from("15")).to be_nil
+        expect(closes_from("25")).to eq 2
+        expect(closes_from("2")).to eq 1
+        expect(closes_from("5")).to eq 0
+      end
+
+      it "insets to the outermost closed group's trail, full-bleed for year-level", :aggregate_failures do
+        expect(instance.group_separator_inset_em(2)).to eq 3.5
+        expect(instance.group_separator_inset_em(1)).to eq 2.25
+        expect(instance.group_separator_inset_em(0)).to eq 0
       end
     end
   end

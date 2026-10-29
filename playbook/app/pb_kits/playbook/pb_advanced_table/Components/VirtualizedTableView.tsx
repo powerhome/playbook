@@ -7,7 +7,7 @@ import { GenericObject } from "../../types"
 
 import { isChrome } from "../Utilities/BrowserCheck"
 import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
-import { buildGroupSeparatorRowIds, getGroupSeparatorInsetEm, getRowColorClass, isGroupSeparatorRow } from "../Utilities/RowUtils"
+import { buildGroupSeparatorInsets, getRowColorClass } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -122,8 +122,8 @@ export const VirtualizedTableView = ({
 
   // Memoize against scroll-driven re-renders; only rebuild when the row model changes.
   const rowModelRows = table.getRowModel().rows
-  const groupSeparatorRowIds = useMemo(
-    () => (groupSeparators ? buildGroupSeparatorRowIds(rowModelRows) : new Set<string>()),
+  const groupSeparatorInsets = useMemo(
+    () => (groupSeparators ? buildGroupSeparatorInsets(rowModelRows) : new Map<string, number>()),
     [groupSeparators, rowModelRows]
   )
 
@@ -188,8 +188,8 @@ export const VirtualizedTableView = ({
 
           // Use the utility function to get consistent row color
           const rowColor = getRowColorClass(row, inlineRowLoading || false);
-          const showGroupSeparator = groupSeparators && isGroupSeparatorRow(row, groupSeparatorRowIds);
-          const groupSeparatorInsetEm = showGroupSeparator ? getGroupSeparatorInsetEm(row) : undefined
+          const groupSeparatorInsetEm = groupSeparatorInsets.get(row.id)
+          const showGroupSeparator = groupSeparatorInsetEm !== undefined
 
           return (
             <tr
