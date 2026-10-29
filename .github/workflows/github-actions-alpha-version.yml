@@ -30,7 +30,7 @@ jobs:
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
       - uses: actions/setup-node@v7
         with:
-          node-version: 22.15.1
+          node-version: 22.23.4
           package-manager-cache: false
       - name: Use npm 11.6.2
         run: npm i -g npm@11.6.2
@@ -118,7 +118,7 @@ jobs:
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
       - uses: actions/setup-node@v7
         with:
-          node-version: 22.15.1
+          node-version: 22.23.4
           package-manager-cache: false
       - name: Use npm 11.6.2
         run: npm i -g npm@11.6.2
