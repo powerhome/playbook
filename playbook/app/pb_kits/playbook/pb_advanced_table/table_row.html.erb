@@ -22,7 +22,7 @@
                     <% (1..depth).each do |i| %>
                         <% additional_offset = i > 1 ? (i - 1) * 0.25 : 0 %>
                         <% left_offset = i * 1.0 + additional_offset %>
-                        <div class="collapsible-trail" style="left: <%= left_offset %>em"></div>
+                        <div class="collapsible-trail" style="left: <%= left_offset %>em; --collapsible-trail-left: <%= left_offset %>em;"></div>
                     <% end %>
                 <% end %>
 

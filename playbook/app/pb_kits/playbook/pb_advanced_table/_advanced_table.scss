@@ -550,8 +550,10 @@
       background-position: var(--group-separator-inset, 0em) 100%;
       background-size: calc(100% - var(--group-separator-inset, 0em)) 2px;
 
+      // Trails left of the inset belong to groups that stay open, so they run
+      // through; trails at or past it stop on top of the stroke (0 or 2px).
       .collapsible-trail {
-        bottom: 2px;
+        bottom: clamp(0px, calc((var(--collapsible-trail-left, 0em) - var(--group-separator-inset, 0em)) * 1000 + 2px), 2px);
       }
     }
   }

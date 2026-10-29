@@ -4,6 +4,8 @@ import React from "react"
 const CollapsibleTrail = ({ leftOffset }: { leftOffset: number }) => {
   const style: { [key: string]: string | number } = {
     left: `${leftOffset}em`,
+    // Read by groupSeparators to decide which trails stop at the stroke
+    "--collapsible-trail-left": `${leftOffset}em`,
   }
 
   return (
