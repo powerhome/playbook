@@ -538,6 +538,9 @@
       background-position: 0 100%;
       background-repeat: no-repeat;
       background-size: 100% 2px;
+      // Table hover sets `transition: all` on cells, which slides the stroke in
+      // from the top when a row becomes a separator. Keep only the hover border fade.
+      transition-property: border-color !important;
     }
 
     > td:first-child:not(.checkbox-cell),
