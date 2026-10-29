@@ -12,13 +12,6 @@
 	cursor: pointer;
 	transition: all $transition_short ease;
 
-	@media (hover:hover) {
-		&:hover * {
-			transition: transform $transition_short ease;
-			transform: translateY(-2px);
-		}
-	}
-
 	* {
 		cursor: pointer;
 	}

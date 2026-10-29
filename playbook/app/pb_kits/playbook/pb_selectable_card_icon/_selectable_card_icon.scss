@@ -16,15 +16,6 @@
     left: 0;
   }
 
-  .buffer > .pb_selectable_icon_kit {
-    @media (hover:hover) {
-      &:hover * {
-            transition: transform $transition_short ease;
-            transform: translateY(-2px);
-          }
-      }
-  }
-
 
 	input[type="checkbox"],
 	input[type="radio"] {
