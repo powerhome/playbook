@@ -30,7 +30,7 @@
     "@tiptap/extension-highlight": "3.0.7",
     "@tiptap/extension-horizontal-rule": "3.0.7",
     "@tiptap/extension-link": "3.0.7",
-    "@tiptap/extension-paragraph": "3.0.7",
+    "@tiptap/extension-paragraph": "3.32.0",
     "@tiptap/extension-text": "3.0.7",
     "@tiptap/pm": "3.0.7",
     "@tiptap/react": "3.0.7",

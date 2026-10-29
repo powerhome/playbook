@@ -2615,10 +2615,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-ordered-list/-/extension-ordered-list-3.0.7.tgz#8cd570dd7e42953cf0d6f31b166616ae103eb621"
   integrity sha512-F/cbG0vt1cjkoJ4A65E6vpZQizZwnE4gJHKAw3ymDdCoZKYaO4OV1UTo98W/jgryORy/HLO12+hogsRvgRvK9Q==
 
-"@tiptap/extension-paragraph@3.0.7", "@tiptap/extension-paragraph@^3.0.7":
-  version "3.0.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-3.0.7.tgz#ddf56f59be5181310c2dafe50e1d746703ffca22"
-  integrity sha512-1lp+/CbYmm1ZnR6CNlreUIWCNQk0cBzLVgS5R8SKfVyYaXo11qQq6Yq8URLhpuge4yXkPGMhClwCLzJ9D9R+eg==
+"@tiptap/extension-paragraph@3.32.0", "@tiptap/extension-paragraph@^3.0.7":
+  version "3.32.0"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-3.32.0.tgz#b5d0802493497c7d5ca3267216c45861221817c6"
+  integrity sha512-afKLMc7fWMkkar9H5FilizStSbhFzUoCzdwwdZf6DDsn3LUt8tJlFHACK78cAyx/TzMJBo0N8/8T1u9bL+N67Q==
 
 "@tiptap/extension-strike@3.0.7", "@tiptap/extension-strike@^3.0.7":
   version "3.0.7"
