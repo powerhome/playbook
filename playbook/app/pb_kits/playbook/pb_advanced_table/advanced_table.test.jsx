@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "../utilities/test-utils"
 
 import { AdvancedTable } from "playbook-ui/advanced-table"
 import { Pill, colors } from "playbook-ui"
+import { buildGroupSeparatorInsets } from "./Utilities/RowUtils"
 
 global.ResizeObserver = class {
   observe() {}
@@ -1975,3 +1976,14 @@ test("groupSeparators follows sorted visible sibling order", async () => {
   })
 })
 
+
+test("groupSeparators insets follow the trail formula past 3 levels", () => {
+  const rowsAt = (depths) => depths.map((depth, index) => ({ id: `${index}`, depth }))
+
+  // Depth-5 leaf closing only its depth-4 parent → 5th trail (5 + 4 * 0.25)
+  expect(buildGroupSeparatorInsets(rowsAt([0, 1, 2, 3, 4, 5, 4])).get("5")).toBe(6)
+  // Depth-5 leaf closing up to the depth-1 group → 2nd trail
+  expect(buildGroupSeparatorInsets(rowsAt([0, 1, 2, 3, 4, 5, 1])).get("5")).toBe(2.25)
+  // Depth-5 leaf closing the year → full-bleed
+  expect(buildGroupSeparatorInsets(rowsAt([0, 1, 2, 3, 4, 5, 0])).get("5")).toBe(0)
+})

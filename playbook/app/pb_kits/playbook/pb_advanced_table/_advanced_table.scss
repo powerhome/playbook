@@ -538,8 +538,11 @@
       background-image:
         linear-gradient(var(--group-separator-color), var(--group-separator-color)),
         linear-gradient(var(--group-separator-row-border-color), var(--group-separator-row-border-color));
-      background-origin: border-box;
-      background-position: 0 100%, 0 100%;
+      // Padding-box origin so the inset matches the trails' `left` (a first-cell
+      // border-left would otherwise shift the stroke 1px past its trail); the
+      // +1px pushes both layers down over the 1px bottom border.
+      background-origin: padding-box;
+      background-position: 0 calc(100% + 1px), 0 calc(100% + 1px);
       background-repeat: no-repeat;
       background-size: 100% 2px, 100% 1px;
       // Table hover sets `transition: all` on cells, which slides the stroke in
@@ -551,7 +554,7 @@
     > .pb_table_td:first-child:not(.checkbox-cell),
     > td.checkbox-cell + td,
     > td.checkbox-cell + .pb_table_td {
-      background-position: var(--group-separator-inset, 0em) 100%, 0 100%;
+      background-position: var(--group-separator-inset, 0em) calc(100% + 1px), 0 calc(100% + 1px);
       background-size: calc(100% - var(--group-separator-inset, 0em)) 2px, 100% 1px;
 
       // Trails left of the inset belong to groups that stay open, so they run
