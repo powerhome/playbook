@@ -1,9 +1,13 @@
-// Rails TipTap: dynamic import() from esm.sh (no import map — avoids 2nd map ignored by Firefox vs Vite/host).
+// Rails TipTap: bundled into playbook-rails.js; TipTap loads as lazy chunks only when an editor mounts.
 // Idempotent: data-pb-rte-initialized / data-pb-rte-pending.
+import PbEnhancedElement from "../pb_enhanced_element";
 
-// Keep in sync with TipTap versions used by Playbook docs / Nitro RTE alignment (TipTap v3).
-const RTE_TIPTAP_VERSION = "3.0.7";
-const RTE_TIPTAP_ESM = (pkg) => `https://esm.sh/${pkg}@${RTE_TIPTAP_VERSION}`;
+// TipTap versions are pinned in playbook/package.json (TipTap v3).
+const RTE_OPTIONAL_IMPORTS = {
+  "@tiptap/extension-underline": () => import("@tiptap/extension-underline"),
+  "@tiptap/extension-text-align": () => import("@tiptap/extension-text-align"),
+  "@tiptap/extension-image": () => import("@tiptap/extension-image"),
+};
 const RTE_EXTENSIONS = new Set(["underline", "text_align", "horizontal_rule", "image"]);
 
 function parseExtensions(value) {
@@ -27,7 +31,7 @@ function extensionActionFromHref(href) {
   return null;
 }
 
-async function loadOptionalExtensions(extensionNames, importer = (pkg) => import(RTE_TIPTAP_ESM(pkg))) {
+async function loadOptionalExtensions(extensionNames, importer = (pkg) => RTE_OPTIONAL_IMPORTS[pkg]()) {
   const extensions = [];
 
   if (extensionNames.includes("underline")) {
@@ -210,8 +214,8 @@ async function initPlaybookRichTextEditorRails(container) {
   }
 
   try {
-    const { Editor } = await import(RTE_TIPTAP_ESM("@tiptap/core"));
-    const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
+    const { Editor } = await import("@tiptap/core");
+    const { default: StarterKit } = await import("@tiptap/starter-kit");
     const optionalExtensions = await loadOptionalExtensions(extensionNames);
     const neutralClipboardTags = new Set(["html", "head", "body", "meta", "div", "span", "p"]);
     const markdownSourceTags = new Set([...neutralClipboardTags, "pre", "code"]);
@@ -220,8 +224,8 @@ async function initPlaybookRichTextEditorRails(container) {
     if (markdownSupport) {
       try {
         const [{ defaultMarkdownParser }, { DOMSerializer }] = await Promise.all([
-          import("https://esm.sh/prosemirror-markdown@1.13.2"),
-          import("https://esm.sh/prosemirror-model@1.25.0"),
+          import("prosemirror-markdown"),
+          import("prosemirror-model"),
         ]);
 
         markdownToHtml = (text) => {
@@ -500,25 +504,20 @@ async function initPlaybookRichTextEditorRails(container) {
   }
 }
 
-function mountAllPlaybookRichTextEditorRails() {
-  document.querySelectorAll("[data-pb-rte-tiptap]").forEach((el) => {
-    void initPlaybookRichTextEditorRails(el);
-  });
-}
+export default class PbRichTextEditor extends PbEnhancedElement {
+  static get selector() {
+    return "[data-pb-rte-tiptap]";
+  }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", mountAllPlaybookRichTextEditorRails);
-} else {
-  mountAllPlaybookRichTextEditorRails();
+  connect() {
+    void initPlaybookRichTextEditorRails(this.element);
+  }
 }
-
-document.addEventListener("turbo:load", mountAllPlaybookRichTextEditorRails);
 
 export {
   extensionActionFromHref,
   initPlaybookRichTextEditorRails,
   loadOptionalExtensions,
-  mountAllPlaybookRichTextEditorRails,
   parseExtensions,
   runToolbarAction,
   syncToHiddenInput,

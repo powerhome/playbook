@@ -31,6 +31,7 @@ import PbMultiLevelSelect from 'kits/pb_multi_level_select'
 import PbCheckbox from 'kits/pb_checkbox'
 import PbButton from 'kits/pb_button'
 import PbTimePicker from 'kits/pb_time_picker'
+import PbRichTextEditor from 'kits/pb_rich_text_editor/rich_text_editor_rails'
 import PbFormValidation from 'kits/pb_form/pb_form_validation'
 
 // Register all kits with the global registry
@@ -63,6 +64,7 @@ const kits = [
   PbCheckbox,
   PbButton,
   PbTimePicker,
+  PbRichTextEditor,
   PbFormValidation,
 ]
 
