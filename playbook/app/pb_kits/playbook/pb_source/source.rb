@@ -25,7 +25,7 @@ module Playbook
       end
 
       def avatar
-        if user.present? && (type == "user" || type == "referral")
+        if user.present? && %w[user referral].include?(type)
           avatar_props = user.clone
           avatar_props[:size] = "sm"
           avatar_props.delete(:user_id)

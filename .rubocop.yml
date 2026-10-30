@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 3.3
+  TargetRubyVersion: 3.4
 
 Gemspec/RequiredRubyVersion:
   Enabled: false
@@ -25,7 +25,7 @@ Lint/StructNewOverride:
 Metrics:
   Enabled: false
 
-Naming/PredicateName:
+Naming/PredicatePrefix:
   Enabled: false
 
 Naming/MethodParameterName:
