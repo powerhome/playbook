@@ -1,9 +1,9 @@
-// Rails TipTap: dynamic import() from esm.sh (no import map — avoids 2nd map ignored by Firefox vs Vite/host).
+// Rails TipTap: dynamic import() from jsDelivr (no import map — avoids 2nd map ignored by Firefox vs Vite/host).
 // Idempotent: data-pb-rte-initialized / data-pb-rte-pending.
 
 // Keep in sync with TipTap versions used by Playbook docs / Nitro RTE alignment (TipTap v3).
 const RTE_TIPTAP_VERSION = "3.0.7";
-const RTE_TIPTAP_ESM = (pkg) => `https://esm.sh/${pkg}@${RTE_TIPTAP_VERSION}`;
+const RTE_TIPTAP_ESM = (pkg) => `https://cdn.jsdelivr.net/npm/${pkg}@${RTE_TIPTAP_VERSION}/+esm`;
 const RTE_EXTENSIONS = new Set(["underline", "text_align", "horizontal_rule", "image"]);
 
 function parseExtensions(value) {
@@ -220,8 +220,8 @@ async function initPlaybookRichTextEditorRails(container) {
     if (markdownSupport) {
       try {
         const [{ defaultMarkdownParser }, { DOMSerializer }] = await Promise.all([
-          import("https://esm.sh/prosemirror-markdown@1.13.2"),
-          import("https://esm.sh/prosemirror-model@1.25.0"),
+          import("https://cdn.jsdelivr.net/npm/prosemirror-markdown@1.13.2/+esm"),
+          import("https://cdn.jsdelivr.net/npm/prosemirror-model@1.25.0/+esm"),
         ]);
 
         markdownToHtml = (text) => {

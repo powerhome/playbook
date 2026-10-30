@@ -2,4 +2,4 @@ Set `markdown_support: true` to convert recognizable Markdown from the clipboard
 
 The prop is opt-in and defaults to `false`, so existing Rails Rich Text Editors retain TipTap's standard paste behavior. Rich HTML, tables, styled content, media, and ordinary plain text also remain on TipTap's native paste path.
 
-When Markdown support is enabled, the Rails editor loads `prosemirror-markdown` and `prosemirror-model` from [esm.sh](https://esm.sh) before initializing. Applications with a strict Content Security Policy must allow esm.sh and its redirected module URLs.
+When Markdown support is enabled, the Rails editor loads `prosemirror-markdown` and `prosemirror-model` from [jsDelivr](https://www.jsdelivr.com) before initializing. Applications with a strict Content Security Policy must allow `https://cdn.jsdelivr.net`.
