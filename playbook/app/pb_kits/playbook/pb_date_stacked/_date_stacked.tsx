@@ -3,6 +3,7 @@ import React from "react";
 import classnames from "classnames";
 import { buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
+import { GlobalEventProps, globalEventProps } from "../utilities/globalEventProps";
 import DateTime from '../pb_kit/dateTime';
 
 import Caption from "../pb_caption/_caption";
@@ -20,7 +21,7 @@ type DateStackedProps = {
   id?: string;
   reverse?: boolean;
   showCurrentYear?: boolean;
-};
+} & GlobalEventProps;
 
 const sizes: {sm: 4, md: 3} = {
   sm: 4,
@@ -60,6 +61,7 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
         <div
             {...dataProps}
             {...htmlProps}
+            {...globalEventProps(props)}
             className={classes}
         >
           <div className="pb_date_stacked_day_month">
@@ -76,6 +78,7 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
           <div
               {...dataProps}
               {...htmlProps}
+              {...globalEventProps(props)}
               className={classes}
           >
             <div className="pb_date_stacked_day_month">

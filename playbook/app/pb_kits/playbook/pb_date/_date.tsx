@@ -3,6 +3,7 @@ import classnames from "classnames";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
+import { GlobalEventProps, globalEventProps } from "../utilities/globalEventProps";
 import DateTime from '../pb_kit/dateTime';
 
 import Body from "../pb_body/_body";
@@ -24,7 +25,7 @@ type PbDateProps = {
   size?: "sm" | "md" | "lg";
   unstyled?: boolean;
   value: Date;
-};
+} & GlobalEventProps;
 
 const PbDate = (props: PbDateProps): React.ReactElement => {
   const {
@@ -64,6 +65,7 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >
