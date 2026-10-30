@@ -483,7 +483,7 @@ kits:
     status: stable
     icons_used: true
     react_rendered: false
-    enhanced_element_used: false
+    enhanced_element_used: true
   - name: textarea
     platforms: *1
     description: Area where user can enter larger amounts of text. Commonly used in

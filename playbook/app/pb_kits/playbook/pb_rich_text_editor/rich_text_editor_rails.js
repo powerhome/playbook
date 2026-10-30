@@ -510,7 +510,13 @@ export default class PbRichTextEditor extends PbEnhancedElement {
   }
 
   connect() {
-    void initPlaybookRichTextEditorRails(this.element);
+    initPlaybookRichTextEditorRails(this.element).catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error("[Playbook] Rich Text Editor failed to load", error);
+      // Un-enhance so the next registry scan (e.g. Turbo visit) retries. Whichever instance now owns
+      // the element has no editor: a newer one skipped init while this load was pending.
+      PbRichTextEditor.removeMatch(this.element);
+    });
   }
 }
 
