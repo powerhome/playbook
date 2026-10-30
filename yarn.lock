@@ -5872,9 +5872,9 @@ highcharts-react-official@^3.2.1:
   integrity sha512-hyQTX7ezCxl7JqumaWiGsroGWalzh24GedQIgO3vJbkGOZ6ySRAltIYjfxhrq4HszJOySZegotEF7v+haQ75UA==
 
 highcharts@^11.4.8:
-  version "11.4.8"
-  resolved "https://npm.powerapp.cloud/highcharts/-/highcharts-11.4.8.tgz#252e71b81c24ec9f99e756b76dbebd7546e18dda"
-  integrity sha512-5Tke9LuzZszC4osaFisxLIcw7xgNGz4Sy3Jc9pRMV+ydm6sYqsPYdU8ELOgpzGNrbrRNDRBtveoR5xS3SzneEA==
+  version "11.4.9"
+  resolved "https://npm.powerapp.cloud/highcharts/-/highcharts-11.4.9.tgz#511bcfc7e46eeb8c37155c2d9c4ef8630ab03bac"
+  integrity sha512-LSFxFZBeffm45OUiTDntYfzZPCbMTs0oyg6lxsE6EHhdIWhlq/8WTYkHlEUHl3+vabdgWP7+EQx0DkoaaE/4rg==
 
 highlight.js@^10.4.1, highlight.js@~10.7.0:
   version "10.7.3"
@@ -10896,10 +10896,10 @@ vite-plugin-ruby@^5.0.0:
     debug "^4.3.4"
     fast-glob "^3.3.2"
 
-vite@6.4.4:
-  version "6.4.4"
-  resolved "https://npm.powerapp.cloud/vite/-/vite-6.4.4.tgz#ddcfd2e568dd4904a9154d8763f2d78a3e9bf443"
-  integrity sha512-xGjU/SyjeNyb0E4KxXBvYz/1C+3JXuujvf2hXNOtnlcE+58o5ajd9N2/n2VhkiJvpCP2qQasnUpx5PXNeI+p1Q==
+vite@6.4.5:
+  version "6.4.5"
+  resolved "https://npm.powerapp.cloud/vite/-/vite-6.4.5.tgz#8da9987120422f92e432b6d25535b82cee867dad"
+  integrity sha512-4enwjFfi4IwtEh0w+jPzpLVOFQiPHmmzPxcHXQOyEur47o6u0jE573DmGpjA+7irXoMLYRZD5ZaFUEneS3abPg==
   dependencies:
     esbuild "^0.25.0"
     fdir "^6.4.4"

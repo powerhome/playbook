@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
 import Caption from '../pb_caption/_caption'
@@ -19,7 +20,7 @@ type WeekdayStackedProps = {
   id?: string,
   variant?: "day_only" | "month_day" | "expanded",
   compact?: boolean,
-}
+} & GlobalEventProps
 
 const getDayOfWeek = (value: Date, compact: boolean) => {
   if (compact) {
@@ -66,6 +67,7 @@ const WeekdayStacked = (props: WeekdayStackedProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

@@ -11,6 +11,12 @@ import Contact from '../../../pb_contact/_contact'
 import Container from '../../../pb_container/_container'
 import Currency from '../../../pb_currency/_currency'
 import DashboardValue from '../../../pb_dashboard_value/_dashboard_value'
+import PbDate from '../../../pb_date/_date'
+import DateRangeInline from '../../../pb_date_range_inline/_date_range_inline'
+import DateRangeStacked from '../../../pb_date_range_stacked/_date_range_stacked'
+import DateStacked from '../../../pb_date_stacked/_date_stacked'
+import DateYearStacked from '../../../pb_date_year_stacked/_date_year_stacked'
+import WeekdayStacked from '../../../pb_weekday_stacked/_weekday_stacked'
 import DateTime from '../../../pb_date_time/_date_time'
 import DateTimeStacked from '../../../pb_date_time_stacked/_date_time_stacked'
 import Detail from '../../../pb_detail/_detail'
@@ -47,7 +53,19 @@ import UserBadge from '../../../pb_user_badge/_user_badge'
 import { globalProps } from '../../globalProps'
 import { globalEventProps } from '../../globalEventProps'
 
+const dateKits = [
+  { Kit: PbDate, name: 'PbDate', extraProps: { value: new Date('2020-12-31T14:24:09') } },
+  { Kit: DateRangeInline, name: 'DateRangeInline', extraProps: { startDate: new Date('2020-12-30T14:24:09'), endDate: new Date('2020-12-31T14:24:09') } },
+  { Kit: DateRangeStacked, name: 'DateRangeStacked', extraProps: { startDate: new Date('2020-12-30T14:24:09'), endDate: new Date('2020-12-31T14:24:09') } },
+  { Kit: DateStacked, name: 'DateStacked', extraProps: { date: new Date('2020-12-31T14:24:09') } },
+  { Kit: DateYearStacked, name: 'DateYearStacked', extraProps: { date: new Date('2020-12-31T14:24:09') } },
+  { Kit: WeekdayStacked, name: 'WeekdayStacked', extraProps: { date: new Date('2020-12-31T14:24:09') } },
+  { Kit: PbDate, name: 'DateUnstyled', extraProps: { value: new Date('2020-12-31T14:24:09'), unstyled: true } },
+  { Kit: DateStacked, name: 'DateStackedBold', extraProps: { date: new Date('2020-12-31T14:24:09'), bold: true } },
+]
+
 const optedInKits = [
+  ...dateKits,
   { Kit: Avatar, name: 'Avatar', extraProps: { name: 'Pat' } },
   { Kit: Background, name: 'Background', extraProps: { children: 'Test' } },
   { Kit: Body, name: 'Body', extraProps: { text: 'Test' } },
@@ -173,6 +191,38 @@ describe('onClick GlobalEventProps', () => {
       fireEvent.click(screen.getByTestId('onclick-stat-change-precedence'))
       expect(firstClassOnClick).toHaveBeenCalledTimes(1)
       expect(htmlOnClick).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('date kit handlers', () => {
+    dateKits.forEach(({ Kit, name, extraProps }) => {
+      test(`${name} preserves precedence and fires once from nested content`, () => {
+        const htmlOnClick = jest.fn()
+        const currentTargets = []
+        const onClick = jest.fn((event) => currentTargets.push(event.currentTarget))
+        const { rerender } = render(
+          <Kit
+              htmlOptions={{ 'data-testid': 'date-root', onClick: htmlOnClick }}
+              onClick={onClick}
+              {...extraProps}
+          />
+        )
+
+        const root = screen.getByTestId('date-root')
+        fireEvent.click(root.querySelector('span, h4, time, div'))
+        expect(onClick).toHaveBeenCalledTimes(1)
+        expect(currentTargets).toEqual([root])
+        expect(htmlOnClick).not.toHaveBeenCalled()
+
+        rerender(
+          <Kit
+              htmlOptions={{ 'data-testid': 'date-root', onClick: htmlOnClick }}
+              {...extraProps}
+          />
+        )
+        fireEvent.click(screen.getByTestId('date-root'))
+        expect(htmlOnClick).toHaveBeenCalledTimes(1)
+      })
     })
   })
 
