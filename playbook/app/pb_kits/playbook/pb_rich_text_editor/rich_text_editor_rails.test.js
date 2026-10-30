@@ -1,10 +1,43 @@
-import {
+import PbRichTextEditor, {
   extensionActionFromHref,
   loadOptionalExtensions,
   parseExtensions,
   runToolbarAction,
   syncToHiddenInput,
 } from "./rich_text_editor_rails";
+
+let mockCoreLoadFails = false;
+
+jest.mock("@tiptap/core", () => ({
+  __esModule: true,
+  get Editor() {
+    if (mockCoreLoadFails) throw new Error("chunk failed to load");
+
+    return class {
+      on() {}
+      getHTML() { return "<p></p>"; }
+    };
+  },
+}));
+
+jest.mock("@tiptap/starter-kit", () => ({
+  __esModule: true,
+  default: { configure: () => ({}) },
+}));
+
+const flushImports = () => new Promise((resolve) => setTimeout(resolve, 0));
+
+const renderRailsEditor = () => {
+  document.body.innerHTML = `
+    <div id="rte" data-pb-rte-tiptap="true" data-input-id="rte-input" data-rte-simple="true">
+      <input id="rte-input" type="hidden">
+      <div id="rte-toolbar"></div>
+      <div id="rte-editor"></div>
+    </div>
+  `;
+
+  return document.getElementById("rte");
+};
 
 const createEditor = () => {
   const chain = {};
@@ -174,5 +207,56 @@ describe("Rails RichTextEditor extensions", () => {
 
     expect(editor.chainCommands.setLink).not.toHaveBeenCalled();
     expect(editor.chainCommands.unsetLink).not.toHaveBeenCalled();
+  });
+});
+
+describe("Rails RichTextEditor kit lifecycle", () => {
+  beforeEach(() => {
+    jest.useRealTimers();
+  });
+
+  afterEach(() => {
+    mockCoreLoadFails = false;
+    jest.restoreAllMocks();
+  });
+
+  test("un-enhances the element when TipTap fails to load so it can retry", async () => {
+    const container = renderRailsEditor();
+    const consoleError = jest.spyOn(console, "error").mockImplementation(() => {});
+    mockCoreLoadFails = true;
+
+    PbRichTextEditor.addMatch(container);
+    await flushImports();
+
+    expect(consoleError).toHaveBeenCalledWith("[Playbook] Rich Text Editor failed to load", expect.any(Error));
+    expect(PbRichTextEditor.elements.has(container)).toBe(false);
+    expect(container.dataset.pbRtePending).toBeUndefined();
+
+    mockCoreLoadFails = false;
+    PbRichTextEditor.addMatch(container);
+    await flushImports();
+
+    expect(container.dataset.pbRteInitialized).toBe("true");
+    PbRichTextEditor.removeMatch(container);
+  });
+
+  test("retries after a load that fails while the element is re-enhanced mid-load", async () => {
+    const container = renderRailsEditor();
+    jest.spyOn(console, "error").mockImplementation(() => {});
+    mockCoreLoadFails = true;
+
+    PbRichTextEditor.addMatch(container);
+    PbRichTextEditor.removeMatch(container);
+    PbRichTextEditor.addMatch(container); // skips init while the first load is pending
+    await flushImports();
+
+    expect(PbRichTextEditor.elements.has(container)).toBe(false);
+
+    mockCoreLoadFails = false;
+    PbRichTextEditor.addMatch(container);
+    await flushImports();
+
+    expect(container.dataset.pbRteInitialized).toBe("true");
+    PbRichTextEditor.removeMatch(container);
   });
 });
