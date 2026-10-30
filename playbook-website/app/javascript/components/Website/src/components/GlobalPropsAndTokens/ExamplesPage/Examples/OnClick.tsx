@@ -10,6 +10,8 @@ import {
   Container,
   Currency,
   DashboardValue,
+  DateTime,
+  DateTimeStacked,
   Detail,
   Flex,
   Highlight,
@@ -27,6 +29,9 @@ import {
   StatValue,
   Table,
   Timeline,
+  TimeRangeInline,
+  TimeStacked,
+  Timestamp,
   Title,
   TitleCount,
   TitleDetail,
@@ -49,6 +54,10 @@ const clickableDemoHtmlOptions = {
 const clickablePointerHtmlOptions = {
   style: { cursor: "pointer" as const, userSelect: "none" as const },
 };
+
+const demoDateTime = new Date("2025-12-07T12:38:07");
+const demoRangeStart = new Date("2025-12-07T12:38:07");
+const demoRangeEnd = new Date("2025-12-07T15:15:15");
 
 const InteractiveExample = ({
   children,
@@ -92,6 +101,8 @@ const OnClick = () => {
     const [containerClicks, setContainerClicks] = useState(0);
     const [currencyClicks, setCurrencyClicks] = useState(0);
     const [dashboardValueClicks, setDashboardValueClicks] = useState(0);
+    const [dateTimeClicks, setDateTimeClicks] = useState(0);
+    const [dateTimeStackedClicks, setDateTimeStackedClicks] = useState(0);
     const [detailClicks, setDetailClicks] = useState(0);
     const [flexClicks, setFlexClicks] = useState(0);
     const [highlightClicks, setHighlightClicks] = useState(0);
@@ -110,11 +121,14 @@ const OnClick = () => {
     });
     const [personClicks, setPersonClicks] = useState(0);
     const [statValueClicks, setStatValueClicks] = useState(0);
+    const [timeRangeInlineClicks, setTimeRangeInlineClicks] = useState(0);
+    const [timeStackedClicks, setTimeStackedClicks] = useState(0);
     const [timelineItemClicks, setTimelineItemClicks] = useState({
       started: 0,
       trip: 0,
       resolved: 0,
     });
+    const [timestampClicks, setTimestampClicks] = useState(0);
     const [titleClicks, setTitleClicks] = useState(0);
     const [labelPillClicks, setLabelPillClicks] = useState(0);
     const [pillClicks, setPillClicks] = useState(0);
@@ -297,6 +311,38 @@ const OnClick = () => {
                 statLabel="Click this Dashboard Value"
                 statValue={{ unit: "USD", value: "98.2" }}
             />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Time" />
+          <InteractiveExample
+              count={dateTimeClicks}
+              label="Date Time"
+              reset={() => setDateTimeClicks(0)}
+          >
+            <DateTime
+                datetime={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateTimeClicks((prev: number) => prev + 1)}
+                showDayOfWeek={false}
+            />
+            <Body text="Click the above Date Time example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Time Stacked" />
+          <InteractiveExample
+              count={dateTimeStackedClicks}
+              label="Date Time Stacked"
+              reset={() => setDateTimeStackedClicks(0)}
+          >
+            <DateTimeStacked
+                dark={false}
+                datetime={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateTimeStackedClicks((prev: number) => prev + 1)}
+            />
+            <Body text="Click the above Date Time Stacked example" />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -738,6 +784,38 @@ const OnClick = () => {
             />
           </InteractiveExample>
         </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Time Range Inline" />
+          <InteractiveExample
+              count={timeRangeInlineClicks}
+              label="Time Range Inline"
+              reset={() => setTimeRangeInlineClicks(0)}
+          >
+            <TimeRangeInline
+                endTime={demoRangeEnd}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setTimeRangeInlineClicks((prev: number) => prev + 1)}
+                startTime={demoRangeStart}
+            />
+            <Body text="Click the above Time Range Inline example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Time Stacked" />
+          <InteractiveExample
+              count={timeStackedClicks}
+              label="Time Stacked"
+              reset={() => setTimeStackedClicks(0)}
+          >
+            <TimeStacked
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setTimeStackedClicks((prev: number) => prev + 1)}
+                time={demoDateTime}
+                timeZone="America/New_York"
+            />
+            <Body text="Click the above Time Stacked example" />
+          </InteractiveExample>
+        </Card>
         <Card padding="md" width="md">
           <Title size={4} text="Timeline.Item (subcomponent of Timeline)" />
           <InteractiveExample
@@ -802,6 +880,21 @@ const OnClick = () => {
                 <Body color="light" text="Conversation resolved" />
               </Timeline.Item>
             </Timeline>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Timestamp" />
+          <InteractiveExample
+              count={timestampClicks}
+              label="Timestamp"
+              reset={() => setTimestampClicks(0)}
+          >
+            <Timestamp
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setTimestampClicks((prev: number) => prev + 1)}
+                timestamp={demoDateTime}
+            />
+            <Body text="Click the above Timestamp example" />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -1015,6 +1108,24 @@ const OnClick = () => {
             "Attached once to the root Dashboard Value element.",
           ],
           [
+            "Date Time",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-time-react"
+              text={`<DateTime datetime={date} onClick={() => alert("clicked")} showDayOfWeek={false} />`}
+            />,
+            "Attached to the root Date Time element.",
+          ],
+          [
+            "Date Time Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-time-stacked-react"
+              text={`<DateTimeStacked datetime={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Date Time Stacked element.",
+          ],
+          [
             "Detail",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -1186,6 +1297,24 @@ const OnClick = () => {
             "Attached once to the root Stat Value element.",
           ],
           [
+            "Time Range Inline",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-time-range-inline-react"
+              text={`<TimeRangeInline startTime={start} endTime={end} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Time Range Inline element.",
+          ],
+          [
+            "Time Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-time-stacked-react"
+              text={`<TimeStacked time={date} timeZone="America/New_York" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Time Stacked element.",
+          ],
+          [
             "Timeline.Item (subcomponent of Timeline)",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -1193,6 +1322,15 @@ const OnClick = () => {
               text={`<Timeline.Item onClick={() => alert("clicked")} cursor="pointer">Event</Timeline.Item>`}
             />,
             "Attached to each Timeline.Item root. Sibling items keep separate handlers. Not shown on the Timeline kit Global Event Props tab.",
+          ],
+          [
+            "Timestamp",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-timestamp-react"
+              text={`<Timestamp timestamp={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Timestamp element.",
           ],
           [
             "Title",

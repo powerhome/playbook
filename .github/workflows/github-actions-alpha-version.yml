@@ -30,7 +30,7 @@ jobs:
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
       - uses: actions/setup-node@v7
         with:
-          node-version: 22.15.1
+          node-version: 22.23.4
           package-manager-cache: false
       - name: Use npm 11.6.2
         run: npm i -g npm@11.6.2
@@ -56,7 +56,7 @@ jobs:
       - name: Set New Alpha Version
         id: grab-package-version
         run: |
-          formatted_branch=$(echo "${{ env.BRANCH_NAME }}" | tr -cd '[:alnum:]')
+          formatted_branch=$(printf '%s' "$BRANCH_NAME" | tr -cd '[:alnum:]')
           npm_alpha_version="${{ env.playbook_npm_version }}-alpha.${formatted_branch}${{ github.run_number }}"
           ruby_alpha_version="${{ env.playbook_ruby_version }}.pre.alpha.${formatted_branch}${{ github.run_number }}"
           echo "new_npm_alpha_version=${npm_alpha_version}" >> $GITHUB_ENV
@@ -118,7 +118,7 @@ jobs:
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
       - uses: actions/setup-node@v7
         with:
-          node-version: 22.15.1
+          node-version: 22.23.4
           package-manager-cache: false
       - name: Use npm 11.6.2
         run: npm i -g npm@11.6.2
