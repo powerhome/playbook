@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useMemo } from "react"
 import classnames from "classnames"
 import { flexRender, Row, Cell } from "@tanstack/react-table"
 
@@ -6,7 +6,7 @@ import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
-import { getFontWeight, getRowColorClass, getRowStyle, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
+import { buildGroupSeparatorInsets, getFontWeight, getRowColorClass, getRowStyle, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -125,6 +125,7 @@ export const RegularTableView = ({
 }: RegularTableViewProps) => {
   const {
     enableToggleExpansion,
+    groupSeparators,
     handleExpandOrCollapse,
     inlineRowLoading,
     loading,
@@ -158,14 +159,30 @@ export const RegularTableView = ({
     (obj: Record<string, unknown>) => "columns" in obj
   );
 
-  // Row pinning
-  function PinnedRow({ row, position }: { row: Row<any>; position: 'top' | 'bottom' }) {
+  // One map from the full row model so pinning a non-last sibling cannot
+  // invent a second separator just because that section only sees that row.
+  const rowModelRows = table.getRowModel().rows
+  const groupSeparatorInsets = useMemo(
+    () => (groupSeparators ? buildGroupSeparatorInsets(rowModelRows) : new Map<string, number>()),
+    [groupSeparators, rowModelRows]
+  )
+
+  function PinnedRow({
+    position,
+    row,
+  }: {
+    position: 'top' | 'bottom'
+    row: Row<any>
+  }) {
     const customRowStyle = getRowStyle(rowStyling, row);
     const bottomRowsCount = table.getBottomRows().length;
+    const groupSeparatorInsetEm = groupSeparatorInsets.get(row.id)
+    const showGroupSeparator = groupSeparatorInsetEm !== undefined
 
     return (
       <tr
           className={classnames('pinned-row', {
+            'group-separator-row': showGroupSeparator,
             'pinned-row-bottom': position === 'bottom',
           })}
           style={{
@@ -182,6 +199,9 @@ export const RegularTableView = ({
                   : undefined,
             zIndex: '3',
             fontWeight: getFontWeight(customRowStyle),
+            ...(showGroupSeparator && {
+              ["--group-separator-inset" as string]: `${groupSeparatorInsetEm}em`,
+            }),
           }}
       >
         <TableCellRenderer
@@ -198,11 +218,13 @@ export const RegularTableView = ({
     )
   }
 
-  const totalRows = pinnedRows ? table.getCenterRows() : table.getRowModel().rows
+  const totalRows = pinnedRows ? table.getCenterRows() : rowModelRows
+  const topRows = pinnedRows ? table.getTopRows() : []
+  const bottomRows = pinnedRows ? table.getBottomRows() : []
 
   return (
     <>
-      {pinnedRows && table.getTopRows().map((row: Row<GenericObject>) => (
+      {topRows.map((row: Row<GenericObject>) => (
         <PinnedRow key={row.id}
             position="top"
             row={row}
@@ -219,6 +241,8 @@ export const RegularTableView = ({
         // Use functions from RowUtils for consistent cell coloring
         const rowColor = getRowColorClass(row, inlineRowLoading || false);
         const isDataLoading = shouldShowLoadingIndicator(row, inlineRowLoading || false, columnDefinitions[0]?.cellAccessors?.length || 0);
+        const groupSeparatorInsetEm = groupSeparatorInsets.get(row.id)
+        const showGroupSeparator = groupSeparatorInsetEm !== undefined
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -234,13 +258,20 @@ export const RegularTableView = ({
             )}
 
             <tr
-                className={`${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
+                className={classnames(
+                  rowColor,
+                  row.depth > 0 && `depth-sub-row-${row.depth}`,
+                  showGroupSeparator && "group-separator-row"
+                )}
                 id={`${row.index}-${row.id}-${row.depth}-row`}
                 ref={isFirstRegularRow ? sampleRowRef : null}
                 style={{
                   backgroundColor: customRowStyle?.backgroundColor,
                   color: customRowStyle?.fontColor,
                   fontWeight: getFontWeight(customRowStyle),
+                  ...(showGroupSeparator && {
+                    ["--group-separator-inset" as string]: `${groupSeparatorInsetEm}em`,
+                  }),
                 }}
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
@@ -280,7 +311,7 @@ export const RegularTableView = ({
           </React.Fragment>
         );
       })}
-      {pinnedRows && table.getBottomRows().map((row: Row<GenericObject>) => (
+      {bottomRows.map((row: Row<GenericObject>) => (
         <PinnedRow key={row.id}
             position="bottom"
             row={row}

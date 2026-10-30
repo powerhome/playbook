@@ -275,6 +275,7 @@ class PagesController < ApplicationController
           table_data_infinite_scroll: @beta_table_data_infinite_scroll,
           table_data_inline_loading: @beta_table_data_inline_loading,
           table_data_inline_loading_empty_children: @beta_table_data_inline_loading_empty_children,
+          table_data_group_separators: @beta_table_data_group_separators,
           landing_posts: landing_posts,
         }
       end
@@ -616,6 +617,7 @@ private
     @beta_table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @beta_table_data_infinite_scroll.nil?
     @beta_table_data_inline_loading = advanced_table_mock_data_inline_loading_beta if @beta_table_data_inline_loading.nil?
     @beta_table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children_beta if @beta_table_data_inline_loading_empty_children.nil?
+    @beta_table_data_group_separators = advanced_table_mock_data_group_separators_beta if @beta_table_data_group_separators.nil?
 
     return unless @type.to_s == "rails"
 
@@ -626,6 +628,7 @@ private
     @table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @table_data_infinite_scroll.nil?
     @table_data_inline_loading = advanced_table_mock_data_inline_loading if @table_data_inline_loading.nil?
     @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children if @table_data_inline_loading_empty_children.nil?
+    @table_data_group_separators = advanced_table_mock_data_group_separators if @table_data_group_separators.nil?
   end
 
   def advanced_table_mock_data
@@ -705,6 +708,24 @@ private
 
   def advanced_table_mock_data_inline_loading_empty_children_beta
     file_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_mock_data_inline_loading_empty_children.json")
+    return nil unless File.exist?(file_path)
+
+    JSON.parse(File.read(file_path))
+  rescue
+    nil
+  end
+
+  def advanced_table_mock_data_group_separators
+    file_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_mock_data_group_separators.json")
+    return nil unless File.exist?(file_path)
+
+    JSON.parse(File.read(file_path), object_class: OpenStruct)
+  rescue
+    nil
+  end
+
+  def advanced_table_mock_data_group_separators_beta
+    file_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_mock_data_group_separators.json")
     return nil unless File.exist?(file_path)
 
     JSON.parse(File.read(file_path))

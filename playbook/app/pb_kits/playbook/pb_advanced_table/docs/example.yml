@@ -37,6 +37,7 @@ examples:
   - advanced_table_background_colors_rails: Column Styling Individual Cell Background Color
   - advanced_table_column_border_color_rails: Column Group Border Color
   - advanced_table_inline_row_loading_rails: Inline Row Loading
+  - advanced_table_group_separators_rails: Group Separators
 
 
   react:
@@ -99,4 +100,5 @@ examples:
   - advanced_table_column_styling_background_multi: Column Styling Background Color with Multiple Headers
   - advanced_table_padding_control: Padding Control using Column Styling
   - advanced_table_column_border_color: Column Group Border Color
+  - advanced_table_group_separators: Group Separators
   - advanced_table_infinite_scroll: Infinite Scroll

@@ -15,6 +15,8 @@
 
   // Base vertical border color variable setup
   --column-border-color: #{$border_light};
+  --group-separator-color: #{$input_border_default};
+  --group-separator-row-border-color: #{$border_light};
 
   // Define color tokens once
   $border_color_options: (
@@ -524,6 +526,46 @@
     border-bottom-color: $border_light !important;
   }
 
+  // 2px group separator on last sibling of each nested group. It replaces the
+  // default border-bottom: the border goes transparent and the stroke paints
+  // over its spot, with a 1px default line underneath for any part left of
+  // --group-separator-inset (0 = year-level full-bleed). Rails: .is-expanded
+  // defers to the leaf.
+  tr.group-separator-row:not(.is-expanded) {
+    > td,
+    > .pb_table_td {
+      border-bottom-color: transparent !important;
+      background-image:
+        linear-gradient(var(--group-separator-color), var(--group-separator-color)),
+        linear-gradient(var(--group-separator-row-border-color), var(--group-separator-row-border-color));
+      // Padding-box origin so the inset matches the trails' `left` (a first-cell
+      // border-left would otherwise shift the stroke 1px past its trail); the
+      // +1px pushes both layers down over the 1px bottom border.
+      background-origin: padding-box;
+      background-position: 0 calc(100% + 1px), 0 calc(100% + 1px);
+      background-repeat: no-repeat;
+      background-size: 100% 2px, 100% 1px;
+      // Table hover sets `transition: all` on cells, which slides the stroke in
+      // from the top when a row becomes a separator. Keep only the hover border fade.
+      transition-property: border-color !important;
+    }
+
+    > td:first-child:not(.checkbox-cell),
+    > .pb_table_td:first-child:not(.checkbox-cell),
+    > td.checkbox-cell + td,
+    > td.checkbox-cell + .pb_table_td {
+      background-position: var(--group-separator-inset, 0em) calc(100% + 1px), 0 calc(100% + 1px);
+      background-size: calc(100% - var(--group-separator-inset, 0em)) 2px, 100% 1px;
+
+      // Trails left of the inset belong to groups that stay open, so they run
+      // through; trails at or past it stop on top of the stroke, which rises
+      // 1px above the (now transparent) border (0 or 1px).
+      .collapsible-trail {
+        bottom: clamp(0px, calc((var(--collapsible-trail-left, 0em) - var(--group-separator-inset, 0em)) * 1000 + 1px), 1px);
+      }
+    }
+  }
+
   // Apply border colors when columnGroupBorderColor is set
   &[class*="column-group-border-"] {
     // For top-level column groups
@@ -789,6 +831,8 @@
   &.dark {
     // Override default border color for dark mode
     --column-border-color: #{$border_dark};
+    --group-separator-color: #{$input_border_default_dark};
+    --group-separator-row-border-color: #{$border_dark};
 
     // Dark mode default border colors for trails and horizontal borders
     .collapsible-trail {
@@ -808,21 +852,22 @@
       background: $bg_dark;
     }
 
-    // Dark mode virtualized rows
+    // Dark mode virtualized rows — use background-color (not the background
+    // shorthand) so group-separator background-image is not cleared.
     .virtualized-table-row {
       &.pb-bg-row-white {
-        background: $bg_dark_card !important;
+        background-color: $bg_dark_card !important;
 
         td:first-child {
-          background: $bg_dark_card !important;
+          background-color: $bg_dark_card !important;
         }
       }
 
       &.bg-silver {
-        background: $bg_dark;
+        background-color: $bg_dark;
 
         td:first-child {
-          background: $bg_dark;
+          background-color: $bg_dark;
         }
       }
     }

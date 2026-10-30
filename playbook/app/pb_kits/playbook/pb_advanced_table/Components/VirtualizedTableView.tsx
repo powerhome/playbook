@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState, useEffect, useRef } from "react"
+import React, { useContext, useEffect, useLayoutEffect, useMemo, useState } from "react"
 import classnames from "classnames"
 import { flexRender, Cell, Row } from "@tanstack/react-table"
 import { VirtualItem } from "@tanstack/react-virtual"
@@ -7,7 +7,7 @@ import { GenericObject } from "../../types"
 
 import { isChrome } from "../Utilities/BrowserCheck"
 import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
-import { getRowColorClass } from "../Utilities/RowUtils"
+import { buildGroupSeparatorInsets, getRowColorClass } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -34,6 +34,7 @@ export const VirtualizedTableView = ({
 }: VirtualizedTableViewProps) => {
   const {
     enableToggleExpansion,
+    groupSeparators,
     handleExpandOrCollapse,
     inlineRowLoading,
     loading,
@@ -119,6 +120,13 @@ export const VirtualizedTableView = ({
     };
   }, [table, selectableRows, hasAnySubRows]);
 
+  // Memoize against scroll-driven re-renders; only rebuild when the row model changes.
+  const rowModelRows = table.getRowModel().rows
+  const groupSeparatorInsets = useMemo(
+    () => (groupSeparators ? buildGroupSeparatorInsets(rowModelRows) : new Map<string, number>()),
+    [groupSeparators, rowModelRows]
+  )
+
   // Safety check
   if (!virtualizer || !flattenedItems) {
     return (
@@ -180,10 +188,17 @@ export const VirtualizedTableView = ({
 
           // Use the utility function to get consistent row color
           const rowColor = getRowColorClass(row, inlineRowLoading || false);
+          const groupSeparatorInsetEm = groupSeparatorInsets.get(row.id)
+          const showGroupSeparator = groupSeparatorInsetEm !== undefined
 
           return (
             <tr
-                className={`virtualized-table-row ${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
+                className={classnames(
+                  "virtualized-table-row",
+                  rowColor,
+                  row.depth > 0 && `depth-sub-row-${row.depth}`,
+                  showGroupSeparator && "group-separator-row"
+                )}
                 data-index={virtualRow.index}
                 key={`row-${item.id}-sort-${sortingState}`}
                 ref={(node) => {
@@ -195,7 +210,12 @@ export const VirtualizedTableView = ({
                     }
                   }
                 }}
-                style={virtualItemStyle}
+                style={{
+                  ...virtualItemStyle,
+                  ...(showGroupSeparator && {
+                    ["--group-separator-inset" as string]: `${groupSeparatorInsetEm}em`,
+                  }),
+                }}
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
               {selectableRows && !hasAnySubRows && (

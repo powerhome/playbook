@@ -1,0 +1,78 @@
+<% column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+] %>
+
+<%= pb_rails("advanced_table", props: { id: "group_separators", table_data: @table_data_group_separators, column_definitions: column_definitions, group_separators: true }) %>
+
+<%# Mirror React default expand: 2022 → Q1 → January; 2023 year open (quarters collapsed) %>
+<script>
+  (function () {
+    // Expand a path like ["2022", "Q1", "January"], searching each label only
+    // within the previous row's subtree so e.g. 2021's Q1 is never matched.
+    function expandPath(root, labels) {
+      var rows = root.querySelectorAll("tr[data-row-depth]");
+      var start = 0;
+
+      for (var depth = 0; depth < labels.length; depth++) {
+        var row = null;
+        for (var i = start; i < rows.length; i++) {
+          var rowDepth = Number(rows[i].getAttribute("data-row-depth"));
+          if (rowDepth < depth) break;
+          var cell = rows[i].querySelector("td");
+          if (rowDepth === depth && cell && cell.textContent.indexOf(labels[depth]) !== -1) {
+            row = rows[i];
+            start = i + 1;
+            break;
+          }
+        }
+        if (!row) return;
+
+        var toggle = row.querySelector("[data-advanced-table]");
+        if (toggle && !row.classList.contains("is-expanded")) toggle.click();
+      }
+    }
+
+    function expandGroupSeparatorsExample() {
+      var root = document.getElementById("group_separators");
+      if (!root) return;
+
+      expandPath(root, ["2022", "Q1", "January"]);
+      expandPath(root, ["2023"]);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", expandGroupSeparatorsExample);
+    } else {
+      expandGroupSeparatorsExample();
+    }
+    setTimeout(expandGroupSeparatorsExample, 0);
+  })();
+</script>
