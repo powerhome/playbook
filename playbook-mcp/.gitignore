@@ -1,0 +1,11 @@
+/.bundle
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+!/tmp/pids/.keep
+.env
+*.log
+/vendor/bundle
+/vendor/chart-peers/*
+!/vendor/chart-peers/.gitkeep
