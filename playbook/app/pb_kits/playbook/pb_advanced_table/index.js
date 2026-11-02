@@ -54,12 +54,17 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     );
   }
 
+  get groupSeparatorsEnabled() {
+    return Boolean(this.mainTable?.dataset.groupSeparators);
+  }
+
   // Restore deferred separator hiding only when nested data rows exist.
   restoreExpandedClass(elem) {
+    if (!this.groupSeparatorsEnabled) return;
     const toggleId = elem.querySelector("[data-advanced-table]")?.id;
     if (!toggleId || !PbAdvancedTable.expandedRows.has(toggleId)) return;
     if (PbAdvancedTable.hasRealChildRows(this.childRowsFor(toggleId))) {
-      elem.classList.add("is-expanded");
+      elem.classList.add("group-separator-expanded");
     }
   }
 
@@ -320,13 +325,18 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       if (!isExpanded) {
         PbAdvancedTable.expandedRows.add(toggleBtn.id);
         // Only defer the separator when real children exist — a lone loading
-        // row must not clear group-separator-row via :not(.is-expanded).
-        if (PbAdvancedTable.hasRealChildRows(childRows)) {
-          parentRow?.classList.add("is-expanded");
+        // row must not clear group-separator-row via :not(.group-separator-expanded).
+        if (
+          this.groupSeparatorsEnabled &&
+          PbAdvancedTable.hasRealChildRows(childRows)
+        ) {
+          parentRow?.classList.add("group-separator-expanded");
         }
       } else {
         PbAdvancedTable.expandedRows.delete(toggleBtn.id);
-        parentRow?.classList.remove("is-expanded");
+        if (this.groupSeparatorsEnabled) {
+          parentRow?.classList.remove("group-separator-expanded");
+        }
       }
 
       this.toggleElement(childRows);
@@ -480,8 +490,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     elements.forEach((elem) => {
       elem.style.display = "none";
       elem.classList.remove("is-visible");
-      // Keep `is-expanded` while hidden so re-expanding an ancestor still defers
-      // the group separator to descendants (toggle click clears it when collapsing).
+      // Keep `group-separator-expanded` while hidden so re-expanding an ancestor
+      // still defers the separator to descendants (toggle click clears it when collapsing).
 
       // Remove the row ID from expandedRows when this row is hidden
       if (PbAdvancedTable.expandedRows.has(elem.id)) {

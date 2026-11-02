@@ -529,9 +529,9 @@
   // 2px group separator on last sibling of each nested group. It replaces the
   // default border-bottom: the border goes transparent and the stroke paints
   // over its spot, with a 1px default line underneath for any part left of
-  // --group-separator-inset (0 = year-level full-bleed). Rails: .is-expanded
-  // defers to the leaf.
-  tr.group-separator-row:not(.is-expanded) {
+  // --group-separator-inset (0 = year-level full-bleed). Rails:
+  // .group-separator-expanded defers to the leaf.
+  tr.group-separator-row:not(.group-separator-expanded) {
     > td,
     > .pb_table_td {
       border-bottom-color: transparent !important;

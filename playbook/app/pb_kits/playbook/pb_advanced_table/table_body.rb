@@ -95,7 +95,7 @@ module Playbook
 
         children = row_children_for(row)
         # Match React: every last sibling gets a separator. When the row is expanded,
-        # JS adds `is-expanded` and CSS hides this row’s separator so the leaf keeps it.
+        # JS adds `group-separator-expanded` and CSS hides this row’s separator so the leaf keeps it.
         # group_closes_from_depth is the depth of the outermost group this row closes (nil unless a last sibling).
         show_group_separator = group_separators && current_depth.positive? && !group_closes_from_depth.nil?
         row_classname = [additional_classes, ("group-separator-row" if show_group_separator)].compact.join(" ").strip

@@ -44,6 +44,13 @@ module Playbook
       prop :pinned_rows, type: Playbook::Props::HashProp,
                          default: {}
 
+      # Marker for Rails JS: only toggle group-separator-expanded when this is set.
+      def data
+        Hash(prop(:data)).tap do |hash|
+          hash[:group_separators] = true if group_separators
+        end
+      end
+
       def classname
         additional_classes = [
           responsive_classname,
