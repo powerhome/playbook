@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 import copy from 'rollup-plugin-copy'
 import consolidate from './app/javascript/rollup/consolidate-plugin';
 import cssUrl from './app/javascript/rollup/css-url-plugin';
+import preloadHelper from './app/javascript/rollup/preload-helper-plugin';
 import { env } from 'process';
 
 const isProduction = env.NODE_ENV === 'production'
@@ -14,6 +15,8 @@ export default defineConfig({
     exclude: ['tiptap/react'],
   },
   build: {
+    // Lazy chunks are re-bundled and renamed by consumers, so preloading our own chunk paths would 404
+    modulePreload: false,
     minify: isProduction ? 'terser' : false,
     terserOptions: {
       mangle: false,
@@ -98,6 +101,7 @@ export default defineConfig({
       ],
     }),
     cssUrl(),
+    preloadHelper(),
   ],
   resolve: {
     dedupe: ['playbook'],
