@@ -134,7 +134,10 @@ module Playbook
           row[:children].each do |child_row|
             is_first_child = row[:children].first.equal?(child_row)
             is_last_child = group_separators && row[:children].last.equal?(child_row)
-            child_closes_from_depth = is_last_child ? (group_closes_from_depth || current_depth) : nil
+            # Prefer nil? over || so year-level 0 is kept (0 is falsy in Ruby).
+            child_closes_from_depth = if is_last_child
+                                        group_closes_from_depth.nil? ? current_depth : group_closes_from_depth
+                                      end
             immediate_parent_id = row.object_id
             data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
 
@@ -229,7 +232,9 @@ module Playbook
         rows = Array(data)
         rows.each do |row|
           # Same chain as render_row_and_children so a pinned nested root gets the right separator inset.
-          closes_from_depth = parent_row && row.equal?(rows.last) ? (parent_closes_from_depth || depth - 1) : nil
+          closes_from_depth = if parent_row && row.equal?(rows.last)
+                                parent_closes_from_depth.nil? ? depth - 1 : parent_closes_from_depth
+                              end
           return { row: row, depth: depth, ancestor_ids: ancestor_ids, parent_row: parent_row, group_closes_from_depth: closes_from_depth } if row_id_for(row).to_s == id_str
 
           found = find_row_by_id(row_children_for(row), id_str, depth: depth + 1, ancestor_ids: ancestor_ids + [row.object_id], parent_row: row, parent_closes_from_depth: closes_from_depth)
