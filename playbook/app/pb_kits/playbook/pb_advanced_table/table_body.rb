@@ -102,7 +102,7 @@ module Playbook
         separator_inset_style = show_group_separator ? "--group-separator-inset: #{group_separator_inset_em(group_closes_from_depth)}em;" : nil
 
         # Additional class and data attributes needed for toggle logic
-        row_props = { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: row_classname, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading, full_width_cell: full_width_cell }
+        row_props = { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, group_separators: group_separators, classname: row_classname, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading, full_width_cell: full_width_cell }
         if is_pinned_row && !next_pinned_index.nil?
           row_props[:is_pinned_row] = true
           row_props[:pinned_position] = pinned_position.to_s

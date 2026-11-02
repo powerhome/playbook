@@ -1,11 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
+
+import AdvancedTableContext from "../Context/AdvancedTableContext"
 
 //CollapsibleTrail component
 const CollapsibleTrail = ({ leftOffset }: { leftOffset: number }) => {
+  const { groupSeparators } = useContext(AdvancedTableContext)
   const style: { [key: string]: string | number } = {
     left: `${leftOffset}em`,
-    // Read by groupSeparators to decide which trails stop at the stroke
-    "--collapsible-trail-left": `${leftOffset}em`,
+  }
+  // Read by groupSeparators CSS to decide which trails stop at the stroke
+  if (groupSeparators) {
+    style["--collapsible-trail-left"] = `${leftOffset}em`
   }
 
   return (
