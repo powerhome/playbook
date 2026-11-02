@@ -30,6 +30,8 @@ import Pill from '../../../pb_pill/_pill'
 import Source from '../../../pb_source/_source'
 import StatChange from '../../../pb_stat_change/_stat_change'
 import Highlight from '../../../pb_highlight/_highlight'
+import Icon from '../../../pb_icon/_icon'
+import IconCircle from '../../../pb_icon_circle/_icon_circle'
 import IconStatValue from '../../../pb_icon_stat_value/_icon_stat_value'
 import IconValue from '../../../pb_icon_value/_icon_value'
 import LabelValue from '../../../pb_label_value/_label_value'
@@ -80,6 +82,8 @@ const optedInKits = [
   { Kit: Detail, name: 'Detail', extraProps: { text: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
   { Kit: Highlight, name: 'Highlight', extraProps: { text: 'Test' } },
+  { Kit: Icon, name: 'Icon', extraProps: { icon: 'user' } },
+  { Kit: IconCircle, name: 'IconCircle', extraProps: { icon: 'user' } },
   { Kit: IconStatValue, name: 'IconStatValue', extraProps: { icon: 'heart', text: 'Likes', value: 42 } },
   { Kit: IconValue, name: 'IconValue', extraProps: { icon: 'heart', text: 'Favorites' } },
   { Kit: Image, name: 'Image', extraProps: { alt: 'Test', url: 'https://example.com/test.jpg' } },
@@ -191,6 +195,171 @@ describe('onClick GlobalEventProps', () => {
       fireEvent.click(screen.getByTestId('onclick-stat-change-precedence'))
       expect(firstClassOnClick).toHaveBeenCalledTimes(1)
       expect(htmlOnClick).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('Icon and IconCircle render paths', () => {
+    const customSvg = (onClick) => (
+      <svg
+          data-testid="custom-icon"
+          onClick={onClick}
+      />
+    )
+
+    test('SVG icon path fires once on the visible element', () => {
+      const onClick = jest.fn()
+      render(
+        <Icon
+            data={{ testid: 'onclick-icon-svg' }}
+            icon="user"
+            onClick={onClick}
+        />
+      )
+
+      const icon = screen.getByTestId('onclick-icon-svg')
+      expect(icon.tagName).toBe('svg')
+      expect(icon).toHaveClass('pb_custom_icon')
+      expect(icon).toHaveAttribute('aria-label', 'user icon')
+      fireEvent.click(icon)
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('inline SVG icon path fires once', () => {
+      const onClick = jest.fn()
+      render(
+        <Icon
+            data={{ testid: 'onclick-icon-inline-svg' }}
+            icon={<svg />}
+            onClick={onClick}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-icon-inline-svg'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('emoji path fires once on the emoji element', () => {
+      const onClick = jest.fn()
+      render(
+        <Icon
+            data={{ testid: 'onclick-icon-emoji' }}
+            icon="😍"
+            onClick={onClick}
+        />
+      )
+
+      const icon = screen.getByTestId('onclick-icon-emoji')
+      expect(icon).toHaveClass('pb_icon_kit_emoji')
+      fireEvent.click(icon)
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('fallback path fires once on the visible icon and not the hidden span', () => {
+      const onClick = jest.fn()
+      const { container } = render(
+        <Icon
+            data={{ testid: 'onclick-icon-fallback' }}
+            icon="not-a-real-icon"
+            onClick={onClick}
+        />
+      )
+
+      const icon = screen.getByTestId('onclick-icon-fallback')
+      expect(icon.tagName).toBe('I')
+      expect(icon).toHaveClass('pb_icon_kit')
+      fireEvent.click(icon)
+      fireEvent.click(container.querySelector('span[hidden]'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('custom icon keeps its own onClick when no global handler is passed', () => {
+      const elementOnClick = jest.fn()
+      render(
+        <Icon customIcon={customSvg(elementOnClick)} />
+      )
+
+      fireEvent.click(screen.getByTestId('custom-icon'))
+      expect(elementOnClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('htmlOptions.onClick wins over a custom icon onClick', () => {
+      const elementOnClick = jest.fn()
+      const htmlOnClick = jest.fn()
+      render(
+        <Icon
+            customIcon={customSvg(elementOnClick)}
+            htmlOptions={{ onClick: htmlOnClick }}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('custom-icon'))
+      expect(htmlOnClick).toHaveBeenCalledTimes(1)
+      expect(elementOnClick).not.toHaveBeenCalled()
+    })
+
+    test('first-class onClick wins over htmlOptions and a custom icon onClick', () => {
+      const elementOnClick = jest.fn()
+      const htmlOnClick = jest.fn()
+      const firstClassOnClick = jest.fn()
+      render(
+        <Icon
+            customIcon={customSvg(elementOnClick)}
+            htmlOptions={{ onClick: htmlOnClick }}
+            onClick={firstClassOnClick}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('custom-icon'))
+      expect(firstClassOnClick).toHaveBeenCalledTimes(1)
+      expect(htmlOnClick).not.toHaveBeenCalled()
+      expect(elementOnClick).not.toHaveBeenCalled()
+    })
+
+    test('IconCircle root and inner icon each fire the root handler once', () => {
+      const onClick = jest.fn()
+      render(
+        <IconCircle
+            data={{ testid: 'onclick-icon-circle-inner' }}
+            icon="user"
+            onClick={onClick}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-icon-circle-inner'))
+      fireEvent.click(screen.getByTestId('onclick-icon-circle-inner').querySelector('svg'))
+      expect(onClick).toHaveBeenCalledTimes(2)
+    })
+
+    test('IconCircle emoji click fires the root handler once', () => {
+      const onClick = jest.fn()
+      render(
+        <IconCircle
+            data={{ testid: 'onclick-icon-circle-emoji' }}
+            icon="😍"
+            onClick={onClick}
+        />
+      )
+
+      fireEvent.click(screen.getByText('😍'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('a parent wrapper onClick still fires once when Icon does not receive onClick', () => {
+      const onClick = jest.fn()
+      render(
+        <span
+            data-testid="nitro-icon-wrapper"
+            onClick={onClick}
+        >
+          <Icon
+              fixedWidth={false}
+              icon="user"
+          />
+        </span>
+      )
+
+      fireEvent.click(screen.getByTestId('nitro-icon-wrapper').querySelector('svg'))
+      expect(onClick).toHaveBeenCalledTimes(1)
     })
   })
 
