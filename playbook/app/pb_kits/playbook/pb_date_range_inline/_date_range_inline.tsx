@@ -2,6 +2,7 @@ import React from "react";
 import classnames from "classnames";
 
 import { globalProps } from "../utilities/globalProps";
+import { GlobalEventProps, globalEventProps } from "../utilities/globalEventProps";
 import { buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import DateTime from '../pb_kit/dateTime';
 
@@ -21,7 +22,7 @@ type DateRangeInlineProps = {
   size?: "sm" | "xs";
   showCurrentYear?: boolean;
   startDate?: Date;
-};
+} & GlobalEventProps;
 
 const dateTimestamp = (dateValue: Date, includeYear: boolean) => {
   if (includeYear) {
@@ -74,6 +75,7 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
     <div
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classnames(dateRangeClasses, globalProps(props), className)}
     >
       <div className="pb_date_range_inline_wrapper">

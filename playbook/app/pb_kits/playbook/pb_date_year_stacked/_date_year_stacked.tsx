@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import DateTime from '../pb_kit/dateTime';
 
 import Body from '../pb_body/_body'
@@ -16,7 +17,7 @@ type DateYearStackedProps = {
   date: Date,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-}
+} & GlobalEventProps
 
 const DateYearStacked = (props: DateYearStackedProps): React.ReactElement => {
   const { 
@@ -39,6 +40,7 @@ const DateYearStacked = (props: DateYearStackedProps): React.ReactElement => {
     <div 
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={css}
     >
       <Title

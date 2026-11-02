@@ -31,6 +31,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { DateRangeStacked } from 'playbook-ui'",
