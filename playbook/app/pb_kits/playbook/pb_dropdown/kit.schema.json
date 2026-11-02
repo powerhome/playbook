@@ -161,6 +161,22 @@
         "react"
       ]
     },
+    "enablePillReorder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "externalDragHandle": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "isClosed": {
       "type": "boolean",
       "platforms": [
@@ -232,6 +248,14 @@
         "rails"
       ],
       "default": true
+    },
+    "showPillIndex": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "variant": {
       "type": "enum",

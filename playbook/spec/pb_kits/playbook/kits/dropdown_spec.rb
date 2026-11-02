@@ -37,6 +37,9 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:context_selector).with_default("") }
   it { is_expected.to define_boolean_prop(:clear_on_context_change).with_default(true) }
   it { is_expected.to define_string_prop(:options_event_type).with_default("") }
+  it { is_expected.to define_boolean_prop(:enable_pill_reorder).with_default(false) }
+  it { is_expected.to define_boolean_prop(:external_drag_handle).with_default(false) }
+  it { is_expected.to define_boolean_prop(:show_pill_index).with_default(false) }
 
   it { is_expected.to define_boolean_prop(:async).with_default(false) }
 
@@ -201,6 +204,36 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       # The name should be configured to support array notation in the template
       expect(dropdown.name).to eq("test_field")
       expect(dropdown.multi_select).to be true
+    end
+  end
+
+  describe "pill reorder props" do
+    it "exports reorder data attributes when multi_select and enable_pill_reorder are true" do
+      dropdown = subject.new(
+        multi_select: true,
+        enable_pill_reorder: true,
+        external_drag_handle: true,
+        show_pill_index: true
+      )
+      expect(dropdown.data).to include(
+        pb_dropdown_enable_pill_reorder: true,
+        pb_dropdown_external_drag_handle: true,
+        pb_dropdown_show_pill_index: true
+      )
+    end
+
+    it "omits reorder data attributes by default" do
+      dropdown = subject.new(multi_select: true)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_enable_pill_reorder)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_external_drag_handle)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_show_pill_index)
+    end
+
+    it "does not export reorder attributes on single-select even when enable_pill_reorder is true" do
+      dropdown = subject.new(enable_pill_reorder: true, show_pill_index: true, external_drag_handle: true)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_enable_pill_reorder)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_external_drag_handle)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_show_pill_index)
     end
   end
 
