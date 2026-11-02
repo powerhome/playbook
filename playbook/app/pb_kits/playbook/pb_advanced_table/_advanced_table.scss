@@ -560,8 +560,10 @@
       // Trails left of the inset belong to groups that stay open, so they run
       // through; trails at or past it stop on top of the stroke, which rises
       // 1px above the (now transparent) border (0 or 1px).
+      // Avoid `* 1000` inside this clamp: dart-sass strips the calc() and leaves
+      // `(var() - var()) * 1000`, which SassC rejects when nitro recompiles playbook.css.
       .collapsible-trail {
-        bottom: clamp(0px, calc((var(--collapsible-trail-left, 0em) - var(--group-separator-inset, 0em)) * 1000 + 1px), 1px);
+        bottom: clamp(0px, calc(var(--collapsible-trail-left, 0em) - var(--group-separator-inset, 0em) + 1px), 1px);
       }
     }
   }
