@@ -132,8 +132,8 @@ module Playbook
 
         if row[:children].present?
           row[:children].each do |child_row|
-            is_first_child = row[:children].first == child_row
-            is_last_child = row[:children].last == child_row
+            is_first_child = row[:children].first.equal?(child_row)
+            is_last_child = group_separators && row[:children].last.equal?(child_row)
             child_closes_from_depth = is_last_child ? (group_closes_from_depth || current_depth) : nil
             immediate_parent_id = row.object_id
             data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
