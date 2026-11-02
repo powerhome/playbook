@@ -1,15 +1,5 @@
 import { ThirdPartyLoader, ThirdPartyScope, parseNamedImportsFor } from "./utilities"
 
-function ensureTrixCSS() {
-  if (typeof document === "undefined") return
-  if (document.querySelector('link[data-trix-css="1"]')) return
-  const link = document.createElement("link")
-  link.rel = "stylesheet"
-  link.href = "https://unpkg.com/trix@2.1.16/dist/trix.css"
-  link.setAttribute("data-trix-css", "1")
-  document.head.appendChild(link)
-}
-
 export const trixLoader: ThirdPartyLoader = {
   id: "trix",
   detect: (_raw, _defaults, sources) =>
@@ -18,7 +8,7 @@ export const trixLoader: ThirdPartyLoader = {
   load: async (raw, defaults) => {
     const scope: ThirdPartyScope = {}
 
-    ensureTrixCSS()
+    await import("trix/dist/trix.css")
 
     // Load trix (default import)
     if (defaults.some((d) => d.source === "trix")) {

@@ -32,7 +32,7 @@ Without a loader, you'll see a `ReferenceError: <LibraryName> is not defined` in
 | Loader | Detects | Libraries Loaded |
 |--------|---------|------------------|
 | `highchartsLoader` | `highcharts`, `highcharts/*`, `highcharts-react-official` | Highcharts, HighchartsReact, and modules like highcharts-more, solid-gauge |
-| `mapboxDrawLoader` | `@mapbox/mapbox-gl-draw` | MapboxDraw + CSS |
+| `mapboxDrawLoader` | `@mapbox/mapbox-gl-draw` | MapboxDraw (CSS bundled in the application entry point) |
 | `maplibreLoader` | `maplibre-gl` | maplibregl (CSS bundled in the application entry point) |
 | `playbookAdvancedTableLoader` | `_advanced_table`, `playbook-ui/advanced-table` | AdvancedTable |
 | `playbookChartsLoader` | `_pb_bar_graph`, `_pb_circle_chart`, `_pb_gauge_chart`, `_pb_line_graph` | PbBarGraph, PbCircleChart, PbGaugeChart, PbLineGraph |
@@ -118,7 +118,7 @@ type ThirdPartyLoader = {
 
 ### Tips
 
-- **CSS Loading**: Import styles from the installed package through the application entry point or a module loaded by the loader. MapLibre CSS is bundled in the application entry point.
+- **CSS Loading**: Import styles from the installed package through the application entry point or a module loaded by the loader. MapLibre and Mapbox Draw CSS are bundled in the application entry point; Trix CSS is loaded on demand by its loader.
 - **Alias Support**: Always check `defaults` for import aliases so `import ML from "my-lib"` works as well as `import MyLib from "my-lib"`
 - **Named Imports**: Use `parseNamedImportsFor()` when the library exports multiple named values
 - **Module Initialization**: Some libraries (like Highcharts modules) need initialization - handle this in the loader
