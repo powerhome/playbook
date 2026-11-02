@@ -541,20 +541,25 @@ const resolvedLoadOptions =
 
     const [contextValue, setContextValue] = useState("")
 
-    // Add listener for form validation to track when validation should be shown (needed for react rendered rails kit)
+    // Track form submit validation for react-rendered Typeahead (own error UI).
+    // When inside pb_form_with validate: true, suppress the browser's native
+    // invalid UI — PbFormValidation skips this kit so it must not double-show.
     useEffect(() => {
       const handleInvalid = (event: Event) => {
         const target = event.target as HTMLInputElement
-        const typeaheadContainer = target.closest(
-          '[data-pb-react-component="Typeahead"]',
-        )
+        if (!kitContainerRef.current?.contains(target)) return
 
-        if (typeaheadContainer) {
-          // Check if this invalid event is specifically for our typeahead by comparing names so we do not have to require ids
-          const invalidInputName = target.name || target.getAttribute("name")
-          if (invalidInputName === name) {
-            setFormSubmitted(true)
-          }
+        // Match by name so we do not have to require ids
+        const invalidInputName = target.name || target.getAttribute("name")
+        if (invalidInputName !== name) return
+
+        setFormSubmitted(true)
+
+        const validatedForm = target.closest(
+          'form[data-pb-form-validation="true"]',
+        )
+        if (validatedForm) {
+          event.preventDefault()
         }
       }
       document.addEventListener("invalid", handleInvalid, true)

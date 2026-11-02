@@ -63,6 +63,7 @@ class PbFormValidation extends PbEnhancedElement {
     if (!field?.matches?.(REQUIRED_FIELDS_SELECTOR)) return false
     if (field.closest('.pb_phone_number_input')) return false
     if (field.closest('.pb_time_picker')) return false
+    if (field.closest('.pb_typeahead_kit.react-select')) return false
     return true
   }
 
