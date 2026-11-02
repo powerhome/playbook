@@ -530,7 +530,6 @@ const OnClick = () => {
                 }}
                 icon="heart"
                 onClick={() => setIconClicks((prev: number) => prev + 1)}
-                size="2x"
             />
           </InteractiveExample>
         </Card>
@@ -551,7 +550,6 @@ const OnClick = () => {
                 }}
                 icon="heart"
                 onClick={() => setIconCircleClicks((prev: number) => prev + 1)}
-                size="lg"
             />
           </InteractiveExample>
         </Card>
