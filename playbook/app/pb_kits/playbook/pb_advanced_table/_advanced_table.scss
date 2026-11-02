@@ -844,6 +844,26 @@
       border-bottom-color: $border_dark !important;
     }
 
+    // table-dark sets `border-color: … !important` (rest + hover), and
+    // column-group-border sets `.toggle-content td { border-bottom: … !important }`.
+    // Those beat the shared separator rule, so the opaque border paints over the
+    // 2px stroke. Reassert transparent bottom with higher specificity.
+    .pb_table.dark,
+    .pb_table.table-dark {
+      tbody > tr.group-separator-row:not(.group-separator-expanded),
+      .pb_table_tbody > .pb_table_tr.group-separator-row:not(.group-separator-expanded) {
+        > td,
+        > .pb_table_td {
+          border-bottom-color: transparent !important;
+        }
+
+        &:hover > td,
+        &:hover > .pb_table_td {
+          border-bottom-color: transparent !important;
+        }
+      }
+    }
+
     .pb-bg-row-white {
       background: $bg_dark_card;
     }
