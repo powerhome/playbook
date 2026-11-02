@@ -45,10 +45,9 @@ module Playbook
                          default: {}
 
       # Marker for Rails JS: only toggle group-separator-expanded when this is set.
+      # Use merge (not tap/mutate) so we don't write onto the shared default {} or a caller-owned data hash.
       def data
-        Hash(prop(:data)).tap do |hash|
-          hash[:group_separators] = true if group_separators
-        end
+        Hash(prop(:data)).merge(group_separators ? { group_separators: true } : {})
       end
 
       def classname
