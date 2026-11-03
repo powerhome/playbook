@@ -34,7 +34,7 @@
     "@tiptap/extension-text": "3.0.7",
     "@tiptap/pm": "3.0.7",
     "@tiptap/react": "3.0.7",
-    "@tiptap/starter-kit": "3.0.7",
+    "@tiptap/starter-kit": "3.32.2",
     "axe-core": "4.10.2",
     "copy-to-clipboard": "^3.3.3",
     "postcss-flexbugs-fixes": "^5.0.2",
