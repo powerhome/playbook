@@ -98,7 +98,6 @@
     "axe-core": "4.10.2",
     "babel-jest": "29.7.0",
     "classnames": "2.5.1",
-    "filemanager-webpack-plugin": "4.0.0",
     "highcharts": "^11.4.8",
     "highcharts-react-official": "^3.2.1",
     "identity-obj-proxy": "3.0.0",

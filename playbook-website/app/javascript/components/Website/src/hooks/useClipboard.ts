@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from "react"
-import copy from "copy-to-clipboard"
+import { useState, useCallback, useEffect, useRef } from "react"
+import { copyText } from "../utils/clipboard"
 
 export interface UseClipboardOptions {
   timeout?: number,
@@ -15,15 +15,20 @@ export function useClipboard(
   const [valueState, setValueState] = useState(value)
   useEffect(() => setValueState(value), [value])
 
-  const { timeout = 3100, ...copyOptions } =
+  const { timeout = 3100, format = 'text/plain' } =
     typeof optionsOrTimeout === "number"
       ? { timeout: optionsOrTimeout }
       : optionsOrTimeout
 
-  const onCopy = useCallback(() => {
-    const didCopy = copy(valueState, copyOptions)
-    setHasCopied(didCopy)
-  }, [valueState, copyOptions])
+  const copyRequest = useRef(0)
+  useEffect(() => () => { copyRequest.current++ }, [valueState, format])
+
+  const onCopy = useCallback(async () => {
+    const request = ++copyRequest.current
+    setHasCopied(false)
+    const didCopy = await copyText(valueState, format)
+    if (request === copyRequest.current) setHasCopied(didCopy)
+  }, [valueState, format])
 
   useEffect(() => {
     let timeoutId: number | null = null

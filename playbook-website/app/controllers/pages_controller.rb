@@ -63,8 +63,8 @@ class PagesController < ApplicationController
 
     # Pagination data is only used when rendering Rails ERB examples inline.
     if @type == "rails"
-      @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
-      @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+      @users = Array.new(9) { |index| "Demo User #{index + 1}" }.paginate(page: will_paginate_page, per_page: 2)
+      @extra_users = Array.new(2000) { |index| "Demo User #{index + 1}" }.paginate(page: will_paginate_page, per_page: 2)
     end
 
     @css = view_context.vite_asset_path("site_styles/main.scss")

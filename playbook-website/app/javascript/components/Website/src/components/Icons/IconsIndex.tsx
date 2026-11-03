@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ChangeEvent } from 'react'
-import { matchSorter, rankings } from 'match-sorter'
+import { searchItems } from '../../utils/searchItems'
 
 import {
   Background,
@@ -106,10 +106,7 @@ const IconsIndex = ({
     return sorted
       .map(([category, icons]) => [
         category,
-        matchSorter(icons, q, {
-          keys: ['name'],
-          threshold: rankings.CONTAINS,
-        }),
+        searchItems(icons, q, ['name'], true),
       ] as [string, IconData[]])
       .filter(([, icons]) => icons.length > 0)
   }, [iconsByCategory, searchQuery])
