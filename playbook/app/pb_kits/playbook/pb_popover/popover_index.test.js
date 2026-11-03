@@ -38,6 +38,7 @@ const renderPopover = ({
 const kitIn = (container) => container.querySelector("[data-pb-popover-kit]");
 const tooltip = () => document.getElementById(TOOLTIP_ID);
 const trigger = () => document.getElementById(TRIGGER_ID);
+const outside = () => document.getElementById("outside");
 const isOpen = () => tooltip().classList.contains("show");
 
 const clickTrigger = async () => {
@@ -46,7 +47,7 @@ const clickTrigger = async () => {
 };
 
 const clickOutside = async () => {
-  document.getElementById("outside").click();
+  outside().click();
   await flush();
 };
 
@@ -70,16 +71,22 @@ const recordToggleEvents = (container) => {
   return events;
 };
 
-const trackOutsideClickListeners = () => {
-  const add = jest.spyOn(document.body, "addEventListener");
-  const remove = jest.spyOn(document.body, "removeEventListener");
-  const isOutsideClick = ([type, , capture]) => type === "click" && capture === true;
+const trackClickListeners = () => {
+  const add = jest.spyOn(EventTarget.prototype, "addEventListener");
+  const remove = jest.spyOn(EventTarget.prototype, "removeEventListener");
+  const clickHandlers = (spy, target, capture) =>
+    spy.mock.calls
+      .filter(([type, , options], index) =>
+        spy.mock.instances[index] === target && type === "click" && (options === true) === capture)
+      .map(([, handler]) => handler);
+  const active = (target, capture) => {
+    const removed = clickHandlers(remove, target, capture);
+    return clickHandlers(add, target, capture).filter((handler) => !removed.includes(handler)).length;
+  };
 
-  return () => {
-    const removed = remove.mock.calls.filter(isOutsideClick).map(([, handler]) => handler);
-    return add.mock.calls
-      .filter(isOutsideClick)
-      .filter(([, handler]) => !removed.includes(handler)).length;
+  return {
+    outside: () => active(document.body, true),
+    trigger: (button) => active(button, false),
   };
 };
 
@@ -107,6 +114,14 @@ describe("PbPopover (Rails)", () => {
       await flush();
 
       expect(tooltip().parentElement).toBe(document.body);
+    });
+
+    test("adds one trigger listener", async () => {
+      const listeners = trackClickListeners();
+      renderPopover();
+      await flush();
+
+      expect(listeners.trigger(trigger())).toBe(1);
     });
 
     describe("when reconnected while closed", () => {
@@ -169,13 +184,37 @@ describe("PbPopover (Rails)", () => {
     test("removes the outside-close listener", async () => {
       const container = renderPopover();
       await flush();
-      const listeners = trackOutsideClickListeners();
+      const listeners = trackClickListeners();
       await clickTrigger();
 
       container.remove();
       await flush();
 
-      expect(listeners()).toBe(0);
+      expect(listeners.outside()).toBe(0);
+    });
+
+    test("removes the trigger listener", async () => {
+      const listeners = trackClickListeners();
+      const container = renderPopover();
+      await flush();
+      const button = trigger();
+
+      container.remove();
+      await flush();
+
+      expect(listeners.trigger(button)).toBe(0);
+    });
+
+    test("drops a pending trigger click", async () => {
+      const container = renderPopover();
+      await flush();
+      const listeners = trackClickListeners();
+
+      trigger().click();
+      container.remove();
+      await flush();
+
+      expect(listeners.outside()).toBe(0);
     });
 
     describe.each([
@@ -203,27 +242,27 @@ describe("PbPopover (Rails)", () => {
     beforeEach(async () => {
       renderPopover();
       await flush();
-      listeners = trackOutsideClickListeners();
+      listeners = trackClickListeners();
     });
 
     test("is added once while open", async () => {
       await clickTrigger();
 
-      expect(listeners()).toBe(1);
+      expect(listeners.outside()).toBe(1);
     });
 
     test("is removed after an outside click", async () => {
       await clickTrigger();
       await clickOutside();
 
-      expect(listeners()).toBe(0);
+      expect(listeners.outside()).toBe(0);
     });
 
     test("is removed after closing from the trigger", async () => {
       await clickTrigger();
       await clickTrigger();
 
-      expect(listeners()).toBe(0);
+      expect(listeners.outside()).toBe(0);
     });
 
     test("is removed after a double click on the trigger", async () => {
@@ -231,7 +270,7 @@ describe("PbPopover (Rails)", () => {
       trigger().click();
       await flush();
 
-      expect(listeners()).toBe(0);
+      expect(listeners.outside()).toBe(0);
     });
   });
 
@@ -278,6 +317,43 @@ describe("PbPopover (Rails)", () => {
       await clickInside();
 
       expect(isOpen()).toBe(true);
+    });
+  });
+
+  describe("when an outside click lands before the trigger opens it", () => {
+    beforeEach(async () => {
+      renderPopover();
+      await flush();
+      trigger().click();
+      outside().click();
+      await flush();
+    });
+
+    test("opens the popover", () => {
+      expect(isOpen()).toBe(true);
+    });
+
+    test("closes on a later outside click", async () => {
+      await clickOutside();
+
+      expect(isOpen()).toBe(false);
+    });
+  });
+
+  describe("when an outside click lands before the trigger closes it", () => {
+    beforeEach(async () => {
+      renderPopover();
+      await flush();
+      await clickTrigger();
+      trigger().click();
+      outside().click();
+      await flush();
+    });
+
+    test("closes on a later outside click", async () => {
+      await clickOutside();
+
+      expect(isOpen()).toBe(false);
     });
   });
 
