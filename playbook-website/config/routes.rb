@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  match "health_check/site", to: "health_checks#site", via: %i[get post], defaults: { format: :txt }
-
   # Staging host: Playground (+ kit Playground tabs) is served here; all other pages redirect to prod.
   # `as: nil` avoids clashing with the named routes defined below for prod/local.
   constraints(host: "staging.playbook.powerapp.cloud") do
