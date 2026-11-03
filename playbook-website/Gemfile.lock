@@ -109,8 +109,6 @@ GEM
     dry-cli (1.4.1)
     erb (6.0.7)
     erubi (1.13.1)
-    faker (3.4.2)
-      i18n (>= 1.8.11, < 2)
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-aarch64-linux-musl)
     ffi (1.17.4-arm-linux-gnu)
@@ -121,11 +119,8 @@ GEM
     ffi (1.17.4-x86_64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
     ffi (1.17.4-x86_64-linux-musl)
-    front_matter_parser (1.0.1)
     globalid (1.4.0)
       activesupport (>= 6.1)
-    health_check (3.1.0)
-      railties (>= 5.0)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     io-console (0.9.4)
@@ -358,9 +353,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap (~> 1.26.1)
-  faker
-  front_matter_parser (~> 1.0.1)
-  health_check
   listen
   mysql2 (~> 0.5.7)
   ostruct

@@ -7,6 +7,8 @@
     "release": "bin/vite build",
     "generate:global-props-values": "node scripts/generate-global-props-values.mjs",
     "generate:global-event-props-values": "node scripts/generate-global-event-props-values.mjs",
+    "test:clipboard-hook": "jest --config jest.config.js --runInBand",
+    "test:dependency-replacements": "node --experimental-strip-types --test scripts/search-items.test.mjs scripts/clipboard.test.mjs",
     "test:global-event-props-tab": "node --experimental-strip-types --test scripts/props-tab-global-event-props.test.mjs"
   },
   "dependencies": {
@@ -17,7 +19,6 @@
     "maplibre-gl": "6.4.1",
     "highcharts": "^11.4.8",
     "highcharts-react-official": "^3.2.1",
-    "match-sorter": "^8.0.0",
     "playbook-ui": ">= 1",
     "react-syntax-highlighter": "^16.1.2",
     "react-hook-form": "^7.28.1",
@@ -36,7 +37,6 @@
     "@tiptap/react": "3.0.7",
     "@tiptap/starter-kit": "3.0.7",
     "axe-core": "4.10.2",
-    "copy-to-clipboard": "^3.3.3",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.1.0",
     "postcss-preset-env": "^7.0.1",
