@@ -21,10 +21,6 @@ module PlaybookWebsite
         PlaybookWebsite::Markdown::Helper.markdown(text)
       end
 
-      def render_frontmatter(file)
-        FrontMatterParser::Parser.parse_file(file)
-      end
-
       def self.markdown(text)
         options = {
           filter_html: false,
