@@ -9,4 +9,11 @@ permissions:
 
 jobs:
   pr-title:
-    uses: powerhome/github-actions-workflows/.github/workflows/pr-title.yml@fb0b02b96be72ccf70a71ed2a56c9621aa731d89 # main
+    name: Conventional Commit title
+    runs-on: ubuntu-latest
+    steps:
+      # The repository squash-merges with the PR title as the commit subject,
+      # so the title is what has to be a Conventional Commit.
+      - uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50 # v6.1.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
