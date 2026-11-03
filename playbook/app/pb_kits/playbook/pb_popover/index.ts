@@ -15,6 +15,7 @@ export default class PbPopover extends PbEnhancedElement {
   _unsubscribeFloatingReposition: (() => void) | null = null
   _closeOnClickHandler: ((event: MouseEvent) => void) | null = null
   _closeOnClickTarget: HTMLElement | null = null
+  _triggerClickHandler: ((event: Event) => void) | null = null
   static get selector() {
     return '[data-pb-popover-kit]'
   }
@@ -59,7 +60,7 @@ export default class PbPopover extends PbEnhancedElement {
       },
     )
 
-    this.triggerElement.addEventListener('click', (event: Event) => {
+    this._triggerClickHandler = (event: Event) => {
       event.preventDefault()
       event.stopPropagation()
 
@@ -71,13 +72,21 @@ export default class PbPopover extends PbEnhancedElement {
         this.toggleTooltip()
         this.popper.update()
       }, 0)
-    })
+    }
+    this.triggerElement.addEventListener('click', this._triggerClickHandler)
+    if (this.tooltip.classList.contains('show')) this.checkCloseTooltip()
   }
 
   disconnect(): void {
     this._unsubscribeFloatingReposition?.()
     this._unsubscribeFloatingReposition = null
+    this.stopCloseTooltipCheck()
+    if (this._triggerClickHandler) {
+      this.triggerElement.removeEventListener('click', this._triggerClickHandler)
+      this._triggerClickHandler = null
+    }
     this.popper?.destroy()
+    if (this.tooltip) this.element.appendChild(this.tooltip)
   }
 
   checkCloseTooltip() {

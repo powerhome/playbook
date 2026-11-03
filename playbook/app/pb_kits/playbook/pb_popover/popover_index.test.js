@@ -58,6 +58,37 @@ describe("PbPopover (Rails)", () => {
     await flush();
   });
 
+  test("moves the tooltip to the body on connect", async () => {
+    renderPopover();
+    await flush();
+
+    expect(tooltip().parentElement).toBe(document.body);
+  });
+
+  test("reclaims the removed tooltip", async () => {
+    const container = renderPopover();
+    await flush();
+
+    const kit = container.querySelector("[data-pb-popover-kit]");
+    const panel = tooltip();
+    container.remove();
+    await flush();
+
+    expect(document.getElementById(TOOLTIP_ID)).toBeNull();
+    expect(panel.parentElement).toBe(kit);
+  });
+
+  test("keeps one panel after replacement", async () => {
+    const container = renderPopover();
+    await flush();
+
+    container.remove();
+    renderPopover();
+    await flush();
+
+    expect(document.querySelectorAll(`[id='${TOOLTIP_ID}']`)).toHaveLength(1);
+  });
+
   test("opens and closes on outside clicks", async () => {
     renderPopover();
     await flush();
@@ -118,6 +149,21 @@ describe("PbPopover (Rails)", () => {
     expect(hide).not.toHaveBeenCalled();
   });
 
+  test("removes the disconnected listener", async () => {
+    const container = renderPopover();
+    await flush();
+    await clickTrigger();
+
+    const kit = container.querySelector("[data-pb-popover-kit]");
+    const hide = jest.spyOn(PbPopover.elements.get(kit), "hideTooltip");
+    container.remove();
+    await flush();
+    document.body.click();
+    await flush();
+
+    expect(hide).not.toHaveBeenCalled();
+  });
+
   test("closes inside with any mode", async () => {
     renderPopover("any");
     await flush();
@@ -153,4 +199,20 @@ describe("PbPopover (Rails)", () => {
     expect(isOpen()).toBe(false);
   });
 
+  test.each([false, true])("reconnects with open=%s", async (open) => {
+    const container = renderPopover();
+    await flush();
+    if (open) await clickTrigger();
+    container.remove();
+    await flush();
+    document.body.appendChild(container);
+    await flush();
+
+    expect(isOpen()).toBe(open);
+    if (!open) await clickTrigger();
+    expect(isOpen()).toBe(true);
+    await clickOutside();
+    expect(isOpen()).toBe(false);
+    expect(document.querySelectorAll(`[id='${TOOLTIP_ID}']`)).toHaveLength(1);
+  });
 });
