@@ -10,15 +10,19 @@ const flush = async () => {
   await Promise.resolve();
 };
 
-const renderPopover = (closeOnClick = "outside") => {
+const renderPopover = ({
+  closeOnClick = "outside",
+  triggerId = TRIGGER_ID,
+  tooltipId = TOOLTIP_ID,
+} = {}) => {
   const container = document.createElement("div");
   container.innerHTML = `
     <button id="${TRIGGER_ID}">Open</button>
     <div
       data-pb-popover-kit="true"
       data-pb-popover-position="bottom"
-      data-pb-popover-trigger-element-id="${TRIGGER_ID}"
-      data-pb-popover-tooltip-id="${TOOLTIP_ID}"
+      data-pb-popover-trigger-element-id="${triggerId}"
+      data-pb-popover-tooltip-id="${tooltipId}"
       data-pb-popover-close-on-click="${closeOnClick}"
     >
       <div class="pb_popover_tooltip hide" id="${TOOLTIP_ID}" role="tooltip">
@@ -31,11 +35,13 @@ const renderPopover = (closeOnClick = "outside") => {
   return container;
 };
 
+const kitIn = (container) => container.querySelector("[data-pb-popover-kit]");
 const tooltip = () => document.getElementById(TOOLTIP_ID);
+const trigger = () => document.getElementById(TRIGGER_ID);
 const isOpen = () => tooltip().classList.contains("show");
 
 const clickTrigger = async () => {
-  document.getElementById(TRIGGER_ID).click();
+  trigger().click();
   await flush();
 };
 
@@ -44,12 +50,37 @@ const clickOutside = async () => {
   await flush();
 };
 
-const recordToggleEvents = () => {
+const clickInside = async () => {
+  tooltip().querySelector(".pb_popover_body").click();
+  await flush();
+};
+
+const reconnect = async (container) => {
+  container.remove();
+  await flush();
+  document.body.appendChild(container);
+  await flush();
+};
+
+const recordToggleEvents = (container) => {
   const events = [];
   const record = (event) => events.push(event.type);
-  document.addEventListener("pb:popover:open", record);
-  document.addEventListener("pb:popover:close", record);
+  container.addEventListener("pb:popover:open", record);
+  container.addEventListener("pb:popover:close", record);
   return events;
+};
+
+const trackOutsideClickListeners = () => {
+  const add = jest.spyOn(document.body, "addEventListener");
+  const remove = jest.spyOn(document.body, "removeEventListener");
+  const isOutsideClick = ([type, , capture]) => type === "click" && capture === true;
+
+  return () => {
+    const removed = remove.mock.calls.filter(isOutsideClick).map(([, handler]) => handler);
+    return add.mock.calls
+      .filter(isOutsideClick)
+      .filter(([, handler]) => !removed.includes(handler)).length;
+  };
 };
 
 describe("PbPopover (Rails)", () => {
@@ -66,180 +97,254 @@ describe("PbPopover (Rails)", () => {
     await flush();
   });
 
-  test("moves the tooltip to the body on connect", async () => {
-    renderPopover();
-    await flush();
-
-    expect(tooltip().parentElement).toBe(document.body);
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
-  test("reclaims the removed tooltip", async () => {
-    const container = renderPopover();
-    await flush();
+  describe("#connect", () => {
+    test("moves the tooltip to the body", async () => {
+      renderPopover();
+      await flush();
 
-    const kit = container.querySelector("[data-pb-popover-kit]");
-    const panel = tooltip();
-    container.remove();
-    await flush();
+      expect(tooltip().parentElement).toBe(document.body);
+    });
 
-    expect(document.getElementById(TOOLTIP_ID)).toBeNull();
-    expect(panel.parentElement).toBe(kit);
+    describe("when reconnected while closed", () => {
+      beforeEach(async () => {
+        const container = renderPopover();
+        await flush();
+        await reconnect(container);
+      });
+
+      test("opens from the trigger", async () => {
+        await clickTrigger();
+
+        expect(isOpen()).toBe(true);
+      });
+    });
+
+    describe("when reconnected while open", () => {
+      beforeEach(async () => {
+        const container = renderPopover();
+        await flush();
+        await clickTrigger();
+        await reconnect(container);
+      });
+
+      test("stays open", () => {
+        expect(isOpen()).toBe(true);
+      });
+
+      test("closes on an outside click", async () => {
+        await clickOutside();
+
+        expect(isOpen()).toBe(false);
+      });
+    });
   });
 
-  test("keeps one panel after replacement", async () => {
-    const container = renderPopover();
-    await flush();
+  describe("#disconnect", () => {
+    test("reclaims the tooltip", async () => {
+      const container = renderPopover();
+      await flush();
 
-    container.remove();
-    renderPopover();
-    await flush();
+      const panel = tooltip();
+      container.remove();
+      await flush();
 
-    expect(document.querySelectorAll(`[id='${TOOLTIP_ID}']`)).toHaveLength(1);
+      expect(panel.parentElement).toBe(kitIn(container));
+    });
+
+    test("keeps one panel after replacement", async () => {
+      const container = renderPopover();
+      await flush();
+
+      container.remove();
+      renderPopover();
+      await flush();
+
+      expect(document.querySelectorAll(`[id='${TOOLTIP_ID}']`)).toHaveLength(1);
+    });
+
+    test("removes the outside-close listener", async () => {
+      const container = renderPopover();
+      await flush();
+      const listeners = trackOutsideClickListeners();
+      await clickTrigger();
+
+      container.remove();
+      await flush();
+
+      expect(listeners()).toBe(0);
+    });
+
+    describe.each([
+      ["trigger", { triggerId: "missing-trigger" }],
+      ["tooltip", { tooltipId: "missing-tooltip" }],
+    ])("without a %s", (_name, options) => {
+      test("unregisters the popover", async () => {
+        jest.spyOn(console, "warn").mockImplementation(() => {});
+        const container = renderPopover(options);
+        await flush();
+        const kit = kitIn(container);
+        expect(PbPopover.elements.has(kit)).toBe(true);
+
+        container.remove();
+        await flush();
+
+        expect(PbPopover.elements.has(kit)).toBe(false);
+      });
+    });
   });
 
-  test("opens and closes on outside clicks", async () => {
-    renderPopover();
-    await flush();
+  describe("outside-close listener", () => {
+    let listeners;
 
-    await clickTrigger();
-    expect(isOpen()).toBe(true);
+    beforeEach(async () => {
+      renderPopover();
+      await flush();
+      listeners = trackOutsideClickListeners();
+    });
 
-    await clickOutside();
-    expect(isOpen()).toBe(false);
+    test("is added once while open", async () => {
+      await clickTrigger();
+
+      expect(listeners()).toBe(1);
+    });
+
+    test("is removed after an outside click", async () => {
+      await clickTrigger();
+      await clickOutside();
+
+      expect(listeners()).toBe(0);
+    });
+
+    test("is removed after closing from the trigger", async () => {
+      await clickTrigger();
+      await clickTrigger();
+
+      expect(listeners()).toBe(0);
+    });
+
+    test("is removed after a double click on the trigger", async () => {
+      trigger().click();
+      trigger().click();
+      await flush();
+
+      expect(listeners()).toBe(0);
+    });
   });
 
-  test("closes outside after reopening", async () => {
-    renderPopover();
-    await flush();
+  describe("trigger", () => {
+    beforeEach(async () => {
+      renderPopover();
+      await flush();
+      await clickTrigger();
+    });
 
-    await clickTrigger();
-    await clickOutside();
-    await clickTrigger();
-    await clickOutside();
+    test("opens the popover", () => {
+      expect(isOpen()).toBe(true);
+    });
 
-    expect(isOpen()).toBe(false);
+    test("closes the popover", async () => {
+      await clickTrigger();
+
+      expect(isOpen()).toBe(false);
+    });
   });
 
-  test("closes from the trigger", async () => {
-    renderPopover();
-    await flush();
+  describe("with closeOnClick outside", () => {
+    beforeEach(async () => {
+      renderPopover();
+      await flush();
+      await clickTrigger();
+    });
 
-    await clickTrigger();
-    await clickTrigger();
+    test("closes on an outside click", async () => {
+      await clickOutside();
 
-    expect(isOpen()).toBe(false);
+      expect(isOpen()).toBe(false);
+    });
+
+    test("closes on an outside click after reopening", async () => {
+      await clickOutside();
+      await clickTrigger();
+      await clickOutside();
+
+      expect(isOpen()).toBe(false);
+    });
+
+    test("ignores inside clicks", async () => {
+      await clickInside();
+
+      expect(isOpen()).toBe(true);
+    });
   });
 
-  test("removes the outside-close listener", async () => {
-    renderPopover();
-    await flush();
-    await clickTrigger();
-    await clickOutside();
+  describe("with closeOnClick inside", () => {
+    beforeEach(async () => {
+      renderPopover({ closeOnClick: "inside" });
+      await flush();
+      await clickTrigger();
+    });
 
-    const kit = document.querySelector("[data-pb-popover-kit]");
-    const hide = jest.spyOn(PbPopover.elements.get(kit), "hideTooltip");
-    await clickOutside();
-    await clickOutside();
+    test("ignores outside clicks", async () => {
+      await clickOutside();
 
-    expect(hide).not.toHaveBeenCalled();
+      expect(isOpen()).toBe(true);
+    });
+
+    test("closes on an inside click", async () => {
+      await clickInside();
+
+      expect(isOpen()).toBe(false);
+    });
   });
 
-  test("removes the trigger-close listener", async () => {
-    renderPopover();
-    await flush();
-    await clickTrigger();
-    await clickTrigger();
+  describe("with closeOnClick any", () => {
+    test("closes on an inside click", async () => {
+      renderPopover({ closeOnClick: "any" });
+      await flush();
+      await clickTrigger();
 
-    const kit = document.querySelector("[data-pb-popover-kit]");
-    const hide = jest.spyOn(PbPopover.elements.get(kit), "hideTooltip");
-    await clickOutside();
+      await clickInside();
 
-    expect(hide).not.toHaveBeenCalled();
+      expect(isOpen()).toBe(false);
+    });
   });
 
-  test("removes the disconnected listener", async () => {
-    const container = renderPopover();
-    await flush();
-    await clickTrigger();
+  describe("toggle events", () => {
+    let container;
+    let events;
 
-    const kit = container.querySelector("[data-pb-popover-kit]");
-    const hide = jest.spyOn(PbPopover.elements.get(kit), "hideTooltip");
-    container.remove();
-    await flush();
-    document.body.click();
-    await flush();
+    beforeEach(async () => {
+      container = renderPopover();
+      await flush();
+      events = recordToggleEvents(container);
+    });
 
-    expect(hide).not.toHaveBeenCalled();
-  });
+    test("announces each open and close once", async () => {
+      await clickTrigger();
+      await clickOutside();
+      await clickOutside();
+      await clickTrigger();
+      await clickTrigger();
 
-  test("announces each open and close once", async () => {
-    renderPopover();
-    await flush();
-    const events = recordToggleEvents();
+      expect(events).toEqual([
+        "pb:popover:open",
+        "pb:popover:close",
+        "pb:popover:open",
+        "pb:popover:close",
+      ]);
+    });
 
-    await clickTrigger();
-    await clickOutside();
-    await clickOutside();
-    await clickTrigger();
-    await clickTrigger();
+    test("stays quiet when hiding a closed popover", async () => {
+      await clickTrigger();
+      await clickOutside();
 
-    expect(events).toEqual([
-      "pb:popover:open",
-      "pb:popover:close",
-      "pb:popover:open",
-      "pb:popover:close",
-    ]);
-  });
+      PbPopover.elements.get(kitIn(container)).hideTooltip();
 
-  test("closes inside with any mode", async () => {
-    renderPopover("any");
-    await flush();
-
-    await clickTrigger();
-    tooltip().querySelector(".pb_popover_body").click();
-    await flush();
-
-    expect(isOpen()).toBe(false);
-  });
-
-  test("ignores inside clicks in outside mode", async () => {
-    renderPopover();
-    await flush();
-    await clickTrigger();
-
-    tooltip().querySelector(".pb_popover_body").click();
-    await flush();
-
-    expect(isOpen()).toBe(true);
-  });
-
-  test("closes only inside with inside mode", async () => {
-    renderPopover("inside");
-    await flush();
-    await clickTrigger();
-
-    await clickOutside();
-    expect(isOpen()).toBe(true);
-
-    tooltip().querySelector(".pb_popover_body").click();
-    await flush();
-    expect(isOpen()).toBe(false);
-  });
-
-  test.each([false, true])("reconnects with open=%s", async (open) => {
-    const container = renderPopover();
-    await flush();
-    if (open) await clickTrigger();
-    container.remove();
-    await flush();
-    document.body.appendChild(container);
-    await flush();
-
-    expect(isOpen()).toBe(open);
-    if (!open) await clickTrigger();
-    expect(isOpen()).toBe(true);
-    await clickOutside();
-    expect(isOpen()).toBe(false);
-    expect(document.querySelectorAll(`[id='${TOOLTIP_ID}']`)).toHaveLength(1);
+      expect(events).toEqual(["pb:popover:open", "pb:popover:close"]);
+    });
   });
 });
