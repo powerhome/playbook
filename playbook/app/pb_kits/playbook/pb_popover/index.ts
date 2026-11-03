@@ -13,6 +13,8 @@ export default class PbPopover extends PbEnhancedElement {
   _tooltip: HTMLElement
   element: HTMLElement
   _unsubscribeFloatingReposition: (() => void) | null = null
+  _closeOnClickHandler: ((event: MouseEvent) => void) | null = null
+  _closeOnClickTarget: HTMLElement | null = null
   static get selector() {
     return '[data-pb-popover-kit]'
   }
@@ -79,7 +81,9 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   checkCloseTooltip() {
-    document.querySelector('body').addEventListener('click', (event) => {
+    if (this._closeOnClickHandler) return
+
+    this._closeOnClickHandler = (event: MouseEvent) => {
       const t = event.target
       const isTooltipElement =
         event.target instanceof Element &&
@@ -112,10 +116,21 @@ export default class PbPopover extends PbEnhancedElement {
         }
         break
       }
-    }, true)
+    }
+    this._closeOnClickTarget = document.querySelector('body')
+    this._closeOnClickTarget.addEventListener('click', this._closeOnClickHandler, true)
+  }
+
+  stopCloseTooltipCheck() {
+    if (!this._closeOnClickHandler) return
+
+    this._closeOnClickTarget.removeEventListener('click', this._closeOnClickHandler, true)
+    this._closeOnClickHandler = null
+    this._closeOnClickTarget = null
   }
 
   hideTooltip() {
+    this.stopCloseTooltipCheck()
     this.tooltip.classList.remove('show')
     this.tooltip.classList.add('hide')
   }
@@ -123,6 +138,9 @@ export default class PbPopover extends PbEnhancedElement {
   toggleTooltip() {
     this.tooltip.classList.toggle('show')
     this.tooltip.classList.toggle('hide')
+
+    const open = this.tooltip.classList.contains('show')
+    if (!open) this.stopCloseTooltipCheck()
   }
 
   get triggerElement() {
