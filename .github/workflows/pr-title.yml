@@ -1,0 +1,12 @@
+name: PR title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  pr-title:
+    uses: powerhome/github-actions-workflows/.github/workflows/pr-title.yml@fb0b02b96be72ccf70a71ed2a56c9621aa731d89 # main
