@@ -27,7 +27,7 @@
   "devDependencies": {
     "@tiptap/core": "3.0.7",
     "@tiptap/extension-document": "3.0.7",
-    "@tiptap/extension-highlight": "3.0.7",
+    "@tiptap/extension-highlight": "3.32.2",
     "@tiptap/extension-horizontal-rule": "3.0.7",
     "@tiptap/extension-link": "3.0.7",
     "@tiptap/extension-paragraph": "3.0.7",
