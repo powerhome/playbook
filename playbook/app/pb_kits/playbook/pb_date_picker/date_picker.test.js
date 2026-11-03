@@ -6,6 +6,7 @@ import DatePicker from './_date_picker'
 import DateTime from "../pb_kit/dateTime.ts"
 import { getTimezoneText } from './plugins/timeSelect'
 
+jest.useFakeTimers();
 jest.setSystemTime(new Date('01/01/2020'));
 const DEFAULT_DATE = new Date()
 

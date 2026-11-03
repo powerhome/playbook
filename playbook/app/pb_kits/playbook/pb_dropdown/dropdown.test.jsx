@@ -903,11 +903,12 @@ describe("quickpick Last Month range when current month is shorter than the prev
   }
 
   beforeEach(() => {
+    jest.useFakeTimers()
     jest.setSystemTime(new Date(2026, 3, 15, 12, 0, 0))
   })
 
   afterEach(() => {
-    jest.setSystemTime()
+    jest.useRealTimers()
   })
 
   test("selecting Last Month matches DateTime previous-month range (full March when today is in April)", async () => {
