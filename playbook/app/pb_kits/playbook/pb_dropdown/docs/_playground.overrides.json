@@ -219,6 +219,9 @@
       "props": [
         "separators",
         "formPillProps",
+        "enablePillReorder",
+        "externalDragHandle",
+        "showPillIndex",
         "activeStyle",
         "dark",
         "disabled"
@@ -386,6 +389,9 @@
     "searchbar": { "structureMode": "async" },
     "requiredIndicator": { "requires": "label" },
     "formPillProps": { "requires": "multiSelect" },
+    "enablePillReorder": { "requires": "multiSelect" },
+    "externalDragHandle": { "requires": "enablePillReorder" },
+    "showPillIndex": { "requires": "multiSelect" },
     "rangeEndsToday": { "requires": { "variant": "quickpick" } },
     "controlsStartId": { "requires": { "variant": "quickpick" } },
     "controlsEndId": { "requires": { "variant": "quickpick" } },
@@ -416,7 +422,7 @@
     },
     "multi_options": {
       "when": { "multiSelect": true },
-      "message": "Multi-select returns arrays of selected options. Use formPillProps to adjust the selected-pill appearance and clearable to let users reset the selection.",
+      "message": "Multi-select returns arrays of selected options. Use formPillProps to adjust the selected-pill appearance and clearable to let users reset the selection. Opt into enablePillReorder to drag pills into a new priority order.",
       "type": "info"
     },
     "autocomplete_info": {

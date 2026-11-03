@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.8.1
-FROM --platform=linux/amd64 ruby:3.3.11-bookworm@sha256:ce11b66eb29db7f53214d37e2f475e156f30631c34ee4d540802270f1fd97d33 AS base
+FROM --platform=linux/amd64 ruby:3.4.10-bookworm@sha256:12d05ecb31a5704f02a6a7df77dab6dcae4be62efa09ef003ea36a307685b9bc AS base
 
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

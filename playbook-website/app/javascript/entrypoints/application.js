@@ -10,6 +10,8 @@ import 'playbook-ui/dist/playbook-rails.js'
 import 'playbook-ui/dist/playbook-rails-charts.js'
 import '../../../../playbook/app/javascript/playbook-doc.js'
 import "@powerhome/playbook-icons/css/pb-icons.css"
+import 'maplibre-gl/dist/maplibre-gl.css'
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 
 import '../site_styles/main.scss'
 
