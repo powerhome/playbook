@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
     "fonts/**/*",
     "lib/*.rb",
     "lib/playbook/**/*",
-    "dist/assets/*",
     "dist/chunks/*",
     "dist/ai/**/*",
     "dist/playbook.css",
