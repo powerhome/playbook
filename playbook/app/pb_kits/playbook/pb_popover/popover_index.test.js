@@ -44,6 +44,14 @@ const clickOutside = async () => {
   await flush();
 };
 
+const recordToggleEvents = () => {
+  const events = [];
+  const record = (event) => events.push(event.type);
+  document.addEventListener("pb:popover:open", record);
+  document.addEventListener("pb:popover:close", record);
+  return events;
+};
+
 describe("PbPopover (Rails)", () => {
   beforeAll(() => {
     PbPopover.start();
@@ -162,6 +170,25 @@ describe("PbPopover (Rails)", () => {
     await flush();
 
     expect(hide).not.toHaveBeenCalled();
+  });
+
+  test("announces each open and close once", async () => {
+    renderPopover();
+    await flush();
+    const events = recordToggleEvents();
+
+    await clickTrigger();
+    await clickOutside();
+    await clickOutside();
+    await clickTrigger();
+    await clickTrigger();
+
+    expect(events).toEqual([
+      "pb:popover:open",
+      "pb:popover:close",
+      "pb:popover:open",
+      "pb:popover:close",
+    ]);
   });
 
   test("closes inside with any mode", async () => {

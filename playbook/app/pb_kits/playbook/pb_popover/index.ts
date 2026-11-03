@@ -140,8 +140,11 @@ export default class PbPopover extends PbEnhancedElement {
 
   hideTooltip() {
     this.stopCloseTooltipCheck()
+    if (!this.tooltip.classList.contains('show')) return
+
     this.tooltip.classList.remove('show')
     this.tooltip.classList.add('hide')
+    this.dispatchToggle(false)
   }
 
   toggleTooltip() {
@@ -150,6 +153,11 @@ export default class PbPopover extends PbEnhancedElement {
 
     const open = this.tooltip.classList.contains('show')
     if (!open) this.stopCloseTooltipCheck()
+    this.dispatchToggle(open)
+  }
+
+  dispatchToggle(open: boolean) {
+    this.element.dispatchEvent(new CustomEvent(open ? 'pb:popover:open' : 'pb:popover:close', { bubbles: true }))
   }
 
   get triggerElement() {
