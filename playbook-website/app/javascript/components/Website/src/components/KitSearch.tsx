@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Typeahead, Pill, Flex, Title, Icon, Body, Caption } from 'playbook-ui'
-import { matchSorter } from 'match-sorter'
+import { searchItems } from '../utils/searchItems'
 import { useDarkMode } from '../contexts/DarkModeContext'
 
 type Kit = {
@@ -177,9 +177,7 @@ const KitSearch = ({ classname, id, kits, platform = 'react', global_props_and_t
     // Drop the same separators normalizePropName ignores so both match.
     const searchableQuery = stripPropSeparators(query) || query
 
-    return sortBySearchGroup(matchSorter(kitsAndGuidelines, searchableQuery, {
-      keys: ['label', normalizedSearchTerms],
-    }))
+    return sortBySearchGroup(searchItems(kitsAndGuidelines, searchableQuery, ['label', normalizedSearchTerms]))
   }, [kitsAndGuidelines, query])
 
   useEffect(() => {

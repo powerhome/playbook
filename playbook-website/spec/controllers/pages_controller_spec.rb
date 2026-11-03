@@ -23,6 +23,15 @@ RSpec.describe PagesController, type: :controller do
       expect(response).to render_template("application")
     end
 
+    it "keeps pagination demo data deterministic across requests" do
+      get :application, params: { page: 2 }
+
+      expect(assigns(:users)).to eq(["Demo User 3", "Demo User 4"])
+      expect(assigns(:users).total_entries).to eq(9)
+      expect(assigns(:extra_users)).to eq(["Demo User 3", "Demo User 4"])
+      expect(assigns(:extra_users).total_entries).to eq(2000)
+    end
+
     it "returns guide content for getting started dependencies guide" do
       @request.env["PATH_INFO"] = "/guides/getting_started/dependencies"
       get :application, params: { page: "dependencies" }, format: :json
