@@ -4,6 +4,7 @@ import { render, screen } from "../utilities/test-utils";
 import WeekdayStacked from "./_weekday_stacked";
 
 const TEST_DATE = "01/01/2020 00:00:000 GMT-0500";
+jest.useFakeTimers();
 jest.setSystemTime(new Date(TEST_DATE));
 const testId = "weekdaystacked-kit";
 const realDate = Date;

@@ -6,6 +6,10 @@ import DatePicker from './_date_picker'
 import DateTime from "../pb_kit/dateTime.ts"
 import { getTimezoneText } from './plugins/timeSelect'
 
+// Freeze Date while letting Flatpickr updates and waitFor polling run normally.
+jest.useFakeTimers({
+  doNotFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval', 'requestAnimationFrame', 'cancelAnimationFrame'],
+});
 jest.setSystemTime(new Date('01/01/2020'));
 const DEFAULT_DATE = new Date()
 
