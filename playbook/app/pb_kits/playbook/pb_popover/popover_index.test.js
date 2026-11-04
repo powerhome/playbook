@@ -1,6 +1,8 @@
 /* eslint-env jest */
 import PbPopover from "./index";
 
+jest.useFakeTimers();
+
 const TRIGGER_ID = "popover-trigger";
 const TOOLTIP_ID = "popover-tooltip";
 
