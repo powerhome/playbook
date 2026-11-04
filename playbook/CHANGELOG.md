@@ -1,10 +1,9 @@
-# Awesome Release Title Here!
-
+# ⏳ Dropdown Kit: Getting Ahead Without Typeahead
 ##### November 04, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
-Your feature description goes here.
+We’ve expanded the Dropdown Kit with features that make it a more versatile option for managing selections, including draggable pills, option creation, and asynchronous search. With these additions, Dropdown Kit offers the functionality available in Typeahead and is the recommended kit to use moving forward.
 
 [18.3.0](https://github.com/powerhome/playbook/tree/18.3.0) full list of changes:
 
