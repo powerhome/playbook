@@ -1,3 +1,5 @@
 The `columnVisibilityControl` prop also allows for greater control over the columnVisibility state. Devs can manage state themselves by passing in `value` and `onChange` as shown.
 
-The additional `onColumnVisibilityChange` provides a callback with the current state as the argument if needed. 
+The additional `onColumnVisibilityChange` provides a callback with the current state as the argument if needed.
+
+`showSelectAll` uses the same controlled state. A bulk change calls `onChange` and `onColumnVisibilityChange`.
