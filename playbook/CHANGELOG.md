@@ -1,3 +1,67 @@
+# Awesome Release Title Here!
+
+##### November 04, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Your feature description goes here.
+
+[18.3.0](https://github.com/powerhome/playbook/tree/18.3.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Rich Text Editor Kit: Bundle Tiptap Instead Of Loading from Cdn for Rails [\#6868](https://github.com/powerhome/playbook/pull/6868) ([ryanmrodriguez](https://github.com/ryanmrodriguez))
+- Dropdown Kit: Add Draggable Pills Functionality [\#6853](https://github.com/powerhome/playbook/pull/6853) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Global Onclick Prop: Date Time, Date Time Stacked, Time Range Inline, Time Stacked, Timestamp [\#6847](https://github.com/powerhome/playbook/pull/6847) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Global Onclick Prop: Avatar, Contact, Image, Person, User, Userbadge [\#6844](https://github.com/powerhome/playbook/pull/6844) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Global Onclick Prop: Label Pill, Pill, Online Status, Source, and Stat Change [\#6826](https://github.com/powerhome/playbook/pull/6826) ([nickamantia](https://github.com/nickamantia))
+- Global Onclick Prop: Timeline.item, Progressstepitem, and Legend [\#6817](https://github.com/powerhome/playbook/pull/6817) ([kangaree](https://github.com/kangaree))
+- Global Onclick Prop: Date, Date Range Inline, Date Range Stacked, Date Stacked, Date Year Stacked, and Weekday Stacked [\#6860](https://github.com/powerhome/playbook/pull/6860) ([nidaqg](https://github.com/nidaqg))
+- Filter Kit: One Click Sort [\#6814](https://github.com/powerhome/playbook/pull/6814) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dropdown Kit: Allowoptioncreation Prop + Native React Form Support [\#6782](https://github.com/powerhome/playbook/pull/6782) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Playbook Website: Reduce Unnecessary Dependencies [\#6885](https://github.com/powerhome/playbook/pull/6885) ([nidaqg](https://github.com/nidaqg))
+- Bump Protocol-buffers-schema from 3.6.0 to 3.6.1 [\#6884](https://github.com/powerhome/playbook/pull/6884) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Changelog for Rc 18.3.0-rc.2 [\#6878](https://github.com/powerhome/playbook/pull/6878) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Map Kit: Update Map Kit Docs and Website Imports for Css [\#6876](https://github.com/powerhome/playbook/pull/6876) ([nidaqg](https://github.com/nidaqg))
+- Add Test for Vite Preload Rename [\#6873](https://github.com/powerhome/playbook/pull/6873) ([nidaqg](https://github.com/nidaqg))
+- Bump Crass from 1.0.7 to 1.0.8 In /playbook [\#6866](https://github.com/powerhome/playbook/pull/6866) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Crass from 1.0.7 to 1.0.8 In /playbook-website [\#6864](https://github.com/powerhome/playbook/pull/6864) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Selectable Card Icon and Selectable Icon Kits: No Hover on Icon [\#6863](https://github.com/powerhome/playbook/pull/6863) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Update Dependency Vite to V6.4.5 [security] [\#6862](https://github.com/powerhome/playbook/pull/6862) ([renovate[bot]](https://github.com/renovate[bot]))
+- Update Tooling to Account for Compromise [\#6861](https://github.com/powerhome/playbook/pull/6861) ([nidaqg](https://github.com/nidaqg))
+- Update Dependency Highcharts to V11.4.9 [security] [\#6859](https://github.com/powerhome/playbook/pull/6859) ([renovate[bot]](https://github.com/renovate[bot]))
+- Fixing Vulnerability In Github Action [\#6858](https://github.com/powerhome/playbook/pull/6858) ([nidaqg](https://github.com/nidaqg))
+- Ruby Update to V3.4.10 [\#6854](https://github.com/powerhome/playbook/pull/6854) ([nidaqg](https://github.com/nidaqg))
+- Consolidate Eslint In Playbook Repo [\#6848](https://github.com/powerhome/playbook/pull/6848) ([nidaqg](https://github.com/nidaqg))
+- Clean Up Website Dependencies and Add Ci Test Coverage [\#6846](https://github.com/powerhome/playbook/pull/6846) ([nidaqg](https://github.com/nidaqg))
+- Remove Unused Turbo Dependencies [\#6843](https://github.com/powerhome/playbook/pull/6843) ([nidaqg](https://github.com/nidaqg))
+- Changelog for 18.3.0.pre.rc.1 [\#6837](https://github.com/powerhome/playbook/pull/6837) ([kangaree](https://github.com/kangaree))
+- Update Bundler to 4.0.22 [\#6836](https://github.com/powerhome/playbook/pull/6836) ([nidaqg](https://github.com/nidaqg))
+- Remove Unused Actions Dependencies and Vulnerable Transitive Packages [\#6835](https://github.com/powerhome/playbook/pull/6835) ([nidaqg](https://github.com/nidaqg))
+- Bump Msgpack from 1.7.2 to 1.8.2 In /playbook-website [\#6833](https://github.com/powerhome/playbook/pull/6833) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Cross-spawn from 6.0.5 to 6.0.6 [\#6832](https://github.com/powerhome/playbook/pull/6832) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Rexml from 3.2.6 to 3.4.2 In /playbook [\#6831](https://github.com/powerhome/playbook/pull/6831) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Form-data from 3.0.4 to 3.0.5 [\#6830](https://github.com/powerhome/playbook/pull/6830) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump Js-yaml from 3.14.1 to 3.15.2 [\#6829](https://github.com/powerhome/playbook/pull/6829) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump browserslist from 4.21.4 to 4.29.5 [\#6775](https://github.com/powerhome/playbook/pull/6775) ([dependabot[bot]](https://github.com/dependabot[bot])), ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Typeahead Kit: Draggable Pills Improve Drag-and-Drop Discoverability [\#6792](https://github.com/powerhome/playbook/pull/6792) ([kangaree](https://github.com/kangaree)), ([edwardsaleeby](https://github.com/edwardsaleeby))
+- Bump rollup from 4.42.0 to 4.64.6 [\#6767](https://github.com/powerhome/playbook/pull/6767) ([dependabot[bot]](https://github.com/dependabot[bot])), ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Bump vite from 6.4.3 to 6.4.4 [\#6811](https://github.com/powerhome/playbook/pull/6811) ([dependabot[bot]](https://github.com/dependabot[bot])), ([nidaqg](https://github.com/nidaqg))
+- Fixes for github actions re ruby, ubuntu and python versions [\#6827](https://github.com/powerhome/playbook/pull/6827) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website - Improve Form Documentation for React Hook Forms [\#6788](https://github.com/powerhome/playbook/pull/6788) ([nickamantia](https://github.com/nickamantia)), ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Typeahead Kit: Form Validation Bug [\#6838](https://github.com/powerhome/playbook/pull/6838) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Richtexteditor Kit: Required_indicator Appears on Second Label Line - Rails [\#6828](https://github.com/powerhome/playbook/pull/6828) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Full Screen Kit: Advanced Table Flush Sticky Header - React [\#6821](https://github.com/powerhome/playbook/pull/6821) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v18.3.0-rc.2...18.3.0)
+
+
 # ✍️ Your Forms, Your Rules, Your Messages!
 ##### October 22, 2026
 
