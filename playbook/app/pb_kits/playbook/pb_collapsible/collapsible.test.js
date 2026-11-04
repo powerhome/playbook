@@ -11,8 +11,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  // eslint-disable-next-line
-  console.error.mockRestore()
+  jest.restoreAllMocks()
 })
 
 const testId = 'collapsible1',
