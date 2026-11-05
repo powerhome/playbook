@@ -37,7 +37,10 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
 
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
-    apt-get update -y && apt-get install -y --no-install-recommends \
+    apt-get -o Acquire::Retries=0 update -y && \
+    apt-get -o Acquire::Retries=0 install -y --only-upgrade apt && \
+    dpkg --compare-versions "$(dpkg-query -W -f='${Version}' apt)" ge 2.6.2 && \
+    apt-get -o Acquire::Retries=0 install -y --no-install-recommends \
     build-essential \
     ca-certificates \
     default-libmysqlclient-dev \
