@@ -1751,12 +1751,14 @@ test("column visibility select all stays in sync with grouped columns", () => {
   expect(checkboxNamed("Deselect All")).toBeChecked()
   expect(checkboxNamed("Enrollment Data")).toBeChecked()
 
+  const headerRowCount = kit.querySelectorAll("thead tr").length
   fireEvent.click(checkboxNamed("Deselect All"))
 
   expect(onColumnVisibilityChange).toHaveBeenCalledWith(expect.objectContaining({
     enrollmentData: false,
     year: true,
   }))
+  expect(kit.querySelectorAll("thead tr")).toHaveLength(headerRowCount)
   expect(checkboxNamed("Select All")).not.toBeChecked()
   expect(checkboxNamed("Enrollment Data")).not.toBeChecked()
   expect(checkboxNamed("New Enrollments")).not.toBeChecked()
@@ -1776,5 +1778,74 @@ test("column visibility select all stays in sync with grouped columns", () => {
   expect(checkboxNamed("Enrollment Data")).toBeChecked()
   expect(headerTexts(kit).some((text) => text.includes("New Enrollments"))).toBe(true)
   expect(headerTexts(kit).some((text) => text.includes("Scheduled Meetings"))).toBe(true)
+})
+
+test("deselect all keeps nested multi-header rows", () => {
+  const nestedColumnDefinitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      id: "year",
+    },
+    {
+      label: "Enrollment Data",
+      id: "enrollmentData",
+      columns: [
+        {
+          label: "Enrollment Stats",
+          id: "enrollmentStats",
+          columns: [
+            {
+              accessor: "newEnrollments",
+              label: "New Enrollments",
+              id: "newEnrollments",
+            },
+            {
+              accessor: "scheduledMeetings",
+              label: "Scheduled Meetings",
+              id: "scheduledMeetings",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Performance Data",
+      id: "performanceData",
+      columns: [
+        {
+          label: "Attendance",
+          id: "attendance",
+          columns: [
+            {
+              accessor: "attendanceRate",
+              label: "Attendance Rate",
+              id: "attendanceRate",
+            },
+          ],
+        },
+      ],
+    },
+  ]
+
+  render(
+    <AdvancedTable
+        columnDefinitions={nestedColumnDefinitions}
+        columnVisibilityControl={{ showSelectAll: true }}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit.querySelectorAll("thead tr")).toHaveLength(3)
+
+  openColumnVisibilityMenu()
+  fireEvent.click(checkboxNamed("Deselect All"))
+
+  expect(kit.querySelectorAll("thead tr")).toHaveLength(3)
+  expect(headerTexts(kit).some((text) => text.includes("Year"))).toBe(true)
+  expect(headerTexts(kit).some((text) => text.includes("New Enrollments"))).toBe(false)
+  expect(headerTexts(kit).some((text) => text.includes("Attendance Rate"))).toBe(false)
 })
 

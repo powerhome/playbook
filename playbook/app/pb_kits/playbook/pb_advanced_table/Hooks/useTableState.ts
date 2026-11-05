@@ -45,6 +45,42 @@ interface UseTableStateProps {
   fullWidthCell?: boolean;
 }
 
+type GroupedHeaderColumn = {
+  columns?: GroupedHeaderColumn[];
+  getIsVisible: () => boolean;
+}
+
+type HeaderGroupReader = (() => unknown) & {
+  preservesColumnHeaderDepth?: boolean;
+}
+
+// TanStack sizes header rows from visible columns only. An empty group drops its
+// subheader rows and changes the table height, so measure depth with groups present.
+const preserveGroupedHeaderRows = (table: {
+  getAllFlatColumns: () => GroupedHeaderColumn[];
+  getHeaderGroups: HeaderGroupReader;
+}) => {
+  if (table.getHeaderGroups.preservesColumnHeaderDepth) return;
+
+  const readHeaderGroups = table.getHeaderGroups.bind(table);
+  const getHeaderGroups: HeaderGroupReader = () => {
+    const groupColumns = table.getAllFlatColumns().filter((column) => column.columns?.length);
+    const previousVisibility = groupColumns.map((column) => column.getIsVisible);
+    groupColumns.forEach((column) => {
+      column.getIsVisible = () => true;
+    });
+    try {
+      return readHeaderGroups();
+    } finally {
+      groupColumns.forEach((column, index) => {
+        column.getIsVisible = previousVisibility[index];
+      });
+    }
+  };
+  getHeaderGroups.preservesColumnHeaderDepth = true;
+  table.getHeaderGroups = getHeaderGroups;
+}
+
 export function useTableState({
   tableData,
   columnDefinitions,
@@ -235,6 +271,8 @@ export function useTableState({
     ...paginationInitializer,
     ...tableOptions,
   });
+
+  preserveGroupedHeaderRows(table);
 
   // Handle row pinning changes
     useEffect(() => {

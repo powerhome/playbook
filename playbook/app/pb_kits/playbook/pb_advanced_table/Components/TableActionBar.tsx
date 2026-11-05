@@ -105,7 +105,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
       }
     };
     return (
-      <>
+      <React.Fragment key={node.id}>
         <Checkbox
             checked={allOn}
             indeterminate={!allOn && someOn}
@@ -120,7 +120,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
             child.children ? renderGroup(child) : renderLeaf(child.id, child.label),
           )}
         </Flex>
-      </>
+      </React.Fragment>
     );
   };
 // ------------ End of column visibility logic --------
