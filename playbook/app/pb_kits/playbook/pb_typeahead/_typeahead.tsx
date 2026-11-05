@@ -149,7 +149,10 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     showPillIndex = false,
     styles: stylesProp,
     ...props
-  }: TypeaheadProps) => {
+  }: TypeaheadProps, _ref) => {
+    // Accept the ref without attaching it, preserving the existing ref behavior.
+    void _ref
+
     // State to manage the input value when preserveSearchInput is true
     const [inputValue, setInputValue] = useState("")
     // State to track if form has been submitted to control validation display for react rendered rails kit

@@ -69,7 +69,10 @@ const Textarea = ({
   rows = 4,
   value,
   ...props
-}: TextareaProps) => {
+}: TextareaProps, _ref: React.ForwardedRef<unknown>) => {
+  // Accept the ref without attaching it, preserving the existing ref behavior.
+  void _ref
+
   const ref = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
     if (ref.current && resize === 'auto') {
