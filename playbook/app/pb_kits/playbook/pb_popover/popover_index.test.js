@@ -161,6 +161,34 @@ describe("PbPopover (Rails)", () => {
   });
 
   describe("#disconnect", () => {
+    describe.each([
+      ["removed", true],
+      ["mounted", false],
+    ])("when the old panel is %s", (_state, removeOldPanel) => {
+      test("preserves the replacement panel", async () => {
+        const container = renderPopover();
+        const kit = kitIn(container);
+        kit.dataset.pbPopoverAppendTo = "parent";
+        await flush();
+        await clickTrigger();
+        const oldPanel = tooltip();
+        const replacement = oldPanel.cloneNode(true);
+        replacement.classList.replace("show", "hide");
+
+        kit.remove();
+        if (removeOldPanel) oldPanel.remove();
+        kit.appendChild(replacement);
+        container.appendChild(kit);
+        await flush();
+
+        expect(document.querySelectorAll(`[id='${TOOLTIP_ID}']`)).toHaveLength(1);
+        expect(tooltip()).toBe(replacement);
+        expect(oldPanel.isConnected).toBe(false);
+        await clickTrigger();
+        expect(isOpen()).toBe(true);
+      });
+    });
+
     test("reclaims the tooltip", async () => {
       const container = renderPopover();
       await flush();

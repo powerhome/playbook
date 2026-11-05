@@ -87,7 +87,11 @@ export default class PbPopover extends PbEnhancedElement {
       this._triggerClickHandler = null
     }
     this.popper?.destroy()
-    if (this.tooltip) this.element.appendChild(this.tooltip)
+    if (this.tooltip) {
+      const replacement = this.element.querySelector(`#${this.tooltipId}`)
+      if (replacement && replacement !== this.tooltip) this.tooltip.remove()
+      else this.element.appendChild(this.tooltip)
+    }
   }
 
   checkCloseTooltip() {
