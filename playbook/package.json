@@ -80,7 +80,7 @@
     "@floating-ui/react": "^0.26.23",
     "@rollup/pluginutils": "^5.1.0",
     "@tanstack/react-table": "8.20.5",
-    "@tanstack/react-virtual": "^3.12.0",
+    "@tanstack/react-virtual": "^3.14.25",
     "@testing-library/jest-dom": "6.7.0",
     "@testing-library/react": "11.2.7",
     "@tiptap/core": "3.0.7",
