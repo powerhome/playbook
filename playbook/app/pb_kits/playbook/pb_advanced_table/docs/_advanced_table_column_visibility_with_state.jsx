@@ -50,6 +50,7 @@ const AdvancedTableColumnVisibilityWithState = (props) => {
     value: columnVisibility,
     onChange: setColumnVisibility,
     onColumnVisibilityChange: (currentState) => console.log(currentState),
+    showSelectAll: true,
   }
   return (
     <div>

@@ -213,7 +213,7 @@ const isToggleExpansionEnabled =
             : undefined,
         }}
     >
-      {header?.isPlaceholder ? null : headerChildren && header?.index === 0 ? (
+      {header?.isPlaceholder ? "\u00A0" : headerChildren && header?.index === 0 ? (
         <Flex alignItems="center">
           {headerChildren}
           <div>
