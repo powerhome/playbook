@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playbook-mcp
+  labels:
+    app: playbook-mcp
+  annotations:
+    krane.shopify.io/required-rollout: "maxUnavailable"
+<%
+  replica_count = 2
+  replica_count = replicas if defined?(replicas) && !replicas.nil?
+  replica_count = appConfig["replicas"] if defined?(appConfig) && appConfig.is_a?(Hash) && appConfig["replicas"]
+  asset_base = ""
+  if defined?(ingress) && ingress.is_a?(Hash) && ingress["hosts"].is_a?(Array) && ingress["hosts"].first
+    asset_base = ingress["hosts"].first.to_s.sub(%r{/\z}, "")
+  end
+%>
+spec:
+  replicas: <%= replica_count %>
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: playbook-mcp
+  template:
+    metadata:
+      labels:
+        app: playbook-mcp
+    spec:
+      # Sticky sessions recommended at the ingress for Streamable HTTP MCP sessions.
+      containers:
+        - name: playbook-mcp
+          image: "image-registry.powerapp.cloud/playbook/playbook-mcp:<%= image_tag %>"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3099
+          env:
+            - name: PORT
+              value: "3099"
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: playbook-mcp
+                  key: secret-key-base
+            - name: RACK_ENV
+              value: <%= appConfig["rackEnv"] %>
+            - name: RAILS_ENV
+              value: <%= appConfig["railsEnv"] %>
+            - name: RAILS_SERVE_STATIC_FILES
+              value: "true"
+            - name: RAILS_LOG_TO_STDOUT
+              value: "true"
+            - name: PLAYBOOK_MCP_DISABLE_HOST_CHECK
+              value: "1"
+            - name: PLAYBOOK_MCP_ASSET_BASE_URL
+              value: "<%= asset_base %>"
+            - name: PLAYBOOK_MCP_RATE_LIMIT_MAX
+              value: "60"
+            - name: PLAYBOOK_MCP_RATE_LIMIT_WINDOW
+              value: "60"
+            - name: PLAYBOOK_MCP_ALLOWLIST
+              valueFrom:
+                secretKeyRef:
+                  name: playbook-mcp
+                  key: allowlist
+            - name: PLAYBOOK_MCP_TRUSTED_PROXIES
+              value: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+            - name: PLAYBOOK_MCP_MAX_PROPS_BYTES
+              value: "65536"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3099
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3099
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi

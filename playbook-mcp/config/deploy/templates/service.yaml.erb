@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: playbook-mcp
+  labels:
+    app: playbook-mcp
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3099
+      protocol: TCP
+      name: playbook-mcp
+  selector:
+    app: playbook-mcp
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 3600
