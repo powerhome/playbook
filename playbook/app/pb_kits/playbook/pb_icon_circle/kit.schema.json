@@ -66,6 +66,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { IconCircle } from 'playbook-ui'",
