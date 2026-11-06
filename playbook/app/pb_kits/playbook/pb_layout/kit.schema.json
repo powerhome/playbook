@@ -20,13 +20,17 @@
         "lg",
         "xl"
       ],
-      "default": "xs"
+      "default": {
+        "react": "md",
+        "rails": "xs"
+      }
     },
     "dark": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "full": {
       "type": "boolean",
@@ -62,15 +66,21 @@
         "react",
         "rails"
       ],
-      "values": [
-        "sm",
-        "md",
-        "lg"
-      ],
-      "default": {
-        "react": "sm",
-        "rails": "md"
-      }
+      "values": {
+        "react": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "rails": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "default": "md"
     },
     "variant": {
       "type": "enum",
@@ -99,15 +109,25 @@
         "react",
         "rails"
       ],
-      "values": [
-        "sidebar",
-        "collection",
-        "collection_detail",
-        "kanban",
-        "content",
-        "masonry",
-        "bracket"
-      ],
+      "values": {
+        "react": [
+          "sidebar",
+          "collection",
+          "collection_detail",
+          "kanban",
+          "content",
+          "masonry",
+          "bracket"
+        ],
+        "rails": [
+          "sidebar",
+          "collection",
+          "collection_detail",
+          "kanban",
+          "content",
+          "masonry"
+        ]
+      },
       "default": "sidebar"
     }
   },

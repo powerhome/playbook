@@ -52,6 +52,16 @@ export function resolveSchemaType(
   return typeof resolved === "string" ? resolved : undefined;
 }
 
+/** Resolve kit schema enum `values` for one platform (handles `{ react, rails }` merge shape). */
+export function resolveSchemaValues(
+  def?: PropDefinition,
+  platform: SchemaPlatform = "react"
+): string[] | undefined {
+  if (!def || def.values === undefined) return undefined;
+  const resolved: unknown = resolvePlatformSplit<unknown>(def.values, platform);
+  return Array.isArray(resolved) ? resolved : undefined;
+}
+
 /** Example value for object/array prop dialogs — prefers playground config defaults over schema. */
 export function getPlaygroundPropExampleValue(
   name: string,

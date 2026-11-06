@@ -6,7 +6,6 @@
     "closeOnClick": "outside",
     "offset": true,
     "show": false,
-    "shouldClosePopover": "noop",
     "placement": "top"
   },
   "children": {

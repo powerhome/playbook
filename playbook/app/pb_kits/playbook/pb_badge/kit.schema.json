@@ -11,13 +11,15 @@
       "type": "GenericObject",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": {}
     },
     "removeIcon": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "removeOnClick": {
       "type": "function",
@@ -52,16 +54,28 @@
         "react",
         "rails"
       ],
-      "values": [
-        "error",
-        "info",
-        "neutral",
-        "notification",
-        "notificationError",
-        "primary",
-        "success",
-        "warning"
-      ],
+      "values": {
+        "react": [
+          "error",
+          "info",
+          "neutral",
+          "notification",
+          "notificationError",
+          "primary",
+          "success",
+          "warning"
+        ],
+        "rails": [
+          "success",
+          "warning",
+          "error",
+          "info",
+          "neutral",
+          "notification",
+          "notification_error",
+          "primary"
+        ]
+      },
       "default": "neutral"
     }
   },
@@ -73,7 +87,7 @@
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"badge\", props: { variant: \"error\" }) %>"
+      "example": "<%= pb_rails(\"badge\", props: { variant: \"success\" }) %>"
     }
   }
 }

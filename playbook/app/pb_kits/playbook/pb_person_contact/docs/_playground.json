@@ -2,8 +2,6 @@
   "template": "<PersonContact{{props}} />",
   "propTargets": {},
   "defaults": {
-    "firstName": "Pauline",
-    "lastName": "Smith",
     "contacts": [
       {
         "contactType": "email",
@@ -16,7 +14,9 @@
         "contactType": "work",
         "contactValue": "3245627482"
       }
-    ]
+    ],
+    "firstName": "Pauline",
+    "lastName": "Smith"
   },
   "groups": [
     {

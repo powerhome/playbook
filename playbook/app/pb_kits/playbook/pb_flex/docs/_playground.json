@@ -18,6 +18,9 @@
     "reverse": false,
     "vertical": "top",
     "align": "none",
+    "gap": "none",
+    "rowGap": "none",
+    "columnGap": "none",
     "wrap": false,
     "alignSelf": "none"
   },

@@ -2,13 +2,14 @@
   "template": "<IconStatValue{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "orientation": "horizontal",
     "size": "md",
     "text": "Avg. session",
     "unit": "hrs",
+    "value": 1428,
     "variant": "default",
-    "icon": "chart-line",
-    "value": 1428
+    "icon": "chart-line"
   },
   "groups": [
     {
