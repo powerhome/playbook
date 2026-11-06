@@ -107,16 +107,16 @@ function generateBaseConfig(schema, kitName) {
   // Extract defaults from schema (use React side when `{ react, rails }` split)
   const defaults = {};
   for (const [name, prop] of Object.entries(reactProps)) {
-    if (prop.default !== undefined && prop.default !== null) {
-      const schemaDefault = prop.default;
-      defaults[name] =
-        schemaDefault !== null &&
-        typeof schemaDefault === 'object' &&
-        !Array.isArray(schemaDefault) &&
-        Object.prototype.hasOwnProperty.call(schemaDefault, 'react')
-          ? schemaDefault.react
-          : schemaDefault;
-    }
+    const schemaDefault = prop.default;
+    const reactDefault =
+      schemaDefault !== null &&
+      typeof schemaDefault === 'object' &&
+      !Array.isArray(schemaDefault) &&
+      Object.prototype.hasOwnProperty.call(schemaDefault, 'react')
+        ? schemaDefault.react
+        : schemaDefault;
+    // Skip null/undefined after resolving the React side so a split `react: null` leaves the prop unset.
+    if (reactDefault !== undefined && reactDefault !== null) defaults[name] = reactDefault;
   }
   
   // Build base config

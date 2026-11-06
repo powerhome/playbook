@@ -372,7 +372,7 @@ function extractDefaults(content, props) {
 }
 
 const isLiteralDefault = (val) =>
-  isQuoted(val) || ['true', 'false', 'null', 'undefined', '{}', '[]'].includes(val) || (val !== '' && !isNaN(val));
+  isQuoted(val) || ['true', 'false', 'null', '{}', '[]'].includes(val) || (val !== '' && !isNaN(val));
 
 /** Split on commas that are not nested inside (), [] or {}. */
 function splitTopLevel(str) {

@@ -51,10 +51,7 @@
         "react",
         "rails"
       ],
-      "default": {
-        "react": null,
-        "rails": ""
-      }
+      "default": ""
     },
     "size": {
       "type": "enum",

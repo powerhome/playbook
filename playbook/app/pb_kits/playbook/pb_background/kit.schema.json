@@ -11,8 +11,7 @@
       "type": "string",
       "platforms": [
         "react"
-      ],
-      "default": null
+      ]
     },
     "backgroundColor": {
       "type": {
