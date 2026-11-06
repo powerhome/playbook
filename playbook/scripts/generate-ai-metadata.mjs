@@ -12,7 +12,8 @@
  *   4. Generate descriptions from component names
  * 
  * Limitations (regex-based parsing):
- *   - Only parses `type XProps = {}` patterns, not interfaces
+ *   - Parses `type XProps` / `XPropTypes` object types; falls back to `type XType = {}`
+ *     (e.g. ImageType, LightboxType) when no Props/PropTypes match. Not interfaces.
  *   - May miss composed/extended types
  *   - Imported prop types are not followed
  * 
@@ -375,9 +376,14 @@ function parseTypeScript(filePath) {
   const imports = extractImports(content, filePath);
 
   const props = {};
-  const typeRegex = /type\s+(\w*(?:Props|PropTypes))\s*=\s*\{/g;
-  
-  for (const match of content.matchAll(typeRegex)) {
+  // Prefer Props/PropTypes so utility aliases like SizeResponsiveType are ignored when
+  // a real props type exists. Fall back to *Type for legacy kits (ImageType, LightboxType).
+  const preferredMatches = [...content.matchAll(/type\s+(\w*(?:Props|PropTypes))\s*=\s*\{/g)];
+  const typeMatches = preferredMatches.length > 0
+    ? preferredMatches
+    : [...content.matchAll(/type\s+(\w+Type)\s*=\s*\{/g)];
+
+  for (const match of typeMatches) {
     const block = extractBracedContent(content, match.index + match[0].length);
     Object.assign(props, parseTypeBlock(block, imports));
   }
