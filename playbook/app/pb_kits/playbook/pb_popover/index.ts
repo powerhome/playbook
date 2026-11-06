@@ -13,6 +13,10 @@ export default class PbPopover extends PbEnhancedElement {
   _tooltip: HTMLElement
   element: HTMLElement
   _unsubscribeFloatingReposition: (() => void) | null = null
+  _closeOnClickHandler: ((event: MouseEvent) => void) | null = null
+  _closeOnClickTarget: HTMLElement | null = null
+  _triggerClickHandler: ((event: Event) => void) | null = null
+  _connected = false
   static get selector() {
     return '[data-pb-popover-kit]'
   }
@@ -57,29 +61,41 @@ export default class PbPopover extends PbEnhancedElement {
       },
     )
 
-    this.triggerElement.addEventListener('click', (event: Event) => {
+    this._triggerClickHandler = (event: Event) => {
       event.preventDefault()
       event.stopPropagation()
 
-      if (!this.tooltip.classList.contains('show')) {
-        this.checkCloseTooltip()
-      }
-
       setTimeout(() => {
+        if (!this._connected) return
+
         this.toggleTooltip()
         this.popper.update()
       }, 0)
-    })
+    }
+    this.triggerElement.addEventListener('click', this._triggerClickHandler)
+    if (this.tooltip.classList.contains('show')) this.checkCloseTooltip()
+    this._connected = true
   }
 
   disconnect(): void {
+    this._connected = false
     this._unsubscribeFloatingReposition?.()
     this._unsubscribeFloatingReposition = null
+    this.stopCloseTooltipCheck()
+    if (this._triggerClickHandler) {
+      this.triggerElement.removeEventListener('click', this._triggerClickHandler)
+      this._triggerClickHandler = null
+    }
     this.popper?.destroy()
+    if (this.tooltip) {
+      const replacement = this.element.querySelector(`#${this.tooltipId}`)
+      if (replacement && replacement !== this.tooltip) this.tooltip.remove()
+      else this.element.appendChild(this.tooltip)
+    }
   }
 
   checkCloseTooltip() {
-    document.querySelector('body').addEventListener('click', (event) => {
+    this._closeOnClickHandler = (event: MouseEvent) => {
       const t = event.target
       const isTooltipElement =
         event.target instanceof Element &&
@@ -112,17 +128,40 @@ export default class PbPopover extends PbEnhancedElement {
         }
         break
       }
-    }, true)
+    }
+    this._closeOnClickTarget = document.querySelector('body')
+    this._closeOnClickTarget.addEventListener('click', this._closeOnClickHandler, true)
+  }
+
+  stopCloseTooltipCheck() {
+    if (!this._closeOnClickHandler) return
+
+    this._closeOnClickTarget.removeEventListener('click', this._closeOnClickHandler, true)
+    this._closeOnClickHandler = null
+    this._closeOnClickTarget = null
   }
 
   hideTooltip() {
+    this.stopCloseTooltipCheck()
+    if (!this.tooltip.classList.contains('show')) return
+
     this.tooltip.classList.remove('show')
     this.tooltip.classList.add('hide')
+    this.dispatchToggle(false)
   }
 
   toggleTooltip() {
     this.tooltip.classList.toggle('show')
     this.tooltip.classList.toggle('hide')
+
+    const open = this.tooltip.classList.contains('show')
+    if (open) this.checkCloseTooltip()
+    else this.stopCloseTooltipCheck()
+    this.dispatchToggle(open)
+  }
+
+  dispatchToggle(open: boolean) {
+    this.element.dispatchEvent(new CustomEvent(open ? 'pb:popover:open' : 'pb:popover:close', { bubbles: true }))
   }
 
   get triggerElement() {
