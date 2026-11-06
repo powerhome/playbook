@@ -4,7 +4,7 @@ import { GlobalProps, globalProps, globalInlineProps } from '../utilities/global
 import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
-type ImageType = {
+type ImageProps = {
   alt?: string,
   aria?: {[key: string]: string},
   className?: string,
@@ -18,7 +18,7 @@ type ImageType = {
   url?: string,
 } & GlobalProps & GlobalEventProps
 
-const Image = (props: ImageType): React.ReactElement => {
+const Image = (props: ImageProps): React.ReactElement => {
   const {
     alt = '',
     aria = {},

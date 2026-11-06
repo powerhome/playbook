@@ -1,0 +1,87 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Lightbox",
+  "description": "Lightbox component",
+  "platforms": [
+    "react"
+  ],
+  "props": {
+    "currentPhotoIndex": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "description": {
+      "type": "string | any",
+      "platforms": [
+        "react"
+      ]
+    },
+    "photos": {
+      "type": "array",
+      "platforms": [
+        "react"
+      ]
+    },
+    "initialPhoto": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onClickRight": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onClose": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "navRight": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "trigger": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "title": {
+      "type": "string | any",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Lightbox } from 'playbook-ui'",
+      "example": "<Lightbox></Lightbox>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"lightbox\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

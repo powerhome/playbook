@@ -8,54 +8,81 @@
   ],
   "props": {
     "alt": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
       ]
     },
     "onError": {
+      "type": {
+        "react": "function",
+        "rails": "string"
+      },
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "string",
       "default": null
     },
-    "rounded": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "boolean",
-      "default": false
-    },
     "size": {
+      "type": "enum",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "enum",
-      "values": [
-        "xs",
-        "sm",
-        "md",
-        "lg",
-        "xl",
-        "none"
-      ],
+      "values": {
+        "react": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "rails": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "none"
+        ]
+      },
       "default": "none"
     },
-    "transition": {
+    "rounded": {
+      "type": "boolean",
       "platforms": [
+        "react",
         "rails"
       ],
+      "default": false
+    },
+    "transition": {
       "type": "enum",
-      "values": [
-        "blur",
-        "fade",
-        "scale",
-        "none"
+      "platforms": [
+        "react",
+        "rails"
       ],
+      "values": {
+        "react": [
+          "blur",
+          "fade",
+          "scale"
+        ],
+        "rails": [
+          "blur",
+          "fade",
+          "scale",
+          "none"
+        ]
+      },
       "default": "fade"
     },
     "url": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
       ]
     }
