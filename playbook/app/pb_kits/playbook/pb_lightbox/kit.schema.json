@@ -28,7 +28,8 @@
       "type": "number",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": 0
     },
     "onChange": {
       "type": "function",
@@ -52,7 +53,8 @@
       "type": "string",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": "times"
     },
     "navRight": {
       "type": "string",

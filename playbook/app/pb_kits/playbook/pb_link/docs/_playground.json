@@ -4,10 +4,13 @@
   "defaults": {
     "color": "default",
     "disabled": false,
-    "tag": "a",
-    "underline": false,
     "href": "#link-example",
-    "text": "Link text"
+    "icon": "",
+    "iconRight": "",
+    "tag": "a",
+    "target": "",
+    "text": "Link text",
+    "underline": false
   },
   "children": {
     "editable": true,

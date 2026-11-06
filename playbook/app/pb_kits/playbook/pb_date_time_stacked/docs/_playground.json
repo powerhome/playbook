@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "dark": false,
+    "timeZone": "America/New_York",
     "showCurrentYear": false
   },
   "groups": [

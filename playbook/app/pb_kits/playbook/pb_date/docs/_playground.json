@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "alignment": "left",
+    "dark": false,
     "showDayOfWeek": false,
     "showCurrentYear": false,
     "showIcon": false,

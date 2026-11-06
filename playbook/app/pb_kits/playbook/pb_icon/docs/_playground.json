@@ -4,12 +4,13 @@
   "defaults": {
     "border": false,
     "fixedWidth": true,
+    "flip": "none",
+    "icon": "user",
     "inverse": false,
     "listItem": false,
     "pulse": false,
     "fontStyle": "far",
-    "spin": false,
-    "icon": "user"
+    "spin": false
   },
   "groups": [
     {

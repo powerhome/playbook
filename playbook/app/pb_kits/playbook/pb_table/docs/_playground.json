@@ -4,16 +4,22 @@
     "colSpan": "Table.Header.props"
   },
   "defaults": {
+    "cardProps": {},
     "collapse": "sm",
     "container": true,
     "dataTable": false,
     "disableHover": false,
+    "filterProps": {},
     "headerStyle": "default",
+    "outerPadding": "",
     "responsive": "collapse",
-    "size": "md",
+    "size": "sm",
     "sticky": false,
+    "stickyLeftColumn": [],
+    "stickyRightColumn": [],
     "striped": false,
     "tag": "table",
+    "titleProps": {},
     "variant": "default",
     "contrastBorder": false,
     "verticalBorder": false

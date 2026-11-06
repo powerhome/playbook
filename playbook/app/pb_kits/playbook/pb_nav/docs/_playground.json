@@ -20,10 +20,12 @@
   },
   "defaults": {
     "borderless": false,
+    "dark": false,
     "extendedUnderline": false,
     "highlight": true,
     "orientation": "vertical",
     "link": "#",
+    "title": "",
     "variant": "normal",
     "active": false,
     "disabled": false,

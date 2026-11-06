@@ -4,6 +4,7 @@
   "defaults": {
     "checked": false,
     "checkmark": false,
+    "dark": false,
     "disabled": false,
     "multi": true,
     "bodyText": "Export",

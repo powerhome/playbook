@@ -12,7 +12,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "onError": {
       "type": {
@@ -48,7 +49,10 @@
           "none"
         ]
       },
-      "default": "none"
+      "default": {
+        "react": "",
+        "rails": "none"
+      }
     },
     "rounded": {
       "type": "boolean",
@@ -84,7 +88,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     }
   },
   "globalProps": true,

@@ -3,10 +3,10 @@
   "propTargets": {},
   "defaults": {
     "active": false,
+    "dark": false,
     "variant": "default",
     "label": "Role",
-    "value": "Administrator, Moderator",
-    "dark": false
+    "value": "Administrator, Moderator"
   },
   "groups": [
     {

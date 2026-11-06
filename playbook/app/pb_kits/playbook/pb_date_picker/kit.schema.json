@@ -51,7 +51,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": null
     },
     "disableInput": {
       "type": "boolean",
@@ -66,14 +67,16 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": null
     },
     "disableWeekdays": {
       "type": "array",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": null
     },
     "enableTime": {
       "type": "boolean",
@@ -118,27 +121,31 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "inLine": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "inputAria": {
       "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "inputData": {
       "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "inputOnChange": {
       "type": "function",
@@ -240,7 +247,10 @@
           "none"
         ]
       },
-      "default": "none"
+      "default": {
+        "react": "",
+        "rails": "none"
+      }
     },
     "showTimezone": {
       "type": "boolean",

@@ -12,7 +12,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": 0
     },
     "closeable": {
       "type": "boolean",
@@ -68,7 +69,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": true
     },
     "status": {
       "type": "enum",
@@ -107,7 +109,8 @@
       "type": "number | string",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": "max"
     }
   },
   "globalProps": true,

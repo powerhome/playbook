@@ -130,21 +130,24 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": "none"
     },
     "rowGap": {
       "type": "SizeType | SizeResponsiveType",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": "none"
     },
     "columnGap": {
       "type": "SizeType | SizeResponsiveType",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": "none"
     },
     "wrap": {
       "type": "boolean",

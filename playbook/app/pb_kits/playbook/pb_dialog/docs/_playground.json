@@ -4,6 +4,7 @@
   "defaults": {
     "closeable": true,
     "fullHeight": false,
+    "loading": false,
     "placement": "center",
     "shouldCloseOnOverlayClick": true,
     "size": "md",

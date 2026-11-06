@@ -12,7 +12,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "collapse": {
       "type": "enum",
@@ -62,7 +63,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "filterContent": {
       "type": "any",
@@ -99,7 +101,10 @@
         "lg",
         "xl"
       ],
-      "default": null
+      "default": {
+        "react": "",
+        "rails": null
+      }
     },
     "pagination": {
       "type": "ReactNode",
@@ -132,7 +137,10 @@
         "md",
         "lg"
       ],
-      "default": "md"
+      "default": {
+        "react": "sm",
+        "rails": "md"
+      }
     },
     "sticky": {
       "type": "boolean",
@@ -147,14 +155,16 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     },
     "stickyRightColumn": {
       "type": "array",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     },
     "striped": {
       "type": "boolean",
@@ -189,7 +199,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "variant": {
       "type": "enum",

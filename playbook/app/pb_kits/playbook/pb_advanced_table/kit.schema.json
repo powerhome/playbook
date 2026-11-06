@@ -21,7 +21,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "columnDefinitions": {
       "type": "array",
@@ -86,7 +87,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "expandedControl": {
       "type": "GenericObject",
@@ -126,7 +128,8 @@
       "type": "number",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": 10
     },
     "inlineRowLoading": {
       "type": "boolean",
@@ -181,7 +184,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "paginationProps": {
       "type": "GenericObject",
@@ -257,7 +261,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "stickyLeftColumn": {
       "type": "array",
@@ -289,7 +294,8 @@
       "type": "string | string[]",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": "arrows-from-line"
     },
     "onRowSelectionChange": {
       "type": "function",
@@ -307,7 +313,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "enableSorting": {
       "type": "boolean",

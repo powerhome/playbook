@@ -2,11 +2,11 @@
   "template": "<Image{{props}} />",
   "propTargets": {},
   "defaults": {
+    "alt": "Misty forest",
     "size": "md",
     "rounded": false,
     "transition": "fade",
-    "url": "https://unsplash.it/500/400/?image=634",
-    "alt": "Misty forest"
+    "url": "https://unsplash.it/500/400/?image=634"
   },
   "groups": [
     {

@@ -51,7 +51,10 @@
         "react",
         "rails"
       ],
-      "default": ""
+      "default": {
+        "react": null,
+        "rails": ""
+      }
     },
     "size": {
       "type": "enum",
@@ -90,7 +93,8 @@
         "away",
         "offline",
         "online"
-      ]
+      ],
+      "default": null
     }
   },
   "globalProps": true,

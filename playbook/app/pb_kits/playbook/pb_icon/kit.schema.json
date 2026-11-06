@@ -74,14 +74,18 @@
           "both"
         ]
       },
-      "default": null
+      "default": {
+        "react": "none",
+        "rails": null
+      }
     },
     "icon": {
       "type": "string | ReactSVGElement",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "inverse": {
       "type": "boolean",

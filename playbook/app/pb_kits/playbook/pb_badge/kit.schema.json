@@ -11,13 +11,15 @@
       "type": "GenericObject",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": {}
     },
     "removeIcon": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "removeOnClick": {
       "type": "function",

@@ -5,7 +5,7 @@
     "dark": false,
     "grayscale": false,
     "imageAlt": "",
-    "name": "",
+    "name": null,
     "size": "md",
     "componentOverlay": {
       "component": "badge",

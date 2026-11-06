@@ -4,8 +4,11 @@
   "defaults": {
     "backgroundColor": "light",
     "backgroundSize": "cover",
+    "backgroundPosition": "",
     "backgroundRepeat": "initial",
-    "tag": "div"
+    "imageUrl": "",
+    "tag": "div",
+    "transition": ""
   },
   "children": {
     "editable": true,

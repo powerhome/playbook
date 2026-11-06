@@ -3,10 +3,11 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
+    "dark": false,
     "muted": false,
+    "percent": "50",
     "variant": "default",
-    "width": "100%",
-    "percent": "50"
+    "width": "100%"
   },
   "groups": [
     {

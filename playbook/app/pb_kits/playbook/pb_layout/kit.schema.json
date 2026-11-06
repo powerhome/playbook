@@ -20,13 +20,17 @@
         "lg",
         "xl"
       ],
-      "default": "xs"
+      "default": {
+        "react": "md",
+        "rails": "xs"
+      }
     },
     "dark": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "full": {
       "type": "boolean",
@@ -76,10 +80,7 @@
           "xl"
         ]
       },
-      "default": {
-        "react": "sm",
-        "rails": "md"
-      }
+      "default": "md"
     },
     "variant": {
       "type": "enum",
