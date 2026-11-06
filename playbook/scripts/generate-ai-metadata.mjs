@@ -8,7 +8,7 @@
  * How it works:
  *   1. Parse .tsx files for React prop definitions
  *   2. Parse .rb files for Rails prop definitions  
- *   3. Merge props from both platforms (`type` and `default` split to `{ react, rails }` when they differ)
+ *   3. Merge props from both platforms (`type`, `values` and `default` split to `{ react, rails }` when they differ)
  *   4. Generate descriptions from component names
  * 
  * Limitations (regex-based parsing):
@@ -461,6 +461,27 @@ function mergePlatformValue(reactVal, railsVal) {
 }
 
 /**
+ * Enum values follow the same rule as `type` and `default`: one list when the
+ * platforms agree (ignoring order, duplicates and blanks), `{ react, rails }` when not.
+ * A missing or single-literal React list is treated as a parse gap and falls back to Rails.
+ */
+function mergePlatformValues(rValues, rbValues) {
+  const clean = (values) => [...new Set(values.filter((v) => v !== '' && v !== null))];
+  const r = clean(rValues), rb = clean(rbValues);
+  const reactLooksTruncated = r.length === 1 && rb.length > 1 && rb.includes(r[0]);
+  if (!r.length || reactLooksTruncated) return rbValues;
+  if (!rb.length) return rValues;
+  const sameSet = r.length === rb.length && r.every((v) => rb.includes(v));
+  return sameSet ? rValues : { react: r, rails: rb };
+}
+
+/** Enum values for one platform, whether stored as a list or split `{ react, rails }`. */
+function valuesForPlatform(values, platform) {
+  if (Array.isArray(values)) return values;
+  return values?.[platform] || [];
+}
+
+/**
  * Merge React and Rails props into unified schema.
  */
 function mergeProps(react, rails) {
@@ -477,18 +498,10 @@ function mergeProps(react, rails) {
         platforms: ['react', 'rails'],
       };
 
-      // Prefer React values (current display preference). Fall back to Rails 
-      // when React looks truncated to a single literal that exists in a longer Rails enum 
-      // (e.g. multiline union parse failure: ["default"] vs full Rails enum list).
-      // This logic should probably eventually be updated in a better way than this.
       const rValues = r.values || [];
       const rbValues = rb.values || [];
       if (rValues.length || rbValues.length) {
-        const reactLooksTruncated =
-          rValues.length === 1 &&
-          rbValues.length > 1 &&
-          rbValues.includes(rValues[0]);
-        merged[name].values = reactLooksTruncated || !rValues.length ? rbValues : rValues;
+        merged[name].values = mergePlatformValues(rValues, rbValues);
         // Promote to enum only when type was not already split by platform.
         if (typeof merged[name].type === 'string' && (r.type === 'enum' || rb.type === 'enum')) {
           merged[name].type = 'enum';
@@ -512,10 +525,16 @@ function mergeProps(react, rails) {
  */
 function generateUsage(kitName, props) {
   const pascal = snakeToPascal(kitName);
-  const examples = Object.entries(props).filter(([, p]) => p.values?.length).slice(0, 2);
+  const examples = Object.entries(props)
+    .filter(([, p]) => valuesForPlatform(p.values, 'react').length || valuesForPlatform(p.values, 'rails').length)
+    .slice(0, 2);
 
-  const reactProps = examples.map(([n, p]) => `${n}="${p.values[0]}"`).join(' ');
-  const railsProps = examples.map(([n, p]) => `${camelToSnake(n)}: "${p.values[0]}"`).join(', ');
+  const reactProps = examples
+    .filter(([, p]) => valuesForPlatform(p.values, 'react').length)
+    .map(([n, p]) => `${n}="${valuesForPlatform(p.values, 'react')[0]}"`).join(' ');
+  const railsProps = examples
+    .filter(([, p]) => valuesForPlatform(p.values, 'rails').length)
+    .map(([n, p]) => `${camelToSnake(n)}: "${valuesForPlatform(p.values, 'rails')[0]}"`).join(', ');
   const reactImportPath = kitName === 'advanced_table' ? 'playbook-ui/advanced-table' : 'playbook-ui';
 
   return {

@@ -70,6 +70,9 @@ const EXCLUDED_PROPS = [
   'children', 'className', 'id', 'data', 'aria', 'htmlOptions', 'wrapperClass'
 ];
 
+// Kits that have a kit.schema.json but intentionally no playground
+const NO_PLAYGROUND_KITS = new Set(['lightbox']);
+
 // Components that commonly accept children content
 const CHILDREN_COMPONENTS = new Set([
   'button', 'card', 'body', 'title', 'caption', 'detail', 'badge', 'pill',
@@ -262,7 +265,12 @@ function processKit(kitDir, options = {}) {
     console.log(`  Skip ${kitName}: no kit.schema.json`);
     return 'skipped';
   }
-  
+
+  if (NO_PLAYGROUND_KITS.has(kitName)) {
+    console.log(`  Skip ${kitName}: no playground for this kit`);
+    return 'skipped';
+  }
+
   // Check if output exists and overwrite not enabled
   if (fs.existsSync(playgroundPath) && !options.overwrite) {
     console.log(`  Skip ${kitName}: _playground.json exists (use --overwrite)`);

@@ -4,10 +4,11 @@ import { Body, Card, Table, Title } from 'playbook-ui'
 type SchemaPlatform = 'react' | 'rails'
 type SplitType = { react?: string, rails?: string }
 type SchemaType = string | SplitType
+type SplitValues = { react?: string[], rails?: string[] }
 
 type PropValue = {
   type: SchemaType
-  values?: string[]
+  values?: string[] | SplitValues
   default?: any
   platforms?: string[]
 }
@@ -46,8 +47,9 @@ const KitProps = ({ kitPropsValues, darkMode, platform }: KitPropsType) => {
   }
 
   const getTypeValues = (prop: PropValue) => {
-    if (prop.values && prop.values.length > 0) {
-      return prop.values.join(' | ')
+    const values = Array.isArray(prop.values) ? prop.values : prop.values?.[platform || 'react']
+    if (values && values.length > 0) {
+      return values.join(' | ')
     }
     const type = typeForDisplay(prop)
     if (type === 'boolean') {

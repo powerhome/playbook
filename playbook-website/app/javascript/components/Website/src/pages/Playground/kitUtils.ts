@@ -40,8 +40,19 @@ const isReactProp = (definition: PropDefinition) =>
   definition.platforms.length === 0 ||
   definition.platforms.includes("react");
 
+// kit.schema.json stores `values` as `{ react, rails }` when the platforms differ; the playground is React.
+const withReactValues = (props: Record<string, PropDefinition>) =>
+  Object.fromEntries(
+    Object.entries(props).map(([name, definition]) => {
+      const values = definition.values as PropDefinition["values"] | { react?: string[] };
+      return Array.isArray(values) || !values
+        ? [name, definition]
+        : [name, { ...definition, values: values.react ?? [] }];
+    })
+  );
+
 export const getAllPropDefinitions = (kit?: PlaygroundKit) => ({
-  ...(kit?.kit_schema?.props ?? {}),
+  ...withReactValues(kit?.kit_schema?.props ?? {}),
   ...(kit?.playground_config?.customProps ?? {}),
 });
 

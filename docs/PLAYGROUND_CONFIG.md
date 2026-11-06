@@ -121,6 +121,8 @@ The generator uses two layers:
 
 The base layer can infer simple things like component name, schema defaults, and props. The override layer defines the actual playground experience: useful presets, prop groupings, children, subcomponent structures, hints, wrappers, and sample data.
 
+Every kit with a `kit.schema.json` gets a `_playground.json` unless it is listed in `NO_PLAYGROUND_KITS` in `playbook/scripts/generate-playground-configs.js` (for example, `lightbox`). Add a kit there when it should have props metadata but no playground.
+
 ## Common Fields
 
 | Field | Purpose |
