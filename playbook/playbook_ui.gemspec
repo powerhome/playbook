@@ -42,7 +42,7 @@ Gem::Specification.new do |s|
   s.add_dependency "actionpack", ">= 7.1.0"
   s.add_dependency "actionview", ">= 7.1.0"
   s.add_dependency "activesupport", ">= 7.1.0"
-  s.add_dependency "view_component", "4.3.0"
+  s.add_dependency "view_component", "4.14.0"
   s.add_dependency "vite_rails"
 
   s.add_development_dependency "brakeman", "7.0.0"
