@@ -123,13 +123,23 @@
         "react",
         "rails"
       ],
-      "values": [
-        "info",
-        "caution",
-        "delete",
-        "error",
-        "success"
-      ],
+      "values": {
+        "react": [
+          "info",
+          "caution",
+          "delete",
+          "error",
+          "success"
+        ],
+        "rails": [
+          "info",
+          "caution",
+          "delete",
+          "error",
+          "success",
+          "default"
+        ]
+      },
       "default": ""
     },
     "text": {

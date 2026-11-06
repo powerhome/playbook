@@ -64,12 +64,22 @@
         "react",
         "rails"
       ],
-      "values": [
-        "currency",
-        "zipCode",
-        "postalCode",
-        "ssn"
-      ],
+      "values": {
+        "react": [
+          "currency",
+          "zipCode",
+          "postalCode",
+          "ssn"
+        ],
+        "rails": [
+          "currency",
+          "zip_code",
+          "postal_code",
+          "ssn",
+          "credit_card",
+          "cvv"
+        ]
+      },
       "default": null
     },
     "onChange": {

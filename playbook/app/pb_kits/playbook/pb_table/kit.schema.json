@@ -197,10 +197,16 @@
         "react",
         "rails"
       ],
-      "values": [
-        "default",
-        "withFilter"
-      ],
+      "values": {
+        "react": [
+          "default",
+          "withFilter"
+        ],
+        "rails": [
+          "default",
+          "with_filter"
+        ]
+      },
       "default": "default"
     },
     "contrastBorder": {

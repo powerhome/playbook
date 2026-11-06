@@ -36,14 +36,25 @@
         "react",
         "rails"
       ],
-      "values": [
-        "text_lt_default",
-        "text_lt_light",
-        "text_lt_lighter",
-        "text_dk_default",
-        "text_dk_light",
-        "text_dk_lighter"
-      ],
+      "values": {
+        "react": [
+          "text_lt_default",
+          "text_lt_light",
+          "text_lt_lighter",
+          "text_dk_default",
+          "text_dk_light",
+          "text_dk_lighter"
+        ],
+        "rails": [
+          "text_lt_default",
+          "text_lt_light",
+          "text_lt_lighter",
+          "text_dk_default",
+          "text_dk_light",
+          "text_dk_lighter",
+          "none"
+        ]
+      },
       "default": "none"
     },
     "columnVisibilityControl": {

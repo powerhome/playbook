@@ -62,11 +62,20 @@
         "react",
         "rails"
       ],
-      "values": [
-        "sm",
-        "md",
-        "lg"
-      ],
+      "values": {
+        "react": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "rails": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
       "default": {
         "react": "sm",
         "rails": "md"
@@ -99,15 +108,25 @@
         "react",
         "rails"
       ],
-      "values": [
-        "sidebar",
-        "collection",
-        "collection_detail",
-        "kanban",
-        "content",
-        "masonry",
-        "bracket"
-      ],
+      "values": {
+        "react": [
+          "sidebar",
+          "collection",
+          "collection_detail",
+          "kanban",
+          "content",
+          "masonry",
+          "bracket"
+        ],
+        "rails": [
+          "sidebar",
+          "collection",
+          "collection_detail",
+          "kanban",
+          "content",
+          "masonry"
+        ]
+      },
       "default": "sidebar"
     }
   },

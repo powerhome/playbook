@@ -130,12 +130,19 @@
         "react",
         "rails"
       ],
-      "values": [
-        "title",
-        "body",
-        "caption",
-        "detail"
-      ],
+      "values": {
+        "react": [
+          "title",
+          "body",
+          "caption",
+          "detail"
+        ],
+        "rails": [
+          "body",
+          "caption",
+          "detail"
+        ]
+      },
       "default": "body"
     }
   },

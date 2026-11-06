@@ -61,12 +61,19 @@
         "react",
         "rails"
       ],
-      "values": [
-        "horizontal",
-        "vertical",
-        "both",
-        "none"
-      ],
+      "values": {
+        "react": [
+          "horizontal",
+          "vertical",
+          "both",
+          "none"
+        ],
+        "rails": [
+          "horizontal",
+          "vertical",
+          "both"
+        ]
+      },
       "default": null
     },
     "icon": {
@@ -98,11 +105,17 @@
         "react",
         "rails"
       ],
-      "values": [
-        "left",
-        "right",
-        "none"
-      ],
+      "values": {
+        "react": [
+          "left",
+          "right",
+          "none"
+        ],
+        "rails": [
+          "left",
+          "right"
+        ]
+      },
       "default": null
     },
     "pulse": {

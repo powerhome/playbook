@@ -61,16 +61,29 @@
         "react",
         "rails"
       ],
-      "values": [
-        "h1",
-        "h2",
-        "h3",
-        "h4",
-        "h5",
-        "h6",
-        "div",
-        "span"
-      ],
+      "values": {
+        "react": [
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6",
+          "div",
+          "span"
+        ],
+        "rails": [
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6",
+          "p",
+          "div",
+          "span"
+        ]
+      },
       "default": "h3"
     },
     "text": {

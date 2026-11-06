@@ -21,11 +21,19 @@
         "react",
         "rails"
       ],
-      "values": [
-        "outside",
-        "inside",
-        "any"
-      ],
+      "values": {
+        "react": [
+          "outside",
+          "inside",
+          "any"
+        ],
+        "rails": [
+          "none",
+          "outside",
+          "inside",
+          "any"
+        ]
+      },
       "default": "none"
     },
     "offset": {
@@ -127,7 +135,7 @@
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"popover\", props: { close_on_click: \"outside\", position: \"top\" }) %>"
+      "example": "<%= pb_rails(\"popover\", props: { close_on_click: \"none\", position: \"top\" }) %>"
     }
   }
 }

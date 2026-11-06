@@ -227,11 +227,19 @@
         "react",
         "rails"
       ],
-      "values": [
-        "month",
-        "week",
-        "quickpick"
-      ],
+      "values": {
+        "react": [
+          "month",
+          "week",
+          "quickpick"
+        ],
+        "rails": [
+          "week",
+          "month",
+          "quickpick",
+          "none"
+        ]
+      },
       "default": "none"
     },
     "showTimezone": {
@@ -410,7 +418,7 @@
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"date_picker\", props: { selection_type: \"month\" }) %>"
+      "example": "<%= pb_rails(\"date_picker\", props: { selection_type: \"week\" }) %>"
     }
   }
 }
