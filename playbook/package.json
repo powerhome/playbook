@@ -85,7 +85,7 @@
     "@testing-library/react": "11.2.7",
     "@tiptap/core": "3.0.7",
     "@tiptap/extension-image": "3.0.7",
-    "@tiptap/extension-text-align": "3.0.7",
+    "@tiptap/extension-text-align": "3.32.2",
     "@tiptap/extension-underline": "3.0.7",
     "@tiptap/pm": "3.0.7",
     "@tiptap/starter-kit": "3.0.7",
