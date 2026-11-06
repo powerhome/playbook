@@ -37,6 +37,7 @@ type AdvancedTableProps = {
   expandByDepth?: GenericObject[]
   onExpandByDepthClick?: (arg: number, arg1: any) => void
   fullWidthCell?: boolean
+  groupSeparators?: boolean
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string
   initialLoadingRowsCount?: number
@@ -100,6 +101,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     expandByDepth,
     onExpandByDepthClick,
     fullWidthCell = false,
+    groupSeparators = false,
     htmlOptions = {},
     id,
     initialLoadingRowsCount = 10,
@@ -326,6 +328,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             expandByDepth={expandByDepth}
             expanded={expanded}
             expandedControl={expandedControl}
+            groupSeparators={groupSeparators}
             handleExpandOrCollapse={handleExpandOrCollapse}
             hasAnySubRows={hasAnySubRows}
             inlineRowLoading={inlineRowLoading}

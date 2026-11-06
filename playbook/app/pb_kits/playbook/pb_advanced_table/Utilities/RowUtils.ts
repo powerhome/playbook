@@ -53,6 +53,35 @@ export const getFontWeight = (rowStyle?: GenericObject) => {
   if (rowStyle?.fontWeight === "regular") return 400
 }
 
+// Matches the `left` of the nth collapsible-trail (see CollapsibleTrail.tsx).
+const getCollapsibleTrailLeftEm = (trailIndex: number): number =>
+  trailIndex * 1.0 + (trailIndex > 1 ? (trailIndex - 1) * 0.25 : 0)
+
+/**
+ * One O(n) pass over the full visible row model → Map of row id to its
+ * `--group-separator-inset` (em). Call once (and memoize) for the whole table —
+ * do not rebuild per pinned section, or a pinned non-last sibling can look like
+ * a last sibling and invent a second separator.
+ *
+ * A row closes every group between its depth and the next visible row's depth
+ * (so expanded parents defer to their last visible descendant, and sort/filter
+ * is respected). One stroke is drawn, inset to the outermost closed group:
+ * year-level → 0 / full-bleed, otherwise that group's collapsible-trail.
+ */
+export const buildGroupSeparatorInsets = (
+  visibleRows: Row<GenericObject>[]
+): Map<string, number> => {
+  const insets = new Map<string, number>()
+
+  visibleRows.forEach((row, index) => {
+    if (row.depth === 0) return
+    const nextDepth = visibleRows[index + 1]?.depth ?? 0
+    if (nextDepth >= row.depth) return
+    insets.set(row.id, nextDepth === 0 ? 0 : getCollapsibleTrailLeftEm(nextDepth + 1))
+  })
+  return insets
+}
+
 /**
  * Creates a virtual item style object for virtualized rows
  */
