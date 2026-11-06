@@ -2,7 +2,6 @@
   "template": "<Link{{props}}>{{children}}</Link>",
   "propTargets": {},
   "defaults": {
-    "color": "default",
     "disabled": false,
     "href": "#link-example",
     "icon": "",
@@ -10,7 +9,8 @@
     "tag": "a",
     "target": "",
     "text": "Link text",
-    "underline": false
+    "underline": false,
+    "color": "default"
   },
   "children": {
     "editable": true,

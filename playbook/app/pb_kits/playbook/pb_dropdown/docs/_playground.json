@@ -31,7 +31,6 @@
     "controlsEndId": "",
     "requiredIndicator": false,
     "required": false,
-    "validationMessage": "Please fill out this field.",
     "label": "Select a Country",
     "options": [
       {

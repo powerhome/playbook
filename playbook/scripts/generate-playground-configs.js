@@ -104,19 +104,19 @@ function generateBaseConfig(schema, kitName) {
     ? `<${componentName}{{props}}>{{children}}</${componentName}>`
     : `<${componentName}{{props}} />`;
   
-  // Extract defaults from schema (use React side when `{ react, rails }` split)
+  // Seed only defaults shared by both platforms. One `_playground.json` serves the React and
+  // Rails tabs, so a `{ react, rails }` split default is left unset (controls fall back to the
+  // schema default); set it in `_playground.overrides.json` if a kit needs a starting value.
   const defaults = {};
   for (const [name, prop] of Object.entries(reactProps)) {
     const schemaDefault = prop.default;
-    const reactDefault =
+    const isPlatformSplit =
       schemaDefault !== null &&
       typeof schemaDefault === 'object' &&
       !Array.isArray(schemaDefault) &&
-      Object.prototype.hasOwnProperty.call(schemaDefault, 'react')
-        ? schemaDefault.react
-        : schemaDefault;
-    // Skip null/undefined after resolving the React side so a split `react: null` leaves the prop unset.
-    if (reactDefault !== undefined && reactDefault !== null) defaults[name] = reactDefault;
+      (Object.prototype.hasOwnProperty.call(schemaDefault, 'react') ||
+        Object.prototype.hasOwnProperty.call(schemaDefault, 'rails'));
+    if (!isPlatformSplit && schemaDefault !== undefined && schemaDefault !== null) defaults[name] = schemaDefault;
   }
   
   // Build base config

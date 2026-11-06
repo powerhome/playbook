@@ -18,7 +18,6 @@
     "label": "Date Picker",
     "placeholder": "Select Date",
     "requiredIndicator": false,
-    "selectionType": "",
     "showTimezone": false,
     "staticPosition": true,
     "thisRangesEndToday": false,

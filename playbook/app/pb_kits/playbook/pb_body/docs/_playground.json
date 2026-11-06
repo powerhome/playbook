@@ -2,7 +2,6 @@
   "template": "<Body{{props}}>{{children}}</Body>",
   "propTargets": {},
   "defaults": {
-    "color": "",
     "highlightedText": [],
     "highlighting": false,
     "tag": "div",

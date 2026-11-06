@@ -4,7 +4,6 @@
   "defaults": {
     "border": false,
     "fixedWidth": true,
-    "flip": "none",
     "icon": "user",
     "inverse": false,
     "listItem": false,

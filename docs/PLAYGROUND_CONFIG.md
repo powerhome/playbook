@@ -237,6 +237,8 @@ Use `defaults` to make controls start with useful values.
 }
 ```
 
+The generated base config only seeds schema defaults that both platforms share. A `{ react, rails }` split default is left out because the same `_playground.json` serves the React and Rails tabs. Each tab's controls fall back to that platform's schema default, so set the prop here only if the playground needs a different starting value.
+
 Defaults are not the same thing as emitted props. They seed the UI as implicit values. If you need a prop to always appear in generated code, use `requiredProps`, a preset, or structure mode `props`.
 
 Object and array defaults prefill the JSON/JS-literal textareas when the prop is enabled.

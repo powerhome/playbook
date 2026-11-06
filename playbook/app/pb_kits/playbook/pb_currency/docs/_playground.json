@@ -9,7 +9,6 @@
     "emphasized": true,
     "label": "Balance",
     "nullDisplay": "",
-    "size": "sm",
     "symbol": "$",
     "variant": "default",
     "unstyled": false,

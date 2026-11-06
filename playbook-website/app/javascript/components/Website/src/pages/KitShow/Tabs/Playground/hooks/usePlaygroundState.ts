@@ -26,6 +26,7 @@ import {
   prepareExampleCode,
   shouldApplyPropSyncOnEnable,
   groupPropDefinitions,
+  resolveSchemaDefaultForPlatform,
   resolveSchemaType,
   resolveSchemaValues,
 } from "../utils";
@@ -144,6 +145,7 @@ export const usePlaygroundState = ({
           ...def,
           ...(resolvedType ? { type: resolvedType } : {}),
           ...(def.values !== undefined ? { values: resolvedValues } : {}),
+          ...(def.default !== undefined ? { default: resolveSchemaDefaultForPlatform(def, platform) } : {}),
           ...(emitEmptyStringPropNames.has(name) ? { emitEmptyString: true } : {}),
         };
       }
