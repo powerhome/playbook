@@ -356,12 +356,40 @@ function parseTypeBlock(block, imports = new Map()) {
  * Extract default values from destructuring: const { x = "default" } = props
  */
 function extractDefaults(content, props) {
-  const regex = /(?:const|let)\s*\{([^}]+)\}\s*=\s*(?:props|this\.props)/g;
-  for (const [, destructure] of content.matchAll(regex)) {
-    for (const [, name, val] of destructure.matchAll(/(\w+)\s*=\s*([^,\n}]+)/g)) {
-      if (props[name]) props[name].default = parseLiteral(val.trim().replace(/,\s*$/, ''));
+  // Balanced braces so nested defaults like `aria = {}` don't end the destructure early.
+  for (const match of content.matchAll(/(?:const|let)\s*\{/g)) {
+    const start = match.index + match[0].length;
+    const destructure = extractBracedContent(content, start);
+    const rest = content.slice(start + destructure.length + 1);
+    if (!/^\s*=\s*(?:props|this\.props)\b/.test(rest)) continue;
+
+    for (const entry of splitTopLevel(destructure)) {
+      const m = entry.match(/^(\w+)\s*=\s*([^]+)$/);
+      // Only literal defaults; functions, identifiers and expressions are not publishable values.
+      if (m && props[m[1]] && isLiteralDefault(m[2].trim())) props[m[1]].default = parseLiteral(m[2].trim());
     }
   }
+}
+
+const isLiteralDefault = (val) =>
+  isQuoted(val) || ['true', 'false', 'null', 'undefined', '{}', '[]'].includes(val) || (val !== '' && !isNaN(val));
+
+/** Split on commas that are not nested inside (), [] or {}. */
+function splitTopLevel(str) {
+  const parts = [];
+  let depth = 0, current = '';
+  for (const ch of str) {
+    if ('([{'.includes(ch)) depth++;
+    if (')]}'.includes(ch)) depth--;
+    if (ch === ',' && depth === 0) {
+      parts.push(current.trim());
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  if (current.trim()) parts.push(current.trim());
+  return parts;
 }
 
 /**

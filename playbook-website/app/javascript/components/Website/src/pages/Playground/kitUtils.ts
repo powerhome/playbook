@@ -1,4 +1,6 @@
 import type { PropValue } from "../KitShow/Tabs/Playground";
+import type { PropDefinition as KitPropDefinition } from "../KitShow/Tabs/Playground/types";
+import { resolveSchemaValues } from "../KitShow/Tabs/Playground/utils";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import type { BuilderInstance, PlaygroundKit, PropDefinition } from "./types";
 
@@ -40,15 +42,14 @@ const isReactProp = (definition: PropDefinition) =>
   definition.platforms.length === 0 ||
   definition.platforms.includes("react");
 
-// kit.schema.json stores `values` as `{ react, rails }` when the platforms differ; the playground is React.
+// kit.schema.json stores `values` as `{ react, rails }` when the platforms differ; the builder is React.
 const withReactValues = (props: Record<string, PropDefinition>) =>
   Object.fromEntries(
-    Object.entries(props).map(([name, definition]) => {
-      const values = definition.values as PropDefinition["values"] | { react?: string[] };
-      return Array.isArray(values) || !values
+    Object.entries(props).map(([name, definition]) =>
+      definition.values === undefined
         ? [name, definition]
-        : [name, { ...definition, values: values.react ?? [] }];
-    })
+        : [name, { ...definition, values: resolveSchemaValues(definition as KitPropDefinition) }]
+    )
   );
 
 export const getAllPropDefinitions = (kit?: PlaygroundKit) => ({

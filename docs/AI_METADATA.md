@@ -410,7 +410,7 @@ Optional consumer rule/skill drafts (not applied anywhere): `docs/ai/consumer/`.
 - `props[name].type` - The prop type (`string`, `boolean`, `enum`, `function`, `ReactNode`, etc.). When React and Rails types differ, this is `{ "react": "...", "rails": "..." }` instead of a single string. Use the entry for the platform you are generating.
 - `props[name].values` - Allowed values for enum types. Same `{ react, rails }` split when the platforms accept different values.
 - `props[name].platforms` - Which platforms support this prop (`react`, `rails`)
-- `props[name].default` - Default value if any. Same `{ react, rails }` split when defaults differ.
+- `props[name].default` - Default value if any. Same `{ react, rails }` split when defaults differ. React defaults come from the component's props destructure and are recorded only when they are literals (strings, numbers, booleans, `null`, `{}`, `[]`); function and expression defaults are omitted.
 - `globalProps: true` - Indicates component accepts all global props
 - `globalEventProps: true` - Indicates component opts into React GlobalEventProps (see `global-event-props.schema.json`)
 - `usage.react.example` - Example React JSX (seeded from first playground preset in dist)

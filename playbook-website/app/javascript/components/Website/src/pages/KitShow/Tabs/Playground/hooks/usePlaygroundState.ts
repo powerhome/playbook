@@ -27,6 +27,7 @@ import {
   shouldApplyPropSyncOnEnable,
   groupPropDefinitions,
   resolveSchemaType,
+  resolveSchemaValues,
 } from "../utils";
 import { generateRailsCode } from "../RailsCodeGenerator";
 import { formatChildrenForRailsEditor } from "../jsxChildrenToRails";
@@ -138,9 +139,11 @@ export const usePlaygroundState = ({
 
       if (isPlatformProp && !isExcluded && !hiddenPropNames.has(name)) {
         const resolvedType = resolveSchemaType(def, platform);
+        const resolvedValues = resolveSchemaValues(def, platform);
         filtered[name] = {
           ...def,
           ...(resolvedType ? { type: resolvedType } : {}),
+          ...(def.values !== undefined ? { values: resolvedValues } : {}),
           ...(emitEmptyStringPropNames.has(name) ? { emitEmptyString: true } : {}),
         };
       }
