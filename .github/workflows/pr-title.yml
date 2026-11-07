@@ -1,0 +1,19 @@
+name: PR title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  pr-title:
+    name: Conventional Commit title
+    runs-on: ubuntu-latest
+    steps:
+      # The repository squash-merges with the PR title as the commit subject,
+      # so the title is what has to be a Conventional Commit.
+      - uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50 # v6.1.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
