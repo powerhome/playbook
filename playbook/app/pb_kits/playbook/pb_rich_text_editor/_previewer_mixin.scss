@@ -115,7 +115,7 @@
 }
 
 @mixin preview_tiptap_ul {
-    list-style-position: disc;
+    list-style: disc outside;
     padding-left: $space_md;
     line-height: $lh_tight;
 }

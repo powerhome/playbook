@@ -10,6 +10,7 @@ import {
   handleMarkdownPaste,
 } from './TipTap/markdownPaste'
 import type { MarkdownDependencies } from './TipTap/markdownPaste'
+import RichTextContent from './_rich_text_content'
 import TipTapEditor from './_tiptap_editor'
 import TrixTextEditor from './_trix_editor'
 
@@ -244,4 +245,5 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   )
 }
 
-export default RichTextEditor
+export { RichTextContent }
+export default Object.assign(RichTextEditor, { Content: RichTextContent })
