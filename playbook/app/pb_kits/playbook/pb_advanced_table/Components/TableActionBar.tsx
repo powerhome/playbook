@@ -152,30 +152,24 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
   const showSelectAll = columnVisibilityControl?.showSelectAll === true && availableLeafIds.length > 0
   const selectAllLabel = allAvailableVisible ? "Deselect All" : "Select All"
 
+  // Uses the same updater form as toggleVisibility, so onChange gets the same kind of value.
   const handleSelectAllChange = () => {
-    const nextVisible = !allAvailableVisible
-    const nextVisibility = {
-      ...table.getState().columnVisibility,
-    }
-    availableLeafIds.forEach((id) => {
-      nextVisibility[id] = nextVisible
-    })
-    table.setColumnVisibility(nextVisibility)
+    const selectAllVisibility = Object.fromEntries(
+      availableLeafIds.map((id) => [id, !allAvailableVisible])
+    )
+    table.setColumnVisibility((previousVisibility: { [id: string]: boolean }) => ({
+      ...previousVisibility,
+      ...selectAllVisibility,
+    }))
 
     if (columnVisibilityControl?.onColumnVisibilityChange) {
-      const isColumnVisible = (column: { getLeafColumns?: () => { id: string }[]; id: string }): boolean => {
-        const leaves = column.getLeafColumns?.() ?? []
-        const isGroup = leaves.some((leaf) => leaf.id !== column.id)
-        if (isGroup) {
-          return leaves.some((leaf) => nextVisibility[leaf.id] == null ? true : nextVisibility[leaf.id])
-        }
-        return nextVisibility[column.id] == null ? true : nextVisibility[column.id]
-      }
+      const nextVisibility = { ...table.getState().columnVisibility, ...selectAllVisibility }
+      // Same shape as the single toggles: root column ids, groups visible if any leaf is visible
       const updatedVisibilityState = table.getAllColumns().reduce((
         acc: { [id: string]: boolean },
-        column: { getLeafColumns?: () => { id: string }[]; id: string }
+        column: { getLeafColumns: () => { id: string }[]; id: string }
       ) => {
-        acc[column.id] = isColumnVisible(column)
+        acc[column.id] = column.getLeafColumns().some((leaf) => nextVisibility[leaf.id] ?? true)
         return acc
       }, {})
       columnVisibilityControl.onColumnVisibilityChange(updatedVisibilityState)

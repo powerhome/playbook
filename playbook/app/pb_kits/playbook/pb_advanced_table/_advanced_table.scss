@@ -251,6 +251,10 @@
     th[colspan]:not([colspan="1"]) {
       border-right: 1px solid $border_light !important;
     }
+    // Spacer rows have no text, so give them one line of header height.
+    .header-spacer-cell::before {
+      content: "\00a0";
+    }
     .table-header-cells-custom {
       text-align: center;
       [class^="pb_checkbox_kit"] .pb_checkbox_label {

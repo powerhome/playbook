@@ -63,11 +63,32 @@ export const TableHeader = ({
     `${responsive === "scroll" && "pinned-left"}`,
   );
 
+  // TanStack drops header rows when every leaf in a group is hidden.
+  // Spacer rows keep the header height steady.
+  const columnHeaderDepth = Math.max(...table.getAllFlatColumns().map((column: GenericObject) => column.depth + 1))
+  const hiddenHeaderRowCount = columnHeaderDepth - table.getHeaderGroups().length
+  const spacerColSpan = table.getVisibleLeafColumns().length + (!hasAnySubRows && selectableRows ? 1 : 0)
+
+  const renderSpacerRows = (rowClassName?: string) =>
+    Array.from({ length: Math.max(0, hiddenHeaderRowCount) }, (_, index) => (
+      <tr
+          aria-hidden="true"
+          className={classnames("header-spacer-row", rowClassName)}
+          key={`header-spacer-${index}`}
+      >
+        <th
+            className="table-header-cells header-spacer-cell"
+            colSpan={spacerColSpan}
+        />
+      </tr>
+    ))
+
   const renderRegularTableHeader = () => (
     <thead className={classes}
         id={id}
         ref={headerRef}
     >
+      {renderSpacerRows()}
       {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
         <tr key={`${headerGroup.id}-headerGroup`}>
           {!hasAnySubRows && selectableRows && (
@@ -109,6 +130,7 @@ export const TableHeader = ({
         id={id}
         ref={headerRef}
     >
+      {renderSpacerRows("virtualized-header-row-header")}
       {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
         <tr
             className="virtualized-header-row-header"
