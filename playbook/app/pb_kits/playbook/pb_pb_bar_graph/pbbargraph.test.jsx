@@ -11,8 +11,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  console.error.mockRestore();
-  console.warn.mockRestore();
+  jest.restoreAllMocks();
 });
 
 const chartData = [{

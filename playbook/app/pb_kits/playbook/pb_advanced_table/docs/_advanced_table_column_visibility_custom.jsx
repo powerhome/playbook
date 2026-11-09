@@ -45,7 +45,6 @@ const AdvancedTableColumnVisibilityCustom = (props) => {
   const columnVisibilityControl = {
     // This is the list of column ids that will be included in the column visibility control
     includeIds:["newEnrollments", "scheduledMeetings", "attendanceRate", "completedClasses"],
-    showSelectAll: true,
   }
 
   return (

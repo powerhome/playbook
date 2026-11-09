@@ -71,7 +71,7 @@ const AdvancedTableColumnVisibilityMulti = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          columnVisibilityControl={{default: true, showSelectAll: true}}
+          columnVisibilityControl={{default: true}}
           tableData={MOCK_DATA}
           {...props}
       />

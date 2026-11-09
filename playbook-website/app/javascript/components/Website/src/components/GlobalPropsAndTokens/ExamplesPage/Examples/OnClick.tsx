@@ -21,6 +21,8 @@ import {
   Detail,
   Flex,
   Highlight,
+  Icon,
+  IconCircle,
   IconStatValue,
   IconValue,
   Image,
@@ -120,6 +122,8 @@ const OnClick = () => {
     const [detailClicks, setDetailClicks] = useState(0);
     const [flexClicks, setFlexClicks] = useState(0);
     const [highlightClicks, setHighlightClicks] = useState(0);
+    const [iconClicks, setIconClicks] = useState(0);
+    const [iconCircleClicks, setIconCircleClicks] = useState(0);
     const [iconStatValueClicks, setIconStatValueClicks] = useState(0);
     const [iconValueClicks, setIconValueClicks] = useState(0);
     const [imageClicks, setImageClicks] = useState(0);
@@ -509,6 +513,46 @@ const OnClick = () => {
                 }}
                 onClick={() => setHighlightClicks((prev: number) => prev + 1)}
                 text="Click this Highlight example"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Icon" />
+          <InteractiveExample
+              count={iconClicks}
+              label="Icon"
+              reset={() => setIconClicks(0)}
+          >
+            <Icon
+                aria={{ label: "Add favorite" }}
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                icon="heart"
+                onClick={() => setIconClicks((prev: number) => prev + 1)}
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Icon Circle" />
+          <InteractiveExample
+              count={iconCircleClicks}
+              label="Icon Circle"
+              reset={() => setIconCircleClicks(0)}
+          >
+            <IconCircle
+                aria={{ label: "Add favorite" }}
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                icon="heart"
+                onClick={() => setIconCircleClicks((prev: number) => prev + 1)}
             />
           </InteractiveExample>
         </Card>
@@ -1187,7 +1231,15 @@ const OnClick = () => {
           <code>role</code>, <code>tabIndex</code>, and an accessible name.
           Adding a role and tab stop does not add keyboard activation; use an
           appropriate native interactive element when possible, or implement
-          equivalent keyboard behavior. For repeated content (Timeline.Item, ListItem,
+          equivalent keyboard behavior. Icon attaches <code>onClick</code> to
+          the visible SVG, custom icon, emoji, or fallback element, with no
+          extra wrapper. Icon Circle attaches it to the circle root. A
+          first-class <code>onClick</code> replaces <code>htmlOptions.onClick</code>{" "}
+          and an <code>onClick</code> already on a custom SVG. If you omit the
+          first-class prop, <code>htmlOptions.onClick</code> still replaces that
+          SVG handler. If you omit both, the SVG handler stays. When an icon is
+          the action, give it an accessible name plus <code>role</code> and{" "}
+          <code>tabIndex</code>. For repeated content (Timeline.Item, ListItem,
           ProgressStepItem), attach <code>onClick</code> on each item —
           sibling items do not share a handler. These are subcomponents, so
           they do not add a Global Event Props tab on their parent kit show
@@ -1361,6 +1413,24 @@ const OnClick = () => {
               text={`<Highlight onClick={() => alert("clicked")} text="Clickable highlight" />`}
             />,
             "Attached to the root Highlight element.",
+          ],
+          [
+            "Icon",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-icon-react"
+              text={`<Icon aria={{ label: "Add favorite" }} cursor="pointer" htmlOptions={{ role: "button", tabIndex: 0 }} icon="heart" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the visible SVG, custom icon, emoji, or fallback element. role and tabIndex do not add keyboard activation. Set an accessible name for the action.",
+          ],
+          [
+            "Icon Circle",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-icon-circle-react"
+              text={`<IconCircle aria={{ label: "Add favorite" }} cursor="pointer" htmlOptions={{ role: "button", tabIndex: 0 }} icon="heart" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the Icon Circle root. The inner icon does not get a second handler.",
           ],
           [
             "Icon Stat Value",
@@ -1671,12 +1741,17 @@ const OnClick = () => {
             "Existing implementations remain unchanged.",
           ],
           [
+            "Custom SVG onClick + Icon onClick",
+            "First-class onClick wins",
+            "cloneElement applies globalEventProps after htmlOptions, so the custom SVG handler remains only when both are omitted.",
+          ],
+          [
             "Nested clickable kits",
             "Both can fire",
             "Normal React event bubbling applies unless stopped.",
           ],
           [
-            "Sibling ListItem /Timeline.Item / ProgressStepItem",
+            "Sibling ListItem / Timeline.Item / ProgressStepItem",
             "Only the clicked item fires",
             "Each item owns its own onClick on its root.",
           ],

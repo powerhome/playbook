@@ -184,6 +184,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Icon } from 'playbook-ui'",

@@ -103,6 +103,14 @@
       ],
       "default": false
     },
+    "groupSeparators": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "initialLoadingRowsCount": {
       "type": "number",
       "platforms": [

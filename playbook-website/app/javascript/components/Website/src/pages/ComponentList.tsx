@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react"
 import type { ChangeEvent } from "react"
 import { NavLink, Outlet, useOutlet, useRouteLoaderData } from "react-router-dom"
 import { EmptyState, Flex, TextInput } from "playbook-ui"
-import { matchSorter } from "match-sorter"
+import { searchItems } from '../utils/searchItems'
 
 import { KitCard } from "../components/KitCard"
 import { Hero } from "../components/Hero"
@@ -73,7 +73,7 @@ export default function ComponentList() {
     return stableByKit
       .map((kit) => ({
         ...kit,
-        components: matchSorter(kit.components, q, { keys: ["name"] }),
+        components: searchItems(kit.components, q, ["name"]),
       }))
       .filter((kit) => kit.components.length > 0)
   }, [kitsToShow, searchQuery])
