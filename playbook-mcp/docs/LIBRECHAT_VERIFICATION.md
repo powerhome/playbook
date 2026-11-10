@@ -48,8 +48,8 @@ LibreChat handles **intent**, **tool**, and **prompt** action types (converted t
 
 ## Security checks before shared use
 
-- Production **requires** `PLAYBOOK_MCP_ALLOWLIST` and `SECRET_KEY_BASE`.
-- Set `PLAYBOOK_MCP_TRUSTED_PROXIES` to ingress CIDRs.
+- Production **requires** `SECRET_KEY_BASE`.
+- Host is unreachable off VPN (enforced by the Ingress).
 - Production **requires** `PLAYBOOK_MCP_KEYS`; `/mcp` without a valid `X-Playbook-Mcp-Key` returns 401.
 - Rate limit + props size caps.
 - Chart IIFE built (`bin/vendor_chart_peers`) — no runtime esm.sh / jsDelivr `/+esm` / importmap.

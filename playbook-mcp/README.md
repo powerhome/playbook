@@ -105,16 +105,14 @@ https://mcp-pr42.playbook.wc.beta.gm.powerapp.cloud/mcp
 Health check: `https://mcp-pr<N>.playbook.wc.beta.gm.powerapp.cloud/health`  
 (Website Milano URL is `https://pr<N>.playbook...` — that host is the docs site, not MCP.)
 
-Review stacks set `PLAYBOOK_MCP_ALLOWLIST=*` because **PR hosts are VPN-only** at the network edge — the allowlist is defense-in-depth inside that perimeter, not the primary control. Staging/production must use real client allowlists (and are not VPN-gated the same way).
+There is no in-app IP allowlist: the Ingress keeps every environment VPN-only, and `/mcp` requires a consumer key.
 
 ## Ops / security
 
 | Env | Default | Meaning |
 |-----|---------|---------|
-| `PLAYBOOK_MCP_ALLOWLIST` | empty (dev allow-all) | **Required in production** — LibreChat/server egress IPs for `/mcp` (`/assets` + `/ui` are exempt for browser iframes) |
-| `PLAYBOOK_MCP_TRUSTED_PROXIES` | unset | Ingress CIDRs for correct `remote_ip` |
 | `PLAYBOOK_MCP_KEYS` | unset (dev allow-all) | **Required in production** — `librechat:<key>,dw_agent:<key>`; `/mcp` requires one of the keys in `X-Playbook-Mcp-Key` |
-| `PLAYBOOK_MCP_RATE_LIMIT_MAX` | `60` | Max MCP requests per window per IP |
+| `PLAYBOOK_MCP_RATE_LIMIT_MAX` | `60` | Max MCP requests per window per consumer key |
 | `PLAYBOOK_MCP_RATE_LIMIT_WINDOW` | `60` | Window seconds |
 | `PLAYBOOK_MCP_MAX_PROPS_BYTES` | `65536` | Max props+children JSON/HTML bytes |
 | `PLAYBOOK_MCP_ASSET_BASE_URL` | relative `/assets` | Absolute origin for iframe assets + `/ui/:id` external_url |

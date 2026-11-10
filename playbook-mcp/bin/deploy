@@ -15,7 +15,6 @@ environmentValuesFile="@${environmentValuesPath}"
 
 environmentSecretsFile=""
 secret_key_base_binding=""
-allowlist_binding=""
 consumer_keys_binding=""
 
 if [ -e "${workDir}/config/deploy/$environment/secrets.yaml" ]; then
@@ -33,7 +32,6 @@ elif [ -e "${workDir}/config/deploy/prs/secrets.yaml" ]; then
   fi
 else
   # PR/review default: generate ephemeral SECRET_KEY_BASE at deploy time (not in git).
-  # allowlist comes from prs/values.yaml (appConfig.allowlist: "*"); VPN-only ingress.
   secret_key_base_binding="secretKeyBase=$(openssl rand -hex 64)"
   # Consumer keys: PLAYBOOK_MCP_KEYS from the CI environment if provided, else a
   # throwaway key (stack is unreachable to MCP clients until one is provided).
@@ -76,7 +74,6 @@ krane render \
   "image_tag=${tag}" \
   "environment=${environment}" \
   ${secret_key_base_binding} \
-  ${allowlist_binding} \
   ${consumer_keys_binding} \
   ${extraBindings} \
   --current-sha="${tag}" | krane deploy "${namespace}" "${cluster}" \

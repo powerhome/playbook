@@ -61,18 +61,11 @@ spec:
               value: "60"
             - name: PLAYBOOK_MCP_RATE_LIMIT_WINDOW
               value: "60"
-            - name: PLAYBOOK_MCP_ALLOWLIST
-              valueFrom:
-                secretKeyRef:
-                  name: playbook-mcp
-                  key: allowlist
             - name: PLAYBOOK_MCP_KEYS
               valueFrom:
                 secretKeyRef:
                   name: playbook-mcp
                   key: consumer-keys
-            - name: PLAYBOOK_MCP_TRUSTED_PROXIES
-              value: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
             - name: PLAYBOOK_MCP_MAX_PROPS_BYTES
               value: "65536"
           livenessProbe:

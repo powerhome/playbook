@@ -5,12 +5,10 @@
 ingress:
   issueCert: false # Certificate issued once per cluster in the playbook-prs namespace
 
-# Review stacks run RAILS_ENV=production; allowlist must be non-empty (boot fail-closed).
-# "*" is OK here: PR ingress is VPN-only. Staging/production must use real client IPs.
+# Review stacks run RAILS_ENV=production, so PLAYBOOK_MCP_KEYS is required (see bin/deploy).
 appConfig:
   rackEnv: "production"
   railsEnv: "production"
-  allowlist: "*"
 
 # Smaller footprint on review stacks
 replicas: 1

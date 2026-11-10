@@ -2,7 +2,6 @@
 
 require "playbook_mcp/version"
 require "playbook_mcp/props"
-require "playbook_mcp/client_ip"
 require "playbook_mcp/html_sanitizer"
 require "playbook_mcp/html_postprocess"
 require "playbook_mcp/chart_options_sanitizer"

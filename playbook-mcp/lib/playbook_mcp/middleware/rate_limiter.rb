@@ -15,11 +15,11 @@ module PlaybookMcp
 
         max = Rails.application.config.playbook_mcp.rate_limit_max
         window = Rails.application.config.playbook_mcp.rate_limit_window
-        ip = ClientIp.from_env(env)
+        consumer = env[SharedSecret::CONSUMER_ENV] || "anonymous"
         now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
         limited = @mutex.synchronize do
-          stamps = @buckets[ip]
+          stamps = @buckets[consumer]
           stamps.reject! { |t| now - t > window }
           if stamps.size >= max
             true

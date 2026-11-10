@@ -43,7 +43,7 @@ type = type["rails"] || type["react"] if type.is_a?(Hash)
 
 ## Safety
 
-Do not weaken sanitization, size caps, allowlist, rate limit, or shared-secret checks. HTML `children` only for composition kits (`HtmlSanitizer::CHILDREN_ALLOWED_KITS`); scrub chart `options`. `RenderStore` is process-local — keep **replicas: 1** until a shared store exists. See `SECURITY.md`.
+Do not weaken sanitization, size caps, rate limit, or per-consumer key checks. Network exposure (VPN-only) is the Ingress's job — do not reintroduce an in-app IP allowlist. HTML `children` only for composition kits (`HtmlSanitizer::CHILDREN_ALLOWED_KITS`); scrub chart `options`. `RenderStore` is process-local — keep **replicas: 1** until a shared store exists. See `SECURITY.md`.
 
 ## Tests / docs
 

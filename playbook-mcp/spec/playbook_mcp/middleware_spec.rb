@@ -2,72 +2,31 @@
 
 require "spec_helper"
 
-RSpec.describe PlaybookMcp::Middleware::Allowlist do
-  let(:app) { ->(_env) { [200, {}, ["ok"]] } }
-
-  it "allows all when allowlist is empty" do
-    allow(Rails.application.config.playbook_mcp).to receive(:allowlist).and_return([])
-    status, = described_class.new(app).call("PATH_INFO" => "/mcp", "REMOTE_ADDR" => "1.2.3.4")
-    expect(status).to eq(200)
-  end
-
-  it "forbids non-allowlisted IPs" do
-    allow(Rails.application.config.playbook_mcp).to receive(:allowlist).and_return(["10.0.0.1"])
-    status, _, body = described_class.new(app).call(
-      "PATH_INFO" => "/mcp",
-      "REMOTE_ADDR" => "1.2.3.4",
-      "rack.input" => StringIO.new
-    )
-    expect(status).to eq(403)
-    expect(body.join).not_to include("1.2.3.4")
-  end
-
-  it "does not trust spoofed leftmost X-Forwarded-For without trusted proxies" do
-    allow(Rails.application.config.playbook_mcp).to receive(:allowlist).and_return(["10.0.0.1"])
-    status, = described_class.new(app).call(
-      "PATH_INFO" => "/mcp",
-      "REMOTE_ADDR" => "1.2.3.4",
-      "HTTP_X_FORWARDED_FOR" => "10.0.0.1",
-      "rack.input" => StringIO.new
-    )
-    expect(status).to eq(403)
-  end
-
-  it "always allows health" do
-    allow(Rails.application.config.playbook_mcp).to receive(:allowlist).and_return(["10.0.0.1"])
-    status, = described_class.new(app).call("PATH_INFO" => "/health", "REMOTE_ADDR" => "1.2.3.4")
-    expect(status).to eq(200)
-  end
-
-  it "allows /assets and /ui from non-allowlisted browser IPs" do
-    allow(Rails.application.config.playbook_mcp).to receive(:allowlist).and_return(["10.0.0.1"])
-    mw = described_class.new(app)
-    expect(mw.call("PATH_INFO" => "/assets/playbook.css", "REMOTE_ADDR" => "1.2.3.4").first).to eq(200)
-    expect(mw.call("PATH_INFO" => "/ui/abc", "REMOTE_ADDR" => "1.2.3.4").first).to eq(200)
-  end
-
-  it "still allowlists /mcp" do
-    allow(Rails.application.config.playbook_mcp).to receive(:allowlist).and_return(["10.0.0.1"])
-    status, = described_class.new(app).call(
-      "PATH_INFO" => "/mcp",
-      "REMOTE_ADDR" => "1.2.3.4",
-      "rack.input" => StringIO.new
-    )
-    expect(status).to eq(403)
-  end
-end
-
 RSpec.describe PlaybookMcp::Middleware::RateLimiter do
   let(:app) { ->(_env) { [200, {}, ["ok"]] } }
 
-  it "returns 429 when over limit" do
+  before do
     allow(Rails.application.config.playbook_mcp).to receive(:rate_limit_max).and_return(2)
     allow(Rails.application.config.playbook_mcp).to receive(:rate_limit_window).and_return(60)
+  end
+
+  def mcp_env(consumer)
+    { "PATH_INFO" => "/mcp", PlaybookMcp::Middleware::SharedSecret::CONSUMER_ENV => consumer, "rack.input" => StringIO.new }
+  end
+
+  it "returns 429 when over limit" do
     mw = described_class.new(app)
-    env = { "PATH_INFO" => "/mcp", "REMOTE_ADDR" => "9.9.9.9", "rack.input" => StringIO.new }
+    env = mcp_env("librechat")
     expect(mw.call(env).first).to eq(200)
     expect(mw.call(env).first).to eq(200)
     expect(mw.call(env).first).to eq(429)
+  end
+
+  it "limits each consumer separately" do
+    mw = described_class.new(app)
+    2.times { mw.call(mcp_env("librechat")) }
+    expect(mw.call(mcp_env("librechat")).first).to eq(429)
+    expect(mw.call(mcp_env("dw_agent")).first).to eq(200)
   end
 end
 

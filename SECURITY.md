@@ -21,12 +21,10 @@ It is important to regularly update and upgrade the design system to ensure that
 
 - `SECRET_KEY_BASE` must be set (no committed default in production).
 - `PLAYBOOK_MCP_KEYS` must be set: one `consumer:key` pair per calling system (comma-separated). Production refuses to boot without it.
-- `PLAYBOOK_MCP_ALLOWLIST` must be set to LibreChat / DW egress IPs (comma-separated). An empty allowlist refuses boot in production.
-- Prefer setting `PLAYBOOK_MCP_TRUSTED_PROXIES` to ingress CIDRs so client IP uses `ActionDispatch` trusted-proxy rules (not raw leftmost `X-Forwarded-For`).
-
 ### Controls
 
-- Rate limiting (`PLAYBOOK_MCP_RATE_LIMIT_MAX`, `PLAYBOOK_MCP_RATE_LIMIT_WINDOW`) — per process; pair with allowlisting.
+- Network exposure is enforced by the Ingress (VPN-only), not in-app. There is no application IP allowlist.
+- Rate limiting (`PLAYBOOK_MCP_RATE_LIMIT_MAX`, `PLAYBOOK_MCP_RATE_LIMIT_WINDOW`) — per consumer key, per process.
 - Input size caps (`PLAYBOOK_MCP_MAX_PROPS_BYTES`).
 - Kit names resolved only through Playbook `KitResolver` + `dist/ai` schema validation.
 - HTML `children` allowed only for composition kits (`table`, `card`, etc.) and sanitized with a SafeList (no scripts / event handlers).
@@ -36,7 +34,6 @@ It is important to regularly update and upgrade the design system to ensure that
 - Static assets are path-allowlisted under gem `dist/` / `fonts/` + vendored chart peers, with permissive CORS (`Access-Control-Allow-Origin: *`) so opaque-origin sandboxed iframes can load web fonts.
 - Per-consumer shared secrets: every `/mcp` request must send a configured key in `X-Playbook-Mcp-Key` (compared in constant time). Each consumer has its own key, so one can be rotated or revoked without breaking the others.
 - Transport is streamable-http only (deprecated standalone SSE is not used).
-- PR/review stacks may use `PLAYBOOK_MCP_ALLOWLIST=*` because review ingress is VPN-only; do not use `*` on staging/production.
 
 ### Consumers and keys
 
