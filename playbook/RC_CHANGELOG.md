@@ -13,10 +13,6 @@
 
 **Improvements:**
 
-- Patch Babel and Tooling Dependencies on Eslint 7 [\#6897](https://github.com/powerhome/playbook/pull/6897) ([nidaqg](https://github.com/nidaqg))
-- Playbook Website: Remove Vulnerable Glob Dependencies [\#6896](https://github.com/powerhome/playbook/pull/6896) ([nidaqg](https://github.com/nidaqg))
-- Playbook Website: Upgrade React-router-dom [\#6895](https://github.com/powerhome/playbook/pull/6895) ([nidaqg](https://github.com/nidaqg))
-- Version Bump 18.3.0 [\#6893](https://github.com/powerhome/playbook/pull/6893) ([ElisaShapiro](https://github.com/ElisaShapiro))
 - Upgrade Playbook’s Jest Stack and Enable the Automatic Jsx Transform In Tests [\#6887](https://github.com/powerhome/playbook/pull/6887) ([nidaqg](https://github.com/nidaqg))
 - Phone Number Input: Self Host Flags [\#6874](https://github.com/powerhome/playbook/pull/6874) ([nidaqg](https://github.com/nidaqg))
 
