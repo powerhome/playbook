@@ -129,7 +129,7 @@ Puma runs with `workers 0` because streamable-http session state is in-memory. D
 
 Each calling system gets its own key so it can be rotated or revoked alone. Generate one with `openssl rand -hex 32`.
 
-- **Staging / production:** `consumerKeys: "librechat:<key>,dw_agent:<key>"` in sops-encrypted `config/deploy/<env>/secrets.yaml` (alongside `secretKeyBase`). `bin/deploy` decrypts it into the `playbook-mcp` Kubernetes Secret.
+- **Staging / production:** `consumerKeys: "librechat:<key>,dw_agent:<key>"` in sops-encrypted `config/deploy/<env>/secrets.yaml` (alongside `secretKeyBase`). `bin/deploy` decrypts it into the `playbook-mcp` Kubernetes Secret and **exits 1 if the file is missing**, so a deploy can never rotate `SECRET_KEY_BASE` or consumer keys on its own.
 - **PR stacks:** `bin/deploy` uses `PLAYBOOK_MCP_KEYS` from the CI environment if set; otherwise it generates a throwaway key, so the stack runs but MCP clients cannot connect until a key is provided.
 
 ### Ingress

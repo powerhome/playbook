@@ -21,6 +21,11 @@ if [ -e "${workDir}/config/deploy/$environment/secrets.yaml" ]; then
   # Staging/production: sops-encrypted secrets only (never commit plaintext).
   sops --decrypt "${workDir}/config/deploy/${environment}/secrets.yaml" > "${workDir}/config/deploy/${environment}/secrets.dec.yaml"
   environmentSecretsFile="@${workDir}/config/deploy/$environment/secrets.dec.yaml"
+elif [ "$environment" = "staging" ] || [ "$environment" = "production" ]; then
+  # Never fall through to the ephemeral PR keys below: they change every deploy,
+  # so consumers like LibreChat would never keep a stable key.
+  echo "ERROR: playbook-mcp/config/deploy/${environment}/secrets.yaml is missing. Add a sops-encrypted file with secretKeyBase and consumerKeys." >&2
+  exit 1
 elif [ -e "${workDir}/config/deploy/prs/secrets.yaml" ]; then
   # Optional: sops-encrypted PR secrets if/when added. Do not commit plaintext secrets.
   if grep -q '^sops:' "${workDir}/config/deploy/prs/secrets.yaml"; then
@@ -31,7 +36,7 @@ elif [ -e "${workDir}/config/deploy/prs/secrets.yaml" ]; then
     exit 1
   fi
 else
-  # PR/review default: generate ephemeral SECRET_KEY_BASE at deploy time (not in git).
+  # PR/review only (staging/production exit above): generate ephemeral SECRET_KEY_BASE at deploy time (not in git).
   secret_key_base_binding="secretKeyBase=$(openssl rand -hex 64)"
   # Consumer keys: PLAYBOOK_MCP_KEYS from the CI environment if provided, else a
   # throwaway key (stack is unreachable to MCP clients until one is provided).
