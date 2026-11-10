@@ -2624,10 +2624,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-text-align/-/extension-text-align-3.0.7.tgz#cb1d6d501d1f7db38546e25f51bb0aac7af2b499"
   integrity sha512-3XywI2+dvb5IIO5NnZqyoXrRnikGyCIN7wWymTI7eqD213Ovs19/sfbW5kXLPsBYiNBb12nbG6pmPhr21mPvoA==
 
-"@tiptap/extension-text@3.0.7", "@tiptap/extension-text@^3.0.7":
-  version "3.0.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-text/-/extension-text-3.0.7.tgz#aa9a833bf8508bd859ac731d1daf47be296fcb9f"
-  integrity sha512-yf5dNcPLB5SbQ0cQq8qyjiMj9khx4Y4EJoyrDSAok/9zYM3ULqwTPkTSZ2eW6VX/grJeyBVleeBHk1PjJ7NiVw==
+"@tiptap/extension-text@3.33.0", "@tiptap/extension-text@^3.0.7":
+  version "3.33.0"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-text/-/extension-text-3.33.0.tgz#11d60f5b8c564292cee24764fc841c6fe11fca80"
+  integrity sha512-R9qVza+udPT+LezNkTkfLctN/9EFD/zFLUA6Lly9ehXZbfH9SLh149qdLdLBl9KMSgYhkFXcySSIoAULCKPRdg==
 
 "@tiptap/extension-underline@3.0.7", "@tiptap/extension-underline@^3.0.7":
   version "3.0.7"
