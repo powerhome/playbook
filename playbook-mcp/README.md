@@ -130,6 +130,12 @@ Each calling system gets its own key so it can be rotated or revoked alone. Gene
 - **Staging / production:** `consumerKeys: "librechat:<key>,dw_agent:<key>"` in sops-encrypted `config/deploy/<env>/secrets.yaml` (alongside `secretKeyBase`). `bin/deploy` decrypts it into the `playbook-mcp` Kubernetes Secret.
 - **PR stacks:** `bin/deploy` uses `PLAYBOOK_MCP_KEYS` from the CI environment if set; otherwise it generates a throwaway key, so the stack runs but MCP clients cannot connect until a key is provided.
 
+### Ingress
+
+`config/deploy/templates/ingress.yaml.erb` is a Traefik-only Ingress (`ingressClassName: traefik`) on PAC's default VPN-scoped entrypoints, in every environment. Keep it separate from the website Ingress (which opts into `https-public` in production), and do not add `https-public` or a source-range whitelist here.
+
+Traefik streams responses without buffering, so the old nginx `proxy-buffering` / `proxy-read-timeout` annotations have no equivalent here; cookie affinity was dropped because it cannot pin `/mcp` and `/ui/:id` to the same pod. When verifying staging, confirm long-lived Streamable HTTP responses are not cut off by Traefik's entrypoint timeouts.
+
 Deploy manifests live under `config/deploy/`. Image build:
 
 ```bash

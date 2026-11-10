@@ -4,22 +4,21 @@
   # Staging/production issue a dedicated cert into playbook-mcp-tls.
   tls_secret = ingress["issueCert"] ? "playbook-mcp-tls" : "playbook-tls"
 %>
+# VPN-only in every environment: Traefik's default entrypoints on PAC are
+# VPN-scoped. Do not add the https-public entrypoint or a source-range
+# whitelist, and keep this separate from the website Ingress (public in production).
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: playbook-mcp
   labels:
     app: playbook-mcp
+  <% if ingress["issueCert"] %>
   annotations:
-    kubernetes.io/ingress.class: nginx
-    <% if ingress["issueCert"] %>
     cert-manager.io/cluster-issuer: production-certs
-    <% end %>
-    nginx.ingress.kubernetes.io/proxy-buffering: "off"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    nginx.ingress.kubernetes.io/affinity: cookie
-    nginx.ingress.kubernetes.io/session-cookie-name: playbook-mcp-session
+  <% end %>
 spec:
+  ingressClassName: traefik
   tls:
   - hosts:
       <% urls.each do |url| %>

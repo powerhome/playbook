@@ -23,7 +23,7 @@ It is important to regularly update and upgrade the design system to ensure that
 - `PLAYBOOK_MCP_KEYS` must be set: one `consumer:key` pair per calling system (comma-separated). Production refuses to boot without it.
 ### Controls
 
-- Network exposure is enforced by the Ingress (VPN-only), not in-app. There is no application IP allowlist.
+- Network exposure is enforced by the Ingress, not in-app. `playbook-mcp` has its own Traefik-only Ingress on PAC's default VPN-scoped entrypoints (no `https-public`, no source-range whitelist), separate from the website's public production Ingress. There is no application IP allowlist.
 - Rate limiting (`PLAYBOOK_MCP_RATE_LIMIT_MAX`, `PLAYBOOK_MCP_RATE_LIMIT_WINDOW`) — per consumer key, per process.
 - Input size caps (`PLAYBOOK_MCP_MAX_PROPS_BYTES`).
 - Kit names resolved only through Playbook `KitResolver` + `dist/ai` schema validation.

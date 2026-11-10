@@ -30,7 +30,6 @@ spec:
       labels:
         app: playbook-mcp
     spec:
-      # Sticky sessions recommended at the ingress for Streamable HTTP MCP sessions.
       containers:
         - name: playbook-mcp
           image: "image-registry.powerapp.cloud/playbook/playbook-mcp:<%= image_tag %>"
