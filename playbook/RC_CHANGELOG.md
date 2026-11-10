@@ -1,3 +1,32 @@
+# ✨ 18.4.0.pre.rc.0
+
+##### November 06, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.4.0-rc.0](https://github.com/powerhome/playbook/tree/18.4.0-rc.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Onclick Global Prop: Add Onclick Global Prop Support to Icon and Icon Circle [\#6877](https://github.com/powerhome/playbook/pull/6877) ([nickamantia](https://github.com/nickamantia))
+- Advanced Table Kit: Visual Separators Between Dimension Groups - React and Rails [\#6845](https://github.com/powerhome/playbook/pull/6845) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Patch Babel and Tooling Dependencies on Eslint 7 [\#6897](https://github.com/powerhome/playbook/pull/6897) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Remove Vulnerable Glob Dependencies [\#6896](https://github.com/powerhome/playbook/pull/6896) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Upgrade React-router-dom [\#6895](https://github.com/powerhome/playbook/pull/6895) ([nidaqg](https://github.com/nidaqg))
+- Version Bump 18.3.0 [\#6893](https://github.com/powerhome/playbook/pull/6893) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Upgrade Playbook’s Jest Stack and Enable the Automatic Jsx Transform In Tests [\#6887](https://github.com/powerhome/playbook/pull/6887) ([nidaqg](https://github.com/nidaqg))
+- Phone Number Input: Self Host Flags [\#6874](https://github.com/powerhome/playbook/pull/6874) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Popover Kit: Clean Up the Rails Popover on Disconnect [\#6894](https://github.com/powerhome/playbook/pull/6894) ([gregblake](https://github.com/gregblake))
+- Collapsible Kit: Fix Duplicate Onclick Calls In React [\#6875](https://github.com/powerhome/playbook/pull/6875) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.3.0...18.4.0-rc.0)
+
 # ✨ 18.3.0.pre.rc.2
 
 ##### November 02, 2026
