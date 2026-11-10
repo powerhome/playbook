@@ -4,6 +4,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  formatRailsProps,
   jsxChildrenToErb,
   selectableListItemsFromJsx,
 } from './jsx-children-to-erb.mjs';
@@ -59,6 +60,22 @@ describe('jsxChildrenToErb', () => {
 
   it('returns null for React-only layout compounds', () => {
     assert.equal(jsxChildrenToErb('<Layout.Round><Caption text="X" /></Layout.Round>'), null);
+  });
+
+  it('keeps Highcharts keys inside options and snake-cases other nested props', () => {
+    const erb = formatRailsProps({
+      options: {
+        series: [{ data: [1] }],
+        xAxis: { categories: ['Q1'] },
+        yAxis: { title: { text: 'USD' } },
+      },
+      custom_options: { minWidth: '360px' },
+    });
+    assert.match(erb, /xAxis:/);
+    assert.match(erb, /yAxis:/);
+    assert.match(erb, /min_width: "360px"/);
+    assert.doesNotMatch(erb, /x_axis/);
+    assert.doesNotMatch(erb, /y_axis/);
   });
 });
 

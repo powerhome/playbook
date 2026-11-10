@@ -112,9 +112,13 @@ function formatRubyHash(obj, opts = {}) {
 }
 
 function formatRailsProps(props) {
-  const parts = Object.entries(props).map(
-    ([name, value]) => `${name}: ${formatRubyValue(value)}`
-  );
+  const parts = Object.entries(props).map(([name, value]) => {
+    // Highcharts `options` is an opaque blob: keep xAxis / yAxis, same as
+    // formatRailsPropEntries in slim-playground.mjs. Prop names here are
+    // already snake_case (parseAttributes).
+    const preserveKeys = name === 'options';
+    return `${name}: ${formatRubyValue(value, { preserveKeys })}`;
+  });
   return parts.length ? ` props: { ${parts.join(', ')} }` : '';
 }
 
