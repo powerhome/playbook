@@ -34,7 +34,12 @@ export function resolveSchemaDefaultForPlatform(
   platform: SchemaPlatform = "react",
 ): unknown {
   if (!def || def.default === undefined) return undefined;
-  return resolvePlatformSplit(def.default, platform);
+  // No cross-platform fallback: `{ rails: "none" }` means React has no default, and an explicit
+  // `null` for this platform must be preserved rather than replaced by the other side's value.
+  if (isPlatformSplit(def.default)) {
+    return platform in def.default ? def.default[platform] : undefined;
+  }
+  return def.default;
 }
 
 /** Resolve React default from kit schema (handles `{ react, rails }` merge shape). */
