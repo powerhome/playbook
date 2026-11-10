@@ -78,12 +78,7 @@
   "globalProps": true,
   "usage": {
     "react": {
-      "import": "import { Lightbox } from 'playbook-ui'",
-      "example": "<Lightbox></Lightbox>"
-    },
-    "rails": {
-      "import": null,
-      "example": "<%= pb_rails(\"lightbox\", props: { text: \"Example\" }) %>"
+      "import": "import { Lightbox } from 'playbook-ui'"
     }
   }
 }

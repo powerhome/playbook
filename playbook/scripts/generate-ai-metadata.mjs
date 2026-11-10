@@ -551,7 +551,7 @@ function mergeProps(react, rails) {
 /**
  * Generate usage examples for React and Rails.
  */
-function generateUsage(kitName, props) {
+function generateUsage(kitName, props, platforms, hasPlayground) {
   const pascal = snakeToPascal(kitName);
   const examples = Object.entries(props)
     .filter(([, p]) => valuesForPlatform(p.values, 'react').length || valuesForPlatform(p.values, 'rails').length)
@@ -565,15 +565,22 @@ function generateUsage(kitName, props) {
     .map(([n, p]) => `${camelToSnake(n)}: "${valuesForPlatform(p.values, 'rails')[0]}"`).join(', ');
   const reactImportPath = kitName === 'advanced_table' ? 'playbook-ui/advanced-table' : 'playbook-ui';
 
+  // Only emit usage for platforms the kit exists on (e.g. no Rails example for React-only Lightbox).
+  // Examples are placeholders that build-ai-dist replaces with the kit's first playground preset, so
+  // kits without a playground configured get the import only, never a guessed example that may crash.
   return {
-    react: {
-      import: `import { ${pascal} } from '${reactImportPath}'`,
-      example: `<${pascal}${reactProps ? ' ' + reactProps : ''}></${pascal}>`,
-    },
-    rails: {
-      import: null,
-      example: `<%= pb_rails("${kitName}", props: { ${railsProps || 'text: "Example"'} }) %>`,
-    },
+    ...(platforms.includes('react') && {
+      react: {
+        import: `import { ${pascal} } from '${reactImportPath}'`,
+        ...(hasPlayground && { example: `<${pascal}${reactProps ? ' ' + reactProps : ''}></${pascal}>` }),
+      },
+    }),
+    ...(platforms.includes('rails') && {
+      rails: {
+        import: null,
+        ...(hasPlayground && { example: `<%= pb_rails("${kitName}", props: { ${railsProps || 'text: "Example"'} }) %>` }),
+      },
+    }),
   };
 }
 
@@ -603,6 +610,7 @@ function generateSchema(kitName, options = {}) {
     return null;
   }
 
+  const hasPlayground = fs.existsSync(path.join(kitDir, 'docs', '_playground.overrides.json'));
   const platforms = [];
   if (fs.existsSync(tsxFile)) platforms.push('react');
   if (fs.existsSync(rbFile)) platforms.push('rails');
@@ -615,7 +623,7 @@ function generateSchema(kitName, options = {}) {
     props,
     globalProps: true,
     ...(usesGlobalEventProps(tsxFile) && { globalEventProps: true }),
-    usage: generateUsage(kitName, props),
+    usage: generateUsage(kitName, props, platforms, hasPlayground),
   };
 
   return schema;

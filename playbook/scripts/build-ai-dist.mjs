@@ -107,18 +107,23 @@ function enrichSchemaUsage(schema, kitName, slimPlayground) {
   const usage = usageFromPreset(kitName, pascal, slimPlayground);
   if (!usage) return schema;
 
+  const platforms = schema.platforms || [];
   return {
     ...schema,
     usage: {
       ...schema.usage,
-      react: {
-        ...(schema.usage?.react || {}),
-        ...usage.react,
-      },
-      rails: {
-        ...(schema.usage?.rails || {}),
-        ...usage.rails,
-      },
+      ...(platforms.includes('react') && {
+        react: {
+          ...(schema.usage?.react || {}),
+          ...usage.react,
+        },
+      }),
+      ...(platforms.includes('rails') && {
+        rails: {
+          ...(schema.usage?.rails || {}),
+          ...usage.rails,
+        },
+      }),
     },
   };
 }

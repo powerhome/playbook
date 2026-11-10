@@ -415,6 +415,7 @@ Optional consumer rule/skill drafts (not applied anywhere): `docs/ai/consumer/`.
 - `globalEventProps: true` - Indicates component opts into React GlobalEventProps (see `global-event-props.schema.json`)
 - `usage.react.example` - Example React JSX (seeded from first playground preset in dist)
 - `usage.rails.example` - Example Rails ERB
+- `usage` only has a `react` / `rails` entry for platforms the kit exists on. Kits without a `docs/_playground.overrides.json` (e.g. `lightbox`, `form`) get the import only, with no `example`.
 - `playgrounds/<kit>.json` - Presets, hints, conditionals, templates, structure modes
 
 ### Responsive Props

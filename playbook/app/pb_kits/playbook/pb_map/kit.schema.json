@@ -44,10 +44,6 @@
     "react": {
       "import": "import { Map } from 'playbook-ui'",
       "example": "<Map></Map>"
-    },
-    "rails": {
-      "import": null,
-      "example": "<%= pb_rails(\"map\", props: { text: \"Example\" }) %>"
     }
   }
 }
