@@ -42,8 +42,18 @@ module PlaybookMcp
     end
 
     def validate_layout!(items:)
+      items = Array(items)
+      config = Rails.application.config.playbook_mcp
+
+      # Bound the whole request, not only each item: many max-sized kits would
+      # otherwise multiply pb_rails work and RenderStore HTML past the documented cap.
+      return Result.failure(["layout has #{items.size} items; max is #{config.max_layout_items}"]) if items.size > config.max_layout_items
+
+      total_bytes = items.sum { |item| layout_item_bytes(item) }
+      return Result.failure(["Layout payload exceeds max size of #{config.max_props_bytes} bytes"]) if total_bytes > config.max_props_bytes
+
       errors = []
-      Array(items).each_with_index do |item, index|
+      items.each_with_index do |item, index|
         item = item.transform_keys(&:to_sym) if item.is_a?(Hash)
         kit = item[:kit] || item["kit"]
         props = item[:props] || item["props"] || {}
@@ -53,11 +63,19 @@ module PlaybookMcp
 
         result.errors.each { |err| errors << "items[#{index}]: #{err}" }
       end
-      errors << "layout items must not be empty" if Array(items).empty?
+      errors << "layout items must not be empty" if items.empty?
       errors.empty? ? Result.success : Result.failure(errors)
     end
 
   private
+
+    # Same measure as validate_kit!: props JSON + children HTML.
+    def layout_item_bytes(item)
+      return 0 unless item.is_a?(Hash)
+
+      item = item.transform_keys(&:to_sym)
+      Props.byte_size(item[:props] || {}) + item[:children].to_s.bytesize
+    end
 
     def validate_props(schema, camel_props)
       errors = []

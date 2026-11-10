@@ -59,6 +59,41 @@ RSpec.describe PlaybookMcp::Validator do
     expect(result.ok?).to be(true)
   end
 
+  describe "layout limits" do
+    let(:caption) { { "kit" => "caption", "props" => { "text" => "x" * 40 } } }
+
+    it "rejects a layout whose combined payload exceeds the cap even when each item fits" do
+      allow(Rails.application.config.playbook_mcp).to receive(:max_props_bytes).and_return(100)
+      expect(validator.validate_kit!(kit: "caption", props: caption["props"]).ok?).to be(true)
+
+      result = validator.validate_layout!(items: [caption, caption, caption])
+      expect(result.ok?).to be(false)
+      expect(result.errors.join).to include("Layout payload exceeds max size of 100 bytes")
+    end
+
+    it "counts HTML children toward the combined payload" do
+      allow(Rails.application.config.playbook_mcp).to receive(:max_props_bytes).and_return(100)
+      table = { "kit" => "table", "props" => {}, "children" => "<tbody>#{'<tr><td>1</td></tr>' * 4}</tbody>" }
+
+      result = validator.validate_layout!(items: [table, table])
+      expect(result.ok?).to be(false)
+      expect(result.errors.join).to include("Layout payload exceeds")
+    end
+
+    it "rejects more items than PLAYBOOK_MCP_MAX_LAYOUT_ITEMS" do
+      allow(Rails.application.config.playbook_mcp).to receive(:max_layout_items).and_return(2)
+
+      result = validator.validate_layout!(items: Array.new(3) { { "kit" => "caption", "props" => { "text" => "a" } } })
+      expect(result.ok?).to be(false)
+      expect(result.errors.join).to include("layout has 3 items; max is 2")
+    end
+
+    it "accepts a layout within both limits" do
+      result = validator.validate_layout!(items: [caption, caption])
+      expect(result.ok?).to be(true)
+    end
+  end
+
   it "uses the rails type when schema type is split by platform" do
     result = validator.validate_kit!(kit: "stat_value", props: { "value" => 42 })
     expect(result.ok?).to be(true)

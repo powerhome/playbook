@@ -38,6 +38,7 @@ module PlaybookMcp
     config.playbook_mcp = ActiveSupport::OrderedOptions.new
     config.playbook_mcp.asset_base_url = ENV.fetch("PLAYBOOK_MCP_ASSET_BASE_URL", "")
     config.playbook_mcp.max_props_bytes = Integer(ENV.fetch("PLAYBOOK_MCP_MAX_PROPS_BYTES", "65536"))
+    config.playbook_mcp.max_layout_items = Integer(ENV.fetch("PLAYBOOK_MCP_MAX_LAYOUT_ITEMS", "50"))
     config.playbook_mcp.rate_limit_max = Integer(ENV.fetch("PLAYBOOK_MCP_RATE_LIMIT_MAX", "60"))
     config.playbook_mcp.rate_limit_window = Integer(ENV.fetch("PLAYBOOK_MCP_RATE_LIMIT_WINDOW", "60"))
     config.playbook_mcp.consumer_keys = PlaybookMcp::Middleware::SharedSecret.parse_keys(ENV.fetch("PLAYBOOK_MCP_KEYS", ""))

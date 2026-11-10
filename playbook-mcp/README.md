@@ -116,7 +116,8 @@ There is no in-app IP allowlist: the Ingress keeps every environment VPN-only, a
 | `PLAYBOOK_MCP_KEYS` | unset (dev allow-all) | **Required in production** — `librechat:<key>,dw_agent:<key>`; `/mcp` requires one of the keys in `X-Playbook-Mcp-Key` |
 | `PLAYBOOK_MCP_RATE_LIMIT_MAX` | `60` | Max MCP requests per window per consumer key |
 | `PLAYBOOK_MCP_RATE_LIMIT_WINDOW` | `60` | Window seconds |
-| `PLAYBOOK_MCP_MAX_PROPS_BYTES` | `65536` | Max props+children JSON/HTML bytes |
+| `PLAYBOOK_MCP_MAX_PROPS_BYTES` | `65536` | Max props+children JSON/HTML bytes per request (`render_layout`: all items combined) |
+| `PLAYBOOK_MCP_MAX_LAYOUT_ITEMS` | `50` | Max kits in one `render_layout` call |
 | `PLAYBOOK_MCP_ASSET_BASE_URL` | relative `/assets` | Absolute origin for iframe assets + `/ui/:id` external_url |
 | `PLAYBOOK_MCP_RENDER_TTL_SECONDS` | `900` | Ephemeral `/ui/:id` HTML lifetime |
 | `PLAYBOOK_MCP_RENDER_MAX_ENTRIES` | `256` | Max in-memory rendered documents |

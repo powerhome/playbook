@@ -17,6 +17,9 @@ module PlaybookMcp
         Chart items may set uiAction for point-click follow-ups.
         Composition kits (card, table) accept HTML children as an item-level string,
         or nested under props.children (equivalent).
+        Limits: at most #{Rails.application.config.playbook_mcp.max_layout_items} items, and all items'
+        props + children combined under #{Rails.application.config.playbook_mcp.max_props_bytes} bytes.
+        Split larger dashboards into several render_layout calls.
       DESC
       input_schema(
         properties: {
