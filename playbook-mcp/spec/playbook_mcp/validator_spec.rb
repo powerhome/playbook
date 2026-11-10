@@ -47,6 +47,18 @@ RSpec.describe PlaybookMcp::Validator do
     expect(result.ok?).to be(true)
   end
 
+  it "rejects a JSON string for object props such as chart options" do
+    options = '{"series":[{"data":[1,2]}]}'
+    result = validator.validate_kit!(kit: "pb_bar_graph", props: { "options" => options })
+    expect(result.ok?).to be(false)
+    expect(result.errors.join).to include("Prop 'options' must be an object")
+  end
+
+  it "accepts a Hash for chart options" do
+    result = validator.validate_kit!(kit: "pb_bar_graph", props: { "options" => { "series" => [{ "data" => [1, 2] }] } })
+    expect(result.ok?).to be(true)
+  end
+
   it "uses the rails type when schema type is split by platform" do
     result = validator.validate_kit!(kit: "stat_value", props: { "value" => 42 })
     expect(result.ok?).to be(true)

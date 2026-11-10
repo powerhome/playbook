@@ -61,7 +61,8 @@ module PlaybookMcp
           kit_props = kit_props.transform_keys(&:to_s)
           if options
             existing = kit_props["options"] || kit_props[:options] || {}
-            kit_props["options"] = existing.merge(Props.deep_stringify_keys(options))
+            # A non-Hash props.options (e.g. a JSON string) is left for the validator to reject.
+            kit_props["options"] = existing.merge(Props.deep_stringify_keys(options)) if existing.is_a?(Hash)
           end
 
           # Fresh Renderer per call — shared ActionView context is not thread-safe.

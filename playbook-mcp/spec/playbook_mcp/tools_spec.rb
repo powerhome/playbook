@@ -95,6 +95,23 @@ RSpec.describe "MCP tools" do
     expect(ui.dig(:resource, :uri) || ui.dig("resource", "uri")).to include("pb_bar_graph")
   end
 
+  it "render_chart returns error: true when props.options is a JSON string instead of an object" do
+    response = PlaybookMcp::Tools::RenderChart.call(
+      **deliver(type: "bar", props: { options: '{"series":[{"data":[1,2]}]}' }),
+      server_context: nil
+    )
+    expect(response.error?).to be(true)
+    expect(response.content.first[:text]).to include("Prop 'options' must be an object")
+  end
+
+  it "render_chart still rejects a string props.options when the options shorthand is also given" do
+    response = PlaybookMcp::Tools::RenderChart.call(
+      **deliver(type: "bar", props: { options: "oops" }, options: { series: [{ data: [1] }] }),
+      server_context: nil
+    )
+    expect(response.error?).to be(true)
+  end
+
   it "render_chart stamps uiAction onto the chart mount" do
     allow(Rails.application.config.playbook_mcp).to receive(:asset_base_url).and_return("")
     response = PlaybookMcp::Tools::RenderChart.call(

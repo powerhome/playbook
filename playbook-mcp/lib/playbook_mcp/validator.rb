@@ -92,6 +92,9 @@ module PlaybookMcp
         return ["Prop '#{key}' must be one of #{values.inspect}"] unless values.map(&:to_s).include?(value.to_s) || value.nil?
       when "string"
         return ["Prop '#{key}' must be a string"] unless value.nil? || value.is_a?(String)
+      when "GenericObject", "object"
+        # e.g. chart `options`. A JSON string would otherwise be replaced by {} at render time.
+        return ["Prop '#{key}' must be an object, not #{value.class.name.downcase}"] unless value.nil? || value.is_a?(Hash)
       when "function"
         return ["Prop '#{key}' is a function and cannot be rendered server-side"]
       end
