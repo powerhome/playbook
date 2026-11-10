@@ -141,7 +141,9 @@
           "default"
         ]
       },
-      "default": ""
+      "default": {
+        "rails": ""
+      }
     },
     "text": {
       "type": "string",

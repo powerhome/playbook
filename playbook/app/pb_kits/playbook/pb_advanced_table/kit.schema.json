@@ -56,7 +56,9 @@
           "none"
         ]
       },
-      "default": "none"
+      "default": {
+        "rails": "none"
+      }
     },
     "columnVisibilityControl": {
       "type": "GenericObject",

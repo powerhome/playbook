@@ -8,7 +8,6 @@
     "placement": "center",
     "shouldCloseOnOverlayClick": true,
     "size": "md",
-    "status": "",
     "title": "Header Title is the Title Prop",
     "text": "Hello Body Text, Nice to meet ya."
   },

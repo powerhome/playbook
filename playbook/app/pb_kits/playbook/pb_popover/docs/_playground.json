@@ -3,9 +3,9 @@
   "propTargets": {},
   "defaults": {
     "appendTo": "body",
-    "closeOnClick": "outside",
     "offset": true,
     "show": false,
+    "closeOnClick": "outside",
     "placement": "top"
   },
   "children": {

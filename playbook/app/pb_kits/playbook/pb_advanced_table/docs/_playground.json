@@ -8,7 +8,6 @@
   },
   "defaults": {
     "cascadeCollapse": false,
-    "columnGroupBorderColor": "none",
     "enableToggleExpansion": "header",
     "enableSortingRemoval": false,
     "fullWidthCell": false,

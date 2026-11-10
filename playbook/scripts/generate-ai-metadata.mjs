@@ -539,6 +539,13 @@ function mergeProps(react, rails) {
       const rd = r.default, rbd = rb.default;
       if (rd !== undefined || rbd !== undefined) {
         merged[name].default = mergePlatformValue(rd, rbd);
+        // A one-sided default the other platform's enum does not accept (e.g. Rails-only "none")
+        // is stored for its own platform only, instead of being published as a shared default.
+        const values = merged[name].values;
+        if (values && !Array.isArray(values)) {
+          if (rd === undefined && typeof rbd === 'string' && !values.react.includes(rbd)) merged[name].default = { rails: rbd };
+          if (rbd === undefined && typeof rd === 'string' && !values.rails.includes(rd)) merged[name].default = { react: rd };
+        }
       }
     } else {
       merged[name] = { ...(r || rb) };
