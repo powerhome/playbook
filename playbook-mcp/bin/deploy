@@ -16,6 +16,7 @@ environmentValuesFile="@${environmentValuesPath}"
 environmentSecretsFile=""
 secret_key_base_binding=""
 allowlist_binding=""
+consumer_keys_binding=""
 
 if [ -e "${workDir}/config/deploy/$environment/secrets.yaml" ]; then
   # Staging/production: sops-encrypted secrets only (never commit plaintext).
@@ -34,6 +35,10 @@ else
   # PR/review default: generate ephemeral SECRET_KEY_BASE at deploy time (not in git).
   # allowlist comes from prs/values.yaml (appConfig.allowlist: "*"); VPN-only ingress.
   secret_key_base_binding="secretKeyBase=$(openssl rand -hex 64)"
+  # Consumer keys: PLAYBOOK_MCP_KEYS from the CI environment if provided, else a
+  # throwaway key (stack is unreachable to MCP clients until one is provided).
+  # JSON binding because the value contains commas.
+  consumer_keys_binding="{\"consumerKeys\":\"${PLAYBOOK_MCP_KEYS:-review:$(openssl rand -hex 32)}\"}"
 fi
 
 # Staging/production pin ingress.hosts in config/deploy/$environment/values.yaml.
@@ -72,6 +77,7 @@ krane render \
   "environment=${environment}" \
   ${secret_key_base_binding} \
   ${allowlist_binding} \
+  ${consumer_keys_binding} \
   ${extraBindings} \
   --current-sha="${tag}" | krane deploy "${namespace}" "${cluster}" \
   --selector='app=playbook-mcp' \

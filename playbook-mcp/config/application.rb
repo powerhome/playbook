@@ -41,7 +41,11 @@ module PlaybookMcp
     config.playbook_mcp.rate_limit_max = Integer(ENV.fetch("PLAYBOOK_MCP_RATE_LIMIT_MAX", "60"))
     config.playbook_mcp.rate_limit_window = Integer(ENV.fetch("PLAYBOOK_MCP_RATE_LIMIT_WINDOW", "60"))
     config.playbook_mcp.allowlist = ENV.fetch("PLAYBOOK_MCP_ALLOWLIST", "").split(",").map(&:strip).reject(&:empty?)
-    config.playbook_mcp.shared_secret = ENV.fetch("PLAYBOOK_MCP_SHARED_SECRET", "")
+    # "librechat:<key>,dw_agent:<key>" → { "librechat" => "<key>", ... }
+    config.playbook_mcp.consumer_keys = ENV.fetch("PLAYBOOK_MCP_KEYS", "").split(",").filter_map do |entry|
+      name, key = entry.strip.split(":", 2)
+      [name, key] if name.present? && key.present?
+    end.to_h
 
     if ENV["PLAYBOOK_MCP_TRUSTED_PROXIES"].present?
       config.action_dispatch.trusted_proxies = ENV["PLAYBOOK_MCP_TRUSTED_PROXIES"]

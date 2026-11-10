@@ -8,7 +8,7 @@ Playbook MCP exposes **streamable-http** (MCP 2025-03-26) at `/mcp` — not the 
 |-------|--------|
 | Transport | **Streamable HTTPS** (streamable-http) |
 | MCP Server URL | Local: `http://localhost:3099/mcp`. PR review: `https://mcp-pr<N>.playbook.wc.beta.gm.powerapp.cloud/mcp` (sibling of website `https://pr<N>.playbook...`). |
-| Auth | None, or custom header `X-Playbook-Mcp-Key` if `PLAYBOOK_MCP_SHARED_SECRET` is set |
+| Auth | Custom header `X-Playbook-Mcp-Key` with LibreChat's key from `PLAYBOOK_MCP_KEYS` (configured centrally by NIP) |
 
 ## Phase 0 exit criteria (architecture risks)
 
@@ -50,6 +50,6 @@ LibreChat handles **intent**, **tool**, and **prompt** action types (converted t
 
 - Production **requires** `PLAYBOOK_MCP_ALLOWLIST` and `SECRET_KEY_BASE`.
 - Set `PLAYBOOK_MCP_TRUSTED_PROXIES` to ingress CIDRs.
-- Optional: `PLAYBOOK_MCP_SHARED_SECRET` + LibreChat custom header `X-Playbook-Mcp-Key`.
+- Production **requires** `PLAYBOOK_MCP_KEYS`; `/mcp` without a valid `X-Playbook-Mcp-Key` returns 401.
 - Rate limit + props size caps.
 - Chart IIFE built (`bin/vendor_chart_peers`) — no runtime esm.sh / jsDelivr `/+esm` / importmap.

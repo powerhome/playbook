@@ -76,7 +76,7 @@ See [docs/LIBRECHAT_VERIFICATION.md](docs/LIBRECHAT_VERIFICATION.md) and [docs/S
 |-------|--------|
 | Transport | **Streamable HTTPS** (streamable-http) |
 | URL (local) | `http://localhost:3099/mcp` |
-| Auth | None, or `X-Playbook-Mcp-Key` if shared secret set |
+| Auth | Custom header `X-Playbook-Mcp-Key` with the consumer's key (optional locally when `PLAYBOOK_MCP_KEYS` is unset) |
 
 **Phase 0 gate:** Button styles **and** table JS (or chart) working inside the real LibreChat sandboxed iframe — not only ActionView HTML in isolation.
 
@@ -113,7 +113,7 @@ Review stacks set `PLAYBOOK_MCP_ALLOWLIST=*` because **PR hosts are VPN-only** a
 |-----|---------|---------|
 | `PLAYBOOK_MCP_ALLOWLIST` | empty (dev allow-all) | **Required in production** — LibreChat/server egress IPs for `/mcp` (`/assets` + `/ui` are exempt for browser iframes) |
 | `PLAYBOOK_MCP_TRUSTED_PROXIES` | unset | Ingress CIDRs for correct `remote_ip` |
-| `PLAYBOOK_MCP_SHARED_SECRET` | unset | If set, require `X-Playbook-Mcp-Key` on `/mcp` |
+| `PLAYBOOK_MCP_KEYS` | unset (dev allow-all) | **Required in production** — `librechat:<key>,dw_agent:<key>`; `/mcp` requires one of the keys in `X-Playbook-Mcp-Key` |
 | `PLAYBOOK_MCP_RATE_LIMIT_MAX` | `60` | Max MCP requests per window per IP |
 | `PLAYBOOK_MCP_RATE_LIMIT_WINDOW` | `60` | Window seconds |
 | `PLAYBOOK_MCP_MAX_PROPS_BYTES` | `65536` | Max props+children JSON/HTML bytes |
@@ -124,6 +124,13 @@ Review stacks set `PLAYBOOK_MCP_ALLOWLIST=*` because **PR hosts are VPN-only** a
 | `PORT` | `3099` | Puma port |
 
 Puma runs with `workers 0` because streamable-http session state is in-memory. Deploy `replicas: 1` while `RenderStore` is process-local (see above).
+
+### Consumer keys
+
+Each calling system gets its own key so it can be rotated or revoked alone. Generate one with `openssl rand -hex 32`.
+
+- **Staging / production:** `consumerKeys: "librechat:<key>,dw_agent:<key>"` in sops-encrypted `config/deploy/<env>/secrets.yaml` (alongside `secretKeyBase`). `bin/deploy` decrypts it into the `playbook-mcp` Kubernetes Secret.
+- **PR stacks:** `bin/deploy` uses `PLAYBOOK_MCP_KEYS` from the CI environment if set; otherwise it generates a throwaway key, so the stack runs but MCP clients cannot connect until a key is provided.
 
 Deploy manifests live under `config/deploy/`. Image build:
 

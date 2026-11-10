@@ -72,32 +72,39 @@ RSpec.describe PlaybookMcp::Middleware::RateLimiter do
 end
 
 RSpec.describe PlaybookMcp::Middleware::SharedSecret do
-  let(:app) { ->(_env) { [200, {}, ["ok"]] } }
+  let(:app) { ->(env) { [200, {}, [env[described_class::CONSUMER_ENV].to_s]] } }
+  let(:keys) { { "librechat" => "lc-s3cret", "dw_agent" => "dw-s3cret" } }
 
-  it "is a no-op when secret unset" do
-    allow(Rails.application.config.playbook_mcp).to receive(:shared_secret).and_return("")
-    status, = described_class.new(app).call("PATH_INFO" => "/mcp", "rack.input" => StringIO.new)
-    expect(status).to eq(200)
+  before { allow(Rails.application.config.playbook_mcp).to receive(:consumer_keys).and_return(keys) }
+
+  def call_mcp(key = nil)
+    env = { "PATH_INFO" => "/mcp", "rack.input" => StringIO.new }
+    env["HTTP_X_PLAYBOOK_MCP_KEY"] = key if key
+    described_class.new(app).call(env)
   end
 
-  it "rejects missing key when secret set" do
-    allow(Rails.application.config.playbook_mcp).to receive(:shared_secret).and_return("s3cret")
-    status, = described_class.new(app).call("PATH_INFO" => "/mcp", "rack.input" => StringIO.new)
-    expect(status).to eq(401)
+  it "is a no-op when no keys are configured" do
+    allow(Rails.application.config.playbook_mcp).to receive(:consumer_keys).and_return({})
+    expect(call_mcp.first).to eq(200)
   end
 
-  it "allows matching X-Playbook-Mcp-Key" do
-    allow(Rails.application.config.playbook_mcp).to receive(:shared_secret).and_return("s3cret")
-    status, = described_class.new(app).call(
-      "PATH_INFO" => "/mcp",
-      "HTTP_X_PLAYBOOK_MCP_KEY" => "s3cret",
-      "rack.input" => StringIO.new
-    )
-    expect(status).to eq(200)
+  it "rejects a missing key" do
+    expect(call_mcp.first).to eq(401)
+  end
+
+  it "rejects an unknown key" do
+    expect(call_mcp("nope").first).to eq(401)
+  end
+
+  it "accepts each consumer's key and records the consumer name" do
+    status, _, body = call_mcp("lc-s3cret")
+    expect([status, body.join]).to eq([200, "librechat"])
+
+    status, _, body = call_mcp("dw-s3cret")
+    expect([status, body.join]).to eq([200, "dw_agent"])
   end
 
   it "allows /ui without key so browser iframes can load external_url" do
-    allow(Rails.application.config.playbook_mcp).to receive(:shared_secret).and_return("s3cret")
     status, = described_class.new(app).call("PATH_INFO" => "/ui/abc", "rack.input" => StringIO.new)
     expect(status).to eq(200)
   end

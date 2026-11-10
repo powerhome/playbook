@@ -20,6 +20,7 @@ It is important to regularly update and upgrade the design system to ensure that
 ### Production requirements (fail closed)
 
 - `SECRET_KEY_BASE` must be set (no committed default in production).
+- `PLAYBOOK_MCP_KEYS` must be set: one `consumer:key` pair per calling system (comma-separated). Production refuses to boot without it.
 - `PLAYBOOK_MCP_ALLOWLIST` must be set to LibreChat / DW egress IPs (comma-separated). An empty allowlist refuses boot in production.
 - Prefer setting `PLAYBOOK_MCP_TRUSTED_PROXIES` to ingress CIDRs so client IP uses `ActionDispatch` trusted-proxy rules (not raw leftmost `X-Forwarded-For`).
 
@@ -33,8 +34,17 @@ It is important to regularly update and upgrade the design system to ensure that
 - Chart click follow-ups are **declarative** `uiAction` templates (`prompt` / `tool` / `intent`) posted via `postMessage`. User-supplied Highcharts event functions are not accepted.
 - Generated MCP-UI documents set a Content-Security-Policy; chart peers are self-hosted under `/assets/vendor` (run `bin/vendor_chart_peers`), not third-party CDNs at runtime.
 - Static assets are path-allowlisted under gem `dist/` / `fonts/` + vendored chart peers, with permissive CORS (`Access-Control-Allow-Origin: *`) so opaque-origin sandboxed iframes can load web fonts.
-- Optional shared secret: `PLAYBOOK_MCP_SHARED_SECRET` requires LibreChat custom header `X-Playbook-Mcp-Key`.
+- Per-consumer shared secrets: every `/mcp` request must send a configured key in `X-Playbook-Mcp-Key` (compared in constant time). Each consumer has its own key, so one can be rotated or revoked without breaking the others.
 - Transport is streamable-http only (deprecated standalone SSE is not used).
 - PR/review stacks may use `PLAYBOOK_MCP_ALLOWLIST=*` because review ingress is VPN-only; do not use `*` on staging/production.
+
+### Consumers and keys
+
+| Consumer | Holder |
+|----------|--------|
+| `librechat` | NIP (configured centrally in LibreChat; end users never see the key) |
+| `dw_agent` | Data-warehouse agent owners |
+
+Staging/production keys live in sops-encrypted `playbook-mcp/config/deploy/<env>/secrets.yaml` (`consumerKeys`). To rotate or revoke a consumer, change or remove only its entry and redeploy.
 
 Report MCP service issues the same way as design-system vulnerabilities (GitHub issue), and include the service version from `GET /health` when possible.
