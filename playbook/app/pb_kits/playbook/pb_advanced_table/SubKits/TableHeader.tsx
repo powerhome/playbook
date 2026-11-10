@@ -32,6 +32,7 @@ export const TableHeader = ({
   ...props
 }: TableHeaderProps) => {
   const {
+    columnVisibilityControl,
     enableToggleExpansion,
     handleExpandOrCollapse,
     loading,
@@ -64,10 +65,17 @@ export const TableHeader = ({
   );
 
   // TanStack drops header rows when every leaf in a group is hidden.
-  // Spacer rows keep the header height steady.
-  const columnHeaderDepth = Math.max(...table.getAllFlatColumns().map((column: GenericObject) => column.depth + 1))
-  const hiddenHeaderRowCount = columnHeaderDepth - table.getHeaderGroups().length
-  const spacerColSpan = table.getVisibleLeafColumns().length + (!hasAnySubRows && selectableRows ? 1 : 0)
+  // Spacer rows keep that height only when Select All can hide a whole group.
+  const showSelectAll = columnVisibilityControl?.showSelectAll === true
+  let hiddenHeaderRowCount = 0
+  let spacerColSpan = 0
+  if (showSelectAll) {
+    const columnHeaderDepth = Math.max(
+      ...table.getAllFlatColumns().map((column: GenericObject) => column.depth + 1)
+    )
+    hiddenHeaderRowCount = columnHeaderDepth - table.getHeaderGroups().length
+    spacerColSpan = table.getVisibleLeafColumns().length + (!hasAnySubRows && selectableRows ? 1 : 0)
+  }
 
   const renderSpacerRows = (rowClassName?: string) =>
     Array.from({ length: Math.max(0, hiddenHeaderRowCount) }, (_, index) => (
@@ -76,8 +84,9 @@ export const TableHeader = ({
           className={classnames("header-spacer-row", rowClassName)}
           key={`header-spacer-${index}`}
       >
+        {/* header-spacer-cell stays off .table-header-cells so width measurement and sticky-left styles skip it. */}
         <th
-            className="table-header-cells header-spacer-cell"
+            className="header-spacer-cell"
             colSpan={spacerColSpan}
         />
       </tr>

@@ -1846,7 +1846,12 @@ test("deselect all keeps nested multi-header rows", () => {
   fireEvent.click(checkboxNamed("Deselect All"))
 
   expect(kit.querySelectorAll("thead tr")).toHaveLength(3)
-  expect(kit.querySelectorAll("thead tr.header-spacer-row[aria-hidden='true']")).toHaveLength(2)
+  const spacerCells = kit.querySelectorAll("thead tr.header-spacer-row[aria-hidden='true'] .header-spacer-cell")
+  expect(spacerCells).toHaveLength(2)
+  spacerCells.forEach((cell) => {
+    expect(cell).not.toHaveClass("table-header-cells")
+    expect(cell).not.toHaveClass("table-header-cells-custom")
+  })
   expect(headerTexts(kit).some((text) => text.includes("Year"))).toBe(true)
   expect(headerTexts(kit).some((text) => text.includes("New Enrollments"))).toBe(false)
   expect(headerTexts(kit).some((text) => text.includes("Attendance Rate"))).toBe(false)
@@ -1919,6 +1924,147 @@ test("select all sends the same callback shapes as single column toggles", () =>
   expect(checkboxNamed("New Enrollments")).not.toBeChecked()
   expect(checkboxNamed("Scheduled Meetings")).not.toBeChecked()
   expect(headerTexts(kit).some((text) => text.includes("Enrollment Data"))).toBe(false)
+})
+
+test("hidden groups keep the existing header layout unless select all is enabled", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={groupedVisibilityColumnDefinitions}
+        columnVisibilityControl={{
+          value: {
+            newEnrollments: false,
+            scheduledMeetings: false,
+          },
+        }}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit.querySelector("thead tr.header-spacer-row")).not.toBeInTheDocument()
+  expect(kit.querySelectorAll("thead tr")).toHaveLength(1)
+  expect(headerTexts(kit).some((text) => text.includes("Year"))).toBe(true)
+  expect(headerTexts(kit).some((text) => text.includes("Enrollment Data"))).toBe(false)
+})
+
+test("select all is omitted when no listed column can be hidden", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={visibilityColumnDefinitions}
+        columnVisibilityControl={{ showSelectAll: true }}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+        tableOptions={{ enableHiding: false }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  openColumnVisibilityMenu()
+
+  expect(queryCheckboxNamed("Select All")).not.toBeInTheDocument()
+  expect(queryCheckboxNamed("Deselect All")).not.toBeInTheDocument()
+  expect(checkboxNamed("New Enrollments")).toBeChecked()
+
+  fireEvent.click(checkboxNamed("New Enrollments"))
+
+  expect(headerTexts(kit).some((text) => text.includes("New Enrollments"))).toBe(true)
+  openColumnVisibilityMenu()
+  openColumnVisibilityMenu()
+  expect(checkboxNamed("New Enrollments")).toBeChecked()
+})
+
+test("virtualized spacer cells stay out of column header measurement", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={groupedVisibilityColumnDefinitions}
+        columnVisibilityControl={{
+          showSelectAll: true,
+          value: {
+            newEnrollments: false,
+            scheduledMeetings: false,
+          },
+        }}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+        virtualizedRows
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const spacerCells = kit.querySelectorAll("thead .header-spacer-cell")
+  const measuredCells = document.querySelectorAll(".table-header-cells, .table-header-cells-custom")
+
+  expect(spacerCells.length).toBeGreaterThan(0)
+  spacerCells.forEach((cell) => {
+    expect(cell).not.toHaveClass("table-header-cells")
+    expect(cell).not.toHaveClass("table-header-cells-custom")
+  })
+  expect(Array.from(measuredCells).some((cell) => cell.classList.contains("header-spacer-cell"))).toBe(false)
+  expect(headerTexts(kit).some((text) => text.includes("Year"))).toBe(true)
+})
+
+test("grouped select all persisted from the onChange updater round-trips leaf visibility", () => {
+  const onChange = jest.fn()
+  const onColumnVisibilityChange = jest.fn()
+
+  const PersistedGroupedVisibility = () => {
+    const [columnVisibility, setColumnVisibility] = useState({})
+
+    return (
+      <AdvancedTable
+          columnDefinitions={groupedVisibilityColumnDefinitions}
+          columnVisibilityControl={{
+            onChange: (updater) => {
+              setColumnVisibility((currentVisibility) => {
+                const nextVisibility = typeof updater === "function" ? updater(currentVisibility) : updater
+                onChange(nextVisibility)
+                return nextVisibility
+              })
+            },
+            onColumnVisibilityChange,
+            showSelectAll: true,
+            value: columnVisibility,
+          }}
+          data={{ testid: testId }}
+          tableData={MOCK_DATA}
+      />
+    )
+  }
+
+  render(<PersistedGroupedVisibility />)
+
+  const kit = screen.getByTestId(testId)
+  openColumnVisibilityMenu()
+  fireEvent.click(checkboxNamed("Deselect All"))
+
+  expect(onChange).toHaveBeenCalledWith(expect.objectContaining({
+    newEnrollments: false,
+    scheduledMeetings: false,
+  }))
+  expect(onColumnVisibilityChange).toHaveBeenCalledWith({ enrollmentData: false, year: true })
+  expect(checkboxNamed("Select All")).not.toBeChecked()
+  expect(checkboxNamed("Enrollment Data")).not.toBeChecked()
+  expect(checkboxNamed("New Enrollments")).not.toBeChecked()
+  expect(checkboxNamed("Scheduled Meetings")).not.toBeChecked()
+  expect(headerTexts(kit).some((text) => text.includes("Enrollment Data"))).toBe(false)
+  expect(headerTexts(kit).some((text) => text.includes("New Enrollments"))).toBe(false)
+  expect(headerTexts(kit).some((text) => text.includes("Scheduled Meetings"))).toBe(false)
+  expect(headerTexts(kit).some((text) => text.includes("Year"))).toBe(true)
+
+  fireEvent.click(checkboxNamed("Select All"))
+
+  expect(onChange).toHaveBeenLastCalledWith(expect.objectContaining({
+    newEnrollments: true,
+    scheduledMeetings: true,
+  }))
+  expect(onColumnVisibilityChange).toHaveBeenLastCalledWith({ enrollmentData: true, year: true })
+  expect(checkboxNamed("Deselect All")).toBeChecked()
+  expect(checkboxNamed("Enrollment Data")).toBeChecked()
+  expect(checkboxNamed("New Enrollments")).toBeChecked()
+  expect(checkboxNamed("Scheduled Meetings")).toBeChecked()
+  expect(headerTexts(kit).some((text) => text.includes("New Enrollments"))).toBe(true)
+  expect(headerTexts(kit).some((text) => text.includes("Scheduled Meetings"))).toBe(true)
 })
 
 test("select all state persisted from onColumnVisibilityChange round-trips through value", () => {

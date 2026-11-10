@@ -143,19 +143,27 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
   const handleShouldClose = (shouldClose: boolean) =>
     setShowPopover(!shouldClose)
 
-  // Select All only changes columns listed in the popover.
+  // Select All only changes columns listed in the popover that can be hidden.
   // The first column and ids omitted by includeIds stay as they are.
-  const availableLeafIds = tree.flatMap(gatherLeafIds).filter((id) => table.getColumn(id))
-  const availableVisibility = availableLeafIds.map((id) => table.getColumn(id).getIsVisible())
-  const allAvailableVisible = availableVisibility.length > 0 && availableVisibility.every(Boolean)
-  const someAvailableVisible = availableVisibility.some(Boolean)
-  const showSelectAll = columnVisibilityControl?.showSelectAll === true && availableLeafIds.length > 0
+  // Skip the leaf walk unless the checkbox is enabled.
+  const selectAllRequested = columnVisibilityControl?.showSelectAll === true
+  const availableColumns = selectAllRequested
+    ? tree.flatMap(gatherLeafIds).flatMap((id) => {
+        const column = table.getColumn(id)
+        return column?.getCanHide() ? [column] : []
+      })
+    : []
+  const allAvailableVisible =
+    availableColumns.length > 0 &&
+    availableColumns.every((column) => column.getIsVisible())
+  const someAvailableVisible = availableColumns.some((column) => column.getIsVisible())
+  const showSelectAll = availableColumns.length > 0
   const selectAllLabel = allAvailableVisible ? "Deselect All" : "Select All"
 
   // Uses the same updater form as toggleVisibility, so onChange gets the same kind of value.
   const handleSelectAllChange = () => {
     const selectAllVisibility = Object.fromEntries(
-      availableLeafIds.map((id) => [id, !allAvailableVisible])
+      availableColumns.map((column) => [column.id, !allAvailableVisible])
     )
     table.setColumnVisibility((previousVisibility: { [id: string]: boolean }) => ({
       ...previousVisibility,
