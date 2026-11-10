@@ -182,6 +182,20 @@ RSpec.describe PlaybookMcp::Renderer do
     expect(html).to include("{{category}}")
   end
 
+  it "reserves chart height when the mount style only mentions height inside another property" do
+    html = %(<div data-pb-react-component="PbBarGraph" style="line-height:1.2;min-height:0;max-height:none"></div>)
+    merged = renderer.send(:reserve_chart_mount_height, html, {})
+    expect(merged).to include("line-height:1.2")
+    expect(merged).to include("height:400px")
+  end
+
+  it "leaves an existing height declaration alone" do
+    html = %(<div data-pb-react-component="PbBarGraph" style="height: 240px;line-height:1.2"></div>)
+    merged = renderer.send(:reserve_chart_mount_height, html, {})
+    expect(merged).to include("height: 240px")
+    expect(merged).not_to include("height:400px")
+  end
+
   it "stamps a custom chart uiAction and can disable clicks" do
     html = renderer.render_kit(
       kit: "pb_bar_graph",

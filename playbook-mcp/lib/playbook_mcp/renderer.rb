@@ -178,13 +178,22 @@ module PlaybookMcp
           open_tag.sub(/\bstyle=(['"])(.*?)\1/) do
             quote = Regexp.last_match(1)
             existing = Regexp.last_match(2).to_s
-            merged = existing.include?("height") ? existing : "#{existing};height:#{height}px;width:100%"
+            merged = if css_declares_height?(existing)
+                       existing
+                     else
+                       "#{existing};height:#{height}px;width:100%"
+                     end
             %(style=#{quote}#{merged}#{quote})
           end + close
         else
           %(#{open_tag} style="height:#{height}px;width:100%"#{close})
         end
       end
+    end
+
+    # "height:" only. include?("height") also matches line-height, min-height, max-height.
+    def css_declares_height?(style)
+      style.match?(/(?<![\w-])height\s*:/i)
     end
 
     def chart_height_px(kit_props)
