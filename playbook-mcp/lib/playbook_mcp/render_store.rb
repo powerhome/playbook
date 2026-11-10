@@ -11,16 +11,23 @@ module PlaybookMcp
   # sessions cannot keep the GET on the pod that stored the HTML.
   class RenderStore
     Entry = Struct.new(:html, :expires_at, keyword_init: true)
+    @mutex = Mutex.new
 
+    # Puma is multithreaded: two first requests must not each build a store,
+    # or /mcp would put into one while /ui/:id reads the other.
     def self.instance
-      @instance ||= new(
-        ttl_seconds: Integer(ENV.fetch("PLAYBOOK_MCP_RENDER_TTL_SECONDS", "900")),
-        max_entries: Integer(ENV.fetch("PLAYBOOK_MCP_RENDER_MAX_ENTRIES", "256"))
-      )
+      return @instance if @instance
+
+      @mutex.synchronize do
+        @instance ||= new(
+          ttl_seconds: Integer(ENV.fetch("PLAYBOOK_MCP_RENDER_TTL_SECONDS", "900")),
+          max_entries: Integer(ENV.fetch("PLAYBOOK_MCP_RENDER_MAX_ENTRIES", "256"))
+        )
+      end
     end
 
     def self.reset_instance!
-      @instance = nil
+      @mutex.synchronize { @instance = nil }
     end
 
     def initialize(ttl_seconds: 900, max_entries: 256)
