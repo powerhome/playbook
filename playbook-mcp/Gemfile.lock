@@ -1,11 +1,11 @@
 PATH
   remote: ../playbook
   specs:
-    playbook_ui (17.1.0)
-      actionpack (>= 5.2.4.5)
-      actionview (>= 5.2.4.5)
-      activesupport (>= 5.2.4.5)
-      view_component (= 2.83.0)
+    playbook_ui (18.2.0)
+      actionpack (>= 7.1.0)
+      actionview (>= 7.1.0)
+      activesupport (>= 7.1.0)
+      view_component (= 4.3.0)
       vite_rails
 
 GEM
@@ -132,7 +132,6 @@ GEM
     mcp (1.0.0)
       json_schemer (>= 2.4)
     mcp_ui_server (0.1.0)
-    method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.27.0)
     msgpack (1.8.4)
@@ -256,10 +255,10 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     useragent (0.16.11)
-    view_component (2.83.0)
-      activesupport (>= 5.2.0, < 8.0)
-      concurrent-ruby (~> 1.0)
-      method_source (~> 1.0)
+    view_component (4.3.0)
+      actionview (>= 7.1.0)
+      activesupport (>= 7.1.0)
+      concurrent-ruby (~> 1)
     vite_rails (3.11.1)
       railties (>= 5.1, < 9)
       vite_ruby (~> 3.0, >= 3.2.2)
