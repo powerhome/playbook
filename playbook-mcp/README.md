@@ -6,6 +6,8 @@ Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from 
 
 When `PLAYBOOK_MCP_ASSET_BASE_URL` is an absolute origin, render tools return MCP-UI **`external_url`** pointing at ephemeral `/ui/:id` HTML (TTL ~15m). That keeps large inline-SVG dashboards out of the tool-result payload so hosts like LibreChat do not truncate mid-document. Without an absolute base (local smoke), tools fall back to `rawHtml`.
 
+`/ui/:id` links work for whoever holds them (iframes cannot send the consumer key), so they rely on unguessable ids, the short TTL, `Referrer-Policy: no-referrer`, and ids being masked in request logs. See `SECURITY.md`.
+
 `RenderStore` is **process-local memory**, so deploy **`replicas: 1`** until a shared store (Redis/Memcached) exists. Sticky sessions cannot fix this: LibreChat calls `/mcp` and the browser iframe loads `/ui/:id` as a different client.
 
 Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standalone SSE.

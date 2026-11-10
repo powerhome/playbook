@@ -21,6 +21,7 @@ It is important to regularly update and upgrade the design system to ensure that
 
 - `SECRET_KEY_BASE` must be set (no committed default in production).
 - `PLAYBOOK_MCP_KEYS` must be set: one `consumer:key` pair per calling system (comma-separated). Production refuses to boot without it.
+
 ### Controls
 
 - Network exposure is enforced by the Ingress, not in-app. `playbook-mcp` has its own Traefik-only Ingress on PAC's default VPN-scoped entrypoints (no `https-public`, no source-range whitelist), separate from the website's public production Ingress. There is no application IP allowlist.
@@ -34,6 +35,22 @@ It is important to regularly update and upgrade the design system to ensure that
 - Static assets are path-allowlisted under gem `dist/` / `fonts/` + vendored chart peers, with permissive CORS (`Access-Control-Allow-Origin: *`) so opaque-origin sandboxed iframes can load web fonts.
 - Per-consumer shared secrets: every `/mcp` request must send a configured key in `X-Playbook-Mcp-Key` (compared in constant time). Each consumer has its own key, so one can be rotated or revoked without breaking the others.
 - Transport is streamable-http only (deprecated standalone SSE is not used).
+
+### Data that passes through
+
+Callers send chart series, table contents, and other kit props/children. The server only renders them: it reads no Power data, changes nothing outside the request, and persists nothing beyond short-lived renders in process memory. Tool props and children are never logged.
+
+### Rendered UI links (`/ui/:id`)
+
+Browser iframes cannot send the consumer key, so `/ui/:id` is reachable by whoever holds the link. It is protected by:
+
+- 144-bit random ids and a 15-minute expiry (`PLAYBOOK_MCP_RENDER_TTL_SECONDS`). LibreChat stores these links in conversations, including shared ones, which is why the expiry is short.
+- `Referrer-Policy: no-referrer` and `Cache-Control: private, no-store`.
+- Ids are masked in request logs (`/ui/[FILTERED]`).
+
+### When this model stops being enough
+
+Shared secrets are sufficient only while the server stays a stateless renderer on the VPN. Switch to NitroID OAuth (MCP authorization spec, as the Nexus MCP gateway does) before exposing it to the internet, adding a tool that reads Power data, persisting anything for a user, or acting on a user's behalf.
 
 ### Consumers and keys
 

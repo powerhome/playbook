@@ -19,6 +19,8 @@ class UiController < ActionController::Base
     response.delete_header("X-Frame-Options")
     response.set_header("Content-Security-Policy", "frame-ancestors *")
     response.set_header("Cache-Control", "private, no-store")
+    # Do not leak the bearer /ui/:id URL to anything the render links to.
+    response.set_header("Referrer-Policy", "no-referrer")
     render html: html.html_safe, layout: false, content_type: "text/html; charset=utf-8"
   end
 end
