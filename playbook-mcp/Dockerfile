@@ -78,10 +78,16 @@ FROM base AS gems
 COPY --chown=9999:9999 playbook/playbook_ui.gemspec playbook/playbook_ui.gemspec
 COPY --chown=9999:9999 playbook/lib/playbook/version.rb playbook/lib/playbook/version.rb
 COPY --chown=9999:9999 playbook-mcp/Gemfile playbook-mcp/Gemfile.lock* playbook-mcp/
-RUN cd playbook-mcp && bundle config set --local without 'development test' && bundle install
+# Env, not `bundle config set --local`: --local writes playbook-mcp/.bundle/config,
+# and that file is never copied into the runtime image (only $BUNDLE_TO is).
+ENV BUNDLE_WITHOUT=development:test
+RUN cd playbook-mcp && bundle install
 
 # --- Runtime ---
 FROM base AS prod
+# Same exclusion as the gems stage. Without it, `bundle exec` still requires
+# development/test gems (rspec-rails, byebug) and exits before Rails boots.
+ENV BUNDLE_WITHOUT=development:test
 COPY --from=gems $BUNDLE_TO $BUNDLE_TO
 COPY --chown=9999:9999 playbook /home/app/src/playbook
 COPY --from=assets --chown=9999:9999 /home/app/src/playbook/dist /home/app/src/playbook/dist
@@ -98,7 +104,8 @@ RUN mkdir -p tmp/pids log \
     && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-charts.js \
     && test -s /home/app/src/playbook-mcp/vendor/chart-peers/playbook-rails.js \
     && test -f vendor/playbook-icons/aliases.json \
-    && test -f vendor/playbook-icons/icons/data-visualization/chart-line.svg
+    && test -f vendor/playbook-icons/icons/data-visualization/chart-line.svg \
+    && bundle exec ruby -e 'required = Bundler.load.specs.map(&:name); %w[rspec-rails byebug].each { |name| abort("prod image required #{name}") if required.include?(name) }'
 
 USER app
 ENV PORT=3099
@@ -119,7 +126,8 @@ FROM prod AS test
 USER root
 COPY --from=test-gems $BUNDLE_TO $BUNDLE_TO
 WORKDIR /home/app/src/playbook-mcp
-RUN bundle config unset --local without || true
 USER app
+# Prod excludes development/test. This stage has the full bundle; drop it so rspec loads.
+ENV BUNDLE_WITHOUT=
 ENV RAILS_ENV=test
 ENV RACK_ENV=test
