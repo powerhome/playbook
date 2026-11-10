@@ -63,6 +63,14 @@ RSpec.describe PlaybookMcp::Middleware::SharedSecret do
     expect([status, body.join]).to eq([200, "dw_agent"])
   end
 
+  it "strips whitespace around the colon in PLAYBOOK_MCP_KEYS and the header" do
+    parsed = described_class.parse_keys("librechat : lc-s3cret , dw_agent:  dw-s3cret , :blank , no_key: ")
+
+    expect(parsed).to eq("librechat" => "lc-s3cret", "dw_agent" => "dw-s3cret")
+    allow(Rails.application.config.playbook_mcp).to receive(:consumer_keys).and_return(parsed)
+    expect(call_mcp(" lc-s3cret ").first).to eq(200)
+  end
+
   it "allows /ui without key so browser iframes can load external_url" do
     status, = described_class.new(app).call("PATH_INFO" => "/ui/abc", "rack.input" => StringIO.new)
     expect(status).to eq(200)

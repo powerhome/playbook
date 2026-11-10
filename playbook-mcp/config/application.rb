@@ -6,6 +6,7 @@ require "rails"
 require "action_controller/railtie"
 require "action_view/railtie"
 require "playbook"
+require_relative "../lib/playbook_mcp/middleware/shared_secret"
 
 Bundler.require(*Rails.groups)
 
@@ -39,10 +40,6 @@ module PlaybookMcp
     config.playbook_mcp.max_props_bytes = Integer(ENV.fetch("PLAYBOOK_MCP_MAX_PROPS_BYTES", "65536"))
     config.playbook_mcp.rate_limit_max = Integer(ENV.fetch("PLAYBOOK_MCP_RATE_LIMIT_MAX", "60"))
     config.playbook_mcp.rate_limit_window = Integer(ENV.fetch("PLAYBOOK_MCP_RATE_LIMIT_WINDOW", "60"))
-    # "librechat:<key>,dw_agent:<key>" → { "librechat" => "<key>", ... }
-    config.playbook_mcp.consumer_keys = ENV.fetch("PLAYBOOK_MCP_KEYS", "").split(",").filter_map do |entry|
-      name, key = entry.strip.split(":", 2)
-      [name, key] if name.present? && key.present?
-    end.to_h
+    config.playbook_mcp.consumer_keys = PlaybookMcp::Middleware::SharedSecret.parse_keys(ENV.fetch("PLAYBOOK_MCP_KEYS", ""))
   end
 end

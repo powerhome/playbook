@@ -10,6 +10,15 @@ module PlaybookMcp
       HEADER = "HTTP_X_PLAYBOOK_MCP_KEY"
       CONSUMER_ENV = "playbook_mcp.consumer"
 
+      # "librechat:<key>,dw_agent:<key>" → { "librechat" => "<key>", ... }
+      def self.parse_keys(raw)
+        raw.to_s.split(",").filter_map do |entry|
+          # Strip both sides of the colon so `librechat: <key>` in a sops file works.
+          name, key = entry.split(":", 2).map(&:strip)
+          [name, key] if name.present? && key.present?
+        end.to_h
+      end
+
       def initialize(app)
         @app = app
       end
@@ -22,7 +31,7 @@ module PlaybookMcp
         keys = Rails.application.config.playbook_mcp.consumer_keys
         return @app.call(env) if keys.empty?
 
-        consumer = consumer_for(env[HEADER].to_s, keys)
+        consumer = consumer_for(env[HEADER].to_s.strip, keys)
         if consumer
           env[CONSUMER_ENV] = consumer
           return @app.call(env)
