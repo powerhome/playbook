@@ -8,7 +8,7 @@ When `PLAYBOOK_MCP_ASSET_BASE_URL` is an absolute origin, render tools return MC
 
 `/ui/:id` links work for whoever holds them (iframes cannot send the consumer key), so they rely on unguessable ids, the short TTL, `Referrer-Policy: no-referrer`, and ids being masked in request logs. See `SECURITY.md`.
 
-`RenderStore` is **process-local memory**, so deploy **`replicas: 1`** until a shared store (Redis/Memcached) exists. Sticky sessions cannot fix this: LibreChat calls `/mcp` and the browser iframe loads `/ui/:id` as a different client.
+`RenderStore` is **process-local memory**, so deploy **`replicas: 1`** until a shared store (Redis/Memcached) exists. Sticky sessions cannot fix this: LibreChat calls `/mcp` and the browser iframe loads `/ui/:id` as a different client. The Deployment therefore uses `strategy: Recreate` (no second pod during a rollout) and the Service has no session affinity. Each deploy stops the server briefly, and renders from before the deploy 404.
 
 Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standalone SSE.
 

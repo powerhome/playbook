@@ -5,9 +5,9 @@ metadata:
   labels:
     app: playbook-mcp
   annotations:
-    krane.shopify.io/required-rollout: "maxUnavailable"
+    krane.shopify.io/required-rollout: "full"
 <%
-  replica_count = 2
+  replica_count = 1
   replica_count = replicas if defined?(replicas) && !replicas.nil?
   replica_count = appConfig["replicas"] if defined?(appConfig) && appConfig.is_a?(Hash) && appConfig["replicas"]
   asset_base = ""
@@ -17,11 +17,11 @@ metadata:
 %>
 spec:
   replicas: <%= replica_count %>
+  # RenderStore is process-local, so two ready pods would split renders: /mcp and
+  # /ui/:id are different clients and cannot be pinned to the same pod. Stop the
+  # old pod before starting the new one (brief downtime, no overlap).
   strategy:
-    rollingUpdate:
-      maxSurge: 50%
-      maxUnavailable: 50%
-    type: RollingUpdate
+    type: Recreate
   selector:
     matchLabels:
       app: playbook-mcp
