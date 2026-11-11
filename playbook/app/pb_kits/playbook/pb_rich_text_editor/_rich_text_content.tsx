@@ -51,9 +51,12 @@ const ALLOWED_ATTRIBUTES: { [tag: string]: string[] } = {
 }
 
 const isSafeUrl = (value: string, allowDataImage: boolean): boolean => {
-  const trimmed = value.trim()
-  if (/^javascript:/i.test(trimmed)) return false
-  if (/^data:/i.test(trimmed)) return allowDataImage && /^data:image\//i.test(trimmed)
+  const normalized = Array.from(value.trim()).filter((character) => {
+    const code = character.charCodeAt(0)
+    return code > 31 && code !== 127 && !/\s/.test(character)
+  }).join('')
+  if (/^(javascript|vbscript):/i.test(normalized)) return false
+  if (/^data:/i.test(normalized)) return allowDataImage && /^data:image\//i.test(normalized)
   return true
 }
 
@@ -120,7 +123,10 @@ const nodesToReact = (
     const attributes = attributesFor(element)
     if (tag === 'img' && !attributes.src) return null
 
-    const props = { ...attributes, key }
+    const props: { [name: string]: string } = { key }
+    Object.entries(attributes).forEach(([name, value]) => {
+      props[name === 'class' ? 'className' : name] = value
+    })
     if (VOID_TAGS.has(tag)) return React.createElement(tag, props)
 
     return React.createElement(tag, props, ...children)

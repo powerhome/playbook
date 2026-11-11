@@ -35,6 +35,28 @@ test("keeps an ordered list when the body also has a mention", () => {
   ]);
 });
 
+test("rejects scheme bypasses that hide javascript or vbscript in whitespace", () => {
+  const { container } = render(
+    <RichTextContent
+        html={"<a href=\"java\tscript:alert(1)\">Tab</a><a href=\"javascript\n:alert(1)\">Newline</a><a href=\"vb\tscript:msgbox\">Script</a><img alt=\"x\" src=\"java\tscript:alert(1)\">"}
+    />
+  );
+
+  container.querySelectorAll("a").forEach((link) => {
+    expect(link.getAttribute("href")).toBeNull();
+  });
+  expect(container.querySelector("img")).toBeNull();
+});
+
+test("keeps allowlisted classes on React 17", () => {
+  const { container } = render(
+    <RichTextContent html={'<div class="note"><span class="mention-user">@A</span></div>'} />
+  );
+
+  expect(container.querySelector("div.note")).not.toBeNull();
+  expect(container.querySelector("span.mention-user")).not.toBeNull();
+});
+
 test("drops scripts and javascript urls", () => {
   const { container } = render(
     <RichTextContent
