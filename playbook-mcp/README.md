@@ -135,9 +135,12 @@ Each calling system gets its own key so it can be rotated or revoked alone. Gene
 
 ### Ingress
 
-`config/deploy/templates/ingress.yaml.erb` is a Traefik-only Ingress (`ingressClassName: traefik`) on PAC's default VPN-scoped entrypoints, in every environment. Keep it separate from the website Ingress (which opts into `https-public` in production), and do not add `https-public` or a source-range whitelist here.
+`config/deploy/templates/ingress.yaml.erb` renders two Ingresses for the same host, following the website's nginx-to-Traefik migration pattern:
 
-Traefik streams responses without buffering, so the old nginx `proxy-buffering` / `proxy-read-timeout` annotations have no equivalent here; cookie affinity was dropped because it cannot pin `/mcp` and `/ui/:id` to the same pod. When verifying staging, confirm long-lived Streamable HTTP responses are not cut off by Traefik's entrypoint timeouts.
+- `playbook-mcp` (nginx). DNS still routes review and beta hosts here, so a Traefik-only Ingress returns nginx's `default backend - 404`. It sets `proxy-buffering: "off"` and `proxy-read-timeout: "3600"` so Streamable HTTP responses stream.
+- `playbook-mcp-traefik` (`ingressClassName: traefik`), ready for when DNS moves to Traefik.
+
+Both stay on the cluster's default VPN scope in every environment. Keep them separate from the website Ingresses (public in production), and never add nginx `whitelist-source-range` or Traefik `https-public` here. Cookie affinity was dropped because it cannot pin `/mcp` and `/ui/:id` to the same pod. When verifying staging, confirm long-lived Streamable HTTP responses are not cut off by Traefik's entrypoint timeouts.
 
 Deploy manifests live under `config/deploy/`. Image build:
 

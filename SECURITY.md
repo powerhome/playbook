@@ -24,7 +24,7 @@ It is important to regularly update and upgrade the design system to ensure that
 
 ### Controls
 
-- Network exposure is enforced by the Ingress, not in-app. `playbook-mcp` has its own Traefik-only Ingress on PAC's default VPN-scoped entrypoints (no `https-public`, no source-range whitelist), separate from the website's public production Ingress. There is no application IP allowlist.
+- Network exposure is enforced by the Ingress, not in-app. `playbook-mcp` has its own Ingresses, separate from the website's public production Ingresses: an nginx Ingress (no `whitelist-source-range`) and a Traefik Ingress (no `https-public`), both on the cluster's default VPN scope. Both exist while PAC moves from nginx to Traefik. There is no application IP allowlist.
 - Rate limiting (`PLAYBOOK_MCP_RATE_LIMIT_MAX`, `PLAYBOOK_MCP_RATE_LIMIT_WINDOW`) — per consumer key, per process.
 - Input size caps (`PLAYBOOK_MCP_MAX_PROPS_BYTES`), applied to a `render_layout` call's combined items, plus a layout item cap (`PLAYBOOK_MCP_MAX_LAYOUT_ITEMS`).
 - Kit names resolved only through Playbook `KitResolver` + `dist/ai` schema validation.
