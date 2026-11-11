@@ -17,11 +17,14 @@ app.build(
   ) { compose ->
     stage('Image Build') {
       // Website image via compose bake (pushed). MCP prod + test images stay
-      // local until Test passes — do not push playbook-mcp:${GIT_COMMIT} here.
+      // local until Test passes — do not push playbook-mcp here.
+      // Tag with TRIGGERING_COMMIT, not GIT_COMMIT. On a PR build GIT_COMMIT is
+      // the Jenkins merge commit, while Milano deploys the PR head, which
+      // ci-kubed records as TRIGGERING_COMMIT (same tag as the website image).
       compose.bake(bakeFiles: ['docker-bake.hcl'])
       shell """
         docker build -f playbook-mcp/Dockerfile --target prod \
-          -t image-registry.powerapp.cloud/playbook/playbook-mcp:${env.GIT_COMMIT} \
+          -t image-registry.powerapp.cloud/playbook/playbook-mcp:${env.TRIGGERING_COMMIT} \
           -t image-registry.powerapp.cloud/playbook/playbook-mcp:local \
           .
         docker build -f playbook-mcp/Dockerfile --target test \
@@ -36,7 +39,7 @@ app.build(
     }
 
     stage('Push') {
-      shell "docker push image-registry.powerapp.cloud/playbook/playbook-mcp:${env.GIT_COMMIT}"
+      shell "docker push image-registry.powerapp.cloud/playbook/playbook-mcp:${env.TRIGGERING_COMMIT}"
     }
   }
 }
