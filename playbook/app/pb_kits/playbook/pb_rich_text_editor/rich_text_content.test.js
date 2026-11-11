@@ -57,6 +57,18 @@ test("keeps allowlisted classes on React 17", () => {
   expect(container.querySelector("span.mention-user")).not.toBeNull();
 });
 
+test("forces noopener noreferrer when a link opens a new window", () => {
+  const { container } = render(
+    <RichTextContent
+        html={'<a href="https://example.com" rel="opener" target="_blank">Open</a>'}
+    />
+  );
+
+  expect(container.querySelector("a").getAttribute("rel").split(/\s+/)).toEqual(
+    expect.arrayContaining(["noopener", "noreferrer"])
+  );
+});
+
 test("drops scripts and javascript urls", () => {
   const { container } = render(
     <RichTextContent

@@ -84,8 +84,9 @@ const attributesFor = (element: Element): { [name: string]: string } => {
     attributes[name] = value
   })
 
-  if (tag === 'a' && attributes.target === '_blank' && !attributes.rel) {
-    attributes.rel = 'noopener noreferrer'
+  if (tag === 'a' && attributes.target === '_blank') {
+    const rel = attributes.rel ? `${attributes.rel} noopener noreferrer` : 'noopener noreferrer'
+    attributes.rel = Array.from(new Set(rel.split(/\s+/).filter(Boolean))).join(' ')
   }
 
   return attributes
