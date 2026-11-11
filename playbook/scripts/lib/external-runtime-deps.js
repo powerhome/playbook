@@ -95,6 +95,10 @@ function loadAllowlist(file = ALLOWLIST_PATH) {
   return exceptions.map((entry) => ({ ...entry, matchers: entry.paths.map(globToRegExp) }))
 }
 
+// Exceptions for findings that only exist in the Vite output (built CSS, bundled node_modules code).
+// The source scan never sees those paths, so only the build guard checks them for staleness.
+const isBuildOnly = (entry) => entry.stage === 'build'
+
 const isAllowed = (finding, entry) =>
   entry.host === finding.host && entry.matchers.some((matcher) => matcher.test(finding.file))
 
@@ -134,7 +138,9 @@ function formatViolations(violations) {
     .concat([
       '',
       'If this host truly cannot be bundled (e.g. a map tile service), add an exception with a reason and',
-      'consumer impact to playbook/config/external-runtime-deps.json. See docs/EXTERNAL_RUNTIME_DEPS.md.',
+      'consumer impact to playbook/config/external-runtime-deps.json. For findings in playbook/dist/ or',
+      'node_modules/, which only the build sees, use those paths and set "stage": "build".',
+      'See docs/EXTERNAL_RUNTIME_DEPS.md.',
     ])
     .join('\n')
 }
@@ -145,6 +151,7 @@ module.exports = {
   applyAllowlist,
   formatViolations,
   globToRegExp,
+  isBuildOnly,
   loadAllowlist,
   scanCode,
   stripComments,

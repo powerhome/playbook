@@ -55,6 +55,23 @@ Some hosts really cannot be bundled (for example map tile services). Add an entr
 - `kit` exceptions need maintainer review, and the `impact` should also be in the kit's docs so consumers know which CSP entries they need.
 - An exception that no longer matches anything fails the check, so remove entries when the dependency goes away.
 
+### Build-only findings
+
+Some findings exist only in the Vite output: URLs in built CSS (reported as `playbook/dist/playbook.css`, since Vite merges all SCSS into one file) and URLs inside bundled dependencies (reported as `node_modules/<pkg>/…`). A source-path exception can't cover these. Add `"stage": "build"` and use the path from the build error:
+
+```json
+{
+  "host": "cdn.example.net",
+  "stage": "build",
+  "paths": ["node_modules/some-lib/**"],
+  "scope": "kit",
+  "reason": "…",
+  "impact": "…"
+}
+```
+
+`yarn check:external-deps` ignores build-stage exceptions, since it never sees those paths. The Vite build checks them instead, and fails if one no longer matches the output.
+
 ## Limits
 
 - The source scan uses heuristics, not a parser. Unusual comment or string layouts can cause misses or false positives; fix the code or add a narrow exception.

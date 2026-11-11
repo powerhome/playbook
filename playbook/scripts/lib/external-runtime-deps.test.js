@@ -119,9 +119,14 @@ describe('allowlist file', () => {
     const { exceptions } = JSON.parse(fs.readFileSync(ALLOWLIST_PATH, 'utf8'))
 
     exceptions.forEach((exception) => {
+      const buildOnly = exception.stage === 'build'
+      expect([undefined, 'build']).toContain(exception.stage)
+      exception.paths.forEach((glob) => {
+        expect(glob).toMatch(buildOnly ? /^(playbook\/dist|node_modules)\// : /^playbook(-website)?\//)
+      })
       expect(exception).toEqual(expect.objectContaining({
         host: expect.stringMatching(/^[a-z0-9.-]+$/),
-        paths: expect.arrayContaining([expect.stringMatching(/^playbook(-website)?\//)]),
+        paths: expect.any(Array),
         scope: expect.stringMatching(/^(kit|website|tooling)$/),
         reason: expect.any(String),
         impact: expect.any(String),

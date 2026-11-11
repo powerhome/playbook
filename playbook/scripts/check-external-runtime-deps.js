@@ -15,6 +15,7 @@ const {
   REPO_ROOT,
   applyAllowlist,
   formatViolations,
+  isBuildOnly,
   loadAllowlist,
   scanCode,
 } = require('./lib/external-runtime-deps')
@@ -49,7 +50,9 @@ function main() {
     .flatMap((root) => [...walk(root)])
     .flatMap((file) => scanCode(fs.readFileSync(file, 'utf8'), path.relative(REPO_ROOT, file)))
 
-  const { violations, unused } = applyAllowlist(findings, loadAllowlist())
+  // Build-stage exceptions cover paths this scan never sees; the Vite build guard checks those.
+  const allowlist = loadAllowlist().filter((entry) => !isBuildOnly(entry))
+  const { violations, unused } = applyAllowlist(findings, allowlist)
   const allowlistFile = path.relative(REPO_ROOT, ALLOWLIST_PATH)
 
   if (violations.length) {

@@ -54,7 +54,33 @@ describe('externalRuntimeGuard', () => {
   test('scans built CSS', () => {
     const bundle = { 'playbook.css': { type: 'asset', fileName: 'playbook.css', source: '@import url(https://fonts.googleapis.com/css2?family=X);' } }
 
-    expect(() => generate(bundle)).toThrow(/dist\/playbook\.css loads stylesheet from fonts\.googleapis\.com/)
+    expect(() => generate(bundle)).toThrow(/playbook\/dist\/playbook\.css loads stylesheet from fonts\.googleapis\.com/)
+  })
+
+  describe('build-stage exceptions', () => {
+    const buildEntry = (host, glob) => ({ host, stage: 'build', paths: [glob], matchers: [globToRegExp(glob)] })
+    const buildAllowlist = [
+      buildEntry('fonts.googleapis.com', 'playbook/dist/playbook.css'),
+      buildEntry('cdn.example.net', 'node_modules/some-lib/**'),
+    ]
+    const generateWith = (list, bundle) => externalRuntimeGuard({ allowlist: list }).generateBundle.call(context, {}, bundle)
+    const bundle = {
+      'chunks/x.js': chunk({ [path.join(REPO_ROOT, 'node_modules/some-lib/index.js')]: { code: 'loadScript("https://cdn.example.net/x.js")' } }),
+      'playbook.css': { type: 'asset', fileName: 'playbook.css', source: '@import url(https://fonts.googleapis.com/css2?family=X);' },
+    }
+
+    test('approve findings in built CSS and bundled node_modules code', () => {
+      expect(() => generateWith(buildAllowlist, bundle)).not.toThrow()
+    })
+
+    test('fail the build when they no longer match the output', () => {
+      expect(() => generateWith(buildAllowlist, { 'chunks/x.js': chunk({}) }))
+        .toThrow(/Stale build exceptions[\s\S]*fonts\.googleapis\.com in playbook\/dist\/playbook\.css[\s\S]*cdn\.example\.net/)
+    })
+
+    test('source-stage exceptions are not reported as stale by the build', () => {
+      expect(() => generate({ 'chunks/x.js': chunk({}) })).not.toThrow()
+    })
   })
 
   test('rejects literal remote import specifiers before Vite marks them external', () => {
