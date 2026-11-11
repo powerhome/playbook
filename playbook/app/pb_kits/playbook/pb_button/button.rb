@@ -23,8 +23,9 @@ module Playbook
                        default: false
       prop :target
       prop :text
-      # HTML type attribute (`submit`, `reset`, `button`). Not a class hook.
+      # HTML type attribute. Not a class hook.
       # React uses `htmlType` for this. There is no Rails `html_type` prop.
+      # schema_values: submit, reset, button
       prop :type
       prop :value
       prop :size, type: Playbook::Props::Enum,

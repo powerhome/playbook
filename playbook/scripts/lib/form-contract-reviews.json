@@ -15,9 +15,9 @@
       "lib/playbook/pb_forms_helper.rb": "bdd00f83ec6bebd6215586c2dcf975e10f653be49b687fd9cd998fd979874625"
     },
     "button": {
-      "app/pb_kits/playbook/pb_button/_button.tsx": "b12ae9c8a1f0f2ba6bda01d47833fef8a103e51abd62510bdd5f374009d13f2c",
+      "app/pb_kits/playbook/pb_button/_button.tsx": "5c53f0eee0cabd9b8f822b7d148b2fe365c78ac6ab157de8e79558bd713a5157",
       "app/pb_kits/playbook/pb_button/button.html.erb": "80362bbc66b290462c3c5b70264e9e15e4224466cc1d35d590fe83f9f62f2787",
-      "app/pb_kits/playbook/pb_button/button.rb": "d15aac746c64aeaa29e02da9974c4f623890ffce1b59614448b54249fd882b01",
+      "app/pb_kits/playbook/pb_button/button.rb": "ddd16a8951b7e243e731fca29e346a1ac1351728ca2f98c0d225e9625ec524bd",
       "app/pb_kits/playbook/pb_button/index.js": "dba912c3e6eec5e9ecd0de33f18626770002eb52a742ba8ae923f4d3524f13ff",
       "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
       "lib/playbook/forms/builder/action_area.rb": "09fcbdbeefd7ab4d9991b2ff58e7bd76f99114605ec996c57598da207bb0ca01"

@@ -34,11 +34,11 @@ type ButtonPropTypes = {
   size?: 'sm' | 'md' | 'lg',
   target?: string,
   text?: string,
-  // Deprecated. Adds `pb_button_${type}` only (default `inline`). Use `fullWidth` for layout and `variant` for appearance. HTML type is `htmlType`.
+  // @schemaOmit Deprecated. Adds `pb_button_${type}` only (default `inline`). Use `fullWidth` for layout and `variant` for appearance. HTML type is `htmlType`.
   type?: 'inline' | null,
-  htmlType?: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
   variant?: 'primary' | 'secondary' | 'link'| 'danger' | 'reaction',
+  htmlType?: 'submit' | 'reset' | 'button' | undefined,
   wrapperClass?: string,
 } & GlobalProps
 

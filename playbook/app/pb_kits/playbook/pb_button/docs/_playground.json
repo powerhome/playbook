@@ -8,7 +8,6 @@
     "iconRight": false,
     "loading": false,
     "newWindow": false,
-    "type": "inline",
     "variant": "primary"
   },
   "children": {
@@ -56,6 +55,7 @@
       "name": "Form",
       "props": [
         "htmlType",
+        "type",
         "form",
         "value",
         "tabIndex"
