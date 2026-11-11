@@ -68,9 +68,12 @@
       ],
       "values": {
         "react": [
+          "xs",
           "sm",
           "md",
-          "lg"
+          "base",
+          "lg",
+          "xl"
         ],
         "rails": [
           "xs",

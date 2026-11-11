@@ -404,8 +404,19 @@ function parseTypeScript(filePath) {
 
   const props = {};
   const typeRegex = /type\s+(\w*(?:Props|PropTypes))\s*=\s*\{/g;
-  
-  for (const match of content.matchAll(typeRegex)) {
+  const matches = [...content.matchAll(typeRegex)];
+
+  // Files with subcomponents (e.g. Layout.Item) declare several props types, and all of them are
+  // merged (subcomponent props such as Card.Header `headerColor` are documented on the kit).
+  // The root component's props type is applied again at the end so its props win on a name
+  // collision (e.g. Layout `size` is not overwritten by Layout.Item `size`) without reordering keys.
+  const kitName = path.basename(filePath, '.tsx').replace(/^_/, '');
+  const rootType = content.match(
+    new RegExp(`(?:const|function)\\s+${snakeToPascal(kitName)}\\s*=?\\s*(?:<[^>]*>)?\\s*\\(\\s*props\\s*:\\s*(\\w+)`)
+  )?.[1];
+  const ordered = [...matches, ...matches.filter((match) => match[1] === rootType)];
+
+  for (const match of ordered) {
     const block = extractBracedContent(content, match.index + match[0].length);
     Object.assign(props, parseTypeBlock(block, imports));
   }
