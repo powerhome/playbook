@@ -47,6 +47,8 @@ jobs:
         run: |
           git config --local user.name "${{ github.actor }}"
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Check External Runtime Dependencies
+        run: yarn check:external-deps
       - name: Grab Current Version
         run: |
           playbook_npm_version=$(node -pe "require('./package.json').version")
@@ -190,6 +192,9 @@ jobs:
 
           echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
           echo "Semver label found: $SEMVER_LABEL"
+      - name: Check External Runtime Dependencies
+        if: env.SKIP_REMAINING_STEPS != 'true'
+        run: yarn check:external-deps
       - name: Grab Current Version and Set New RC Version
         id: set-version
         run: |

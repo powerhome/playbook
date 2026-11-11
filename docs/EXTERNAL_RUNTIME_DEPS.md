@@ -14,6 +14,7 @@ The rule: if it runs in a consumer's browser, it ships with Playbook. Lazy-loade
 |-------|-------|----------------|
 | Source scan | `yarn check:external-deps`: Overcommit, Husky pre-commit, and CI (`playbook/bin/build`) | Kit, entrypoint, `lib/`, and website source, including ERB, Ruby, and SCSS |
 | Build guard | `externalRuntimeGuard` plugin in `playbook/vite.config.ts`: every `vite build`, including `yarn release` in the CI image build | Remote import specifiers, plus every module's rendered code and built CSS in the npm/gem output, including bundled `node_modules` code |
+| Release preflight | `pb_release:push` (stable), and the alpha and RC jobs in `.github/workflows/github-actions-alpha-version.yml` | Runs the source scan before any version files change or anything is packaged. Stable releases also stop if `yarn release` fails, so a build-guard failure never reaches `npm pack` or `gem build` |
 
 Both use [`playbook/scripts/lib/external-runtime-deps.js`](../playbook/scripts/lib/external-runtime-deps.js) and the same exceptions file.
 

@@ -102,9 +102,13 @@ namespace :pb_release do
 
     npm_whoami_or_abort!
 
+    puts "\nChecking for external runtime dependencies..."
+    abort "Release stopped. Fix the external runtime dependency check above, then retry." unless system("yarn", "check:external-deps")
+
     # NPM Packaging
     puts "\nGenerating distribution files"
-    `yarn release`
+    # The Vite build also fails on external runtime dependencies in built CSS or bundled packages.
+    abort "Release stopped. yarn release failed; nothing was packaged or published." unless system("yarn", "release")
     puts "\nCreating NPM package..."
     `npm pack`
 
