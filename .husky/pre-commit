@@ -3,3 +3,4 @@
 
 yarn lint-staged
 bash .git-hooks/pre_commit/verify_docs_metadata.sh
+node playbook/scripts/check-external-runtime-deps.js
