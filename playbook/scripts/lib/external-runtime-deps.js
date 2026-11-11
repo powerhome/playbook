@@ -69,7 +69,7 @@ function scanCode(code, file, ext = path.extname(file)) {
     const hostsOnLine = new Set()
     for (const match of line.matchAll(URL_PATTERN)) {
       const [, scheme, rawHost] = match
-      const [url] = line.slice(match.index).match(/^[^\s"'`)<>]+/)
+      const [url] = line.slice(match.index).match(/^(?:\$\{[^}]*\}|[^\s"'`)<>])+/)
       const before = line.slice(0, match.index)
       if (!scheme && !PROTOCOL_RELATIVE_PREFIX.test(before)) continue
       if (isNavigationLink(before)) continue

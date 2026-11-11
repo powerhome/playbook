@@ -67,6 +67,10 @@ describe('scanCode', () => {
     expect(hosts(scanCode('fetch("https://api.github.com/x")', 'x.js'))).toEqual(['api.github.com'])
   })
 
+  test('keeps template expressions containing quotes in the reported URL', () => {
+    expect(scanCode("const u = `https://esm.sh/${'a'}@1`", 'x.js')[0].url).toBe("https://esm.sh/${'a'}@1")
+  })
+
   test('reports a host once per line', () => {
     expect(scanCode('src="https://a.cdn.dev/x" data-fallback="https://a.cdn.dev/y"', 'x.erb')).toHaveLength(1)
   })
