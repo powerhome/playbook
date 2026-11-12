@@ -69,6 +69,16 @@ test("forces noopener noreferrer when a link opens a new window", () => {
   );
 });
 
+test("drops event handler attributes such as onerror", () => {
+  const { container } = render(
+    <RichTextContent html={'<img src="x" onerror="alert(document.cookie)"><p onclick="alert(1)">Text</p>'} />
+  );
+
+  expect(container.querySelector("img").getAttribute("onerror")).toBeNull();
+  expect(container.querySelector("p").getAttribute("onclick")).toBeNull();
+  expect(container.innerHTML).not.toContain("alert");
+});
+
 test("drops scripts and javascript urls", () => {
   const { container } = render(
     <RichTextContent
