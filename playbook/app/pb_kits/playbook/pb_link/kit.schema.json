@@ -19,7 +19,10 @@
         "muted",
         "destructive"
       ],
-      "default": "default"
+      "default": {
+        "react": "",
+        "rails": "default"
+      }
     },
     "dark": {
       "type": "boolean",
@@ -40,21 +43,24 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "icon": {
       "type": "string",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "iconRight": {
       "type": "string",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "rel": {
       "type": "string",
@@ -94,14 +100,16 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "text": {
       "type": "string",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "underline": {
       "type": "boolean",

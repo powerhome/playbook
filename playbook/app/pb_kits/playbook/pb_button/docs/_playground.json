@@ -8,7 +8,9 @@
     "iconRight": false,
     "loading": false,
     "newWindow": false,
-    "variant": "primary"
+    "target": "",
+    "variant": "primary",
+    "htmlType": "button"
   },
   "children": {
     "editable": true,

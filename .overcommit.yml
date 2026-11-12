@@ -57,6 +57,18 @@ PreCommit:
       - 'playbook/app/pb_kits/playbook/pb_*/kit.schema.json'
       - 'playbook/app/pb_kits/playbook/pb_*/docs/_playground.overrides.json'
 
+  ExternalRuntimeDeps:
+    enabled: true
+    description: 'Block new third-party hosts (CDNs, remote imports) in shipped source (also run via Husky and CI)'
+    required_executable: 'node'
+    command: ['node', 'playbook/scripts/check-external-runtime-deps.js']
+    include:
+      - 'playbook/app/**/*'
+      - 'playbook/lib/**/*'
+      - 'playbook-website/app/**/*'
+      - 'playbook/config/external-runtime-deps.json'
+      - 'playbook/scripts/lib/external-runtime-deps.js'
+
 CommitMsg:
   CapitalizedSubject:
     enabled: false

@@ -31,7 +31,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "title": {
       "type": "string",

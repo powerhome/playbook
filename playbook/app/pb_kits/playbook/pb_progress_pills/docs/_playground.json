@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "active": 2,
+    "dark": false,
     "fullWidthPill": false,
     "steps": 4,
     "title": "Checkout",

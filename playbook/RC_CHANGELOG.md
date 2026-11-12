@@ -1,3 +1,17 @@
+# ✨ 18.4.0.pre.rc.1
+
+##### November 09, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.4.0-rc.1](https://github.com/powerhome/playbook/tree/18.4.0-rc.1) full list of changes:
+
+**Improvements:**
+
+- Playbook Website: Update View_component to 4.14.0 [\#6888](https://github.com/powerhome/playbook/pull/6888) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.4.0-rc.0...18.4.0-rc.1)
+
 # ✨ 18.4.0.pre.rc.0
 
 ##### November 06, 2026

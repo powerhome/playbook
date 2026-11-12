@@ -25,7 +25,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "statLabel": {
       "type": "string",
@@ -39,7 +40,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     }
   },
   "globalProps": true,

@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "change": "increase",
+    "dark": false,
     "value": "15"
   },
   "groups": [

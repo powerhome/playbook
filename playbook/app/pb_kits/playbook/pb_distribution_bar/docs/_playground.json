@@ -2,12 +2,12 @@
   "template": "<DistributionBar{{props}} />",
   "propTargets": {},
   "defaults": {
-    "size": "lg",
     "colors": [
       "data_7",
       "data_1",
       "neutral"
-    ]
+    ],
+    "size": "lg"
   },
   "groups": [
     {

@@ -86,21 +86,24 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     },
     "excludeCountries": {
       "type": "array",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     },
     "preferredCountries": {
       "type": "array",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     },
     "required": {
       "type": "boolean",

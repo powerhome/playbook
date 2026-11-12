@@ -19,14 +19,16 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "inputProps": {
       "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "label": {
       "type": "string",
@@ -70,20 +72,23 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     },
     "uncontrolled": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "value": {
       "type": "string",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "required": {
       "platforms": [

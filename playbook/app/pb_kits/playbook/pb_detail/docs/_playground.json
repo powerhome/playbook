@@ -4,7 +4,8 @@
   "defaults": {
     "bold": false,
     "color": "light",
-    "tag": "div"
+    "tag": "div",
+    "text": ""
   },
   "children": {
     "editable": true,
