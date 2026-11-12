@@ -106,7 +106,10 @@ type MultiLevelSelectProps = {
 } & GlobalProps;
 
 const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
-  (props) => {
+  (props, _ref) => {
+    // Accept the ref without attaching it, preserving the existing ref behavior.
+    void _ref;
+
     const {
       aria = {},
       className,
