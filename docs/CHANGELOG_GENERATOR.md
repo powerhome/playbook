@@ -53,14 +53,18 @@ RC_VERSION=17.2.0-rc.3 make changelog-rc
 
 Use the [Playbook PR title format](./PR_TITLES.md). Changelog category labels are deprecated. The stable and RC generators use these headings in order:
 
+- **New Kit** groups titles whose description starts with `New Kit`, such as `feat(full-screen): New Kit [PLAY-1234]`.
 - **Enhancement** groups `feat`, `style`, and `refactor`.
 - **Bug Fixes** groups `fix`.
 - **Documentation** groups `docs` and legacy `doc` titles.
 - **Improvement** groups `perf`, `test`, `build`, and `ci`.
 - **Dependencies** groups `chore`.
+- **Deprecated** groups titles whose description starts with `Deprecated`, such as `feat(button): Deprecated the legacy size prop`.
 - **Breaking** takes precedence when a recognized title has `!` immediately before the colon.
 - **Revert** groups `revert`.
 - **Other** comes last and includes older free-form titles and titles with unrecognized types.
+
+`New Kit` and `Deprecated` are case-insensitive and override the type-based category. A breaking marker takes precedence over both.
 
 For a recognized title, the entry uses its description. If the title has a scope, the generator puts the scope first and replaces hyphens with spaces. For example, `fix(advanced-table): Fix sticky column widths [PLAY-1234]` becomes Advanced Table: **Fix Sticky Column Widths** under **Bug Fixes**.
 

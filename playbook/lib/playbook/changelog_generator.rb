@@ -22,15 +22,21 @@ module Playbook
 
     OTHER_HEADER = "**Other:**"
     BREAKING_HEADER = "**Breaking:**"
+    DESCRIPTION_SECTIONS = {
+      /\Anew kit\b/i => "**New Kit:**",
+      /\Adeprecated\b/i => "**Deprecated:**",
+    }.freeze
     RELEASE_IMAGE = "![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)"
     RC_RELEASE_IMAGE = "![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)"
 
     SECTION_TYPES = {
+      "**New Kit:**" => [],
       "**Enhancement:**" => %w[feat style refactor],
       "**Bug Fixes:**" => %w[fix],
       "**Documentation:**" => %w[doc docs],
       "**Improvement:**" => %w[perf test build ci],
       "**Dependencies:**" => %w[chore],
+      "**Deprecated:**" => [],
       BREAKING_HEADER => [],
       "**Revert:**" => %w[revert],
       OTHER_HEADER => [],
@@ -118,15 +124,19 @@ module Playbook
 
       pulls.each do |pull_request|
         title = parse_title(pull_request["title"])
-        header = if title
-                   title[:breaking] ? BREAKING_HEADER : TYPE_TO_SECTION.fetch(title[:type])
-                 else
-                   OTHER_HEADER
-                 end
+        header = section_for_title(title)
         grouped[header] << pull_request
       end
 
       grouped
+    end
+
+    def section_for_title(title)
+      return OTHER_HEADER unless title
+      return BREAKING_HEADER if title[:breaking]
+
+      marker = DESCRIPTION_SECTIONS.keys.find { |pattern| pattern.match?(title[:description]) }
+      marker ? DESCRIPTION_SECTIONS.fetch(marker) : TYPE_TO_SECTION.fetch(title[:type])
     end
 
     def parse_title(title)

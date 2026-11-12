@@ -44,6 +44,7 @@ Keep rules lean — general quality only. Workflow detail lives in skills + `doc
 Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md).
 
 When creating or updating a PR title, follow the [Playbook PR title requirements](docs/PR_TITLES.md). Use a Conventional Commit title and put the Runway key at the end when the PR has one.
+Changelog categories come from the PR title. Start the description with `New Kit` or `Deprecated` when appropriate, and use `!` for breaking changes.
 
 ## Where to look
 

@@ -6,6 +6,7 @@ Start with a lowercase type, followed by an optional scope in parentheses. Add `
 
 - Use `fix` for a bug fix and `feat` for a new feature. The check also accepts `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, and `revert`.
 - Use `chore` for dependency updates and `docs` for documentation changes. The [changelog generator](./CHANGELOG_GENERATOR.md#changelog-categories) uses the title to group entries.
+- Start the description with `New Kit` or `Deprecated` to use that changelog section.
 - Use the kit or area as the scope when it helps, such as `table` or `date-picker`.
 - If the PR has a Runway story, put its key in brackets at the end of the title. A Runway key is optional.
 

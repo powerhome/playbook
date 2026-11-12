@@ -11,6 +11,7 @@ module Playbook
 
     SECTION_HEADERS = {
       "**New Kits:**" => "🆕 New Kits:",
+      "**New Kit:**" => "🆕 New Kit:",
       "**Kit Enhancements:**" => "✨ Kit Enhancements:",
       "**Improvements:**" => "🔥 Improvements:",
       "**Fixed Bugs:**" => "🐛 Fixed Bugs:",
@@ -20,6 +21,7 @@ module Playbook
       "**Documentation:**" => "📝 Documentation:",
       "**Improvement:**" => "🔥 Improvement:",
       "**Dependencies:**" => "📦 Dependencies:",
+      "**Deprecated:**" => "⚠️ Deprecated:",
       "**Breaking:**" => "💥 Breaking:",
       "**Revert:**" => "↩️ Revert:",
       "**Other:**" => "📦 Other:",
