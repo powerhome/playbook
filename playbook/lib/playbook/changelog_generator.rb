@@ -22,15 +22,16 @@ module Playbook
 
     OTHER_HEADER = "**Other:**"
     BREAKING_HEADER = "**Breaking:**"
+    NEW_KITS_HEADER = "**New Kits:**"
     DESCRIPTION_SECTIONS = {
-      /\Anew kit\b/i => "**New Kit:**",
+      /\Anew kit\b/i => NEW_KITS_HEADER,
       /\Adeprecated\b/i => "**Deprecated:**",
     }.freeze
     RELEASE_IMAGE = "![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)"
     RC_RELEASE_IMAGE = "![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)"
 
     SECTION_TYPES = {
-      "**New Kit:**" => [],
+      NEW_KITS_HEADER => [],
       "**Enhancement:**" => %w[feat style refactor],
       "**Bug Fixes:**" => %w[fix],
       "**Documentation:**" => %w[doc docs],

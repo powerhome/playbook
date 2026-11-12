@@ -53,7 +53,7 @@ RC_VERSION=17.2.0-rc.3 make changelog-rc
 
 Use the [Playbook PR title format](./PR_TITLES.md). Changelog category labels are deprecated. The stable and RC generators use these headings in order:
 
-- **New Kit** groups titles whose description starts with `New Kit`, such as `feat(full-screen): New Kit [PLAY-1234]`.
+- **New Kits** groups titles whose description starts with `New Kit`, such as `feat(full-screen): New Kit [PLAY-1234]`.
 - **Enhancement** groups `feat`, `style`, and `refactor`.
 - **Bug Fixes** groups `fix`.
 - **Documentation** groups `docs` and legacy `doc` titles.
