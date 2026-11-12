@@ -23,21 +23,19 @@
 
 - Release: **Default Rcs to Minor Bumps and Remove Required Labels** [\#6935](https://github.com/powerhome/playbook/pull/6935) ([nidaqg](https://github.com/nidaqg))
 - Check That Pr Titles Are Conventional Commits [\#6886](https://github.com/powerhome/playbook/pull/6886) ([benlangfeld](https://github.com/benlangfeld))
+- Playbook Website: Guard Against External Runtime Dependencies [\#6927](https://github.com/powerhome/playbook/pull/6927) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Changelog for 18.4.0.pre.rc.1 [\#6926](https://github.com/powerhome/playbook/pull/6926) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Regenerate Ai Metadata for Image, Lightbox, and More [\#6910](https://github.com/powerhome/playbook/pull/6910) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Changelog for 18.4.0.pre.rc.0 [\#6916](https://github.com/powerhome/playbook/pull/6916) ([nickamantia](https://github.com/nickamantia))
+- Upgrades Playbook Icons [\#6912](https://github.com/powerhome/playbook/pull/6912) ([ElisaShapiro](https://github.com/ElisaShapiro))
 
 **Dependencies:**
 
 - Remove Nginx Ingress [\#6936](https://github.com/powerhome/playbook/pull/6936) ([rafatio](https://github.com/rafatio))
-
-**Other:**
-
 - Keep Renovate Ranges for Playbook-ui and Pin the Website. [\#6934](https://github.com/powerhome/playbook/pull/6934) ([nidaqg](https://github.com/nidaqg))
 - Playbook Website: Patch Rails, Rack, and Nokogiri [\#6928](https://github.com/powerhome/playbook/pull/6928) ([nidaqg](https://github.com/nidaqg))
-- Playbook Website: Guard Against External Runtime Dependencies [\#6927](https://github.com/powerhome/playbook/pull/6927) ([ElisaShapiro](https://github.com/ElisaShapiro))
-- Changelog for 18.4.0.pre.rc.1 [\#6926](https://github.com/powerhome/playbook/pull/6926) ([kangaree](https://github.com/kangaree))
-- Playbook Website: Regenerate Ai Metadata for Image, Lightbox, and More [\#6910](https://github.com/powerhome/playbook/pull/6910) ([ElisaShapiro](https://github.com/ElisaShapiro))
 - Pin Actions to Full Shas [\#6931](https://github.com/powerhome/playbook/pull/6931) ([nidaqg](https://github.com/nidaqg))
-- Changelog for 18.4.0.pre.rc.0 [\#6916](https://github.com/powerhome/playbook/pull/6916) ([nickamantia](https://github.com/nickamantia))
-- Upgrades Playbook Icons [\#6912](https://github.com/powerhome/playbook/pull/6912) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/18.4.0-rc.1...18.4.0-rc.4)
 
