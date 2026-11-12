@@ -105,7 +105,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
       }
     };
     return (
-      <>
+      <React.Fragment key={node.id}>
         <Checkbox
             checked={allOn}
             indeterminate={!allOn && someOn}
@@ -120,7 +120,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
             child.children ? renderGroup(child) : renderLeaf(child.id, child.label),
           )}
         </Flex>
-      </>
+      </React.Fragment>
     );
   };
 // ------------ End of column visibility logic --------
@@ -142,6 +142,47 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
   const togglePopover = () => setShowPopover((prev) => !prev)
   const handleShouldClose = (shouldClose: boolean) =>
     setShowPopover(!shouldClose)
+
+  // Select All only changes columns listed in the popover that can be hidden.
+  // The first column and ids omitted by includeIds stay as they are.
+  // Skip the leaf walk unless the checkbox is enabled.
+  const selectAllRequested = columnVisibilityControl?.showSelectAll === true
+  const availableColumns = selectAllRequested
+    ? tree.flatMap(gatherLeafIds).flatMap((id) => {
+        const column = table.getColumn(id)
+        return column?.getCanHide() ? [column] : []
+      })
+    : []
+  const allAvailableVisible =
+    availableColumns.length > 0 &&
+    availableColumns.every((column) => column.getIsVisible())
+  const someAvailableVisible = availableColumns.some((column) => column.getIsVisible())
+  const showSelectAll = availableColumns.length > 0
+  const selectAllLabel = allAvailableVisible ? "Deselect All" : "Select All"
+
+  // Uses the same updater form as toggleVisibility, so onChange gets the same kind of value.
+  const handleSelectAllChange = () => {
+    const selectAllVisibility = Object.fromEntries(
+      availableColumns.map((column) => [column.id, !allAvailableVisible])
+    )
+    table.setColumnVisibility((previousVisibility: { [id: string]: boolean }) => ({
+      ...previousVisibility,
+      ...selectAllVisibility,
+    }))
+
+    if (columnVisibilityControl?.onColumnVisibilityChange) {
+      const nextVisibility = { ...table.getState().columnVisibility, ...selectAllVisibility }
+      // Same shape as the single toggles: root column ids, groups visible if any leaf is visible
+      const updatedVisibilityState = table.getAllColumns().reduce((
+        acc: { [id: string]: boolean },
+        column: { getLeafColumns: () => { id: string }[]; id: string }
+      ) => {
+        acc[column.id] = column.getLeafColumns().some((leaf) => nextVisibility[leaf.id] ?? true)
+        return acc
+      }, {})
+      columnVisibilityControl.onColumnVisibilityChange(updatedVisibilityState)
+    }
+  }
 
   const popoverReference = (
     <Tooltip
@@ -197,6 +238,25 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
                   textAlign="center"
               />
               <SectionSeparator paddingBottom="xs" />
+              {showSelectAll && (
+                <>
+                  <Flex
+                      cursor="pointer"
+                      flexDirection="column"
+                      paddingX="xs"
+                  >
+                    <Checkbox
+                        aria={{ label: selectAllLabel }}
+                        checked={allAvailableVisible}
+                        indeterminate={!allAvailableVisible && someAvailableVisible}
+                        onChange={handleSelectAllChange}
+                        paddingBottom="xs"
+                        text={selectAllLabel}
+                    />
+                  </Flex>
+                  <SectionSeparator paddingBottom="xs" />
+                </>
+              )}
               {tree.map((node: VisibilityNode) => (
                 <Flex cursor="pointer"
                     flexDirection="column"

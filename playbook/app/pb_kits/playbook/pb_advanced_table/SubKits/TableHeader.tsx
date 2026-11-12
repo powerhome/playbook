@@ -32,6 +32,7 @@ export const TableHeader = ({
   ...props
 }: TableHeaderProps) => {
   const {
+    columnVisibilityControl,
     enableToggleExpansion,
     handleExpandOrCollapse,
     loading,
@@ -63,11 +64,40 @@ export const TableHeader = ({
     `${responsive === "scroll" && "pinned-left"}`,
   );
 
+  // TanStack drops header rows when every leaf in a group is hidden.
+  // Spacer rows keep that height only when Select All can hide a whole group.
+  const showSelectAll = columnVisibilityControl?.showSelectAll === true
+  let hiddenHeaderRowCount = 0
+  let spacerColSpan = 0
+  if (showSelectAll) {
+    const columnHeaderDepth = Math.max(
+      ...table.getAllFlatColumns().map((column: GenericObject) => column.depth + 1)
+    )
+    hiddenHeaderRowCount = columnHeaderDepth - table.getHeaderGroups().length
+    spacerColSpan = table.getVisibleLeafColumns().length + (!hasAnySubRows && selectableRows ? 1 : 0)
+  }
+
+  const renderSpacerRows = (rowClassName?: string) =>
+    Array.from({ length: Math.max(0, hiddenHeaderRowCount) }, (_, index) => (
+      <tr
+          aria-hidden="true"
+          className={classnames("header-spacer-row", rowClassName)}
+          key={`header-spacer-${index}`}
+      >
+        {/* header-spacer-cell stays off .table-header-cells so width measurement and sticky-left styles skip it. */}
+        <th
+            className="header-spacer-cell"
+            colSpan={spacerColSpan}
+        />
+      </tr>
+    ))
+
   const renderRegularTableHeader = () => (
     <thead className={classes}
         id={id}
         ref={headerRef}
     >
+      {renderSpacerRows()}
       {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
         <tr key={`${headerGroup.id}-headerGroup`}>
           {!hasAnySubRows && selectableRows && (
@@ -109,6 +139,7 @@ export const TableHeader = ({
         id={id}
         ref={headerRef}
     >
+      {renderSpacerRows("virtualized-header-row-header")}
       {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
         <tr
             className="virtualized-header-row-header"
