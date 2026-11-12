@@ -296,6 +296,13 @@
     .pb_tooltip_kit {
       font-weight: unset;
       text-transform: unset;
+
+      .tooltip_tooltip {
+        font-size: initial;
+        font-weight: normal;
+        letter-spacing: normal;
+        text-transform: none;
+      }
     }
   }
 
