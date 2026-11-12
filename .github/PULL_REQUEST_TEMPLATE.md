@@ -1,4 +1,6 @@
-**What does this PR do?** A clear and concise description with your runway ticket url.
+<!-- Use a Conventional Commit title, such as fix(table): Fix sticky columns. If the PR has a Runway key, put it at the end. See https://github.com/powerhome/playbook/blob/master/docs/PR_TITLES.md. -->
+
+**What does this PR do?** Briefly describe the change and include the Runway story link if there is one.
 
 
 **Screenshots:** Screenshots to visualize your addition/change
@@ -12,9 +14,7 @@
 
 
 #### Checklist:
-- [ ] **LABELS** Add a label: `enhancement`, `bug`, `improvement`, `new kit`, `deprecated`, or `breaking`. See [Changelog & Labels](https://github.com/powerhome/playbook/wiki/Changelog-&-Labels) for details.
 - [ ] **DEPLOY** I have added the `milano` label to show I'm ready for a review.
 - [ ] **TESTS** I have added test coverage to my code.
 - [ ] **PLAYGROUND** I have added and tested Playground metadata and overrides for all kits and props updated in my code.
-- [ ] **SEMVER** I have added a `minor`, `major`, or `patch` label for release.
 - [ ] **RC** I have added an `inactive RC` label if not an active RC.

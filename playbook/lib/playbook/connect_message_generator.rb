@@ -11,10 +11,19 @@ module Playbook
 
     SECTION_HEADERS = {
       "**New Kits:**" => "🆕 New Kits:",
+      "**New Kit:**" => "🆕 New Kits:",
       "**Kit Enhancements:**" => "✨ Kit Enhancements:",
       "**Improvements:**" => "🔥 Improvements:",
       "**Fixed Bugs:**" => "🐛 Fixed Bugs:",
       "**Breaking Changes:**" => "💥 Breaking Changes:",
+      "**Enhancement:**" => "✨ Enhancement:",
+      "**Bug Fixes:**" => "🐛 Bug Fixes:",
+      "**Documentation:**" => "📝 Documentation:",
+      "**Improvement:**" => "🔥 Improvement:",
+      "**Dependencies:**" => "📦 Dependencies:",
+      "**Deprecated:**" => "⚠️ Deprecated:",
+      "**Breaking:**" => "💥 Breaking:",
+      "**Revert:**" => "↩️ Revert:",
       "**Other:**" => "📦 Other:",
     }.freeze
 
@@ -58,7 +67,11 @@ module Playbook
 
       text.gsub!(MARKDOWN_LINK_REGEX, "")
       text.gsub!(/\(\s*\)/, "")
-      text.gsub!(/(?<=-\s).+/) { |match| titleize(match.strip) }
+      text.gsub!(/(?<=-\s).+/) do |match|
+        entry = match.strip
+        # Scoped changelog entries already format both the scope and description.
+        entry.match?(/\A.+: \*\*.+\*\*\z/) ? entry : titleize(entry)
+      end
       text.gsub!(/-\s+/, "- ")
 
       text = group_by_headers(text)
@@ -74,7 +87,7 @@ module Playbook
       current_header = nil
 
       lines.each do |line|
-        if line.match?(/^(🆕|✨|🔥|🐛|💥|📦|\*\*).*:/)
+        if SECTION_HEADERS.value?(line) || line.match?(/^\*\*.*:/)
           current_header = line
           unless grouped_sections.key?(current_header)
             grouped_sections[current_header] = []
