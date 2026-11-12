@@ -2,12 +2,15 @@
   "template": "<TextInput{{props}} value={textInputValue} onChange={({ target }) => setTextInputValue(target.value)} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "disabled": false,
     "emojiMask": false,
     "inline": false,
     "required": false,
     "requiredIndicator": false,
     "type": "text",
+    "value": "",
+    "autoComplete": true,
     "addOn": {
       "icon": "user",
       "alignment": "left",

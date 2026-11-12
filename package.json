@@ -6,7 +6,8 @@
     "prepare": "husky install",
     "lint": "eslint . --ext .js,.jsx,.tsx,.ts",
     "lint-fix": "eslint . --ext .js,.jsx,.tsx,.ts --fix",
-    "generate:docs-metadata": "bash scripts/generate-docs-metadata.sh"
+    "generate:docs-metadata": "bash scripts/generate-docs-metadata.sh",
+    "check:external-deps": "node playbook/scripts/check-external-runtime-deps.js"
   },
   "workspaces": {
     "packages": [

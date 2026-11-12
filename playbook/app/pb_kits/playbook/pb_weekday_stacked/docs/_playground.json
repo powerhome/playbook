@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
+    "dark": false,
     "variant": "month_day",
     "compact": false
   },

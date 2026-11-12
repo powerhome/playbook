@@ -2,10 +2,11 @@
   "template": "<MultipleUsers{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
+    "maxDisplayedUsers": 4,
     "reverse": false,
     "size": "sm",
     "withTooltip": false,
-    "maxDisplayedUsers": 4,
     "users": [
       {
         "name": "Anna Black",

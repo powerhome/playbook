@@ -7,18 +7,24 @@
     "subRowHeaders": "AdvancedTable.Body.props"
   },
   "defaults": {
-    "columnGroupBorderColor": "none",
+    "cascadeCollapse": false,
     "enableToggleExpansion": "header",
+    "enableSortingRemoval": false,
     "fullWidthCell": false,
     "groupSeparators": false,
+    "initialLoadingRowsCount": 10,
     "inlineRowLoading": false,
     "loading": false,
     "maxHeight": "auto",
+    "pagination": false,
     "responsive": "scroll",
     "scrollBarNone": false,
     "selectableRows": false,
     "showActionsBar": true,
     "persistToggleExpansionButton": false,
+    "sortParentOnly": false,
+    "toggleExpansionIcon": "arrows-from-line",
+    "virtualizedRows": false,
     "collapsibleTrail": true,
     "columnVisibilityControl": {
       "default": true

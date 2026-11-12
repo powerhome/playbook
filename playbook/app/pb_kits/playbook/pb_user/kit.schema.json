@@ -47,7 +47,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "avatarGrayscale": {
       "type": "boolean",
@@ -115,14 +116,16 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "title": {
       "type": "string",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "titleStyle": {
       "type": "enum",
@@ -130,12 +133,19 @@
         "react",
         "rails"
       ],
-      "values": [
-        "title",
-        "body",
-        "caption",
-        "detail"
-      ],
+      "values": {
+        "react": [
+          "title",
+          "body",
+          "caption",
+          "detail"
+        ],
+        "rails": [
+          "body",
+          "caption",
+          "detail"
+        ]
+      },
       "default": "body"
     }
   },

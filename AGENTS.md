@@ -28,6 +28,7 @@ Consumer-facing rule/skill drafts (for apps that import `playbook-ui`) live in [
    - `playbook/dist/ai/**`
 4. **Playground source of truth** is `docs/_playground.overrides.json` per kit — edit that, then regenerate.
 5. **Do not install packages** into consuming apps from this repo’s AI guidance; that rule is for consumers. Here, follow normal workspace yarn flows when adding deps intentionally.
+6. **No external runtime dependencies in kits** — never load scripts, styles, or data from a CDN or other third-party host (`import('https://…')`, `<script src>`, remote `@import`, hard-coded fetch hosts). Install the package and let Vite bundle it; `import()` of a package still gives a lazy chunk. Run `yarn check:external-deps` (also runs in pre-commit, CI, and every `vite build`). Exceptions need a reviewed entry in `playbook/config/external-runtime-deps.json`; see [`docs/EXTERNAL_RUNTIME_DEPS.md`](docs/EXTERNAL_RUNTIME_DEPS.md).
 
 ## Code change hygiene (always-on rules)
 
@@ -54,6 +55,7 @@ Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PUL
 | Deprecation warnings | [`docs/DEPRECATION_WARNINGS.md`](docs/DEPRECATION_WARNINGS.md) |
 | Kit status in menu | [`docs/PLATFORM_SPECIFIC_STATUS.md`](docs/PLATFORM_SPECIFIC_STATUS.md) |
 | Changelog generator | [`docs/CHANGELOG_GENERATOR.md`](docs/CHANGELOG_GENERATOR.md) |
+| External runtime dependencies (CDNs, CSP) | [`docs/EXTERNAL_RUNTIME_DEPS.md`](docs/EXTERNAL_RUNTIME_DEPS.md) |
 
 ## Cursor-specific paths
 

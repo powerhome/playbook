@@ -112,7 +112,10 @@
         "react",
         "rails"
       ],
-      "default": null
+      "default": {
+        "react": "",
+        "rails": null
+      }
     },
     "backgroundRepeat": {
       "type": {
@@ -140,7 +143,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "imageOverlay": {
       "type": "enum",
@@ -217,7 +221,10 @@
         "blur",
         "scale"
       ],
-      "default": null
+      "default": {
+        "react": "",
+        "rails": null
+      }
     }
   },
   "globalProps": true,

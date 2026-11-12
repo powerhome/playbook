@@ -24,7 +24,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "icon": {
       "type": "string",

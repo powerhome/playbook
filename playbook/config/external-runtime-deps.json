@@ -1,0 +1,88 @@
+{
+  "$comment": "Reviewed exceptions for yarn check:external-deps. Each entry allows one host in specific paths only. Stale entries fail the check. Policy and process: docs/EXTERNAL_RUNTIME_DEPS.md",
+  "exceptions": [
+    {
+      "host": "basemaps.cartocdn.com",
+      "paths": ["playbook/app/pb_kits/playbook/pb_map/pbMapTheme.ts"],
+      "scope": "kit",
+      "reason": "Default MapLibre style for the Map kit. Vector tile services cannot reasonably be bundled.",
+      "impact": "Apps using the default map theme must allow basemaps.cartocdn.com (and the tile hosts its style references) in CSP connect-src/img-src. If CARTO is down, maps render without tiles; the rest of the page is unaffected."
+    },
+    {
+      "host": "t.contentsquare.net",
+      "paths": ["playbook-website/app/views/layouts/_hotjar.html.erb"],
+      "scope": "website",
+      "reason": "Analytics script for the docs website.",
+      "impact": "Docs website only. Not shipped in playbook-ui or the gem."
+    },
+    {
+      "host": "randomuser.me",
+      "paths": [
+        "playbook-website/app/javascript/components/Website/src/components/GlobalPropsAndTokens/ExamplesPage/Examples/**",
+        "playbook-website/app/javascript/components/Website/src/pages/Home/**",
+        "playbook-website/app/javascript/components/Website/src/pages/Playground/buildingBlocks/**",
+        "playbook-website/app/views/building_blocks/**"
+      ],
+      "scope": "website",
+      "reason": "Placeholder avatars in website demos.",
+      "impact": "Docs website only. Demo avatars fall back to initials if the host is down."
+    },
+    {
+      "host": "unsplash.it",
+      "paths": [
+        "playbook-website/app/javascript/components/Website/src/components/GlobalPropsAndTokens/ExamplesPage/Examples/**",
+        "playbook-website/app/javascript/components/Website/src/pages/Playground/buildingBlocks/**",
+        "playbook-website/app/views/building_blocks/**"
+      ],
+      "scope": "website",
+      "reason": "Placeholder images in website demos.",
+      "impact": "Docs website only."
+    },
+    {
+      "host": "images.unsplash.com",
+      "paths": ["playbook-website/app/javascript/components/Website/src/components/HomepageHero/**"],
+      "scope": "website",
+      "reason": "Placeholder images in the homepage hero.",
+      "impact": "Docs website only."
+    },
+    {
+      "host": "flagcdn.com",
+      "paths": ["playbook-website/app/javascript/components/Website/src/pages/WorldCup/teamFlags.ts"],
+      "scope": "website",
+      "reason": "Team flag images for the World Cup page.",
+      "impact": "Docs website only."
+    },
+    {
+      "host": "wheniskickoff.com",
+      "paths": ["playbook-website/app/controllers/pages_controller.rb"],
+      "scope": "website",
+      "reason": "Server-side fetch of World Cup match data, cached for 60 seconds.",
+      "impact": "Docs website server only; no browser CSP impact."
+    },
+    {
+      "host": "playbook.powerapp.cloud",
+      "paths": [
+        "playbook-website/app/controllers/pages_controller.rb",
+        "playbook-website/app/javascript/components/Website/src/utils/siteNavigation.ts",
+        "playbook/lib/generators/kit/kit_generator.rb"
+      ],
+      "scope": "website",
+      "reason": "Playbook's own docs origin, used as link targets and as the $schema id written by the kit generator. Nothing is loaded from it at runtime.",
+      "impact": "None for consumers."
+    },
+    {
+      "host": "staging.playbook.powerapp.cloud",
+      "paths": ["playbook-website/app/javascript/components/Website/src/utils/siteNavigation.ts"],
+      "scope": "website",
+      "reason": "Docs website staging origin, used for link targets.",
+      "impact": "None for consumers."
+    },
+    {
+      "host": "api.github.com",
+      "paths": ["playbook/lib/playbook/changelog_generator.rb"],
+      "scope": "tooling",
+      "reason": "Maintainer rake task that builds the changelog from GitHub issues.",
+      "impact": "None for consumers; never runs in a consuming app."
+    }
+  ]
+}
