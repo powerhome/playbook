@@ -1,6 +1,6 @@
 # Changelog generator
 
-Both website changelog files are built by `Playbook::ChangelogGenerator` from merged GitHub PRs, grouped by changelog labels. Run the commands from the **repo root**.
+Both website changelog files are built by `Playbook::ChangelogGenerator` from merged GitHub PRs, grouped by PR title. Run the commands from the **repo root**.
 
 ## Auth
 
@@ -18,7 +18,7 @@ Equivalent rake task: `changelog`.
 
 - Uses `Playbook::VERSION` and `Playbook::PREVIOUS_VERSION` from `playbook/lib/playbook/version.rb`.
 - Fetches PRs merged since the previous release tag.
-- Groups them into New Kits, Kit Enhancements, Improvements, Fixed Bugs, Breaking Changes, and Other (max 25 per section).
+- Groups them by Conventional Commit type and breaking-change marker.
 - Prepends one new section. Aborts if that version is already in the file.
 - Inserts a title placeholder, date, hero image, and description placeholder. Edit those before you publish.
 
@@ -49,20 +49,26 @@ RC_VERSION=17.2.0-rc.3 make changelog-rc
 
 `RC_VERSION` also accepts the gem form, `17.2.0.pre.rc.3`.
 
-## PR labels
+## Changelog categories
 
-The generator maps these labels to sections:
+Use the [Playbook PR title format](./PR_TITLES.md). Changelog category labels are deprecated. The stable and RC generators use these headings in order:
 
-| Label | Section |
-|-------|---------|
-| `new kit` | New Kits |
-| `enhancement` | Kit Enhancements |
-| `improvement` | Improvements |
-| `bug` | Fixed Bugs |
-| `breaking` | Breaking Changes |
-| (none of the above) | Other |
+- **New Kits** groups titles whose description starts with `New Kit`, such as `feat(full-screen): New Kit [PLAY-1234]`.
+- **Enhancement** groups `feat`, `style`, and `refactor`.
+- **Bug Fixes** groups `fix`.
+- **Documentation** groups `docs` and legacy `doc` titles.
+- **Improvement** groups `perf`, `test`, `build`, and `ci`.
+- **Dependencies** groups `chore`.
+- **Deprecated** groups titles whose description starts with `Deprecated`, such as `feat(button): Deprecated the legacy size prop`.
+- **Breaking** takes precedence when a recognized title has `!` immediately before the colon.
+- **Revert** groups `revert`.
+- **Other** comes last and includes older free-form titles and titles with unrecognized types.
 
-PRs need the usual changelog label so they land in the right section.
+`New Kit` and `Deprecated` are case-insensitive and override the type-based category. A breaking marker takes precedence over both.
+
+For a recognized title, the entry uses its description. If the title has a scope, the generator puts the scope first and replaces hyphens with spaces. For example, `fix(advanced-table): Fix sticky column widths [PLAY-1234]` becomes Advanced Table: **Fix Sticky Column Widths** under **Bug Fixes**.
+
+Review entries under **Other** and move them to the appropriate headings as needed during the transition.
 
 ## After you generate
 

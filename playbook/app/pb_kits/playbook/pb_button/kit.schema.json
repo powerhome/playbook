@@ -132,29 +132,6 @@
         "rails"
       ]
     },
-    "type": {
-      "type": "enum",
-      "platforms": [
-        "react",
-        "rails"
-      ],
-      "values": [
-        "inline"
-      ],
-      "default": "inline"
-    },
-    "htmlType": {
-      "type": "enum",
-      "platforms": [
-        "react"
-      ],
-      "values": [
-        "submit",
-        "reset",
-        "button"
-      ],
-      "default": "button"
-    },
     "value": {
       "type": "string | null",
       "platforms": [
@@ -177,10 +154,33 @@
       ],
       "default": "primary"
     },
+    "htmlType": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "submit",
+        "reset",
+        "button"
+      ],
+      "default": "button"
+    },
     "wrapperClass": {
       "type": "string",
       "platforms": [
         "react"
+      ]
+    },
+    "type": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "submit",
+        "reset",
+        "button"
       ]
     },
     "iconFontFamily": {
@@ -201,11 +201,11 @@
   "usage": {
     "react": {
       "import": "import { Button } from 'playbook-ui'",
-      "example": "<Button size=\"sm\" type=\"inline\"></Button>"
+      "example": "<Button size=\"sm\" variant=\"primary\"></Button>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"button\", props: { size: \"sm\", type: \"inline\" }) %>"
+      "example": "<%= pb_rails(\"button\", props: { size: \"sm\", variant: \"primary\" }) %>"
     }
   }
 }

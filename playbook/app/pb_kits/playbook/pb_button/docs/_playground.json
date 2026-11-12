@@ -9,9 +9,8 @@
     "loading": false,
     "newWindow": false,
     "target": "",
-    "type": "inline",
-    "htmlType": "button",
-    "variant": "primary"
+    "variant": "primary",
+    "htmlType": "button"
   },
   "children": {
     "editable": true,
@@ -58,6 +57,7 @@
       "name": "Form",
       "props": [
         "htmlType",
+        "type",
         "form",
         "value",
         "tabIndex"
