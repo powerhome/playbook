@@ -17,32 +17,37 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": true
     },
     "toolbarBottom": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "focus": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "inputOptions": {
       "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "inline": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "label": {
       "type": "string",
@@ -137,26 +142,30 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "template": {
       "type": "string",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": ""
     },
     "value": {
       "type": "string",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "maxWidth": {
       "type": "string",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": "md"
     },
     "TrixEditor": {
       "type": "ReactNode",

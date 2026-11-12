@@ -4,6 +4,7 @@
   "defaults": {
     "hideIcon": false,
     "type": "inbound",
+    "user": {},
     "source": "Website lead"
   },
   "groups": [

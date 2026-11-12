@@ -4,6 +4,7 @@
   "defaults": {
     "dark": false,
     "disabled": false,
+    "inputOptions": {},
     "label": "Time Picker",
     "required": false,
     "requiredIndicator": false,

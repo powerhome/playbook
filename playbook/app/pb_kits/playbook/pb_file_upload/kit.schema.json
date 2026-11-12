@@ -16,7 +16,10 @@
         "react",
         "rails"
       ],
-      "default": ""
+      "default": {
+        "react": {},
+        "rails": ""
+      }
     },
     "customMessage": {
       "type": "string",
@@ -30,13 +33,15 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "acceptedFilesDescription": {
       "type": "string",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": ""
     },
     "maxSize": {
       "type": "number",

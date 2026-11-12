@@ -12,7 +12,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     },
     "size": {
       "type": "enum",

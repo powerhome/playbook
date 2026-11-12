@@ -32,7 +32,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "iconEnabled": {
       "type": "boolean",

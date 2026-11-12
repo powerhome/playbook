@@ -13,16 +13,24 @@
         "react",
         "rails"
       ],
-      "values": [
-        "card_light",
-        "bg_light",
-        "card_dark",
-        "bg_dark",
-        "black",
-        "white",
-        "success",
-        "error"
-      ],
+      "values": {
+        "react": [
+          "card_light",
+          "bg_light",
+          "card_dark",
+          "bg_dark",
+          "black",
+          "white",
+          "success",
+          "error"
+        ],
+        "rails": [
+          "card_light",
+          "bg_light",
+          "card_dark",
+          "bg_dark"
+        ]
+      },
       "default": "card_light"
     },
     "dynamic": {
@@ -40,7 +48,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": true
     },
     "position": {
       "type": "string",
@@ -66,7 +75,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "layout": {
       "type": "GenericObject",

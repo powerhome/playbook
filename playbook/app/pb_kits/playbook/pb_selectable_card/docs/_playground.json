@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "checked": false,
+    "dark": false,
     "disabled": false,
     "error": false,
     "icon": false,

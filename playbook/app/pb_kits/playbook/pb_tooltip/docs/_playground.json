@@ -3,7 +3,11 @@
   "propTargets": {},
   "defaults": {
     "useClickToOpen": false,
-    "interaction": false
+    "delay": 0,
+    "interaction": false,
+    "position": "absolute",
+    "showTooltip": true,
+    "forceOpenTooltip": false
   },
   "children": {
     "editable": true,
