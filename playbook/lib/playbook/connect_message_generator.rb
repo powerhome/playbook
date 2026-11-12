@@ -67,7 +67,11 @@ module Playbook
 
       text.gsub!(MARKDOWN_LINK_REGEX, "")
       text.gsub!(/\(\s*\)/, "")
-      text.gsub!(/(?<=-\s).+/) { |match| titleize(match.strip) }
+      text.gsub!(/(?<=-\s).+/) do |match|
+        entry = match.strip
+        # Scoped changelog entries already format both the scope and description.
+        entry.match?(/\A.+: \*\*.+\*\*\z/) ? entry : titleize(entry)
+      end
       text.gsub!(/-\s+/, "- ")
 
       text = group_by_headers(text)
