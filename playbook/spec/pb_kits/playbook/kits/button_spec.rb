@@ -43,6 +43,7 @@ RSpec.describe Playbook::PbButton::Button do
       expect(subject.new(new_window: false).link_options).to_not include(:target)
 
       expect(subject.new(link: "Google.com").link_options).to include href: "Google.com"
+      expect(subject.new(link: "Google.com", type: "button").link_options).to include(type: "button", href: "Google.com")
     end
   end
 
@@ -54,7 +55,9 @@ RSpec.describe Playbook::PbButton::Button do
       end
 
       it "type", :aggregate_failures do
-        expect(subject.new(type: "button").options).to include(:type)
+        expect(subject.new(type: "button").options).to include(type: "button")
+        expect(subject.new(type: "submit").options).to include(type: "submit")
+        expect(subject.new(type: "reset").options).to include(type: "reset")
         expect(subject.new.options).to_not include(:type)
       end
 
@@ -78,6 +81,10 @@ RSpec.describe Playbook::PbButton::Button do
       expect(subject.new(full_width: true).classname).to eq "pb_button_kit pb_button_primary pb_button_block pb_button_enabled"
       expect(subject.new(size: "sm").classname).to eq "pb_button_kit pb_button_primary pb_button_inline pb_button_enabled pb_button_size_sm"
       expect(subject.new(size: "lg").classname).to eq "pb_button_kit pb_button_primary pb_button_inline pb_button_enabled pb_button_size_lg"
+      expect(subject.new(type: "submit").classname).to eq "pb_button_kit pb_button_primary pb_button_inline pb_button_enabled"
+      expect(subject.new(type: "inline").classname).to eq "pb_button_kit pb_button_primary pb_button_inline pb_button_enabled"
+      expect(subject.new(loading: true).classname).to eq "pb_button_kit pb_button_primary pb_button_inline pb_button_enabled pb_button_loading"
+      expect(subject.new(type: "reset", full_width: true, loading: true, disabled: true, variant: "secondary").classname).to eq "pb_button_kit pb_button_secondary pb_button_block pb_button_disabled pb_button_loading"
     end
 
     context "when managing enabled/disabled states" do
