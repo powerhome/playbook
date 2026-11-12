@@ -297,3 +297,20 @@ test('should set tabIndex to -1 when disabled (vertical nav)', () => {
         expect(kit).toHaveAttribute('tabIndex', '-1')
     })
 })
+
+test('collapsible NavItem invokes onClick once per click', () => {
+    const handleClick = jest.fn()
+    render(
+        <NavItem
+            collapsible
+            onClick={handleClick}
+            text="Albums"
+        >
+            <NavItem text="Photos" />
+        </NavItem>
+    )
+
+    screen.getByText('Albums').click()
+
+    expect(handleClick).toHaveBeenCalledTimes(1)
+})

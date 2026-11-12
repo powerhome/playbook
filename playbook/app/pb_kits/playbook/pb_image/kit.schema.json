@@ -8,59 +8,92 @@
   ],
   "props": {
     "alt": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "onError": {
+      "type": {
+        "react": "function",
+        "rails": "string"
+      },
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "string",
       "default": null
     },
-    "rounded": {
+    "size": {
+      "type": "enum",
       "platforms": [
+        "react",
         "rails"
       ],
+      "values": {
+        "react": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "rails": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "none"
+        ]
+      },
+      "default": {
+        "react": "",
+        "rails": "none"
+      }
+    },
+    "rounded": {
       "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
       "default": false
     },
-    "size": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "enum",
-      "values": [
-        "xs",
-        "sm",
-        "md",
-        "lg",
-        "xl",
-        "none"
-      ],
-      "default": "none"
-    },
     "transition": {
+      "type": "enum",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "enum",
-      "values": [
-        "blur",
-        "fade",
-        "scale",
-        "none"
-      ],
+      "values": {
+        "react": [
+          "blur",
+          "fade",
+          "scale"
+        ],
+        "rails": [
+          "blur",
+          "fade",
+          "scale",
+          "none"
+        ]
+      },
       "default": "fade"
     },
     "url": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
-      ]
+      ],
+      "default": ""
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Image } from 'playbook-ui'",

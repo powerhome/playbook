@@ -1523,3 +1523,548 @@ describe("PbDropdown multi-select identity", () => {
     jest.useRealTimers();
   });
 });
+
+describe("PbDropdown option creation", () => {
+  let root;
+  let instance;
+  let input;
+
+  const mount = ({ multi = false, async = false, creation = true, required = false, disabled = false, defaultValue = "" } = {}) => {
+    root = buildDropdownElement({ options: [{ id: "existing", label: "Existing", value: "existing" }] });
+    root.dataset.pbDropdownAllowOptionCreation = String(creation);
+    root.dataset.pbDropdownDisabled = String(disabled);
+    const baseInput = root.querySelector("[data-dropdown-selected-option]");
+    baseInput.required = required;
+    baseInput.dataset.defaultValue = defaultValue;
+    root.dataset.pbDropdownMultiSelect = String(multi);
+    if (async) root.dataset.pbDropdownAsync = "true";
+    root.dataset.pbDropdownSearchTermMinimumLength = "1";
+    root.dataset.pbDropdownSearchDebounceTimeout = "0";
+    input = document.createElement("input");
+    input.dataset.dropdownAutocomplete = "true";
+    root.querySelector(".pb_dropdown_trigger").appendChild(input);
+    if (multi) root.querySelector("[data-dropdown-selected-option]").name = "tags[]";
+    const form = document.createElement("form");
+    root.replaceWith(form);
+    form.appendChild(root);
+    instance = new PbDropdown(root);
+    instance.connect();
+    return form;
+  };
+
+  const typeQuery = value => {
+    input.value = value;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+  const getCreationRow = () => root.querySelector("[data-dropdown-create-option]");
+
+  afterEach(() => {
+    instance?.disconnect();
+    document.body.innerHTML = "";
+    jest.useRealTimers();
+  });
+
+  test("Enter on a partial query creates the value instead of selecting the first match", () => {
+    mount();
+    const onSelect = jest.fn();
+    root.addEventListener("pb:dropdown:selected", event => onSelect(event.detail));
+    typeQuery("Ex");
+
+    const createRow = getCreationRow();
+    expect(createRow).toHaveClass("pb_dropdown_option_focused");
+    expect(instance.queryAllOptions()[0]).not.toHaveClass("pb_dropdown_option_focused");
+
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true }));
+    expect(onSelect).toHaveBeenCalledWith({ id: "Ex", label: "Ex", value: "Ex", __isNew__: true });
+
+    typeQuery("Ex");
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(JSON.parse(instance.selectedOptionJson)).toEqual({ id: "existing", label: "Existing", value: "existing" });
+  });
+
+  test("Enter creates a trimmed value through the selection event and form input", () => {
+    jest.useFakeTimers();
+    const form = mount();
+    const onSelect = jest.fn();
+    root.addEventListener("pb:dropdown:selected", event => onSelect(event.detail));
+    typeQuery("  New tag  ");
+    expect(getCreationRow().textContent).toBe('Create "New tag"');
+    input.dispatchEvent(new KeyboardEvent("keydown", {
+      key: "Enter",
+      bubbles: true,
+      cancelable: true,
+    }));
+    expect(onSelect).toHaveBeenCalledWith({
+      id: "New tag",
+      label: "New tag",
+      value: "New tag",
+      __isNew__: true,
+    });
+    expect(new FormData(form).get("country")).toBe("New tag");
+    expect(getCreationRow()).toBeNull();
+    jest.runOnlyPendingTimers();
+    expect(instance.target).toHaveClass("close");
+  });
+
+  test("multi-select submits separate values and suppresses selected duplicates", () => {
+    const form = mount({ multi: true });
+    for (const value of ["First", "Second"]) {
+      typeQuery(value);
+      instance.handleOptionClick({ target: getCreationRow() });
+    }
+    expect(new FormData(form).getAll("tags[]")).toEqual(["First", "Second"]);
+    typeQuery(" first ");
+    expect(getCreationRow()).toBeNull();
+  });
+
+  test("whitespace, existing labels and values cannot be created", () => {
+    mount();
+    for (const value of ["  ", " EXISTING ", "existing"]) {
+      typeQuery(value);
+      expect(getCreationRow()).toBeNull();
+    }
+  });
+
+  test("clear and reset remove the creation row", () => {
+    mount();
+    typeQuery("New");
+    instance.clearSelection();
+    expect(getCreationRow()).toBeNull();
+    typeQuery("Another");
+    instance.resetDropdownValue();
+    expect(getCreationRow()).toBeNull();
+  });
+
+  test("async results resolve before creation and stale callbacks are ignored", () => {
+    jest.useFakeTimers();
+    mount({ async: true });
+    const searches = [];
+    root.addEventListener("pb:dropdown:search", event => searches.push(event.detail));
+    typeQuery("Old");
+    jest.runOnlyPendingTimers();
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
+    jest.runOnlyPendingTimers();
+    searches[1].setResults([]);
+    expect(getCreationRow().textContent).toBe('Create "New"');
+    searches[0].setResults([{ id: "old", label: "Old" }]);
+    expect(getCreationRow().textContent).toBe('Create "New"');
+  });
+
+  test("async existing results and errors do not offer creation", () => {
+    jest.useFakeTimers();
+    mount({ async: true });
+    let search;
+    root.addEventListener("pb:dropdown:search", event => { search = event.detail });
+    typeQuery("Existing");
+    jest.runOnlyPendingTimers();
+    search.setResults([{ id: "server", label: "Existing" }]);
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
+    jest.runOnlyPendingTimers();
+    search.setError();
+    expect(getCreationRow()).toBeNull();
+  });
+
+  test.each([undefined, false])("creation %s submits individual multi-select values in selection order", (creation) => {
+    const form = mount({ multi: true, creation });
+    if (creation === undefined) delete root.dataset.pbDropdownAllowOptionCreation;
+    instance.replaceOptions([
+      { id: "first", label: "First", value: "first" },
+      { id: "second", label: "Second", value: "second" },
+    ]);
+    const rows = Array.from(instance.queryAllOptions());
+    rows.forEach((row) => instance.handleOptionClick({ target: row }));
+    expect(instance.baseInput.value).toBe("");
+    expect(new FormData(form).getAll("tags[]")).toEqual(["first", "second"]);
+    typeQuery("New");
+    expect(getCreationRow()).toBeNull();
+  });
+
+  test.each(["ny", " NY ", "empire"])("keeps the existing option selectable for query %s", (query) => {
+    mount();
+    const newYork = { id: "ny", label: "New York", value: "empire" };
+    instance.replaceOptions([newYork]);
+    typeQuery(query);
+
+    const optionRow = instance.queryAllOptions()[0];
+    expect(optionRow.style.display).toBe("");
+    expect(getCreationRow()).toBeNull();
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    expect(instance.baseInput.value).toBe("ny");
+    expect(JSON.parse(instance.selectedOptionJson)).toEqual(newYork);
+  });
+
+  const reopen = () => {
+    if (!instance.target.classList.contains("open")) instance.showElement(instance.target);
+  };
+
+  test("reopening a single-select after choosing an existing option keeps that option", () => {
+    mount();
+    const option = instance.queryAllOptions()[0];
+    option.click();
+    reopen();
+    expect(instance.target).toHaveClass("open");
+    expect(option.style.display).not.toBe("none");
+    expect(input.value).toBe("Existing");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+  });
+
+  test("reopening a multi-select after its only option is chosen shows the empty message", () => {
+    mount({ multi: true });
+    const option = instance.queryAllOptions()[0];
+    option.click();
+    reopen();
+    expect(instance.target).toHaveClass("open");
+    expect(option.style.display).toBe("none");
+    expect(instance.target.querySelector(".dropdown_no_options")).toHaveTextContent("no option");
+  });
+
+  test("reopening a multi-select keeps the options that are still available", () => {
+    mount({ multi: true });
+    instance.replaceOptions([
+      { id: "existing", label: "Existing", value: "existing" },
+      { id: "other", label: "Other", value: "other" },
+    ]);
+    const [selected, remaining] = instance.queryAllOptions();
+    selected.click();
+    reopen();
+    expect(selected.style.display).toBe("none");
+    expect(remaining.style.display).toBe("");
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+  });
+
+  test("static filtering stays label-only when option creation is disabled", () => {
+    mount({ creation: false });
+    instance.replaceOptions([{ id: "ny", label: "New York", value: "empire" }]);
+    typeQuery("ny");
+    expect(instance.queryAllOptions()[0].style.display).toBe("none");
+    expect(getCreationRow()).toBeNull();
+    typeQuery("New");
+    expect(instance.queryAllOptions()[0].style.display).toBe("");
+  });
+
+  test.each([false, true])("clearing selections restores required validation with creation=%s", (creation) => {
+    const form = mount({ multi: true, creation, required: true });
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(form.checkValidity()).toBe(false);
+
+    instance.handleOptionClick({ target: instance.queryAllOptions()[0] });
+    expect(instance.baseInput.hasAttribute("name")).toBe(false);
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(new FormData(form).getAll("tags[]")).toEqual(["existing"]);
+    expect(form.checkValidity()).toBe(true);
+
+    instance.clearSelection();
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(instance.baseInput.required).toBe(true);
+    expect(root.querySelectorAll("input[data-generated]")).toHaveLength(0);
+    expect(form.checkValidity()).toBe(false);
+  });
+
+  test("default selections submit without a blank entry and reset restores validation", () => {
+    const form = mount({ multi: true, required: true, defaultValue: "existing" });
+    expect(instance.baseInput.hasAttribute("name")).toBe(false);
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(new FormData(form).getAll("tags[]")).toEqual(["existing"]);
+
+    form.reset();
+    expect(instance.baseInput.disabled).toBe(false);
+    expect(instance.baseInput.required).toBe(true);
+    expect(form.checkValidity()).toBe(false);
+  });
+
+  test("disabled multi-select defaults remain excluded from submission after reset", () => {
+    const form = mount({ multi: true, disabled: true, defaultValue: "existing" });
+    expect(new FormData(form).getAll("tags[]")).toEqual([]);
+    form.reset();
+    expect(instance.baseInput.disabled).toBe(true);
+    expect(new FormData(form).getAll("tags[]")).toEqual([]);
+  });
+
+  test("Turbo reconnect preserves submission order and restores required validation", () => {
+    const form = mount({ multi: true, required: true, defaultValue: "existing" });
+    instance.disconnect();
+    instance = new PbDropdown(root);
+    instance.connect();
+
+    typeQuery("Second");
+    instance.handleOptionClick({ target: getCreationRow() });
+    expect(new FormData(form).getAll("tags[]")).toEqual(["existing", "Second"]);
+    expect(instance.baseInput.hasAttribute("name")).toBe(false);
+    expect(form.checkValidity()).toBe(true);
+
+    instance.clearSelection();
+    expect(instance.baseInput.name).toBe("tags[]");
+    expect(instance.baseInput.required).toBe(true);
+    expect(form.checkValidity()).toBe(false);
+  });
+
+  test("composition and disabled controls do not create", () => {
+    mount();
+    typeQuery("New");
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", isComposing: true, bubbles: true }));
+    expect(instance.baseInput.value).toBe("");
+    instance.isDisabled = true;
+    instance.updateCreationOption("Another");
+    expect(getCreationRow()).toBeNull();
+  });
+});
+
+describe("PbDropdown pill reorder", () => {
+  let root;
+  let instance;
+
+  const mountReorder = ({
+    externalDragHandle = false,
+    showPillIndex = true,
+  } = {}) => {
+    root = buildDropdownElement({
+      options: [
+        { id: "year", label: "Year", value: "year" },
+        { id: "territory", label: "Territory", value: "territory" },
+        { id: "branch", label: "Branch", value: "branch" },
+      ],
+    });
+    root.dataset.pbDropdownMultiSelect = "true";
+    root.dataset.pbDropdownEnablePillReorder = "true";
+    root.dataset.pbDropdownShowPillIndex = showPillIndex ? "true" : "false";
+    if (externalDragHandle) root.dataset.pbDropdownExternalDragHandle = "true";
+    root.innerHTML = `
+      <div class="dropdown_wrapper">
+        <input data-dropdown-selected-option name="services[]" style="display: none" />
+        <div class="pb_dropdown_trigger">
+          <div data-dropdown-pills-wrapper></div>
+          <span data-dropdown-trigger-display-multi-select>Choose one</span>
+        </div>
+        <div class="pb_dropdown_container close" data-dropdown-container="true">
+          <div class="pb_list_kit"></div>
+        </div>
+      </div>
+    `;
+    const list = root.querySelector(".pb_list_kit");
+    [
+      { id: "year", label: "Year", value: "year" },
+      { id: "territory", label: "Territory", value: "territory" },
+      { id: "branch", label: "Branch", value: "branch" },
+    ].forEach((option) => {
+      list.appendChild(new PbDropdown(root).buildOptionElement(option));
+    });
+    instance = new PbDropdown(root);
+    instance.connect();
+    instance.setSelectionByOptionIds(["year", "territory", "branch"]);
+  };
+
+  afterEach(() => {
+    instance?.disconnect();
+    document.body.innerHTML = "";
+  });
+
+  test("enable_pill_reorder renders numbered draggable pills", () => {
+    mountReorder();
+    const pills = root.querySelectorAll(".pb_form_pill_kit_icon");
+    expect(pills.length).toBe(3);
+    expect(pills[0]).toHaveTextContent("1. Year");
+    expect(pills[1]).toHaveTextContent("2. Territory");
+    expect(pills[2]).toHaveTextContent("3. Branch");
+    expect(root.querySelectorAll(".pb_draggable_item").length).toBe(3);
+    expect(root.querySelector(".pb_dropdown_external_drag_handle")).toBeNull();
+  });
+
+  test("keyboard reorder updates selection, form values, and reordered event", () => {
+    mountReorder();
+    const reordered = jest.fn();
+    root.addEventListener("pb:dropdown:reordered", reordered);
+    const pills = root.querySelectorAll(".pb_form_pill_kit_icon");
+
+    pills[1].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+
+    expect(Array.from(instance.selectedOptions).map((raw) => JSON.parse(raw).label)).toEqual([
+      "Territory",
+      "Year",
+      "Branch",
+    ]);
+    expect(Array.from(root.querySelectorAll("input[data-generated]")).map((input) => input.value)).toEqual([
+      "territory",
+      "year",
+      "branch",
+    ]);
+    expect(reordered).toHaveBeenCalled();
+    expect(reordered.mock.calls[0][0].detail.map((item) => item.label)).toEqual([
+      "Territory",
+      "Year",
+      "Branch",
+    ]);
+  });
+
+  test("external_drag_handle renders external handles", () => {
+    mountReorder({ externalDragHandle: true });
+    const handles = root.querySelectorAll(".pb_dropdown_external_drag_handle");
+    expect(handles.length).toBe(3);
+    expect(root.querySelectorAll(".pb_form_pill_kit_icon").length).toBe(0);
+    handles.forEach((handle) => {
+      expect(handle.querySelector(".pb_dropdown_pill_grip_icon")).not.toBeNull();
+    });
+  });
+
+  test("grip icon uses the playbook-icons grip-dots-vertical path", () => {
+    mountReorder();
+    const grip = root.querySelector(".pb_dropdown_pill_grip_icon");
+    expect(grip).not.toBeNull();
+    expect(grip).toHaveClass("pb_custom_icon");
+    expect(grip.getAttribute("viewBox")).toBe("0 0 31 25");
+    expect(grip.querySelector("path").getAttribute("d")).toContain("12.9043 6.35547");
+  });
+
+  test("dragging a pill commits order on drop", () => {
+    mountReorder();
+    const reordered = jest.fn();
+    root.addEventListener("pb:dropdown:reordered", reordered);
+
+    const draggableItems = root.querySelectorAll(".pb_draggable_item");
+    draggableItems.forEach((item, index) => {
+      item.getBoundingClientRect = () => ({
+        left: index * 100,
+        right: index * 100 + 100,
+        width: 100,
+        top: 0,
+        bottom: 30,
+        height: 30,
+      });
+    });
+
+    draggableItems[0].dispatchEvent(new MouseEvent("mousedown", {
+      button: 0,
+      clientX: 10,
+      clientY: 10,
+      bubbles: true,
+    }));
+    document.dispatchEvent(new MouseEvent("mousemove", {
+      clientX: 280,
+      clientY: 10,
+      bubbles: true,
+    }));
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).not.toBeNull();
+    expect(draggableItems[2].classList.contains("pb_dropdown_drop_after")).toBe(true);
+
+    document.dispatchEvent(new MouseEvent("mouseup", {
+      clientX: 280,
+      clientY: 10,
+      bubbles: true,
+    }));
+
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).toBeNull();
+    expect(reordered).toHaveBeenCalled();
+    expect(reordered.mock.calls[0][0].detail.map((item) => item.label)).toEqual([
+      "Territory",
+      "Branch",
+      "Year",
+    ]);
+    expect(Array.from(root.querySelectorAll("input[data-generated]")).map((input) => input.value)).toEqual([
+      "territory",
+      "branch",
+      "year",
+    ]);
+  });
+
+  test("removing a pill still works with reorder enabled", () => {
+    mountReorder();
+    root.querySelector(".pb_form_pill_close").click();
+    expect(Array.from(instance.selectedOptions).map((raw) => JSON.parse(raw).label)).toEqual([
+      "Territory",
+      "Branch",
+    ]);
+    expect(root.querySelectorAll(".pb_form_pill_kit_icon")[0]).toHaveTextContent("1. Territory");
+  });
+
+  test("mousedown focuses a pill for keyboard reorder", () => {
+    mountReorder();
+    const pills = root.querySelectorAll(".pb_form_pill_kit_icon");
+    const draggableItems = root.querySelectorAll(".pb_draggable_item");
+
+    draggableItems[1].dispatchEvent(new MouseEvent("mousedown", {
+      button: 0,
+      clientX: 110,
+      clientY: 10,
+      bubbles: true,
+    }));
+    document.dispatchEvent(new MouseEvent("mouseup", {
+      clientX: 110,
+      clientY: 10,
+      bubbles: true,
+    }));
+
+    expect(document.activeElement).toBe(pills[1]);
+
+    const reordered = jest.fn();
+    root.addEventListener("pb:dropdown:reordered", reordered);
+    pills[1].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+    expect(reordered).toHaveBeenCalled();
+    expect(reordered.mock.calls[0][0].detail.map((item) => item.label)).toEqual([
+      "Territory",
+      "Year",
+      "Branch",
+    ]);
+  });
+
+  test("touch dragging a pill commits order on drop", () => {
+    mountReorder();
+    const reordered = jest.fn();
+    root.addEventListener("pb:dropdown:reordered", reordered);
+
+    const draggableItems = root.querySelectorAll(".pb_draggable_item");
+    draggableItems.forEach((item, index) => {
+      item.getBoundingClientRect = () => ({
+        left: index * 100,
+        right: index * 100 + 100,
+        width: 100,
+        top: 0,
+        bottom: 30,
+        height: 30,
+      });
+    });
+
+    const touch = (clientX, clientY, identifier = 1) => ({
+      identifier,
+      clientX,
+      clientY,
+      target: draggableItems[0],
+    });
+
+    draggableItems[0].dispatchEvent(new TouchEvent("touchstart", {
+      bubbles: true,
+      cancelable: true,
+      touches: [touch(10, 10)],
+      targetTouches: [touch(10, 10)],
+      changedTouches: [touch(10, 10)],
+    }));
+    document.dispatchEvent(new TouchEvent("touchmove", {
+      bubbles: true,
+      cancelable: true,
+      touches: [touch(280, 10)],
+      targetTouches: [touch(280, 10)],
+      changedTouches: [touch(280, 10)],
+    }));
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).not.toBeNull();
+
+    document.dispatchEvent(new TouchEvent("touchend", {
+      bubbles: true,
+      cancelable: true,
+      touches: [],
+      targetTouches: [],
+      changedTouches: [touch(280, 10)],
+    }));
+
+    expect(document.querySelector(".pb_dropdown_pill_drag_preview")).toBeNull();
+    expect(reordered).toHaveBeenCalled();
+    expect(reordered.mock.calls[0][0].detail.map((item) => item.label)).toEqual([
+      "Territory",
+      "Branch",
+      "Year",
+    ]);
+  });
+});

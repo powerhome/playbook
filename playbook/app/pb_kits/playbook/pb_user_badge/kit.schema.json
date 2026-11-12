@@ -34,6 +34,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { UserBadge } from 'playbook-ui'",

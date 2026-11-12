@@ -49,7 +49,6 @@ const TypeaheadDraggablePills = (props) => {
           showPillIndex
           value={value}
           {...props}
-          pillDragHandle={false}
       />
 
       <Body

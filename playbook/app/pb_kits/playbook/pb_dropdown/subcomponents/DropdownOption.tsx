@@ -9,6 +9,7 @@ import {
 import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
+import { matchesOptionExactly } from "../utilities/optionCreation";
 
 import Body from "../../pb_body/_body";
 import ListItem from "../../pb_list/_list_item";
@@ -36,12 +37,13 @@ const DropdownOption = (props: DropdownOptionProps) => {
     data = {},
     htmlOptions = {},
     id,
-    key,
     option,
   } = props;
 
   const {
     asyncEnabled,
+    creationOption,
+    creationEnabled,
     autocomplete,
     activeStyle,
     disabled,
@@ -70,7 +72,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
     const filterText =
       selectedLabel && filterItem === selectedLabel ? "" : filterItem;
     const label = typeof option?.label === 'string' ? option.label.toLowerCase() : option?.label;
-    return String(label).toLowerCase().includes(filterText.toLowerCase());
+    return String(label).toLowerCase().includes(filterText.toLowerCase()) ||
+      (creationEnabled && matchesOptionExactly(option, filterText));
   }
 
   // When multiSelect, then if an option is selected, remove from dropdown
@@ -84,7 +87,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
   const isOptionDisabled = option?.disabled === true;
   const isDisabled = disabled || isOptionDisabled;
 
-  if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
+  const isCreationOption = option === creationOption;
+  if ((!isCreationOption && !isItemMatchingFilter(option)) || (multiSelect && isSelected)) {
     return null;
   }
   const isFocused =
@@ -122,7 +126,12 @@ const DropdownOption = (props: DropdownOptionProps) => {
     isDisabled && "disabled"
   );
 
-  const content = children || (renderOption && option ? renderOption(option) : null);
+  let content = children || null;
+  if (isCreationOption) {
+    content = `Create "${option.label}"`;
+  } else if (!content && renderOption && option) {
+    content = renderOption(option);
+  }
 
   return (
     <div
@@ -132,7 +141,6 @@ const DropdownOption = (props: DropdownOptionProps) => {
         aria-disabled={isDisabled}
         className={classes}
         id={id}
-        key={key}
         onClick={isDisabled ? undefined : () => handleOptionClick(option)}
     >
       <ListItem

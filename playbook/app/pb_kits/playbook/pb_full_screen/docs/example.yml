@@ -9,6 +9,7 @@ examples:
   - full_screen_custom_trigger: Custom Trigger
   - full_screen_header_text_styling: Header Text Styling
   - full_screen_sticky_header: Sticky Header
+  - full_screen_advanced_table_sticky_header: Advanced Table Sticky Header
   - full_screen_content_padding: Content Padding
   - full_screen_table_and_filter: Complex Example
   

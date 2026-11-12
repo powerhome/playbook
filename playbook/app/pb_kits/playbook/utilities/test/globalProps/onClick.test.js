@@ -1,53 +1,118 @@
 import React from 'react'
 import { fireEvent, render, screen } from '../../test-utils'
+import Avatar from '../../../pb_avatar/_avatar'
 import Background from '../../../pb_background/_background'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
 import ButtonToolbar from '../../../pb_button_toolbar/_button_toolbar'
 import Caption from '../../../pb_caption/_caption'
 import Card from '../../../pb_card/_card'
+import Contact from '../../../pb_contact/_contact'
 import Container from '../../../pb_container/_container'
 import Currency from '../../../pb_currency/_currency'
 import DashboardValue from '../../../pb_dashboard_value/_dashboard_value'
+import PbDate from '../../../pb_date/_date'
+import DateRangeInline from '../../../pb_date_range_inline/_date_range_inline'
+import DateRangeStacked from '../../../pb_date_range_stacked/_date_range_stacked'
+import DateStacked from '../../../pb_date_stacked/_date_stacked'
+import DateYearStacked from '../../../pb_date_year_stacked/_date_year_stacked'
+import WeekdayStacked from '../../../pb_weekday_stacked/_weekday_stacked'
+import DateTime from '../../../pb_date_time/_date_time'
+import DateTimeStacked from '../../../pb_date_time_stacked/_date_time_stacked'
 import Detail from '../../../pb_detail/_detail'
 import Flex from '../../../pb_flex/_flex'
 import FormPill from '../../../pb_form_pill/_form_pill'
+import Image from '../../../pb_image/_image'
+import LabelPill from '../../../pb_label_pill/_label_pill'
+import OnlineStatus from '../../../pb_online_status/_online_status'
+import Person from '../../../pb_person/_person'
+import Pill from '../../../pb_pill/_pill'
+import Source from '../../../pb_source/_source'
+import StatChange from '../../../pb_stat_change/_stat_change'
 import Highlight from '../../../pb_highlight/_highlight'
+import Icon from '../../../pb_icon/_icon'
+import IconCircle from '../../../pb_icon_circle/_icon_circle'
 import IconStatValue from '../../../pb_icon_stat_value/_icon_stat_value'
 import IconValue from '../../../pb_icon_value/_icon_value'
 import LabelValue from '../../../pb_label_value/_label_value'
+import Legend from '../../../pb_legend/_legend'
+import List from '../../../pb_list/_list'
+import ListItem from '../../../pb_list/_list_item'
 import Message from '../../../pb_message/_message'
 import MultipleUsers from '../../../pb_multiple_users/_multiple_users'
 import MultipleUsersStacked from '../../../pb_multiple_users_stacked/_multiple_users_stacked'
+import ProgressStep from '../../../pb_progress_step/_progress_step'
+import ProgressStepItem from '../../../pb_progress_step/_progress_step_item'
 import StarRating from '../../../pb_star_rating/_star_rating'
 import StatValue from '../../../pb_stat_value/_stat_value'
+import Timeline from '../../../pb_timeline/_timeline'
+import TimeRangeInline from '../../../pb_time_range_inline/_time_range_inline'
+import TimeStacked from '../../../pb_time_stacked/_time_stacked'
+import Timestamp from '../../../pb_timestamp/_timestamp'
 import Title from '../../../pb_title/_title'
 import TitleCount from '../../../pb_title_count/_title_count'
 import TitleDetail from '../../../pb_title_detail/_title_detail'
+import User from '../../../pb_user/_user'
+import UserBadge from '../../../pb_user_badge/_user_badge'
+import { DraggableProvider } from '../../../pb_draggable/context'
 import { globalProps } from '../../globalProps'
 import { globalEventProps } from '../../globalEventProps'
 
+const dateKits = [
+  { Kit: PbDate, name: 'PbDate', extraProps: { value: new Date('2020-12-31T14:24:09') } },
+  { Kit: DateRangeInline, name: 'DateRangeInline', extraProps: { startDate: new Date('2020-12-30T14:24:09'), endDate: new Date('2020-12-31T14:24:09') } },
+  { Kit: DateRangeStacked, name: 'DateRangeStacked', extraProps: { startDate: new Date('2020-12-30T14:24:09'), endDate: new Date('2020-12-31T14:24:09') } },
+  { Kit: DateStacked, name: 'DateStacked', extraProps: { date: new Date('2020-12-31T14:24:09') } },
+  { Kit: DateYearStacked, name: 'DateYearStacked', extraProps: { date: new Date('2020-12-31T14:24:09') } },
+  { Kit: WeekdayStacked, name: 'WeekdayStacked', extraProps: { date: new Date('2020-12-31T14:24:09') } },
+  { Kit: PbDate, name: 'DateUnstyled', extraProps: { value: new Date('2020-12-31T14:24:09'), unstyled: true } },
+  { Kit: DateStacked, name: 'DateStackedBold', extraProps: { date: new Date('2020-12-31T14:24:09'), bold: true } },
+]
+
 const optedInKits = [
+  ...dateKits,
+  { Kit: Avatar, name: 'Avatar', extraProps: { name: 'Pat' } },
   { Kit: Background, name: 'Background', extraProps: { children: 'Test' } },
   { Kit: Body, name: 'Body', extraProps: { text: 'Test' } },
   { Kit: Caption, name: 'Caption', extraProps: { text: 'Test' } },
   { Kit: Card, name: 'Card', extraProps: { children: 'Test' } },
+  { Kit: Contact, name: 'Contact', extraProps: { contactType: 'email', contactValue: 'pat@example.com' } },
   { Kit: Container, name: 'Container', extraProps: { children: 'Test' } },
   { Kit: Currency, name: 'Currency', extraProps: { amount: '100.00', label: 'Total' } },
   { Kit: DashboardValue, name: 'DashboardValue', extraProps: { statLabel: 'Sales', statValue: { value: 100 } } },
+  { Kit: DateTime, name: 'DateTime', extraProps: { datetime: new Date('2020-12-31T14:24:09'), showDayOfWeek: false } },
+  { Kit: DateTimeStacked, name: 'DateTimeStacked', extraProps: { dark: false, datetime: new Date('2020-12-31T14:24:09') } },
   { Kit: Detail, name: 'Detail', extraProps: { text: 'Test' } },
   { Kit: Flex, name: 'Flex', extraProps: { children: 'Test' } },
   { Kit: Highlight, name: 'Highlight', extraProps: { text: 'Test' } },
+  { Kit: Icon, name: 'Icon', extraProps: { icon: 'user' } },
+  { Kit: IconCircle, name: 'IconCircle', extraProps: { icon: 'user' } },
   { Kit: IconStatValue, name: 'IconStatValue', extraProps: { icon: 'heart', text: 'Likes', value: 42 } },
   { Kit: IconValue, name: 'IconValue', extraProps: { icon: 'heart', text: 'Favorites' } },
+  { Kit: Image, name: 'Image', extraProps: { alt: 'Test', url: 'https://example.com/test.jpg' } },
   { Kit: LabelValue, name: 'LabelValue', extraProps: { label: 'Label', value: 'Value' } },
+  { Kit: Legend, name: 'Legend', extraProps: { text: 'Series A' } },
+  { Kit: ListItem, name: 'ListItem', extraProps: { children: 'Test' } },
   { Kit: Message, name: 'Message', extraProps: { label: 'Sender', message: 'Test' } },
   { Kit: MultipleUsers, name: 'MultipleUsers', extraProps: { users: [{ name: 'Pat' }] } },
   { Kit: MultipleUsersStacked, name: 'MultipleUsersStacked', extraProps: { users: [{ name: 'Pat' }] } },
+  { Kit: Person, name: 'Person', extraProps: { firstName: 'Pat', lastName: 'Example' } },
+  { Kit: ProgressStepItem, name: 'ProgressStepItem', extraProps: { children: 'Step', status: 'active' } },
   { Kit: StatValue, name: 'StatValue', extraProps: { unit: 'mg', value: 100 } },
+  { Kit: TimeRangeInline, name: 'TimeRangeInline', extraProps: { endTime: new Date('2012-08-02T17:49:29Z'), startTime: new Date('2012-08-02T15:49:29Z') } },
+  { Kit: TimeStacked, name: 'TimeStacked', extraProps: { time: new Date('2020-12-31T14:24:09'), timeZone: 'America/New_York' } },
+  { Kit: Timeline.Item, name: 'TimelineItem', extraProps: { children: 'Event' } },
+  { Kit: Timestamp, name: 'Timestamp', extraProps: { timestamp: new Date('2020-12-31T14:24:09') } },
   { Kit: Title, name: 'Title', extraProps: { text: 'Test' } },
+  { Kit: LabelPill, name: 'LabelPill', extraProps: { label: 'Label', pillValue: '1' } },
+  { Kit: Pill, name: 'Pill', extraProps: { text: 'Test' } },
+  { Kit: OnlineStatus, name: 'OnlineStatus', extraProps: {} },
+  { Kit: Source, name: 'Source', extraProps: { source: 'Test', type: 'retail' } },
+  { Kit: StatChange, name: 'StatChange', extraProps: { value: 12 } },
   { Kit: TitleCount, name: 'TitleCount', extraProps: { count: 12, title: 'Items' } },
   { Kit: TitleDetail, name: 'TitleDetail', extraProps: { detail: 'Detail', title: 'Title' } },
+  { Kit: User, name: 'User', extraProps: { name: 'Pat Example', title: 'Engineer' } },
+  { Kit: UserBadge, name: 'UserBadge', extraProps: { badge: 'veteran' } },
 ]
 
 describe('onClick GlobalEventProps', () => {
@@ -118,6 +183,219 @@ describe('onClick GlobalEventProps', () => {
 
       fireEvent.click(screen.getByTestId('onclick-html-options'))
       expect(htmlOnClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('StatChange first-class onClick wins over htmlOptions.onClick', () => {
+      const htmlOnClick = jest.fn()
+      const firstClassOnClick = jest.fn()
+      render(
+        <StatChange
+            htmlOptions={{ 'data-testid': 'onclick-stat-change-precedence', onClick: htmlOnClick }}
+            onClick={firstClassOnClick}
+            value={12}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-stat-change-precedence'))
+      expect(firstClassOnClick).toHaveBeenCalledTimes(1)
+      expect(htmlOnClick).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('Icon and IconCircle render paths', () => {
+    const customSvg = (onClick) => (
+      <svg
+          data-testid="custom-icon"
+          onClick={onClick}
+      />
+    )
+
+    test('SVG icon path fires once on the visible element', () => {
+      const onClick = jest.fn()
+      render(
+        <Icon
+            data={{ testid: 'onclick-icon-svg' }}
+            icon="user"
+            onClick={onClick}
+        />
+      )
+
+      const icon = screen.getByTestId('onclick-icon-svg')
+      expect(icon.tagName).toBe('svg')
+      expect(icon).toHaveClass('pb_custom_icon')
+      expect(icon).toHaveAttribute('aria-label', 'user icon')
+      fireEvent.click(icon)
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('inline SVG icon path fires once', () => {
+      const onClick = jest.fn()
+      render(
+        <Icon
+            data={{ testid: 'onclick-icon-inline-svg' }}
+            icon={<svg />}
+            onClick={onClick}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-icon-inline-svg'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('emoji path fires once on the emoji element', () => {
+      const onClick = jest.fn()
+      render(
+        <Icon
+            data={{ testid: 'onclick-icon-emoji' }}
+            icon="😍"
+            onClick={onClick}
+        />
+      )
+
+      const icon = screen.getByTestId('onclick-icon-emoji')
+      expect(icon).toHaveClass('pb_icon_kit_emoji')
+      fireEvent.click(icon)
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('fallback path fires once on the visible icon and not the hidden span', () => {
+      const onClick = jest.fn()
+      const { container } = render(
+        <Icon
+            data={{ testid: 'onclick-icon-fallback' }}
+            icon="not-a-real-icon"
+            onClick={onClick}
+        />
+      )
+
+      const icon = screen.getByTestId('onclick-icon-fallback')
+      expect(icon.tagName).toBe('I')
+      expect(icon).toHaveClass('pb_icon_kit')
+      fireEvent.click(icon)
+      fireEvent.click(container.querySelector('span[hidden]'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('custom icon keeps its own onClick when no global handler is passed', () => {
+      const elementOnClick = jest.fn()
+      render(
+        <Icon customIcon={customSvg(elementOnClick)} />
+      )
+
+      fireEvent.click(screen.getByTestId('custom-icon'))
+      expect(elementOnClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('htmlOptions.onClick wins over a custom icon onClick', () => {
+      const elementOnClick = jest.fn()
+      const htmlOnClick = jest.fn()
+      render(
+        <Icon
+            customIcon={customSvg(elementOnClick)}
+            htmlOptions={{ onClick: htmlOnClick }}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('custom-icon'))
+      expect(htmlOnClick).toHaveBeenCalledTimes(1)
+      expect(elementOnClick).not.toHaveBeenCalled()
+    })
+
+    test('first-class onClick wins over htmlOptions and a custom icon onClick', () => {
+      const elementOnClick = jest.fn()
+      const htmlOnClick = jest.fn()
+      const firstClassOnClick = jest.fn()
+      render(
+        <Icon
+            customIcon={customSvg(elementOnClick)}
+            htmlOptions={{ onClick: htmlOnClick }}
+            onClick={firstClassOnClick}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('custom-icon'))
+      expect(firstClassOnClick).toHaveBeenCalledTimes(1)
+      expect(htmlOnClick).not.toHaveBeenCalled()
+      expect(elementOnClick).not.toHaveBeenCalled()
+    })
+
+    test('IconCircle root and inner icon each fire the root handler once', () => {
+      const onClick = jest.fn()
+      render(
+        <IconCircle
+            data={{ testid: 'onclick-icon-circle-inner' }}
+            icon="user"
+            onClick={onClick}
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-icon-circle-inner'))
+      fireEvent.click(screen.getByTestId('onclick-icon-circle-inner').querySelector('svg'))
+      expect(onClick).toHaveBeenCalledTimes(2)
+    })
+
+    test('IconCircle emoji click fires the root handler once', () => {
+      const onClick = jest.fn()
+      render(
+        <IconCircle
+            data={{ testid: 'onclick-icon-circle-emoji' }}
+            icon="😍"
+            onClick={onClick}
+        />
+      )
+
+      fireEvent.click(screen.getByText('😍'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('a parent wrapper onClick still fires once when Icon does not receive onClick', () => {
+      const onClick = jest.fn()
+      render(
+        <span
+            data-testid="nitro-icon-wrapper"
+            onClick={onClick}
+        >
+          <Icon
+              fixedWidth={false}
+              icon="user"
+          />
+        </span>
+      )
+
+      fireEvent.click(screen.getByTestId('nitro-icon-wrapper').querySelector('svg'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('date kit handlers', () => {
+    dateKits.forEach(({ Kit, name, extraProps }) => {
+      test(`${name} preserves precedence and fires once from nested content`, () => {
+        const htmlOnClick = jest.fn()
+        const currentTargets = []
+        const onClick = jest.fn((event) => currentTargets.push(event.currentTarget))
+        const { rerender } = render(
+          <Kit
+              htmlOptions={{ 'data-testid': 'date-root', onClick: htmlOnClick }}
+              onClick={onClick}
+              {...extraProps}
+          />
+        )
+
+        const root = screen.getByTestId('date-root')
+        fireEvent.click(root.querySelector('span, h4, time, div'))
+        expect(onClick).toHaveBeenCalledTimes(1)
+        expect(currentTargets).toEqual([root])
+        expect(htmlOnClick).not.toHaveBeenCalled()
+
+        rerender(
+          <Kit
+              htmlOptions={{ 'data-testid': 'date-root', onClick: htmlOnClick }}
+              {...extraProps}
+          />
+        )
+        fireEvent.click(screen.getByTestId('date-root'))
+        expect(htmlOnClick).toHaveBeenCalledTimes(1)
+      })
     })
   })
 
@@ -273,6 +551,22 @@ describe('onClick GlobalEventProps', () => {
       )
 
       fireEvent.click(screen.getByTestId('onclick-currency-unstyled'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    test('Contact unstyled branch still attaches root onClick', () => {
+      const onClick = jest.fn()
+      render(
+        <Contact
+            contactType="email"
+            contactValue="pat@example.com"
+            data={{ testid: 'onclick-contact-unstyled' }}
+            onClick={onClick}
+            unstyled
+        />
+      )
+
+      fireEvent.click(screen.getByTestId('onclick-contact-unstyled'))
       expect(onClick).toHaveBeenCalledTimes(1)
     })
 
@@ -444,6 +738,183 @@ describe('onClick GlobalEventProps', () => {
         screen.getByTestId('onclick-multiple-users-stacked'),
         screen.getByTestId('onclick-multiple-users-stacked'),
       ])
+    })
+  })
+
+  describe('item kits isolate siblings and identify currentTarget', () => {
+    test('ListItem click fires only that item and sets currentTarget to its root', () => {
+      let currentTarget = null
+      const firstOnClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      const secondOnClick = jest.fn()
+      render(
+        <List>
+          <ListItem
+              data={{ testid: 'onclick-list-item-1' }}
+              onClick={firstOnClick}
+          >
+            {'First'}
+          </ListItem>
+          <ListItem
+              data={{ testid: 'onclick-list-item-2' }}
+              onClick={secondOnClick}
+          >
+            {'Second'}
+          </ListItem>
+        </List>
+      )
+
+      const firstItem = screen.getByTestId('onclick-list-item-1')
+      fireEvent.click(firstItem)
+
+      expect(firstOnClick).toHaveBeenCalledTimes(1)
+      expect(secondOnClick).not.toHaveBeenCalled()
+      expect(currentTarget).toBe(firstItem)
+    })
+
+    test('ListItem keeps htmlOptions.tabIndex when first-class tabIndex is omitted', () => {
+      render(
+        <ListItem
+            data={{ testid: 'onclick-list-item-html-tabindex' }}
+            htmlOptions={{ tabIndex: 0 }}
+        >
+          {'Focusable via htmlOptions'}
+        </ListItem>
+      )
+
+      expect(screen.getByTestId('onclick-list-item-html-tabindex')).toHaveAttribute(
+        'tabindex',
+        '0'
+      )
+    })
+
+    test('ListItem first-class tabIndex wins over htmlOptions.tabIndex', () => {
+      render(
+        <ListItem
+            data={{ testid: 'onclick-list-item-first-class-tabindex' }}
+            htmlOptions={{ tabIndex: 1 }}
+            tabIndex={0}
+        >
+          {'Focusable via first-class tabIndex'}
+        </ListItem>
+      )
+
+      expect(screen.getByTestId('onclick-list-item-first-class-tabindex')).toHaveAttribute(
+        'tabindex',
+        '0'
+      )
+    })
+
+    test('ListItem draggable branch still attaches onClick to the li root', () => {
+      let currentTarget = null
+      const onClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      const items = [{ id: '1', text: 'Draggable row' }]
+      render(
+        <DraggableProvider
+            initialItems={items}
+            onReorder={jest.fn()}
+        >
+          <List enableDrag>
+            <ListItem
+                data={{ testid: 'onclick-list-item-drag' }}
+                dragId="1"
+                onClick={onClick}
+            >
+              {'Draggable row'}
+            </ListItem>
+          </List>
+        </DraggableProvider>
+      )
+
+      const item = screen.getByTestId('onclick-list-item-drag')
+      fireEvent.click(item)
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(currentTarget).toBe(item)
+      expect(item.querySelector('.pb_draggable_handle')).not.toBeNull()
+    })
+    
+    test('Timeline.Item siblings stay isolated', () => {
+      let currentTarget = null
+      const firstOnClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      const secondOnClick = jest.fn()
+      render(
+        <Timeline>
+          <Timeline.Item
+              htmlOptions={{ 'data-testid': 'onclick-timeline-item-1' }}
+              onClick={firstOnClick}
+          >
+            {'Alpha'}
+          </Timeline.Item>
+          <Timeline.Item
+              htmlOptions={{ 'data-testid': 'onclick-timeline-item-2' }}
+              onClick={secondOnClick}
+          >
+            {'Beta'}
+          </Timeline.Item>
+        </Timeline>
+      )
+
+      const firstItem = screen.getByTestId('onclick-timeline-item-1')
+      fireEvent.click(firstItem)
+      expect(firstOnClick).toHaveBeenCalledTimes(1)
+      expect(secondOnClick).not.toHaveBeenCalled()
+      expect(currentTarget).toBe(firstItem)
+    })
+
+    test('ProgressStepItem siblings stay isolated', () => {
+      let currentTarget = null
+      const firstOnClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      const secondOnClick = jest.fn()
+      render(
+        <ProgressStep>
+          <ProgressStepItem
+              data={{ testid: 'onclick-progress-step-1' }}
+              onClick={firstOnClick}
+              status="complete"
+          >
+            {'Ordered'}
+          </ProgressStepItem>
+          <ProgressStepItem
+              data={{ testid: 'onclick-progress-step-2' }}
+              onClick={secondOnClick}
+              status="active"
+          >
+            {'Shipped'}
+          </ProgressStepItem>
+        </ProgressStep>
+      )
+
+      const firstItem = screen.getByTestId('onclick-progress-step-1')
+      fireEvent.click(firstItem)
+      expect(firstOnClick).toHaveBeenCalledTimes(1)
+      expect(secondOnClick).not.toHaveBeenCalled()
+      expect(currentTarget).toBe(firstItem)
+    })
+
+    test('Legend attaches once on its outer root', () => {
+      let currentTarget = null
+      const onClick = jest.fn((event) => {
+        currentTarget = event.currentTarget
+      })
+      render(
+        <Legend
+            data={{ testid: 'onclick-legend' }}
+            onClick={onClick}
+            text="Series A"
+        />
+      )
+
+      const legend = screen.getByTestId('onclick-legend')
+      fireEvent.click(screen.getByText('Series A'))
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(currentTarget).toBe(legend)
     })
   })
 })

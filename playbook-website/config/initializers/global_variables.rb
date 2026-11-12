@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-MENU = Rails.cache.fetch("menu_yml") { YAML.load_file(Rails.root.join("config/menu.yml")) }
+MENU = Rails.cache.fetch("menu_yml") { YAML.load_file(Rails.root.join("config/menu.yml"), aliases: true) }
 GLOBAL_PROPS_AND_TOKENS = Rails.cache.fetch("global_props_and_tokens_yml") { YAML.load_file(Rails.root.join("config/global_props_and_tokens.yml")) }
 
 require "markdown_helper"
+require_relative "../../app/services/guide_front_matter"
 search_path = File.join(Rails.root, "/app/views/guides")
 navigation = {}
 Dir.glob("#{search_path}/**/*.md") do |filename|
   dir_path = File.dirname(filename)
   dir = File.basename(dir_path)
   title = File.basename(filename).sub(/(?<=.)\..*/, "")
-  front_matter = FrontMatterParser::Parser.parse_file(filename).front_matter
+  front_matter = GuideFrontMatter.parse(File.read(filename, encoding: "UTF-8"))
   display_title = front_matter.try(:title) || front_matter["title"] || title.split(".")[0].tr("_", " ").titleize
   url = "#{dir}/#{title}"
 

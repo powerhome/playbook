@@ -12,8 +12,10 @@ import DropdownContainer from "./subcomponents/DropdownContainer";
 import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
+import DropdownFormFields from "./subcomponents/DropdownFormFields";
 import useDropdown from "./hooks/useDropdown";
 import useAsyncOptions, { LoadOptions } from "./hooks/useAsyncOptions";
+import { getCreationOption, matchesOptionExactly } from "./utilities/optionCreation";
 import getQuickPickOptions from "./quickpick";
 
 import {
@@ -99,6 +101,7 @@ type CustomQuickPickDates = {
 type InputChangeReason = "input" | "clear";
 
 type DropdownProps = {
+    allowOptionCreation?: boolean;
     aria?: { [key: string]: string };
     async?: boolean;
     loadOptions?: LoadOptions;
@@ -122,6 +125,9 @@ type DropdownProps = {
     data?: { [key: string]: string };
     defaultValue?: GenericObject;
     error?: string;
+    enableFormSupport?: boolean;
+    enablePillReorder?: boolean;
+    externalDragHandle?: boolean;
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string;
     isClosed?: boolean;
@@ -134,6 +140,7 @@ type DropdownProps = {
     options?: GenericObject;
     placeholder?: string;
     separators?: boolean;
+    showPillIndex?: boolean;
     variant?: "default" | "subtle" | "quickpick";
     rangeEndsToday?: boolean;
     controlsStartId?: string;
@@ -143,6 +150,8 @@ type DropdownProps = {
       fontColor?: string;
     };
     requiredIndicator?: boolean;
+    required?: boolean;
+    validationMessage?: string;
 };
 
 interface DropdownComponent
@@ -154,6 +163,7 @@ interface DropdownComponent
 
 let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const {
+        allowOptionCreation = false,
         aria = {},
         async = false,
         loadOptions,
@@ -163,7 +173,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         onInputChange,
         renderOption,
         value,
-        autocomplete = false,
+        autocomplete: autocompleteProp = false,
         blankSelection = '',
         children,
         className,
@@ -175,7 +185,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         data = {},
         defaultValue = {},
         disabled = false,
-        error,
+        error: errorProp,
+        enableFormSupport = false,
+        enablePillReorder = false,
+        externalDragHandle = false,
         htmlOptions = {},
         id,
         isClosed = true,
@@ -188,14 +201,26 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         onSelect,
         options,
         placeholder,
+        showPillIndex = false,
         rangeEndsToday = false,
         controlsStartId,
         controlsEndId,
         separators = true,
         variant = "default",
         activeStyle,
-        requiredIndicator = false
+        requiredIndicator = false,
+        required = false,
+        validationMessage = "Please fill out this field."
     } = props;
+
+    const isPillReorderEnabled = Boolean(enablePillReorder && multiSelect);
+
+    const creationEnabled = allowOptionCreation && variant !== "quickpick";
+    const autocomplete = autocompleteProp || creationEnabled;
+
+    const [formInvalid, setFormInvalid] = useState(false);
+    const formError = formInvalid ? validationMessage : "";
+    const error = enableFormSupport ? errorProp || formError : errorProp;
 
     const ariaProps = buildAriaProps(aria);
     const dataProps = buildDataProps(data);
@@ -365,6 +390,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     ? [selected]
     : [];
 
+    const hasFormSelection = enableFormSupport && selectedArray.some((option) => String(option.id ?? option.value ?? "") !== "");
+    useEffect(() => {
+        if (!enableFormSupport || hasFormSelection || !required) setFormInvalid(false);
+    }, [enableFormSupport, hasFormSelection, required]);
+
     const selectedOptionIds = useMemo(() => (
       multiSelect && getOptionValue
         ? new Set(selectedArray.map((option) => String(getOptionValue(option))))
@@ -415,7 +445,16 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => isSameOption(sel, option)));
     }, [optionsWithBlankSelection, selectedArray, multiSelect, isSameOption, selectedOptionIds, getOptionValue]);
     
-    const filteredOptions = useMemo(() => {
+    const searchIsPending = loading || (asyncEnabled && asyncStatus === "loading");
+    const searchFailed = asyncEnabled && asyncStatus === "error";
+    const canCreateOption = creationEnabled && !disabled && !searchIsPending && !searchFailed;
+    let creationOption: GenericObject | null = null;
+    if (canCreateOption) {
+        const existingOptions = Array.isArray(dropdownOptions) ? dropdownOptions : [];
+        creationOption = getCreationOption(filterItem, [...existingOptions, ...selectedArray]);
+    }
+
+    const matchingOptions = useMemo(() => {
           const selectedLabel =
             !multiSelect &&
             !Array.isArray(selected) &&
@@ -431,9 +470,29 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           const filterText =
             selectedLabel && filterItem === selectedLabel ? "" : filterItem;
           return availableOptions.filter((opt: GenericObject) =>
-            String(opt.label).toLowerCase().includes(filterText.toLowerCase())
+            String(opt.label).toLowerCase().includes(filterText.toLowerCase()) ||
+            (creationEnabled && matchesOptionExactly(opt, filterText))
           );
-        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, autocomplete]);
+        }, [availableOptions, filterItem, multiSelect, selected, asyncEnabled, autocomplete, creationEnabled]);
+
+    const filteredOptions = creationOption ? [...matchingOptions, creationOption] : matchingOptions;
+    const inputShowsSelection = !multiSelect && !Array.isArray(selected) && filterItem === selected?.label;
+    let creationFocusIndex = -1;
+    if (creationEnabled && creationOption) {
+        creationFocusIndex = matchingOptions.length;
+    } else if (creationEnabled) {
+        creationFocusIndex = matchingOptions.findIndex((option: GenericObject) => !option.disabled);
+    }
+
+    useEffect(() => {
+        if (!creationEnabled) return;
+        if (isDropDownClosed || !filterItem.trim() || inputShowsSelection) {
+            setFocusedOptionIndex(-1);
+            return;
+        }
+
+        setFocusedOptionIndex(creationFocusIndex);
+    }, [creationEnabled, isDropDownClosed, filterItem, inputShowsSelection, creationFocusIndex]);
 
     // Empty copy follows the settled search. Hiding already-selected rows must not turn a
     // successful result list into "No results found", including the last pick while the menu stays open.
@@ -441,18 +500,25 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         ? noOptionsText || "No results found"
         : "";
 
+    let asyncStatusText = "";
+    if (asyncEnabled) {
+        if (searchIsPending) asyncStatusText = "Loading…";
+        else if (searchFailed) asyncStatusText = "Unable to load options";
+        else if (!creationOption) asyncStatusText = asyncEmptyCopy;
+    }
+
     // A keystroke clears the highlight. Focus the first result once the next list arrives,
     // including options the application loads itself.
     const asyncResultOptions = loadOptions ? loadedOptions : options;
     useEffect(() => {
-        if (asyncEnabled && !isDropDownClosed) {
+        if (!creationEnabled && asyncEnabled && !isDropDownClosed) {
             setFocusedOptionIndex(filteredOptions.length ? 0 : -1);
         }
-    }, [asyncResultOptions]);
+    }, [asyncResultOptions, creationEnabled]);
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {
-        if (!isDropDownClosed) {
+        if (!creationEnabled && !isDropDownClosed) {
             let newIndex = 0;
             if (selected && !Array.isArray(selected) && selected.label) {
                 const selectedIndex = filteredOptions.findIndex((option: GenericObject) => isSameOption(option, selected));
@@ -462,7 +528,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             }
             setFocusedOptionIndex(newIndex);
         }
-    }, [isDropDownClosed]);
+    }, [isDropDownClosed, creationEnabled]);
 
     // Auto-position dropdown above/below based on available space or fixed/absolute when portaled to body / floating root
     useLayoutEffect(() => {
@@ -580,10 +646,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    }
                } else {
                    setSelected(clickedItem);
-                   // Async autocomplete shows the selection in the input, as controlled mode and Rails do
-                   setFilterItem(isControlled && autocomplete
-                     ? (selected as GenericObject)?.label || ""
-                     : asyncEnabled && autocomplete ? clickedItem.label || "" : "");
+                   // Plain uncontrolled autocomplete clears its query after selection.
+                   const keepSelectedLabel = autocomplete && (creationEnabled || asyncEnabled || isControlled);
+                   const nextQuery = keepSelectedLabel
+                     ? (isControlled ? (selected as GenericObject)?.label : clickedItem.label) || ""
+                     : "";
+                   setFilterItem(nextQuery);
                    if (shouldCloseOnClick) {
                        setIsDropDownClosed(true);
                    }
@@ -724,6 +792,27 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       }
     }, [variant, initialSelected, controlsStartId, controlsEndId]);
 
+    const handleFormInvalid = () => {
+        setFormInvalid(true);
+        const focusTarget = inputRef.current || inputWrapperRef.current;
+        focusTarget?.focus();
+    };
+
+    const handleFormReset = () => {
+        const hasDefaultSelection = Object.keys(initialSelected).length > 0;
+        const resetValue = multiSelect || hasDefaultSelection ? initialSelected : null;
+        const resetQuery = autocomplete && !multiSelect
+            ? (initialSelected as GenericObject).label || ""
+            : "";
+
+        setSelected(initialSelected);
+        handleSelectionChange(resetValue);
+        setFilterItem(resetQuery);
+        setFormInvalid(false);
+        setIsDropDownClosed(true);
+        if (asyncEnabled) clearAsync();
+    };
+
     return (
         <div {...ariaProps}
             {...dataProps}
@@ -738,7 +827,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     asyncEnabled,
-                    asyncStatus: asyncEnabled ? (loading || asyncStatus === "loading" ? "Loading…" : asyncStatus === "error" ? "Unable to load options" : asyncEmptyCopy) : "",
+                    asyncStatus: asyncStatusText,
+                    creationEnabled,
+                    creationOption,
                     renderOption,
                     optionKey,
                     isControlled,
@@ -754,6 +845,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     disabled,
                     error,
                     errorId,
+                    enablePillReorder: isPillReorderEnabled,
+                    externalDragHandle,
                     filterItem,
                     filteredOptions,
                     focusedOptionIndex,
@@ -782,9 +875,22 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     setIsDropDownClosed,
                     setIsInputFocused,
                     setSelected,
+                    showPillIndex,
                     toggleDropdown
                 }}
             >
+                {enableFormSupport && (
+                    <DropdownFormFields
+                        disabled={disabled}
+                        multiSelect={multiSelect}
+                        name={name}
+                        onInvalid={handleFormInvalid}
+                        onReset={handleFormReset}
+                        required={required}
+                        selected={selectedArray}
+                        validationMessage={validationMessage}
+                    />
+                )}
                 {label && (
                   <label
                       data-dropdown="pb-dropdown-label"

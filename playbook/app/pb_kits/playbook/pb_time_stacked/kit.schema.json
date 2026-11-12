@@ -53,6 +53,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { TimeStacked } from 'playbook-ui'",

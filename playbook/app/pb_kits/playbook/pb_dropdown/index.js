@@ -2,7 +2,9 @@ import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
 import { subscribeFloatingKitReposition, positionDropdownPortalToWrapper } from "../utilities/floatingPortalHosts";
+import { getCreationOption, matchesOptionExactly } from "./utilities/optionCreation";
 import { setQuickPickDateOnPicker } from "./utilities/quickpickDateSync";
+import { bindPillReorder } from "./utilities/pillReorder";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -136,6 +138,52 @@ export default class PbDropdown extends PbEnhancedElement {
     return this.element.dataset.pbDropdownAsync === "true";
   }
 
+  get allowOptionCreation() {
+    return this.element.dataset.pbDropdownAllowOptionCreation === "true";
+  }
+
+  removeCreationOption() {
+    const row = this.target?.querySelector("[data-dropdown-create-option]");
+    if (row) {
+      this.resetFocus();
+      row.remove();
+    }
+  }
+
+  updateCreationOption(term) {
+    if (!this.allowOptionCreation) return;
+    this.removeCreationOption();
+
+    const searchIsPending = this.asyncSearchTimer != null || this.element.getAttribute("aria-busy") === "true";
+    if (this.isDisabled || searchIsPending || this.asyncCreationFailed) return;
+
+    const options = Array.from(this.queryAllOptions()).map((node) => (
+      JSON.parse(node.dataset.dropdownOptionLabel)
+    ));
+    let selected = [];
+    if (this.isMultiSelect) {
+      selected = Array.from(this.selectedOptions).map(JSON.parse);
+    } else if (this.selectedOptionJson) {
+      selected = [JSON.parse(this.selectedOptionJson)];
+    }
+
+    const option = getCreationOption(term, [...options, ...selected]);
+    if (!option) return;
+
+    const row = this.buildOptionElement(option);
+    row.removeAttribute("id");
+    row.dataset.dropdownCreateOption = "true";
+    row.querySelector(".pb_body_kit_light").textContent = `Create "${option.label}"`;
+    this.getOptionsParent()?.appendChild(row);
+    this.removeNoOptionsMessage();
+    this.showElement(this.target);
+    this.updateArrowDisplay(true);
+    this.resetFocus();
+    row.classList.add("pb_dropdown_option_focused");
+    this.keyboardHandler.focusedOptionIndex = Array.from(this.queryAllOptions()).indexOf(row);
+    this.adjustDropdownHeight();
+  }
+
   get canOpenMenu() {
     return !this.isAsync || Boolean(this.searchBar || this.hasAsyncMenuContent());
   }
@@ -155,13 +203,13 @@ export default class PbDropdown extends PbEnhancedElement {
 
   // Selected multi-select rows stay in the list with display:none. An open menu of only
   // those rows collapses to its border, so show the empty message instead.
-  showAsyncMultiSelectMenu() {
-    if (!this.isAsync || !this.isMultiSelect) return;
+  showMultiSelectEmptyMenu() {
+    if (!this.isMultiSelect) return;
     const options = Array.from(this.queryAllOptions());
     if (!options.length) return;
     const hasVisibleOption = options.some((opt) => opt.style.display !== "none");
     if (hasVisibleOption) this.removeNoOptionsMessage();
-    else this.showNoOptionsMessage("No results found");
+    else this.showNoOptionsMessage(this.isAsync ? "No results found" : undefined);
   }
 
   asyncRequestId = 0;
@@ -202,13 +250,29 @@ export default class PbDropdown extends PbEnhancedElement {
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isDisabled = this.element.dataset.pbDropdownDisabled === "true";
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
+    this.enablePillReorder = this.isMultiSelect
+      && this.element.dataset.pbDropdownEnablePillReorder === "true";
+    this.externalDragHandle = this.enablePillReorder
+      && this.element.dataset.pbDropdownExternalDragHandle === "true";
+    this.showPillIndex = this.isMultiSelect
+      && this.element.dataset.pbDropdownShowPillIndex === "true";
     this.closeOnClick = this.element.dataset.pbDropdownCloseOnClick || "any";
     this.formPillProps = this.element.dataset.formPillProps
       ? JSON.parse(this.element.dataset.formPillProps)
       : {};
+    this.pillReorderCleanup = null;
     const baseInput = this.baseInput;
-    this.wasOriginallyRequired =
-      baseInput && baseInput.hasAttribute("required");
+    // Preserve original attributes when Turbo reconnects to the mutated DOM.
+    if (this.isMultiSelect && baseInput) {
+      if (baseInput.dataset.pbDropdownInputName == null) {
+        baseInput.dataset.pbDropdownInputName = baseInput.getAttribute("name") || "";
+        baseInput.dataset.pbDropdownOriginallyRequired = String(baseInput.required);
+      }
+      this.baseInputName = baseInput.dataset.pbDropdownInputName;
+      this.wasOriginallyRequired = baseInput.dataset.pbDropdownOriginallyRequired === "true";
+    } else {
+      this.wasOriginallyRequired = Boolean(baseInput && baseInput.required);
+    }
     // Apply context options before default value so SSR/default selection matches current context
     this.bindContextSelector();
     this.setDefaultValue();
@@ -269,6 +333,10 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   disconnect() {
+    if (typeof this.pillReorderCleanup === "function") {
+      this.pillReorderCleanup();
+      this.pillReorderCleanup = null;
+    }
     if (this.isAsync) this.cancelAsyncSearch();
     if (this.formElement && this.formResetHandler) {
       this.formElement.removeEventListener("reset", this.formResetHandler);
@@ -615,6 +683,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleSearch(term = "") {
     if (this.isDisabled) return;
+    if (this.allowOptionCreation) this.removeCreationOption();
     if (this.isAsync) {
       this.searchAsync(term);
       return;
@@ -630,22 +699,22 @@ export default class PbDropdown extends PbEnhancedElement {
         opt.style.display = "none";
         return;
       }
-      const label = JSON.parse(opt.dataset.dropdownOptionLabel)
-        .label.toString()
-        .toLowerCase();
+      const option = JSON.parse(opt.dataset.dropdownOptionLabel);
+      const label = option.label.toString().toLowerCase();
 
       // hide or show option
-      const match = label.includes(lcTerm);
+      const match = label.includes(lcTerm) ||
+        (this.allowOptionCreation && matchesOptionExactly(option, term));
       opt.style.display = match ? "" : "none";
       if (match) hasMatch = true;
     });
-
-    this.adjustDropdownHeight();
 
     this.removeNoOptionsMessage();
     if (!hasMatch) {
       this.showNoOptionsMessage();
     }
+    this.updateCreationOption(term);
+    this.adjustDropdownHeight();
   }
 
   cancelAsyncSearch() {
@@ -684,7 +753,10 @@ export default class PbDropdown extends PbEnhancedElement {
 
   rememberSettledAsyncResults() {
     const parent = this.getOptionsParent();
-    this.asyncSettledOptions = parent ? Array.from(parent.children).map((node) => node.cloneNode(true)) : [];
+    const optionNodes = parent ? Array.from(parent.children) : [];
+    this.asyncSettledOptions = optionNodes
+      .filter((node) => !this.allowOptionCreation || !node.hasAttribute("data-dropdown-create-option"))
+      .map((node) => node.cloneNode(true));
     const empty = this.target?.querySelector(".dropdown_no_options");
     const status = this.target?.querySelector("[data-dropdown-async-status]");
     this.asyncSettledEmpty = empty ? empty.cloneNode(true) : null;
@@ -749,6 +821,7 @@ export default class PbDropdown extends PbEnhancedElement {
   searchAsync(term) {
     this.cancelAsyncSearch();
     this.asyncSearchInterrupted = false;
+    this.asyncCreationFailed = false;
 
     const minimumLength = Number(this.element.dataset.pbDropdownSearchTermMinimumLength ?? 3);
     if (term.length < minimumLength) {
@@ -764,6 +837,7 @@ export default class PbDropdown extends PbEnhancedElement {
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       }
+      this.updateCreationOption(term);
       return;
     }
 
@@ -807,6 +881,8 @@ export default class PbDropdown extends PbEnhancedElement {
         this.asyncResultsCleared = false;
         this.rememberSettledAsyncResults();
         this.resetOptionFilterForSelectedLabel();
+        this.asyncCreationFailed = failed;
+        this.updateCreationOption(term);
         this.adjustDropdownHeight();
         this.applyPortalPosition();
       };
@@ -954,6 +1030,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
       this.clearFormValidation(hiddenInput);
       this.onOptionSelected(value, option);
+      if (this.allowOptionCreation) this.removeCreationOption();
       this.updateClearButton();
     }
   }
@@ -1147,6 +1224,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   resetInteractiveOptionState() {
+    if (this.allowOptionCreation) this.removeCreationOption();
     this.resetFocus();
 
     if (this.searchBar) {
@@ -1528,13 +1606,9 @@ export default class PbDropdown extends PbEnhancedElement {
           selectedOption.style.display = "none";
         }
       });
-      if (this.isAsync) this.showAsyncMultiSelectMenu();
+      this.showMultiSelectEmptyMenu();
       this.adjustDropdownHeight();
-      this.baseInput.value = Array.from(
-        this.selectedOptions,
-      )
-        .map((opt) => JSON.parse(opt).id)
-        .join(",");
+      this.syncHiddenInputs();
     } else {
       options.forEach((option) => {
         option.classList.remove("pb_dropdown_option_selected");
@@ -1554,7 +1628,7 @@ export default class PbDropdown extends PbEnhancedElement {
       retryTerm = this.searchInput?.value || this.searchBar?.value || "";
     }
     this.showAsyncEmptyState();
-    this.showAsyncMultiSelectMenu();
+    this.showMultiSelectEmptyMenu();
     if (!this.canOpenMenu && retryTerm == null) return;
     if (!this.canOpenMenu) {
       this.searchAsync(retryTerm);
@@ -1851,6 +1925,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   resetDropdownValue({ preserveOptions = false } = {}) {
+    if (this.allowOptionCreation) this.removeCreationOption();
     this.selectedOptionJson = null;
     if (this.isAsync) {
       if (!preserveOptions) this.clearAsyncResults();
@@ -1895,6 +1970,59 @@ export default class PbDropdown extends PbEnhancedElement {
     }
   }
 
+  getPillOptionId(optionData) {
+    return String(optionData.id ?? optionData.value ?? optionData.label ?? "");
+  }
+
+  reorderSelectedByIds(orderedIds) {
+    const byId = new Map(
+      Array.from(this.selectedOptions).map((raw) => {
+        const data = JSON.parse(raw);
+        return [this.getPillOptionId(data), raw];
+      }),
+    );
+    const next = orderedIds.map((id) => byId.get(String(id))).filter(Boolean);
+    if (next.length !== this.selectedOptions.size) return;
+
+    this.selectedOptions = new Set(next);
+    this.updatePills();
+    this.updateClearButton();
+    this.syncHiddenInputs();
+    this.emitReorderChange();
+    this.emitSelectionChange();
+  }
+
+  emitReorderChange() {
+    const detail = Array.from(this.selectedOptions).map(JSON.parse);
+    this.element.dispatchEvent(
+      new CustomEvent("pb:dropdown:reordered", {
+        detail,
+        bubbles: true,
+      }),
+    );
+  }
+
+  moveSelectedOption(fromIndex, direction) {
+    const items = Array.from(this.selectedOptions);
+    const toIndex = direction === "left" ? fromIndex - 1 : fromIndex + 1;
+    if (toIndex < 0 || toIndex >= items.length) return;
+
+    const [moved] = items.splice(fromIndex, 1);
+    items.splice(toIndex, 0, moved);
+    this.selectedOptions = new Set(items);
+    this.updatePills();
+    this.updateClearButton();
+    this.syncHiddenInputs();
+    this.emitReorderChange();
+    this.emitSelectionChange();
+
+    requestAnimationFrame(() => {
+      const wrapper = this.element.querySelector("[data-dropdown-pills-wrapper]");
+      const pills = wrapper?.querySelectorAll(".pb_form_pill_kit, .pb_form_pill_kit_icon");
+      pills?.[toIndex]?.focus();
+    });
+  }
+
   updatePills() {
     if (!this.isMultiSelect) return;
 
@@ -1903,6 +2031,11 @@ export default class PbDropdown extends PbEnhancedElement {
       '[data-dropdown-trigger-display-multi-select]',
     );
     if (!wrapper) return;
+
+    if (typeof this.pillReorderCleanup === "function") {
+      this.pillReorderCleanup();
+      this.pillReorderCleanup = null;
+    }
 
     wrapper.innerHTML = "";
     // Show or hide the placeholder based on selected options
@@ -1914,12 +2047,28 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     }
 
-    Array.from(this.selectedOptions).map((option) => {
-      // Create a form pill for each selected option
-      const pill = document.createElement("div");
+    const reorderEnabled = this.enablePillReorder && !this.isDisabled;
+    let pillsContainer = wrapper;
+    if (reorderEnabled) {
+      pillsContainer = document.createElement("div");
+      pillsContainer.className = "pb_dropdown_draggable_pills pb_draggable_container";
+      pillsContainer.setAttribute("data-pb-drag-container", "dropdown-pills");
+      wrapper.appendChild(pillsContainer);
+    }
+
+    const selectedList = Array.from(this.selectedOptions);
+    const gripSize = this.formPillProps.size === "small" ? "xs" : "sm";
+    // Path from @powerhome/playbook-icons grip-dots-vertical (same source as React Icon / Typeahead)
+    const gripSvg = `<svg class="pb_custom_icon svg-inline--fa svg_${gripSize} svg_fw pb_form_pill_icon pb_dropdown_pill_grip_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31 25" aria-hidden="true"><path fill="currentColor" d="M12.9043 6.35547C12.0605 6.35547 11.4043 5.69922 11.4043 4.85547C11.4043 4.05859 12.0605 3.35547 12.9043 3.35547C13.7012 3.35547 14.4043 4.05859 14.4043 4.85547C14.4043 5.69922 13.7012 6.35547 12.9043 6.35547ZM12.9043 13.8555C12.0605 13.8555 11.4043 13.1992 11.4043 12.3555C11.4043 11.5586 12.0605 10.8555 12.9043 10.8555C13.7012 10.8555 14.4043 11.5586 14.4043 12.3555C14.4043 13.1992 13.7012 13.8555 12.9043 13.8555ZM14.4043 19.8555C14.4043 20.6992 13.7012 21.3555 12.9043 21.3555C12.0605 21.3555 11.4043 20.6992 11.4043 19.8555C11.4043 19.0586 12.0605 18.3555 12.9043 18.3555C13.7012 18.3555 14.4043 19.0586 14.4043 19.8555ZM18.9043 6.35547C18.0605 6.35547 17.4043 5.69922 17.4043 4.85547C17.4043 4.05859 18.0605 3.35547 18.9043 3.35547C19.7012 3.35547 20.4043 4.05859 20.4043 4.85547C20.4043 5.69922 19.7012 6.35547 18.9043 6.35547ZM20.4043 12.3555C20.4043 13.1992 19.7012 13.8555 18.9043 13.8555C18.0605 13.8555 17.4043 13.1992 17.4043 12.3555C17.4043 11.5586 18.0605 10.8555 18.9043 10.8555C19.7012 10.8555 20.4043 11.5586 20.4043 12.3555ZM18.9043 21.3555C18.0605 21.3555 17.4043 20.6992 17.4043 19.8555C17.4043 19.0586 18.0605 18.3555 18.9043 18.3555C19.7012 18.3555 20.4043 19.0586 20.4043 19.8555C20.4043 20.6992 19.7012 21.3555 18.9043 21.3555Z"/></svg>`;
+
+    selectedList.forEach((option, index) => {
+      const optionData = JSON.parse(option);
+      const optionId = this.getPillOptionId(optionData);
       const color = this.formPillProps.color || "primary";
+      const showInPillGrip = reorderEnabled && !this.externalDragHandle;
+      const pill = document.createElement("div");
       pill.classList.add(
-        "pb_form_pill_kit",
+        showInPillGrip ? "pb_form_pill_kit_icon" : "pb_form_pill_kit",
         `pb_form_pill_${color}`,
         "pb_form_pill_none",
         "mr_xs",
@@ -1928,10 +2077,23 @@ export default class PbDropdown extends PbEnhancedElement {
         pill.classList.add("pb_form_pill_small");
       }
       pill.tabIndex = 0;
-      pill.dataset.pillId = JSON.parse(option).id;
+      pill.dataset.pillId = optionData.id;
+      const label = optionData.label || "";
+      const displayLabel = this.showPillIndex ? `${index + 1}. ${label}` : label;
+      if (reorderEnabled) {
+        pill.setAttribute(
+          "aria-label",
+          `${label}, position ${index + 1} of ${selectedList.length}, press Left or Right Arrow keys to reorder`,
+        );
+      }
+
+      if (showInPillGrip) {
+        pill.insertAdjacentHTML("beforeend", gripSvg);
+      }
+
       const innerDiv = document.createElement("h3");
       innerDiv.className = "pb_title_kit pb_title_4 pb_form_pill_text";
-      innerDiv.textContent = JSON.parse(option).label;
+      innerDiv.textContent = displayLabel;
       pill.appendChild(innerDiv);
 
       const closeIcon = document.createElement("div");
@@ -1972,12 +2134,73 @@ export default class PbDropdown extends PbEnhancedElement {
         this.emitSelectionChange();
         this.syncHiddenInputs();
       });
-      wrapper.appendChild(pill);
+
+      if (reorderEnabled) {
+        pill.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            event.stopPropagation();
+            this.moveSelectedOption(index, event.key === "ArrowLeft" ? "left" : "right");
+          } else if (event.key === "Backspace" || event.key === "Delete") {
+            event.preventDefault();
+            event.stopPropagation();
+            closeIcon.click();
+          }
+        });
+
+        const item = document.createElement("span");
+        item.className = "pb_draggable_item";
+        item.setAttribute("data-pb-drag-id", optionId);
+        item.setAttribute("draggable", "false");
+
+        if (this.externalDragHandle) {
+          const handleWrap = document.createElement("span");
+          handleWrap.className = "pb_dropdown_pill_with_handle";
+          const handle = document.createElement("span");
+          handle.className = "pb_draggable_handle pb_dropdown_external_drag_handle";
+          handle.setAttribute("aria-hidden", "true");
+          handle.innerHTML = gripSvg;
+          handleWrap.appendChild(handle);
+          handleWrap.appendChild(pill);
+          item.appendChild(handleWrap);
+        } else {
+          item.appendChild(pill);
+        }
+
+        pillsContainer.appendChild(item);
+      } else {
+        pillsContainer.appendChild(pill);
+      }
     });
+
+    if (reorderEnabled && selectedList.length > 0) {
+      const stopTriggerToggle = (event) => {
+        if (event.target.closest(".pb_form_pill_close")) return;
+        event.stopPropagation();
+      };
+      pillsContainer.addEventListener("click", stopTriggerToggle);
+      pillsContainer.addEventListener("mousedown", stopTriggerToggle);
+
+      const reorderCleanup = bindPillReorder({
+        container: pillsContainer,
+        getOrderedIds: () => Array.from(this.selectedOptions).map((raw) => (
+          this.getPillOptionId(JSON.parse(raw))
+        )),
+        onReorder: (orderedIds) => this.reorderSelectedByIds(orderedIds),
+        externalDragHandle: this.externalDragHandle,
+      });
+
+      this.pillReorderCleanup = () => {
+        pillsContainer.removeEventListener("click", stopTriggerToggle);
+        pillsContainer.removeEventListener("mousedown", stopTriggerToggle);
+        reorderCleanup();
+      };
+    }
   }
 
   clearSelection(reason = "clear", { preserveOptions = false } = {}) {
     if (this.isDisabled && reason !== "reset") return;
+    if (this.allowOptionCreation) this.removeCreationOption();
     if (this.isMultiSelect) {
       this.selectedOptions.clear();
       this.queryAllOptions().forEach((opt) => {
@@ -2078,31 +2301,31 @@ export default class PbDropdown extends PbEnhancedElement {
     const baseInput = this.baseInput;
     if (!baseInput) return;
     // for multi_select, for each selectedOption, create a hidden input
-    const name = baseInput.getAttribute("name");
+    const name = this.baseInputName;
+    let previousInput = baseInput;
     this.selectedOptions.forEach((raw) => {
       const optionData = JSON.parse(raw);
       // Use id if available, otherwise fall back to value
       const id = optionData.id ?? optionData.value;
       const inp = document.createElement("input");
       inp.type = "hidden";
-      inp.name = name;
+      if (name) inp.name = name;
       inp.value = id;
+      inp.disabled = this.isDisabled;
       inp.dataset.generated = "true";
-      baseInput.insertAdjacentElement("afterend", inp);
+      previousInput.insertAdjacentElement("afterend", inp);
+      previousInput = inp;
     });
 
-    // For multi-select, remove required from base input when there are selections
-    // The generated inputs handle the form submission with actual values
-    // Restore required attribute when there are no selections (if it was originally required)
+    // Generated inputs own submission; the base input validates empty selections.
+    baseInput.value = "";
     if (this.selectedOptions.size > 0) {
-      baseInput.value = "";
+      baseInput.removeAttribute("name");
       baseInput.removeAttribute("required");
       baseInput.setCustomValidity("");
     } else {
-      baseInput.value = "";
-      if (this.wasOriginallyRequired) {
-        baseInput.setAttribute("required", "");
-      }
+      if (name) baseInput.setAttribute("name", name);
+      if (this.wasOriginallyRequired) baseInput.setAttribute("required", "");
     }
   }
 

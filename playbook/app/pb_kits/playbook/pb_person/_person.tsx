@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import {
   buildAriaProps,
   buildCss,
@@ -20,7 +21,7 @@ type PersonProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   lastName: string,
-}
+} & GlobalEventProps
 
 const Person = (props: PersonProps): React.ReactElement => {
   const {
@@ -56,6 +57,7 @@ const Person = (props: PersonProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

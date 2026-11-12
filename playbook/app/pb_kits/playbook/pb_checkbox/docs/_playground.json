@@ -3,9 +3,14 @@
   "propTargets": {},
   "defaults": {
     "checked": false,
+    "dark": false,
     "disabled": false,
     "error": false,
-    "requiredIndicator": false
+    "indeterminate": false,
+    "name": "",
+    "requiredIndicator": false,
+    "text": "",
+    "value": ""
   },
   "groups": [
     {

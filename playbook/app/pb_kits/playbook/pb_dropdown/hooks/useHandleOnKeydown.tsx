@@ -7,11 +7,14 @@ export const useHandleOnKeyDown = () => {
 const {
   asyncEnabled,
   autocomplete,
+  creationEnabled,
+  creationOption,
   filterItem,
   filteredOptions,
   focusedOptionIndex,
   handleChange,
   handleOptionClick,
+  isDropDownClosed,
   multiSelect,
   selected,
   setFocusedOptionIndex,
@@ -42,6 +45,8 @@ const {
 
   return (e: React.KeyboardEvent) => {
     if (e.defaultPrevented) return;
+    const isComposing = e.nativeEvent.isComposing || e.keyCode === 229;
+    if (creationEnabled && isComposing) return;
 
     const printableKey = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
     const replacingSelectedLabel = filterItem === selected?.label;
@@ -58,7 +63,7 @@ const {
 
     switch (e.key) {
     case "Escape":
-      if (asyncEnabled) {
+      if (asyncEnabled || creationEnabled) {
         setIsDropDownClosed(true);
         setFocusedOptionIndex(-1);
       }
@@ -76,15 +81,27 @@ const {
       setFocusedOptionIndex(nextIndexUp);
       break;
     }
-    case "Enter":
-      if (focusedOptionIndex !== -1 && (!asyncEnabled || filteredOptions[focusedOptionIndex]) && !filteredOptions[focusedOptionIndex]?.disabled) {
+    case "Enter": {
+      const focusedOption = filteredOptions[focusedOptionIndex];
+      const canSelectFocused = focusedOptionIndex !== -1 &&
+        (!asyncEnabled || focusedOption) &&
+        !focusedOption?.disabled;
+      // A closed menu or blank query stays available for form submission unless an option is highlighted.
+      if (creationEnabled && (isDropDownClosed || (!filterItem.trim() && !canSelectFocused))) return;
+      if (canSelectFocused) {
         e.preventDefault();
-        handleOptionClick(filteredOptions[focusedOptionIndex]);
+        handleOptionClick(focusedOption);
         setFocusedOptionIndex(-1)
       } else if (focusedOptionIndex === -1) {
-        setIsDropDownClosed(false)
+        if (creationEnabled && creationOption) {
+          e.preventDefault();
+          handleOptionClick(creationOption);
+        } else {
+          setIsDropDownClosed(false)
+        }
       }
       break;
+    }
       case "Tab":
         setIsDropDownClosed(true);
         setFocusedOptionIndex(-1)

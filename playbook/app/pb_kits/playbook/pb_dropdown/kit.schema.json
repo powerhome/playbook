@@ -7,6 +7,14 @@
     "rails"
   ],
   "props": {
+    "allowOptionCreation": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "async": {
       "type": "boolean",
       "platforms": [
@@ -25,19 +33,22 @@
       "type": "boolean | GenericObject[]",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "cacheOptions": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "loading": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "onInputChange": {
       "type": "function",
@@ -131,14 +142,16 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "defaultValue": {
       "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "error": {
       "type": "string",
@@ -147,11 +160,35 @@
         "rails"
       ]
     },
+    "enableFormSupport": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "enablePillReorder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "externalDragHandle": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "isClosed": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": true
     },
     "label": {
       "type": "string",
@@ -219,6 +256,14 @@
       ],
       "default": true
     },
+    "showPillIndex": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "variant": {
       "type": "enum",
       "platforms": [
@@ -272,18 +317,23 @@
       "default": false
     },
     "required": {
+      "type": "boolean",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "boolean",
       "default": false
     },
     "validationMessage": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "string",
-      "default": ""
+      "default": {
+        "react": "Please fill out this field.",
+        "rails": ""
+      }
     },
     "searchTermMinimumLength": {
       "platforms": [

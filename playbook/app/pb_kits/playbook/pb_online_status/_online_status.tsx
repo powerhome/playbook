@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
@@ -13,7 +14,7 @@ type OnlineStatusProps = {
   status?: "away" | "error" | "info" | "neutral" | "offline" |"online" | "primary"| "success" | "warning",
   size?: "sm" | "md" | "lg",
   noBorder?: boolean,
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const OnlineStatus = (props: OnlineStatusProps) => {
   const {
@@ -40,6 +41,7 @@ const OnlineStatus = (props: OnlineStatusProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     />

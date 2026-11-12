@@ -1,4 +1,10 @@
 import type { PropValue } from "../KitShow/Tabs/Playground";
+import type { PropDefinition as KitPropDefinition } from "../KitShow/Tabs/Playground/types";
+import {
+  resolveSchemaDefaultForPlatform,
+  resolveSchemaType,
+  resolveSchemaValues,
+} from "../KitShow/Tabs/Playground/utils";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import type { BuilderInstance, PlaygroundKit, PropDefinition } from "./types";
 
@@ -40,8 +46,23 @@ const isReactProp = (definition: PropDefinition) =>
   definition.platforms.length === 0 ||
   definition.platforms.includes("react");
 
+// kit.schema.json stores `type`, `values` and `default` as `{ react, rails }` when the platforms
+// differ; the builder is React, so resolve the React side (same helpers as the kit playground).
+const withReactDefinitions = (props: Record<string, PropDefinition>) =>
+  Object.fromEntries(
+    Object.entries(props).map(([name, definition]) => {
+      const kitDefinition = definition as KitPropDefinition;
+      return [name, {
+        ...definition,
+        ...(definition.type !== undefined && { type: resolveSchemaType(kitDefinition) }),
+        ...(definition.values !== undefined && { values: resolveSchemaValues(kitDefinition) }),
+        ...(definition.default !== undefined && { default: resolveSchemaDefaultForPlatform(kitDefinition) }),
+      }];
+    })
+  );
+
 export const getAllPropDefinitions = (kit?: PlaygroundKit) => ({
-  ...(kit?.kit_schema?.props ?? {}),
+  ...withReactDefinitions(kit?.kit_schema?.props ?? {}),
   ...(kit?.playground_config?.customProps ?? {}),
 });
 

@@ -215,6 +215,47 @@ test("responsive stacked merges kit className with caller className", () => {
   expect(container.querySelector(".pb_filter_kit.pb_filter_responsive.consumer-class")).toBeInTheDocument();
 });
 
+test("toggles a single sort option without opening the popover", () => {
+  const handleSortChange = jest.fn();
+
+  const { rerender } = render(
+    <Filter
+        onSortChange={handleSortChange}
+        results={1}
+        sortOptions={{ popularity: "Popularity" }}
+        sortValue={[{ name: "popularity", dir: "desc" }]}
+    />
+  );
+
+  fireEvent.click(screen.getByRole("button", { name: /Popularity/ }));
+
+  expect(handleSortChange).toHaveBeenCalledWith([{ name: "popularity", dir: "asc" }]);
+  expect(document.querySelector(".pb_filter_sort_menu")).not.toBeInTheDocument();
+
+  rerender(
+    <Filter
+        onSortChange={handleSortChange}
+        results={1}
+        sortOptions={{ popularity: "Popularity" }}
+        sortValue={[{ name: "popularity", dir: "asc" }]}
+    />
+  );
+
+  fireEvent.click(screen.getByRole("button", { name: /Popularity/ }));
+
+  expect(handleSortChange).toHaveBeenLastCalledWith([{ name: "popularity", dir: "desc" }]);
+  expect(document.querySelector(".pb_filter_sort_menu")).not.toBeInTheDocument();
+});
+
+test("opens the sort popover when multiple options are available", () => {
+  render(<FilterTest />);
+
+  fireEvent.click(screen.getByRole("button", { name: /Popularity/ }));
+
+  expect(screen.getByText("Manager's Title")).toBeInTheDocument();
+  expect(document.querySelector(".pb_filter_sort_menu")).toBeInTheDocument();
+});
+
 test("responsive stacked without children keeps sort-only FilterSingle", () => {
   const { container } = render(
     <Filter

@@ -24,7 +24,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "showDayOfWeek": {
       "type": "boolean",
@@ -56,11 +57,19 @@
         "react",
         "rails"
       ],
-      "values": [
-        "sm",
-        "md",
-        "lg"
-      ],
+      "values": {
+        "react": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "rails": [
+          "lg",
+          "md",
+          "sm",
+          "xs"
+        ]
+      },
       "default": "md"
     },
     "unstyled": {
@@ -90,6 +99,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Date } from 'playbook-ui'",
@@ -97,7 +107,7 @@
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"date\", props: { alignment: \"left\", size: \"sm\" }) %>"
+      "example": "<%= pb_rails(\"date\", props: { alignment: \"left\", size: \"lg\" }) %>"
     }
   }
 }

@@ -32,7 +32,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "iconEnabled": {
       "type": "boolean",
@@ -52,6 +53,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Contact } from 'playbook-ui'",

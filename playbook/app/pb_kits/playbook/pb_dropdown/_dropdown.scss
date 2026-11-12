@@ -4,6 +4,7 @@
 @import "../tokens/border_radius";
 @import "../tokens/shadows";
 @import "../tokens/positioning";
+@import "../tokens/opacity";
 @import "../pb_body/body_mixins";
 @import "../pb_textarea/textarea_mixin";
 
@@ -535,4 +536,115 @@
   margin: 0;
   padding: 0;
   pointer-events: auto;
+}
+
+.pb_dropdown_draggable_pills {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+
+  .pb_draggable_item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+
+    &.pb_dropdown_drop_before::before,
+    &.pb_dropdown_drop_after::after {
+      content: "";
+      position: absolute;
+      inset-block: 2px;
+      width: 2px;
+      background-color: $primary;
+      border-radius: $border_radius_rounded;
+      pointer-events: none;
+    }
+    &.pb_dropdown_drop_before::before {
+      inset-inline-start: -5px;
+    }
+    &.pb_dropdown_drop_after::after {
+      inset-inline-end: 3px;
+    }
+
+    &:hover {
+      cursor: grab;
+    }
+
+    &.is_dragging {
+      cursor: grabbing;
+    }
+
+    .pb_form_pill_kit_icon,
+    .pb_form_pill_kit_icon * {
+      cursor: grab;
+    }
+    .pb_form_pill_close,
+    .pb_form_pill_close * {
+      cursor: pointer;
+    }
+  }
+
+  &.active .pb_draggable_item > * {
+    pointer-events: none;
+  }
+}
+
+.pb_dropdown_pill_with_handle {
+  display: inline-flex;
+  align-items: center;
+  gap: $space_xxs;
+}
+
+.pb_dropdown_external_drag_handle {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: grab;
+  user-select: none;
+  color: $text_lighter;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  .pb_dropdown_pill_grip_icon {
+    color: $text_lighter !important;
+  }
+}
+
+.pb_dropdown_draggable_pills,
+.pb_dropdown_pill_drag_preview {
+  .pb_form_pill_kit_icon .pb_form_pill_icon,
+  .pb_form_pill_kit_icon .pb_dropdown_pill_grip_icon {
+    order: -1;
+    color: $text_lighter !important;
+    margin-left: -$space_xs;
+    padding-right: $space_xxs;
+    scale: 0.9;
+  }
+  .pb_form_pill_kit_icon.dark .pb_form_pill_icon,
+  .pb_form_pill_kit_icon.dark .pb_dropdown_pill_grip_icon {
+    color: $text_lighter_dark !important;
+  }
+}
+
+.pb_dropdown_pill_drag_preview {
+  position: fixed;
+  z-index: $z_max;
+  display: inline-flex;
+  align-items: center;
+  opacity: $opacity_5;
+  pointer-events: none;
+
+  .pb_form_pill_kit,
+  .pb_form_pill_kit_icon {
+    box-shadow: $shadow_deep;
+  }
+}
+
+body:has(.pb_dropdown_pill_drag_preview),
+body:has(.pb_dropdown_pill_drag_preview) * {
+  cursor: grabbing !important;
 }

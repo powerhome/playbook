@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import DateTime from '../pb_kit/dateTime';
 import { resolveTimeZone } from './activeSupportTimeZones'
 
@@ -27,7 +28,7 @@ type TimestampProps = {
   showTimezone?: boolean,
   unstyled?: boolean,
   variant?: "default" | "elapsed" | "updated"
-}
+} & GlobalEventProps
 
 const Timestamp = (props: TimestampProps): React.ReactElement => {
   const {
@@ -120,6 +121,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
     >
       <div className="pb_timestamp_kit">

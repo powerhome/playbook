@@ -37,6 +37,9 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:context_selector).with_default("") }
   it { is_expected.to define_boolean_prop(:clear_on_context_change).with_default(true) }
   it { is_expected.to define_string_prop(:options_event_type).with_default("") }
+  it { is_expected.to define_boolean_prop(:enable_pill_reorder).with_default(false) }
+  it { is_expected.to define_boolean_prop(:external_drag_handle).with_default(false) }
+  it { is_expected.to define_boolean_prop(:show_pill_index).with_default(false) }
 
   it { is_expected.to define_boolean_prop(:async).with_default(false) }
 
@@ -201,6 +204,36 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       # The name should be configured to support array notation in the template
       expect(dropdown.name).to eq("test_field")
       expect(dropdown.multi_select).to be true
+    end
+  end
+
+  describe "pill reorder props" do
+    it "exports reorder data attributes when multi_select and enable_pill_reorder are true" do
+      dropdown = subject.new(
+        multi_select: true,
+        enable_pill_reorder: true,
+        external_drag_handle: true,
+        show_pill_index: true
+      )
+      expect(dropdown.data).to include(
+        pb_dropdown_enable_pill_reorder: true,
+        pb_dropdown_external_drag_handle: true,
+        pb_dropdown_show_pill_index: true
+      )
+    end
+
+    it "omits reorder data attributes by default" do
+      dropdown = subject.new(multi_select: true)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_enable_pill_reorder)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_external_drag_handle)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_show_pill_index)
+    end
+
+    it "does not export reorder attributes on single-select even when enable_pill_reorder is true" do
+      dropdown = subject.new(enable_pill_reorder: true, show_pill_index: true, external_drag_handle: true)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_enable_pill_reorder)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_external_drag_handle)
+      expect(dropdown.data).not_to have_key(:pb_dropdown_show_pill_index)
     end
   end
 
@@ -582,5 +615,35 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       dropdown = subject.new(disabled: true)
       expect(dropdown.data).to include(pb_dropdown_disabled: true)
     end
+  end
+end
+
+RSpec.describe Playbook::PbDropdown::Dropdown do
+  subject { described_class }
+
+  it { is_expected.to define_boolean_prop(:allow_option_creation).with_default(false) }
+
+  it "enables autocomplete and exports creation only when requested" do
+    dropdown = described_class.new(allow_option_creation: true)
+    expect(dropdown.autocomplete_enabled?).to be(true)
+    expect(dropdown.data[:pb_dropdown_allow_option_creation]).to be(true)
+    expect(described_class.new.data).not_to have_key(:pb_dropdown_allow_option_creation)
+  end
+
+  it "does not enable creation for quickpick" do
+    dropdown = described_class.new(allow_option_creation: true, variant: "quickpick")
+    expect(dropdown.autocomplete_enabled?).to be(false)
+    expect(dropdown.data).not_to have_key(:pb_dropdown_allow_option_creation)
+  end
+
+  it "does not append array brackets twice when creation is disabled" do
+    expect(described_class.new(name: "home_ids[]", multi_select: true).input_name).to eq("home_ids[]")
+    expect(described_class.new(name: "home_ids[]", multi_select: true, allow_option_creation: false).input_name).to eq("home_ids[]")
+  end
+
+  it "does not append array brackets twice" do
+    expect(described_class.new(name: "home_ids[]", multi_select: true, allow_option_creation: true).input_name).to eq("home_ids[]")
+    expect(described_class.new(name: "home_ids", multi_select: true).input_name).to eq("home_ids[]")
+    expect(described_class.new(name: "home_id").input_name).to eq("home_id")
   end
 end

@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 
@@ -16,7 +17,7 @@ type LabelPillProps = {
   label?: string,
   pillValue?: string,
   variant: "error" | "info" | "neutral" | "primary" | "success" | "warning",
-}
+} & GlobalEventProps
 
 const LabelPill = (props: LabelPillProps) => {
   const {
@@ -43,6 +44,7 @@ const LabelPill = (props: LabelPillProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={css}
         id={id}
     >

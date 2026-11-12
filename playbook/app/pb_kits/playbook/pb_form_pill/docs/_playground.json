@@ -2,9 +2,12 @@
   "template": "<FormPill{{props}} />",
   "propTargets": {},
   "defaults": {
+    "size": "",
     "textTransform": "none",
     "color": "primary",
+    "icon": "",
     "wrapped": false,
+    "closeProps": {},
     "text": "This is a tag",
     "tabIndex": 0,
     "onClick": "() => alert('Click!')"

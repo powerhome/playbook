@@ -14,6 +14,8 @@ module Playbook
       prop :depth
       prop :collapsible_trail, type: Playbook::Props::Boolean,
                                default: true
+      prop :group_separators, type: Playbook::Props::Boolean,
+                              default: false
       prop :table_data_attributes, type: Playbook::Props::HashProp,
                                    default: {}
       prop :loading, type: Playbook::Props::Boolean,

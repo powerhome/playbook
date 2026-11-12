@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -64,7 +65,7 @@ type ContactProps = {
   iconEnabled?: boolean
   id?: string
   unstyled?: boolean
-}
+} & GlobalEventProps
 
 const Contact = (props: ContactProps): React.ReactElement => {
   const {
@@ -125,6 +126,7 @@ const Contact = (props: ContactProps): React.ReactElement => {
           {...ariaProps}
           {...dataProps}
           {...htmlProps}
+          {...globalEventProps(props)}
           className={classes}
           id={id}
       >
@@ -139,6 +141,7 @@ const Contact = (props: ContactProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

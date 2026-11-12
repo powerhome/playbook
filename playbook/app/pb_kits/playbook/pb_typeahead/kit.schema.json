@@ -222,7 +222,7 @@
       ],
       "default": false
     },
-    "showPillIndex": {
+    "externalDragHandle": {
       "type": "boolean",
       "platforms": [
         "react",
@@ -230,13 +230,13 @@
       ],
       "default": false
     },
-    "pillDragHandle": {
+    "showPillIndex": {
       "type": "boolean",
       "platforms": [
         "react",
         "rails"
       ],
-      "default": true
+      "default": false
     },
     "styles": {
       "type": "TypeaheadStylesConfig",

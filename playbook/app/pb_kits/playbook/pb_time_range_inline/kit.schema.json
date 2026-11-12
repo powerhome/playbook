@@ -13,11 +13,18 @@
         "react",
         "rails"
       ],
-      "values": [
-        "left",
-        "center",
-        "vertical"
-      ],
+      "values": {
+        "react": [
+          "left",
+          "center",
+          "vertical"
+        ],
+        "rails": [
+          "left",
+          "center",
+          "right"
+        ]
+      },
       "default": "left"
     },
     "size": {
@@ -72,6 +79,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { TimeRangeInline } from 'playbook-ui'",

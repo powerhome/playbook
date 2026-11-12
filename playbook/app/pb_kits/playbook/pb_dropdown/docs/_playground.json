@@ -5,21 +5,32 @@
     "options": "Options.data"
   },
   "defaults": {
+    "allowOptionCreation": false,
     "async": false,
+    "defaultOptions": false,
+    "cacheOptions": false,
+    "loading": false,
     "autocomplete": false,
     "blankSelection": "",
     "clearable": true,
     "closeOnClick": "any",
     "constrainHeight": false,
     "disabled": false,
+    "dark": false,
+    "defaultValue": {},
+    "enableFormSupport": false,
+    "enablePillReorder": false,
+    "externalDragHandle": false,
+    "isClosed": true,
     "multiSelect": false,
     "separators": true,
+    "showPillIndex": false,
     "variant": "default",
     "rangeEndsToday": false,
     "controlsStartId": "",
     "controlsEndId": "",
     "requiredIndicator": false,
-    "dark": false,
+    "required": false,
     "label": "Select a Country",
     "options": [
       {
@@ -124,7 +135,11 @@
         "closeOnClick",
         "constrainHeight",
         "isClosed",
-        "requiredIndicator"
+        "enableFormSupport",
+        "requiredIndicator",
+        "required",
+        "validationMessage",
+        "allowOptionCreation"
       ]
     },
     {
@@ -141,6 +156,9 @@
       "props": [
         "separators",
         "formPillProps",
+        "enablePillReorder",
+        "externalDragHandle",
+        "showPillIndex",
         "activeStyle",
         "dark",
         "disabled"
@@ -155,6 +173,15 @@
     }
   ],
   "presets": [
+    {
+      "name": "Create tags",
+      "props": {
+        "allowOptionCreation": true,
+        "multiSelect": true,
+        "name": "tags[]",
+        "label": "Tags"
+      }
+    },
     {
       "name": "Async search",
       "structureMode": "async",
@@ -339,6 +366,15 @@
     "formPillProps": {
       "requires": "multiSelect"
     },
+    "enablePillReorder": {
+      "requires": "multiSelect"
+    },
+    "externalDragHandle": {
+      "requires": "enablePillReorder"
+    },
+    "showPillIndex": {
+      "requires": "multiSelect"
+    },
     "rangeEndsToday": {
       "requires": {
         "variant": "quickpick"
@@ -389,7 +425,7 @@
       "when": {
         "multiSelect": true
       },
-      "message": "Multi-select returns arrays of selected options. Use formPillProps to adjust the selected-pill appearance and clearable to let users reset the selection.",
+      "message": "Multi-select returns arrays of selected options. Use formPillProps to adjust the selected-pill appearance and clearable to let users reset the selection. Opt into enablePillReorder to drag pills into a new priority order.",
       "type": "info"
     },
     "autocomplete_info": {

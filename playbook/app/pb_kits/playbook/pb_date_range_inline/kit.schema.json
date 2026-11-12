@@ -40,7 +40,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": false
     },
     "size": {
       "type": "enum",
@@ -71,6 +72,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { DateRangeInline } from 'playbook-ui'",

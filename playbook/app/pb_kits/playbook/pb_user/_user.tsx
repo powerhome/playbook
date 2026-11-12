@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Avatar from '../pb_avatar/_avatar'
 import Body from '../pb_body/_body'
@@ -30,7 +31,7 @@ type UserProps = {
   territory?: string,
   title?: string,
   titleStyle?: "title" | "body" | "caption" | "detail",
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const User = (props: UserProps): React.ReactElement => {
   const {
@@ -142,6 +143,7 @@ const User = (props: UserProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

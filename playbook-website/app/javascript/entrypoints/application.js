@@ -1,6 +1,6 @@
 /* eslint no-console:0 */
 
-import '../utilities/mountComponent'
+import { mountComponents } from '../utilities/mountComponent'
 import ComponentRegistry from '../utilities/componentRegistry'
 
 import zxcvbn from 'zxcvbn'
@@ -10,11 +10,12 @@ import 'playbook-ui/dist/playbook-rails.js'
 import 'playbook-ui/dist/playbook-rails-charts.js'
 import '../../../../playbook/app/javascript/playbook-doc.js'
 import "@powerhome/playbook-icons/css/pb-icons.css"
+import 'maplibre-gl/dist/maplibre-gl.css'
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 
 import '../site_styles/main.scss'
 
 import { Website } from 'website/src/app'
-import { Turbo } from "@hotwired/turbo-rails"
 
 // Icons from playbook-icons-react for testing
 import * as icons from "@powerhome/playbook-icons-react"
@@ -36,8 +37,9 @@ Object.entries(icons).forEach(([key, value]) => {
   window.PB_ICONS[iconName] = value
 })
 
-Turbo.session.drive = false
-
 ComponentRegistry.registerComponents({
   Website,
 })
+
+// The import above mounts immediately, before Website is registered.
+mountComponents()

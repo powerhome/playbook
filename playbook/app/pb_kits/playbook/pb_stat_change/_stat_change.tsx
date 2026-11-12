@@ -3,6 +3,7 @@ import classnames from "classnames"
 
 import { buildCss, buildHtmlProps } from "../utilities/props"
 import { globalProps } from "../utilities/globalProps"
+import { GlobalEventProps, globalEventProps } from "../utilities/globalEventProps"
 
 import Body from "../pb_body/_body"
 import Icon from "../pb_icon/_icon"
@@ -30,7 +31,7 @@ type StatChangeProps = {
   id?: string
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
   value?: string | number
-}
+} & GlobalEventProps
 
 const StatChange = (props: StatChangeProps): React.ReactElement => {
   const {
@@ -62,6 +63,7 @@ const StatChange = (props: StatChangeProps): React.ReactElement => {
           )}
             id={id}
             {...htmlProps}
+            {...globalEventProps(props)}
         >
           <Body dark={dark}
               status={status}

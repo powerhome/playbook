@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.8.1
-FROM --platform=linux/amd64 ruby:3.3.11-bookworm@sha256:ce11b66eb29db7f53214d37e2f475e156f30631c34ee4d540802270f1fd97d33 AS base
+FROM --platform=linux/amd64 ruby:3.4.10-bookworm@sha256:12d05ecb31a5704f02a6a7df77dab6dcae4be62efa09ef003ea36a307685b9bc AS base
 
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -17,10 +17,10 @@ RUN addgroup --gid $APP_GROUP_GID $APP_GROUP && \
     mkdir -p $APP_PATH && \
     chown $APP_USER:$APP_GROUP $APP_PATH
 
-ENV BUNDLER_VERSION=2.5.9
+ENV BUNDLER_VERSION=4.0.22
 ENV BUNDLE_TO=/usr/local/bundle
 ENV NVM_VERSION=v0.33.8
-ENV NODE_VERSION=v22.15.1
+ENV NODE_VERSION=v22.23.4
 ENV NPM_VERSION=8.19.3
 ENV YARN_VERSION=1.22.22
 ENV NVM_DIR=/home/app/.nvm

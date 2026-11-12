@@ -4,7 +4,7 @@ import SelectableCardIcon from '../_selectable_card_icon'
 const svg = {
   newChat: (
     <svg
-        ariaHidden="true"
+        aria-hidden="true"
         focusable="false"
         role="img"
         viewBox="0 0 512 512"

@@ -19,7 +19,7 @@
             data-message="<%= object.validation_message %>"
             <% end %>
             data-dropdown-selected-option
-            name="<%= object.name %><%= '[]' if object.multi_select %>"
+            name="<%= object.input_name %>"
             style="display: none"
             <%= object.disabled ? "disabled" : ""%>
             <%= object.required ? "required" : ""%>
@@ -34,7 +34,7 @@
                 <%= pb_rails("body", props: { status: "negative", text: object.error, id: object.error_id, aria: { atomic: "true", live: "polite" }, html_options: { role: "alert" }, dark: object.dark }) %>
             <% end %>
         <% else %>
-            <%= pb_rails("dropdown/dropdown_trigger", props: { autocomplete: object.autocomplete, disabled: object.disabled, multi_select: object.multi_select, placeholder: object.placeholder, select_id: object.select_id, label: object.label, error_id: object.error_id, error: object.error }) %>
+            <%= pb_rails("dropdown/dropdown_trigger", props: { autocomplete: object.autocomplete_enabled?, disabled: object.disabled, multi_select: object.multi_select, placeholder: object.placeholder, select_id: object.select_id, label: object.label, error_id: object.error_id, error: object.error }) %>
             <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar, constrain_height: object.constrain_height, disabled: object.disabled, no_options_text: object.no_options_text }) do %>
                 <% if options_with_blank.present? %>
                     <% options_with_blank.each do |option| %>

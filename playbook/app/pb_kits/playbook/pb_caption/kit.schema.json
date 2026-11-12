@@ -29,13 +29,23 @@
         "react",
         "rails"
       ],
-      "values": [
-        "xs",
-        "sm",
-        "md",
-        "lg",
-        "xl"
-      ],
+      "values": {
+        "react": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ],
+        "rails": [
+          "xs",
+          "sm",
+          "md",
+          "base",
+          "lg",
+          "xl"
+        ]
+      },
       "default": "md"
     },
     "tag": {

@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from "../utilities/globalProps"
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import DateStacked from '../pb_date_stacked/_date_stacked'
 import IconCircle from '../pb_icon_circle/_icon_circle'
@@ -19,7 +20,7 @@ type ItemProps = {
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
   lineStyle?: 'solid' | 'dotted',
   showCurrentYear?: boolean,
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 function isElementOfType<P>(
   element: React.ReactNode,
@@ -67,6 +68,7 @@ const TimelineItem = ({
   return (
     <div
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classnames(timelineItemCss, globalProps(props), className)}
     >
         {labelChild || (

@@ -66,7 +66,8 @@
       "type": "string",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": "America/New_York"
     },
     "date": {
       "platforms": [
@@ -90,6 +91,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { DateTime } from 'playbook-ui'",

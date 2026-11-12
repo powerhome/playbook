@@ -32,7 +32,8 @@
       "type": "string",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": "America/New_York"
     },
     "showCurrentYear": {
       "type": "boolean",
@@ -57,6 +58,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { DateTimeStacked } from 'playbook-ui'",

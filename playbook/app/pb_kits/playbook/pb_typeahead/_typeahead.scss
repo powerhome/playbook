@@ -3,6 +3,7 @@
 @import "../tokens/spacing";
 @import "../tokens/shadows";
 @import "../tokens/positioning";
+@import "../tokens/opacity";
 
 .pb_typeahead_kit {
   .typeahead-kit-select__option {
@@ -204,10 +205,30 @@
     gap: 0;
 
     .pb_draggable_item {
+      position: relative;
       display: inline-flex;
       align-items: center;
       user-select: none;
       -webkit-user-select: none;
+
+      // 2px drop line centered in the xs (8px) margin pills keep on their right:
+      // 4px gap center - 1px half line = 3px inside the margin, or 5px before the next pill
+      &.pb_typeahead_drop_before::before,
+      &.pb_typeahead_drop_after::after {
+        content: "";
+        position: absolute;
+        inset-block: 2px;
+        width: 2px;
+        background-color: $primary;
+        border-radius: $border_radius_rounded;
+        pointer-events: none;
+      }
+      &.pb_typeahead_drop_before::before {
+        inset-inline-start: -5px;
+      }
+      &.pb_typeahead_drop_after::after {
+        inset-inline-end: 3px;
+      }
 
       &:hover {
         cursor: grab;
@@ -216,6 +237,22 @@
       &.is_dragging {
         cursor: grabbing;
       }
+
+      // Whole-pill draggable pills (the ones with the grip icon) override Form Pill's pointer cursor
+      .pb_form_pill_kit_icon,
+      .pb_form_pill_kit_icon * {
+        cursor: grab;
+      }
+      .pb_form_pill_close,
+      .pb_form_pill_close * {
+        cursor: pointer;
+      }
+    }
+
+    // While dragging (container is .active), pills skip hover styles but their
+    // wrappers still receive the pointer for drop targeting
+    &.active .pb_draggable_item > * {
+      pointer-events: none;
     }
   }
 
@@ -390,4 +427,40 @@
       }
     }
   }
+}
+
+// Draggable pill grip icon; !important beats Form Pill's dark-mode icon color
+.pb_typeahead_draggable_pills,
+.pb_typeahead_pill_drag_preview {
+  .pb_form_pill_kit_icon .pb_form_pill_icon {
+    order: -1;
+    color: $text_lighter !important;
+    margin-left: -$space_xs;
+    padding-right: $space_xxs;
+    scale: 0.9;
+  }
+  .pb_form_pill_kit_icon.dark .pb_form_pill_icon {
+    color: $text_lighter_dark !important;
+  }
+}
+
+// Ghost that follows the pointer while a pill is dragged
+.pb_typeahead_pill_drag_preview {
+  position: fixed;
+  z-index: $z_max;
+  display: inline-flex;
+  align-items: center;
+  opacity: $opacity_5;
+  pointer-events: none;
+
+  .pb_form_pill_kit,
+  .pb_form_pill_kit_icon {
+    box-shadow: $shadow_deep;
+  }
+}
+
+// The ghost only exists mid-drag, so keep the grabbing cursor everywhere until drop
+body:has(.pb_typeahead_pill_drag_preview),
+body:has(.pb_typeahead_pill_drag_preview) * {
+  cursor: grabbing !important;
 }

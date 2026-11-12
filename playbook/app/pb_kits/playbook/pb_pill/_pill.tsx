@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import Title from '../pb_title/_title'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 type PillProps = {
   aria?: {[key: string]: string},
@@ -17,7 +18,7 @@ type PillProps = {
   text: string,
   variant?: "success" | "warning" | "error" | "info" | "neutral" | "primary",
   textTransform?: "none" | "lowercase"
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const Pill = (props: PillProps) => {
   const {
@@ -45,6 +46,7 @@ const Pill = (props: PillProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

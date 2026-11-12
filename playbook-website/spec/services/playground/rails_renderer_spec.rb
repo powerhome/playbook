@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Playground::RailsRenderer do
-  let(:controller) { ApplicationController.new }
+  let(:controller) { ApplicationController.new.tap { |c| c.request = ActionDispatch::TestRequest.create } }
   let(:view_context) { controller.view_context }
 
   describe "#render" do

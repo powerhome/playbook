@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Flex from '../pb_flex/_flex'
 import Time from '../pb_time/_time'
@@ -21,7 +22,7 @@ type DateTimeProps = {
   showDayOfWeek: boolean,
   showIcon?: boolean,
   timeZone?: string
-}
+} & GlobalEventProps
 
 const DateTime = (props: DateTimeProps): React.ReactElement => {
   const {
@@ -53,6 +54,7 @@ const DateTime = (props: DateTimeProps): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

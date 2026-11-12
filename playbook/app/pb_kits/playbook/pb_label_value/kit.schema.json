@@ -19,7 +19,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "date": {
       "type": "Date",

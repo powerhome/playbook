@@ -130,7 +130,7 @@
             <div class="pb_filter_responsive_sort">
               <%= pb_rails("caption", props: { text: "sort by:", classname: "pb_filter_responsive_sort_label"}) %>
               <% unless object.sort_menu == [{}] %>
-                <%= pb_rails("button", props: {variant: "link",id: "sort-button#{object.id}",padding_right: "none"}) do %>
+                <%= pb_rails("button", props: object.sort_button_props) do %>
                   <% object.sort_menu.each do |item| %>
                     <% if item[:active] == true %>
                       <%= item[:item] %>
@@ -153,7 +153,7 @@
 
         <% if (object.template == "single" ) || (object.template == "sort_only") %>
           <% unless object.sort_menu == [{}] %>
-            <%= pb_rails("button", props: {variant: "link",id: "sort-button#{object.id}",padding_right: "none"}) do %>
+            <%= pb_rails("button", props: object.sort_button_props) do %>
               <% object.sort_menu.each do |item| %>
                 <% if item[:active] == true %>
                   <%= item[:item] %>
@@ -171,7 +171,7 @@
           <%= pb_rails("title_count", props: {title: "Results:",count: object.results, align:"center"}) %>
             <%= pb_rails("flex", props: {orientation: "row", vertical: "center"}) do %>
               <%= pb_rails("caption", props: { text: "sort by:"}) %>
-              <%= pb_rails("button", props: {variant: "link", padding_right: "none", id: "sort-button#{object.id}"}) do %>
+              <%= pb_rails("button", props: object.sort_button_props) do %>
                 <% object.sort_menu.each do |item| %>
                   <% if item[:active] == true %>
                     <%= item[:item] %>
@@ -191,7 +191,7 @@
       <% end %>
     <%end%>
 
-    <% if object.template != "filter_only"%>
+    <% if object.template != "filter_only" && !object.single_sort_option? %>
       <%= pb_rails("popover", props: {max_height: object.max_height, classname: "pb_filter_sort_menu", close_on_click: "outside", trigger_element_id: "sort-button#{object.id}", tooltip_id: "sort-filter-btn-tooltip#{object.id}", position: object.placement , padding: 'none'}.merge(object.popover_props)) do %>
           <%= pb_rails("list") do %>
             <% object.sort_menu.each do |item| %>

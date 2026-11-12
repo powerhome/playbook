@@ -47,10 +47,12 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Source } from 'playbook-ui'",

@@ -4,13 +4,13 @@
   "defaults": {
     "color": "card_light",
     "dynamic": false,
-    "scrollBarNone": false,
     "gradient": true,
+    "scrollBarNone": false,
+    "fullScreen": false,
     "layout": {
       "bottom": "full"
     },
-    "opacity": "opacity_6",
-    "fullScreen": false
+    "opacity": "opacity_6"
   },
   "children": {
     "editable": true,

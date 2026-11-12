@@ -41,5 +41,9 @@ app.build(
     stage('Push') {
       shell "docker push image-registry.powerapp.cloud/playbook/playbook-mcp:${env.TRIGGERING_COMMIT}"
     }
+
+    stage('Website Test') {
+      shell "docker compose run --workdir /home/app/src/playbook-website web bin/test"
+    }
   }
 }

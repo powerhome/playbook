@@ -3,12 +3,12 @@
   "propTargets": {},
   "defaults": {
     "contentPadding": "lg",
+    "headerTextStyling": "title_4",
+    "stickyHeader": true,
     "escToExit": true,
     "headerText": "Enrollment Review",
-    "headerTextStyling": "title_4",
     "onClose": "() => console.log('Fullscreen closed')",
-    "onOpen": "() => console.log('Fullscreen opened')",
-    "stickyHeader": true
+    "onOpen": "() => console.log('Fullscreen opened')"
   },
   "groups": [
     {

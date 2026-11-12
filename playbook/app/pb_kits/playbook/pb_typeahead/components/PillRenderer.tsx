@@ -33,15 +33,16 @@ type PillColorType =
 type PillRendererProps = {
   data: SelectValueType
   dark?: boolean
+  externalDragHandle?: boolean
   index?: number
   isFocused?: boolean
   multiKit?: string
   onKeyboardReorder?: (direction: 'left' | 'right') => void
   onRemove?: (event: React.MouseEvent | React.KeyboardEvent) => void
   pillColor?: PillColorType
-  pillDragHandle?: boolean
   removeProps?: { onClick?: (event: React.MouseEvent | React.KeyboardEvent) => void }
   selectProps?: Record<string, unknown>
+  showDragIcon?: boolean
   showPillIndex?: boolean
   totalCount?: number
   truncate?: 'none' | 1 | 2 | 3 | 4 | 5
@@ -51,14 +52,15 @@ type PillRendererProps = {
 const PillRenderer = ({
   data,
   dark,
+  externalDragHandle = false,
   index = 0,
   isFocused = false,
   multiKit = '',
   onKeyboardReorder,
   onRemove,
   pillColor,
-  pillDragHandle = false,
   removeProps,
+  showDragIcon = false,
   showPillIndex = false,
   totalCount = 0,
   truncate,
@@ -68,8 +70,9 @@ const PillRenderer = ({
   const baseLabel = data.label || data.name || ''
   const label = showPillIndex ? `${index + 1}. ${baseLabel}` : baseLabel
   const pillClassName = isFocused ? 'pb_form_pill_or_badge_focused' : ''
+  const pillIcon = showDragIcon ? 'grip-dots-vertical' : ''
   const positionLabel = totalCount > 0
-    ? `${baseLabel}, position ${index + 1} of ${totalCount}, press Control+Shift+Arrow keys to reorder`
+    ? `${baseLabel}, position ${index + 1} of ${totalCount}, press Left or Right Arrow keys to reorder`
     : baseLabel
 
   const handleRemove = (event: React.MouseEvent | React.KeyboardEvent) => {
@@ -85,14 +88,13 @@ const PillRenderer = ({
       event.preventDefault()
       event.stopPropagation()
       handleRemove(event)
-    } else if (event.key === 'ArrowLeft' && event.ctrlKey && event.shiftKey) {
+    } else if (onKeyboardReorder && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
       event.preventDefault()
       event.stopPropagation()
-      onKeyboardReorder?.('left')
-    } else if (event.key === 'ArrowRight' && event.ctrlKey && event.shiftKey) {
-      event.preventDefault()
-      event.stopPropagation()
-      onKeyboardReorder?.('right')
+      const pill = event.currentTarget
+      onKeyboardReorder(event.key === 'ArrowLeft' ? 'left' : 'right')
+      // Reordering moves the pill's DOM node, which drops focus; restore it after the update
+      requestAnimationFrame(() => pill.focus())
     } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       const selectInput = event.currentTarget.closest('.pb_typeahead_kit')?.querySelector('input')
       if (selectInput instanceof HTMLInputElement) {
@@ -105,7 +107,7 @@ const PillRenderer = ({
 
   const pillContent = (
     <>
-      {pillDragHandle && (
+      {externalDragHandle && (
         <span
             aria-hidden="true"
             className="pb_draggable_handle pb_typeahead_pill_drag_handle"
@@ -144,6 +146,7 @@ const PillRenderer = ({
             color={pillColor}
             dark={dark}
             htmlOptions={{ 'aria-label': positionLabel, onKeyDown: handleKeyDown }}
+            icon={pillIcon}
             marginRight="xs"
             name={label}
             size={multiKit === 'smallPill' ? 'small' : ''}
@@ -161,6 +164,7 @@ const PillRenderer = ({
             color={pillColor}
             dark={dark}
             htmlOptions={{ 'aria-label': positionLabel, onKeyDown: handleKeyDown }}
+            icon={pillIcon}
             marginRight="xs"
             name=""
             size={multiKit === 'smallPill' ? 'small' : ''}
@@ -173,7 +177,7 @@ const PillRenderer = ({
     </>
   )
 
-  if (pillDragHandle) {
+  if (externalDragHandle) {
     return (
       <span className="pb_typeahead_pill_with_handle">
         {pillContent}

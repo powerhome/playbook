@@ -2,6 +2,7 @@
   "template": "<StarRating{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "layoutOption": "default",
     "rating": 4,
     "denominator": 5,

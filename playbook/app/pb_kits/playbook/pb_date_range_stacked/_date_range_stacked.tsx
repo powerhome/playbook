@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import { buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Body from '../pb_body/_body'
 import Flex from '../pb_flex/_flex'
@@ -18,7 +19,7 @@ type DateRangeStackedProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   startDate: Date,
-}
+} & GlobalEventProps
 
 const DateRangeStacked = (props: DateRangeStackedProps): React.ReactElement => {
   const { 
@@ -41,6 +42,7 @@ const DateRangeStacked = (props: DateRangeStackedProps): React.ReactElement => {
     <div 
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={css}
     >
       <Flex vertical="center">

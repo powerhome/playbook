@@ -22,7 +22,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": 0
     },
     "precision": {
       "platforms": [

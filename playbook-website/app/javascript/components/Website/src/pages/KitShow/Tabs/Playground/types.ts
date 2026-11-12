@@ -14,6 +14,7 @@ export type PlatformSplit<T> = { react?: T; rails?: T };
 export interface PropDefinition {
   type: PropType | PlatformSplit<PropType>;
   platforms: ("react" | "rails")[];
+  /** kit.schema.json may store `{ react, rails }`; resolve with `resolveSchemaValues` before use. */
   values?: string[];
   default?: any;
   responsive?: boolean;

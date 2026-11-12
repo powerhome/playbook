@@ -8,10 +8,6 @@ $flag-min-resolution: 192dpi;
 :root {
   --iti-arrow-padding: #{$space_xs};
   --iti-spacer-horizontal: #{$space_sm};
-  --iti-path-flags-1x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags.png");
-  --iti-path-flags-2x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags@2x.png");
-  --iti-path-globe-1x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe.png");
-  --iti-path-globe-2x: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe@2x.png");
 }
 
 .pb_phone_number_input {
@@ -121,12 +117,12 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__flag {
-    background-image: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags.png");
+    background-image: var(--iti-path-flags-1x);
     border-radius: 1px;
   }
 
   .iti__flag.iti__globe {
-    background-image: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/globe.png");
+    background-image: var(--iti-path-globe-1x);
     background-position: center;
     height: 16px;
     width: 16px;
@@ -281,7 +277,7 @@ $flag-min-resolution: 192dpi;
 
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: $flag-min-resolution) {
     .iti__flag {
-      background-image: url("https://unpkg.com/intl-tel-input@24.6.0/build/img/flags@2x.png");
+      background-image: var(--iti-path-flags-2x);
     }
   }
 }

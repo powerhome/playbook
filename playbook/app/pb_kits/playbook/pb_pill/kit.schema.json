@@ -63,6 +63,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Pill } from 'playbook-ui'",

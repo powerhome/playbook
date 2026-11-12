@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 
 import Icon from '../pb_icon/_icon'
 
@@ -26,7 +27,7 @@ type IconCircleProps = {
     | "orange"
     | "green"
     | "lighter",
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
 const IconCircle = (props: IconCircleProps) => {
   const {
@@ -52,6 +53,7 @@ const IconCircle = (props: IconCircleProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         className={classes}
         id={id}
     >

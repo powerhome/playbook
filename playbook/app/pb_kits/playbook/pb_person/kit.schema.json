@@ -23,6 +23,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { Person } from 'playbook-ui'",

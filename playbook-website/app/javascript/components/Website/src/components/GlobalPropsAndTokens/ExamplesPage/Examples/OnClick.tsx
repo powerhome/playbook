@@ -1,87 +1,185 @@
 import { useState } from "react";
 import {
+  Avatar,
   Background,
   Body,
   Button,
   Caption,
   Card,
+  Contact,
   Container,
   Currency,
   DashboardValue,
+  Date as FormattedDate,
+  DateRangeInline,
+  DateRangeStacked,
+  DateStacked,
+  DateYearStacked,
+  WeekdayStacked,
+  DateTime,
+  DateTimeStacked,
   Detail,
   Flex,
   Highlight,
+  Icon,
+  IconCircle,
   IconStatValue,
   IconValue,
+  Image,
   LabelValue,
+  Legend,
+  List,
+  ListItem,
   Message,
   MultipleUsers,
   MultipleUsersStacked,
+  Person,
+  ProgressStep,
+  ProgressStepItem,
   StatValue,
   Table,
+  Timeline,
+  TimeRangeInline,
+  TimeStacked,
+  Timestamp,
   Title,
   TitleCount,
   TitleDetail,
+  LabelPill,
+  Pill,
+  OnlineStatus,
+  Source,
+  StatChange,
+  User,
+  UserBadge,
 } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 
+const clickableDemoHtmlOptions = {
+  style: { userSelect: "none" as const },
+};
+
+const clickablePointerHtmlOptions = {
+  style: { cursor: "pointer" as const, userSelect: "none" as const },
+};
+
+const demoDateTime = new Date("2025-12-07T12:38:07");
+const demoRangeStart = new Date("2025-12-07T12:38:07");
+const demoRangeEnd = new Date("2025-12-07T15:15:15");
+
+const InteractiveExample = ({
+  children,
+  count,
+  label,
+  reset,
+  statusText,
+}: {
+  children: React.ReactNode,
+  count?: number,
+  label?: string,
+  reset: () => void,
+  statusText?: string,
+}) => {
+  const summary =
+    statusText ||
+    `${label}: ${count} click${count === 1 ? "" : "s"}`;
+
+  return (
+    <Flex flexDirection="column" gap="xs" width="100%">
+      {children}
+      <Body color="light" text={summary} />
+      <Button
+          onClick={reset}
+          size="sm"
+          text="Reset"
+          variant="secondary"
+      />
+    </Flex>
+  );
+};
+
 const OnClick = () => {
-  const clickableDemoHtmlOptions = {
-    style: { userSelect: "none" as const },
-  };
-
-  const InteractiveExample = ({
-    children,
-    count,
-    label,
-    reset,
-  }: {
-    children: React.ReactNode,
-    count: number,
-    label: string,
-    reset: () => void,
-  }) => {
-    return (
-      <Flex flexDirection="column" gap="xs" width="100%">
-        {children}
-        <Body color="light" text={`${label}: ${count} click${count === 1 ? "" : "s"}`} />
-        <Button
-            onClick={reset}
-            size="sm"
-            text="Reset"
-            variant="secondary"
-        />
-      </Flex>
-    );
-  };
-
   const VisualGuideCard = () => {
+    const [avatarClicks, setAvatarClicks] = useState(0);
     const [backgroundClicks, setBackgroundClicks] = useState(0);
     const [bodyClicks, setBodyClicks] = useState(0);
     const [captionClicks, setCaptionClicks] = useState(0);
     const [cardClicks, setCardClicks] = useState(0);
+    const [contactClicks, setContactClicks] = useState(0);
     const [containerClicks, setContainerClicks] = useState(0);
     const [currencyClicks, setCurrencyClicks] = useState(0);
     const [dashboardValueClicks, setDashboardValueClicks] = useState(0);
+    const [dateClicks, setDateClicks] = useState(0);
+    const [dateRangeInlineClicks, setDateRangeInlineClicks] = useState(0);
+    const [dateRangeStackedClicks, setDateRangeStackedClicks] = useState(0);
+    const [dateStackedClicks, setDateStackedClicks] = useState(0);
+    const [dateYearStackedClicks, setDateYearStackedClicks] = useState(0);
+    const [weekdayStackedClicks, setWeekdayStackedClicks] = useState(0);
+    const [dateTimeClicks, setDateTimeClicks] = useState(0);
+    const [dateTimeStackedClicks, setDateTimeStackedClicks] = useState(0);
     const [detailClicks, setDetailClicks] = useState(0);
     const [flexClicks, setFlexClicks] = useState(0);
     const [highlightClicks, setHighlightClicks] = useState(0);
+    const [iconClicks, setIconClicks] = useState(0);
+    const [iconCircleClicks, setIconCircleClicks] = useState(0);
     const [iconStatValueClicks, setIconStatValueClicks] = useState(0);
     const [iconValueClicks, setIconValueClicks] = useState(0);
+    const [imageClicks, setImageClicks] = useState(0);
     const [labelValueClicks, setLabelValueClicks] = useState(0);
+    const [legendClicks, setLegendClicks] = useState({ windows: 0, doors: 0, roofing: 0 });
+    const [listItemClicks, setListItemClicks] = useState({ one: 0, two: 0, three: 0 });
     const [messageClicks, setMessageClicks] = useState(0);
     const [multipleUsersClicks, setMultipleUsersClicks] = useState(0);
     const [multipleUsersStackedClicks, setMultipleUsersStackedClicks] = useState(0);
+    const [progressStepItemClicks, setProgressStepItemClicks] = useState({
+      ordered: 0,
+      shipped: 0,
+      delivered: 0,
+    });
+    const [personClicks, setPersonClicks] = useState(0);
     const [statValueClicks, setStatValueClicks] = useState(0);
+    const [timeRangeInlineClicks, setTimeRangeInlineClicks] = useState(0);
+    const [timeStackedClicks, setTimeStackedClicks] = useState(0);
+    const [timelineItemClicks, setTimelineItemClicks] = useState({
+      started: 0,
+      trip: 0,
+      resolved: 0,
+    });
+    const [timestampClicks, setTimestampClicks] = useState(0);
     const [titleClicks, setTitleClicks] = useState(0);
+    const [labelPillClicks, setLabelPillClicks] = useState(0);
+    const [pillClicks, setPillClicks] = useState(0);
+    const [onlineStatusClicks, setOnlineStatusClicks] = useState(0);
+    const [sourceClicks, setSourceClicks] = useState(0);
+    const [statChangeClicks, setStatChangeClicks] = useState(0);
     const [titleCountClicks, setTitleCountClicks] = useState(0);
     const [titleDetailClicks, setTitleDetailClicks] = useState(0);
+    const [userClicks, setUserClicks] = useState(0);
+    const [userBadgeClicks, setUserBadgeClicks] = useState(0);
     const [buttonClicks, setButtonClicks] = useState(0);
 
     return (
       <Flex gap="sm" wrap width="100%">
+        <Card padding="md" width="sm">
+          <Title size={4} text="Avatar" />
+          <InteractiveExample
+              count={avatarClicks}
+              label="Avatar"
+              reset={() => setAvatarClicks(0)}
+          >
+            <Avatar
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                imageUrl="https://randomuser.me/api/portraits/men/44.jpg"
+                name="Avatar Example"
+                onClick={() => setAvatarClicks((prev: number) => prev + 1)}
+                size="md"
+            />
+            <Body text="Click the above Avatar example" />
+          </InteractiveExample>
+        </Card>
         <Card padding="md" width="sm">
           <Title size={4} text="Background" />
           <InteractiveExample
@@ -159,6 +257,21 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Contact" />
+          <InteractiveExample
+              count={contactClicks}
+              label="Contact"
+              reset={() => setContactClicks(0)}
+          >
+            <Contact
+                contactType="email"
+                contactValue="clickthiscontact@example.com"
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setContactClicks((prev: number) => prev + 1)}
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Container" />
           <InteractiveExample
               count={containerClicks}
@@ -217,6 +330,130 @@ const OnClick = () => {
                 statLabel="Click this Dashboard Value"
                 statValue={{ unit: "USD", value: "98.2" }}
             />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date" />
+          <InteractiveExample
+              count={dateClicks}
+              label="Date"
+              reset={() => setDateClicks(0)}
+          >
+            <FormattedDate
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateClicks((prev: number) => prev + 1)}
+                value={demoDateTime}
+            />
+            <Body text="Click the above Date example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Range Inline" />
+          <InteractiveExample
+              count={dateRangeInlineClicks}
+              label="Date Range Inline"
+              reset={() => setDateRangeInlineClicks(0)}
+          >
+            <DateRangeInline
+                endDate={demoRangeEnd}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateRangeInlineClicks((prev: number) => prev + 1)}
+                startDate={demoRangeStart}
+            />
+            <Body text="Click the above Date Range Inline example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Range Stacked" />
+          <InteractiveExample
+              count={dateRangeStackedClicks}
+              label="Date Range Stacked"
+              reset={() => setDateRangeStackedClicks(0)}
+          >
+            <DateRangeStacked
+                endDate={demoRangeEnd}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateRangeStackedClicks((prev: number) => prev + 1)}
+                startDate={demoRangeStart}
+            />
+            <Body text="Click the above Date Range Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Stacked" />
+          <InteractiveExample
+              count={dateStackedClicks}
+              label="Date Stacked"
+              reset={() => setDateStackedClicks(0)}
+          >
+            <DateStacked
+                date={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateStackedClicks((prev: number) => prev + 1)}
+            />
+            <Body text="Click the above Date Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Year Stacked" />
+          <InteractiveExample
+              count={dateYearStackedClicks}
+              label="Date Year Stacked"
+              reset={() => setDateYearStackedClicks(0)}
+          >
+            <DateYearStacked
+                date={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateYearStackedClicks((prev: number) => prev + 1)}
+            />
+            <Body text="Click the above Date Year Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Weekday Stacked" />
+          <InteractiveExample
+              count={weekdayStackedClicks}
+              label="Weekday Stacked"
+              reset={() => setWeekdayStackedClicks(0)}
+          >
+            <WeekdayStacked
+                date={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setWeekdayStackedClicks((prev: number) => prev + 1)}
+            />
+            <Body text="Click the above Weekday Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Time" />
+          <InteractiveExample
+              count={dateTimeClicks}
+              label="Date Time"
+              reset={() => setDateTimeClicks(0)}
+          >
+            <DateTime
+                datetime={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateTimeClicks((prev: number) => prev + 1)}
+                showDayOfWeek={false}
+            />
+            <Body text="Click the above Date Time example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Date Time Stacked" />
+          <InteractiveExample
+              count={dateTimeStackedClicks}
+              label="Date Time Stacked"
+              reset={() => setDateTimeStackedClicks(0)}
+          >
+            <DateTimeStacked
+                dark={false}
+                datetime={demoDateTime}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setDateTimeStackedClicks((prev: number) => prev + 1)}
+            />
+            <Body text="Click the above Date Time Stacked example" />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -280,6 +517,46 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Icon" />
+          <InteractiveExample
+              count={iconClicks}
+              label="Icon"
+              reset={() => setIconClicks(0)}
+          >
+            <Icon
+                aria={{ label: "Add favorite" }}
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                icon="heart"
+                onClick={() => setIconClicks((prev: number) => prev + 1)}
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Icon Circle" />
+          <InteractiveExample
+              count={iconCircleClicks}
+              label="Icon Circle"
+              reset={() => setIconCircleClicks(0)}
+          >
+            <IconCircle
+                aria={{ label: "Add favorite" }}
+                cursor="pointer"
+                htmlOptions={{
+                  ...clickableDemoHtmlOptions,
+                  role: "button",
+                  tabIndex: 0,
+                }}
+                icon="heart"
+                onClick={() => setIconCircleClicks((prev: number) => prev + 1)}
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Icon Stat Value" />
           <InteractiveExample
               count={iconStatValueClicks}
@@ -321,6 +598,41 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Image" />
+          <InteractiveExample
+              count={imageClicks}
+              label="Image"
+              reset={() => setImageClicks(0)}
+          >
+            <Image
+                alt="Clickable demo"
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setImageClicks((prev: number) => prev + 1)}
+                rounded
+                size="sm"
+                url="https://unsplash.it/500/400/?image=634"
+            />
+            <Body text="Click the above Image example" />
+
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Label Pill" />
+          <InteractiveExample
+              count={labelPillClicks}
+              label="Label Pill"
+              reset={() => setLabelPillClicks(0)}
+          >
+            <LabelPill
+                htmlOptions={clickablePointerHtmlOptions}
+                label="Queue"
+                onClick={() => setLabelPillClicks((prev: number) => prev + 1)}
+                pillValue="4"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Label Value" />
           <InteractiveExample
               count={labelValueClicks}
@@ -338,6 +650,104 @@ const OnClick = () => {
                 onClick={() => setLabelValueClicks((prev: number) => prev + 1)}
                 value="Summary"
             />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="md">
+          <Title size={4} text="Legend" />
+          <InteractiveExample
+              reset={() => setLegendClicks({ windows: 0, doors: 0, roofing: 0 })}
+              statusText={`Windows: ${legendClicks.windows} · Doors: ${legendClicks.doors} · Roofing: ${legendClicks.roofing}`}
+          >
+            <Flex flexDirection="column" gap="xs">
+              <Legend
+                  color="data_1"
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setLegendClicks((prev) => ({ ...prev, windows: prev.windows + 1 }))
+                  }
+                  text="Windows"
+              />
+              <Legend
+                  color="data_2"
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setLegendClicks((prev) => ({ ...prev, doors: prev.doors + 1 }))
+                  }
+                  text="Doors"
+              />
+              <Legend
+                  color="data_3"
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setLegendClicks((prev) => ({ ...prev, roofing: prev.roofing + 1 }))
+                  }
+                  text="Roofing"
+              />
+            </Flex>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="md">
+          <Title size={4} text="ListItem (subcomponent of List)" />
+          <InteractiveExample
+              reset={() => setListItemClicks({ one: 0, two: 0, three: 0 })}
+              statusText={`Item 1: ${listItemClicks.one} · Item 2: ${listItemClicks.two} · Item 3: ${listItemClicks.three}`}
+          >
+            <List>
+              <ListItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                  }}
+                  onClick={() =>
+                    setListItemClicks((prev) => ({ ...prev, one: prev.one + 1 }))
+                  }
+                  tabIndex={0}
+              >
+                {"Item 1"}
+              </ListItem>
+              <ListItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                  }}
+                  onClick={() =>
+                    setListItemClicks((prev) => ({ ...prev, two: prev.two + 1 }))
+                  }
+                  tabIndex={0}
+              >
+                {"Item 2"}
+              </ListItem>
+              <ListItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                  }}
+                  onClick={() =>
+                    setListItemClicks((prev) => ({ ...prev, three: prev.three + 1 }))
+                  }
+                  tabIndex={0}
+              >
+                {"Item 3"}
+              </ListItem>
+            </List>
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -416,6 +826,145 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="Online Status" />
+          <InteractiveExample
+              count={onlineStatusClicks}
+              label="Online Status"
+              reset={() => setOnlineStatusClicks(0)}
+          >
+            <OnlineStatus
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setOnlineStatusClicks((prev: number) => prev + 1)}
+                size="lg"
+                status="online"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Person" />
+          <InteractiveExample
+              count={personClicks}
+              label="Person"
+              reset={() => setPersonClicks(0)}
+          >
+            <Person
+                firstName="Click"
+                htmlOptions={clickablePointerHtmlOptions}
+                lastName="ThisPersonExample"
+                onClick={() => setPersonClicks((prev: number) => prev + 1)}
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Pill" />
+          <InteractiveExample
+              count={pillClicks}
+              label="Pill"
+              reset={() => setPillClicks(0)}
+          >
+            <Pill
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                onClick={() => setPillClicks((prev: number) => prev + 1)}
+                text="Click this Pill example"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="md">
+          <Title size={4} text="ProgressStepItem (subcomponent of Progress Step)" />
+          <InteractiveExample
+              reset={() =>
+                setProgressStepItemClicks({ ordered: 0, shipped: 0, delivered: 0 })
+              }
+              statusText={`Ordered: ${progressStepItemClicks.ordered} · Shipped: ${progressStepItemClicks.shipped} · Delivered: ${progressStepItemClicks.delivered}`}
+          >
+            <ProgressStep icon orientation="vertical">
+              <ProgressStepItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setProgressStepItemClicks((prev) => ({
+                      ...prev,
+                      ordered: prev.ordered + 1,
+                    }))
+                  }
+                  status="complete"
+              >
+                {"Ordered"}
+              </ProgressStepItem>
+              <ProgressStepItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setProgressStepItemClicks((prev) => ({
+                      ...prev,
+                      shipped: prev.shipped + 1,
+                    }))
+                  }
+                  status="active"
+              >
+                {"Shipped"}
+              </ProgressStepItem>
+              <ProgressStepItem
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  onClick={() =>
+                    setProgressStepItemClicks((prev) => ({
+                      ...prev,
+                      delivered: prev.delivered + 1,
+                    }))
+                  }
+                  status="inactive"
+              >
+                {"Delivered"}
+              </ProgressStepItem>
+            </ProgressStep>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Source" />
+          <InteractiveExample
+              count={sourceClicks}
+              label="Source"
+              reset={() => setSourceClicks(0)}
+          >
+            <Source
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setSourceClicks((prev: number) => prev + 1)}
+                source="Click this Source example"
+                type="retail"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Stat Change" />
+          <InteractiveExample
+              count={statChangeClicks}
+              label="Stat Change"
+              reset={() => setStatChangeClicks(0)}
+          >
+            <StatChange
+                change="increase"
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setStatChangeClicks((prev: number) => prev + 1)}
+                value="12.4"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Stat Value" />
           <InteractiveExample
               count={statValueClicks}
@@ -433,6 +982,119 @@ const OnClick = () => {
                 unit="mg"
                 value={104}
             />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Time Range Inline" />
+          <InteractiveExample
+              count={timeRangeInlineClicks}
+              label="Time Range Inline"
+              reset={() => setTimeRangeInlineClicks(0)}
+          >
+            <TimeRangeInline
+                endTime={demoRangeEnd}
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setTimeRangeInlineClicks((prev: number) => prev + 1)}
+                startTime={demoRangeStart}
+            />
+            <Body text="Click the above Time Range Inline example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Time Stacked" />
+          <InteractiveExample
+              count={timeStackedClicks}
+              label="Time Stacked"
+              reset={() => setTimeStackedClicks(0)}
+          >
+            <TimeStacked
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setTimeStackedClicks((prev: number) => prev + 1)}
+                time={demoDateTime}
+                timeZone="America/New_York"
+            />
+            <Body text="Click the above Time Stacked example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="md">
+          <Title size={4} text="Timeline.Item (subcomponent of Timeline)" />
+          <InteractiveExample
+              reset={() =>
+                setTimelineItemClicks({ started: 0, trip: 0, resolved: 0 })
+              }
+              statusText={`Started: ${timelineItemClicks.started} · Trip: ${timelineItemClicks.trip} · Resolved: ${timelineItemClicks.resolved}`}
+          >
+            <Timeline orientation="vertical">
+              <Timeline.Item
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  icon="user"
+                  iconColor="royal"
+                  onClick={() =>
+                    setTimelineItemClicks((prev) => ({
+                      ...prev,
+                      started: prev.started + 1,
+                    }))
+                  }
+              >
+                <Body color="light" text="Conversation started" />
+              </Timeline.Item>
+              <Timeline.Item
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  icon="check"
+                  iconColor="teal"
+                  onClick={() =>
+                    setTimelineItemClicks((prev) => ({
+                      ...prev,
+                      trip: prev.trip + 1,
+                    }))
+                  }
+              >
+                <Body color="light" text="Trip #12422" />
+              </Timeline.Item>
+              <Timeline.Item
+                  cursor="pointer"
+                  htmlOptions={{
+                    ...clickableDemoHtmlOptions,
+                    role: "button",
+                    tabIndex: 0,
+                  }}
+                  icon="smile"
+                  iconColor="green"
+                  onClick={() =>
+                    setTimelineItemClicks((prev) => ({
+                      ...prev,
+                      resolved: prev.resolved + 1,
+                    }))
+                  }
+              >
+                <Body color="light" text="Conversation resolved" />
+              </Timeline.Item>
+            </Timeline>
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="Timestamp" />
+          <InteractiveExample
+              count={timestampClicks}
+              label="Timestamp"
+              reset={() => setTimestampClicks(0)}
+          >
+            <Timestamp
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setTimestampClicks((prev: number) => prev + 1)}
+                timestamp={demoDateTime}
+            />
+            <Body text="Click the above Timestamp example" />
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
@@ -497,6 +1159,39 @@ const OnClick = () => {
           </InteractiveExample>
         </Card>
         <Card padding="md" width="sm">
+          <Title size={4} text="User" />
+          <InteractiveExample
+              count={userClicks}
+              label="User"
+              reset={() => setUserClicks(0)}
+          >
+            <User
+                avatar
+                cursor="pointer"
+                htmlOptions={clickableDemoHtmlOptions}
+                name="Click ThisUser"
+                onClick={() => setUserClicks((prev: number) => prev + 1)}
+                title="Example"
+            />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
+          <Title size={4} text="User Badge" />
+          <InteractiveExample
+              count={userBadgeClicks}
+              label="User Badge"
+              reset={() => setUserBadgeClicks(0)}
+          >
+            <UserBadge
+                badge="veteran"
+                htmlOptions={clickablePointerHtmlOptions}
+                onClick={() => setUserBadgeClicks((prev: number) => prev + 1)}
+                size="md"
+            />
+            <Body text="Click the above User Badge example" />
+          </InteractiveExample>
+        </Card>
+        <Card padding="md" width="sm">
           <Title size={4} text="Button (kit-specific)" />
           <InteractiveExample
               count={buttonClicks}
@@ -536,7 +1231,20 @@ const OnClick = () => {
           <code>role</code>, <code>tabIndex</code>, and an accessible name.
           Adding a role and tab stop does not add keyboard activation; use an
           appropriate native interactive element when possible, or implement
-          equivalent keyboard behavior.
+          equivalent keyboard behavior. Icon attaches <code>onClick</code> to
+          the visible SVG, custom icon, emoji, or fallback element, with no
+          extra wrapper. Icon Circle attaches it to the circle root. A
+          first-class <code>onClick</code> replaces <code>htmlOptions.onClick</code>{" "}
+          and an <code>onClick</code> already on a custom SVG. If you omit the
+          first-class prop, <code>htmlOptions.onClick</code> still replaces that
+          SVG handler. If you omit both, the SVG handler stays. When an icon is
+          the action, give it an accessible name plus <code>role</code> and{" "}
+          <code>tabIndex</code>. For repeated content (Timeline.Item, ListItem,
+          ProgressStepItem), attach <code>onClick</code> on each item —
+          sibling items do not share a handler. These are subcomponents, so
+          they do not add a Global Event Props tab on their parent kit show
+          pages (List, Progress Step, Timeline). Legend attaches to its outer root
+          (one Legend instance = one series entry).
         </>
       }
       VisualGuideCard={VisualGuideCard()}
@@ -544,6 +1252,15 @@ const OnClick = () => {
       <PropsExamplesTable
         headers={["Supported Kit", "Type", "React Example", "Notes"]}
         rows={[
+          [
+            "Avatar",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-avatar-react"
+              text={`<Avatar name="Harvey Specter" onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached to the root Avatar element.",
+          ],
           [
             "Body",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
@@ -572,6 +1289,15 @@ const OnClick = () => {
             "Attached to the root Card tag.",
           ],
           [
+            "Contact",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-contact-react"
+              text={`<Contact contactType="email" contactValue="email@example.com" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Contact element for styled and unstyled variants.",
+          ],
+          [
             "Currency",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -588,6 +1314,78 @@ const OnClick = () => {
               text={`<DashboardValue onClick={() => alert("clicked")} cursor="pointer" statLabel="Sales" statValue={{ value: 100 }} />`}
             />,
             "Attached once to the root Dashboard Value element.",
+          ],
+          [
+            "Date",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-react"
+              text={`<FormattedDate value={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date element for styled and unstyled variants.",
+          ],
+          [
+            "Date Range Inline",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-range-inline-react"
+              text={`<DateRangeInline startDate={startDate} endDate={endDate} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date Range Inline element.",
+          ],
+          [
+            "Date Range Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-range-stacked-react"
+              text={`<DateRangeStacked startDate={startDate} endDate={endDate} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date Range Stacked element.",
+          ],
+          [
+            "Date Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-stacked-react"
+              text={`<DateStacked date={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date Stacked element for both bold and default variants.",
+          ],
+          [
+            "Date Year Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-year-stacked-react"
+              text={`<DateYearStacked date={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Date Year Stacked element.",
+          ],
+          [
+            "Weekday Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-weekday-stacked-react"
+              text={`<WeekdayStacked date={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached once to the root Weekday Stacked element.",
+          ],
+          [
+            "Date Time",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-time-react"
+              text={`<DateTime datetime={date} onClick={() => alert("clicked")} showDayOfWeek={false} />`}
+            />,
+            "Attached to the root Date Time element.",
+          ],
+          [
+            "Date Time Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-date-time-stacked-react"
+              text={`<DateTimeStacked datetime={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Date Time Stacked element.",
           ],
           [
             "Detail",
@@ -617,6 +1415,24 @@ const OnClick = () => {
             "Attached to the root Highlight element.",
           ],
           [
+            "Icon",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-icon-react"
+              text={`<Icon aria={{ label: "Add favorite" }} cursor="pointer" htmlOptions={{ role: "button", tabIndex: 0 }} icon="heart" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the visible SVG, custom icon, emoji, or fallback element. role and tabIndex do not add keyboard activation. Set an accessible name for the action.",
+          ],
+          [
+            "Icon Circle",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-icon-circle-react"
+              text={`<IconCircle aria={{ label: "Add favorite" }} cursor="pointer" htmlOptions={{ role: "button", tabIndex: 0 }} icon="heart" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the Icon Circle root. The inner icon does not get a second handler.",
+          ],
+          [
             "Icon Stat Value",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -635,6 +1451,24 @@ const OnClick = () => {
             "Attached once to the root Icon Value element.",
           ],
           [
+            "Image",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-image-react"
+              text={`<Image alt="Demo" url="https://example.com/image.jpg" onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached to the root Image element.",
+          ],
+          [
+            "Label Pill",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-label-pill-react"
+              text={`<LabelPill label="Queue" onClick={() => alert("clicked")} pillValue="4" />`}
+            />,
+            "Attached to the root Label Pill element.",
+          ],
+          [
             "Label Value",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -642,6 +1476,24 @@ const OnClick = () => {
               text={`<LabelValue label="Status" value="Open" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
             "Attached once to the root Label Value element for default and details variants.",
+          ],
+          [
+            "Legend",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-legend-react"
+              text={`<Legend text="Series A" onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached to the outer Legend root. Per-entry callbacks across many Legend instances stay consumer-owned.",
+          ],
+          [
+            "ListItem (subcomponent of List)",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-list-item-react"
+              text={`<ListItem onClick={() => alert("clicked")} cursor="pointer">Row</ListItem>`}
+            />,
+            "Attached to each ListItem root (ordinary and draggable). Sibling items keep separate handlers. Not shown on the List kit Global Event Props tab.",
           ],
           [
             "Message",
@@ -671,6 +1523,60 @@ const OnClick = () => {
             "Attached once to the root Multiple Users Stacked element. Avatar and overflow badge clicks bubble to the whole-kit handler; this is not a per-user callback.",
           ],
           [
+            "Online Status",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-online-status-react"
+              text={`<OnlineStatus cursor="pointer" onClick={() => alert("clicked")} status="online" />`}
+            />,
+            "Attached to the root Online Status element.",
+          ],
+          [
+            "Person",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-person-react"
+              text={`<Person firstName="Harvey" lastName="Specter" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Person element.",
+          ],
+          [
+            "Pill",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-pill-react"
+              text={`<Pill cursor="pointer" onClick={() => alert("clicked")} text="Clickable pill" />`}
+            />,
+            "Attached to the root Pill element.",
+          ],
+          [
+            "ProgressStepItem (subcomponent of Progress Step)",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-progress-step-item-react"
+              text={`<ProgressStepItem status="active" onClick={() => alert("clicked")} cursor="pointer">Step</ProgressStepItem>`}
+            />,
+            "Attached to each ProgressStepItem root. Sibling steps do not share a handler. Not shown on the Progress Step kit Global Event Props tab.",
+          ],
+          [
+            "Source",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-source-react"
+              text={`<Source onClick={() => alert("clicked")} source="Retail" type="retail" />`}
+            />,
+            "Attached to the root Source element.",
+          ],
+          [
+            "Stat Change",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-stat-change-react"
+              text={`<StatChange change="increase" onClick={() => alert("clicked")} value="12.4" />`}
+            />,
+            "Attached to the root element when value is set.",
+          ],
+          [
             "Stat Value",
             <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
             <ExampleCodeCard
@@ -678,6 +1584,42 @@ const OnClick = () => {
               text={`<StatValue value={104} unit="mg" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
             "Attached once to the root Stat Value element.",
+          ],
+          [
+            "Time Range Inline",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-time-range-inline-react"
+              text={`<TimeRangeInline startTime={start} endTime={end} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Time Range Inline element.",
+          ],
+          [
+            "Time Stacked",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-time-stacked-react"
+              text={`<TimeStacked time={date} timeZone="America/New_York" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Time Stacked element.",
+          ],
+          [
+            "Timeline.Item (subcomponent of Timeline)",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-timeline-item-react"
+              text={`<Timeline.Item onClick={() => alert("clicked")} cursor="pointer">Event</Timeline.Item>`}
+            />,
+            "Attached to each Timeline.Item root. Sibling items keep separate handlers. Not shown on the Timeline kit Global Event Props tab.",
+          ],
+          [
+            "Timestamp",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-timestamp-react"
+              text={`<Timestamp timestamp={date} onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root Timestamp element.",
           ],
           [
             "Title",
@@ -705,6 +1647,24 @@ const OnClick = () => {
               text={`<TitleDetail title="Name" detail="Role" onClick={() => alert("clicked")} cursor="pointer" />`}
             />,
             "Attached once to the root Title Detail element.",
+          ],
+          [
+            "User",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-user-react"
+              text={`<User name="Harvey Specter" title="Attorney" onClick={() => alert("clicked")} cursor="pointer" />`}
+            />,
+            "Attached to the root User element.",
+          ],
+          [
+            "User Badge",
+            <ExampleCodeCard copyIcon={false} text="MouseEventHandler" />,
+            <ExampleCodeCard
+              id="onclick-user-badge-react"
+              text={`<UserBadge badge="veteran" onClick={() => alert("clicked")} />`}
+            />,
+            "Attached to the root User Badge element.",
           ],
         ]}
       />
@@ -781,9 +1741,19 @@ const OnClick = () => {
             "Existing implementations remain unchanged.",
           ],
           [
+            "Custom SVG onClick + Icon onClick",
+            "First-class onClick wins",
+            "cloneElement applies globalEventProps after htmlOptions, so the custom SVG handler remains only when both are omitted.",
+          ],
+          [
             "Nested clickable kits",
             "Both can fire",
             "Normal React event bubbling applies unless stopped.",
+          ],
+          [
+            "Sibling ListItem / Timeline.Item / ProgressStepItem",
+            "Only the clicked item fires",
+            "Each item owns its own onClick on its root.",
           ],
         ]}
       />

@@ -2,11 +2,11 @@
   "template": "<Layout{{props}} />",
   "propTargets": {},
   "defaults": {
-    "collapse": "xs",
+    "dark": false,
     "full": false,
     "position": "left",
     "responsive": false,
-    "size": "sm",
+    "size": "md",
     "variant": "light",
     "transparent": false,
     "layout": "sidebar"

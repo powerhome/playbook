@@ -49,9 +49,11 @@ test('supported kits set globalEventProps: true in kit.schema.json', () => {
     'icon_stat_value',
     'icon_value',
     'label_value',
+    'legend',
     'message',
     'multiple_users',
     'multiple_users_stacked',
+
     'stat_value',
     'title',
     'title_count',

@@ -24,7 +24,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "icon": {
       "type": "string",
@@ -45,6 +46,7 @@
     }
   },
   "globalProps": true,
+  "globalEventProps": true,
   "usage": {
     "react": {
       "import": "import { StatChange } from 'playbook-ui'",

@@ -62,7 +62,7 @@ module PlaybookWebsite
     end
 
     def get_kits_pb_website
-      menu = YAML.load_file(Rails.root.join("config/menu.yml"))
+      menu = YAML.load_file(Rails.root.join("config/menu.yml"), aliases: true)
       menu["kits"]
     end
     # rubocop:enable Naming/AccessorMethodName

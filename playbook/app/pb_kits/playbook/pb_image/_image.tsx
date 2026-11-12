@@ -1,9 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 
-type ImageType = {
+type ImageProps = {
   alt?: string,
   aria?: {[key: string]: string},
   className?: string,
@@ -15,9 +16,9 @@ type ImageType = {
   rounded?: boolean,
   transition?: "blur" | "fade" | "scale",
   url?: string,
-} & GlobalProps
+} & GlobalProps & GlobalEventProps
 
-const Image = (props: ImageType): React.ReactElement => {
+const Image = (props: ImageProps): React.ReactElement => {
   const {
     alt = '',
     aria = {},
@@ -50,6 +51,7 @@ const Image = (props: ImageType): React.ReactElement => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        {...globalEventProps(props)}
         alt={alt}
         className={classes}
         id={id}

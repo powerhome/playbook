@@ -11,7 +11,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "icon": {
       "type": "string",
@@ -66,7 +67,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": 0
     },
     "variant": {
       "type": "enum",

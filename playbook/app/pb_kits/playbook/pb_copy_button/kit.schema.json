@@ -12,14 +12,16 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "text": {
       "type": "string",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": "Copy"
     },
     "tooltipPlacement": {
       "type": "enum",
@@ -31,7 +33,8 @@
         "right",
         "bottom",
         "left"
-      ]
+      ],
+      "default": "bottom"
     },
     "tooltipText": {
       "type": "string",
@@ -46,7 +49,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "variant": {
       "type": "enum",
@@ -64,7 +68,8 @@
       "type": "number",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": 1000
     },
     "tooltipPosition": {
       "platforms": [

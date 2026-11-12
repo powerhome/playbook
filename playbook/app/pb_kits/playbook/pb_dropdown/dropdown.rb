@@ -29,6 +29,8 @@ module Playbook
                         default: true
       prop :autocomplete, type: Playbook::Props::Boolean,
                           default: false
+      prop :allow_option_creation, type: Playbook::Props::Boolean,
+                                   default: false
       prop :async, type: Playbook::Props::Boolean, default: false
       prop :active_style, type: Playbook::Props::HashProp,
                           default: {}
@@ -75,11 +77,18 @@ module Playbook
                                      default: true
       prop :options_event_type, type: Playbook::Props::String,
                                 default: ""
+      prop :enable_pill_reorder, type: Playbook::Props::Boolean,
+                                 default: false
+      prop :external_drag_handle, type: Playbook::Props::Boolean,
+                                  default: false
+      prop :show_pill_index, type: Playbook::Props::Boolean,
+                             default: false
 
       def data
         Hash(prop(:data)).merge(
           pb_dropdown: true,
           pb_dropdown_async: async ? true : nil,
+          pb_dropdown_allow_option_creation: allow_option_creation && variant != "quickpick" ? true : nil,
           pb_dropdown_active_style: active_style.present? ? active_style.to_json : nil,
           pb_dropdown_default_value: async && default_value.present? ? default_value.to_json : nil,
           pb_dropdown_search_term_minimum_length: async ? search_term_minimum_length : nil,
@@ -99,7 +108,10 @@ module Playbook
           pb_dropdown_options_by_context: options_by_context.present? ? options_by_context.to_json : nil,
           pb_dropdown_context_selector: context_selector.presence,
           pb_dropdown_clear_on_context_change: clear_on_context_change,
-          options_event_type: options_event_type.presence
+          options_event_type: options_event_type.presence,
+          pb_dropdown_enable_pill_reorder: multi_select && enable_pill_reorder ? true : nil,
+          pb_dropdown_external_drag_handle: multi_select && enable_pill_reorder && external_drag_handle ? true : nil,
+          pb_dropdown_show_pill_index: multi_select && show_pill_index ? true : nil
         ).compact
       end
 
@@ -111,6 +123,17 @@ module Playbook
 
       def select_id
         id.presence || (label.present? ? label.downcase.gsub(/\s+/, "_").gsub(/[^a-z0-9_]/, "") : nil)
+      end
+
+      def autocomplete_enabled?
+        autocomplete || (allow_option_creation && variant != "quickpick")
+      end
+
+      def input_name
+        return name unless multi_select
+        return name if name.present? && name.end_with?("[]")
+
+        "#{name}[]"
       end
 
       def error_id
