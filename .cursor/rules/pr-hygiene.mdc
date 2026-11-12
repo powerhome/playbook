@@ -16,10 +16,11 @@ When helping with commits or pull requests, align with `.github/PULL_REQUEST_TEM
 
 ## PR checklist (remind when creating/updating a PR)
 
+- Use a Conventional Commit title as described in [Playbook PR titles](../../docs/PR_TITLES.md). If the PR has a Runway key, put it at the end.
 - Optional changelog label: `enhancement`, `bug`, `improvement`, `new kit`, `deprecated`, or `breaking`
 - `milano` when ready for review
 - Optional `inactive RC` when not an active RC
 
 ## Commit messages
 
-No enforced Conventional Commits format in this repo. Match recent history style; do not invent a format unless the user asks.
+Match recent history for individual commit messages. The Conventional Commit title check runs on the PR title.

@@ -39,9 +39,11 @@ Keep rules lean — general quality only. Workflow detail lives in skills + `doc
 | Repo orientation | [`.cursor/rules/playbook-repo.mdc`](.cursor/rules/playbook-repo.mdc) — packages, generated files, regenerate |
 | Minimal diffs | [`.cursor/rules/minimal-diffs.mdc`](.cursor/rules/minimal-diffs.mdc) — no drive-by formatting |
 | Readable code | [`.cursor/rules/readable-code.mdc`](.cursor/rules/readable-code.mdc) — less code, reuse, clear names, performance, no DS regressions |
-| PRs / commits | [`.cursor/rules/pr-hygiene.mdc`](.cursor/rules/pr-hygiene.mdc) — tests, labels/semver |
+| PRs / commits | [`.cursor/rules/pr-hygiene.mdc`](.cursor/rules/pr-hygiene.mdc) — tests, PR titles, and labels |
 
 Formatting is **ESLint + RuboCop** (no Prettier). PR expectations: [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md).
+
+When creating or updating a PR title, follow the [Playbook PR title requirements](docs/PR_TITLES.md). Use a Conventional Commit title and put the Runway key at the end when the PR has one.
 
 ## Where to look
 
