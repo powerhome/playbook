@@ -2,15 +2,15 @@
   "template": "<FixedConfirmationToast{{props}} />",
   "propTargets": {},
   "defaults": {
+    "autoClose": 0,
     "closeable": false,
     "multiLine": false,
     "navMarginTop": false,
-    "status": "success",
-    "autoClose": 0,
-    "onClose": "() => {}",
     "open": true,
-    "text": "Items Successfully Moved",
-    "zIndex": "max"
+    "status": "success",
+    "zIndex": "max",
+    "onClose": "() => {}",
+    "text": "Items Successfully Moved"
   },
   "groups": [
     {

@@ -37,10 +37,18 @@ module Playbook
                                 default: false
       prop :full_width_cell, type: Playbook::Props::Boolean,
                              default: false
+      prop :group_separators, type: Playbook::Props::Boolean,
+                              default: false
       prop :persist_toggle_expansion_button, type: Playbook::Props::Boolean,
                                              default: false
       prop :pinned_rows, type: Playbook::Props::HashProp,
                          default: {}
+
+      # Marker for Rails JS: only toggle group-separator-expanded when this is set.
+      # Use merge (not tap/mutate) so we don't write onto the shared default {} or a caller-owned data hash.
+      def data
+        Hash(prop(:data)).merge(group_separators ? { group_separators: true } : {})
+      end
 
       def classname
         additional_classes = [

@@ -24,6 +24,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
   it { is_expected.to define_boolean_prop(:selectable_rows).with_default(false) }
   it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
   it { is_expected.to define_boolean_prop(:full_width_cell).with_default(false) }
+  it { is_expected.to define_boolean_prop(:group_separators).with_default(false) }
   it { is_expected.to define_hash_prop(:pinned_rows).with_default({}) }
 
   describe "#classname" do
@@ -533,6 +534,45 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
       it "places the last bottom pinned row at bottom 0" do
         style = instance.build_pinned_row_style(2, position: "bottom", bottom_total: 3)
         expect(style).to include("bottom: calc(2.5em * 0)")
+      end
+    end
+
+    describe "group separator closes-from depth" do
+      let(:table_data) do
+        [
+          {
+            id: "2022",
+            children: [
+              {
+                id: "q1",
+                children: [
+                  { id: "jan", children: [{ id: "15" }, { id: "25" }] },
+                  { id: "may", children: [{ id: "2" }] },
+                ],
+              },
+              { id: "q2", children: [{ id: "june", children: [{ id: "5" }] }] },
+            ],
+          },
+        ]
+      end
+      let(:instance) { subject.new(table_data: table_data) }
+
+      def closes_from(id)
+        instance.find_row_by_id(table_data, id)[:group_closes_from_depth]
+      end
+
+      it "is the depth of the outermost group a last sibling closes", :aggregate_failures do
+        expect(closes_from("2022")).to be_nil
+        expect(closes_from("15")).to be_nil
+        expect(closes_from("25")).to eq 2
+        expect(closes_from("2")).to eq 1
+        expect(closes_from("5")).to eq 0
+      end
+
+      it "insets to the outermost closed group's trail, full-bleed for year-level", :aggregate_failures do
+        expect(instance.group_separator_inset_em(2)).to eq 3.5
+        expect(instance.group_separator_inset_em(1)).to eq 2.25
+        expect(instance.group_separator_inset_em(0)).to eq 0
       end
     end
   end

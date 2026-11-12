@@ -33,19 +33,22 @@
       "type": "boolean | GenericObject[]",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "cacheOptions": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "loading": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "onInputChange": {
       "type": "function",
@@ -139,14 +142,16 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "defaultValue": {
       "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": {}
     },
     "error": {
       "type": "string",
@@ -159,7 +164,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "enablePillReorder": {
       "type": "boolean",
@@ -181,7 +187,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": true
     },
     "label": {
       "type": "string",
@@ -323,7 +330,10 @@
         "react",
         "rails"
       ],
-      "default": ""
+      "default": {
+        "react": "Please fill out this field.",
+        "rails": ""
+      }
     },
     "searchTermMinimumLength": {
       "platforms": [

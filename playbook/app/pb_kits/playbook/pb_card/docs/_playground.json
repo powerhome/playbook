@@ -10,6 +10,7 @@
     "borderRadius": "md",
     "draggableItem": false,
     "dragHandle": true,
+    "highlight": {},
     "selected": false,
     "tag": "div",
     "headerColor": "category_1",

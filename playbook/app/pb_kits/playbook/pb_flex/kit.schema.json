@@ -28,15 +28,27 @@
         "react",
         "rails"
       ],
-      "values": [
-        "start",
-        "center",
-        "end",
-        "around",
-        "between",
-        "evenly",
-        "none"
-      ],
+      "values": {
+        "react": [
+          "start",
+          "center",
+          "end",
+          "around",
+          "between",
+          "evenly",
+          "none"
+        ],
+        "rails": [
+          "start",
+          "center",
+          "end",
+          "stretch",
+          "around",
+          "between",
+          "evenly",
+          "none"
+        ]
+      },
       "default": "none"
     },
     "inline": {
@@ -118,21 +130,24 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": "none"
     },
     "rowGap": {
       "type": "SizeType | SizeResponsiveType",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": "none"
     },
     "columnGap": {
       "type": "SizeType | SizeResponsiveType",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": "none"
     },
     "wrap": {
       "type": "boolean",

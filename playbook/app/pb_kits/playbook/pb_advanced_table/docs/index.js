@@ -54,6 +54,7 @@ export { default as AdvancedTableColumnStylingBackground } from './_advanced_tab
 export { default as AdvancedTableColumnStylingBackgroundMulti } from './_advanced_table_column_styling_background_multi.jsx'
 export { default as AdvancedTableColumnStylingBackgroundCustom } from './_advanced_table_column_styling_background_custom.jsx'
 export { default as AdvancedTableCascadeCollapse } from './_advanced_table_cascade_collapse.jsx'
+export { default as AdvancedTableGroupSeparators } from './_advanced_table_group_separators.jsx'
 export { default as AdvancedTableSortParentOnly } from './_advanced_table_sort_parent_only.jsx'
 export { default as AdvancedTableSkippingSubrowHeaders } from './_advanced_table_skipping_subrow_headers.jsx'
 export { default as AdvancedTablePinnedRowsBottom } from './_advanced_table_pinned_rows_bottom.jsx'

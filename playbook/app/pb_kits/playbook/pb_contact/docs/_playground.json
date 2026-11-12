@@ -2,6 +2,7 @@
   "template": "<Contact{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "iconEnabled": true,
     "unstyled": false,
     "contactType": "email",

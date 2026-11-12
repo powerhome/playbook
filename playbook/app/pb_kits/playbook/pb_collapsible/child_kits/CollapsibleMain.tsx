@@ -31,11 +31,11 @@ const CollapsibleMain = ({
   const mainSpacing = globalProps(props, { cursor })
 
   const handleCollapsibleClick = () => {
-    onClick && onClick();
-    //To disable default toggling behavior return "true" in the onClick()
-    const disableToggle = onClick && onClick();
+    // Returning true from onClick disables the default toggle.
+    const disableToggle = onClick && onClick()
+
     if (disableToggle !== true) {
-    toggle();
+      toggle()
     }
   }
 

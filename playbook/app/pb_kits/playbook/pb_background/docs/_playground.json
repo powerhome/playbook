@@ -5,6 +5,7 @@
     "backgroundColor": "light",
     "backgroundSize": "cover",
     "backgroundRepeat": "initial",
+    "imageUrl": "",
     "tag": "div"
   },
   "children": {

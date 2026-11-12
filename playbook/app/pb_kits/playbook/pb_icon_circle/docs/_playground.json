@@ -2,10 +2,10 @@
   "template": "<IconCircle{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "size": "md",
     "variant": "default",
-    "icon": "rocket",
-    "dark": false
+    "icon": "rocket"
   },
   "groups": [
     {

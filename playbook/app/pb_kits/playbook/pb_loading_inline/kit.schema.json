@@ -50,7 +50,10 @@
         "react",
         "rails"
       ],
-      "default": "Loading"
+      "default": {
+        "react": " Loading",
+        "rails": "Loading"
+      }
     },
     "variant": {
       "type": "enum",

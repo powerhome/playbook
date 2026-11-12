@@ -46,6 +46,28 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return this.childRowsMap.get(parentId);
   }
 
+  // True when expand shows real data rows (not only the inline_row_loading placeholder).
+  // Match React: keep the group separator while subRows.length === 0.
+  static hasRealChildRows(childRows) {
+    return childRows.some(
+      (row) => !row.classList.contains("inline-loading-row")
+    );
+  }
+
+  get groupSeparatorsEnabled() {
+    return Boolean(this.mainTable?.dataset.groupSeparators);
+  }
+
+  // Restore deferred separator hiding only when nested data rows exist.
+  restoreExpandedClass(elem) {
+    if (!this.groupSeparatorsEnabled) return;
+    const toggleId = elem.querySelector("[data-advanced-table]")?.id;
+    if (!toggleId || !PbAdvancedTable.expandedRows.has(toggleId)) return;
+    if (PbAdvancedTable.hasRealChildRows(this.childRowsFor(toggleId))) {
+      elem.classList.add("group-separator-expanded");
+    }
+  }
+
   updateTableSelectedRowsAttribute() {
     const mainTable = this.mainTable;
     if (!mainTable) return;
@@ -298,14 +320,25 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       const isExpanded =
         toggleBtn.querySelector(UP_ARROW_SELECTOR).style.display ===
         "inline-block";
+      const parentRow = toggleBtn.closest("tr");
+      const childRows = this.childRowsFor(toggleBtn.id);
       if (!isExpanded) {
         PbAdvancedTable.expandedRows.add(toggleBtn.id);
+        // Only defer the separator when real children exist — a lone loading
+        // row must not clear group-separator-row via :not(.group-separator-expanded).
+        if (
+          this.groupSeparatorsEnabled &&
+          PbAdvancedTable.hasRealChildRows(childRows)
+        ) {
+          parentRow?.classList.add("group-separator-expanded");
+        }
       } else {
         PbAdvancedTable.expandedRows.delete(toggleBtn.id);
+        if (this.groupSeparatorsEnabled) {
+          parentRow?.classList.remove("group-separator-expanded");
+        }
       }
 
-      // Find direct child rows
-      const childRows = this.childRowsFor(toggleBtn.id);
       this.toggleElement(childRows);
 
       // Restore original element context
@@ -401,6 +434,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     elements.forEach((elem) => {
       elem.style.display = "table-row";
       elem.classList.add("is-visible");
+      this.restoreExpandedClass(elem);
       const childRowsAll = this.table.querySelectorAll(
         `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
       );
@@ -443,6 +477,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         if (allAncestorsExpanded || checkIfParentIsExpanded()) {
           childRow.style.display = "table-row";
           childRow.classList.add("is-visible");
+          this.restoreExpandedClass(childRow);
         } else {
           childRow.style.display = "none";
           childRow.classList.remove("is-visible");
@@ -455,6 +490,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     elements.forEach((elem) => {
       elem.style.display = "none";
       elem.classList.remove("is-visible");
+      // Keep `group-separator-expanded` while hidden so re-expanding an ancestor
+      // still defers the separator to descendants (toggle click clears it when collapsing).
 
       // Remove the row ID from expandedRows when this row is hidden
       if (PbAdvancedTable.expandedRows.has(elem.id)) {

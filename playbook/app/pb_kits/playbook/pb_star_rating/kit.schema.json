@@ -11,7 +11,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "fixedWidth": {
       "type": "boolean",
@@ -67,12 +68,19 @@
         "react",
         "rails"
       ],
-      "values": [
-        "yellow",
-        "primary",
-        "subtle",
-        "outline"
-      ],
+      "values": {
+        "react": [
+          "yellow",
+          "primary",
+          "subtle",
+          "outline"
+        ],
+        "rails": [
+          "yellow",
+          "primary",
+          "subtle"
+        ]
+      },
       "default": "yellow"
     },
     "backgroundType": {

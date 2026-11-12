@@ -31,7 +31,7 @@ describe('PbDate Kit', () => {
   })
 
   afterEach(() => {
-    console.error.mockRestore()
+    jest.restoreAllMocks()
   })
 
   // Default Props

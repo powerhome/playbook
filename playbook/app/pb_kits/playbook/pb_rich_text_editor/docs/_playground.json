@@ -2,14 +2,21 @@
   "template": "<RichTextEditor{{props}} />",
   "propTargets": {},
   "defaults": {
+    "advancedEditorToolbar": true,
+    "toolbarBottom": false,
+    "focus": false,
+    "inputOptions": {},
+    "inline": false,
     "markdownSupport": false,
     "requiredIndicator": false,
     "simple": false,
-    "advancedEditorToolbar": true,
+    "sticky": false,
+    "template": "",
+    "value": "",
+    "maxWidth": "md",
     "inputHeight": "md",
     "inputMinHeight": "sm",
     "label": "Description",
-    "maxWidth": "md",
     "name": "description"
   },
   "groups": [
