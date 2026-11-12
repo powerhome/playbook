@@ -66,7 +66,7 @@ private
     render json: {
       html: nil,
       error: Playground::PreviewLimits::CLIENT_LIMIT_ERROR,
-    }, status: :payload_too_large
+    }, status: :content_too_large
     true
   end
 
