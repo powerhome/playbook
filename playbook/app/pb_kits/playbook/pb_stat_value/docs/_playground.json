@@ -1,7 +1,9 @@
 {
   "template": "<StatValue{{props}} />",
   "propTargets": {},
-  "defaults": {},
+  "defaults": {
+    "value": 0
+  },
   "groups": [
     {
       "name": "Content",

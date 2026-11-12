@@ -11,7 +11,8 @@
       "type": "number",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": 1
     },
     "onChange": {
       "type": "function",
@@ -23,13 +24,15 @@
       "type": "number",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": 5
     },
     "total": {
       "type": "number",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": 1
     },
     "model": {
       "platforms": [

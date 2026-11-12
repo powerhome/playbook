@@ -21,7 +21,10 @@
         "error",
         "success"
       ],
-      "default": "default"
+      "default": {
+        "react": "",
+        "rails": "default"
+      }
     },
     "dark": {
       "type": "boolean",
@@ -34,7 +37,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     },
     "highlighting": {
       "type": "boolean",
@@ -55,7 +59,10 @@
         "negative",
         "positive"
       ],
-      "default": "neutral"
+      "default": {
+        "react": null,
+        "rails": "neutral"
+      }
     },
     "tag": {
       "type": "enum",
@@ -81,7 +88,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "variant": {
       "type": "enum",
@@ -90,7 +98,8 @@
       ],
       "values": [
         "link"
-      ]
+      ],
+      "default": null
     }
   },
   "globalProps": true,

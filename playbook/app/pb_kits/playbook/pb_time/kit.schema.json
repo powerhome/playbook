@@ -46,10 +46,18 @@
         "react",
         "rails"
       ],
-      "values": [
-        "md",
-        "sm"
-      ],
+      "values": {
+        "react": [
+          "md",
+          "sm"
+        ],
+        "rails": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
       "default": "sm"
     },
     "showTimezone": {
@@ -94,7 +102,7 @@
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"time\", props: { align: \"left\", size: \"md\" }) %>"
+      "example": "<%= pb_rails(\"time\", props: { align: \"left\", size: \"xs\" }) %>"
     }
   }
 }

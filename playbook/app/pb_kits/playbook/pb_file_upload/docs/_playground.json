@@ -2,9 +2,10 @@
   "template": "<FileUpload{{props}} />",
   "propTargets": {},
   "defaults": {
-    "accept": {},
     "customMessage": "",
-    "dark": false
+    "dark": false,
+    "acceptedFilesDescription": "",
+    "accept": {}
   },
   "groups": [
     {

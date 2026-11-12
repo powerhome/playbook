@@ -32,13 +32,16 @@ Rails.application.routes.draw do
          defaults: { format: :json }
   end
 
+  # Rails route redirects interpolate only %{name} tokens.
+  # rubocop:disable Style/FormatStringToken
   # Legacy /beta/* redirects (301)
   get "beta",       to: redirect("/")
-  get "beta/*path", to: redirect("/%<path>s")
+  get "beta/*path", to: redirect("/%{path}")
 
   # Legacy Swift kit platform → Rails
-  get "kits/advanced_table/:name/swift",     to: redirect("/kits/advanced_table/%<name>s/rails")
-  get "kits/:name/swift",                    to: redirect("/kits/%<name>s/rails")
+  get "kits/advanced_table/:name/swift",     to: redirect("/kits/advanced_table/%{name}/rails")
+  get "kits/:name/swift",                    to: redirect("/kits/%{name}/rails")
+  # rubocop:enable Style/FormatStringToken
 
   # SPA routes: all served by the React app
   get "kits",                                to: "pages#application"

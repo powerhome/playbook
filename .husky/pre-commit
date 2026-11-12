@@ -2,4 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn lint-staged
+node playbook/scripts/check-external-runtime-deps.js
 bash .git-hooks/pre_commit/verify_docs_metadata.sh

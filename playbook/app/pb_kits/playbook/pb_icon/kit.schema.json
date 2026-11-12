@@ -61,20 +61,31 @@
         "react",
         "rails"
       ],
-      "values": [
-        "horizontal",
-        "vertical",
-        "both",
-        "none"
-      ],
-      "default": null
+      "values": {
+        "react": [
+          "horizontal",
+          "vertical",
+          "both",
+          "none"
+        ],
+        "rails": [
+          "horizontal",
+          "vertical",
+          "both"
+        ]
+      },
+      "default": {
+        "react": "none",
+        "rails": null
+      }
     },
     "icon": {
       "type": "string | ReactSVGElement",
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "inverse": {
       "type": "boolean",
@@ -98,11 +109,17 @@
         "react",
         "rails"
       ],
-      "values": [
-        "left",
-        "right",
-        "none"
-      ],
+      "values": {
+        "react": [
+          "left",
+          "right",
+          "none"
+        ],
+        "rails": [
+          "left",
+          "right"
+        ]
+      },
       "default": null
     },
     "pulse": {
