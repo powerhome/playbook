@@ -34,10 +34,11 @@ type ButtonPropTypes = {
   size?: 'sm' | 'md' | 'lg',
   target?: string,
   text?: string,
+  // @schemaOmit Deprecated. Adds `pb_button_${type}` only (default `inline`). Use `fullWidth` for layout and `variant` for appearance. HTML type is `htmlType`.
   type?: 'inline' | null,
-  htmlType?: 'submit' | 'reset' | 'button' | undefined,
   value?: string | null,
   variant?: 'primary' | 'secondary' | 'link'| 'danger' | 'reaction',
+  htmlType?: 'submit' | 'reset' | 'button' | undefined,
   wrapperClass?: string,
 } & GlobalProps
 
@@ -60,6 +61,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   const isIconOnly = icon && !text && !children && variant !== 'reaction'
 
   if (variant) classNames.push(`pb_button_${variant}`)
+  // Deprecated `type` still controls this class, including legacy values. HTML type is `htmlType`.
   if (type) classNames.push(`pb_button_${type}`)
   if (fullWidth) classNames.push('pb_button_block')
   classNames.push(disabled ? 'pb_button_disabled' : 'pb_button_enabled')
