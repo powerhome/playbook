@@ -339,10 +339,13 @@ function parseTypeBlock(block, imports = new Map()) {
         props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
       }
       if (omitNextProp) {
+        // Keep brace depth so a multiline object is skipped as a whole.
+        // Resetting to 0 would treat the first nested field as a new prop.
         currentProp = null;
         currentType = '';
-        depth = 0;
         omitNextProp = false;
+        const typeStart = match[2];
+        depth = (typeStart.match(/\{/g) || []).length - (typeStart.match(/\}/g) || []).length;
         continue;
       }
       omitNextProp = false;
