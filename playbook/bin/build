@@ -7,3 +7,4 @@ set -e
 echo ">>> Building"
 time bin/rubocop --display-cop-names --extra-details --parallel --display-style-guide
 time yarn lint
+time yarn check:external-deps

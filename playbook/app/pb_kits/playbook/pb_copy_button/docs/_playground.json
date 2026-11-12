@@ -2,9 +2,13 @@
   "template": "<CopyButton{{props}} />",
   "propTargets": {},
   "defaults": {
+    "from": "",
+    "text": "Copy",
+    "tooltipPlacement": "bottom",
     "tooltipText": "Copied!",
+    "value": "Boo from Ghost Crew!",
     "variant": "icon",
-    "value": "Boo from Ghost Crew!"
+    "timeout": 1000
   },
   "groups": [
     {

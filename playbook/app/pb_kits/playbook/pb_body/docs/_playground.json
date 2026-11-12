@@ -2,10 +2,10 @@
   "template": "<Body{{props}}>{{children}}</Body>",
   "propTargets": {},
   "defaults": {
-    "color": "default",
+    "highlightedText": [],
     "highlighting": false,
-    "status": "neutral",
-    "tag": "div"
+    "tag": "div",
+    "text": ""
   },
   "children": {
     "editable": true,

@@ -7,11 +7,11 @@
       "change": "decrease",
       "value": "26.1"
     },
-    "statLabel": "Decreased Value",
     "statValue": {
       "value": "1,428",
       "unit": "appts"
-    }
+    },
+    "statLabel": "Decreased Value"
   },
   "groups": [
     {

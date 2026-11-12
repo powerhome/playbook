@@ -70,6 +70,9 @@ const EXCLUDED_PROPS = [
   'children', 'className', 'id', 'data', 'aria', 'htmlOptions', 'wrapperClass'
 ];
 
+// Kits that have a kit.schema.json but intentionally no playground
+const NO_PLAYGROUND_KITS = new Set(['lightbox']);
+
 // Components that commonly accept children content
 const CHILDREN_COMPONENTS = new Set([
   'button', 'card', 'body', 'title', 'caption', 'detail', 'badge', 'pill',
@@ -101,19 +104,19 @@ function generateBaseConfig(schema, kitName) {
     ? `<${componentName}{{props}}>{{children}}</${componentName}>`
     : `<${componentName}{{props}} />`;
   
-  // Extract defaults from schema (use React side when `{ react, rails }` split)
+  // Seed only defaults shared by both platforms. One `_playground.json` serves the React and
+  // Rails tabs, so a `{ react, rails }` split default is left unset (controls fall back to the
+  // schema default); set it in `_playground.overrides.json` if a kit needs a starting value.
   const defaults = {};
   for (const [name, prop] of Object.entries(reactProps)) {
-    if (prop.default !== undefined && prop.default !== null) {
-      const schemaDefault = prop.default;
-      defaults[name] =
-        schemaDefault !== null &&
-        typeof schemaDefault === 'object' &&
-        !Array.isArray(schemaDefault) &&
-        Object.prototype.hasOwnProperty.call(schemaDefault, 'react')
-          ? schemaDefault.react
-          : schemaDefault;
-    }
+    const schemaDefault = prop.default;
+    const isPlatformSplit =
+      schemaDefault !== null &&
+      typeof schemaDefault === 'object' &&
+      !Array.isArray(schemaDefault) &&
+      (Object.prototype.hasOwnProperty.call(schemaDefault, 'react') ||
+        Object.prototype.hasOwnProperty.call(schemaDefault, 'rails'));
+    if (!isPlatformSplit && schemaDefault !== undefined && schemaDefault !== null) defaults[name] = schemaDefault;
   }
   
   // Build base config
@@ -262,7 +265,12 @@ function processKit(kitDir, options = {}) {
     console.log(`  Skip ${kitName}: no kit.schema.json`);
     return 'skipped';
   }
-  
+
+  if (NO_PLAYGROUND_KITS.has(kitName)) {
+    console.log(`  Skip ${kitName}: no playground for this kit`);
+    return 'skipped';
+  }
+
   // Check if output exists and overwrite not enabled
   if (fs.existsSync(playgroundPath) && !options.overwrite) {
     console.log(`  Skip ${kitName}: _playground.json exists (use --overwrite)`);

@@ -80,6 +80,10 @@
     "category": "Animals"
   },
   {
+    "name": "piggy-bank",
+    "category": "Animals"
+  },
+  {
     "name": "angle-double-down",
     "category": "Arrows"
   },
@@ -1552,6 +1556,10 @@
     "category": "Interface Core"
   },
   {
+    "name": "trash-alt-undo",
+    "category": "Interface Core"
+  },
+  {
     "name": "trash-alt",
     "category": "Interface Core"
   },
@@ -2493,6 +2501,10 @@
   },
   {
     "name": "conveyor-belt-alt",
+    "category": "Tools"
+  },
+  {
+    "name": "dice",
     "category": "Tools"
   },
   {

@@ -34,7 +34,12 @@ export function resolveSchemaDefaultForPlatform(
   platform: SchemaPlatform = "react",
 ): unknown {
   if (!def || def.default === undefined) return undefined;
-  return resolvePlatformSplit(def.default, platform);
+  // No cross-platform fallback: `{ rails: "none" }` means React has no default, and an explicit
+  // `null` for this platform must be preserved rather than replaced by the other side's value.
+  if (isPlatformSplit(def.default)) {
+    return platform in def.default ? def.default[platform] : undefined;
+  }
+  return def.default;
 }
 
 /** Resolve React default from kit schema (handles `{ react, rails }` merge shape). */
@@ -50,6 +55,16 @@ export function resolveSchemaType(
   if (!def || def.type === undefined) return undefined;
   const resolved = resolvePlatformSplit(def.type, platform);
   return typeof resolved === "string" ? resolved : undefined;
+}
+
+/** Resolve kit schema enum `values` for one platform (handles `{ react, rails }` merge shape). */
+export function resolveSchemaValues(
+  def?: PropDefinition,
+  platform: SchemaPlatform = "react"
+): string[] | undefined {
+  if (!def || def.values === undefined) return undefined;
+  const resolved: unknown = resolvePlatformSplit<unknown>(def.values, platform);
+  return Array.isArray(resolved) ? resolved : undefined;
 }
 
 /** Example value for object/array prop dialogs — prefers playground config defaults over schema. */

@@ -20,6 +20,14 @@
         "/^(@babel|babel|webpacker|webpack|node)/"
       ],
       "enabled": false
+    },
+    {
+      "description": "playbook-ui is a published library. Keep ranges so consumers are not locked to one release.",
+      "matchFileNames": [
+        "playbook/package.json",
+        "playbook/playbook_ui.gemspec"
+      ],
+      "rangeStrategy": "replace"
     }
   ]
 }

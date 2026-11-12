@@ -6,6 +6,7 @@ import copy from 'rollup-plugin-copy'
 import consolidate from './app/javascript/rollup/consolidate-plugin';
 import cssUrl from './app/javascript/rollup/css-url-plugin';
 import preloadHelper from './app/javascript/rollup/preload-helper-plugin';
+import externalRuntimeGuard from './app/javascript/rollup/external-runtime-guard-plugin';
 import { env } from 'process';
 
 const isProduction = env.NODE_ENV === 'production'
@@ -102,6 +103,7 @@ export default defineConfig({
     }),
     cssUrl(),
     preloadHelper(),
+    externalRuntimeGuard(),
   ],
   resolve: {
     dedupe: ['playbook'],

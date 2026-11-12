@@ -24,7 +24,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "max": {
       "type": "number",
@@ -46,7 +47,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "value": {
       "type": "number",

@@ -19,7 +19,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "extendedUnderline": {
       "type": "boolean",
@@ -68,7 +69,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "variant": {
       "type": "enum",

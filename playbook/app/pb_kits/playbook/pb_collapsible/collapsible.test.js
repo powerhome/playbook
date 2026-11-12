@@ -71,3 +71,83 @@ test('html structure is correct', () => {
 
   expect(container).toMatchSnapshot()
 })
+
+const clickCollapsibleMain = () => {
+  screen.getByText('Main Section').click()
+}
+
+test('calls onClick once per click', () => {
+  const handleClick = jest.fn()
+  render(
+    <Collapsible onClick={handleClick}>
+      <Collapsible.Main>
+        <div>{'Main Section'}</div>
+      </Collapsible.Main>
+      <Collapsible.Content>
+        <div>{'Content'}</div>
+      </Collapsible.Content>
+    </Collapsible>
+  )
+
+  clickCollapsibleMain()
+
+  expect(handleClick).toHaveBeenCalledTimes(1)
+})
+
+test('toggles by default when onClick is omitted', () => {
+  const { container } = render(
+    <Collapsible>
+      <Collapsible.Main>
+        <div>{'Main Section'}</div>
+      </Collapsible.Main>
+      <Collapsible.Content>
+        <div>{'Content'}</div>
+      </Collapsible.Content>
+    </Collapsible>
+  )
+
+  expect(container.querySelector('[aria-label="chevron-down icon"]')).toBeInTheDocument()
+
+  clickCollapsibleMain()
+
+  expect(container.querySelector('[aria-label="chevron-up icon"]')).toBeInTheDocument()
+})
+
+test('toggles when onClick does not return true', () => {
+  const handleClick = jest.fn()
+  const { container } = render(
+    <Collapsible onClick={handleClick}>
+      <Collapsible.Main>
+        <div>{'Main Section'}</div>
+      </Collapsible.Main>
+      <Collapsible.Content>
+        <div>{'Content'}</div>
+      </Collapsible.Content>
+    </Collapsible>
+  )
+
+  clickCollapsibleMain()
+
+  expect(handleClick).toHaveBeenCalledTimes(1)
+  expect(container.querySelector('[aria-label="chevron-up icon"]')).toBeInTheDocument()
+})
+
+test('does not toggle when onClick returns true', () => {
+  const handleClick = jest.fn(() => true)
+  const { container } = render(
+    <Collapsible onClick={handleClick}>
+      <Collapsible.Main>
+        <div>{'Main Section'}</div>
+      </Collapsible.Main>
+      <Collapsible.Content>
+        <div>{'Content'}</div>
+      </Collapsible.Content>
+    </Collapsible>
+  )
+
+  clickCollapsibleMain()
+
+  expect(handleClick).toHaveBeenCalledTimes(1)
+  expect(container.querySelector('[aria-label="chevron-down icon"]')).toBeInTheDocument()
+  expect(container.querySelector('[aria-label="chevron-up icon"]')).not.toBeInTheDocument()
+})

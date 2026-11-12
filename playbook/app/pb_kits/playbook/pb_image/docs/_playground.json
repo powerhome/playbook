@@ -2,12 +2,35 @@
   "template": "<Image{{props}} />",
   "propTargets": {},
   "defaults": {
-    "url": "https://unsplash.it/500/400/?image=634",
     "alt": "Misty forest",
-    "size": "md",
+    "rounded": false,
     "transition": "fade",
-    "rounded": false
+    "url": "https://unsplash.it/500/400/?image=634",
+    "size": "md"
   },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "url",
+        "alt"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size",
+        "rounded",
+        "transition"
+      ]
+    },
+    {
+      "name": "Events",
+      "props": [
+        "onError"
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Default",
@@ -151,28 +174,5 @@
         "react"
       ]
     }
-  },
-  "groups": [
-    {
-      "name": "Content",
-      "props": [
-        "url",
-        "alt"
-      ]
-    },
-    {
-      "name": "Appearance",
-      "props": [
-        "size",
-        "rounded",
-        "transition"
-      ]
-    },
-    {
-      "name": "Events",
-      "props": [
-        "onError"
-      ]
-    }
-  ]
+  }
 }

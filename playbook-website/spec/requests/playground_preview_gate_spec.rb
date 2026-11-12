@@ -57,5 +57,30 @@ RSpec.describe "Rails playground preview gate", type: :request do
       expect(json["error"]).to be_nil
       expect(json["html"]).to include("pb_button")
     end
+
+    it "renders preview text without turning user input into HTML" do
+      post "/kits/button/rails/playground/preview",
+           params: { props: { text: "<script>alert(1)</script>" } },
+           as: :json
+
+      expect(response).to have_http_status(:ok)
+      payload = response.parsed_body
+      expect(payload["error"]).to be_nil
+      document = Nokogiri::HTML.fragment(payload.fetch("html"))
+      expect(document.text).to include("<script>alert(1)</script>")
+      expect(document.css("script")).to be_empty
+    end
+
+    it "rejects oversized preview requests with a JSON error" do
+      post "/kits/button/rails/playground/preview",
+           params: { props: { text: "x" * (Playground::PreviewLimits::MAX_REQUEST_BYTES + 1) } },
+           as: :json
+
+      expect(response).to have_http_status(413)
+      expect(response.parsed_body).to eq(
+        "html" => nil,
+        "error" => Playground::PreviewLimits::CLIENT_LIMIT_ERROR
+      )
+    end
   end
 end

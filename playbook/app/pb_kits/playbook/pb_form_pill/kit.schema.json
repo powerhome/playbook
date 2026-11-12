@@ -45,7 +45,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "textTransform": {
       "type": "enum",
@@ -102,7 +103,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": ""
     },
     "wrapped": {
       "type": "boolean",
@@ -116,7 +118,8 @@
       "type": "GenericObject",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": {}
     },
     "tabindex": {
       "platforms": [

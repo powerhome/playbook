@@ -6,7 +6,8 @@
     "size": "md",
     "showCurrentYear": false,
     "showDayOfWeek": false,
-    "showIcon": false
+    "showIcon": false,
+    "timeZone": "America/New_York"
   },
   "groups": [
     {

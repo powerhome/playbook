@@ -8,7 +8,7 @@ import { LightboxContext } from './_lightbox_context'
 
 import Carousel from './Carousel/index'
 
-type LightboxType = {
+type LightboxProps = {
   aria?: {[key: string]: string},
   children: React.ReactNode[] | React.ReactNode | string,
   className?: string,
@@ -28,7 +28,7 @@ type LightboxType = {
   title?: string | any,
 }
 
-const Lightbox = (props: LightboxType): React.ReactNode => {
+const Lightbox = (props: LightboxProps): React.ReactNode => {
   const {
     aria = {},
     children,

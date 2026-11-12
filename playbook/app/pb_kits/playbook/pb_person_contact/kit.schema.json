@@ -26,7 +26,8 @@
       "platforms": [
         "react",
         "rails"
-      ]
+      ],
+      "default": []
     }
   },
   "globalProps": true,

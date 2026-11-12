@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import type { BorderPropValue } from '../utilities/globalProps'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
+import { GlobalEventProps, globalEventProps } from '../utilities/globalEventProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
 
 export type IconSizes = "lg"
@@ -44,7 +45,7 @@ type IconOwnProps = {
   tabIndex?: number,
 }
 
-type IconProps = IconOwnProps & Omit<GlobalProps, 'border'>
+type IconProps = IconOwnProps & Omit<GlobalProps, 'border'> & GlobalEventProps
 
 const flipMap = {
   fa: {
@@ -233,6 +234,7 @@ const Icon = (props: IconProps) => {
   const ariaProps = buildAriaProps(normalizedAria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
+  const eventProps = globalEventProps(props)
 
   // Add a conditional here to show only the SVG if custom
   const displaySVG = (customIcon: any) => {
@@ -244,6 +246,7 @@ const Icon = (props: IconProps) => {
               ...ariaProps,
               ...dataProps,
               ...htmlProps,
+              ...eventProps,
               className: classes,
               id,
               ...(props.tabIndex !== undefined && { tabIndex }),
@@ -258,6 +261,7 @@ const Icon = (props: IconProps) => {
               {...ariaProps}
               {...dataProps}
               {...htmlProps}
+              {...eventProps}
               className={classesEmoji}
               id={id}
           >
@@ -272,6 +276,7 @@ const Icon = (props: IconProps) => {
               {...ariaProps}
               {...dataProps}
               {...htmlProps}
+              {...eventProps}
               className={classes}
               id={id}
           />
