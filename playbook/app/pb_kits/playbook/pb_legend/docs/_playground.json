@@ -3,8 +3,8 @@
   "propTargets": {},
   "defaults": {
     "color": "data_1",
-    "text": "Revenue",
-    "dark": false
+    "dark": false,
+    "text": "Revenue"
   },
   "groups": [
     {

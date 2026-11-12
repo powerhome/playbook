@@ -109,14 +109,21 @@ Playgrounds are **opt-in for agents**: keep loading schemas by default, then rea
 }
 ```
 
-When React and Rails types (or defaults) differ, the field is split instead of preferring React:
+When React and Rails types, enum values or defaults differ, the field is split instead of preferring React:
 
 ```json
 "value": {
   "type": { "react": "string | number", "rails": "number" },
   "platforms": ["react", "rails"]
+},
+"size": {
+  "type": "enum",
+  "platforms": ["react", "rails"],
+  "values": { "react": ["xs", "sm", "md", "lg", "xl"], "rails": ["xs", "sm", "md", "lg", "xl", "none"] }
 }
 ```
+
+Enum values count as matching when they contain the same values in any order, ignoring duplicates and blanks.
 
 ### Global Props Schema
 
@@ -170,7 +177,7 @@ When React and Rails types (or defaults) differ, the field is split instead of p
 1. Scans `app/pb_kits/playbook/pb_*/` directories
 2. Parses TypeScript (`.tsx`) files for React prop types
 3. Parses Ruby (`.rb`) files for Rails prop definitions
-4. Merges props from both platforms. Shared `type` and `default` become `{ react, rails }` when they differ; otherwise a single value is stored.
+4. Merges props from both platforms. Shared `type`, `values` and `default` become `{ react, rails }` when they differ; otherwise a single value is stored.
 5. Generates descriptions from component names
 6. Outputs `kit.schema.json` in each component folder
 
@@ -401,13 +408,14 @@ Optional consumer rule/skill drafts (not applied anywhere): `docs/ai/consumer/`.
 ### Key Fields
 
 - `props[name].type` - The prop type (`string`, `boolean`, `enum`, `function`, `ReactNode`, etc.). When React and Rails types differ, this is `{ "react": "...", "rails": "..." }` instead of a single string. Use the entry for the platform you are generating.
-- `props[name].values` - Allowed values for enum types
+- `props[name].values` - Allowed values for enum types. Same `{ react, rails }` split when the platforms accept different values.
 - `props[name].platforms` - Which platforms support this prop (`react`, `rails`)
-- `props[name].default` - Default value if any. Same `{ react, rails }` split when defaults differ.
+- `props[name].default` - Default value if any. Same `{ react, rails }` split when defaults differ. React defaults come from the component's props destructure and are recorded only when they are literals (strings, numbers, booleans, `null`, `{}`, `[]`); function and expression defaults are omitted.
 - `globalProps: true` - Indicates component accepts all global props
 - `globalEventProps: true` - Indicates component opts into React GlobalEventProps (see `global-event-props.schema.json`)
 - `usage.react.example` - Example React JSX (seeded from first playground preset in dist)
 - `usage.rails.example` - Example Rails ERB
+- `usage` only has a `react` / `rails` entry for platforms the kit exists on. Kits without a `docs/_playground.overrides.json` (e.g. `lightbox`, `form`) get the import only, with no `example`.
 - `playgrounds/<kit>.json` - Presets, hints, conditionals, templates, structure modes
 
 ### Responsive Props

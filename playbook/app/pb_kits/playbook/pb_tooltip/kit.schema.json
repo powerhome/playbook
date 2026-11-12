@@ -19,7 +19,8 @@
       "type": "number | Partial<{open: number; close: number}>",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": 0
     },
     "height": {
       "type": "string",
@@ -32,7 +33,8 @@
       "type": "string",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": null
     },
     "interaction": {
       "type": "boolean",
@@ -85,7 +87,8 @@
       "values": [
         "absolute",
         "fixed"
-      ]
+      ],
+      "default": "absolute"
     },
     "text": {
       "type": "string",
@@ -104,13 +107,15 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": true
     },
     "forceOpenTooltip": {
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "dark": {
       "platforms": [

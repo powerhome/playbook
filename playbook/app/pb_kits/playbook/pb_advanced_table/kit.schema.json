@@ -21,7 +21,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "columnDefinitions": {
       "type": "array",
@@ -36,15 +37,28 @@
         "react",
         "rails"
       ],
-      "values": [
-        "text_lt_default",
-        "text_lt_light",
-        "text_lt_lighter",
-        "text_dk_default",
-        "text_dk_light",
-        "text_dk_lighter"
-      ],
-      "default": "none"
+      "values": {
+        "react": [
+          "text_lt_default",
+          "text_lt_light",
+          "text_lt_lighter",
+          "text_dk_default",
+          "text_dk_light",
+          "text_dk_lighter"
+        ],
+        "rails": [
+          "text_lt_default",
+          "text_lt_light",
+          "text_lt_lighter",
+          "text_dk_default",
+          "text_dk_light",
+          "text_dk_lighter",
+          "none"
+        ]
+      },
+      "default": {
+        "rails": "none"
+      }
     },
     "columnVisibilityControl": {
       "type": "GenericObject",
@@ -75,7 +89,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "expandedControl": {
       "type": "GenericObject",
@@ -115,7 +130,8 @@
       "type": "number",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": 10
     },
     "inlineRowLoading": {
       "type": "boolean",
@@ -170,7 +186,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "paginationProps": {
       "type": "GenericObject",
@@ -246,7 +263,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "stickyLeftColumn": {
       "type": "array",
@@ -278,7 +296,8 @@
       "type": "string | string[]",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": "arrows-from-line"
     },
     "onRowSelectionChange": {
       "type": "function",
@@ -296,7 +315,8 @@
       "type": "boolean",
       "platforms": [
         "react"
-      ]
+      ],
+      "default": false
     },
     "enableSorting": {
       "type": "boolean",

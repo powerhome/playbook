@@ -100,25 +100,47 @@ function getKitDirs() {
     .filter((k) => fs.existsSync(k.schemaPath));
 }
 
+function withPlatformValidPreset(playground, schema, platform) {
+  const [first, ...rest] = playground.presets || [];
+  if (!first?.props) return playground;
+  const props = Object.fromEntries(
+    Object.entries(first.props).filter(([name, value]) => {
+      const values = schema.props?.[name]?.values;
+      const allowed = Array.isArray(values) ? values : values?.[platform];
+      return typeof value !== 'string' || !allowed?.length || allowed.includes(value);
+    })
+  );
+  return { ...playground, presets: [{ ...first, props }, ...rest] };
+}
+
 function enrichSchemaUsage(schema, kitName, slimPlayground) {
   if (!schema || !slimPlayground) return schema;
 
   const pascal = schema.name || snakeToPascal(kitName);
-  const usage = usageFromPreset(kitName, pascal, slimPlayground);
-  if (!usage) return schema;
+  // Build each platform's example from the first preset minus enum values that platform rejects
+  // (presets are authored for React, e.g. MultipleUsers size "sm" is not a Rails size).
+  const reactUsage = usageFromPreset(kitName, pascal, withPlatformValidPreset(slimPlayground, schema, 'react'));
+  const railsUsage = usageFromPreset(kitName, pascal, withPlatformValidPreset(slimPlayground, schema, 'rails'));
+  if (!reactUsage) return schema;
+  const usage = { react: reactUsage.react, rails: railsUsage.rails };
 
+  const platforms = schema.platforms || [];
   return {
     ...schema,
     usage: {
       ...schema.usage,
-      react: {
-        ...(schema.usage?.react || {}),
-        ...usage.react,
-      },
-      rails: {
-        ...(schema.usage?.rails || {}),
-        ...usage.rails,
-      },
+      ...(platforms.includes('react') && {
+        react: {
+          ...(schema.usage?.react || {}),
+          ...usage.react,
+        },
+      }),
+      ...(platforms.includes('rails') && {
+        rails: {
+          ...(schema.usage?.rails || {}),
+          ...usage.rails,
+        },
+      }),
     },
   };
 }

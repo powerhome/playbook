@@ -8,7 +8,7 @@
     "decimals": "default",
     "emphasized": true,
     "label": "Balance",
-    "size": "md",
+    "nullDisplay": "",
     "symbol": "$",
     "variant": "default",
     "unstyled": false,

@@ -2,11 +2,11 @@
   "template": "<Hashtag{{props}} />",
   "propTargets": {},
   "defaults": {
+    "dark": false,
     "newWindow": false,
     "type": "project",
     "text": "470297",
-    "url": "https://google.com",
-    "dark": false
+    "url": "https://google.com"
   },
   "groups": [
     {

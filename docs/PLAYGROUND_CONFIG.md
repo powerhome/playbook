@@ -121,6 +121,8 @@ The generator uses two layers:
 
 The base layer can infer simple things like component name, schema defaults, and props. The override layer defines the actual playground experience: useful presets, prop groupings, children, subcomponent structures, hints, wrappers, and sample data.
 
+Every kit with a `kit.schema.json` gets a `_playground.json` unless it is listed in `NO_PLAYGROUND_KITS` in `playbook/scripts/generate-playground-configs.js` (for example, `lightbox`). Add a kit there when it should have props metadata but no playground.
+
 ## Common Fields
 
 | Field | Purpose |
@@ -234,6 +236,8 @@ Use `defaults` to make controls start with useful values.
   }
 }
 ```
+
+The generated base config only seeds schema defaults that both platforms share. A `{ react, rails }` split default is left out because the same `_playground.json` serves the React and Rails tabs. Each tab's controls fall back to that platform's schema default, so set the prop here only if the playground needs a different starting value.
 
 Defaults are not the same thing as emitted props. They seed the UI as implicit values. If you need a prop to always appear in generated code, use `requiredProps`, a preset, or structure mode `props`.
 

@@ -32,7 +32,8 @@
         "away",
         "offline",
         "online"
-      ]
+      ],
+      "default": null
     },
     "avatarUrl": {
       "type": "string",

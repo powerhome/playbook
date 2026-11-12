@@ -3,10 +3,10 @@
   "propTargets": {},
   "defaults": {
     "alignment": "center",
+    "header": "Title Explains",
     "orientation": "vertical",
     "size": "md",
     "description": "Body text goes into detail with possible steps for user to take",
-    "header": "Title Explains",
     "image": "default"
   },
   "groups": [

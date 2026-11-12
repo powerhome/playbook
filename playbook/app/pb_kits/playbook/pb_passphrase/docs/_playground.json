@@ -3,18 +3,20 @@
   "propTargets": {},
   "defaults": {
     "confirmation": false,
-    "requiredIndicator": false,
-    "showTipsBelow": "always",
+    "dark": false,
     "inputProps": {
       "name": "passphrase"
     },
-    "label": "Passphrase",
+    "requiredIndicator": false,
+    "showTipsBelow": "always",
     "tips": [
       "Use a longer phrase.",
       "Avoid common words.",
       "Mix in punctuation or numbers."
     ],
-    "uncontrolled": false
+    "uncontrolled": false,
+    "value": "",
+    "label": "Passphrase"
   },
   "groups": [
     {
