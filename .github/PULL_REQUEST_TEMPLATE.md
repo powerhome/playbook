@@ -14,7 +14,6 @@
 
 
 #### Checklist:
-- [ ] **CHANGELOG (OPTIONAL)** Add a category label to group this PR in the changelog: `enhancement`, `bug`, `improvement`, `new kit`, `deprecated`, or `breaking`. See [Changelog & Labels](https://github.com/powerhome/playbook/wiki/Changelog-&-Labels) for details.
 - [ ] **DEPLOY** I have added the `milano` label to show I'm ready for a review.
 - [ ] **TESTS** I have added test coverage to my code.
 - [ ] **PLAYGROUND** I have added and tested Playground metadata and overrides for all kits and props updated in my code.

@@ -15,6 +15,13 @@ module Playbook
       "**Improvements:**" => "🔥 Improvements:",
       "**Fixed Bugs:**" => "🐛 Fixed Bugs:",
       "**Breaking Changes:**" => "💥 Breaking Changes:",
+      "**Enhancement:**" => "✨ Enhancement:",
+      "**Bug Fixes:**" => "🐛 Bug Fixes:",
+      "**Documentation:**" => "📝 Documentation:",
+      "**Improvement:**" => "🔥 Improvement:",
+      "**Dependencies:**" => "📦 Dependencies:",
+      "**Breaking:**" => "💥 Breaking:",
+      "**Revert:**" => "↩️ Revert:",
       "**Other:**" => "📦 Other:",
     }.freeze
 
@@ -74,7 +81,7 @@ module Playbook
       current_header = nil
 
       lines.each do |line|
-        if line.match?(/^(🆕|✨|🔥|🐛|💥|📦|\*\*).*:/)
+        if SECTION_HEADERS.value?(line) || line.match?(/^\*\*.*:/)
           current_header = line
           unless grouped_sections.key?(current_header)
             grouped_sections[current_header] = []
