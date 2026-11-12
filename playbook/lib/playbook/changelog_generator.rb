@@ -11,33 +11,43 @@ require "uri"
 require "playbook/version"
 
 module Playbook
-  # Builds a website-ready release section from labeled GitHub PRs.
+  # Builds a website-ready release section from GitHub PR titles.
   # Web mode prepends one section to CHANGELOG.md.
   # RC mode prepends every RC missing from RC_CHANGELOG.md since the last heading.
   module ChangelogGenerator
     REPO = "powerhome/playbook"
-    MAX_PER_SECTION = 25
     CHANGELOG_PATH = File.expand_path("../../CHANGELOG.md", __dir__)
     RC_CHANGELOG_PATH = File.expand_path("../../RC_CHANGELOG.md", __dir__)
     MODES = %i[web rc].freeze
 
     OTHER_HEADER = "**Other:**"
+    BREAKING_HEADER = "**Breaking:**"
+    NEW_KITS_HEADER = "**New Kits:**"
+    DESCRIPTION_SECTIONS = {
+      /\Anew kit\b/i => NEW_KITS_HEADER,
+      /\Adeprecated\b/i => "**Deprecated:**",
+    }.freeze
     RELEASE_IMAGE = "![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)"
     RC_RELEASE_IMAGE = "![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)"
 
-    SECTIONS = [
-      { header: "**New Kits:**", labels: ["new kit"] },
-      { header: "**Kit Enhancements:**", labels: ["enhancement"] },
-      { header: "**Improvements:**", labels: ["improvement"] },
-      { header: "**Fixed Bugs:**", labels: ["bug"] },
-      { header: "**Breaking Changes:**", labels: ["breaking"] },
-      { header: OTHER_HEADER, labels: [] },
-    ].freeze
+    SECTION_TYPES = {
+      NEW_KITS_HEADER => [],
+      "**Enhancement:**" => %w[feat style refactor],
+      "**Bug Fixes:**" => %w[fix],
+      "**Documentation:**" => %w[doc docs],
+      "**Improvement:**" => %w[perf test build ci],
+      "**Dependencies:**" => %w[chore],
+      "**Deprecated:**" => [],
+      BREAKING_HEADER => [],
+      "**Revert:**" => %w[revert],
+      OTHER_HEADER => [],
+    }.freeze
 
-    LABEL_TO_SECTION = SECTIONS.each_with_object({}) do |section, map|
-      section[:labels].each { |label| map[label.downcase] = section[:header] }
+    TYPE_TO_SECTION = SECTION_TYPES.each_with_object({}) do |(header, types), sections|
+      types.each { |type| sections[type] = header }
     end.freeze
 
+    PR_TITLE_REGEX = /\A(?<type>[a-z]+)(?:\((?<scope>[^()\r\n]+)\))?(?<breaking>!)?: (?<description>\S.*)\z/
     EMOJI_REGEX = /[\u{1F300}-\u{1F5FF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/
     TICKET_REGEX = /\\\[\w+-\d+\\\]\s?|\[\w+-\d+\]\s?/
     LOWERCASE_WORDS = %w[a an the and but or for nor on at to from by].freeze
@@ -114,12 +124,25 @@ module Playbook
       grouped = Hash.new { |hash, key| hash[key] = [] }
 
       pulls.each do |pull_request|
-        labels = Array(pull_request["labels"]).map { |label| (label.is_a?(Hash) ? label["name"] : label).to_s.downcase }
-        header = labels.map { |label| LABEL_TO_SECTION[label] }.compact.first || OTHER_HEADER
-        grouped[header] << pull_request if grouped[header].size < MAX_PER_SECTION
+        title = parse_title(pull_request["title"])
+        header = section_for_title(title)
+        grouped[header] << pull_request
       end
 
       grouped
+    end
+
+    def section_for_title(title)
+      return OTHER_HEADER unless title
+      return BREAKING_HEADER if title[:breaking]
+
+      marker = DESCRIPTION_SECTIONS.keys.find { |pattern| pattern.match?(title[:description]) }
+      marker ? DESCRIPTION_SECTIONS.fetch(marker) : TYPE_TO_SECTION.fetch(title[:type])
+    end
+
+    def parse_title(title)
+      match = PR_TITLE_REGEX.match(title.to_s)
+      match if match && TYPE_TO_SECTION.key?(match[:type])
     end
 
     def missing_rc_versions(existing)
@@ -356,7 +379,6 @@ module Playbook
           "number" => number,
           "title" => item["title"],
           "user" => { "login" => item.dig("user", "login") },
-          "labels" => Array(item["labels"]),
           "merged_at" => merged_at,
         }
       end
@@ -404,11 +426,11 @@ module Playbook
       lines << "[#{version}](https://github.com/#{REPO}/tree/#{version}) full list of changes:"
       lines << ""
 
-      SECTIONS.each do |section|
-        prs = grouped[section[:header]]
+      SECTION_TYPES.each_key do |header|
+        prs = grouped[header]
         next if prs.nil? || prs.empty?
 
-        lines << section[:header]
+        lines << header
         lines << ""
         prs.each { |pull_request| lines << format_pr_line(pull_request) }
         lines << ""
@@ -422,7 +444,11 @@ module Playbook
     def format_pr_line(pull_request)
       number = pull_request["number"]
       author = pull_request.dig("user", "login") || "unknown"
-      title = clean_title(pull_request["title"].to_s)
+      title = pull_request["title"].to_s
+      parsed_title = parse_title(title)
+      title = clean_title(parsed_title ? parsed_title[:description] : title)
+      scope = parsed_title&.[](:scope)
+      title = "#{titleize(scope.tr('-', ' '))}: **#{title}**" if scope
       "- #{title} [\\##{number}](https://github.com/#{REPO}/pull/#{number}) ([#{author}](https://github.com/#{author}))"
     end
 

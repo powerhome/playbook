@@ -38,6 +38,10 @@ Use `./run.sh` to run the application in one step. This will handle dependency u
 
 ## Additional Resources
 
+### Contributing
+
+- [Playbook PR title requirements](./PR_TITLES.md)
+
 ### Adding NPM Dependencies
 
 1. You need to be working in `playbook/playbook` or `playbook/playbook-website` subdirectory
