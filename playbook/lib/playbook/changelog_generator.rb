@@ -163,8 +163,9 @@ module Playbook
       return versions if from_env.empty?
 
       ceiling = normalize_rc_version(from_env)
+      ceiling_key = version_sort_key(ceiling)
       (versions + [ceiling]).uniq
-                            .select { |version| version_sort_key(version) <= version_sort_key(ceiling) }
+                            .select { |version| (version_sort_key(version) <=> ceiling_key) <= 0 }
                             .sort_by { |version| rc_sort_key(version) }
                             .reverse
     end
