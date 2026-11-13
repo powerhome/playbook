@@ -14,7 +14,7 @@ const RichTextEditorAdvancedPreview = (props) => {
   })
 
   const [showPreview, setShowPreview] = useState(false)
-  const [previewText, setPreviewText] = useState(<div />)
+  const [previewText, setPreviewText] = useState("")
 
   const handleChange = () => {
     if (editor) {
@@ -46,10 +46,8 @@ const RichTextEditorAdvancedPreview = (props) => {
             marginTop="md"
             maxWidth="md"
         >
-          <div
-              className="tiptap-content"
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: previewText }}
+          <RichTextEditor.Content
+              html={previewText}
               id="advanced-preview-content"
           />
         </Card>
