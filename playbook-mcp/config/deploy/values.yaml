@@ -1,0 +1,16 @@
+appConfig:
+  rackEnv: "production"
+  railsEnv: "production"
+
+# MUST stay 1 while RenderStore is process-local memory.
+# /mcp (LibreChat) and /ui/:id (browser iframe) are different clients — sticky
+# sessions cannot pin both to the same pod. The Deployment uses the Recreate
+# strategy so a rollout never runs two pods at once. Scale (and switch back to
+# RollingUpdate) only after a shared store (Redis/Memcached) backs RenderStore.
+replicas: 1
+
+ingress:
+  hosts:
+    - https://playbook-mcp.powerapp.cloud
+  issueCert: true
+

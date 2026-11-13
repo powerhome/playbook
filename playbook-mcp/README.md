@@ -1,0 +1,155 @@
+# playbook-mcp
+
+Hosted MCP-UI render server for Playbook. Renders kits server-side via `pb_rails` and returns `ui://` HTML resources for LibreChat and other MCP-UI hosts.
+
+Consumers do **not** need a Playbook install. CSS/JS/fonts are self-served from this service’s `/assets` (gem `dist/` + `fonts/`) with **permissive CORS** (`Access-Control-Allow-Origin: *`) so sandboxed MCP-UI iframes with opaque origin can load web fonts. Icons are inlined as SVG from `@powerhome/playbook-icons` (configured via `icon_path` / `icon_alias_path`; vendored into the image at `vendor/playbook-icons/`) — not Font Awesome webfonts. Charts load one self-contained IIFE (`bin/vendor_chart_peers` → `/assets/vendor/playbook-charts.js`) — no importmap / jsDelivr `/+esm`. Mixed `render_layout` documents load `/assets/vendor/playbook-rails.js` (table/collapsible JS) plus that chart IIFE when a Highcharts kit is present. The chart bundle uses a private React registry so it does not collide with rails.js. Vite `yarn release` does not emit `playbook-rails.js`.
+
+When `PLAYBOOK_MCP_ASSET_BASE_URL` is an absolute origin, render tools return MCP-UI **`external_url`** pointing at ephemeral `/ui/:id` HTML (TTL ~15m). That keeps large inline-SVG dashboards out of the tool-result payload so hosts like LibreChat do not truncate mid-document. Without an absolute base (local smoke), tools fall back to `rawHtml`.
+
+`/ui/:id` links work for whoever holds them (iframes cannot send the consumer key), so they rely on unguessable ids, the short TTL, `Referrer-Policy: no-referrer`, and ids being masked in request logs. See `SECURITY.md`.
+
+`RenderStore` is **process-local memory**, so deploy **`replicas: 1`** until a shared store (Redis/Memcached) exists. Sticky sessions cannot fix this: LibreChat calls `/mcp` and the browser iframe loads `/ui/:id` as a different client. The Deployment therefore uses `strategy: Recreate` (no second pod during a rollout) and the Service has no session affinity. Each deploy stops the server briefly, and renders from before the deploy 404.
+
+Transport is **streamable-http** only (MCP 2025-03-26) — not deprecated standalone SSE.
+
+## Tools
+
+| Tool | Purpose |
+|------|---------|
+| `list_kits` | Discover rails-renderable kits from `dist/ai` |
+| `list_icons` | Discover valid kebab-case icon ids (`chart-line`, `users`, …) |
+| `get_kit_schema` | Kit schema + slim playground (conditionals, hints, structureModes) |
+| `render_kit` | Validate + render one kit → MCP-UI HTML |
+| `render_layout` | Compose multiple kits into one HTML document |
+| `render_chart` | Interactive Highcharts kit (`pb_bar_graph`, etc.) |
+
+Kit ids are **snake_case** (`table`, `button`, `pb_bar_graph`). Props use **camelCase** as in `playbook/dist/ai` schemas; the server converts to Ruby snake_case for `pb_rails`.
+
+HTML `children` are only accepted for composition kits (`table`, `card`, …) and are sanitized before render. In `render_layout`, `props.children` is treated as the item-level `children` field.
+
+Chart kits in `render_layout` hydrate via the same Highcharts mount as `render_chart` (`playbook-charts.js` once per document). Pass Highcharts config under `props.options` with real Highcharts keys (`series`, `xAxis`, `yAxis`) — do not snake_case keys inside `options`.
+
+Chart **point clicks** post MCP-UI actions to the host (LibreChat handles `prompt`, `tool`, and `intent`). Pass `uiAction` as a **sibling of `props`** (not Highcharts `events`):
+
+```json
+{
+  "type": "bar",
+  "options": { "series": [{ "name": "Revenue", "data": [10, 20] }], "xAxis": { "categories": ["Q1", "Q2"] } },
+  "uiAction": { "type": "prompt", "prompt": "Break down {{category}} for {{series}}" }
+}
+```
+
+Omit `uiAction` for a default prompt. `{ "type": "none" }` disables clicks. Templates: `{{category}}` `{{series}}` `{{value}}` `{{name}}` `{{x}}` `{{y}}`. Highcharts event functions are stripped.
+
+## Local setup
+
+```bash
+cd playbook-mcp
+bin/setup          # bundle + vendor chart peers
+bundle exec puma -C config/puma.rb
+```
+
+- Health: `http://localhost:3099/health`
+- MCP (Streamable HTTP): `http://localhost:3099/mcp`
+- Assets: `http://localhost:3099/assets/playbook.css`
+
+Smoke / tests:
+
+```bash
+bundle exec ruby bin/smoke
+bundle exec rspec
+```
+
+## Example: render_kit (table)
+
+```json
+{
+  "kit": "table",
+  "props": { "size": "sm", "striped": true },
+  "children": "<thead><tr><th>Name</th><th>Qty</th></tr></thead><tbody><tr><td>Widgets</td><td>3</td></tr></tbody>"
+}
+```
+
+## LibreChat
+
+See [docs/LIBRECHAT_VERIFICATION.md](docs/LIBRECHAT_VERIFICATION.md) and [docs/SPEC_REVIEW_RESPONSE.md](docs/SPEC_REVIEW_RESPONSE.md).
+
+| Field | Value |
+|-------|--------|
+| Transport | **Streamable HTTPS** (streamable-http) |
+| URL (local) | `http://localhost:3099/mcp` |
+| Auth | Custom header `X-Playbook-Mcp-Key` with the consumer's key (optional locally when `PLAYBOOK_MCP_KEYS` is unset) |
+
+**Phase 0 gate:** Button styles **and** table JS (or chart) working inside the real LibreChat sandboxed iframe — not only ActionView HTML in isolation.
+
+Chart point clicks emit MCP-UI `prompt` / `tool` / `intent` actions (declarative `uiAction`; default is a prompt). Shared transcripts are read-only — clicks will not run there.
+
+## Review / PR environment URL
+
+On Milano PR deploy, the website review host is typically:
+
+```text
+https://playbook-pr-<N>.powerapp.cloud
+```
+
+`playbook-mcp` is deployed alongside it with a derived host:
+
+```text
+https://mcp-pr<N>.playbook.wc.beta.gm.powerapp.cloud/mcp
+```
+
+Example: if the PR stack is `https://playbook-pr-42.powerapp.cloud`, point LibreChat at:
+
+```text
+https://mcp-pr42.playbook.wc.beta.gm.powerapp.cloud/mcp
+```
+
+Health check: `https://mcp-pr<N>.playbook.wc.beta.gm.powerapp.cloud/health`  
+(Website Milano URL is `https://pr<N>.playbook...` — that host is the docs site, not MCP.)
+
+There is no in-app IP allowlist: the Ingress keeps every environment VPN-only, and `/mcp` requires a consumer key.
+
+## Ops / security
+
+| Env | Default | Meaning |
+|-----|---------|---------|
+| `PLAYBOOK_MCP_KEYS` | unset (dev allow-all) | **Required in production** — `librechat:<key>,dw_agent:<key>`; `/mcp` requires one of the keys in `X-Playbook-Mcp-Key` |
+| `PLAYBOOK_MCP_RATE_LIMIT_MAX` | `60` | Max MCP requests per window per consumer key |
+| `PLAYBOOK_MCP_RATE_LIMIT_WINDOW` | `60` | Window seconds |
+| `PLAYBOOK_MCP_MAX_PROPS_BYTES` | `65536` | Max props+children JSON/HTML bytes per request (`render_layout`: all items combined) |
+| `PLAYBOOK_MCP_MAX_LAYOUT_ITEMS` | `50` | Max kits in one `render_layout` call |
+| `PLAYBOOK_MCP_ASSET_BASE_URL` | relative `/assets` | Absolute origin for iframe assets + `/ui/:id` external_url |
+| `PLAYBOOK_MCP_RENDER_TTL_SECONDS` | `900` | Ephemeral `/ui/:id` HTML lifetime |
+| `PLAYBOOK_MCP_RENDER_MAX_ENTRIES` | `256` | Max in-memory rendered documents |
+| `SECRET_KEY_BASE` | dev default only | **Required in production** (boot fails if missing) |
+| `PORT` | `3099` | Puma port |
+
+Puma runs with `workers 0` because streamable-http session state is in-memory. Deploy `replicas: 1` while `RenderStore` is process-local (see above).
+
+### Consumer keys
+
+Each calling system gets its own key so it can be rotated or revoked alone. Generate one with `openssl rand -hex 32`.
+
+- **Staging / production:** `consumerKeys: "librechat:<key>,dw_agent:<key>"` in sops-encrypted `config/deploy/<env>/secrets.yaml` (alongside `secretKeyBase`). `bin/deploy` decrypts it into the `playbook-mcp` Kubernetes Secret and **exits 1 if the file is missing**, so a deploy can never rotate `SECRET_KEY_BASE` or consumer keys on its own.
+- **PR stacks:** `bin/deploy` uses `PLAYBOOK_MCP_KEYS` from the CI environment if set; otherwise it generates a throwaway key, so the stack runs but MCP clients cannot connect until a key is provided.
+
+### Ingress
+
+`config/deploy/templates/ingress.yaml.erb` renders two Ingresses for the same host, following the website's nginx-to-Traefik migration pattern:
+
+- `playbook-mcp` (nginx). DNS still routes review and beta hosts here, so a Traefik-only Ingress returns nginx's `default backend - 404`. It sets `proxy-buffering: "off"` and `proxy-read-timeout: "3600"` so Streamable HTTP responses stream.
+- `playbook-mcp-traefik` (`ingressClassName: traefik`), ready for when DNS moves to Traefik.
+
+Both stay on the cluster's default VPN scope in every environment. Keep them separate from the website Ingresses (public in production), and never add nginx `whitelist-source-range` or Traefik `https-public` here. Cookie affinity was dropped because it cannot pin `/mcp` and `/ui/:id` to the same pod. When verifying staging, confirm long-lived Streamable HTTP responses are not cut off by Traefik's entrypoint timeouts.
+
+Deploy manifests live under `config/deploy/`. Image build:
+
+```bash
+docker build -f playbook-mcp/Dockerfile --target prod -t playbook-mcp .
+```
+
+## Decisions
+
+- **Ruby / `pb_rails` base** — server HTML already exists; Ruby `mcp_ui_server` wraps `ui://` resources.
+- **Self-served assets** — CSS/JS from gem `dist/` + vendored chart peers under `/assets/vendor`.
+- **Validation** — hard-enforces `playbook/dist/ai` schemas + slim playground conditionals; sanitizes children and chart options.

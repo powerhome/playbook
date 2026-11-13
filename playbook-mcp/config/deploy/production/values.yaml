@@ -1,0 +1,4 @@
+ingress:
+  hosts:
+    - https://playbook-mcp.powerapp.cloud
+  issueCert: true
