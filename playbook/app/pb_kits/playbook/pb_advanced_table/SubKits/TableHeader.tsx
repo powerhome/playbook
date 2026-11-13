@@ -92,43 +92,55 @@ export const TableHeader = ({
       </tr>
     ))
 
+  // Empty checkbox-column cell on upper multi-header rows; checkbox only on the lowest row.
+  const renderSelectableHeaderCell = (
+    isLowestHeaderRow: boolean,
+    extraClassName?: string
+  ) => (
+    <th className={classnames(customCellClassnames, "checkbox-cell-header", extraClassName)}>
+      {isLowestHeaderRow ? (
+        <Checkbox
+            checked={table?.getIsAllRowsSelected()}
+            indeterminate={table?.getIsSomeRowsSelected()}
+            onChange={table?.getToggleAllRowsSelectedHandler()}
+        />
+      ) : null}
+    </th>
+  )
+
   const renderRegularTableHeader = () => (
     <thead className={classes}
         id={id}
         ref={headerRef}
     >
       {renderSpacerRows()}
-      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
-        <tr key={`${headerGroup.id}-headerGroup`}>
-          {!hasAnySubRows && selectableRows && (
-            <th className={customCellClassnames}>
-              <Checkbox
-                  checked={table?.getIsAllRowsSelected()}
-                  indeterminate={table?.getIsSomeRowsSelected()}
-                  onChange={table?.getToggleAllRowsSelectedHandler()}
-              />
-            </th>
-          )}
-          {headerGroup.headers.map(header => {
-            const isPinnedLeft = columnPinning.left.includes(header.id)
-            return (
-              <TableHeaderCell
-                  enableSorting={enableSorting}
-                  enableToggleExpansion={enableToggleExpansion}
-                  handleExpandOrCollapse={handleExpandOrCollapse}
-                  header={header}
-                  headerChildren={children}
-                  isPinnedLeft={isPinnedLeft}
-                  key={`${header.id}-header`}
-                  loading={loading}
-                  persistToggleExpansionButton={persistToggleExpansionButton}
-                  sortIcon={sortIcon}
-                  table={table}
-              />
-            )
-          })}
-        </tr>
-      ))}
+      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, headerGroupIndex: number, headerGroups: HeaderGroup<GenericObject>[]) => {
+        const isLowestHeaderRow = headerGroupIndex === headerGroups.length - 1
+
+        return (
+          <tr key={`${headerGroup.id}-headerGroup`}>
+            {!hasAnySubRows && selectableRows && renderSelectableHeaderCell(isLowestHeaderRow)}
+            {headerGroup.headers.map(header => {
+              const isPinnedLeft = columnPinning.left.includes(header.id)
+              return (
+                <TableHeaderCell
+                    enableSorting={enableSorting}
+                    enableToggleExpansion={enableToggleExpansion}
+                    handleExpandOrCollapse={handleExpandOrCollapse}
+                    header={header}
+                    headerChildren={children}
+                    isPinnedLeft={isPinnedLeft}
+                    key={`${header.id}-header`}
+                    loading={loading}
+                    persistToggleExpansionButton={persistToggleExpansionButton}
+                    sortIcon={sortIcon}
+                    table={table}
+                />
+              )
+            })}
+          </tr>
+        )
+      })}
     </thead>
   );
 
@@ -140,41 +152,37 @@ export const TableHeader = ({
         ref={headerRef}
     >
       {renderSpacerRows("virtualized-header-row-header")}
-      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
-        <tr
-            className="virtualized-header-row-header"
-            key={`${headerGroup.id}-headerGroup-virtualized`}
-        >
-          {!hasAnySubRows && selectableRows && (
-            <th className={classnames(customCellClassnames, "virtualized-header-cell")}>
-              <Checkbox
-                  checked={table?.getIsAllRowsSelected()}
-                  indeterminate={table?.getIsSomeRowsSelected()}
-                  onChange={table?.getToggleAllRowsSelectedHandler()}
-              />
-            </th>
-          )}
-          {headerGroup.headers.map(header => {
-            const isPinnedLeft = columnPinning.left.includes(header.id)
-            return (
-              <TableHeaderCell
-                  enableSorting={enableSorting}
-                  enableToggleExpansion={enableToggleExpansion}
-                  handleExpandOrCollapse={handleExpandOrCollapse}
-                  header={header}
-                  headerChildren={children}
-                  isPinnedLeft={isPinnedLeft}
-                  isVirtualized
-                  key={`${header.id}-header-virtualized`}
-                  loading={loading}
-                  persistToggleExpansionButton={persistToggleExpansionButton}
-                  sortIcon={sortIcon}
-                  table={table}
-              />
-            )
-          })}
-        </tr>
-      ))}
+      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, headerGroupIndex: number, headerGroups: HeaderGroup<GenericObject>[]) => {
+        const isLowestHeaderRow = headerGroupIndex === headerGroups.length - 1
+
+        return (
+          <tr
+              className="virtualized-header-row-header"
+              key={`${headerGroup.id}-headerGroup-virtualized`}
+          >
+            {!hasAnySubRows && selectableRows && renderSelectableHeaderCell(isLowestHeaderRow, "virtualized-header-cell")}
+            {headerGroup.headers.map(header => {
+              const isPinnedLeft = columnPinning.left.includes(header.id)
+              return (
+                <TableHeaderCell
+                    enableSorting={enableSorting}
+                    enableToggleExpansion={enableToggleExpansion}
+                    handleExpandOrCollapse={handleExpandOrCollapse}
+                    header={header}
+                    headerChildren={children}
+                    isPinnedLeft={isPinnedLeft}
+                    isVirtualized
+                    key={`${header.id}-header-virtualized`}
+                    loading={loading}
+                    persistToggleExpansionButton={persistToggleExpansionButton}
+                    sortIcon={sortIcon}
+                    table={table}
+                />
+              )
+            })}
+          </tr>
+        )
+      })}
     </thead>
   );
   return (
