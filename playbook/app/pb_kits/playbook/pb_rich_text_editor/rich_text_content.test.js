@@ -79,6 +79,29 @@ test("drops event handler attributes such as onerror", () => {
   expect(container.innerHTML).not.toContain("alert");
 });
 
+test("keeps text alignment and drops every other inline style", () => {
+  const { container } = render(
+    <RichTextContent
+        html={'<p style="color: red; text-align: right; background: url(javascript:alert(1))">Aligned</p><h2 style="text-align: expression(alert(1))">Nope</h2>'}
+    />
+  );
+
+  const paragraph = container.querySelector("p");
+  expect(paragraph.style.textAlign).toBe("right");
+  expect(paragraph.getAttribute("style")).not.toContain("color");
+  expect(paragraph.getAttribute("style")).not.toContain("javascript");
+  expect(container.querySelector("h2").style.textAlign).toBe("");
+});
+
+test("keeps strikethrough from older Trix content", () => {
+  const { container } = render(
+    <RichTextContent html={"<div><del>Deleted</del> and <strike>struck</strike></div>"} />
+  );
+
+  expect(container.querySelector("del").textContent).toBe("Deleted");
+  expect(container.querySelector("strike").textContent).toBe("struck");
+});
+
 test("drops scripts and javascript urls", () => {
   const { container } = render(
     <RichTextContent

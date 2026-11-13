@@ -245,5 +245,4 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   )
 }
 
-export { RichTextContent }
 export default Object.assign(RichTextEditor, { Content: RichTextContent })

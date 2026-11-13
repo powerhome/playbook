@@ -118,6 +118,14 @@
     list-style: disc outside;
     padding-left: $space_md;
     line-height: $lh_tight;
+
+    ul {
+        list-style-type: circle;
+
+        ul {
+            list-style-type: square;
+        }
+    }
 }
 
 // Trix mixins section (Rails and React default editor)

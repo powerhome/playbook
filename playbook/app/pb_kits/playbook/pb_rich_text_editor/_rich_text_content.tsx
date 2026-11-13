@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import classnames from 'classnames'
 
 type RichTextMention = {
@@ -18,6 +18,7 @@ const ALLOWED_TAGS = new Set([
   'blockquote',
   'br',
   'code',
+  'del',
   'div',
   'em',
   'h1',
@@ -35,6 +36,7 @@ const ALLOWED_TAGS = new Set([
   'pre',
   's',
   'span',
+  'strike',
   'strong',
   'u',
   'ul',
@@ -48,6 +50,15 @@ const ALLOWED_ATTRIBUTES: { [tag: string]: string[] } = {
   div: ['class'],
   img: ['alt', 'src', 'title'],
   span: ['class', 'data-id', 'data-label', 'data-type'],
+}
+
+const TEXT_ALIGN = /(?:^|;)\s*text-align\s*:\s*(center|justify|left|right)\s*(?:;|$)/i
+
+const textAlignFor = (element: Element): string | null => {
+  const style = element.getAttribute('style')
+  if (!style) return null
+  const match = style.match(TEXT_ALIGN)
+  return match ? match[1].toLowerCase() : null
 }
 
 const isSafeUrl = (value: string, allowDataImage: boolean): boolean => {
@@ -124,10 +135,12 @@ const nodesToReact = (
     const attributes = attributesFor(element)
     if (tag === 'img' && !attributes.src) return null
 
-    const props: { [name: string]: string } = { key }
+    const textAlign = textAlignFor(element)
+    const props: { [name: string]: unknown } = { key }
     Object.entries(attributes).forEach(([name, value]) => {
       props[name === 'class' ? 'className' : name] = value
     })
+    if (textAlign) props.style = { textAlign }
     if (VOID_TAGS.has(tag)) return React.createElement(tag, props)
 
     return React.createElement(tag, props, ...children)
@@ -146,9 +159,11 @@ const RichTextContent = ({
   id,
   renderMention,
 }: RichTextContentProps): React.ReactElement => {
-  const content = html
-    ? nodesToReact(new DOMParser().parseFromString(html, 'text/html').body.childNodes, 'rte', renderMention)
-    : null
+  const content = useMemo(() => (
+    html
+      ? nodesToReact(new DOMParser().parseFromString(html, 'text/html').body.childNodes, 'rte', renderMention)
+      : null
+  ), [html, renderMention])
 
   return (
     <div
