@@ -42,7 +42,7 @@ jobs:
       - name: Python Setup
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.13.18'
       - name: Set Git Config
         run: |
           git config --local user.name "${{ github.actor }}"
@@ -132,7 +132,7 @@ jobs:
       - name: Python Setup
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.13.18'
       - name: Set Git Config
         run: |
           git config --local user.name "${{ github.actor }}"
