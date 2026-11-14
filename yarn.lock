@@ -7858,10 +7858,10 @@ prosemirror-menu@^1.2.4:
     prosemirror-history "^1.0.0"
     prosemirror-state "^1.0.0"
 
-prosemirror-model@1.25.12, prosemirror-model@^1.0.0, prosemirror-model@^1.21.0, prosemirror-model@^1.24.1, prosemirror-model@^1.25.0, prosemirror-model@^1.25.12, prosemirror-model@^1.25.4:
-  version "1.25.12"
-  resolved "https://npm.powerapp.cloud/prosemirror-model/-/prosemirror-model-1.25.12.tgz#00232836bf4f5bdfdfe8300d00706564515bfc28"
-  integrity sha512-Ue2gTmXMa7EhpLNhC7J+h4+ykD8ha12K6rrZFFKKJHBForfIStw5gJ6Zrf1mqqAa9NmpmEB4wp9bKmA4eUVjWg==
+prosemirror-model@1.25.13, prosemirror-model@^1.0.0, prosemirror-model@^1.21.0, prosemirror-model@^1.24.1, prosemirror-model@^1.25.0, prosemirror-model@^1.25.12, prosemirror-model@^1.25.4:
+  version "1.25.13"
+  resolved "https://npm.powerapp.cloud/prosemirror-model/-/prosemirror-model-1.25.13.tgz#6ef470cb833b7cdbb0670260dd6b9c4c22faa73d"
+  integrity sha512-MlDMWGjYXaYOeCiO17jcybntCOzPnN+97U0809ke2QsgPtxW3n5/sD6ZKyJONUgMw1iP93ohZTjeKjnRJ7L6kQ==
   dependencies:
     orderedmap "^2.0.0"
 
