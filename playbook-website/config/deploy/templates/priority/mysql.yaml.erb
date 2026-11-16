@@ -43,7 +43,11 @@ metadata:
 spec:
   crVersion: 1.15.0
   secretsName: database-secrets
-  allowUnsafeConfigurations: false
+  unsafeFlags:
+    tls: false
+    pxcSize: false
+    proxySize: false
+    backupIfUnhealthy: false
   pause: false
   updateStrategy: SmartUpdate
   pxc:
