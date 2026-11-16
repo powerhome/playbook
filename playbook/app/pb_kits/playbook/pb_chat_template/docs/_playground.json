@@ -1,0 +1,86 @@
+{
+  "template": "<ChatTemplate\n    height=\"420px\"\n    messages={messages}\n    onClear={() => setMessages([])}\n    onSubmit={handleSubmit}{{props}}\n/>",
+  "propTargets": {},
+  "defaults": {
+    "dark": false,
+    "defaultHeight": 560,
+    "defaultWidth": 400,
+    "emptyState": "Ask a question to get started.",
+    "floating": false,
+    "loading": false,
+    "loadingText": " Thinking",
+    "messages": [],
+    "placeholder": "Ask a question...",
+    "title": "Nitro Intelligence Chat",
+    "icon": "nitro-intelligence"
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "title",
+        "icon",
+        "placeholder",
+        "emptyState"
+      ]
+    },
+    {
+      "name": "State",
+      "props": [
+        "loading",
+        "loadingText",
+        "error"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "icon": "nitro-intelligence",
+        "title": "Nitro Intelligence Chat"
+      }
+    },
+    {
+      "name": "Loading",
+      "props": {
+        "loading": true,
+        "title": "Nitro Intelligence Chat"
+      }
+    },
+    {
+      "name": "Error",
+      "props": {
+        "error": "Something went wrong. Please try again.",
+        "title": "Nitro Intelligence Chat"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "floating_window": {
+      "when": {},
+      "message": "Set floating to open Chat Template as a movable, resizable window. See the Floating Window doc example; it is hidden here because it covers the playground canvas.",
+      "type": "info"
+    }
+  },
+  "wrapper": "const ChatTemplatePlayground = () => {\n  const [messages, setMessages] = useState([\n    { id: 'user-1', role: 'user', content: 'Can you summarize the Kitchen Remodel project?' },\n    { id: 'agent-1', role: 'agent', content: 'The Kitchen Remodel project is 70% complete and on budget.' },\n  ])\n\n  const handleSubmit = (prompt) => {\n    setMessages((current) => [\n      ...current,\n      { id: `user-${Date.now()}`, role: 'user', content: prompt },\n      { id: `agent-${Date.now()}`, role: 'agent', content: `Here is what I found about \"${prompt}\".` },\n    ])\n  }\n\n  return {{component}}\n}\n\n<ChatTemplatePlayground />",
+  "externalImports": [
+    "import React, { useState } from 'react'"
+  ],
+  "children": {
+    "editable": false,
+    "default": ""
+  },
+  "hiddenProps": [
+    "context",
+    "defaultHeight",
+    "defaultWidth",
+    "floating",
+    "messages",
+    "onClear",
+    "onClose",
+    "onSubmit",
+    "renderContent"
+  ]
+}

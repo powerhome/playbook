@@ -1,0 +1,221 @@
+@import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../tokens/positioning";
+@import "../tokens/screen_sizes";
+@import "../tokens/shadows";
+@import "../tokens/spacing";
+
+$chat_template_edge_handle: 6px;
+$chat_template_corner_handle: 12px;
+
+.pb_chat_template_kit {
+  background-color: $white;
+  border: 1px solid $border_light;
+  border-radius: $border_radius_lg;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 360px;
+  overflow: hidden;
+  position: relative;
+
+  .chat-template-header {
+    align-items: center;
+    border-bottom: 1px solid $border_light;
+    display: flex;
+    flex-shrink: 0;
+    gap: $space_xs;
+    justify-content: space-between;
+    padding: $space_xs $space_xs $space_xs $space_sm;
+
+    &:focus-visible {
+      outline: 2px solid $primary;
+      outline-offset: -2px;
+    }
+  }
+
+  .chat-template-title {
+    align-items: center;
+    display: flex;
+    gap: $space_xs;
+    min-width: 0;
+  }
+
+  .chat-template-actions {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .chat-template-context {
+    border-bottom: 1px solid $border_light;
+    flex-shrink: 0;
+    padding: $space_xs $space_sm;
+  }
+
+  .chat-template-thread {
+    background-color: $bg_light;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: $space_sm;
+    min-height: 0;
+    overflow-y: auto;
+    padding: $space_sm;
+
+    &:focus-visible {
+      outline: 2px solid $primary;
+      outline-offset: -2px;
+    }
+  }
+
+  .chat-template-empty {
+    margin: auto;
+    text-align: center;
+  }
+
+  .chat-template-message {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .chat-template-message-user {
+    justify-content: flex-end;
+  }
+
+  // Wide content (tables) scrolls inside the bubble instead of stretching the window.
+  .chat-template-bubble {
+    background-color: $white;
+    border-radius: $border_radius_lg;
+    box-sizing: border-box;
+    max-width: 85%;
+    min-width: 0;
+    overflow-x: auto;
+    padding: $space_xs $space_sm;
+  }
+
+  .chat-template-message-user .chat-template-bubble {
+    background-color: $primary;
+
+    .pb_body_kit {
+      color: $white;
+    }
+  }
+
+  .chat-template-bubble-error {
+    border: 1px solid $error;
+  }
+
+  .chat-template-form {
+    align-items: center;
+    border-top: 1px solid $border_light;
+    display: flex;
+    flex-shrink: 0;
+    gap: $space_xs;
+    margin: 0;
+    padding: $space_xs $space_sm;
+
+    .pb_text_input_kit {
+      flex: 1 1 auto;
+    }
+  }
+
+  &.chat-template-floating {
+    box-shadow: $shadow_deeper;
+    height: var(--pb-chat-template-height, 560px);
+    left: var(--pb-chat-template-x, auto);
+    min-height: 0;
+    position: fixed;
+    top: var(--pb-chat-template-y, auto);
+    width: var(--pb-chat-template-width, 400px);
+    z-index: $z_10;
+
+    .chat-template-header {
+      cursor: move;
+      touch-action: none;
+      user-select: none;
+    }
+  }
+
+  .chat-template-resize-handle {
+    position: absolute;
+    touch-action: none;
+    z-index: 1;
+  }
+
+  .chat-template-resize-n,
+  .chat-template-resize-s {
+    cursor: ns-resize;
+    height: $chat_template_edge_handle;
+    left: $chat_template_corner_handle;
+    right: $chat_template_corner_handle;
+  }
+
+  .chat-template-resize-e,
+  .chat-template-resize-w {
+    bottom: $chat_template_corner_handle;
+    cursor: ew-resize;
+    top: $chat_template_corner_handle;
+    width: $chat_template_edge_handle;
+  }
+
+  .chat-template-resize-ne,
+  .chat-template-resize-nw,
+  .chat-template-resize-se,
+  .chat-template-resize-sw {
+    height: $chat_template_corner_handle;
+    width: $chat_template_corner_handle;
+  }
+
+  .chat-template-resize-n { top: 0; }
+  .chat-template-resize-s { bottom: 0; }
+  .chat-template-resize-e { right: 0; }
+  .chat-template-resize-w { left: 0; }
+  .chat-template-resize-ne { cursor: nesw-resize; right: 0; top: 0; }
+  .chat-template-resize-sw { bottom: 0; cursor: nesw-resize; left: 0; }
+  .chat-template-resize-nw { cursor: nwse-resize; left: 0; top: 0; }
+  .chat-template-resize-se { bottom: 0; cursor: nwse-resize; right: 0; }
+
+  // Small screens get a full-screen sheet; moving and resizing are desktop-only.
+  @media (max-width: $screen-sm-max) {
+    &.chat-template-floating {
+      border-radius: 0;
+      height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+
+      .chat-template-header {
+        cursor: default;
+      }
+
+      .chat-template-resize-handle {
+        display: none;
+      }
+    }
+  }
+
+  &.dark {
+    background-color: $bg_dark_card;
+    border-color: $border_dark;
+
+    .chat-template-header,
+    .chat-template-context,
+    .chat-template-form {
+      border-color: $border_dark;
+    }
+
+    .chat-template-thread {
+      background-color: $bg_dark;
+    }
+
+    .chat-template-bubble {
+      background-color: $card_dark;
+    }
+
+    .chat-template-message-user .chat-template-bubble {
+      background-color: $primary;
+    }
+  }
+}

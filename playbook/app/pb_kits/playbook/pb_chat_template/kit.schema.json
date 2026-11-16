@@ -1,0 +1,129 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "ChatTemplate",
+  "description": "ChatTemplate component",
+  "platforms": [
+    "react"
+  ],
+  "props": {
+    "context": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "defaultHeight": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ],
+      "default": 560
+    },
+    "defaultWidth": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ],
+      "default": 400
+    },
+    "emptyState": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ],
+      "default": "Ask a question to get started."
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "floating": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "loading": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "loadingText": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": " Thinking"
+    },
+    "messages": {
+      "type": "array",
+      "platforms": [
+        "react"
+      ],
+      "default": []
+    },
+    "onClear": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onClose": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onSubmit": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "placeholder": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": "Ask a question..."
+    },
+    "renderContent": {
+      "type": "(message: ChatTemplateMessage) => React.ReactNode | undefined",
+      "platforms": [
+        "react"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": "Chat"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { ChatTemplate } from 'playbook-ui'",
+      "example": "<ChatTemplate></ChatTemplate>"
+    }
+  }
+}

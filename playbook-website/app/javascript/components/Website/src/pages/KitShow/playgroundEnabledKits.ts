@@ -9,6 +9,7 @@ export const PLAYGROUND_ENABLED_KITS = [
   "button",
   "caption",
   "card",
+  "chat_template",
   "checkbox",
   "circle_icon_button",
   "collapsible",

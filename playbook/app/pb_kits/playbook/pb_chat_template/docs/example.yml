@@ -1,0 +1,7 @@
+examples:
+
+  react:
+  - chat_template_default: Default
+  - chat_template_floating: Floating Window
+  - chat_template_structured_responses: Structured Responses
+  - chat_template_states: Empty, Loading, and Error States

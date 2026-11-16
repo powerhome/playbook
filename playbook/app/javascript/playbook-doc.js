@@ -14,6 +14,7 @@ import * as Button from '../pb_kits/playbook/pb_button/docs'
 import * as ButtonToolbar from '../pb_kits/playbook/pb_button_toolbar/docs'
 import * as Caption from '../pb_kits/playbook/pb_caption/docs'
 import * as Card from '../pb_kits/playbook/pb_card/docs'
+import * as ChatTemplate from '../pb_kits/playbook/pb_chat_template/docs'
 import * as Checkbox from '../pb_kits/playbook/pb_checkbox/docs'
 import * as CircleIconButton from '../pb_kits/playbook/pb_circle_icon_button/docs'
 import * as Collapsible from '../pb_kits/playbook/pb_collapsible/docs'
@@ -124,6 +125,7 @@ ComponentRegistry.registerComponents({
   ...ButtonToolbar,
   ...Caption,
   ...Card,
+  ...ChatTemplate,
   ...Checkbox,
   ...CircleIconButton,
   ...Collapsible,

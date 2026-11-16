@@ -1,7 +1,9 @@
+import chatTemplate from "./chat_template.svg";
 import highlight from "./highlight.svg";
 import message from "./message.svg";
 
 export const messageTextPatternsPreviewMap = {
+  "message_text_patterns/chat_template": chatTemplate,
   "message_text_patterns/highlight": highlight,
   "message_text_patterns/message": message,
 } as const;

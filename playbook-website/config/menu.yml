@@ -729,6 +729,13 @@ kits:
 - category: message_text_patterns
   description: Components for displaying messages and highlighting content.
   components:
+  - name: chat_template
+    platforms: *2
+    description: AI chat window with a scrollable conversation thread, prompt input, and optional floating, resizable layout.
+    status: beta
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
   - name: highlight
     platforms: *1
     description: Highlight is used to pick out or emphasize content.
