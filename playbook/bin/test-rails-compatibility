@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+cd "$(dirname "$0")/.."
+
+bundle check || BUNDLE_FROZEN=true bundle install --quiet
+bundle exec appraisal generate
+
+# Resolve the compatibility bundle separately from the primary Rails 8 lockfile.
+export BUNDLE_GEMFILE="$PWD/gemfiles/rails_7.2.gemfile"
+bundle install --quiet
+bundle exec ruby -rrails -e 'puts "Testing Rails #{Rails.version}"'
+bundle exec rspec --format progress spec

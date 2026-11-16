@@ -13,3 +13,4 @@ playbook/stats.json
 *.dec.*
 .env
 spec/examples.txt
+/playbook/gemfiles/*.gemfile.lock
