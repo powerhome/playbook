@@ -369,6 +369,19 @@ describe("PbDropdown dynamic options", () => {
     expect(list.textContent).not.toContain("No option");
     expect(dropdownEl.querySelectorAll(OPTION_SELECTOR).length).toBe(1);
   });
+
+  test("active_style classes are applied to existing options and can set font color alone", () => {
+    instance.disconnect();
+    dropdownEl.dataset.pbDropdownActiveStyle = JSON.stringify({
+      font_color: "text_lt_lighter",
+    });
+    instance.connect();
+
+    dropdownEl.querySelectorAll(OPTION_SELECTOR).forEach((option) => {
+      expect(option).toHaveClass("font-text_lt_lighter");
+      expect(option.className).not.toMatch(/\bbg-/);
+    });
+  });
 });
 
 describe("PbDropdown async search", () => {
