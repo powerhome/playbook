@@ -8,7 +8,11 @@
   selected_value = params[:selected_value]
 %>
 
-<%= pb_rails("dropdown", props: { label: "Choose Item", options: options }) do %>
+<%= pb_rails("dropdown", props: {
+  active_style: { background_color: "bg_light", font_color: "text_lt_default" },
+  label: "Choose Item",
+  options: options,
+}) do %>
   <%= pb_rails("dropdown/dropdown_trigger") %>
   <%= pb_rails("dropdown/dropdown_container") do %>
     <% options.each do |option| %>

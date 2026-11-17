@@ -1,3 +1,44 @@
+# ✨ 18.4.0.pre.rc.4
+
+##### November 12, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.4.0-rc.4](https://github.com/powerhome/playbook/tree/18.4.0-rc.4) full list of changes:
+
+**Enhancement:**
+
+- Advanced Table: **Add Select All to Advanced Table Column Visibility** [\#6898](https://github.com/powerhome/playbook/pull/6898) ([nickamantia](https://github.com/nickamantia))
+
+**Bug Fixes:**
+
+- Advanced Table: **Rails Tooltip In Header Has Default Styling** [\#6911](https://github.com/powerhome/playbook/pull/6911) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Fixes for Forward Ref Warnings In Mls, Typeahead and Textarea [\#6905](https://github.com/powerhome/playbook/pull/6905) ([nidaqg](https://github.com/nidaqg))
+
+**Documentation:**
+
+- Button: **Document React Button `type` Prop As Deprecated** [\#6929](https://github.com/powerhome/playbook/pull/6929) ([kangaree](https://github.com/kangaree))
+
+**Improvement:**
+
+- Release: **Default Rcs to Minor Bumps and Remove Required Labels** [\#6935](https://github.com/powerhome/playbook/pull/6935) ([nidaqg](https://github.com/nidaqg))
+- Check That Pr Titles Are Conventional Commits [\#6886](https://github.com/powerhome/playbook/pull/6886) ([benlangfeld](https://github.com/benlangfeld))
+- Playbook Website: Guard Against External Runtime Dependencies [\#6927](https://github.com/powerhome/playbook/pull/6927) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Changelog for 18.4.0.pre.rc.1 [\#6926](https://github.com/powerhome/playbook/pull/6926) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Regenerate Ai Metadata for Image, Lightbox, and More [\#6910](https://github.com/powerhome/playbook/pull/6910) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Changelog for 18.4.0.pre.rc.0 [\#6916](https://github.com/powerhome/playbook/pull/6916) ([nickamantia](https://github.com/nickamantia))
+- Upgrades Playbook Icons [\#6912](https://github.com/powerhome/playbook/pull/6912) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Dependencies:**
+
+- Remove Nginx Ingress [\#6936](https://github.com/powerhome/playbook/pull/6936) ([rafatio](https://github.com/rafatio))
+- Keep Renovate Ranges for Playbook-ui and Pin the Website. [\#6934](https://github.com/powerhome/playbook/pull/6934) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Patch Rails, Rack, and Nokogiri [\#6928](https://github.com/powerhome/playbook/pull/6928) ([nidaqg](https://github.com/nidaqg))
+- Pin Actions to Full Shas [\#6931](https://github.com/powerhome/playbook/pull/6931) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.4.0-rc.1...18.4.0-rc.4)
+
 # ✨ 18.4.0.pre.rc.1
 
 ##### November 09, 2026
