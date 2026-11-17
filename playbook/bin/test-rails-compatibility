@@ -6,8 +6,12 @@ cd "$(dirname "$0")/.."
 bundle check || BUNDLE_FROZEN=true bundle install --quiet
 
 # Fail if the committed appraisal gemfiles are stale relative to Appraisals/Gemfile.
+# Compare against a snapshot rather than git, since the CI container has no .git directory.
+snapshot="$(mktemp -d)"
+trap 'rm -rf "$snapshot"' EXIT
+cp -R gemfiles "$snapshot/"
 bundle exec appraisal generate
-if ! git diff --exit-code -- gemfiles/; then
+if ! diff -ru "$snapshot/gemfiles" gemfiles; then
   echo "gemfiles/ is out of date. Run 'bundle exec appraisal generate' and commit the result." >&2
   exit 1
 fi
