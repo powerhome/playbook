@@ -1,3 +1,23 @@
+# ✨ 18.4.0.pre.rc.5
+
+##### November 17, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.4.0-rc.5](https://github.com/powerhome/playbook/tree/18.4.0-rc.5) full list of changes:
+
+**Enhancement:**
+
+- Background: **Add All Product Colors to Rails Background_color Prop** [\#6948](https://github.com/powerhome/playbook/pull/6948) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: **React Selectable Rows + Multi-column Header** [\#6947](https://github.com/powerhome/playbook/pull/6947) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Documentation:**
+
+- Dropdown: **Dropdown Active_style Docs - Rails (parity)** [\#6950](https://github.com/powerhome/playbook/pull/6950) ([nickamantia](https://github.com/nickamantia))
+- Changelog for Rc 18.4.0-rc.4 [\#6937](https://github.com/powerhome/playbook/pull/6937) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.4.0-rc.4...18.4.0-rc.5)
+
 # ✨ 18.4.0.pre.rc.4
 
 ##### November 12, 2026
