@@ -82,6 +82,27 @@ test("drops event handler attributes such as onerror", () => {
   expect(container.innerHTML).not.toContain("alert");
 });
 
+test("keeps highlight, subscript, and superscript", () => {
+  const { container } = render(
+    <RichTextContent
+        html={'<p><mark data-color="#ffee00" style="background-color: #ffee00; color: red; background-image: url(javascript:alert(1))">Hi</mark> <sub>2</sub><sup>3</sup></p><mark style="background-color: expression(alert(1))">No</mark>'}
+    />
+  );
+
+  const highlight = container.querySelector("p mark");
+  expect(highlight.textContent).toBe("Hi");
+  expect(highlight.style.backgroundColor.replace(/\s/g, "")).toMatch(/#ffee00|rgb\(255,238,0\)/i);
+  expect(highlight.style.color).toBe("");
+  expect(highlight.getAttribute("style")).not.toContain("javascript");
+  expect(container.querySelector("sub").textContent).toBe("2");
+  expect(container.querySelector("sup").textContent).toBe("3");
+
+  const rejected = container.querySelectorAll("mark")[1];
+  expect(rejected.textContent).toBe("No");
+  expect(rejected.style.backgroundColor).toBe("");
+  expect(rejected.getAttribute("style") || "").not.toContain("expression");
+});
+
 test("keeps text alignment and drops every other inline style", () => {
   const { container } = render(
     <RichTextContent

@@ -31,6 +31,7 @@ const ALLOWED_TAGS = new Set([
   'i',
   'img',
   'li',
+  'mark',
   'ol',
   'p',
   'pre',
@@ -38,6 +39,8 @@ const ALLOWED_TAGS = new Set([
   'span',
   'strike',
   'strong',
+  'sub',
+  'sup',
   'u',
   'ul',
 ])
@@ -53,12 +56,32 @@ const ALLOWED_ATTRIBUTES: { [tag: string]: string[] } = {
 }
 
 const TEXT_ALIGN = /(?:^|;)\s*text-align\s*:\s*(center|justify|left|right)\s*(?:;|$)/i
+const BACKGROUND_COLOR = /(?:^|;)\s*background-color\s*:\s*([^;]+)/i
+const SAFE_COLOR = /^(?:#(?:[0-9a-f]{3}|[0-9a-f]{4}|[0-9a-f]{6}|[0-9a-f]{8})|[a-z]+|(?:rgb|hsl)a?\([\d.%\s,/]+\))$/i
+const UNSAFE_COLOR_NAME = /^(?:expression|javascript|url|vbscript)$/i
 
 const textAlignFor = (element: Element): string | null => {
   const style = element.getAttribute('style')
   if (!style) return null
   const match = style.match(TEXT_ALIGN)
   return match ? match[1].toLowerCase() : null
+}
+
+const safeColor = (value: string | null): string | null => {
+  if (!value) return null
+  const color = value.trim()
+  if (!SAFE_COLOR.test(color) || UNSAFE_COLOR_NAME.test(color)) return null
+  return color
+}
+
+const highlightColorFor = (element: Element): string | null => {
+  const fromData = safeColor(element.getAttribute('data-color'))
+  if (fromData) return fromData
+
+  const style = element.getAttribute('style')
+  if (!style) return null
+  const match = style.match(BACKGROUND_COLOR)
+  return match ? safeColor(match[1]) : null
 }
 
 const isSafeUrl = (value: string, allowDataImage: boolean): boolean => {
@@ -144,11 +167,17 @@ const nodesToReact = (
     if (tag === 'img' && !attributes.src) return null
 
     const textAlign = textAlignFor(element)
+    const highlightColor = tag === 'mark' ? highlightColorFor(element) : null
     const props: { [name: string]: unknown } = { key }
     Object.entries(attributes).forEach(([name, value]) => {
       props[name === 'class' ? 'className' : name] = value
     })
-    if (textAlign) props.style = { textAlign }
+    if (highlightColor || textAlign) {
+      const style: { backgroundColor?: string, textAlign?: string } = {}
+      if (highlightColor) style.backgroundColor = highlightColor
+      if (textAlign) style.textAlign = textAlign
+      props.style = style
+    }
     if (VOID_TAGS.has(tag)) return React.createElement(tag, props)
 
     return React.createElement(tag, props, ...children)
