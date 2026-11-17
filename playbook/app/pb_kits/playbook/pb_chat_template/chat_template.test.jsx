@@ -196,6 +196,19 @@ test('narrow viewports do not drag the floating window', () => {
   window.innerWidth = originalWidth
 })
 
+test('a cancelled pointer stops dragging', () => {
+  renderChat({ defaultHeight: 500, defaultWidth: 400, floating: true })
+  const kit = screen.getByTestId(testId)
+  const startX = kit.style.getPropertyValue('--pb-chat-template-x')
+  const header = kit.querySelector('.chat-template-header')
+
+  fireEvent.pointerDown(header, { button: 0, clientX: 200, clientY: 40 })
+  fireEvent.pointerCancel(window)
+  fireEvent.pointerMove(window, { clientX: 20, clientY: 40 })
+
+  expect(kit.style.getPropertyValue('--pb-chat-template-x')).toBe(startX)
+})
+
 test('Escape calls onClose only when floating', () => {
   const onClose = jest.fn()
   const { rerender } = renderChat({ onClose })

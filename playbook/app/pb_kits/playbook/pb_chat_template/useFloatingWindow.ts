@@ -131,11 +131,13 @@ const useFloatingWindow = ({ defaultHeight, defaultWidth, enabled }: FloatingWin
     const stopInteraction = () => {
       window.removeEventListener('pointermove', handlePointerMove)
       window.removeEventListener('pointerup', stopInteraction)
+      window.removeEventListener('pointercancel', stopInteraction)
       stopInteractionRef.current = null
     }
 
     window.addEventListener('pointermove', handlePointerMove)
     window.addEventListener('pointerup', stopInteraction)
+    window.addEventListener('pointercancel', stopInteraction)
     stopInteractionRef.current = stopInteraction
   }
 
