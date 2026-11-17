@@ -95,9 +95,17 @@ const attributesFor = (element: Element): { [name: string]: string } => {
     attributes[name] = value
   })
 
-  if (tag === 'a' && attributes.target === '_blank') {
-    const rel = attributes.rel ? `${attributes.rel} noopener noreferrer` : 'noopener noreferrer'
-    attributes.rel = Array.from(new Set(rel.split(/\s+/).filter(Boolean))).join(' ')
+  if (tag === 'a' && attributes.target?.toLowerCase() === '_blank') {
+    attributes.target = '_blank'
+    const rel = new Set(
+      (attributes.rel || '')
+        .toLowerCase()
+        .split(/\s+/)
+        .filter((token) => token && token !== 'opener')
+    )
+    rel.add('noopener')
+    rel.add('noreferrer')
+    attributes.rel = Array.from(rel).join(' ')
   }
 
   return attributes

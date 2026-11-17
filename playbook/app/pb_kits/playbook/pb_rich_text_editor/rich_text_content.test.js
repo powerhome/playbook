@@ -60,13 +60,16 @@ test("keeps allowlisted classes on React 17", () => {
 test("forces noopener noreferrer when a link opens a new window", () => {
   const { container } = render(
     <RichTextContent
-        html={'<a href="https://example.com" rel="opener" target="_blank">Open</a>'}
+        html={'<a href="https://example.com" rel="opener" target="_blank">Open</a><a href="https://example.com" rel="Opener" target="_BLANK">Also</a>'}
     />
   );
 
-  expect(container.querySelector("a").getAttribute("rel").split(/\s+/)).toEqual(
-    expect.arrayContaining(["noopener", "noreferrer"])
-  );
+  container.querySelectorAll("a").forEach((link) => {
+    const rel = link.getAttribute("rel").split(/\s+/);
+    expect(link.getAttribute("target")).toBe("_blank");
+    expect(rel).toEqual(expect.arrayContaining(["noopener", "noreferrer"]));
+    expect(rel).not.toContain("opener");
+  });
 });
 
 test("drops event handler attributes such as onerror", () => {
