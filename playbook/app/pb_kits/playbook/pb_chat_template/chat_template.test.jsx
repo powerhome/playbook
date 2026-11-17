@@ -166,6 +166,22 @@ test('floating opens in the bottom-right corner and moves with the arrow keys', 
   expect(kit.style.getPropertyValue('--pb-chat-template-width')).toBe('384px')
 })
 
+test('keeps htmlOptions styles alongside global inline props', () => {
+  renderChat({ height: '480px', htmlOptions: { style: { outline: '1px solid red' } } })
+  const kit = screen.getByTestId(testId)
+
+  expect(kit.style.outline).toBe('1px solid red')
+  expect(kit.style.height).toBe('480px')
+})
+
+test('floating size ignores the height prop so resizing can change it', () => {
+  renderChat({ floating: true, height: '480px' })
+  const kit = screen.getByTestId(testId)
+
+  expect(kit.style.height).toBe('')
+  expect(kit.style.getPropertyValue('--pb-chat-template-height')).toBe('560px')
+})
+
 test('Escape calls onClose only when floating', () => {
   const onClose = jest.fn()
   const { rerender } = renderChat({ onClose })

@@ -83,6 +83,14 @@ const ChatTemplate = (props: ChatTemplateProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
+  const { style: htmlStyle, ...restHtmlProps } = htmlProps as { style?: React.CSSProperties }
+  // Floating size comes from the drag rect. A pixel height prop would override it.
+  const inlineStyle: React.CSSProperties = { ...htmlStyle, ...globalInlineProps(props) }
+  if (floating) {
+    delete inlineStyle.height
+    delete inlineStyle.maxHeight
+    delete inlineStyle.minHeight
+  }
   const classes = classnames(
     buildCss('pb_chat_template_kit'),
     { 'chat-template-floating': floating },
@@ -132,14 +140,14 @@ const ChatTemplate = (props: ChatTemplateProps): React.ReactElement => {
     <div
         {...ariaProps}
         {...dataProps}
-        {...htmlProps}
+        {...restHtmlProps}
         aria-label={title}
         className={classes}
         id={id}
         onKeyDown={handleWindowKeyDown}
         ref={windowRef}
         role={floating ? 'dialog' : 'region'}
-        style={globalInlineProps(props)}
+        style={inlineStyle}
     >
       <div
           aria-label={floating ? `${title}. Use arrow keys to move or Shift plus arrow keys to resize.` : undefined}
