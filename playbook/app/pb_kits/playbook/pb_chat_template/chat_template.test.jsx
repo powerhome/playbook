@@ -182,6 +182,20 @@ test('floating size ignores the height prop so resizing can change it', () => {
   expect(kit.style.getPropertyValue('--pb-chat-template-height')).toBe('560px')
 })
 
+test('narrow viewports do not drag the floating window', () => {
+  const originalWidth = window.innerWidth
+  window.innerWidth = 400
+  renderChat({ floating: true })
+  const kit = screen.getByTestId(testId)
+  const startX = kit.style.getPropertyValue('--pb-chat-template-x')
+
+  fireEvent.pointerDown(kit.querySelector('.chat-template-header'), { button: 0, clientX: 200, clientY: 40 })
+  fireEvent.pointerMove(window, { clientX: 20, clientY: 40 })
+
+  expect(kit.style.getPropertyValue('--pb-chat-template-x')).toBe(startX)
+  window.innerWidth = originalWidth
+})
+
 test('Escape calls onClose only when floating', () => {
   const onClose = jest.fn()
   const { rerender } = renderChat({ onClose })

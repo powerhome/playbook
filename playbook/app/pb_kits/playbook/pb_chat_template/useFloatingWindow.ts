@@ -20,6 +20,8 @@ type RectUpdater = (start: WindowRect, deltaX: number, deltaY: number) => Window
 export const RESIZE_DIRECTIONS: ResizeDirection[] = ['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw']
 export const MIN_WINDOW_HEIGHT = 360
 export const MIN_WINDOW_WIDTH = 320
+// Matches $screen-sm-min. Below this the stylesheet pins the window to the screen.
+export const FLOATING_DESKTOP_MIN_WIDTH = 576
 const VIEWPORT_MARGIN = 16
 const KEYBOARD_STEP = 16
 
@@ -34,6 +36,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 
 const viewportRight = () => window.innerWidth - VIEWPORT_MARGIN
 const viewportBottom = () => window.innerHeight - VIEWPORT_MARGIN
+const isDesktopViewport = () => window.innerWidth >= FLOATING_DESKTOP_MIN_WIDTH
 
 export const moveRect: RectUpdater = (start, deltaX, deltaY) => ({
   ...start,
@@ -103,7 +106,9 @@ const useFloatingWindow = ({ defaultHeight, defaultWidth, enabled }: FloatingWin
     if (!enabled) return
 
     const handleViewportResize = () => {
-      if (rectRef.current) applyRect(fitToViewport(rectRef.current))
+      // The stylesheet owns the full-screen sheet, so keep the desktop rect intact.
+      if (!isDesktopViewport() || !rectRef.current) return
+      applyRect(fitToViewport(rectRef.current))
     }
 
     window.addEventListener('resize', handleViewportResize)
@@ -114,7 +119,7 @@ const useFloatingWindow = ({ defaultHeight, defaultWidth, enabled }: FloatingWin
   }, [enabled])
 
   const startInteraction = (event: React.PointerEvent, updateRect: RectUpdater) => {
-    if (!enabled || event.button !== 0 || !rectRef.current) return
+    if (!enabled || !isDesktopViewport() || event.button !== 0 || !rectRef.current) return
     event.preventDefault()
 
     const start = rectRef.current
@@ -145,7 +150,7 @@ const useFloatingWindow = ({ defaultHeight, defaultWidth, enabled }: FloatingWin
 
   const handleKeyboardMove = (event: React.KeyboardEvent) => {
     const offset = ARROW_KEY_OFFSETS[event.key]
-    if (!enabled || !offset || event.target !== event.currentTarget || !rectRef.current) return
+    if (!enabled || !isDesktopViewport() || !offset || event.target !== event.currentTarget || !rectRef.current) return
     event.preventDefault()
 
     const [deltaX, deltaY] = offset.map((direction) => direction * KEYBOARD_STEP)
