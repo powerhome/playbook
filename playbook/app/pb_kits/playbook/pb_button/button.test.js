@@ -132,6 +132,160 @@ test('should render child target prop', () => {
     expect(kit).not.toHaveAttribute('rel')
 })
 
+describe('type and htmlType', () => {
+    test('defaults to pb_button_inline and html type button', () => {
+        render(
+            <Button
+                data={{ testid: 'default-type' }}
+                text="Save"
+            />
+        )
+
+        const kit = screen.getByTestId('default-type')
+        expect(kit).toHaveClass('pb_button_kit pb_button_primary pb_button_inline pb_button_enabled')
+        expect(kit).not.toHaveClass('pb_button_block')
+        expect(kit).toHaveAttribute('type', 'button')
+    })
+
+    test('type="inline" adds pb_button_inline without changing the html type', () => {
+        render(
+            <Button
+                data={{ testid: 'inline-type' }}
+                type="inline"
+            />
+        )
+
+        const kit = screen.getByTestId('inline-type')
+        expect(kit).toHaveClass('pb_button_inline')
+        expect(kit).toHaveAttribute('type', 'button')
+    })
+
+    test('type={null} omits the layout class', () => {
+        render(
+            <Button
+                data={{ testid: 'null-type' }}
+                type={null}
+            />
+        )
+
+        const kit = screen.getByTestId('null-type')
+        expect(kit).not.toHaveClass('pb_button_inline')
+        expect(kit).toHaveAttribute('type', 'button')
+    })
+
+    test('legacy and undocumented type strings still generate pb_button_${type}', () => {
+        const { unmount } = render(
+            <Button
+                data={{ testid: 'legacy-link' }}
+                type="link"
+            />
+        )
+
+        const linkType = screen.getByTestId('legacy-link')
+        expect(linkType).toHaveClass('pb_button_primary')
+        expect(linkType).toHaveClass('pb_button_link')
+        expect(linkType).toHaveAttribute('type', 'button')
+        unmount()
+
+        render(
+            <Button
+                data={{ testid: 'legacy-submit' }}
+                type="submit"
+            />
+        )
+
+        const submitType = screen.getByTestId('legacy-submit')
+        expect(submitType).toHaveClass('pb_button_submit')
+        expect(submitType).toHaveAttribute('type', 'button')
+    })
+
+    test('fullWidth keeps pb_button_inline and adds pb_button_block', () => {
+        render(
+            <Button
+                data={{ testid: 'full-width-type' }}
+                fullWidth
+            />
+        )
+
+        const kit = screen.getByTestId('full-width-type')
+        expect(kit).toHaveClass('pb_button_inline')
+        expect(kit).toHaveClass('pb_button_block')
+    })
+
+    test('htmlType sets the attribute on standard and reaction buttons', () => {
+        const { unmount } = render(
+            <Button
+                data={{ testid: 'html-submit' }}
+                htmlType="submit"
+            />
+        )
+
+        expect(screen.getByTestId('html-submit')).toHaveAttribute('type', 'submit')
+        unmount()
+
+        render(
+            <Button
+                data={{ testid: 'html-reset' }}
+                htmlType="reset"
+                variant="reaction"
+            />
+        )
+
+        const kit = screen.getByTestId('html-reset')
+        expect(kit).toHaveAttribute('type', 'reset')
+        expect(kit).toHaveClass('pb_button_reaction')
+        expect(kit).toHaveClass('pb_button_inline')
+    })
+
+    test('htmlType is omitted when link renders an anchor', () => {
+        render(
+            <Button
+                data={{ testid: 'html-link' }}
+                htmlType="submit"
+                link="https://example.com"
+            />
+        )
+
+        const kit = screen.getByTestId('html-link')
+        expect(kit.tagName).toBe('A')
+        expect(kit).toHaveAttribute('href', 'https://example.com')
+        expect(kit).not.toHaveAttribute('type')
+        expect(kit).toHaveClass('pb_button_inline')
+    })
+
+    test('htmlType overrides htmlOptions.type', () => {
+        render(
+            <Button
+                data={{ testid: 'html-override' }}
+                htmlOptions={{ type: 'submit' }}
+                htmlType="reset"
+            />
+        )
+
+        expect(screen.getByTestId('html-override')).toHaveAttribute('type', 'reset')
+    })
+
+    test('loading, disabled, and variant classes stay independent of type', () => {
+        render(
+            <Button
+                data={{ testid: 'type-states' }}
+                disabled
+                loading
+                type="inline"
+                variant="danger"
+            />
+        )
+
+        const kit = screen.getByTestId('type-states')
+        expect(kit).toHaveClass('pb_button_danger')
+        expect(kit).toHaveClass('pb_button_inline')
+        expect(kit).toHaveClass('pb_button_disabled')
+        expect(kit).toHaveClass('pb_button_loading')
+        expect(kit).toBeDisabled()
+        expect(kit).toHaveAttribute('type', 'button')
+    })
+})
+
 describe('icon-only button', () => {
     test('adds pb_button_icon_only class when icon is provided without text', () => {
         render(

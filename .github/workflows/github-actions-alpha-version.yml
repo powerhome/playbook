@@ -137,61 +137,19 @@ jobs:
         run: |
           git config --local user.name "${{ github.actor }}"
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-      - name: Get Semver Label
-        id: get-label
+      - name: Check RC eligibility
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          PR_NUMBER=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
-            "https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
-            | jq '.[0].number')
-          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
-          
-          if [ ! -z "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
-            echo "✅ Successfully found PR number: $PR_NUMBER"
-          else
-            echo "❌ Unable to find PR number"
+          pull_request=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" --jq '.[0]')
+
+          if [ -z "$pull_request" ] || [ "$pull_request" = "null" ]; then
+            echo "No associated PR found. Skipping the release candidate process."
+            echo "SKIP_REMAINING_STEPS=true" >> "$GITHUB_ENV"
+          elif jq -e 'any(.labels[]; (.name | ascii_downcase) == "inactive rc")' <<< "$pull_request" > /dev/null; then
+            echo "PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "SKIP_REMAINING_STEPS=true" >> "$GITHUB_ENV"
           fi
-
-          echo "Fetching labels for PR #$PR_NUMBER..."
-          LABELS=$(gh pr view $PR_NUMBER --json labels -q '.labels[].name' || echo "Failed to fetch labels")
-          echo "Found labels: $LABELS"
-
-          if [ -z "$LABELS" ]; then
-            echo "⛔ Error: Failed to fetch PR labels"
-            exit 1
-          fi
-
-          if echo "$LABELS" | grep -iq "Inactive RC"; then
-            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
-            echo "SKIP_REMAINING_STEPS=true" >> $GITHUB_ENV  # Set flag to skip steps
-            exit 0  # Exit the job early, skipping the rest of the workflow
-          fi
-
-          SEMVER_LABEL=$(echo "$LABELS" | grep -iE '^(major|minor|patch)$' || true)
-          echo "Found Semver labels: $SEMVER_LABEL"
-
-          if [ -z "$SEMVER_LABEL" ]; then
-            echo "⏭️ No Semver label found on PR #$PR_NUMBER."
-            echo "ℹ️ This is likely an automated PR. Treating as 'Inactive RC' and skipping the release candidate process."
-            echo "SKIP_REMAINING_STEPS=true" >> $GITHUB_ENV  # Set flag to skip steps
-            exit 0  # Exit the job early, skipping the rest of the workflow
-          fi
-
-          LABEL_COUNT=$(echo "$SEMVER_LABEL" | wc -l)
-          echo "Number of Semver labels found: $LABEL_COUNT"
-
-          if [ "$LABEL_COUNT" -ne 1 ]; then
-            echo "⛔ Error: Expected exactly one Semver label, found $LABEL_COUNT on PR #$PR_NUMBER."
-            exit 1
-          fi
-
-          echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
-          echo "✅ Successfully found Semver label: $SEMVER_LABEL"
-
-          echo "SEMVER_LABEL=$SEMVER_LABEL" >> $GITHUB_ENV
-          echo "Semver label found: $SEMVER_LABEL"
       - name: Check External Runtime Dependencies
         if: env.SKIP_REMAINING_STEPS != 'true'
         run: yarn check:external-deps
@@ -199,27 +157,10 @@ jobs:
         id: set-version
         run: |
           if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "⏭️ Skipping the release candidate process."
             exit 0
           fi
-          current_npm_version=$(node -pe "require('./package.json').version")
-
-          case ${{ env.SEMVER_LABEL }} in
-            major)
-              new_npm_version=$(yarn version --premajor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-              ;;
-            minor)
-              new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-              ;;
-            patch)
-              new_npm_version=$(yarn version --prepatch --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
-              ;;
-            *)
-              echo "Error: Invalid Semver label: ${{ env.SEMVER_LABEL }}"
-              exit 1
-              ;;
-          esac
-
+          new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           new_npm_version=${new_npm_version#v}
           new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
 
@@ -229,7 +170,7 @@ jobs:
       - name: Check if version exists and increment if necessary
         run: |
           if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "⏭️ Skipping the release candidate process."
             exit 0
           fi
           max_attempts=100
@@ -256,7 +197,7 @@ jobs:
       - name: Update Version.rb
         run: |
           if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "⏭️ Skipping the release candidate process."
             exit 0
           fi
           gem install bundler -v 4.0.22
@@ -265,7 +206,7 @@ jobs:
       - name: Distribute and Publish (NPM)
         run: |
           if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "⏭️ Skipping the release candidate process."
             exit 0
           fi
           yarn install
@@ -279,7 +220,7 @@ jobs:
       - name: Distribute and Publish (RubyGems)
         run: |
           if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "⏭️ Skipping the release candidate process."
             exit 0
           fi
           bin/build_gem
@@ -289,7 +230,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process."
+            echo "⏭️ Skipping the release candidate process."
             exit 0
           fi
           gh release create v${{ env.new_npm_version }} \
@@ -309,7 +250,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             if (process.env.SKIP_REMAINING_STEPS === 'true') {
-              console.log("⏭️ PR has the 'Inactive RC' label. Skipping the release candidate process.");
+              console.log("⏭️ Skipping the release candidate process.");
               return;
             }
 

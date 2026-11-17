@@ -2,47 +2,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: playbook
+  name: playbook-traefik
   labels:
     app: playbook
+  <% if ingress["issueCert"] || environment == 'production' %>
   annotations:
-    kubernetes.io/ingress.class: nginx
     <% if ingress["issueCert"] %>
     cert-manager.io/cluster-issuer: production-certs
     <% end %>
     <% if environment == 'production' %>
-    nginx.ingress.kubernetes.io/whitelist-source-range: '0.0.0.0/0'
-    <% end %>
-spec:
-  tls:
-  - hosts:
-      <% urls.each do |url| %>
-      - <%= url.host %>
-      <% end %>
-    secretName: playbook-tls
-  rules:
-    <% urls.each do |url| %>
-    - host: <%= url.host %>
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: playbook
-                port:
-                  number: 80
-    <% end %>
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: playbook-traefik
-  labels:
-    app: playbook
-  <% if environment == 'production' %>
-  annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: https,https-public
+    <% end %>
   <% end %>
 spec:
   ingressClassName: traefik

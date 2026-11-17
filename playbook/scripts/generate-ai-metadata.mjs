@@ -318,10 +318,18 @@ function parseTypeBlock(block, imports = new Map()) {
   let currentProp = null;
   let currentType = '';
   let depth = 0;
+  // A comment containing `@schemaOmit` drops the next prop from kit.schema.json.
+  // The prop stays in the component. Use this for deprecated React-only props
+  // that should not appear in the props tab or playground.
+  let omitNextProp = false;
 
   for (const line of block.split('\n')) {
     const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('//') || trimmed.startsWith('/*')) continue;
+    if (!trimmed) continue;
+    if (trimmed.startsWith('//') || trimmed.startsWith('/*') || trimmed.startsWith('*')) {
+      if (trimmed.includes('@schemaOmit')) omitNextProp = true;
+      continue;
+    }
 
     // Check for new prop BEFORE updating depth (so opening braces on same line don't block it)
     const match = trimmed.match(/^(\w+)\??:\s*(.*)$/);
@@ -330,6 +338,17 @@ function parseTypeBlock(block, imports = new Map()) {
         const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim(), imports);
         props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
       }
+      if (omitNextProp) {
+        // Keep brace depth so a multiline object is skipped as a whole.
+        // Resetting to 0 would treat the first nested field as a new prop.
+        currentProp = null;
+        currentType = '';
+        omitNextProp = false;
+        const typeStart = match[2];
+        depth = (typeStart.match(/\{/g) || []).length - (typeStart.match(/\}/g) || []).length;
+        continue;
+      }
+      omitNextProp = false;
       currentProp = match[1];
       currentType = match[2].replace(/,\s*$/, '');
       // Reset depth tracking for this prop's type
@@ -447,8 +466,24 @@ function parseRubyArray(str) {
 }
 
 /**
- * Parse all props from a .rb file.
+ * `# schema_values: submit, reset, button` on the comment lines directly above a
+ * Rails prop documents playground and props-tab choices. It does not add runtime
+ * validation; the Ruby prop stays whatever type it already is.
  */
+function readSchemaValuesComment(content, propIndex) {
+  const lines = content.slice(0, propIndex).split('\n');
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const trimmed = lines[i].trim();
+    if (!trimmed) continue;
+    if (!trimmed.startsWith('#')) break;
+    const match = trimmed.match(/^#\s*schema_values:\s*(.+)$/);
+    if (match) {
+      return match[1].split(/[,\s]+/).map((value) => value.trim()).filter(Boolean);
+    }
+  }
+  return null;
+}
+
 function parseRuby(filePath) {
   const content = readFile(filePath);
   if (!content) return {};
@@ -456,7 +491,8 @@ function parseRuby(filePath) {
   const props = {};
   const propRegex = /prop\s+:(\w+)([^]*?)(?=\n\s*(?:prop\s+:|def\s+|private|protected|end\s*$))/gm;
 
-  for (const [, name, body] of content.matchAll(propRegex)) {
+  for (const match of content.matchAll(propRegex)) {
+    const [, name, body] = match;
     const camelName = snakeToCamel(name);
     if (KIT_TYPE_BLOCK_SKIP_PROPS.has(camelName)) continue;
 
@@ -469,6 +505,12 @@ function parseRuby(filePath) {
     if (valuesMatch) {
       prop.values = parseRubyArray(valuesMatch[1]);
       prop.type = 'enum';
+    }
+
+    const schemaValues = readSchemaValuesComment(content, match.index);
+    if (schemaValues) {
+      prop.type = 'enum';
+      prop.values = schemaValues;
     }
 
     const defaultMatch = body.match(/default:\s*("[^"]*"|'[^']*'|true|false|nil|\d+(?:\.\d+)?)/);

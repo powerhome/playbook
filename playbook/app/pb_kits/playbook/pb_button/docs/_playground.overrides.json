@@ -14,7 +14,7 @@
     { "name": "Content", "props": ["text", "icon", "iconRight"] },
     { "name": "Link Mode", "props": ["link", "target", "newWindow"] },
     { "name": "Reaction Mode", "props": ["count", "highlight"] },
-    { "name": "Form", "props": ["htmlType", "form", "value", "tabIndex"] }
+    { "name": "Form", "props": ["htmlType", "type", "form", "value", "tabIndex"] }
   ],
   "presets": [
     { "name": "Primary", "props": { "variant": "primary" }, "children": "Submit" },
