@@ -293,14 +293,14 @@ export const bindTouchDrag = ({
 
     if (!state.active) return;
 
-    if (runDragPointerMove(state, touch.clientX, touch.clientY, dragId, container, handlers)) {
-      event.preventDefault();
-    }
+    // Once armed, claim every move (even under the drag threshold) so the browser can't start a pan.
+    event.preventDefault();
+    runDragPointerMove(state, touch.clientX, touch.clientY, dragId, container, handlers);
   };
 
-  // Long-press opens the context menu on Android; suppress it once the hold arms the drag.
+  // Long-press opens the context menu at about the same time the hold arms, so block it for the whole press.
   const handleContextMenu = (event: Event) => {
-    if (state.active) event.preventDefault();
+    if (pressTimer !== null || state.active) event.preventDefault();
   };
 
   // A long-press on an image or selected text starts native drag-and-drop on iPadOS.

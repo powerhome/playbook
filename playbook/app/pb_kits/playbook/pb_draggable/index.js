@@ -178,6 +178,9 @@ export default class PbDraggable extends PbEnhancedElement {
 
       if (!state.active) return;
 
+      // Once armed, claim every move (even under the drag threshold) so the browser can't start a pan.
+      event.preventDefault();
+
       if (!state.dragging) {
         const deltaX = touch.clientX - state.startX;
         const deltaY = touch.clientY - state.startY;
@@ -187,8 +190,6 @@ export default class PbDraggable extends PbEnhancedElement {
         state.dragging = true;
         this.handleDragStart(pointerEventFromTouch(touch, item));
       }
-
-      event.preventDefault();
 
       const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
       if (!isWithinThisDraggable(elementBelow)) return;
@@ -235,9 +236,9 @@ export default class PbDraggable extends PbEnhancedElement {
 
     const onTouchEnd = (event) => finishTouchDrag(event.changedTouches[0]);
     const onTouchCancel = (event) => finishTouchDrag(event.changedTouches[0]);
-    // Long-press opens the context menu on Android; suppress it once the hold arms the drag.
+    // Long-press opens the context menu at about the same time the hold arms, so block it for the whole press.
     const onContextMenu = (event) => {
-      if (state.active) event.preventDefault();
+      if (pressTimer !== null || state.active) event.preventDefault();
     };
     // A long-press on an image or selected text starts native drag-and-drop on iPadOS; cancel it.
     const onNativeDragStart = (event) => event.preventDefault();

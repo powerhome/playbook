@@ -180,6 +180,37 @@ describe("touchDrag utilities", () => {
       expect(handlers.onDragEnd).not.toHaveBeenCalled();
     });
 
+    test("claims small moves once armed so the browser cannot start a pan", () => {
+      item.dispatchEvent(touchEvent("touchstart", 0, 0));
+      jest.advanceTimersByTime(TOUCH_DRAG_DELAY_MS);
+
+      const smallMove = touchEvent("touchmove", 0, 2);
+      item.dispatchEvent(smallMove);
+
+      expect(smallMove.defaultPrevented).toBe(true);
+      expect(handlers.onDragStart).not.toHaveBeenCalled();
+    });
+
+    test("blocks the context menu for the whole press, not just once armed", () => {
+      const contextMenu = () => {
+        const event = new Event("contextmenu", { bubbles: true, cancelable: true });
+        item.dispatchEvent(event);
+        return event;
+      };
+
+      expect(contextMenu().defaultPrevented).toBe(false);
+
+      item.dispatchEvent(touchEvent("touchstart", 0, 0));
+      jest.advanceTimersByTime(TOUCH_DRAG_DELAY_MS - 1);
+      expect(contextMenu().defaultPrevented).toBe(true);
+
+      jest.advanceTimersByTime(1);
+      expect(contextMenu().defaultPrevented).toBe(true);
+
+      item.dispatchEvent(touchEvent("touchend", 0, 0));
+      expect(contextMenu().defaultPrevented).toBe(false);
+    });
+
     test("blocks native dragstart so it does not reach HTML5 drag handlers", () => {
       const img = document.createElement("img");
       item.appendChild(img);
