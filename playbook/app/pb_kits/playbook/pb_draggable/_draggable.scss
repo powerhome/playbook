@@ -20,13 +20,23 @@
 
     .pb_draggable_handle,
     .card_draggable_handle {
-      touch-action: none;
+      // Allow swipe-to-scroll from the handle; touch drag arms only after a press-and-hold.
+      touch-action: manipulation;
       -webkit-touch-callout: none;
       user-select: none;
       cursor: grab;
 
       &:active {
         color: $text_lt_default;
+      }
+    }
+
+    // Whole-item touch drag: keep the long-press from selecting text or opening the iOS callout.
+    @media (hover: none) and (pointer: coarse) {
+      &:not(:has(.pb_draggable_handle, .card_draggable_handle)) {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
       }
     }
 
