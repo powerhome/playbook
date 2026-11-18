@@ -84,14 +84,19 @@ const highlightColorFor = (element: Element): string | null => {
   return match ? safeColor(match[1]) : null
 }
 
-const isSafeUrl = (value: string, allowDataImage: boolean): boolean => {
-  const normalized = Array.from(value.trim()).filter((character) => {
-    const code = character.charCodeAt(0)
-    return code > 31 && code !== 127 && !/\s/.test(character)
-  }).join('')
-  if (/^(javascript|vbscript):/i.test(normalized)) return false
-  if (/^data:/i.test(normalized)) return allowDataImage && /^data:image\//i.test(normalized)
-  return true
+const SAFE_LINK_PROTOCOLS = new Set(['http:', 'https:', 'mailto:', 'tel:'])
+const SAFE_IMAGE_PROTOCOLS = new Set(['http:', 'https:'])
+
+// The URL parser strips tabs, newlines, and control characters the same way navigation does.
+// Relative URLs resolve against the page and keep its protocol.
+const isSafeUrl = (value: string, isImage: boolean): boolean => {
+  try {
+    const { protocol } = new URL(value, window.location.href)
+    if (isImage && protocol === 'data:') return /^\s*data:image\//i.test(value)
+    return (isImage ? SAFE_IMAGE_PROTOCOLS : SAFE_LINK_PROTOCOLS).has(protocol)
+  } catch {
+    return false
+  }
 }
 
 const mentionFrom = (element: Element): RichTextMention | null => {

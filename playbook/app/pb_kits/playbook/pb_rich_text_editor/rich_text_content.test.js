@@ -35,6 +35,41 @@ test("keeps an ordered list when the body also has a mention", () => {
   ]);
 });
 
+test("allows web, mail, phone, and relative links, and image data urls", () => {
+  const { container } = render(
+    <RichTextContent
+        html={'<a href="https://example.com">Https</a><a href="mailto:ada@example.com">Mail</a><a href="tel:+15551212">Phone</a><a href="/tickets/1">Ticket</a><a href="#notes">Notes</a><img alt="photo" src="data:image/png;base64,abc">'}
+    />
+  );
+
+  expect([...container.querySelectorAll("a")].map((link) => link.getAttribute("href"))).toEqual([
+    "https://example.com",
+    "mailto:ada@example.com",
+    "tel:+15551212",
+    "/tickets/1",
+    "#notes",
+  ]);
+  expect(container.querySelector("img").getAttribute("src")).toBe("data:image/png;base64,abc");
+});
+
+test("drops links and images that use a non-web scheme", () => {
+  const { container } = render(
+    <RichTextContent
+        html={'<a href="file:///etc/passwd">File</a><a href="intent://scan/#Intent;scheme=https;end">Intent</a><a href="ms-officecmd:ofe|u|https://example.com">Office</a><img alt="local" src="file:///tmp/pixel.png"><img alt="html" src="data:text/html,hi">'}
+    />
+  );
+
+  container.querySelectorAll("a").forEach((link) => {
+    expect(link.getAttribute("href")).toBeNull();
+  });
+  expect([...container.querySelectorAll("a")].map((link) => link.textContent)).toEqual([
+    "File",
+    "Intent",
+    "Office",
+  ]);
+  expect(container.querySelector("img")).toBeNull();
+});
+
 test("rejects scheme bypasses that hide javascript or vbscript in whitespace", () => {
   const { container } = render(
     <RichTextContent
