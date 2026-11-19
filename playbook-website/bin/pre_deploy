@@ -9,14 +9,28 @@ instance=$(environment=$environment instance_name)
 
 ctrl="kubectl --context $cluster -n $namespace"
 
+# The read functions print nothing when the object does not exist, and fail when the read fails.
 operator_generation() {
-    $ctrl get deployment percona-xtradb-cluster-operator -o jsonpath='{.metadata.generation}' 2>/dev/null || true
+    $ctrl get deployment percona-xtradb-cluster-operator --ignore-not-found -o jsonpath='{.metadata.generation}'
 }
 
 # The operator changes these StatefulSets when it applies new pod templates.
 database_generations() {
-    $ctrl get statefulset database-pxc database-haproxy \
-        -o jsonpath='{range .items[*]}{.metadata.generation} {end}' 2>/dev/null || true
+    $ctrl get statefulset database-pxc database-haproxy --ignore-not-found \
+        -o jsonpath='{range .items[*]}{.metadata.generation} {end}'
+}
+
+# Run a read up to 3 times, 5 seconds apart. Print the output of the first read that succeeds.
+read_with_retry() {
+    local output attempt
+    for attempt in 1 2 3; do
+        if output=$("$@"); then
+            echo "$output"
+            return 0
+        fi
+        sleep 5
+    done
+    return 1
 }
 
 # OnDelete StatefulSets never update currentRevision, so compare the replica counts.
@@ -26,9 +40,10 @@ database_rollout_done() {
         | awk '$1 != $2 || $3 != $4 || $3 != $5 { pending = 1 } END { exit pending }'
 }
 
-operatorGenerationBefore=$(operator_generation)
 # Read these before the operator deploy. The new operator can change them before krane returns.
-databaseGenerationsBefore=$(database_generations)
+# If a read fails 3 times, the script stops here (set -e in deployment_helpers).
+operatorGenerationBefore=$(read_with_retry operator_generation)
+databaseGenerationsBefore=$(read_with_retry database_generations)
 
 operatorResources=$(krane render \
     --filenames=/app/config/deploy/templates/operators \
@@ -43,20 +58,38 @@ echo "$operatorResources" | krane deploy ${namespace} ${cluster} \
 # Then bin/deploy applies the new crVersion, and the operator restarts the pods again.
 # Wait here for the first restart, so the timeout in bin/deploy applies only to the second.
 # If the operator does not change the StatefulSets in 120 seconds, do not wait.
+# A new stack has no operator and no StatefulSets before its first deploy, so it does not wait.
+# A failed read is neither a change nor no change. Only a successful read decides.
 if [ -n "$operatorGenerationBefore" ] \
-    && [ "$operatorGenerationBefore" != "$(operator_generation)" ] \
-    && $ctrl get pxc database >/dev/null 2>&1; then
+    && [ "$(wc -w <<< "$databaseGenerationsBefore")" -eq 2 ] \
+    && [ "$operatorGenerationBefore" != "$(operator_generation)" ]; then
     log ">>> The operator changed. Waiting up to 120 seconds for it to change the database StatefulSets"
     waitStart=$SECONDS
-    while [ "$(database_generations)" = "$databaseGenerationsBefore" ]; do
-        if (( SECONDS - waitStart >= 120 )); then
-            log ">>> The operator did not change the database StatefulSets. There is no database restart to wait for"
-            break
+    databaseChanged=""
+    databaseLastReadFailed=""
+    while (( SECONDS - waitStart < 120 )); do
+        if databaseGenerations=$(database_generations); then
+            databaseLastReadFailed=""
+            if [ "$databaseGenerations" != "$databaseGenerationsBefore" ]; then
+                databaseChanged=1
+                break
+            fi
+        else
+            databaseLastReadFailed=1
+            log ">>> Could not read the database StatefulSets. Trying again"
         fi
         sleep 5
     done
 
-    if [ "$(database_generations)" != "$databaseGenerationsBefore" ]; then
+    # A change can occur while the reads fail, so "no change" needs a successful last read.
+    if [ -z "$databaseChanged" ] && [ -n "$databaseLastReadFailed" ]; then
+        log "${RED}Could not read the database StatefulSets at the end of the 120 seconds${NOFORMAT}"
+        exit 1
+    fi
+
+    if [ -z "$databaseChanged" ]; then
+        log ">>> The operator did not change the database StatefulSets. There is no database restart to wait for"
+    else
         log ">>> Waiting up to 600 seconds for the database restart to finish"
         rolloutStart=$SECONDS
         until database_rollout_done; do
