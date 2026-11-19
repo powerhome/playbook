@@ -316,5 +316,11 @@
       position: static;
       top: 0;
     }
+    // Firefox renders its native number spinner alongside flatpickr's own
+    // year arrows; `appearance: none` doesn't remove it, `textfield` does.
+    .numInputWrapper input.cur-year {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
   }
 }
