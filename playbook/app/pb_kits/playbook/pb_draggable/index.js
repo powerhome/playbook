@@ -73,6 +73,12 @@ export default class PbDraggable extends PbEnhancedElement {
     }
   }
 
+  disconnect() {
+    // Clears pending press timers so a hold in flight can't fire after the kit is removed.
+    this.touchCleanups.forEach((cleanup) => cleanup());
+    this.touchCleanups = [];
+  }
+
   bindEventListeners() {
     // Check for multiple containers
     const containers = this.element.querySelectorAll(DRAGGABLE_CONTAINER);
