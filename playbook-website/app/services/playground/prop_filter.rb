@@ -154,8 +154,11 @@ module Playground
         if playground_code_expression?(value)
           nil
         else
-          value.transform_keys { |key| camel_to_snake(key.to_s).to_sym }
-               .transform_values { |nested| deep_convert(nested) }
+          # to_hash: request params arrive as HashWithIndifferentAccess, which keeps
+          # string keys through transform_keys; nested kits (e.g. Avatar) need symbols.
+          value.to_hash.each_with_object({}) do |(key, nested), converted|
+            converted[camel_to_snake(key.to_s).to_sym] = deep_convert(nested)
+          end
         end
       when Array
         value.map { |item| deep_convert(item) }
