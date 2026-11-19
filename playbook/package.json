@@ -97,7 +97,7 @@
     "@types/react-modal": "3.16.1",
     "@vitejs/plugin-react": "^4.3.1",
     "axe-core": "4.10.2",
-    "babel-jest": "29.7.0",
+    "babel-jest": "30.5.2",
     "classnames": "2.5.1",
     "highcharts": "^11.4.8",
     "highcharts-react-official": "^3.2.1",
