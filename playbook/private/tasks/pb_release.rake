@@ -113,15 +113,21 @@ namespace :pb_release do
     abort "Release stopped. Package preparation failed." unless system(*package_args)
 
     unless dryrun
-      puts "\nPublishing to RubyGems"
-      puts "If MFA is enabled (UI and API), you will be prompted for an OTP code..."
-      gem_published = system("bash", "bin/publish_release_package", "rubygems", version)
-      abort "RubyGems publish failed. Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1." unless gem_published
+      resume_hint = "Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1, or run the command manually."
 
-      puts "\nPublishing to npm"
+      puts "\nPushing to RubyGems..."
+      puts "If MFA is enabled (UI and API), you will be prompted for an OTP code..."
+      gem_file = "playbook_ui-#{version}.gem"
+      gem_cmd = "gem push #{gem_file}"
+      gem_published = system("bash", "bin/publish_release_package", "rubygems", version)
+      abort "gem push failed for #{gem_file}. If no OTP prompt appeared, try:\n  #{gem_cmd}\nor:\n  #{gem_cmd} --otp YOUR_CODE\n#{resume_hint}" unless gem_published
+
+      puts "\nPublishing to NPM..."
       puts "A browser prompt may open for WebAuthn (Touch ID / YubiKey / passkey)..."
-      npm_published = system("bash", "bin/publish_release_package", "npm", npm_version, looks_like_alpha ? "alpha" : "")
-      abort "npm publish failed. Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1." unless npm_published
+      npm_tag_args = looks_like_alpha ? ["--tag", "alpha"] : []
+      npm_cmd = ["npm publish --registry https://registry.npmjs.org playbook-ui-#{npm_version}.tgz", *npm_tag_args].join(" ")
+      npm_published = system("bash", "bin/publish_release_package", "npm", npm_version, *npm_tag_args)
+      abort "npm publish failed. If no browser prompt appeared, try running the same command manually:\n  #{npm_cmd}\n#{resume_hint}" unless npm_published
 
       File.delete("playbook_ui-#{version}.gem", "playbook-ui-#{npm_version}.tgz")
     end

@@ -2,9 +2,11 @@
 
 set -euo pipefail
 
+# Usage: publish_release_package <npm|rubygems> <version> [extra publish args...]
+# Extra args are passed through unchanged so each caller keeps its exact push command.
 registry=${1:?Expected registry}
 version=${2:?Expected version}
-tag=${3:-}
+shift 2
 
 case "$registry" in
   npm)
@@ -12,15 +14,14 @@ case "$registry" in
     url="https://registry.npmjs.org/playbook-ui/$version"
     field="dist.integrity"
     digest="sha512-$(openssl dgst -sha512 -binary "$artifact" | openssl base64 -A)"
-    publish=(npm publish --registry https://registry.npmjs.org "$artifact")
-    if [[ -n "$tag" ]]; then publish+=(--tag "$tag"); fi
+    publish=(npm publish --registry https://registry.npmjs.org "$artifact" "$@")
     ;;
   rubygems)
     artifact="playbook_ui-$version.gem"
     url="https://rubygems.org/api/v2/rubygems/playbook_ui/versions/$version.json"
     field="sha"
     digest=$(ruby -rdigest -e 'puts Digest::SHA256.file(ARGV.fetch(0)).hexdigest' "$artifact")
-    publish=(gem push "$artifact" --host https://rubygems.org/)
+    publish=(gem push "$artifact" "$@")
     ;;
   *)
     echo "Unknown registry: $registry" >&2
@@ -33,7 +34,10 @@ response=$(mktemp)
 trap 'rm -f "$response"' EXIT
 status=$(curl --silent --show-error --retry 2 --max-time 20 --output "$response" --write-out '%{http_code}' "$url")
 case "$status" in
-  404) "${publish[@]}" ;;
+  404)
+    echo "\$ ${publish[*]}"
+    "${publish[@]}"
+    ;;
   200)
     published_digest=$(node -e '
       const [, responsePath, digestField] = process.argv;

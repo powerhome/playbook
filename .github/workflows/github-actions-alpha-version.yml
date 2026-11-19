@@ -96,14 +96,14 @@ jobs:
       - name: Publish to npm
         if: github.event.pull_request.head.repo.full_name == github.repository
         run: |
-          bash bin/publish_release_package npm "$new_npm_version" alpha
+          bash bin/publish_release_package npm "$new_npm_version" --tag alpha
       - name: Configure RubyGems Credentials
         if: github.event.pull_request.head.repo.full_name == github.repository
         uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
       - name: Publish to RubyGems
         if: github.event.pull_request.head.repo.full_name == github.repository
         run: |
-          bash bin/publish_release_package rubygems "$new_ruby_version"
+          bash bin/publish_release_package rubygems "$new_ruby_version" --host https://rubygems.org/
       - name: Leave PR comment
         if: github.event.pull_request.head.repo.full_name == github.repository
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -119,12 +119,15 @@ jobs:
             if (comments.some(comment => comment.user?.login === "github-actions[bot]" && comment.body?.includes(marker))) return;
             await github.rest.issues.createComment({
               ...issue,
-              body: `${marker}
-              🎉 Congratulations on creating an Alpha Version!
-
-              Your Alpha for Ruby Gems is [${RUBY_GEM_VERSION}](https://rubygems.org/gems/playbook_ui/versions/${RUBY_GEM_VERSION})
-
-              Your Alpha for NPM is [${NPM_VERSION}](https://www.npmjs.com/package/playbook-ui/v/${NPM_VERSION})`
+              // Keep lines unindented: indented markdown after the marker renders as a code block.
+              body: [
+                marker,
+                "🎉 Congratulations on creating an Alpha Version!",
+                "",
+                `Your Alpha for Ruby Gems is [${RUBY_GEM_VERSION}](https://rubygems.org/gems/playbook_ui/versions/${RUBY_GEM_VERSION})`,
+                "",
+                `Your Alpha for NPM is [${NPM_VERSION}](https://www.npmjs.com/package/playbook-ui/v/${NPM_VERSION})`
+              ].join("\n")
             });
   Creating-Release-Candidate:
     if: github.event_name == 'push'
@@ -248,13 +251,13 @@ jobs:
       - name: Publish to npm
         if: env.SKIP_REMAINING_STEPS != 'true'
         run: |
-          bash bin/publish_release_package npm "$new_npm_version" rc
+          bash bin/publish_release_package npm "$new_npm_version" --tag rc
       - name: Configure RubyGems Credentials
         if: env.SKIP_REMAINING_STEPS != 'true'
         uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
       - name: Publish to RubyGems
         if: env.SKIP_REMAINING_STEPS != 'true'
-        run: bash bin/publish_release_package rubygems "$new_ruby_version"
+        run: bash bin/publish_release_package rubygems "$new_ruby_version" --host https://rubygems.org/
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -316,10 +319,13 @@ jobs:
               if (comments.some(comment => comment.user?.login === "github-actions[bot]" && comment.body?.includes(marker))) return;
               await github.rest.issues.createComment({
                 ...issue,
-                body: `${marker}
-                You merged this pr to master branch:
-                - Ruby Gem: [${RUBY_GEM_VERSION}](${RUBY_GEM_LINK})
-                - NPM: [${NPM_VERSION}](${NPM_LINK})`
+                // Keep lines unindented: indented markdown after the marker renders as a code block.
+                body: [
+                  marker,
+                  "You merged this pr to master branch:",
+                  `- Ruby Gem: [${RUBY_GEM_VERSION}](${RUBY_GEM_LINK})`,
+                  `- NPM: [${NPM_VERSION}](${NPM_LINK})`
+                ].join("\n")
               });
             } else {
               console.log('No pull request found for this commit');
