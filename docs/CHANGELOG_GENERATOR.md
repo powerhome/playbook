@@ -49,6 +49,16 @@ RC_VERSION=17.2.0-rc.3 make changelog-rc
 
 `RC_VERSION` also accepts the gem form, `17.2.0.pre.rc.3`.
 
+### Automated RC changelog PR
+
+After each RC is published, the `Open-RC-Changelog-PR` job in `.github/workflows/github-actions-alpha-version.yml` runs this generator with `RC_VERSION` set to that RC. It then opens `docs: Changelog for RC <version>` from the branch `changelog-rc-<version>`, with the `Inactive RC` and `milano` labels. `Inactive RC` stops the merge from cutting another RC.
+
+- The commit is made through the GitHub API, so it is signed.
+- Each PR includes every undocumented RC, so the job closes older open changelog PRs as superseded.
+- PRs opened by GitHub Actions do not trigger other workflows. Close and reopen the PR to run the required Conventional Commit title check.
+- The job runs separately from the publish job, so a failure here never affects the published RC. You can still run `make changelog-rc` by hand.
+- The repository must allow GitHub Actions to create pull requests (Settings → Actions → General).
+
 ## Changelog categories
 
 Use the [Playbook PR title format](./PR_TITLES.md). Changelog category labels are deprecated. The stable and RC generators use these headings in order:
