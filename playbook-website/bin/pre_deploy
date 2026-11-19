@@ -7,6 +7,14 @@ log ">>> Installing dependencies at $tag into $environment ($cluster # $namespac
 
 instance=$(environment=$environment instance_name)
 
+ctrl="kubectl --context $cluster -n $namespace"
+
+operator_generation() {
+    $ctrl get deployment percona-xtradb-cluster-operator -o jsonpath='{.metadata.generation}' 2>/dev/null || true
+}
+
+operatorGenerationBefore=$(operator_generation)
+
 operatorResources=$(krane render \
     --filenames=/app/config/deploy/templates/operators \
     --current-sha=${tag}) || exit $?
@@ -15,5 +23,17 @@ echo "$operatorResources" | krane deploy ${namespace} ${cluster} \
     --verbose-log-prefix \
     --global-timeout=300s \
     --stdin
+
+# A new operator restarts the database pods with its own pod templates.
+# Then bin/deploy applies the new crVersion, and the operator restarts the pods again.
+# Wait here for the first restart, so the timeout in bin/deploy applies only to the second.
+# The operator starts the restart some seconds after it starts, so wait 30 seconds first.
+if [ -n "$operatorGenerationBefore" ] \
+    && [ "$operatorGenerationBefore" != "$(operator_generation)" ] \
+    && $ctrl get pxc database >/dev/null 2>&1; then
+    log ">>> The operator changed. Waiting for PerconaXtraDBCluster/database to be ready"
+    sleep 30
+    $ctrl wait pxc/database --for=jsonpath='{.status.state}'=ready --timeout=600s
+fi
 
 log "${GREEN}SUCCESS: $task_name - $cluster / $namespace${NOFORMAT}"
