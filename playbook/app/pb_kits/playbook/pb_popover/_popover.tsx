@@ -75,6 +75,8 @@ type PopperOffsetFn = (args: { placement: Placement; popper: Rect; reference: Re
 // Matches the Popper.js `offset: [0, 20]` modifier previously enabled by the `offset` prop.
 const POPOVER_OFFSET = 20;
 
+const POPPER_INSET_STYLE: React.CSSProperties = { right: "auto", bottom: "auto" };
+
 const isAutoPlacement = (placement: PopoverPlacement): placement is AutoPlacement =>
   placement === "auto" || placement === "auto-start" || placement === "auto-end";
 
@@ -241,7 +243,8 @@ const Popover = (props: PopoverProps) => {
               data-placement={placement}
               id={id}
               ref={floatingRef}
-              style={Object.assign({}, floatingStyles, zIndexStyle)}
+              // right/bottom: auto restores what Popper's inline `inset: 0 auto auto 0` did: stylesheet right/bottom rules don't apply.
+              style={Object.assign({}, floatingStyles, POPPER_INSET_STYLE, zIndexStyle)}
           >
             <div
                 className={classnames(`${buildCss("pb_popover_tooltip")} show`)}

@@ -33,7 +33,7 @@
 1. **`auto*` placements aren't proven equivalent to Popper's.** Only one audited call site uses them (Runway, mobile). This is a React release gate.
 2. **No browser-level automated tests.** Jest has no layout, and Playbook has no browser test setup. Positioning has only been verified by scripted and manual checks in Chromium.
 3. **Untested browsers:** Safari, Firefox and mobile. This is a gate for both releases.
-4. **Consumer CSS that overrode Popper's inline styles**, mainly Runway's `.reviewerPopover`. This is a React release gate.
+4. **Consumer CSS that overrode Popper's inline styles.** Both kits now write Popper's `inset: 0 auto auto 0`, so rules like Runway's `.reviewerPopover` (`right: 150px`) are cancelled as before. `!important` overrides such as Runway's `.popoverAdjustment` still need a visual check (React release gate).
 5. **Consumers outside the four audited apps** may use Popper modifiers we don't translate. The React release's deprecation warning is the safety net.
 
 ## How it works today
@@ -73,7 +73,7 @@ Generated metadata (`kit.schema.json`, `_playground.json`) hasn't been regenerat
 ### Rails: `pb_popover/index.ts`, `pb_filter/index.ts` and `utilities/autoPositionFixed.ts`
 
 - Both kits call `autoPositionFixed(reference, floating, { placement, middleware })`. It runs `computePosition` from `@floating-ui/dom` under `autoUpdate`, with `strategy: 'fixed'`. It writes the same DOM output Popper did:
-  - `left`/`top` rounded to the device pixel, matching Popper's `roundOffsetsByDPR`
+  - Popper's inline style: `position: fixed; inset: 0 auto auto 0; transform: translate3d(x, y, 0)`, with `x`/`y` rounded to the device pixel like Popper's `roundOffsetsByDPR`. The `inset` stops stylesheet `right`/`bottom` rules from applying. The `transform` keeps the tooltip the containing block for `position: fixed` content inside it, as it was under Popper.
   - `margin: 0` inline
   - `data-popper-placement`
 - It also listens to `visualViewport` scroll and resize (pinch-zoom, mobile keyboard), which `autoUpdate` doesn't. That keeps the behavior of the `subscribeFloatingKitReposition` subscription the Popover had before.
@@ -97,7 +97,7 @@ Generated metadata (`kit.schema.json`, `_playground.json`) hasn't been regenerat
 | `portal` | No effect | No effect | None |
 | `modifiers` | Any Popper modifier | Translated subset; see below | Deprecated |
 | `onFirstUpdate`, `innerRef` | Accepted by the types; had no effect | Removed from the types | TypeScript error if passed. No audited app passes them. |
-| Inline style on the popover | `position:absolute; inset:0 auto auto 0; transform: translate3d(…)` | `position:absolute; left:0; top:0; transform: translate(…)` | Consumer CSS that relied on Popper writing `right`/`bottom` (via `inset`) behaves differently. See Runway's `.reviewerPopover`. |
+| Inline style on the popover | `position:absolute; inset:0 auto auto 0; transform: translate3d(…)` | `position:absolute; inset:0 auto auto 0; transform: translate(…)` (floating-ui's styles plus `right`/`bottom: auto`) | `translate` vs `translate3d` only. Stylesheet `right`/`bottom` rules are cancelled as before; checked in the browser with a Runway-style `right: 150px` rule. |
 
 ### Legacy `modifiers` contract (React)
 
@@ -131,7 +131,7 @@ Type: `PopperLikeModifier` accepts the shapes apps pass today: `enabled` as a st
 | `position` (12 values), boolean `offset` (20px), `append_to`, `close_on_click`, `trigger_element_id`, `tooltip_id`, `z_index`, sizing | — | Unchanged |
 | Events, classes, IDs | `pb:popover:open/close`, `show`/`hide` | Unchanged |
 | `data-popper-placement` | Written | Written |
-| Inline style | `position:fixed; inset:0 auto auto 0; margin:0; transform: translate3d(…)`, rounded to device pixels | `position:fixed; margin:0; left:…; top:…`, rounded to device pixels |
+| Inline style | `position:fixed; inset:0 auto auto 0; margin:0; transform: translate3d(…)`, rounded to device pixels | Same |
 | Reposition triggers | Scroll and resize, always on; plus `visualViewport` (from PLAY-3055) | `autoUpdate` (scroll, resize, element resize, layout shift) and `visualViewport`, only while open |
 | Before first open | Positioned immediately | Hidden at its static spot until first opened (not visible or clickable) |
 
@@ -179,7 +179,7 @@ These call sites go beyond the documented kit props:
 
 | App | Selector | Risk |
 |---|---|---|
-| Runway | `FlightControl/columns/style.scss` `.reviewerPopover`: `right: 150px` on `[class^=pb_popover]` | **Medium-high.** Popper wrote `right: auto` inline (through `inset`), which cancelled this rule. floating-ui writes only `left`/`top`, so `right: 150px` now applies and may stretch or shift the popover. Expect to adjust this rule. |
+| Runway | `FlightControl/columns/style.scss` `.reviewerPopover`: `right: 150px` on `[class^=pb_popover]` | Low. Popper's inline `right: auto` (through `inset`) cancelled this rule. The POC writes the same, so it stays cancelled. Checked with the same rule on the React and Rails docs pages: no change in size or position. |
 | Runway | `BigBoardApp/Popovers/styles.scss` `.popoverAdjustment` (AdditionPopover): forces `inset`, `transform: translate3d(...)` and `position: fixed` with `!important` | Medium. Its `!important` rules still beat floating-ui's inline styles, so it probably behaves the same. It's the most fragile override. |
 | Runway | `CloneItemsButton/styles.scss` `.customBacklogPopover`: `margin-top`, width, padding with `!important` | Low. Neither library writes these on React. |
 | Connect-Web | `.room-popover-modal-position { margin-top: 15px }`, `.menu-popover` margins, `#popover-notification-preferences { padding-right: 93px }` | Low. React Popper didn't write margin or padding inline, and neither does floating-ui. |
@@ -218,7 +218,7 @@ These call sites go beyond the documented kit props:
 - [ ] `auto`, `auto-start` and `auto-end` verified in the browser against the Popper version: plenty of room, a constrained container, nested scrolling containers, and no side fits. Differences documented or fixed.
 - [ ] Runway `SprintOverview` checked on a phone.
 - [ ] Nitro `MoveUpButton` and one offset override checked in the app.
-- [ ] Runway `.reviewerPopover` and `.popoverAdjustment` checked visually and adjusted if needed.
+- [ ] Runway `.popoverAdjustment` (`!important` overrides) and `.reviewerPopover` checked visually.
 - [ ] React docs pages pass a manual check (Popover, Filter, Table, Advanced Table, Passphrase, Rich Text Editor), including inside Dialog and Fullscreen.
 - [ ] Smoke test in Chrome, Safari, Firefox and iOS Safari.
 - [ ] `yarn generate:docs-metadata` run and the output reviewed.
@@ -253,7 +253,7 @@ Both sides were built with `npx vite build` into a clean `dist/`, for the full m
 
 - Full Jest suite: **160 suites, 2,300 tests passing**, with the packages removed.
 - `pb_popover/buildMiddleware.test.ts` (11 tests): every row of the modifier contract, each `auto*` placement, and the Tempo and Nitro modifier shapes. The file is type-checked, so it also confirms those shapes compile.
-- `utilities/autoPositionFixed.test.ts` (3 tests): `position: fixed`, `margin: 0`, device-pixel rounding at 1× and 2×, `data-popper-placement`, and `visualViewport` subscribe/unsubscribe.
+- `utilities/autoPositionFixed.test.ts` (3 tests): `position: fixed`, `margin: 0`, `top`/`left` 0 with a `translate3d` rounded to the device pixel at 1× and 2×, `data-popper-placement`, and `visualViewport` subscribe/unsubscribe. jsdom drops `auto` for `right`/`bottom`, so those were checked in the browser instead.
 - A clean `vite build` succeeds with no Popper code in `dist`. ESLint: 0 errors. `tsc`: no errors in Popover, Filter, Passphrase, Table, Advanced Table or Rich Text Editor files.
 - jsdom has no layout, so Jest checks behavior (open/close, close-on-click, portals, DOM output), not positioning. Playbook has no browser-level test setup; see [Follow-up stories](#follow-up-stories).
 
@@ -287,13 +287,15 @@ The same script ran on the original Popper code and on the POC. It opened each n
 |---|---|---|
 | Dropdown | ✅ Menu 5px below its trigger, left-aligned. Moves with the popover on scroll. Closes with the popover. | Same |
 | Multi Level Select | ✅ Menu 16px below the input. Checking an option keeps the popover open, and the popover grows with the new pill. Moves on scroll. Closes with the popover. | Same (15px vs 16px is rounding) |
-| Date Picker | ✅ Calendar opens below the input when there's room and above when there isn't. Moves on scroll. Closes with the popover. | Above-the-input case is the same. Below-the-input case: the POC places the calendar 5px below the input, while the original overlapped the input by 15px. In the above-the-input case the calendar moved 40px during a 60px scroll (60px on the original); check during the release gate. |
+| Date Picker | ✅ Calendar settles 5px below the input when there's room and 5px above when there isn't. Moves on scroll. Closes with the popover. | Same, including an existing timing issue: the calendar often first opens 20px too high, overlapping the input by 15px, then snaps into place on its next reposition (a few hundred ms later, or on scroll). See [Existing issues](#existing-issues-found-along-the-way-not-caused-by-this-change). |
 | Time Picker | ✅ Panel 5px below the input. Moves on scroll. Closes with the popover. | Same |
 | Typeahead (react-select) | ✅ Menu opens directly below the input and extends past the popover's edge. Choosing an option keeps the popover open. Moves on scroll. Outside click closes both. | Only run on the POC |
 
 The script's first version reported that the Date Picker calendar stayed open. It did the same on the original code: a synthetic `click()` doesn't fire flatpickr's close listener. With realistic pointer events (`pointerdown`, `mousedown`, `mouseup`, `click`), the calendar closes along with the popover.
 
-These results predate `autoPositionFixed`. The helper keeps the same positioning and only changes rounding, `margin` and the placement attribute, and the Rails Popover and Filter checks were repeated after it.
+The Date Picker race was mistaken in review for an effect of the tooltip's `transform` (a containing block for `position: fixed` content). The calendar's shell is portaled to `document.body`, so the tooltip's transform doesn't contain it. Five repeated runs showed the same first-open offset with and without the transform and `inset`, and on the original Popper code.
+
+The table above was re-checked on the final `autoPositionFixed`: after settling, Dropdown, Time Picker and Date Picker each sit 5px below their inputs. A `position: fixed` child inside the tooltip is positioned relative to the tooltip, as under Popper.
 
 ### Not covered yet
 
@@ -304,8 +306,9 @@ These results predate `autoPositionFixed`. The helper keeps the same positioning
 - **React side of PLAY-3055** (React Dropdown, Select and Typeahead inside a React Popover, Dialog or Fullscreen): covered only by the maintainer pass.
 - The scripted pass ran in a hidden browser pane at about 1024×600 to 1024×768.
 
-### Existing issue found along the way (not caused by this change)
+### Existing issues found along the way (not caused by this change)
 
+- **Date Picker inside a Rails Popover opens 20px too high, then corrects.** On first open the calendar often overlaps its input by 15px. It snaps to 5px below on the Date Picker's next reposition (`subscribeFloatingKitReposition` or scroll). The same happens on Popper and with every inline style variant tested, so it's a timing issue in the Date Picker's own portal positioning, not in Popover.
 - **Filter "Max Width" / "Max Height" React examples:** the popover wrapper stretches to the full viewport width with both Popper and floating-ui. This is a CSS issue, not a positioning one.
 
 ## Follow-up stories
@@ -318,7 +321,7 @@ These results predate `autoPositionFixed`. The helper keeps the same positioning
    - **Fold Rails Tooltip into `autoPositionFixed`.** Tooltip already uses floating-ui, so this removes duplication but changes no dependency. It would also change Tooltip's own output: device-pixel rounding, `margin: 0` and the `visualViewport` listener. The helper would need a hook for Tooltip's arrow, which is positioned from `middlewareData.arrow`. That makes it a Tooltip change that needs its own testing.
    - **Use floating-ui's `useClick`/`useDismiss` in React** in place of the hand-rolled `closeOnClick` listener. It changes open/close behavior, not positioning, and has to keep the PLAY-3055 rules for menus that render outside the popover. That's riskier than this migration needs.
    - **Switch flip from `initialPlacement` to `bestFit`.** A deliberate behavior change: popovers would open on a different side when neither side fits. Keeping Popper's behavior keeps both releases free of visible changes.
-6. **Separate bug:** the Filter max-width popover stretching.
+6. **Separate bugs:** the Date Picker's first-open offset inside a Rails Popover, and the Filter max-width popover stretching.
 
 ## Repro
 

@@ -31,7 +31,7 @@ describe('autoPositionFixed', () => {
     Object.defineProperty(window, 'visualViewport', { value: undefined, configurable: true })
   })
 
-  test('writes the same DOM output Popper.js did: fixed, margin 0, rounded coordinates, data-popper-placement', async () => {
+  test('writes the same DOM output Popper.js did: fixed, margin 0, top/left 0, rounded translate3d, data-popper-placement', async () => {
     Object.defineProperty(window, 'devicePixelRatio', { value: 2, configurable: true })
 
     autoPositionFixed(reference, floating, { placement: 'top-start' })
@@ -39,9 +39,11 @@ describe('autoPositionFixed', () => {
 
     expect(floating.style.position).toBe('fixed')
     expect(floating.style.margin).toBe('0px')
+    // right/bottom: auto is also written, but jsdom's CSS parser drops `auto` for those properties (browsers keep it).
+    expect(floating.style.top).toBe('0px')
+    expect(floating.style.left).toBe('0px')
     // 10.37 → 10.5 and 20.62 → 20.5 at devicePixelRatio 2
-    expect(floating.style.left).toBe('10.5px')
-    expect(floating.style.top).toBe('20.5px')
+    expect(floating.style.transform).toBe('translate3d(10.5px, 20.5px, 0px)')
     expect(floating.getAttribute('data-popper-placement')).toBe('top-start')
   })
 
@@ -51,8 +53,7 @@ describe('autoPositionFixed', () => {
     autoPositionFixed(reference, floating, {})
     await flushPromises()
 
-    expect(floating.style.left).toBe('10px')
-    expect(floating.style.top).toBe('21px')
+    expect(floating.style.transform).toBe('translate3d(10px, 21px, 0px)')
   })
 
   test('repositions on visual viewport scroll/resize and unsubscribes on cleanup', () => {

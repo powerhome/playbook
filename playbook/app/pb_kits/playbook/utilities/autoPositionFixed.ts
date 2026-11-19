@@ -9,7 +9,7 @@ const roundByDPR = (value: number): number => {
 /**
  * Keeps a `position: fixed` floating element attached to its reference until the returned cleanup runs.
  * Writes the same DOM output Popper.js did for the Rails kits that used it (Popover, Filter):
- * device-pixel-rounded `left`/`top`, `margin: 0` and `data-popper-placement`.
+ * `inset: 0 auto auto 0` with a device-pixel-rounded `translate3d`, `margin: 0` and `data-popper-placement`.
  */
 export const autoPositionFixed = (
   reference: HTMLElement,
@@ -20,7 +20,15 @@ export const autoPositionFixed = (
 
   const update = () => {
     void computePosition(reference, floating, { ...config, strategy: 'fixed' }).then(({ x, y, placement }) => {
-      Object.assign(floating.style, { left: `${roundByDPR(x)}px`, top: `${roundByDPR(y)}px` })
+      // Same inline style as Popper: `inset: 0 auto auto 0` stops stylesheet right/bottom rules from applying, and
+      // the transform keeps the tooltip the containing block for `position: fixed` content inside it.
+      Object.assign(floating.style, {
+        top: '0px',
+        right: 'auto',
+        bottom: 'auto',
+        left: '0px',
+        transform: `translate3d(${roundByDPR(x)}px, ${roundByDPR(y)}px, 0px)`,
+      })
       floating.setAttribute('data-popper-placement', placement)
     })
   }
