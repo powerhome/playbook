@@ -55,7 +55,11 @@ export default class PbDraggable extends PbEnhancedElement {
 
     // If DOM is already loaded, bind immediately; otherwise wait for DOMContentLoaded
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", () => this.bindEventListeners());
+      this.pendingBind = () => {
+        this.pendingBind = null;
+        this.bindEventListeners();
+      };
+      document.addEventListener("DOMContentLoaded", this.pendingBind);
     } else {
       this.bindEventListeners();
     }
@@ -74,6 +78,11 @@ export default class PbDraggable extends PbEnhancedElement {
   }
 
   disconnect() {
+    // Cancels a bind still waiting on DOMContentLoaded so a reinserted node isn't bound twice.
+    if (this.pendingBind) {
+      document.removeEventListener("DOMContentLoaded", this.pendingBind);
+      this.pendingBind = null;
+    }
     // Clears pending press timers so a hold in flight can't fire after the kit is removed.
     this.touchCleanups.forEach((cleanup) => cleanup());
     this.touchCleanups = [];
