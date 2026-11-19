@@ -115,15 +115,13 @@ namespace :pb_release do
     unless dryrun
       puts "\nPublishing to RubyGems"
       puts "If MFA is enabled (UI and API), you will be prompted for an OTP code..."
-      unless system("bash", "bin/publish_release_package", "rubygems", version)
-        abort "RubyGems publish failed. Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1."
-      end
+      gem_published = system("bash", "bin/publish_release_package", "rubygems", version)
+      abort "RubyGems publish failed. Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1." unless gem_published
 
       puts "\nPublishing to npm"
       puts "A browser prompt may open for WebAuthn (Touch ID / YubiKey / passkey)..."
-      unless system("bash", "bin/publish_release_package", "npm", npm_version, looks_like_alpha ? "alpha" : "")
-        abort "npm publish failed. Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1."
-      end
+      npm_published = system("bash", "bin/publish_release_package", "npm", npm_version, looks_like_alpha ? "alpha" : "")
+      abort "npm publish failed. Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1." unless npm_published
 
       File.delete("playbook_ui-#{version}.gem", "playbook-ui-#{npm_version}.tgz")
     end
