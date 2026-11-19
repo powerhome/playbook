@@ -27,6 +27,7 @@ type UserProps = {
   nameStyle?: "title" | "body" | "caption" | "detail"
   orientation?: "horizontal" | "vertical",
   size?: "sm" | "md" | "lg",
+  status?: "away" | "offline" | "online",
   subtitle?: string | Array<Node> | Node,
   territory?: string,
   title?: string,
@@ -50,6 +51,7 @@ const User = (props: UserProps): React.ReactElement => {
     nameStyle = 'title',
     orientation = 'horizontal',
     size = 'sm',
+    status,
     subtitle,
     territory = '',
     title = '',
@@ -153,7 +155,7 @@ const User = (props: UserProps): React.ReactElement => {
             imageUrl={avatarUrl}
             name={name}
             size={size}
-            status={null}
+            status={status}
         />
       }
       <div className="content_wrapper">

@@ -104,6 +104,18 @@
       ],
       "default": "sm"
     },
+    "status": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "away",
+        "offline",
+        "online"
+      ]
+    },
     "subtitle": {
       "type": "string | Array<Node> | Node",
       "platforms": [
