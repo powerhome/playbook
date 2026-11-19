@@ -41,7 +41,7 @@ metadata:
     krane.shopify.io/timeout-override: 600s
   finalizers: []
 spec:
-  crVersion: 1.16.1
+  crVersion: 1.17.0
   secretsName: database-secrets
   unsafeFlags:
     tls: false
@@ -52,7 +52,7 @@ spec:
   updateStrategy: SmartUpdate
   pxc:
     size: <%= pxc_cluster_size %>
-    image: percona/percona-xtradb-cluster:8.0.39-30.1@sha256:6a53a6ad4e7d2c2fb404d274d993414a22cb67beecf7228df9d5d994e7a09966
+    image: percona/percona-xtradb-cluster:8.0.41-32.1@sha256:8a6799cbded5524c6979442f8d7097831c8c6481f5106a856b44b2791ccaf0fb
     autoRecovery: true
     resources:
       requests:
@@ -81,7 +81,7 @@ spec:
   haproxy:
     enabled: true
     size: 3
-    image: percona/haproxy:2.8.11@sha256:422a210b4170a973f8582ef3d7ddcc879c32bc48f6c66fad8b3154bce4e79b84
+    image: percona/haproxy:2.8.14@sha256:6de8c402d83b88dae7403c05183fd75100774defa887c05a57ec04bc25be2305
     resources:
       requests:
         memory: 100M
