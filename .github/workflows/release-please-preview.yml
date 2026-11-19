@@ -60,7 +60,8 @@ jobs:
               sha: git('rev-parse', stableTag + '^{}').trim(),
             }, true);
 
-            const notes = draft?.body.releaseData[0].notes ?? 'No release notes generated.';
+            // These are release-please internals, so guard every step in case a later version changes the shape.
+            const notes = draft?.body?.releaseData?.[0]?.notes ?? 'No release notes generated.';
             appendFileSync(process.env.GITHUB_STEP_SUMMARY, `Baseline: \`${stableTag}\`\n\n${notes}\n`);
           }
 
