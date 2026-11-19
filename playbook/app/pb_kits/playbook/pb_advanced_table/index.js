@@ -578,15 +578,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           PbAdvancedTable.expandedRows.add(button.id);
         }
       });
-
-      PbAdvancedTable.expandedRows.forEach((rowId) => {
-        const nestedButton = table.querySelector(
-          `[data-advanced-table][id="${rowId}"]`
-        );
-        if (nestedButton && !firstLevelButtons.contains(nestedButton)) {
-          nestedButton.click();
-        }
-      });
     }
   }
 
