@@ -9,7 +9,7 @@ npm_package="playbook-ui-${npm_version}.tgz"
 ruby_package="playbook_ui-${ruby_version}.gem"
 
 if [[ ${3:-} != --verify-only ]]; then
-  node -e 'const pkg = require("./package.json"); if (pkg.version !== process.argv[1]) throw new Error("Unexpected npm version: " + pkg.version)' "$npm_version"
+  node -e 'const pkg = require("./package.json"); if (pkg.version !== process.argv[1]) throw new Error("Unexpected npm version: " + pkg.version)' -- "$npm_version"
   ruby -r ./lib/playbook/version.rb -e 'abort "Unexpected gem version: #{Playbook::VERSION}" unless Playbook::VERSION == ARGV.fetch(0)' "$ruby_version"
 
   yarn release
@@ -22,7 +22,7 @@ tar -xOf "$npm_package" package/package.json | node -e '
   if (pkg.name !== "playbook-ui" || pkg.version !== process.argv[1]) {
     throw new Error("Unexpected npm artifact: " + pkg.name + " " + pkg.version);
   }
-' "$npm_version"
+' -- "$npm_version"
 
 ruby -r rubygems/package -e '
   spec = Gem::Package.new(ARGV.fetch(0)).spec
