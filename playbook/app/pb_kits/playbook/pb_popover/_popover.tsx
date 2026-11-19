@@ -2,11 +2,13 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import {
+  autoPlacement,
   autoUpdate,
   flip,
   Middleware,
   offset as offsetMiddleware,
   Placement,
+  Rect,
   shift,
   Strategy,
   useFloating,
@@ -43,7 +45,7 @@ type PbPopoverProps = {
   /** @deprecated Popper.js modifiers. Only `offset`, `flip` and `preventOverflow` are translated to floating-ui middleware. */
   modifiers?: PopperLikeModifier[];
   offset?: boolean;
-  placement?: Placement;
+  placement?: PopoverPlacement;
   portal?: string;
   reference?: React.ReactElement & any;
   referenceElement?: Element | null;
@@ -54,28 +56,91 @@ type PbPopoverProps = {
 } & ModifiedGlobalProps
 & { children?: React.ReactChild[] | React.ReactChild }
 
-type PopperLikeModifier = {
+// Loose on purpose: consumers pass Popper.js modifier objects as-is (e.g. `enabled: "true"`, `phase`).
+export type PopperLikeModifier = {
   name: string;
-  enabled?: boolean;
-  options?: { offset?: [number, number] } & Record<string, unknown>;
+  enabled?: boolean | string;
+  phase?: string;
+  options?: Record<string, any>;
+  [key: string]: unknown;
 };
+
+/** Popper.js `auto*` placements, mapped to floating-ui's `autoPlacement()` middleware. */
+type AutoPlacement = "auto" | "auto-start" | "auto-end";
+export type PopoverPlacement = Placement | AutoPlacement;
+
+type PopperOffset = [number?, number?];
+type PopperOffsetFn = (args: { placement: Placement; popper: Rect; reference: Rect }) => PopperOffset;
 
 // Matches the Popper.js `offset: [0, 20]` modifier previously enabled by the `offset` prop.
 const POPOVER_OFFSET = 20;
 
-// Popper.js enables flip + preventOverflow by default; floating-ui's equivalents are flip + shift.
-// Legacy Popper modifiers are translated where a 1:1 mapping exists so existing consumers keep working.
-const buildMiddleware = (offset: boolean, modifiers: PopperLikeModifier[] = []): Middleware[] => {
-  const byName = (name: string) => modifiers.find((modifier) => modifier.name === name);
-  const isDisabled = (name: string) => byName(name)?.enabled === false;
+const isAutoPlacement = (placement: PopoverPlacement): placement is AutoPlacement =>
+  placement === "auto" || placement === "auto-start" || placement === "auto-end";
 
-  const [skidding, distance] = byName("offset")?.options?.offset ?? [0, offset ? POPOVER_OFFSET : 0];
+// Popper.js `offset` is `[skidding, distance]` or a function returning it; floating-ui calls these crossAxis / mainAxis.
+const toOffsetMiddleware = (popperOffset: unknown): Middleware => {
+  const toAxes = ([skidding, distance]: PopperOffset = []) => ({ mainAxis: distance ?? 0, crossAxis: skidding ?? 0 });
+
+  if (typeof popperOffset === "function") {
+    return offsetMiddleware(({ placement, rects }) =>
+      toAxes((popperOffset as PopperOffsetFn)({ placement, popper: rects.floating, reference: rects.reference })));
+  }
+  if (typeof popperOffset === "number") return offsetMiddleware(popperOffset);
+  return offsetMiddleware(toAxes(Array.isArray(popperOffset) ? popperOffset as PopperOffset : undefined));
+};
+
+// Popper.js enables flip + preventOverflow by default; floating-ui's equivalents are flip + shift.
+// Legacy Popper modifiers are translated where a mapping exists so existing consumers keep working.
+export const buildMiddleware = (
+  offset: boolean,
+  modifiers: PopperLikeModifier[] = [],
+  placement: PopoverPlacement = "left",
+): Middleware[] => {
+  const byName = (name: string) => modifiers.find((modifier) => modifier.name === name);
+  const isDisabled = (name: string) => {
+    const enabled = byName(name)?.enabled;
+    return enabled === false || enabled === "false";
+  };
+
+  const offsetModifier = byName("offset");
+  const flipOptions = byName("flip")?.options ?? {};
+  const shiftOptions = byName("preventOverflow")?.options ?? {};
+
+  let offsetStep: Middleware | false = false;
+  if (!isDisabled("offset")) {
+    offsetStep = offsetModifier?.options?.offset !== undefined
+      ? toOffsetMiddleware(offsetModifier.options.offset)
+      : offsetMiddleware(offset ? POPOVER_OFFSET : 0);
+  }
+
+  // floating-ui docs: don't combine autoPlacement() with flip(); Popper computed auto placements inside flip.
+  let placementStep: Middleware | false = false;
+  if (isAutoPlacement(placement)) {
+    placementStep = autoPlacement({
+      alignment: placement === "auto" ? null : placement === "auto-start" ? "start" : "end",
+      allowedPlacements: flipOptions.allowedAutoPlacements,
+      autoAlignment: flipOptions.flipVariations !== false,
+      padding: flipOptions.padding,
+    });
+  } else if (!isDisabled("flip")) {
+    // Only options with the same meaning in both libraries; Popper's `boundary` values differ from floating-ui's.
+    placementStep = flip({
+      // `initialPlacement` matches Popper: when no side fits, keep the requested placement instead of the best fit.
+      fallbackStrategy: "initialPlacement",
+      ...(flipOptions.fallbackPlacements && { fallbackPlacements: flipOptions.fallbackPlacements }),
+      ...(flipOptions.flipVariations === false && { flipAlignment: false }),
+      ...(flipOptions.padding !== undefined && { padding: flipOptions.padding }),
+    });
+  }
 
   return [
-    offsetMiddleware({ mainAxis: distance, crossAxis: skidding }),
-    // `initialPlacement` matches Popper: when no side fits, keep the requested placement instead of the best fit.
-    !isDisabled("flip") && flip({ fallbackStrategy: "initialPlacement" }),
-    !isDisabled("preventOverflow") && shift(),
+    offsetStep,
+    placementStep,
+    !isDisabled("preventOverflow") && shift({
+      ...(shiftOptions.altAxis !== undefined && { crossAxis: Boolean(shiftOptions.altAxis) }),
+      ...(shiftOptions.padding !== undefined && { padding: shiftOptions.padding }),
+    }),
   ].filter(Boolean) as Middleware[];
 };
 
@@ -234,17 +299,21 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
     shouldClosePopover = noop,
   } = props;
 
+  // Modifier arrays are usually recreated each render; the fingerprint keeps middleware stable.
+  // Function offsets don't serialize, so their source is included (a changed closure value won't re-run).
+  const modifiersKey = JSON.stringify(modifiers, (_key, value) => typeof value === "function" ? value.toString() : value);
   const middleware = useMemo(
-    () => buildMiddleware(offset, modifiers),
+    () => buildMiddleware(offset, modifiers, placement),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [offset, JSON.stringify(modifiers)],
+    [offset, modifiersKey, placement],
   );
 
   const { refs, floatingStyles, placement: resolvedPlacement } = useFloating({
     elements: referenceElement ? { reference: referenceElement } : undefined,
     middleware,
     open: show,
-    placement,
+    // autoPlacement() picks the side; floating-ui needs a real placement as the starting point.
+    placement: isAutoPlacement(placement) ? "bottom" : placement,
     strategy,
     whileElementsMounted: autoUpdate,
   });

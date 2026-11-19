@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import PbEnhancedElement from "../pb_enhanced_element";
-import { autoUpdate, computePosition, flip, offset, shift } from "@floating-ui/dom";
+import { flip, offset, shift } from "@floating-ui/dom";
+import { autoPositionFixed } from "../utilities/autoPositionFixed";
 import flatpickr from "flatpickr";
 
 const INTERACTIVE_FILTER_SELECTOR = "[data-pb-interactive-filter]";
@@ -138,14 +139,9 @@ export default class PbFilter extends PbEnhancedElement {
   startPositioning(tooltip: HTMLElement) {
     if (this._cleanupAutoUpdate) return;
 
-    this._cleanupAutoUpdate = autoUpdate(this.element, tooltip, () => {
-      computePosition(this.element, tooltip, {
-        placement: "bottom-start",
-        strategy: "fixed",
-        middleware: [offset(8), flip({ fallbackStrategy: "initialPlacement" }), shift()],
-      }).then(({ x, y }) => {
-        Object.assign(tooltip.style, { left: `${x}px`, top: `${y}px` });
-      });
+    this._cleanupAutoUpdate = autoPositionFixed(this.element, tooltip, {
+      placement: "bottom-start",
+      middleware: [offset(8), flip({ fallbackStrategy: "initialPlacement" }), shift()],
     });
   }
 

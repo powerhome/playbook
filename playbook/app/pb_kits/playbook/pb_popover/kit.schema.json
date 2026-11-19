@@ -54,7 +54,7 @@
       "default": false
     },
     "placement": {
-      "type": "Placement",
+      "type": "PopoverPlacement",
       "platforms": [
         "react"
       ],

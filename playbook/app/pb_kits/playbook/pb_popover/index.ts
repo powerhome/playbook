@@ -1,5 +1,6 @@
 import PbEnhancedElement from '../pb_enhanced_element'
-import { autoUpdate, computePosition, flip, offset, Placement, shift } from '@floating-ui/dom'
+import { flip, offset, Placement, shift } from '@floating-ui/dom'
+import { autoPositionFixed } from '../utilities/autoPositionFixed'
 import { isPortaledFloatingKitInteraction } from '../utilities/floatingPortalHosts'
 
 const POPOVER_OFFSET = 20
@@ -35,7 +36,7 @@ export default class PbPopover extends PbEnhancedElement {
       return
     }
     this.moveTooltip()
-    this.tooltip.style.position = 'fixed'
+    Object.assign(this.tooltip.style, { position: 'fixed', margin: '0' })
 
     this._triggerClickHandler = (event: Event) => {
       event.preventDefault()
@@ -74,15 +75,9 @@ export default class PbPopover extends PbEnhancedElement {
   startPositioning() {
     if (this._cleanupAutoUpdate) return
 
-    this._cleanupAutoUpdate = autoUpdate(this.triggerElement, this.tooltip, () => {
-      computePosition(this.triggerElement, this.tooltip, {
-        placement: this.position as Placement,
-        strategy: 'fixed',
-        middleware: [offset(this.offset), flip({ fallbackStrategy: 'initialPlacement' }), shift()],
-      }).then(({ x, y, placement }) => {
-        Object.assign(this.tooltip.style, { left: `${x}px`, top: `${y}px` })
-        this.tooltip.dataset.placement = placement
-      })
+    this._cleanupAutoUpdate = autoPositionFixed(this.triggerElement, this.tooltip, {
+      placement: this.position as Placement,
+      middleware: [offset(this.offset), flip({ fallbackStrategy: 'initialPlacement' }), shift()],
     })
   }
 
