@@ -9,6 +9,9 @@ import PbReactPopover from '../../pb_popover/_popover'
 import getQuickPickOptions from '../../pb_dropdown/quickpick'
 import { uniqueId } from '../../utilities/object'
 import Title from '../../pb_title/_title'
+import { getAllIcons } from '../../utilities/icons/allicons'
+
+const { angleLeft, angleRight } = getAllIcons()
 
 export type SelectInteractiveConfig = {
   type: 'select',
@@ -151,8 +154,8 @@ const InlineCalendar = ({
       dateFormat: config.format || 'm/d/Y',
       minDate: config.minDate,
       maxDate: config.maxDate,
-      nextArrow: '<i class="far fa-angle-right"></i>',
-      prevArrow: '<i class="far fa-angle-left"></i>',
+      nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
+      prevArrow: `<div style="height: 14px;">${angleLeft.string}</div>`,
       onChange: (_selectedDates, dateStr) => {
         config.onChange(dateStr)
         if ((config.mode || 'single') === 'single') onSinglePick()

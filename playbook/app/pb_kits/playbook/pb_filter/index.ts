@@ -3,6 +3,9 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { createPopper, Instance as PopperInstance } from "@popperjs/core";
 import flatpickr from "flatpickr";
+import { getAllIcons } from "../utilities/icons/allicons";
+
+const { angleLeft, angleRight } = getAllIcons();
 
 const INTERACTIVE_FILTER_SELECTOR = "[data-pb-interactive-filter]";
 
@@ -207,8 +210,8 @@ export default class PbFilter extends PbEnhancedElement {
       dateFormat: dataset.pbFilterDateFormat || "m/d/Y",
       minDate: dataset.pbFilterDateMin || undefined,
       maxDate: dataset.pbFilterDateMax || undefined,
-      nextArrow: '<i class="far fa-angle-right"></i>',
-      prevArrow: '<i class="far fa-angle-left"></i>',
+      nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
+      prevArrow: `<div style="height: 14px;">${angleLeft.string}</div>`,
       onChange: (_dates: Date[], dateStr: string) => {
         this.applyChange(dateStr, dateStr);
         if (mode === "single") this.hide();
