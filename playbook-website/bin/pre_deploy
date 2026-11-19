@@ -13,7 +13,22 @@ operator_generation() {
     $ctrl get deployment percona-xtradb-cluster-operator -o jsonpath='{.metadata.generation}' 2>/dev/null || true
 }
 
+# The operator changes these StatefulSets when it applies new pod templates.
+database_generations() {
+    $ctrl get statefulset database-pxc database-haproxy \
+        -o jsonpath='{range .items[*]}{.metadata.generation} {end}' 2>/dev/null || true
+}
+
+# OnDelete StatefulSets never update currentRevision, so compare the replica counts.
+database_rollout_done() {
+    $ctrl get statefulset database-pxc database-haproxy \
+        -o jsonpath='{range .items[*]}{.metadata.generation} {.status.observedGeneration} {.spec.replicas} {.status.updatedReplicas} {.status.readyReplicas}{"\n"}{end}' \
+        | awk '$1 != $2 || $3 != $4 || $3 != $5 { pending = 1 } END { exit pending }'
+}
+
 operatorGenerationBefore=$(operator_generation)
+# Read these before the operator deploy. The new operator can change them before krane returns.
+databaseGenerationsBefore=$(database_generations)
 
 operatorResources=$(krane render \
     --filenames=/app/config/deploy/templates/operators \
@@ -27,13 +42,32 @@ echo "$operatorResources" | krane deploy ${namespace} ${cluster} \
 # A new operator restarts the database pods with its own pod templates.
 # Then bin/deploy applies the new crVersion, and the operator restarts the pods again.
 # Wait here for the first restart, so the timeout in bin/deploy applies only to the second.
-# The operator starts the restart some seconds after it starts, so wait 30 seconds first.
+# If the operator does not change the StatefulSets in 120 seconds, do not wait.
 if [ -n "$operatorGenerationBefore" ] \
     && [ "$operatorGenerationBefore" != "$(operator_generation)" ] \
     && $ctrl get pxc database >/dev/null 2>&1; then
-    log ">>> The operator changed. Waiting for PerconaXtraDBCluster/database to be ready"
-    sleep 30
-    $ctrl wait pxc/database --for=jsonpath='{.status.state}'=ready --timeout=600s
+    log ">>> The operator changed. Waiting up to 120 seconds for it to change the database StatefulSets"
+    waitStart=$SECONDS
+    while [ "$(database_generations)" = "$databaseGenerationsBefore" ]; do
+        if (( SECONDS - waitStart >= 120 )); then
+            log ">>> The operator did not change the database StatefulSets. There is no database restart to wait for"
+            break
+        fi
+        sleep 5
+    done
+
+    if [ "$(database_generations)" != "$databaseGenerationsBefore" ]; then
+        log ">>> Waiting up to 600 seconds for the database restart to finish"
+        rolloutStart=$SECONDS
+        until database_rollout_done; do
+            if (( SECONDS - rolloutStart >= 600 )); then
+                log "${RED}The database restart did not finish in 600 seconds${NOFORMAT}"
+                exit 1
+            fi
+            sleep 10
+        done
+        $ctrl wait pxc/database --for=jsonpath='{.status.state}'=ready --timeout=120s
+    fi
 fi
 
 log "${GREEN}SUCCESS: $task_name - $cluster / $namespace${NOFORMAT}"
