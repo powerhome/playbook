@@ -177,5 +177,10 @@
         "react"
       ]
     }
+  },
+  "hiddenPropsByPlatform": {
+    "rails": [
+      "onError"
+    ]
   }
 }

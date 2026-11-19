@@ -121,8 +121,11 @@ export const usePlaygroundState = ({
   const initialDataPresetKey = getDataPresetForPreset(firstPresetIndex, null);
 
   const hiddenPropNames = useMemo(
-    () => new Set(playgroundConfig?.hiddenProps ?? []),
-    [playgroundConfig?.hiddenProps]
+    () => new Set([
+      ...(playgroundConfig?.hiddenProps ?? []),
+      ...(playgroundConfig?.hiddenPropsByPlatform?.[platform] ?? []),
+    ]),
+    [playgroundConfig?.hiddenProps, playgroundConfig?.hiddenPropsByPlatform, platform]
   );
 
   const emitEmptyStringPropNames = useMemo(
@@ -160,10 +163,14 @@ export const usePlaygroundState = ({
     return globalPropsSchema.props;
   }, [globalPropsSchema, kitSchema]);
 
-  const playgroundProps = useMemo(
-    () => ({ ...reactProps, ...(playgroundConfig?.customProps ?? {}) }),
-    [reactProps, playgroundConfig?.customProps]
-  );
+  const playgroundProps = useMemo(() => {
+    const customProps = Object.fromEntries(
+      Object.entries(playgroundConfig?.customProps ?? {}).filter(
+        ([name]) => !hiddenPropNames.has(name),
+      ),
+    );
+    return { ...reactProps, ...customProps };
+  }, [reactProps, playgroundConfig?.customProps, hiddenPropNames]);
 
   const allPropDefinitions = useMemo(
     () => ({ ...playgroundProps, ...globalProps }),

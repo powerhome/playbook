@@ -630,6 +630,12 @@ Good reasons to hide props:
 - the prop is internal/noisy
 - the prop is represented by a custom playground control instead
 
+Use `hiddenPropsByPlatform` to hide a prop on only one tab. For example, Image's Rails `on_error` is an inline JavaScript string the Rails preview never renders, so it is hidden on Rails but kept on React:
+
+```json
+"hiddenPropsByPlatform": { "rails": ["onError"] }
+```
+
 ## Gotchas
 
 ### Do not edit `_playground.json`
