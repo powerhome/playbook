@@ -1,0 +1,71 @@
+name: Release Please Preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: master
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb241d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22.23.4
+          package-manager-cache: false
+      - name: Install release-please
+        run: npm install --prefix "$RUNNER_TEMP/release-preview" --ignore-scripts --no-audit --no-fund release-please@17.11.2
+      - name: Preview stable version and notes
+        run: |
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const { appendFileSync } = require('node:fs');
+          const { createRequire } = require('node:module');
+          const load = createRequire(process.env.RUNNER_TEMP + '/release-preview/package.json');
+          load('release-please');
+          const { parseConventionalCommits } = load('release-please/build/src/commit');
+          const { Simple } = load('release-please/build/src/strategies/simple');
+          const { TagName } = load('release-please/build/src/util/tag-name');
+
+          const git = (...args) => execFileSync('git', args, { encoding: 'utf8' });
+
+          async function preview() {
+            // Stable releases use bare X.Y.Z tags. RC tags must not set the baseline.
+            const stableTag = git('tag', '--merged', 'HEAD', '--sort=-version:refname')
+              .split('\n')
+              .find(tag => /^\d+\.\d+\.\d+$/.test(tag));
+            if (!stableTag) throw new Error('No stable tag found on master');
+
+            const fields = git('log', '-z', '--format=%H%x00%B', stableTag + '..HEAD').split('\0');
+            const commits = [];
+            for (let index = 0; index + 1 < fields.length; index += 2) {
+              commits.push({ sha: fields[index], message: fields[index + 1] });
+            }
+
+            const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
+            const strategy = new Simple({
+              github: { repository: { owner, repo } },
+              targetBranch: 'master',
+              includeComponentInTag: false,
+              includeVInTag: false,
+            });
+            const draft = await strategy.buildReleasePullRequest(parseConventionalCommits(commits), {
+              tag: TagName.parse(stableTag),
+              sha: git('rev-parse', stableTag + '^{}').trim(),
+            }, true);
+
+            const notes = draft?.body.releaseData[0].notes ?? 'No release notes generated.';
+            appendFileSync(process.env.GITHUB_STEP_SUMMARY, `Baseline: \`${stableTag}\`\n\n${notes}\n`);
+          }
+
+          preview().catch(error => {
+            console.error(error);
+            process.exitCode = 1;
+          });
+          NODE

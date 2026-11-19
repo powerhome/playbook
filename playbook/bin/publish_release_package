@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+registry=${1:?Expected registry}
+version=${2:?Expected version}
+tag=${3:-}
+
+case "$registry" in
+  npm)
+    artifact="playbook-ui-$version.tgz"
+    url="https://registry.npmjs.org/playbook-ui/$version"
+    field="dist.integrity"
+    digest="sha512-$(openssl dgst -sha512 -binary "$artifact" | openssl base64 -A)"
+    publish=(npm publish --registry https://registry.npmjs.org "$artifact")
+    if [[ -n "$tag" ]]; then publish+=(--tag "$tag"); fi
+    ;;
+  rubygems)
+    artifact="playbook_ui-$version.gem"
+    url="https://rubygems.org/api/v2/rubygems/playbook_ui/versions/$version.json"
+    field="sha"
+    digest=$(ruby -rdigest -e 'puts Digest::SHA256.file(ARGV.fetch(0)).hexdigest' "$artifact")
+    publish=(gem push "$artifact" --host https://rubygems.org/)
+    ;;
+  *)
+    echo "Unknown registry: $registry" >&2
+    exit 1
+    ;;
+esac
+
+# A rerun may skip a version only if it contains exactly the saved package.
+response=$(mktemp)
+trap 'rm -f "$response"' EXIT
+status=$(curl --silent --show-error --retry 2 --max-time 20 --output "$response" --write-out '%{http_code}' "$url")
+case "$status" in
+  404) "${publish[@]}" ;;
+  200)
+    published_digest=$(node -e '
+      const body = JSON.parse(require("node:fs").readFileSync(process.argv[1], "utf8"));
+      const value = process.argv[2].split(".").reduce((object, key) => object?.[key], body);
+      if (typeof value !== "string") process.exit(1);
+      console.log(value);
+    ' "$response" "$field")
+    if [[ "$published_digest" != "$digest" ]]; then
+      echo "$registry already has a different artifact for $version." >&2
+      exit 1
+    fi
+    echo "$registry already has the exact artifact for $version."
+    ;;
+  *)
+    echo "Could not verify $registry version $version (HTTP $status)." >&2
+    exit 1
+    ;;
+esac

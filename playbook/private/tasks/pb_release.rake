@@ -105,42 +105,27 @@ namespace :pb_release do
     puts "\nChecking for external runtime dependencies..."
     abort "Release stopped. Fix the external runtime dependency check above, then retry." unless system("yarn", "check:external-deps")
 
-    # NPM Packaging
-    puts "\nGenerating distribution files"
-    # The Vite build also fails on external runtime dependencies in built CSS or bundled packages.
-    abort "Release stopped. yarn release failed; nothing was packaged or published." unless system("yarn", "release")
-    puts "\nCreating NPM package..."
-    `npm pack`
+    resume = ENV["PLAYBOOK_RESUME_RELEASE"] == "1"
+    abort "Resume is only available for publishing." if resume && dryrun
 
-    # RubyGems
-    puts "\nCreating Gem..."
-    `bin/build_gem`
-    # Publish to RubyGems
+    package_args = ["bash", "bin/package_release", npm_version, version]
+    package_args << "--verify-only" if resume
+    abort "Release stopped. Package preparation failed." unless system(*package_args)
+
     unless dryrun
-      puts "\nPushing to RubyGems..."
+      puts "\nPublishing to RubyGems"
       puts "If MFA is enabled (UI and API), you will be prompted for an OTP code..."
-      gem_file = "playbook_ui-#{version}.gem"
-      cmd = "gem push #{gem_file}"
-      puts "$ #{cmd}"
-      success = system(cmd)
-      abort "gem push failed for #{gem_file}. If no OTP prompt appeared, try:\n  #{cmd}\nor:\n  #{cmd} --otp YOUR_CODE" unless success
-      puts "\nPushed to RubyGems. Now lets clean up..."
-      `rm -rf playbook_ui-*.gem`
-    end
+      unless system("bash", "bin/publish_release_package", "rubygems", version)
+        abort "RubyGems publish failed. Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1."
+      end
 
-    # Publish to NPM
-    unless dryrun
-      puts "\nPublishing to NPM..."
-      npm_suffix = looks_like_alpha ? "--tag alpha" : ""
-      cmd = "npm publish --registry https://registry.npmjs.org playbook-ui-#{npm_version}.tgz #{npm_suffix}"
-      puts "$ #{cmd}"
+      puts "\nPublishing to npm"
       puts "A browser prompt may open for WebAuthn (Touch ID / YubiKey / passkey)..."
-      success = system(cmd)
+      unless system("bash", "bin/publish_release_package", "npm", npm_version, looks_like_alpha ? "alpha" : "")
+        abort "npm publish failed. Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1."
+      end
 
-      abort "npm publish failed. If no browser prompt appeared, try running the same command manually:\n  #{cmd}" unless success
-
-      puts "\nPublished to NPM. Now lets clean up..."
-      `rm -rf playbook-ui-*.tgz`
+      File.delete("playbook_ui-#{version}.gem", "playbook-ui-#{npm_version}.tgz")
     end
 
     if dryrun

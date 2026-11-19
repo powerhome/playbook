@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+artifact=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=release-packages" --jq '.artifacts[0].id // empty')
+# If the first attempt failed before upload, it could not have published.
+if [[ -z "$artifact" ]]; then exit 0; fi
+
+package_dir=$(mktemp -d)
+gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name release-packages --dir "$package_dir"
+
+shopt -s nullglob
+npm_packages=("$package_dir"/playbook-ui-*.tgz)
+ruby_packages=("$package_dir"/playbook_ui-*.gem)
+if [[ ${#npm_packages[@]} != 1 || ${#ruby_packages[@]} != 1 ]]; then
+  echo 'Expected exactly one saved npm package and one saved gem.' >&2
+  exit 1
+fi
+
+npm_file=${npm_packages[0]##*/}
+ruby_file=${ruby_packages[0]##*/}
+npm_version=${npm_file#playbook-ui-}
+ruby_version=${ruby_file#playbook_ui-}
+npm_version=${npm_version%.tgz}
+ruby_version=${ruby_version%.gem}
+
+if [[ ! "$npm_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+-(alpha|rc)\.[[:alnum:]]+$ || \
+      "$ruby_version" != "${npm_version/-/.pre.}" ]]; then
+  echo 'Saved packages have unexpected prerelease versions.' >&2
+  exit 1
+fi
+
+mv "${npm_packages[0]}" "${ruby_packages[0]}" .
+bash bin/package_release "$npm_version" "$ruby_version" --verify-only
+{
+  printf 'new_npm_version=%s\n' "$npm_version"
+  printf 'new_ruby_version=%s\n' "$ruby_version"
+  printf 'RELEASE_PACKAGES_RESTORED=true\n'
+} >> "$GITHUB_ENV"
