@@ -63,8 +63,12 @@ namespace :pb_release do
     puts "Updated Gemfile.lock"
 
     # The website bundles playbook_ui from this checkout, so its lockfile records the version too.
-    # Clear Bundler's env so this bundles playbook-website's Gemfile, not playbook's.
-    website_bundled = Bundler.with_unbundled_env { system("bundle", chdir: "../playbook-website") }
+    # Clear Bundler's env so this bundles playbook-website's Gemfile, not playbook's, but pin the
+    # lockfile's own Bundler so a different Bundler on PATH can't rewrite BUNDLED WITH.
+    website_dir = "../playbook-website"
+    bundled_with = File.read("#{website_dir}/Gemfile.lock")[/^BUNDLED WITH\n\s+(\S+)/, 1]
+    website_env = bundled_with ? { "BUNDLER_VERSION" => bundled_with } : {}
+    website_bundled = Bundler.with_unbundled_env { system(website_env, "bundle", chdir: website_dir) }
     if website_bundled
       puts "Updated playbook-website/Gemfile.lock"
     else
