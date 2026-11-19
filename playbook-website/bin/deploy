@@ -23,7 +23,6 @@ extraBindings="{\"ingress\":{\"hosts\":[\"${deploy_url}\"]}}"
 
 # Priority resources
 source "${workDir}/bin/priority_deploy"
-priority_deploy
 
 # Application Deployment
 krane render \
