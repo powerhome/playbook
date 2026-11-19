@@ -211,18 +211,55 @@ describe("touchDrag utilities", () => {
       expect(contextMenu().defaultPrevented).toBe(false);
     });
 
-    test("blocks native dragstart so it does not reach HTML5 drag handlers", () => {
+    const nativeDragStart = (target) => {
+      const event = new Event("dragstart", { bubbles: true, cancelable: true });
+      target.dispatchEvent(event);
+      return event;
+    };
+
+    test("blocks native dragstart only during a touch press", () => {
       const img = document.createElement("img");
       item.appendChild(img);
       const onBubbledDragStart = jest.fn();
       document.body.addEventListener("dragstart", onBubbledDragStart);
 
-      const dragStart = new Event("dragstart", { bubbles: true, cancelable: true });
-      img.dispatchEvent(dragStart);
+      // No touch press: native drag is left alone and still reaches delegated handlers.
+      expect(nativeDragStart(img).defaultPrevented).toBe(false);
+      expect(onBubbledDragStart).toHaveBeenCalledTimes(1);
 
-      expect(dragStart.defaultPrevented).toBe(true);
-      expect(onBubbledDragStart).not.toHaveBeenCalled();
+      // Pending and armed press: cancelled and kept from HTML5 drag handlers.
+      item.dispatchEvent(touchEvent("touchstart", 0, 0));
+      expect(nativeDragStart(img).defaultPrevented).toBe(true);
+      jest.advanceTimersByTime(TOUCH_DRAG_DELAY_MS);
+      expect(nativeDragStart(img).defaultPrevented).toBe(true);
+      expect(onBubbledDragStart).toHaveBeenCalledTimes(1);
+
+      // After release: back to normal.
+      item.dispatchEvent(touchEvent("touchend", 0, 0));
+      expect(nativeDragStart(img).defaultPrevented).toBe(false);
+      expect(onBubbledDragStart).toHaveBeenCalledTimes(2);
+
       document.body.removeEventListener("dragstart", onBubbledDragStart);
+    });
+
+    test("leaves native dragstart alone for a press outside the drag handle", () => {
+      cleanup();
+      item.innerHTML = '<span class="pb_draggable_handle"></span><img />';
+      cleanup = bindTouchDrag({ dragId: "1", container: "list", itemElement: item, handlers });
+
+      const img = item.querySelector("img");
+      img.dispatchEvent(touchEvent("touchstart", 0, 0));
+
+      expect(nativeDragStart(img).defaultPrevented).toBe(false);
+    });
+
+    test("cleanup clears is_touch_active mid-press", () => {
+      item.dispatchEvent(touchEvent("touchstart", 0, 0));
+      expect(item.classList.contains("is_touch_active")).toBe(true);
+
+      cleanup();
+
+      expect(item.classList.contains("is_touch_active")).toBe(false);
     });
   });
 });

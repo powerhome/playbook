@@ -240,8 +240,11 @@ export default class PbDraggable extends PbEnhancedElement {
     const onContextMenu = (event) => {
       if (pressTimer !== null || state.active) event.preventDefault();
     };
-    // A long-press on an image or selected text starts native drag-and-drop on iPadOS; cancel it.
-    const onNativeDragStart = (event) => event.preventDefault();
+    // During a touch press on the drag target, a long-press on an image or selected text starts
+    // native drag-and-drop on iPadOS; cancel it. Other native drags are left alone.
+    const onNativeDragStart = (event) => {
+      if (pressTimer !== null || state.active) event.preventDefault();
+    };
 
     dragTarget.addEventListener("touchstart", onTouchStart, { passive: true });
     dragTarget.addEventListener("touchmove", onTouchMove, { passive: false });
@@ -251,7 +254,7 @@ export default class PbDraggable extends PbEnhancedElement {
     item.addEventListener("dragstart", onNativeDragStart);
 
     return () => {
-      cancelPendingPress();
+      resetState();
       dragTarget.removeEventListener("touchstart", onTouchStart);
       dragTarget.removeEventListener("touchmove", onTouchMove);
       dragTarget.removeEventListener("touchend", onTouchEnd);

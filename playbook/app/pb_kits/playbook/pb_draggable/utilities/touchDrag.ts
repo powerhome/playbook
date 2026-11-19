@@ -303,9 +303,12 @@ export const bindTouchDrag = ({
     if (pressTimer !== null || state.active) event.preventDefault();
   };
 
-  // A long-press on an image or selected text starts native drag-and-drop on iPadOS.
-  // Cancel it and stop it reaching React's HTML5 drag handlers, which would run alongside touch drag.
+  // During a touch press on the drag target, a long-press on an image or selected text starts
+  // native drag-and-drop on iPadOS. Cancel it and keep it from React's HTML5 drag handlers,
+  // which would run alongside touch drag. Other native drags are left alone.
   const handleNativeDragStart = (event: DragEvent) => {
+    if (pressTimer === null && !state.active) return;
+
     event.preventDefault();
     event.stopPropagation();
   };
@@ -344,6 +347,7 @@ export const bindTouchDrag = ({
 
   return () => {
     cancelPendingPress();
+    itemElement.classList.remove('is_touch_active');
     dragTarget.removeEventListener('touchstart', handleTouchStart);
     dragTarget.removeEventListener('touchmove', handleTouchMove);
     dragTarget.removeEventListener('touchend', handleTouchEnd);
