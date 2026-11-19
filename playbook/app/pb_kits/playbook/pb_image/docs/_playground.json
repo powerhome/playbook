@@ -80,6 +80,9 @@
     },
     {
       "name": "Custom Error Handler",
+      "platforms": [
+        "react"
+      ],
       "props": {
         "url": "https://example.invalid/missing-image.jpg",
         "alt": "Broken image example",

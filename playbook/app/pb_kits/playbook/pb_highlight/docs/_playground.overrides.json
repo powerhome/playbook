@@ -47,6 +47,16 @@
         "text": "This sentence renders without any highlighted text.",
         "highlightedText": ["missing"]
       }
+    },
+    {
+      "name": "Highlighted word",
+      "platforms": ["rails"],
+      "props": { "text": "Highlight Kit" }
+    },
+    {
+      "name": "Highlighted phrase",
+      "platforms": ["rails"],
+      "props": { "text": "Use Highlight to call attention to important words" }
     }
   ],
   "conditionals": {},

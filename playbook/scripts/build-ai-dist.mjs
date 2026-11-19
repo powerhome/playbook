@@ -101,7 +101,10 @@ function getKitDirs() {
 }
 
 function withPlatformValidPreset(playground, schema, platform) {
-  const [first, ...rest] = playground.presets || [];
+  const presets = playground.presets || [];
+  const firstIndex = presets.findIndex((preset) => !preset.platforms || preset.platforms.includes(platform));
+  const first = presets[firstIndex];
+  const rest = presets.filter((_, index) => index !== firstIndex);
   if (!first?.props) return playground;
   const props = Object.fromEntries(
     Object.entries(first.props).filter(([name, value]) => {

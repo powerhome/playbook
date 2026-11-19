@@ -14,6 +14,20 @@ module Playground
       text_input
       dialog
       dropdown
+      body
+      detail
+      hashtag
+      highlight
+      icon_circle
+      icon_value
+      image
+      label_pill
+      label_value
+      link
+      pill
+      source
+      title_count
+      title_detail
     ].freeze
 
     MOCK_DATA_KITS = %w[advanced_table full_screen].freeze
@@ -21,7 +35,6 @@ module Playground
     # Full kit paths allowed as nested pb_rails / JSX children (not just the root segment).
     ALLOWED_CHILD_KITS = (
       POC_KITS + %w[
-        body
         card/card_header
         card/card_body
         card/card_footer

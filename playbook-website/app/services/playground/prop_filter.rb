@@ -6,6 +6,7 @@ module Playground
   # Trust rules:
   # - Only schema-defined props for the Rails platform are kept
   # - html_options / data / aria / style are never forwarded
+  # - on_error is never forwarded (rendered as an inline JS handler, e.g. Image)
   # - Code-like playground values are dropped
   # - icon / custom_icon values that look like URLs or paths are dropped (SSRF defense)
   class PropFilter
@@ -15,6 +16,8 @@ module Playground
       data
       aria
       style
+      on_error
+      onError
     ].freeze
 
     ICON_SOURCE_KEYS = %w[

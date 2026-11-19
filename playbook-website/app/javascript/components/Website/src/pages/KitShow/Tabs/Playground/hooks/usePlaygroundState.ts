@@ -58,9 +58,11 @@ export const usePlaygroundState = ({
   playgroundConfig,
   platform = "react",
 }: UsePlaygroundStateProps) => {
-  // Initialize with first preset if available
-  const firstPreset = playgroundConfig?.presets?.[0];
-  const firstPresetIndex = firstPreset ? 0 : null;
+  // Initialize with the first preset available on this platform
+  const firstPresetMatch = playgroundConfig?.presets?.findIndex(
+    (preset) => !preset.platforms || preset.platforms.includes(platform)
+  ) ?? -1;
+  const firstPresetIndex = firstPresetMatch >= 0 ? firstPresetMatch : null;
   
   // Get required props (always enabled with default values)
   const requiredProps = useMemo(
@@ -404,7 +406,9 @@ export const usePlaygroundState = ({
   );
 
   const platformPresets = useMemo(() => {
-    const all = playgroundConfig?.presets ?? [];
+    const all = (playgroundConfig?.presets ?? []).filter(
+      (preset) => !preset.platforms || preset.platforms.includes(platform),
+    );
     if (platform !== "rails") return all;
 
     return all.filter((preset) =>
@@ -607,10 +611,11 @@ export const usePlaygroundState = ({
       kitName,
       propValues: propValuesForCodegen,
       propDefinitions: allPropDefinitions,
-      children: needsChildren(kitName) ? children : undefined,
+      // Match railsPreviewPayload so copied ERB renders what the preview shows.
+      children: showChildren ? children : undefined,
       structureMode: activeStructureMode,
     });
-  }, [platform, kitName, propValuesForCodegen, allPropDefinitions, children, activeStructureMode]);
+  }, [platform, kitName, propValuesForCodegen, allPropDefinitions, children, showChildren, activeStructureMode]);
 
   // Code generation
   const generatedDisplayCode = useMemo(() => {

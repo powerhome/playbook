@@ -134,6 +134,8 @@ export interface PlaygroundPreset {
   structureMode?: string;
   /** Key in `dataPresets.presets` — loads that bundle’s `columnDefinitions` + `tableData`. */
   dataPreset?: string | null;
+  /** Limit this preset to these playground tabs. Omit to show it on every platform. */
+  platforms?: ("react" | "rails")[];
 }
 
 export interface PlaygroundHint {

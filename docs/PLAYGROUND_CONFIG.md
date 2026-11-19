@@ -174,6 +174,21 @@ Presets should demonstrate real kit usage, not every possible prop.
 
 Preset values are emitted in generated code because they represent the selected example.
 
+### Platform-specific presets
+
+The React and Rails tabs share one config. The Rails tab already hides presets that set props the Rails kit does not have. Add `platforms` when a preset only makes sense on one tab, for example JSX children, a value the Rails kit cannot accept (a date string), or a Rails-only prop:
+
+```json
+{
+  "name": "Icon children",
+  "platforms": ["rails"],
+  "props": { "variant": "warning" },
+  "children": "<%= pb_rails(\"icon\", props: { icon: \"exclamation-triangle\", size: \"sm\" }) %>"
+}
+```
+
+Keep a preset with no `platforms` (or one for React) first, because the standalone Playground page and the AI usage examples start from the first preset. Preset names must be unique across platforms.
+
 ## Children
 
 Use `children.editable` when the user should be able to edit nested JSX.
