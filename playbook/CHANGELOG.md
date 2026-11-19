@@ -1,10 +1,10 @@
-# 18.4.0
+# 🔩 Patch, Pin, Repeat
 
 ##### November 19, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
-Your feature description goes here.
+Dependabot kept us busy. We patched Rails, Rack, Nokogiri, and Babel tooling, tossed vulnerable glob dependencies, and pinned GitHub Actions to full commit SHAs. 📦
 
 [18.4.0](https://github.com/powerhome/playbook/tree/18.4.0) full list of changes:
 
