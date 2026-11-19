@@ -57,6 +57,7 @@ After each RC is published, the `Open-RC-Changelog-PR` job in `.github/workflows
 
 - The commit is made through the GitHub API, so it is signed.
 - Each PR includes every undocumented RC, so the job closes older open changelog PRs as superseded.
+- RC runs can finish out of order. If a newer changelog PR is already open, the job regenerates up to that PR's RC and updates it, so an RC tagged late is still documented.
 - PRs opened by GitHub Actions do not trigger other workflows. Close and reopen the PR to run the required Conventional Commit title check.
 - The job runs separately from the publish job, so a failure here never affects the published RC. You can still run `make changelog-rc` by hand.
 - The repository must allow GitHub Actions to create pull requests (Settings → Actions → General).

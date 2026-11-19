@@ -349,7 +349,7 @@ jobs:
       issues: write        # apply labels
       pull-requests: write # open and close changelog PRs
     env:
-      RC_VERSION: ${{ needs.Creating-Release-Candidate.outputs.rc_version }}
+      PUBLISHED_RC: ${{ needs.Creating-Release-Candidate.outputs.rc_version }}
       GH_TOKEN: ${{ github.token }}
       LANG: C.UTF-8 # RC_CHANGELOG.md headings contain emoji
     steps:
@@ -362,10 +362,25 @@ jobs:
         uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
         with:
           ruby-version: '3.4.10'
+      # RC runs publish in parallel, so a later RC's changelog PR can open before this RC is tagged and leave it out.
+      # Regenerate up to the newest open changelog PR's RC and update that PR, so it picks this RC up.
+      # This RC was tagged before this job started, so the regenerated section includes it.
+      - name: Pick the changelog PR to update
+        id: target
+        run: |
+          # Only PRs this workflow opened count. Anyone, including forks, can open a PR from a changelog-rc-* branch.
+          newest=$( { echo "$PUBLISHED_RC"
+            gh pr list --repo "$GITHUB_REPOSITORY" --state open --author "app/github-actions" --json headRefName \
+              --jq '.[].headRefName | select(startswith("changelog-rc-")) | ltrimstr("changelog-rc-")'
+          } | sort -V | tail -1)
+          echo "Changelog target: $newest"
+          echo "rc_version=$newest" >> "$GITHUB_OUTPUT"
       - name: Generate RC changelog
         id: generate
+        env:
+          RC_VERSION: ${{ steps.target.outputs.rc_version }}
         run: |
-          # RC_VERSION caps the generator at this run's RC, so an out-of-order run never documents a later RC.
+          # RC_VERSION caps the generator, so an out-of-order run never documents an RC without a changelog job yet.
           if ! output=$(ruby -Iplaybook/lib -rplaybook/changelog_generator -e 'Playbook::ChangelogGenerator.run!(mode: :rc)' 2>&1); then
             echo "$output"
             if grep -q "Nothing to do" <<< "$output"; then exit 0; fi
@@ -375,23 +390,14 @@ jobs:
           if ! git diff --quiet -- playbook/RC_CHANGELOG.md; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
-      - name: Open changelog PR
+      - name: Open or update changelog PR
         if: steps.generate.outputs.changed == 'true'
+        env:
+          RC_VERSION: ${{ steps.target.outputs.rc_version }}
         run: |
           branch="changelog-rc-$RC_VERSION"
           path="playbook/RC_CHANGELOG.md"
           title="docs: Changelog for RC $RC_VERSION"
-
-          # Only PRs this workflow opened count. Anyone, including forks, can open a PR from a changelog-rc-* branch.
-          # A newer changelog PR already covers this RC.
-          newer=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --author "app/github-actions" --json headRefName --jq '.[].headRefName | select(startswith("changelog-rc-")) | ltrimstr("changelog-rc-")' \
-            | while read -r other; do
-                if [[ "$other" != "$RC_VERSION" && "$(printf '%s\n%s\n' "$RC_VERSION" "$other" | sort -V | tail -1)" == "$other" ]]; then echo "$other"; fi
-              done)
-          if [[ -n "$newer" ]]; then
-            echo "Open changelog PR for $newer already covers $RC_VERSION."
-            exit 0
-          fi
 
           if ! gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$branch" > /dev/null 2>&1; then
             gh api -X POST "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/heads/$branch" -f sha="$GITHUB_SHA" > /dev/null
