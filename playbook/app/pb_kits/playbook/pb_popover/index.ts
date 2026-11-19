@@ -1,18 +1,14 @@
 import PbEnhancedElement from '../pb_enhanced_element'
-import { createPopper, Instance, Placement } from '@popperjs/core'
-import {
-  isPortaledFloatingKitInteraction,
-  subscribeFloatingKitReposition,
-} from '../utilities/floatingPortalHosts'
+import { autoUpdate, computePosition, flip, offset, Placement, shift } from '@floating-ui/dom'
+import { isPortaledFloatingKitInteraction } from '../utilities/floatingPortalHosts'
 
-const POPOVER_OFFSET_Y = [0, 20]
+const POPOVER_OFFSET = 20
 
 export default class PbPopover extends PbEnhancedElement {
-  popper: Instance
+  _cleanupAutoUpdate: (() => void) | null = null
   _triggerElement: HTMLElement
   _tooltip: HTMLElement
   element: HTMLElement
-  _unsubscribeFloatingReposition: (() => void) | null = null
   _closeOnClickHandler: ((event: MouseEvent) => void) | null = null
   _closeOnClickTarget: HTMLElement | null = null
   _triggerClickHandler: ((event: Event) => void) | null = null
@@ -39,27 +35,7 @@ export default class PbPopover extends PbEnhancedElement {
       return
     }
     this.moveTooltip()
-
-    this.popper = createPopper (this.triggerElement, this.tooltip, {
-      placement: this.position as Placement,
-      strategy: 'fixed',
-      modifiers: [
-        {
-          name: 'offset',
-          options: {
-            offset: this.offset,
-          },
-        },
-      ],
-    })
-
-    this._unsubscribeFloatingReposition = subscribeFloatingKitReposition(
-      () => {
-        if (this.tooltip?.classList.contains('show')) {
-          void this.popper?.update()
-        }
-      },
-    )
+    this.tooltip.style.position = 'fixed'
 
     this._triggerClickHandler = (event: Event) => {
       event.preventDefault()
@@ -69,29 +45,50 @@ export default class PbPopover extends PbEnhancedElement {
         if (!this._connected) return
 
         this.toggleTooltip()
-        this.popper.update()
       }, 0)
     }
     this.triggerElement.addEventListener('click', this._triggerClickHandler)
-    if (this.tooltip.classList.contains('show')) this.checkCloseTooltip()
+    if (this.tooltip.classList.contains('show')) {
+      this.checkCloseTooltip()
+      this.startPositioning()
+    }
     this._connected = true
   }
 
   disconnect(): void {
     this._connected = false
-    this._unsubscribeFloatingReposition?.()
-    this._unsubscribeFloatingReposition = null
+    this.stopPositioning()
     this.stopCloseTooltipCheck()
     if (this._triggerClickHandler) {
       this.triggerElement.removeEventListener('click', this._triggerClickHandler)
       this._triggerClickHandler = null
     }
-    this.popper?.destroy()
     if (this.tooltip) {
       const replacement = this.element.querySelector(`#${this.tooltipId}`)
       if (replacement && replacement !== this.tooltip) this.tooltip.remove()
       else this.element.appendChild(this.tooltip)
     }
+  }
+
+  // autoUpdate only runs while open; Popper.js kept scroll/resize listeners alive for the page lifetime.
+  startPositioning() {
+    if (this._cleanupAutoUpdate) return
+
+    this._cleanupAutoUpdate = autoUpdate(this.triggerElement, this.tooltip, () => {
+      computePosition(this.triggerElement, this.tooltip, {
+        placement: this.position as Placement,
+        strategy: 'fixed',
+        middleware: [offset(this.offset), flip({ fallbackStrategy: 'initialPlacement' }), shift()],
+      }).then(({ x, y, placement }) => {
+        Object.assign(this.tooltip.style, { left: `${x}px`, top: `${y}px` })
+        this.tooltip.dataset.placement = placement
+      })
+    })
+  }
+
+  stopPositioning() {
+    this._cleanupAutoUpdate?.()
+    this._cleanupAutoUpdate = null
   }
 
   checkCloseTooltip() {
@@ -147,6 +144,7 @@ export default class PbPopover extends PbEnhancedElement {
 
     this.tooltip.classList.remove('show')
     this.tooltip.classList.add('hide')
+    this.stopPositioning()
     this.dispatchToggle(false)
   }
 
@@ -155,8 +153,13 @@ export default class PbPopover extends PbEnhancedElement {
     this.tooltip.classList.toggle('hide')
 
     const open = this.tooltip.classList.contains('show')
-    if (open) this.checkCloseTooltip()
-    else this.stopCloseTooltipCheck()
+    if (open) {
+      this.startPositioning()
+      this.checkCloseTooltip()
+    } else {
+      this.stopPositioning()
+      this.stopCloseTooltipCheck()
+    }
     this.dispatchToggle(open)
   }
 
@@ -185,7 +188,7 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   get offset() {
-    return this.element.dataset.pbPopoverOffset === 'true' ? POPOVER_OFFSET_Y : [0, 0]
+    return this.element.dataset.pbPopoverOffset === 'true' ? POPOVER_OFFSET : 0
   }
 
   get closeOnClick() {

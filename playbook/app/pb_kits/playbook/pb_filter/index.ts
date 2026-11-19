@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import PbEnhancedElement from "../pb_enhanced_element";
-import { createPopper, Instance as PopperInstance } from "@popperjs/core";
+import { autoUpdate, computePosition, flip, offset, shift } from "@floating-ui/dom";
 import flatpickr from "flatpickr";
 
 const INTERACTIVE_FILTER_SELECTOR = "[data-pb-interactive-filter]";
@@ -20,7 +20,7 @@ const INTERACTIVE_FILTER_SELECTOR = "[data-pb-interactive-filter]";
  * row's overflow clipping (see _filter.scss for position:fixed).
  */
 export default class PbFilter extends PbEnhancedElement {
-  _popper: PopperInstance | null = null;
+  _cleanupAutoUpdate: (() => void) | null = null;
   _picker: any = null;
   _tooltip: HTMLElement | null = null;
   _bodyClickHandler: ((e: MouseEvent) => void) | null = null;
@@ -64,8 +64,7 @@ export default class PbFilter extends PbEnhancedElement {
   }
 
   disconnect() {
-    this._popper?.destroy();
-    this._popper = null;
+    this.stopPositioning();
 
     this._picker?.destroy();
     this._picker = null;
@@ -113,15 +112,7 @@ export default class PbFilter extends PbEnhancedElement {
     tooltip.classList.add("show");
     this._isOpen = true;
 
-    if (!this._popper) {
-      this._popper = createPopper(this.element, tooltip, {
-        placement: "bottom-start",
-        strategy: "fixed",
-        modifiers: [{ name: "offset", options: { offset: [0, 8] } }],
-      });
-    } else {
-      this._popper.update();
-    }
+    this.startPositioning(tooltip);
 
     if (this._type === "date-picker" && !this._picker) {
       this.initFlatpickr();
@@ -136,11 +127,31 @@ export default class PbFilter extends PbEnhancedElement {
     tooltip.classList.remove("show");
     tooltip.classList.add("hide");
     this._isOpen = false;
+    this.stopPositioning();
 
     if (this._bodyClickHandler) {
       document.removeEventListener("click", this._bodyClickHandler, true);
       this._bodyClickHandler = null;
     }
+  }
+
+  startPositioning(tooltip: HTMLElement) {
+    if (this._cleanupAutoUpdate) return;
+
+    this._cleanupAutoUpdate = autoUpdate(this.element, tooltip, () => {
+      computePosition(this.element, tooltip, {
+        placement: "bottom-start",
+        strategy: "fixed",
+        middleware: [offset(8), flip({ fallbackStrategy: "initialPlacement" }), shift()],
+      }).then(({ x, y }) => {
+        Object.assign(tooltip.style, { left: `${x}px`, top: `${y}px` });
+      });
+    });
+  }
+
+  stopPositioning() {
+    this._cleanupAutoUpdate?.();
+    this._cleanupAutoUpdate = null;
   }
 
   bindBodyClickToClose() {

@@ -92,11 +92,11 @@ These kits use dependencies that ship with Playbook; no additional installation 
 | [Date Picker](/kits/date_picker/react) | [flatpickr](https://www.npmjs.com/package/flatpickr) |
 | [Dialog](/kits/dialog/react) | [react-modal](https://www.npmjs.com/package/react-modal) |
 | [File Upload](/kits/file_upload/react) | [react-dropzone](https://www.npmjs.com/package/react-dropzone) |
-| [Filter](/kits/filter/react) | [react-popper](https://www.npmjs.com/package/react-popper) |
+| [Filter](/kits/filter/react) | [@floating-ui/react](https://www.npmjs.com/package/@floating-ui/react) |
 | [LightBox](/kits/lightbox/react) | [react-zoom-pan-pinch](https://www.npmjs.com/package/react-zoom-pan-pinch) |
-| [Passphrase](/kits/passphrase/react) | [react-popper](https://www.npmjs.com/package/react-popper) |
+| [Passphrase](/kits/passphrase/react) | [@floating-ui/react](https://www.npmjs.com/package/@floating-ui/react) |
 | [Phone Number Input](/kits/phone_number_input/react) | [intl-tel-input](https://www.npmjs.com/package/intl-tel-input) |
-| [Popover](/kits/popover/react) | [react-popper](https://www.npmjs.com/package/react-popper) |
+| [Popover](/kits/popover/react) | [@floating-ui/react](https://www.npmjs.com/package/@floating-ui/react) |
 | [Tooltip](/kits/tooltip/react) | [@floating-ui/react](https://www.npmjs.com/package/@floating-ui/react) |
 | [Typeahead](/kits/typeahead/react) | [react-select](https://www.npmjs.com/package/react-select) |
 

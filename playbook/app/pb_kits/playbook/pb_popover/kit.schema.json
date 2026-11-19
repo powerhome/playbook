@@ -38,6 +38,13 @@
         "rails": "none"
       }
     },
+    "modifiers": {
+      "type": "array",
+      "platforms": [
+        "react"
+      ],
+      "default": []
+    },
     "offset": {
       "type": "boolean",
       "platforms": [
@@ -46,8 +53,27 @@
       ],
       "default": false
     },
+    "placement": {
+      "type": "Placement",
+      "platforms": [
+        "react"
+      ],
+      "default": "left"
+    },
+    "portal": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
     "reference": {
-      "type": "PopperReference & any",
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "referenceElement": {
+      "type": "Element | null",
       "platforms": [
         "react"
       ]
@@ -64,6 +90,20 @@
       "platforms": [
         "react"
       ]
+    },
+    "strategy": {
+      "type": "Strategy",
+      "platforms": [
+        "react"
+      ],
+      "default": "absolute"
+    },
+    "usePortal": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": true
     },
     "position": {
       "platforms": [

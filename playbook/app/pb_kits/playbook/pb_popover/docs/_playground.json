@@ -3,10 +3,13 @@
   "propTargets": {},
   "defaults": {
     "appendTo": "body",
+    "modifiers": [],
     "offset": true,
+    "placement": "top",
     "show": false,
-    "closeOnClick": "outside",
-    "placement": "top"
+    "strategy": "absolute",
+    "usePortal": true,
+    "closeOnClick": "outside"
   },
   "children": {
     "editable": true,

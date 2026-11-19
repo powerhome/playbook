@@ -47,7 +47,7 @@ function buildExternalDependenciesIndex(kitEntries) {
   return {
     description:
       'Kits that need host-app packages (from each kit’s docs/_playground.overrides.json → externalDependencies). Agents must NOT install packages — tell the user if they are missing.',
-    bundledWithPlaybookUi: ['flatpickr', 'intl-tel-input', '@floating-ui/dom', '@popperjs/core'],
+    bundledWithPlaybookUi: ['flatpickr', 'intl-tel-input', '@floating-ui/dom'],
     kits,
   };
 }

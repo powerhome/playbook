@@ -2,12 +2,15 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import {
-  Popper,
-  Manager as PopperManager,
-  Modifier,
-  PopperProps,
-  Reference as PopperReference,
-} from "react-popper";
+  autoUpdate,
+  flip,
+  Middleware,
+  offset as offsetMiddleware,
+  Placement,
+  shift,
+  Strategy,
+  useFloating,
+} from "@floating-ui/react";
 
 import {
   buildAriaProps,
@@ -37,36 +40,43 @@ type PbPopoverProps = {
   data?: { [key: string]: string },
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
+  /** @deprecated Popper.js modifiers. Only `offset`, `flip` and `preventOverflow` are translated to floating-ui middleware. */
+  modifiers?: PopperLikeModifier[];
   offset?: boolean;
-  reference: PopperReference & any;
+  placement?: Placement;
+  portal?: string;
+  reference?: React.ReactElement & any;
+  referenceElement?: Element | null;
   show?: boolean;
   shouldClosePopover?: (arg0: boolean) => void;
-} & ModifiedGlobalProps & Omit<PopperProps<any>, 'children'>
+  strategy?: Strategy;
+  usePortal?: boolean;
+} & ModifiedGlobalProps
 & { children?: React.ReactChild[] | React.ReactChild }
 
-// Prop enabled default modifiers here
-// https://popper.js.org/docs/v2/modifiers
-
-const POPOVER_MODIFIERS = {
-  offset: {
-    //https://popper.js.org/docs/v2/modifiers/offset/
-    enabled: true,
-    name: "offset",
-    options: {
-      offset: [0, 20],
-    },
-    phase: "main",
-  },
+type PopperLikeModifier = {
+  name: string;
+  enabled?: boolean;
+  options?: { offset?: [number, number] } & Record<string, unknown>;
 };
 
-const popoverModifiers = ({
-  modifiers,
-  offset,
-}: {
-  modifiers: Modifier<any> & any;
-  offset: boolean;
-}) => {
-  return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers;
+// Matches the Popper.js `offset: [0, 20]` modifier previously enabled by the `offset` prop.
+const POPOVER_OFFSET = 20;
+
+// Popper.js enables flip + preventOverflow by default; floating-ui's equivalents are flip + shift.
+// Legacy Popper modifiers are translated where a 1:1 mapping exists so existing consumers keep working.
+const buildMiddleware = (offset: boolean, modifiers: PopperLikeModifier[] = []): Middleware[] => {
+  const byName = (name: string) => modifiers.find((modifier) => modifier.name === name);
+  const isDisabled = (name: string) => byName(name)?.enabled === false;
+
+  const [skidding, distance] = byName("offset")?.options?.offset ?? [0, offset ? POPOVER_OFFSET : 0];
+
+  return [
+    offsetMiddleware({ mainAxis: distance, crossAxis: skidding }),
+    // `initialPlacement` matches Popper: when no side fits, keep the requested placement instead of the best fit.
+    !isDisabled("flip") && flip({ fallbackStrategy: "initialPlacement" }),
+    !isDisabled("preventOverflow") && shift(),
+  ].filter(Boolean) as Middleware[];
 };
 
 const getAppendTarget = (
@@ -92,7 +102,13 @@ const getAppendTarget = (
   return document.body;
 };
 
-const Popover = (props: PbPopoverProps) => {
+type PopoverProps = PbPopoverProps & {
+  floatingRef: (node: HTMLElement | null) => void;
+  floatingStyles: React.CSSProperties;
+  targetId: string;
+};
+
+const Popover = (props: PopoverProps) => {
   const {
     aria = {},
     className,
@@ -100,10 +116,9 @@ const Popover = (props: PbPopoverProps) => {
     data = {},
     htmlOptions = {},
     id,
-    modifiers,
-    offset,
+    floatingRef,
+    floatingStyles,
     placement,
-    referenceElement,
     zIndex,
     maxHeight,
     maxWidth,
@@ -153,13 +168,6 @@ const Popover = (props: PbPopoverProps) => {
   );
 
   return (
-    <Popper
-        modifiers={popoverModifiers({ modifiers, offset: offset || false })}
-        placement={placement}
-        referenceElement={referenceElement}
-    >
-      {({ placement, ref, style }) => {
-        return (
           <div
               {...ariaProps}
               {...dataProps}
@@ -167,8 +175,8 @@ const Popover = (props: PbPopoverProps) => {
               className={classes}
               data-placement={placement}
               id={id}
-              ref={ref}
-              style={Object.assign({}, style, zIndexStyle)}
+              ref={floatingRef}
+              style={Object.assign({}, floatingStyles, zIndexStyle)}
           >
             <div
                 className={classnames(`${buildCss("pb_popover_tooltip")} show`)}
@@ -199,9 +207,6 @@ const Popover = (props: PbPopoverProps) => {
             </div>
             </div>
           </div>
-        );
-      }}
-    </Popper>
   );
 };
 
@@ -214,10 +219,10 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
     modifiers = [],
     offset = false,
     placement = "left",
-    portal = "body",
     reference,
     referenceElement,
     show = false,
+    strategy = "absolute",
     usePortal = true,
     zIndex,
     maxHeight,
@@ -228,6 +233,21 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
     closeOnClick,
     shouldClosePopover = noop,
   } = props;
+
+  const middleware = useMemo(
+    () => buildMiddleware(offset, modifiers),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [offset, JSON.stringify(modifiers)],
+  );
+
+  const { refs, floatingStyles, placement: resolvedPlacement } = useFloating({
+    elements: referenceElement ? { reference: referenceElement } : undefined,
+    middleware,
+    open: show,
+    placement,
+    strategy,
+    whileElementsMounted: autoUpdate,
+  });
 
   // Store latest callback in a ref to avoid re-runs
   const shouldClosePopoverRef = useRef(shouldClosePopover);
@@ -283,38 +303,33 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
   const popoverComponent = (
     <Popover
         className={className}
+        floatingRef={refs.setFloating}
+        floatingStyles={floatingStyles}
         maxHeight={maxHeight}
         maxWidth={maxWidth}
         minHeight={minHeight}
         minWidth={minWidth}
         modifiers={modifiers}
-        offset={offset}
-        placement={placement}
-        referenceElement={referenceElement}
+        {...props}
+        placement={resolvedPlacement}
         targetId={targetId}
         width={width}
         zIndex={zIndex}
-        {...props}
     >
       {children}
     </Popover>
   );
 
   return (
-    <PopperManager>
       <>
         {reference && !referenceElement && (
-          <PopperReference>
-            {({ ref }) => (
-              <span
-                  className="pb_popover_reference_wrapper"
-                  id={"reference-" + targetId}
-                  ref={ref}
-              >
-                <reference.type {...reference.props} />
-              </span>
-            )}
-          </PopperReference>
+          <span
+              className="pb_popover_reference_wrapper"
+              id={"reference-" + targetId}
+              ref={refs.setReference}
+          >
+            <reference.type {...reference.props} />
+          </span>
         )}
         {show &&
           (usePortal ? (
@@ -328,7 +343,6 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
             popoverComponent
           ))}
       </>
-    </PopperManager>
   );
 };
 
