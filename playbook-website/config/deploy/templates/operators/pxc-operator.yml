@@ -30,7 +30,7 @@ spec:
       serviceAccountName: percona-xtradb-cluster-operator
       containers:
         - name: percona-xtradb-cluster-operator
-          image: percona/percona-xtradb-cluster-operator:1.15.0@sha256:6f7d8d4e472b8c4d166573cc7bb714bbb0fdf1535142b6138c62fdecbf881df9
+          image: percona/percona-xtradb-cluster-operator:1.17.0@sha256:da9aa5c7cb546c60624b927bdd273fc3646bc5a027bcc6f138291bad4da9b7b8
           ports:
           - containerPort: 8080
             name: metrics

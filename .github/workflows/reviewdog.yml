@@ -15,7 +15,15 @@ jobs:
       - name: Check out code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Set up Ruby
-        uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
+        # Brakeman reads source statically and never runs the app, so it does not
+        # need the app's exact interpreter. Without a ruby-version input, setup-ruby
+        # reads .ruby-version, and the job then fails for the day or two after any
+        # Ruby release before ruby-builder publishes a matching binary, which blocks
+        # this required check exactly when a Ruby security patch is being shipped.
+        # Pin a stable Ruby that can run Brakeman instead.
+        uses: ruby/setup-ruby@f9c4492e86def3e644ab32a0ef185eda5b0c20d0 # v1.342.0
+        with:
+          ruby-version: "3.4"
       - name: "brakeman playbook"
         uses: reviewdog/action-brakeman@0fee43fec04facd0f7fb907e2e70ce622a3b7ddb # v2.21.0
         with:

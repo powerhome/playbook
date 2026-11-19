@@ -38,17 +38,21 @@ metadata:
     app.kubernetes.io/part-of: priority-deploy
     app.kubernetes.io/managed-by: krane
   annotations:
-    krane.shopify.io/timeout-override: 400s
+    krane.shopify.io/timeout-override: 600s
   finalizers: []
 spec:
-  crVersion: 1.15.0
+  crVersion: 1.17.0
   secretsName: database-secrets
-  allowUnsafeConfigurations: false
+  unsafeFlags:
+    tls: false
+    pxcSize: false
+    proxySize: false
+    backupIfUnhealthy: false
   pause: false
   updateStrategy: SmartUpdate
   pxc:
     size: <%= pxc_cluster_size %>
-    image: percona/percona-xtradb-cluster:8.0.36@sha256:b5cc4034ccfb0186d6a734cb749ae17f013b027e9e64746b2c876e8beef379b3
+    image: percona/percona-xtradb-cluster:8.0.41-32.1@sha256:8a6799cbded5524c6979442f8d7097831c8c6481f5106a856b44b2791ccaf0fb
     autoRecovery: true
     resources:
       requests:
@@ -77,7 +81,7 @@ spec:
   haproxy:
     enabled: true
     size: 3
-    image: percona/haproxy:2.8.5@sha256:941f3bd0977bff9145e904bf8f8298a1a024d7f03152edaea0cf65fd1c137340
+    image: percona/haproxy:2.8.14@sha256:6de8c402d83b88dae7403c05183fd75100774defa887c05a57ec04bc25be2305
     resources:
       requests:
         memory: 100M
