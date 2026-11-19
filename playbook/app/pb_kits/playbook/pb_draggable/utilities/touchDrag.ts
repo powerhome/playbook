@@ -258,7 +258,14 @@ export const bindTouchDrag = ({
 
     const touch = event.touches[0];
     if (!touch || event.touches.length > 1) {
+      // A second finger cancels the press (or drag in progress) without dropping.
       cancelPendingPress();
+      if (state.dragging) handlers.onDragEnd();
+      state.active = false;
+      state.dragging = false;
+      state.lastTargetDragId = null;
+      state.lastContainer = undefined;
+      itemElement.classList.remove('is_touch_active');
       return;
     }
 

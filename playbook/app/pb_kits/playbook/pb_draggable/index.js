@@ -159,7 +159,9 @@ export default class PbDraggable extends PbEnhancedElement {
 
       const touch = event.touches[0];
       if (!touch || event.touches.length > 1) {
-        cancelPendingPress();
+        // A second finger cancels the press (or drag in progress) without dropping.
+        if (state.dragging) this.handleDragEnd({ target: item });
+        resetState();
         return;
       }
 

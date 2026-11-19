@@ -253,6 +253,29 @@ describe("touchDrag utilities", () => {
       expect(nativeDragStart(img).defaultPrevented).toBe(false);
     });
 
+    test("a second finger cancels an armed drag without dropping", () => {
+      const twoFingerStart = () => {
+        const event = new Event("touchstart", { bubbles: true, cancelable: true });
+        const touches = [{ clientX: 0, clientY: 20 }, { clientX: 50, clientY: 50 }];
+        Object.defineProperty(event, "touches", { value: touches });
+        Object.defineProperty(event, "changedTouches", { value: [touches[1]] });
+        return event;
+      };
+
+      item.dispatchEvent(touchEvent("touchstart", 0, 0));
+      jest.advanceTimersByTime(TOUCH_DRAG_DELAY_MS);
+      item.dispatchEvent(touchEvent("touchmove", 0, 20));
+      expect(handlers.onDragStart).toHaveBeenCalled();
+
+      item.dispatchEvent(twoFingerStart());
+      expect(handlers.onDragEnd).toHaveBeenCalledTimes(1);
+      expect(item.classList.contains("is_touch_active")).toBe(false);
+
+      item.dispatchEvent(touchEvent("touchend", 0, 20));
+      expect(handlers.onDrop).not.toHaveBeenCalled();
+      expect(handlers.onDragEnd).toHaveBeenCalledTimes(1);
+    });
+
     test("cleanup clears is_touch_active mid-press", () => {
       item.dispatchEvent(touchEvent("touchstart", 0, 0));
       expect(item.classList.contains("is_touch_active")).toBe(true);
