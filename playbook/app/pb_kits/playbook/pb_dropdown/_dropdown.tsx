@@ -586,6 +586,18 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     ]);
 
 
+    const linkedDatePicker = (pickerId?: string) =>
+      pickerId
+        ? (document.querySelector(`#${pickerId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr
+        : undefined;
+
+    const syncQuickPickPickers = (range: unknown) => {
+      if (!Array.isArray(range) || range.length !== 2) return;
+      const [start, end] = range;
+      setQuickPickDateOnPicker(linkedDatePicker(controlsStartId), start, "start");
+      setQuickPickDateOnPicker(linkedDatePicker(controlsEndId), end, "end");
+    };
+
     const handleSelectionChange = (value: any) => {
         onSelect && onSelect(value);
         onChange && onChange({ target: { name, value } });
@@ -658,18 +670,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    handleSelectionChange(clickedItem);
                    
                    // Sync with DatePickers if this is a quickpick variant
-                   if (variant === "quickpick" && Array.isArray(clickedItem.value)) {
-                       const [start, end] = clickedItem.value;
-                       
-                       if (controlsStartId) {
-                           const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-                           setQuickPickDateOnPicker(startPicker, start, "start");
-                       }
-                       
-                       if (controlsEndId) {
-                           const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-                           setQuickPickDateOnPicker(endPicker, end, "end");
-                       }
+                   if (variant === "quickpick") {
+                       syncQuickPickPickers(clickedItem.value);
                    }
             }
              };
@@ -678,6 +680,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         if (disabled) return;
         autocomplete && inputRef?.current?.focus();
         toggleDropdown();
+    };
+
+    const clearLinkedDatePickers = () => {
+      if (variant !== "quickpick") return;
+      linkedDatePicker(controlsStartId)?.clear();
+      linkedDatePicker(controlsEndId)?.clear();
     };
 
     const handleBackspace = () => {
@@ -696,17 +704,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
         
         // Clear linked DatePickers as well if this is a quickpick variant with controls
-        if (variant === "quickpick") {
-          if (controlsStartId) {
-            const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-            startPicker?.clear();
-          }
-          
-          if (controlsEndId) {
-            const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-            endPicker?.clear();
-          }
-        }
+        clearLinkedDatePickers();
       }
     };
 
@@ -720,74 +718,67 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         dark
     });
 
-    // Create an internal ref object that holds the imperative handle methods
+    const clearSelection = ({ clearDatePickers }: { clearDatePickers: boolean }) => {
+      preserveQueryOnControlledClear.current = false;
+      if (asyncEnabled) clearAsync();
+      onInputChange?.("", { reason: "clear" });
+      if (multiSelect) {
+        setSelected([]);
+        handleSelectionChange([]);
+      } else {
+        setSelected({});
+        handleSelectionChange(null);
+        if (clearDatePickers) clearLinkedDatePickers();
+      }
+      setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
+      setIsDropDownClosed(true);
+    };
+
+    // Create an internal ref object that holds the imperative handle methods.
+    // Public clearSelected also clears linked DatePickers (controlsStartId/controlsEndId).
     const imperativeRef = useRef({
-      clearSelected: () => {
-          preserveQueryOnControlledClear.current = false;
-          if (asyncEnabled) clearAsync();
-          onInputChange?.("", { reason: "clear" });
-        if (multiSelect) {
-          setSelected([]);
-          handleSelectionChange([]);
-        } else {
-          setSelected({});
-          handleSelectionChange(null);
-        }
-        setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
-        setIsDropDownClosed(true);
-      },
+      clearSelected: () => clearSelection({ clearDatePickers: true }),
     });
 
-    // Update imperativeRef whenever dependencies change
+    // DatePickers (syncStartWith/syncEndWith) clear the Dropdown when a date is picked;
+    // that path must leave the DatePickers alone, matching Rails clearSelected().
+    const datePickerSyncRef = useRef({
+      clearSelected: () => clearSelection({ clearDatePickers: false }),
+    });
+
+    // Update refs whenever dependencies change
     // (needed for external clearing of normal Dropdown + DatePicker-synced QuickPick Dropdown)
     useEffect(() => {
       imperativeRef.current = {
-        clearSelected: () => {
-          preserveQueryOnControlledClear.current = false;
-          if (asyncEnabled) clearAsync();
-          onInputChange?.("", { reason: "clear" });
-          if (multiSelect) {
-            setSelected([]);
-            handleSelectionChange([]);
-          } else {
-            setSelected({});
-            handleSelectionChange(null);
-          }
-          setFilterItem(isControlled && autocomplete && !multiSelect ? (selected as GenericObject)?.label || "" : "");
-          setIsDropDownClosed(true);
-        },
+        clearSelected: () => clearSelection({ clearDatePickers: true }),
       };
-    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed, asyncEnabled, clearAsync, onInputChange]);
+      datePickerSyncRef.current = {
+        clearSelected: () => clearSelection({ clearDatePickers: false }),
+      };
+    }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed, asyncEnabled, clearAsync, onInputChange, variant, controlsStartId, controlsEndId]);
 
     useImperativeHandle(ref, () => imperativeRef.current);
 
     useEffect(() => {
-      // Attach the ref to the DOM element so DatePicker can access it
+      // Attach the sync ref to the DOM element so DatePicker can access it
       if (outerDivRef.current && variant === "quickpick" && id) {
-        (outerDivRef.current as any)._dropdownRef = imperativeRef;
+        (outerDivRef.current as any)._dropdownRef = datePickerSyncRef;
       }
     }, [variant, id]);
 
-    // Sync defaultValue with DatePickers on mount when 3 input pattern is used
+    // Sync defaultValue with DatePickers on mount when 3 input pattern is used.
+    // Quickpick options are rebuilt every render, so initialSelected changes identity each render;
+    // guard so later re-renders don't reset the DatePickers back to the default range.
+    const hasSyncedDefaultDates = useRef(false);
     useEffect(() => {
+      if (hasSyncedDefaultDates.current) return;
       if (variant === "quickpick" && initialSelected && typeof initialSelected === "object" && !Array.isArray(initialSelected)) {
         const value = initialSelected.value;
-        
+
         if (Array.isArray(value) && value.length === 2) {
-          const [start, end] = value;
-          
+          hasSyncedDefaultDates.current = true;
           // Wait for DatePickers to be initialized
-          setTimeout(() => {
-            if (controlsStartId) {
-              const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-              setQuickPickDateOnPicker(startPicker, start, "start");
-            }
-            
-            if (controlsEndId) {
-              const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-              setQuickPickDateOnPicker(endPicker, end, "end");
-            }
-          }, 0);
+          setTimeout(() => syncQuickPickPickers(value), 0);
         }
       }
     }, [variant, initialSelected, controlsStartId, controlsEndId]);
@@ -811,6 +802,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setFormInvalid(false);
         setIsDropDownClosed(true);
         if (asyncEnabled) clearAsync();
+
+        // Native form reset clears linked DatePicker inputs; restore the default range after that.
+        if (variant === "quickpick") {
+          const resetRange = (initialSelected as GenericObject)?.value;
+          setTimeout(() => syncQuickPickPickers(resetRange), 0);
+        }
     };
 
     return (
