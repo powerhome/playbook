@@ -153,6 +153,7 @@ const InlineCalendar = ({
       inline: true,
       defaultDate: calendarValue || undefined,
       mode: config.mode || 'single',
+      // Keep before minDate/maxDate: flatpickr parses them with this format before plugins (e.g. month's F Y) run.
       dateFormat: config.format || 'm/d/Y',
       plugins: selectionTypePlugins(config.selectionType),
       minDate: config.minDate,

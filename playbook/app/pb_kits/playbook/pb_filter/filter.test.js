@@ -167,6 +167,8 @@ test("renders a month picker for interactive date-picker filters with selectionT
             type: "date-picker",
             selectionType: "month",
             value: "May 2026",
+            minDate: "03/01/2026",
+            maxDate: "10/31/2026",
             onChange: handleChange,
           },
         }}
@@ -181,6 +183,12 @@ test("renders a month picker for interactive date-picker filters with selectionT
 
   const months = document.querySelectorAll(".flatpickr-monthSelect-month");
   expect(months).toHaveLength(12);
+
+  // minDate/maxDate use the default m/d/Y format, not the month plugin's F Y
+  const disabled = Array.from(months)
+    .filter((el) => el.classList.contains("flatpickr-disabled"))
+    .map((el) => el.textContent);
+  expect(disabled).toEqual(["Jan", "Feb", "Nov", "Dec"]);
 
   fireEvent.click(Array.from(months).find((el) => el.textContent === "Jun"));
 

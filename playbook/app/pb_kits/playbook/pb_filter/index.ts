@@ -208,6 +208,7 @@ export default class PbFilter extends PbEnhancedElement {
       inline: true,
       defaultDate: dataset.pbFilterValue || undefined,
       mode,
+      // Keep before minDate/maxDate: flatpickr parses them with this format before plugins (e.g. month's F Y) run.
       dateFormat: dataset.pbFilterDateFormat || "m/d/Y",
       plugins: selectionTypePlugins(dataset.pbFilterDateSelectionType),
       minDate: dataset.pbFilterDateMin || undefined,
