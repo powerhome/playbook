@@ -1,6 +1,8 @@
 dependencies:
   override: []
 
+# Website remains the Milano machine directory so existing /app/config/deploy paths work.
+# playbook-mcp deploys via its own deployer, which mounts the monorepo root as /app.
 machine:
   directory: playbook-website/
 
@@ -10,6 +12,7 @@ deploy: &deploy
     - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/pre_deploy"
   override:
     - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
+    - ../playbook-mcp/bin/deployer bash -lc "cd /app/playbook-mcp && cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
 
 rollback:
   <<: *deploy
@@ -25,7 +28,10 @@ ci:
     - continuous-integration/jenkins/branch
 
 review:
-  checklist: []
+  checklist:
+    - Website review URL loads (https://pr<N>.playbook.../)
+    - playbook-mcp health at https://mcp-pr<N>.playbook.../health
+    - MCP streamable-http at https://mcp-pr<N>.playbook.../mcp (not a browser page; use LibreChat)
 
 status:
   context: powerhome/deploy/pr

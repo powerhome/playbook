@@ -1,0 +1,14 @@
+# PR / review stacks.
+# Milano DEPLOY_URL is the website host (e.g. https://pr6468.playbook...).
+# bin/deploy derives MCP host as https://mcp-pr6468.playbook...
+# SECRET_KEY_BASE is generated at deploy time (bin/deploy) — not stored in this public repo.
+ingress:
+  issueCert: false # Certificate issued once per cluster in the playbook-prs namespace
+
+# Review stacks run RAILS_ENV=production, so PLAYBOOK_MCP_KEYS is required (see bin/deploy).
+appConfig:
+  rackEnv: "production"
+  railsEnv: "production"
+
+# Smaller footprint on review stacks
+replicas: 1
