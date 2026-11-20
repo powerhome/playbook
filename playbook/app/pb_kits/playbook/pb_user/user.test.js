@@ -221,3 +221,81 @@ test('territory prop adds territory text', () => {
   const titleElement = screen.getByText(`${territory} • Remodeling Consultant`)
   expect(titleElement).toBeInTheDocument()
 })
+
+describe('status prop', () => {
+  const testId = 'test-status'
+  describe('status prop adds status indicator', () => {
+    test('when avatarUrl present', () => {
+      render(
+        <User
+            avatarUrl='https://example.com/avatar.jpg'
+            data={{ testid: testId }}
+            status='online'
+        />
+      )
+
+      const userStatus = screen.getByTestId('test-status')
+      const onlineStatus = userStatus.querySelector('.pb_online_status_kit')
+
+      expect(onlineStatus).toBeInTheDocument()
+    })
+    test('when avatar props set to true', () => {
+      render(
+        <User
+            avatar
+            data={{ testid: testId }}
+            status='online'
+        />
+      )
+
+      const userStatus = screen.getByTestId('test-status')
+      const onlineStatus = userStatus.querySelector('.pb_online_status_kit')
+
+      expect(onlineStatus).toBeInTheDocument()
+    })
+  })
+  describe('dark prop colors the status ring', () => {
+    test('adds the dark class to the presence indicator', () => {
+      render(
+        <User
+            avatar
+            dark
+            data={{ testid: testId }}
+            status='online'
+        />
+      )
+
+      const onlineStatus = screen.getByTestId(testId).querySelector('.pb_online_status_kit')
+
+      expect(onlineStatus).toHaveClass('dark')
+    })
+    test('leaves the presence indicator light by default', () => {
+      render(
+        <User
+            avatar
+            data={{ testid: testId }}
+            status='online'
+        />
+      )
+
+      const onlineStatus = screen.getByTestId(testId).querySelector('.pb_online_status_kit')
+
+      expect(onlineStatus).not.toHaveClass('dark')
+    })
+  })
+  describe('stats prop does not add status indicator', () => {
+    test('when avatar and avatarUrl not present', () => {
+      render(
+        <User
+            data={{ testid: testId }}
+            status='online'
+        />
+      )
+
+      const userStatus = screen.getByTestId('test-status')
+      const onlineStatus = userStatus.querySelector('.pb_online_status_kit')
+
+      expect(onlineStatus).not.toBeInTheDocument()
+    })
+  })
+})
