@@ -150,7 +150,11 @@
         "gutters",
         "solar",
         "insulation",
-        "accessories"
+        "accessories",
+        "trim",
+        "product_10_background",
+        "hardboard_siding",
+        "multi"
       ],
       "default": "primary"
     },

@@ -2,6 +2,11 @@ export const DRAG_HANDLE_SELECTOR = '.pb_draggable_handle, .card_draggable_handl
 
 const DRAG_THRESHOLD_PX = 5;
 
+// Touch drag requires a press-and-hold so swipes still scroll the page.
+export const TOUCH_DRAG_DELAY_MS = 500;
+// Movement allowed during the hold before it is treated as a scroll and cancelled.
+export const TOUCH_DRAG_TOLERANCE_PX = 10;
+
 export const isTouchDragDevice = (): boolean => {
   if (typeof window === 'undefined') return false;
 
@@ -237,32 +242,86 @@ export const bindTouchDrag = ({
     lastContainer: undefined,
   };
 
+  let pressTimer: ReturnType<typeof setTimeout> | null = null;
+
+  const cancelPendingPress = () => {
+    if (pressTimer !== null) {
+      clearTimeout(pressTimer);
+      pressTimer = null;
+    }
+  };
+
   const handleTouchStart = (event: TouchEvent) => {
     if (handle && !handle.contains(event.target as Node)) {
       return;
     }
 
     const touch = event.touches[0];
-    if (!touch) return;
+    if (!touch || event.touches.length > 1) {
+      // A second finger cancels the press (or drag in progress) without dropping.
+      cancelPendingPress();
+      if (state.dragging) handlers.onDragEnd();
+      state.active = false;
+      state.dragging = false;
+      state.lastTargetDragId = null;
+      state.lastContainer = undefined;
+      itemElement.classList.remove('is_touch_active');
+      return;
+    }
 
-    state.active = true;
     state.startX = touch.clientX;
     state.startY = touch.clientY;
+    // Applied on press (not on arm) so iOS long-press text selection never starts.
     itemElement.classList.add('is_touch_active');
+
+    // Drag only arms after a press-and-hold; until then the touch is a normal scroll/tap.
+    cancelPendingPress();
+    pressTimer = setTimeout(() => {
+      pressTimer = null;
+      state.active = true;
+      window.getSelection?.()?.removeAllRanges();
+    }, TOUCH_DRAG_DELAY_MS);
   };
 
   const handleTouchMove = (event: TouchEvent) => {
-    if (!state.active) return;
-
     const touch = event.touches[0];
     if (!touch) return;
 
-    if (runDragPointerMove(state, touch.clientX, touch.clientY, dragId, container, handlers)) {
-      event.preventDefault();
+    if (pressTimer !== null) {
+      const deltaX = touch.clientX - state.startX;
+      const deltaY = touch.clientY - state.startY;
+
+      if (Math.hypot(deltaX, deltaY) > TOUCH_DRAG_TOLERANCE_PX) {
+        cancelPendingPress();
+        itemElement.classList.remove('is_touch_active');
+      }
+      return;
     }
+
+    if (!state.active) return;
+
+    // Once armed, claim every move (even under the drag threshold) so the browser can't start a pan.
+    event.preventDefault();
+    runDragPointerMove(state, touch.clientX, touch.clientY, dragId, container, handlers);
+  };
+
+  // Long-press opens the context menu at about the same time the hold arms, so block it for the whole press.
+  const handleContextMenu = (event: Event) => {
+    if (pressTimer !== null || state.active) event.preventDefault();
+  };
+
+  // During a touch press on the drag target, a long-press on an image or selected text starts
+  // native drag-and-drop on iPadOS. Cancel it and keep it from React's HTML5 drag handlers,
+  // which would run alongside touch drag. Other native drags are left alone.
+  const handleNativeDragStart = (event: DragEvent) => {
+    if (pressTimer === null && !state.active) return;
+
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   const finishDrag = (touch: Touch | null) => {
+    cancelPendingPress();
     finishDragPointer(
       state,
       touch?.clientX ?? null,
@@ -271,6 +330,7 @@ export const bindTouchDrag = ({
       handlers,
       itemElement,
     );
+    itemElement.classList.remove('is_touch_active');
   };
 
   const handleTouchEnd = (event: TouchEvent) => {
@@ -289,12 +349,18 @@ export const bindTouchDrag = ({
   dragTarget.addEventListener('touchmove', handleTouchMove, { passive: false });
   dragTarget.addEventListener('touchend', handleTouchEnd, { passive: true });
   dragTarget.addEventListener('touchcancel', handleTouchCancel, { passive: true });
+  dragTarget.addEventListener('contextmenu', handleContextMenu);
+  itemElement.addEventListener('dragstart', handleNativeDragStart);
 
   return () => {
+    cancelPendingPress();
+    itemElement.classList.remove('is_touch_active');
     dragTarget.removeEventListener('touchstart', handleTouchStart);
     dragTarget.removeEventListener('touchmove', handleTouchMove);
     dragTarget.removeEventListener('touchend', handleTouchEnd);
     dragTarget.removeEventListener('touchcancel', handleTouchCancel);
+    dragTarget.removeEventListener('contextmenu', handleContextMenu);
+    itemElement.removeEventListener('dragstart', handleNativeDragStart);
   };
 };
 

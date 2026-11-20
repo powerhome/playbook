@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+cd "$(dirname "$0")/.."
+
+bundle check || BUNDLE_FROZEN=true bundle install --quiet
+
+# Fail if the committed appraisal gemfiles are stale relative to Appraisals/Gemfile.
+# Compare against a snapshot rather than git, since the CI container has no .git directory.
+snapshot="$(mktemp -d)"
+trap 'rm -rf "$snapshot"' EXIT
+cp -R gemfiles "$snapshot/"
+bundle exec appraisal generate
+if ! diff -ru "$snapshot/gemfiles" gemfiles; then
+  echo "gemfiles/ is out of date. Run 'bundle exec appraisal generate' and commit the result." >&2
+  exit 1
+fi
+
+# Each appraisal installs from its committed lockfile, separate from the primary Rails 8 bundle.
+for gemfile in gemfiles/*.gemfile; do
+  export BUNDLE_GEMFILE="$PWD/$gemfile"
+  BUNDLE_FROZEN=true bundle install --quiet
+  bundle exec ruby -rrails -e 'puts "Testing Rails #{Rails.version}"'
+  bundle exec rspec --format progress spec
+done
