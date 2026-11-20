@@ -151,6 +151,7 @@ const User = (props: UserProps): React.ReactElement => {
     >
       { avatarPresent &&
         <Avatar
+            dark={dark}
             grayscale={avatarGrayscale}
             imageUrl={avatarUrl}
             name={name}
