@@ -30,8 +30,21 @@
     },
     {
       "name": "Link style",
+      "platforms": ["react"],
       "props": {},
       "children": "<a href=\"#\">This text is using the anchor tag</a>"
+    },
+    {
+      "name": "Link color",
+      "platforms": ["rails"],
+      "props": { "color": "link" },
+      "children": "This body text uses the link color."
+    },
+    {
+      "name": "Highlighted words",
+      "platforms": ["rails"],
+      "props": { "highlighting": true, "highlightedText": ["highlighted", "Body Kit"] },
+      "children": "This is text highlighted in the Body Kit."
     }
   ],
   "conditionals": {
