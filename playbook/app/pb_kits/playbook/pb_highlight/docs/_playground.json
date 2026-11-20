@@ -74,15 +74,6 @@
       "props": {
         "text": "Highlight Kit"
       }
-    },
-    {
-      "name": "Highlighted phrase",
-      "platforms": [
-        "rails"
-      ],
-      "props": {
-        "text": "Use Highlight to call attention to important words"
-      }
     }
   ],
   "conditionals": {},
