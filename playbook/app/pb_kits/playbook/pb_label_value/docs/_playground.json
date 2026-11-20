@@ -148,5 +148,10 @@
       "message": "Use the active prop to change the style of the label value.",
       "type": "info"
     }
+  },
+  "hiddenPropsByPlatform": {
+    "rails": [
+      "date"
+    ]
   }
 }
