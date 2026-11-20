@@ -161,12 +161,14 @@ const InlineCalendar = ({
       nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
       prevArrow: `<div style="height: 14px;">${angleLeft.string}</div>`,
       onChange: (_selectedDates, dateStr) => {
-        // Defer until flatpickr's click handler finishes: React 17 re-renders synchronously
-        // here, which destroys this instance while plugins (e.g. monthSelect) still use it.
-        setTimeout(() => {
+        const commit = () => {
           config.onChange(dateStr)
           if ((config.mode || 'single') === 'single') onSinglePick()
-        }, 0)
+        }
+        // monthSelect keeps using this instance after onChange, but React 17 re-renders
+        // synchronously here and destroys it, so wait for its click handler to finish.
+        if (config.selectionType === 'month') setTimeout(commit, 0)
+        else commit()
       },
     }) as Instance
     return () => fp.destroy()

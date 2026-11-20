@@ -241,6 +241,67 @@ test("month chip updates without errors when the parent stores the value", async
   expect(errors).toEqual([]);
 });
 
+test.each([
+  ["day", undefined],
+  ["week", "week"],
+])("%s chip calls onChange synchronously without errors", (_label, selectionType) => {
+  mockMatchMedia(true);
+  const handleChange = jest.fn();
+
+  const DayFilter = () => {
+    const [date, setDate] = useState("05/01/2026");
+    return (
+      <FilterTest
+          filters={{ Date: date }}
+          interactiveFilters={{
+            Date: {
+              type: "date-picker",
+              selectionType,
+              value: date,
+              onChange: (value) => {
+                handleChange(value);
+                setDate(value);
+              },
+            },
+          }}
+      />
+    );
+  };
+
+  const errors = [];
+  const onError = (event) => {
+    errors.push(event.message);
+    event.preventDefault();
+  };
+  window.addEventListener("error", onError);
+
+  // The raw click below skips act() on purpose, so React warns about it.
+  const consoleError = console.error;
+  const errorSpy = jest.spyOn(console, "error").mockImplementation((message, ...args) => {
+    if (String(message).includes("not wrapped in act")) return;
+    consoleError(message, ...args);
+  });
+
+  render(<DayFilter />);
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+
+  // Raw click so React 17 re-renders synchronously, as in the browser.
+  document
+    .querySelector('.flatpickr-day[aria-label="May 13, 2026"]')
+    .dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+
+  window.removeEventListener("error", onError);
+  errorSpy.mockRestore();
+  expect(handleChange).toHaveBeenCalledWith("05/13/2026");
+  expect(interactiveButton).toHaveTextContent("05/13/2026");
+  expect(errors).toEqual([]);
+});
+
 test("renders a week picker for interactive date-picker filters with selectionType week", () => {
   mockMatchMedia(true);
 
