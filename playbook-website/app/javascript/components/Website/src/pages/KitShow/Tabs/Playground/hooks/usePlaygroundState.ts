@@ -164,13 +164,17 @@ export const usePlaygroundState = ({
   }, [globalPropsSchema, kitSchema]);
 
   const playgroundProps = useMemo(() => {
+    // A custom prop for another platform must not replace this platform's schema
+    // definition (e.g. Image's React size has no Rails "none" or Rails default).
     const customProps = Object.fromEntries(
       Object.entries(playgroundConfig?.customProps ?? {}).filter(
-        ([name]) => !hiddenPropNames.has(name),
+        ([name, def]) =>
+          !hiddenPropNames.has(name) &&
+          !(name in reactProps && def.platforms?.length && !def.platforms.includes(platform)),
       ),
     );
     return { ...reactProps, ...customProps };
-  }, [reactProps, playgroundConfig?.customProps, hiddenPropNames]);
+  }, [reactProps, playgroundConfig?.customProps, hiddenPropNames, platform]);
 
   const allPropDefinitions = useMemo(
     () => ({ ...playgroundProps, ...globalProps }),
