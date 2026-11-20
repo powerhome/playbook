@@ -102,7 +102,12 @@ type MultiLevelSelectProps = {
     | "gutters"
     | "solar"
     | "insulation"
-    | "accessories";
+    | "accessories"
+    | "trim"
+    | "product_10_background"
+    | "hardboard_siding"
+    | "multi";
+
 } & GlobalProps;
 
 const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
