@@ -9,6 +9,10 @@ import PbReactPopover from '../../pb_popover/_popover'
 import getQuickPickOptions from '../../pb_dropdown/quickpick'
 import { uniqueId } from '../../utilities/object'
 import Title from '../../pb_title/_title'
+import selectionTypePlugins from '../../pb_date_picker/selection_type_plugins'
+import { getAllIcons } from '../../utilities/icons/allicons'
+
+const { angleLeft, angleRight } = getAllIcons()
 
 export type SelectInteractiveConfig = {
   type: 'select',
@@ -45,6 +49,7 @@ export type DatePickerInteractiveConfig = {
   minDate?: string,
   maxDate?: string,
   mode?: 'single' | 'range' | 'multiple',
+  selectionType?: 'month' | 'week',
 }
 
 export type InteractiveFilterConfig =
@@ -148,14 +153,24 @@ const InlineCalendar = ({
       inline: true,
       defaultDate: calendarValue || undefined,
       mode: config.mode || 'single',
+      // Keep before minDate/maxDate: flatpickr parses them with this format before plugins (e.g. month's F Y) run.
       dateFormat: config.format || 'm/d/Y',
+      plugins: selectionTypePlugins(config.selectionType),
       minDate: config.minDate,
       maxDate: config.maxDate,
-      nextArrow: '<i class="far fa-angle-right"></i>',
-      prevArrow: '<i class="far fa-angle-left"></i>',
-      onChange: (_selectedDates, dateStr) => {
-        config.onChange(dateStr)
-        if ((config.mode || 'single') === 'single') onSinglePick()
+      nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
+      prevArrow: `<div style="height: 14px;">${angleLeft.string}</div>`,
+      onChange: (_selectedDates, dateStr, instance) => {
+        // Use the instance's mode: plugins can override the configured one (weekSelect forces single).
+        const isSingle = instance.config.mode === 'single'
+        const commit = () => {
+          config.onChange(dateStr)
+          if (isSingle) onSinglePick()
+        }
+        // monthSelect keeps using this instance after onChange, but React 17 re-renders
+        // synchronously here and destroys it, so wait for its click handler to finish.
+        if (config.selectionType === 'month') setTimeout(commit, 0)
+        else commit()
       },
     }) as Instance
     return () => fp.destroy()

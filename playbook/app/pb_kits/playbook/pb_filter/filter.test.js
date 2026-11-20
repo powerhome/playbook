@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   render,
   screen,
   fireEvent,
+  waitFor,
 } from "../utilities/test-utils";
 import { Button, Filter, Flex, Select, TextInput } from "playbook-ui";
 
@@ -152,6 +153,221 @@ test("generates quickpick options for interactive dropdown filters", () => {
 
   expect(handleChange).toHaveBeenCalledWith("quickpick-last-month");
 });
+
+test("renders a month picker for interactive date-picker filters with selectionType month", async () => {
+  mockMatchMedia(true);
+  const handleChange = jest.fn();
+
+  render(
+    <FilterTest
+        filters={{
+          "Report month": "May 2026",
+        }}
+        interactiveFilters={{
+          "Report month": {
+            type: "date-picker",
+            selectionType: "month",
+            value: "May 2026",
+            minDate: "03/01/2026",
+            maxDate: "10/31/2026",
+            onChange: handleChange,
+          },
+        }}
+    />
+  );
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+
+  const months = document.querySelectorAll(".flatpickr-monthSelect-month");
+  expect(months).toHaveLength(12);
+
+  // minDate/maxDate use the default m/d/Y format, not the month plugin's F Y
+  const disabled = Array.from(months)
+    .filter((el) => el.classList.contains("flatpickr-disabled"))
+    .map((el) => el.textContent);
+  expect(disabled).toEqual(["Jan", "Feb", "Nov", "Dec"]);
+
+  fireEvent.click(Array.from(months).find((el) => el.textContent === "Jun"));
+
+  await waitFor(() => expect(handleChange).toHaveBeenCalledWith("June 2026"));
+});
+
+test("month chip updates without errors when the parent stores the value", async () => {
+  mockMatchMedia(true);
+
+  const MonthFilter = () => {
+    const [month, setMonth] = useState("May 2026");
+    return (
+      <FilterTest
+          filters={{ Month: month }}
+          interactiveFilters={{
+            Month: {
+              type: "date-picker",
+              selectionType: "month",
+              value: month,
+              onChange: setMonth,
+            },
+          }}
+      />
+    );
+  };
+
+  const errors = [];
+  const onError = (event) => {
+    errors.push(event.message);
+    event.preventDefault();
+  };
+  window.addEventListener("error", onError);
+
+  render(<MonthFilter />);
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+
+  // A raw click (not wrapped in act) matches the browser, where React 17 re-renders synchronously.
+  Array.from(document.querySelectorAll(".flatpickr-monthSelect-month"))
+    .find((el) => el.textContent === "Jun")
+    .dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+
+  await waitFor(() => expect(interactiveButton).toHaveTextContent("June 2026"));
+  window.removeEventListener("error", onError);
+  expect(errors).toEqual([]);
+});
+
+test.each([
+  ["day", undefined],
+  ["week", "week"],
+])("%s chip calls onChange synchronously without errors", (_label, selectionType) => {
+  mockMatchMedia(true);
+  const handleChange = jest.fn();
+
+  const DayFilter = () => {
+    const [date, setDate] = useState("05/01/2026");
+    return (
+      <FilterTest
+          filters={{ Date: date }}
+          interactiveFilters={{
+            Date: {
+              type: "date-picker",
+              selectionType,
+              value: date,
+              onChange: (value) => {
+                handleChange(value);
+                setDate(value);
+              },
+            },
+          }}
+      />
+    );
+  };
+
+  const errors = [];
+  const onError = (event) => {
+    errors.push(event.message);
+    event.preventDefault();
+  };
+  window.addEventListener("error", onError);
+
+  // The raw click below skips act() on purpose, so React warns about it.
+  const consoleError = console.error;
+  const errorSpy = jest.spyOn(console, "error").mockImplementation((message, ...args) => {
+    if (String(message).includes("not wrapped in act")) return;
+    consoleError(message, ...args);
+  });
+
+  render(<DayFilter />);
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+
+  // Raw click so React 17 re-renders synchronously, as in the browser.
+  document
+    .querySelector('.flatpickr-day[aria-label="May 13, 2026"]')
+    .dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+
+  window.removeEventListener("error", onError);
+  errorSpy.mockRestore();
+  expect(handleChange).toHaveBeenCalledWith("05/13/2026");
+  expect(interactiveButton).toHaveTextContent("05/13/2026");
+  expect(errors).toEqual([]);
+});
+
+test("renders a week picker for interactive date-picker filters with selectionType week", () => {
+  mockMatchMedia(true);
+
+  render(
+    <FilterTest
+        filters={{
+          Week: "05/06/2026",
+        }}
+        interactiveFilters={{
+          Week: {
+            type: "date-picker",
+            selectionType: "week",
+            value: "05/06/2026",
+            onChange: jest.fn(),
+          },
+        }}
+    />
+  );
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+
+  const day = document.querySelector('.flatpickr-day[aria-label="May 13, 2026"]');
+  fireEvent.mouseOver(day);
+
+  // weekSelect highlights the full week around the hovered day
+  expect(document.querySelectorAll(".flatpickr-day.inRange").length).toBeGreaterThan(0);
+});
+
+test.each(["range", "multiple"])(
+  "week chip with mode %s emits one date and closes, since weekSelect forces single mode",
+  (mode) => {
+    mockMatchMedia(true);
+    const handleChange = jest.fn();
+
+    render(
+      <FilterTest
+          filters={{
+            Week: "05/06/2026",
+          }}
+          interactiveFilters={{
+            Week: {
+              type: "date-picker",
+              selectionType: "week",
+              mode,
+              value: "05/06/2026",
+              onChange: handleChange,
+            },
+          }}
+      />
+    );
+
+    const interactiveButton = screen
+      .getAllByRole("button")
+      .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+    fireEvent.click(interactiveButton);
+    fireEvent.click(document.querySelector('.flatpickr-day[aria-label="May 13, 2026"]'));
+
+    expect(handleChange).toHaveBeenCalledWith("05/13/2026");
+    expect(document.querySelector(".flatpickr-calendar")).not.toBeInTheDocument();
+  }
+);
 
 test("applies htmlOptions to the root element", () => {
   render(

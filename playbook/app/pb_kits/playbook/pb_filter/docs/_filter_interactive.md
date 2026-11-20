@@ -1,7 +1,7 @@
 Click an applied filter chip to edit it inline. `interactive_filters` supports:
 
 - `type: 'select'` / `'dropdown'`: pick from a list of options.
-- `type: 'date-picker'`: inline calendar. Supports `format`, `min_date`, `max_date`, and `mode`.
+- `type: 'date-picker'`: inline calendar. Supports `format`, `min_date`, `max_date`, `mode`, and `selection_type` (`'month'` or `'week'`), matching the Date Picker kit. Month values use the `F Y` format, e.g. `May 2026`.
 
 Each entry needs a `target_input` that points to the form control it updates. For `select` and `date-picker`, use the input's `id`. For `dropdown`, use the Dropdown kit's `id`.
 
