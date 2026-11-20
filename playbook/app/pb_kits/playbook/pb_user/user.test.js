@@ -254,6 +254,35 @@ describe('status prop', () => {
       expect(onlineStatus).toBeInTheDocument()
     })
   })
+  describe('dark prop colors the status ring', () => {
+    test('adds the dark class to the presence indicator', () => {
+      render(
+        <User
+            avatar
+            dark
+            data={{ testid: testId }}
+            status='online'
+        />
+      )
+
+      const onlineStatus = screen.getByTestId(testId).querySelector('.pb_online_status_kit')
+
+      expect(onlineStatus).toHaveClass('dark')
+    })
+    test('leaves the presence indicator light by default', () => {
+      render(
+        <User
+            avatar
+            data={{ testid: testId }}
+            status='online'
+        />
+      )
+
+      const onlineStatus = screen.getByTestId(testId).querySelector('.pb_online_status_kit')
+
+      expect(onlineStatus).not.toHaveClass('dark')
+    })
+  })
   describe('stats prop does not add status indicator', () => {
     test('when avatar and avatarUrl not present', () => {
       render(
