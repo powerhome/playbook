@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   render,
   screen,
   fireEvent,
+  waitFor,
 } from "../utilities/test-utils";
 import { Button, Filter, Flex, Select, TextInput } from "playbook-ui";
 
@@ -153,7 +154,7 @@ test("generates quickpick options for interactive dropdown filters", () => {
   expect(handleChange).toHaveBeenCalledWith("quickpick-last-month");
 });
 
-test("renders a month picker for interactive date-picker filters with selectionType month", () => {
+test("renders a month picker for interactive date-picker filters with selectionType month", async () => {
   mockMatchMedia(true);
   const handleChange = jest.fn();
 
@@ -192,7 +193,52 @@ test("renders a month picker for interactive date-picker filters with selectionT
 
   fireEvent.click(Array.from(months).find((el) => el.textContent === "Jun"));
 
-  expect(handleChange).toHaveBeenCalledWith("June 2026");
+  await waitFor(() => expect(handleChange).toHaveBeenCalledWith("June 2026"));
+});
+
+test("month chip updates without errors when the parent stores the value", async () => {
+  mockMatchMedia(true);
+
+  const MonthFilter = () => {
+    const [month, setMonth] = useState("May 2026");
+    return (
+      <FilterTest
+          filters={{ Month: month }}
+          interactiveFilters={{
+            Month: {
+              type: "date-picker",
+              selectionType: "month",
+              value: month,
+              onChange: setMonth,
+            },
+          }}
+      />
+    );
+  };
+
+  const errors = [];
+  const onError = (event) => {
+    errors.push(event.message);
+    event.preventDefault();
+  };
+  window.addEventListener("error", onError);
+
+  render(<MonthFilter />);
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+
+  // A raw click (not wrapped in act) matches the browser, where React 17 re-renders synchronously.
+  Array.from(document.querySelectorAll(".flatpickr-monthSelect-month"))
+    .find((el) => el.textContent === "Jun")
+    .dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+
+  await waitFor(() => expect(interactiveButton).toHaveTextContent("June 2026"));
+  window.removeEventListener("error", onError);
+  expect(errors).toEqual([]);
 });
 
 test("renders a week picker for interactive date-picker filters with selectionType week", () => {

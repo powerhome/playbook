@@ -161,8 +161,12 @@ const InlineCalendar = ({
       nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
       prevArrow: `<div style="height: 14px;">${angleLeft.string}</div>`,
       onChange: (_selectedDates, dateStr) => {
-        config.onChange(dateStr)
-        if ((config.mode || 'single') === 'single') onSinglePick()
+        // Defer until flatpickr's click handler finishes: React 17 re-renders synchronously
+        // here, which destroys this instance while plugins (e.g. monthSelect) still use it.
+        setTimeout(() => {
+          config.onChange(dateStr)
+          if ((config.mode || 'single') === 'single') onSinglePick()
+        }, 0)
       },
     }) as Instance
     return () => fp.destroy()
