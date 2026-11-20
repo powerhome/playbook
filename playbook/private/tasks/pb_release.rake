@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "English"
+require "net/http"
 
 namespace :pb_release do
   desc "Update the version number in preparation to release"
@@ -60,6 +61,19 @@ namespace :pb_release do
 
     `bundle`
     puts "Updated Gemfile.lock"
+
+    # The website bundles playbook_ui from this checkout, so its lockfile records the version too.
+    # Clear Bundler's env so this bundles playbook-website's Gemfile, not playbook's, but pin the
+    # lockfile's own Bundler so a different Bundler on PATH can't rewrite BUNDLED WITH.
+    website_dir = "../playbook-website"
+    bundled_with = File.read("#{website_dir}/Gemfile.lock")[/^BUNDLED WITH\n\s+(\S+)/, 1]
+    website_env = bundled_with ? { "BUNDLER_VERSION" => bundled_with } : {}
+    website_bundled = Bundler.with_unbundled_env { system(website_env, "bundle", chdir: website_dir) }
+    if website_bundled
+      puts "Updated playbook-website/Gemfile.lock"
+    else
+      warn "Could not update playbook-website/Gemfile.lock. Run `bundle` in playbook-website."
+    end
     puts "\n\n"
 
     if alpha || dryrun
@@ -75,7 +89,26 @@ namespace :pb_release do
     puts "\nPushing Tag to GitHub..."
     `git push origin #{new_version}`
 
-    puts "Commit your changes and create a PR to merge to master"
+    generate_changelog
+
+    puts "\nChanged files:"
+    system("git", "status", "--short", chdir: "..")
+    puts "\nEdit the title and description in CHANGELOG.md, then commit your changes and create a PR to merge to master"
+  end
+
+  # Runs in a separate process so the generator reads the new version from version.rb.
+  def generate_changelog
+    puts "\nGenerating the CHANGELOG.md section..."
+    env = {}
+    unless %w[CHANGELOG_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN].any? { |key| !ENV[key].to_s.strip.empty? }
+      gh_token = `gh auth token 2>/dev/null`.strip
+      env["CHANGELOG_GITHUB_TOKEN"] = gh_token unless gh_token.empty?
+    end
+
+    generated = Bundler.with_unbundled_env do
+      system(env, "ruby", "-Ilib", "-rplaybook/changelog_generator", "-e", "Playbook::ChangelogGenerator.run!")
+    end
+    warn "Changelog generation failed. Fix the error above, then run `make changelog` from the repo root." unless generated
   end
 
   def npm_whoami_or_abort!
@@ -105,42 +138,31 @@ namespace :pb_release do
     puts "\nChecking for external runtime dependencies..."
     abort "Release stopped. Fix the external runtime dependency check above, then retry." unless system("yarn", "check:external-deps")
 
-    # NPM Packaging
-    puts "\nGenerating distribution files"
-    # The Vite build also fails on external runtime dependencies in built CSS or bundled packages.
-    abort "Release stopped. yarn release failed; nothing was packaged or published." unless system("yarn", "release")
-    puts "\nCreating NPM package..."
-    `npm pack`
+    resume = ENV["PLAYBOOK_RESUME_RELEASE"] == "1"
+    abort "Resume is only available for publishing." if resume && dryrun
 
-    # RubyGems
-    puts "\nCreating Gem..."
-    `bin/build_gem`
-    # Publish to RubyGems
+    package_args = ["bash", "bin/package_release", npm_version, version]
+    package_args << "--verify-only" if resume
+    abort "Release stopped. Package preparation failed." unless system(*package_args)
+
     unless dryrun
+      resume_hint = "Keep both packages and rerun with PLAYBOOK_RESUME_RELEASE=1, or run the command manually."
+
       puts "\nPushing to RubyGems..."
       puts "If MFA is enabled (UI and API), you will be prompted for an OTP code..."
       gem_file = "playbook_ui-#{version}.gem"
-      cmd = "gem push #{gem_file}"
-      puts "$ #{cmd}"
-      success = system(cmd)
-      abort "gem push failed for #{gem_file}. If no OTP prompt appeared, try:\n  #{cmd}\nor:\n  #{cmd} --otp YOUR_CODE" unless success
-      puts "\nPushed to RubyGems. Now lets clean up..."
-      `rm -rf playbook_ui-*.gem`
-    end
+      gem_cmd = "gem push #{gem_file}"
+      gem_published = system("bash", "bin/publish_release_package", "rubygems", version)
+      abort "gem push failed for #{gem_file}. If no OTP prompt appeared, try:\n  #{gem_cmd}\nor:\n  #{gem_cmd} --otp YOUR_CODE\n#{resume_hint}" unless gem_published
 
-    # Publish to NPM
-    unless dryrun
       puts "\nPublishing to NPM..."
-      npm_suffix = looks_like_alpha ? "--tag alpha" : ""
-      cmd = "npm publish --registry https://registry.npmjs.org playbook-ui-#{npm_version}.tgz #{npm_suffix}"
-      puts "$ #{cmd}"
       puts "A browser prompt may open for WebAuthn (Touch ID / YubiKey / passkey)..."
-      success = system(cmd)
+      npm_tag_args = looks_like_alpha ? ["--tag", "alpha"] : []
+      npm_cmd = ["npm publish --registry https://registry.npmjs.org playbook-ui-#{npm_version}.tgz", *npm_tag_args].join(" ")
+      npm_published = system("bash", "bin/publish_release_package", "npm", npm_version, *npm_tag_args)
+      abort "npm publish failed. If no browser prompt appeared, try running the same command manually:\n  #{npm_cmd}\n#{resume_hint}" unless npm_published
 
-      abort "npm publish failed. If no browser prompt appeared, try running the same command manually:\n  #{cmd}" unless success
-
-      puts "\nPublished to NPM. Now lets clean up..."
-      `rm -rf playbook-ui-*.tgz`
+      File.delete("playbook_ui-#{version}.gem", "playbook-ui-#{npm_version}.tgz")
     end
 
     if dryrun
@@ -150,7 +172,37 @@ namespace :pb_release do
 
     # Tags
     puts "\nPushed to NPM."
+    verify_published(version, npm_version)
     puts "\n\n"
     puts "Complete! Don't forget to add your release notes https://github.com/powerhome/playbook/releases/tag/#{version}"
+  end
+
+  # Confirms both registries list the release, so you do not need to check email or the registry sites.
+  def verify_published(version, npm_version)
+    puts "\nChecking that both registries list the release..."
+    {
+      "RubyGems" => ["https://rubygems.org/api/v2/rubygems/playbook_ui/versions/#{version}.json",
+                     "https://rubygems.org/gems/playbook_ui/versions/#{version}"],
+      "npm" => ["https://registry.npmjs.org/playbook-ui/#{npm_version}",
+                "https://www.npmjs.com/package/playbook-ui/v/#{npm_version}"],
+    }.each do |registry, (api_url, page_url)|
+      if registry_lists?(api_url)
+        puts "✅ #{registry}: #{page_url}"
+      else
+        warn "⚠️  #{registry} does not list #{registry == 'npm' ? npm_version : version} yet. Check #{page_url} in a few minutes."
+      end
+    end
+  end
+
+  def registry_lists?(url)
+    3.times do |attempt|
+      sleep(5) if attempt.positive?
+      begin
+        return true if Net::HTTP.get_response(URI(url)).is_a?(Net::HTTPSuccess)
+      rescue
+        next
+      end
+    end
+    false
   end
 end
