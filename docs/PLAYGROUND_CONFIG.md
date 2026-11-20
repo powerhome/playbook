@@ -174,6 +174,21 @@ Presets should demonstrate real kit usage, not every possible prop.
 
 Preset values are emitted in generated code because they represent the selected example.
 
+### Platform-specific presets
+
+The React and Rails tabs share one config. The Rails tab already hides presets that set props the Rails kit does not have. Add `platforms` when a preset only makes sense on one tab, for example JSX children, a value the Rails kit cannot accept (a date string), or a Rails-only prop:
+
+```json
+{
+  "name": "Icon children",
+  "platforms": ["rails"],
+  "props": { "variant": "warning" },
+  "children": "<%= pb_rails(\"icon\", props: { icon: \"exclamation-triangle\", size: \"sm\" }) %>"
+}
+```
+
+Keep a preset with no `platforms` (or one for React) first, because the standalone Playground page and the AI usage examples start from the first preset. Preset names must be unique across platforms.
+
 ## Children
 
 Use `children.editable` when the user should be able to edit nested JSX.
@@ -614,6 +629,12 @@ Good reasons to hide props:
 - the prop cannot be usefully edited in JSON
 - the prop is internal/noisy
 - the prop is represented by a custom playground control instead
+
+Use `hiddenPropsByPlatform` to hide a prop on only one tab. For example, Image's Rails `on_error` is an inline JavaScript string the Rails preview never renders, so it is hidden on Rails but kept on React:
+
+```json
+"hiddenPropsByPlatform": { "rails": ["onError"] }
+```
 
 ## Gotchas
 

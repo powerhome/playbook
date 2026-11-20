@@ -90,11 +90,25 @@
     },
     {
       "name": "Children",
+      "platforms": [
+        "react"
+      ],
       "props": {
         "variant": "success",
         "textTransform": "none"
       },
       "children": "<Flex alignItems=\"center\">\n  <Title color=\"success\" size={4} tag=\"div\" text=\"Complete\" />\n  <Icon color=\"success\" icon=\"check\" size=\"sm\" />\n</Flex>"
+    },
+    {
+      "name": "Icon children",
+      "platforms": [
+        "rails"
+      ],
+      "props": {
+        "variant": "warning",
+        "textTransform": "none"
+      },
+      "children": "<%= pb_rails(\"icon\", props: { color: \"warning\", icon: \"exclamation-triangle\", size: \"sm\" }) %>"
     }
   ],
   "conditionals": {},
