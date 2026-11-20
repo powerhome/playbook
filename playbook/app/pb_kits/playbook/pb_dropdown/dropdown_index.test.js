@@ -2081,3 +2081,65 @@ describe("PbDropdown pill reorder", () => {
     ]);
   });
 });
+
+describe("PbDropdown server-rendered empty options", () => {
+  let instance;
+
+  const connectEmptyDropdown = (dataset = {}) => {
+    const root = buildDropdownElement({ options: [] });
+    Object.assign(root.dataset, dataset);
+    root.querySelector(".pb_dropdown_trigger").innerHTML = `
+      <input data-dropdown-autocomplete type="text" />
+      <span data-dropdown-trigger-display data-dropdown-placeholder="Choose one">Choose one</span>
+    `;
+    root.querySelector(".pb_list_kit").innerHTML = `
+      <div class="pb_item_kit" data-dropdown-empty-options="true">
+        <div class="pb_body_kit">${dataset.pbDropdownNoOptionsText || "no option"}</div>
+      </div>
+    `;
+    instance = new PbDropdown(root);
+    instance.connect();
+    return root;
+  };
+
+  const emptyMessages = () => instance.target.querySelectorAll(".dropdown_no_options, [data-dropdown-empty-options]");
+
+  afterEach(() => {
+    instance.disconnect();
+    document.body.innerHTML = "";
+  });
+
+  test("searching without matches shows a single no options message", () => {
+    connectEmptyDropdown();
+
+    instance.handleSearch("zzz");
+    expect(emptyMessages()).toHaveLength(1);
+    expect(emptyMessages()[0]).toHaveTextContent("no option");
+
+    instance.handleSearch("");
+    expect(emptyMessages()).toHaveLength(1);
+  });
+
+  test("keeps no_options_text when filtering", () => {
+    connectEmptyDropdown({ pbDropdownNoOptionsText: "No agents available" });
+
+    instance.handleSearch("zzz");
+    expect(emptyMessages()).toHaveLength(1);
+    expect(emptyMessages()[0]).toHaveTextContent("No agents available");
+  });
+
+  test("option creation replaces the no options message", () => {
+    connectEmptyDropdown({ pbDropdownAllowOptionCreation: "true" });
+
+    instance.handleSearch("New team");
+    expect(emptyMessages()).toHaveLength(0);
+    expect(instance.target).toHaveTextContent('Create "New team"');
+  });
+
+  test("async dropdowns keep the server row out of their empty state", () => {
+    connectEmptyDropdown({ pbDropdownAsync: "true" });
+
+    expect(instance.target.querySelector(".dropdown_no_options")).toBeNull();
+    expect(instance.hasAsyncMenuContent()).toBe(false);
+  });
+});

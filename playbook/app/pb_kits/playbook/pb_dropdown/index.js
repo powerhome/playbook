@@ -19,6 +19,7 @@ const DROPDOWN_INPUT = "[data-dropdown-selected-option]";
 const SEARCH_INPUT_SELECTOR = "[data-dropdown-autocomplete]";
 const SEARCH_BAR_SELECTOR = "[data-dropdown-search]";
 const CLEAR_ICON_SELECTOR = "[data-dropdown-clear-icon]";
+const EMPTY_OPTIONS_SELECTOR = "[data-dropdown-empty-options]";
 const LABEL_SELECTOR = '[data-dropdown="pb-dropdown-label"]';
 
 // Portal host + positioning (parity with utilities/floatingPortalHosts.ts + React Dropdown).
@@ -227,6 +228,11 @@ export default class PbDropdown extends PbEnhancedElement {
     // Store instance on element for DatePicker sync
     this.element._pbDropdownInstance = this;
     this.cacheElements();
+    // Treat the server-rendered "no option" row as the no-options message so filtering
+    // doesn't add a second one. Async menus show their own empty state instead.
+    if (!this.isAsync) {
+      this.target?.querySelector(EMPTY_OPTIONS_SELECTOR)?.classList.add("dropdown_no_options");
+    }
 
     this.portalHost = null;
     this.useMenuPortal = false;
