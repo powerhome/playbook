@@ -4,5 +4,5 @@ Each instance creates its own drag boundary. Items stay inside that list on desk
 
 This is different from [Dragging Across Multiple Containers](#draggable_multiple_containers), which uses **one** `draggable` wrapping multiple `draggable/draggable_container` kits so items can move between columns.
 
-On touch devices, drag from the grip handle. Swiping outside the handle scrolls as usual.
+On touch devices, press and hold the grip handle to start dragging. Swiping outside the handle scrolls as usual.
 
