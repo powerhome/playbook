@@ -215,9 +215,10 @@ export default class PbFilter extends PbEnhancedElement {
       maxDate: dataset.pbFilterDateMax || undefined,
       nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
       prevArrow: `<div style="height: 14px;">${angleLeft.string}</div>`,
-      onChange: (_dates: Date[], dateStr: string) => {
+      onChange: (_dates: Date[], dateStr: string, instance) => {
         this.applyChange(dateStr, dateStr);
-        if (mode === "single") this.hide();
+        // Use the instance's mode: plugins can override the configured one (weekSelect forces single).
+        if (instance.config.mode === "single") this.hide();
       },
     });
   }

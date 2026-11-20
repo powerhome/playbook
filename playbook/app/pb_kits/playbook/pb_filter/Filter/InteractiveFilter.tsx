@@ -160,10 +160,12 @@ const InlineCalendar = ({
       maxDate: config.maxDate,
       nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
       prevArrow: `<div style="height: 14px;">${angleLeft.string}</div>`,
-      onChange: (_selectedDates, dateStr) => {
+      onChange: (_selectedDates, dateStr, instance) => {
+        // Use the instance's mode: plugins can override the configured one (weekSelect forces single).
+        const isSingle = instance.config.mode === 'single'
         const commit = () => {
           config.onChange(dateStr)
-          if ((config.mode || 'single') === 'single') onSinglePick()
+          if (isSingle) onSinglePick()
         }
         // monthSelect keeps using this instance after onChange, but React 17 re-renders
         // synchronously here and destroys it, so wait for its click handler to finish.

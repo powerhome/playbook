@@ -334,6 +334,41 @@ test("renders a week picker for interactive date-picker filters with selectionTy
   expect(document.querySelectorAll(".flatpickr-day.inRange").length).toBeGreaterThan(0);
 });
 
+test.each(["range", "multiple"])(
+  "week chip with mode %s emits one date and closes, since weekSelect forces single mode",
+  (mode) => {
+    mockMatchMedia(true);
+    const handleChange = jest.fn();
+
+    render(
+      <FilterTest
+          filters={{
+            Week: "05/06/2026",
+          }}
+          interactiveFilters={{
+            Week: {
+              type: "date-picker",
+              selectionType: "week",
+              mode,
+              value: "05/06/2026",
+              onChange: handleChange,
+            },
+          }}
+      />
+    );
+
+    const interactiveButton = screen
+      .getAllByRole("button")
+      .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+    fireEvent.click(interactiveButton);
+    fireEvent.click(document.querySelector('.flatpickr-day[aria-label="May 13, 2026"]'));
+
+    expect(handleChange).toHaveBeenCalledWith("05/13/2026");
+    expect(document.querySelector(".flatpickr-calendar")).not.toBeInTheDocument();
+  }
+);
+
 test("applies htmlOptions to the root element", () => {
   render(
     <Filter
