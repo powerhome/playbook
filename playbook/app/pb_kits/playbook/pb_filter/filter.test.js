@@ -153,6 +153,72 @@ test("generates quickpick options for interactive dropdown filters", () => {
   expect(handleChange).toHaveBeenCalledWith("quickpick-last-month");
 });
 
+test("renders a month picker for interactive date-picker filters with selectionType month", () => {
+  mockMatchMedia(true);
+  const handleChange = jest.fn();
+
+  render(
+    <FilterTest
+        filters={{
+          "Report month": "May 2026",
+        }}
+        interactiveFilters={{
+          "Report month": {
+            type: "date-picker",
+            selectionType: "month",
+            value: "May 2026",
+            onChange: handleChange,
+          },
+        }}
+    />
+  );
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+
+  const months = document.querySelectorAll(".flatpickr-monthSelect-month");
+  expect(months).toHaveLength(12);
+
+  fireEvent.click(Array.from(months).find((el) => el.textContent === "Jun"));
+
+  expect(handleChange).toHaveBeenCalledWith("June 2026");
+});
+
+test("renders a week picker for interactive date-picker filters with selectionType week", () => {
+  mockMatchMedia(true);
+
+  render(
+    <FilterTest
+        filters={{
+          Week: "05/06/2026",
+        }}
+        interactiveFilters={{
+          Week: {
+            type: "date-picker",
+            selectionType: "week",
+            value: "05/06/2026",
+            onChange: jest.fn(),
+          },
+        }}
+    />
+  );
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+
+  const day = document.querySelector('.flatpickr-day[aria-label="May 13, 2026"]');
+  fireEvent.mouseOver(day);
+
+  // weekSelect highlights the full week around the hovered day
+  expect(document.querySelectorAll(".flatpickr-day.inRange").length).toBeGreaterThan(0);
+});
+
 test("applies htmlOptions to the root element", () => {
   render(
     <Filter

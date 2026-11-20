@@ -4,6 +4,7 @@ import PbEnhancedElement from "../pb_enhanced_element";
 import { createPopper, Instance as PopperInstance } from "@popperjs/core";
 import flatpickr from "flatpickr";
 import { getAllIcons } from "../utilities/icons/allicons";
+import selectionTypePlugins from "../pb_date_picker/selection_type_plugins";
 
 const { angleLeft, angleRight } = getAllIcons();
 
@@ -208,6 +209,7 @@ export default class PbFilter extends PbEnhancedElement {
       defaultDate: dataset.pbFilterValue || undefined,
       mode,
       dateFormat: dataset.pbFilterDateFormat || "m/d/Y",
+      plugins: selectionTypePlugins(dataset.pbFilterDateSelectionType),
       minDate: dataset.pbFilterDateMin || undefined,
       maxDate: dataset.pbFilterDateMax || undefined,
       nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,

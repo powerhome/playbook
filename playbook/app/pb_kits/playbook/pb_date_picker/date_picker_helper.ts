@@ -1,8 +1,7 @@
 import flatpickr from 'flatpickr'
 import { Instance } from "flatpickr/dist/types/instance"
 import { BaseOptions } from 'flatpickr/dist/types/options'
-import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
-import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
+import selectionTypePlugins from './selection_type_plugins'
 import timeSelectPlugin from './plugins/timeSelect'
 import quickPickPlugin from './plugins/quickPick'
 import { getAllIcons } from '../utilities/icons/allicons';
@@ -360,11 +359,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     const pluginList = []
 
     // month and week selection
-    if (selectionType === "month" || plugins.length > 0) {
-      pluginList.push(monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }))
-    } else if ( selectionType === "week") {
-      pluginList.push(weekSelect())
-
+    const selectionPlugins = selectionTypePlugins(plugins.length > 0 ? "month" : selectionType)
+    if (selectionPlugins.length > 0) {
+      pluginList.push(...selectionPlugins)
     } else if (selectionType === "quickpick") {
       //------- QUICKPICK VARIANT PLUGIN -------------//
       pluginList.push(quickPickPlugin(thisRangesEndToday, customQuickPickDates, defaultDate as string))

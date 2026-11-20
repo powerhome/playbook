@@ -9,6 +9,7 @@ import PbReactPopover from '../../pb_popover/_popover'
 import getQuickPickOptions from '../../pb_dropdown/quickpick'
 import { uniqueId } from '../../utilities/object'
 import Title from '../../pb_title/_title'
+import selectionTypePlugins from '../../pb_date_picker/selection_type_plugins'
 import { getAllIcons } from '../../utilities/icons/allicons'
 
 const { angleLeft, angleRight } = getAllIcons()
@@ -48,6 +49,7 @@ export type DatePickerInteractiveConfig = {
   minDate?: string,
   maxDate?: string,
   mode?: 'single' | 'range' | 'multiple',
+  selectionType?: 'month' | 'week',
 }
 
 export type InteractiveFilterConfig =
@@ -152,6 +154,7 @@ const InlineCalendar = ({
       defaultDate: calendarValue || undefined,
       mode: config.mode || 'single',
       dateFormat: config.format || 'm/d/Y',
+      plugins: selectionTypePlugins(config.selectionType),
       minDate: config.minDate,
       maxDate: config.maxDate,
       nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
