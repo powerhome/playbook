@@ -19,8 +19,12 @@ app.build(
       compose.bake(bakeFiles: ['docker-bake.hcl'])
     }
 
-    stage('Test') {
+    stage('Test (Rails 8.1)') {
       shell "docker compose run --workdir /home/app/src/playbook web ./test.sh"
+    }
+
+    stage('Rails 7.x Compatibility') {
+      shell "docker compose run --workdir /home/app/src/playbook web bin/test-rails-compatibility"
     }
 
     stage('Website Test') {

@@ -6,4 +6,4 @@ Use the `draggable` kit and manage state as shown.
 
 The Card kit is optimized to work with the draggable kit. To enable drag, use the `draggable_item` and `drag_id` props on the Card kit as shown. An additional optional boolean prop (set to true by default) of `drag_handle` is also available to show the drag handle icon.
 
-On touch devices, drag from the grip handle (no long press). Swiping the card body scrolls as usual. Keep `drag_handle` enabled on mobile. Desktop mouse drag is unchanged.
+On touch devices, press and hold the grip handle to start dragging. Swiping the card body scrolls as usual. Keep `drag_handle` enabled on mobile. Desktop mouse drag is unchanged.

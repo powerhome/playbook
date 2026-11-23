@@ -29,6 +29,10 @@ type PillColorType =
   | 'solar'
   | 'insulation'
   | 'accessories'
+  | 'trim'
+  | 'product_10_background'
+  | 'hardboard_siding'
+  | 'multi'
 
 type PillRendererProps = {
   data: SelectValueType

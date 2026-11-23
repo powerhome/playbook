@@ -60,6 +60,15 @@ namespace :pb_release do
 
     `bundle`
     puts "Updated Gemfile.lock"
+
+    # Appraisal lockfiles pin the local playbook_ui version too; CI installs them frozen.
+    Dir["gemfiles/*.gemfile"].each do |gemfile|
+      updated = Bundler.with_unbundled_env do
+        system({ "BUNDLE_GEMFILE" => File.expand_path(gemfile) }, "bundle", "install", "--quiet")
+      end
+      abort "Failed to update #{gemfile}.lock. Run `BUNDLE_GEMFILE=#{gemfile} bundle install` and retry." unless updated
+      puts "Updated #{gemfile}.lock"
+    end
     puts "\n\n"
 
     if alpha || dryrun

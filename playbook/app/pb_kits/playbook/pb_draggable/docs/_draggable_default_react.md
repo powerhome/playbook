@@ -4,3 +4,5 @@ The Draggable kit gives you a full subcomponent structure that allows it to be u
  
 `Draggable.Container` = This specifies the container within which items can be dropped.
 `Draggable.Item` = This specifies the items that can be dragged and dropped. `dragId` is a REQUIRED prop for Draggable.Item.
+
+On touch devices, press and hold an item to start dragging. Swiping scrolls the page as usual. Desktop mouse drag is unchanged.

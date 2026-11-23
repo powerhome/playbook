@@ -1,5 +1,10 @@
 inherit_from: ../.rubocop.yml
 
+# Appraisal 2.5 generates these headers and its header customization fails on Ruby 3.4.
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - "gemfiles/*.gemfile"
+
 AllCops:
   Exclude:
     - "spec/**/*"
