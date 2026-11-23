@@ -722,10 +722,9 @@ describe("quickpick with linked DatePickers", () => {
     expect(endPicker.setDate.mock.calls.at(-1)[0]).toEqual(quarterEnd)
   })
 
-  // Mirrors a filter form: controlled quickpick, DatePickers fed back through defaultDate, state-based Defaults button
+  // Mirrors a filter form: uncontrolled quickpick, DatePickers fed back through defaultDate, state-based Defaults button
   // eslint-disable-next-line react/no-multi-comp, react/prop-types
   const FilterForm = ({ quickpickDefault }) => {
-    const [dateRange, setDateRange] = useState(null)
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
     return (
@@ -736,8 +735,7 @@ describe("quickpick with linked DatePickers", () => {
             data={{ testid: testId }}
             defaultValue={quickpickDefault}
             id="form-range"
-            onSelect={(selected) => setDateRange(selected?.label ? selected : null)}
-            value={dateRange}
+            placeholder="Select a date range"
             variant="quickpick"
         />
         <DatePicker
@@ -754,7 +752,6 @@ describe("quickpick with linked DatePickers", () => {
         />
         <button
             onClick={() => {
-              setDateRange(null)
               setStartDate("")
               setEndDate("")
             }}
@@ -768,11 +765,18 @@ describe("quickpick with linked DatePickers", () => {
 
   const pickerStart = (id) => document.getElementById(id)._flatpickr.selectedDates[0]?.getTime()
 
-  test("state-based Defaults button clears DatePickers filled by the quickpick", () => {
-    render(<FilterForm />)
+  const triggerText = () => screen.getByTestId(testId).querySelector('.pb_dropdown_trigger').textContent
+
+  test.each([
+    ["no defaultValue", undefined],
+    ["defaultValue This Quarter", "This Quarter"],
+  ])("state-based Defaults button clears the quickpick and DatePickers (%s)", (_name, quickpickDefault) => {
+    render(<FilterForm quickpickDefault={quickpickDefault} />)
     act(() => jest.runAllTimers())
+    if (quickpickDefault) expect(triggerText()).toContain(quickpickDefault)
 
     selectOption("Last Year")
+    expect(triggerText()).toContain("Last Year")
     expect(document.getElementById("form-start").value).not.toBe("")
     expect(document.getElementById("form-end").value).not.toBe("")
 
@@ -782,6 +786,8 @@ describe("quickpick with linked DatePickers", () => {
     expect(document.getElementById("form-start").value).toBe("")
     expect(document.getElementById("form-end").value).toBe("")
     expect(document.getElementById("form-start")._flatpickr.selectedDates).toHaveLength(0)
+    expect(triggerText()).toContain("Select a date range")
+    expect(triggerText()).not.toContain("Last Year")
   })
 
   test("DatePickers follow quickpick changes when defaultValue is set", () => {
