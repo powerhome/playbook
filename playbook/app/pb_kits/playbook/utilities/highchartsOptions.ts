@@ -290,12 +290,18 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> => {
 
 const IGNORED_KEY = "pbIgnored"
 
-// `keys` can map tuple values onto behavior options such as `events.click` or `dataLabels.useHTML`.
-// Strict mode keeps each entry in place so tuple positions stay aligned, but renames unsafe ones.
-const neutralizeUnsafeKeys = (keys: unknown) =>
+const PROTOTYPE_KEYS = new Set(["__proto__", "constructor", "prototype"])
+
+const isUnsafeKeyPart = (part: string, strict: boolean) =>
+  PROTOTYPE_KEYS.has(part) || (strict && (BLOCKED_KEYS.has(part) || isFormatterKey(part)))
+
+// Highcharts assigns each dotted `keys` path segment by segment, so tuple data can reach
+// `__proto__.*` in any mode, and `events.click` or `dataLabels.useHTML` when strict.
+// Unsafe entries are renamed in place so the remaining tuple positions stay aligned.
+const neutralizeUnsafeKeys = (keys: unknown, strict: boolean) =>
   Array.isArray(keys)
     ? keys.map((key) =>
-      typeof key === "string" && key.split(".").some((part) => BLOCKED_KEYS.has(part) || isFormatterKey(part))
+      typeof key === "string" && key.split(".").some((part) => isUnsafeKeyPart(part, strict))
         ? IGNORED_KEY
         : key
     )
@@ -312,7 +318,7 @@ const walk = (value: unknown, strict: boolean): unknown => {
 
   const result: Record<string, unknown> = {}
   Object.entries(value).forEach(([key, child]) => {
-    if (key === "__proto__" || key === "constructor" || key === "prototype") return
+    if (PROTOTYPE_KEYS.has(key)) return
     if (URL_KEYS.has(key)) {
       if (isSafeChartUrl(child)) result[key] = child
       return
@@ -322,7 +328,7 @@ const walk = (value: unknown, strict: boolean): unknown => {
 
     const next = walk(child, strict)
     if (next === undefined) return
-    result[key] = strict && key === "keys" ? neutralizeUnsafeKeys(next) : next
+    result[key] = key === "keys" ? neutralizeUnsafeKeys(next, strict) : next
   })
   return result
 }

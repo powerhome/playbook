@@ -171,10 +171,22 @@ describe("sanitizeChartOptions", () => {
     expect(safe.series[0].data).toEqual([[1, "a", true, "b", "Point"]])
   })
 
-  test("default mode leaves series keys as the caller wrote them", () => {
+  test("default mode leaves behavior series keys as the caller wrote them", () => {
     const keys = ["y", "dataLabels.useHTML"]
 
     expect(sanitizeChartOptions({ series: [{ keys, data: [[1, true]] }] }).series[0].keys).toEqual(keys)
+  })
+
+  test.each([false, true])("renames prototype paths in series keys (strict: %s)", (strict) => {
+    const safe = sanitizeChartOptions({
+      series: [{
+        keys: ["y", "__proto__.polluted", "constructor.prototype.polluted", "custom.prototype", "__proto__", "name"],
+        data: [[1, "a", "b", "c", "d", "Point"]],
+      }],
+    }, strict)
+
+    expect(safe.series[0].keys).toEqual(["y", "pbIgnored", "pbIgnored", "pbIgnored", "pbIgnored", "name"])
+    expect(safe.series[0].data).toEqual([[1, "a", "b", "c", "d", "Point"]])
   })
 
   test("strict mode keeps presentation data and drops behavior keys", () => {
