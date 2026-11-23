@@ -2,6 +2,7 @@
   "template": "<PbCircleChart{{props}} />",
   "propTargets": {},
   "defaults": {
+    "sanitizeOptions": false,
     "options": {
       "series": [
         {

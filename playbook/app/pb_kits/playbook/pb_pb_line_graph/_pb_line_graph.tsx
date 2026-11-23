@@ -5,6 +5,7 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import pbLineGraphTheme from './pbLineGraphTheme'
+import { mergeChartOptions } from '../utilities/highchartsOptions'
 import { globalProps } from '../utilities/globalProps'
 
 
@@ -15,6 +16,7 @@ type PbLineGraphProps = {
   id?: string,
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   options: Record<string, unknown>
+  sanitizeOptions?: boolean
 }
 
 const PbLineGraph = (props: PbLineGraphProps) => {
@@ -24,7 +26,8 @@ const PbLineGraph = (props: PbLineGraphProps) => {
   data = {},
   id,
   htmlOptions = {},
-  options
+  options,
+  sanitizeOptions = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -36,11 +39,11 @@ const PbLineGraph = (props: PbLineGraphProps) => {
     if (!options || typeof options !== "object") {
       // eslint-disable-next-line no-console
       console.error("❌ Invalid options passed to <PbLineGraph />", options)
-      return {}
+      return mergeChartOptions({}, {})
     }
 
-    return Highcharts.merge({}, pbLineGraphTheme, options)
-  }, [options])
+    return mergeChartOptions(pbLineGraphTheme, options, sanitizeOptions)
+  }, [options, sanitizeOptions])
   return (
     <div>
         <HighchartsReact

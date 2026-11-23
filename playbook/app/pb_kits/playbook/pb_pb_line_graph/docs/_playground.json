@@ -2,6 +2,7 @@
   "template": "<PbLineGraph{{props}} />",
   "propTargets": {},
   "defaults": {
+    "sanitizeOptions": false,
     "options": {
       "series": [
         {

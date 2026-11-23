@@ -4,12 +4,14 @@ module Playbook
   module PbPbGaugeChart
     class PbGaugeChart < ::Playbook::KitBase
       prop :options, default: {}
+      prop :sanitize_options, type: Playbook::Props::Boolean, default: false
 
       def react_props
         {
           className: classname,
           data: data,
           options: options,
+          sanitizeOptions: sanitize_options,
           id: id,
         }
       end

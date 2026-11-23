@@ -2,6 +2,7 @@
   "template": "<PbBarGraph{{props}} />",
   "propTargets": {},
   "defaults": {
+    "sanitizeOptions": false,
     "options": {
       "series": [
         {

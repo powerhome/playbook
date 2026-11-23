@@ -14,6 +14,14 @@
         "rails"
       ],
       "default": {}
+    },
+    "sanitizeOptions": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
     }
   },
   "globalProps": true,

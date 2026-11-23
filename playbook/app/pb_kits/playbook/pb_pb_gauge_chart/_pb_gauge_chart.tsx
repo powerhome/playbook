@@ -8,6 +8,7 @@ import pbGaugeGraphTheme from './pbGaugeGraphTheme'
 import highchartsMore from "highcharts/highcharts-more";
 import solidGauge from "highcharts/modules/solid-gauge";
 import { globalProps } from '../utilities/globalProps'
+import { mergeChartOptions } from '../utilities/highchartsOptions'
 
 type PbGaugeChartProps = {
   aria?: { [key: string]: string },
@@ -17,6 +18,7 @@ type PbGaugeChartProps = {
   id?: string,
   ref?: React.RefObject<any>,
   options: Record<string, unknown>
+  sanitizeOptions?: boolean
 }
 
 const PbGaugeChart = (props: PbGaugeChartProps) => {
@@ -28,6 +30,7 @@ const PbGaugeChart = (props: PbGaugeChartProps) => {
   id,
   ref,
   options = {},
+  sanitizeOptions = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -39,11 +42,11 @@ const PbGaugeChart = (props: PbGaugeChartProps) => {
     if (!options || typeof options !== "object") {
       // eslint-disable-next-line no-console
       console.error("❌ Invalid options passed to <PbLineGraph />", options)
-      return {}
+      return mergeChartOptions({}, {})
     }
 
-    return Highcharts.merge({}, pbGaugeGraphTheme, options)
-  }, [options])
+    return mergeChartOptions(pbGaugeGraphTheme, options, sanitizeOptions)
+  }, [options, sanitizeOptions])
 
   highchartsMore(Highcharts);
   solidGauge(Highcharts);
