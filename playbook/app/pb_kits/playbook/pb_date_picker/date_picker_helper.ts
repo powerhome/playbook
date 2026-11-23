@@ -857,6 +857,14 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       if (selectedDates?.length) clearSyncedQuickpick(syncEndWith);
     });
   }
+
+  // A React quickpick that mounted before this picker may still be holding its defaultValue range
+  const syncedQuickpickId = syncStartWith || syncEndWith
+  if (syncedQuickpickId) {
+    const quickpick = document.querySelector(`#${syncedQuickpickId}`) as
+      (HTMLElement & { _dropdownRef?: { current?: { applyPendingDefaultRange?: () => void } } }) | null
+    quickpick?._dropdownRef?.current?.applyPendingDefaultRange?.()
+  }
 // === End of Automatic Sync Logic ===
 
   // Label click toggles calendar: stop pointer bubbling to document, then toggle (avoids flatpickr close + input-focus reopen).

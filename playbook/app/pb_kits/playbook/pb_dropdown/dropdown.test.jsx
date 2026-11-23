@@ -724,7 +724,7 @@ describe("quickpick with linked DatePickers", () => {
 
   // Mirrors a filter form: uncontrolled quickpick, DatePickers fed back through defaultDate, state-based Defaults button
   // eslint-disable-next-line react/no-multi-comp, react/prop-types
-  const FilterForm = ({ quickpickDefault }) => {
+  const FilterForm = ({ onSelect, quickpickDefault }) => {
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
     return (
@@ -735,6 +735,7 @@ describe("quickpick with linked DatePickers", () => {
             data={{ testid: testId }}
             defaultValue={quickpickDefault}
             id="form-range"
+            onSelect={onSelect}
             placeholder="Select a date range"
             variant="quickpick"
         />
@@ -833,6 +834,135 @@ describe("quickpick with linked DatePickers", () => {
     expect(startPicker.clear).not.toHaveBeenCalled()
     expect(endPicker.clear).not.toHaveBeenCalled()
     expect(kit.querySelector('.pb_dropdown_trigger')).toHaveTextContent("Select...")
+  })
+
+  // eslint-disable-next-line react/no-multi-comp, react/prop-types
+  const LatePickersForm = ({ showPickers }) => (
+    <>
+      <Dropdown
+          controlsEndId="late-end"
+          controlsStartId="late-start"
+          data={{ testid: testId }}
+          defaultValue="This Quarter"
+          id="late-range"
+          variant="quickpick"
+      />
+      {showPickers && (
+        <>
+          <DatePicker
+              pickerId="late-start"
+              syncStartWith="late-range"
+          />
+          <DatePicker
+              pickerId="late-end"
+              syncEndWith="late-range"
+          />
+        </>
+      )}
+    </>
+  )
+
+  test("defaultValue range reaches DatePickers that mount after the Dropdown", () => {
+    const { rerender } = render(<LatePickersForm showPickers={false} />)
+    act(() => jest.runAllTimers())
+
+    rerender(<LatePickersForm showPickers />)
+    act(() => jest.runAllTimers())
+
+    const quarterStartMonth = Math.floor(new Date().getMonth() / 3) * 3
+    const start = new Date(pickerStart("late-start"))
+    expect(start.getMonth()).toBe(quarterStartMonth)
+    expect(start.getDate()).toBe(1)
+    expect(document.getElementById("late-end")._flatpickr.selectedDates).toHaveLength(1)
+    expect(triggerText()).toContain("This Quarter")
+  })
+
+  test("a range picked before late DatePickers mount is not replaced by the defaultValue range", () => {
+    const { rerender } = render(<LatePickersForm showPickers={false} />)
+    act(() => jest.runAllTimers())
+    selectOption("Last Year")
+
+    rerender(<LatePickersForm showPickers />)
+    act(() => jest.runAllTimers())
+
+    expect(document.getElementById("late-start")._flatpickr.selectedDates).toHaveLength(0)
+    expect(triggerText()).toContain("Last Year")
+  })
+
+  test("clearing both DatePickers in one render emits a single selection change", () => {
+    const onSelect = jest.fn()
+    render(<FilterForm onSelect={onSelect} />)
+    act(() => jest.runAllTimers())
+    selectOption("Last Year")
+    onSelect.mockClear()
+
+    fireEvent.click(screen.getByText("Defaults"))
+    act(() => jest.runAllTimers())
+
+    expect(onSelect).toHaveBeenCalledTimes(1)
+    expect(onSelect).toHaveBeenCalledWith(null)
+  })
+
+  // eslint-disable-next-line react/no-multi-comp, react/prop-types
+  const ControlledFilterForm = ({ onSelect }) => {
+    const [range, setRange] = useState(null)
+    const [startDate, setStartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
+    return (
+      <form>
+        <Dropdown
+            controlsEndId="controlled-end"
+            controlsStartId="controlled-start"
+            data={{ testid: testId }}
+            id="controlled-range"
+            onSelect={(selected) => {
+              onSelect(selected)
+              setRange(selected)
+            }}
+            placeholder="Select a date range"
+            value={range}
+            variant="quickpick"
+        />
+        <DatePicker
+            defaultDate={startDate}
+            onChange={(date) => setStartDate(date || "")}
+            pickerId="controlled-start"
+            syncStartWith="controlled-range"
+        />
+        <DatePicker
+            defaultDate={endDate}
+            onChange={(date) => setEndDate(date || "")}
+            pickerId="controlled-end"
+            syncEndWith="controlled-range"
+        />
+        <button
+            onClick={() => {
+              setRange(null)
+              setStartDate("")
+              setEndDate("")
+            }}
+            type="button"
+        >
+          {"Defaults"}
+        </button>
+      </form>
+    )
+  }
+
+  test("DatePickers do not re-clear a controlled Dropdown the consumer already cleared", () => {
+    const onSelect = jest.fn()
+    render(<ControlledFilterForm onSelect={onSelect} />)
+    act(() => jest.runAllTimers())
+    selectOption("Last Year")
+    expect(triggerText()).toContain("Last Year")
+    onSelect.mockClear()
+
+    fireEvent.click(screen.getByText("Defaults"))
+    act(() => jest.runAllTimers())
+
+    expect(onSelect).not.toHaveBeenCalled()
+    expect(document.getElementById("controlled-start").value).toBe("")
+    expect(triggerText()).toContain("Select a date range")
   })
 })
 

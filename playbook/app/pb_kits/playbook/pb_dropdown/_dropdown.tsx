@@ -389,6 +389,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     : selected && Object.keys(selected).length
     ? [selected]
     : [];
+    // Set during render so a clear triggered from a DatePicker effect sees the current selection.
+    const latestSelectedArray = useRef(selectedArray);
+    latestSelectedArray.current = selectedArray;
 
     const hasFormSelection = enableFormSupport && selectedArray.some((option) => String(option.id ?? option.value ?? "") !== "");
     useEffect(() => {
@@ -598,6 +601,16 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
       setQuickPickDateOnPicker(linkedDatePicker(controlsEndId), end, "end");
     };
 
+    // A defaultValue range waits here until every configured DatePicker exists,
+    // and is dropped once the user picks or clears a range themselves.
+    const pendingDefaultRange = useRef<unknown[] | null>(null);
+    const applyPendingDefaultRange = () => {
+      if (!pendingDefaultRange.current) return;
+      if ((controlsStartId && !linkedDatePicker(controlsStartId)) || (controlsEndId && !linkedDatePicker(controlsEndId))) return;
+      syncQuickPickPickers(pendingDefaultRange.current);
+      pendingDefaultRange.current = null;
+    };
+
     const handleSelectionChange = (value: any) => {
         onSelect && onSelect(value);
         onChange && onChange({ target: { name, value } });
@@ -671,6 +684,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    
                    // Sync with DatePickers if this is a quickpick variant
                    if (variant === "quickpick") {
+                       pendingDefaultRange.current = null;
                        syncQuickPickPickers(clickedItem.value);
                    }
             }
@@ -691,6 +705,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const handleBackspace = () => {
       if (disabled) return;
       preserveQueryOnControlledClear.current = false;
+      pendingDefaultRange.current = null;
       if (asyncEnabled) clearAsync();
       onInputChange?.("", { reason: "clear" });
       if ((onInputChange || asyncEnabled) && multiSelect) setFilterItem("");
@@ -718,7 +733,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         dark
     });
 
-    const clearSelection = ({ clearDatePickers }: { clearDatePickers: boolean }) => {
+    const clearSelection = ({ clearDatePickers, skipIfEmpty = false }: { clearDatePickers: boolean, skipIfEmpty?: boolean }) => {
+      pendingDefaultRange.current = null;
+      // Linked start and end DatePickers can both clear the Dropdown in one commit; only the first emits a change.
+      if (skipIfEmpty && !latestSelectedArray.current.length) return;
+      latestSelectedArray.current = [];
       preserveQueryOnControlledClear.current = false;
       if (asyncEnabled) clearAsync();
       onInputChange?.("", { reason: "clear" });
@@ -743,7 +762,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // DatePickers (syncStartWith/syncEndWith) clear the Dropdown when a date is picked;
     // that path must leave the DatePickers alone, matching Rails clearSelected().
     const datePickerSyncRef = useRef({
-      clearSelected: () => clearSelection({ clearDatePickers: false }),
+      clearSelected: () => clearSelection({ clearDatePickers: false, skipIfEmpty: true }),
+      applyPendingDefaultRange,
     });
 
     // Update refs whenever dependencies change
@@ -753,7 +773,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         clearSelected: () => clearSelection({ clearDatePickers: true }),
       };
       datePickerSyncRef.current = {
-        clearSelected: () => clearSelection({ clearDatePickers: false }),
+        clearSelected: () => clearSelection({ clearDatePickers: false, skipIfEmpty: true }),
+        applyPendingDefaultRange,
       };
     }, [multiSelect, handleSelectionChange, setSelected, setFilterItem, setIsDropDownClosed, asyncEnabled, clearAsync, onInputChange, variant, controlsStartId, controlsEndId]);
 
@@ -768,17 +789,19 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     // Sync defaultValue with DatePickers on mount when 3 input pattern is used.
     // Quickpick options are rebuilt every render, so initialSelected changes identity each render;
-    // guard so later re-renders don't reset the DatePickers back to the default range.
-    const hasSyncedDefaultDates = useRef(false);
+    // queue the default once so later re-renders don't reset the DatePickers back to the default range.
+    // DatePickers that mount later apply it through datePickerSyncRef when they initialize.
+    const hasQueuedDefaultDates = useRef(false);
     useEffect(() => {
-      if (hasSyncedDefaultDates.current) return;
+      if (hasQueuedDefaultDates.current) return;
       if (variant === "quickpick" && initialSelected && typeof initialSelected === "object" && !Array.isArray(initialSelected)) {
         const value = initialSelected.value;
 
         if (Array.isArray(value) && value.length === 2) {
-          hasSyncedDefaultDates.current = true;
+          hasQueuedDefaultDates.current = true;
+          pendingDefaultRange.current = value;
           // Wait for DatePickers to be initialized
-          setTimeout(() => syncQuickPickPickers(value), 0);
+          setTimeout(applyPendingDefaultRange, 0);
         }
       }
     }, [variant, initialSelected, controlsStartId, controlsEndId]);
