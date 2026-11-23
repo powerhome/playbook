@@ -91,6 +91,9 @@
     },
     {
       "name": "Custom Icon",
+      "platforms": [
+        "react"
+      ],
       "structureMode": "progress_step_item_props",
       "props": {
         "icon": true,
@@ -102,6 +105,9 @@
     },
     {
       "name": "ProgressStepItem Active",
+      "platforms": [
+        "react"
+      ],
       "structureMode": "progress_step_item_props",
       "props": {
         "icon": true,
@@ -154,6 +160,9 @@
       },
       "progress_step_item_props": {
         "label": "ProgressStepItem Props",
+        "platforms": [
+          "react"
+        ],
         "template": "<ProgressStep{{props}}>\n  <ProgressStepItem{{ProgressStepItem.props}}>\n    {{children}}\n  </ProgressStepItem>\n  <ProgressStepItem status=\"active\">Approve</ProgressStepItem>\n  <ProgressStepItem status=\"inactive\">Publish</ProgressStepItem>\n</ProgressStep>",
         "children": "Review",
         "props": {

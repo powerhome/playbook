@@ -4,7 +4,7 @@
   "defaults": {
     "change": "increase",
     "dark": false,
-    "value": "15"
+    "value": 15
   },
   "groups": [
     {
@@ -26,28 +26,28 @@
       "name": "Increase",
       "props": {
         "change": "increase",
-        "value": "15"
+        "value": 15
       }
     },
     {
       "name": "Decrease",
       "props": {
         "change": "decrease",
-        "value": "8"
+        "value": 8
       }
     },
     {
       "name": "Neutral",
       "props": {
         "change": "neutral",
-        "value": "0"
+        "value": 0
       }
     },
     {
       "name": "Custom icon",
       "props": {
         "change": "increase",
-        "value": "12",
+        "value": 12,
         "icon": "chart-line"
       }
     }

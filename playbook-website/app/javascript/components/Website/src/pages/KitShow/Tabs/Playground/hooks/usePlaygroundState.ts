@@ -260,11 +260,13 @@ export const usePlaygroundState = ({
   // Get available structure modes for UI
   const availableStructureModes = useMemo(() => {
     if (!playgroundConfig?.structureModes?.modes) return [];
-    return Object.entries(playgroundConfig.structureModes.modes).map(([key, mode]) => ({
-      key,
-      label: mode.label,
-    }));
-  }, [playgroundConfig]);
+    return Object.entries(playgroundConfig.structureModes.modes)
+      .filter(([, mode]) => !mode.platforms || mode.platforms.includes(platform))
+      .map(([key, mode]) => ({
+        key,
+        label: mode.label,
+      }));
+  }, [playgroundConfig, platform]);
 
   const availableDataPresets = useMemo(() => {
     const presets = playgroundConfig?.dataPresets?.presets;

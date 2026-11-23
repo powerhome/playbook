@@ -42,7 +42,8 @@
       "name": "bold variant",
       "props": {
         "amount": "1428.5",
-        "label": "ARR"
+        "label": "ARR",
+        "variant": "bold"
       }
     },
     {
@@ -57,7 +58,7 @@
     {
       "name": "Matching decimals",
       "props": {
-        "amount": "99.9999",
+        "amount": "372.12",
         "decimals": "matching",
         "symbol": "$",
         "label": "Per seat"

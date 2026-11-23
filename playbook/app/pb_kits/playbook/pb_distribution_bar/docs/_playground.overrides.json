@@ -1,6 +1,7 @@
 {
   "defaults": {
-    "colors": ["data_7", "data_1", "neutral"]
+    "colors": ["data_7", "data_1", "neutral"],
+    "widths": [1, 2, 3]
   },
   "groups": [
     {

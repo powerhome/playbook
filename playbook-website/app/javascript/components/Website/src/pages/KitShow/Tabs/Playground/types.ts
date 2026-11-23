@@ -160,6 +160,8 @@ export interface StructureMode {
   externalImports?: string[];
   wrapper?: string;
   statefulProps?: string[];
+  /** Limit this structure to these playground tabs. Omit to show it on every platform. */
+  platforms?: ("react" | "rails")[];
 }
 
 export interface StructureModesConfig {

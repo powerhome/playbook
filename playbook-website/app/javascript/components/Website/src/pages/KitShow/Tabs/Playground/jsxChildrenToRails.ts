@@ -6,6 +6,7 @@ const COMPONENT_KITS: Record<string, string> = {
   Badge: "badge",
   Icon: "icon",
   FlexItem: "flex/flex_item",
+  ProgressStepItem: "progress_step/progress_step_item",
 };
 
 const CAPTION_FALLBACK_CLASS = "pb_caption_kit_md";
