@@ -15,6 +15,22 @@ describe("isSafeChartUrl", () => {
     expect(isSafeChartUrl("data:text/html,hi")).toBe(false)
     expect(isSafeChartUrl("//evil.example")).toBe(false)
     expect(isSafeChartUrl("")).toBe(false)
+    expect(isSafeChartUrl("   ")).toBe(false)
+  })
+
+  test.each([
+    "java\tscript:alert(1)",
+    "java\nscript:alert(1)",
+    "java\rscript:alert(1)",
+    "\x00javascript:alert(1)",
+    "\x1fjavascript:alert(1)",
+    " javascript:alert(1)",
+    "/\\evil.example",
+    "\\\\evil.example",
+    "/\t/evil.example",
+    "\t//evil.example",
+  ])("rejects obfuscated scheme or host %j", (value) => {
+    expect(isSafeChartUrl(value)).toBe(false)
     expect(isSafeChartUrl(1)).toBe(false)
   })
 })

@@ -253,7 +253,7 @@ const ALLOWED_KEYS = new Set([
   "zooming",
 ])
 
-const URL_SCHEME = /^[a-zA-Z][a-zA-Z+\-.]*:/
+const URL_SCHEME = /^[a-z][a-z\d+.-]*:/i
 
 const isFormatterKey = (key: string) =>
   key === "formatter" || key.toLowerCase().endsWith("formatter")
@@ -264,15 +264,18 @@ const isAllowedKey = (key: string, value: unknown) =>
   !isFormatterKey(key) &&
   ALLOWED_KEYS.has(key)
 
-export const isSafeChartUrl = (value: unknown): boolean => {
+// Browsers ignore whitespace and control characters inside URLs and treat backslashes as slashes,
+// so classify the normalized form. Otherwise `java\tscript:` or `/\evil.example` would pass.
+export const isSafeChartUrl = (value: unknown): value is string => {
   if (typeof value !== "string") return false
-  const url = value.trim()
-  if (url === "" || url.startsWith("//") || url.startsWith("\\")) return false
-  if (!URL_SCHEME.test(url)) return true
+  // eslint-disable-next-line no-control-regex -- browsers strip these characters, so we must match them
+  const normalized = value.replace(/[\x00-\x20\x7f]/g, "").replace(/\\/g, "/")
+  if (normalized === "" || normalized.startsWith("//")) return false
+  if (!URL_SCHEME.test(normalized)) return true
 
   try {
-    const parsed = new URL(url)
-    return parsed.protocol === "http:" || parsed.protocol === "https:"
+    const { protocol } = new URL(normalized)
+    return protocol === "http:" || protocol === "https:"
   } catch {
     return false
   }
@@ -297,7 +300,7 @@ const walk = (value: unknown, strict: boolean): unknown => {
   Object.entries(value).forEach(([key, child]) => {
     if (key === "__proto__" || key === "constructor" || key === "prototype") return
     if (URL_KEYS.has(key)) {
-      if (isSafeChartUrl(child) && typeof child === "string") result[key] = child.trim()
+      if (isSafeChartUrl(child)) result[key] = child
       return
     }
     if (key === "credits") return
