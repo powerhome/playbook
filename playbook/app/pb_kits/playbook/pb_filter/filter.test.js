@@ -233,6 +233,45 @@ test("month picker refreshes disabled months when the year is typed instead of u
   expect(document.querySelector(".flatpickr-next-month")).toHaveClass("flatpickr-disabled");
 });
 
+test("month picker only highlights the selected month in its own year when the year is typed", () => {
+  mockMatchMedia(true);
+
+  render(
+    <FilterTest
+        filters={{ "Report month": "March 2025" }}
+        interactiveFilters={{
+          "Report month": {
+            type: "date-picker",
+            selectionType: "month",
+            value: "March 2025",
+            minDate: "03/01/2024",
+            maxDate: "11/30/2026",
+            onChange: jest.fn(),
+          },
+        }}
+    />
+  );
+
+  fireEvent.click(
+    screen.getAllByRole("button").find((button) => button.getAttribute("aria-haspopup") === "dialog")
+  );
+
+  const selectedMonths = () =>
+    Array.from(document.querySelectorAll(".flatpickr-monthSelect-month.selected"))
+      .map((el) => el.textContent);
+  const typeYear = (year) => {
+    const yearInput = document.querySelector(".numInputWrapper input.cur-year");
+    yearInput.value = year;
+    fireEvent.keyUp(yearInput, { key: "Enter" });
+  };
+
+  expect(selectedMonths()).toEqual(["Mar"]);
+  typeYear("2024");
+  expect(selectedMonths()).toEqual([]);
+  typeYear("2025");
+  expect(selectedMonths()).toEqual(["Mar"]);
+});
+
 test("month chip updates without errors when the parent stores the value", async () => {
   mockMatchMedia(true);
 
