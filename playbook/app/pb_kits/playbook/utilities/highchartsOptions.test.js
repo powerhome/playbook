@@ -140,6 +140,23 @@ describe("sanitizeChartOptions", () => {
     expect(safe.exporting.chartOptions.series[0].data).toEqual([[1, null]])
   })
 
+  test("clears unsafe keys-mapped urls when series and rules are single objects", () => {
+    const safe = sanitizeChartOptions({
+      series: { keys: ["y", "url"], data: [[1, "javascript:alert(1)"], [2, "https://example.com"]] },
+      drilldown: { series: { id: "a", keys: ["y", "href"], data: [[1, "data:text/html,hi"]] } },
+      responsive: {
+        rules: {
+          condition: { maxWidth: 500 },
+          chartOptions: { series: { keys: ["y", "url"], data: [[1, "javascript:alert(1)"]] } },
+        },
+      },
+    })
+
+    expect(safe.series.data).toEqual([[1, null], [2, "https://example.com"]])
+    expect(safe.drilldown.series.data).toEqual([[1, null]])
+    expect(safe.responsive.rules.chartOptions.series.data).toEqual([[1, null]])
+  })
+
   test("strict mode keeps series keys and still clears unsafe urls mapped through them", () => {
     const safe = sanitizeChartOptions({
       series: [{

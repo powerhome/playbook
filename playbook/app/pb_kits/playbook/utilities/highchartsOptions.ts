@@ -340,10 +340,14 @@ const getUrlKeyIndexes = (keys: unknown): number[] => {
   )
 }
 
+// Highcharts accepts a single object wherever it expects a list of series or rules.
+const toList = (value: unknown): unknown[] => {
+  if (Array.isArray(value)) return value
+  return value == null ? [] : [value]
+}
+
 const getNestedChartOptions = (options: Record<string, unknown>) => {
-  const rules = isPlainObject(options.responsive) && Array.isArray(options.responsive.rules)
-    ? options.responsive.rules
-    : []
+  const rules = isPlainObject(options.responsive) ? toList(options.responsive.rules) : []
   const nested = [
     ...rules.map((rule) => (isPlainObject(rule) ? rule.chartOptions : undefined)),
     isPlainObject(options.exporting) ? options.exporting.chartOptions : undefined,
@@ -369,8 +373,7 @@ const sanitizePositionalUrls = (options: Record<string, unknown>, inheritedIndex
   const nestedInheritedIndexes = [...defaultUrlIndexes]
 
   seriesLists.forEach((seriesList) => {
-    if (!Array.isArray(seriesList)) return
-    seriesList.forEach((series) => {
+    toList(seriesList).forEach((series) => {
       if (!isPlainObject(series)) return
       const seriesIndexes = "keys" in series ? getUrlKeyIndexes(series.keys) : undefined
       nestedInheritedIndexes.push(...(seriesIndexes ?? []))
