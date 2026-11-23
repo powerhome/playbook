@@ -46,6 +46,18 @@ describe("sanitizeChartOptions", () => {
     expect(options.credits.href).toBe("javascript:alert(1)")
   })
 
+  test.each([false, true])("keeps Date values in datetime series (strict: %s)", (strict) => {
+    const day = new Date(Date.UTC(2026, 10, 23))
+    const safe = sanitizeChartOptions({
+      series: [{ data: [[day, 1], { x: day, y: 2 }] }],
+      xAxis: { min: day, type: "datetime" },
+    }, strict)
+
+    expect(safe.series[0].data[0][0]).toBe(day)
+    expect(safe.series[0].data[1].x).toBe(day)
+    expect(safe.xAxis.min).toBe(day)
+  })
+
   test("strict mode keeps presentation data and drops behavior keys", () => {
     const safe = sanitizeChartOptions(options, true)
 

@@ -278,6 +278,12 @@ export const isSafeChartUrl = (value: unknown): boolean => {
   }
 }
 
+const isPlainObject = (value: unknown): value is Record<string, unknown> => {
+  if (value === null || typeof value !== "object") return false
+  const prototype = Object.getPrototypeOf(value)
+  return prototype === Object.prototype || prototype === null
+}
+
 const walk = (value: unknown, strict: boolean): unknown => {
   if (typeof value === "function") return strict ? undefined : value
   if (Array.isArray(value)) {
@@ -285,10 +291,10 @@ const walk = (value: unknown, strict: boolean): unknown => {
       .map((item) => walk(item, strict))
       .filter((item) => item !== undefined)
   }
-  if (value === null || typeof value !== "object") return value
+  if (!isPlainObject(value)) return value
 
   const result: Record<string, unknown> = {}
-  Object.entries(value as Record<string, unknown>).forEach(([key, child]) => {
+  Object.entries(value).forEach(([key, child]) => {
     if (key === "__proto__" || key === "constructor" || key === "prototype") return
     if (URL_KEYS.has(key)) {
       if (isSafeChartUrl(child) && typeof child === "string") result[key] = child.trim()
