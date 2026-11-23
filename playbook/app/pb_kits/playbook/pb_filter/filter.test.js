@@ -196,6 +196,43 @@ test("renders a month picker for interactive date-picker filters with selectionT
   await waitFor(() => expect(handleChange).toHaveBeenCalledWith("June 2026"));
 });
 
+test("month picker refreshes disabled months when the year is typed instead of using the arrows", () => {
+  mockMatchMedia(true);
+
+  render(
+    <FilterTest
+        filters={{ "Report month": "December 2025" }}
+        interactiveFilters={{
+          "Report month": {
+            type: "date-picker",
+            selectionType: "month",
+            value: "December 2025",
+            minDate: "12/01/2025",
+            maxDate: "11/30/2026",
+            onChange: jest.fn(),
+          },
+        }}
+    />
+  );
+
+  fireEvent.click(
+    screen.getAllByRole("button").find((button) => button.getAttribute("aria-haspopup") === "dialog")
+  );
+
+  const disabledMonths = () =>
+    Array.from(document.querySelectorAll(".flatpickr-monthSelect-month.flatpickr-disabled"))
+      .map((el) => el.textContent);
+  expect(disabledMonths()).toHaveLength(11);
+
+  const yearInput = document.querySelector(".numInputWrapper input.cur-year");
+  yearInput.value = "2026";
+  fireEvent.keyUp(yearInput, { key: "Enter" });
+
+  expect(disabledMonths()).toEqual(["Dec"]);
+  expect(document.querySelector(".flatpickr-prev-month")).not.toHaveClass("flatpickr-disabled");
+  expect(document.querySelector(".flatpickr-next-month")).toHaveClass("flatpickr-disabled");
+});
+
 test("month chip updates without errors when the parent stores the value", async () => {
   mockMatchMedia(true);
 
