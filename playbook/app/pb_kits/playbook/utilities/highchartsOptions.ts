@@ -102,6 +102,7 @@ const ALLOWED_KEYS = new Set([
   "itemMarginTop",
   "itemStyle",
   "itemWidth",
+  "keys",
   "label",
   "labels",
   "layout",
@@ -287,6 +288,19 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> => {
   return prototype === Object.prototype || prototype === null
 }
 
+const IGNORED_KEY = "pbIgnored"
+
+// `keys` can map tuple values onto behavior options such as `events.click` or `dataLabels.useHTML`.
+// Strict mode keeps each entry in place so tuple positions stay aligned, but renames unsafe ones.
+const neutralizeUnsafeKeys = (keys: unknown) =>
+  Array.isArray(keys)
+    ? keys.map((key) =>
+      typeof key === "string" && key.split(".").some((part) => BLOCKED_KEYS.has(part) || isFormatterKey(part))
+        ? IGNORED_KEY
+        : key
+    )
+    : keys
+
 const walk = (value: unknown, strict: boolean): unknown => {
   if (typeof value === "function") return strict ? undefined : value
   if (Array.isArray(value)) {
@@ -307,7 +321,8 @@ const walk = (value: unknown, strict: boolean): unknown => {
     if (strict && !isAllowedKey(key, child)) return
 
     const next = walk(child, strict)
-    if (next !== undefined) result[key] = next
+    if (next === undefined) return
+    result[key] = strict && key === "keys" ? neutralizeUnsafeKeys(next) : next
   })
   return result
 }
@@ -319,23 +334,42 @@ const getUrlKeyIndexes = (keys: unknown): number[] => {
   )
 }
 
+const getNestedChartOptions = (options: Record<string, unknown>) => {
+  const rules = isPlainObject(options.responsive) && Array.isArray(options.responsive.rules)
+    ? options.responsive.rules
+    : []
+  const nested = [
+    ...rules.map((rule) => (isPlainObject(rule) ? rule.chartOptions : undefined)),
+    isPlainObject(options.exporting) ? options.exporting.chartOptions : undefined,
+  ]
+  return nested.filter(isPlainObject)
+}
+
 // `keys` maps array point values onto point options by position, so `url` can arrive without its key name.
 // Series `keys` override plotOptions `keys`. The series type can come from the kit theme, so without
 // series `keys`, positions from every plotOptions entry are checked. Only string values are cleared.
-const sanitizePositionalUrls = (options: Record<string, unknown>) => {
+// Responsive and exporting `chartOptions` are merged onto the chart, so they are checked too and
+// also inherit the positions found in the options they extend.
+const sanitizePositionalUrls = (options: Record<string, unknown>, inheritedIndexes: number[] = []) => {
   const plotOptions = isPlainObject(options.plotOptions) ? Object.values(options.plotOptions) : []
-  const defaultUrlIndexes = plotOptions.flatMap((typeOptions) =>
-    isPlainObject(typeOptions) ? getUrlKeyIndexes(typeOptions.keys) : []
-  )
+  const defaultUrlIndexes = [
+    ...inheritedIndexes,
+    ...plotOptions.flatMap((typeOptions) =>
+      isPlainObject(typeOptions) ? getUrlKeyIndexes(typeOptions.keys) : []
+    ),
+  ]
   const drilldownSeries = isPlainObject(options.drilldown) ? options.drilldown.series : undefined
   const seriesLists = [options.series, drilldownSeries]
+  const nestedInheritedIndexes = [...defaultUrlIndexes]
 
   seriesLists.forEach((seriesList) => {
     if (!Array.isArray(seriesList)) return
     seriesList.forEach((series) => {
-      if (!isPlainObject(series) || !Array.isArray(series.data)) return
-      const urlIndexes = "keys" in series ? getUrlKeyIndexes(series.keys) : defaultUrlIndexes
-      if (urlIndexes.length === 0) return
+      if (!isPlainObject(series)) return
+      const seriesIndexes = "keys" in series ? getUrlKeyIndexes(series.keys) : undefined
+      nestedInheritedIndexes.push(...(seriesIndexes ?? []))
+      const urlIndexes = seriesIndexes ?? defaultUrlIndexes
+      if (!Array.isArray(series.data) || urlIndexes.length === 0) return
 
       series.data = series.data.map((point) => {
         if (!Array.isArray(point)) return point
@@ -345,6 +379,10 @@ const sanitizePositionalUrls = (options: Record<string, unknown>) => {
       })
     })
   })
+
+  getNestedChartOptions(options).forEach((chartOptions) =>
+    sanitizePositionalUrls(chartOptions, nestedInheritedIndexes)
+  )
   return options
 }
 

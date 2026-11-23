@@ -112,6 +112,71 @@ describe("sanitizeChartOptions", () => {
     expect(safe.drilldown.series[0].data).toEqual([[null, 4]])
   })
 
+  test("clears unsafe keys-mapped urls in responsive and exporting chartOptions", () => {
+    const safe = sanitizeChartOptions({
+      series: [{ keys: ["y", "url"], data: [[1, "https://example.com"]] }],
+      responsive: {
+        rules: [{
+          condition: { maxWidth: 500 },
+          chartOptions: {
+            series: [{ keys: ["y", "url"], data: [[1, "javascript:alert(1)"], [2, "/ok"]] }],
+          },
+        }, {
+          condition: { maxWidth: 300 },
+          chartOptions: { series: [{ data: [[1, "data:text/html,hi"]] }] },
+        }],
+      },
+      exporting: {
+        chartOptions: {
+          plotOptions: { column: { keys: ["y", "href"] } },
+          series: [{ data: [[1, "javascript:alert(1)"]] }],
+        },
+      },
+    })
+
+    expect(safe.series[0].data).toEqual([[1, "https://example.com"]])
+    expect(safe.responsive.rules[0].chartOptions.series[0].data).toEqual([[1, null], [2, "/ok"]])
+    expect(safe.responsive.rules[1].chartOptions.series[0].data).toEqual([[1, null]])
+    expect(safe.exporting.chartOptions.series[0].data).toEqual([[1, null]])
+  })
+
+  test("strict mode keeps series keys and still clears unsafe urls mapped through them", () => {
+    const safe = sanitizeChartOptions({
+      series: [{
+        keys: ["x", "y", "url"],
+        data: [[1, 10, "https://example.com"], [2, 20, "javascript:alert(1)"]],
+      }],
+      responsive: {
+        rules: [{
+          condition: { maxWidth: 500 },
+          chartOptions: { series: [{ keys: ["y", "href"], data: [[1, "data:text/html,hi"], [2, "/ok"]] }] },
+        }],
+      },
+    }, true)
+
+    expect(safe.series[0].keys).toEqual(["x", "y", "url"])
+    expect(safe.series[0].data).toEqual([[1, 10, "https://example.com"], [2, 20, null]])
+    expect(safe.responsive.rules[0].chartOptions.series[0].data).toEqual([[1, null], [2, "/ok"]])
+  })
+
+  test("strict mode renames keys that map behavior options but keeps their positions", () => {
+    const safe = sanitizeChartOptions({
+      series: [{
+        keys: ["y", "events.click", "dataLabels.useHTML", "tooltipFormatter", "name"],
+        data: [[1, "a", true, "b", "Point"]],
+      }],
+    }, true)
+
+    expect(safe.series[0].keys).toEqual(["y", "pbIgnored", "pbIgnored", "pbIgnored", "name"])
+    expect(safe.series[0].data).toEqual([[1, "a", true, "b", "Point"]])
+  })
+
+  test("default mode leaves series keys as the caller wrote them", () => {
+    const keys = ["y", "dataLabels.useHTML"]
+
+    expect(sanitizeChartOptions({ series: [{ keys, data: [[1, true]] }] }).series[0].keys).toEqual(keys)
+  })
+
   test("strict mode keeps presentation data and drops behavior keys", () => {
     const safe = sanitizeChartOptions(options, true)
 
