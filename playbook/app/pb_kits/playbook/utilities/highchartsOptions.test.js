@@ -74,6 +74,44 @@ describe("sanitizeChartOptions", () => {
     expect(safe.xAxis.min).toBe(day)
   })
 
+  test.each([false, true])("keeps undefined and sparse gaps in series data (strict: %s)", (strict) => {
+    // eslint-disable-next-line no-sparse-arrays
+    const sparse = [1, , 3]
+    const safe = sanitizeChartOptions({
+      series: [{ data: [1, undefined, 3] }, { data: sparse }],
+    }, strict)
+
+    expect(safe.series[0].data).toEqual([1, undefined, 3])
+    expect(safe.series[0].data).toHaveLength(3)
+    expect(safe.series[1].data).toEqual([1, undefined, 3])
+  })
+
+  test("clears unsafe urls mapped by series keys", () => {
+    const safe = sanitizeChartOptions({
+      series: [{
+        keys: ["y", "url"],
+        data: [[1, "javascript:alert(1)"], [2, "https://example.com"], [3, "java\tscript:alert(1)"]],
+      }],
+    })
+
+    expect(safe.series[0].data).toEqual([[1, null], [2, "https://example.com"], [3, null]])
+  })
+
+  test("clears unsafe urls mapped by plotOptions keys and dotted keys", () => {
+    const safe = sanitizeChartOptions({
+      plotOptions: { column: { keys: ["name", "y", "custom.href"] } },
+      series: [
+        { data: [["A", 1, "javascript:alert(1)"], ["B", 2, "/reports/2"]] },
+        { keys: ["name", "y"], data: [["C", "javascript:still-a-name"]] },
+      ],
+      drilldown: { series: [{ id: "a", keys: ["url", "y"], data: [["data:text/html,hi", 4]] }] },
+    })
+
+    expect(safe.series[0].data).toEqual([["A", 1, null], ["B", 2, "/reports/2"]])
+    expect(safe.series[1].data).toEqual([["C", "javascript:still-a-name"]])
+    expect(safe.drilldown.series[0].data).toEqual([[null, 4]])
+  })
+
   test("strict mode keeps presentation data and drops behavior keys", () => {
     const safe = sanitizeChartOptions(options, true)
 

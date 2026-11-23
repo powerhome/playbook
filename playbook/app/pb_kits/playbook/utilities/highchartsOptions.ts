@@ -290,9 +290,9 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> => {
 const walk = (value: unknown, strict: boolean): unknown => {
   if (typeof value === "function") return strict ? undefined : value
   if (Array.isArray(value)) {
-    return value
-      .map((item) => walk(item, strict))
-      .filter((item) => item !== undefined)
+    return Array.from(value, (item) =>
+      strict && typeof item === "function" ? null : walk(item, strict)
+    )
   }
   if (!isPlainObject(value)) return value
 
@@ -312,10 +312,46 @@ const walk = (value: unknown, strict: boolean): unknown => {
   return result
 }
 
+const getUrlKeyIndexes = (keys: unknown): number[] => {
+  if (!Array.isArray(keys)) return []
+  return keys.flatMap((key, index) =>
+    typeof key === "string" && URL_KEYS.has(key.split(".").pop() ?? "") ? [index] : []
+  )
+}
+
+// `keys` maps array point values onto point options by position, so `url` can arrive without its key name.
+// Series `keys` override plotOptions `keys`. The series type can come from the kit theme, so without
+// series `keys`, positions from every plotOptions entry are checked. Only string values are cleared.
+const sanitizePositionalUrls = (options: Record<string, unknown>) => {
+  const plotOptions = isPlainObject(options.plotOptions) ? Object.values(options.plotOptions) : []
+  const defaultUrlIndexes = plotOptions.flatMap((typeOptions) =>
+    isPlainObject(typeOptions) ? getUrlKeyIndexes(typeOptions.keys) : []
+  )
+  const drilldownSeries = isPlainObject(options.drilldown) ? options.drilldown.series : undefined
+  const seriesLists = [options.series, drilldownSeries]
+
+  seriesLists.forEach((seriesList) => {
+    if (!Array.isArray(seriesList)) return
+    seriesList.forEach((series) => {
+      if (!isPlainObject(series) || !Array.isArray(series.data)) return
+      const urlIndexes = "keys" in series ? getUrlKeyIndexes(series.keys) : defaultUrlIndexes
+      if (urlIndexes.length === 0) return
+
+      series.data = series.data.map((point) => {
+        if (!Array.isArray(point)) return point
+        return point.map((value, index) =>
+          urlIndexes.includes(index) && typeof value === "string" && !isSafeChartUrl(value) ? null : value
+        )
+      })
+    })
+  })
+  return options
+}
+
 export const sanitizeChartOptions = (
   options: Record<string, unknown>,
   strict = false
-): Record<string, unknown> => walk(options, strict) as Record<string, unknown>
+): Record<string, unknown> => sanitizePositionalUrls(walk(options, strict) as Record<string, unknown>)
 
 export const lockChartCredits = (options: Record<string, unknown>) => {
   options.credits = { enabled: false }
