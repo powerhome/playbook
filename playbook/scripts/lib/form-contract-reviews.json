@@ -142,11 +142,11 @@
       "lib/playbook/forms/builder/time_zone_select_field.rb": "4fa1d423b1e4c48b696a1f08af1c9630091277ca737e8b98146cab85545f2964"
     },
     "star_rating": {
-      "app/pb_kits/playbook/pb_star_rating/_star_rating.tsx": "9ac320f7d6c633c33cc76d3581fd04e86044ce0b9f8e67de8e375143271f4e7b",
+      "app/pb_kits/playbook/pb_star_rating/_star_rating.tsx": "012222af8eb1feee1717da1807ca18d23a7aa83966de95ec50c45cba9493feb2",
       "app/pb_kits/playbook/pb_star_rating/index.js": "aecb4796c52a4981ae1f6e05bb5693c8e7839c683e5630f3e2e580fa7dddc16d",
-      "app/pb_kits/playbook/pb_star_rating/star_rating.html.erb": "977c0d39d6874855ba2faded253c3c33deeba74121870d1187371587be239ae2",
-      "app/pb_kits/playbook/pb_star_rating/star_rating.rb": "86ef421223df8a84fb65680cbe6648bd684ccb1d54e32a7c72ccf52ad4f45102",
-      "app/pb_kits/playbook/pb_star_rating/stars/utils.tsx": "06b5ac5b40e32b7c7bd60644a1d9ad8d7c7f79b4d255e46b79b385d012ca96bf",
+      "app/pb_kits/playbook/pb_star_rating/star_rating.html.erb": "a8dc088be24e31b517b0509441539f81964dcbbdb6e6e8958064d42fa8e9d3ce",
+      "app/pb_kits/playbook/pb_star_rating/star_rating.rb": "ba013f5b4bb88546d7b1ba55f3ac7f669af553c78ce05b1e0d85dceaa4ffc4c9",
+      "app/pb_kits/playbook/pb_star_rating/stars/utils.tsx": "e435dac45107f23f234502792f632c5b07495a07b1001fd05bf463ea4b8c4726",
       "app/pb_kits/playbook/pb_star_rating/subcomponents/_star_rating_display.tsx": "0abca94bbe1645790d6c2e7b8ab0d5d42412ca9d4e114900d0ef2f288d304bfa",
       "app/pb_kits/playbook/pb_star_rating/subcomponents/_star_rating_interactive.tsx": "ae2c8da8308a7960885238988f871ce3cc276dce09d6527537baea92933336b3",
       "lib/playbook/forms/builder.rb": "bca17b6922b5933b90c2a853a7633c084ef990a800a66f8ff50dc2c0b53e8512",
