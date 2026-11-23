@@ -48,7 +48,7 @@
     "react-markdown": "^10.1.0",
     "react-router-dom": "^6.30.4",
     "sass": "^1.77.6",
-    "vite": "6.4.5",
+    "vite": "7.3.7",
     "vite-plugin-ruby": "^5.0.0",
     "zxcvbn": "^4.4.2"
   }
