@@ -83,6 +83,9 @@ function formatRubyValue(value: unknown, depth = 0): string {
   return JSON.stringify(value);
 }
 
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+const ISO_DATE_TIME = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?$/;
+
 const formatRailsPropValue = (
   name: string,
   value: unknown,
@@ -100,6 +103,18 @@ const formatRailsPropValue = (
 
   if (Array.isArray(value)) {
     return `${formatRailsPropName(name)}: ${formatRubyValue(value)}`;
+  }
+
+  // kit.schema `Date`: Playbook::Props::Date needs a Date object, so parse ISO
+  // strings the same way Playground::PropFilter does for the preview.
+  if (/\bdate\b/.test(propType) && typeof value === "string") {
+    const trimmed = value.trim();
+    if (ISO_DATE.test(trimmed)) {
+      return `${formatRailsPropName(name)}: Date.parse(${JSON.stringify(trimmed)})`;
+    }
+    if (ISO_DATE_TIME.test(trimmed)) {
+      return `${formatRailsPropName(name)}: DateTime.parse(${JSON.stringify(trimmed)})`;
+    }
   }
 
   if (propType === "boolean") {

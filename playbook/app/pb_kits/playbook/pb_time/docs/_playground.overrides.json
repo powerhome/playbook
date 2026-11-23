@@ -2,7 +2,7 @@
   "groups": [
     {
       "name": "Content",
-      "props": ["date", "showTimezone", "timeZone"]
+      "props": ["date", "showTimezone", "timeZone", "time", "timezone"]
     },
     {
       "name": "Appearance",
@@ -37,10 +37,43 @@
         "date": "2026-04-09T15:30:00.000Z",
         "timeZone": "America/Los_Angeles"
       }
+    },
+    {
+      "name": "Time",
+      "platforms": ["rails"],
+      "props": {
+        "time": "2026-04-09T15:30:00Z"
+      }
+    },
+    {
+      "name": "Medium with icon",
+      "platforms": ["rails"],
+      "props": {
+        "time": "2026-04-09T13:15:00Z",
+        "showIcon": true,
+        "size": "md"
+      }
+    },
+    {
+      "name": "No timezone label",
+      "platforms": ["rails"],
+      "props": {
+        "time": "2026-04-09T15:30:00Z",
+        "showTimezone": false
+      }
+    },
+    {
+      "name": "Pacific timezone",
+      "platforms": ["rails"],
+      "props": {
+        "time": "2026-04-09T15:30:00Z",
+        "timezone": "America/Los_Angeles"
+      }
     }
   ],
   "conditionals": {
-    "timeZone": { "requires": "showTimezone" }
+    "timeZone": { "requires": "showTimezone" },
+    "timezone": { "requires": "showTimezone" }
   },
   "hints": {
     "default": {

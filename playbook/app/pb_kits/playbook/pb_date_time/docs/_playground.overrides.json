@@ -2,7 +2,7 @@
   "groups": [
     {
       "name": "Date Config",
-      "props": ["datetime", "showDayOfWeek", "showCurrentYear", "showIcon", "timeZone"]
+      "props": ["datetime", "showDayOfWeek", "showCurrentYear", "showIcon", "timeZone", "date", "timezone"]
     },
     {
       "name": "Appearance",
@@ -51,12 +51,45 @@
         "datetime": "2026-04-09T15:30:00.000Z",
         "timeZone": "Asia/Tokyo"
       }
-    }, 
+    },
     {
       "name": "Always show year",
       "props": {
         "datetime": "2026-04-09T15:30:00.000Z",
         "showCurrentYear": true
+      }
+    },
+    {
+      "name": "Date and time",
+      "platforms": ["rails"],
+      "props": {
+        "date": "2026-04-09T15:30:00Z"
+      }
+    },
+    {
+      "name": "Small with icon",
+      "platforms": ["rails"],
+      "props": {
+        "date": "2026-04-09T15:30:00Z",
+        "size": "sm",
+        "showIcon": true
+      }
+    },
+    {
+      "name": "Weekday & year",
+      "platforms": ["rails"],
+      "props": {
+        "date": "2026-06-12T11:00:00Z",
+        "showDayOfWeek": true,
+        "showCurrentYear": true
+      }
+    },
+    {
+      "name": "Tokyo timezone",
+      "platforms": ["rails"],
+      "props": {
+        "date": "2026-04-09T15:30:00Z",
+        "timezone": "Asia/Tokyo"
       }
     }
   ],
@@ -65,6 +98,11 @@
     "tokyo_time": {
       "presetName": "Tokyo time",
       "message": "Use the timeZone prop to display the time in a different timezone",
+      "type": "info"
+    },
+    "tokyo_timezone": {
+      "presetName": "Tokyo timezone",
+      "message": "Use the timezone prop to display the time in a different timezone",
       "type": "info"
     }
   }

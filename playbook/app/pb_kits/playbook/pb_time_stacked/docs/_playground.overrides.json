@@ -1,8 +1,14 @@
 {
+  "customProps": {
+    "time": {
+      "type": "Date",
+      "platforms": ["rails"]
+    }
+  },
   "groups": [
     {
       "name": "Content",
-      "props": ["time", "timeZone"]
+      "props": ["time", "timeZone", "timezone"]
     },
     {
       "name": "Appearance",
@@ -12,12 +18,14 @@
   "presets": [
     {
       "name": "Default",
+      "platforms": ["react"],
       "props": {
         "time": 1775748600000
       }
     },
     {
       "name": "Centered",
+      "platforms": ["react"],
       "props": {
         "time": 1775748600000,
         "align": "center"
@@ -25,6 +33,7 @@
     },
     {
       "name": "Right aligned",
+      "platforms": ["react"],
       "props": {
         "time": 1775764800000,
         "align": "right"
@@ -35,6 +44,37 @@
       "props": {
         "time": 1775748600000,
         "timeZone": "Europe/London"
+      }
+    },
+    {
+      "name": "Time",
+      "platforms": ["rails"],
+      "props": {
+        "time": "2026-04-09T15:30:00Z"
+      }
+    },
+    {
+      "name": "Centered time",
+      "platforms": ["rails"],
+      "props": {
+        "time": "2026-04-09T15:30:00Z",
+        "align": "center"
+      }
+    },
+    {
+      "name": "Right aligned time",
+      "platforms": ["rails"],
+      "props": {
+        "time": "2026-04-09T20:00:00Z",
+        "align": "right"
+      }
+    },
+    {
+      "name": "London timezone",
+      "platforms": ["rails"],
+      "props": {
+        "time": "2026-04-09T15:30:00Z",
+        "timezone": "Europe/London"
       }
     }
   ],

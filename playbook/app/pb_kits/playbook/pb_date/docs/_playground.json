@@ -17,7 +17,9 @@
         "value",
         "showDayOfWeek",
         "showCurrentYear",
-        "showIcon"
+        "showIcon",
+        "date",
+        "timezone"
       ]
     },
     {
@@ -56,6 +58,48 @@
       "props": {
         "value": "2024-11-02",
         "showIcon": true,
+        "showCurrentYear": true
+      }
+    },
+    {
+      "name": "Date",
+      "platforms": [
+        "rails"
+      ],
+      "props": {
+        "date": "2026-04-09T12:00:00Z"
+      }
+    },
+    {
+      "name": "Large & centered",
+      "platforms": [
+        "rails"
+      ],
+      "props": {
+        "date": "2026-04-09T12:00:00Z",
+        "size": "lg",
+        "alignment": "center"
+      }
+    },
+    {
+      "name": "Weekday & icon",
+      "platforms": [
+        "rails"
+      ],
+      "props": {
+        "date": "2026-06-18T12:00:00Z",
+        "size": "sm",
+        "showDayOfWeek": true,
+        "showIcon": true
+      }
+    },
+    {
+      "name": "Show year",
+      "platforms": [
+        "rails"
+      ],
+      "props": {
+        "date": "2024-11-02T12:00:00Z",
         "showCurrentYear": true
       }
     }

@@ -8,6 +8,7 @@ module Playground
   # - html_options / data / aria / style are never forwarded
   # - on_error is never forwarded (rendered as an inline JS handler, e.g. Image)
   # - Code-like playground values are dropped
+  # - ISO date strings for schema `Date` props become Date / DateTime objects
   # - icon / custom_icon values that look like URLs or paths are dropped (SSRF defense)
   class PropFilter
     BLOCKED_PROP_NAMES = %w[
@@ -25,6 +26,9 @@ module Playground
       custom_icon
       customIcon
     ].freeze
+
+    ISO_DATE = /\A\d{4}-\d{2}-\d{2}\z/
+    ISO_DATE_TIME = /\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?\z/
 
     def self.filter_kit_and_globals(kit_name:, props:, global_props: {})
       new(kit_name: kit_name).filter_kit_and_globals(props: props, global_props: global_props)
@@ -75,7 +79,7 @@ module Playground
         next if unsupported_value?(value)
         next if unsafe_icon_source?(camel_key, value)
 
-        converted = deep_convert(value)
+        converted = date_prop?(definition) ? convert_iso_date(value) : deep_convert(value)
         next if converted.nil?
 
         merged[camel_to_snake(camel_key).to_sym] = converted
@@ -142,6 +146,28 @@ module Playground
       end
 
       false
+    end
+
+    # Kit schema `Date` props: the playground sends ISO strings, but Rails kits
+    # typed with Playbook::Props::Date only accept Date objects. Mirrors the
+    # Date.parse / DateTime.parse emitted by RailsCodeGenerator.ts.
+    def date_prop?(definition)
+      definition["type"].to_s.downcase.match?(/\bdate\b/)
+    end
+
+    def convert_iso_date(value)
+      return deep_convert(value) unless value.is_a?(String)
+
+      trimmed = value.strip
+      if trimmed.match?(ISO_DATE)
+        ::Date.iso8601(trimmed)
+      elsif trimmed.match?(ISO_DATE_TIME)
+        ::DateTime.iso8601(trimmed)
+      else
+        value
+      end
+    rescue ::Date::Error
+      nil
     end
 
     def playground_code_expression?(value)

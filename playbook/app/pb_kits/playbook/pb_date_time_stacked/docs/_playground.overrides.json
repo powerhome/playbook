@@ -2,7 +2,7 @@
   "groups": [
     {
       "name": "Date Config",
-      "props": ["datetime", "timeZone", "showCurrentYear"]
+      "props": ["datetime", "timeZone", "showCurrentYear", "dateTime", "timezone"]
     },
     {
       "name": "Appearance",
@@ -29,6 +29,29 @@
         "datetime": "2026-04-09T15:30:00.000Z",
         "timeZone": "Europe/Paris"
       }
+    },
+    {
+      "name": "Date and time",
+      "platforms": ["rails"],
+      "props": {
+        "dateTime": "2026-04-09T15:30:00Z"
+      }
+    },
+    {
+      "name": "Show year",
+      "platforms": ["rails"],
+      "props": {
+        "dateTime": "2024-10-31T18:45:00Z",
+        "showCurrentYear": true
+      }
+    },
+    {
+      "name": "Paris timezone",
+      "platforms": ["rails"],
+      "props": {
+        "dateTime": "2026-04-09T15:30:00Z",
+        "timezone": "Europe/Paris"
+      }
     }
   ],
   "conditionals": {},
@@ -37,6 +60,14 @@
       "presetName": "Paris time",
       "message": "Use the timeZone prop to display the time in a different timezone",
       "type": "info"
+    },
+    "paris_timezone": {
+      "presetName": "Paris timezone",
+      "message": "Use the timezone prop to display the time in a different timezone",
+      "type": "info"
     }
+  },
+  "hiddenPropsByPlatform": {
+    "rails": ["date"]
   }
 }
