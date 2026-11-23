@@ -1057,6 +1057,30 @@ const Colors = () => {
                 <Body>Accessories</Body>
               </Card>,
             ],
+            [
+              <ColorSwatch color="#FCC419" />,
+              <Title size={4}>$trim</Title>,
+              "$product_9_background",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Trim</Body>
+              </Card>,
+            ],
+            [
+              <ColorSwatch color="#635445" />,
+              <Title size={4}>$hardboard_siding</Title>,
+              "$product_11_background",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Hardboard Siding</Body>
+              </Card>,
+            ],  
+            [
+              <ColorSwatch color="#6F83AF" />,
+              <Title size={4}>$multi</Title>,
+              "$product_12_background",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Multi</Body>
+              </Card>,
+            ],  
           ]}
         />
       </ShowPage>

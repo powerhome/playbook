@@ -134,6 +134,8 @@ export interface PlaygroundPreset {
   structureMode?: string;
   /** Key in `dataPresets.presets` — loads that bundle’s `columnDefinitions` + `tableData`. */
   dataPreset?: string | null;
+  /** Limit this preset to these playground tabs. Omit to show it on every platform. */
+  platforms?: ("react" | "rails")[];
 }
 
 export interface PlaygroundHint {
@@ -213,6 +215,8 @@ export interface PlaygroundConfig {
   statefulProps?: string[];
   /** Kit prop names to omit from the playground props panel (still in kit.schema.json). */
   hiddenProps?: string[];
+  /** Like `hiddenProps`, but only on one playground tab (e.g. `{ "rails": ["onError"] }`). */
+  hiddenPropsByPlatform?: Partial<Record<"react" | "rails", string[]>>;
   externalImports?: string[];
   /** Prop names for which an explicit empty string is a meaningful value and should be emitted as `prop=""` instead of omitted. */
   emitEmptyStringProps?: string[];

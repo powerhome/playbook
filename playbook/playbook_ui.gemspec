@@ -48,7 +48,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "brakeman", "7.0.0"
   s.add_development_dependency "byebug", ">= 11.0.0"
   s.add_development_dependency "ostruct"
-  s.add_development_dependency "rails", ">= 7.1.0"
   s.add_development_dependency "rspec-html-matchers", "0.9.1"
   s.add_development_dependency "rspec-rails", "~> 3.8", ">= 3.8.0"
   s.add_development_dependency "rubocop", "~> 1.84.2"

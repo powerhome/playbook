@@ -1,6 +1,7 @@
 import { Background, Body, Title, Table } from "playbook-ui";
 import HeaderImage from "../../../../../images/getting-started.svg";
-
+import productBackgroundColors from "../../../../../images/product-colors.png";
+import productHighlightColors from "../../../../../images/product-highlight-colors.png";
 const Color = () => {
   return (
     <>
@@ -321,12 +322,12 @@ const Color = () => {
             </thead>
             <tbody>
               <tr>
-                <td><img src="https://github.com/powerhome/playbook/assets/89551222/9729ae41-c614-4436-a79d-c2962e804bde" alt="Product Background" /></td>
+                <td><img src={productBackgroundColors} alt="Product Background" /></td>
                 <td><small>PRODUCT BACKGROUND 1 - 12<br />$product_1_background - $product_12_background</small></td>
                 <td>Used as a background color and text color for a grouping of reoccurring items</td>
               </tr>
               <tr>
-                <td><img src="https://github.com/powerhome/playbook/assets/89551222/43b5012c-c27d-4587-9e72-5fff35785c82" alt="Product Highlight" /></td>
+                <td><img src={productHighlightColors} alt="Product Highlight" /></td>
                 <td><small>PRODUCT HIGHLIGHT 1 - 12<br />$product_1_highlight - $product_12_highlight</small></td>
                 <td>Used as a highlight color perfect for icons or emphasis for a grouping of reoccurring items</td>
               </tr>

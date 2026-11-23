@@ -301,5 +301,54 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:html]).not_to include("127.0.0.1")
       expect(result[:html]).not_to include("secret.svg")
     end
+
+    it "drops image on_error so the preview never renders an inline handler" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "image",
+        props: { "url" => "https://example.invalid/missing.jpg", "onError" => "alert(1)" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("pb_image_kit")
+      expect(result[:html]).not_to include("onerror")
+    end
+  end
+
+  describe "text, icon, and label kits" do
+    global_prop_names = JSON.parse(
+      Playbook::Engine.root.join("app/pb_kits/playbook/utilities/global-props.schema.json").read
+    )["props"].keys
+
+    %w[
+      body detail hashtag highlight icon_circle icon_value image
+      label_pill label_value link pill source title_count title_detail
+    ].each do |kit|
+      it "renders every Rails preset for #{kit}" do
+        schema = JSON.parse(Playbook.kit_path(kit, "", "kit.schema.json").read)
+        config = JSON.parse(Playbook.kit_path(kit, "docs", "_playground.json").read)
+        rails_props = schema["props"].select { |_, d| d["platforms"].blank? || d["platforms"].include?("rails") }
+        presets = config["presets"].select do |preset|
+          (preset["platforms"].nil? || preset["platforms"].include?("rails")) &&
+            preset.fetch("props", {}).keys.all? { |name| rails_props.key?(name) || global_prop_names.include?(name) }
+        end
+
+        expect(presets).not_to be_empty
+
+        presets.each do |preset|
+          props, global_props = preset.fetch("props", {}).partition { |name, _| rails_props.key?(name) }.map(&:to_h)
+          result = described_class.new(
+            view_context: view_context,
+            kit_name: kit,
+            props: props,
+            global_props: global_props,
+            children: preset["children"].presence
+          ).render
+
+          expect(result[:error]).to be_nil, "#{kit} preset #{preset['name']} failed"
+          expect(result[:html]).to be_present
+        end
+      end
+    end
   end
 end

@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "appraisal", "~> 2.5"
+gem "rails", "~> 8.1.4", ">= 8.1.4.1"
 gem "vite_rails"
 gem "vite_ruby", "3.8.0"
 

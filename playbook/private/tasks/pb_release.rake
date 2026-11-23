@@ -62,6 +62,15 @@ namespace :pb_release do
     `bundle`
     puts "Updated Gemfile.lock"
 
+    # Appraisal lockfiles pin the local playbook_ui version too; CI installs them frozen.
+    Dir["gemfiles/*.gemfile"].each do |gemfile|
+      updated = Bundler.with_unbundled_env do
+        system({ "BUNDLE_GEMFILE" => File.expand_path(gemfile) }, "bundle", "install", "--quiet")
+      end
+      abort "Failed to update #{gemfile}.lock. Run `BUNDLE_GEMFILE=#{gemfile} bundle install` and retry." unless updated
+      puts "Updated #{gemfile}.lock"
+    end
+
     # The website bundles playbook_ui from this checkout, so its lockfile records the version too.
     # Clear Bundler's env so this bundles playbook-website's Gemfile, not playbook's, but pin the
     # lockfile's own Bundler so a different Bundler on PATH can't rewrite BUNDLED WITH.
