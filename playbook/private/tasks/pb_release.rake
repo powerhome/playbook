@@ -63,9 +63,11 @@ namespace :pb_release do
     puts "Updated Gemfile.lock"
 
     # Appraisal lockfiles pin the local playbook_ui version too; CI installs them frozen.
+    # Pin each lockfile's own Bundler so a different Bundler on PATH can't rewrite BUNDLED WITH.
     Dir["gemfiles/*.gemfile"].each do |gemfile|
+      env = bundler_pin("#{gemfile}.lock").merge("BUNDLE_GEMFILE" => File.expand_path(gemfile))
       updated = Bundler.with_unbundled_env do
-        system({ "BUNDLE_GEMFILE" => File.expand_path(gemfile) }, "bundle", "install", "--quiet")
+        system(env, "bundle", "install", "--quiet")
       end
       abort "Failed to update #{gemfile}.lock. Run `BUNDLE_GEMFILE=#{gemfile} bundle install` and retry." unless updated
       puts "Updated #{gemfile}.lock"
@@ -75,9 +77,7 @@ namespace :pb_release do
     # Clear Bundler's env so this bundles playbook-website's Gemfile, not playbook's, but pin the
     # lockfile's own Bundler so a different Bundler on PATH can't rewrite BUNDLED WITH.
     website_dir = "../playbook-website"
-    bundled_with = File.read("#{website_dir}/Gemfile.lock")[/^BUNDLED WITH\n\s+(\S+)/, 1]
-    website_env = bundled_with ? { "BUNDLER_VERSION" => bundled_with } : {}
-    website_bundled = Bundler.with_unbundled_env { system(website_env, "bundle", chdir: website_dir) }
+    website_bundled = Bundler.with_unbundled_env { system(bundler_pin("#{website_dir}/Gemfile.lock"), "bundle", chdir: website_dir) }
     if website_bundled
       puts "Updated playbook-website/Gemfile.lock"
     else
@@ -103,6 +103,12 @@ namespace :pb_release do
     puts "\nChanged files:"
     system("git", "status", "--short", chdir: "..")
     puts "\nEdit the title and description in CHANGELOG.md, then commit your changes and create a PR to merge to master"
+  end
+
+  # Env that runs the Bundler version a lockfile was written with, so bundling keeps its BUNDLED WITH.
+  def bundler_pin(lockfile)
+    bundled_with = File.exist?(lockfile) && File.read(lockfile)[/^BUNDLED WITH\n\s+(\S+)/, 1]
+    bundled_with ? { "BUNDLER_VERSION" => bundled_with } : {}
   end
 
   # Runs in a separate process so the generator reads the new version from version.rb.
