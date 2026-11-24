@@ -43,7 +43,6 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     propValues,
     displayPropValues,
     children,
-    activePresetIndex,
     activeStructureMode,
     activeDataPresetKey,
     reactProps,
@@ -61,8 +60,10 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     availableStructureModes,
     availableDataPresets,
     requiredPropNames,
+    platformPresets,
+    activePlatformPresetIndex,
     handlePropChange,
-    applyPreset,
+    applyPlatformPreset,
     setChildren,
     handleStructureModeChange,
     handleDataPresetChange,
@@ -86,8 +87,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
   }
 
   const totalKitProps = Object.keys(reactProps).length;
-  const hasPresets =
-    playgroundConfig?.presets && playgroundConfig.presets.length > 0;
+  const hasPresets = platformPresets.length > 0;
   const hasStructureModes = availableStructureModes.length > 0;
   const hasDataPresets = availableDataPresets.length > 0;
 
@@ -122,9 +122,9 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         <Caption text={`${displayKitName} Setup`} />
         {hasPresets && (
           <PresetsBar
-            presets={playgroundConfig!.presets!}
-            activePresetIndex={activePresetIndex}
-            onPresetClick={applyPreset}
+            presets={platformPresets}
+            activePresetIndex={activePlatformPresetIndex}
+            onPresetClick={applyPlatformPreset}
           />
         )}
 

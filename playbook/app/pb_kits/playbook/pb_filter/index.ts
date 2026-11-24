@@ -3,6 +3,10 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { createPopper, Instance as PopperInstance } from "@popperjs/core";
 import flatpickr from "flatpickr";
+import { getAllIcons } from "../utilities/icons/allicons";
+import selectionTypePlugins from "../pb_date_picker/selection_type_plugins";
+
+const { angleLeft, angleRight } = getAllIcons();
 
 const INTERACTIVE_FILTER_SELECTOR = "[data-pb-interactive-filter]";
 
@@ -204,14 +208,17 @@ export default class PbFilter extends PbEnhancedElement {
       inline: true,
       defaultDate: dataset.pbFilterValue || undefined,
       mode,
+      // Keep before minDate/maxDate: flatpickr parses them with this format before plugins (e.g. month's F Y) run.
       dateFormat: dataset.pbFilterDateFormat || "m/d/Y",
+      plugins: selectionTypePlugins(dataset.pbFilterDateSelectionType),
       minDate: dataset.pbFilterDateMin || undefined,
       maxDate: dataset.pbFilterDateMax || undefined,
-      nextArrow: '<i class="far fa-angle-right"></i>',
-      prevArrow: '<i class="far fa-angle-left"></i>',
-      onChange: (_dates: Date[], dateStr: string) => {
+      nextArrow: `<div style="height: 14px;">${angleRight.string}</div>`,
+      prevArrow: `<div style="height: 14px;">${angleLeft.string}</div>`,
+      onChange: (_dates: Date[], dateStr: string, instance) => {
         this.applyChange(dateStr, dateStr);
-        if (mode === "single") this.hide();
+        // Use the instance's mode: plugins can override the configured one (weekSelect forces single).
+        if (instance.config.mode === "single") this.hide();
       },
     });
   }

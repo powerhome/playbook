@@ -223,6 +223,42 @@ const FormPillColors = (props) => {
           text="Accessories"
           {...props}
       />
+      <FormPill
+          color="trim"
+          onClick={() => {
+            alert('Click!')
+          }}
+          tabIndex={0}
+          text="Trim"
+          {...props}
+      />
+      <FormPill
+          color="product_10_background"
+          onClick={() => {
+            alert('Click!')
+          }}
+          tabIndex={0}
+          text="Product 10 Background"
+          {...props}
+      />
+      <FormPill
+          color="hardboard_siding"
+          onClick={() => {
+            alert('Click!')
+          }}
+          tabIndex={0}
+          text="Hardboard Siding"
+          {...props}
+      />
+      <FormPill
+          color="multi"
+          onClick={() => {
+            alert('Click!')
+          }}
+          tabIndex={0}
+          text="Multi"
+          {...props}
+      />
     </div>
   )
 }

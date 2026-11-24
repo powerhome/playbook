@@ -52,4 +52,17 @@ RSpec.describe Playground::PropFilter do
       expect(filtered).not_to have_key(:style)
     end
   end
+
+  describe ".filter_kit_and_globals" do
+    it "returns symbol-keyed plain hashes for nested request params" do
+      params = ActiveSupport::HashWithIndifferentAccess.new(
+        "user" => { "name" => "Ada Lovelace", "userId" => "42" }
+      )
+
+      filtered = described_class.filter_kit_and_globals(kit_name: "source", props: params)
+
+      expect(filtered[:user]).to eq(name: "Ada Lovelace", user_id: "42")
+      expect(filtered[:user]).not_to be_a(ActiveSupport::HashWithIndifferentAccess)
+    end
+  end
 end

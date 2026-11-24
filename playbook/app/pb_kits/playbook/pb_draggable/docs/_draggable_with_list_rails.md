@@ -4,4 +4,4 @@ The List kit is optimized to work with the draggable kit. To enable drag, use th
 
 An additional optional boolean prop (set to true by default) of `drag_handle` is also available on ListItem kit to show the drag handle icon.
 
-On touch devices, drag from the grip handle (no long press). Swiping the rest of the row scrolls as usual. Keep `drag_handle` enabled on mobile. Desktop mouse drag is unchanged.
+On touch devices, press and hold the grip handle to start dragging. Swiping the rest of the row scrolls as usual. Keep `drag_handle` enabled on mobile. Desktop mouse drag is unchanged.

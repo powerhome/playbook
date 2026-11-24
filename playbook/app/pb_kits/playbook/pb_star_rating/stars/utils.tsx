@@ -83,3 +83,15 @@ export const getStarIconObject = (backgroundType: string, color: string, dark: b
         }
     }
 }
+
+export const MAX_DENOMINATOR = 10
+
+const isValidCount = (value: number) => Number.isFinite(value) && value >= 0
+
+// Returns null for negative or non-finite input so callers can skip rendering.
+export const normalizeStarRating = (rating: number, denominator: number) => {
+    if (!isValidCount(rating) || !isValidCount(denominator)) return null
+
+    const cappedDenominator = Math.min(Math.floor(denominator), MAX_DENOMINATOR)
+    return { denominator: cappedDenominator, rating: Math.min(rating, cappedDenominator) }
+}

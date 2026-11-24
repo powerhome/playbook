@@ -1,1 +1,1 @@
-Radio inputs can be used inside `dropdown/dropdown_option` for a custom layout that mimics form-like selection within a dropdown.
+Radio inputs can be used inside `dropdown/dropdown_option` for a custom layout that mimics form-like selection within a dropdown. Use the [active_style](https://playbook.powerapp.cloud/kits/dropdown/rails#dropdown_with_custom_active_style_options) `background_color` and `font_color` props to create contrast between the Radio selection indicator and the Dropdown selection background indicator.

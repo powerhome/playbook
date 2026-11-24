@@ -69,6 +69,7 @@
     },
     {
       "name": "Details With Date",
+      "platforms": ["react"],
       "props": {
         "variant": "details",
         "label": "Project",
@@ -90,6 +91,9 @@
       }
     }
   ],
+  "hiddenPropsByPlatform": {
+    "rails": ["date"]
+  },
   "conditionals": {
     "icon": { "requires": { "variant": "details" } },
     "description": { "requires": { "variant": "details" } },

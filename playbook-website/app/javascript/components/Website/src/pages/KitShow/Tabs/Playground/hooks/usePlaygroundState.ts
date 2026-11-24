@@ -58,10 +58,6 @@ export const usePlaygroundState = ({
   playgroundConfig,
   platform = "react",
 }: UsePlaygroundStateProps) => {
-  // Initialize with first preset if available
-  const firstPreset = playgroundConfig?.presets?.[0];
-  const firstPresetIndex = firstPreset ? 0 : null;
-  
   // Get required props (always enabled with default values)
   const requiredProps = useMemo(
     () => playgroundConfig?.requiredProps ?? {},
@@ -115,12 +111,12 @@ export const usePlaygroundState = ({
     [getChildrenForState, normalizeChildren]
   );
 
-  const initialStructureMode = getStructureModeForPreset(firstPresetIndex, defaultStructureMode);
-  const initialDataPresetKey = getDataPresetForPreset(firstPresetIndex, null);
-
   const hiddenPropNames = useMemo(
-    () => new Set(playgroundConfig?.hiddenProps ?? []),
-    [playgroundConfig?.hiddenProps]
+    () => new Set([
+      ...(playgroundConfig?.hiddenProps ?? []),
+      ...(playgroundConfig?.hiddenPropsByPlatform?.[platform] ?? []),
+    ]),
+    [playgroundConfig?.hiddenProps, playgroundConfig?.hiddenPropsByPlatform, platform]
   );
 
   const emitEmptyStringPropNames = useMemo(
@@ -158,15 +154,41 @@ export const usePlaygroundState = ({
     return globalPropsSchema.props;
   }, [globalPropsSchema, kitSchema]);
 
-  const playgroundProps = useMemo(
-    () => ({ ...reactProps, ...(playgroundConfig?.customProps ?? {}) }),
-    [reactProps, playgroundConfig?.customProps]
-  );
+  const playgroundProps = useMemo(() => {
+    // A custom prop for another platform must not replace this platform's schema
+    // definition (e.g. Image's React size has no Rails "none" or Rails default).
+    const customProps = Object.fromEntries(
+      Object.entries(playgroundConfig?.customProps ?? {}).filter(
+        ([name, def]) =>
+          !hiddenPropNames.has(name) &&
+          !(name in reactProps && def.platforms?.length && !def.platforms.includes(platform)),
+      ),
+    );
+    return { ...reactProps, ...customProps };
+  }, [reactProps, playgroundConfig?.customProps, hiddenPropNames, platform]);
 
   const allPropDefinitions = useMemo(
     () => ({ ...playgroundProps, ...globalProps }),
     [playgroundProps, globalProps]
   );
+
+  // Presets shown on this tab: the platforms tag, plus on Rails only presets
+  // whose props the Rails kit supports. The starting preset uses the same rule.
+  const presetFitsPlatform = useCallback(
+    (preset: NonNullable<PlaygroundConfig["presets"]>[number]) => {
+      if (preset.platforms && !preset.platforms.includes(platform)) return false;
+      if (platform !== "rails") return true;
+      return Object.keys(preset.props ?? {}).every(
+        (name) => requiredPropNames.has(name) || name in playgroundProps || name in globalProps,
+      );
+    },
+    [platform, requiredPropNames, playgroundProps, globalProps],
+  );
+
+  const firstPresetMatch = playgroundConfig?.presets?.findIndex(presetFitsPlatform) ?? -1;
+  const firstPresetIndex = firstPresetMatch >= 0 ? firstPresetMatch : null;
+  const initialStructureMode = getStructureModeForPreset(firstPresetIndex, defaultStructureMode);
+  const initialDataPresetKey = getDataPresetForPreset(firstPresetIndex, null);
 
   const buildFullPropValues = useCallback(
     (
@@ -203,7 +225,7 @@ export const usePlaygroundState = ({
 
   // Reset all state when kit changes
   useEffect(() => {
-    const nextPresetIndex = playgroundConfig?.presets?.[0] ? 0 : null;
+    const nextPresetIndex = firstPresetIndex;
     const nextStructureMode = getStructureModeForPreset(
       nextPresetIndex,
       playgroundConfig?.structureModes?.default ?? null
@@ -403,17 +425,10 @@ export const usePlaygroundState = ({
     [playgroundConfig],
   );
 
-  const platformPresets = useMemo(() => {
-    const all = playgroundConfig?.presets ?? [];
-    if (platform !== "rails") return all;
-
-    return all.filter((preset) =>
-      Object.keys(preset.props ?? {}).every((name) => {
-        if (requiredPropNames.has(name)) return true;
-        return name in playgroundProps || name in globalProps;
-      }),
-    );
-  }, [playgroundConfig?.presets, platform, playgroundProps, globalProps, requiredPropNames]);
+  const platformPresets = useMemo(
+    () => (playgroundConfig?.presets ?? []).filter(presetFitsPlatform),
+    [playgroundConfig?.presets, presetFitsPlatform],
+  );
 
   const activePlatformPresetIndex = useMemo(() => {
     if (activePresetIndex == null || !playgroundConfig?.presets) return null;
@@ -607,10 +622,11 @@ export const usePlaygroundState = ({
       kitName,
       propValues: propValuesForCodegen,
       propDefinitions: allPropDefinitions,
-      children: needsChildren(kitName) ? children : undefined,
+      // Match railsPreviewPayload so copied ERB renders what the preview shows.
+      children: showChildren ? children : undefined,
       structureMode: activeStructureMode,
     });
-  }, [platform, kitName, propValuesForCodegen, allPropDefinitions, children, activeStructureMode]);
+  }, [platform, kitName, propValuesForCodegen, allPropDefinitions, children, showChildren, activeStructureMode]);
 
   // Code generation
   const generatedDisplayCode = useMemo(() => {

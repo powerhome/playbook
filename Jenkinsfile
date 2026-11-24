@@ -33,13 +33,17 @@ app.build(
       """
     }
 
-    stage('Test') {
+    stage('Test (Rails 8.1)') {
       shell "docker compose run --workdir /home/app/src/playbook web ./test.sh"
       shell "docker compose run --no-deps --rm mcp ./test.sh"
     }
 
     stage('Push') {
       shell "docker push image-registry.powerapp.cloud/playbook/playbook-mcp:${env.TRIGGERING_COMMIT}"
+    }
+
+    stage('Rails 7.x Compatibility') {
+      shell "docker compose run --workdir /home/app/src/playbook web bin/test-rails-compatibility"
     }
 
     stage('Website Test') {

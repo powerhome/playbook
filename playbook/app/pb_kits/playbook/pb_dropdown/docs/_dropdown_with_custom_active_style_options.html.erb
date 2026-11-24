@@ -1,0 +1,50 @@
+<%
+  options = [
+    { label: "United States", value: "unitedStates", id: "us" },
+    { label: "Canada", value: "canada", id: "ca" },
+    { label: "Pakistan", value: "pakistan", id: "pk" }
+  ]
+%>
+
+<%= pb_rails("dropdown", props: {
+  active_style: { background_color: "bg_light", font_color: "primary" },
+  label: "Background Color: bg_light; Font Color: primary",
+  margin_bottom: "sm",
+  options: options,
+}) do %>
+  <%= pb_rails("dropdown/dropdown_trigger") %>
+  <%= pb_rails("dropdown/dropdown_container") do %>
+    <% options.each do |option| %>
+      <%= pb_rails("dropdown/dropdown_option", props: { option: option }) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("dropdown", props: {
+  active_style: { background_color: "white", font_color: "primary" },
+  label: "Background Color: white; Font Color: primary",
+  margin_bottom: "sm",
+  options: options,
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  active_style: { background_color: "bg_light", font_color: "text_lt_default" },
+  autocomplete: true,
+  label: "Background Color: bg_light; Font Color: text_lt_default",
+  margin_bottom: "sm",
+  options: options,
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  active_style: { font_color: "text_lt_lighter" },
+  label: "Font Color: text_lt_lighter",
+  margin_bottom: "sm",
+  options: options,
+}) do %>
+  <%= pb_rails("dropdown/dropdown_trigger") %>
+  <%= pb_rails("dropdown/dropdown_container") do %>
+    <% options.each do |option| %>
+      <%= pb_rails("dropdown/dropdown_option", props: { option: option }) %>
+    <% end %>
+  <% end %>
+<% end %>

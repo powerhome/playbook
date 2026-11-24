@@ -20,7 +20,7 @@ module Playbook
                      values: %w[multi single],
                      default: "multi"
       prop :pill_color, type: Playbook::Props::Enum,
-                        values: %w[primary neutral success warning error info data_1 data_2 data_3 data_4 data_5 data_6 data_7 data_8 windows siding roofing doors gutters solar insulation accessories],
+                        values: %w[primary neutral success warning error info data_1 data_2 data_3 data_4 data_5 data_6 data_7 data_8 windows siding roofing doors gutters solar insulation accessories trim product_10_background hardboard_siding multi],
                         default: "primary"
       prop :wrapped, type: Playbook::Props::Boolean,
                      default: false

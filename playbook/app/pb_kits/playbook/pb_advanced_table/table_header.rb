@@ -108,27 +108,24 @@ module Playbook
       # Check if a header cell has a custom renderer
       def has_header_renderer?(cell)
         original_def = find_original_column_def_for_cell(cell)
-        original_def&.dig(:header).present?
+        original_def&.dig(:header).respond_to?(:call)
       rescue
         false
       end
 
-      # Render custom header content
+      # Render custom header content. Only a callable renderer's output is trusted as HTML;
+      # every fallback returns the escaped label because the template outputs this with raw.
       def render_header(cell)
-        return cell[:label] unless has_header_renderer?(cell)
+        escaped_label = ERB::Util.html_escape(cell[:label])
+        return escaped_label unless has_header_renderer?(cell)
 
-        original_def = find_original_column_def_for_cell(cell)
-        return cell[:label] unless original_def
+        custom_renderer = find_original_column_def_for_cell(cell)[:header]
 
-        custom_renderer = original_def[:header]
-        return cell[:label] unless custom_renderer
-
-        # Call the custom renderer with the cell data and label
         begin
           result = custom_renderer.call(cell, cell[:label])
-          result.present? ? result.to_s : cell[:label]
+          result.present? ? result.to_s : escaped_label
         rescue
-          cell[:label]
+          escaped_label
         end
       end
 

@@ -1,0 +1,1 @@
+Set `highlighting` to `true` and pass an array of words or phrases to `highlightedText` (`highlighted_text` in Rails). Each match is wrapped in the [Highlight kit](https://playbook.powerapp.cloud/kits/highlight). Matches are case-insensitive.

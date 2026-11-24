@@ -20,6 +20,8 @@
 
     .pb_draggable_handle,
     .card_draggable_handle {
+      // Handles are dedicated drag targets: never let the browser pan from them, or an armed
+      // drag can lose the gesture to scrolling. Whole-item drag still scrolls normally.
       touch-action: none;
       -webkit-touch-callout: none;
       user-select: none;
@@ -27,6 +29,15 @@
 
       &:active {
         color: $text_lt_default;
+      }
+    }
+
+    // Whole-item touch drag: keep the long-press from selecting text or opening the iOS callout.
+    @media (hover: none) and (pointer: coarse) {
+      &:not(:has(.pb_draggable_handle, .card_draggable_handle)) {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
       }
     }
 

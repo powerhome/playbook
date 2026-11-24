@@ -16,7 +16,7 @@
   raw_example = params[:example]
   example_params =
     if raw_example.respond_to?(:permit)
-      raw_example.permit(:territory, :status, :date_range, :start_date)
+      raw_example.permit(:territory, :status, :date_range, :start_date, :report_month)
     else
       raw_example || {}
     end
@@ -24,6 +24,7 @@
   current_status    = example_params[:status].presence || "open"
   current_date_range = example_params[:date_range].presence || "quickpick-this-week"
   current_start     = example_params[:start_date].presence || "05/01/2026"
+  current_month     = example_params[:report_month].presence || "May 2026"
   status_default    = status_options.find { |o| o[:value] == current_status }
 %>
 
@@ -39,6 +40,7 @@
       { name: "Status",     value: current_status },
       { name: "Date range", value: current_date_range },
       { name: "Start date", value: current_start },
+      { name: "Report month", value: current_month },
     ],
     interactive_filters: [
       {
@@ -67,6 +69,13 @@
         type: "date-picker",
         target_input: "filter-interactive-start",
         format: "m/d/Y",
+        auto_submit: true,
+      },
+      {
+        name: "Report month",
+        type: "date-picker",
+        selection_type: "month",
+        target_input: "filter-interactive-report-month",
         auto_submit: true,
       },
     ],
@@ -106,6 +115,14 @@
       name: "start_date",
       picker_id: "filter-interactive-start",
       default_date: current_start,
+    }) %>
+
+    <%= pb_rails("date_picker", props: {
+      label: "Report month",
+      name: "report_month",
+      picker_id: "filter-interactive-report-month",
+      default_date: current_month,
+      selection_type: "month",
     }) %>
 
     <%= form.actions do |action| %>

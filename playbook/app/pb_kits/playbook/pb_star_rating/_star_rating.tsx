@@ -9,6 +9,7 @@ import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
 import StarRatingInteractive from "./subcomponents/_star_rating_interactive"
 import StarRatingDisplay from "./subcomponents/_star_rating_display"
+import { normalizeStarRating } from "./stars/utils"
 
 type StarRatingProps = {
     aria?: { [key: string]: string },
@@ -40,8 +41,8 @@ const StarRating = (props: StarRatingProps) => {
         htmlOptions = {},
         id,
         label,
-        rating = 0,
-        denominator = 5,
+        rating: ratingProp = 0,
+        denominator: denominatorProp = 5,
         colorOption = "yellow",
         backgroundType = "fill",
         size = "sm",
@@ -52,6 +53,10 @@ const StarRating = (props: StarRatingProps) => {
     const ariaProps = buildAriaProps(aria)
     const dataProps = buildDataProps(data)
     const htmlProps = buildHtmlProps(htmlOptions)
+    const normalized = normalizeStarRating(ratingProp, denominatorProp)
+    if (!normalized) return null
+
+    const { denominator, rating } = normalized
     const oneDecimalRating = rating.toFixed(1)
 
     return (

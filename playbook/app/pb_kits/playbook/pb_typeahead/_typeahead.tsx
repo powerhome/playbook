@@ -84,6 +84,10 @@ type TypeaheadProps = {
     | "solar"
     | "insulation"
     | "accessories"
+    | "trim"
+    | "product_10_background"
+    | "hardboard_siding"
+    | "multi"
   onChange?: any
   optionsByContext?: Record<string, Array<{label: string; value?: string}>>
   required?: boolean

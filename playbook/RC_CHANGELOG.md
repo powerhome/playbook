@@ -1,3 +1,97 @@
+# ✨ 18.5.0.pre.rc.2
+
+##### November 24, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.5.0-rc.2](https://github.com/powerhome/playbook/tree/18.5.0-rc.2) full list of changes:
+
+**Bug Fixes:**
+
+- Star_rating: **Cap Star Count and Reject Invalid Values** [\#6983](https://github.com/powerhome/playbook/pull/6983) ([kangaree](https://github.com/kangaree))
+- Advanced Table: **Escape Column Header Labels In Rails** [\#6982](https://github.com/powerhome/playbook/pull/6982) ([nidaqg](https://github.com/nidaqg))
+- Dropdown: **Dropdown Quickpick and Datepicker Synchronization Issues** [\#6977](https://github.com/powerhome/playbook/pull/6977) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dropdown: **Show a Single No Options Message for Empty Dropdowns** [\#6974](https://github.com/powerhome/playbook/pull/6974) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.5.0-rc.1...18.5.0-rc.2)
+
+# ✨ 18.5.0.pre.rc.1
+
+##### November 24, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.5.0-rc.1](https://github.com/powerhome/playbook/tree/18.5.0-rc.1) full list of changes:
+
+**Enhancement:**
+
+- User: **Expose Status Prop to User Kit** [\#6968](https://github.com/powerhome/playbook/pull/6968) ([andrew-k9](https://github.com/andrew-k9))
+- Filter: **Interactive Applied Filters - Month Date Picker Fixes and Improvements** [\#6967](https://github.com/powerhome/playbook/pull/6967) ([kangaree](https://github.com/kangaree))
+
+**Documentation:**
+
+- Update Changelog for Rc - 18.5.0-rc.0 [\#6989](https://github.com/powerhome/playbook/pull/6989) ([nickamantia](https://github.com/nickamantia))
+
+**Dependencies:**
+
+- Release: **Update Appraisal Lockfiles During Version Bump** [\#6978](https://github.com/powerhome/playbook/pull/6978) ([nidaqg](https://github.com/nidaqg))
+- Website: **Upgrade the Pxc Operator to 1.18.0** [\#6965](https://github.com/powerhome/playbook/pull/6965) ([c-gerke](https://github.com/c-gerke))
+- Release: **Share Package Verification, Add Safe Publish Retries, and Open Rc Changelog Prs** [\#6959](https://github.com/powerhome/playbook/pull/6959) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.5.0-rc.0...18.5.0-rc.1)
+
+# ✨ 18.5.0.pre.rc.0
+
+##### November 23, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.5.0-rc.0](https://github.com/powerhome/playbook/tree/18.5.0-rc.0) full list of changes:
+
+**Enhancement:**
+
+- Form_pill: **Add Additional Product Color Tokens to Form Pill, Typeahead, Multilevelselect** [\#6975](https://github.com/powerhome/playbook/pull/6975) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Draggable: **Add Touch Delay to Prevent Accidental Dragging on Mobile** [\#6957](https://github.com/powerhome/playbook/pull/6957) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Rich Text Editor: **Rte Text In Editor Vs. Actual Differences** [\#6917](https://github.com/powerhome/playbook/pull/6917) ([nickamantia](https://github.com/nickamantia))
+
+**Bug Fixes:**
+
+- Rails: **Update Appraisal Lockfiles to Playbook_ui 18.4.0** [\#6976](https://github.com/powerhome/playbook/pull/6976) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: **Fix Console Error on Expand All** [\#6963](https://github.com/powerhome/playbook/pull/6963) ([nickamantia](https://github.com/nickamantia))
+- Website: **Fail the Deploy on a Pxc Timeout and Wait After Operator Changes** [\#6962](https://github.com/powerhome/playbook/pull/6962) ([c-gerke](https://github.com/c-gerke))
+
+**Documentation:**
+
+- Playground: **Add Rails Playground for Text, Icon, and Label Kits** [\#6966](https://github.com/powerhome/playbook/pull/6966) ([kangaree](https://github.com/kangaree))
+
+**Dependencies:**
+
+- Website: **Upgrade the Pxc Operator to 1.17.0** [\#6961](https://github.com/powerhome/playbook/pull/6961) ([c-gerke](https://github.com/c-gerke))
+- Release: **Version Bump 18.4.0** [\#6960](https://github.com/powerhome/playbook/pull/6960) ([nidaqg](https://github.com/nidaqg))
+- Rails: **Upgrade to Rails 8 and Test Rails 7 Compatibility** [\#6949](https://github.com/powerhome/playbook/pull/6949) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.4.0...18.5.0-rc.0)
+
+# ✨ 18.4.0.pre.rc.5
+
+##### November 17, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.4.0-rc.5](https://github.com/powerhome/playbook/tree/18.4.0-rc.5) full list of changes:
+
+**Enhancement:**
+
+- Background: **Add All Product Colors to Rails Background_color Prop** [\#6948](https://github.com/powerhome/playbook/pull/6948) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: **React Selectable Rows + Multi-column Header** [\#6947](https://github.com/powerhome/playbook/pull/6947) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Documentation:**
+
+- Dropdown: **Dropdown Active_style Docs - Rails (parity)** [\#6950](https://github.com/powerhome/playbook/pull/6950) ([nickamantia](https://github.com/nickamantia))
+- Changelog for Rc 18.4.0-rc.4 [\#6937](https://github.com/powerhome/playbook/pull/6937) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.4.0-rc.4...18.4.0-rc.5)
+
 # ✨ 18.4.0.pre.rc.4
 
 ##### November 12, 2026

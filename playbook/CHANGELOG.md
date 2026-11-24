@@ -1,3 +1,63 @@
+# 🔩 Patch, Pin, Repeat
+
+##### November 19, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Dependabot kept us busy. We patched Rails, Rack, Nokogiri, and Babel tooling, tossed vulnerable glob dependencies, and pinned GitHub Actions to full commit SHAs. 📦
+
+[18.4.0](https://github.com/powerhome/playbook/tree/18.4.0) full list of changes:
+
+**Enhancement:**
+
+- Background: **Add All Product Colors to Rails Background_color Prop** [\#6948](https://github.com/powerhome/playbook/pull/6948) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: **React Selectable Rows + Multi-column Header** [\#6947](https://github.com/powerhome/playbook/pull/6947) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Advanced Table: **Add Select All to Advanced Table Column Visibility** [\#6898](https://github.com/powerhome/playbook/pull/6898) ([nickamantia](https://github.com/nickamantia))
+- Advanced Table Kit: Visual Separators Between Dimension Groups - React and Rails [\#6845](https://github.com/powerhome/playbook/pull/6845) ([kangaree](https://github.com/kangaree))
+- Onclick Global Prop: Add Onclick Global Prop Support to Icon and Icon Circle [\#6877](https://github.com/powerhome/playbook/pull/6877) ([nickamantia](https://github.com/nickamantia))
+
+**Bug Fixes:**
+
+- Advanced Table: **Rails Tooltip In Header Has Default Styling** [\#6911](https://github.com/powerhome/playbook/pull/6911) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- MLS, Typeahead and Textarea: Fixes for Forward Ref Warnings In MLS, Typeahead and Textarea [\#6905](https://github.com/powerhome/playbook/pull/6905) ([nidaqg](https://github.com/nidaqg))
+- Popover Kit: Clean Up the Rails Popover on Disconnect [\#6894](https://github.com/powerhome/playbook/pull/6894) ([gregblake](https://github.com/gregblake))
+- Collapsible Kit: Fix Duplicate Onclick Calls In React [\#6875](https://github.com/powerhome/playbook/pull/6875) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Documentation:**
+
+- Changelog for Rc 18.4.0-rc.5 [\#6955](https://github.com/powerhome/playbook/pull/6955) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dropdown: Dropdown Active_style Docs - Rails (parity) [\#6950](https://github.com/powerhome/playbook/pull/6950) ([nickamantia](https://github.com/nickamantia))
+- Changelog for Rc 18.4.0-rc.4 [\#6937](https://github.com/powerhome/playbook/pull/6937) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Button: Document React Button `type` Prop As Deprecated [\#6929](https://github.com/powerhome/playbook/pull/6929) ([kangaree](https://github.com/kangaree))
+- Changelog for 18.4.0.pre.rc.1 [\#6926](https://github.com/powerhome/playbook/pull/6926) ([kangaree](https://github.com/kangaree))
+- Changelog for 18.4.0.pre.rc.0 [\#6916](https://github.com/powerhome/playbook/pull/6916) ([nickamantia](https://github.com/nickamantia))
+
+**Improvement:**
+
+- Release: Default Rcs to Minor Bumps and Remove Required Labels [\#6935](https://github.com/powerhome/playbook/pull/6935) ([nidaqg](https://github.com/nidaqg))
+- Check That PR Titles Are Conventional Commits [\#6886](https://github.com/powerhome/playbook/pull/6886) ([benlangfeld](https://github.com/benlangfeld))
+- Keep Renovate Ranges for Playbook-ui and Pin the Website. [\#6934](https://github.com/powerhome/playbook/pull/6934) ([nidaqg](https://github.com/nidaqg))
+- Pin Actions to Full Shas [\#6931](https://github.com/powerhome/playbook/pull/6931) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Regenerate AI Metadata for Image, Lightbox, and More [\#6910](https://github.com/powerhome/playbook/pull/6910) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Dependencies:**
+
+- Website: Upgrade the Pxc Operator to 1.16.1 [\#6954](https://github.com/powerhome/playbook/pull/6954) ([c-gerke](https://github.com/c-gerke))
+- Remove Nginx Ingress [\#6936](https://github.com/powerhome/playbook/pull/6936) ([rafatio](https://github.com/rafatio))
+- Playbook Website: Patch Rails, Rack, and Nokogiri [\#6928](https://github.com/powerhome/playbook/pull/6928) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Guard Against External Runtime Dependencies [\#6927](https://github.com/powerhome/playbook/pull/6927) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Upgrades Playbook Icons [\#6912](https://github.com/powerhome/playbook/pull/6912) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Patch Babel and Tooling Dependencies on Eslint 7 [\#6897](https://github.com/powerhome/playbook/pull/6897) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Remove Vulnerable Glob Dependencies [\#6896](https://github.com/powerhome/playbook/pull/6896) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Upgrade React-router-dom [\#6895](https://github.com/powerhome/playbook/pull/6895) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Update View_component to 4.14.0 [\#6888](https://github.com/powerhome/playbook/pull/6888) ([kangaree](https://github.com/kangaree))
+- Upgrade Playbook’s Jest Stack and Enable the Automatic Jsx Transform In Tests [\#6887](https://github.com/powerhome/playbook/pull/6887) ([nidaqg](https://github.com/nidaqg))
+- Phone Number Input: Self Host Flags [\#6874](https://github.com/powerhome/playbook/pull/6874) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v18.4.0-rc.5...18.4.0)
+
+
 # ⏳ Dropdown Kit: Getting Ahead Without Typeahead
 ##### November 04, 2026
 

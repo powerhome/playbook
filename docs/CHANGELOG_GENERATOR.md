@@ -14,6 +14,8 @@ make changelog
 
 Equivalent rake task: `changelog`.
 
+`bin/rails pb_release:version` runs this automatically for stable releases, after the version bump. If no token is set, it uses your `gh auth token`. Run `make changelog` by hand only if that step fails.
+
 **Writes** `playbook/CHANGELOG.md` (the Web tab on `/changelog`).
 
 - Uses `Playbook::VERSION` and `Playbook::PREVIOUS_VERSION` from `playbook/lib/playbook/version.rb`.
@@ -48,6 +50,17 @@ RC_VERSION=17.2.0-rc.3 make changelog-rc
 ```
 
 `RC_VERSION` also accepts the gem form, `17.2.0.pre.rc.3`.
+
+### Automated RC changelog PR
+
+After each RC is published, the `Open-RC-Changelog-PR` job in `.github/workflows/github-actions-alpha-version.yml` runs this generator with `RC_VERSION` set to that RC. It then opens `docs: Changelog for RC <version>` from the branch `changelog-rc-<version>`, with the `Inactive RC` and `milano` labels. `Inactive RC` stops the merge from cutting another RC.
+
+- The commit is made through the GitHub API, so it is signed.
+- Each PR includes every undocumented RC, so the job closes older open changelog PRs as superseded.
+- RC runs can finish out of order. If a newer changelog PR is already open, the job regenerates up to that PR's RC and updates it, so an RC tagged late is still documented.
+- PRs opened by GitHub Actions do not trigger other workflows. Close and reopen the PR to run the required Conventional Commit title check.
+- The job runs separately from the publish job, so a failure here never affects the published RC. You can still run `make changelog-rc` by hand.
+- The repository must allow GitHub Actions to create pull requests (Settings → Actions → General).
 
 ## Changelog categories
 

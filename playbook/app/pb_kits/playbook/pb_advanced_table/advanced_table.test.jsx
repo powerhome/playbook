@@ -1521,6 +1521,55 @@ test("single header row does not mark every column as last-header-cell", () => {
   expect(kit.querySelector("tbody td.last-cell")).not.toBeInTheDocument()
 })
 
+const selectableMultiHeaderData = MOCK_DATA_NO_SUBROWS.map((row, index) => ({
+  ...row,
+  id: String(index + 1),
+}))
+
+test("multi-column selectable headers keep one select-all checkbox on the lowest header row", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={groupedColumnDefinitions}
+        data={{ testid: testId }}
+        enableToggleExpansion="none"
+        selectableRows
+        tableData={selectableMultiHeaderData}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const headerRows = kit.querySelectorAll("thead tr")
+  const checkboxHeaderCells = kit.querySelectorAll("thead th.checkbox-cell-header")
+  const headerCheckboxes = kit.querySelectorAll("thead th.checkbox-cell-header input[type='checkbox']")
+
+  expect(headerRows.length).toBeGreaterThan(1)
+  expect(checkboxHeaderCells).toHaveLength(headerRows.length)
+  expect(headerCheckboxes).toHaveLength(1)
+
+  const lowestHeaderRow = headerRows[headerRows.length - 1]
+  expect(lowestHeaderRow.querySelector("th.checkbox-cell-header input[type='checkbox']")).toBeInTheDocument()
+  expect(headerRows[0].querySelector("th.checkbox-cell-header input[type='checkbox']")).not.toBeInTheDocument()
+})
+
+test("single-header selectable rows still render one select-all checkbox", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        enableToggleExpansion="none"
+        selectableRows
+        tableData={selectableMultiHeaderData}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const headerRows = kit.querySelectorAll("thead tr")
+  const headerCheckboxes = kit.querySelectorAll("thead th.checkbox-cell-header input[type='checkbox']")
+
+  expect(headerRows).toHaveLength(1)
+  expect(headerCheckboxes).toHaveLength(1)
+})
+
 const visibilityColumnDefinitions = [
   {
     accessor: "year",
