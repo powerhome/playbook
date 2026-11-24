@@ -26,6 +26,8 @@ module Playground
       customIcon
     ].freeze
 
+    PLAIN_DECIMAL = /\A-?\d+(\.\d+)?\z/
+
     def self.filter_kit_and_globals(kit_name:, props:, global_props: {})
       new(kit_name: kit_name).filter_kit_and_globals(props: props, global_props: global_props)
     end
@@ -84,10 +86,11 @@ module Playground
     end
 
     # Shared presets keep React's string values (percent: "50"); Rails number props reject strings.
+    # Only plain decimals are coerced, so "010" is 10 (not octal) and "0x10" is left for Rails to reject.
     def coerce_numeric_string(value, definition)
-      return value unless value.is_a?(String) && rails_prop_type(definition) == "number"
+      return value unless value.is_a?(String) && rails_prop_type(definition) == "number" && value.match?(PLAIN_DECIMAL)
 
-      Integer(value, exception: false) || Float(value, exception: false) || value
+      value.include?(".") ? value.to_f : value.to_i
     end
 
     def rails_prop_type(definition)

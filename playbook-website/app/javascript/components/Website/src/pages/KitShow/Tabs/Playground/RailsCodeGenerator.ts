@@ -83,6 +83,8 @@ function formatRubyValue(value: unknown, depth = 0): string {
   return JSON.stringify(value);
 }
 
+const PLAIN_DECIMAL = /^-?\d+(\.\d+)?$/;
+
 const formatRailsPropValue = (
   name: string,
   value: unknown,
@@ -119,7 +121,7 @@ const formatRailsPropValue = (
   }
 
   // Shared presets keep React's string values (percent: "50"); Rails number props reject strings.
-  if (propType === "number" && typeof value === "string" && value.trim() !== "" && !Number.isNaN(Number(value))) {
+  if (propType === "number" && typeof value === "string" && PLAIN_DECIMAL.test(value)) {
     return `${formatRailsPropName(name)}: ${Number(value)}`;
   }
 
