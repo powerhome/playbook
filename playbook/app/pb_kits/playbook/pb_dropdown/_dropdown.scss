@@ -107,17 +107,17 @@
         }
       }
 
-      // Let Rails autocomplete use the trigger space left by its action icons.
-      > :has([data-dropdown-autocomplete]) {
+      // Let the autocomplete input use (and shrink to) the trigger space left by its action icons.
+      > :has(.dropdown_input) {
         flex: 1;
         min-width: 0;
 
-        .pb_flex_kit:has([data-dropdown-autocomplete]) {
+        .pb_flex_kit:has(.dropdown_input) {
           min-width: 0;
           width: 100%;
         }
 
-        [data-dropdown-autocomplete] {
+        .dropdown_input {
           min-width: 0;
           width: 100%;
         }
