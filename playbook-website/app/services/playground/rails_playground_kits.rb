@@ -28,6 +28,16 @@ module Playground
       source
       title_count
       title_detail
+      avatar
+      contact
+      home_address_street
+      multiple_users
+      multiple_users_stacked
+      online_status
+      person
+      person_contact
+      user
+      user_badge
     ].freeze
 
     MOCK_DATA_KITS = %w[advanced_table full_screen].freeze

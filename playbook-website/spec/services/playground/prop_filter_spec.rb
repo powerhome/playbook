@@ -53,6 +53,41 @@ RSpec.describe Playground::PropFilter do
     end
   end
 
+  describe "Rails number props" do
+    it "converts numeric strings for props typed number on Rails" do
+      filtered = described_class.filter_kit_and_globals(
+        kit_name: "home_address_street",
+        props: { "homeId" => "8250263", "address" => "70 Prospect Ave", "zipcode" => "19382" }
+      )
+
+      expect(filtered).to eq(home_id: 8_250_263, address: "70 Prospect Ave", zipcode: "19382")
+    end
+
+    it "leaves non-numeric strings for Rails to validate" do
+      filtered = described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => "H8250263" })
+
+      expect(filtered[:home_id]).to eq("H8250263")
+    end
+
+    it "keeps zero and drops blank values so the optional prop falls back to nil" do
+      expect(described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => "0" })).to eq(home_id: 0)
+
+      ["", "  "].each do |value|
+        filtered = described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => value })
+
+        expect(filtered).not_to have_key(:home_id)
+      end
+    end
+
+    it "leaves numbers with leading zeros as strings, matching the code generator" do
+      %w[08 010 -07 007.5].each do |value|
+        filtered = described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => value })
+
+        expect(filtered[:home_id]).to eq(value)
+      end
+    end
+  end
+
   describe ".filter_kit_and_globals" do
     it "returns symbol-keyed plain hashes for nested request params" do
       params = ActiveSupport::HashWithIndifferentAccess.new(

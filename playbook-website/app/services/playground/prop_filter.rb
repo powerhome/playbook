@@ -8,6 +8,7 @@ module Playground
   # - html_options / data / aria / style are never forwarded
   # - on_error is never forwarded (rendered as an inline JS handler, e.g. Image)
   # - Code-like playground values are dropped
+  # - Numeric strings for props typed `number` on Rails become numbers
   # - icon / custom_icon values that look like URLs or paths are dropped (SSRF defense)
   class PropFilter
     BLOCKED_PROP_NAMES = %w[
@@ -25,6 +26,10 @@ module Playground
       custom_icon
       customIcon
     ].freeze
+
+    # No leading zeros: copied ERB would read 010 as octal 8 and 08 as a syntax error.
+    # Keep in sync with NUMERIC_STRING_PATTERN in RailsCodeGenerator.ts.
+    NUMERIC_STRING = /\A-?(0|[1-9]\d*)(\.\d+)?\z/
 
     def self.filter_kit_and_globals(kit_name:, props:, global_props: {})
       new(kit_name: kit_name).filter_kit_and_globals(props: props, global_props: global_props)
@@ -75,7 +80,7 @@ module Playground
         next if unsupported_value?(value)
         next if unsafe_icon_source?(camel_key, value)
 
-        converted = deep_convert(value)
+        converted = rails_number_prop?(definition) ? convert_numeric_string(value) : deep_convert(value)
         next if converted.nil?
 
         merged[camel_to_snake(camel_key).to_sym] = converted
@@ -146,6 +151,27 @@ module Playground
 
     def playground_code_expression?(value)
       value.is_a?(Hash) && value.key?("__playgroundCode")
+    end
+
+    # Split-typed props (e.g. HomeAddressStreet homeId: React string, Rails
+    # number) share presets, so numeric strings reach Playbook::Props::Number.
+    # Mirrors the unquoted number emitted by RailsCodeGenerator.ts.
+    def rails_number_prop?(definition)
+      type = definition["type"]
+      type = type["rails"] if type.is_a?(Hash)
+      type.to_s.downcase == "number"
+    end
+
+    # Blank values are dropped (a cleared field sends ""), matching the code
+    # generator, which omits them, so optional number props fall back to nil.
+    def convert_numeric_string(value)
+      return deep_convert(value) unless value.is_a?(String)
+
+      trimmed = value.strip
+      return nil if trimmed.empty?
+      return value unless trimmed.match?(NUMERIC_STRING)
+
+      trimmed.include?(".") ? trimmed.to_f : trimmed.to_i
     end
 
     def deep_convert(value)

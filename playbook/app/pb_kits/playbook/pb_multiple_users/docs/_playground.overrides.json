@@ -40,6 +40,7 @@
   "presets": [
     {
       "name": "Size sm",
+      "platforms": ["react"],
       "props": {
         "size": "sm",
         "users": [
@@ -63,7 +64,32 @@
       }
     },
     {
+      "name": "Photos",
+      "platforms": ["rails"],
+      "props": {
+        "users": [
+          {
+            "name": "Anna Black",
+            "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+          },
+          {
+            "name": "Jordan Lee",
+            "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            "name": "Sam Rivera",
+            "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg"
+          },
+          {
+            "name": "Chris Patel",
+            "imageUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+          }
+        ]
+      }
+    },
+    {
       "name": "Size lg",
+      "platforms": ["react"],
       "props": {
         "size": "lg",
         "users": [
@@ -84,6 +110,7 @@
     },
     {
       "name": "Initials only",
+      "platforms": ["react"],
       "props": {
         "size": "md",
         "users": [
@@ -156,6 +183,38 @@
             "name": "Morgan Quinn",
             "imageUrl": "https://randomuser.me/api/portraits/women/12.jpg"
           }
+        ]
+      }
+    },
+    {
+      "name": "Size xxs",
+      "platforms": ["rails"],
+      "props": {
+        "size": "xxs",
+        "users": [
+          {
+            "name": "Anna Black",
+            "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+          },
+          {
+            "name": "Jordan Lee",
+            "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            "name": "Sam Rivera",
+            "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Initials",
+      "platforms": ["rails"],
+      "props": {
+        "users": [
+          { "name": "Anna Black" },
+          { "name": "Jordan Lee" },
+          { "name": "Sam Rivera" }
         ]
       }
     }

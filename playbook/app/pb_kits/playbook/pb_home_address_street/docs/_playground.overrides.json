@@ -123,6 +123,7 @@
     },
     {
       "name": "Empty Fallback",
+      "platforms": ["react"],
       "props": {}
     }
   ],

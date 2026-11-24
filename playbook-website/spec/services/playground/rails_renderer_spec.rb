@@ -315,7 +315,7 @@ RSpec.describe Playground::RailsRenderer do
     end
   end
 
-  describe "text, icon, and label kits" do
+  describe "text, icon, label, and people kits" do
     global_prop_names = JSON.parse(
       Playbook::Engine.root.join("app/pb_kits/playbook/utilities/global-props.schema.json").read
     )["props"].keys
@@ -323,6 +323,8 @@ RSpec.describe Playground::RailsRenderer do
     %w[
       body detail hashtag highlight icon_circle icon_value image
       label_pill label_value link pill source title_count title_detail
+      avatar contact home_address_street multiple_users multiple_users_stacked
+      online_status person person_contact user user_badge
     ].each do |kit|
       it "renders every Rails preset for #{kit}" do
         schema = JSON.parse(Playbook.kit_path(kit, "", "kit.schema.json").read)
