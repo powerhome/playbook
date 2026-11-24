@@ -11,6 +11,7 @@ jobs:
     if: github.event.label.name == 'alpha'
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       id-token: write
       contents: read
       issues: write
@@ -47,6 +48,11 @@ jobs:
         run: |
           git config --local user.name "${{ github.actor }}"
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Restore release packages on rerun
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.run_attempt > 1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash bin/restore_release_packages
       - name: Check External Runtime Dependencies
         run: yarn check:external-deps
       - name: Grab Current Version
@@ -56,54 +62,80 @@ jobs:
           playbook_ruby_version=$(ruby -r ./lib/playbook/version.rb -e "puts Playbook::VERSION")
           echo "playbook_ruby_version=${playbook_ruby_version}" >> $GITHUB_ENV
       - name: Set New Alpha Version
+        if: env.RELEASE_PACKAGES_RESTORED != 'true'
         id: grab-package-version
         run: |
           formatted_branch=$(printf '%s' "$BRANCH_NAME" | tr -cd '[:alnum:]')
           npm_alpha_version="${{ env.playbook_npm_version }}-alpha.${formatted_branch}${{ github.run_number }}"
           ruby_alpha_version="${{ env.playbook_ruby_version }}.pre.alpha.${formatted_branch}${{ github.run_number }}"
-          echo "new_npm_alpha_version=${npm_alpha_version}" >> $GITHUB_ENV
-          echo "new_ruby_alpha_version=${ruby_alpha_version}" >> $GITHUB_ENV
+          echo "new_npm_version=${npm_alpha_version}" >> $GITHUB_ENV
+          echo "new_ruby_version=${ruby_alpha_version}" >> $GITHUB_ENV
       - name: Update Version.rb
+        if: env.RELEASE_PACKAGES_RESTORED != 'true'
         id: update-version-rb
         run: |
           gem install bundler -v 4.0.22
           bundle
-          bin/rails pb_release:action[${{env.new_ruby_alpha_version}}]
-      - name: Version Up, Distribute and Publish (NPM)
-        if: github.event.pull_request.head.repo.full_name == github.repository
+          bin/rails pb_release:action[${{env.new_ruby_version}}]
+      - name: Build npm and RubyGems packages
+        if: github.event.pull_request.head.repo.full_name == github.repository && env.RELEASE_PACKAGES_RESTORED != 'true'
         run: |
           yarn install
-          yarn version --new-version ${{ env.new_npm_alpha_version }}
+          yarn version --new-version ${{ env.new_npm_version }}
           bundle
-          yarn release
-          npm pack
-          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_alpha_version }}.tgz --tag alpha
+          bash bin/package_release "$new_npm_version" "$new_ruby_version"
+      - name: Save release packages for reruns
+        if: github.event.pull_request.head.repo.full_name == github.repository && env.RELEASE_PACKAGES_RESTORED != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-packages
+          if-no-files-found: error
+          path: |
+            playbook/playbook-ui-${{ env.new_npm_version }}.tgz
+            playbook/playbook_ui-${{ env.new_ruby_version }}.gem
+      - name: Publish to npm
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          bash bin/publish_release_package npm "$new_npm_version" --tag alpha
       - name: Configure RubyGems Credentials
         if: github.event.pull_request.head.repo.full_name == github.repository
         uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
-      - name: Version Up, Distribute and Publish (RubyGems)
+      - name: Publish to RubyGems
         if: github.event.pull_request.head.repo.full_name == github.repository
         run: |
-          bin/build_gem
-          echo "${{ env.new_ruby_alpha_version }}"
-          gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/
+          bash bin/publish_release_package rubygems "$new_ruby_version" --host https://rubygems.org/
       - name: Leave PR comment
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUBY_GEM_VERSION: ${{ env.new_ruby_alpha_version }}
-          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_alpha_version}}
-          NPM_VERSION: ${{ env.new_npm_alpha_version }}
-          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_alpha_version}}
-        run: |
-          curl -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-              -X POST \
-              -d '{"body": "🎉 Congratulations on creating an Alpha Version! \n\n Your Alpha for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your Alpha for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}) "}' \
-                "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
+          RUBY_GEM_VERSION: ${{ env.new_ruby_version }}
+          NPM_VERSION: ${{ env.new_npm_version }}
+        with:
+          script: |
+            const { RUBY_GEM_VERSION, NPM_VERSION } = process.env;
+            const issue = { ...context.repo, issue_number: context.issue.number };
+            const marker = `<!-- playbook-release:${NPM_VERSION} -->`;
+            const comments = await github.paginate(github.rest.issues.listComments, issue);
+            if (comments.some(comment => comment.user?.login === "github-actions[bot]" && comment.body?.includes(marker))) return;
+            await github.rest.issues.createComment({
+              ...issue,
+              // Keep lines unindented: indented markdown after the marker renders as a code block.
+              body: [
+                marker,
+                "🎉 Congratulations on creating an Alpha Version!",
+                "",
+                `Your Alpha for Ruby Gems is [${RUBY_GEM_VERSION}](https://rubygems.org/gems/playbook_ui/versions/${RUBY_GEM_VERSION})`,
+                "",
+                `Your Alpha for NPM is [${NPM_VERSION}](https://www.npmjs.com/package/playbook-ui/v/${NPM_VERSION})`
+              ].join("\n")
+            });
   Creating-Release-Candidate:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    outputs:
+      rc_version: ${{ steps.rc-output.outputs.rc_version }}
     permissions:
+      actions: read
       id-token: write      # OIDC for npm publish
       contents: write      # REQUIRED for gh release create
       issues: write
@@ -150,16 +182,17 @@ jobs:
             echo "PR has the 'Inactive RC' label. Skipping the release candidate process."
             echo "SKIP_REMAINING_STEPS=true" >> "$GITHUB_ENV"
           fi
+      - name: Restore release packages on rerun
+        if: env.SKIP_REMAINING_STEPS != 'true' && github.run_attempt > 1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash bin/restore_release_packages
       - name: Check External Runtime Dependencies
         if: env.SKIP_REMAINING_STEPS != 'true'
         run: yarn check:external-deps
       - name: Grab Current Version and Set New RC Version
-        id: set-version
+        if: env.SKIP_REMAINING_STEPS != 'true' && env.RELEASE_PACKAGES_RESTORED != 'true'
         run: |
-          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ Skipping the release candidate process."
-            exit 0
-          fi
           new_npm_version=$(yarn version --preminor --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
           new_npm_version=${new_npm_version#v}
           new_ruby_version=$(echo $new_npm_version | sed 's/-rc\./.pre.rc./')
@@ -168,22 +201,24 @@ jobs:
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
 
       - name: Check if version exists and increment if necessary
+        if: env.SKIP_REMAINING_STEPS != 'true' && env.RELEASE_PACKAGES_RESTORED != 'true'
         run: |
-          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ Skipping the release candidate process."
-            exit 0
-          fi
           max_attempts=100
           attempt=0
-          current_version="${{ env.new_npm_version }}"
+          current_version="$new_npm_version"
           while [ $attempt -lt $max_attempts ]; do
-            if npm view playbook-ui@$current_version version &>/dev/null; then
+            status=$(curl --silent --show-error --retry 2 --max-time 20 --output /dev/null \
+              --write-out '%{http_code}' "https://registry.npmjs.org/playbook-ui/$current_version")
+            if [[ "$status" == 200 ]]; then
               echo "Version $current_version already exists. Incrementing..."
               current_version=$(yarn version --prerelease --preid rc --no-git-tag-version | grep "New version:" | awk '{print $4}')
               current_version=${current_version#v}
-            else
+            elif [[ "$status" == 404 ]]; then
               echo "Version $current_version is available."
               break
+            else
+              echo "Could not check availability of $current_version (HTTP $status)." >&2
+              exit 1
             fi
             attempt=$((attempt+1))
           done
@@ -195,36 +230,36 @@ jobs:
           new_ruby_version=$(echo $current_version | sed 's/-rc\./.pre.rc./')
           echo "new_ruby_version=${new_ruby_version}" >> $GITHUB_ENV
       - name: Update Version.rb
+        if: env.SKIP_REMAINING_STEPS != 'true' && env.RELEASE_PACKAGES_RESTORED != 'true'
         run: |
-          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ Skipping the release candidate process."
-            exit 0
-          fi
           gem install bundler -v 4.0.22
           bundle
           bin/rails pb_release:action[${{env.new_ruby_version}}]
-      - name: Distribute and Publish (NPM)
+      - name: Build npm and RubyGems packages
+        if: env.SKIP_REMAINING_STEPS != 'true' && env.RELEASE_PACKAGES_RESTORED != 'true'
         run: |
-          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ Skipping the release candidate process."
-            exit 0
-          fi
           yarn install
           bundle
-          yarn release
-          npm pack
-          npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_version }}.tgz --tag rc
+          bash bin/package_release "$new_npm_version" "$new_ruby_version"
+      - name: Save release packages for reruns
+        if: env.SKIP_REMAINING_STEPS != 'true' && env.RELEASE_PACKAGES_RESTORED != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-packages
+          if-no-files-found: error
+          path: |
+            playbook/playbook-ui-${{ env.new_npm_version }}.tgz
+            playbook/playbook_ui-${{ env.new_ruby_version }}.gem
+      - name: Publish to npm
+        if: env.SKIP_REMAINING_STEPS != 'true'
+        run: |
+          bash bin/publish_release_package npm "$new_npm_version" --tag rc
       - name: Configure RubyGems Credentials
         if: env.SKIP_REMAINING_STEPS != 'true'
         uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
-      - name: Distribute and Publish (RubyGems)
-        run: |
-          if [ "${{ env.SKIP_REMAINING_STEPS }}" == "true" ]; then
-            echo "⏭️ Skipping the release candidate process."
-            exit 0
-          fi
-          bin/build_gem
-          gem push playbook_ui-${{ env.new_ruby_version }}.gem --host https://rubygems.org/
+      - name: Publish to RubyGems
+        if: env.SKIP_REMAINING_STEPS != 'true'
+        run: bash bin/publish_release_package rubygems "$new_ruby_version" --host https://rubygems.org/
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -233,10 +268,19 @@ jobs:
             echo "⏭️ Skipping the release candidate process."
             exit 0
           fi
-          gh release create v${{ env.new_npm_version }} \
+          tag="v$new_npm_version"
+          if gh release view "$tag" --json isPrerelease --jq '.isPrerelease' | grep -qx true; then
+            test "$(gh api "repos/$GITHUB_REPOSITORY/commits/$tag" --jq '.sha')" = "$GITHUB_SHA"
+            exit 0
+          fi
+          gh release create "$tag" --target "$GITHUB_SHA" \
             --title "Release Candidate v${{ env.new_npm_version }}" \
             --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
             --prerelease
+      - name: Share RC version
+        id: rc-output
+        if: env.SKIP_REMAINING_STEPS != 'true'
+        run: echo "rc_version=$new_npm_version" >> "$GITHUB_OUTPUT"
       - name: Leave PR comment
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
@@ -274,15 +318,116 @@ jobs:
               const pullRequestNumber = pullRequests.data[0].number;
               console.log(`Found pull request #${pullRequestNumber} for commit ${commitSha}`);
 
-              // Add a comment to the pull request
+              const { RUBY_GEM_VERSION, RUBY_GEM_LINK, NPM_VERSION, NPM_LINK } = process.env;
+              const issue = { ...context.repo, issue_number: pullRequestNumber };
+              const marker = `<!-- playbook-release:${NPM_VERSION} -->`;
+              const comments = await github.paginate(github.rest.issues.listComments, issue);
+              if (comments.some(comment => comment.user?.login === "github-actions[bot]" && comment.body?.includes(marker))) return;
               await github.rest.issues.createComment({
-                issue_number: pullRequestNumber,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `You merged this pr to master branch:
-                - Ruby Gem: [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}})
-                - NPM: [${{env.NPM_VERSION}}](${{env.NPM_LINK}})`
+                ...issue,
+                // Keep lines unindented: indented markdown after the marker renders as a code block.
+                body: [
+                  marker,
+                  "You merged this pr to master branch:",
+                  `- Ruby Gem: [${RUBY_GEM_VERSION}](${RUBY_GEM_LINK})`,
+                  `- NPM: [${NPM_VERSION}](${NPM_LINK})`
+                ].join("\n")
               });
             } else {
               console.log('No pull request found for this commit');
             }
+  Open-RC-Changelog-PR:
+    # Runs after the RC is published. A failure here never affects the published RC.
+    needs: Creating-Release-Candidate
+    if: ${{ !cancelled() && needs.Creating-Release-Candidate.outputs.rc_version != '' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: rc-changelog
+      cancel-in-progress: false
+    permissions:
+      contents: write      # create the changelog branch and commit
+      issues: write        # apply labels
+      pull-requests: write # open and close changelog PRs
+    env:
+      PUBLISHED_RC: ${{ needs.Creating-Release-Candidate.outputs.rc_version }}
+      GH_TOKEN: ${{ github.token }}
+      LANG: C.UTF-8 # RC_CHANGELOG.md headings contain emoji
+    steps:
+      # Fresh checkout: the RC job rewrites version.rb, but the generator needs the stable Playbook::VERSION.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # the generator reads RC tags and their history
+          persist-credentials: false
+      - name: Ruby Setup
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
+        with:
+          ruby-version: '3.4.10'
+      # RC runs publish in parallel, so a later RC's changelog PR can open before this RC is tagged and leave it out.
+      # Regenerate up to the newest open changelog PR's RC and update that PR, so it picks this RC up.
+      # This RC was tagged before this job started, so the regenerated section includes it.
+      - name: Pick the changelog PR to update
+        id: target
+        run: |
+          # Only PRs this workflow opened count. Anyone, including forks, can open a PR from a changelog-rc-* branch.
+          newest=$( { echo "$PUBLISHED_RC"
+            gh pr list --repo "$GITHUB_REPOSITORY" --state open --author "app/github-actions" --json headRefName \
+              --jq '.[].headRefName | select(startswith("changelog-rc-")) | ltrimstr("changelog-rc-")'
+          } | sort -V | tail -1)
+          echo "Changelog target: $newest"
+          echo "rc_version=$newest" >> "$GITHUB_OUTPUT"
+      - name: Generate RC changelog
+        id: generate
+        env:
+          RC_VERSION: ${{ steps.target.outputs.rc_version }}
+        run: |
+          # RC_VERSION caps the generator, so an out-of-order run never documents an RC without a changelog job yet.
+          if ! output=$(ruby -Iplaybook/lib -rplaybook/changelog_generator -e 'Playbook::ChangelogGenerator.run!(mode: :rc)' 2>&1); then
+            echo "$output"
+            if grep -q "Nothing to do" <<< "$output"; then exit 0; fi
+            exit 1
+          fi
+          echo "$output"
+          if ! git diff --quiet -- playbook/RC_CHANGELOG.md; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Open or update changelog PR
+        if: steps.generate.outputs.changed == 'true'
+        env:
+          RC_VERSION: ${{ steps.target.outputs.rc_version }}
+        run: |
+          branch="changelog-rc-$RC_VERSION"
+          path="playbook/RC_CHANGELOG.md"
+          title="docs: Changelog for RC $RC_VERSION"
+
+          if ! gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$branch" > /dev/null 2>&1; then
+            gh api -X POST "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/heads/$branch" -f sha="$GITHUB_SHA" > /dev/null
+          fi
+
+          # Commit through the API so GitHub signs it (master requires signed commits).
+          current=$(gh api "repos/$GITHUB_REPOSITORY/contents/$path?ref=$branch")
+          if [[ "$(jq -r '.content' <<< "$current" | base64 -d)" != "$(cat "$path")" ]]; then
+            jq -n --arg message "$title" --arg branch "$branch" \
+              --arg sha "$(jq -r '.sha' <<< "$current")" --rawfile content <(base64 -w0 "$path") \
+              '{message: $message, branch: $branch, sha: $sha, content: $content}' > "$RUNNER_TEMP/commit.json"
+            gh api -X PUT "repos/$GITHUB_REPOSITORY/contents/$path" --input "$RUNNER_TEMP/commit.json" > /dev/null
+          fi
+
+          pr_url=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --author "app/github-actions" --head "$branch" --json url --jq '.[0].url // empty')
+          if [[ -z "$pr_url" ]]; then
+            body="Changelog for $(sed 's/-rc\./.pre.rc./' <<< "$RC_VERSION"), generated by the RC workflow.
+
+          Pull requests opened by GitHub Actions do not trigger other workflows. **Close and reopen this PR** to run the required Conventional Commit title check."
+            # "Inactive RC" stops merging this PR from cutting another RC.
+            pr_url=$(gh pr create --repo "$GITHUB_REPOSITORY" --base master --head "$branch" \
+              --title "$title" --body "$body" --label "Inactive RC" --label milano)
+          fi
+          echo "Changelog PR: $pr_url"
+
+          # This PR includes every undocumented RC, so older open changelog PRs are superseded.
+          gh pr list --repo "$GITHUB_REPOSITORY" --state open --author "app/github-actions" --json number,headRefName \
+            --jq '.[] | select(.headRefName | startswith("changelog-rc-")) | "\(.number) \(.headRefName | ltrimstr("changelog-rc-"))"' \
+            | while read -r number other; do
+                if [[ "$other" != "$RC_VERSION" && "$(printf '%s\n%s\n' "$RC_VERSION" "$other" | sort -V | head -1)" == "$other" ]]; then
+                  gh pr close "$number" --repo "$GITHUB_REPOSITORY" --comment "Superseded by $pr_url" --delete-branch
+                fi
+              done

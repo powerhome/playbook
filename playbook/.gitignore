@@ -21,6 +21,7 @@ tmp/
 .vscode
 *.gem
 *.tgz
+connect_message_formatted.md
 yarn-error.log
 .byebug_history
 spec_results/
