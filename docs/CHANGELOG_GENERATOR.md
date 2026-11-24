@@ -14,7 +14,7 @@ make changelog
 
 Equivalent rake task: `changelog`.
 
-`bin/rails pb_release:version` runs this automatically for stable releases, after the version bump. If no token is set, it uses your `gh auth token`. Run `make changelog` by hand only if that step fails.
+For stable releases, the release-please release PR runs this automatically after the version bump. See [Releasing a stable version](./RELEASING.md). `bin/rails pb_release:version` also runs it, using your `gh auth token` if no token is set. Run `make changelog` by hand only if those steps fail.
 
 **Writes** `playbook/CHANGELOG.md` (the Web tab on `/changelog`).
 

@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+#
+# Usage: .github/scripts/prepare-release-pr BRANCH
+#
+# release-please bumps Playbook::VERSION and package.json on the release branch. This does the rest
+# of what pb_release:version did: sets PREVIOUS_VERSION, pins the new version in the Bundler
+# lockfiles, and generates the playbook/CHANGELOG.md section with Playbook's own generator. If
+# anything changed, it commits to BRANCH through the GitHub API so the commit is signed.
+# Runs in CI: needs GNU sed and base64, GH_TOKEN and GITHUB_REPOSITORY.
+
+set -euo pipefail
+
+branch=${1:?Expected the release branch}
+cd "$(dirname "${BASH_SOURCE[0]}")/../.."
+
+version_rb=playbook/lib/playbook/version.rb
+read_version() { ruby -e 'eval($stdin.read); print Playbook::VERSION'; }
+
+version=$(read_version < "$version_rb")
+# The version being replaced is the one on master, where the release branch starts.
+previous=$(git show "$(git merge-base HEAD origin/master):$version_rb" | read_version)
+if [[ "$previous" == "$version" ]]; then
+  echo "The release branch still has version $version. Expected release-please to bump it." >&2
+  exit 1
+fi
+echo "Preparing $version (previous $previous)"
+
+sed -i -E "s/^(  PREVIOUS_VERSION = \")[^\"]*\"/\1${previous}\"/" "$version_rb"
+# Each lockfile lists the path gem under PATH (4 spaces) and, in the Appraisal lockfiles, under CHECKSUMS (2 spaces).
+sed -i -E "s/^( {2}| {4})playbook_ui \([^)]*\)$/\1playbook_ui (${version})/" \
+  playbook/Gemfile.lock playbook/gemfiles/*.gemfile.lock playbook-website/Gemfile.lock
+
+# A rerun on a branch that already has this version's section changes nothing.
+if ! output=$(cd playbook && ruby -Ilib -rplaybook/changelog_generator -e 'Playbook::ChangelogGenerator.run!' 2>&1); then
+  grep -q "already has a section for $version" <<< "$output" || { echo "$output"; exit 1; }
+fi
+echo "$output"
+
+mapfile -t changed < <(git diff --name-only)
+if [[ ${#changed[@]} -eq 0 ]]; then
+  echo "The release branch is already prepared for $version"
+  exit 0
+fi
+printf 'Committing %s\n' "${changed[@]}"
+
+# --rawfile, not --arg: CHANGELOG.md is larger than one command-line argument can be.
+for file in "${changed[@]}"; do
+  jq -n --arg path "$file" --rawfile contents <(base64 -w0 "$file") '{$path, $contents}'
+done | jq -s \
+  --arg repo "$GITHUB_REPOSITORY" \
+  --arg branch "$branch" \
+  --arg head "$(git rev-parse HEAD)" \
+  --arg headline "chore(release): Prepare $version" \
+  '{
+    query: "mutation($input: CreateCommitOnBranchInput!) { createCommitOnBranch(input: $input) { commit { oid } } }",
+    variables: {input: {
+      branch: {repositoryNameWithOwner: $repo, branchName: $branch},
+      expectedHeadOid: $head,
+      message: {headline: $headline},
+      fileChanges: {additions: .}
+    }}
+  }' | gh api graphql --input -

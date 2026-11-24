@@ -1,0 +1,59 @@
+name: Release Please
+
+# Keeps a release pull request open against master that bumps the version, worked out from the
+# Conventional Commit titles merged since the last stable release. A second job finishes the
+# release pull request the way pb_release:version used to. Merging it tags the release and creates
+# its GitHub Release. Publishing stays manual with pb_release:push. See docs/RELEASING.md.
+
+on:
+  push:
+    branches: [master]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    name: Release pull request
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # release branch, tag, and GitHub Release
+      issues: write        # labels
+      pull-requests: write # release pull request
+    outputs:
+      branch: ${{ fromJSON(steps.release.outputs.pr || '{}').headBranchName }}
+    steps:
+      # Uses GITHUB_TOKEN, so the release pull request doesn't trigger other workflows.
+      # Editing its title, or pushing to it, runs the required checks.
+      - name: Open or update the release pull request, or tag a merged one
+        id: release
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+
+  prepare:
+    name: Finish the release pull request
+    needs: release-please
+    if: needs.release-please.outputs.branch != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # commit to the release branch
+      pull-requests: read  # list merged pull requests for the changelog
+    steps:
+      - name: Check out the release pull request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.release-please.outputs.branch }}
+          fetch-depth: 0 # the changelog generator reads release tags and their history
+          persist-credentials: false
+      - name: Ruby Setup
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1.338.0
+        with:
+          ruby-version: '3.4.10'
+      - name: Set the previous version, pin the lockfiles, and generate the changelog
+        env:
+          BRANCH: ${{ needs.release-please.outputs.branch }}
+          GH_TOKEN: ${{ github.token }}
+          LANG: C.UTF-8 # CHANGELOG.md contains emoji
+        run: .github/scripts/prepare-release-pr "$BRANCH"
