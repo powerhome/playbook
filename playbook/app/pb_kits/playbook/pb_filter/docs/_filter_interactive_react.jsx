@@ -27,6 +27,7 @@ const INITIAL_FILTERS = {
   status: "open",
   dateRange: "quickpick-this-week",
   startDate: "05/01/2026",
+  reportMonth: "May 2026",
 };
 
 const statusOptionForValue = (value) =>
@@ -52,6 +53,7 @@ const FilterInteractive = (props) => {
           Status: filters.status,
           "Date range": filters.dateRange,
           "Start date": filters.startDate,
+          "Report month": filters.reportMonth,
         }}
         interactiveFilters={{
           Territory: {
@@ -77,6 +79,12 @@ const FilterInteractive = (props) => {
             value: filters.startDate,
             onChange: updateFilter("startDate"),
             format: "m/d/Y",
+          },
+          "Report month": {
+            type: "date-picker",
+            selectionType: "month",
+            value: filters.reportMonth,
+            onChange: updateFilter("reportMonth"),
           },
         }}
         minWidth="360px"
@@ -126,6 +134,15 @@ const FilterInteractive = (props) => {
               label="Start date"
               onChange={updateFilter("startDate")}
               pickerId="filter-panel-start-date"
+          />
+
+          <DatePicker
+              {...props}
+              inputValue={filters.reportMonth}
+              label="Report month"
+              onChange={updateFilter("reportMonth")}
+              pickerId="filter-panel-report-month"
+              selectionType="month"
           />
 
           <Flex
