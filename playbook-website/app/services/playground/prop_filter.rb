@@ -27,8 +27,8 @@ module Playground
       customIcon
     ].freeze
 
-    ISO_DATE = /\A\d{4}-\d{2}-\d{2}\z/
-    ISO_DATE_TIME = /\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?\z/
+    # Keep in sync with ISO_DATE_PATTERN in RailsCodeGenerator.ts.
+    ISO_DATE = /\A(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(?:Z|[+-](\d{2}):?(\d{2}))?)?\z/
 
     def self.filter_kit_and_globals(kit_name:, props:, global_props: {})
       new(kit_name: kit_name).filter_kit_and_globals(props: props, global_props: global_props)
@@ -155,19 +155,27 @@ module Playground
       definition["type"].to_s.downcase.match?(/\bdate\b/)
     end
 
+    # Invalid ISO dates (e.g. 2026-02-30, 12:60) are dropped. The code generator
+    # applies the same check and omits them, so copied ERB never raises Date::Error.
     def convert_iso_date(value)
       return deep_convert(value) unless value.is_a?(String)
 
       trimmed = value.strip
-      if trimmed.match?(ISO_DATE)
-        ::Date.iso8601(trimmed)
-      elsif trimmed.match?(ISO_DATE_TIME)
-        ::DateTime.iso8601(trimmed)
-      else
-        value
-      end
+      match = ISO_DATE.match(trimmed)
+      return value unless match
+      return nil unless valid_iso_parts?(match)
+
+      match[4] ? ::DateTime.iso8601(trimmed) : ::Date.iso8601(trimmed)
     rescue ::Date::Error
       nil
+    end
+
+    def valid_iso_parts?(match)
+      year, month, day, hour, minute, second, offset_hour, offset_minute = match.captures.map { |part| part&.to_i }
+
+      ::Date.valid_date?(year, month, day) &&
+        (hour.nil? || hour < 24) && (minute.nil? || minute < 60) && (second.nil? || second < 60) &&
+        (offset_hour.nil? || offset_hour < 24) && (offset_minute.nil? || offset_minute < 60)
     end
 
     def playground_code_expression?(value)
