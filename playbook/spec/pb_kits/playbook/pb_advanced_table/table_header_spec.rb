@@ -277,6 +277,12 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
       cell = { accessor: "other", label: "Other" }
       expect(instance.has_header_renderer?(cell)).to be false
     end
+
+    it "returns false when header is a non-callable string" do
+      instance = subject.new(column_definitions: [{ accessor: "name", label: "Name", header: "<b>Name</b>" }])
+      cell = { accessor: "name", label: "Name" }
+      expect(instance.has_header_renderer?(cell)).to be false
+    end
   end
 
   describe "#render_header" do
@@ -304,6 +310,38 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
       instance = subject.new(column_definitions: [{ accessor: "test", label: "Test", header: failing_proc }])
       cell = { accessor: "test", label: "Test" }
       expect(instance.render_header(cell)).to eq "Test"
+    end
+
+    context "with labels containing HTML" do
+      let(:malicious_label) { %(<a href="//example.com" onmouseover="alert(1)">x</a>) }
+      let(:escaped_label) { "&lt;a href=&quot;//example.com&quot; onmouseover=&quot;alert(1)&quot;&gt;x&lt;/a&gt;" }
+
+      it "escapes the label when no custom header exists" do
+        instance = subject.new(column_definitions: [{ accessor: "a", label: malicious_label }])
+        expect(instance.render_header({ accessor: "a", label: malicious_label })).to eq escaped_label
+      end
+
+      it "escapes the label when header is a non-callable string" do
+        instance = subject.new(column_definitions: [{ accessor: "a", label: malicious_label, header: "<b>x</b>" }])
+        expect(instance.render_header({ accessor: "a", label: malicious_label })).to eq escaped_label
+      end
+
+      it "escapes the label when custom renderer raises error" do
+        failing_proc = ->(_cell, _label) { raise StandardError }
+        instance = subject.new(column_definitions: [{ accessor: "a", label: malicious_label, header: failing_proc }])
+        expect(instance.render_header({ accessor: "a", label: malicious_label })).to eq escaped_label
+      end
+
+      it "escapes the label when custom renderer returns blank" do
+        instance = subject.new(column_definitions: [{ accessor: "a", label: malicious_label, header: ->(_cell, _label) { "" } }])
+        expect(instance.render_header({ accessor: "a", label: malicious_label })).to eq escaped_label
+      end
+
+      it "escapes grouped column labels without a custom header" do
+        column_definitions = [{ label: malicious_label, id: "group", columns: [{ accessor: "a", label: "A" }] }]
+        instance = subject.new(column_definitions: column_definitions)
+        expect(instance.render_header({ label: malicious_label, id: "group", colspan: 1 })).to eq escaped_label
+      end
     end
   end
 

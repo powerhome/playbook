@@ -1,3 +1,35 @@
+# ✨ 18.5.0.pre.rc.0
+
+##### November 23, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.5.0-rc.0](https://github.com/powerhome/playbook/tree/18.5.0-rc.0) full list of changes:
+
+**Enhancement:**
+
+- Form_pill: **Add Additional Product Color Tokens to Form Pill, Typeahead, Multilevelselect** [\#6975](https://github.com/powerhome/playbook/pull/6975) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Draggable: **Add Touch Delay to Prevent Accidental Dragging on Mobile** [\#6957](https://github.com/powerhome/playbook/pull/6957) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Rich Text Editor: **Rte Text In Editor Vs. Actual Differences** [\#6917](https://github.com/powerhome/playbook/pull/6917) ([nickamantia](https://github.com/nickamantia))
+
+**Bug Fixes:**
+
+- Rails: **Update Appraisal Lockfiles to Playbook_ui 18.4.0** [\#6976](https://github.com/powerhome/playbook/pull/6976) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: **Fix Console Error on Expand All** [\#6963](https://github.com/powerhome/playbook/pull/6963) ([nickamantia](https://github.com/nickamantia))
+- Website: **Fail the Deploy on a Pxc Timeout and Wait After Operator Changes** [\#6962](https://github.com/powerhome/playbook/pull/6962) ([c-gerke](https://github.com/c-gerke))
+
+**Documentation:**
+
+- Playground: **Add Rails Playground for Text, Icon, and Label Kits** [\#6966](https://github.com/powerhome/playbook/pull/6966) ([kangaree](https://github.com/kangaree))
+
+**Dependencies:**
+
+- Website: **Upgrade the Pxc Operator to 1.17.0** [\#6961](https://github.com/powerhome/playbook/pull/6961) ([c-gerke](https://github.com/c-gerke))
+- Release: **Version Bump 18.4.0** [\#6960](https://github.com/powerhome/playbook/pull/6960) ([nidaqg](https://github.com/nidaqg))
+- Rails: **Upgrade to Rails 8 and Test Rails 7 Compatibility** [\#6949](https://github.com/powerhome/playbook/pull/6949) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.4.0...18.5.0-rc.0)
+
 # ✨ 18.4.0.pre.rc.5
 
 ##### November 17, 2026

@@ -50,6 +50,7 @@ changelog-rc:
 
 connect:
 	ruby -Iplaybook/lib -rplaybook/connect_message_generator -e 'Playbook::ConnectMessageGenerator.run!'
+	@if command -v pbcopy >/dev/null; then pbcopy < playbook/connect_message_formatted.md && echo "Copied to clipboard."; fi
 
 time-to-live ?= 3h
 review_cluster = ${shell ./playbook-website/bin/deployer ./playbook-website/bin/cluster_for_review_stack pr$(pr)}

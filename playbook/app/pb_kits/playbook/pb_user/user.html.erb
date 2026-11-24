@@ -1,8 +1,10 @@
 <%= pb_content_tag do %>
   <% if object.avatar_url.present? || object.avatar %>
     <%= pb_rails("avatar", props: {
+      dark: object.dark,
       name: object.name,
       size: object.avatar_size,
+      status: object.status,
       image_url: object.avatar_url,
       grayscale: object.avatar_grayscale,
     }) %>

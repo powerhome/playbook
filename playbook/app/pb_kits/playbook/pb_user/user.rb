@@ -21,6 +21,7 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[lg md sm],
                   default: "sm"
+      prop :status
       prop :subtitle
       prop :title
       prop :title_style, type: Playbook::Props::Enum,

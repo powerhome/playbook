@@ -610,6 +610,16 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     end
   end
 
+  describe "empty options", type: :kit do
+    before { helper.extend Playbook::PbKitHelper }
+
+    it "marks the empty options row so the JS reuses it as the no options message" do
+      html = helper.pb_rails("dropdown", props: { id: "empty", no_options_text: "No agents available", options: [] })
+
+      expect(html).to have_tag("[data-dropdown-empty-options]", text: /No agents available/)
+    end
+  end
+
   describe "#disabled" do
     it "includes disabled state in data when true" do
       dropdown = subject.new(disabled: true)
