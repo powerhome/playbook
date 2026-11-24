@@ -226,6 +226,48 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:html]).to include("&lt;script&gt;")
     end
 
+    it "centers empty_state inside a flex wrapper like the Rails docs example" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "empty_state",
+        props: { "header" => "Nothing here", "image" => "default" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to match(/\A\s*<div class="pb_flex_kit[^"]*justify_content_center[^"]*">\s*<div class="pb_empty_state_kit"/)
+    end
+
+    it "applies ProgressStepItem panel props to the first step in progress_step_item_props mode" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "progress_step",
+        props: {
+          "variant" => "tracker",
+          "progressStepItemStatus" => "active",
+          "progressStepItemIcon" => "exclamation-triangle",
+          "progressStepItemClassName" => "custom-step",
+        },
+        children: "Review",
+        structure_mode: "progress_step_item_props"
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("Review", "Approve", "Publish")
+      expect(result[:html]).to include('<li class="pb_progress_step_item_active custom-step">')
+      expect(result[:html]).to include('<li class="pb_progress_step_item_active">', '<li class="pb_progress_step_item_inactive">')
+    end
+
+    it "renders progress_simple from React's string percent presets" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "progress_simple",
+        props: { "percent" => "50" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("width:50%;")
+    end
+
     it "renders ProgressStepItem children inside progress_step" do
       result = described_class.new(
         view_context: view_context,

@@ -10,7 +10,6 @@
       },
       "progress_step_item_props": {
         "label": "ProgressStepItem Props",
-        "platforms": ["react"],
         "template": "<ProgressStep{{props}}>\n  <ProgressStepItem{{ProgressStepItem.props}}>\n    {{children}}\n  </ProgressStepItem>\n  <ProgressStepItem status=\"active\">Approve</ProgressStepItem>\n  <ProgressStepItem status=\"inactive\">Publish</ProgressStepItem>\n</ProgressStep>",
         "children": "Review",
         "props": {
@@ -34,18 +33,18 @@
   "customProps": {
     "progressStepItemStatus": {
       "type": "enum",
-      "platforms": ["react"],
+      "platforms": ["react", "rails"],
       "values": ["complete", "active", "inactive", "hidden"],
       "default": "complete"
     },
     "progressStepItemIcon": {
       "type": "string",
-      "platforms": ["react"],
+      "platforms": ["react", "rails"],
       "default": "check"
     },
     "progressStepItemClassName": {
       "type": "string",
-      "platforms": ["react"]
+      "platforms": ["react", "rails"]
     }
   },
   "propTargets": {
@@ -71,9 +70,18 @@
     }
   ],
   "hiddenProps": ["showIcon"],
+  "generatedRailsDefault": true,
   "presets": [
     {
+      "name": "Default steps",
+      "platforms": ["rails"],
+      "structureMode": "standard",
+      "props": {},
+      "children": "<ProgressStepItem status=\"complete\" />\n<ProgressStepItem status=\"active\" />\n<ProgressStepItem status=\"inactive\" />"
+    },
+    {
       "name": "Default",
+      "platforms": ["react"],
       "structureMode": "standard",
       "props": {},
       "children": "<ProgressStepItem status=\"complete\">Step 1</ProgressStepItem>\n<ProgressStepItem status=\"active\">Step 2</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Step 3</ProgressStepItem>"
@@ -125,7 +133,6 @@
     },
     {
       "name": "Custom Icon",
-      "platforms": ["react"],
       "structureMode": "progress_step_item_props",
       "props": {
         "icon": true,
@@ -137,7 +144,6 @@
     },
     {
       "name": "ProgressStepItem Active",
-      "platforms": ["react"],
       "structureMode": "progress_step_item_props",
       "props": {
         "icon": true,

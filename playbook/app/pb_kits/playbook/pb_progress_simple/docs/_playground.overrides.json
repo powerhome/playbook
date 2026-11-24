@@ -2,6 +2,7 @@
   "defaults": {
     "align": "left",
     "muted": false,
+    "percent": "50",
     "variant": "default",
     "width": "100%"
   },
@@ -11,17 +12,15 @@
     { "name": "Appearance", "props": ["variant", "muted", "width", "dark"] }
   ],
   "presets": [
-    { "name": "0%", "platforms": ["react"], "props": { "percent": "0" } },
-    { "name": "50%", "platforms": ["react"], "props": { "percent": "50" } },
-    { "name": "100%", "platforms": ["react"], "props": { "percent": "100" } },
+    { "name": "0%", "props": { "percent": "0" } },
+    { "name": "50%", "props": { "percent": "50" } },
+    { "name": "100%", "props": { "percent": "100" } },
     {
       "name": "variant: positive",
-      "platforms": ["react"],
       "props": { "percent": "75", "variant": "positive" }
     },
     {
       "name": "Muted",
-      "platforms": ["react"],
       "props": { "muted": true, "percent": "50" }
     },
     {
@@ -30,44 +29,15 @@
     },
     {
       "name": "Fixed Width",
-      "platforms": ["react"],
       "props": { "percent": "40", "width": "120px" }
     },
     {
       "name": "Centered",
-      "platforms": ["react"],
       "props": { "percent": "60", "align": "center" }
-    },
-    { "name": "Empty (0%)", "platforms": ["rails"], "props": { "percent": 0 } },
-    { "name": "Half (50%)", "platforms": ["rails"], "props": { "percent": 50 } },
-    { "name": "Complete (100%)", "platforms": ["rails"], "props": { "percent": 100 } },
-    {
-      "name": "Positive variant",
-      "platforms": ["rails"],
-      "props": { "percent": 75, "variant": "positive" }
-    },
-    {
-      "name": "Muted bar",
-      "platforms": ["rails"],
-      "props": { "muted": true, "percent": 50 }
-    },
-    {
-      "name": "Fixed width bar",
-      "platforms": ["rails"],
-      "props": { "percent": 40, "width": "120px" }
-    },
-    {
-      "name": "Centered bar",
-      "platforms": ["rails"],
-      "props": { "percent": 60, "align": "center" }
     }
   ],
   "conditionals": {},
   "hints": {
-    "required_progress": {
-      "message": "Set percent, or set both value and max. Percent wins when both are set.",
-      "type": "info"
-    },
     "percent": {
       "when": { "percent": "50" },
       "message": "Percent accepts a number-like string and renders that width directly.",

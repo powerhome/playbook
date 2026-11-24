@@ -78,9 +78,21 @@ module Playground
         converted = deep_convert(value)
         next if converted.nil?
 
-        merged[camel_to_snake(camel_key).to_sym] = converted
+        merged[camel_to_snake(camel_key).to_sym] = coerce_numeric_string(converted, definition)
       end
       merged
+    end
+
+    # Shared presets keep React's string values (percent: "50"); Rails number props reject strings.
+    def coerce_numeric_string(value, definition)
+      return value unless value.is_a?(String) && rails_prop_type(definition) == "number"
+
+      Integer(value, exception: false) || Float(value, exception: false) || value
+    end
+
+    def rails_prop_type(definition)
+      type = definition["type"]
+      type.is_a?(Hash) ? type["rails"] : type
     end
 
     def blocked_prop_name?(name)

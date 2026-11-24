@@ -260,13 +260,11 @@ export const usePlaygroundState = ({
   // Get available structure modes for UI
   const availableStructureModes = useMemo(() => {
     if (!playgroundConfig?.structureModes?.modes) return [];
-    return Object.entries(playgroundConfig.structureModes.modes)
-      .filter(([, mode]) => !mode.platforms || mode.platforms.includes(platform))
-      .map(([key, mode]) => ({
-        key,
-        label: mode.label,
-      }));
-  }, [playgroundConfig, platform]);
+    return Object.entries(playgroundConfig.structureModes.modes).map(([key, mode]) => ({
+      key,
+      label: mode.label,
+    }));
+  }, [playgroundConfig]);
 
   const availableDataPresets = useMemo(() => {
     const presets = playgroundConfig?.dataPresets?.presets;
@@ -697,7 +695,7 @@ export const usePlaygroundState = ({
 
   const displayCode = useMemo(() => {
     if (platform === "rails") {
-      if (!hasModifiedProps && defaultExample?.source) {
+      if (!hasModifiedProps && defaultExample?.source && !playgroundConfig?.generatedRailsDefault) {
         return defaultExample.source;
       }
       return generatedRailsCode;
@@ -713,6 +711,7 @@ export const usePlaygroundState = ({
     hasActiveTemplate,
     hasModifiedProps,
     defaultExample,
+    playgroundConfig?.generatedRailsDefault,
     generatedDisplayCode,
     generatedRailsCode,
   ]);

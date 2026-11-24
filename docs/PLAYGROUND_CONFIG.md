@@ -137,6 +137,7 @@ Every kit with a `kit.schema.json` gets a `_playground.json` unless it is listed
 | `editableFunctionProps` | Render selected function props as editable code fields instead of handler preset dropdowns. |
 | `hints` | Info/warning/error banners above the preview. |
 | `hiddenProps` | Props to omit from the props panel. |
+| `generatedRailsDefault` | Rails tab only. When `true`, the unmodified code panel shows the generated ERB for the starting preset instead of the first Rails docs example's source. Use it when that docs example is much longer than a starting playground example. Pair it with a Rails-first preset. |
 | `emitEmptyStringProps` | Prop names for which an explicitly empty string is a meaningful value. Emits `prop=""` instead of omitting the prop when enabled and cleared. |
 | `requiredProps` | Props that should always be present and non-disableable. Useful for required arrays/data like `treeData`. |
 | `customProps` | Playground-only controls not in the schema, often used for subcomponent props. Prefer the real prop names developers pass (for example `text`, `marginY`) when they do not collide with the parent kit. |

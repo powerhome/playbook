@@ -118,6 +118,11 @@ const formatRailsPropValue = (
     return `${formatRailsPropName(name)}: ${value}`;
   }
 
+  // Shared presets keep React's string values (percent: "50"); Rails number props reject strings.
+  if (propType === "number" && typeof value === "string" && value.trim() !== "" && !Number.isNaN(Number(value))) {
+    return `${formatRailsPropName(name)}: ${Number(value)}`;
+  }
+
   if (
     propType.startsWith("{") ||
     (typeof value === "object" &&
@@ -167,6 +172,23 @@ function buildPbRailsBlock(
     ? `<%= pb_rails("${kitName}", ${propsBlock}) do %>`
     : `<%= pb_rails("${kitName}") do %>`;
   return [opener, ...childLines, `<% end %>`].join("\n");
+}
+
+const PROGRESS_STEP_ITEM_PANEL_PROPS: Record<string, string> = {
+  progressStepItemStatus: "status",
+  progressStepItemIcon: "icon",
+  progressStepItemClassName: "classname",
+};
+
+function formatProgressStepItemPropsFromPanel(
+  propValues: Record<string, PropValue>
+): string[] {
+  return Object.entries(PROGRESS_STEP_ITEM_PANEL_PROPS).flatMap(([panelName, railsName]) => {
+    const propValue = propValues[panelName];
+    return propValue?.enabled && propValue.value
+      ? [`    ${railsName}: ${JSON.stringify(String(propValue.value))}`]
+      : [];
+  });
 }
 
 interface GenerateRailsCodeOptions {
@@ -308,6 +330,33 @@ export const generateRailsCode = ({
         `<% end %>`,
       ].join("\n")
     );
+  }
+
+  if (kitName === "progress_step" && structureMode === "progress_step_item_props") {
+    const progressStepPropsBlock = buildPropsBlock(
+      enabledProps.filter((line) => !line.includes("progress_step_item_"))
+    );
+    const itemKit = "progress_step/progress_step_item";
+    const firstItemPropsBlock = buildPropsBlock(formatProgressStepItemPropsFromPanel(propValues));
+    const firstItemOpener = firstItemPropsBlock
+      ? `  <%= pb_rails("${itemKit}", ${firstItemPropsBlock}) do %>`
+      : `  <%= pb_rails("${itemKit}") do %>`;
+
+    return [
+      progressStepPropsBlock
+        ? `<%= pb_rails("progress_step", ${progressStepPropsBlock}) do %>`
+        : `<%= pb_rails("progress_step") do %>`,
+      firstItemOpener,
+      ...childrenToBlockLines(children?.trim() || "Review", "    "),
+      `  <% end %>`,
+      `  <%= pb_rails("${itemKit}", props: { status: "active" }) do %>`,
+      `    Approve`,
+      `  <% end %>`,
+      `  <%= pb_rails("${itemKit}", props: { status: "inactive" }) do %>`,
+      `    Publish`,
+      `  <% end %>`,
+      `<% end %>`,
+    ].join("\n");
   }
 
   if (
