@@ -15,6 +15,7 @@
                 <%= content.presence %>
             <% else %>
                 <%= pb_rails("list/item", props: {
+                    data: { dropdown_empty_options: true },
                     display: "flex",
                     justify_content: "center",
                     padding:"xs",
