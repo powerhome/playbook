@@ -143,6 +143,9 @@ export const usePlaygroundState = ({
           ...(def.values !== undefined ? { values: resolvedValues } : {}),
           ...(def.default !== undefined ? { default: resolveSchemaDefaultForPlatform(def, platform) } : {}),
           ...(emitEmptyStringPropNames.has(name) ? { emitEmptyString: true } : {}),
+          ...(typeof def.type === "object" && resolvedType?.toLowerCase() === "number"
+            ? { clearableNumber: true }
+            : {}),
         };
       }
     });
