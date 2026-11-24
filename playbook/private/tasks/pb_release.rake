@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "English"
+require "json"
 require "net/http"
 
 namespace :pb_release do
@@ -58,6 +59,16 @@ namespace :pb_release do
     new_version_rb = old_version_rb.gsub(/\sVERSION\s=\s"\w{1,3}.\w{1,3}.\w{1,3}"/, " VERSION = \"#{new_version}\"")
     File.open("lib/playbook/version.rb", "w") { |file| file.puts new_version_rb }
     puts "Updated lib/playbook/version.rb"
+
+    # release-please reads the last stable version from its manifest, so a manual release must
+    # record it there too, or the next release PR proposes this version again.
+    unless alpha
+      manifest_path = "../.release-please-manifest.json"
+      manifest = JSON.parse(File.read(manifest_path))
+      manifest["."] = new_version
+      File.write(manifest_path, "#{JSON.pretty_generate(manifest)}\n")
+      puts "Updated .release-please-manifest.json"
+    end
 
     `bundle`
     puts "Updated Gemfile.lock"
