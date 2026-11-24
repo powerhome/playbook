@@ -11,6 +11,7 @@ examples:
   - user_block_content_subtitle_rails: Block Content Subtitle
   - user_font_options: Font Options
   - user_grayscale: Grayscale Avatar
+  - user_status: Status
 
   react:
   - user_default: Default
@@ -23,6 +24,7 @@ examples:
   - user_block_content_subtitle_react: Block Content Subtitle
   - user_font_options: Font Options
   - user_grayscale: Grayscale Avatar
+  - user_status: Status
 
   swift:
   - user_horizontal_swift: Horizontal

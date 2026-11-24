@@ -41,4 +41,30 @@ RSpec.describe Playbook::PbUser::User do
       expect(subject.new({ size: "md", align: "center", orientation: "vertical" }).classname).to eq "pb_user_kit_center_vertical_md"
     end
   end
+
+  describe "status indicator", type: :kit do
+    before { helper.extend Playbook::PbKitHelper }
+
+    it "puts the dark class on the presence ring when user is dark" do
+      html = helper.pb_rails("user", props: {
+                               avatar: true,
+                               dark: true,
+                               name: "Anna Black",
+                               status: "online",
+                             })
+
+      expect(html).to have_tag(".pb_online_status_kit.dark")
+    end
+
+    it "leaves the presence ring light by default" do
+      html = helper.pb_rails("user", props: {
+                               avatar: true,
+                               name: "Anna Black",
+                               status: "online",
+                             })
+
+      expect(html).to have_tag(".pb_online_status_kit")
+      expect(html).not_to have_tag(".pb_online_status_kit.dark")
+    end
+  end
 end
