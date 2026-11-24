@@ -3,6 +3,8 @@
 module Playbook
   module PbStarRating
     class StarRating < Playbook::KitBase
+      MAX_DENOMINATOR = 10
+
       prop :rating, type: Playbook::Props::Numeric,
                     default: 0
 
@@ -38,16 +40,30 @@ module Playbook
                            default: {}
       prop :default_value
 
+      def initialize(prop_values = {}, &block)
+        super
+        validate_star_count!(:rating)
+        validate_star_count!(:denominator)
+      end
+
+      def star_denominator
+        [denominator.to_i, MAX_DENOMINATOR].min
+      end
+
+      def star_rating
+        [rating, star_denominator].min
+      end
+
       def one_decimal_rating
-        rating.to_f.round(1)
+        star_rating.to_f.round(1)
       end
 
       def star_count
-        rating.round > denominator_style ? denominator_style : rating.round
+        [star_rating.round, denominator_style].min
       end
 
       def denominator_style
-        layout_option == "onestar" ? 1 : denominator
+        layout_option == "onestar" ? 1 : star_denominator
       end
 
       def empty_stars
@@ -129,6 +145,15 @@ module Playbook
           style: "display: none",
           value: default_value || ""
         )
+      end
+
+    private
+
+      def validate_star_count!(name)
+        value = public_send(name)
+        return if value.to_f.finite? && !value.negative?
+
+        raise Playbook::Props::Error, "#{self.class} prop '#{name}' must be a finite number that is not negative, got #{value.inspect}"
       end
     end
   end

@@ -68,4 +68,61 @@ describe("Star Rating Kit", () => {
     expect(title.className).toBe("pb_title_kit pb_title_2 pb_title_light pb_title_thin pr_sm pb_star_rating_number_lg")
     expect(count).toBe(5)
   })
+
+  const countStars = (props) => {
+    render(
+      <StarRating
+          data={{ testid: testId }}
+          size="xs"
+          {...props}
+      />
+    )
+    return screen.getByTestId(testId).querySelectorAll(".pb_star_xs").length
+  }
+
+  test("Caps an oversized denominator at 10 stars", () => {
+    expect(countStars({ denominator: 1000000000, rating: 3 })).toBe(10)
+  })
+
+  test("Caps an oversized denominator for the interactive variant", () => {
+    expect(countStars({ denominator: 1000000000, variant: "interactive" })).toBe(10)
+  })
+
+  test("Displays a rating above the denominator as full", () => {
+    render(
+      <StarRating
+          data={{ testid: testId }}
+          denominator={5}
+          rating={100}
+          size="xs"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelectorAll(".yellow_star").length).toBe(5)
+    expect(kit.querySelectorAll(".empty_star_light").length).toBe(0)
+  })
+
+  test("Keeps partial ratings rounded as before", () => {
+    render(
+      <StarRating
+          data={{ testid: testId }}
+          denominator={5}
+          layoutOption="number"
+          rating={4.2}
+          size="xs"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelectorAll(".yellow_star").length).toBe(4)
+    expect(kit.querySelectorAll(".empty_star_light").length).toBe(1)
+    expect(kit).toHaveTextContent("4.2")
+  })
+
+  test.each([-1, NaN, Infinity, -Infinity])("Renders nothing for invalid value %s", (value) => {
+    render(<div data-testid="wrapper"><StarRating rating={value} /><StarRating denominator={value} /></div>)
+
+    expect(screen.getByTestId("wrapper")).toBeEmptyDOMElement()
+  })
 })
