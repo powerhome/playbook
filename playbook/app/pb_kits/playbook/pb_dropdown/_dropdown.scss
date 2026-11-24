@@ -117,8 +117,13 @@
           width: 100%;
         }
 
+        // Fill the space beside multi-select pills; wrap only when it can't fit.
         .dropdown_input {
+          flex: 1 1 auto;
           min-width: 0;
+        }
+
+        [data-dropdown-autocomplete] {
           width: 100%;
         }
       }
