@@ -54,7 +54,11 @@ RSpec.describe Playground::PropFilter do
   end
 
   describe "Rails number props" do
-    it "converts numeric strings for props typed number on Rails" do
+    def filtered_home_id(value)
+      described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => value })
+    end
+
+    it "converts numeric strings for props typed string on React and number on Rails" do
       filtered = described_class.filter_kit_and_globals(
         kit_name: "home_address_street",
         props: { "homeId" => "8250263", "address" => "70 Prospect Ave", "zipcode" => "19382" }
@@ -63,28 +67,22 @@ RSpec.describe Playground::PropFilter do
       expect(filtered).to eq(home_id: 8_250_263, address: "70 Prospect Ave", zipcode: "19382")
     end
 
-    it "leaves non-numeric strings for Rails to validate" do
-      filtered = described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => "H8250263" })
-
-      expect(filtered[:home_id]).to eq("H8250263")
+    it "normalizes leading zeros as decimal, matching the code generator and NumberControl" do
+      expect(filtered_home_id("010")).to eq(home_id: 10)
+      expect(filtered_home_id("08")).to eq(home_id: 8)
+      expect(filtered_home_id("0")).to eq(home_id: 0)
     end
 
-    it "keeps zero and drops blank values so the optional prop falls back to nil" do
-      expect(described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => "0" })).to eq(home_id: 0)
-
-      ["", "  "].each do |value|
-        filtered = described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => value })
-
-        expect(filtered).not_to have_key(:home_id)
+    it "drops blank and non-numeric values so the optional prop falls back to nil" do
+      ["", "  ", "H8250263"].each do |value|
+        expect(filtered_home_id(value)).not_to have_key(:home_id)
       end
     end
 
-    it "leaves numbers with leading zeros as strings, matching the code generator" do
-      %w[08 010 -07 007.5].each do |value|
-        filtered = described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => value })
+    it "leaves props typed number on both platforms unchanged" do
+      filtered = described_class.filter_kit_and_globals(kit_name: "button", props: { "count" => "5" })
 
-        expect(filtered[:home_id]).to eq(value)
-      end
+      expect(filtered[:count]).to eq("5")
     end
   end
 

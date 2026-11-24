@@ -47,6 +47,29 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:error]).to eq(Playground::PreviewLimits::CLIENT_ERROR)
     end
 
+    it "renders a leading-zero home ID as the normalized number" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "home_address_street",
+        props: { "address" => "70 Prospect Ave", "homeId" => "010" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("<span>H#10</span>")
+    end
+
+    it "renders without a home ID when the value is not a number" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "home_address_street",
+        props: { "address" => "70 Prospect Ave", "homeId" => "H8250263" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("70 Prospect Ave")
+      expect(result[:html]).not_to include("home-hashtag")
+    end
+
     it "rejects oversized children" do
       result = described_class.new(
         view_context: view_context,
