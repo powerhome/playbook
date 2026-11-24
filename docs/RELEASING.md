@@ -21,7 +21,7 @@ To choose a version yourself, add a `Release-As: x.y.z` line to the body of a sq
 
 ## The release pull request
 
-On every push to master, `.github/workflows/release-please.yml` opens or updates `chore(release): Version bump <version>` from the branch `release-please--branches--master`.
+On every push to master, `.github/workflows/release-please.yml` opens or updates `chore(release): Version bump <version>` from the branch `release-please--branches--master`. It opens as a draft, so it can't be merged until someone marks it ready for review. Rebuilds don't change that.
 
 - **release-please** bumps `VERSION` in `playbook/lib/playbook/version.rb` (the line marked `x-release-please-version`) and `playbook/package.json`. Its notes go in the PR body.
 - **The prepare job** (`.github/scripts/prepare-release-pr`) then commits the rest:
@@ -39,7 +39,7 @@ Every push to master rebuilds the branch from master (`always-update`), and the 
 1. Review the release PR. Check the version and the generated `CHANGELOG.md` section.
 2. Finalize the changelog title, date, hero image, and description with the team, and push them to the release branch. The push runs the required checks.
 3. Run `make connect` from the repo root on the release branch. The message is copied to your clipboard.
-4. If anything merged to master after step 2, the rebuild replaced your changelog edits, so push them again. That push also runs the title check on the rebuilt branch. Then merge the release PR. release-please tags the merge commit (for example `18.5.0`) and creates its GitHub Release with the notes.
+4. If anything merged to master after step 2, the rebuild replaced your changelog edits, so push them again. That push also runs the title check on the rebuilt branch. Then mark the release PR ready for review and merge it. release-please tags the merge commit (for example `18.5.0`) and creates its GitHub Release with the notes.
 5. Pull master, then from `playbook/` run `bin/rails pb_release:push`. It builds and verifies both packages, publishes to RubyGems and then npm with the same 2FA prompts, and confirms both registries list the release.
 
 If either publish fails, keep both package files and rerun with `PLAYBOOK_RESUME_RELEASE=1 bin/rails pb_release:push`.
@@ -48,7 +48,7 @@ If either publish fails, keep both package files and rerun with `PLAYBOOK_RESUME
 
 | File | Purpose |
 |------|---------|
-| `release-please-config.json` | Release type, bare `X.Y.Z` tags, PR title, labels, and the version files to bump |
+| `release-please-config.json` | Release type, bare `X.Y.Z` tags, PR title, labels, draft PRs, and the version files to bump |
 | `.release-please-manifest.json` | The last released version. release-please updates it in each release PR. |
 | `.github/workflows/release-please.yml` | Runs release-please and the prepare job |
 | `.github/scripts/prepare-release-pr` | Sets `PREVIOUS_VERSION`, pins the lockfiles, and generates the changelog |
