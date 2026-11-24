@@ -1,3 +1,45 @@
+# ✨ 18.5.0.pre.rc.2
+
+##### November 24, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.5.0-rc.2](https://github.com/powerhome/playbook/tree/18.5.0-rc.2) full list of changes:
+
+**Bug Fixes:**
+
+- Star_rating: **Cap Star Count and Reject Invalid Values** [\#6983](https://github.com/powerhome/playbook/pull/6983) ([kangaree](https://github.com/kangaree))
+- Advanced Table: **Escape Column Header Labels In Rails** [\#6982](https://github.com/powerhome/playbook/pull/6982) ([nidaqg](https://github.com/nidaqg))
+- Dropdown: **Dropdown Quickpick and Datepicker Synchronization Issues** [\#6977](https://github.com/powerhome/playbook/pull/6977) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dropdown: **Show a Single No Options Message for Empty Dropdowns** [\#6974](https://github.com/powerhome/playbook/pull/6974) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.5.0-rc.1...18.5.0-rc.2)
+
+# ✨ 18.5.0.pre.rc.1
+
+##### November 24, 2026
+
+![rc_release_image](https://github.com/user-attachments/assets/8cc6cce5-fd42-40e1-be76-bbf5e0aef277)
+
+[18.5.0-rc.1](https://github.com/powerhome/playbook/tree/18.5.0-rc.1) full list of changes:
+
+**Enhancement:**
+
+- User: **Expose Status Prop to User Kit** [\#6968](https://github.com/powerhome/playbook/pull/6968) ([andrew-k9](https://github.com/andrew-k9))
+- Filter: **Interactive Applied Filters - Month Date Picker Fixes and Improvements** [\#6967](https://github.com/powerhome/playbook/pull/6967) ([kangaree](https://github.com/kangaree))
+
+**Documentation:**
+
+- Update Changelog for Rc - 18.5.0-rc.0 [\#6989](https://github.com/powerhome/playbook/pull/6989) ([nickamantia](https://github.com/nickamantia))
+
+**Dependencies:**
+
+- Release: **Update Appraisal Lockfiles During Version Bump** [\#6978](https://github.com/powerhome/playbook/pull/6978) ([nidaqg](https://github.com/nidaqg))
+- Website: **Upgrade the Pxc Operator to 1.18.0** [\#6965](https://github.com/powerhome/playbook/pull/6965) ([c-gerke](https://github.com/c-gerke))
+- Release: **Share Package Verification, Add Safe Publish Retries, and Open Rc Changelog Prs** [\#6959](https://github.com/powerhome/playbook/pull/6959) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/18.5.0-rc.0...18.5.0-rc.1)
+
 # ✨ 18.5.0.pre.rc.0
 
 ##### November 23, 2026
