@@ -31,7 +31,7 @@ On every push to master, `.github/workflows/release-please.yml` opens or updates
 - The PR is labeled `Inactive RC`, so merging it doesn't cut a release candidate, and `milano`.
 - Both jobs use `GITHUB_TOKEN`, so the PR doesn't run other workflows by itself. **Editing the PR title, or pushing a commit to the branch, runs the required checks.**
 
-When a later merge changes the release notes, release-please rebuilds the branch from master and the prepare job runs again. That replaces any edits on the branch, including the changelog title and description, so make those edits last.
+Every push to master rebuilds the branch from master (`always-update`), and the prepare job runs again. That keeps the `CHANGELOG.md` section complete, including PRs that don't trigger a release, and its date current. It also replaces any edits on the branch, including the changelog title and description, so make those edits last, after everything you want in the release has merged.
 
 ## Cutting the release
 

@@ -4,6 +4,7 @@
   "include-component-in-tag": false,
   "include-v-in-tag": false,
   "skip-changelog": true,
+  "always-update": true,
   "pull-request-title-pattern": "chore(release): Version bump ${version}",
   "extra-label": "Inactive RC,milano",
   "packages": {
