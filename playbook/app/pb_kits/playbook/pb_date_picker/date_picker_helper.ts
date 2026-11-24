@@ -94,6 +94,25 @@ type DatePickerConfig = {
   dialogPortalTarget?: HTMLElement | null,
 } & Pick<BaseOptions, "allowInput" | "defaultDate" | "enableTime" | "maxDate" | "minDate" | "mode" | "plugins" | "position" | "positionElement" | "inline" >
 
+// Clears the quickpick a start/end DatePicker is synced with (syncStartWith/syncEndWith),
+// without touching the DatePickers themselves.
+export const clearSyncedQuickpick = (quickpickId?: string): void => {
+  if (!quickpickId) return
+  const element = document.querySelector(`#${quickpickId}`) as any
+  // React Dropdown
+  if (element?._dropdownRef?.current) {
+    element._dropdownRef.current.clearSelected()
+  }
+  // Rails Dropdown
+  else if (element?._pbDropdownInstance) {
+    element._pbDropdownInstance.clearSelected()
+  }
+  // DatePicker QuickPick
+  else {
+    element?._flatpickr?.clear()
+  }
+}
+
 const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HTMLElement) => {
   const noop = () => {
     // intentionally left empty as a no-op placeholder
@@ -825,45 +844,23 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // If this is a start picker that syncs with a quickpick
   if (syncStartWith) {
     picker.config.onClose.push((selectedDates: string) => {
-      if (selectedDates?.length) {
-        const element = document.querySelector(`#${syncStartWith}`) as any;
-        // Check if it's a React Dropdown (has _dropdownRef)
-        if (element?._dropdownRef?.current) {
-          element._dropdownRef.current.clearSelected();
-        }
-        // Check if it's a Rails Dropdown (has _pbDropdownInstance)
-        else if (element?._pbDropdownInstance) {
-          element._pbDropdownInstance.clearSelected();
-        }
-        // Check if it's a DatePicker QuickPick (has _flatpickr)
-        else {
-          const quickpick = element?._flatpickr;
-          quickpick?.clear();
-        }
-      }
+      if (selectedDates?.length) clearSyncedQuickpick(syncStartWith);
     });
   }
 
   // If this is an end picker that syncs with a quickpick
   if (syncEndWith) {
     picker.config.onClose.push((selectedDates: string) => {
-      if (selectedDates?.length) {
-        const element = document.querySelector(`#${syncEndWith}`) as any;
-        // Check if it's a React Dropdown (has _dropdownRef)
-        if (element?._dropdownRef?.current) {
-          element._dropdownRef.current.clearSelected();
-        }
-        // Check if it's a Rails Dropdown (has _pbDropdownInstance)
-        else if (element?._pbDropdownInstance) {
-          element._pbDropdownInstance.clearSelected();
-        }
-        // Check if it's a DatePicker QuickPick (has _flatpickr)
-        else {
-          const quickpick = element?._flatpickr;
-          quickpick?.clear();
-        }
-      }
+      if (selectedDates?.length) clearSyncedQuickpick(syncEndWith);
     });
+  }
+
+  // A React quickpick that mounted before this picker may still be holding its defaultValue range
+  const syncedQuickpickId = syncStartWith || syncEndWith
+  if (syncedQuickpickId) {
+    const quickpick = document.querySelector(`#${syncedQuickpickId}`) as
+      (HTMLElement & { _dropdownRef?: { current?: { applyPendingDefaultRange?: () => void } } }) | null
+    quickpick?._dropdownRef?.current?.applyPendingDefaultRange?.()
   }
 // === End of Automatic Sync Logic ===
 
