@@ -100,3 +100,17 @@ test('kit to apply id', () => {
 
   expect(screen.getByTestId(testId)).toHaveAttribute('id', 'bar-graph-id')
 })
+
+test('does not render a credits link from caller options', () => {
+  render(
+    <PbBarGraph
+        data={{ testid: testId }}
+        options={{
+          ...chartOptions,
+          credits: { enabled: true, href: 'javascript:alert(1)' },
+        }}
+    />
+  )
+
+  expect(document.querySelector('a[href="javascript:alert(1)"]')).not.toBeInTheDocument()
+})

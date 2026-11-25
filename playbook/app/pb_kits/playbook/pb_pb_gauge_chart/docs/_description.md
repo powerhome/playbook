@@ -4,6 +4,8 @@ This kit is a wrapper around the Highcharts library. It applies styling and defa
 
 See the [highcharts API docs](https://api.highcharts.com/highcharts/) for a comprehensive look at what is possible.
 
+`credits` stays off. `href` and `url` values are kept only for `http:`, `https:`, and same-origin paths. Pass `sanitizeOptions` in React, or `sanitize_options` in Rails, when `options` come from untrusted input. That keeps presentation and data keys and drops functions, `events`, formatters, and `useHTML`.
+
 **NOTE**: All chart kits are available through a separate entrypoint to keep Highcharts optional. Import them using:
 ```javascript
 import { PbGaugeChart } from 'playbook-ui/charts'

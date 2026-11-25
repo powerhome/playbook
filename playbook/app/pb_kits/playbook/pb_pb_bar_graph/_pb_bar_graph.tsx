@@ -5,12 +5,14 @@ import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 
 import pbBarGraphTheme from "./pbBarGraphTheme"
+import { mergeChartOptions } from "../utilities/highchartsOptions"
 
 import classnames from "classnames";
 
 type PbBarGraphProps = {
   
   options: Record<string, unknown>
+  sanitizeOptions?: boolean
   className?: string
   aria?: { [key: string]: string };
   data?: { [key: string]: string };
@@ -25,6 +27,7 @@ const {
   id,
   htmlOptions = {},
   options,
+  sanitizeOptions = false,
   className,
 } = props
 
@@ -37,11 +40,11 @@ const {
     if (!options || typeof options !== "object") {
       // eslint-disable-next-line no-console
       console.error("❌ Invalid options passed to <PbBarGraph />", options)
-      return {}
+      return mergeChartOptions({}, {})
     }
 
-    return Highcharts.merge({}, pbBarGraphTheme, options)
-  }, [options])
+    return mergeChartOptions(pbBarGraphTheme, options, sanitizeOptions)
+  }, [options, sanitizeOptions])
 
   return (
   

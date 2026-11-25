@@ -13,7 +13,8 @@
           ]
         }
       ]
-    }
+    },
+    "sanitizeOptions": false
   },
   "groups": [
     {

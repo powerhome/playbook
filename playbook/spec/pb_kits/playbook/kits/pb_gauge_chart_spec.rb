@@ -5,6 +5,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_pb_gauge_chart/pb_gauge_ch
 RSpec.describe Playbook::PbPbGaugeChart::PbGaugeChart do
   subject { Playbook::PbPbGaugeChart::PbGaugeChart }
   it { is_expected.to define_prop(:options) }
+  it { is_expected.to define_boolean_prop(:sanitize_options).with_default(false) }
 
   describe "#classname_and_id" do
     it "returns empty string for classname since it's handled in React", :aggregate_failures do
@@ -19,6 +20,11 @@ RSpec.describe Playbook::PbPbGaugeChart::PbGaugeChart do
 
     it "attaches id as expected" do
       expect(subject.new(id: "test-id").react_props[:id]).to eq "test-id"
+    end
+
+    it "passes sanitizeOptions through to React" do
+      expect(subject.new.react_props[:sanitizeOptions]).to eq false
+      expect(subject.new(sanitize_options: true).react_props[:sanitizeOptions]).to eq true
     end
   end
 

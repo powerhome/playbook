@@ -5,6 +5,7 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import pbCircleGraphTheme from './pbCircleChartTheme'
+import { mergeChartOptions } from '../utilities/highchartsOptions'
 import { globalProps } from '../utilities/globalProps'
 
 type PbCircleChartProps = {
@@ -14,6 +15,7 @@ type PbCircleChartProps = {
   id?: string,
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   options: Record<string, unknown>
+  sanitizeOptions?: boolean
 }
 
 const PbCircleChart = (props: PbCircleChartProps) => {
@@ -23,7 +25,8 @@ const PbCircleChart = (props: PbCircleChartProps) => {
   data = {},
   id,
   htmlOptions = {},
-  options
+  options,
+  sanitizeOptions = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -35,11 +38,11 @@ const PbCircleChart = (props: PbCircleChartProps) => {
     if (!options || typeof options !== "object") {
       // eslint-disable-next-line no-console
       console.error("❌ Invalid options passed to <PbCircleChart />", options)
-      return {}
+      return mergeChartOptions({}, {})
     }
 
-    return Highcharts.merge({}, pbCircleGraphTheme, options)
-  }, [options])
+    return mergeChartOptions(pbCircleGraphTheme, options, sanitizeOptions)
+  }, [options, sanitizeOptions])
 
   return (
 
