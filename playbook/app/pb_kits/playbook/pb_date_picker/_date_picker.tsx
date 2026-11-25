@@ -243,6 +243,9 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       input?._pbDatePickerOpenUnsub?.()
       delete input?._pbDatePickerOpenUnsub
       input?._flatpickr?.destroy()
+      // destroy() leaves input._flatpickr pointing at the dead instance (its config is deleted),
+      // so a linked quickpick would call setDate on it before this picker is rebuilt
+      delete input?._flatpickr
     }
   }, initializeOnce ? [initializeOnce, dialogCtx?.selectMenuPortalTarget, pickerId] : undefined)
 

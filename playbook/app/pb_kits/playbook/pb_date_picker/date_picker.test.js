@@ -3,6 +3,7 @@ import React from 'react'
 import { fireEvent, render, screen, waitFor, within } from '../utilities/test-utils'
 
 import DatePicker from './_date_picker'
+import Dropdown from '../pb_dropdown/_dropdown'
 import DateTime from "../pb_kit/dateTime.ts"
 import { getTimezoneText } from './plugins/timeSelect'
 
@@ -465,6 +466,57 @@ describe('DatePicker Kit', () => {
       const years = Array.from(document.querySelectorAll(`#year-${pickerId} option`))
         .map((option) => option.value)
       expect(years).toEqual(['2020', '2019', '2018'])
+    })
+  })
+
+  test('reads a pre-1970 timestamp minDate as a date for the year dropdown', async () => {
+    const pickerId = 'date-picker-pre-1970-min'
+
+    render(
+      <DatePicker
+          maxDate={new Date('01/01/1952').getTime()}
+          minDate={new Date('06/15/1950').getTime()}
+          pickerId={pickerId}
+      />
+    )
+
+    await waitFor(() => {
+      const years = Array.from(document.querySelectorAll(`#year-${pickerId} option`))
+        .map((option) => option.value)
+      expect(years).toEqual(['1952', '1951', '1950'])
+    })
+  })
+
+  test('does not throw when a quickpick defaultValue is first set while its linked DatePickers rebuild', async () => {
+    // eslint-disable-next-line react/no-multi-comp, react/prop-types
+    const LinkedRange = ({ preset }) => (
+      <>
+        <Dropdown
+            controlsEndId="linked-end"
+            controlsStartId="linked-start"
+            defaultValue={preset}
+            id="linked-quickpick"
+            variant="quickpick"
+        />
+        <DatePicker
+            pickerId="linked-start"
+            syncStartWith="linked-quickpick"
+        />
+        <DatePicker
+            pickerId="linked-end"
+            syncEndWith="linked-quickpick"
+        />
+      </>
+    )
+
+    // The quickpick queues its defaultValue range the first time it is set (e.g. a parent stores the
+    // picked preset), in the same commit where both DatePickers are destroyed and rebuilt
+    const { rerender } = render(<LinkedRange />)
+    expect(() => rerender(<LinkedRange preset="Last Year" />)).not.toThrow()
+
+    await waitFor(() => {
+      expect(document.getElementById('linked-start')._flatpickr.config).toBeDefined()
+      expect(document.getElementById('linked-end')._flatpickr.config).toBeDefined()
     })
   })
 
