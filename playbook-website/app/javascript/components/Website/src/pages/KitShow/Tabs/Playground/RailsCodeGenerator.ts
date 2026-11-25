@@ -83,6 +83,32 @@ function formatRubyValue(value: unknown, depth = 0): string {
   return JSON.stringify(value);
 }
 
+// Keep in sync with ISO_DATE in Playground::PropFilter.
+const ISO_DATE_PATTERN =
+  /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(?:Z|[+-](\d{2}):?(\d{2}))?)?$/;
+
+const isValidIsoParts = (match: RegExpMatchArray): boolean => {
+  const [year, month, day] = [1, 2, 3].map((index) => Number(match[index]));
+  const [hour, minute, second, offsetHour, offsetMinute] = match
+    .slice(4)
+    .map((part) => (part === undefined ? undefined : Number(part)));
+  // setUTCFullYear (not Date.UTC) so years 0–99 are not mapped to 1900–1999.
+  const calendarDate = new Date(0);
+  calendarDate.setUTCFullYear(year, month - 1, day);
+  const below = (part: number | undefined, max: number) => part === undefined || part < max;
+
+  return (
+    calendarDate.getUTCFullYear() === year &&
+    calendarDate.getUTCMonth() === month - 1 &&
+    calendarDate.getUTCDate() === day &&
+    below(hour, 24) &&
+    below(minute, 60) &&
+    below(second, 60) &&
+    below(offsetHour, 24) &&
+    below(offsetMinute, 60)
+  );
+};
+
 const formatRailsPropValue = (
   name: string,
   value: unknown,
@@ -100,6 +126,20 @@ const formatRailsPropValue = (
 
   if (Array.isArray(value)) {
     return `${formatRailsPropName(name)}: ${formatRubyValue(value)}`;
+  }
+
+  // kit.schema `Date`: Playbook::Props::Date needs a Date object, so parse ISO
+  // strings the same way Playground::PropFilter does for the preview. Invalid
+  // ISO dates are omitted, matching the preview, which drops them.
+  if (/\bdate\b/.test(propType) && typeof value === "string") {
+    const trimmed = value.trim();
+    const match = trimmed.match(ISO_DATE_PATTERN);
+    if (match) {
+      if (!isValidIsoParts(match)) return null;
+
+      const parser = match[4] === undefined ? "Date" : "DateTime";
+      return `${formatRailsPropName(name)}: ${parser}.parse(${JSON.stringify(trimmed)})`;
+    }
   }
 
   if (propType === "boolean") {

@@ -53,6 +53,43 @@ RSpec.describe Playground::PropFilter do
     end
   end
 
+  describe "Date props" do
+    it "converts ISO strings to Date and DateTime objects" do
+      filtered = described_class.filter_kit_and_globals(
+        kit_name: "date_range_inline",
+        props: { "startDate" => "2026-04-09", "endDate" => "2026-04-09T15:30:00.000Z" }
+      )
+
+      expect(filtered[:start_date]).to eq(Date.new(2026, 4, 9))
+      expect(filtered[:end_date]).to eq(DateTime.new(2026, 4, 9, 15, 30))
+    end
+
+    it "drops impossible calendar dates and out-of-range times" do
+      %w[2026-02-30 2026-02-29 2026-04-00 2026-04-09T24:00:00Z 2026-04-09T12:60Z 2026-04-09T12:00:60Z 2026-04-09T12:00+25:00].each do |value|
+        filtered = described_class.filter_kit_and_globals(kit_name: "weekday_stacked", props: { "date" => value })
+
+        expect(filtered).not_to have_key(:date), "expected #{value} to be dropped"
+      end
+
+      leap_day = described_class.filter_kit_and_globals(kit_name: "weekday_stacked", props: { "date" => "2024-02-29" })
+      expect(leap_day[:date]).to eq(Date.new(2024, 2, 29))
+    end
+
+    it "leaves other strings as typed and drops invalid ISO dates" do
+      filtered = described_class.filter_kit_and_globals(
+        kit_name: "timestamp",
+        props: { "timestamp" => "April 9, 2026", "text" => "2026-04-09" }
+      )
+      invalid = described_class.filter_kit_and_globals(
+        kit_name: "date_stacked",
+        props: { "date" => "2026-13-45" }
+      )
+
+      expect(filtered).to eq(timestamp: "April 9, 2026", text: "2026-04-09")
+      expect(invalid).not_to have_key(:date)
+    end
+  end
+
   describe ".filter_kit_and_globals" do
     it "returns symbol-keyed plain hashes for nested request params" do
       params = ActiveSupport::HashWithIndifferentAccess.new(

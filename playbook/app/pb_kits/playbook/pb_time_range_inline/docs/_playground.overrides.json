@@ -35,10 +35,20 @@
     },
     {
       "name": "Vertical Timezone",
+      "platforms": ["react"],
       "props": {
         "startTime": "2026-04-09T20:00:00.000Z",
         "endTime": "2026-04-09T21:30:00.000Z",
         "alignment": "vertical",
+        "timezone": true
+      }
+    },
+    {
+      "name": "With timezone",
+      "platforms": ["rails"],
+      "props": {
+        "startTime": "2026-04-09T20:00:00Z",
+        "endTime": "2026-04-09T21:30:00Z",
         "timezone": true
       }
     }

@@ -315,7 +315,30 @@ RSpec.describe Playground::RailsRenderer do
     end
   end
 
-  describe "text, icon, and label kits" do
+  describe "date props" do
+    it "parses ISO strings for Props::Date kits" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "date_range_stacked",
+        props: { "startDate" => "2019-06-18", "endDate" => "2020-03-20T15:30:00.000Z" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("JUN", "2019", "MAR", "2020")
+    end
+
+    it "drops an invalid date so the kit falls back to its default" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "weekday_stacked",
+        props: { "date" => "2026-13-45" }
+      ).render
+
+      expect(result[:html]).to be_present
+    end
+  end
+
+  describe "text, icon, label, date, and time kits" do
     global_prop_names = JSON.parse(
       Playbook::Engine.root.join("app/pb_kits/playbook/utilities/global-props.schema.json").read
     )["props"].keys
@@ -323,6 +346,9 @@ RSpec.describe Playground::RailsRenderer do
     %w[
       body detail hashtag highlight icon_circle icon_value image
       label_pill label_value link pill source title_count title_detail
+      date date_range_inline date_range_stacked date_stacked date_time
+      date_time_stacked date_year_stacked time time_range_inline time_stacked
+      timestamp weekday_stacked
     ].each do |kit|
       it "renders every Rails preset for #{kit}" do
         schema = JSON.parse(Playbook.kit_path(kit, "", "kit.schema.json").read)

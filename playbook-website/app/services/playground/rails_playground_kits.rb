@@ -28,6 +28,18 @@ module Playground
       source
       title_count
       title_detail
+      date
+      date_range_inline
+      date_range_stacked
+      date_stacked
+      date_time
+      date_time_stacked
+      date_year_stacked
+      time
+      time_range_inline
+      time_stacked
+      timestamp
+      weekday_stacked
     ].freeze
 
     MOCK_DATA_KITS = %w[advanced_table full_screen].freeze
