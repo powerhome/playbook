@@ -56,4 +56,4 @@ jobs:
           BRANCH: ${{ needs.release-please.outputs.branch }}
           GH_TOKEN: ${{ github.token }}
           LANG: C.UTF-8 # CHANGELOG.md contains emoji
-        run: .github/scripts/prepare-release-pr "$BRANCH"
+        run: bash .github/scripts/prepare-release-pr "$BRANCH"
