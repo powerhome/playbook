@@ -1,0 +1,41 @@
+<%
+  urls = ingress["hosts"].map { |host| URI.parse(host) }
+  # PR stacks (issueCert: false) share the pre-issued wildcard secret used by the website.
+  # Staging/production issue a dedicated cert into playbook-mcp-tls.
+  tls_secret = ingress["issueCert"] ? "playbook-mcp-tls" : "playbook-tls"
+%>
+# VPN-only in every environment. Traefik only, matching the website after the
+# nginx Ingress was removed (WTWR-2282). Never add Traefik `https-public`:
+# the website uses that to opt production into the public internet, and this
+# service stays on the cluster's default VPN scope, separate from the website.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: playbook-mcp-traefik
+  labels:
+    app: playbook-mcp
+  <% if ingress["issueCert"] %>
+  annotations:
+    cert-manager.io/cluster-issuer: production-certs
+  <% end %>
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+      <% urls.each do |url| %>
+      - <%= url.host %>
+      <% end %>
+    secretName: <%= tls_secret %>
+  rules:
+    <% urls.each do |url| %>
+    - host: <%= url.host %>
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: playbook-mcp
+                port:
+                  number: 80
+    <% end %>

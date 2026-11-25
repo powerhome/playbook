@@ -12,6 +12,7 @@ deploy: &deploy
     - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/pre_deploy"
   override:
     - ./bin/deployer bash -lc "cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
+    - ../playbook-mcp/bin/deployer bash -lc "cd /app/playbook-mcp && cluster=${CLUSTER} environment=${ENVIRONMENT} tag=${REVISION} namespace=${GITHUB_REPO_NAME}-${ENVIRONMENT} deploy_url=${DEPLOY_URL} bin/deploy"
 
 rollback:
   <<: *deploy
