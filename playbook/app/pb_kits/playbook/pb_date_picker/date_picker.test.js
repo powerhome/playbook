@@ -468,6 +468,24 @@ describe('DatePicker Kit', () => {
     })
   })
 
+  test('reads the year dropdown bounds from pre-1970 (negative) timestamps', async () => {
+    const pickerId = 'date-picker-negative-timestamp-bounds'
+
+    render(
+      <DatePicker
+          maxDate={new Date('01/01/1967').getTime()}
+          minDate={new Date('06/15/1965').getTime()}
+          pickerId={pickerId}
+      />
+    )
+
+    await waitFor(() => {
+      const years = Array.from(document.querySelectorAll(`#year-${pickerId} option`))
+        .map((option) => option.value)
+      expect(years).toEqual(['1967', '1966', '1965'])
+    })
+  })
+
   test("renders required indicator asterisk when requiredIndicator is true", () => {
     const testId = "datepicker-required-indicator"
 

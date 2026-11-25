@@ -255,9 +255,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     const extractYear = (dateOption: typeof minDate | typeof maxDate): number | null => {
       if (!dateOption) return null;
 
-      // A small number is a year; a larger one is a timestamp (e.g. Date.now())
+      // A 4-digit integer is a year; any other number is a timestamp (e.g. Date.now(), or negative before 1970)
       if (typeof dateOption === 'number') {
-        if (dateOption <= 9999) return dateOption;
+        if (Number.isInteger(dateOption) && dateOption >= 1000 && dateOption <= 9999) return dateOption;
         const year = new Date(dateOption).getFullYear();
         return Number.isNaN(year) ? null : year;
       }
