@@ -168,14 +168,20 @@
       "default": "Date Picker"
     },
     "maxDate": {
-      "type": "string",
+      "type": {
+        "react": "string | number | Date",
+        "rails": "string"
+      },
       "platforms": [
         "react",
         "rails"
       ]
     },
     "minDate": {
-      "type": "string",
+      "type": {
+        "react": "string | number | Date",
+        "rails": "string"
+      },
       "platforms": [
         "react",
         "rails"
