@@ -450,6 +450,24 @@ describe('DatePicker Kit', () => {
     }, { timeout: 5000 })
   })
 
+  test('reads the year dropdown bounds from timestamp minDate and maxDate', async () => {
+    const pickerId = 'date-picker-timestamp-bounds'
+
+    render(
+      <DatePicker
+          maxDate={new Date('01/01/2020').getTime()}
+          minDate={new Date('06/15/2018').getTime()}
+          pickerId={pickerId}
+      />
+    )
+
+    await waitFor(() => {
+      const years = Array.from(document.querySelectorAll(`#year-${pickerId} option`))
+        .map((option) => option.value)
+      expect(years).toEqual(['2020', '2019', '2018'])
+    })
+  })
+
   test("renders required indicator asterisk when requiredIndicator is true", () => {
     const testId = "datepicker-required-indicator"
 
