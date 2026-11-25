@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -7,7 +7,7 @@ import { getAllIcons } from "../utilities/icons/allicons"
 import { camelToSnakeCase } from '../utilities/text'
 
 import { DialogContext } from '../pb_dialog/_dialog_context'
-import datePickerHelper from './date_picker_helper'
+import datePickerHelper, { clearSyncedQuickpick } from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
@@ -28,6 +28,10 @@ function normalizeDefaultDate<T>(defaultDate: T): T {
     return (normalized.length ? normalized : '') as unknown as T
   }
   return defaultDate
+}
+
+function isEmptyDefaultDate(defaultDate: unknown): boolean {
+  return defaultDate == null || defaultDate === '' || (Array.isArray(defaultDate) && defaultDate.length === 0)
 }
 
 function serializeDefaultDateForFilterReset(defaultDate: unknown): string | undefined {
@@ -179,7 +183,21 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     return 'pointer'
   }
 
+  // Flatpickr is rebuilt each render and seeds itself from the input's leftover text when defaultDate is empty.
+  // When a parent clears defaultDate (e.g. a filter "Defaults" button), drop that text so the old date isn't restored.
+  // Only on the change to empty, so pickers that never receive a defaultDate keep the user's selection.
+  // Also clears a linked quickpick, the same way picking a date by hand does.
+  const previousDefaultDate = useRef(normalizedDefaultDate)
+
   useEffect(() => {
+    if (!isEmptyDefaultDate(previousDefaultDate.current) && isEmptyDefaultDate(normalizedDefaultDate)) {
+      const input = document.getElementById(String(pickerId)) as HTMLInputElement | null
+      if (input) input.value = ''
+      // The range is gone, so the linked quickpick label no longer applies either
+      clearSyncedQuickpick(syncStartWith || syncEndWith)
+    }
+    previousDefaultDate.current = normalizedDefaultDate
+
     datePickerHelper({
       allowInput,
       closeOnSelect,
