@@ -58,6 +58,7 @@ Changelog categories come from the PR title. Start the description with `New Kit
 | Deprecation warnings | [`docs/DEPRECATION_WARNINGS.md`](docs/DEPRECATION_WARNINGS.md) |
 | Kit status in menu | [`docs/PLATFORM_SPECIFIC_STATUS.md`](docs/PLATFORM_SPECIFIC_STATUS.md) |
 | Changelog generator | [`docs/CHANGELOG_GENERATOR.md`](docs/CHANGELOG_GENERATOR.md) |
+| Stable releases (release-please) | [`docs/RELEASING.md`](docs/RELEASING.md) |
 | External runtime dependencies (CDNs, CSP) | [`docs/EXTERNAL_RUNTIME_DEPS.md`](docs/EXTERNAL_RUNTIME_DEPS.md) |
 
 ## Cursor-specific paths
