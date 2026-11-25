@@ -28,6 +28,20 @@ module Playground
       source
       title_count
       title_detail
+      currency
+      dashboard_value
+      distribution_bar
+      empty_state
+      icon_stat_value
+      legend
+      loading_inline
+      progress_pills
+      progress_simple
+      progress_step
+      section_separator
+      skeleton_loading
+      stat_change
+      stat_value
     ].freeze
 
     MOCK_DATA_KITS = %w[advanced_table full_screen].freeze
@@ -42,6 +56,7 @@ module Playground
         dialog/dialog_body
         dialog/dialog_footer
         flex/flex_item
+        progress_step/progress_step_item
       ]
     ).freeze
 

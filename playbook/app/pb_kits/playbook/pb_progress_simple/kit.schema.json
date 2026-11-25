@@ -43,7 +43,10 @@
       "default": false
     },
     "percent": {
-      "type": "string",
+      "type": {
+        "react": "string",
+        "rails": "number"
+      },
       "platforms": [
         "react",
         "rails"

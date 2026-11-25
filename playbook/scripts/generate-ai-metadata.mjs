@@ -450,7 +450,7 @@ function parseTypeScript(filePath) {
 
 const RUBY_TYPE_MAP = {
   Boolean: 'boolean', Number: 'number', String: 'string',
-  Numeric: 'number', Date: 'Date',
+  Numeric: 'number', Percentage: 'number', Date: 'Date',
   Enum: 'enum', Hash: 'object', HashProp: 'GenericObject', Array: 'array', HashArray: 'array', NumberArray: 'array',
 };
 

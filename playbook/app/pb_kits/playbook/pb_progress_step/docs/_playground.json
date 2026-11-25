@@ -39,7 +39,19 @@
   ],
   "presets": [
     {
+      "name": "Default steps",
+      "platforms": [
+        "rails"
+      ],
+      "structureMode": "standard",
+      "props": {},
+      "children": "<ProgressStepItem status=\"complete\" />\n<ProgressStepItem status=\"active\" />\n<ProgressStepItem status=\"inactive\" />"
+    },
+    {
       "name": "Default",
+      "platforms": [
+        "react"
+      ],
       "structureMode": "standard",
       "props": {},
       "children": "<ProgressStepItem status=\"complete\">Step 1</ProgressStepItem>\n<ProgressStepItem status=\"active\">Step 2</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Step 3</ProgressStepItem>"
@@ -172,7 +184,8 @@
     "progressStepItemStatus": {
       "type": "enum",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "values": [
         "complete",
@@ -185,14 +198,16 @@
     "progressStepItemIcon": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ],
       "default": "check"
     },
     "progressStepItemClassName": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     }
   },
@@ -204,6 +219,7 @@
   "hiddenProps": [
     "showIcon"
   ],
+  "generatedRailsDefault": true,
   "propSyncOnEnable": {
     "progressStepItemStatus": {
       "structureMode": "progress_step_item_props"

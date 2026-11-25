@@ -6,6 +6,7 @@ const COMPONENT_KITS: Record<string, string> = {
   Badge: "badge",
   Icon: "icon",
   FlexItem: "flex/flex_item",
+  ProgressStepItem: "progress_step/progress_step_item",
 };
 
 const CAPTION_FALLBACK_CLASS = "pb_caption_kit_md";
@@ -195,8 +196,15 @@ export function wrapFlexDocExample(code: string): string {
   return `<div class="flex-doc-example">\n${code}\n</div>`;
 }
 
+function wrapCenteredFlex(code: string): string {
+  const indented = code.split("\n").map((line) => `  ${line}`).join("\n");
+  return `<%= pb_rails("flex", props: { align: "center", justify: "center" }) do %>\n${indented}\n<% end %>`;
+}
+
 export function wrapFlexOutput(kitName: string, code: string): string {
-  return kitName === "flex" ? wrapFlexDocExample(code) : code;
+  if (kitName === "flex") return wrapFlexDocExample(code);
+  if (kitName === "empty_state") return wrapCenteredFlex(code);
+  return code;
 }
 
 export function looksLikeRailsChildren(children?: string | null): boolean {

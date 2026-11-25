@@ -5,8 +5,9 @@
   "presets": [
     { "name": "Default", "props": { "value": 1428, "unit": "hrs" } },
     { "name": "Value only", "props": { "value": 1428 } },
-    { "name": "Formatted string", "props": { "value": "2,000", "unit": "views" } },
-    { "name": "Zero state", "props": { "value": 0, "unit": "tasks" } }
+    { "name": "Formatted string", "platforms": ["react"], "props": { "value": "2,000", "unit": "views" } },
+    { "name": "Zero state", "props": { "value": 0, "unit": "tasks" } },
+    { "name": "With precision", "platforms": ["rails"], "props": { "value": 1428.5, "precision": 2, "unit": "hrs" } }
   ],
   "conditionals": {},
   "hints": {
@@ -28,6 +29,11 @@
     "zero_state": {
       "presetName": "Zero state",
       "message": "Zero state keeps the unit visible while showing an empty or reset metric.",
+      "type": "info"
+    },
+    "with_precision": {
+      "presetName": "With precision",
+      "message": "Precision fixes the number of decimal places shown on Rails.",
       "type": "info"
     }
   }

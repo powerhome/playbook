@@ -7,7 +7,12 @@
       "data_1",
       "neutral"
     ],
-    "size": "lg"
+    "size": "lg",
+    "widths": [
+      1,
+      2,
+      3
+    ]
   },
   "groups": [
     {

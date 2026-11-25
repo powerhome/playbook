@@ -226,6 +226,61 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:html]).to include("&lt;script&gt;")
     end
 
+    it "centers empty_state inside a flex wrapper like the Rails docs example" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "empty_state",
+        props: { "header" => "Nothing here", "image" => "default" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to match(/\A\s*<div class="pb_flex_kit[^"]*justify_content_center[^"]*">\s*<div class="pb_empty_state_kit"/)
+    end
+
+    it "applies ProgressStepItem panel props to the first step in progress_step_item_props mode" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "progress_step",
+        props: {
+          "variant" => "tracker",
+          "progressStepItemStatus" => "active",
+          "progressStepItemIcon" => "exclamation-triangle",
+          "progressStepItemClassName" => "custom-step",
+        },
+        children: "Review",
+        structure_mode: "progress_step_item_props"
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("Review", "Approve", "Publish")
+      expect(result[:html]).to include('<li class="pb_progress_step_item_active custom-step">')
+      expect(result[:html]).to include('<li class="pb_progress_step_item_active">', '<li class="pb_progress_step_item_inactive">')
+    end
+
+    it "renders progress_simple from React's string percent presets" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "progress_simple",
+        props: { "percent" => "50" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("width:50%;")
+    end
+
+    it "renders ProgressStepItem children inside progress_step" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "progress_step",
+        props: {},
+        children: '<ProgressStepItem status="complete">Step 1</ProgressStepItem><ProgressStepItem status="active">Step 2</ProgressStepItem>'
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("pb_progress_step_item_complete", "pb_progress_step_item_active", "Step 2")
+      expect(Playground::RailsPlaygroundKits.allowed_child_kit?("progress_step/progress_step_item")).to be(true)
+    end
+
     it "renders compound card structure for header_body mode" do
       result = described_class.new(
         view_context: view_context,
@@ -315,7 +370,7 @@ RSpec.describe Playground::RailsRenderer do
     end
   end
 
-  describe "text, icon, and label kits" do
+  describe "text, icon, label, metric, and status kits" do
     global_prop_names = JSON.parse(
       Playbook::Engine.root.join("app/pb_kits/playbook/utilities/global-props.schema.json").read
     )["props"].keys
@@ -323,6 +378,8 @@ RSpec.describe Playground::RailsRenderer do
     %w[
       body detail hashtag highlight icon_circle icon_value image
       label_pill label_value link pill source title_count title_detail
+      currency dashboard_value distribution_bar empty_state icon_stat_value legend loading_inline
+      progress_pills progress_simple progress_step section_separator skeleton_loading stat_change stat_value
     ].each do |kit|
       it "renders every Rails preset for #{kit}" do
         schema = JSON.parse(Playbook.kit_path(kit, "", "kit.schema.json").read)

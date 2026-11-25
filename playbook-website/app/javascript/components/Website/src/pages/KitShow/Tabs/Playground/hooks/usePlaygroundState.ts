@@ -695,7 +695,7 @@ export const usePlaygroundState = ({
 
   const displayCode = useMemo(() => {
     if (platform === "rails") {
-      if (!hasModifiedProps && defaultExample?.source) {
+      if (!hasModifiedProps && defaultExample?.source && !playgroundConfig?.generatedRailsDefault) {
         return defaultExample.source;
       }
       return generatedRailsCode;
@@ -711,6 +711,7 @@ export const usePlaygroundState = ({
     hasActiveTemplate,
     hasModifiedProps,
     defaultExample,
+    playgroundConfig?.generatedRailsDefault,
     generatedDisplayCode,
     generatedRailsCode,
   ]);

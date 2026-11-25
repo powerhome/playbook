@@ -3,6 +3,35 @@
 require "rails_helper"
 
 RSpec.describe Playground::PropFilter do
+  describe ".filter_kit_and_globals" do
+    def percent_for(value)
+      described_class.filter_kit_and_globals(kit_name: "progress_simple", props: { "percent" => value })[:percent]
+    end
+
+    it "coerces numeric strings for Rails number props only" do
+      filtered = described_class.filter_kit_and_globals(
+        kit_name: "progress_simple",
+        props: { "percent" => "50", "width" => "120" }
+      )
+
+      expect(filtered[:percent]).to eq(50)
+      expect(filtered[:width]).to eq("120")
+    end
+
+    it "reads plain decimals as base 10 numbers, including zero and decimals" do
+      expect(percent_for("010")).to eq(10)
+      expect(percent_for("0")).to eq(0)
+      expect(percent_for("26.5")).to eq(26.5)
+      expect(percent_for("-5")).to eq(-5)
+    end
+
+    it "keeps non-decimal strings on number props so Rails still validates them" do
+      ["1,428", "0x10", "1_000", "1e3", " 5", ""].each do |input|
+        expect(percent_for(input)).to eq(input)
+      end
+    end
+  end
+
   describe ".filter_child_props" do
     it "keeps compound flex_item props when no nested kit.schema.json exists" do
       filtered = described_class.filter_child_props(

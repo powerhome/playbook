@@ -12,6 +12,12 @@ module Playground
       "flexItemDisplayFlex" => :display_flex,
     }.freeze
 
+    PROGRESS_STEP_ITEM_PROP_MAP = {
+      "progressStepItemStatus" => "status",
+      "progressStepItemIcon" => "icon",
+      "progressStepItemClassName" => "classname",
+    }.freeze
+
     def initialize(view_context:, kit_name:, props: {}, global_props: {}, children: nil, structure_mode: nil)
       @view_context = view_context
       @kit_name = kit_name.to_s
@@ -65,6 +71,8 @@ module Playground
       when "dialog" then render_dialog_preview(merged_props)
       when "card" then render_card_preview(merged_props)
       when "flex" then render_flex_preview(merged_props)
+      when "empty_state" then render_centered_flex_preview(merged_props)
+      when "progress_step" then render_progress_step_preview(merged_props)
       else render_pb_kit(@kit_name, merged_props, block_content(merged_props))
       end
     end
@@ -89,6 +97,34 @@ module Playground
              end
 
       wrap_flex_doc_example(html)
+    end
+
+    def render_centered_flex_preview(merged_props)
+      render_pb_kit("flex", { align: "center", justify: "center" }) do
+        render_pb_kit(@kit_name, merged_props, block_content(merged_props))
+      end
+    end
+
+    def render_progress_step_preview(merged_props)
+      return render_pb_kit("progress_step", merged_props, block_content(merged_props)) unless @structure_mode == "progress_step_item_props"
+
+      first_inner = block_content(merged_props.except(:text)) ||
+                    TrustedHtml.plain_text(JsxChildrenRenderer.extract_jsx_text(@children))
+      item_kit = "progress_step/progress_step_item"
+
+      render_pb_kit("progress_step", merged_props, safe_join([
+                                                               render_pb_kit(item_kit, progress_step_item_props_from_payload) { first_inner.presence || "" },
+                                                               render_pb_kit(item_kit, { status: "active" }) { "Approve" },
+                                                               render_pb_kit(item_kit, { status: "inactive" }) { "Publish" },
+                                                             ]))
+    end
+
+    def progress_step_item_props_from_payload
+      item_props = PROGRESS_STEP_ITEM_PROP_MAP.each_with_object({}) do |(panel_name, prop_name), props|
+        value = @props[panel_name]
+        props[prop_name] = value if value.present?
+      end
+      Playground::PropFilter.filter_child_props(kit_name: "progress_step/progress_step_item", props: item_props)
     end
 
     def wrap_flex_doc_example(html)

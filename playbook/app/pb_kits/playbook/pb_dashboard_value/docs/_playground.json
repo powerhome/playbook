@@ -5,10 +5,10 @@
     "align": "left",
     "statChange": {
       "change": "decrease",
-      "value": "26.1"
+      "value": 26.1
     },
     "statValue": {
-      "value": "1,428",
+      "value": 1428,
       "unit": "appts"
     },
     "statLabel": "Decreased Value"
@@ -35,12 +35,12 @@
       "props": {
         "statLabel": "Monthly recurring revenue",
         "statValue": {
-          "value": "1,428",
+          "value": 1428,
           "unit": "appts"
         },
         "statChange": {
           "change": "decrease",
-          "value": "26.1"
+          "value": 26.1
         }
       }
     },
@@ -49,12 +49,12 @@
       "props": {
         "statLabel": "Active accounts",
         "statValue": {
-          "value": "938",
+          "value": 938,
           "unit": "homes"
         },
         "statChange": {
           "change": "increase",
-          "value": "56.1"
+          "value": 56.1
         }
       }
     },
@@ -63,11 +63,11 @@
       "props": {
         "statLabel": "Neutral Value",
         "statValue": {
-          "value": "261",
+          "value": 261,
           "unit": "windows"
         },
         "statChange": {
-          "value": "86"
+          "value": 86
         }
       }
     },
@@ -76,12 +76,17 @@
       "props": {
         "statLabel": "Pitch Rate",
         "statValue": {
-          "value": "90.9",
+          "value": 90.9,
           "unit": "%"
         }
       }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "numeric_values": {
+      "message": "Use numbers for value inside statValue and statChange, such as { \"value\": 1428 }.",
+      "type": "info"
+    }
+  }
 }

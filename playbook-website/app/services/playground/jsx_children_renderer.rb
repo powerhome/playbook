@@ -10,6 +10,7 @@ module Playground
       "Badge" => "badge",
       "Icon" => "icon",
       "FlexItem" => "flex/flex_item",
+      "ProgressStepItem" => "progress_step/progress_step_item",
     }.freeze
 
     CAPTION_FALLBACK_CLASS = "pb_caption_kit_md"

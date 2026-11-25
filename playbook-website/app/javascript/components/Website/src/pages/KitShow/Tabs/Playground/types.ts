@@ -217,6 +217,8 @@ export interface PlaygroundConfig {
   hiddenProps?: string[];
   /** Like `hiddenProps`, but only on one playground tab (e.g. `{ "rails": ["onError"] }`). */
   hiddenPropsByPlatform?: Partial<Record<"react" | "rails", string[]>>;
+  /** Rails tab: show generated ERB in the default state instead of the first docs example's source. */
+  generatedRailsDefault?: boolean;
   externalImports?: string[];
   /** Prop names for which an explicit empty string is a meaningful value and should be emitted as `prop=""` instead of omitted. */
   emitEmptyStringProps?: string[];
