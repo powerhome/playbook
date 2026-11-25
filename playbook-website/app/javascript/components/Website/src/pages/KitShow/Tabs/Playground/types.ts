@@ -22,6 +22,8 @@ export interface PropDefinition {
   example?: string;
   /** When true, an empty string value is emitted as `prop=""` in generated code instead of being omitted. */
   emitEmptyString?: boolean;
+  /** Number on this platform but a string on the other (e.g. HomeAddressStreet homeId); clearing leaves the field blank instead of 0. */
+  clearableNumber?: boolean;
 }
 
 export interface KitSchema {

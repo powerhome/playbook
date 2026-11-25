@@ -47,6 +47,29 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:error]).to eq(Playground::PreviewLimits::CLIENT_ERROR)
     end
 
+    it "renders a leading-zero home ID as the normalized number" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "home_address_street",
+        props: { "address" => "70 Prospect Ave", "homeId" => "010" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("<span>H#10</span>")
+    end
+
+    it "renders without a home ID when the value is not a number" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "home_address_street",
+        props: { "address" => "70 Prospect Ave", "homeId" => "H8250263" }
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).to include("70 Prospect Ave")
+      expect(result[:html]).not_to include("home-hashtag")
+    end
+
     it "rejects oversized children" do
       result = described_class.new(
         view_context: view_context,
@@ -315,7 +338,7 @@ RSpec.describe Playground::RailsRenderer do
     end
   end
 
-  describe "text, icon, and label kits" do
+  describe "text, icon, label, and people kits" do
     global_prop_names = JSON.parse(
       Playbook::Engine.root.join("app/pb_kits/playbook/utilities/global-props.schema.json").read
     )["props"].keys
@@ -323,6 +346,8 @@ RSpec.describe Playground::RailsRenderer do
     %w[
       body detail hashtag highlight icon_circle icon_value image
       label_pill label_value link pill source title_count title_detail
+      avatar contact home_address_street multiple_users multiple_users_stacked
+      online_status person person_contact user user_badge
     ].each do |kit|
       it "renders every Rails preset for #{kit}" do
         schema = JSON.parse(Playbook.kit_path(kit, "", "kit.schema.json").read)

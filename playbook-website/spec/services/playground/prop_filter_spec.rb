@@ -53,6 +53,39 @@ RSpec.describe Playground::PropFilter do
     end
   end
 
+  describe "Rails number props" do
+    def filtered_home_id(value)
+      described_class.filter_kit_and_globals(kit_name: "home_address_street", props: { "homeId" => value })
+    end
+
+    it "converts numeric strings for props typed string on React and number on Rails" do
+      filtered = described_class.filter_kit_and_globals(
+        kit_name: "home_address_street",
+        props: { "homeId" => "8250263", "address" => "70 Prospect Ave", "zipcode" => "19382" }
+      )
+
+      expect(filtered).to eq(home_id: 8_250_263, address: "70 Prospect Ave", zipcode: "19382")
+    end
+
+    it "normalizes leading zeros as decimal, matching the code generator and NumberControl" do
+      expect(filtered_home_id("010")).to eq(home_id: 10)
+      expect(filtered_home_id("08")).to eq(home_id: 8)
+      expect(filtered_home_id("0")).to eq(home_id: 0)
+    end
+
+    it "drops blank and non-numeric values so the optional prop falls back to nil" do
+      ["", "  ", "H8250263"].each do |value|
+        expect(filtered_home_id(value)).not_to have_key(:home_id)
+      end
+    end
+
+    it "leaves props typed number on both platforms unchanged" do
+      filtered = described_class.filter_kit_and_globals(kit_name: "button", props: { "count" => "5" })
+
+      expect(filtered[:count]).to eq("5")
+    end
+  end
+
   describe ".filter_kit_and_globals" do
     it "returns symbol-keyed plain hashes for nested request params" do
       params = ActiveSupport::HashWithIndifferentAccess.new(

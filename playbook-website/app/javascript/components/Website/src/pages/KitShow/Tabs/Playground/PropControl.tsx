@@ -532,7 +532,9 @@ const NumberControl: React.FC<ExtendedPropControlProps> = ({
         placeholder={`Enter ${name}...`}
         value={String(currentValue)}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          onChange(name, { value: Number(e.target.value), enabled: true });
+          const raw = e.target.value;
+          const cleared = raw === "" && definition.clearableNumber;
+          onChange(name, { value: cleared ? "" : Number(raw), enabled: true });
         }}
         width="100%"
         marginBottom="none"

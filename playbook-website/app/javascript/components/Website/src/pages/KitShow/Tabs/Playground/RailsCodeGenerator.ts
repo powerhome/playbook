@@ -83,6 +83,9 @@ function formatRubyValue(value: unknown, depth = 0): string {
   return JSON.stringify(value);
 }
 
+// Keep in sync with NUMERIC_STRING in Playground::PropFilter.
+const NUMERIC_STRING_PATTERN = /^-?\d+(\.\d+)?$/;
+
 const formatRailsPropValue = (
   name: string,
   value: unknown,
@@ -116,6 +119,17 @@ const formatRailsPropValue = (
 
   if (propType.includes("number") && typeof value === "number") {
     return `${formatRailsPropName(name)}: ${value}`;
+  }
+
+  // Split-typed props (React string, Rails number) share presets; emit the
+  // number unquoted, matching Playground::PropFilter, so copied ERB renders.
+  // Leading zeros are stripped (Ruby would read 010 as octal 8), matching
+  // Number("010") in NumberControl. Blank and non-numeric values are omitted,
+  // matching the preview, which drops them.
+  if (definition.clearableNumber && typeof value === "string") {
+    const trimmed = value.trim();
+    if (!NUMERIC_STRING_PATTERN.test(trimmed)) return null;
+    return `${formatRailsPropName(name)}: ${trimmed.replace(/^(-?)0+(?=\d)/, "$1")}`;
   }
 
   if (
